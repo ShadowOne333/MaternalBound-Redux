@@ -1,0 +1,432 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc50000:
+    newline
+    "[06 E2 00 {e(l_0xc51ccb)}][06 E3 00 {e(l_0xc51b12)}][06 E4 00 {e(data_11.l_0xc5bb76)}][06 E5 00 {e(data_11.l_0xc5bb76)}][06 E6 00 {e(data_10.l_0xc5baa4)}][06 E7 00 {e(data_11.l_0xc5bb76)}][06 E8 00 {e(data_10.l_0xc5baa4)}][06 E9 00 {e(l_0xc51b12)}][06 EA 00 {e(l_0xc5211e)}][06 EB 00 {e(data_10.l_0xc5b625)}][06 EC 00 {e(data_11.l_0xc5bc70)}][06 ED 00 {e(data_11.l_0xc5bef9)}][06 EE 00 {e(data_12.l_0xc5cd18)}][06 EF 00 {e(l_0xc51b12)}][06 F0 00 {e(l_0xc51b12)}][06 F1 00 {e(l_0xc51b12)}][06 F2 00 {e(l_0xc51b12)}][06 F3 00 {e(data_01.l_0xc52d94)}][06 F4 00 {e(data_10.l_0xc5baa4)}][06 F5 00 {e(l_0xc51b12)}][06 F6 00 {e(data_13.l_0xc5d050)}][06 F7 00 {e(data_11.l_0xc5c32a)}][06 F8 00 {e(data_02.l_0xc530a2)}][06 F9 00 {e(data_02.l_0xc530a2)}][06 FA 00 {e(data_02.l_0xc530a2)}][06 FB 00 {e(l_0xc51b12)}][06 FC 00 {e(l_0xc51b12)}][06 FD 00 {e(data_12.l_0xc5c71f)}][06 FE 00 {e(data_01.l_0xc52d94)}][06 FF 00 {e(data_10.l_0xc5baa4)}][06 00 01 {e(l_0xc5211e)}][06 01 01 {e(l_0xc51b12)}][06 02 01 {e(data_10.l_0xc5baa4)}][06 03 01 {e(l_0xc51b12)}][06 04 01 {e(l_0xc51eea)}][06 05 01 {e(data_11.l_0xc5bb76)}][06 06 01 {e(data_12.l_0xc5ce22)}][06 07 01 {e(data_01.l_0xc52d94)}][06 08 01 {e(data_11.l_0xc5c1e5)}][06 09 01 {e(data_01.l_0xc522ef)}][06 0A 01 {e(data_11.l_0xc5bd92)}][06 0B 01 {e(data_01.l_0xc524f7)}][06 0C 01 {e(data_13.l_0xc5cf67)}][06 0D 01 {e(data_12.l_0xc5ca56)}][06 0E 01 {e(data_12.l_0xc5c845)}][06 0F 01 {e(data_01.l_0xc527c7)}][06 44 01 {e(data_11.l_0xc5c05f)}][06 45 01 {e(data_01.l_0xc52acc)}][06 46 01 {e(data_01.l_0xc52d94)}][06 DE 01 {e(data_11.l_0xc5bef9)}][06 55 02 {e(data_12.l_0xc5c59e)}][06 56 02 {e(data_12.l_0xc5cbc0)}][06 57 02 {e(data_10.l_0xc5b3ba)}][06 58 02 {e(l_0xc51b12)}][06 8D 02 {e(data_01.l_0xc52d94)}][06 DB 02 {e(data_02.l_0xc5341d)}][06 DC 02 {e(data_10.l_0xc5b896)}][06 DD 02 {e(data_12.l_0xc5c96a)}]" eob
+
+l_0xc50198:
+    newline
+    "[06 E2 00 {e(l_0xc51cef)}][06 E3 00 {e(l_0xc51b28)}][06 E4 00 {e(data_11.l_0xc5bb9a)}][06 E5 00 {e(data_11.l_0xc5bb9a)}][06 E6 00 {e(data_10.l_0xc5bab4)}][06 E7 00 {e(data_11.l_0xc5bb9a)}][06 E8 00 {e(data_10.l_0xc5bab4)}][06 E9 00 {e(l_0xc51b28)}][06 EA 00 {e(l_0xc52130)}][06 EB 00 {e(data_10.l_0xc5b666)}][06 EC 00 {e(data_11.l_0xc5bcc2)}][06 ED 00 {e(data_11.l_0xc5bf87)}][06 EE 00 {e(data_12.l_0xc5cd29)}][06 EF 00 {e(l_0xc51b28)}][06 F0 00 {e(l_0xc51b28)}][06 F1 00 {e(l_0xc51b28)}][06 F2 00 {e(l_0xc51b28)}][06 F3 00 {e(data_02.l_0xc52dcc)}][06 F4 00 {e(data_10.l_0xc5bab4)}][06 F5 00 {e(l_0xc51b28)}][06 F6 00 {e(data_13.l_0xc5d06d)}][06 F7 00 {e(data_11.l_0xc5c39e)}][06 F8 00 {e(data_02.l_0xc530fc)}][06 F9 00 {e(data_02.l_0xc530fc)}][06 FA 00 {e(data_02.l_0xc530fc)}][06 FB 00 {e(l_0xc51b28)}][06 FC 00 {e(l_0xc51b28)}][06 FD 00 {e(data_12.l_0xc5c74c)}][06 FE 00 {e(data_02.l_0xc52dcc)}][06 FF 00 {e(data_10.l_0xc5bab4)}][06 00 01 {e(l_0xc52130)}][06 01 01 {e(l_0xc51b28)}][06 02 01 {e(data_10.l_0xc5bab4)}][06 03 01 {e(l_0xc51b28)}][06 04 01 {e(l_0xc51f2c)}][06 05 01 {e(data_11.l_0xc5bb9a)}][06 06 01 {e(data_12.l_0xc5cec0)}][06 07 01 {e(data_02.l_0xc52dcc)}][06 08 01 {e(data_11.l_0xc5c203)}][06 09 01 {e(data_01.l_0xc5230c)}][06 0A 01 {e(data_11.l_0xc5bde0)}][06 0B 01 {e(data_01.l_0xc52546)}][06 0C 01 {e(data_13.l_0xc5cf82)}][06 0D 01 {e(data_12.l_0xc5cab4)}][06 0E 01 {e(data_12.l_0xc5c86c)}][06 0F 01 {e(data_01.l_0xc52809)}][06 44 01 {e(data_11.l_0xc5c0ad)}][06 45 01 {e(data_01.l_0xc52b37)}][06 46 01 {e(data_02.l_0xc52dcc)}][06 DE 01 {e(data_11.l_0xc5bf87)}][06 55 02 {e(data_12.l_0xc5c5dd)}][06 56 02 {e(data_12.l_0xc5cbdc)}][06 57 02 {e(data_10.l_0xc5b3eb)}][06 58 02 {e(l_0xc51b28)}][06 8D 02 {e(data_02.l_0xc52dcc)}][06 DB 02 {e(data_02.l_0xc53454)}][06 DC 02 {e(data_10.l_0xc5b8d6)}][06 DD 02 {e(data_12.l_0xc5c99a)}]" eob
+
+l_0xc50330:
+    newline
+    "[06 E2 00 {e(l_0xc51cfa)}][06 E3 00 {e(l_0xc51b31)}][06 E4 00 {e(data_11.l_0xc5bbb2)}][06 E5 00 {e(data_11.l_0xc5bbb2)}][06 E6 00 {e(data_10.l_0xc5babd)}][06 E7 00 {e(data_11.l_0xc5bbb2)}][06 E8 00 {e(data_10.l_0xc5babd)}][06 E9 00 {e(l_0xc51b31)}][06 EA 00 {e(l_0xc52139)}][06 EB 00 {e(data_10.l_0xc5b674)}][06 EC 00 {e(data_11.l_0xc5bcca)}][06 ED 00 {e(data_11.l_0xc5bf8e)}][06 EE 00 {e(data_12.l_0xc5cd2f)}][06 EF 00 {e(l_0xc51b31)}][06 F0 00 {e(l_0xc51b31)}][06 F1 00 {e(l_0xc51b31)}][06 F2 00 {e(l_0xc51b31)}][06 F3 00 {e(data_02.l_0xc52de8)}][06 F4 00 {e(data_10.l_0xc5babd)}][06 F5 00 {e(l_0xc51b31)}][06 F6 00 {e(data_13.l_0xc5d08d)}][06 F7 00 {e(data_11.l_0xc5c456)}][06 F8 00 {e(data_02.l_0xc5310f)}][06 F9 00 {e(data_02.l_0xc5310f)}][06 FA 00 {e(data_02.l_0xc5310f)}][06 FB 00 {e(l_0xc51b31)}][06 FC 00 {e(l_0xc51b31)}][06 FD 00 {e(data_12.l_0xc5c755)}][06 FE 00 {e(data_02.l_0xc52de8)}][06 FF 00 {e(data_10.l_0xc5babd)}][06 00 01 {e(l_0xc52139)}][06 01 01 {e(l_0xc51b31)}][06 02 01 {e(data_10.l_0xc5babd)}][06 03 01 {e(data_01.l_0xc52d8c)}][06 04 01 {e(l_0xc51f45)}][06 05 01 {e(data_11.l_0xc5bbb2)}][06 06 01 {e(data_12.l_0xc5cec8)}][06 07 01 {e(data_02.l_0xc52de8)}][06 08 01 {e(data_11.l_0xc5c210)}][06 09 01 {e(data_01.l_0xc52312)}][06 0A 01 {e(data_11.l_0xc5be00)}][06 0B 01 {e(data_01.l_0xc5256c)}][06 0C 01 {e(data_13.l_0xc5cf8a)}][06 0D 01 {e(data_12.l_0xc5cad0)}][06 0E 01 {e(data_12.l_0xc5c876)}][06 0F 01 {e(data_01.l_0xc52836)}][06 44 01 {e(data_11.l_0xc5c0cb)}][06 45 01 {e(data_01.l_0xc52b67)}][06 46 01 {e(data_02.l_0xc52de8)}][06 DE 01 {e(data_11.l_0xc5bf8e)}][06 55 02 {e(data_12.l_0xc5c5f3)}][06 56 02 {e(data_12.l_0xc5cc35)}][06 57 02 {e(data_10.l_0xc5b3f6)}][06 58 02 {e(l_0xc51b31)}][06 8D 02 {e(data_02.l_0xc52de8)}][06 DB 02 {e(data_02.l_0xc5346f)}][06 DC 02 {e(data_10.l_0xc5b8df)}][06 DD 02 {e(data_12.l_0xc5c9a4)}]" eob
+
+l_0xc504c8:
+    newline
+    "[06 E2 00 {e(l_0xc51d20)}][06 E3 00 {e(l_0xc51b39)}][06 E4 00 {e(data_11.l_0xc5bbce)}][06 E5 00 {e(data_11.l_0xc5bbce)}][06 E6 00 {e(data_11.l_0xc5bac5)}][06 E7 00 {e(data_11.l_0xc5bbce)}][06 E8 00 {e(data_11.l_0xc5bac5)}][06 E9 00 {e(l_0xc51b39)}][06 EA 00 {e(l_0xc52154)}][06 EB 00 {e(data_10.l_0xc5b69d)}][06 EC 00 {e(data_11.l_0xc5bcd2)}][06 ED 00 {e(data_11.l_0xc5bf95)}][06 EE 00 {e(data_12.l_0xc5cd51)}][06 EF 00 {e(l_0xc51b39)}][06 F0 00 {e(l_0xc51b39)}][06 F1 00 {e(l_0xc51b39)}][06 F2 00 {e(l_0xc51b39)}][06 F3 00 {e(data_02.l_0xc52e0d)}][06 F4 00 {e(data_11.l_0xc5bac5)}][06 F5 00 {e(l_0xc51b39)}][06 F6 00 {e(data_13.l_0xc5d0aa)}][06 F7 00 {e(data_11.l_0xc5c4e3)}][06 F8 00 {e(data_02.l_0xc5311f)}][06 F9 00 {e(data_02.l_0xc5311f)}][06 FA 00 {e(data_02.l_0xc5311f)}][06 FB 00 {e(l_0xc51b39)}][06 FC 00 {e(l_0xc51b39)}][06 FD 00 {e(data_12.l_0xc5c765)}][06 FE 00 {e(data_02.l_0xc52e0d)}][06 FF 00 {e(data_11.l_0xc5bac5)}][06 00 01 {e(l_0xc52154)}][06 01 01 {e(l_0xc51b39)}][06 02 01 {e(data_11.l_0xc5bac5)}][06 03 01 {e(l_0xc51b39)}][06 04 01 {e(l_0xc51f62)}][06 05 01 {e(data_11.l_0xc5bbce)}][06 06 01 {e(data_12.l_0xc5ced0)}][06 07 01 {e(data_02.l_0xc52e0d)}][06 08 01 {e(data_11.l_0xc5c22e)}][06 09 01 {e(data_01.l_0xc52339)}][06 0A 01 {e(data_11.l_0xc5be16)}][06 0B 01 {e(data_01.l_0xc52574)}][06 0C 01 {e(data_13.l_0xc5cf9b)}][06 0D 01 {e(data_12.l_0xc5caec)}][06 0E 01 {e(data_12.l_0xc5c88a)}][06 0F 01 {e(data_01.l_0xc52855)}][06 44 01 {e(data_11.l_0xc5c0e3)}][06 45 01 {e(data_01.l_0xc52b82)}][06 46 01 {e(data_02.l_0xc52e0d)}][06 DE 01 {e(data_11.l_0xc5bf95)}][06 55 02 {e(data_12.l_0xc5c61a)}][06 56 02 {e(data_12.l_0xc5cc53)}][06 57 02 {e(data_10.l_0xc5b405)}][06 58 02 {e(l_0xc51b39)}][06 8D 02 {e(data_02.l_0xc52e0d)}][06 DB 02 {e(data_02.l_0xc5348a)}][06 DC 02 {e(data_10.l_0xc5b8eb)}][06 DD 02 {e(data_12.l_0xc5c9ae)}]" eob
+
+l_0xc50660:
+    newline
+    "[06 E2 00 {e(l_0xc51d31)}][06 E3 00 {e(l_0xc51b49)}][06 E4 00 {e(data_11.l_0xc5bbdc)}][06 E5 00 {e(data_11.l_0xc5bbdc)}][06 E6 00 {e(data_11.l_0xc5bad3)}][06 E7 00 {e(data_11.l_0xc5bbdc)}][06 E8 00 {e(data_11.l_0xc5bad3)}][06 E9 00 {e(l_0xc51b49)}][06 EA 00 {e(l_0xc52163)}][06 EB 00 {e(data_10.l_0xc5b6af)}][06 EC 00 {e(data_11.l_0xc5bcdd)}][06 ED 00 {e(data_11.l_0xc5bfa1)}][06 EE 00 {e(data_12.l_0xc5cd64)}][06 EF 00 {e(l_0xc51b49)}][06 F0 00 {e(l_0xc51b49)}][06 F1 00 {e(l_0xc51b49)}][06 F2 00 {e(l_0xc51b49)}][06 F3 00 {e(data_02.l_0xc52e1c)}][06 F4 00 {e(data_11.l_0xc5bad3)}][06 F5 00 {e(l_0xc51b49)}][06 F6 00 {e(data_13.l_0xc5d0c9)}][06 F7 00 {e(data_11.l_0xc5c4ee)}][06 F8 00 {e(data_02.l_0xc53134)}][06 F9 00 {e(data_02.l_0xc53134)}][06 FA 00 {e(data_02.l_0xc53134)}][06 FB 00 {e(l_0xc51b49)}][06 FC 00 {e(l_0xc51b49)}][06 FD 00 {e(data_12.l_0xc5c76f)}][06 FE 00 {e(data_02.l_0xc52e1c)}][06 FF 00 {e(data_11.l_0xc5bad3)}][06 00 01 {e(l_0xc52163)}][06 01 01 {e(l_0xc51b49)}][06 02 01 {e(data_11.l_0xc5bad3)}][06 03 01 {e(l_0xc51b49)}][06 04 01 {e(l_0xc51f74)}][06 05 01 {e(data_11.l_0xc5bbdc)}][06 06 01 {e(data_12.l_0xc5cedc)}][06 07 01 {e(data_02.l_0xc52e1c)}][06 08 01 {e(data_11.l_0xc5c23b)}][06 09 01 {e(data_01.l_0xc5234d)}][06 0A 01 {e(data_11.l_0xc5be24)}][06 0B 01 {e(data_01.l_0xc52583)}][06 0C 01 {e(data_13.l_0xc5cfa6)}][06 0D 01 {e(data_12.l_0xc5cafe)}][06 0E 01 {e(data_12.l_0xc5c896)}][06 0F 01 {e(data_01.l_0xc52860)}][06 44 01 {e(data_11.l_0xc5c0f3)}][06 45 01 {e(data_01.l_0xc52b8d)}][06 46 01 {e(data_02.l_0xc52e1c)}][06 DE 01 {e(data_11.l_0xc5bfa1)}][06 55 02 {e(data_12.l_0xc5c63a)}][06 56 02 {e(data_12.l_0xc5cc63)}][06 57 02 {e(data_10.l_0xc5b426)}][06 58 02 {e(l_0xc51b49)}][06 8D 02 {e(data_02.l_0xc52e1c)}][06 DB 02 {e(data_02.l_0xc5349f)}][06 DC 02 {e(data_10.l_0xc5b8f8)}][06 DD 02 {e(data_12.l_0xc5c9b7)}]" eob
+
+l_0xc507f8:
+    newline
+    "[06 E2 00 {e(l_0xc51d39)}][06 E3 00 {e(l_0xc51b57)}][06 E4 00 {e(data_11.l_0xc5bbe4)}][06 E5 00 {e(data_11.l_0xc5bbe4)}][06 E6 00 {e(data_11.l_0xc5badb)}][06 E7 00 {e(data_11.l_0xc5bbe4)}][06 E8 00 {e(data_11.l_0xc5badb)}][06 E9 00 {e(l_0xc51b57)}][06 EA 00 {e(l_0xc5216b)}][06 EB 00 {e(data_10.l_0xc5b6b7)}][06 EC 00 {e(data_11.l_0xc5bce5)}][06 ED 00 {e(data_11.l_0xc5bfb0)}][06 EE 00 {e(data_12.l_0xc5cd73)}][06 EF 00 {e(l_0xc51b57)}][06 F0 00 {e(l_0xc51b57)}][06 F1 00 {e(l_0xc51b57)}][06 F2 00 {e(l_0xc51b57)}][06 F3 00 {e(data_02.l_0xc52e24)}][06 F4 00 {e(data_11.l_0xc5badb)}][06 F5 00 {e(l_0xc51b57)}][06 F6 00 {e(data_13.l_0xc5d0df)}][06 F7 00 {e(data_11.l_0xc5c4fd)}][06 F8 00 {e(data_02.l_0xc53144)}][06 F9 00 {e(data_02.l_0xc53144)}][06 FA 00 {e(data_02.l_0xc53144)}][06 FB 00 {e(l_0xc51b57)}][06 FC 00 {e(l_0xc51b57)}][06 FD 00 {e(data_12.l_0xc5c77e)}][06 FE 00 {e(data_02.l_0xc52e24)}][06 FF 00 {e(data_11.l_0xc5badb)}][06 00 01 {e(l_0xc5216b)}][06 01 01 {e(l_0xc51b57)}][06 02 01 {e(data_11.l_0xc5badb)}][06 03 01 {e(l_0xc51b57)}][06 04 01 {e(l_0xc51f7c)}][06 05 01 {e(data_11.l_0xc5bbe4)}][06 06 01 {e(data_12.l_0xc5cee4)}][06 07 01 {e(data_02.l_0xc52e24)}][06 08 01 {e(data_11.l_0xc5c252)}][06 09 01 {e(data_01.l_0xc52355)}][06 0A 01 {e(data_11.l_0xc5be34)}][06 0B 01 {e(data_01.l_0xc5258b)}][06 0C 01 {e(data_13.l_0xc5cfae)}][06 0D 01 {e(data_12.l_0xc5cb12)}][06 0E 01 {e(data_12.l_0xc5c89e)}][06 0F 01 {e(data_01.l_0xc52868)}][06 44 01 {e(data_11.l_0xc5c10f)}][06 45 01 {e(data_01.l_0xc52b9b)}][06 46 01 {e(data_02.l_0xc52e24)}][06 DE 01 {e(data_11.l_0xc5bfb0)}][06 55 02 {e(data_12.l_0xc5c64d)}][06 56 02 {e(data_12.l_0xc5cc83)}][06 57 02 {e(data_10.l_0xc5b42e)}][06 58 02 {e(l_0xc51b57)}][06 8D 02 {e(data_02.l_0xc52e24)}][06 DB 02 {e(data_02.l_0xc534a7)}][06 DC 02 {e(data_10.l_0xc5b900)}][06 DD 02 {e(data_12.l_0xc5c9c2)}]" eob
+
+l_0xc50990:
+    newline
+    "[06 E2 00 {e(l_0xc51d45)}][06 E3 00 {e(l_0xc51b6a)}][06 E9 00 {e(l_0xc51b6a)}][06 EA 00 {e(l_0xc5217a)}][06 EB 00 {e(data_10.l_0xc5b6ca)}][06 EF 00 {e(l_0xc51b6a)}][06 F0 00 {e(l_0xc51b6a)}][06 F1 00 {e(l_0xc51b6a)}][06 F2 00 {e(l_0xc51b6a)}][06 F3 00 {e(data_02.l_0xc52e3a)}][06 F5 00 {e(l_0xc51b6a)}][06 F8 00 {e(data_02.l_0xc53161)}][06 F9 00 {e(data_02.l_0xc53161)}][06 FA 00 {e(data_02.l_0xc53161)}][06 FB 00 {e(l_0xc51b6a)}][06 FC 00 {e(l_0xc51b6a)}][06 FE 00 {e(data_02.l_0xc52e3a)}][06 00 01 {e(l_0xc5217a)}][06 01 01 {e(l_0xc51b6a)}][06 03 01 {e(l_0xc51b6a)}][06 04 01 {e(l_0xc51f91)}][06 07 01 {e(data_02.l_0xc52e3a)}][06 09 01 {e(data_01.l_0xc52361)}][06 0B 01 {e(data_01.l_0xc525a4)}][06 0F 01 {e(data_01.l_0xc52885)}][06 45 01 {e(data_01.l_0xc52baa)}][06 46 01 {e(data_02.l_0xc52e3a)}][06 57 02 {e(data_10.l_0xc5b43c)}][06 58 02 {e(l_0xc51b6a)}][06 8D 02 {e(data_02.l_0xc52e3a)}][06 DB 02 {e(data_02.l_0xc534b6)}][06 DC 02 {e(data_10.l_0xc5b910)}]" eob
+
+l_0xc50a72:
+    newline
+    "[06 E2 00 {e(l_0xc51d5b)}][06 E3 00 {e(l_0xc51b7e)}][06 E9 00 {e(l_0xc51b7e)}][06 EA 00 {e(l_0xc52189)}][06 EB 00 {e(data_10.l_0xc5b6e2)}][06 EF 00 {e(l_0xc51b7e)}][06 F0 00 {e(l_0xc51b7e)}][06 F1 00 {e(l_0xc51b7e)}][06 F2 00 {e(l_0xc51b7e)}][06 F3 00 {e(data_02.l_0xc52e59)}][06 F5 00 {e(l_0xc51b7e)}][06 F8 00 {e(data_02.l_0xc53172)}][06 F9 00 {e(data_02.l_0xc53172)}][06 FA 00 {e(data_02.l_0xc53172)}][06 FB 00 {e(l_0xc51b7e)}][06 FC 00 {e(l_0xc51b7e)}][06 FE 00 {e(data_02.l_0xc52e59)}][06 00 01 {e(l_0xc52189)}][06 01 01 {e(l_0xc51b7e)}][06 03 01 {e(l_0xc51b7e)}][06 04 01 {e(l_0xc51fa7)}][06 07 01 {e(data_02.l_0xc52e59)}][06 09 01 {e(data_01.l_0xc52371)}][06 0B 01 {e(data_01.l_0xc525bb)}][06 0F 01 {e(data_01.l_0xc52893)}][06 45 01 {e(data_01.l_0xc52bbd)}][06 46 01 {e(data_02.l_0xc52e59)}][06 57 02 {e(data_10.l_0xc5b447)}][06 58 02 {e(l_0xc51b7e)}][06 8D 02 {e(data_02.l_0xc52e59)}][06 DB 02 {e(data_02.l_0xc534c8)}][06 DC 02 {e(data_10.l_0xc5b92c)}]" eob
+
+l_0xc50b54:
+    newline
+    "[06 E2 00 {e(l_0xc51d7b)}][06 E3 00 {e(l_0xc51b9d)}][06 E9 00 {e(l_0xc51b9d)}][06 EA 00 {e(l_0xc521aa)}][06 EB 00 {e(data_10.l_0xc5b70b)}][06 EF 00 {e(l_0xc51b9d)}][06 F0 00 {e(l_0xc51b9d)}][06 F1 00 {e(l_0xc51b9d)}][06 F2 00 {e(l_0xc51b9d)}][06 F3 00 {e(data_02.l_0xc52e85)}][06 F5 00 {e(l_0xc51b9d)}][06 F8 00 {e(data_02.l_0xc531ba)}][06 F9 00 {e(data_02.l_0xc531ba)}][06 FA 00 {e(data_02.l_0xc531ba)}][06 FB 00 {e(l_0xc51b9d)}][06 FC 00 {e(l_0xc51b9d)}][06 FE 00 {e(data_02.l_0xc52e85)}][06 00 01 {e(l_0xc521aa)}][06 01 01 {e(l_0xc51b9d)}][06 03 01 {e(l_0xc51b9d)}][06 04 01 {e(l_0xc51fc8)}][06 07 01 {e(data_02.l_0xc52e85)}][06 09 01 {e(data_01.l_0xc5238f)}][06 0B 01 {e(data_01.l_0xc525e6)}][06 0F 01 {e(data_01.l_0xc528bf)}][06 45 01 {e(data_01.l_0xc52bdd)}][06 46 01 {e(data_02.l_0xc52e85)}][06 57 02 {e(data_10.l_0xc5b468)}][06 58 02 {e(l_0xc51b9d)}][06 8D 02 {e(data_02.l_0xc52e85)}][06 DB 02 {e(data_02.l_0xc534e9)}][06 DC 02 {e(data_10.l_0xc5b94d)}]" eob
+
+l_0xc50c36:
+    newline
+    "[06 E2 00 {e(l_0xc51d96)}][06 E3 00 {e(l_0xc51bb7)}][06 E4 00 {e(data_11.l_0xc5bbf2)}][06 E5 00 {e(data_11.l_0xc5bbf2)}][06 E6 00 {e(data_11.l_0xc5bae8)}][06 E7 00 {e(data_11.l_0xc5bbf2)}][06 E8 00 {e(data_11.l_0xc5bae8)}][06 E9 00 {e(l_0xc51bb7)}][06 EA 00 {e(l_0xc521d3)}][06 EB 00 {e(data_10.l_0xc5b72d)}][06 EC 00 {e(data_11.l_0xc5bcf4)}][06 ED 00 {e(data_11.l_0xc5bfbf)}][06 EE 00 {e(data_12.l_0xc5cd7f)}][06 EF 00 {e(l_0xc51bb7)}][06 F0 00 {e(l_0xc51bb7)}][06 F1 00 {e(l_0xc51bb7)}][06 F2 00 {e(l_0xc51bb7)}][06 F3 00 {e(data_02.l_0xc52eb2)}][06 F4 00 {e(data_11.l_0xc5bae8)}][06 F5 00 {e(l_0xc51bb7)}][06 F6 00 {e(data_13.l_0xc5d104)}][06 F7 00 {e(data_11.l_0xc5c50d)}][06 F8 00 {e(data_02.l_0xc531ea)}][06 F9 00 {e(data_02.l_0xc531ea)}][06 FA 00 {e(data_02.l_0xc531ea)}][06 FB 00 {e(l_0xc51bb7)}][06 FC 00 {e(l_0xc51bb7)}][06 FD 00 {e(data_12.l_0xc5c78a)}][06 FE 00 {e(data_02.l_0xc52eb2)}][06 FF 00 {e(data_11.l_0xc5bae8)}][06 00 01 {e(l_0xc521d3)}][06 01 01 {e(l_0xc51bb7)}][06 02 01 {e(data_11.l_0xc5bae8)}][06 03 01 {e(l_0xc51bb7)}][06 04 01 {e(l_0xc51fe7)}][06 05 01 {e(data_11.l_0xc5bbf2)}][06 06 01 {e(data_12.l_0xc5cef0)}][06 07 01 {e(data_02.l_0xc52eb2)}][06 08 01 {e(data_11.l_0xc5c268)}][06 09 01 {e(data_01.l_0xc523be)}][06 0A 01 {e(data_11.l_0xc5be45)}][06 0B 01 {e(data_01.l_0xc52603)}][06 0C 01 {e(data_13.l_0xc5cfba)}][06 0D 01 {e(data_12.l_0xc5cb1e)}][06 0E 01 {e(data_12.l_0xc5c8aa)}][06 0F 01 {e(data_01.l_0xc528eb)}][06 44 01 {e(data_11.l_0xc5c125)}][06 45 01 {e(data_01.l_0xc52c00)}][06 46 01 {e(data_02.l_0xc52eb2)}][06 DE 01 {e(data_11.l_0xc5bfbf)}][06 55 02 {e(data_12.l_0xc5c65c)}][06 56 02 {e(data_12.l_0xc5cc8f)}][06 57 02 {e(data_10.l_0xc5b48c)}][06 58 02 {e(l_0xc51bb7)}][06 8D 02 {e(data_02.l_0xc52eb2)}][06 DB 02 {e(data_02.l_0xc53515)}][06 DC 02 {e(data_10.l_0xc5b971)}][06 DD 02 {e(data_12.l_0xc5c9ce)}]" eob
+
+l_0xc50dce:
+    newline
+    "[06 E2 00 {e(l_0xc51db0)}][06 E3 00 {e(l_0xc51bc0)}][06 E4 00 {e(data_11.l_0xc5bbfb)}][06 E5 00 {e(data_11.l_0xc5bbfb)}][06 E6 00 {e(data_11.l_0xc5baf1)}][06 E7 00 {e(data_11.l_0xc5bbfb)}][06 E8 00 {e(data_11.l_0xc5baf1)}][06 E9 00 {e(l_0xc51bc0)}][06 EA 00 {e(l_0xc521dc)}][06 EB 00 {e(data_10.l_0xc5b746)}][06 EC 00 {e(data_11.l_0xc5bcfd)}][06 ED 00 {e(data_11.l_0xc5bfc7)}][06 EE 00 {e(data_12.l_0xc5cd97)}][06 EF 00 {e(l_0xc51bc0)}][06 F0 00 {e(l_0xc51bc0)}][06 F1 00 {e(l_0xc51bc0)}][06 F2 00 {e(l_0xc51bc0)}][06 F3 00 {e(data_02.l_0xc52ed7)}][06 F4 00 {e(data_11.l_0xc5baf1)}][06 F5 00 {e(l_0xc51bc0)}][06 F6 00 {e(data_13.l_0xc5d120)}][06 F7 00 {e(data_11.l_0xc5c521)}][06 F8 00 {e(data_02.l_0xc53212)}][06 F9 00 {e(data_02.l_0xc53212)}][06 FA 00 {e(data_02.l_0xc53212)}][06 FB 00 {e(l_0xc51bc0)}][06 FC 00 {e(l_0xc51bc0)}][06 FD 00 {e(data_12.l_0xc5c7ae)}][06 FE 00 {e(data_02.l_0xc52ed7)}][06 FF 00 {e(data_11.l_0xc5baf1)}][06 00 01 {e(l_0xc521dc)}][06 01 01 {e(l_0xc51bc0)}][06 02 01 {e(data_11.l_0xc5baf1)}][06 03 01 {e(l_0xc51bc0)}][06 04 01 {e(l_0xc51ff8)}][06 05 01 {e(data_11.l_0xc5bbfb)}][06 06 01 {e(data_12.l_0xc5cef9)}][06 07 01 {e(data_02.l_0xc52ed7)}][06 08 01 {e(data_11.l_0xc5c27f)}][06 09 01 {e(data_01.l_0xc523cb)}][06 0A 01 {e(data_11.l_0xc5be4e)}][06 0B 01 {e(data_01.l_0xc52622)}][06 0C 01 {e(data_13.l_0xc5cfd5)}][06 0D 01 {e(data_12.l_0xc5cb29)}][06 0E 01 {e(data_12.l_0xc5c8c8)}][06 0F 01 {e(data_01.l_0xc528f9)}][06 44 01 {e(data_11.l_0xc5c13e)}][06 45 01 {e(data_01.l_0xc52c1c)}][06 46 01 {e(data_02.l_0xc52ed7)}][06 DE 01 {e(data_11.l_0xc5bfc7)}][06 55 02 {e(data_12.l_0xc5c67a)}][06 56 02 {e(data_12.l_0xc5ccae)}][06 57 02 {e(data_10.l_0xc5b4d7)}][06 58 02 {e(l_0xc51bc0)}][06 8D 02 {e(data_02.l_0xc52ed7)}][06 DB 02 {e(data_02.l_0xc5352c)}][06 DC 02 {e(data_10.l_0xc5b97e)}][06 DD 02 {e(data_12.l_0xc5c9e7)}]" eob
+
+l_0xc50f66:
+    newline
+    "[06 E2 00 {e(l_0xc51dcb)}][06 E3 00 {e(l_0xc51bde)}][06 E4 00 {e(data_11.l_0xc5bc0d)}][06 E5 00 {e(data_11.l_0xc5bc0d)}][06 E6 00 {e(data_11.l_0xc5bb02)}][06 E7 00 {e(data_11.l_0xc5bc0d)}][06 E8 00 {e(data_11.l_0xc5bb02)}][06 E9 00 {e(l_0xc51bde)}][06 EA 00 {e(l_0xc521ec)}][06 EB 00 {e(data_10.l_0xc5b76f)}][06 EC 00 {e(data_11.l_0xc5bd0c)}][06 ED 00 {e(data_11.l_0xc5bfd3)}][06 EE 00 {e(data_12.l_0xc5cdb3)}][06 EF 00 {e(l_0xc51bde)}][06 F0 00 {e(l_0xc51bde)}][06 F1 00 {e(l_0xc51bde)}][06 F2 00 {e(l_0xc51bde)}][06 F3 00 {e(data_02.l_0xc52ef5)}][06 F4 00 {e(data_11.l_0xc5bb02)}][06 F5 00 {e(l_0xc51bde)}][06 F6 00 {e(data_13.l_0xc5d148)}][06 F7 00 {e(data_11.l_0xc5c536)}][06 F8 00 {e(data_02.l_0xc53259)}][06 F9 00 {e(data_02.l_0xc53259)}][06 FA 00 {e(data_02.l_0xc53259)}][06 FB 00 {e(l_0xc51bde)}][06 FC 00 {e(l_0xc51bde)}][06 FD 00 {e(data_12.l_0xc5c7b9)}][06 FE 00 {e(data_02.l_0xc52ef5)}][06 FF 00 {e(data_11.l_0xc5bb02)}][06 00 01 {e(l_0xc521ec)}][06 01 01 {e(l_0xc51bde)}][06 02 01 {e(data_11.l_0xc5bb02)}][06 03 01 {e(l_0xc51bde)}][06 04 01 {e(l_0xc5201d)}][06 05 01 {e(data_11.l_0xc5bc0d)}][06 06 01 {e(data_13.l_0xc5cf0a)}][06 07 01 {e(data_02.l_0xc52ef5)}][06 08 01 {e(data_11.l_0xc5c2a5)}][06 09 01 {e(data_01.l_0xc523ef)}][06 0A 01 {e(data_11.l_0xc5be6f)}][06 0B 01 {e(data_01.l_0xc5264b)}][06 0C 01 {e(data_13.l_0xc5cfdf)}][06 0D 01 {e(data_12.l_0xc5cb33)}][06 0E 01 {e(data_12.l_0xc5c8d8)}][06 0F 01 {e(data_01.l_0xc52938)}][06 44 01 {e(data_11.l_0xc5c161)}][06 45 01 {e(data_01.l_0xc52c3d)}][06 46 01 {e(data_02.l_0xc52ef5)}][06 DE 01 {e(data_11.l_0xc5bfd3)}][06 55 02 {e(data_12.l_0xc5c68a)}][06 56 02 {e(data_12.l_0xc5ccbd)}][06 57 02 {e(data_10.l_0xc5b507)}][06 58 02 {e(l_0xc51bde)}][06 8D 02 {e(data_02.l_0xc52ef5)}][06 DB 02 {e(data_02.l_0xc53562)}][06 DC 02 {e(data_10.l_0xc5b994)}][06 DD 02 {e(data_12.l_0xc5c9f2)}]" eob
+
+l_0xc510fe:
+    newline
+    "[06 E2 00 {e(l_0xc51e14)}][06 E3 00 {e(l_0xc51c03)}][06 E9 00 {e(l_0xc51c03)}][06 EA 00 {e(l_0xc5222e)}][06 EB 00 {e(data_10.l_0xc5b799)}][06 EF 00 {e(l_0xc51c03)}][06 F0 00 {e(l_0xc51c03)}][06 F1 00 {e(l_0xc51c03)}][06 F2 00 {e(l_0xc51c03)}][06 F3 00 {e(data_02.l_0xc52f4a)}][06 F5 00 {e(l_0xc51c03)}][06 F8 00 {e(data_02.l_0xc5328f)}][06 F9 00 {e(data_02.l_0xc5328f)}][06 FA 00 {e(data_02.l_0xc5328f)}][06 FB 00 {e(l_0xc51c03)}][06 FC 00 {e(l_0xc51c03)}][06 FE 00 {e(data_02.l_0xc52f4a)}][06 00 01 {e(l_0xc5222e)}][06 01 01 {e(l_0xc51c03)}][06 03 01 {e(l_0xc51c03)}][06 04 01 {e(l_0xc52059)}][06 07 01 {e(data_02.l_0xc52f4a)}][06 09 01 {e(data_01.l_0xc5241d)}][06 0B 01 {e(data_01.l_0xc526a2)}][06 0F 01 {e(data_01.l_0xc52972)}][06 45 01 {e(data_01.l_0xc52c81)}][06 46 01 {e(data_02.l_0xc52f4a)}][06 57 02 {e(data_10.l_0xc5b541)}][06 58 02 {e(l_0xc51c03)}][06 8D 02 {e(data_02.l_0xc52f4a)}][06 DB 02 {e(data_02.l_0xc535d3)}][06 DC 02 {e(data_10.l_0xc5b9c1)}]" eob
+
+l_0xc511e0:
+    newline
+    "[06 E2 00 {e(l_0xc51e1f)}][06 E3 00 {e(l_0xc51c0e)}][06 E9 00 {e(l_0xc51c0e)}][06 EA 00 {e(data_01.l_0xc5223c)}][06 EB 00 {e(data_10.l_0xc5b7a6)}][06 EF 00 {e(l_0xc51c0e)}][06 F0 00 {e(l_0xc51c0e)}][06 F1 00 {e(l_0xc51c0e)}][06 F2 00 {e(l_0xc51c0e)}][06 F3 00 {e(data_02.l_0xc52f5f)}][06 F5 00 {e(l_0xc51c0e)}][06 F8 00 {e(data_02.l_0xc532b3)}][06 F9 00 {e(data_02.l_0xc532b3)}][06 FA 00 {e(data_02.l_0xc532b3)}][06 FB 00 {e(l_0xc51c0e)}][06 FC 00 {e(l_0xc51c0e)}][06 FE 00 {e(data_02.l_0xc52f5f)}][06 00 01 {e(data_01.l_0xc5223c)}][06 01 01 {e(l_0xc51c0e)}][06 03 01 {e(l_0xc51c0e)}][06 04 01 {e(l_0xc5206d)}][06 07 01 {e(data_02.l_0xc52f5f)}][06 09 01 {e(data_01.l_0xc5242b)}][06 0B 01 {e(data_01.l_0xc526b8)}][06 0F 01 {e(data_01.l_0xc52989)}][06 45 01 {e(data_01.l_0xc52c9b)}][06 46 01 {e(data_02.l_0xc52f5f)}][06 57 02 {e(data_10.l_0xc5b551)}][06 58 02 {e(l_0xc51c0e)}][06 8D 02 {e(data_02.l_0xc52f5f)}][06 DB 02 {e(data_02.l_0xc535df)}][06 DC 02 {e(data_10.l_0xc5b9d1)}]" eob
+
+l_0xc512c2:
+    newline
+    "[06 E2 00 {e(l_0xc51e4a)}][06 E3 00 {e(l_0xc51c38)}][06 E9 00 {e(l_0xc51c38)}][06 EA 00 {e(data_01.l_0xc52261)}][06 EB 00 {e(data_10.l_0xc5b7cd)}][06 EF 00 {e(l_0xc51c38)}][06 F0 00 {e(l_0xc51c38)}][06 F1 00 {e(l_0xc51c38)}][06 F2 00 {e(l_0xc51c38)}][06 F3 00 {e(data_02.l_0xc52f94)}][06 F5 00 {e(l_0xc51c38)}][06 F8 00 {e(data_02.l_0xc532fa)}][06 F9 00 {e(data_02.l_0xc532fa)}][06 FA 00 {e(data_02.l_0xc532fa)}][06 FB 00 {e(l_0xc51c38)}][06 FC 00 {e(l_0xc51c38)}][06 FE 00 {e(data_02.l_0xc52f94)}][06 00 01 {e(data_01.l_0xc52261)}][06 01 01 {e(l_0xc51c38)}][06 03 01 {e(l_0xc51c38)}][06 04 01 {e(l_0xc5209b)}][06 07 01 {e(data_02.l_0xc52f94)}][06 09 01 {e(data_01.l_0xc5244f)}][06 0B 01 {e(data_01.l_0xc526e5)}][06 0F 01 {e(data_01.l_0xc529d2)}][06 45 01 {e(data_01.l_0xc52cd4)}][06 46 01 {e(data_02.l_0xc52f94)}][06 57 02 {e(data_10.l_0xc5b572)}][06 58 02 {e(l_0xc51c38)}][06 8D 02 {e(data_02.l_0xc52f94)}][06 DB 02 {e(data_02.l_0xc53615)}][06 DC 02 {e(data_10.l_0xc5b9fe)}]" eob
+
+l_0xc513a4:
+    newline
+    "[06 E2 00 {e(l_0xc51e67)}][06 E3 00 {e(l_0xc51c41)}][06 E9 00 {e(l_0xc51c41)}][06 EA 00 {e(data_01.l_0xc52272)}][06 EB 00 {e(data_10.l_0xc5b7f2)}][06 EF 00 {e(l_0xc51c41)}][06 F0 00 {e(l_0xc51c41)}][06 F1 00 {e(l_0xc51c41)}][06 F2 00 {e(l_0xc51c41)}][06 F3 00 {e(data_02.l_0xc52fb6)}][06 F5 00 {e(l_0xc51c41)}][06 F8 00 {e(data_02.l_0xc53312)}][06 F9 00 {e(data_02.l_0xc53312)}][06 FA 00 {e(data_02.l_0xc53312)}][06 FB 00 {e(l_0xc51c41)}][06 FC 00 {e(l_0xc51c41)}][06 FE 00 {e(data_02.l_0xc52fb6)}][06 00 01 {e(data_01.l_0xc52272)}][06 01 01 {e(l_0xc51c41)}][06 03 01 {e(l_0xc51c41)}][06 04 01 {e(l_0xc520a2)}][06 07 01 {e(data_02.l_0xc52fb6)}][06 09 01 {e(data_01.l_0xc52469)}][06 0B 01 {e(data_01.l_0xc5270f)}][06 0F 01 {e(data_01.l_0xc529e0)}][06 45 01 {e(data_01.l_0xc52ced)}][06 46 01 {e(data_02.l_0xc52fb6)}][06 57 02 {e(data_10.l_0xc5b591)}][06 58 02 {e(l_0xc51c41)}][06 8D 02 {e(data_02.l_0xc52fb6)}][06 DB 02 {e(data_02.l_0xc53645)}][06 DC 02 {e(data_10.l_0xc5ba07)}]" eob
+
+l_0xc51486:
+    newline
+    "[06 E2 00 {e(l_0xc51e81)}][06 E3 00 {e(l_0xc51c56)}][06 E9 00 {e(l_0xc51c56)}][06 EA 00 {e(data_01.l_0xc52288)}][06 EB 00 {e(data_10.l_0xc5b807)}][06 EF 00 {e(l_0xc51c56)}][06 F0 00 {e(l_0xc51c56)}][06 F1 00 {e(l_0xc51c56)}][06 F2 00 {e(l_0xc51c56)}][06 F3 00 {e(data_02.l_0xc52ffa)}][06 F5 00 {e(l_0xc51c56)}][06 F8 00 {e(data_02.l_0xc53363)}][06 F9 00 {e(data_02.l_0xc53363)}][06 FA 00 {e(data_02.l_0xc53363)}][06 FB 00 {e(l_0xc51c56)}][06 FC 00 {e(l_0xc51c56)}][06 FE 00 {e(data_02.l_0xc52ffa)}][06 00 01 {e(data_01.l_0xc52288)}][06 01 01 {e(l_0xc51c56)}][06 03 01 {e(l_0xc51c56)}][06 04 01 {e(l_0xc520b9)}][06 07 01 {e(data_02.l_0xc52ffa)}][06 09 01 {e(data_01.l_0xc52485)}][06 0B 01 {e(data_01.l_0xc52732)}][06 0F 01 {e(data_01.l_0xc52a09)}][06 45 01 {e(data_01.l_0xc52d03)}][06 46 01 {e(data_02.l_0xc52ffa)}][06 57 02 {e(data_10.l_0xc5b5b1)}][06 58 02 {e(l_0xc51c56)}][06 8D 02 {e(data_02.l_0xc52ffa)}][06 DB 02 {e(data_02.l_0xc5366d)}][06 DC 02 {e(data_10.l_0xc5ba28)}]" eob
+
+l_0xc51568:
+    newline
+    "[06 E2 00 {e(l_0xc51e95)}][06 E3 00 {e(l_0xc51c6e)}][06 E4 00 {e(data_11.l_0xc5bc23)}][06 E5 00 {e(data_11.l_0xc5bc23)}][06 E6 00 {e(data_11.l_0xc5bb22)}][06 E7 00 {e(data_11.l_0xc5bc23)}][06 E8 00 {e(data_11.l_0xc5bb22)}][06 E9 00 {e(l_0xc51c6e)}][06 EA 00 {e(data_01.l_0xc52299)}][06 EB 00 {e(data_10.l_0xc5b826)}][06 EC 00 {e(data_11.l_0xc5bd49)}][06 ED 00 {e(data_11.l_0xc5c025)}][06 EE 00 {e(data_12.l_0xc5cdc0)}][06 EF 00 {e(l_0xc51c6e)}][06 F0 00 {e(l_0xc51c6e)}][06 F1 00 {e(l_0xc51c6e)}][06 F2 00 {e(l_0xc51c6e)}][06 F3 00 {e(data_02.l_0xc53018)}][06 F4 00 {e(data_11.l_0xc5bb22)}][06 F5 00 {e(l_0xc51c6e)}][06 F6 00 {e(data_13.l_0xc5d178)}][06 F7 00 {e(data_11.l_0xc5c564)}][06 F8 00 {e(data_02.l_0xc5338f)}][06 F9 00 {e(data_02.l_0xc5338f)}][06 FA 00 {e(data_02.l_0xc5338f)}][06 FB 00 {e(l_0xc51c6e)}][06 FC 00 {e(l_0xc51c6e)}][06 FD 00 {e(data_12.l_0xc5c7f1)}][06 FE 00 {e(data_02.l_0xc53018)}][06 FF 00 {e(data_11.l_0xc5bb22)}][06 00 01 {e(data_01.l_0xc52299)}][06 01 01 {e(l_0xc51c6e)}][06 02 01 {e(data_11.l_0xc5bb22)}][06 03 01 {e(l_0xc51c6e)}][06 04 01 {e(l_0xc520cf)}][06 05 01 {e(data_11.l_0xc5bc23)}][06 06 01 {e(data_13.l_0xc5cf1c)}][06 07 01 {e(data_02.l_0xc53018)}][06 08 01 {e(data_11.l_0xc5c2c6)}][06 09 01 {e(data_01.l_0xc5249a)}][06 0A 01 {e(data_11.l_0xc5beb3)}][06 0B 01 {e(data_01.l_0xc52750)}][06 0C 01 {e(data_13.l_0xc5d00c)}][06 0D 01 {e(data_12.l_0xc5cb67)}][06 0E 01 {e(data_12.l_0xc5c916)}][06 0F 01 {e(data_01.l_0xc52a2a)}][06 44 01 {e(data_11.l_0xc5c192)}][06 45 01 {e(data_01.l_0xc52d1e)}][06 46 01 {e(data_02.l_0xc53018)}][06 DE 01 {e(data_11.l_0xc5c025)}][06 55 02 {e(data_12.l_0xc5c6c3)}][06 56 02 {e(data_12.l_0xc5ccca)}][06 57 02 {e(data_10.l_0xc5b5ce)}][06 58 02 {e(l_0xc51c6e)}][06 8D 02 {e(data_02.l_0xc53018)}][06 DB 02 {e(data_02.l_0xc53687)}][06 DC 02 {e(data_10.l_0xc5ba5b)}][06 DD 02 {e(data_12.l_0xc5ca04)}]" eob
+
+l_0xc51700:
+    newline
+    "[06 E2 00 {e(l_0xc51ea9)}][06 E3 00 {e(l_0xc51c87)}][06 E4 00 {e(data_11.l_0xc5bc3c)}][06 E5 00 {e(data_11.l_0xc5bc3c)}][06 E6 00 {e(data_11.l_0xc5bb36)}][06 E7 00 {e(data_11.l_0xc5bc3c)}][06 E8 00 {e(data_11.l_0xc5bb36)}][06 E9 00 {e(l_0xc51c87)}][06 EA 00 {e(data_01.l_0xc522aa)}][06 EB 00 {e(data_10.l_0xc5b84e)}][06 EC 00 {e(data_11.l_0xc5bd59)}][06 ED 00 {e(data_11.l_0xc5c033)}][06 EE 00 {e(data_12.l_0xc5cdd8)}][06 EF 00 {e(l_0xc51c87)}][06 F0 00 {e(l_0xc51c87)}][06 F1 00 {e(l_0xc51c87)}][06 F2 00 {e(l_0xc51c87)}][06 F3 00 {e(data_02.l_0xc53063)}][06 F4 00 {e(data_11.l_0xc5bb36)}][06 F5 00 {e(l_0xc51c87)}][06 F6 00 {e(data_13.l_0xc5d1c7)}][06 F7 00 {e(data_11.l_0xc5c572)}][06 F8 00 {e(data_02.l_0xc533b6)}][06 F9 00 {e(data_02.l_0xc533b6)}][06 FA 00 {e(data_02.l_0xc533b6)}][06 FB 00 {e(l_0xc51c87)}][06 FC 00 {e(l_0xc51c87)}][06 FD 00 {e(data_12.l_0xc5c804)}][06 FE 00 {e(data_02.l_0xc53063)}][06 FF 00 {e(data_11.l_0xc5bb36)}][06 00 01 {e(data_01.l_0xc522aa)}][06 01 01 {e(l_0xc51c87)}][06 02 01 {e(data_11.l_0xc5bb36)}][06 03 01 {e(l_0xc51c87)}][06 04 01 {e(l_0xc520e1)}][06 05 01 {e(data_11.l_0xc5bc3c)}][06 06 01 {e(data_13.l_0xc5cf30)}][06 07 01 {e(data_02.l_0xc53063)}][06 08 01 {e(data_11.l_0xc5c2de)}][06 09 01 {e(data_01.l_0xc524b8)}][06 0A 01 {e(data_11.l_0xc5bec1)}][06 0B 01 {e(data_01.l_0xc52776)}][06 0C 01 {e(data_13.l_0xc5d01e)}][06 0D 01 {e(data_12.l_0xc5cb7b)}][06 0E 01 {e(data_12.l_0xc5c92a)}][06 0F 01 {e(data_01.l_0xc52a5c)}][06 44 01 {e(data_11.l_0xc5c1a7)}][06 45 01 {e(data_01.l_0xc52d38)}][06 46 01 {e(data_02.l_0xc53063)}][06 DE 01 {e(data_11.l_0xc5c033)}][06 55 02 {e(data_12.l_0xc5c6e3)}][06 56 02 {e(data_12.l_0xc5ccea)}][06 57 02 {e(data_10.l_0xc5b5e2)}][06 58 02 {e(l_0xc51c87)}][06 8D 02 {e(data_02.l_0xc53063)}][06 DB 02 {e(data_02.l_0xc536c1)}][06 DC 02 {e(data_10.l_0xc5ba69)}][06 DD 02 {e(data_12.l_0xc5ca10)}]" eob
+
+l_0xc51898:
+    newline
+    "[06 E2 00 {e(l_0xc51eb6)}][06 E3 00 {e(l_0xc51c95)}][06 E9 00 {e(l_0xc51c95)}][06 EA 00 {e(data_01.l_0xc522ba)}][06 EB 00 {e(data_10.l_0xc5b860)}][06 EF 00 {e(l_0xc51c95)}][06 F0 00 {e(l_0xc51c95)}][06 F1 00 {e(l_0xc51c95)}][06 F2 00 {e(l_0xc51c95)}][06 F3 00 {e(data_02.l_0xc53072)}][06 F5 00 {e(l_0xc51c95)}][06 F8 00 {e(data_02.l_0xc533d5)}][06 F9 00 {e(data_02.l_0xc533d5)}][06 FA 00 {e(data_02.l_0xc533d5)}][06 FB 00 {e(l_0xc51c95)}][06 FC 00 {e(l_0xc51c95)}][06 FE 00 {e(data_02.l_0xc53072)}][06 00 01 {e(data_01.l_0xc522ba)}][06 01 01 {e(l_0xc51c95)}][06 03 01 {e(l_0xc51c95)}][06 04 01 {e(l_0xc520f1)}][06 07 01 {e(data_02.l_0xc53072)}][06 09 01 {e(data_01.l_0xc524c5)}][06 0B 01 {e(data_01.l_0xc52788)}][06 0F 01 {e(data_01.l_0xc52a82)}][06 45 01 {e(data_01.l_0xc52d54)}][06 46 01 {e(data_02.l_0xc53072)}][06 57 02 {e(data_10.l_0xc5b5f0)}][06 58 02 {e(l_0xc51c95)}][06 8D 02 {e(data_02.l_0xc53072)}][06 DB 02 {e(data_02.l_0xc536d2)}][06 DC 02 {e(data_10.l_0xc5ba78)}]" eob
+
+l_0xc5197a:
+    newline
+    "[06 E2 00 {e(l_0xc51ec4)}][06 E3 00 {e(l_0xc51ca3)}][06 E4 00 {e(data_11.l_0xc5bc4c)}][06 E5 00 {e(data_11.l_0xc5bc4c)}][06 E6 00 {e(data_11.l_0xc5bb46)}][06 E7 00 {e(data_11.l_0xc5bc4c)}][06 E8 00 {e(data_11.l_0xc5bb46)}][06 E9 00 {e(l_0xc51ca3)}][06 EA 00 {e(data_01.l_0xc522ca)}][06 EB 00 {e(data_10.l_0xc5b86d)}][06 EC 00 {e(data_11.l_0xc5bd62)}][06 ED 00 {e(data_11.l_0xc5c03c)}][06 EE 00 {e(data_12.l_0xc5cdf2)}][06 EF 00 {e(l_0xc51ca3)}][06 F0 00 {e(l_0xc51ca3)}][06 F1 00 {e(l_0xc51ca3)}][06 F2 00 {e(l_0xc51ca3)}][06 F3 00 {e(data_02.l_0xc5307d)}][06 F4 00 {e(data_11.l_0xc5bb46)}][06 F5 00 {e(l_0xc51ca3)}][06 F6 00 {e(data_13.l_0xc5d1ed)}][06 F7 00 {e(data_12.l_0xc5c57b)}][06 F8 00 {e(data_02.l_0xc533e5)}][06 F9 00 {e(data_02.l_0xc533e5)}][06 FA 00 {e(data_02.l_0xc533e5)}][06 FB 00 {e(l_0xc51ca3)}][06 FC 00 {e(l_0xc51ca3)}][06 FD 00 {e(data_12.l_0xc5c80d)}][06 FE 00 {e(data_02.l_0xc5307d)}][06 FF 00 {e(data_11.l_0xc5bb46)}][06 00 01 {e(data_01.l_0xc522ca)}][06 01 01 {e(l_0xc51ca3)}][06 02 01 {e(data_11.l_0xc5bb46)}][06 03 01 {e(l_0xc51ca3)}][06 04 01 {e(l_0xc520fa)}][06 05 01 {e(data_11.l_0xc5bc4c)}][06 06 01 {e(data_13.l_0xc5cf3d)}][06 07 01 {e(data_02.l_0xc5307d)}][06 08 01 {e(data_11.l_0xc5c2e7)}][06 09 01 {e(data_01.l_0xc524d2)}][06 0A 01 {e(data_11.l_0xc5becd)}][06 0B 01 {e(data_01.l_0xc52796)}][06 0C 01 {e(data_13.l_0xc5d02d)}][06 0D 01 {e(data_12.l_0xc5cb88)}][06 0E 01 {e(data_12.l_0xc5c933)}][06 0F 01 {e(data_01.l_0xc52a92)}][06 44 01 {e(data_11.l_0xc5c1be)}][06 45 01 {e(data_01.l_0xc52d5f)}][06 46 01 {e(data_02.l_0xc5307d)}][06 DE 01 {e(data_11.l_0xc5c03c)}][06 55 02 {e(data_12.l_0xc5c6ec)}][06 56 02 {e(data_12.l_0xc5ccf5)}][06 57 02 {e(data_10.l_0xc5b5fe)}][06 58 02 {e(l_0xc51ca3)}][06 8D 02 {e(data_02.l_0xc5307d)}][06 DB 02 {e(data_02.l_0xc536e1)}][06 DC 02 {e(data_10.l_0xc5ba86)}][06 DD 02 {e(data_12.l_0xc5ca1e)}]" eob
+
+l_0xc51b12:
+    "@Hello there!" linebreak
+    "  How may I help you?" linebreak
+    eob
+
+l_0xc51b28:
+    "@Thank you very much." end
+
+l_0xc51b31:
+    "@Please come again." end
+
+l_0xc51b39:
+    "@Can I get you" linebreak
+    "  anything?[03]" eob
+
+l_0xc51b49:
+    "@[1C 05 00]?" linebreak
+    "  All right." next
+    eob
+
+l_0xc51b57:
+    "@Which of you will carry this?[03]" eob
+
+l_0xc51b6a:
+    "@Thank you.  Are you going to equip it here?" linebreak
+    eob
+
+l_0xc51b7e:
+    "@Would you like me to buy" linebreak
+    "  the [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]?" next
+    eob
+
+l_0xc51b9d:
+    "@[1C 02 00] cannot equip this." next
+    "@Do you still want to buy it?" linebreak
+    eob
+
+l_0xc51bb7:
+    "@Please come again." next
+    eob
+
+l_0xc51bc0:
+    "@Excuse me, uhhh... you don't seem to have enough money." next
+    eob
+
+l_0xc51bde:
+    "@I'm afraid you cannot carry anything else." next
+    "@Do you want to sell some things that you don't need?" linebreak
+    eob
+
+l_0xc51c03:
+    "@What do you want to sell?[03]" eob
+
+l_0xc51c0e:
+    "@[1C 05 00]?" linebreak
+    "  I can buy it" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]." next
+    "@Would you like to do that?" linebreak
+    eob
+
+l_0xc51c38:
+    "@Please come again." next
+    eob
+
+l_0xc51c41:
+    "@I don't think you have any thing that you can sell." next
+    eob
+
+l_0xc51c56:
+    "@I am sorry, but we cannot buy the [1C 05 00]." next
+    eob
+
+l_0xc51c6e:
+    "@Thank you very much." next
+    eob
+
+l_0xc51c78:
+    "@Thank you for shopping here." next
+    eob
+
+l_0xc51c87:
+    "@Can I get you anything else?" linebreak
+    eob
+
+l_0xc51c95:
+    "@What would you like to get next?" linebreak
+    eob
+
+l_0xc51ca3:
+    "@It looks like [1C 02 00] can't carry any more stuff." next
+    "@Would someone else like to carry it?" linebreak
+    eob
+
+l_0xc51ccb:
+    "@Hi, come in, come in!" next
+    "@What can I do for you today?" linebreak
+    eob
+
+l_0xc51cef:
+    "@Thanks a bunch!" end
+
+l_0xc51cfa:
+    "@You don't want to buy anything from me?" next
+    "@Oh, you hurt my feelings." end
+
+l_0xc51d20:
+    "@Can I help you find something?[03]" eob
+
+l_0xc51d31:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc51d39:
+    "@Who's going to carry it?[03]" eob
+
+l_0xc51d45:
+    "@Do you want to, like, <equip> it here?" linebreak
+    eob
+
+l_0xc51d5b:
+    "@I can buy your" linebreak
+    "  [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]." next
+    eob
+
+l_0xc51d7b:
+    "@[1C 02 00]  can't equip this." next
+    "@Do you still want to buy it?" linebreak
+    eob
+
+l_0xc51d96:
+    "@So, you say you don't want it... Hmmmm..." next
+    eob
+
+l_0xc51db0:
+    "@Oh no!" linebreak
+    "  Don't tell me you don't have enough money!!" next
+    eob
+
+l_0xc51dcb:
+    "@Oh, my!" next
+    "@I just don't think you can carry any more than what you already have." next
+    "@But you know, I might be able to buy some of the stuff you don't need." next
+    eob
+
+l_0xc51e14:
+    "@What do you want to sell?[03]" eob
+
+l_0xc51e1f:
+    "@The [1C 05 00]?" linebreak
+    "  I'll buy it for {swap}$[1C 0A 00 00 00 00]." next
+    "@Do you wanna sell it?" linebreak
+    eob
+
+l_0xc51e4a:
+    "@Oh, so you don't want to do that?" linebreak
+    "  Well, all right." next
+    eob
+
+l_0xc51e67:
+    "@Well, it looks like you don't have anything to sell to us." next
+    eob
+
+l_0xc51e81:
+    "@Oh, no!" linebreak
+    "  You can't sell that here." next
+    eob
+
+l_0xc51e95:
+    "@Thanks a bunch!" next
+    eob
+
+l_0xc51ea1:
+    "@Thanks again." next
+    eob
+
+l_0xc51ea9:
+    "@Do you need anything else from me?" linebreak
+    eob
+
+l_0xc51eb6:
+    "@What can I do for you?" linebreak
+    eob
+
+l_0xc51ec4:
+    "@[1C 02 00] is already carrying too much stuff." next
+    "@Does anyone else want to carry it?" linebreak
+    eob
+
+l_0xc51eea:
+    "@Hey dudes!  It's summer!" linebreak
+    "  It's the manly time of year!" linebreak
+    "  Time for sports, guys!" next
+    "@What can I do you for?" linebreak
+    eob
+
+l_0xc51f2c:
+    "@Hey buddy, thanks!" linebreak
+    "  See you around!" end
+
+l_0xc51f45:
+    "@If you ever need anything, come back here, and I'll set you up!" end
+
+l_0xc51f62:
+    "@So what'll it be today?[03]" eob
+
+l_0xc51f74:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc51f7c:
+    "@Which of you is going to carry this?[03]" eob
+
+l_0xc51f91:
+    "@So, man, are you gonna equip it here?" linebreak
+    eob
+
+l_0xc51fa7:
+    "@Can I buy your" linebreak
+    "  [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]?" linebreak
+    eob
+
+l_0xc51fc8:
+    "@[1C 02 00] can't equip this." next
+    "  Do ya still want to buy it?" linebreak
+    eob
+
+l_0xc51fe7:
+    "@Catch ya later!" next
+    eob
+
+l_0xc51ff8:
+    "@Oh, most heinous!" linebreak
+    "  You dudes don't have enough money for this." next
+    eob
+
+l_0xc5201d:
+    "@Dudes!" linebreak
+    "  You simply have too much stuff in your kit!" next
+    "@But don't sweat it, I can buy some stuff you don't need." linebreak
+    eob
+
+l_0xc52059:
+    "@Now, you're sure you want to sell this to me...[03]" eob
+
+l_0xc5206d:
+    "@The [1C 05 00]?" linebreak
+    "  I'll buy it for {swap}$[1C 0A 00 00 00 00]." next
+    "@You positive you want to sell it?" linebreak
+    eob
+
+l_0xc5209b:
+    "@OK." next
+    eob
+
+l_0xc520a2:
+    "@Man, you don't have anything to sell me!" next
+    eob
+
+l_0xc520b9:
+    "@Sorry dude, but I can't buy that." next
+    eob
+
+l_0xc520cf:
+    "@Thanks!" next
+    eob
+
+l_0xc520d5:
+    "@Thanks, buddy!" next
+    eob
+
+l_0xc520e1:
+    "@Is there anything else I can do for you?" linebreak
+    eob
+
+l_0xc520f1:
+    "@What is it?" linebreak
+    eob
+
+l_0xc520fa:
+    "@[1C 02 00] has too many things." next
+    "@Does somebody else want to carry it?" linebreak
+    eob
+
+l_0xc5211e:
+    "@Hi!" next
+    "@Can I help you?" linebreak
+    eob
+
+l_0xc52130:
+    "@Thanks so much!" end
+
+l_0xc52139:
+    "@Are you here just to say <Hi>?  What a loser!" end
+
+l_0xc52154:
+    "@So, what are you going to buy?[03]" eob
+
+l_0xc52163:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc5216b:
+    "@Who's going to carry this?[03]" eob
+
+l_0xc5217a:
+    "@Would you like to equip it here?" linebreak
+    eob
+
+l_0xc52189:
+    "@Do you want me to buy" linebreak
+    "  your [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]?" next
+    eob
+
+l_0xc521aa:
+    "@Even though [1C 02 00] can't equip this," next
+    "@do you still want to purchase it?" linebreak
+    eob
+
+l_0xc521d3:
+    "@Please come again." next
+    eob
+
+l_0xc521dc:
+    "@I'm sorry, but you don't have enough money." next
+    eob
+
+l_0xc521ec:
+    "@Oh, how are you planning to carry this?  You've got too much stuff!" next
+    "@Well, I guess I could buy the stuff you don't need." next
+    "@Do you want to sell anything?" linebreak
+    eob
+
+l_0xc5222e:
+    "@What can you sell me?[03]" eob
+

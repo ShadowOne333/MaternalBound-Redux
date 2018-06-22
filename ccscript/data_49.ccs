@@ -1,0 +1,342 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc913dd:
+    "[06 0A 00 {e(l_0xc91401)}]@If you are the patient, come into the back room." end
+
+l_0xc91401:
+    "@You need to be examined?" linebreak
+    "  Then, you need to see the doctor... not me." end
+
+l_0xc9142c:
+    "@I'm not busy right now." next
+    "@Shall I explain about the hospital system?" linebreak
+    call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc91486)} {e(l_0xc9146d)}]" goto(l_0xc9146d)
+
+l_0xc9146d:
+    "@Yeah, well, I am actually pretty busy." end
+
+l_0xc91486:
+    "@If a good friend of yours becomes unconscious," next
+    "@come to the hospital right away." next
+    "@As long as you have money for the doctor's fee," next
+    "@you'll be able to see your friend completely recovered in no time." next
+    "@Besides being unconscious, whenever" next
+    "@you don't feel so well, come and talk to a doctor." next
+    "@Everything I just told you applies to hospitals all over the world." end
+
+l_0xc9155b:
+    "[1D 0D 01 01 02][1B 03 {e(l_0xc91581)}][1D 0D 02 01 02][1B 03 {e(l_0xc91581)}][1D 0D 03 01 02][1B 03 {e(l_0xc91581)}][1D 0D 04 01 02]" goto(l_0xc91581)
+
+l_0xc91581:
+    eob
+
+l_0xc91582:
+    "{counter(1)}" goto(l_0xc91584)
+
+l_0xc91584:
+    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc915be)}][19 10 00]{store_registers}[1D 0D 00 01 02][1B 03 {e(l_0xc915b8)}]{load_registers}[1D 0D 00 01 03][1B 03 {e(l_0xc915b8)}]{load_registers}{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc915b8)
+
+l_0xc915b8:
+    "{inc}" goto(l_0xc91584)
+
+l_0xc915be:
+    call(l_0xc915c7) "{unset(flag 169)}" eob
+
+l_0xc915c7:
+    "[06 60 02 {e(l_0xc915cf)}]" eob
+
+l_0xc915cf:
+    "{set(flag 174)}{unset(flag 608)}" eob
+
+l_0xc915d6:
+    "{music(12)}{pause(200)}{music_resume}{pause(1)}" eob
+
+l_0xc915e1:
+    call(l_0xc915f4) call(l_0xc915d6) call(l_0xc915c7) "{unset(flag 169)}" eob
+
+l_0xc915f4:
+    "{counter(1)}" goto(l_0xc915f6)
+
+l_0xc915f6:
+    "{ctoarg}{swap}{store_registers}{result_is(5)}[1B 03 {e(l_0xc9162b)}]{load_registers}[19 05 00 01 01][1B 02 {e(l_0xc91625)}][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc91625)
+
+l_0xc91625:
+    "{inc}" goto(l_0xc915f6)
+
+l_0xc9162b:
+    eob
+
+l_0xc9162c:
+    "{counter(1)}" goto(l_0xc9162e)
+
+l_0xc9162e:
+    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91674)}][19 10 00]{store_registers}[1D 0D 00 01 02][1B 02 {e(l_0xc9165a)}]{load_registers}[19 05 00 01 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc9165a)
+
+l_0xc9165a:
+    "{load_registers}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{sound(37)}{inc}" goto(l_0xc9162e)
+
+l_0xc91674:
+    eob
+
+l_0xc91675:
+    "{ctoarg}{swap}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" eob
+
+l_0xc91693:
+    call(data_48.l_0xc90f7d) call(l_0xc915d6) call(l_0xc91582) eob
+
+l_0xc916a3:
+    "{set(flag 226)}" call(l_0xc91805) "{unset(flag 226)}" eob
+
+l_0xc916af:
+    "{set(flag 227)}" call(l_0xc91805) "{unset(flag 227)}" eob
+
+l_0xc916bb:
+    "{set(flag 228)}" call(l_0xc91805) "{unset(flag 228)}" eob
+
+l_0xc916c7:
+    "{set(flag 229)}" call(l_0xc91805) "{unset(flag 229)}" eob
+
+l_0xc916d3:
+    "{set(flag 230)}" call(l_0xc91805) "{unset(flag 230)}" eob
+
+l_0xc916df:
+    "{set(flag 231)}" call(l_0xc91805) "{unset(flag 231)}" eob
+
+l_0xc916eb:
+    "{set(flag 232)}" call(l_0xc91805) "{unset(flag 232)}" eob
+
+l_0xc916f7:
+    "{set(flag 233)}{set(flag 659)}" call(l_0xc91805) "{unset(flag 233)}{unset(flag 659)}" eob
+
+l_0xc91709:
+    "{set(flag 176)}[06 E2 00 {e(l_0xc91745)}][06 E3 00 {e(l_0xc91748)}][06 E4 00 {e(l_0xc9174b)}][06 E5 00 {e(l_0xc9174e)}][06 E6 00 {e(l_0xc91751)}][06 E7 00 {e(l_0xc91754)}][06 E8 00 {e(l_0xc91757)}][06 E9 00 {e(l_0xc9175a)}]" eob
+
+l_0xc91745:
+    "{counter(70)}" eob
+
+l_0xc91748:
+    "{counter(80)}" eob
+
+l_0xc9174b:
+    "{counter(90)}" eob
+
+l_0xc9174e:
+    "{counter(100)}" eob
+
+l_0xc91751:
+    "{counter(100)}" eob
+
+l_0xc91754:
+    "{counter(120)}" eob
+
+l_0xc91757:
+    "{counter(150)}" eob
+
+l_0xc9175a:
+    "{counter(100)}" eob
+
+l_0xc9175d:
+    "{set(flag 178)}[06 E2 00 {e(l_0xc91799)}][06 E3 00 {e(l_0xc9179c)}][06 E4 00 {e(l_0xc9179f)}][06 E5 00 {e(l_0xc917a2)}][06 E6 00 {e(l_0xc917a5)}][06 E7 00 {e(l_0xc917a8)}][06 E8 00 {e(l_0xc917ab)}][06 E9 00 {e(l_0xc917ae)}]" eob
+
+l_0xc91799:
+    "{counter(60)}" eob
+
+l_0xc9179c:
+    "{counter(70)}" eob
+
+l_0xc9179f:
+    "{counter(80)}" eob
+
+l_0xc917a2:
+    "{counter(90)}" eob
+
+l_0xc917a5:
+    "{counter(90)}" eob
+
+l_0xc917a8:
+    "{counter(110)}" eob
+
+l_0xc917ab:
+    "{counter(140)}" eob
+
+l_0xc917ae:
+    "{counter(90)}" eob
+
+l_0xc917b1:
+    "{set(flag 177)}[06 E2 00 {e(l_0xc917ed)}][06 E3 00 {e(l_0xc917f0)}][06 E4 00 {e(l_0xc917f3)}][06 E5 00 {e(l_0xc917f6)}][06 E6 00 {e(l_0xc917f9)}][06 E7 00 {e(l_0xc917fc)}][06 E8 00 {e(l_0xc917ff)}][06 E9 00 {e(l_0xc91802)}]" eob
+
+l_0xc917ed:
+    "{counter(50)}" eob
+
+l_0xc917f0:
+    "{counter(60)}" eob
+
+l_0xc917f3:
+    "{counter(70)}" eob
+
+l_0xc917f6:
+    "{counter(80)}" eob
+
+l_0xc917f9:
+    "{counter(80)}" eob
+
+l_0xc917fc:
+    "{counter(100)}" eob
+
+l_0xc917ff:
+    "{counter(130)}" eob
+
+l_0xc91802:
+    "{counter(80)}" eob
+
+l_0xc91805:
+    call(l_0xc91bb8) call(l_0xc91a91) "[1B 02 {e(l_0xc91a47)}]" call(l_0xc91abe) call(l_0xc91c1b) goto(l_0xc9181f)
+
+l_0xc9181f:
+    call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc91838)} {e(l_0xc919f6)}]" goto(l_0xc919f6)
+
+l_0xc91838:
+    "@What do you want me to do?" linebreak
+    "[18 02]{open_hp}{window_open(37)}[19 02]Soften" eob
+
+l_0xc91855:
+    "[19 02]Restore feeling" eob
+
+l_0xc91867:
+    "[19 02]Purify" eob
+
+l_0xc91870:
+    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc919f6)}][1F C0 03 {e(l_0xc91709)} {e(l_0xc9175d)} {e(l_0xc917b1)}]{ctoarg}@I need to charge you $[1C 0A 00 00 00 00]." linebreak
+    call(data_36.l_0xc7dd4d) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc918da)} {e(l_0xc918be)}]" goto(l_0xc918be)
+
+l_0xc918be:
+    newline
+    "@Mmm, come back when necessary.{wait}" call(l_0xc91bae) eob
+
+l_0xc918da:
+    "[1D 14 00 00 00 00][1B 03 {e(l_0xc91a11)}][1D 19 02][1B 02 {e(l_0xc918f7)}][19 10 01]" goto(l_0xc9191e)
+
+l_0xc918f7:
+    "@Who needs healing?" goto(l_0xc91905)
+
+l_0xc91905:
+    "[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc918be)}]" goto(l_0xc9191e)
+
+l_0xc9191e:
+    "{store_registers}[06 B1 00 {e(l_0xc91966)}][06 B2 00 {e(l_0xc9194e)}][06 B0 00 {e(l_0xc91936)}]" eob
+
+l_0xc91936:
+    "[1D 0D 00 01 03][1B 02 {e(l_0xc9197e)}]{load_registers}[19 05 00 01 01]" call(l_0xc91a51) eob
+
+l_0xc9194e:
+    "[1D 0D 00 01 04][1B 02 {e(l_0xc9199e)}]{load_registers}[19 05 00 01 01]" call(l_0xc91a51) eob
+
+l_0xc91966:
+    "[1D 0D 00 02 03][1B 02 {e(l_0xc919b5)}]{load_registers}[19 05 00 02 01]" call(l_0xc91a51) eob
+
+l_0xc9197e:
+    "{load_registers}{swap}" newline
+    "@[1C 02 00] isn't hard like a diamond." goto(l_0xc919ce)
+
+l_0xc9199e:
+    "{load_registers}{swap}" newline
+    "@[1C 02 00] isn't numb." goto(l_0xc919ce)
+
+l_0xc919b5:
+    "{load_registers}{swap}" newline
+    "@[1C 02 00] isn't possessed." goto(l_0xc919ce)
+
+l_0xc919ce:
+    "{swap}[1D 19 02][1B 03 {e(l_0xc919ef)}]" newline
+    "  Who needs to be healed?" goto(l_0xc91905)
+
+l_0xc919ef:
+    "{wait}" call(l_0xc91bae) eob
+
+l_0xc919f6:
+    "@Mmm, come back when necessary.{wait}" call(l_0xc91bae) eob
+
+l_0xc91a11:
+    newline
+    "@If you don't have any money, you'll just have to keep on going in your current state.{wait}" call(l_0xc91bae) eob
+
+l_0xc91a47:
+    call(data_50.l_0xc91c2e) goto(l_0xc9181f)
+
+l_0xc91a51:
+    "[1D 09 00 00]{open_wallet}{load_registers}{sound(37)}{pause(30)}{swap}" newline
+    "@There!  You're already healed!" linebreak
+    "  Can I do my job well, or what!{wait}" call(l_0xc91bae) eob
+
+l_0xc91a91:
+    "[19 20]{counter(1)}" goto(l_0xc91a95)
+
+l_0xc91a95:
+    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91abb)}][19 10 00][1B 02 {e(l_0xc91aba)}][1D 0D 00 02 02][1B 03 {e(l_0xc91aba)}]{inc}" goto(l_0xc91a95)
+
+l_0xc91aba:
+    eob
+
+l_0xc91abb:
+    "{result_is(0)}" eob
+
+l_0xc91abe:
+    "@Hey, now that I notice," next
+    "@could you sell me the mushroom growing on top of your head?" next
+    "@Come on, let's make a deal." next
+    "[19 02]Sell" eob
+
+l_0xc91b0e:
+    "[19 02]No" eob
+
+l_0xc91b13:
+    "{open_wallet}[1C 07 02][11]{clearline}[09 02 {e(l_0xc91b3d)} {e(l_0xc91b24)}]" goto(l_0xc91b24)
+
+l_0xc91b24:
+    "@Hmmmmm....." linebreak
+    "  That's too bad.[03]" eob
+
+l_0xc91b3d:
+    "@Thanks." linebreak
+    "  I'll pay you $50 for each mushroom." next
+    "@All right, let's do it![03]" call(l_0xc91b6f) eob
+
+l_0xc91b6f:
+    "{counter(1)}" goto(l_0xc91b71)
+
+l_0xc91b71:
+    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91bac)}][19 10 00]{store_registers}[1B 02 {e(l_0xc91bac)}][1D 0D 00 02 02][1B 02 {e(l_0xc91ba6)}]{load_registers}[19 05 00 02 01]{rtoarg}[1D 08 32 00]{open_wallet}{sound(37)}{pause(30)}" goto(l_0xc91ba6)
+
+l_0xc91ba6:
+    "{inc}" goto(l_0xc91b71)
+
+l_0xc91bac:
+    newline
+    eob
+
+l_0xc91bae:
+    "{unset(flag 176)}{unset(flag 178)}{unset(flag 177)}" eob
+
+l_0xc91bb8:
+    "@Though you may not believe it, I'm a healer." next
+    "@If you have some illness that can not be treated at the hospital," next
+    "@it's my job to cure you." next
+    eob
+
+l_0xc91c0f:
+    newline
+    "@Do you need any help?" linebreak
+    eob
+
+l_0xc91c1b:
+    newline
+    "@By the way, do you need any help?" linebreak
+    eob
+

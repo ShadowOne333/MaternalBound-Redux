@@ -1,0 +1,422 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc96657:
+    " girlie girl." eob
+
+l_0xc96661:
+    " specs." eob
+
+l_0xc96667:
+    " pajama boy." next
+    eob
+
+l_0xc96675:
+    "[06 5B 00 {e(l_0xc966d6)}]@My daughter left for the big city to become a superstar." next
+    "@She's using a stage name--{pause(20)}Vein... oh, vein something... she's working hard." end
+
+l_0xc966d6:
+    "@I got a letter from my daughter.{pause(20)}  She wants me to see her next show." next
+    "@A book of photographs of her is coming out soon." next
+    "@I really hope she kept her clothes on...{pause(20)}  Times sure have changed..." end
+
+l_0xc9675a:
+    "[06 49 00 {e(l_0xc9680e)}][06 44 00 {e(l_0xc967aa)}]@Dad and Mom have left for Happy-Happy Village." next
+    "@They wanna meet with the founder of the religion there." end
+
+l_0xc967aa:
+    "@Dad and Mom said they won't go to Happy-Happy Village." next
+    "@I'm not sure why, but now I'm happy." end
+
+l_0xc967e7:
+    "@You woke me from that nightmare." end
+
+l_0xc967fb:
+    "@I'm sorry that I made you worry..." end
+
+l_0xc9680e:
+    "@Now I get it.{pause(20)}  You're not from this town." next
+    "@So, where do you come from?{pause(15)}  Can you play with me again someday?" end
+
+l_0xc9684f:
+    "[06 53 00 {e(l_0xc9688a)}]@Did you know that two young inventors live in this town?" next
+    "@I want to invent something, too." end
+
+l_0xc9688a:
+    "@The other day,{pause(15)} did you speak to a boy who invents stuff?" end
+
+l_0xc968ae:
+    "@Meow." end
+
+l_0xc968b6:
+    call(data_20.l_0xc64dd0) eob
+
+l_0xc968bc:
+    "[06 77 00 {e(l_0xc969b2)}]@Do you want to buy a ticket for the Runaway Brothers show?" linebreak
+    "  [19 02]Yes" eob
+
+l_0xc968e0:
+    "  [19 02]No" eob
+
+l_0xc968e7:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9690d)} {e(l_0xc968f6)}]" goto(l_0xc968f6)
+
+l_0xc968f6:
+    "@Oh, I mistook you for a customer." end
+
+l_0xc9690d:
+    "@The main floor and balcony seats are sold out." next
+    "@We only have box seats, which cost 20 dollars.{pause(20)}  Would that be okay?" next
+    "@Oh, wait... the box seats sold out a long time ago.  Oops.{pause(20)}  My mistake." next
+    "@The box seats are the most popular." end
+
+l_0xc969b2:
+    "@Sorry.{pause(15)}  The Chaos Theater is being remodeled.{pause(20)}  There is no concert." end
+
+l_0xc969e5:
+    "[06 02 00 {e(l_0xc969ff)}][06 72 00 {e(l_0xc96a1f)}]" call(l_0xc969ff) "{set(flag 114)}{set(flag 2)}" eob
+
+l_0xc969ff:
+    "@This department store isn't crowded.{pause(20)}  I like that." end
+
+l_0xc96a1f:
+    "@Didn't you talk to me before?{pause(20)}  I believe I said," next
+    "@<This department store isn't crowded.{pause(20)}  I like that>..." next
+    "@or something to that effect." end
+
+l_0xc96a72:
+    call(data_13.l_0xc5d287) eob
+
+l_0xc96a78:
+    call(data_13.l_0xc5d293) eob
+
+l_0xc96a7e:
+    "[06 26 02 {e(l_0xc96aff)}]@I think that my grandchild is older than you.{pause(20)}  He's a famous inventor." next
+    "@He lives here, and people call him Orange Kid." next
+    "@He seems to be popular with the girls,{pause(15)} because he's... groovy?" end
+
+l_0xc96aff:
+    "@We've bumped into each other before.{pause(20)}  You seem to love department stores." next
+    "@I do too." end
+
+l_0xc96b37:
+    "[06 D7 00 {e(l_0xc96b79)}]@I heard a meteorite crashed onto a hilltop near Onett." next
+    "@That must have been exciting!" end
+
+l_0xc96b79:
+    "@I saw you a long time ago..." next
+    "@maybe about the time that the meteorite hit Onett..." end
+
+l_0xc96baf:
+    call(data_13.l_0xc5d29f) eob
+
+l_0xc96bb5:
+    call(data_13.l_0xc5d2ab) eob
+
+l_0xc96bbb:
+    "@I wanna visit my boyfriend in Threek 'cept the bus won't go there." next
+    "@I wonder why." end
+
+l_0xc96bf2:
+    "[06 49 00 {e(l_0xc96cd4)}][06 D3 00 {e(l_0xc96c57)}][06 44 00 {e(l_0xc96c35)}]@Happy-Happy Village is getting to be more and more blue.{pause(20)}  Do you get it?" end
+
+l_0xc96c35:
+    "@Someday, Happy-Happy Village will be truly happy." end
+
+l_0xc96c57:
+    "@You're always wearing the same clothes..." next
+    "@Do you wash them, or what?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc96c88:
+    "[19 02]No" eob
+
+l_0xc96c8d:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc96cba)} {e(l_0xc96c9c)}]" goto(l_0xc96c9c)
+
+l_0xc96c9c:
+    "@Well, they look clean enough,{pause(15)} but who knows?" end
+
+l_0xc96cba:
+    "@Hmm.{pause(30)}  I wouldn't have believed it..." end
+
+l_0xc96cd4:
+    "@Hey, it's the boy who wears the same outfit all the time!" next
+    "@You seem happy enough,{pause(15)} but who knows?" end
+
+l_0xc96d10:
+    "@Welcome to Moonside." next
+    "@Wel{pause(15)}  come{pause(15)}  to moo{pause(20)}   nsi{pause(15)}  ns{pause(15)}  dem{pause(5)} oons{pause(5)} ide." end
+
+l_0xc96d4f:
+    "@No, that's right.{pause(20)}" linebreak
+    "  I am the host here." end
+
+l_0xc96d6a:
+    "@Yes, that's wrong.{pause(20)}" linebreak
+    "  I am the hostess here." end
+
+l_0xc96d8a:
+    "@What?{pause(20)}" linebreak
+    "  Fourside?{pause(20)}" linebreak
+    "  Are you still sleeping?" next
+    "@This is Moonside." end
+
+l_0xc96db2:
+    "@<Yes> is <No> and" linebreak
+    "  <No> is <Yes.>" next
+    "@It makes perfect sense in Moonside." end
+
+l_0xc96dec:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 6A]" eob
+
+l_0xc96e07:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 6B]" eob
+
+l_0xc96e22:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 6C]" eob
+
+l_0xc96e3d:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 6F]" eob
+
+l_0xc96e58:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[06 06 03 {e(l_0xc96e7a)}][1F 21 E8]" eob
+
+l_0xc96e7a:
+    "[1F 21 70]" eob
+
+l_0xc96e7e:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 71]" eob
+
+l_0xc96e99:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye![03]{window_closeall}{pause(1)}[1F 21 72]" eob
+
+l_0xc96eb4:
+    "@Before the soup gets cold,{pause(15)}" linebreak
+    "  we must care for Mani Mani." next
+    "@Before the knife gets rusty,{pause(15)} we must care for Mani Mani." end
+
+l_0xc96f0a:
+    "@I'll tell ya what I hate in this world." next
+    "@That's [1C 01 04]." next
+    "@The color,{pause(15)} the smell,{pause(15)} the taste,{pause(15)} the texture..." next
+    "@Hey you, you're drooling!" end
+
+l_0xc96f5d:
+    "@<Yes> means <No>" linebreak
+    "  <No> means <Yes.>" next
+    "@Or did you already know this?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc96f96:
+    "[19 02]No" eob
+
+l_0xc96f9b:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc96fd1)} {e(l_0xc96faa)}]" goto(l_0xc96faa)
+
+l_0xc96faa:
+    "@Ah!  You knew it.{pause(20)}  That's good.{pause(20)}  I was just wondering." end
+
+l_0xc96fd1:
+    "@Oh yeah?" linebreak
+    "  You didn't know?" end
+
+l_0xc96fe2:
+    "@Hello!" next
+    "@And...{pause(20)} good-bye..." next
+    "@Shall I...?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc97006:
+    "[19 02]No" eob
+
+l_0xc9700b:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc97033)} {e(l_0xc9701a)}]" goto(l_0xc9701a)
+
+l_0xc9701a:
+    "@Then...{pause(20)}" linebreak
+    "  good-bye![03]{window_closeall}{pause(1)}[1F 21 09]" eob
+
+l_0xc97033:
+    "@Welcome to Moonside." next
+    "@Welcome to Moo{pause(20)}   Moo{pause(15)}  Moo{pause(15)}  nsi{pause(20)}   nsi{pause(20)}   nsi{pause(20)}   nsi... nside." end
+
+l_0xc9707c:
+    "@I'm pretty forgetful." linebreak
+    "  I even forgot why I'm here." next
+    "@Hmm..." next
+    "@I just forgot something..." next
+    "@Who am I?" next
+    "@Am I a man?" end
+
+l_0xc970c8:
+    "@Do you understand all this?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc970d8:
+    "[19 02]No" eob
+
+l_0xc970dd:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc97100)} {e(l_0xc970ec)}]" goto(l_0xc970ec)
+
+l_0xc970ec:
+    "@Good,{pause(20)}" linebreak
+    "  I'm glad you get it." end
+
+l_0xc97100:
+    "@No?{pause(20)}  You don't?{pause(20)}" linebreak
+    "  To tell you the truth,{pause(15)} neither do I." end
+
+l_0xc9712e:
+    "@If you stay here too long,{pause(15)} you'll end up frying" linebreak
+    "  your brain." next
+    "@Yes, you will.{pause(20)}" linebreak
+    "  No, you will{pause(15)}... not.{pause(20)}" linebreak
+    "  Yesno, you will won't." end
+
+l_0xc97187:
+    "[06 A8 00 {e(l_0xc972d8)}][06 A7 00 {e(l_0xc97289)}][06 A6 00 {e(l_0xc9720d)}]@257{pause(15)}  256{pause(15)}  255{pause(15)}  254{pause(15)}  253..." next
+    "@So what's your problem?{pause(20)}  If you don't want anything, get outta here." next
+    "@I'm counting backwards." next
+    "@252{pause(15)}  251{pause(15)}  250...{wait}{set(flag 166)}" eob
+
+l_0xc9720d:
+    "@69{pause(15)}  68{pause(15)}  67{pause(15)}  66{pause(15)}  65{pause(15)}  64{pause(15)}  63..." next
+    "@What?{pause(15)}  Is this a special hobby of yours?  You like watching people count backwards?" next
+    "@62{pause(15)}  61{pause(15)}  60{pause(15)}  59...{wait}{set(flag 167)}" eob
+
+l_0xc97289:
+    "@9{pause(5)}  8{pause(5)}  7{pause(1)}  6  5  4  3  2  1  0..." linebreak
+    "  Baboooooooom!!" next
+    "@Wow!{pause(20)}  I scared myself.{wait}{set(flag 168)}" eob
+
+l_0xc972d8:
+    "@I got surprised." end
+
+l_0xc972e7:
+    "@I spy with my little eye...{pause(15)}" linebreak
+    "  Allakazam!" next
+    "@I see a country in summer and a big silver ball." next
+    "@You're burnt,{pause(15)} but you're fine." next
+    "@...That is what I see." end
+
+l_0xc9734a:
+    "@Ha!  everyone is someone!" next
+    "@Don't you think so?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc9736b:
+    "[19 02]No" eob
+
+l_0xc97370:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc97394)} {e(l_0xc9737f)}]" goto(l_0xc9737f)
+
+l_0xc9737f:
+    "@Wa ha ha!" next
+    "@...He he he...!" end
+
+l_0xc97394:
+    "@Moo{pause(5)} nsi{pause(5)} dem{pause(1)} oons{pause(1)} ide." end
+
+l_0xc973b1:
+    "@I will send you first and then, you second..." next
+    "@to the hospital.[03]{window_closeall}{pause(1)}[1F 21 08]" eob
+
+l_0xc973e4:
+    "@[1C 01 08]'s HP drops to 0!" next
+    "@[1C 01 34]'s HP drops to 0!" end
+
+l_0xc9740a:
+    "@Welcome to Moonside." next
+    "@Wecomel to Soonmide." next
+    "@Moonwel ot cosidme." end
+
+l_0xc9743d:
+    "@How about I sharpen you?" next
+    "@I just love sharpening." linebreak
+    "  You don't want me to sharpen?" next
+    "@Sidem{pause(5)} oonsi{pause(5)} demoon." linebreak
+    "  Welc welc omewelc omeome." end
+
+l_0xc9749e:
+    "@Hey!  Parking meters!" linebreak
+    "  And you're walking around!" next
+    "@Ha ha ha... That's so funny." next
+    "@Wwwweeelcome come to Mmmmmoooonsiddeee." end
+
+l_0xc974f4:
+    "[06 A5 00 {e(l_0xc97554)}]@I'm really busy doing nothing, so I don't have time to talk to you." next
+    "@If you need something, talk to my partner." next
+    "@He's right over there... see?" next
+    "@You mean you can't see him?" end
+
+l_0xc97554:
+    "@What the...?" linebreak
+    "  You're looking for some kind of door?" next
+    "@Well, you're not gonna find one!" next
+    "@So, get out of my face, loser..." next
+    "@I have no patience when people interrupt me while I'm busy doing nothing.[03]{window_closeall}{pause(1)}[1F 21 07]" eob
+
+l_0xc975cc:
+    "@Can you see me?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc975dd:
+    "[19 02]No" eob
+
+l_0xc975e2:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9763a)} {e(l_0xc975f1)}]" goto(l_0xc975f1)
+
+l_0xc975f1:
+    "@Ha ha." linebreak
+    "  You can, huh?" next
+    "@He he.  You've become a real Moonsidian, haven't you?{wait}{set(flag 165)}[1F 66 01 20 89 76 C9 00][1F 41 05]{set(flag 11)}" eob
+
+l_0xc9763a:
+    "@Ha ha." linebreak
+    "  You can't?" next
+    "@You're definitely not from around here." next
+    "@Hee hee.  Get going now.{pause(20)}  Here's your hat, what's your hurry..." end
+
+l_0xc97689:
+    "{window_open(1)}@He he ha!  It's me!{pause(20)}  You can see me, right?" next
+    "@There's something interesting about you, so I'm going to follow you." next
+    "@Don't worry, though...  Heh heh..." next
+    "@If you get into a fight,{pause(20)} I'll stay out of it...{wait}[1F 66 01 21 05 77 C9 00]{window_closetop}" eob
+
+l_0xc97705:
+    "{window_open(1)}@Heh heh." linebreak
+    "  You can't see me... right?{wait}[1F 66 01 22 28 77 C9 00]{window_closetop}" eob
+
+l_0xc97728:
+    "{window_open(1)}@Hyuk huyk." linebreak
+    "  Hey!" next
+    "@Don't you wish you had a gold tooth like mine?" next
+    "@Give me a smile!  Heh heh{wait}[1F 66 01 23 80 77 C9 00][1F 66 02 24 A8 77 C9 00]{window_closetop}" eob
+
+l_0xc97780:
+    "{window_open(1)}@*Grin* *Grin*." next
+    "@Heh heh.{wait}[1F 67 02][1F 66 01 25 D1 77 C9 00]{window_closetop}" eob
+
+l_0xc977a8:
+    "{window_open(1)}@*Smile* *Smile*" next
+    "@Heh heh.{wait}[1F 67 01][1F 66 01 26 D1 77 C9 00]{window_closetop}" eob
+
+l_0xc977d1:
+    "{window_open(1)}@Uh... Heh heh...{pause(20)}" linebreak
+    "  Yo!" next
+    "@Don't you think my eyebrows rock?" next
+    "@Check'em out... they're connected!{wait}{window_closetop}[1F 41 06]{unset(flag 11)}" eob

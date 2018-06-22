@@ -1,0 +1,322 @@
+/*
+ * EarthBound Text Dump
+ * Time: 16:51:57 - 18/02/2015
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc5df3a:
+    call(l_0xc5e431) "[1B 02 {e(l_0xc5dfa7)}]" call(l_0xc5e1ef) "[06 E1 00 {e(l_0xc5df56)}]" goto(l_0xc5df61)
+
+l_0xc5df56:
+    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" goto(l_0xc5df61)
+
+l_0xc5df61:
+    call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5df7f)} {e(data_14.l_0xc5deef)}]" goto(data_14.l_0xc5deef)
+
+l_0xc5df7f:
+    call(data_00.l_0xc51898) goto(data_14.l_0xc5ded3)
+
+l_0xc5df89:
+    call(data_00.l_0xc50f66) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5df3a)} {e(data_14.l_0xc5deef)}]" goto(data_14.l_0xc5deef)
+
+l_0xc5dfa7:
+    call(data_00.l_0xc513a4) goto(l_0xc5df61)
+
+l_0xc5dfb1:
+    "{unset(flag 657)}" newline
+    call(data_00.l_0xc50000) goto(l_0xc5dfba)
+
+l_0xc5dfba:
+    call(data_00.l_0xc504c8) "{open_hp}" call(data_13.l_0xc5d5ab) "[1B 02 {e(l_0xc5e013)}]{store_registers}[1D 03 FF][1B 02 {e(l_0xc5e029)}]{load_registers}" call(l_0xc5e3bc) call(l_0xc5e0a9) "[06 E0 00 {e(l_0xc5dfef)}]" goto(l_0xc5dffa)
+
+l_0xc5dfef:
+    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" goto(l_0xc5dffa)
+
+l_0xc5dffa:
+    call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5dfba)} {e(l_0xc5e013)}]" goto(l_0xc5e013)
+
+l_0xc5e013:
+    "[06 91 02 {e(l_0xc5e020)}]" call(data_00.l_0xc50330) eob
+
+l_0xc5e020:
+    "{unset(flag 657)}" call(data_00.l_0xc50198) eob
+
+l_0xc5e029:
+    call(data_00.l_0xc50f66) eob
+
+l_0xc5e02f:
+    "{unset(flag 657)}" newline
+    call(data_00.l_0xc50000) goto(l_0xc5e038)
+
+l_0xc5e038:
+    call(data_00.l_0xc504c8) "{open_hp}" call(data_13.l_0xc5d5ab) "[1B 02 {e(l_0xc5e08d)}]{store_registers}[1D 03 FF][1B 02 {e(l_0xc5e0a3)}]{load_registers}" call(l_0xc5e3bc) call(l_0xc5e0a9) "[06 E0 00 {e(l_0xc5e069)}]" eob
+
+l_0xc5e069:
+    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e038)} {e(l_0xc5e08d)}]" goto(l_0xc5e08d)
+
+l_0xc5e08d:
+    "[06 91 02 {e(l_0xc5e09a)}]" call(data_00.l_0xc50330) eob
+
+l_0xc5e09a:
+    "{unset(flag 657)}" call(data_00.l_0xc50198) eob
+
+l_0xc5e0a3:
+    call(data_00.l_0xc50f66) eob
+
+l_0xc5e0a9:
+    call(l_0xc5e24b) "[1B 03 {e(l_0xc5e1d6)}]{load_registers}" call(data_00.l_0xc50660) "[1D 19 02][1B 02 {e(l_0xc5e0cc)}][19 10 01]" goto(l_0xc5e0de)
+
+l_0xc5e0cc:
+    "{load_registers}" call(data_00.l_0xc507f8) call(l_0xc5e52e) "[1B 02 {e(l_0xc5e1ad)}]" goto(l_0xc5e0de)
+
+l_0xc5e0de:
+    "{store_registers}{swap}[1D 03 00][1B 02 {e(l_0xc5e1b7)}]{load_registers}[1D 02 02][1B 02 {e(l_0xc5e1e0)}]" call(l_0xc5e25b) call(l_0xc5e26a) "[1B 02 {e(l_0xc5e18f)}][1B 06][1D 0F 00 00]" call(l_0xc5e3a5) call(data_14.l_0xc5d835) "{store_registers}" call(data_00.l_0xc50990) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e136)} {e(l_0xc5e18b)}]" goto(l_0xc5e18b)
+
+l_0xc5e136:
+    "{sound(115)}" call(l_0xc5e277) "{load_registers}[1F 83 00 00]{store_registers}" call(l_0xc5e2f7) "{load_registers}{swap}[1B 02 {e(l_0xc5e18b)}]" call(l_0xc5e36e) "[1B 02 {e(l_0xc5e18b)}]" call(data_00.l_0xc50a72) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e17e)} {e(l_0xc5e18b)}]" goto(l_0xc5e18b)
+
+l_0xc5e17e:
+    call(data_14.l_0xc5d835) call(l_0xc5e37a) goto(l_0xc5e188)
+
+l_0xc5e188:
+    "{set(flag 224)}" goto(l_0xc5e18b)
+
+l_0xc5e18b:
+    "{unset(flag 658)}" eob
+
+l_0xc5e18f:
+    call(l_0xc5e387) call(data_00.l_0xc50b54) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e1e0)} {e(l_0xc5e1ad)}]" goto(l_0xc5e1ad)
+
+l_0xc5e1ad:
+    call(data_00.l_0xc50c36) goto(l_0xc5e18b)
+
+l_0xc5e1b7:
+    newline
+    call(data_00.l_0xc5197a) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e0cc)} {e(l_0xc5e1ad)}]" goto(l_0xc5e1ad)
+
+l_0xc5e1d6:
+    call(data_00.l_0xc50dce) goto(l_0xc5e18b)
+
+l_0xc5e1e0:
+    call(l_0xc5e3a5) call(data_14.l_0xc5d835) goto(l_0xc5e188)
+
+l_0xc5e1ef:
+    call(data_00.l_0xc510fe) call(l_0xc5e456) "[1B 02 {e(l_0xc5e236)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc5e241)}]" call(data_00.l_0xc511e0) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e22c)} {e(l_0xc5e237)}]" goto(l_0xc5e237)
+
+l_0xc5e22c:
+    call(l_0xc5e392) call(data_14.l_0xc5d835) goto(l_0xc5e236)
+
+l_0xc5e236:
+    eob
+
+l_0xc5e237:
+    call(data_00.l_0xc512c2) goto(l_0xc5e236)
+
+l_0xc5e241:
+    call(data_00.l_0xc51486) goto(l_0xc5e236)
+
+l_0xc5e24b:
+    "{swap}[1D 0A 00]{store_registers}{swap}[1D 14 00 00 00 00]" eob
+
+l_0xc5e25b:
+    "[1D 23 00]{result_is(1)}[1B 02 {e(l_0xc5e269)}]{set(flag 658)}" goto(l_0xc5e269)
+
+l_0xc5e269:
+    eob
+
+l_0xc5e26a:
+    "{load_registers}[1D 0E 00 00][1B 05][1D 11 00 00]" eob
+
+l_0xc5e277:
+    "{load_registers}{rtoarg}@([1C 02 00]'s[06 92 02 {e(l_0xc5e2c4)}][06 92 02 {e(l_0xc5e2c4)}] defense" linebreak
+    "  changed [09 04 {e(l_0xc5e2b0)} {e(l_0xc5e2b5)} {e(l_0xc5e2ba)} {e(l_0xc5e2bf)}]" goto(l_0xc5e2b0)
+
+l_0xc5e2b0:
+    " [1C 01 12]" eob
+
+l_0xc5e2b5:
+    " [1C 01 28]" eob
+
+l_0xc5e2ba:
+    " [1C 01 3E]" eob
+
+l_0xc5e2bf:
+    " [1C 01 54]" eob
+
+l_0xc5e2c4:
+    " offense" linebreak
+    "  changed [09 04 {e(l_0xc5e2e3)} {e(l_0xc5e2e8)} {e(l_0xc5e2ed)} {e(l_0xc5e2f2)}]" goto(l_0xc5e2e3)
+
+l_0xc5e2e3:
+    " [1C 01 11]" eob
+
+l_0xc5e2e8:
+    " [1C 01 27]" eob
+
+l_0xc5e2ed:
+    " [1C 01 3D]" eob
+
+l_0xc5e2f2:
+    " [1C 01 53]" eob
+
+l_0xc5e2f7:
+    " to{rtoarg}[06 92 02 {e(l_0xc5e338)}][09 04 {e(l_0xc5e314)} {e(l_0xc5e31d)} {e(l_0xc5e326)} {e(l_0xc5e32f)}]" goto(l_0xc5e314)
+
+l_0xc5e314:
+    "  [1C 01 12])" next
+    eob
+
+l_0xc5e31d:
+    "  [1C 01 28])" next
+    eob
+
+l_0xc5e326:
+    "  [1C 01 3E])" next
+    eob
+
+l_0xc5e32f:
+    "  [1C 01 54])" next
+    eob
+
+l_0xc5e338:
+    "[09 04 {e(l_0xc5e34a)} {e(l_0xc5e353)} {e(l_0xc5e35c)} {e(l_0xc5e365)}]" goto(l_0xc5e34a)
+
+l_0xc5e34a:
+    "  [1C 01 11])" next
+    eob
+
+l_0xc5e353:
+    "  [1C 01 27])" next
+    eob
+
+l_0xc5e35c:
+    "  [1C 01 3D])" next
+    eob
+
+l_0xc5e365:
+    "  [1C 01 53])" next
+    eob
+
+l_0xc5e36e:
+    "{swap}{store_registers}[19 19 00 00][1D 0B 00]" eob
+
+l_0xc5e37a:
+    "[1D 08 00 00]{open_wallet}{load_registers}[1D 0F 00 00]" eob
+
+l_0xc5e387:
+    "[1B 06][1D 0F 00 00]{load_registers}{swap}" eob
+
+l_0xc5e392:
+    "[1D 08 00 00]{load_registers}[1D 0F 00 00]{open_wallet}{set(flag 657)}{set(flag 225)}" eob
+
+l_0xc5e3a5:
+    "{load_registers}[1D 0A 00]{swap}[1D 09 00 00]{open_wallet}{load_registers}[1D 0E 00 00]{set(flag 657)}" eob
+
+l_0xc5e3bc:
+    "{store_registers}{result_is(226)}[1B 03 {e(l_0xc5e3c9)}]{load_registers}" eob
+
+l_0xc5e3c9:
+    "[1D 21 0F][18 07 07 00 00 00 00][1B 02 {e(l_0xc5e42e)}][1D 21 08][18 07 04 00 00 00 00][1B 02 {e(l_0xc5e427)}][1D 21 04][18 07 03 00 00 00 00][1B 02 {e(l_0xc5e420)}][1D 21 01][1B 02 {e(l_0xc5e419)}][1D 21 02][1B 03 {e(l_0xc5e412)}]{counter(231)}{ctoarg}{swap}" eob
+
+l_0xc5e412:
+    "{counter(230)}{ctoarg}{swap}" eob
+
+l_0xc5e419:
+    "{counter(229)}{ctoarg}{swap}" eob
+
+l_0xc5e420:
+    "{counter(228)}{ctoarg}{swap}" eob
+
+l_0xc5e427:
+    "{counter(227)}{ctoarg}{swap}" eob
+
+l_0xc5e42e:
+    "{load_registers}" eob
+
+l_0xc5e431:
+    "{counter(1)}" goto(l_0xc5e433)
+
+l_0xc5e433:
+    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc5e453)}][19 10 00][19 19 00 01]{swap}[1B 03 {e(l_0xc5e455)}]{inc}" goto(l_0xc5e433)
+
+l_0xc5e453:
+    "{result_is(0)}" goto(l_0xc5e455)
+
+l_0xc5e455:
+    eob
+
+l_0xc5e456:
+    "{open_hp}[1D 19 02][1B 03 {e(l_0xc5e499)}][1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 00]{rtoarg}[1B 02 {e(l_0xc5e48e)}][19 1B 02][1B 02 {e(l_0xc5e456)}][18 09 02][1B 02 {e(l_0xc5e456)}]" goto(l_0xc5e48e)
+
+l_0xc5e48e:
+    "{window_switch(2)}{window_closetop}{window_switch(1)}{swap}" eob
+
+l_0xc5e499:
+    "[19 10 01]{rtoarg}[1B 05][18 02][1B 06][1A 05 02 00][1B 06][18 09 02][1B 05]{window_switch(2)}{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc5e4c2)}]{swap}" eob
+
+l_0xc5e4c2:
+    eob
+
+l_0xc5e4c3:
+    "[1D 19 02][1B 03 {e(l_0xc5e504)}][1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 00]{rtoarg}[1B 02 {e(l_0xc5e4f9)}][19 1B 02][1B 02 {e(l_0xc5e4c3)}][18 09 02][1B 02 {e(l_0xc5e4c3)}]" goto(l_0xc5e4f9)
+
+l_0xc5e4f9:
+    "{window_switch(2)}{window_closetop}{window_switch(14)}{swap}" eob
+
+l_0xc5e504:
+    "[19 10 01]{rtoarg}[1B 05][18 02][1B 06][1A 05 02 00][1B 06][18 09 02][1B 05]{window_switch(2)}{window_closetop}{window_switch(14)}[1B 06][1B 02 {e(l_0xc5e52d)}]{swap}" eob
+
+l_0xc5e52d:
+    eob
+
+l_0xc5e52e:
+    "[1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 02]{window_switch(2)}{window_closetop}{window_switch(1)}" eob
+
+l_0xc5e54a:
+    "[1A 01 {e(l_0xc5e5a0)} {e(l_0xc5e5a7)} {e(l_0xc5e5ae)} {e(l_0xc5e5b5)} 02][1B 05][1B 02 {e(l_0xc5e579)}]{swap}[1D 03 00][1B 03 {e(l_0xc5e579)}][1B 06]{swap}" goto(l_0xc5e54a)
+
+l_0xc5e579:
+    "[1B 06]{window_switch(44)}{window_closetop}{window_switch(1)}" eob
+
+l_0xc5e584:
+    "[18 02][1A 05 02 01]" eob
+
+l_0xc5e58b:
+    "[18 02][1A 05 02 02]" eob
+
+l_0xc5e592:
+    "[18 02][1A 05 02 03]" eob
+
+l_0xc5e599:
+    "[18 02][1A 05 02 04]" eob
+
+l_0xc5e5a0:
+    "[18 02][1A 05 2C 01]" eob
+
+l_0xc5e5a7:
+    "[18 02][1A 05 2C 02]" eob
+
+l_0xc5e5ae:
+    "[18 02][1A 05 2C 03]" eob
+
+l_0xc5e5b5:
+    "[18 02][1A 05 2C 04]" eob
+
+l_0xc5e5bc:
+    "{set(flag 104)}{set(flag 288)}[1F 11 02][1F 11 03][1F E5 FF][1F 21 AE][1F 15 6A 00 17 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+
+l_0xc5e5df:
+    "[1F 16 29 04 03][1F F1 29 04 08 00]" eob
+
+l_0xc5e5eb:
+    "[1F 11 02][1F E5 FF][1F 21 AF][1F 15 6A 00 18 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+
+l_0xc5e605:
+    "[1F 11 02][1F 11 03][1F 11 04][1F E5 FF][1F 21 B0][1F 15 6A 00 19 02 01][1F 15 22 01 2C 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+
+l_0xc5e62c:
+    "[1F F2 22 01 1A 02]" eob
+

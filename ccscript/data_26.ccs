@@ -1,0 +1,475 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc6c377:
+    "@I wonder what Tessie thinks of me?" end
+
+l_0xc6c38c:
+    "@Sebastian, chum,{pause(15)} was abducted!" end
+
+l_0xc6c3a9:
+    "[06 34 00 {e(l_0xc6c40b)}][06 13 01 {e(l_0xc6c3ea)}]@Tessie may unexpectedly be living in the woods." next
+    "@I personally think so." end
+
+l_0xc6c3ea:
+    "@Tessie appeared again today and smiled at me." end
+
+l_0xc6c40b:
+    "@...It's so shocking...{pause(20)}  He was such a great guy..." end
+
+l_0xc6c42c:
+    "@I heard a creature called Tessie lives in the southern lake..." next
+    "@I don't believe it!{pause(20)}  I think someone made a model and placed it in the lake." end
+
+l_0xc6c479:
+    "@I heard a more interesting story than the rumor about Tessie." next
+    "@It's about the Bigfoot at Stonehenge." next
+    "@Many claim to have actually seen them." end
+
+l_0xc6c4d5:
+    "@I wonder if the rumor is true" next
+    "@that the center of Stonehenge has an entrance leading someplace." next
+    "@Some day, we should check it out." end
+
+l_0xc6c52e:
+    "@I'm sleepy." next
+    "@I'll wash my face, brush my teeth, pee and go to bed." end
+
+l_0xc6c565:
+    "@If you're going outside,{pause(15)} stop by and say hi to Maxwell before you leave." next
+    "@He always looks out for the younger students." next
+    "@Maxwell is still working hard in the lab downstairs." next
+    "@Anyway, these days there are many dangerous animals wandering around outside." end
+
+l_0xc6c606:
+    "[06 0F 00 {e(l_0xc6c63c)}]@The tame animals have become wild.{pause(20)}  Something evil is going on." end
+
+l_0xc6c63c:
+    "@Outside there are many monsters I've never seen before..." next
+    "@I wonder what's happening." next
+    "@You should stay here where it's safe.{pause(15)}  We don't mind if you stay." end
+
+l_0xc6c68f:
+    "[06 7F 01 {e(l_0xc6c729)}]@So, why don't you rest here for a short while...{pause(15)}  Have something to drink," next
+    "@perhaps some tea?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc6c6d6:
+    " [19 02]No" eob
+
+l_0xc6c6dc:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6c6ec)} {e(l_0xc6c6eb)}]" goto(l_0xc6c6eb)
+
+l_0xc6c6eb:
+    eob
+
+l_0xc6c6ec:
+    "[06 1F 01 {e(l_0xc6c720)}]{set(flag 383)}" call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "{window_open(1)}@Are you feeling much better now?{pause(20)}  Good luck.{wait}{window_closeall}" eob
+
+l_0xc6c720:
+    call(data_49.l_0xc91693) "[1F 21 2D]" eob
+
+l_0xc6c729:
+    "@Are you feeling much better now?{pause(20)}  Good luck." end
+
+l_0xc6c744:
+    "[06 D6 00 {e(l_0xc6c77b)}]@There's something..." next
+    "@south of the lake..." next
+    "@it looks like a research building." end
+
+l_0xc6c77b:
+    "@It is of course, some sort of lab where they do some high-level scientific research." next
+    "@I get the feeling that it is a very important lab." end
+
+l_0xc6c7d9:
+    "[06 46 00 {e(l_0xc6c8dd)}][06 6A 02 {e(l_0xc6c8d3)}]@I've been waiting for you." next
+    "@My master, Apple Kid completed this <Eraser Eraser Machine.>" next
+    "@While he was calling you, he was kidnapped.{pause(20)}  He felt like this...!{pause(5)}!{pause(5)}!{pause(5)}!{pause(5)}!" next
+    "@I was there, but was helpless.{pause(15)}  Sorry about that." next
+    "@Anyway, take this machine." next
+    "[1D 03 FF][1B 02 {e(l_0xc6c8a3)}][1D 0E 00 D2]" call(data_36.l_0xc7dcb6) "{wait}{set(flag 618)}" eob
+
+l_0xc6c8a3:
+    "@I think this is an important item." next
+    "@Get rid of something you don't need, and come back for it." end
+
+l_0xc6c8d3:
+    "@Way to go." end
+
+l_0xc6c8dd:
+    "@I've been taking care of this place while waiting for you." next
+    "@I no longer need to stay, since you have arrived..." next
+    "@I'll leave for Saturn Valley as quiet as a mouse.{wait}{unset(flag 620)}" eob
+
+l_0xc6c942:
+    "@It was in Winters that we last met?" next
+    "@I just got here.  Tee tee tee." end
+
+l_0xc6c970:
+    "[06 49 00 {e(l_0xc6cb14)}][06 76 02 {e(l_0xc6ca9a)}]@Kyi kya kiko kree." next
+    "@(I saw you once before just for a second...  You know my fiancee.)" next
+    "@Koo kya keke" linebreak
+    "  (My fiancee loves to chew gum." next
+    "@He went to visit Dr. Andonuts' lab...{pause(15)} but he hasn't returned yet.)" next
+    "@Kye koko kikkya kekra," linebreak
+    "  (I want to go there so I can get him home," next
+    "@but without him, I can't cross Lake Tess.)" next
+    "@Kri kekko kya ko" next
+    "@(I'm really worried that the mad doctor will use him in a crash test.)" end
+
+l_0xc6ca9a:
+    "@Ku kyo kika." next
+    "@(It's me again, that chewing gum monkey's wife.)" next
+    "@Kako kyuka kre." next
+    "@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next    "@Sheesh, what nerve!)" end
+
+l_0xc6cb14:
+    "@Kyakkro ki kyokke" linebreak
+    "  (Ah, [1C 02 01]," next
+    "@my husband has been returning home late these days.{pause(20)}  He says he's busy.)" next
+    "@Kya." next
+    "@(I know he's out saving the earth, but a marriage is also important.)" end
+
+l_0xc6cb97:
+    "{window_open(1)}@Kekye koo kikkro" linebreak
+    "  (Thanks for taking care of my husband the other day...)" next
+    "@(Oh yes, we finally tied the knot...)" next
+    "{window_closeall}{pause(30)}[1F 16 69 02 05]{pause(30)}{window_open(1)}@Kooki kekye ki!" next
+    "@(Honey, don't just stand there with your mouth open, say hello!)[03]{window_closeall}" eob
+
+l_0xc6cc31:
+    "[1F 16 69 02 01]{window_open(1)}@Krikko kyakya" linebreak
+    "  (So...)" next
+    "@Kekroo kyaki" linebreak
+    "  (You passed by a cave north of Stonehenge." next
+    "@Don't you ever wonder what's inside?)" next
+    "@Kikkyo kukru ki" linebreak
+    "  (Can't seem to stop thinking about it!)" next
+    "@Keke kike" linebreak
+    "  (Go and see what's there!)" next
+    "@Kyoke kyakroo koo" linebreak
+    "  (We're going to get out of here." next
+    "@We're still newlyweds, you know...{pause(20)}  Bye-bye!){wait}{window_closeall}{unset(flag 621)}" eob
+
+l_0xc6cd2a:
+    "[06 3D 03 {e(l_0xc6cdaf)}][06 3E 03 {e(l_0xc6cdaf)}][06 3F 03 {e(l_0xc6cdaf)}][06 40 03 {e(l_0xc6cdaf)}][06 41 03 {e(l_0xc6cdaf)}][06 42 03 {e(l_0xc6cdaf)}][06 43 03 {e(l_0xc6cdaf)}]@I'm so sleepy.{pause(20)}  Tony's birthday party is tomorrow." next
+    "@I hand decorated and wrapped each cookie to pass out at the party tomorrow." end
+
+l_0xc6cdaf:
+    "@[1C 02 03],{pause(15)} I can't believe you could do something so nasty..." end
+
+l_0xc6cdcd:
+    "@Instant Revitalizing Device" next
+    "@(In only a few seconds, this machine fully revitalizes you," next
+    "@just like a good night's sleep.)[03]" call(data_49.l_0xc915f4) "{music(12)}{pause(200)}{music_resume}" eob
+
+l_0xc6ce34:
+    "@Since our imprisonment is now over," next
+    "@I want to start on the Phase Distorter as soon as possible." next
+    "@...Oh, I should at least thank you, huh?" next
+    "@Thank you." next
+    "@Now, then. Leave everything here to us and hurry forth.{wait}{unset(flag 766)}" eob
+
+l_0xc6cebc:
+    "@[1C 02 03] just called.{pause(20)}  He's with Dr. Andonuts." next
+    "@The two of them may be able to develop some new scientific theories." next
+    "@You've helped make a beautiful life for everyone..." end
+
+l_0xc6cf2d:
+    "@...[1C 02 03] doesn't call me." next
+    "@Maybe he thinks I'm too annoying..." next
+    "@But I don't think so." next
+    "@[1C 02 01], did you tell him not to call me?" next
+    "@...No, I know you wouldn't do that." next
+    "@If you see [1C 02 03],{pause(15)} please,{pause(15)} please ask him to call Tony.  Thanks!" end
+
+l_0xc6cfc5:
+    "{window_open(1)}@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
+    "@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
+    "@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
+    "@BUT YOU MUST NOT UNDERESTIMATE US.[03]{window_closeall}" eob
+
+l_0xc6d067:
+    "@(Drug Store <Best Friend>)" end
+
+l_0xc6d082:
+    "@*Bloop* *Glub*" linebreak
+    "  Can't...{pause(15)} last...{pause(15)} much...{pause(15)} longer..." end
+
+l_0xc6d0b1:
+    "@Next *Bloop*{pause(20)}" linebreak
+    "  Next *Bloop*{pause(15)}  Room..." end
+
+l_0xc6d0db:
+    "@*Glub*" linebreak
+    "  ...Can't breathe..." end
+
+l_0xc6d0f0:
+    "{font_saturn}@Kay-o.{pause(15)}  Can breathe..." next
+    "@*Bloop*{pause(15)} *Bloop*{pause(15)} *Bloop*{pause(30)}" linebreak
+    "  Oh, no!{font_normal}" end
+
+l_0xc6d133:
+    "@Oh, no... *Bloop* *Glub*{pause(20)}" linebreak
+    "  Can't see anything..." next
+    "@*Bloop* *Glub*" linebreak
+    "  [1C 02 03]!...{pause(15)} *Bloop*..." next
+    "@Where...{pause(15)} is...{pause(15)} [1C 02 03]...  *Bloop*" end
+
+l_0xc6d19c:
+    "[06 D7 00 {e(l_0xc6d325)}][06 92 00 {e(l_0xc6d2e8)}]@So, you're a Runaway Brothers fan, huh?" next
+    "@What?" next
+    "@Excuse me?" next
+    "@No, no!" next
+    "@This band owes me a million bucks." next
+    "@If they break their contract,{pause(15)} they'll be in deep doodoo with the police." next
+    "@The police would probably say,{pause(15)} <Hey, you guys!> or something like that..." next
+    "@Unless you're able to pay a million dollars on their behalf?" next
+    "@You'd have to find buried gold," next
+    "@or you would never be able to pay such a huge sum of money." next
+    "@Ho ho ho..." next
+    "@Ho ho ho ho ho ho ho!{wait}{set(flag 607)}[06 89 00 {e(l_0xc6d2e4)}]" eob
+
+l_0xc6d2e4:
+    "{set(flag 174)}" eob
+
+l_0xc6d2e8:
+    "@(Thump, thump!..." linebreak
+    "  thump, thump!" next
+    "@I made so much money, I can hear my heartbeat!)" end
+
+l_0xc6d325:
+    "@Ok?{pause(20)}  Don't forget." next
+    "@Life is money." next
+    "@I've lived that life." next
+    "@You can buy everything but <love,> <friendship> and <exp points.>" end
+
+l_0xc6d37e:
+    "[19 19 00 00]{swap}{result_is(182)}[1B 03 {e(l_0xc6d391)}]" goto(data_35.l_0xc7c6b6)
+
+l_0xc6d391:
+    "[19 10 01][19 22 00 02 47 03]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc6d4d6)}][1D 01 FF B6][1F 41 05]{sound(118)}[19 23 47 03 01 01 00][1F 16 47 03 00]@Yaaaieeee!!" next
+    "@That that that [1C 05 B6]... you're going to pay with that [1C 05 B6]?!" next
+    "@O... o... okay, th... that's fine.{pause(20)}  I'll rip up this contract." next
+    "@*rrrrrip!*" next
+    "@Don't tell anyone about the [1C 05 B6]..." next
+    "@Now the Runaway Brothers are free!" next
+    "@...You should thank me." next
+    "@That [1C 05 B6] is worth maybe...  MAYBE... $50." next
+    "@So I gave you a bargain." next
+    "@(Thump, thump..." linebreak
+    "  Thump, thump!" next
+    "@I made lots of money...){wait}{set(flag 146)}{set(flag 594)}" goto(data_44.l_0xc88b6d)
+
+l_0xc6d4d5:
+    eob
+
+l_0xc6d4d6:
+    "@What, what, what?" next
+    "@I can't tell what it is from this distance." next
+    "@Bring it closer!" end
+
+l_0xc6d50a:
+    "[06 09 00 {e(l_0xc6d642)}][06 0A 00 {e(l_0xc6d61e)}][06 93 00 {e(l_0xc6d5ae)}][19 10 01]{rtoarg}{result_is(1)}[1B 03 {e(l_0xc6d561)}]@Hey, kid..." next
+    "@This is a restricted area." next
+    "@Back stage is right behind this door." end
+
+l_0xc6d561:
+    "@When [1C 02 01] arrives,{pause(15)} the Runaway Brothers told me to let him in." next
+    "@So please come in.[03]{window_closeall}[1F F1 48 03 F2 00][1F 61][1F 1E 48 03 06][1F 17 49 03 08 00 01]{set(flag 374)}{set(flag 10)}" eob
+
+l_0xc6d5ae:
+    "@Ah, you're a friend of the Runaway Brothers.." next
+    "@Did you come to see Miss Venus?{pause(20)}  Come inside quickly." next
+    "@Don't let the other fans see you enter.[03]{window_closeall}[1F F1 48 03 F2 00][1F 61][1F 1E 48 03 06][1F 17 49 03 08 00 01]{set(flag 374)}{set(flag 9)}" eob
+
+l_0xc6d61e:
+    "@If [1C 02 01] arrives,{pause(15)} the Runaway Brothers told me to let him in.[03]" eob
+
+l_0xc6d642:
+    "@Ah, you're a friend of the Runaway Brothers?" next
+    "@Did you come to see Miss Venus?{pause(20)}  Come inside quickly." next
+    "@Don't let the other fans see you enter.[03]" eob
+
+l_0xc6d695:
+    "[06 93 00 {e(l_0xc6d642)}]" goto(l_0xc6d61e)
+
+l_0xc6d6a1:
+    "[06 0A 00 {e(l_0xc6d822)}][06 5B 00 {e(l_0xc6d7b3)}][06 8C 00 {e(l_0xc6d707)}]@Oh, you're just a little kid." next
+    "@I'm too busy right now to give you my autograph." next
+    "@Maybe next time, little [19 10 01]{result_is(2)}[1B 03 {e(l_0xc6d702)}]man." end
+
+l_0xc6d702:
+    "girl." end
+
+l_0xc6d707:
+    "@Oh, you want an autograph?" next
+    "@Okay,{pause(15)} I'll give you my autograph on this banana peel..." next
+    "@{pause(20)}Here you go." next
+    "[1D 03 FF][1B 02 {e(l_0xc6d786)}][1D 0E 00 B7]" call(data_36.l_0xc7dcb6) next
+    "@Oh, and this is a bonus..." next
+    "@Smooch!{wait}{window_closeall}{set(flag 91)}{set(flag 10)}" eob
+
+l_0xc6d786:
+    "@Oh, uh huh..." next
+    "@I can't give you the banana 'cause you have too much stuff." end
+
+l_0xc6d7b3:
+    "[06 A8 02 {e(l_0xc6d852)}]@Oh, you again..." next
+    "@Look, I'm busy right now." next
+    "@I'll give you an autograph next time." next
+    "@Are you here to see my show?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc6d803:
+    "[19 02]No" eob
+
+l_0xc6d808:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6d84b)} {e(l_0xc6d817)}]" goto(l_0xc6d817)
+
+l_0xc6d817:
+    "@...Oh, I see." next
+    goto(l_0xc6d822)
+
+l_0xc6d822:
+    "@Looks like you aren't too busy.{pause(20)}  Make yourself at home for a while." end
+
+l_0xc6d84b:
+    "@Okay." next
+    goto(l_0xc6d852)
+
+l_0xc6d852:
+    "@...Then, you should give me a big hand.{wait}{set(flag 680)}" eob
+
+l_0xc6d86d:
+    "@Again, we've been cheated by the theater owner." next
+    "@We're stuck here with a phony contract.  Oh yeah!" end
+
+l_0xc6d8af:
+    "@Once again, I've made trouble for you." next
+    "@This is it... we'll stop being so naive..." next
+    "@But right now,{pause(15)} our fans are waiting for us." next
+    "@We'll sing one more song before we go." next
+    "@Ready?" next
+    "@Okay, let's go!{pause(15)}  Thanks, boogie boy![03]" eob
+
+l_0xc6d93f:
+    "@We know how to sing but we don't know how to handle money or women." next
+    "@Do-wap, do do wop." end
+
+l_0xc6d97a:
+    "@We owe you guys so much." next
+    "@Sorry." end
+
+l_0xc6d993:
+    "@We're so helpless." next
+    "@Really helpless, and hopeless..." linebreak
+    "  Hyuk hyuk hyuk." end
+
+l_0xc6d9ca:
+    "@To meet Geldegarde Monotoli, you'll need our help." next
+    "@I don't exactly know why... it's just a hunch." end
+
+l_0xc6da0b:
+    "@Do you wanna buy a ticket?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc6da23:
+    "[19 02]No" eob
+
+l_0xc6da28:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6da3f)} {e(l_0xc6da37)}]" goto(l_0xc6da37)
+
+l_0xc6da37:
+    "@Please come again." end
+
+l_0xc6da3f:
+    "@30 bucks, please." linebreak
+    "{open_wallet}[19 02]Yes" eob
+
+l_0xc6da54:
+    "[19 02]No" eob
+
+l_0xc6da59:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6da6d)} {e(l_0xc6da37)}]" goto(l_0xc6da37)
+
+l_0xc6da6d:
+    "[1D 03 FF][1B 02 {e(l_0xc6daa0)}]{store_registers}[1D 14 1E 00 00 00][1B 03 {e(l_0xc6dac0)}]{sound(118)}{pause(1)}[1D 09 1E 00]{open_wallet}@Thanks a lot.{wait}{sound(116)}{load_registers}[1D 0E 00 B2]" eob
+
+l_0xc6daa0:
+    "@Excuse me [19 10 01]" call(data_37.l_0xc7e6b3) ", but your hands are full..." end
+
+l_0xc6dac0:
+    "@I'm sorry sir..." next
+    "[1F 16 99 03 07]@We don't just give away the tickets... you must pay 30 dollars." end
+
+l_0xc6daf5:
+    "[06 02 00 {e(l_0xc6dbbf)}][06 93 00 {e(l_0xc6db0a)}][06 92 00 {e(l_0xc6db2e)}]" goto(l_0xc6db0a)
+
+l_0xc6db0a:
+    "[19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}]@Please have your tickets ready..." end
+
+l_0xc6db2e:
+    "[06 93 00 {e(l_0xc6dbd5)}]@Boys and girls, ladies and gents... this is a very special show," next
+    "@the final Runaway Brothers show here at the Topolla!" next
+    "@Please, please, please don't miss this once in a lifetime chance to see their show." end
+
+l_0xc6dbae:
+    "@Oh, hi.{wait}{window_closeall}" call(data_44.l_0xc88988) "{set(flag 2)}" eob
+
+l_0xc6dbbf:
+    "@Are you enjoying yourself?" end
+
+l_0xc6dbce:
+    "[06 92 00 {e(l_0xc6db2e)}]" goto(l_0xc6dbd5)
+
+l_0xc6dbd5:
+    "[06 02 00 {e(l_0xc6dbbf)}]{store_registers}{load_registers}[19 19 00 00]{swap}{store_registers}{result_is(178)}[1B 03 {e(l_0xc6dc0c)}][19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}]@No kidding..." end
+
+l_0xc6dc0c:
+    "[19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}][06 02 00 {e(l_0xc6dbbf)}]{sound(118)}{pause(1)}[1D 01 FF B2]@Thanks a lot." next
+    "@Please hurry.{pause(20)}  The show will be starting at any moment.{wait}{window_closeall}" call(data_44.l_0xc8897f) "{set(flag 2)}" eob
+
+l_0xc6dc62:
+    "@Thanks a lot." next
+    "@Please hurry.{pause(20)}  The show will be starting at any moment." end
+
+l_0xc6dc8d:
+    call(data_13.l_0xc5d3dd) eob
+
+l_0xc6dc93:
+    "@Bread in this town has a very big city delectability to it, don't you think?" next
+    "@To tell you the truth,{pause(20)} I'm the owner of this bakery." end
+
+l_0xc6dce7:
+    "@I was thinking <There's a tight wad born every minute...>" end
+
+l_0xc6dd0a:
+    "[19 19 00 00]{swap}{result_is(187)}[1B 03 {e(l_0xc6dd1d)}]" goto(data_35.l_0xc7c6b6)
+
+l_0xc6dd1d:
+    "@What?" next
+    "@You came to deliver my grandma's memento, the [1C 05 BB]?!" next
+    "@Thank you." next
+    "@Thank you so{pause(5)}o{pause(5)}o{pause(1)}o{pause(1)}o much!" next
+    "@It's our family tradition to keep things forever." next
+    "@...Okay, I'll give you something as a reward." next
+    "@Here's my socks that I use only for special occasions." next
+    "@I've worn these socks for just five years." next
+    "@There are no holes, and they've only been worn once since the last washing." next
+    "@They stink a little... but they're still good." next
+    "@Hey, don't refuse me here... I'm being generous!" next
+    "{sound(116)}[1D 01 FF BB][1D 03 FF][1D 0E 00 98]" call(data_36.l_0xc7dccf) next
+    "@Please take good care of my socks... *sniff!*{wait}{set(flag 736)}" eob
+
+l_0xc6de7b:
+    "[06 0A 00 {e(data_27.l_0xc6df35)}][06 8F 00 {e(data_27.l_0xc6df43)}]@This elevator is only for Master Porky's use." next
+    "@It goes directly to the 47th floor." next
+    "@Quit staring at my hips... why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)
+

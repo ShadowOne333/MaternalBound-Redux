@@ -1,0 +1,1833 @@
+0:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 0, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+1:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 1, Probability: 2}
+    1: {Enemy Group: 2, Probability: 3}
+    2: {Enemy Group: 3, Probability: 3}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2:
+    0: {Enemy Group: 4, Probability: 2}
+    1: {Enemy Group: 5, Probability: 2}
+    2: {Enemy Group: 6, Probability: 2}
+    3: {Enemy Group: 7, Probability: 2}
+  Sub-Group 2 Rate: 8
+2:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 1, Probability: 2}
+    1: {Enemy Group: 2, Probability: 3}
+    2: {Enemy Group: 3, Probability: 3}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2:
+    0: {Enemy Group: 4, Probability: 2}
+    1: {Enemy Group: 5, Probability: 2}
+    2: {Enemy Group: 6, Probability: 2}
+    3: {Enemy Group: 7, Probability: 2}
+  Sub-Group 2 Rate: 8
+3:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 1, Probability: 3}
+    1: {Enemy Group: 2, Probability: 3}
+    2: {Enemy Group: 3, Probability: 2}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2:
+    0: {Enemy Group: 4, Probability: 2}
+    1: {Enemy Group: 5, Probability: 2}
+    2: {Enemy Group: 6, Probability: 2}
+    3: {Enemy Group: 7, Probability: 2}
+  Sub-Group 2 Rate: 8
+4:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 3, Probability: 6}
+    1: {Enemy Group: 2, Probability: 2}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2:
+    0: {Enemy Group: 4, Probability: 2}
+    1: {Enemy Group: 5, Probability: 2}
+    2: {Enemy Group: 6, Probability: 2}
+    3: {Enemy Group: 7, Probability: 2}
+  Sub-Group 2 Rate: 8
+5:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 1, Probability: 3}
+    1: {Enemy Group: 2, Probability: 3}
+    2: {Enemy Group: 3, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2:
+    0: {Enemy Group: 4, Probability: 2}
+    1: {Enemy Group: 5, Probability: 2}
+    2: {Enemy Group: 6, Probability: 2}
+    3: {Enemy Group: 7, Probability: 2}
+  Sub-Group 2 Rate: 100
+6:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 2, Probability: 4}
+    1: {Enemy Group: 1, Probability: 3}
+    2: {Enemy Group: 3, Probability: 1}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+7:
+  Event Flag: 0x84
+  Sub-Group 1:
+    0: {Enemy Group: 1, Probability: 4}
+    1: {Enemy Group: 3, Probability: 4}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+8:
+  Event Flag: 0x40
+  Sub-Group 1:
+    0: {Enemy Group: 8, Probability: 3}
+    1: {Enemy Group: 9, Probability: 2}
+    2: {Enemy Group: 10, Probability: 2}
+    3: {Enemy Group: 11, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+9:
+  Event Flag: 0xf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 15, Probability: 2}
+    1: {Enemy Group: 16, Probability: 2}
+    2: {Enemy Group: 17, Probability: 2}
+    3: {Enemy Group: 18, Probability: 2}
+  Sub-Group 2 Rate: 100
+10:
+  Event Flag: 0xf
+  Sub-Group 1:
+    0: {Enemy Group: 12, Probability: 3}
+    1: {Enemy Group: 13, Probability: 3}
+    2: {Enemy Group: 14, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2:
+    0: {Enemy Group: 15, Probability: 2}
+    1: {Enemy Group: 16, Probability: 2}
+    2: {Enemy Group: 17, Probability: 2}
+    3: {Enemy Group: 18, Probability: 2}
+  Sub-Group 2 Rate: 100
+11:
+  Event Flag: 0xf
+  Sub-Group 1:
+    0: {Enemy Group: 12, Probability: 3}
+    1: {Enemy Group: 13, Probability: 2}
+    2: {Enemy Group: 14, Probability: 3}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2:
+    0: {Enemy Group: 15, Probability: 2}
+    1: {Enemy Group: 16, Probability: 2}
+    2: {Enemy Group: 17, Probability: 2}
+    3: {Enemy Group: 18, Probability: 2}
+  Sub-Group 2 Rate: 100
+12:
+  Event Flag: 0xf
+  Sub-Group 1:
+    0: {Enemy Group: 19, Probability: 0}
+    1: {Enemy Group: 20, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2:
+    0: {Enemy Group: 25, Probability: 8}
+  Sub-Group 2 Rate: 100
+13:
+  Event Flag: 0xf
+  Sub-Group 1:
+    0: {Enemy Group: 20, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2:
+    0: {Enemy Group: 23, Probability: 0}
+    1: {Enemy Group: 25, Probability: 8}
+  Sub-Group 2 Rate: 100
+14:
+  Event Flag: 0xf
+  Sub-Group 1:
+    0: {Enemy Group: 26, Probability: 8}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2:
+    0: {Enemy Group: 27, Probability: 5}
+    1: {Enemy Group: 28, Probability: 0}
+    2: {Enemy Group: 29, Probability: 3}
+  Sub-Group 2 Rate: 90
+15:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 30, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+16:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 31, Probability: 5}
+    1: {Enemy Group: 32, Probability: 3}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+17:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 35, Probability: 2}
+    1: {Enemy Group: 33, Probability: 6}
+  Sub-Group 1 Rate: 12
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+18:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 40, Probability: 4}
+    1: {Enemy Group: 38, Probability: 2}
+    2: {Enemy Group: 37, Probability: 2}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+19:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 40, Probability: 2}
+    1: {Enemy Group: 39, Probability: 2}
+    2: {Enemy Group: 38, Probability: 1}
+    3: {Enemy Group: 37, Probability: 1}
+    4: {Enemy Group: 36, Probability: 2}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+20:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 34, Probability: 2}
+    1: {Enemy Group: 35, Probability: 6}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+21:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 41, Probability: 2}
+    1: {Enemy Group: 42, Probability: 6}
+  Sub-Group 1 Rate: 12
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+22:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 41, Probability: 4}
+    1: {Enemy Group: 42, Probability: 4}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+23:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 50, Probability: 4}
+    1: {Enemy Group: 46, Probability: 1}
+    2: {Enemy Group: 51, Probability: 3}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+24:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 53, Probability: 2}
+    1: {Enemy Group: 45, Probability: 2}
+    2: {Enemy Group: 47, Probability: 1}
+    3: {Enemy Group: 49, Probability: 3}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+25:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 45, Probability: 1}
+    1: {Enemy Group: 47, Probability: 1}
+    2: {Enemy Group: 49, Probability: 4}
+    3: {Enemy Group: 48, Probability: 2}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+26:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 43, Probability: 3}
+    1: {Enemy Group: 52, Probability: 3}
+    2: {Enemy Group: 49, Probability: 2}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+27:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 48, Probability: 2}
+    1: {Enemy Group: 44, Probability: 2}
+    2: {Enemy Group: 52, Probability: 2}
+    3: {Enemy Group: 43, Probability: 2}
+  Sub-Group 1 Rate: 12
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+28:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 48, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+29:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 44, Probability: 2}
+    1: {Enemy Group: 43, Probability: 2}
+    2: {Enemy Group: 52, Probability: 2}
+    3: {Enemy Group: 49, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+30:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 44, Probability: 2}
+    1: {Enemy Group: 43, Probability: 2}
+    2: {Enemy Group: 52, Probability: 4}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+31:
+  Event Flag: 0xaf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 54, Probability: 8}
+  Sub-Group 2 Rate: 10
+32:
+  Event Flag: 0xaf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 55, Probability: 8}
+  Sub-Group 2 Rate: 7
+33:
+  Event Flag: 0xaf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 55, Probability: 8}
+  Sub-Group 2 Rate: 7
+34:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 56, Probability: 5}
+    1: {Enemy Group: 57, Probability: 3}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+35:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 60, Probability: 3}
+    1: {Enemy Group: 59, Probability: 3}
+    2: {Enemy Group: 58, Probability: 2}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+36:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 59, Probability: 3}
+    1: {Enemy Group: 58, Probability: 3}
+    2: {Enemy Group: 60, Probability: 2}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+37:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 58, Probability: 3}
+    1: {Enemy Group: 60, Probability: 3}
+    2: {Enemy Group: 59, Probability: 2}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+38:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 60, Probability: 8}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+39:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 61, Probability: 2}
+    1: {Enemy Group: 63, Probability: 2}
+    2: {Enemy Group: 62, Probability: 1}
+    3: {Enemy Group: 64, Probability: 1}
+    4: {Enemy Group: 65, Probability: 1}
+    5: {Enemy Group: 427, Probability: 1}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+40:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 61, Probability: 2}
+    1: {Enemy Group: 63, Probability: 2}
+    2: {Enemy Group: 64, Probability: 1}
+    3: {Enemy Group: 65, Probability: 1}
+    4: {Enemy Group: 62, Probability: 1}
+    5: {Enemy Group: 427, Probability: 1}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+41:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 66, Probability: 1}
+    1: {Enemy Group: 67, Probability: 1}
+    2: {Enemy Group: 68, Probability: 2}
+    3: {Enemy Group: 69, Probability: 4}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+42:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 70, Probability: 1}
+    1: {Enemy Group: 71, Probability: 1}
+    2: {Enemy Group: 72, Probability: 2}
+    3: {Enemy Group: 73, Probability: 2}
+    4: {Enemy Group: 74, Probability: 2}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+43:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 75, Probability: 8}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+44:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 76, Probability: 5}
+    1: {Enemy Group: 77, Probability: 3}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+45:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 84, Probability: 5}
+    1: {Enemy Group: 85, Probability: 3}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2:
+    0: {Enemy Group: 99, Probability: 8}
+  Sub-Group 2 Rate: 15
+46:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 78, Probability: 1}
+    1: {Enemy Group: 81, Probability: 1}
+    2: {Enemy Group: 79, Probability: 1}
+    3: {Enemy Group: 80, Probability: 5}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2:
+    0: {Enemy Group: 92, Probability: 3}
+    1: {Enemy Group: 95, Probability: 3}
+    2: {Enemy Group: 93, Probability: 2}
+  Sub-Group 2 Rate: 15
+47:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 80, Probability: 3}
+    1: {Enemy Group: 83, Probability: 3}
+    2: {Enemy Group: 81, Probability: 2}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2:
+    0: {Enemy Group: 91, Probability: 2}
+    1: {Enemy Group: 96, Probability: 2}
+    2: {Enemy Group: 94, Probability: 2}
+    3: {Enemy Group: 101, Probability: 2}
+  Sub-Group 2 Rate: 15
+48:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 86, Probability: 2}
+    1: {Enemy Group: 82, Probability: 2}
+    2: {Enemy Group: 89, Probability: 2}
+    3: {Enemy Group: 88, Probability: 2}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2:
+    0: {Enemy Group: 100, Probability: 2}
+    1: {Enemy Group: 98, Probability: 2}
+    2: {Enemy Group: 102, Probability: 2}
+    3: {Enemy Group: 94, Probability: 2}
+  Sub-Group 2 Rate: 40
+49:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 90, Probability: 2}
+    1: {Enemy Group: 89, Probability: 3}
+    2: {Enemy Group: 87, Probability: 3}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2:
+    0: {Enemy Group: 97, Probability: 6}
+    1: {Enemy Group: 102, Probability: 2}
+  Sub-Group 2 Rate: 40
+50:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 103, Probability: 6}
+    1: {Enemy Group: 104, Probability: 2}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+51:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 105, Probability: 1}
+    1: {Enemy Group: 106, Probability: 1}
+    2: {Enemy Group: 107, Probability: 1}
+    3: {Enemy Group: 108, Probability: 3}
+    4: {Enemy Group: 425, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+52:
+  Event Flag: 0x0
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+53:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 113, Probability: 2}
+    1: {Enemy Group: 117, Probability: 1}
+    2: {Enemy Group: 114, Probability: 1}
+    3: {Enemy Group: 116, Probability: 1}
+    4: {Enemy Group: 122, Probability: 1}
+    5: {Enemy Group: 123, Probability: 1}
+    6: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+54:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 109, Probability: 2}
+    1: {Enemy Group: 112, Probability: 1}
+    2: {Enemy Group: 120, Probability: 2}
+    3: {Enemy Group: 115, Probability: 1}
+    4: {Enemy Group: 118, Probability: 1}
+    5: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+55:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 109, Probability: 2}
+    1: {Enemy Group: 119, Probability: 1}
+    2: {Enemy Group: 110, Probability: 1}
+    3: {Enemy Group: 111, Probability: 1}
+    4: {Enemy Group: 118, Probability: 1}
+    5: {Enemy Group: 121, Probability: 1}
+    6: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+56:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 125, Probability: 4}
+    1: {Enemy Group: 126, Probability: 4}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+57:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 126, Probability: 1}
+    1: {Enemy Group: 125, Probability: 2}
+    2: {Enemy Group: 124, Probability: 4}
+    3: {Enemy Group: 127, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+58:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 124, Probability: 4}
+    1: {Enemy Group: 127, Probability: 1}
+    2: {Enemy Group: 126, Probability: 2}
+    3: {Enemy Group: 125, Probability: 1}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+59:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 129, Probability: 1}
+    1: {Enemy Group: 131, Probability: 2}
+    2: {Enemy Group: 132, Probability: 2}
+    3: {Enemy Group: 133, Probability: 1}
+    4: {Enemy Group: 128, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+60:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 129, Probability: 1}
+    1: {Enemy Group: 131, Probability: 2}
+    2: {Enemy Group: 130, Probability: 1}
+    3: {Enemy Group: 128, Probability: 2}
+    4: {Enemy Group: 133, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+61:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 134, Probability: 2}
+    1: {Enemy Group: 135, Probability: 4}
+    2: {Enemy Group: 136, Probability: 2}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+62:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 137, Probability: 4}
+    1: {Enemy Group: 138, Probability: 2}
+    2: {Enemy Group: 139, Probability: 2}
+  Sub-Group 1 Rate: 5
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+63:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 146, Probability: 2}
+    1: {Enemy Group: 145, Probability: 2}
+    2: {Enemy Group: 148, Probability: 1}
+    3: {Enemy Group: 144, Probability: 1}
+    4: {Enemy Group: 142, Probability: 1}
+    5: {Enemy Group: 140, Probability: 1}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+64:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 146, Probability: 2}
+    1: {Enemy Group: 148, Probability: 1}
+    2: {Enemy Group: 144, Probability: 1}
+    3: {Enemy Group: 147, Probability: 1}
+    4: {Enemy Group: 145, Probability: 1}
+    5: {Enemy Group: 141, Probability: 1}
+    6: {Enemy Group: 143, Probability: 1}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+65:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 153, Probability: 4}
+    1: {Enemy Group: 151, Probability: 3}
+    2: {Enemy Group: 150, Probability: 1}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+66:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 153, Probability: 4}
+    1: {Enemy Group: 151, Probability: 2}
+    2: {Enemy Group: 149, Probability: 1}
+    3: {Enemy Group: 152, Probability: 1}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+67:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 153, Probability: 4}
+    1: {Enemy Group: 151, Probability: 3}
+    2: {Enemy Group: 150, Probability: 1}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+68:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 154, Probability: 2}
+    1: {Enemy Group: 155, Probability: 3}
+    2: {Enemy Group: 156, Probability: 3}
+  Sub-Group 1 Rate: 18
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+69:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 157, Probability: 2}
+    1: {Enemy Group: 160, Probability: 2}
+    2: {Enemy Group: 161, Probability: 2}
+    3: {Enemy Group: 162, Probability: 2}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+70:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 157, Probability: 2}
+    1: {Enemy Group: 160, Probability: 2}
+    2: {Enemy Group: 161, Probability: 1}
+    3: {Enemy Group: 162, Probability: 1}
+    4: {Enemy Group: 160, Probability: 2}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+71:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 165, Probability: 2}
+    1: {Enemy Group: 157, Probability: 2}
+    2: {Enemy Group: 163, Probability: 2}
+    3: {Enemy Group: 164, Probability: 2}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+72:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 157, Probability: 2}
+    1: {Enemy Group: 164, Probability: 2}
+    2: {Enemy Group: 165, Probability: 2}
+    3: {Enemy Group: 166, Probability: 2}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+73:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 166, Probability: 3}
+    1: {Enemy Group: 158, Probability: 2}
+    2: {Enemy Group: 164, Probability: 3}
+  Sub-Group 1 Rate: 3
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+74:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 159, Probability: 2}
+    1: {Enemy Group: 167, Probability: 2}
+    2: {Enemy Group: 168, Probability: 2}
+    3: {Enemy Group: 169, Probability: 2}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+75:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 170, Probability: 8}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+76:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 170, Probability: 5}
+    1: {Enemy Group: 171, Probability: 2}
+    2: {Enemy Group: 172, Probability: 1}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+77:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 170, Probability: 4}
+    1: {Enemy Group: 171, Probability: 3}
+    2: {Enemy Group: 172, Probability: 1}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+78:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 171, Probability: 4}
+    1: {Enemy Group: 170, Probability: 3}
+    2: {Enemy Group: 172, Probability: 1}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+79:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 171, Probability: 5}
+    1: {Enemy Group: 170, Probability: 2}
+    2: {Enemy Group: 172, Probability: 1}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+80:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 177, Probability: 3}
+    1: {Enemy Group: 176, Probability: 3}
+    2: {Enemy Group: 178, Probability: 1}
+    3: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+81:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 178, Probability: 2}
+    1: {Enemy Group: 175, Probability: 1}
+    2: {Enemy Group: 177, Probability: 2}
+    3: {Enemy Group: 425, Probability: 1}
+    4: {Enemy Group: 176, Probability: 2}
+  Sub-Group 1 Rate: 50
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+82:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 179, Probability: 3}
+    1: {Enemy Group: 180, Probability: 2}
+    2: {Enemy Group: 181, Probability: 2}
+    3: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 70
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+83:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 180, Probability: 1}
+    1: {Enemy Group: 181, Probability: 1}
+    2: {Enemy Group: 173, Probability: 4}
+    3: {Enemy Group: 174, Probability: 1}
+    4: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+84:
+  Event Flag: 0xe
+  Sub-Group 1:
+    0: {Enemy Group: 183, Probability: 3}
+    1: {Enemy Group: 182, Probability: 2}
+    2: {Enemy Group: 187, Probability: 3}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2:
+    0: {Enemy Group: 196, Probability: 2}
+    1: {Enemy Group: 190, Probability: 2}
+    2: {Enemy Group: 189, Probability: 3}
+    3: {Enemy Group: 191, Probability: 1}
+  Sub-Group 2 Rate: 60
+85:
+  Event Flag: 0xe
+  Sub-Group 1:
+    0: {Enemy Group: 185, Probability: 2}
+    1: {Enemy Group: 182, Probability: 3}
+    2: {Enemy Group: 188, Probability: 3}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2:
+    0: {Enemy Group: 194, Probability: 2}
+    1: {Enemy Group: 192, Probability: 3}
+    2: {Enemy Group: 193, Probability: 3}
+  Sub-Group 2 Rate: 60
+86:
+  Event Flag: 0xe
+  Sub-Group 1:
+    0: {Enemy Group: 186, Probability: 4}
+    1: {Enemy Group: 184, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2:
+    0: {Enemy Group: 192, Probability: 4}
+    1: {Enemy Group: 194, Probability: 2}
+    2: {Enemy Group: 193, Probability: 2}
+  Sub-Group 2 Rate: 60
+87:
+  Event Flag: 0xe
+  Sub-Group 1:
+    0: {Enemy Group: 185, Probability: 4}
+    1: {Enemy Group: 186, Probability: 4}
+  Sub-Group 1 Rate: 70
+  Sub-Group 2:
+    0: {Enemy Group: 193, Probability: 3}
+    1: {Enemy Group: 192, Probability: 3}
+    2: {Enemy Group: 195, Probability: 2}
+  Sub-Group 2 Rate: 65
+88:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 202, Probability: 6}
+    1: {Enemy Group: 204, Probability: 2}
+  Sub-Group 1 Rate: 55
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+89:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 202, Probability: 2}
+    1: {Enemy Group: 204, Probability: 2}
+    2: {Enemy Group: 197, Probability: 2}
+    3: {Enemy Group: 201, Probability: 2}
+  Sub-Group 1 Rate: 35
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+90:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 205, Probability: 2}
+    1: {Enemy Group: 198, Probability: 4}
+    2: {Enemy Group: 201, Probability: 2}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+91:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 197, Probability: 5}
+    1: {Enemy Group: 203, Probability: 3}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+92:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 203, Probability: 6}
+    1: {Enemy Group: 202, Probability: 2}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+93:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 199, Probability: 5}
+    1: {Enemy Group: 201, Probability: 3}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+94:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 199, Probability: 7}
+    1: {Enemy Group: 201, Probability: 1}
+  Sub-Group 1 Rate: 65
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+95:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 199, Probability: 6}
+    1: {Enemy Group: 201, Probability: 2}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+96:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 201, Probability: 4}
+    1: {Enemy Group: 199, Probability: 4}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+97:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 198, Probability: 3}
+    1: {Enemy Group: 200, Probability: 3}
+    2: {Enemy Group: 201, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+98:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 206, Probability: 8}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+99:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 211, Probability: 2}
+    1: {Enemy Group: 207, Probability: 2}
+    2: {Enemy Group: 208, Probability: 3}
+    3: {Enemy Group: 210, Probability: 1}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+100:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 213, Probability: 4}
+    1: {Enemy Group: 214, Probability: 2}
+    2: {Enemy Group: 212, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+101:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 212, Probability: 3}
+    1: {Enemy Group: 209, Probability: 2}
+    2: {Enemy Group: 213, Probability: 1}
+    3: {Enemy Group: 208, Probability: 1}
+    4: {Enemy Group: 210, Probability: 1}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+102:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 218, Probability: 5}
+    1: {Enemy Group: 221, Probability: 3}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+103:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 216, Probability: 2}
+    1: {Enemy Group: 215, Probability: 3}
+    2: {Enemy Group: 217, Probability: 2}
+    3: {Enemy Group: 425, Probability: 1}
+  Sub-Group 1 Rate: 36
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+104:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 218, Probability: 2}
+    1: {Enemy Group: 219, Probability: 2}
+    2: {Enemy Group: 221, Probability: 2}
+    3: {Enemy Group: 216, Probability: 2}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+105:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 216, Probability: 4}
+    1: {Enemy Group: 215, Probability: 3}
+    2: {Enemy Group: 217, Probability: 1}
+  Sub-Group 1 Rate: 36
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+106:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 219, Probability: 2}
+    1: {Enemy Group: 221, Probability: 3}
+    2: {Enemy Group: 220, Probability: 3}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+107:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 221, Probability: 4}
+    1: {Enemy Group: 220, Probability: 4}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+108:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 222, Probability: 8}
+  Sub-Group 1 Rate: 70
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+109:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 225, Probability: 4}
+    1: {Enemy Group: 224, Probability: 3}
+    2: {Enemy Group: 223, Probability: 1}
+  Sub-Group 1 Rate: 75
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+110:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 227, Probability: 4}
+    1: {Enemy Group: 226, Probability: 3}
+    2: {Enemy Group: 223, Probability: 1}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+111:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 235, Probability: 4}
+    1: {Enemy Group: 234, Probability: 4}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+112:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 224, Probability: 4}
+    1: {Enemy Group: 231, Probability: 3}
+    2: {Enemy Group: 230, Probability: 1}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+113:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 230, Probability: 4}
+    1: {Enemy Group: 228, Probability: 3}
+    2: {Enemy Group: 229, Probability: 1}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+114:
+  Event Flag: 0x47
+  Sub-Group 1:
+    0: {Enemy Group: 229, Probability: 2}
+    1: {Enemy Group: 232, Probability: 2}
+    2: {Enemy Group: 230, Probability: 2}
+    3: {Enemy Group: 233, Probability: 2}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+115:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 236, Probability: 2}
+    1: {Enemy Group: 237, Probability: 1}
+    2: {Enemy Group: 238, Probability: 2}
+    3: {Enemy Group: 239, Probability: 3}
+  Sub-Group 1 Rate: 8
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+116:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 240, Probability: 1}
+    1: {Enemy Group: 241, Probability: 1}
+    2: {Enemy Group: 242, Probability: 4}
+    3: {Enemy Group: 244, Probability: 1}
+    4: {Enemy Group: 243, Probability: 1}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+117:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 247, Probability: 4}
+    1: {Enemy Group: 248, Probability: 4}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+118:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 245, Probability: 4}
+    1: {Enemy Group: 247, Probability: 2}
+    2: {Enemy Group: 248, Probability: 2}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+119:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 247, Probability: 3}
+    1: {Enemy Group: 248, Probability: 2}
+    2: {Enemy Group: 246, Probability: 2}
+    3: {Enemy Group: 248, Probability: 1}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+120:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 252, Probability: 6}
+    1: {Enemy Group: 256, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+121:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 252, Probability: 4}
+    1: {Enemy Group: 257, Probability: 3}
+    2: {Enemy Group: 254, Probability: 1}
+  Sub-Group 1 Rate: 25
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+122:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 252, Probability: 6}
+    1: {Enemy Group: 249, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+123:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 253, Probability: 3}
+    1: {Enemy Group: 251, Probability: 3}
+    2: {Enemy Group: 249, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+124:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 258, Probability: 3}
+    1: {Enemy Group: 259, Probability: 2}
+    2: {Enemy Group: 255, Probability: 2}
+    3: {Enemy Group: 252, Probability: 1}
+  Sub-Group 1 Rate: 70
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+125:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 260, Probability: 2}
+    1: {Enemy Group: 261, Probability: 3}
+    2: {Enemy Group: 250, Probability: 1}
+    3: {Enemy Group: 249, Probability: 2}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+126:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 262, Probability: 3}
+    1: {Enemy Group: 263, Probability: 3}
+    2: {Enemy Group: 264, Probability: 1}
+    3: {Enemy Group: 265, Probability: 1}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+127:
+  Event Flag: 0x11a
+  Sub-Group 1:
+    0: {Enemy Group: 261, Probability: 4}
+    1: {Enemy Group: 250, Probability: 3}
+    2: {Enemy Group: 249, Probability: 1}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+128:
+  Event Flag: 0x39
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 271, Probability: 2}
+    1: {Enemy Group: 272, Probability: 2}
+    2: {Enemy Group: 268, Probability: 2}
+    3: {Enemy Group: 269, Probability: 1}
+    4: {Enemy Group: 266, Probability: 1}
+  Sub-Group 2 Rate: 100
+129:
+  Event Flag: 0x39
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 269, Probability: 4}
+    1: {Enemy Group: 270, Probability: 2}
+    2: {Enemy Group: 271, Probability: 2}
+  Sub-Group 2 Rate: 100
+130:
+  Event Flag: 0x39
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 267, Probability: 2}
+    1: {Enemy Group: 268, Probability: 2}
+    2: {Enemy Group: 272, Probability: 2}
+    3: {Enemy Group: 266, Probability: 2}
+  Sub-Group 2 Rate: 100
+131:
+  Event Flag: 0x39
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+132:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 273, Probability: 2}
+    1: {Enemy Group: 274, Probability: 2}
+    2: {Enemy Group: 275, Probability: 2}
+    3: {Enemy Group: 276, Probability: 1}
+    4: {Enemy Group: 277, Probability: 1}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+133:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 278, Probability: 3}
+    1: {Enemy Group: 279, Probability: 2}
+    2: {Enemy Group: 280, Probability: 1}
+    3: {Enemy Group: 281, Probability: 1}
+    4: {Enemy Group: 282, Probability: 1}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+134:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 283, Probability: 3}
+    1: {Enemy Group: 284, Probability: 2}
+    2: {Enemy Group: 285, Probability: 2}
+    3: {Enemy Group: 286, Probability: 1}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+135:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 287, Probability: 4}
+    1: {Enemy Group: 288, Probability: 4}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+136:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 289, Probability: 8}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+137:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 290, Probability: 3}
+    1: {Enemy Group: 291, Probability: 5}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+138:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 292, Probability: 8}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+139:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 293, Probability: 8}
+  Sub-Group 1 Rate: 20
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+140:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 294, Probability: 3}
+    1: {Enemy Group: 295, Probability: 2}
+    2: {Enemy Group: 296, Probability: 1}
+    3: {Enemy Group: 297, Probability: 2}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+141:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 298, Probability: 8}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+142:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 299, Probability: 5}
+    1: {Enemy Group: 300, Probability: 3}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+143:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 303, Probability: 4}
+    1: {Enemy Group: 307, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+144:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 304, Probability: 4}
+    1: {Enemy Group: 306, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+145:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 310, Probability: 4}
+    1: {Enemy Group: 313, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+146:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 309, Probability: 4}
+    1: {Enemy Group: 322, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+147:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 309, Probability: 4}
+    1: {Enemy Group: 312, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+148:
+  Event Flag: 0x11
+  Sub-Group 1:
+    0: {Enemy Group: 309, Probability: 4}
+    1: {Enemy Group: 312, Probability: 4}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+149:
+  Event Flag: 0x11
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+150:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 323, Probability: 8}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+151:
+  Event Flag: 0x0
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+152:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 324, Probability: 4}
+    1: {Enemy Group: 325, Probability: 4}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+153:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 326, Probability: 8}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+154:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 327, Probability: 4}
+    1: {Enemy Group: 328, Probability: 2}
+    2: {Enemy Group: 329, Probability: 2}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+155:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 330, Probability: 5}
+    1: {Enemy Group: 331, Probability: 3}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+156:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 332, Probability: 0}
+    1: {Enemy Group: 333, Probability: 0}
+    2: {Enemy Group: 334, Probability: 0}
+    3: {Enemy Group: 335, Probability: 8}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+157:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 336, Probability: 5}
+    1: {Enemy Group: 337, Probability: 3}
+  Sub-Group 1 Rate: 7
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+158:
+  Event Flag: 0x0
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+159:
+  Event Flag: 0x0
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+160:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 338, Probability: 3}
+    1: {Enemy Group: 339, Probability: 3}
+    2: {Enemy Group: 340, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+161:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 341, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+162:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 342, Probability: 2}
+    1: {Enemy Group: 343, Probability: 3}
+    2: {Enemy Group: 344, Probability: 3}
+  Sub-Group 1 Rate: 24
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+163:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 345, Probability: 1}
+    1: {Enemy Group: 346, Probability: 1}
+    2: {Enemy Group: 347, Probability: 1}
+    3: {Enemy Group: 348, Probability: 5}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+164:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 349, Probability: 4}
+    1: {Enemy Group: 350, Probability: 2}
+    2: {Enemy Group: 351, Probability: 1}
+    3: {Enemy Group: 352, Probability: 1}
+  Sub-Group 1 Rate: 32
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+165:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 353, Probability: 2}
+    1: {Enemy Group: 354, Probability: 2}
+    2: {Enemy Group: 355, Probability: 2}
+    3: {Enemy Group: 356, Probability: 2}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+166:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 357, Probability: 2}
+    1: {Enemy Group: 358, Probability: 2}
+    2: {Enemy Group: 359, Probability: 4}
+  Sub-Group 1 Rate: 64
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+167:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 360, Probability: 3}
+    1: {Enemy Group: 361, Probability: 5}
+  Sub-Group 1 Rate: 64
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+168:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 362, Probability: 4}
+    1: {Enemy Group: 363, Probability: 4}
+  Sub-Group 1 Rate: 64
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+169:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 364, Probability: 3}
+    1: {Enemy Group: 365, Probability: 2}
+    2: {Enemy Group: 366, Probability: 3}
+  Sub-Group 1 Rate: 24
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+170:
+  Event Flag: 0x7e
+  Sub-Group 1:
+    0: {Enemy Group: 367, Probability: 5}
+    1: {Enemy Group: 368, Probability: 3}
+  Sub-Group 1 Rate: 64
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+171:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 369, Probability: 3}
+    1: {Enemy Group: 370, Probability: 3}
+    2: {Enemy Group: 371, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+172:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 372, Probability: 6}
+    1: {Enemy Group: 373, Probability: 2}
+  Sub-Group 1 Rate: 75
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+173:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 374, Probability: 6}
+    1: {Enemy Group: 375, Probability: 2}
+  Sub-Group 1 Rate: 60
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+174:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 376, Probability: 3}
+    1: {Enemy Group: 377, Probability: 3}
+    2: {Enemy Group: 378, Probability: 2}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+175:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 379, Probability: 4}
+    1: {Enemy Group: 380, Probability: 4}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+176:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 381, Probability: 3}
+    1: {Enemy Group: 382, Probability: 3}
+    2: {Enemy Group: 383, Probability: 2}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+177:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 384, Probability: 3}
+    1: {Enemy Group: 385, Probability: 3}
+    2: {Enemy Group: 386, Probability: 2}
+  Sub-Group 1 Rate: 30
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+178:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 387, Probability: 4}
+    1: {Enemy Group: 388, Probability: 4}
+  Sub-Group 1 Rate: 95
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+179:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 389, Probability: 5}
+    1: {Enemy Group: 390, Probability: 3}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+180:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 391, Probability: 4}
+    1: {Enemy Group: 392, Probability: 4}
+  Sub-Group 1 Rate: 70
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+181:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 393, Probability: 6}
+    1: {Enemy Group: 394, Probability: 2}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+182:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 395, Probability: 5}
+    1: {Enemy Group: 396, Probability: 3}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+183:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 397, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+184:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 398, Probability: 8}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+185:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 399, Probability: 8}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+186:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 400, Probability: 8}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+187:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 401, Probability: 6}
+    1: {Enemy Group: 402, Probability: 2}
+  Sub-Group 1 Rate: 80
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+188:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 403, Probability: 2}
+    1: {Enemy Group: 404, Probability: 2}
+    2: {Enemy Group: 405, Probability: 2}
+    3: {Enemy Group: 406, Probability: 1}
+    4: {Enemy Group: 407, Probability: 1}
+  Sub-Group 1 Rate: 72
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+189:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 408, Probability: 2}
+    1: {Enemy Group: 409, Probability: 2}
+    2: {Enemy Group: 410, Probability: 2}
+    3: {Enemy Group: 411, Probability: 1}
+    4: {Enemy Group: 412, Probability: 1}
+  Sub-Group 1 Rate: 72
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+190:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 413, Probability: 6}
+    1: {Enemy Group: 414, Probability: 2}
+  Sub-Group 1 Rate: 10
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+191:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 414, Probability: 4}
+    1: {Enemy Group: 415, Probability: 4}
+  Sub-Group 1 Rate: 16
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+192:
+  Event Flag: 0xaf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 426, Probability: 8}
+  Sub-Group 2 Rate: 100
+193:
+  Event Flag: 0xaf
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2:
+    0: {Enemy Group: 417, Probability: 8}
+  Sub-Group 2 Rate: 8
+194:
+  Event Flag: 0x47
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+195:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 421, Probability: 8}
+  Sub-Group 1 Rate: 40
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+196:
+  Event Flag: 0x0
+  Sub-Group 1: {}
+  Sub-Group 1 Rate: 0
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+197:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 423, Probability: 8}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+198:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 424, Probability: 8}
+  Sub-Group 1 Rate: 15
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+199:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 425, Probability: 8}
+  Sub-Group 1 Rate: 90
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+200:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 428, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+201:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 429, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0
+202:
+  Event Flag: 0x0
+  Sub-Group 1:
+    0: {Enemy Group: 430, Probability: 8}
+  Sub-Group 1 Rate: 100
+  Sub-Group 2: {}
+  Sub-Group 2 Rate: 0

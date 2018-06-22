@@ -1,0 +1,293 @@
+//
+// 65816 assembly opcodes
+//
+// Addressing mode tags:
+//
+// (none)	Implied or Accumulator
+// _i		Immediate
+// _8		Immediate, 8-bit register
+// _d		Direct page
+// _di		Direct indirect
+// _dl		Direct indirect long
+// _a		Absolute
+// _al		Absolute long
+// _x		Absolute indexed,X
+// _xl		Absolute long indexed,X
+// _y		Absolute indexed,Y
+// _dx		Direct page indexed,X
+// _dxi		Direct page indexed indirect,X
+// _diy		Direct page indirect indexed,Y
+// _dly		Direct page indirect long indexed,Y
+// _s		Stack relative
+// _sy		Stack relative indexed,Y
+
+command adr24(a) "[{byte[0] a} {byte[1] a} {byte[2] a}]"
+
+command ADC_i(C)	"[69 {short C}]"
+command ADC_8(C)	"[69 {byte C}]"
+command ADC_a(a)	"[6d {short a}]"
+command ADC_al(a)	"[6f {adr24(a)}]"
+command ADC_d(a)	"[65 {byte a}]"
+command ADC_di(a)	"[72 {byte a}]"
+command ADC_dil(a)	"[67 {byte a}]"
+command ADC_dx(a)	"[75 {byte a}]"
+command ADC_x(a)	"[7d {short a}]"
+command ADC_xl(a)	"[7f {adr24(a)}]"
+command ADC_y(a)	"[79 {short a}]"
+command ADC_s(a)	"[73 {byte a}]"
+// TODO: more modes
+command AND_d(a)	"[25 {byte a}]"
+command AND_i(C)	"[29 {short C}]"
+command AND_8(C)	"[29 {byte C}]"
+command AND_a(a)	"[2d {short a}]"
+command AND_al(a)	"[2f {adr24(a)}]"
+command AND_x(a)	"[3d {short a}]"
+command AND_xl(a)	"[3f {adr24(a)}]"
+// TODO: more modes
+command ASL			"[0a]"
+command ASL_a(a)	"[0e {short a}]"
+command ASL_d(a)	"[06 {byte a}]"
+//
+command BIT_i(C)	"[89 {short C}]"
+command BIT_8(C)	"[89 {byte C}]"
+command BIT_d(a)	"[24 {byte a}]"
+command BIT_dx(a)	"[34 {byte a}]"
+command BIT_a(a)	"[2c {short a}]"
+command BIT_x(a)	"[3c {short a}]"
+//
+command BCC(a)		"[90 {byte a}]"
+command BCS(a)		"[b0 {byte a}]"
+command BEQ(a)		"[f0 {byte a}]"
+command BNE(a)		"[d0 {byte a}]"
+command BMI(a)		"[30 {byte a}]"
+command BPL(a)		"[10 {byte a}]"
+command BVC(a)		"[50 {byte a}]"
+command BVS(a)		"[70 {byte a}]"
+command BRA(a)		"[80 {byte a}]"
+command BRL(a)		"[82 {short a}]"
+
+// Pseudo-instructions for labeled conditional jumps
+// (Necessary because CCScript can't do arithmetic on labels yet)
+command BCC_a(a)	{ BCS(3) JMP(a) }
+command BCS_a(a)	{ BCC(3) JMP(a) }
+command BEQ_a(a)	{ BNE(3) JMP(a) }
+command BNE_a(a)	{ BEQ(3) JMP(a) }
+command BMI_a(a)	{ BPL(3) JMP(a) }
+command BPL_a(a)	{ BMI(3) JMP(a) }
+command BVC_a(a)	{ BVS(3) JMP(a) }
+command BVS_a(a)	{ BVC(3) JMP(a) }
+command BRA_a(a)	{ JMP(a) }
+
+
+//
+command CLC			"[18]"
+command CLD			"[d8]"
+command CLI			"[58]"
+command CLV			"[b8]"
+command SEC			"[38]"
+command SED			"[f8]"
+command SEI			"[78]"
+//
+command COP(C)		"[02 {byte C}]"
+//
+command CMP_i(C)	"[c9 {short C}]"
+command CMP_8(C)	"[c9 {byte C}]"
+command CMP_a(a)	"[cd {short a}]"
+command CMP_al(a)	"[cf {adr24(a)}]"
+command CMP_d(a)	"[c5 {byte a}]"
+command CMP_y(a)	"[d9 {short a}]"
+command CMP_x(a)	"[dd {short a}]"
+command CMP_xl(a)	"[df {adr24(a)}]"
+//
+command CPX_i(C)	"[e0 {short C}]"
+command CPX_8(C)	"[e0 {byte C}]"
+command CPX_a(a)	"[ec {short a}]"
+command CPX_d(a)	"[e4 {byte a}]"
+command CPY_i(C)	"[c0 {short C}]"
+command CPY_8(C)	"[c0 {byte C}]"
+command CPY_a(a)	"[cc {short a}]"
+command CPY_d(a)	"[c4 {byte a}]"
+//
+command DEC			"[3a]"				command dea DEC
+command DEC_a(a)	"[ce {short a}]"
+command DEC_d(a)	"[c6 {byte a}]"
+command DEC_x(a)	"[de {short a}]"
+command DEC_dx(a)	"[d6 {byte a}]"
+command DEX			"[ca]"
+command DEY			"[88]"
+//
+command EOR_i(C)	"[49 {short C}]"
+command EOR_8(C)	"[49 {byte C}]"
+command EOR_a(a)	"[4d {short a}]"
+command EOR_al(a)	"[4f {adr24(a)}]"
+command EOR_d(a)	"[45 {byte a}]"
+command EOR_di(a)	"[52 {byte a}]"
+//
+command INC			"[1a]"				command INA INC
+command INC_a(a)	"[ee {short a}]"
+command INC_d(a)	"[e6 {byte a}]"
+command INX			"[e8]"
+command INY			"[c8]"
+//
+command JMP(a)		"[4c {short a}]"
+command JMP_i(a)	"[6c {short a}]"
+command JMP_ix(a)	"[7c {short a}]"
+command JMP_l(a)	"[5c {adr24(a)}]"	command JML(a) JMP_l(a)
+command JMP_il(a)	"[dc {short a}]"	command JML_i(a) JMP_il(a)
+//
+command JSR(a)		"[20 {short a}]"
+command JSR_ix(a)	"[fc {short a}]"
+command JSL(a)		"[22 {adr24(a)}]"
+//
+command LDA_s(a)	"[a3 {byte a}]"
+command LDA_i(C)	"[a9 {short C}]"
+command LDA_8(C)	"[a9 {byte C}]"
+command LDA_a(a)	"[ad {short a}]"
+command LDA_al(a)	"[af {adr24(a)}]"
+command LDA_d(a)	"[a5 {byte a}]"
+command LDA_di(a)	"[b2 {byte a}]"
+command LDA_dl(a)	"[a7 {byte a}]"
+command LDA_dx(a)	"[b5 {byte a}]"
+command LDA_x(a)	"[bd {short a}]"
+command LDA_y(a)	"[b9 {short a}]"
+command LDA_xl(a)	"[bf {adr24(a)}]"
+command LDA_diy(a)	"[b1 {byte a}]"
+command LDA_dly(a)	"[b7 {byte a}]"
+//
+command LDX_i(C)	"[a2 {short C}]"
+command LDX_8(C)	"[a2 {byte C}]"
+command LDX_a(a)	"[ae {short a}]"
+command LDX_d(a)	"[a6 {byte a}]"
+command LDY_i(C)	"[a0 {short C}]"
+command LDY_8(C)	"[a0 {byte C}]"
+command LDY_a(a)	"[ac {short a}]"
+command LDY_d(a)	"[a4 {byte a}]"
+command LDY_dx(a)	"[b4 {short a}]"
+command LDY_x(a)	"[bc {short a}]"
+//
+command LSR			"[4a]"
+command LSR_a(a)	"[4e {short a}]"
+command LSR_d(a)	"[46 {byte a}]"
+command LSR_x(a)	"[5e {short a}]"
+//
+command NOP			"[ea]"
+//
+command ORA_i(C)	"[09 {short C}]"
+command ORA_8(C)	"[09 {byte C}]"
+command ORA_a(a)	"[0d {short a}]"
+command ORA_al(a)	"[0f {adr24(a)}]"
+command ORA_xl(a)	"[1f {adr24(a)}]"
+command ORA_d(a)	"[05 {byte a}]"
+//
+command PEA(a)		"[f4 {short a}]"
+command PEI(a)		"[d4 {byte a}]"
+command PER(a)		"[62 {short a}]"
+command PHA			"[48]"
+command PHP			"[08]"
+command PHX			"[da]"
+command PHY			"[5a]"
+command PLA			"[68]"
+command PLP			"[28]"
+command PLX			"[fa]"
+command PLY			"[7a]"
+command PHB			"[8b]"
+command PHD			"[0b]"
+command PHK			"[4b]"
+command PLB			"[ab]"
+command PLD			"[2b]"
+//
+command REP(C)		"[c2 {byte C}]"
+//
+command ROL			"[2a]"
+command ROL_a(a)	"[2e {short a}]"
+command ROL_d(a)	"[26 {byte a}]"
+command ROR			"[6a]"
+command ROR_a(a)	"[6e {short a}]"
+command ROR_d(a)	"[66 {byte a}]"
+//
+command RTI			"[40]"
+command RTS			"[60]"
+command RTL			"[6b]"
+//
+command SBC_i(C)	"[e9 {short C}]"
+command SBC_8(C)	"[e9 {byte C}]"
+command SBC_a(a)	"[ed {short a}]"
+command SBC_al(a)	"[ef {adr24(a)}]"
+command SBC_d(a)	"[e5 {byte a}]"
+command SBC_x(a)	"[fd {short a}]"
+command SBC_xl(a)	"[ff {adr24(a)}]"
+//
+command SEP(C)		"[e2 {byte C}]"
+//
+command STP		"[DB]"
+//
+command STA_d(a)	"[85 {byte a}]"
+command STA_dl(a)	"[87 {byte a}]"
+command STA_di(a)	"[92 {byte a}]"
+command STA_dx(a)	"[95 {byte a}]"
+command STA_a(a)	"[8d {short a}]"
+command STA_al(a)	"[8f {adr24(a)}]"
+command STA_x(a)	"[9d {short a}]"
+command STA_xl(a)	"[9f {adr24(a)}]"
+command STA_y(a)	"[99 {short a}]"
+command STA_dxi(a)	"[81 {byte a}]"
+command STA_diy(a)	"[91 {byte a}]"
+command STA_dly(a)	"[97 {byte a}]"
+command STX_a(a)	"[8e {short a}]"
+command STX_d(a)	"[86 {byte a}]"
+command STX_dy(a)	"[96 {byte a}]"
+command STY_a(a)	"[8c {short a}]"
+command STY_d(a)	"[84 {byte a}]"
+command STY_dx(a)	"[94 {byte a}]"
+command STZ_a(a)	"[9c {short a}]"
+command STZ_d(a)	"[64 {byte a}]"
+command STZ_x(a)	"[9e {short a}]"
+command STZ_dx(a)	"[74 {byte a}]"
+command TAX			"[aa]"
+command TAY			"[a8]"
+command TXA			"[8a]"
+command TYA			"[98]"
+command TSX			"[ba]"
+command TXS			"[9a]"
+command TXY			"[9b]"
+command TYX			"[bb]"
+command TCD			"[5b]"				command TAD TCD
+command TDC			"[7b]"				command TDA TDC
+command TCS			"[1b]"				command TAS TCS
+command TSC			"[3b]"				command TSA TSC
+command TRB_a(a)	"[1c {short a}]"
+command TRB_d(a)	"[14 {byte a}]"
+command TSB_a(a)	"[0c {short a}]"
+command TSB_d(a)	"[04 {byte a}]"
+command WAI			"[cb]"
+command WDM			"[42]"
+command XBA			"[eb]"				command swa xba
+command XCE			"[fb]"
+
+command ASMLoadAddress0E(Address) {
+	LDA_i	(short[0] Address)
+	STA_d	(0x0E)
+	LDA_i	(short[1] Address)
+	STA_d	(0x10)
+}
+
+command ASMLoadAddress12(Address) {
+	LDA_i	(short[0] Address)
+	STA_d	(0x12)
+	LDA_i	(short[1] Address)
+	STA_d	(0x14)
+}
+
+command ASMLoadAddress06(Address) {
+	LDA_i	(short[0] Address)
+	STA_d	(0x06)
+	LDA_i	(short[1] Address)
+	STA_d	(0x08)
+}
+
+command ASMLoadAddress0A(Address) {
+	LDA_i	(short[0] Address)
+	STA_d	(0x0A)
+	LDA_i	(short[1] Address)
+	STA_d	(0x0C)
+}

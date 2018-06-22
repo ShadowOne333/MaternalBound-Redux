@@ -1,0 +1,415 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xef806d:
+    newline
+    "{sound(25)}@{user} growled" linebreak
+    "  and lunged forward![03]" eob
+
+l_0xef808d:
+    newline
+    "{sound(25)}@{user} wielded" linebreak
+    "  a shopping bag![03]" eob
+
+l_0xef80ac:
+    newline
+    "{sound(25)}@{user} swung" linebreak
+    "  a club![03]" eob
+
+l_0xef80c4:
+    newline
+    "{sound(25)}@{user} generated" linebreak
+    "  a tornado!{sound(90)}[03]" eob
+
+l_0xef80e4:
+    newline
+    "{sound(25)}@{user} sprayed a gigantic blast of water!" linebreak
+    "[03]" eob
+
+l_0xef8109:
+    newline
+    "{sound(25)}@{user} flashed" linebreak
+    "  a menacing smile![03]" eob
+
+l_0xef812b:
+    newline
+    "{sound(25)}@{user} started" linebreak
+    "  laughing hysterically![03]" eob
+
+l_0xef814f:
+    newline
+    "{sound(25)}@{user} edged" linebreak
+    "  closer![03]" eob
+
+l_0xef8167:
+    newline
+    "{sound(25)}@{user} muttered" linebreak
+    "[1F 04 02]  <1...>[1F 04 01][03]" eob
+
+l_0xef8186:
+    newline
+    "{sound(25)}@{user} murmured" linebreak
+    "[1F 04 02]  <2...>[1F 04 01][03]" eob
+
+l_0xef81a5:
+    newline
+    "{sound(25)}@{user} whispered" linebreak
+    "[1F 04 02]  <3...>[1F 04 01][03]" eob
+
+l_0xef81c4:
+    newline
+    "{sound(25)}@{user} fell down!{sound(34)}[03]" eob
+
+l_0xef81d7:
+    newline
+    "{sound(25)}@{user} is being" linebreak
+    "  absentminded.[03]" eob
+
+l_0xef81f1:
+    newline
+    "{sound(25)}@{user} generated" linebreak
+    "  a burst of steam![03]" eob
+
+l_0xef8211:
+    newline
+    "{sound(25)}@{user} is" linebreak
+    "  wobbly.[03]" eob
+
+l_0xef8226:
+    newline
+    "{sound(25)}@{user} is" linebreak
+    "  reeling.[03]" eob
+
+l_0xef8239:
+    newline
+    "{sound(25)}@{user} has" linebreak
+    "  a big grin on " call(data_37.l_0xc7e66e) " face.[03]" eob
+
+l_0xef825c:
+    newline
+    "{sound(25)}@{user} is taking deep breaths for the next assault." linebreak
+    "[03]" eob
+
+l_0xef8281:
+    newline
+    "{sound(25)}@{user} sends" linebreak
+    "  a greeting![03]" eob
+
+l_0xef8299:
+    newline
+    "{sound(25)}@{user} is" linebreak
+    "  making a loud, piercing howl.[03]" eob
+
+l_0xef82bc:
+    newline
+    "{sound(25)}@{user} is" linebreak
+    "  saying <tick-tock.>[03]" eob
+
+l_0xef82d7:
+    newline
+    "{sound(25)}@{user} emitted" linebreak
+    "  a glorious light![03]" eob
+
+l_0xef82f7:
+    newline
+    "{sound(25)}@{user} used an" linebreak
+    "  electrical shock attack![03]" eob
+
+l_0xef8317:
+    newline
+    "{sound(25)}@{user} scattered" linebreak
+    "  its pollen around!{sound(82)}[03]{pause(1)}" eob
+
+l_0xef833e:
+    newline
+    "{sound(25)}@{user} reached" linebreak
+    "  out with its icy hand.[03]" eob
+
+l_0xef835c:
+    newline
+    "{sound(25)}@{user} played" linebreak
+    "  a flute with " call(data_37.l_0xc7e66e) " poisonous breath![03]" eob
+
+l_0xef838a:
+    newline
+    "{sound(25)}@{user} spewed" linebreak
+    "  exhaust fumes![03]" eob
+
+l_0xef83a8:
+    newline
+    "{sound(25)}@{user} started" linebreak
+    "  laughing maniacally![03]" eob
+
+l_0xef83ca:
+    newline
+    "{sound(25)}@{user} breathed" linebreak
+    "  in through " call(data_37.l_0xc7e66e) " flute![03]" eob
+
+l_0xef83ed:
+    newline
+    "{sound(25)}@{user} leaped" linebreak
+    "  forward and spread its wings![03]" eob
+
+l_0xef8413:
+    newline
+    "{sound(25)}@{user} became" linebreak
+    "  friendly and affectionate!" next
+    "@You backed off." linebreak
+    "[03]" eob
+
+l_0xef843f:
+    goto(data_62.l_0xef71df)
+
+l_0xef8444:
+    eob
+
+l_0xef8445:
+    newline
+    "@{target} is acting" linebreak
+    "  a little bit strange.[03]" eob
+
+l_0xef845d:
+    newline
+    "@{user} is acting" linebreak
+    "  a bit unusual.[03]" eob
+
+l_0xef8477:
+    newline
+    "@{user} is" linebreak
+    "  feeling funky.[03]" eob
+
+l_0xef848c:
+    newline
+    "[1F 41 08][1B 02 {e(l_0xef84a7)}]{sound(25)}@{user} is attacking!{sound(26)}[03]" eob
+
+l_0xef84a7:
+    "{sound(24)}@{user} attacks!{sound(26)}[03]" eob
+
+l_0xef84b6:
+    newline
+    "{sound(24)}@{user} attacks!{sound(27)}[03]" eob
+
+l_0xef84c6:
+    newline
+    "@{user} is on guard." eob
+
+l_0xef84d4:
+    newline
+    "@{user} relaxed" linebreak
+    "  and took a deep breath.[03]" eob
+
+l_0xef84f3:
+    newline
+    "@" call(data_37.l_0xc7e6d7) " tried to get away,{pause(60)}" next
+    "@and did![03]" eob
+
+l_0xef8511:
+    newline
+    "@" call(data_37.l_0xc7e6d7) " tried to get away,{pause(60)}" next
+    "@but couldn't![03]" eob
+
+l_0xef8530:
+    newline
+    "@{user} spies on" linebreak
+    "  {target}![03]" eob
+
+l_0xef8543:
+    newline
+    "[1F 41 08][1B 02 {e(l_0xef8568)}]{sound(55)}@{user} tried" linebreak
+    "[19 1F]{swap}  [1C 12 00]![03]" goto(l_0xef857e)
+
+l_0xef8568:
+    "{sound(29)}@{user} tried" linebreak
+    "[19 1F]{swap}  [1C 12 00]![03]" goto(l_0xef857e)
+
+l_0xef857e:
+    "{swap}[1F C0 32 {e(l_0xef864c)} {e(l_0xef866e)} {e(l_0xef8698)} {e(l_0xef86e2)} {e(l_0xef874a)} {e(l_0xef875f)} {e(l_0xef8777)} {e(l_0xef878f)} {e(l_0xef87ac)} {e(l_0xef87c3)} {e(l_0xef87da)} {e(l_0xef87f4)} {e(l_0xef8813)} {e(l_0xef8813)} {e(l_0xef8813)} {e(l_0xef8813)} {e(l_0xef883d)} {e(l_0xef8847)} {e(l_0xef8851)} {e(l_0xef8868)} {e(l_0xef8882)} {e(l_0xef88b8)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef88ec)} {e(l_0xef88f6)} {e(l_0xef8900)} {e(l_0xef890a)} {e(l_0xef8914)} {e(l_0xef891e)} {e(l_0xef8928)} {e(l_0xef8932)} {e(l_0xef88e9)} {e(l_0xef88e9)} {e(l_0xef893c)} {e(l_0xef894c)} {e(l_0xef895c)} {e(l_0xef896c)} {e(l_0xef897c)} {e(l_0xef898c)} {e(l_0xef899c)} {e(l_0xef89ac)} {e(l_0xef89bc)} {e(l_0xef89ce)}]" eob
+
+l_0xef864c:
+    "[1C 13 00 13]{pause(10)}{sound(48)}{pause(32)}{sound(74)}{pause(2)}{sound(48)}[1C 13 2A 00]{pause(32)}{sound(74)}{pause(14)}{sound(91)}" eob
+
+l_0xef866e:
+    "{sound(48)}[1C 13 00 14]{pause(32)}{sound(74)}{pause(2)}{sound(48)}{pause(29)}{sound(74)}{pause(2)}{sound(49)}[1C 13 2A 00]{pause(29)}{sound(49)}{pause(25)}{sound(91)}" eob
+
+l_0xef8698:
+    "[1C 13 00 15]{pause(5)}{sound(49)}{pause(32)}{sound(50)}{pause(26)}{sound(71)}{pause(7)}{sound(71)}{pause(7)}{sound(71)}{pause(7)}{sound(71)}{pause(7)}{sound(71)}{pause(7)}[1C 13 2A 00]{sound(71)}{pause(7)}{sound(71)}{pause(7)}{sound(71)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(5)}{sound(91)}" eob
+
+l_0xef86e2:
+    "[1C 13 00 16]{pause(30)}{sound(49)}{pause(34)}{sound(49)}{pause(34)}{sound(49)}{pause(34)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(11)}{sound(91)}{pause(11)}{sound(91)}{pause(11)}[1C 13 2A 00]{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}{pause(3)}{sound(91)}" eob
+
+l_0xef874a:
+    "{sound(51)}[1C 13 00 07]{pause(28)}{sound(53)}{pause(6)}[1C 13 24 00]{pause(30)}" eob
+
+l_0xef875f:
+    "{sound(51)}[1C 13 00 08]{pause(28)}{sound(53)}{pause(24)}{sound(52)}[1C 13 24 00]{pause(30)}" eob
+
+l_0xef8777:
+    "{sound(51)}[1C 13 00 09]{pause(28)}{sound(53)}{pause(24)}{sound(52)}[1C 13 24 00]{pause(35)}" eob
+
+l_0xef878f:
+    "{sound(51)}[1C 13 00 0A]{pause(28)}{sound(53)}{pause(29)}{sound(53)}{pause(24)}{sound(53)}[1C 13 24 00]{pause(55)}" eob
+
+l_0xef87ac:
+    "{sound(56)}[1C 13 00 0F]{pause(30)}{sound(57)}{pause(20)}[1C 13 29 00]{pause(15)}{pause(27)}" eob
+
+l_0xef87c3:
+    "{sound(56)}[1C 13 00 10]{pause(34)}{sound(57)}{pause(20)}[1C 13 29 00]{pause(15)}{pause(27)}" eob
+
+l_0xef87da:
+    "{sound(56)}[1C 13 00 11]{pause(38)}{sound(57)}{pause(11)}[1C 13 29 00]{pause(27)}{sound(58)}{pause(42)}" eob
+
+l_0xef87f4:
+    "{sound(56)}[1C 13 00 12]{pause(54)}{sound(57)}{pause(5)}[1C 13 29 00]{pause(31)}{sound(58)}{pause(27)}{sound(58)}{pause(20)}" eob
+
+l_0xef8813:
+    eob
+
+l_0xef8814:
+    "{sound(61)}[1C 13 2E 21]{pause(22)}{sound(63)}{pause(30)}" eob
+
+l_0xef8823:
+    "{sound(62)}[1C 13 2E 22]{pause(22)}{sound(63)}{pause(23)}{sound(63)}{pause(30)}" eob
+
+l_0xef8837:
+    "{sound(60)}{pause(60)}" eob
+
+l_0xef883d:
+    "{sound(65)}[1C 13 28 0B]{pause(30)}" eob
+
+l_0xef8847:
+    "{sound(65)}[1C 13 28 0C]{pause(30)}" eob
+
+l_0xef8851:
+    "{sound(67)}{pause(10)}[1C 13 00 0D]{pause(20)}[1C 13 28 00]{pause(19)}{sound(66)}{pause(26)}" eob
+
+l_0xef8868:
+    "{sound(67)}[1C 13 00 0E]{pause(17)}[1C 13 28 00]{pause(50)}{sound(66)}{pause(5)}{sound(66)}{pause(14)}" eob
+
+l_0xef8882:
+    "[1C 13 00 1F]{pause(10)}{sound(64)}{pause(50)}[1C 13 2D 00]{sound(91)}{pause(7)}{sound(91)}{pause(15)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}{pause(7)}{sound(91)}" eob
+
+l_0xef88b8:
+    "[1C 13 00 20]{pause(20)}{sound(64)}{pause(40)}[1C 13 2D 00]{pause(24)}{sound(64)}{sound(91)}{pause(19)}{sound(91)}{pause(15)}{sound(91)}{pause(15)}{sound(91)}{pause(11)}{sound(91)}{pause(4)}{sound(91)}" eob
+
+l_0xef88e9:
+    "{pause(30)}" eob
+
+l_0xef88ec:
+    "{sound(38)}[1C 13 32 00]{pause(1)}" eob
+
+l_0xef88f6:
+    "{sound(38)}[1C 13 32 00]{pause(1)}" eob
+
+l_0xef8900:
+    "{sound(38)}[1C 13 33 00]{pause(1)}" eob
+
+l_0xef890a:
+    "{sound(38)}[1C 13 33 00]{pause(1)}" eob
+
+l_0xef8914:
+    "{sound(39)}[1C 13 34 00]{pause(1)}" eob
+
+l_0xef891e:
+    "{sound(39)}[1C 13 34 00]{pause(1)}" eob
+
+l_0xef8928:
+    "{sound(39)}[1C 13 35 00]{pause(1)}" eob
+
+l_0xef8932:
+    "{sound(39)}[1C 13 35 00]{pause(1)}" eob
+
+l_0xef893c:
+    "{sound(44)}[1C 13 00 05]{pause(40)}[1C 13 27 00]{pause(100)}" eob
+
+l_0xef894c:
+    "{sound(79)}[1C 13 00 06]{pause(40)}[1C 13 27 00]{pause(125)}" eob
+
+l_0xef895c:
+    "{sound(42)}[1C 13 00 1C]{pause(25)}[1C 13 2F 00]{pause(30)}" eob
+
+l_0xef896c:
+    "{sound(42)}[1C 13 00 1D]{pause(55)}[1C 13 2F 00]{pause(30)}" eob
+
+l_0xef897c:
+    "{sound(43)}[1C 13 00 19]{pause(45)}[1C 13 2C 00]{pause(57)}" eob
+
+l_0xef898c:
+    "{sound(76)}[1C 13 00 1A]{pause(45)}[1C 13 2C 00]{pause(33)}" eob
+
+l_0xef899c:
+    "{sound(44)}[1C 13 00 17]{pause(60)}[1C 13 2B 00]{pause(70)}" eob
+
+l_0xef89ac:
+    "{sound(79)}[1C 13 00 18]{pause(60)}[1C 13 2B 00]{pause(70)}" eob
+
+l_0xef89bc:
+    "{pause(20)}{sound(45)}[1C 13 00 02]{pause(20)}[1C 13 2F 00]{pause(76)}" eob
+
+l_0xef89ce:
+    "{pause(20)}{sound(80)}[1C 13 00 03]{pause(40)}[1C 13 2F 00]{pause(128)}" eob
+
+l_0xef89e0:
+    newline
+    "{sound(28)}@{user} prayed" linebreak
+    "  with her whole heart![03]" eob
+
+l_0xef89fe:
+    newline
+    "{sound(25)}@{user} made a" linebreak
+    "  loud rumble![03]" eob
+
+l_0xef8a18:
+    newline
+    "{sound(25)}@{user} gave you" linebreak
+    "  a great big hug.[03]" eob
+
+l_0xef8a33:
+    newline
+    "{sound(25)}@{user} let loose" linebreak
+    "  with a hacking cough.[03]" eob
+
+l_0xef8a52:
+    newline
+    "{sound(25)}@{user} used" linebreak
+    "  " call(data_37.l_0xc7e66e) " misery attack![03]" eob
+
+l_0xef8a6f:
+    newline
+    "{sound(25)}@{user} utilized a" linebreak
+    "  paint attack![03]" eob
+
+l_0xef8a8c:
+    newline
+    "{sound(25)}@{user} came out" linebreak
+    "  swinging![03]" eob
+
+l_0xef8aa3:
+    newline
+    "{sound(25)}@{user} scratched" linebreak
+    "  with its claws![03]" eob
+
+l_0xef8ac2:
+    newline
+    "{sound(25)}@{user} pecked" linebreak
+    "  at your eyes![03]" eob
+
+l_0xef8add:
+    newline
+    "{sound(25)}@{user} rammed and trampled you![03]" eob
+
+l_0xef8af8:
+    newline
+    "{sound(25)}@{user} threw" linebreak
+    "  a punch![03]" eob
+
+l_0xef8b11:
+    newline
+    "{sound(25)}@{user} spit" linebreak
+    "  its pumpkin seeds![03]" eob
+

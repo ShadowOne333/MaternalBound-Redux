@@ -1,0 +1,424 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc856fc:
+    "@Good morning!" next
+    "@This is a unique service, exclusive to our hotel only!" next
+    "@I'm here to read you today's headline." next
+    eob
+
+l_0xc8574a:
+    "@On the front page of the Fourside Post..." next
+    eob
+
+l_0xc85767:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 70% of Fourside citizens support Monotoli>" end
+
+l_0xc85791:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 80% of Fourside citizens support Monotoli>" end
+
+l_0xc857bb:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 90% of Fourside citizens support Monotoli>" next
+    "@Then on page 17, " next
+    "@<Mysterious department store blackout caused by mouse>" end
+
+l_0xc8581b:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 50% of Fourside citizens now support Anti-Monotoli campaign>" next
+    "@And on page 23 of the Fourside Post." next
+    "@<Lonely demise in the city.  Long-haired man with beard," next
+    "@sunglasses and aloha shirt found in street>" end
+
+l_0xc858ba:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Famed Mr. Monotoli leaves Fourside.  States he is going on a trip>" end
+
+l_0xc858f0:
+    call(l_0xc856fc) "  The Fourside Post says..." next
+    "@Yoicks!  I made a mistake and brought a newspaper called Fourside Star." next
+    "@Let me read this anyway..." next
+    "@<Lucky of the Runaway Brothers found to have been a member of the state" next
+    "@House of Representatives>" next
+    "@...That's got to be a lie..." end
+
+l_0xc85985:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Prince [1C 02 04] of Dalaam visiting Fourside in secret?>" end
+
+l_0xc859b5:
+    call(l_0xc856fc) "  On page 25 of the Fourside Post..." next
+    "@<Venus becomes toast of Fourside Autograph hunters creating problems for famed singer>" end
+
+l_0xc85a11:
+    call(l_0xc856fc) "  On page 3 of the Fourside Post..." next
+    "@<Criminal activity in Scarabia?" next
+    "@Sacred treasure of pyramid, the [1C 05 AF] stolen>" end
+
+l_0xc85a6c:
+    call(l_0xc856fc) "  Here's an advertisement in today's Fourside Post." next
+    "@<Higher than everywhere else!" linebreak
+    " (That's height, not price)" linebreak
+    " Monotoli Grand Hotel>" next
+    "@Hey!  That's our hotel!" end
+
+l_0xc85ad8:
+    call(l_0xc856fc) "  On page 13 of the Fourside Post..." next
+    "@<Newspaper reading by bellboys is not exclusive to Fourside only" next
+    "@Do not be taken in by bellboys just looking for a tip>" next
+    "@...I'm so ashamed..." end
+
+l_0xc85b55:
+    call(l_0xc856fc) call(l_0xc8574a) "@<The best newspaper of all the others" next
+    "@Everyone reads the Fourside Post each morning>" next
+    "@...Is this the page one headline?" end
+
+l_0xc85bab:
+    call(l_0xc856fc) call(l_0xc8574a) "@<Megalopolis Fourside to have another busy day>" end
+
+l_0xc85bd4:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85c99)} {e(l_0xc85cd3)} {e(l_0xc85d13)} {e(l_0xc85d45)} {e(l_0xc85de3)} {e(l_0xc85e27)} {e(l_0xc85e65)} {e(l_0xc85eb1)} {e(l_0xc85f32)}]" eob
+
+l_0xc85c55:
+    "@Ah, sir..." linebreak
+    " Are you already on your way to the beach?" next
+    eob
+
+l_0xc85c76:
+    "@Here is this morning's headlines from the Daily Summers..." next
+    eob
+
+l_0xc85c99:
+    call(l_0xc85c55) call(l_0xc85c76) "@<People reported missing one after another in our sister city Winters>" end
+
+l_0xc85cd3:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Yesterday the same as the day before yesterday" next
+    "@Today to be the same as yesterday>" end
+
+l_0xc85d13:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Prince [1C 02 04] of Dalaam visiting Summers secretly?>" end
+
+l_0xc85d45:
+    call(l_0xc85c55) "@Today's Daily Summers says..." next
+    "@Ooo la la,{pause(10)} I brought the wrong paper by mistake.  It is the Summer Inquirer" next
+    "@Listen to this headline..." next
+    "@<Huge rat found living in sewer system>" next
+    "@...I really do not think so..." end
+
+l_0xc85de3:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Intruders in Scarabia Pyramid!{pause(10)} Summers remains a peaceful paradise>" end
+
+l_0xc85e27:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Breeze blew through the palm trees last night>" next
+    "@...{pause(10)} This is big news here." end
+
+l_0xc85e65:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Kraken Fin makes a beautiful soup!" next
+    "@New gourmet dish makes big waves at the beach>" end
+
+l_0xc85eb1:
+    call(l_0xc85c55) "@There's a great advertisement in this morning's Daily Summers" next
+    "@<Stop doing anything complicated." next
+    "@Forget about solving mysteries and completing stages!" next
+    "@Welcome to the easy life in Summers!>" end
+
+l_0xc85f32:
+    call(l_0xc85c55) call(l_0xc85c76) "@<Yesterday was the same as the day before yesterday" next
+    "@Today will be the same as yesterday>" end
+
+l_0xc85f76:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86059)} {e(l_0xc86088)} {e(l_0xc860b9)} {e(l_0xc860e4)} {e(l_0xc86112)} {e(l_0xc86147)} {e(l_0xc86186)}]" eob
+
+l_0xc85ff7:
+    "@Good morning, good sir!" next
+    "@Please allow me to read to you from the local newspaper," next
+    "@the Scarabia Papyrus..." next
+    eob
+
+l_0xc8603c:
+    "@...{pause(10)}Well ...there is some news here about..." next
+    eob
+
+l_0xc86059:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Kraken, the evil sea monster, now gone forever!>" next
+    end
+
+l_0xc86088:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Activity at pyramid the first in 300 years>" next
+    end
+
+l_0xc860b9:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<[1C 05 AF] stolen from the pyramid in the desert!>" next
+    end
+
+l_0xc860e4:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Mysterious moving tower sighted in desert!>" next
+    end
+
+l_0xc86112:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Miraculous foreign children overwhelm Kraken!>" next
+    end
+
+l_0xc86147:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Children who dash then disappear sighted, but only for an instant>" next
+    end
+
+l_0xc86186:
+    call(l_0xc85ff7) call(l_0xc8603c) "@<Terrible sound recently heard" next
+    "@Possibly the sound of evil being destroyed beyond our time and space>" next
+    end
+
+l_0xc861dd:
+    "@Good morn...{pause(10)}  Uhhh... not morning.{pause(10)}" next
+    "@Here{pause(5)} in Moonside, it's always the middle of the night." next
+    "@This is a headline from tonight's Moonside Press..." next
+    "@<Mani Mani is {pause(10)} always Mani Mani {pause(10)} at Mani Mani with all {pause(10)} Mani Mani {pause(10)} Mani>" end
+
+l_0xc86279:
+    "[06 4F 00 {e(l_0xc86320)}][06 84 00 {e(l_0xc862b8)}]@(Caution!{pause(30)}  There are still lots of fires burning here and there.{pause(20)}  It's HOT!)" end
+
+l_0xc862b8:
+    "@There is something shiny that you can reach." next
+    "@Do you want to try and get it?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc862e3:
+    "[19 02]No" eob
+
+l_0xc862e8:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc862f8)} {e(l_0xc862f7)}]" goto(l_0xc862f7)
+
+l_0xc862f7:
+    eob
+
+l_0xc862f8:
+    "[1D 03 FF][1B 02 {e(l_0xc86311)}][1D 0E 00 C1][1B 05]" call(data_36.l_0xc7dcb6) "{set(flag 79)}" end
+
+l_0xc86311:
+    "@You don't have any more space." end
+
+l_0xc86320:
+    "@(Seems like a big meteorite landed here not too long ago.)" end
+
+l_0xc8634c:
+    "@Even if you're poor, come and see how easy it is to own a luxurious second home!" next
+    "@<Beak Point Real Estate>" end
+
+l_0xc86399:
+    "@<Bush Hospital>" next
+    "@The best hospital care in Onett!{pause(15)}  We put our life into operating on you!" end
+
+l_0xc863da:
+    "@(The flowers in the garden are representative of those in your heart." next
+    "@Treat them both nice.)" end
+
+l_0xc86419:
+    "@Traveling entertainer's shack." end
+
+l_0xc86431:
+    "@<Giant Step>" next
+    "@North, at the top of the mountain" linebreak
+    "  Danger!  Do Not Enter!" end
+
+l_0xc86467:
+    "@Onett City Hall" end
+
+l_0xc86477:
+    "@Road to Twoson." end
+
+l_0xc86483:
+    "@Mom's really cooking now.  <Down Home Burgers>" end
+
+l_0xc864a7:
+    "@Break the course of violence.  Don't break the wind of change." next
+    "@<Fresh Breeze Movement>" end
+
+l_0xc864e6:
+    "@<Onett Public Library>{pause(20)}" linebreak
+    "  Use the library more!" end
+
+l_0xc86511:
+    "@South to the" linebreak
+    "  suburbs of Onett." end
+
+l_0xc8652a:
+    "@Don't wander this far away from town." linebreak
+    "  <Fresh Breeze Movement>" end
+
+l_0xc86554:
+    "@Welcome to Happy Happy Village!" end
+
+l_0xc86568:
+    "@<Meager Livin' Farm>" linebreak
+    "  (Lodgings available)" end
+
+l_0xc86591:
+    "@<Entrance to Burglin Park>" next
+    "@No admittance to good kids or police officers." end
+
+l_0xc865cb:
+    "@Twoson--" linebreak
+    "  We got this name because we weren't first." end
+
+l_0xc865f3:
+    "@If you see a suspicious fellow,{pause(15)} just pretend not to see him." end
+
+l_0xc8661b:
+    "@If you have time to read this, go to the Chaos Theater immediately." end
+
+l_0xc86646:
+    "@<Secret Entrance to Burglin Park>" end
+
+l_0xc86663:
+    "@Are you happy now?{pause(20)}" linebreak
+    "  <Happy Happy Religious Group>" end
+
+l_0xc86689:
+    "@<Two-Three Tunnel>{pause(20)}" linebreak
+    "  To the town of Threek." end
+
+l_0xc866ab:
+    "@(Home of Orange Kid, inventor)" end
+
+l_0xc866c4:
+    "@(Home of Apple Kid, inventor)" end
+
+l_0xc866dd:
+    "  Hint Shop <Realization>" end
+
+l_0xc866f3:
+    "@(This Bulletin Board" linebreak
+    "  greets you on this evening." linebreak
+    "  All is well, Good Night.)" end
+
+l_0xc8672b:
+    end
+
+l_0xc8672d:
+    "@(Want to escape to the Beach?{pause(15)}  If this is your big dream..." next
+    "@Come to Carrillon Beach in Summers!{pause(20)}" linebreak
+    "  Summers Tourism Bureau.)" end
+
+l_0xc86787:
+    "@If you miss a nice, cozy bed, walk to the west...  We're right there!" next
+    "@<Threek Sunset Hotel>" end
+
+l_0xc867c5:
+    "@(<Horses say <neigh,> but the Hint Shop says <yea> to giving you a hint.>" next
+    "@Eagleland Hint Union)" end
+
+l_0xc86813:
+    "@No pitching of tents in this area without permission." end
+
+l_0xc8683d:
+    "[19 10 01]{swap}@[1C 02 00] checked the drawers." next
+    "[06 F3 02 {e(l_0xc8688e)}][19 10 01]{swap}@There was a [1C 05 CE] in the drawer." next
+    "[1D 03 FF][1B 02 {e(l_0xc8689c)}][1D 0E 00 CE]" call(data_36.l_0xc7dccf) "{set(flag 755)}" end
+
+l_0xc8688e:
+    "@But there was nothing." end
+
+l_0xc8689c:
+    "@But you don't have any more space." end
+
+l_0xc868ad:
+    "@(There is lots of junk like this bulletin board at the junk shop <Busted Up,>" next
+    "@located in the back alley of the department store.)" end
+
+l_0xc86900:
+    "@(Planning Meeting for" next
+    "  MOTHER 3." next    "@Only those who are related to this project are allowed to enter." next
+    "@APE Software Development Team)" end
+
+l_0xc86961:
+    "@First Floor <Fourside Bakery>" next
+    "@Second Floor <2F of the Bakery>" end
+
+l_0xc86995:
+    "@(I can sense..." linebreak
+    "  that... you have a controller... in your... hands...)" end
+
+l_0xc869be:
+    "@Hey!  It's Magicant!" end
+
+l_0xc869cb:
+    "@Come on in to Magicant!" end
+
+l_0xc869dd:
+    "@Scarabia Cultural Museum" next
+    "@(Hieroglyph exhibition currently under re-construction.)" end
+
+l_0xc86a25:
+    "@(Recently, a strange fellow has been wandering around this hospital saying" next
+    "@he can cure you of the afflictions that we can't treat." next
+    "@Please be informed that he has no connection to the hospital." next
+    "@Fourside Hospital Management)" end
+
+l_0xc86ab2:
+    eob
+
+l_0xc86ab3:
+    "@This is not a hotel." linebreak
+    "  Staying for the night is not permitted." end
+
+l_0xc86ad7:
+    "@(Aren't you stuck?{pause(20)}  If you want a hint, come and get it!" next
+    "@Eagleland Hint Union)" end
+
+l_0xc86b10:
+    "@(<Tombstone Blow-out Sale>" linebreak
+    "  We have a special discount" next
+    "@for those who have passed on in this hospital." next
+    "@What would you like written on your tombstone?" next
+    "@Onett Hospital Surgery Team)" end
+
+l_0xc86b8f:
+    "@(<Members needed>" linebreak
+    "  Popular Music Club." next
+    "@Those who have a guitar, bass or drums, apply now." next
+    "@Caracas Cathedral," linebreak
+    "  Napalm wound," linebreak
+    "  Minky Cadillac," next
+    "@Sun Bunnies," linebreak
+    "  the Creeps," next
+    "@Run Around TownKinky Kids," linebreak
+    "  Bjork," next
+    "@Takashi Hosokawa" linebreak
+    "  or Horenso." next
+    "@We welcome anyone who likes to listen to these bands." next
+    "@Only serious, mature fans need apply." next
+    "@Please contact Lou." end
+
+l_0xc86cb4:
+    "@(Relax, take it easy!" linebreak
+    "  It's all in your head..." next
+    "@A healthy mind is a healthy body.)" end
+
+l_0xc86cf4:
+    "@(There is a well-known theory that if you are bitten by zombies," next
+    "@bite back and you can recover." next
+    "@Of course, there is no scientific evidence to support this theory.)" end
+
+l_0xc86d59:
+    "@(To recover or not depends on luck." next
+    "@Believe in your luck.  Believe your doctor also." next
+    "@The Doctor believes in his luck.)" end
+
+l_0xc86da8:
+    "@(Dinosaur bones believed to be from southern Scarabia." next
+    "@Don't ask for any details." linebreak
+    "  Our research is continuing.)" end
+
+l_0xc86dfb:
+    "[06 4B 00 {e(l_0xc86e2f)}][06 91 00 {e(l_0xc86e14)}]@No problem here." end
+
+l_0xc86e14:
+    call(data_24.l_0xc69082) "[19 10 01]{swap}@?{pause(30)}?{pause(30)}?{wait}{wait}[1F 21 99][19 26 00]" eob
+
+l_0xc86e2f:
+    "@No problem here.{wait}[19 26 05]" eob
+
+l_0xc86e3d:
+    "{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_43.l_0xc8709d)}][06 49 00 {e(data_43.l_0xc870a4)}][06 11 00 {e(data_43.l_0xc8709d)}]" goto(data_43.l_0xc86e58)

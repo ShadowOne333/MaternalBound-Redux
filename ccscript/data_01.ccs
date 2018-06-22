@@ -1,0 +1,435 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc5223c:
+    "@[1C 05 00]?" linebreak
+    "  I'll pay {swap}$[1C 0A 00 00 00 00] for it." next
+    "@Is that okay?" linebreak
+    eob
+
+l_0xc52261:
+    "@Hummm.  Is that so?" next
+    eob
+
+l_0xc52272:
+    "@Oh, so you don't really have anything to sell?" next
+    eob
+
+l_0xc52288:
+    "@I'm sorry, but I can't buy that." next
+    eob
+
+l_0xc52299:
+    "@Thank you very much." next
+    eob
+
+l_0xc522a3:
+    "@Thank you." next
+    eob
+
+l_0xc522aa:
+    "@Is there anything I can do for you?" linebreak
+    eob
+
+l_0xc522ba:
+    "@What can I do for you now?" linebreak
+    eob
+
+l_0xc522ca:
+    "@[1C 02 00] can't carry any more." next
+    "@Will another one of you take it?" linebreak
+    eob
+
+l_0xc522ef:
+    "@Hi!  Welcome to my store." next
+    "@What do you need?" linebreak
+    eob
+
+l_0xc5230c:
+    "@Thank you!" end
+
+l_0xc52312:
+    "@This place isn't for looky loos.  If you're not buying, get out!" end
+
+l_0xc52339:
+    "@So, you're going to buy something, eh?[03]" eob
+
+l_0xc5234d:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc52355:
+    "@Who's going to carry it?[03]" eob
+
+l_0xc52361:
+    "@Are you going to equip it here?" linebreak
+    eob
+
+l_0xc52371:
+    "@I'll buy your" linebreak
+    "  [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]." next
+    eob
+
+l_0xc5238f:
+    "@Even though [1C 02 00] can't put this on, you still want to buy it?" next
+    "@Well, it's your money..." linebreak
+    eob
+
+l_0xc523be:
+    "@Hurry back now." next
+    eob
+
+l_0xc523cb:
+    "@Hey!  What are you trying to pull?!  You haven't got enough money!!" next
+    eob
+
+l_0xc523ef:
+    "@Hey!  You've got enough junk already!" next
+    "@Do you want to sell me some of the junk you don't need?" linebreak
+    eob
+
+l_0xc5241d:
+    "@What can you sell me?[03]" eob
+
+l_0xc5242b:
+    "@[1C 05 00]?" linebreak
+    "  I'll give you {swap}$[1C 0A 00 00 00 00]." next
+    "@How would that be?" linebreak
+    eob
+
+l_0xc5244f:
+    "@Hurrm.  Changed your mind, eh?" next
+    eob
+
+l_0xc52469:
+    "@C'mon!" linebreak
+    "  You don't have anything to sell, do you?!" next
+    eob
+
+l_0xc52485:
+    "@Sorry, but I have no use for that." next
+    eob
+
+l_0xc5249a:
+    "@Hey, it was nice doing business with you." next
+    eob
+
+l_0xc524b2:
+    "@Thanks." next
+    eob
+
+l_0xc524b8:
+    "@Will there be anything else?" linebreak
+    eob
+
+l_0xc524c5:
+    "@What else do you want?" linebreak
+    eob
+
+l_0xc524d2:
+    "@[1C 02 00] can't carry anymore stuff." next
+    "@Can one of you others carry it?" linebreak
+    eob
+
+l_0xc524f7:
+    "@If ye be headin' to Scarabia, ye ought to shop here." next
+    "@Things're expensive down there..." next
+    "@So, what're ye lookin' fer?" linebreak
+    eob
+
+l_0xc52546:
+    "@Thanks much." next
+    "@If'n yer going to Scarabia, take care of yerself." end
+
+l_0xc5256c:
+    "@Please come again!" end
+
+l_0xc52574:
+    "@What would ye like, then?[03]" eob
+
+l_0xc52583:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc5258b:
+    "@Which of ye is goin' to carry this?[03]" eob
+
+l_0xc525a4:
+    "@Would ye like to equip it here, then?" linebreak
+    eob
+
+l_0xc525bb:
+    "@Would ye like it if I bought yer" linebreak
+    "  [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]?" linebreak
+    eob
+
+l_0xc525e6:
+    "@[1C 02 00] cannot equip this." next
+    "@Do ye still want to buy it?" linebreak
+    eob
+
+l_0xc52603:
+    "@Yer not goin' to buy this thing?  All righty then." next
+    eob
+
+l_0xc52622:
+    "@Beggin' yer pardon, but it appears ye don't have enough money..." next
+    eob
+
+l_0xc5264b:
+    "@You've got entirely too many goodies." next
+    "@Would ye like me to take some of those things off yer hands?" next
+    "@I can buy the ones ye don't need, if ye want." linebreak
+    eob
+
+l_0xc526a2:
+    "@What would ye like to sell me, then?[03]" eob
+
+l_0xc526b8:
+    "@[1C 05 00]?" linebreak
+    "  I would pay {swap}$[1C 0A 00 00 00 00]." next
+    "@Are ye happy with my offer?" linebreak
+    eob
+
+l_0xc526e5:
+    "@Oh, it's not quite what ye expected?  Well, all righty then." next
+    eob
+
+l_0xc5270f:
+    "@Oh?  Well, it appears to me that ye don't have anything to sell." next
+    eob
+
+l_0xc52732:
+    "@Beggin' yer pardon, but I can't buy that." next
+    eob
+
+l_0xc52750:
+    "@Here ye go.  Thank ye." next
+    eob
+
+l_0xc52764:
+    "@Thank ye kindly." next
+    eob
+
+l_0xc52776:
+    "@Will ye be needin' anything else?" linebreak
+    eob
+
+l_0xc52788:
+    "@What do ye need now?" linebreak
+    eob
+
+l_0xc52796:
+    "@It appears [1C 02 00] has a full load." next
+    "@Will someone else take this instead?" linebreak
+    eob
+
+l_0xc527c7:
+    "@Welcome, welcome!  Ach, the heat!  Is your body okay?" next
+    "@Can I interest you in some of my merchandise?" linebreak
+    eob
+
+l_0xc52809:
+    "@Ohh, thank you very much.  May you never find rocks in your sandals." end
+
+l_0xc52836:
+    "@Why don't you buy something?  I've got a family to feed!" end
+
+l_0xc52855:
+    "@What would you like?[03]" eob
+
+l_0xc52860:
+    "@[1C 05 00]?" next
+    eob
+
+l_0xc52868:
+    "@So, which of you will take this wonderful item?[03]" eob
+
+l_0xc52885:
+    "@Will you equip it here?" linebreak
+    eob
+
+l_0xc52893:
+    "@Would you be interested in selling your [1C 05 00]" next
+    "@for {swap}$[1C 0A 00 00 00 00]?" linebreak
+    eob
+
+l_0xc528bf:
+    "@[1C 02 00] will have no use for this." next
+    "@Do you still want to buy this marvelous thing?" linebreak
+    eob
+
+l_0xc528eb:
+    "@Very well then." next
+    eob
+
+l_0xc528f9:
+    "@A thousand pardons, but you do not seem to have the money" next
+    "@required to make this purchase." next
+    eob
+
+l_0xc52938:
+    "@Ahh, I can see that your caravan is overloaded." next
+    "@Would you like to sell some of your extra items to me?" linebreak
+    eob
+
+l_0xc52972:
+    "@Very well then, what would you like to sell?[03]" eob
+
+l_0xc52989:
+    "@[1C 05 00]?" linebreak
+    "  Ahhh, I would pay you..." linebreak
+    "  {swap}$[1C 0A 00 00 00 00] for that." next
+    "@A trifle, I realize, but do you accept?" linebreak
+    eob
+
+l_0xc529d2:
+    "@Very well then." next
+    eob
+
+l_0xc529e0:
+    "@From my humble vantage point, it appears you have nothing to sell." next
+    eob
+
+l_0xc52a09:
+    "@A thousand pardons.  We do not carry that item here." next
+    eob
+
+l_0xc52a2a:
+    "@Ahh, you are most gracious and kind." next
+    eob
+
+l_0xc52a45:
+    "@Thank you for visiting my poor shop." next
+    eob
+
+l_0xc52a5c:
+    "@If there is anything else I can do for you, please, do not hesitate to ask." next
+    eob
+
+l_0xc52a82:
+    "@So, what more can I do for you?" linebreak
+    eob
+
+l_0xc52a92:
+    "@[1C 02 00] simply cannot carry any more goods." next
+    "@Perhaps another of your party could bear this load?" linebreak
+    eob
+
+l_0xc52acc:
+    "@If you've already got what you need, great!" next
+    "@But if you don't, well, that would be a real shame." next
+    "@Take a good look at my menu and decide." next
+    "@Is there anything listed that you might want?" linebreak
+    eob
+
+l_0xc52b37:
+    "@If you do decide that you need any of my goodies, you just hurry on back now, y'hear?" end
+
+l_0xc52b67:
+    "@Come back any time, if do need any of my goods." end
+
+l_0xc52b82:
+    "@What'll it be?[03]" eob
+
+l_0xc52b8d:
+    "@The [1C 05 00], you say?" next
+    eob
+
+l_0xc52b9b:
+    "@Who's going to carry this?[03]" eob
+
+l_0xc52baa:
+    "@Will you be equipping that here?" linebreak
+    eob
+
+l_0xc52bbd:
+    "@I can buy your" linebreak
+    "  [1C 05 00]" linebreak
+    "  for {swap}$[1C 0A 00 00 00 00]." next
+    eob
+
+l_0xc52bdd:
+    "@[1C 02 00] won't be able to equip this." next
+    "@Are you sure you really need it?" linebreak
+    eob
+
+l_0xc52c00:
+    "@Oh?  Decided you don't want to buy it, huh?" next
+    eob
+
+l_0xc52c1c:
+    "@Hmmm...  Hate to break this to you, but you don't have enough money." next
+    eob
+
+l_0xc52c3d:
+    "@Oh... uh... it looks like you've got too many goods to carry." next
+    "@Would you be willing to sell me some of the goods you don't need?" next
+    eob
+
+l_0xc52c81:
+    "@Fantastic!  What do you wanna sell?[03]" eob
+
+l_0xc52c9b:
+    "@[1C 05 00]?" linebreak
+    "  I'd say it's worth" linebreak
+    "  about... {swap}$[1C 0A 00 00 00 00]." next
+    "@Whaddya say, partner?" linebreak
+    eob
+
+l_0xc52cd4:
+    "@OK, I see.  Y'all come back now, hear?" next
+    eob
+
+l_0xc52ced:
+    "@What gives?  You don't have anything to sell.[03]" eob
+
+l_0xc52d03:
+    "@Look, I'm really sorry, but we can't buy that." next
+    eob
+
+l_0xc52d1e:
+    "@Thanks a million!" next
+    eob
+
+l_0xc52d2c:
+    "@Thanks a bunch!" next
+    eob
+
+l_0xc52d38:
+    "@Is there anything else" linebreak
+    "  I can get for you" linebreak
+    "  while you're here?" next
+    eob
+
+l_0xc52d54:
+    "@What'll it be?" linebreak
+    eob
+
+l_0xc52d5f:
+    "@Sakes alive! [1C 02 00] can't carry another thing." next
+    "@Maybe someone else can carry it." linebreak
+    eob
+
+l_0xc52d8c:
+    "@Please come again." end
+
+l_0xc52d94:
+    "@Sssshhh!" linebreak
+    "  Don't talk too loud!" next
+    "@What do you want?" linebreak
+    eob
+
+l_0xc52db6:
+    "@...you again?!" linebreak
+    "  What do you want now?" linebreak
+    eob
+

@@ -1,0 +1,175 @@
+/*ASM Code to implement the New/Improved Controls for EarthBound hack with CoilSnake*/
+
+import asm65816
+
+/* Button values for remapping purposes:
+
+0010 = R button
+0020 = L button
+0040 = X button
+0080 = A button
+0100 = D-Pad Right
+0200 = D-Pad Left
+0400 = D-Pad Down
+0800 = D-Pad Up
+1000 = Start button
+2000 = Select button
+4000 = Y button
+8000 = B button
+*/
+
+ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
+
+ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for X button. This opens up the Main menu
+ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Start button (Changed from Y button to Start to make room for Run button code. Opens up the Map.
+ROM[0xC0B915] = AND_i	(0x00A0)	// AND operand check for A+L buttons. This determines which buttons can talk to people / Confirm selections at the Menus
+
+ROM[0xC13199] = {
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+}
+
+ROM[0xC1324D] = {	
+	JSL	(0xC04279)	// Jump to subroutine at $C04279
+
+	//The rest of the code up to Label 5 seems to be the same as in the original game, simply shifted due to the JSL
+	LDA_a	(0x5D62) 	// LDA $5D62
+	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62)
+	JMP	(0x3394) 	// Jump to $3394
+	LDA_a	(0x5D62)	// LDA $5D62
+	CMP_i	(0xFFFF)	// CMP #$FFFF
+	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62)
+	JMP	(0x3394) 	// Jump to $3394
+	LDA_a	(0x5D62)	// LDA $5D62
+	CMP_i	(0xFFFE)	// CMP #$FFFE
+	BNE	(0x0D)		// Branch if not equal to pointer to 0xCF8985
+	LDA_a	(0x5DDE)	// LDA $5DDE
+	STA_d	(0x0A)		// STA $0A
+	LDA_a	(0x5DE0) 	// LDA $5DE0
+	STA_d	(0x0C) 		// STA $0C
+	JMP	(0x3394) 	// Jump to $3394
+	ASMLoadAddress06(0xCF8985)	// Load NPC Config table
+	LDA_d	(0x06) 		// LDA $06
+	STA_d	(0x14)		// STA $14
+	LDA_d	(0x08) 		// LDA $08
+	STA_d	(0x16)		// STA $16
+	LDA_a	(0x5D62) 	// LDA $5D62
+	STA_d	(0x04)		// STA $04
+	ASL			// Arithmetic Shift Left
+	ASL			// Arithmetic Shift Left
+	ASL			// Arithmetic Shift Left
+	ASL			// Arithmetic Shift Left
+	ADC_d	(0x04) 		// ADC $04
+	STA_d	(0x12) 		// STA $12
+	CLC 			// CLC
+	ADC_d	(0x06) 		// ADC $06
+	STA_d	(0x06) 		// STA $06
+	LDA_dl	(0x06)		// LDA [$06]
+	AND_i	(0x00FF) 	// AND #$00FF
+	CMP_i	(0x0001) 	// CMP #$0001
+	BNE	(0x03)		// Branch if not equal to next CMP_i (0x0002)
+	JMP	(0x3394) 	// Jump to $3394
+	CMP_i	(0x0002) 	// CMP #$0002
+	BEQ	(0x0B)		// Branch if equal to next LDA_i (0x0001)
+	CMP_i	(0x0003) 	// CMP #$0003
+	BNE	(0x03)		// Branch if not equal to next JMP (0x3394)
+	JMP	(0x3375) 	// Jump to $3375
+	JMP	(0x3394) 	// Jump to $3394
+	LDA_i	(0x0001)	// LDA #$0001
+	JSR	(0x04EE)	// Jump to address $04EE
+}
+
+ROM[0xC13493] = CMP_i	(0x0005)// CMP #$0005
+
+
+/* Open Menu subroutine modifications */
+ROM[0xC134E1] = {
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	CMP_i	(0x0001)	// CMP #$0001
+}
+
+ROM[0xC134F3] = CMP_i	(0x0002)// CMP #$0002
+
+ROM[0xC134FB] = {
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	CMP_i	(0x0004)	// AND $0004
+}
+
+
+/* Talk/Check Button subroutine modifications.
+I believe this is the one that removes the "No problem here" dialog */
+ROM[0xC13C3E] = {
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+}
+
+ROM[0xC13C5D] = BNE	(0x13)	// BNE $13, Branch if not equal to STA $06 at $C13C72
+
+ROM[0xC13C6D] = {
+	BNE	(0x03)		// BNE $03, Branch if not equal to LDA (0x0001)
+	JMP	(0x3C8F)	// JMP $3C8F
+	LDA_i	(0x0001)	// LDA #$0001 
+	JSR	(0x04EE)	// Jump to RAM address $04EE
+	NOP			// No operation
+}
+
+
+/* THE FOLLOWING SECTIONS ARE NOT ASM CODE, BUT RATHER PART OF THE DIALOG WINDOW ATTRIBUTES TABLE AND TEXT.
+DUE TO COILSNAKE COMPILING WINDOW ATTRIBUTES AND TEXT THROUGH CCS/YML FILES, THE FOLLOWING CHANGES ARE REQUIRED:
+
+Open up window_configuration table.yml and change:
+
+Window #0 properties:
+  Height: 8 -> 6
+  Width: 13 -> 14	<------NOT NECESSARY!
+
+Also, modify the "Out of Battle Menu" options in text_misc.yml:
+
+Out of Battle Menu:
+  Check: Check
+  Equip: Status
+  Goods: Equip
+  PSI: PSI
+  Status: Status
+  Talk to: Goods
+
+TEXT CHANGES TO CHANGE "X BUTTON" REFERENCES TO "Y BUTTON" SHOULD BE SOUGHT OUT IN THE CCS FILES...
+
+
+
+
+
+
+ROM[0xC3E254] = "[0E 00 06]"	// Extends Game Menu from 0D to 0E to the right, and reduces heigth from 08 to 06
+NOTE: Since this will compile with CoilSnake, this change will NOT take effect.
+
+
+This is part of the Primary Dialogue Bank
+// This is most likely changes in the text to mention the Y Button instead of the X button
+ROM[0xC55D25] = "[89]"	// Change X button mention to Y (Previously 88)
+ROM[0xC7333E] = "[89]"	// Change X button mention to Y (Previously 88)
+ROM[0xC73375] = "[89]"	// Change X button mention to Y (Previously 88)
+
+ROM[0xEFA37A] = {		//This one modifies the text for the command windows descriptions
+	"[77 9F 9F 94 A3 00 00 00 00 00 75 A1 A5 99 A0 00 00 00 00 00 80 83 79 00 00 00 00 00 00 00 83 A4 91 A4 A5 A3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}    */

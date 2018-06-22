@@ -1,0 +1,237 @@
+// Earthbound MSU1 patch by Conn 
+// Credits for addresses by byuu, looptable by ShadowOne333
+// Apply on non-header US rom
+
+// CCS transcription by ShadowOne333
+
+import asm65816
+
+// org $E60353
+// db $2f ; hardcore mute
+
+ROM[0xC4FBF4] = {
+	JSL (msuTrack)
+	NOP
+}
+
+ROM[0xC4FD12] = {
+	JSL (newTrackFlag)
+}
+
+ROM[0xC0AC0C] = {
+	JSL (setFadeFlag)
+	NOP
+}
+
+ROM[0xC08183] = {
+	JSL (nmi)
+	NOP
+	NOP
+}
+
+
+msuTrack: {			// //ROM[0xEFFE00] = 
+	LDX_d	(0x12)		// Native code
+	STX_a	(0xB53B)
+	PHA
+	PHP			// Save processor status
+	SEP	(0x20)
+	LDA_al	(0x002002)
+	CMP_8	(0x53)
+	BEQ_a	(playmsu)	// (playmsu) Branch to playmsu
+	PLP			// Restore processor status
+	PLA			// Get track number from stack
+	RTL
+}
+
+playmsu: {
+	LDA_8	(0x00)
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF0)	// Rease new track introduced flag
+	TXA
+	STA_al	(0x002004)
+	LDA_8	(0x00)
+	STA_al	(0x002005)
+}
+
+loop: {
+	LDA_al	(0x002000)
+	AND_8	(0x40)
+	BNE_a	(loop)		// (loop) Branch to loop
+	LDA_al	(0x002000)
+	AND_8	(0x08)
+	BNE_a	(playspc)	// Branch to playspc, error bit set?
+	LDA_xl	(track_table)	// LDA_xl (0xEFFF00)
+	STA_al	(0x002007)
+	LDA_8	(0xFF)
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF2)	// Volume flag
+	LDA_8	(0x01)
+	STA_al	(0x7FFFF0)	// Set new track introduced flag
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	PLP			// Restore processor status
+	PLA			// Get track number from stack
+	CPX_i	(0x00C0)	// Compare with $C0 or 192 in decimal
+	BCC	(0x06)		// If comparison is less than 192, branch to RTL
+	LDX_i	(0x0004)
+	STX_a	(0xB53B)
+	RTL
+}
+
+playspc: {
+	LDA_8	(0x00)
+	STA_al	(0x002007)
+	PLP
+	PLA
+	RTL
+}
+
+newTrackFlag: {
+	SEP	(0x20)
+	PHA
+	LDA_al 	(0x002002)
+	CMP_8 	(0x53)
+	BEQ	(0x06)		// BEQ $06
+}
+
+endflag: {
+	PLA
+	JSL	(0xC0ABBD)
+	RTL
+	LDA_al	(0x7FFFF0)
+	CMP_8	(0x01)
+	BEQ	(0x08)		// BEQ $08
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF0)	// Erase flag
+	BRA	(0xEA)		// BRA (endflag) - BRA $EA
+	PLA
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF0) 	// Erase flag
+	LDA_8	(0x04)		// Mute
+	JSL	(0xC0ABBD)
+	RTL
+}
+
+setFadeFlag: {
+	SEP	(0x20)
+	PHA
+	LDA_al	(0x002002)
+	CMP_8	(0x53)
+	BEQ	(0x05)
+}
+
+endsetflag: {
+	PLA
+	ORA_a	(0x1ACB)
+	RTL
+	PLA
+	PHA
+	STA_al	(0x7FFFF3)
+	BRA	(0xF3)		// BRA (endsetflag) - BRA $F3
+}
+
+nmi: {
+	LDA_a	(0x4210)
+	STZ_a	(0x420C)
+	LDA_al	(0x7FFFF3)
+	BNE	(0x01)
+	RTL
+	CMP_8	(0x02)
+	BNE	(0x03)
+	JMP	(fadefast)	// JMP (endhalf) - JMP $FDF7
+	CMP_8	(0x03)
+	BNE	(0x03)
+	JMP	(fadeslow)	// JMP (endhalf) - JMP $FDDA
+	CMP_8	(0x07)
+	BNE	(0x03)
+	JMP	(fadehalf)	// JMP (endhalf) - JMP $FE16
+	CMP_8	(0x08)
+	BNE	(0x03)
+	JMP	(fadefull)	// JMP (endhalf) - JMP $FE36
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	RTL
+}
+
+fadeslow: {
+	LDA_al	(0x7FFFF2)
+	CMP_8	(0x00)
+	BEQ_a	(endslow)	// BEQ (endhalf) - BEQ $06
+	DEC
+	DEC
+	CMP_8	(0x10)
+	BCS	(0x06)
+}
+
+endslow: {
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF2)
+	RTL
+}
+
+fadefast: {
+	LDA_al	(0x7FFFF2)
+	CMP_8	(0x00)
+	BEQ_a	(endfast)	// BEQ (endhalf) - BEQ $08
+	DEC
+	DEC
+	DEC
+	DEC
+	CMP_8	(0x10)
+	BCS	(0x06)
+}
+
+endfast: {
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF2)
+	RTL
+}
+
+fadehalf: {
+	LDA_al	(0x7FFFF2)
+	CMP_8	(0x40)		// Final level?
+	BEQ_a	(endhalf)	// BEQ (endhalf) - BEQ $07
+	DEC
+	DEC
+	DEC
+	CMP_8	(0x40)
+	BCS	(0x08)
+}
+
+endhalf: {
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	LDA_8	(0x40)		// Set final level
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF2)
+	RTL
+}
+
+fadefull: {
+	LDA_al	(0x7FFFF2)
+	CMP_8	(0xFF)		// Final level?
+	BEQ_a	(endfull)	// BEQ (endfull) - BEQ $07
+	INC
+	INC
+	INC
+	CMP_8	(0xFB)
+	BCC	(0x08)
+}
+
+endfull: {
+	LDA_8	(0x00)
+	STA_al	(0x7FFFF3)	// Erase fade flag
+	LDA_8	(0xFF)
+	STA_al	(0x002006)
+	STA_al	(0x7FFFF2)
+	RTL
+}
+
+track_table:			//ROM[0xEFFF00] = 
+	//00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+	"[03 01 03 03 03 03 03 03 01 01 03 01 01 01 01 01 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 01 01 01 01 01 01 01 01 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 01 03 01 03 01 03 03 03 01 03 03 03 03 03 01 01 03 03 01 01 03 03 03 03 03 03 03 03 03 03 03 03 03 01 01 01 03 01 03 03 03 03 03 03 03 03 03 01 01 03 01 01 03 03 03 03 03 03 03 01 03 01 01 01 03 03 01 01 03 03 03 01 03 03 03 03 03 03 03 03 03 01 01 03 01 01 01 01 01 01 01 01 01 03 03 03 03 03 01 01 01 01 03 03 01 01 03 03 03 03 03 03 03 01 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03]"

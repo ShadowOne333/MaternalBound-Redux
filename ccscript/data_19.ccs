@@ -1,0 +1,466 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc633c9:
+    newline
+    "@Anyway, what do you need from me?" linebreak
+    "[19 02]Record" eob
+
+l_0xc633e6:
+    "[19 02]Nothing, really" eob
+
+l_0xc633f8:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc63415)} {e(l_0xc63407)}]" goto(l_0xc63407)
+
+l_0xc63407:
+    "@Good luck!" next
+    goto(l_0xc634ea)
+
+l_0xc63415:
+    "[1B 06][19 26 00]{save}@All done." next
+    "@Your dear old dad was also thinking about hitting the hay for the night." next
+    "@I have created a record of your adventure to this point." next
+    "@Good night, sleep tight." linebreak
+    "[19 10 01]{result_is(1)}[1B 02 {e(l_0xc63494)}]{isset(flag 372)}[1F C0 01 {e(l_0xc63593)}]" goto(l_0xc63494)
+
+l_0xc63494:
+    "[19 02]Continue" eob
+
+l_0xc6349f:
+    "[19 02]End" eob
+
+l_0xc634a5:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc634b4)} {e(l_0xc63506)}]" goto(l_0xc634b4)
+
+l_0xc634b4:
+    "@[1C 01 08], you like to work hard, just like your mother." next
+    "@But, I don't think it's good to work too hard." next
+    goto(l_0xc634ea)
+
+l_0xc634ea:
+    newline
+    "{sound(11)}@(Click!  Beep-beep-beep...)" end
+
+l_0xc63506:
+    "@We're a great team, aren't we?" next
+    "@Well, you should turn the power OFF instead of just pressing RESET." next
+    "@All right?[1F 50]" end
+
+l_0xc6354b:
+    "@Who is this?!  [1C 01 08]?!" linebreak
+    "  Do you have a cold or something?" next
+    "@Your voice sounds kind of funny." next
+    "@Oh, well.  That's OK." next
+    eob
+
+l_0xc63593:
+    "@I hope you get over your cold soon." linebreak
+    "[1D 0D 01 06 02][1B 03 {e(l_0xc635b4)}]" eob
+
+l_0xc635b4:
+    "[19 05 01 06 01]{sound(37)}" eob
+
+l_0xc635bd:
+    "@Hi, it's your dad!" linebreak
+    "  To get to the next level..." next
+    "@Ha hah ha hah!" linebreak
+    "  I guess I don't need to tell you this any more!" next
+    "@... Next week will be your birthday, [1C 01 08]." next
+    "@I'm trying very hard to be home for that big day!" next
+    "@I'll be sure to get you a good present!" next
+    "@I've been following your adventures closely," next
+    "@but I want to hear about them from you, in person." next
+    "@You sound a lot more... mature over the phone. I bet you've grown up, huh?" next
+    "@...Well, I'll see you at home, then." next
+    "@Bye!" linebreak
+    "{sound(11)}  (Click!" linebreak
+    "  Beep-beep-beep...){wait}{set(flag 772)}" eob
+
+l_0xc636e5:
+    "[06 02 03 {e(data_31.l_0xc75929)}][06 49 00 {e(l_0xc639ca)}][06 B5 00 {e(l_0xc63958)}][06 85 02 {e(l_0xc63958)}][06 B6 02 {e(l_0xc63958)}][06 B7 02 {e(l_0xc63958)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc63958)}][06 B4 02 {e(data_20.l_0xc64946)}][06 B5 02 {e(data_20.l_0xc649b7)}]" call(l_0xc63963) goto(l_0xc6372d)
+
+l_0xc6372d:
+    call(l_0xc63ba1) "[19 02]Pick-up" eob
+
+l_0xc6373c:
+    "[19 02]Delivery" eob
+
+l_0xc63747:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc63761)} {e(l_0xc63790)}]" goto(l_0xc63756)
+
+l_0xc63756:
+    call(l_0xc63bc1) call(l_0xc645f2) eob
+
+l_0xc63761:
+    "[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc63786)}]" call(l_0xc63bec) "{set(flag 645)}[1F D3 03]" call(l_0xc645f2) "{set(flag 754)}" eob
+
+l_0xc63786:
+    call(l_0xc63c59) goto(l_0xc63756)
+
+l_0xc63790:
+    "{counter(1)}[19 14][1B 02 {e(l_0xc6390c)}]" call(l_0xc63ca8) goto(l_0xc6379f)
+
+l_0xc6379f:
+    "[18 02][1A 07]{window_switch(13)}{window_closetop}{window_switch(1)}" newline
+    "[1B 02 {e(l_0xc63756)}]{swap}{store_registers}[19 1A 00]{swap}@[1C 05 00]?" linebreak
+    "  Do you need anything else?" linebreak
+    "{load_registers}[19 1C FF 00]" call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc637e8)} {e(l_0xc63888)}]" goto(l_0xc63888)
+
+l_0xc637e8:
+    "{counter(1)}[19 14][1B 02 {e(l_0xc63916)}]@Select an item.[03][18 02][1A 07]{window_switch(13)}{window_closetop}{window_switch(1)}" newline
+    "[1B 02 {e(l_0xc63888)}]{swap}{store_registers}[19 1A 00]{swap}@[1C 05 00]?" linebreak
+    "  Do you need anything else?" linebreak
+    "{load_registers}[19 1C FF 00]" call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc63848)} {e(l_0xc63888)}]" goto(l_0xc63888)
+
+l_0xc63848:
+    "{counter(1)}[19 14][1B 02 {e(l_0xc63916)}]@Select an item.[03][18 02][1A 07]{window_switch(13)}{window_closetop}{window_switch(1)}" newline
+    "[1B 02 {e(l_0xc63888)}]{swap}{store_registers}[19 1A 00]{swap}@[1C 05 00]?" next
+    "{load_registers}[19 1C FF 00]" goto(l_0xc63888)
+
+l_0xc63888:
+    "@Just to confirm, you're expecting delivery of the" next
+    "[19 1D 01 00]@[1C 05 00][19 1D 02 00][1B 02 {e(l_0xc638d4)}]" linebreak
+    "  [1C 05 00][19 1D 03 00][1B 02 {e(l_0xc638d4)}]" linebreak
+    "  and [1C 05 00]." goto(l_0xc638d4)
+
+l_0xc638d4:
+    "[03]" newline
+    "@Is that correct?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc638f8)} {e(l_0xc6393e)}]" goto(l_0xc6393e)
+
+l_0xc638f8:
+    call(l_0xc63d25) "{set(flag 181)}[1F D3 02]" call(l_0xc645f2) "{set(flag 754)}" eob
+
+l_0xc6390c:
+    call(l_0xc63d54) goto(l_0xc63756)
+
+l_0xc63916:
+    "[19 10 01]{swap}@We're not storing any of [1C 02 00]'s stuff right now." next
+    goto(l_0xc63888)
+
+l_0xc6393e:
+    call(l_0xc64650) "@Well, please start over again." next
+    goto(l_0xc6379f)
+
+l_0xc63958:
+    call(l_0xc63de3) call(l_0xc645f2) eob
+
+l_0xc63963:
+    "@Hello!  This is Escargo Express." next
+    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc639c9)}]" newline
+    "@Oh, is that you, [1C 01 08]?" linebreak
+    "  Big Bro!" next
+    "@It's me, Tracy." next
+    "@I'm working part-time for Escargo Express." next
+    goto(l_0xc639c9)
+
+l_0xc639c9:
+    eob
+
+l_0xc639ca:
+    "@Hello! This is Escargo Express." next
+    "@Tracy doesn't work here any more.  Yeah, she used to work here, part-time." next
+    "@Hunh?  This is [1C 01 08]?" linebreak
+    "  Tracy's big brother?" next
+    "@I've heard about the great work you're doing." next
+    "@It's an honor to talk to you, sir!" next
+    "@Oh, you're calling for a delivery?" linebreak
+    "  I'm very sorry." next
+    "@My wife is out on maternity leave, so I'm taking care of my other kid." next
+    "@I decided to take some time off from the delivery business." next
+    "@It's right next to the fridge!  Put it into the microwave...  ...that's it." next
+    "@...Sorry about that." next
+    "@I'm a little busy right now, as you heard." next
+    "@I really would like to hear some of your stories." next
+    "@Zoicks!  That was the dog's food!" next
+    "@*Crash!* Hey, hey!  Now look what you've done!" next
+    "@...I'm sorry." linebreak
+    "  I have to go.  Good bye." linebreak
+    "{sound(11)}  (Click!){wait}{set(flag 770)}" eob
+
+l_0xc63ba1:
+    newline
+    "[06 49 00 {e(l_0xc63bb7)}]@What can I do for you?" linebreak
+    eob
+
+l_0xc63bb7:
+    "@What do you need?" linebreak
+    eob
+
+l_0xc63bc1:
+    "[06 49 00 {e(l_0xc63be4)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc63bdc)}]@Come again.[03]" eob
+
+l_0xc63bdc:
+    "@Please come again.[03]" eob
+
+l_0xc63be4:
+    "@Well, come again.[03]" eob
+
+l_0xc63bec:
+    "[06 49 00 {e(l_0xc63c2a)}]@You want us to store something for you?" next
+    "@We'll send someone over immediately to pick it up.[03]" eob
+
+l_0xc63c2a:
+    "@Well, I'll pick it up personally." linebreak
+    "  Who am I?" linebreak
+    "  I'm the president![03]" eob
+
+l_0xc63c59:
+    "[06 49 00 {e(l_0xc63c86)}]@I'm very sorry." linebreak
+    "  Our storage lockers are all full right now." next
+    eob
+
+l_0xc63c86:
+    "@I'm sorry." linebreak
+    "  Our storage lockers are all full right now." next
+    eob
+
+l_0xc63ca8:
+    "[06 49 00 {e(l_0xc63cea)}]@You would like us to deliver something?  We can deliver up to three things." next
+    "@Please select the goods you want.[03]" eob
+
+l_0xc63cea:
+    "@You would like us to deliver something?  We can deliver up to three things." next
+    "@Please select the goods you want.[03]" eob
+
+l_0xc63d25:
+    "[06 49 00 {e(l_0xc63d40)}]@We'll send someone over right away![03]" eob
+
+l_0xc63d40:
+    "@I'll come and help you personally!" next
+    eob
+
+l_0xc63d54:
+    "[06 49 00 {e(l_0xc63dc8)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc63d93)}]@Hey big brother [1C 01 08]," linebreak
+    "  we don't have any of your stuff in storage right now." next
+    eob
+
+l_0xc63d93:
+    "[19 10 01]@" call(data_37.l_0xc7e6c5) ", we do not have anything stored for someone" next
+    "[19 10 01]{swap}@by the name of [1C 02 00]." next
+    eob
+
+l_0xc63dc8:
+    "@I don't think we have anything of yours in storage." next
+    eob
+
+l_0xc63de3:
+    "[06 49 00 {e(l_0xc63e5a)}]@Hello!" linebreak
+    "  This is Escargo Express." next
+    "@I'm very sorry, but all our delivery people are out, serving other customers." next
+    "@We can't take any delivery orders right now." next
+    "@Please call back a little later.[03]" eob
+
+l_0xc63e5a:
+    "@Hello, you have reached Escargo Express." next
+    "@All of our staff members are currently out of the office." next
+    "@Please call again." linebreak
+    "  This is a recording.[03]" eob
+
+l_0xc63eb0:
+    call(data_21.l_0xc659bf) "{unset(flag 645)}[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc641b0)}][06 49 00 {e(l_0xc63f42)}]@Hello, this is Escargo Express!" next
+    "@Your delivery charge is $18." next
+    "@You can cover the bill, right?" linebreak
+    call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc63f74)} {e(l_0xc63f1f)}]" goto(l_0xc63f1f)
+
+l_0xc63f1f:
+    "@Oh, I see." linebreak
+    "  Please try us again.{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc63f42:
+    "@Hi, I'm from Escargo Express." next
+    "@I'm here to pick up your stuff." next
+    goto(l_0xc63f80)
+
+l_0xc63f74:
+    "[1D 14 12 00 00 00][1B 03 {e(l_0xc6427c)}]" goto(l_0xc63f80)
+
+l_0xc63f80:
+    "@What do you want me to take?" next
+    "@I can take up to three things.[03]{open_hp}" goto(l_0xc63fa2)
+
+l_0xc63fa2:
+    call(data_15.l_0xc5e456) newline
+    "[1B 02 {e(l_0xc63f1f)}]{store_registers}[1D 0C 00 00][1B 03 {e(l_0xc64192)}]{load_registers}[19 1C 00 00][19 1D 01 00]@[1C 05 00]?[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc64240)}]" newline
+    "  Will there be anything else?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc63ffd)} {e(l_0xc640a1)}]" goto(l_0xc640a1)
+
+l_0xc63ffd:
+    "@What do you want me to take?[03]" goto(l_0xc6400a)
+
+l_0xc6400a:
+    call(data_15.l_0xc5e456) newline
+    "[1B 02 {e(l_0xc640a1)}]{store_registers}[1D 0C 00 00][1B 03 {e(l_0xc6419c)}]{load_registers}[19 1C 00 00][19 1D 02 00]@[1C 05 00]?" linebreak
+    "[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc64240)}]" newline
+    "  Will there be anything else?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc64066)} {e(l_0xc640a1)}]" goto(l_0xc640a1)
+
+l_0xc64066:
+    "@Which one do you want me to take?[03]" goto(l_0xc64078)
+
+l_0xc64078:
+    call(data_15.l_0xc5e456) newline
+    "[1B 02 {e(l_0xc640a1)}]{store_registers}[1D 0C 00 00][1B 03 {e(l_0xc641a6)}]{load_registers}[19 1C 00 00][19 1D 03 00]@[1C 05 00]?" next
+    goto(l_0xc640a1)
+
+l_0xc640a1:
+    "@Let me just confirm your request.  You want me to take" next
+    "[19 1D 01 00]@the [1C 05 00][19 1D 02 00][1B 02 {e(l_0xc640f1)}]" linebreak
+    "  the [1C 05 00][19 1D 03 00][1B 02 {e(l_0xc640f1)}]" linebreak
+    "  and the [1C 05 00]." goto(l_0xc640f1)
+
+l_0xc640f1:
+    next
+    "@Is this correct?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc64116)} {e(l_0xc64155)}]" goto(l_0xc64155)
+
+l_0xc64116:
+    "[1D 09 12 00]{isset(flag 73)}[1F C0 01 {e(l_0xc6462e)}]{open_wallet}{sound(118)}" call(l_0xc64650) "@All right, certainly," linebreak
+    "  thanks a lot!{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc64155:
+    "[19 1D 01 01][1D 0E 00 00][19 1D 02 01][1B 02 {e(l_0xc64179)}][1D 0E 00 00][19 1D 03 01][1B 02 {e(l_0xc64179)}][1D 0E 00 00]" goto(l_0xc64179)
+
+l_0xc64179:
+    "@Well, let's start again, shall we?[03]" goto(l_0xc63fa2)
+
+l_0xc64192:
+    call(l_0xc64633) goto(l_0xc63fa2)
+
+l_0xc6419c:
+    call(l_0xc64633) goto(l_0xc6400a)
+
+l_0xc641a6:
+    call(l_0xc64633) goto(l_0xc64078)
+
+l_0xc641b0:
+    "@Excuse me." next
+    "@We checked your records and found" next
+    "@that we are already storing too many of your items." next
+    "@We cannot accept any more goods from you at this time." next
+    "@Please contact us later when we may have space for your items.{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc64240:
+    next
+    "@We're sorry, we cannot carry more than three items." next
+    "@Please understand that it's our policy." next
+    goto(l_0xc640a1)
+
+l_0xc6427c:
+    "@You don't have enough money." next
+    "@Call us at another time.{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc642a3:
+    call(data_21.l_0xc659bf) "{unset(flag 181)}@I'm from Escargo Express!!" next
+    "@I'm here to deliver your" next
+    "[19 1D 01 00]@[1C 05 00][19 1D 02 00][1B 02 {e(l_0xc642fc)}]," linebreak
+    "  [1C 05 00][19 1D 03 00][1B 02 {e(l_0xc642fc)}]," linebreak
+    "  and [1C 05 00]" goto(l_0xc642fc)
+
+l_0xc642fc:
+    "." next
+    "[06 49 00 {e(l_0xc643de)}]@Your charge is $18." linebreak
+    "  You can pay for this, right?" next
+    call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc643ce)} {e(l_0xc64339)}]" goto(l_0xc64339)
+
+l_0xc64339:
+    "@Well, I need to take these things back then." next
+    "@Is that OK?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc643a7)} {e(l_0xc6436a)}]" goto(l_0xc6436a)
+
+l_0xc6436a:
+    "@Hmmm, what should I do?" next
+    "@You actually don't have any money, right?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc643ce)} {e(l_0xc64339)}]" goto(l_0xc64339)
+
+l_0xc643a7:
+    "@Okay." linebreak
+    "  Call us again later.{wait}" call(l_0xc64650) "{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc643ce:
+    "[1D 14 12 00 00 00][1B 03 {e(l_0xc644e3)}][19 1D 01 00]" goto(l_0xc643de)
+
+l_0xc643de:
+    "[1D 03 FF][1B 02 {e(l_0xc6442f)}][1D 0E 00 00][1D 09 12 00][19 1D 02 00][1B 02 {e(l_0xc6441d)}][1D 03 FF][1B 02 {e(l_0xc6445f)}][1D 0E 00 00][19 1D 03 00][1B 02 {e(l_0xc6441d)}][1D 03 FF][1B 02 {e(l_0xc644a0)}][1D 0E 00 00]" goto(l_0xc6441d)
+
+l_0xc6441d:
+    call(l_0xc64600) "[19 1D 01 01][19 1D 02 01][19 1D 03 01]" eob
+
+l_0xc6442f:
+    "@Oh, you have too many things." linebreak
+    "  Please call us again later.{wait}" call(l_0xc64650) "{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc6445f:
+    "@I don't think you can carry everything." next
+    "[19 1D 01 01]@Well, I'll leave just" linebreak
+    "  the [1C 05 00]." next
+    call(l_0xc64600) "[19 1D 02 01][1D 18 00][19 1D 03 01][1B 02 {e(l_0xc6449f)}][1D 18 00]" goto(l_0xc6449f)
+
+l_0xc6449f:
+    eob
+
+l_0xc644a0:
+    "@I don't think you can carry everything." next
+    "[19 1D 01 01]@Well, I'll leave just" linebreak
+    "  the [1C 05 00]" linebreak
+    "  and[19 1D 02 01] the [1C 05 00]." next
+    call(l_0xc64600) "[19 1D 03 01][1D 18 00]" eob
+
+l_0xc644e3:
+    "@Ah, I see...  You don't have enough money.  Call us again later.{wait}" call(l_0xc64650) "{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc64515:
+    call(l_0xc64650) goto(l_0xc6451a)
+
+l_0xc6451a:
+    "{unset(flag 181)}{unset(flag 645)}" call(data_36.l_0xc7de2f) "{window_open(1)}@Hello!" linebreak
+    "  This is Escargo Express." linebreak
+    " (hee, ha, he, ha)" next
+    "@I just (hee, ha, he, ha) couldn't find your location..." next
+    "@...You must be somewhere really strange.  (hee, ha, he, ha)" next
+    "@I've decided, honestly, that... I should give up." next
+    "@I'm outta here.  (hee, ha, he, ha)" next
+    "@Sometimes this happens, you know?[03]" call(data_36.l_0xc7de54) call(data_36.l_0xc7de72) eob
+
+l_0xc645f2:
+    newline
+    "{sound(11)}@(Click!)" end
+
+l_0xc64600:
+    "{isset(flag 73)}[1F C0 01 {e(l_0xc6462e)}]{open_wallet}{sound(118)}@OK, here we are." linebreak
+    "  Thank you!{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc6462e:
+    "[1D 08 12 00]" eob
+
+l_0xc64633:
+    "@I think you should keep it." next
+    "@Do you have anything else you want me to take?[03]" eob
+
+l_0xc64650:
+    "[19 1D 01 01][1D 18 00][19 1D 02 01][1B 02 {e(l_0xc64671)}][1D 18 00][19 1D 03 01][1B 02 {e(l_0xc64671)}][1D 18 00]" goto(l_0xc64671)
+
+l_0xc64671:
+    eob
+
+l_0xc64672:
+    "@Oh, it's my line now? Ooops!" linebreak
+    goto(l_0xc64687)
+
+l_0xc64687:
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc646ae)} {e(l_0xc64698)}]" goto(l_0xc64698)
+
+l_0xc64698:
+    "@What the hey?" linebreak
+    "  Well, see you!" end
+
+l_0xc646ae:
+    "@What do you want me to do?" linebreak
+    goto(data_20.l_0xc646bb)
+

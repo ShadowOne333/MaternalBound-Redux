@@ -1,0 +1,370 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc5d766:
+    "[1A 06 0B]" eob
+
+l_0xc5d76a:
+    "[1A 06 0E]" eob
+
+l_0xc5d76e:
+    "[1A 06 36]" eob
+
+l_0xc5d772:
+    "[1A 06 0F]" eob
+
+l_0xc5d776:
+    "[1A 06 37]" eob
+
+l_0xc5d77a:
+    "[1A 06 10]" eob
+
+l_0xc5d77e:
+    "[1A 06 11]" eob
+
+l_0xc5d782:
+    "[1A 06 12]" eob
+
+l_0xc5d786:
+    "[1A 06 13]" eob
+
+l_0xc5d78a:
+    "[1A 06 14]" eob
+
+l_0xc5d78e:
+    "[1A 06 16]" eob
+
+l_0xc5d792:
+    "[06 D7 00 {e(l_0xc5d79d)}][1A 06 40]" eob
+
+l_0xc5d79d:
+    "[1A 06 41]" eob
+
+l_0xc5d7a1:
+    "[1A 06 38]" eob
+
+l_0xc5d7a5:
+    "[1A 06 17]" eob
+
+l_0xc5d7a9:
+    "[1A 06 32]" eob
+
+l_0xc5d7ad:
+    "[1A 06 39]" eob
+
+l_0xc5d7b1:
+    "[1A 06 18]" eob
+
+l_0xc5d7b5:
+    "[1A 06 3A]" eob
+
+l_0xc5d7b9:
+    "[1A 06 3B]" eob
+
+l_0xc5d7bd:
+    "[1A 06 19]" eob
+
+l_0xc5d7c1:
+    "[1A 06 1A]" eob
+
+l_0xc5d7c5:
+    "[1A 06 1B]" eob
+
+l_0xc5d7c9:
+    "[1A 06 1C]" eob
+
+l_0xc5d7cd:
+    "[1A 06 1D]" eob
+
+l_0xc5d7d1:
+    "[1A 06 1F]" eob
+
+l_0xc5d7d5:
+    "[1A 06 20]" eob
+
+l_0xc5d7d9:
+    "[1A 06 21]" eob
+
+l_0xc5d7dd:
+    "[1A 06 1E]" eob
+
+l_0xc5d7e1:
+    "[1A 06 22]" eob
+
+l_0xc5d7e5:
+    "[1A 06 23]" eob
+
+l_0xc5d7e9:
+    "[1A 06 26]" eob
+
+l_0xc5d7ed:
+    "[1A 06 28]" eob
+
+l_0xc5d7f1:
+    "[1A 06 27]" eob
+
+l_0xc5d7f5:
+    "[1A 06 03]" eob
+
+l_0xc5d7f9:
+    "[1A 06 0A]" eob
+
+l_0xc5d7fd:
+    "[1A 06 3D]" eob
+
+l_0xc5d801:
+    "[1A 06 29]" eob
+
+l_0xc5d805:
+    "[1A 06 2B]" eob
+
+l_0xc5d809:
+    "[1A 06 2C]" eob
+
+l_0xc5d80d:
+    "[1A 06 2D]" eob
+
+l_0xc5d811:
+    "[1A 06 3F]" eob
+
+l_0xc5d815:
+    "[1A 06 3E]" eob
+
+l_0xc5d819:
+    "[1A 06 15]" eob
+
+l_0xc5d81d:
+    "[1A 06 33]" eob
+
+l_0xc5d821:
+    "[1A 06 2E]" eob
+
+l_0xc5d825:
+    "[1A 06 34]" eob
+
+l_0xc5d829:
+    "[1A 06 35]" eob
+
+l_0xc5d82d:
+    "[1A 06 24]" eob
+
+l_0xc5d831:
+    "[1A 06 3C]" eob
+
+l_0xc5d835:
+    "[06 90 02 {e(l_0xc5d840)}]{sound(12)}" eob
+
+l_0xc5d840:
+    "{sound(120)}" eob
+
+l_0xc5d844:
+    "{unset(flag 446)}{set(flag 226)}" call(l_0xc5d894) "{unset(flag 226)}" call(data_36.l_0xc7de72) eob
+
+l_0xc5d858:
+    "{unset(flag 646)}{set(flag 227)}" call(l_0xc5d894) "{unset(flag 227)}" call(data_36.l_0xc7de72) eob
+
+l_0xc5d86c:
+    "{unset(flag 647)}{set(flag 228)}" call(l_0xc5d894) "{unset(flag 228)}" call(data_36.l_0xc7de72) eob
+
+l_0xc5d880:
+    "{unset(flag 648)}{set(flag 229)}" call(l_0xc5d894) "{unset(flag 229)}" call(data_36.l_0xc7de72) eob
+
+l_0xc5d894:
+    call(data_21.l_0xc659bf) call(l_0xc5d917) goto(l_0xc5d89e)
+
+l_0xc5d89e:
+    "{open_hp}" call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc5d905)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc5d8fb)}]" call(l_0xc5d974) call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc5d8da)} {e(l_0xc5d8d0)}]" goto(l_0xc5d8d0)
+
+l_0xc5d8d0:
+    call(l_0xc5d993) goto(l_0xc5d89e)
+
+l_0xc5d8da:
+    "[1D 08 00 00]{open_wallet}{sound(118)}{load_registers}[1D 0F 00 00]" call(l_0xc5d936) "{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc5d8fb:
+    call(l_0xc5d9b2) goto(l_0xc5d89e)
+
+l_0xc5d905:
+    call(l_0xc5d955) "{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc5d917:
+    "[1B 05][06 E2 00 {e(l_0xc5d9d1)}][06 E3 00 {e(l_0xc5db01)}][06 E4 00 {e(l_0xc5dc17)}][06 E5 00 {e(l_0xc5dcf9)}]" eob
+
+l_0xc5d936:
+    "[1B 05][06 E2 00 {e(l_0xc5da27)}][06 E3 00 {e(l_0xc5db32)}][06 E4 00 {e(l_0xc5dc3c)}][06 E5 00 {e(l_0xc5dd29)}]" eob
+
+l_0xc5d955:
+    "[1B 05][06 E2 00 {e(l_0xc5da58)}][06 E3 00 {e(l_0xc5db54)}][06 E4 00 {e(l_0xc5dc63)}][06 E5 00 {e(l_0xc5dd52)}]" eob
+
+l_0xc5d974:
+    "[1B 05][06 E2 00 {e(l_0xc5da85)}][06 E3 00 {e(l_0xc5db7f)}][06 E4 00 {e(l_0xc5dc91)}][06 E5 00 {e(l_0xc5dd6c)}]" eob
+
+l_0xc5d993:
+    "[1B 05][06 E2 00 {e(l_0xc5dab3)}][06 E3 00 {e(l_0xc5dbbf)}][06 E4 00 {e(l_0xc5dcc1)}][06 E5 00 {e(l_0xc5dda3)}]" eob
+
+l_0xc5d9b2:
+    "[1B 05][06 E2 00 {e(l_0xc5dacb)}][06 E3 00 {e(l_0xc5dbeb)}][06 E4 00 {e(l_0xc5dcdf)}][06 E5 00 {e(l_0xc5ddcc)}]" eob
+
+l_0xc5d9d1:
+    "@Huff, puff, huff... wheeeeze!  I ran here as fast as I could." next
+    "@I'm plum tuckered out." next
+    "@What have you got for sale?[03]" eob
+
+l_0xc5da27:
+    "@Thanks, sonny." next
+    "@You certainly made it worth my while to come all this way!" end
+
+l_0xc5da58:
+    newline
+    "@Oh, say it ain't so!  And after I ran here as fast as I could!" end
+
+l_0xc5da85:
+    "[1B 06]" newline
+    "@[1C 05 00]?" linebreak
+    "  I'll give you {swap}$[1C 0A 00 00 00 00]." next
+    "@How's that for a fair offer?" linebreak
+    eob
+
+l_0xc5dab3:
+    "@That's too bad..." next
+    "@Do you have anything else you want to sell?[03]" eob
+
+l_0xc5dacb:
+    newline
+    "@Oh, jumpin' jehosaphat!  I don't think I can buy that." next
+    "@What else can you sell me?[03]" eob
+
+l_0xc5db01:
+    "@I saw your sign.  So, I thought I'd stop by." next
+    "@What're you peddlin'?[03]" eob
+
+l_0xc5db32:
+    newline
+    "@Oh, thank you so much!  It was well worth the trip!" end
+
+l_0xc5db54:
+    newline
+    "@I can't believe it!" next
+    "@After I took all the trouble to get out here!" end
+
+l_0xc5db7f:
+    "[1B 06]" newline
+    "@The [1C 05 00]?" linebreak
+    "  Hmmm...  How about" linebreak
+    "  {swap}$[1C 0A 00 00 00 00]?" next
+    "@How does that offer strike you?" linebreak
+    eob
+
+l_0xc5dbbf:
+    newline
+    "@My, my!" linebreak
+    "  You can't do that to me!" next
+    "@Well, have you got anything else for sale?[03]" eob
+
+l_0xc5dbeb:
+    newline
+    "@Already got me one of those." next
+    "@Anything else worthwhile for sale?[03]" eob
+
+l_0xc5dc17:
+    "@Hi!" linebreak
+    "  Is this a tool shop?  Cool!" next
+    "@What are you selling?[03]" eob
+
+l_0xc5dc3c:
+    newline
+    "@Thanks a lot!" linebreak
+    "  It sure was worth it to come all the way out here!" end
+
+l_0xc5dc63:
+    newline
+    "@Oh, c'mon!" next
+    "@You have no idea how much trouble it was for me to get here!" end
+
+l_0xc5dc91:
+    "[1B 06]" newline
+    "@The [1C 05 00]?" linebreak
+    "  How about {swap}$[1C 0A 00 00 00 00]..." next
+    "@Is that a fair trade?" linebreak
+    eob
+
+l_0xc5dcc1:
+    newline
+    "@You don't think so?  OK, have you got anything else then?[03]" eob
+
+l_0xc5dcdf:
+    newline
+    "@Uhhh, I can't buy that..." next
+    "@Got anything else?[03]" eob
+
+l_0xc5dcf9:
+    "@Hi, how are ya?  Is this a tool shop or something?" next
+    "@What are you selling, anyway?[03]" eob
+
+l_0xc5dd29:
+    newline
+    "@Thanks!  I have to say, it was well worth my trouble to come out here." end
+
+l_0xc5dd52:
+    newline
+    "@That's just great!" linebreak
+    "  You can't do this to me!" end
+
+l_0xc5dd6c:
+    "[1B 06]" newline
+    "@The [1C 05 00]?" linebreak
+    "  I'd offer about" linebreak
+    "  {swap}$[1C 0A 00 00 00 00] for that." next
+    "@Is it a deal?" linebreak
+    eob
+
+l_0xc5dda3:
+    newline
+    "@Have it your way." next
+    "@Did you say you have some other things for sale?[03]" eob
+
+l_0xc5ddcc:
+    newline
+    "@I'm not interested in one of those." next
+    "@Can you show me anything else?[03]" eob
+
+l_0xc5ddf1:
+    call(data_36.l_0xc7de2f) "{unset(flag 446)}{unset(flag 646)}{unset(flag 647)}{unset(flag 648)}{window_open(1)}@Hello!" linebreak
+    "  (gasp... pant...)" next
+    "@I saw your sign" linebreak
+    "  (gasp... pant...)," next
+    "@and thought I should stop and buy something." next
+    "@I tried and tried to find it" linebreak
+    "  (gasp... pant...)" linebreak
+    "  but no such luck." next
+    "@I think you should give this up and go home." next
+    "@If you took your business more seriously," next
+    "@you would be more considerate of your customers![03]" call(data_36.l_0xc7de54) "{unset(flag 754)}" eob
+
+l_0xc5decb:
+    "{unset(flag 657)}" call(data_00.l_0xc50000) goto(l_0xc5ded3)
+
+l_0xc5ded3:
+    "[19 02]Buy" eob
+
+l_0xc5ded9:
+    "[19 02]Sell" eob
+
+l_0xc5dee0:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5df05)} {e(data_15.l_0xc5df3a)}]" goto(l_0xc5deef)
+
+l_0xc5deef:
+    "[06 91 02 {e(l_0xc5defc)}]" call(data_00.l_0xc50330) eob
+
+l_0xc5defc:
+    call(data_00.l_0xc50198) "{unset(flag 657)}" eob
+
+l_0xc5df05:
+    call(data_00.l_0xc504c8) "{open_hp}" call(data_13.l_0xc5d5ab) "[1B 02 {e(data_15.l_0xc5df61)}]" call(data_15.l_0xc5e3bc) "{store_registers}[1D 03 FF][1B 02 {e(data_15.l_0xc5df89)}]{load_registers}" call(data_15.l_0xc5e0a9) "[06 E0 00 {e(data_15.l_0xc5df56)}]" goto(data_15.l_0xc5df61)
+
