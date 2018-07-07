@@ -38,7 +38,7 @@ msuTrack: {			// //ROM[0xEFFE00] =
 	SEP	(0x20)
 	LDA_al	(0x002002)
 	CMP_8	(0x53)
-	BEQ_a	(playmsu)	// (playmsu) Branch to playmsu
+	BEQ_a	(playmsu)	// BEQ $03 - BEQ (playmsu) Branch to playmsu
 	PLP			// Restore processor status
 	PLA			// Get track number from stack
 	RTL
@@ -57,10 +57,10 @@ playmsu: {
 loop: {
 	LDA_al	(0x002000)
 	AND_8	(0x40)
-	BNE_a	(loop)		// (loop) Branch to loop
+	BNE	(0xF8)		// BNE $F8 - BNE(loop) Branch to loop
 	LDA_al	(0x002000)
 	AND_8	(0x08)
-	BNE_a	(playspc)	// Branch to playspc, error bit set?
+	BNE_a	(playspc)	// BNE $2C - Branch to playspc, error bit set?
 	LDA_xl	(track_table)	// LDA_xl (0xEFFF00)
 	STA_al	(0x002007)
 	LDA_8	(0xFF)
@@ -73,7 +73,7 @@ loop: {
 	PLP			// Restore processor status
 	PLA			// Get track number from stack
 	CPX_i	(0x00C0)	// Compare with $C0 or 192 in decimal
-	BCC	(0x06)		// If comparison is less than 192, branch to RTL
+	BCC	(0x06)		// BCC $06 - If comparison is less than 192, branch to RTL
 	LDX_i	(0x0004)
 	STX_a	(0xB53B)
 	RTL
@@ -118,7 +118,7 @@ setFadeFlag: {
 	PHA
 	LDA_al	(0x002002)
 	CMP_8	(0x53)
-	BEQ	(0x05)
+	BEQ	(0x05)		// BEQ $05
 }
 
 endsetflag: {
@@ -135,19 +135,19 @@ nmi: {
 	LDA_a	(0x4210)
 	STZ_a	(0x420C)
 	LDA_al	(0x7FFFF3)
-	BNE	(0x01)
+	BNE	(0x01)		// BNE $01
 	RTL
 	CMP_8	(0x02)
-	BNE	(0x03)
+	BNE	(0x03)		// BNE $03
 	JMP	(fadefast)	// JMP (endhalf) - JMP $FDF7
 	CMP_8	(0x03)
-	BNE	(0x03)
+	BNE	(0x03)		// BNE $03
 	JMP	(fadeslow)	// JMP (endhalf) - JMP $FDDA
 	CMP_8	(0x07)
-	BNE	(0x03)
+	BNE	(0x03)		// BNE $03
 	JMP	(fadehalf)	// JMP (endhalf) - JMP $FE16
 	CMP_8	(0x08)
-	BNE	(0x03)
+	BNE	(0x03)		// BNE $03
 	JMP	(fadefull)	// JMP (endhalf) - JMP $FE36
 	LDA_8	(0x00)
 	STA_al	(0x7FFFF3)	// Erase fade flag
@@ -157,11 +157,11 @@ nmi: {
 fadeslow: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x00)
-	BEQ_a	(endslow)	// BEQ (endhalf) - BEQ $06
+	BEQ_a	(endslow)	// BEQ (endslow) - BEQ $06
 	DEC
 	DEC
 	CMP_8	(0x10)
-	BCS	(0x06)
+	BCS	(0x06)		// BCS $06
 }
 
 endslow: {
@@ -181,7 +181,7 @@ fadefast: {
 	DEC
 	DEC
 	CMP_8	(0x10)
-	BCS	(0x06)
+	BCS	(0x06)		// BCS $06
 }
 
 endfast: {
@@ -200,7 +200,7 @@ fadehalf: {
 	DEC
 	DEC
 	CMP_8	(0x40)
-	BCS	(0x08)
+	BCS	(0x08)		// BCS $08
 }
 
 endhalf: {
@@ -220,7 +220,7 @@ fadefull: {
 	INC
 	INC
 	CMP_8	(0xFB)
-	BCC	(0x08)
+	BCC	(0x08)		// BCC $08
 }
 
 endfull: {
