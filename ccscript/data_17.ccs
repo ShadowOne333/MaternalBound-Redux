@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -86,22 +89,30 @@ l_0xc608ff:
     "[06 0B 02 {e(l_0xc60a97)}]" goto(l_0xc60b71)
 
 l_0xc6090b:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}@Amigo, you won a very big jackpot!" next
+    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
+    title(1,"Tomas Jefferson")
+    "@Amigo, you won a very big jackpot!" next
     "@Here's a big prize for you, amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 A8]@" call(data_37.l_0xc7e6d7) " won a [1C 05 A8] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60985:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}@Amigo, you won!{pause(20)}  A very big winning, I think!" next
+    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
+    title(1,"Tomas Jefferson")
+    "@Amigo, you won!{pause(20)}  A very big winning, I think!" next
     "@Here's a very nice prize for the important amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 E0]@" call(data_37.l_0xc7e6d7) " won a [1C 05 E0] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60a0d:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}@Amigo, you won!{pause(20)}  A very big winning, and you hit it!" next
+    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
+    title(1,"Tomas Jefferson")
+    "@Amigo, you won!{pause(20)}  A very big winning, and you hit it!" next
     "@Here's the prize for the important amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 62]@" call(data_37.l_0xc7e6d7) " won a [1C 05 62] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60a97:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}@Amigo, you won!{pause(20)}  A very big winning, my friend!" next
+    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
+    title(1,"Tomas Jefferson")
+    "@Amigo, you won!{pause(20)}  A very big winning, my friend!" next
     "@Here's the big prize for you!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 6A]@" call(data_37.l_0xc7e6d7) " won a [1C 05 6A] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
@@ -118,12 +129,15 @@ l_0xc60b71:
     "{pause(2)}[1F F1 FD 02 08 00]{pause(2)}[1F F1 FE 02 08 00]{pause(2)}[1F F1 FF 02 08 00]" eob
 
 l_0xc60b8a:
+    title(1,"Pancho Sanchez")
     "@I'm big brother Pancho." end
 
 l_0xc60b9b:
+    title(1,"Pincho Sanchez")
     "@I'm kid brother Pincho." end
 
 l_0xc60bae:
+    title(1,"Tomas Jefferson")
     "@I'm Tomas Jefferson." end
 
 l_0xc60bbf:
@@ -167,7 +181,9 @@ l_0xc60e2a:
     call(data_13.l_0xc5d3cb) eob
 
 l_0xc60e30:
-    "[06 49 00 {e(l_0xc611e2)}][06 FC 02 {e(l_0xc61139)}][06 2A 02 {e(l_0xc60ff3)}]{music(119)}@The truth of space and time moves through the universe like a wave..." next
+    "[06 49 00 {e(l_0xc611e2)}][06 FC 02 {e(l_0xc61139)}][06 2A 02 {e(l_0xc60ff3)}]{music(119)}"
+    title(1,"Talah Rama")
+    "@The truth of space and time moves through the universe like a wave..." next
     "@Truth speaks through space and matter and makes itself known to human beings." next
     "@I was waiting for you,{pause(15)} and you came.{pause(30)}  This was destined to happen." next
     "@In truth,{pause(15)} all is predestined..." next
@@ -185,7 +201,9 @@ l_0xc60e30:
     goto(l_0xc60ff3)
 
 l_0xc60ff3:
-    "{window_open(1)}@The adventure that lies ahead won't be easy." next
+    "{window_open(1)}"
+    title(1,"Talah Rama")
+    "@The adventure that lies ahead won't be easy." next
     "@I'll give you a special skill to help you move through space as you wish." next
     "@Learn the skill from the monkey over there..." next
     "@Would you like to learn this special power?" linebreak
@@ -213,17 +231,20 @@ l_0xc610f1:
     "@You will need this, the Gourmet Tofu Machine.{wait}[1F 07 03]{pause(20)}{music_resume}" eob
 
 l_0xc61139:
+    title(1,"Talah Rama")
     "@The truth of space and time moves through the universe like a wave..." next
     "@Truth speaks through space and matter and makes itself known to human beings." next
     "@I was waiting for you,{pause(15)} and you came.{pause(20)}  This was destined to happen." next
     "@In truth,{pause(15)} all is pre-destined..." end
 
 l_0xc611e2:
+    title(1,"Talah Rama")
     "@You've been exceedingly patient." next
     "@You've overcome many hardships." next
     "@I praise all of you for your courage." end
 
 l_0xc61228:
+    title(1,"Gerardo Montague")
     "@I didn't have a problem digging until this...{pause(20)} I found a maze." next
     "@Lots of monsters appeared, so I couldn't proceed." next
     "@There's 5 big moles...!" next

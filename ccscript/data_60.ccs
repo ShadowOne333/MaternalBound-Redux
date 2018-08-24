@@ -193,7 +193,7 @@ l_0xc9fd60:
 
 l_0xc9fd82:
     newline
-    "@{user}[19 1F]{swap} used [1C 05 00]!" next
+    "@{user}[19 1F]{swap} used the [1C 05 00]!" next
     "@Now, " call(data_36.l_0xc7e602) " can figure out the length of things easily.[03]" eob
 
 l_0xc9fdbb:
@@ -217,7 +217,7 @@ l_0xc9fe41:
 l_0xc9fe9d:
     newline
     " The Teleport Box began to groan.{sound(99)}" next
-    "[1C 13 30 00] The Teleport Box didn't work quite right...{sound(5)}" end
+    "[1C 13 30 00] The Teleport Box didn't work quite right...{sound(5)}{pause(30)}" end
 
 l_0xc9fee3:
     newline

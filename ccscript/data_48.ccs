@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -149,6 +152,7 @@ l_0xc908bc:
     "  L'hotel de Summers." next
     "@My name is" linebreak
     "  Resosha Richmonde," next
+    title(1,"Resosha Richmonde")
     "@and I am the assistant manager." next
     "@I'm sorry [19 10 01]" call(data_37.l_0xc7e6b3) ", but I'm afraid" linebreak
     "  that we do not have any reservation under your name." next

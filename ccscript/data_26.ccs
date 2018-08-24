@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -127,7 +130,8 @@ l_0xc6ca9a:
     "@Ku kyo kika." next
     "@(It's me again, that chewing gum monkey's wife.)" next
     "@Kako kyuka kre." next
-    "@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next    "@Sheesh, what nerve!)" end
+    "@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next
+    "@Sheesh, what nerve!)" end
 
 l_0xc6cb14:
     "@Kyakkro ki kyokke" linebreak
@@ -144,7 +148,9 @@ l_0xc6cb97:
     "@(Honey, don't just stand there with your mouth open, say hello!)[03]{window_closeall}" eob
 
 l_0xc6cc31:
-    "[1F 16 69 02 01]{window_open(1)}@Krikko kyakya" linebreak
+    "[1F 16 69 02 01]{window_open(1)}"
+    title(1, "Bubble Monkey")
+    "@Krikko kyakya" linebreak
     "  (So...)" next
     "@Kekroo kyaki" linebreak
     "  (You passed by a cave north of Stonehenge." next
@@ -170,6 +176,7 @@ l_0xc6cdcd:
     "@just like a good night's sleep.)[03]" call(data_49.l_0xc915f4) "{music(12)}{pause(200)}{music_resume}" eob
 
 l_0xc6ce34:
+    title(1, "Dr. Andonuts")
     "@Since our imprisonment is now over," next
     "@I want to start on the Phase Distorter as soon as possible." next
     "@...Oh, I should at least thank you, huh?" next
@@ -182,6 +189,7 @@ l_0xc6cebc:
     "@You've helped make a beautiful life for everyone..." end
 
 l_0xc6cf2d:
+    title(1, "Tony")
     "@...[1C 02 03] doesn't call me." next
     "@Maybe he thinks I'm too annoying..." next
     "@But I don't think so." next
@@ -190,7 +198,9 @@ l_0xc6cf2d:
     "@If you see [1C 02 03],{pause(15)} please,{pause(15)} please ask him to call Tony.  Thanks!" end
 
 l_0xc6cfc5:
-    "{window_open(1)}@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
+    "{window_open(1)}"
+    title(1, "Starman Deluxe")
+    "@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
     "@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
     "@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
     "@BUT YOU MUST NOT UNDERESTIMATE US.[03]{window_closeall}" eob
@@ -203,6 +213,7 @@ l_0xc6d082:
     "  Can't...{pause(15)} last...{pause(15)} much...{pause(15)} longer..." end
 
 l_0xc6d0b1:
+    title(1, "Apple Kid")
     "@Next *Bloop*{pause(20)}" linebreak
     "  Next *Bloop*{pause(15)}  Room..." end
 
@@ -216,6 +227,7 @@ l_0xc6d0f0:
     "  Oh, no!{font_normal}" end
 
 l_0xc6d133:
+    title(1, "Tony")
     "@Oh, no... *Bloop* *Glub*{pause(20)}" linebreak
     "  Can't see anything..." next
     "@*Bloop* *Glub*" linebreak
@@ -301,6 +313,7 @@ l_0xc6d695:
     "[06 93 00 {e(l_0xc6d642)}]" goto(l_0xc6d61e)
 
 l_0xc6d6a1:
+    title(1, "Venus")
     "[06 0A 00 {e(l_0xc6d822)}][06 5B 00 {e(l_0xc6d7b3)}][06 8C 00 {e(l_0xc6d707)}]@Oh, you're just a little kid." next
     "@I'm too busy right now to give you my autograph." next
     "@Maybe next time, little [19 10 01]{result_is(2)}[1B 03 {e(l_0xc6d702)}]man." end
@@ -454,6 +467,7 @@ l_0xc6dd0a:
     "[19 19 00 00]{swap}{result_is(187)}[1B 03 {e(l_0xc6dd1d)}]" goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
+    title(1, "Pettenella Giovanni")
     "@What?" next
     "@You came to deliver my grandma's memento, the [1C 05 BB]?!" next
     "@Thank you." next

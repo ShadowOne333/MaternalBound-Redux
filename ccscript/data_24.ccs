@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -70,19 +73,26 @@ l_0xc6899a:
 
 l_0xc689fb:
     "@Hi, it's me--Tony." next
+    title(1, "Tony")
     "@I'm collecting player's names for a school project." next
     "@You know, players just like you!" next
     "@That's right, you--the one holding the controller." next
     "@Would you register your name, please?" next
-    "@Don't spell your name wrong![03]{window_closeall}[1F 07 02]{pause(30)}{music(2)}[1F 41 03]{window_open(1)}@Thanks, game player!" next
+    "@Don't spell your name wrong![03]{window_closeall}[1F 07 02]{pause(30)}{music(2)}[1F 41 03]{window_open(1)}"
+    title(1, "Tony")
+    "@Thanks, game player!" next
     "@Thank you very much!" next
-    "@Is this correct?[03]{window_closeall}[1F 41 03][1F 07 02]{pause(30)}{window_open(1)}@I apologize for any trouble this may have caused you." next
+    "@Is this correct?[03]{window_closeall}[1F 41 03][1F 07 02]{pause(30)}{window_open(1)}"
+    title(1, "Tony")
+    "@I apologize for any trouble this may have caused you." next
     "@Don't put my friend [1C 02 03] in any dangerous situations, okay?" next
     "@I worry about him." next
     "@I really do..." next
     "@Well, talk to you later..." next
     "@...[1C 02 03]..." next
-    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc68b7d)}]@It seems like you're not feeling well..." next
+    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc68b7d)}]"
+    title(1, "Tony")
+    "@It seems like you're not feeling well..." next
     "@Get better soon..." next
     goto(l_0xc68b7d)
 
@@ -109,6 +119,7 @@ l_0xc68c3f:
     "@...[1C 02 01]..." next
     "@I'm a friend who you have never met before..." next
     "@My name is [1C 02 02]." next
+    title_paula(1)
     next
     "{pause(60)}" linebreak
     "@Can you hear me calling you?" next
@@ -125,6 +136,7 @@ l_0xc68cc3:
     "{window_open(1)}@....." next
     "@[1C 02 01]!" next
     "@I...[1C 02 02]..." next
+    title_paula(1)
     "@I am [1C 02 02]..." next
     "@Can you hear me calling you?" next
     "@Help!" next
@@ -139,7 +151,9 @@ l_0xc68d59:
     eob
 
 l_0xc68d5a:
-    "{window_open(1)}@You are a friend who I have never met before..." next
+    "{window_open(1)}"
+    title_paula(1)
+    "@You are a friend who I have never met before..." next
     "@[1C 02 03]..." next
     "@Head south..." next
     "@I am [1C 01 1E]..." next
@@ -174,6 +188,7 @@ l_0xc68e1c:
     "  <who am I>?" next
     "@Don't you recognize my voice?" next
     "@It's me, Mr. Spoon from the Fourside Museum of Natural History!" next
+    title(1, "Mr. Spoon")
     "@Look Mr. Fork, I'm not exaggerating this find!" next
     "@I'm telling you..." next
     "@It's fantastic!....." next
@@ -268,7 +283,8 @@ l_0xc692ea:
     "@Good luck, ok?" end
 
 l_0xc692f7:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}@Sorry to bother you, big bro..." next
+    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    title(1, "Tracy")"@Sorry to bother you, big bro..." next
     "@This is Escargo Express." next
     "@I had a phone call from a friend of yours recently." next
     "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil Eraser machine." next
@@ -288,7 +304,9 @@ l_0xc693be:
     "@*Click*{wait}{window_closeall}{sound(11)}{music_resume}{unset(flag 690)}{unset(flag 691)}" eob
 
 l_0xc6943a:
-    "{window_open(1)}@Escargo Express!" next
+    "{window_open(1)}"
+    title(1, "Escargo Express")
+    "@Escargo Express!" next
     "@<We treat your package like it was our only child>..." next
     "@I'm here with your Pencil Eraser." next
     "[1D 03 FF][1B 02 {e(l_0xc694b9)}][1D 0E 00 B8]{sound(118)}@Here you are." next
@@ -299,7 +317,9 @@ l_0xc694b9:
     "@I hope I can deliver this to you soon![03]{window_closeall}{unset(flag 694)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
 
 l_0xc694f4:
-    "{window_open(1)}@Escargo Express." next
+    "{window_open(1)}"
+    title(1, "Escargo Express")
+    "@Escargo Express." next
     "@<We treat your package like it was our only child>..." next
     "@I'm here to deliver" linebreak
     "  the [1C 05 AF]." next
@@ -366,6 +386,7 @@ l_0xc698ca:
 l_0xc69928:
     "[06 49 00 {e(l_0xc69ac6)}]@Woof! Woof!" next
     "@(I'm Ruffini the dog." next
+    title(1, "Ruffini")
     "@I'm being possessed by the spirit of the game designer... (RUFF!)" next
     "@Do you see the window showing HP and PP at the bottom of the screen?" next
     "@When you go to a store that has equippable items," next
@@ -379,6 +400,7 @@ l_0xc69928:
     "@Now it's time to become a regular dog again...)" end
 
 l_0xc69ac6:
+    title(1, "Ruffini")
     "@Woof! Woof!" next
     "@I'm Ruffini the dog." next
     "@Here comes the spirit of the game designer again..." next

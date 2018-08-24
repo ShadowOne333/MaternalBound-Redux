@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -185,6 +188,7 @@ l_0xefa0b7:
 
 l_0xefa0dc:
     "{swap}@[1C 02 00] read the hieroglyphs." next
+    title_poo(1)
     "@<To fight against the invaders, we built this pyramid fortress." next
     "@However, our efforts were futile, and we lost." next
     "@Nonetheless, our pyramid was protected by the gods of Scarabia." next

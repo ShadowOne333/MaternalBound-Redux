@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -17,7 +20,9 @@ l_0xc886f5:
     "{unset(flag 626)}" eob
 
 l_0xc886f9:
-    "{window_open(1)}@What happened?{pause(20)}  It's not moving!" next
+    "{window_open(1)}"
+    title(1,"Dr. Andonuts")
+    "@What happened?{pause(20)}  It's not moving!" next
     "@Hey!  Why don't you try pressing the button on the controller![03]{window_closeall}" eob
 
 l_0xc88739:
@@ -123,6 +128,7 @@ l_0xc8905c:
 
 l_0xc89078:
     "@I'm George,{pause(15)} Gerardo Montague's brother." next
+    title(1,"George Montague")
     "@Gerardo is in his mine," next
     "@but he hasn't found any buried treasure yet." next
     "@We did, however,{pause(15)} find a Diamond instead." next
@@ -169,7 +175,8 @@ l_0xc89566:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc89580)}]{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8955a)}]" goto(l_0xc89580)
 
 l_0xc89580:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8955a)}][1F 07 02]{pause(10)}[1F 01 00][1F E1 1F 00 01]{pause(20)}[1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01]{pause(1)}[1F E1 14 01 01]{pause(1)}[1F E1 1F 00 01]{pause(1)}{music(177)}{pause(20)}[1F 15 C7 01 99 02 01]{pause(50)}[1F EB 02 06][1F 12 02][1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01][1F 1E 98 03 06][1F 1E 99 03 06][1F 1E A3 03 06]{set(flag 776)}{set(flag 57)}{set(flag 555)}{unset(flag 594)}{pause(30)}{pause(60)}" call(data_36.l_0xc7dd7d) "{sound(114)}{pause(180)}{window_open(1)}@Your attention please," next
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8955a)}][1F 07 02]{pause(10)}[1F 01 00][1F E1 1F 00 01]{pause(20)}[1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01]{pause(1)}[1F E1 14 01 01]{pause(1)}[1F E1 1F 00 01]{pause(1)}{music(177)}{pause(20)}[1F 15 C7 01 99 02 01]{pause(50)}[1F EB 02 06][1F 12 02][1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01][1F 1E 98 03 06][1F 1E 99 03 06][1F 1E A3 03 06]{set(flag 776)}{set(flag 57)}{set(flag 555)}{unset(flag 594)}{pause(30)}{pause(60)}" call(data_36.l_0xc7dd7d) "{sound(114)}{pause(180)}{window_open(1)}"
+    "@Your attention please," next
     "@would the customer from Onett,{pause(15)} Mr. [1C 02 01]," next
     "@please proceed to the office on the fourth floor." next
     "@That was customer [1C 02 01],{pause(15)} 4th floor office..." next
@@ -221,11 +228,15 @@ l_0xc89922:
     "@'Cept I need to go to the bathroom first..." end
 
 l_0xc8995a:
-    "[1F 41 05][1F E6 68 03]{window_open(1)}@Stop!{pause(20)}  That's enough!{pause(20)}  Please stop!" next
+    "[1F 41 05][1F E6 68 03]{window_open(1)}"
+    title(1,"Geldegarde Monotoli")
+    "@Stop!{pause(20)}  That's enough!{pause(20)}  Please stop!" next
     "@I give up!{pause(15)}  I really do![03]" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_closeall}{music_resume}[1F E9 68 03]{pause(30)}" eob
 
 l_0xc899a6:
-    "[1F 1C 02 03]{pause(15)}[19 22 01 01 02 00][1F 13 01 00][19 22 03 01 02 00][1F 13 03 00]{pause(45)}[1F 07 03][1F 1D 02][1F 15 6A 00 FE 02 01][1F 61][1F E7 6A 00][1F EB 01 06][1F EB 03 06]{pause(180)}{window_open(1)}@.....{wait}{window_closeall}{pause(60)}[1F EC 01 01][1F EC 03 01]{pause(180)}[1F EA 6A 00][1F 61]{music_resume}{window_open(1)}@Oooh... I was a little dizzy,{pause(15)} but now I'm okay." next
+    "[1F 1C 02 03]{pause(15)}[19 22 01 01 02 00][1F 13 01 00][19 22 03 01 02 00][1F 13 03 00]{pause(45)}[1F 07 03][1F 1D 02][1F 15 6A 00 FE 02 01][1F 61][1F E7 6A 00][1F EB 01 06][1F EB 03 06]{pause(180)}{window_open(1)}@.....{wait}{window_closeall}{pause(60)}[1F EC 01 01][1F EC 03 01]{pause(180)}[1F EA 6A 00][1F 61]{music_resume}{window_open(1)}"
+    title_paula(1)
+    "@Oooh... I was a little dizzy,{pause(15)} but now I'm okay." next
     "@...to get to Summers... we need to go back to Threek." next
     "@Yep, somehow I know that's where we must go...{wait}{window_closeall}{pause(60)}{unset(flag 47)}{set(flag 48)}{set(flag 773)}{set(flag 143)}" call(data_36.l_0xc7de60) "{set(flag 536)}" eob
 

@@ -4,11 +4,16 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc573dc:
-    "{window_open(1)}@The stars foretold that I would meet you here..." next
+    "{window_open(1)}"
+    title(1, "Star Master")
+    "@The stars foretold that I would meet you here..." next
     "@Now is the time for me to pass on to you the <technique for making stars rain down.>" next
     "@For a while, you must live far away from your friends and live with me." next
     "@Do you understand?" next
@@ -17,7 +22,9 @@ l_0xc573dc:
     "@Stay with me for a while, do you understand?![03]{window_closeall}{pause(30)}" goto(data_50.l_0xc9329b)
 
 l_0xc5749a:
-    "{window_open(1)}@It depends on [1C 02 04]'s efforts.  That will determine the reuniting of the group." next
+    "{window_open(1)}"
+    title(1, "Star Master")
+    "@It depends on [1C 02 04]'s efforts.  That will determine the reuniting of the group." next
     "@Be faithful, and wait until the time comes!{wait}{window_closeall}" eob
 
 l_0xc574f6:
@@ -106,15 +113,20 @@ l_0xc57947:
     "[06 DA 00 {e(l_0xc57955)}][06 97 00 {e(l_0xc57a26)}]" goto(l_0xc57955)
 
 l_0xc57955:
-    "@Welcome![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}[06 DA 00 {e(l_0xc57ad9)}]@Long time no see." next
+    title(1, "Brickroad")
+    "@Welcome![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}"
+    title(1, "Brickroad")
+    "[06 DA 00 {e(l_0xc57ad9)}]@Long time no see." next
     "@Mr. [1C 02 03], we met in Winters a long time ago." next
     "@I'm Brickroad." next
     "@Dr. Andonuts finally made me Dungeon Man." next
+    title(1, "Dungeon Man")
     "@If you want, I'll come with you guys for a while." next
     "@The <Return Hole> is over there." next
     "@Jump in that hole and then walk out.{wait}{set(flag 24)}{set(flag 445)}[1F 66 01 09 81 33 C9 00]{set(flag 507)}" eob
 
 l_0xc57a26:
+    title(1, "Dungeon Man")
     "@There's an old submarine at the back of the dungeon." next
     "@It can be used to cross the river." next
     "@There's a <Goodbye Exit> ...over there." next
@@ -124,6 +136,7 @@ l_0xc57a26:
     "@Hope to see you again!" end
 
 l_0xc57ad9:
+    title(1, "Dungeon Man")
     "@I don't know how, but my homemade dungeon helped you out." next
     "@I'm glad.{wait}{window_closeall}" eob
 
@@ -197,6 +210,7 @@ l_0xc57dea:
     "@                      ...Brickroad." end
 
 l_0xc57e1c:
+    title(1, "Porky")
     "@[1C 02 01]!{pause(20)}  Are you surprised?" next
     "@It's me, Porky." next
     "@I, Porky, assist only the strong and able!" next

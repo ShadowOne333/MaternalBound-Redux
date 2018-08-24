@@ -84,7 +84,7 @@ l_0xc99ed9:
     "{unset(flag 312)}" eob
 
 l_0xc99edd:
-    "[06 78 02 {e(data_57.l_0xc9b20e)}][06 6C 00 {e(data_55.l_0xc9992f)}]{window_open(1)}[1D 05 FF AA][1B 02 {e(l_0xc99f2d)}][1D 01 FF AA]@(" call(data_37.l_0xc7e6d7) " used the key to the traveling entertainer's shack.)[03]{sound(119)}{set(flag 108)}{window_closeall}" eob
+    "[06 78 02 {e(data_57.l_0xc9b20e)}][06 6C 00 {e(data_55.l_0xc9992f)}]{window_open(1)}[1D 05 FF AA][1B 02 {e(l_0xc99f2d)}][1D 01 FF AA]@(" call(data_37.l_0xc7e6d7) " used the key to the traveling entertainers' shack.)[03]{sound(119)}{set(flag 108)}{window_closeall}" eob
 
 l_0xc99f2d:
     "@(The door is locked.){wait}{window_closeall}" eob

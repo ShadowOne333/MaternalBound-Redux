@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -422,6 +425,10 @@ l_0xc57399:
     call(data_20.l_0xc6500f) eob
 
 l_0xc5739f:
-    "{window_open(1)}@Well done." next
-    "@You have made it![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}@We finally meet, Prince [1C 01 4A].[03]{window_closeall}" eob
+    "{window_open(1)}"
+    title(1, "Star Master")
+    "@Well done." next
+    "@You have made it![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}"
+    title(1, "Star Master")
+    "@We finally meet, Prince [1C 01 4A].[03]{window_closeall}" eob
 

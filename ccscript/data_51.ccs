@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -233,7 +236,7 @@ l_0xc94270:
 
 l_0xc94288:
     newline
-    "{sound(5)}@Eggs are easily broken." next
+    "{sound(5)}{pause(30)}@Eggs are easily broken." next
     "@There's no way to stuff it in with your other things if you have no more room..." end
 
 l_0xc942c7:
@@ -284,6 +287,7 @@ l_0xc94503:
     call(data_13.l_0xc5d2ed) eob
 
 l_0xc94509:
+    title(1,"Orange Kid")
     "@Are you looking for that so-called genius, Apple Kid?" next
     "@As a true genius,{pause(15)} I'll tell you that he's in Burglin Park, looking for you." end
 

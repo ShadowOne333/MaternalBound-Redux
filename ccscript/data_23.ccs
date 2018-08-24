@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -206,7 +209,7 @@ l_0xc685bb:
 
 l_0xc685cb:
     newline
-    "@But, it was empty.{wait}" goto(l_0xc685da)
+    "@But, it was empty." end
 
 l_0xc685da:
     "[1D 0D 03 01 02][1B 03 {e(l_0xc68650)}][1D 0D 03 01 03][1B 03 {e(l_0xc68650)}][06 B8 02 {e(l_0xc68651)}][1F D0 64]" goto(l_0xc685fa)
@@ -238,7 +241,9 @@ l_0xc6866a:
     eob
 
 l_0xc6866b:
-    "{save}{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{music_resume}{window_open(1)}@Hello, it's me... your dad." next
+    "{save}{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{music_resume}{window_open(1)}"
+    title(1, "Dad")
+    "@Hello, it's me... your dad." next
     "@I don't mean to butt in, but don't you think you should take a break?" next
     "[19 02]Yes" eob
 

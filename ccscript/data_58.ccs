@@ -4,16 +4,22 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc9bfcd:
+    title(1, "Dr. Andonuts")
     "@...Yes... I see...{pause(20)}" linebreak
     "  You have really set your mind on this..." next
     "@Let me take a good look at you now..." next
     "@[1C 02 01],{pause(15)} please give me that red cap..." next
     "{pause(60)}" linebreak
-    "@Ready... stand by...[03]{window_closeall}{pause(1)}" call(data_24.l_0xc69082) "[1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 06][1F 21 51][1F E5 FF][1F 15 6A 00 0E 03 01][1F 61][1F E6 6A 00]{music(179)}[1F E9 6A 00][1F 61][1F 01 00][1F 15 A2 00 3B 01 FF][1F 21 68][1F E5 FF][1F EB FF 06]{window_open(1)}@[1C 02 01]!" linebreak
+    "@Ready... stand by...[03]{window_closeall}{pause(1)}" call(data_24.l_0xc69082) "[1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 06][1F 21 51][1F E5 FF][1F 15 6A 00 0E 03 01][1F 61][1F E6 6A 00]{music(179)}[1F E9 6A 00][1F 61][1F 01 00][1F 15 A2 00 3B 01 FF][1F 21 68][1F E5 FF][1F EB FF 06]{window_open(1)}"
+    title(1, "Dr. Andonuts")
+    "@[1C 02 01]!" linebreak
     "  [1C 02 02]!" linebreak
     "  [1C 02 04]!" next
     "@[1C 02 03]!...{pause(20)} my son..." next
@@ -83,7 +89,9 @@ l_0xc9c7fa:
     "[1F 12 02][1F 41 0F][1F 41 05]{set(flag 763)}{set(flag 295)}{set(flag 468)}{set(flag 469)}{set(flag 472)}{set(flag 473)}{set(flag 476)}{set(flag 513)}{set(flag 530)}{set(flag 749)}{set(flag 750)}{set(flag 805)}[1F 15 6A 00 79 02 01][1F 61]{pause(1)}[1F EB FF 06][1F 21 51]{pause(180)}[1F 15 B5 01 0B 03 FF][1F 21 C4][1F E6 FF 00]{pause(1)}[1F 1F B5 01 06][1F EC FF 01]{pause(1)}{set(flag 775)}{set(flag 11)}" eob
 
 l_0xc9c85d:
-    "[1F 01 00]{sound(8)}[1F 15 6A 00 27 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 2D 00 0B 00 01][1F 1E 16 00 06]{sound(9)}[1F ED][19 24 2D 00 01 01 00][1F E4 2D 00 00][19 22 01 03 2D 00][1F 13 01 00][1F E5 FF]{pause(1)}[1F E7 2D 00]{unset(flag 295)}{set(flag 467)}{set(flag 97)}{pause(30)}{music(177)}{pause(120)}{pause(120)}{window_open(1)}{pause(20)}@A letter arrived from my brother, Porky...{pause(15)} it is addressed to [1C 02 01]." next
+    "[1F 01 00]{sound(8)}[1F 15 6A 00 27 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 2D 00 0B 00 01][1F 1E 16 00 06]{sound(9)}[1F ED][19 24 2D 00 01 01 00][1F E4 2D 00 00][19 22 01 03 2D 00][1F 13 01 00][1F E5 FF]{pause(1)}[1F E7 2D 00]{unset(flag 295)}{set(flag 467)}{set(flag 97)}{pause(30)}{music(177)}{pause(120)}{pause(120)}{window_open(1)}{pause(20)}"
+    title(1, "Picky")
+    "@A letter arrived from my brother, Porky...{pause(15)} it is addressed to [1C 02 01]." next
     "@There's no stamp,{pause(15)} and it's not time for the mailman to come..." next
     "@Anyway, I brought it over." next
     "@It says,{pause(15)} <come and get me, loser!" next
@@ -94,6 +102,7 @@ l_0xc9c98a:
     "{pause(1)}" goto(l_0xc9c98a)
 
 l_0xc9c991:
+    title(1, "Yi-Si-Qi")
     "[06 49 00 {e(l_0xc9cbc4)}][06 10 00 {e(l_0xc9cb79)}][06 11 01 {e(l_0xc9c9e8)}][06 0A 00 {e(l_0xc9c9db)}]@I won't say anything." next
     "@Go to <Mu,> the Place of Emptiness again.{wait}" call(data_50.l_0xc92458) eob
 
@@ -103,7 +112,9 @@ l_0xc9c9db:
 l_0xc9c9e8:
     "@I am proud." next
     "@You have completed your Mu training." next
-    "@I, Yi-Si-Qi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}@Prince [1C 02 04]," next
+    "@I, Yi-Si-Qi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
+    title(1, "Yi-Si-Qi")
+    "@Prince [1C 02 04]," next
     "@I shall relay a message to you from the heavens." next
     "@The evil entity that controls all wickedness is preparing" next
     "@for the greatest struggle of all time..." next
@@ -316,6 +327,7 @@ l_0xc9d523:
     "@I'll see you again.  So long!{wait}{sound(40)}{set(flag 595)}" eob
 
 l_0xc9d5c4:
+    title_poo(1)
     "@You're here!" next
     "@We have little, but stay and rest for a while." next
     call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}" linebreak

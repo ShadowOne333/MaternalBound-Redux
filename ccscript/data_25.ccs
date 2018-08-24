@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -49,11 +52,14 @@ l_0xc6a9c8:
     "@My lands..." end
 
 l_0xc6a9f9:
+    title(1, "Tony")
     "@Ah, [1C 02 03],{pause(15)} I just dreamt that you and I were taking a walk." next
     "@...What's wrong?" end
 
 l_0xc6aa2f:
-    "[06 58 00 {e(l_0xc6ad29)}][06 5D 02 {e(l_0xc6abd5)}][06 5C 02 {e(l_0xc6ad29)}]@Oh,{pause(15)} [1C 02 03] and Tony.{pause(20)}  You startled me." next
+    "[06 58 00 {e(l_0xc6ad29)}][06 5D 02 {e(l_0xc6abd5)}][06 5C 02 {e(l_0xc6ad29)}]"
+    title(1, "Maxwell")
+    "@Oh,{pause(15)} [1C 02 03] and Tony.{pause(20)}  You startled me." next
     "@Are you looking for a late night snack?" next
     "@I'm having some trouble with my project." next
     "@If only [1C 02 03]'s father, Dr. Andonuts, were here." next
@@ -69,7 +75,9 @@ l_0xc6aa2f:
     "  Ah, ha, ha, ha, ha.{wait}{window_closeall}" eob
 
 l_0xc6abd5:
-    "[1D 01 FF CD]@Hah, ha, ha.  The key didn't work, did it?" next
+    "[1D 01 FF CD]"
+    title(1, "Maxwell")
+    "@Hah, ha, ha.  The key didn't work, did it?" next
     "@I thought that might be the case.{pause(15)}  So I just invented{pause(10)} the..." next
     "@<Machine that Opens Doors, especially when you have a slightly bad key.>" next
     "@Sorry for" linebreak
@@ -84,6 +92,7 @@ l_0xc6acda:
     "@Hah, ha, ha.  What a greedy guy!  Hah, ha, ha." end
 
 l_0xc6ad29:
+    title(1, "Maxwell")
     "@If you leave, call me, and I'll record your adventure." next
     "@It's like saving a game.{pause(20)}" linebreak
     "  Ha, ha, ha." end
@@ -129,9 +138,12 @@ l_0xc6af5d:
     "@Is it cold outside?" end
 
 l_0xc6af6c:
-    "[1D 05 FF 68][1B 03 {e(l_0xc6af8a)}]@Kyee Kyee! (Yeah!)" end
+    "[1D 05 FF 68][1B 03 {e(l_0xc6af8a)}]"
+    title(1, "Bubble Monkey")
+    "@Kyee Kyee! (Yeah!)" end
 
 l_0xc6af8a:
+    title(1, "Bubble Monkey")
     "@Kyu Ukyee" linebreak
     "  (Gimme some gum.)" next
     "@(The monkey got a piece of bubble gum from [1C 02 03] and blew a bubble!)[03]{window_closeall}{set(flag 334)}{set(flag 22)}" call(data_43.l_0xc880b9) call(data_23.l_0xc6822a) eob
@@ -158,7 +170,9 @@ l_0xc6b063:
     "[06 0E 00 {e(data_55.l_0xc9992f)}]{set(flag 344)}[1F 66 01 27 0F AE C9 00]{isset(flag 22)}[1B 02 {e(data_55.l_0xc9992f)}][1F 66 02 30 87 B0 C6 00]" eob
 
 l_0xc6b087:
-    "[1F EB 09 06][1F 15 2E 00 FB 00 01][1F 61][19 22 03 03 2E 00][1F 13 03 00][1F F3 2E 00 03]{pause(60)}[1F F4 2E 00]{window_open(1)}@Kya kyi kya kyoo." linebreak
+    "[1F EB 09 06][1F 15 2E 00 FB 00 01][1F 61][19 22 03 03 2E 00][1F 13 03 00][1F F3 2E 00 03]{pause(60)}[1F F4 2E 00]{window_open(1)}"
+    title(1, "Bubble Monkey")
+    "@Kya kyi kya kyoo." linebreak
     "  (Give me some gum now.)" next
     "@Kaki kuke ko." linebreak
     "  (I'll take care of everything.){wait}{window_closeall}{pause(30)}" goto(data_43.l_0xc88103)
@@ -177,7 +191,9 @@ l_0xc6b161:
     "@Do you think Sebastian's kidnapping will be in tomorrow's paper?" end
 
 l_0xc6b18d:
-    "[06 0E 00 {e(l_0xc6b4bb)}][06 7F 00 {e(l_0xc6b492)}]@Mr. Brickroad, the dungeon maker referred you, right?" next
+    title(1, "Dr. Andonuts")
+    "[06 0E 00 {e(l_0xc6b4bb)}][06 7F 00 {e(l_0xc6b492)}]"
+    "@Mr. Brickroad, the dungeon maker referred you, right?" next
     "@And not only that...  What?{pause(15)}  Who?{pause(15)}  My son?{pause(20)}  Oh... I... can't... I can't believe it..." next
     "@You're [1C 02 03], my son.{pause(15)}  It's been maybe 10 years since I last saw you." next
     "@I'm so glad you're such a healthy boy." next
@@ -237,6 +253,7 @@ l_0xc6b492:
     "@Let's get together again in 10 years or so.{wait}[1F F1 6F 02 89 00]{set(flag 127)}" eob
 
 l_0xc6b4bb:
+    title(1, "Dr. Andonuts")
     "[19 10 01]{rtoarg}{result_is(3)}[1B 03 {e(l_0xc6b4fe)}][06 82 00 {e(l_0xc6b516)}]@Oh!  You surprised me!" next
     "[19 10 01]{rtoarg}@You're [1C 02 00], aren't you?" next
     "{set(flag 130)}" goto(l_0xc6b523)
@@ -280,6 +297,7 @@ l_0xc6b759:
     end
 
 l_0xc6b75b:
+    title(1, "Dr. Andonuts")
     "@Hmm..." next
     "@...It looks like you found something out." next
     "@I finished remodeling the Sky Walker." next
@@ -287,12 +305,15 @@ l_0xc6b75b:
     "@It shouldn't  break this time...{pause(20)}  Well, maybe...{wait}[1F F1 6F 02 8A 00]" eob
 
 l_0xc6b7d0:
-    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6b871)}]@[1C 02 03]!{pause(15)}  Long time no see.{pause(20)}  You've gotten taller..." next
+    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6b871)}]"
+    title(1, "Maxwell")
+    "@[1C 02 03]!{pause(15)}  Long time no see.{pause(20)}  You've gotten taller..." next
     "@Oh, I don't have time to chat right now.{pause(20)}  Tony's missing." next
     "@I thought he was with you...  He suddenly disappeared." next
     "@He's usually very responsible and leaves a note at least..." end
 
 l_0xc6b871:
+    title(1, "Maxwell")
     "@What?{pause(20)}  You're [1C 02 03]'s friends?" next
     "@Good timing." next
     "@Tony, [1C 02 03]'s friend,{pause(15)} suddenly disappeared.{pause(15)}  I thought he left to go see [1C 02 03]..." next
@@ -351,7 +372,9 @@ l_0xc6bbe3:
     "@I can't believe that I was so brave..." end
 
 l_0xc6bbf9:
-    "[06 49 00 {e(l_0xc6bc43)}]@Ki-kye-kye-kye-kiii." next
+    "[06 49 00 {e(l_0xc6bc43)}]"
+    title(1, "Bubble Monkey")
+    "@Ki-kye-kye-kye-kiii." next
     "@(Yep,{pause(15)} I have some" linebreak
     "  che{pause(5)}e{pause(5)}e{pause(5)}ewing gum!){wait}{window_closeall}" goto(data_50.l_0xc92a82)
 
@@ -368,6 +391,7 @@ l_0xc6bc80:
     goto(l_0xc6bc9b)
 
 l_0xc6bc9b:
+    title(1, "Brickroad")
     "@My name's Brickroad, the dungeon developer." next
     "@I've devoted my life to making dungeons." next
     "@Well, by combining my skills and Dr. Andonuts intelligence," next
@@ -410,6 +434,7 @@ l_0xc6bef9:
     "@(There's no response.)" end
 
 l_0xc6bf0c:
+    title(1, "Apple Kid")
     "@I expected there to be about a seven percent chance that you would rescue me." next
     "@But meeting Mr. Saturn here has actually turned out to be very beneficial." next
     "@I also got to meet Dr. Andonuts...{pause(20)}  See you." next
@@ -436,6 +461,7 @@ l_0xc6c081:
     "@...can't carry all.{wait}{font_normal}" eob
 
 l_0xc6c099:
+    title(1, "Tony")
     "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6c168)}]@[1C 02 03], [1C 02 03] buddy!" next
     "@Oh me, oh my..." next
     "@You... came to rescue me!{pause(15)}  Pal!" linebreak
@@ -455,10 +481,12 @@ l_0xc6c129:
 
 l_0xc6c13a:
     next
+    title(1, "Tony")
     "@I'm Tony." next
     "@I'm [1C 02 03]'s best friend.{pause(20)}  I've known him for the longest time." end
 
 l_0xc6c168:
+    title(1, "Tony")
     "@Where's [1C 02 03]?" next
     "[19 10 01]{swap}@[1C 02 00], you've altered [1C 02 03]'s destiny." next
     "@Bring back [1C 02 03]!" next

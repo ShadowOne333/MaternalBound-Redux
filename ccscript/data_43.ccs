@@ -4,11 +4,15 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc86e58:
     "@([1C 01 4A] read the Hieroglyphs!)" next
+    title_poo(1)
     "@<To fight against the invaders, we built this pyramid fortress." next
     "@However, our efforts were futile, and we lost." next
     "@Nonetheless, our pyramid was protected by the gods of Scarabia." next
@@ -22,7 +26,9 @@ l_0xc86e58:
     "@   #" linebreak
     "  4   3" linebreak
     "   2 5" next
-    "@Dance in front of the Sphinx!>[06 94 00 {e(l_0xc87099)}][03]{window_closeall}{pause(120)}[1F 1C 04 04]{pause(10)}[19 22 01 01 04 00][1F 13 01 00][19 22 02 01 04 00][1F 13 02 00][19 22 03 01 04 00][1F 13 03 00]{pause(50)}[1F 1D 04]{pause(30)}{window_open(1)}[19 10 01]{rtoarg}@[1C 02 00]!  Let's go to Scarabia.{pause(15)}  The pyramid is the key!{wait}{set(flag 148)}[1F 66 01 31 6F AC C8 00]" eob
+    "@Dance in front of the Sphinx!>[06 94 00 {e(l_0xc87099)}][03]{window_closeall}{pause(120)}[1F 1C 04 04]{pause(10)}[19 22 01 01 04 00][1F 13 01 00][19 22 02 01 04 00][1F 13 02 00][19 22 03 01 04 00][1F 13 03 00]{pause(50)}[1F 1D 04]{pause(30)}{window_open(1)}"
+    title_poo(1)
+    "[19 10 01]{rtoarg}@[1C 02 00]!  Let's go to Scarabia.{pause(15)}  The pyramid is the key!{wait}{set(flag 148)}[1F 66 01 31 6F AC C8 00]" eob
 
 l_0xc87099:
     end
@@ -279,7 +285,8 @@ l_0xc87aeb:
 
 l_0xc87b0b:
     "@(<Safety First>" linebreak
-    "  Don't get injured!" next    "  Burp instead!)" end
+    "  Don't get injured!" next
+    "  Burp instead!)" end
 
 l_0xc87b33:
     "@(Item shop here.)" end
@@ -386,7 +393,9 @@ l_0xc8824a:
     "[1F EB 09 06][1F 15 31 00 FD 00 01][1F 61][1F 1F 31 00 06][1F 15 32 00 05 01 01][1F 15 58 01 FF 00 01] [1F 61][1F F2 58 01 06 01] [1F 61][1F 1F 32 00 06][1F 1F 58 01 06][1F 15 2E 00 07 01 01] [1F 61][1F 1E A5 02 06][1F 61][1F 1F 2E 00 06][1F 15 2F 00 08 01 01][1F 61][1F 1F 2F 00 06][1F 15 2E 00 09 01 01][1F 61][1F 1F 2E 00 06][1F EC 09 01]{unset(flag 338)}{set(flag 311)}" eob
 
 l_0xc882bd:
-    "[1F E6 78 02] [1F 13 09 05][1F 1C 09 03]{pause(60)}[1F 1D 09]{window_open(1)}@Kye uki kukyi" linebreak
+    "[1F E6 78 02] [1F 13 09 05][1F 1C 09 03]{pause(60)}[1F 1D 09]{window_open(1)}"
+    title(1,"Bubble Monkey")
+    "@Kye uki kukyi" linebreak
     "  (Now she's my type...)" next
     "@Ki kukkyo uke" linebreak
     "  (I think I'll ask her for a date!)[03]{window_closeall}[1F 12 09][1F 15 2E 00 1D 01 01]{pause(4)}[1F E9 78 02] [1F 61]{unset(flag 22)}" eob
@@ -401,9 +410,11 @@ l_0xc88387:
     "[1F 15 B9 01 09 03 01][1F E9 6F 02][1F 61]{pause(30)}[1F 1E 6D 02 06][1F 61][1F 15 D1 00 92 00 FF][1F 21 BA][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 93 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 99 00 FF][1F 15 E6 00 9B 00 FF][1F 21 BD][1F EF E6 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 94 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 9D 00 FF][1F 15 E6 00 9F 00 FF][1F 21 BF][1F EF E6 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 95 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 A1 00 FF][1F 15 E6 00 A4 00 FF][1F 21 C1][1F EF E6 00][1F 61][1F E7 D1 00][1F E7 E6 00]" call(data_44.l_0xc886d7) "{pause(15)}" call(data_44.l_0xc886d7) "[1F EA D1 00][1F EA E6 00][1F 61][1F E7 D1 00][1F E7 E6 00]{unset(flag 655)}{music(110)}[1F E8 FF][1F EA D1 00][1F EA E6 00][1F 61][1F ED][1F E5 FF][1F 11 01][1F 11 02][1F 12 03]" call(data_49.l_0xc915f4) "{set(flag 47)}[1F 15 0D 00 B0 00 FF][1F 21 4D]{music_resume}[1F 15 6A 00 AF 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F 0D 00 06][1F 15 03 00 B1 00 01]{pause(1)}[1F E7 03 00]{window_open(1)}" goto(l_0xc884d0)
 
 l_0xc884d0:
+    title_jeff(1)
     "@Man,{pause(15)} oh,{pause(5)} man,{pause(20)} did that ever scare me!..." next
     "@The Sky Walker...{pause(20)}  I guess it took a little damage while landing..." next
     "@Oh well...[03]{window_closeall}[1F EA 03 00][1F 61]{window_open(1)}" newline
+    title_jeff(1)
     "@You don't have to explain a thing...{pause(20)}  I'm [1C 02 03]." next
     "@I came because you" linebreak
     "  called me." next

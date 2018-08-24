@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -72,6 +75,7 @@ l_0xc6e2a4:
     "[06 4B 00 {e(l_0xc6e45a)}]" goto(l_0xc6e2ab)
 
 l_0xc6e2ab:
+    title(1, "Porky")
     "@Oooo la la." next
     "@This... this is my poor old friend..." next
     "@Ah... what's your name..." next
@@ -102,6 +106,7 @@ l_0xc6e426:
     "@Get outta here!{pause(20)}  Now, loser![03]{window_closeall}" goto(data_44.l_0xc894ac)
 
 l_0xc6e45a:
+    title(1, "Porky")
     "[06 71 02 {e(l_0xc6e2ab)}]@Oooo la la." next
     "@You shouldn't be satisfied with eating just some more [1C 01 04]." next
     "@You're so out of it." next
@@ -112,7 +117,8 @@ l_0xc6e45a:
     "@<Strawberry tofu>...{pause(20)}  Oooo, I can't wait!" next
     "@I'm starting to drool all over myself just thinking about it." end
 
-l_0xc6e557:
+l_0xc6e557:    
+    title(1, "Aloysius Minch")
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6e57d)}]@You haven't changed much, [1C 02 01]." next
     goto(l_0xc6e5a1)
 
@@ -193,14 +199,18 @@ l_0xc6e982:
     goto(l_0xc6e9d6)
 
 l_0xc6e9d6:
+    title(1, "Electra")
     "@Master Porky's cool!" next
     "@He gave me something the other day, and said <this is fit for a maid...>" end
 
 l_0xc6ea0f:
+    title(1, "Electra")
     "@Thanks for dropping by, even though there's nothing to do, honey." end
 
 l_0xc6ea34:
-    "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]@Look at my skinny arms,{pause(20)} thin body,{pause(20)} and gray hair..." next
+    "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]"
+    title(1, "Geldegarde Monotoli")
+    "@Look at my skinny arms,{pause(20)} thin body,{pause(20)} and gray hair..." next
     "@I've become so weak since I lost the Mani Mani statue." next
     "@I'm sorry I kidnapped [1C 02 02]." next
     "@I haven't done anything to her." next
@@ -209,6 +219,7 @@ l_0xc6ea34:
     "@I'm sorry I've created so much trouble for you.[03]{window_closeall}{pause(60)}" call(data_23.l_0xc68253) "{set(flag 15)}{unset(flag 776)}[19 23 68 03 01 FF 00][1F 16 68 03 00]{music_resume}{pause(120)}{window_open(1)}" goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
+    title(1, "Geldegarde Monotoli")
     "@....." next
     "@I'll tell you everything." next
     "@The Mani Mani statue creates an illusion." next
@@ -242,7 +253,9 @@ l_0xc6ed65:
 
 l_0xc6ed74:
     "@Summers is located across the ocean.{pause(20)} Take my helicopter." next
-    "@I'll open the door to my heliport.[03]{window_closeall}{pause(1)}[1F F1 68 03 BD 02][1F 61][1F F1 6C 03 BE 02][1F 61][1F F1 6C 03 2C 00][1F E6 68 03][1F 07 03]{pause(180)}{music(85)}[1F F1 6D 03 BF 02][1F 61][1F F1 6D 03 08 00][1F 07 02]{pause(30)}{sound(28)}{pause(60)}{music_resume}[1F E9 68 03][1F 61][1F F1 68 03 08 00]{window_open(1)}@You must go on!" next
+    "@I'll open the door to my heliport.[03]{window_closeall}{pause(1)}[1F F1 68 03 BD 02][1F 61][1F F1 6C 03 BE 02][1F 61][1F F1 6C 03 2C 00][1F E6 68 03][1F 07 03]{pause(180)}{music(85)}[1F F1 6D 03 BF 02][1F 61][1F F1 6D 03 08 00][1F 07 02]{pause(30)}{sound(28)}{pause(60)}{music_resume}[1F E9 68 03][1F 61][1F F1 68 03 08 00]{window_open(1)}"
+    title(1, "Geldegarde Monotoli")
+    "@You must go on!" next
     "@[1C 02 01]!" next
     "@This is your destiny." next
     "{set(flag 664)}{set(flag 741)}" goto(l_0xc6ee2e)
@@ -252,6 +265,7 @@ l_0xc6ee2e:
     "@Take care.{wait}{window_closeall}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 11)}{set(flag 754)}{set(flag 779)}{unset(flag 759)}" eob
 
 l_0xc6ee6f:
+    title(1, "Geldegarde Monotoli")
     "@So Porky took the helicopter?" next
     "@I wonder if he'll be okay..." end
 
@@ -260,7 +274,9 @@ l_0xc6ee94:
     "  He's stuffed!)" end
 
 l_0xc6eeb4:
-    "[19 10 01]{rtoarg}@...[1C 02 01]!" next
+    "[19 10 01]{rtoarg}"
+    title_paula(1)
+    "@...[1C 02 01]!" next
     "@You finally made it here!" next
     "@...I'm fine." next
     "@I believed you'd come and save me." next
@@ -308,12 +324,15 @@ l_0xc6f112:
     "@...Anyway, I don't think a woman like that would be looking for me..." end
 
 l_0xc6f175:
-    "[06 8F 00 {e(l_0xc6f1d6)}]@What?" next
+    "[06 8F 00 {e(l_0xc6f1d6)}]"
+    title(1, "Boris")
+    "@What?" next
     "@Does Mr. Geldegarde Monotoli come here often?" next
     "@Hello!{pause(20)}  Time to get up!!" next
     "@It could never happen!...  Well, actually that's not true." end
 
 l_0xc6f1d6:
+    title(1, "Boris")
     "@Sorry about the other day." next
     "@This sidewalk bar isn't as profitable as it used to be." next
     "@This is just a hangout for the regulars." end

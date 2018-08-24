@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -230,6 +233,7 @@ l_0xc98000:
     "@(The Mani Mani Statue is glowing strangely...){wait}{sound(113)}" eob
 
 l_0xc98024:
+    title(1,"Mr. Carpainter")
     "[06 7A 00 {e(l_0xc981c6)}][06 44 00 {e(l_0xc982b3)}]{set(flag 744)}@Thanks for coming!{pause(15)}  I've been waiting for you." next
     "@I need your assistance to help make the world blue" next
     "@and change it into a happy and peaceful society." next
@@ -252,6 +256,7 @@ l_0xc98148:
 
 l_0xc9817a:
     "{window_open(1)}" newline
+    title(1,"Mr. Carpainter")
     "@The gold-colored statue behind me..." next
     "@Since I got the statue,{pause(15)} I have been doing peculiar things." next
     "{set(flag 44)}" goto(l_0xc981c6)
@@ -268,6 +273,7 @@ l_0xc9827c:
     "@You should take this even if you need to throw away one of your items." end
 
 l_0xc982b3:
+    title(1,"Mr. Carpainter")
     "@Please forgive me, if you can...{pause(20)}  I just wanted to have a normal life." next
     "@I apologize to everyone." end
 
@@ -356,7 +362,7 @@ l_0xc9873b:
 
 l_0xc98785:
     "[06 61 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
-    "@You strange, unmasked fellow.  Don't go to heaven![03]" call(data_23.l_0xc6850e) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 83 01 7B 02]{set(flag 353)}" eob
+    "@You strange, unmasked fellow.  Don't go to Heaven![03]" call(data_23.l_0xc6850e) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 83 01 7B 02]{set(flag 353)}" eob
 
 l_0xc987cf:
     "[06 62 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
@@ -461,7 +467,9 @@ l_0xc98cc1:
     "@You really think I was a bad boy?" end
 
 l_0xc98cd3:
-    "[1F F1 9B 01 6F 02] [1F 61][1F E6 9B 01]{window_open(1)}@That was really something, [1C 02 01]!{pause(20)}  It looks like I somehow woke up, too.{pause(15)}" next
+    "[1F F1 9B 01 6F 02] [1F 61][1F E6 9B 01]{window_open(1)}"
+    title(1,"Porky")
+    "@That was really something, [1C 02 01]!{pause(20)}  It looks like I somehow woke up, too.{pause(15)}" next
     "@Let's be friends again!{pause(20)}" next
     "@C'mon, reply to me, will ya? I promise I'll be a good guy.{pause(60)}" next
     "@I guess that's a no, huh?" next

@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -185,7 +188,8 @@ l_0xc70a4c:
 
 l_0xc70ab5:
     "@This is my business, so I'm happy to have customers." next
-    "@But, don't you know this is a crisis?{pause(20)}  You shouldn't be wasting time here.@Anyway, I'll keep your $[1C 0A 00 00 00 00]." call(data_29.l_0xc726cb) eob
+    "@But, don't you know this is a crisis?{pause(20)}  You shouldn't be wasting time here." next
+    "@Anyway, I'll keep your $[1C 0A 00 00 00 00]." call(data_29.l_0xc726cb) eob
 
 l_0xc70b17:
     "@You know that [1C 02 02] is in the mountain cabin, right?" next

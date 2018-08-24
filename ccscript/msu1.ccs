@@ -9,13 +9,10 @@ import asm65816
 // org $E60353
 // db $2f ; hardcore mute
 
-ROM[0xC4FBF4] = {
-	JSL (msuTrack)
+ROM[0xC08183] = {
+	JSL (nmi)
 	NOP
-}
-
-ROM[0xC4FD12] = {
-	JSL (newTrackFlag)
+	NOP
 }
 
 ROM[0xC0AC0C] = {
@@ -23,10 +20,13 @@ ROM[0xC0AC0C] = {
 	NOP
 }
 
-ROM[0xC08183] = {
-	JSL (nmi)
+ROM[0xC4FBF4] = {
+	JSL (msuTrack)
 	NOP
-	NOP
+}
+
+ROM[0xC4FD12] = {
+	JSL (newTrackFlag)
 }
 
 
@@ -38,7 +38,7 @@ msuTrack: {			// //ROM[0xEFFE00] =
 	SEP	(0x20)
 	LDA_al	(0x002002)
 	CMP_8	(0x53)
-	BEQ_a	(playmsu)	// BEQ $03 - BEQ (playmsu) Branch to playmsu
+	BEQ	(0x03)		// BEQ $03 - BEQ (playmsu) Branch to playmsu
 	PLP			// Restore processor status
 	PLA			// Get track number from stack
 	RTL
@@ -60,7 +60,7 @@ loop: {
 	BNE	(0xF8)		// BNE $F8 - BNE(loop) Branch to loop
 	LDA_al	(0x002000)
 	AND_8	(0x08)
-	BNE_a	(playspc)	// BNE $2C - Branch to playspc, error bit set?
+	BNE	(0x2C)		// BNE $2C - Branch to "playspc", error bit set?
 	LDA_xl	(track_table)	// LDA_xl (0xEFFF00)
 	STA_al	(0x002007)
 	LDA_8	(0xFF)
@@ -139,16 +139,16 @@ nmi: {
 	RTL
 	CMP_8	(0x02)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadefast)	// JMP (endhalf) - JMP $FDF7
+	JMP	(fadefast)	// JMP (fadefast) - JMP $FDF7
 	CMP_8	(0x03)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadeslow)	// JMP (endhalf) - JMP $FDDA
+	JMP	(fadeslow)	// JMP (fadeslow) - JMP $FDDA
 	CMP_8	(0x07)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadehalf)	// JMP (endhalf) - JMP $FE16
+	JMP	(fadehalf)	// JMP (fadehalf) - JMP $FE16
 	CMP_8	(0x08)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadefull)	// JMP (endhalf) - JMP $FE36
+	JMP	(fadefull)	// JMP (fadefull) - JMP $FE36
 	LDA_8	(0x00)
 	STA_al	(0x7FFFF3)	// Erase fade flag
 	RTL
@@ -157,7 +157,7 @@ nmi: {
 fadeslow: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x00)
-	BEQ_a	(endslow)	// BEQ (endslow) - BEQ $06
+	BEQ	(0x06)		// BEQ (endslow) - BEQ $06
 	DEC
 	DEC
 	CMP_8	(0x10)
@@ -175,7 +175,7 @@ endslow: {
 fadefast: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x00)
-	BEQ_a	(endfast)	// BEQ (endhalf) - BEQ $08
+	BEQ	(0x08)		// BEQ (endfast) - BEQ $08
 	DEC
 	DEC
 	DEC
@@ -195,7 +195,7 @@ endfast: {
 fadehalf: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x40)		// Final level?
-	BEQ_a	(endhalf)	// BEQ (endhalf) - BEQ $07
+	BEQ	(0x07)		// BEQ (endhalf) - BEQ $07
 	DEC
 	DEC
 	DEC
@@ -215,7 +215,7 @@ endhalf: {
 fadefull: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0xFF)		// Final level?
-	BEQ_a	(endfull)	// BEQ (endfull) - BEQ $07
+	BEQ	(0x07)		// BEQ (endfull) - BEQ $07
 	INC
 	INC
 	INC

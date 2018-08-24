@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -46,6 +49,7 @@ l_0xc9ddf8:
     "@This is the earth's belly button!" end
 
 l_0xc9de0e:
+    title(1,"Mystery Rock")
     "[06 A7 01 {e(data_35.l_0xc7c588)}][06 80 01 {e(l_0xc9e252)}]{music(119)}[06 02 00 {e(l_0xc9e041)}]@You finally came, [1C 01 08]." next
     "[19 05 01 01 01][19 05 01 02 01][19 05 01 06 01][1E 00 01 64][1E 04 01 64]{sound(37)}{pause(10)}@At last, you speak to me." next
     "@Listen [1C 01 08]." next
@@ -167,13 +171,16 @@ l_0xc9e613:
     call(data_48.l_0xc90d23) eob
 
 l_0xc9e619:
+    title(1,"Master Belch")
     "[06 14 01 {e(data_35.l_0xc7c588)}]{music(134)}@You may have forgotten, but *Buuuuurp!*..." next
     "@I'm the return of Belch!{sound(78)}{pause(1)}" next
+    title(1,"Return of Belch")
     "@I've fought you before." next
     "{sound(78)}{pause(1)}@Peeeeyouuu!" next
     "@Don't you remember my ripe odor?" next
     "@Belch has trained more and has returned much stronger." next
     "@Buuuurp!{pause(20)}{sound(78)}{pause(1)}  Belch has also changed his name to Barf!..." next
+    title(1,"Master Barf")
     "@Puke!  Vomit!  Barf, barf!  Chuck!  Chuck!" next
     "@Drown to death in puke!" next
     "@Don't you think that's an incredibly masculine taunt to throw at you?[03]" call(data_23.l_0xc68570) "[1B 03 {e(data_23.l_0xc683de)}][1F 11 04][1F 71 04 02]{set(flag 276)}{pause(1)}[1F F1 CD 04 7B 02]" eob
@@ -297,7 +304,9 @@ l_0xc9ec74:
     call(data_21.l_0xc65243) eob
 
 l_0xc9ec7a:
-    "[06 49 00 {e(l_0xc9ecfe)}]{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9ecfe)}][19 22 01 01 03 00][1F 13 01 00][19 22 02 01 03 00][1F 13 02 00]{window_open(1)}{pause(20)}@It's completely broken." next
+    "[06 49 00 {e(l_0xc9ecfe)}]{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9ecfe)}][19 22 01 01 03 00][1F 13 01 00][19 22 02 01 03 00][1F 13 02 00]{window_open(1)}{pause(20)}"
+    title_jeff(1)
+    "@It's completely broken." next
     "@I thought I could fix it,{pause(15)} but on re-examination..." next
     "@...I noticed that there's no engine.{pause(20)}  Mmmm.{wait}{window_closeall}" eob
 
@@ -464,7 +473,7 @@ l_0xc9f442:
 
 l_0xc9f4a2:
     "{window_open(1)}@(Suddenly,{pause(10)}" linebreak
-    "  Nice, of the Runaway Brothers,{pause(20)}{prompt}" linebreak
+    "  Nice{pause(20)} of the Runaway Brothers,{pause(20)}{prompt}" linebreak
     "@felt something stop him,{prompt}" linebreak
     "@and he prayed fervently for the safety of [1C 01 08] and his friends.){pause(150)}{window_closeall}" eob
 

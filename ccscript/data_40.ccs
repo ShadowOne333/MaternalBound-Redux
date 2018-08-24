@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -24,7 +27,7 @@ l_0xc82986:
     "@Oh, excuse me for my laughing in your face." end
 
 l_0xc829df:
-    "{sound(5)}@Sorry, but you can't carry all of these..." end
+    "{sound(5)}{pause(30)}@Sorry, but you can't carry all of these..." end
 
 l_0xc829f8:
     call(data_13.l_0xc5d3e9) eob
@@ -86,11 +89,15 @@ l_0xc82c48:
     "@Certainly, it's very dangerous living in the city." end
 
 l_0xc82c6b:
-    "[06 8B 00 {e(data_35.l_0xc7c588)}]{music(155)}@Gwaaagh, gwarrrgh!" next
+    "[06 8B 00 {e(data_35.l_0xc7c588)}]{music(155)}"
+    title(1,"Dept. Store Spook")
+    "@Gwaaagh, gwarrrgh!" next
     "@You finally made it." next
     "@This department store is gonna be your grave!{pause(20)}  Gwaaagh." next
     "@Die and go to Hell-" next
-    "@No, to heaven![03]" call(data_23.l_0xc6855b) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}@...Even though you could beat me..." next
+    "@No, to Heaven![03]" call(data_23.l_0xc6855b) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}"
+    title(1,"Dept. Store Spook")
+    "@...Even though you could beat me..." next
     "@Master Giygas will avenge me..." next
     "{pause(60)}" linebreak
     "@At this moment, [1C 02 02] should be...Monotoli..." next
@@ -167,7 +174,8 @@ l_0xc83158:
     "@Lawyers,{pause(15)} policemen,{pause(15)} everyone that follows Monotoli!" next
     "@They're all his toadies!" next
     "@No matter how you fight him,{pause(15)} you can't win!" next
-    "@No I ain't- hic! {pause(30)}drunk!" next    "@Dumbass!" end
+    "@No I ain't- hic! {pause(30)}drunk!" next
+    "@Dumbass!" end
 
 l_0xc83254:
     "@Hic!" next
@@ -212,6 +220,7 @@ l_0xc834a8:
     "@...I know better now." end
 
 l_0xc834e1:
+    title(1,"Electra")
     "@I kept asking around for strawberry tofu, but...{wait}[1D 05 FF 8B][1B 03 {e(l_0xc83515)}]" eob
 
 l_0xc83515:
@@ -222,12 +231,15 @@ l_0xc83515:
     "  <[1C 05 8B].>)" next
     "@Now I can make strawberry tofu for my guests." next
     "@...You are so kind, I'll make some for you." next
-    "@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1D 01 FF 8B]{set(flag 142)}[1F F1 B7 03 A8 02][1F 61][1F E6 B7 03][19 23 B7 03 01 FF 00][1F 16 B7 03 00]{pause(20)}{window_open(1)}@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1F E9 B7 03]{unset(flag 59)}" eob
+    "@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1D 01 FF 8B]{set(flag 142)}[1F F1 B7 03 A8 02][1F 61][1F E6 B7 03][19 23 B7 03 01 FF 00][1F 16 B7 03 00]{pause(20)}{window_open(1)}"
+    title(1,"Electra")
+    "@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1F E9 B7 03]{unset(flag 59)}" eob
 
 l_0xc8361b:
     eob
 
 l_0xc8361c:
+    title(1,"Everdred")
     "@....." next
     "@*Wheeze, wheeze*..." next
     "@....." next
@@ -298,6 +310,7 @@ l_0xc839f7:
     "[06 91 00 {e(l_0xc83a24)}]@There's a person lying on the ground." next
     "@I wonder if he's...{pause(20)} he's...{pause(15)}" linebreak
     "  d-{pause(20)}dead?  {pause(20)}Is he?!" end
+
 l_0xc83a24:
     "@He's not dead..." next
     "@I thought he may have passed on." end
@@ -368,7 +381,7 @@ l_0xc83c94:
     "@I'm glad it wasn't me." end
 
 l_0xc83cc8:
-    "@Is that man going to... to...{pause(20)} die?!" end
+    "@Is that man going to...{pause(20)} to...{pause(20)} die?!" end
 
 l_0xc83cdd:
     "[06 91 00 {e(l_0xc83cf9)}]@He doesn't look like a nice man." end
@@ -433,6 +446,7 @@ l_0xc83fcf:
 
 l_0xc83fe6:
     "@I'm Geldegarde Monotoli." next
+    title(1,"Geldegarde Monotoli")
     "@Don't you remember me?" next
     "@I returned this building to Mr. Enrich Flavor." next
     "@Now I'm working as an elevator man." next

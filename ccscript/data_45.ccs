@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -130,7 +133,7 @@ l_0xc8abb0:
     "@Use it in your Human Civilization class.  Ha ha ha!{wait}{set(flag 343)}{unset(flag 10)}[06 8C 00 {e(data_55.l_0xc9992f)}]{set(flag 687)}" eob
 
 l_0xc8ac30:
-    "{sound(5)}@Oh, you can't carry it 'cause you have too much stuff." next
+    "{sound(5)}{pause(30)}@Oh, you can't carry it 'cause you have too much stuff." next
     "@It's a pity.{pause(20)}  You're such a hard worker." next
     "@Ha ha ha!{wait}{set(flag 10)}" eob
 
@@ -143,17 +146,19 @@ l_0xc8ac6f:
     "@Ha ha ha!{wait}{window_closeall}[1F E9 0E 04][1F 61]{set(flag 343)}[06 8C 00 {e(data_55.l_0xc9992f)}]{set(flag 687)}" eob
 
 l_0xc8ad22:
-    "{sound(5)}@Oh, you can't carry it 'cause you have too much stuff." next
+    "{sound(5)}{pause(30)}@Oh, you can't carry it 'cause you have too much stuff." next
     "@It's a pity.{pause(20)}  You're such a hard worker." next
     "@Ha ha ha!{wait}{window_closeall}[1F E9 0E 04][1F 61]{set(flag 10)}" eob
 
 l_0xc8ad69:
+    title(1,"Mr. Fork")
     "[06 49 00 {e(l_0xc8ae72)}][06 3A 00 {e(l_0xc8ae3b)}]@...mumble, mumble..." next
     "@Why would Mr. Spoon from the Fourside museum try to call me?" next
     "@I bet he just wants to brag about something..." next
     "@Well,{pause(15)} let him try...{pause(20)}  I wonder what he wants to tell me?" next
     "@Argh,{pause(20)} I just gotta know!" next
-    "@Argh,{pause(20)} this is so frustrating!" next    "@Oh!{pause(20)}  Pardon me...{pause(20)}  I was just talking to myself... *cough*{wait}{sound(114)}" end
+    "@Argh,{pause(20)} this is so frustrating!" next
+    "@Oh!{pause(20)}  Pardon me...{pause(20)}  I was just talking to myself... *cough*{wait}{sound(114)}" end
 
 l_0xc8ae3b:
     "@It must be something teeny weeny that Mr. Spoon has found." next
@@ -281,7 +286,8 @@ l_0xc8b460:
     "@...I'm writing a song for sailors." end
 
 l_0xc8b4c9:
-    "@Dinosaurs DO exist!{pause(20)}" next    "@I saw one! I swear!" next
+    "@Dinosaurs DO exist!{pause(20)}" next
+    "@I saw one! I swear!" next
     "@It had been out of the underground when it dried out." next
     "@Of course, it was dead!" next
     "@Believe what I'm saying!" end
@@ -417,7 +423,8 @@ l_0xc8bae0:
     "@Pooooweeeet!{pause(60)}" linebreak
     "  Oooo... sorry..." next
     "@Y'know, I can't quite describe it..." next
-    "@Having beer in the daytime like this is truly...{pause(20)}" next   "@How do I put it?{pause(20)}" next
+    "@Having beer in the daytime like this is truly...{pause(20)}" next
+    "@How do I put it?{pause(20)}" next
     "@Buuuurp!{pause(90)}" linebreak
     "  Oooo... 'scuse me..." end
 

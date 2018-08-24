@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -392,10 +395,12 @@ l_0xc7ef3b:
     goto(l_0xc7ef67)
 
 l_0xc7ef67:
+    title(1,"Apple Kid")
     "@The Phase Distorter will certainly be completed someday," next
     "@in my humble opinion." end
 
 l_0xc7efa2:
+    title(1,"Apple Kid")
     "@Excellent, excellent!" linebreak
     "  Everything proceeded as planned." next
     "@Dr. Andonuts, Mr. Saturn and I worked together" next
@@ -411,11 +416,13 @@ l_0xc7f0d6:
     "[06 A9 00 {e(l_0xc7ef67)}]" goto(l_0xc7efa2)
 
 l_0xc7f0e2:
+    title(1,"Apple Kid")
     "@The chance of Giygas gaining victory with his monstrous plan is 99%." next
     "@However, your courage has produced a 1% chance that Giygas fails." next
     "@I must try to come to a deeper understanding of this trait called <courage.>" end
 
 l_0xc7f165:
+    title(1,"Dr. Andonuts")
     "[06 49 00 {e(l_0xc7f634)}][06 FD 02 {e(l_0xc7f50b)}][06 86 00 {e(l_0xc7f34c)}][06 84 00 {e(l_0xc7f25b)}]@Yahah!  The Mr. Saturns are incredible folk." next
     "@And the Apple Kid...  He is a most exceptional young man," next
     "@very different from other kids." next
@@ -433,6 +440,7 @@ l_0xc7f29e:
     "[19 19 00 00]{swap}{result_is(193)}[1B 03 {e(l_0xc7f2b1)}]" goto(data_35.l_0xc7c6b6)
 
 l_0xc7f2b1:
+    title(1,"Dr. Andonuts")
     "[1D 01 FF C1]{sound(118)}@Ah, yes!{pause(15)}" linebreak
     "  This is fantastic!{pause(30)}" linebreak
     "  What?" next
@@ -442,6 +450,7 @@ l_0xc7f2b1:
     "@This is getting most fascinating!{wait}{set(flag 134)}{set(flag 169)}" eob
 
 l_0xc7f34c:
+    title(1,"Dr. Andonuts")
     "[06 A9 00 {e(l_0xc7f5ec)}]@Finally, it's complete! " next
     "@The Phase Distorter, version two,{pause(15)} is equipped with two new features." next
     "@First,{pause(20)} it can repair your biological functions." next

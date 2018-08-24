@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -276,6 +279,7 @@ l_0xc7911e:
 
 l_0xc7916c:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}@Hello... this is the Apple Kid." next
+    title(1,"Apple Kid")
     "@I've just finished work on this great invention!" next
     "@Get over here as fast as you can!{pause(20)}  This thing is so{pause(5)}o{pause(5)}o{pause(5)}o{pause(15)} cool!" next
     "@See you soon!{pause(15)}  Slam!{pause(20)}" linebreak
@@ -325,6 +329,7 @@ l_0xc7949e:
     "{unset(flag 2)}{unset(flag 3)}[1F E9 B7 01][1F 61][1F E6 B7 01]{window_open(1)}" goto(l_0xc794b1)
 
 l_0xc794b1:
+    title(1,"Porky")
     "@Hey [1C 02 01]!{pause(20)}  You're just here to bother me, aren't you?" next
     "@And just when it looks like I'm going to be" next
     "@a big shot in Happy-happyism thanks to Mr. Carpainter..." next
@@ -336,7 +341,9 @@ l_0xc795bd:
 
 l_0xc795c1:
     "{store_registers}[19 19 00 00]{swap}{result_is(171)}[1B 02 {e(l_0xc796ee)}][1D 01 FF AB]@(" call(data_37.l_0xc7e74e) " used the [1C 05 AB].)" next
-    "{window_closeall}{sound(119)}[1F 1E B4 01 06]{pause(60)}{window_open(1)}@Thank you, [1C 02 01]!" next
+    "{window_closeall}{sound(119)}[1F 1E B4 01 06]{pause(60)}{window_open(1)}"
+    title_paula(1)
+    "@Thank you, [1C 02 01]!" next
     "@You're just like I imagined you would be..." next
     "@I'm sure that some people in Twoson are worried about me..." next
     "@Getting back there may be dangerous," next
@@ -358,7 +365,9 @@ l_0xc7970b:
 
 l_0xc79796:
     "@[1C 02 02],{pause(15)} I'm sure you'd be a big help to [1C 02 01]." next
-    "@It's not every day a father lets his daughter embark on a journey to save the world![03]{window_closeall}{set(flag 12)}[19 22 02 02 D9 00][1F 13 02 00][1F 1C 02 01]{pause(60)}[1F 1D 02]{window_open(1)}@Dad,{pause(15)} don't worry about me." next
+    "@It's not every day a father lets his daughter embark on a journey to save the world![03]{window_closeall}{set(flag 12)}[19 22 02 02 D9 00][1F 13 02 00][1F 1C 02 01]{pause(60)}[1F 1D 02]{window_open(1)}"
+    title_paula(1)
+    "@Dad,{pause(15)} don't worry about me." next
     "@[1C 02 01] and I will be able to take care of ourselves." next
     "@In Threek, the next town,{pause(15)} we'll meet another friend." next
     "@If the three of us can combine our power,{pause(15)} no one can beat us." next

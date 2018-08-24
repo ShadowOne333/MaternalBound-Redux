@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -185,7 +188,9 @@ l_0xc7c973:
     "@but the record of adventure number {delta} has been lost..." end
 
 l_0xc7c9a8:
-    "[06 49 00 {e(l_0xc7ca3c)}][19 10 01]{swap}@Hello,{pause(15)} this is the Stoic Club." next
+    "[06 49 00 {e(l_0xc7ca3c)}][19 10 01]{swap}"
+    title(1,"Stoic Club")
+    "@Hello,{pause(15)} this is the Stoic Club." next
     "@Oh,{pause(15)} [1C 02 00], {swap}" call(data_37.l_0xc7e6b3) "!{pause(20)}" linebreak
     "  Would you like to make a reservation? " next
     "@Certainly." next
@@ -193,7 +198,9 @@ l_0xc7c9a8:
     "@Click!  Beep-beep-beep... {wait}{sound(11)}{set(flag 337)}" eob
 
 l_0xc7ca3c:
+    title(1,"Stoic Club")
     "@Yo, this is the <Lunatics for Life>" next
+    title(1,"Lunatics for Life")
     "@Yeah, we're a new drinking spot... we just opened..." next
     "@What's that?  The Stoic Club?!  That lame old place shut down ages ago!" next
     "@We totally remodeled the place!" next
@@ -207,6 +214,7 @@ l_0xc7cb5f:
     "[19 10 01]{rtoarg}{result_is(1)}[1B 02 {e(l_0xc7d1c1)}][06 49 00 {e(l_0xc7d226)}]{isset(flag 688)}[1B 02 {e(l_0xc7cc35)}][1D 0D 01 06 02][1B 03 {e(l_0xc7cdae)}][1D 0D 01 01 08][1B 03 {e(l_0xc7ccec)}][06 B1 02 {e(l_0xc7ce96)}][1D 21 07][09 07 {e(l_0xc7cbba)} {e(l_0xc7cbba)} {e(l_0xc7cf6c)} {e(l_0xc7cf6c)} {e(l_0xc7d05a)} {e(l_0xc7d05a)} {e(l_0xc7d102)}]" goto(l_0xc7cbba)
 
 l_0xc7cbba:
+    title(1,"Mom")
     "@[1C 01 08]?" next
     "@....." next
     "@Don't say a word; I know exactly what you're thinking." next
@@ -215,6 +223,7 @@ l_0xc7cbba:
     "@Click!  Beep-beep-beep...{wait}{sound(11)}" eob
 
 l_0xc7cc35:
+    title(1,"Mom")
     "@Is that you, [1C 01 08]?" next
     "@You called me back sooner than I thought..." next
     "@Everyone here is doing just fine." next
@@ -225,6 +234,7 @@ l_0xc7cc35:
     "{set(flag 201)}{set(flag 688)}" goto(data_19.l_0xc636e5)
 
 l_0xc7ccec:
+    title(1,"Mom")
     "@Hey, [1C 01 08]!" linebreak
     "  You sound terrible!" next
     "@Do you have a cold or something?" next
@@ -234,6 +244,7 @@ l_0xc7ccec:
     "@Click!  Beep-beep-beep... {wait}{sound(11)}" eob
 
 l_0xc7cdae:
+    title(1,"Mom")
     "@Hello, [1C 01 08]?" linebreak
     "  What's wrong?  You sound so sad..." next
     "@Are you homesick?...  Well, I knew there would be days like this. " next
@@ -246,6 +257,7 @@ l_0xc7ce73:
     "{pause(30)}{window_open(1)}@[1C 01 08] got over being homesick.[19 05 01 06 01]{sound(37)}{wait}{window_closeall}" eob
 
 l_0xc7ce96:
+    title(1,"Mom")
     "@Hello, [1C 01 08]?" next
     "@So, I heard that you got a new girlfriend on your journey..." next
     "@Well, why don't you tell me about her later..." next
@@ -255,6 +267,7 @@ l_0xc7ce96:
     "{sound(11)}  Click!  Beep-beep-beep...{wait}{unset(flag 689)}" eob
 
 l_0xc7cf6c:
+    title(1,"Mom")
     "@Hello, [1C 01 08]?" next
     "@So, how is your adventure going?" next
     "@...Hmmmm, I see..." linebreak
@@ -266,6 +279,7 @@ l_0xc7cf6c:
     "{sound(11)}@Click!  Beep-beep-beep..." end
 
 l_0xc7d05a:
+    title(1,"Mom")
     "@Hello?  Hello?!" linebreak
     "  Is that you, [1C 01 08]?" next
     "@I can hardly hear you..." next
@@ -276,6 +290,7 @@ l_0xc7d05a:
     "{sound(11)}  Click!  Beep-beep-beep..." end
 
 l_0xc7d102:
+    title(1,"Mom")
     "@Click! Beep-beep-beep..." next
     "@...No, no... I was just teasing..." next
     "@I wanted to see if my new impression would fool you." next
@@ -286,13 +301,16 @@ l_0xc7d102:
     "{sound(11)}  Click!  Beep-beep-beep..." end
 
 l_0xc7d1c1:
+    title(1,"Mom")
     "[19 10 01]{swap}@Oh, is this that darling little [1C 02 00]?" next
     "@Is my sweet child [1C 01 08] doing okay?" next
     "@Please come visit us sometime." next
     "{sound(11)}@Click!  Beep-beep-beep..." end
 
 l_0xc7d226:
-    "[06 83 02 {e(l_0xc7d2f6)}]@Hello, [1C 01 08]?" linebreak
+    "[06 83 02 {e(l_0xc7d2f6)}]"
+    title(1,"Mom")
+    "@Hello, [1C 01 08]?" linebreak
     "  You can finally come home?  ...So that means..." next
     "@Oh, thank heavens!" next
     "@You did it and you're safe!  I'm not exactly sure what you did, but..." next
@@ -302,6 +320,7 @@ l_0xc7d226:
     "{sound(11)}@Click!  Beep-beep-beep..." end
 
 l_0xc7d2f6:
+    title(1,"Mom")
     "@I thought we would look at your album together..." next
     "@So what are you doing calling me?" linebreak
     "{sound(11)}  Click!  Beep-beep-beep..." end
@@ -310,7 +329,9 @@ l_0xc7d33e:
     "[06 49 00 {e(data_55.l_0xc9992f)}]{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[06 10 00 {e(l_0xc7d36e)}][06 95 00 {e(l_0xc7d4af)}][06 0E 00 {e(l_0xc7d36e)}][06 80 00 {e(l_0xc7d627)}]" goto(l_0xc7d36e)
 
 l_0xc7d36e:
-    "{window_open(1)}[19 10 01]{result_is(1)}[1B 02 {e(l_0xc7d630)}]@Hello, it's your dad." next
+    "{window_open(1)}[19 10 01]{result_is(1)}[1B 02 {e(l_0xc7d630)}]"
+    title(1, "Dad")
+    "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my" linebreak
     "  business," next
@@ -335,7 +356,9 @@ l_0xc7d43b:
     "@And hey, keep an eye out for bad guys![03]" call(data_36.l_0xc7de54) eob
 
 l_0xc7d4af:
-    "{window_open(1)}@Hello, it's your dad." next
+    "{window_open(1)}"
+    title(1, "Dad")
+    "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next
@@ -363,7 +386,9 @@ l_0xc7d627:
     "{window_open(1)}" call(l_0xc7d4af) eob
 
 l_0xc7d630:
-    "{window_open(1)}[19 10 01]@Hello, it's your dad." next
+    "{window_open(1)}[19 10 01]"
+    title(1, "Dad")
+    "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next

@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -22,6 +25,7 @@ l_0xc61ed7:
 l_0xc61f07:
     "[06 CB 01 {e(l_0xc62008)}]@Ukie Ukikikie" next
     "@(I am Man K. Man.)" next
+    title(1, "Man K. Man")
     "@Ukie Ukikikie" next
     "@(To me the most interesting thing is the [1C 05 A6].)" next
     "@Ukie Ukikikie" next
@@ -38,6 +42,7 @@ l_0xc61fab:
 
 l_0xc62008:
     "@Ukki Ukikie" next
+    title(1, "Man K. Man")
     "@(I am Man K. Man.)" end
 
 l_0xc62026:
@@ -398,6 +403,7 @@ l_0xc630ae:
 l_0xc630c7:
     "{ctoarg}[1B 05]@Hello!  Hello!" linebreak
     "  Maxwell Labs here." next
+    title(1, "Maxwell")
     "@Oh, hello [1C 01 34]!" next
     "@Would you like me to keep a record of your journey?" linebreak
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc6314c)} {e(l_0xc6311e)}]" goto(l_0xc6311e)
@@ -439,7 +445,9 @@ l_0xc631e3:
 
 l_0xc63229:
     "[06 04 03 {e(data_31.l_0xc75929)}][06 49 00 {e(data_19.l_0xc635bd)}]{ctoarg}[1B 05]" newline
-    "[19 10 01]{result_is(1)}[1B 03 {e(l_0xc632c7)}]@Hello?" next
+    "[19 10 01]{result_is(1)}[1B 03 {e(l_0xc632c7)}]"
+    title(1, "Dad")
+    "@Hello?" next
     "@...Is that you, [1C 01 08]{pause(10)}?" next
     "@Why are you disguising your voice like that?" next
     "@Who are you pretending to be?" next
@@ -448,6 +456,7 @@ l_0xc63229:
     goto(l_0xc632e2)
 
 l_0xc632c7:
+    title(1, "Dad")
     "@[1C 02 01]?  It's your dad." next
     "{isset(flag 372)}[1F C0 01 {e(data_19.l_0xc6354b)}]" goto(l_0xc632e2)
 

@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -29,14 +32,17 @@ l_0xc76fb2:
     "[06 CF 00 {e(l_0xc770b0)}][06 CE 00 {e(l_0xc7706a)}][06 CD 00 {e(l_0xc7703f)}][06 CC 00 {e(l_0xc77007)}]@I am your courage." next
     "@I follow you here in Magicant." next
     "@...My name?" next
+    title(1,"Flying Man")
     "@Let's say Flying Man.[03]" eob
 
 l_0xc77007:
+    title(1,"Flying Man 2")
     "@I'll be your courage." next
     "@I'll remain unless you lose your courage." next
     "@Call me Flying Man 2.[03]" eob
 
 l_0xc7703f:
+    title(1,"Flying Man 3")
     "@I'm Flying Man 3." next
     "@Your courage hasn't died yet." next
     "@Let's go![03]" eob
@@ -44,6 +50,7 @@ l_0xc7703f:
 l_0xc7706a:
     "@I'm also your courage." next
     "@Call me Return of the Flying Man!" next
+    title(1,"Return of the Flying Man")
     "@...How's that?" next
     "@However... don't treat us like trash.[03]" eob
 
@@ -54,6 +61,7 @@ l_0xc770b0:
     "@This isn't courage, it's desperation." next
     "@If you don't understand <courage,>{pause(15)} look it up in the dictionary." next
     "@Okay?" next
+    title(1,"Final Flying Man")
     "@My name's The Final Flying Man.[03]" eob
 
 l_0xc77148:
@@ -92,6 +100,7 @@ l_0xc77236:
     "@If you walk outside,{pause(15)} beware of the monsters." end
 
 l_0xc77251:
+    title(1,"Mom")
     "@Oh [1C 02 01],{pause(15)} are you tired from traveling on your adventure?" next
     "[19 02]Yes" eob
 
@@ -111,6 +120,7 @@ l_0xc772c8:
     "@I'll make some [1C 01 04] for you.[03]" call(data_49.l_0xc915f4) call(data_49.l_0xc91693) "{unset(flag 383)}[1F 21 34][1F E1 1F 07 3C]" eob
 
 l_0xc772ff:
+    title(1,"Tracy")
     "@Brother [1C 02 01]!" next
     "@The <Sea of Eden> is at the end of Magicant." next
     "@Other people can't get close to it.{pause(20)}  It's a strange place." next
@@ -118,6 +128,7 @@ l_0xc772ff:
     goto(data_19.l_0xc64687)
 
 l_0xc7735d:
+    title_dog(1)
     "@Whimper... whine." next
     "@(I lived in your house before you were born..." next
     "@[1C 02 01] used to be small and weak.)" end
@@ -133,6 +144,7 @@ l_0xc773f4:
 
 l_0xc7743d:
     "@It's me...{pause(20)}  I'm you when you were younger." next
+    title_ness(1)
     "@Hey, let's play ball." next
     "@Do you prefer reading comics or playing games?" next
     "@What?{pause(20)}  You're busy?...{wait}[1F E1 1F 03 3C]" eob
@@ -145,6 +157,7 @@ l_0xc774c3:
     "        " goto(l_0xc774c6)
 
 l_0xc774c6:
+    title(1,"Master Belch")
     "@You destroyed my pride..." next
     "@AAaaaargh!{wait}[1F E1 1F 06 3C]" eob
 
@@ -161,9 +174,11 @@ l_0xc77529:
 
 l_0xc77544:
     "@La lalala! [ac]" next
+    title(1,"Nico")
     "@My name's Nico...{pause(20)} Let's run and sing and dance!" end
 
 l_0xc77572:
+    title(1,"Picky")
     "@[1C 02 01]!" next
     "@Porky took my snack!" end
 
@@ -182,7 +197,9 @@ l_0xc775bf:
     "@'cause this land will disappear when you wake up.{wait}[1F E1 05 00 3C]" eob
 
 l_0xc775fd:
-    "[06 5D 00 {e(l_0xc77683)}]@Hey me!{pause(20)}  I found my cap that you lost." next
+    "[06 5D 00 {e(l_0xc77683)}]"
+    title_ness(1)
+    "@Hey me!{pause(20)}  I found my cap that you lost." next
     "[1D 03 FF][1B 02 {e(l_0xc77639)}][1D 0E 00 4A]" call(data_36.l_0xc7dccf) "{wait}{set(flag 93)}[1F E1 1F 03 3C]" eob
 
 l_0xc77639:
@@ -192,6 +209,7 @@ l_0xc77639:
     "@Why don't I get rid of something I don't use.{wait}[1F E1 05 00 3C]" eob
 
 l_0xc77683:
+    title_ness(1)
     "@Hey me!{wait}[1F E1 05 00 3C]" eob
 
 l_0xc7768f:
@@ -200,7 +218,9 @@ l_0xc7768f:
 
 l_0xc776c8:
     "@Let's look at Mr. Sun.{pause(25)}" linebreak
-    "@Let's face at Mr. Sun.{pause(25)}" linebreak     "  and put smiles on our" linebreak     "  faces! [ac]{wait}[1F E1 05 00 3C]" eob
+    "@Let's face at Mr. Sun.{pause(25)}" linebreak
+    "  and put smiles on our" linebreak
+    "  faces! [ac]{wait}[1F E1 05 00 3C]" eob
 
 l_0xc776ee:
     "@[1C 02 01]'s courage is resting here." next
@@ -226,12 +246,14 @@ l_0xc7779e:
     "@before he achieved his goal." end
 
 l_0xc777f2:
+    title(1,"Star Master")
     "@The Sea of Eden is a vortex of ultimate wisdom." next
     "@You can't go there unless you're truly ready." next
     "@It's a place where you can touch the truth of the universe for an instant." next
     "@Going there may bring sorrow.{wait}[1F E1 1F 05 3C]" eob
 
 l_0xc7786e:
+    title(1,"Star Master")
     "@[1C 02 01], you've stood on the eight power spots of the earth." next
     "@That was the requirement for creating this realm in your mind known as Magicant." next
     "@In Magicant,{pause(15)} there's beauty,{pause(15)} kindness,{pause(15)} sorrow,{pause(20)} and hatred." next
@@ -288,6 +310,7 @@ l_0xc77cd0:
     "@Thank you for remembering me." end
 
 l_0xc77cdf:
+    title(1,"Porky")
     "@[1C 02 01], you're so lucky..." next
     "@I envy you." next
     "@....." next
@@ -298,6 +321,7 @@ l_0xc77cdf:
     "@Let's be friends forever,{pause(15)} all right?" end
 
 l_0xc77d3a:
+    title(1,"Everdred")
     "@[1C 02 01]!" next
     "@Maybe you don't wanna hear this," next
     "@but you remind me of myself when I was young." next
@@ -352,7 +376,7 @@ l_0xc77eb6:
     "  the [1C 05 00] very well.[03]" eob
 
 l_0xc77ee8:
-    "@{user} could not use" linebreak
+    "[19 1F]{swap}@{user} could not use" linebreak
     "  the [1C 05 00] very well.[03]" eob
 
 l_0xc77eff:

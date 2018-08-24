@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -216,7 +219,8 @@ l_0xc9b268:
     "[06 BD 00 {e(l_0xc9b270)}]" eob
 
 l_0xc9b270:
-    "{set(flag 384)}[1F 41 06][1F 12 02][1F 12 03][1F 12 04]" call(data_24.l_0xc69082) "{set(flag 11)}" call(data_36.l_0xc7de60) "[1F 41 05][1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 01][1F 21 51]{pause(30)}[1F 41 10]{pause(30)}[1F 15 B3 01 B7 02 FF][1F 21 23][1F EF B3 01][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F B3 01 0A]{pause(180)}[1F 21 24][1F 15 6A 00 B8 02 01]" call(l_0xc9b4b8) "[1F 21 25][1F 15 6A 00 B9 02 01]" call(l_0xc9b4b8) "[1F 21 26][1F 15 6A 00 BA 02 01]" call(l_0xc9b4b8) "{pause(120)}{window_open(1)}@[1C 02 01]...{pause(30)} Hmmm..." next
+    "{set(flag 384)}[1F 41 06][1F 12 02][1F 12 03][1F 12 04]" call(data_24.l_0xc69082) "{set(flag 11)}" call(data_36.l_0xc7de60) "[1F 41 05][1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 01][1F 21 51]{pause(30)}[1F 41 10]{pause(30)}[1F 15 B3 01 B7 02 FF][1F 21 23][1F EF B3 01][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F B3 01 0A]{pause(180)}[1F 21 24][1F 15 6A 00 B8 02 01]" call(l_0xc9b4b8) "[1F 21 25][1F 15 6A 00 B9 02 01]" call(l_0xc9b4b8) "[1F 21 26][1F 15 6A 00 BA 02 01]" call(l_0xc9b4b8) "{pause(120)}{window_open(1)}"
+    "@[1C 02 01]...{pause(30)} Hmmm..." next
     "@I think [1C 02 01] is the right name for him.[03]{window_closeall}{pause(60)}{window_open(1)}@[1C 02 01]...{pause(30)} he smiled just from hearing his own name." next
     "@Do you think he likes his name?[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}@Try putting that red cap on him." next
     "@Ha ha ha!" linebreak
@@ -248,13 +252,19 @@ l_0xc9b799:
     "[1F 21 9E][1F E5 FF]{pause(60)}" call(data_32.l_0xc77dab) "{pause(60)}[1F F1 FD 04 5B 01]{pause(30)}[1F 1A FE 04 03][1F 1A FF 04 03][1F 1A 00 05 03]{pause(90)}[1F 1E FD 04 06]         [1F EC 01 01]                {pause(30)}[1F 1B FE 04][1F 1B FF 04][1F 1B 00 05]{pause(90)}[1F F1 FE 04 5C 01]" call(l_0xc9b84f) "[1F F1 FF 04 5D 01]" call(l_0xc9b87f) "[1F F1 00 05 5E 01]" call(l_0xc9b898) "[1F 11 02][1F EB 02 06][1F F1 FE 04 2F 00][1F 61][1F 1E FE 04 06][1F EC 02 01][1F 11 03][1F EB 03 06][1F F1 FF 04 2F 00][1F 61][1F 1E FF 04 06][1F EC 03 01][1F 11 04][1F EB 04 06][1F F1 00 05 2F 00][1F 61][1F 1E 00 05 06][1F EC 04 01]" call(l_0xc9b60f) eob
 
 l_0xc9b84f:
-    "[1F 61]{window_open(1)}@What happened, [1C 02 01]?{pause(20)}  You've been unconscious for a long time...[03]{window_closeall}{pause(30)}" eob
+    "[1F 61]{window_open(1)}"
+    title_paula(1)
+    "@What happened, [1C 02 01]?{pause(20)}  You've been unconscious for a long time...[03]{window_closeall}{pause(30)}" eob
 
 l_0xc9b87f:
-    "[1F 61]{window_open(1)}@You kept saying something...[03]{window_closeall}{pause(30)}" eob
+    "[1F 61]{window_open(1)}"
+    title_jeff(1)
+    "@You kept saying something...[03]{window_closeall}{pause(30)}" eob
 
 l_0xc9b898:
-    "[1F 61]{window_open(1)}@...Saturn Valley?{pause(30)}" linebreak
+    "[1F 61]{window_open(1)}"
+    title_poo(1)
+    "@...Saturn Valley?{pause(30)}" linebreak
     "  What's waiting for us there?" next
     "@Anyway, we need to teleport...[03]{window_closeall}{pause(30)}" eob
 
@@ -268,7 +278,9 @@ l_0xc9b8ff:
     eob
 
 l_0xc9b900:
-    "[1F 15 6A 00 20 01 01]" call(l_0xc9b4b8) "[1F EB FF 06]{music(91)}[1F E9 E5 02][1F 61]{music(126)}{pause(100)}[19 05 01 08 02][1F 15 6A 00 21 01 01][1F EC FF 01]" call(l_0xc9b4b8) "{pause(120)}[1F F1 D8 02 22 01][1F 61]{music_resume}[1F E6 D8 02][19 05 01 08 00]{window_open(1)}@Hmmm... it doesn't work.{pause(20)}  One thing is missing..." next
+    "[1F 15 6A 00 20 01 01]" call(l_0xc9b4b8) "[1F EB FF 06]{music(91)}[1F E9 E5 02][1F 61]{music(126)}{pause(100)}[19 05 01 08 02][1F 15 6A 00 21 01 01][1F EC FF 01]" call(l_0xc9b4b8) "{pause(120)}[1F F1 D8 02 22 01][1F 61]{music_resume}[1F E6 D8 02][19 05 01 08 00]{window_open(1)}"
+    title(1, "Dr. Andonuts")
+    "@Hmmm... it doesn't work.{pause(20)}  One thing is missing..." next
     "@But that one material cannot normally be found on the earth." next
     "@The material I'm thinking of came from a meteorite" next
     "@that fell when I was much younger." next
@@ -311,18 +323,23 @@ l_0xc9bc48:
     "{music(127)}[1F 17 FB 04 36 01 04]{pause(120)}{pause(60)}[1F 17 F8 04 37 01 01][1F 17 F5 04 38 01 01][1F 17 F7 04 3A 01 01]  [1F 61]{music_resume}[19 23 F5 04 01 FF 00][1F 16 F5 04 00][1F E6 F8 04][1F E6 F5 04][1F E6 F7 04]" call(l_0xc9bca1) "{set(flag 328)}{set(flag 329)}{set(flag 330)}{set(flag 327)}" eob
 
 l_0xc9bca1:
-    "[06 1D 01 {e(l_0xc9bd69)}]{window_open(1)}@The <Phase Distorter 3> has been completed." next
+    "[06 1D 01 {e(l_0xc9bd69)}]{window_open(1)}"
+    title(1, "Dr. Andonuts")
+    "@The <Phase Distorter 3> has been completed." next
     "@We could finish it quickly because of Mr. Saturn's incredible scientific skill..." next
     "@Giygas is attacking from our exact location," next
-    "@but he is attacking from" linebreak "  many years in the past.[03]{window_closeall}" eob
+    "@but he is attacking from" linebreak
+    "  many years in the past.[03]{window_closeall}" eob
 
 l_0xc9bd35:
+    title(1, "Dr. Andonuts")
     "@This is very hard for me to tell you, but...[03][06 1D 01 {e(l_0xc9bd52)}]" eob
 
 l_0xc9bd52:
     "{window_closeall}[1F 1E F5 04 06][1F 17 F6 04 39 01 01]{pause(150)}{set(flag 331)}{unset(flag 328)}" eob
 
 l_0xc9bd69:
+    title(1, "Dr. Andonuts")
     "@In order to defeat Giygas,{pause(15)} who is attacking from the past," next
     "@you must warp to the past." next
     "@This can be done by way of the <Phase Distorter 3.>" next

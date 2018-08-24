@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -51,7 +54,9 @@ l_0xc7f921:
     "@Boing!{font_normal}" end
 
 l_0xc7f949:
-    "{window_open(1)}@Our travels together end here." next
+    "{window_open(1)}"
+    title_poo(1)
+    "@Our travels together end here." next
     "@I must return to Dalaam, and use this experience for the good of my country." next
     "@[1C 01 08],{pause(15)}" linebreak
     "  [1C 01 1E],{pause(20)}" linebreak
@@ -60,7 +65,9 @@ l_0xc7f949:
     "@PSI Farewell!  Now![03]{window_closeall}{set(flag 637)}" eob
 
 l_0xc7f9f8:
-    "{window_open(1)}@[1C 01 1E],{pause(20)}" linebreak
+    "{window_open(1)}"
+    title_jeff(1)
+    "@[1C 01 1E],{pause(20)}" linebreak
     "  [1C 01 08]..." next
     "@It was great to hang out with you guys.{pause(20)}  It really was." next
     "@I'm glad that I had the chance to use some of the theories" next
@@ -77,10 +84,13 @@ l_0xc7f9f8:
     "@...So it looks like this is good bye for now,{pause(20)} my friends.{wait}{window_closeall}" eob
 
 l_0xc7fb3e:
+    title_jeff(1)
     "@It was fun hanging out together." end
 
 l_0xc7fb56:
-    "{window_open(1)}@[1C 01 08], will you escort me home?" linebreak
+    "{window_open(1)}"
+    title_paula(1)
+    "@[1C 01 08], will you escort me home?" linebreak
     "[19 02]Yes" eob
 
 l_0xc7fb75:
@@ -107,7 +117,9 @@ l_0xc7fc32:
     "[1F 15 02 00 39 02 01]" goto(l_0xc7fd06)
 
 l_0xc7fc3e:
-    "[1F E5 FF]{pause(30)}[19 22 01 01 02 00][1F 13 01 00][19 22 02 01 01 00][1F 13 02 00]{pause(30)}{window_open(1)}@[1C 01 08]..." linebreak
+    "[1F E5 FF]{pause(30)}[19 22 01 01 02 00][1F 13 01 00][19 22 02 01 01 00][1F 13 02 00]{pause(30)}{window_open(1)}"
+    title_paula(1)
+    "@[1C 01 08]..." linebreak
     " Thank you for escorting me home." next
     "@....." next
     "@...There was something I wanted to tell you, but I've forgotten it." next
@@ -123,7 +135,9 @@ l_0xc7fd06:
     "[1F 61][1F E7 02 00][1F 13 01 01]{pause(60)}[1F EA 02 00][1F 61][1F 12 02]{set(flag 638)}[1F E8 FF]" eob
 
 l_0xc7fd22:
-    "[19 22 01 01 02 00][1F 13 01 00][19 22 02 01 01 00][1F 13 02 00]{pause(30)}{window_open(1)}@I really should go home.{pause(20)}  I shouldn't be out just wandering here and there." next
+    "[19 22 01 01 02 00][1F 13 01 00][19 22 02 01 01 00][1F 13 02 00]{pause(30)}{window_open(1)}"
+    title_paula(1)
+    "@I really should go home.{pause(20)}  I shouldn't be out just wandering here and there." next
     "@Don't you think so?" linebreak
     "[19 02]Yes" eob
 
@@ -227,7 +241,7 @@ l_0xc80276:
 
 l_0xc80277:
     newline
-    "{sound(5)}@You have too many items.{pause(20)}  Why don't you get rid of something and come back." next
+    "{sound(5)}{pause(30)}@You have too many items.{pause(20)}  Why don't you get rid of something and come back." next
     "@I know you want it now,{pause(15)} but my hands are tied..." end
 
 l_0xc802b9:
@@ -471,7 +485,9 @@ l_0xc81087:
     "@You should come stay the night sometime too, you can crash in my room." end
 
 l_0xc81122:
-    "[06 49 00 {e(data_39.l_0xc8159f)}][06 75 00 {e(data_39.l_0xc81318)}][06 55 01 {e(data_39.l_0xc814b9)}]@Greetings.{pause(20)}  I'm Orange Kid, the inventor." next
+    "[06 49 00 {e(data_39.l_0xc8159f)}][06 75 00 {e(data_39.l_0xc81318)}][06 55 01 {e(data_39.l_0xc814b9)}]"
+    "@Greetings.{pause(20)}  I'm Orange Kid, the inventor." next
+    title(1,"Orange Kid")
     "@Have you heard of me?{pause(20)}  I'm a bit embarrassed about my reputation." next
     "@I have a lot of inventions in development, but I'm running short of cash." next
     "@I'm basically a happy-go-lucky person,{pause(15)} so I'm not worried." next

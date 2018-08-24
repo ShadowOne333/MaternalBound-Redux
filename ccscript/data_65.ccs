@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -310,6 +313,7 @@ l_0xef9502:
     "[06 5B 02 {e(data_35.l_0xc7c588)}]{window_open(1)}" call(data_61.l_0xef681a) "{window_closeall}[1F 23 E2 01][1B 03 {e(data_32.l_0xc77eff)}]" call(data_61.l_0xef68d7) "{set(flag 603)}{pause(1)}[1F F1 4E 02 7B 02]" eob
 
 l_0xef952e:
+    title_paula(1)
     "[06 44 00 {e(l_0xef9737)}][06 56 00 {e(l_0xef970f)}][06 0A 00 {e(l_0xef95a3)}]@...Who?..." next
     "@...Are you [1C 02 01]?" next
     "@[1C 02 01]!  I'm so glad it's you." next
@@ -329,7 +333,7 @@ l_0xef95a3:
     "@Don't worry about me, just kick butt like I know you can!{wait}{set(flag 11)}[1F 41 05]" eob
 
 l_0xef96d3:
-    "{sound(5)}@What--{pause(15)}do you want to get fried by lightning?" next
+    "{sound(5)}{pause(30)}@What--{pause(15)}do you want to get fried by lightning?" next
     "@Get rid of something so I can give you the [1C 05 01].{wait}" linebreak
     "{set(flag 10)}" eob
 
@@ -338,6 +342,7 @@ l_0xef970f:
     eob
 
 l_0xef9737:
+    title_paula(1)
     "@[1C 02 01]!  You got the key!" next
     "@Are you hurt?" linebreak
     "[19 02]Yes" eob
