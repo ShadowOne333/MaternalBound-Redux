@@ -276,7 +276,7 @@ l_0xef7c42:
     "  {swap}[1C 02 00]'s stuff.{swap}[1D 0E 00 00]{sound(116)}{prompt}" eob
 
 l_0xef7c73:
-    "@But, " call(data_37.l_0xc7e6d7) " cannot carry anymore stuff.{prompt}" linebreak
+    "@But, " call(data_37.l_0xc7e6d7) " cannot carry any more stuff.{prompt}" linebreak
     goto(l_0xef7c89)
 
 l_0xef7c89:

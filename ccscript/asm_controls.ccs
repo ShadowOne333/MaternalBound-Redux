@@ -1,4 +1,4 @@
-/*ASM Code to implement the New/Improved Controls for EarthBound hack with CoilSnake*/
+/*ASM Code to implement the New/Improved Controls for EarthBound hack with CoilSnake made by ShadowOne333*/
 
 import asm65816
 
@@ -19,9 +19,8 @@ import asm65816
 */
 
 ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
-
-ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for X button. This opens up the Main menu
-ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Start button (Changed from Y button to Start to make room for Run button code. Opens up the Map.
+ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for Opening the Main Menu (A button by default)
+ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Opening the Map (X button by default)
 ROM[0xC0B915] = AND_i	(0x00A0)	// AND operand check for A+L buttons. This determines which buttons can talk to people / Confirm selections at the Menus
 
 ROM[0xC13199] = {

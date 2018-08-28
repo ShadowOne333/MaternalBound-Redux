@@ -19,7 +19,7 @@ ROM[0xC1FE42] = byte [0] 0x7B
 
 // Rename Poo's master to Yi-Si-Qi in the Credits
 ROM[0xC4EA4C] = "[EA EA EA EA]"
-ROM[0xC4EA60] = ASMLoadAddress12 (poo_master) // Poo's master
+ROM[0xC4EA60] = ASMLoadAddress12(poo_master) // Poo's master
 
 poo_master:
     "Yi-Si-Qi[00]"

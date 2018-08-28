@@ -353,7 +353,7 @@ l_0xc5fa72:
     "{set(flag 293)}{window_closeall}[1F F1 4D 00 EE 00][1F 61]{pause(30)}[1F F2 4B 00 EF 00][1F 61]{window_open(1)}"
     title(1, "Capt. Strong")
     "@There is no way I can beat you in a straight competition, so..." next
-    "@get ready for my <Super Ultra Sambo-Mambo-Tango martial arts!>{wait}" call(data_23.l_0xc68464) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{pause(60)}{window_open(1)}" newline
+    "@get ready for my <Super Ultra Sambo-Mambo-Tango martial arts>!{wait}" call(data_23.l_0xc68464) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{pause(60)}{window_open(1)}" newline
     title(1, "Capt. Strong")
     "@I didn't think you would do so well against the mighty Onett police force..." next
     "@You want me to open the road to Twoson?" next
