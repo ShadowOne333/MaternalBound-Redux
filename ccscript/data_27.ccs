@@ -208,13 +208,15 @@ l_0xc6ea0f:
     "@Thanks for dropping by, even though there's nothing to do, honey." end
 
 l_0xc6ea34:
-    "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]"
     title(1, "Geldegarde Monotoli")
+    "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]"
     "@Look at my skinny arms,{pause(20)} thin body,{pause(20)} and gray hair..." next
     "@I've become so weak since I lost the Mani Mani statue." next
     "@I'm sorry I kidnapped [1C 02 02]." next
     "@I haven't done anything to her." next
-    "@...[1C 02 02] is a nice girl.[03]{window_closeall}{pause(60)}[1F 16 68 03 03]{pause(10)}{window_open(1)}@[1C 02 02]." next
+    "@...[1C 02 02] is a nice girl.[03]{window_closeall}{pause(60)}[1F 16 68 03 03]{pause(10)}{window_open(1)}"
+    title(1, "Geldegarde Monotoli")
+    "@[1C 02 02]." next
     "@Return to [1C 02 01]." next
     "@I'm sorry I've created so much trouble for you.[03]{window_closeall}{pause(60)}" call(data_23.l_0xc68253) "{set(flag 15)}{unset(flag 776)}[19 23 68 03 01 FF 00][1F 16 68 03 00]{music_resume}{pause(120)}{window_open(1)}" goto(l_0xc6eb2c)
 
@@ -261,6 +263,7 @@ l_0xc6ed74:
     "{set(flag 664)}{set(flag 741)}" goto(l_0xc6ee2e)
 
 l_0xc6ee2e:
+    title(1, "Geldegarde Monotoli")
     "@[1C 01 1E], it's time we said goodbye." next
     "@Take care.{wait}{window_closeall}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 11)}{set(flag 754)}{set(flag 779)}{unset(flag 759)}" eob
 

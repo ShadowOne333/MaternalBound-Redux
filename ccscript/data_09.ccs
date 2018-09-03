@@ -34,10 +34,11 @@ l_0xc58eb4:
     "{window_closeall}[1F 20 04 04]" eob
 
 l_0xc58ebb:
-    "@SKtPSNDWKWEMS.{wait}" call(data_07.l_0xc58555) eob
+    "@Add a Skip Sandwich.{wait}" call(data_07.l_0xc58555) eob
+    //"@SKtPSNDWKWEMS.{wait}"
 
 l_0xc58ed1:
-    "@NNMDKMSN." end
+    "@NNMDKMSN." end //Unused debug option
 
 l_0xc58edd:
     "[18 02]{window_open(7)}[1C 0C 01][11][09 06 {e(l_0xc58f07)} {e(l_0xc58f37)} {e(l_0xc58f61)} {e(l_0xc58f93)} {e(l_0xc58fc1)} {e(l_0xc58feb)}]{window_closetop}{window_switch(1)}" newline

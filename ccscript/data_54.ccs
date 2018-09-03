@@ -278,9 +278,8 @@ l_0xc982b3:
     "@I apologize to everyone." end
 
 l_0xc982f2:
-    "[06 44 00 {e(l_0xc9833f)}]@Aai{pause(5)}i{pause(5)}i{pause(5)}i{pause(5)}e{pause(5)}e{pause(5)}e{pause(5)}e{pause(5)}e{pause(5)}e!{pause(20)}" linebreak
-    "  I screamed..." next
-    "@'cause I didn't know what else to do!" end
+    "[06 44 00 {e(l_0xc9833f)}]@I yelled,{pause(10)} <Intruder!>{pause(10)}" next
+    "@but I don't know what to do beyond that!" end
 
 l_0xc9833f:
     "@So you're the boy that... that..." next
@@ -301,7 +300,7 @@ l_0xc983de:
 
 l_0xc98424:
     "[06 03 00 {e(l_0xc98465)}]@Blue, blue." next
-    "@...What?  I'm blocking you?{pause(20)}  Ok, I'll move out of your way.[03][1F F1 7B 01 15 01][1F 61]{set(flag 3)}" eob
+    "@...What?  I'm in your way?{pause(20)}  Well, then, I'll move aside for you.[03][1F F1 7B 01 15 01][1F 61]{set(flag 3)}" eob
 
 l_0xc98465:
     "@Blue, blue." next
@@ -370,7 +369,7 @@ l_0xc987cf:
 
 l_0xc9881e:
     "[06 63 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
-    "@Those who aren't believers must not be good!{pause(15)}  To eternity with you![03]" call(data_23.l_0xc6851c) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 85 01 7B 02]{set(flag 355)}" eob
+    "@There's no salvation for non-believers!{pause(15)}  Go to Hell![03]" call(data_23.l_0xc6851c) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 85 01 7B 02]{set(flag 355)}" eob
 
 l_0xc9886f:
     "[06 64 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
@@ -387,7 +386,7 @@ l_0xc988f1:
 
 l_0xc98913:
     "@Blue, blue." next
-    "@You can't be happy unless you know happy-happyism." end
+    "@You can't be happy unless you know Happy Happyism." end
 
 l_0xc98940:
     "@Thanks, ahead of time." end
@@ -446,7 +445,7 @@ l_0xc98b68:
 l_0xc98b6e:
     "[06 49 00 {e(l_0xc98940)}][06 44 00 {e(l_0xc98be1)}]@Mr. Carpainter wants a girl." next
     "@No, I don't mean it like that." next
-    "@I meant he's looking for a girl who can be the goddess of Happy-happyism." next
+    "@I meant he's looking for a girl who can be the goddess of Happy Happyism." next
     "@I heard he's already got her." end
 
 l_0xc98be1:

@@ -217,7 +217,7 @@ l_0xc659c8:
 
 l_0xc659c9:
     "@The point overlooking the sea has beautiful scenery.{pause(15)}  It's over that way." next
-    "@Such a beautiful place gets me all choked up." end
+    "@I'd love to get dumped in a place like that to see what it's like." end
 
 l_0xc65a18:
     "[06 49 00 {e(l_0xc65a38)}]@You look so helpless.{pause(15)}  Are you okay?" end
@@ -310,7 +310,7 @@ l_0xc65efc:
 l_0xc65f4b:
     "@You look pretty healthy." end
 
-l_0xc65f5c:
+l_0xc66002:	// l_0xc65f5c
     "[06 69 00 {e(l_0xc65fa6)}]@Don't talk to me!{pause(15)}" linebreak
     "  I'm on duty." next
     "@Until I have Chief Strong's permission,{pause(15)} I can't let you through!" end
@@ -320,7 +320,7 @@ l_0xc65fa6:
     "@The <Town Map> can be checked out at the library." next
     "@You can also use the map in Twoson.{pause(20)}  It's really useful." end
 
-l_0xc66002:
+l_0xc65f5c:	// l_0xc66002
     "[06 69 00 {e(l_0xc6605f)}]@The road to Twoson" linebreak
     "  is closed." next
     "@You can't just squeeze through road blocks,{pause(15)} either!" next

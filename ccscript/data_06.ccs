@@ -230,7 +230,8 @@ l_0xc57e1c:
 
 l_0xc58000:
     "{window_open(1)}" newline
-    "@What shall you do?{wait}[18 02]{open_hp}{open_wallet}{window_open(2)}[19 02]Party edit" eob
+    "@Debug menu on." linebreak
+    "  What shall you do?{wait}[18 02]{open_hp}{open_wallet}{window_open(2)}[19 02]Party edit" eob
 
 l_0xc58023:
     "[19 02]Goods Edit" eob
@@ -272,7 +273,7 @@ enemy_spawn:
     "[19 02]Enemy spawn" eob
 
 l_0xc5808c:
-    "[1C 0C 02][11][1B 05]{window_closetop}{window_switch(1)}{clearline}" newline
+    "[1C 0C 02][11][1B 05]{window_closetop}{window_switch(1)}{window_clear}" newline
     "[1B 06][09 0E {e(l_0xc58103)} {e(l_0xc58262)} {e(data_07.l_0xc58718)} {e(data_08.l_0xc588cd)} {e(data_08.l_0xc58afb)} {e(data_08.l_0xc58a36)} {e(data_08.l_0xc58c88)} {e(data_09.l_0xc59895)} {e(data_08.l_0xc58e13)} {e(data_08.l_0xc58d09)} {e(data_10.l_0xc5a57f)} {e(data_09.l_0xc58e73)} {e(l_0xc580da)} {e(data_08.l_0xc58dbf)} ]@Debug mode off." end
 
 l_0xc580da:

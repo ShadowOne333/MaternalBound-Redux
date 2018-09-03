@@ -456,19 +456,20 @@ l_0xc80ec3:
     "  and re{pause(5)}e{pause(5)}e{pause(5)}e{pause(5)}lax." end
 
 l_0xc80ef3:
-    "@[1C 02 01], you'll sleep on the couch in the den...[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" newline
+    "@[1C 02 01], sleep here tonight." next
+    "@In separate rooms, of course...[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" newline
     eob
 
 l_0xc80f1c:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]@Hey!  Come on in!" next
     "@No, I don't need to hear about what happened...{pause(20)}  [1C 02 02] will be okay." next
     "@Why don't you just rest for now." next
-    "@You know where the couch in the den is...[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
+    "@You know where the other room is...[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
 
 l_0xc80f94:
     "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]@Oh [1C 02 02]!" next
     "@So even a tomboy like you thinks of her father occasionally!" next
-    "@You should rest,{pause(15)} seeing how this is your own home." next
+    "@You should stay here tonight,{pause(15)} for old times' sake." next
     "@How about we share a piece of pie like we used to?  Ha ha ha![03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
 
 l_0xc81027:

@@ -20,19 +20,23 @@ l_0xc79997:
     "[1F 41 05][1F F1 E7 00 6D 00][1F 15 6A 00 6F 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 78 00 6E 00 FF][1F 15 6A 00 70 00 FF][1F 21 41]" call(data_57.l_0xc9b4b8) "[1F 1F 6A 00 06][1F 1F 78 00 06][1F 17 F7 00 0C 00 01][1F 41 06]" eob
 
 l_0xc799d7:
-    "{set(flag 11)}[1F 41 05]{set(flag 536)}{music_resume}[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]{window_closeall}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}[1F 61]{window_open(1)}" call(l_0xc79a64) "{window_closeall}{unset(flag 2)}[1F 61]{window_open(1)}" call(l_0xc79a98) "{window_closeall}{unset(flag 3)}[1F 61]{window_open(1)}" call(l_0xc79ab9) "{window_closeall}{unset(flag 4)}[1F 61]{window_open(1)}" call(l_0xc79ad7) "{window_closeall}{unset(flag 5)}[1F 61]{window_open(1)}" call(data_52.l_0xc9594d) "{window_closeall}{unset(flag 6)}[1F 61]" eob
+    "{set(flag 11)}[1F 41 05]{set(flag 536)}{music_resume}[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]{window_closeall}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}[1F 61]{window_open(1)}" call(l_0xc79a64) "{window_closeall}{unset(flag 2)}[1F 61]{window_open(1)}" call(l_0xc79a98) "{window_closeall}{unset(flag 3)}[1F 61]{window_open(1)}" call(l_0xc79ab9) "{window_closeall}{unset(flag 4)}[1F 61]{window_open(1)}" call(l_0xc79ad7) "{window_closeall}{unset(flag 5)}[1F 61]{window_open(1)}" title(1,"Gorgeous") call(data_52.l_0xc9594d) "{window_closeall}{unset(flag 6)}[1F 61]" eob
 
 l_0xc79a64:
+    title(1,"Nice")	// Fatty guy
     "@Well, what do you know?" next
-    "@This little nipper took us from a nightmare to a dream...[03]" eob
+    "@This little nipper took us from hell to heaven.[03]" eob
 
 l_0xc79a98:
+    title(1,"Lucky")	// Skinny guy
     "@Ow!{pause(20)}  This means we can get out of this dump![03]" eob
 
 l_0xc79ab9:
+    title(1,"Okay")	// Drum guy
     "@I'm a good driver.{pause(15)}  C'mon, I'll show you.[03]" eob
 
 l_0xc79ad7:
+    title(1,"Groovy")	// Bass guy
     "@All right,{pause(15)} let's move on to the next town." next
     "@I'm sure our ol' hunk o' junk will get us there...[03]" eob
 
@@ -44,10 +48,14 @@ l_0xc79b98:
     "[1F 15 B9 01 09 03 01][1F 41 05]{set(flag 747)}[1F 15 6A 00 B6 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]{unset(flag 536)}{set(flag 535)}{music_resume}[1F E5 FF][1F F1 40 01 B7 00][1F 61]{unset(flag 309)}{window_open(1)}" call(l_0xc79bec) "{window_closeall}[1F F1 75 01 B8 00]{pause(60)}[1F EE 75 01][1F E8 FF][1F 67 01]" eob
 
 l_0xc79bec:
+    title(1,"Okay")	// Drums guy
     "@Okay, guys, here we go![03]" eob
 
 l_0xc79bff:
-    "{window_open(1)}@Hey, sidewalk!{pause(20)}  Get out of my way![03]{window_closeall}" eob
+    "{window_open(1)}"
+    title(1,"Okay")	// Drums guy
+    "@Hey, sidewalk!{pause(20)}" linebreak
+    "  Get out of my way![03]{window_closeall}" eob
 
 l_0xc79c1e:
     "[1F ED]{set(flag 314)}[1F 15 F3 00 B9 00 FF][1F 21 3C][1F EF F3 00]" eob
@@ -59,12 +67,16 @@ l_0xc79c46:
     "[1F ED][1F 15 6A 00 4A 00 01][1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61][1F 13 01 05][1F 13 02 05]{unset(flag 535)}{music_resume}[1F ED][1F E5 FF][1F 15 95 00 4B 00 01][1F 61]{pause(30)}" call(l_0xc79cc8) "{pause(20)}[1F F2 95 00 4C 00][1F 61]{pause(30)}[1F F3 F3 00 08]{pause(30)}[1F 13 01 01][1F 13 02 01]{pause(30)}" call(l_0xc79d27) "{pause(30)}[1F F4 F3 00]{pause(30)}[1F EA F3 00][1F 61][1F 67 01][19 26 03]{set(flag 211)}{set(flag 761)}{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
 
 l_0xc79cc8:
-    "{window_open(1)}@Looks like we have to say goodbye for now." next
+    "{window_open(1)}"
+    title(1,"Nice")	// Fatty guy
+    "@Looks like we have to say goodbye for now." next
     "@This town seems pretty gloomy," next
     "@but I'm sure you can light up the place with your own little brand of sunshine...[03]{window_closeall}" eob
 
 l_0xc79d27:
-    "{window_open(1)}@Hope to see you again sometime." next
+    "{window_open(1)}"
+    title(1,"Okay")	// Drums guy
+    "@Hope to see you again sometime." next
     "@Look for us to be singing at some theater in Fourside...[03]{window_closeall}" eob
 
 l_0xc79d5f:

@@ -197,7 +197,7 @@ l_0xc72fbe:
     "@Pals basically.  Ya ha ha ha ha." end
 
 l_0xc72ff8:
-    "@City Hall is to the east.{pause(20)}  You know,{pause(10)}  where the sun rises!" end
+    "@Thity Hall ith to the eatht.{pause(20)}  You know,{pause(10)}  where the thun ritheth!" end
 
 l_0xc73024:
     "[06 7E 02 {e(l_0xc73039)}][06 0C 00 {e(l_0xc730cf)}][06 0D 00 {e(l_0xc730cf)}]" goto(l_0xc73039)
@@ -239,7 +239,8 @@ l_0xc731bc:
     "@I'm sad 'cause I only got this short message." end
 
 l_0xc731f0:
-    "[06 49 00 {e(l_0xc73217)}]@I wonder if <MOTHER 2> has been released yet." end
+    "[06 49 00 {e(l_0xc73217)}]@I wonder if <MOTHER 2> has been released yet." next
+    "@It really fell behind schedule..." end
 
 l_0xc73217:
     "@Listen to this!{pause(20)}  I finished MOTHER 2!" end

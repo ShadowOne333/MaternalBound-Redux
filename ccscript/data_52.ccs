@@ -63,10 +63,10 @@ l_0xc94e44:
     "[1D 01 FF CE][1D 0E 00 63]" call(data_36.l_0xc7dccf) end
 
 l_0xc94ed9:
-    "[06 44 00 {e(l_0xc94f01)}]@I had an argument with my friend about Happy-Happyism." end
+    "[06 44 00 {e(l_0xc94f01)}]@I had an argument with my friend about Happy Happyism." end
 
 l_0xc94f01:
-    "@My friend who joined the Happy-happy religion came to see me a while ago." next
+    "@My friend who joined the Happy Happy religion came to see me a while ago." next
     "@We've became friends again." end
 
 l_0xc94f42:
@@ -162,6 +162,7 @@ l_0xc953bf:
     "@I'm so excited!{pause(20)}  I might just wet myself.{pause(20)}  My heart is going pitter patter!" end
 
 l_0xc953f7:
+    title(1,"Nice")	// Fatty guy
     "[06 03 00 {e(l_0xc954b3)}][06 3F 01 {e(l_0xc954b3)}]@Shaba do wap, diddly dee da.{pause(20)}  Shaba di doo bee, bop wah." next
     "@I got those debt blues," linebreak
     "  hm mm mm." next
@@ -172,10 +173,13 @@ l_0xc954b3:
     "@Mr. Poochyfud,{pause(15)} the Manager, is looking for you.{pause(20)}  I wonder what he wants?" end
 
 l_0xc954e1:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Don't try to use your play money here, kid." next
+    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+    title(1,"Nice")	// Fatty guy
+    "@Don't try to use your play money here, kid." next
     "@Oh... my... gosh...!{pause(20)}  That's not real money,{pause(15)} is it?{pause(15)}  Wow!" end
 
 l_0xc95532:
+    title(1,"Lucky")	// Skinny guy
     "[06 03 00 {e(l_0xc9569a)}][06 3F 01 {e(l_0xc9560b)}]@Well,{pause(15)} yeah, in the old days,{pause(15)} there was lots o' cute girl dancers and acts at this theater." next
     "@'cept now,{pause(15)} we're the only act playin' here." next
     "@We even gone into debt here,{pause(15)} so we're pretty near stuck, hyuk, hyuk, hyuk." next
@@ -200,23 +204,31 @@ l_0xc95673:
     "@This is your chance fer a once in a lifetime event.{wait}{unset(flag 319)}{set(flag 3)}" eob
 
 l_0xc9569a:
+    title(1,"Lucky")	// Skinny guy
     "@Ya got a once in a lifetime opportunity.{pause(20)}  How 'bout watchin'{pause(15)} one more show?" end
 
 l_0xc956d6:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Well, hello!  Ya got cash!{pause(20)}  And some nice stuff ta boot!  Hyuk, hyuk, hyuk." end
+    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+    title(1,"Lucky")	// Skinny guy
+    "@Well, hello!  Ya got cash!{pause(20)}  And some nice stuff ta boot!  Hyuk, hyuk, hyuk." end
 
 l_0xc9571e:
+    title(1,"Okay")	// Drum guy
     "[06 03 00 {e(l_0xc9575e)}][06 3F 01 {e(l_0xc9575e)}]@Hey,{pause(15)} ya get to see our show, you lucky kid!{pause(20)}  I hope ya pay attention." end
 
 l_0xc9575e:
+    title(1,"Okay")	// Drum guy
     "@That was a great gig!" next
     "@We can't be this good all the time, can we? " end
 
 l_0xc95786:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]@If you give him a chance,{pause(15)} the theater manager will cheat you out of your money," next
+    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+    title(1,"Okay")	// Drum guy
+    "@If you give him a chance,{pause(15)} the theater manager will cheat you out of your money," next
     "@he he he." end
 
 l_0xc957cb:
+    title(1,"Gorgeous")	// Sax guy
     "[06 03 00 {e(l_0xc95881)}][06 3F 01 {e(l_0xc95881)}][06 02 00 {e(l_0xc957ff)}]@I wrote the lyrics to most of the Runaway Brothers songs." next
     goto(l_0xc957ff)
 
@@ -234,13 +246,16 @@ l_0xc95881:
     "@...hey, I just made up a new song." end
 
 l_0xc958d7:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Wow!  10,000 dollars!{pause(20)}" linebreak
+    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+    title(1,"Gorgeous")	// Sax guy
+    "@Wow!  10,000 dollars!{pause(20)}" linebreak
     "  I can make another song now." next
     "@Ten G's,{pause(20)}  ten G's.{pause(20)}" linebreak
     "  That's dollars,{pause(20)} baby, dollars.{pause(20)}" linebreak
     "  Yeah yeah yeah." end
 
 l_0xc9594d:
+    title(1,"Groovy")	// Bass guy
     "[06 03 00 {e(l_0xc95988)}][06 3F 01 {e(l_0xc95988)}]@I want some bread." next
     "@I need the coinage." next
     "@I want more dough all the time." end
@@ -249,7 +264,9 @@ l_0xc95988:
     "@I didn't stand out and get much attention, did I?" end
 
 l_0xc959a5:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]@That is exactly what I want." next
+    "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+    title(1,"Groovy")	// Bass guy
+    "@That is exactly what I want." next
     "@I can't believe that you have that much..." end
 
 l_0xc959db:
@@ -299,7 +316,7 @@ l_0xc95c0e:
     "@Anyway, I lost and nothing will change that." next
     "@You know,{pause(15)} you're pretty strong." next
     "@Yeah, I know that you want to find out about a girl named [1C 02 02]." next
-    "@She went off to a secret hideout in the Grateful Dead Valley." next
+    "@She went off to a secret hideout I rent in the Grateful Dead Valley." next
     "@A chubby boy and a weird guy in a blue outfit have kidnapped her, though." next
     "@They said that they were going to make [1C 02 02] some sort of human sacrifice." next
     "@They were definitely hard-core strange." next

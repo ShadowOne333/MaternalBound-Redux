@@ -80,14 +80,26 @@ l_0xc88a47:
     "@*Boo,{pause(5)} hoo,{pause(5)} hoo* ...Venus!... *sob* *sob*[03]{window_closeall}" eob
 
 l_0xc88b6d:
-    "{window_closeall}{set(flag 536)}{music_resume}[1F 15 95 00 D4 01 01]   [1F 15 96 00 D5 01 01][1F 15 B9 00 D6 01 01][1F 15 BA 00 D7 01 01][1F 15 BB 00 D8 01 01][1F 61]                                              [1F F2 95 00 D9 01]     [1F 61][1F E7 95 00]{window_open(1)}@Sorry about bein' such troublemakers![03]{window_closeall}[1F EA 95 00]                   [1F 61][1F F2 96 00 D9 01]        [1F 61][1F E7 96 00]{window_open(1)}@We won't be so gullible anymore...{pause(20)}  Well,{pause(15)} our fans are waitin', baby..." next
-    "{window_closeall}[1F EA 96 00]                      [1F 61][1F F2 B9 00 D9 01] [1F 61][1F E7 B9 00]{window_open(1)}@Let's just do this one last show and then get outta here..." next
-    "{window_closeall}[1F EA B9 00]           [1F 61][1F F2 BA 00 D9 01]   [1F 61][1F E7 BA 00]{window_open(1)}@All right!{pause(20)}  Thanks again![03]{window_closeall}[1F EA BA 00]                 [1F 61][1F F2 BB 00 DA 01]        [1F 61][1F E7 BB 00]{window_open(1)}@Money, that's what I want." linebreak
+    "{window_closeall}{set(flag 536)}{music_resume}[1F 15 95 00 D4 01 01]   [1F 15 96 00 D5 01 01][1F 15 B9 00 D6 01 01][1F 15 BA 00 D7 01 01][1F 15 BB 00 D8 01 01][1F 61]                                              [1F F2 95 00 D9 01]     [1F 61][1F E7 95 00]{window_open(1)}"
+    title(1,"Nice")	// Fatty guy
+    "@Sorry about bein' such troublemakers![03]{window_closeall}[1F EA 95 00]                   [1F 61][1F F2 96 00 D9 01]        [1F 61][1F E7 96 00]{window_open(1)}"
+    title(1,"Lucky")	// Skinny guy
+    "@We won't be so gullible anymore...{pause(20)}  Well,{pause(15)} our fans are waitin', baby..." next
+    "{window_closeall}[1F EA 96 00]                      [1F 61][1F F2 B9 00 D9 01] [1F 61][1F E7 B9 00]{window_open(1)}"
+    title(1,"Okay")	// Drum guy
+    "@Let's just do this one last show and then get outta here..." next
+    "{window_closeall}[1F EA B9 00]           [1F 61][1F F2 BA 00 D9 01]   [1F 61][1F E7 BA 00]{window_open(1)}"
+    title(1,"Groovy")	// Bass guy
+    "@All right!{pause(20)}  Thanks again![03]{window_closeall}[1F EA BA 00]                 [1F 61][1F F2 BB 00 DA 01]        [1F 61][1F E7 BB 00]{window_open(1)}"
+    title(1,"Gorgeous")	// Sax guy
+    "@Money, that's what I want." linebreak
     "  Money, that's what is hot." linebreak
     "  Money, that's what I want." next
     "@Money, it's what we ain't got 'cept{pause(5)} freedom,{pause(15)} freedom," next
     "@freedom is what we've really sought!" next
-    "{window_closeall}[1F EA BB 00]                     [1F 61][1F E7 BB 00]{window_open(1)}@Money, that's what I want." linebreak
+    "{window_closeall}[1F EA BB 00]                     [1F 61][1F E7 BB 00]{window_open(1)}"
+    title(1,"Gorgeous")	// Sax guy
+    "@Money, that's what I want." linebreak
     "  Money, that's what is hot." linebreak
     "  Money, that's what I want...[03]{window_closeall}[1F 15 95 00 DB 01 01]   [1F 61][1F EA BB 00][1F 61]                                      " eob
 
@@ -134,7 +146,9 @@ l_0xc89078:
     "@We did, however,{pause(15)} find a Diamond instead." next
     "@Gerardo told me to give it to [1C 02 01]." next
     "@Here it is... please take it.[03][1D 03 FF][1B 02 {e(l_0xc891b7)}][1D 0E 00 B6]" call(data_36.l_0xc7dcb6) next
-    "{set(flag 90)}@Well, I've got to go..." next
+    "{set(flag 90)}"
+    title(1,"George Montague")
+    "@Well, I've got to go..." next
     "@I'm busy working at the other mine...{pause(15)} busy, busy, busy![03]{window_closeall}" goto(l_0xc89160)
 
 l_0xc89160:
@@ -146,6 +160,7 @@ l_0xc89180:
     goto(l_0xc89078)
 
 l_0xc891b7:
+    title(1,"George Montague")
     "@Hey!{pause(20)}  You've got too many things with you..." next
     "@Well, I've got to go... I'm busy working at the other mine..." next
     "@I'll certainly hang on to your Diamond." next
@@ -212,18 +227,23 @@ l_0xc8983b:
     "{window_closeall}{set(flag 11)}[1F 1E B8 03 06][1F 15 9D 00 F9 00 01]{unset(flag 2)}{pause(40)}[1F F1 B9 03 F5 00][1F F1 BA 03 F6 00]{pause(94)}{set(flag 2)}[1F 61][1F F1 BD 03 F7 00][1F F1 BE 03 F8 00][1F 61][1F F1 BD 03 0C 00][1F F1 BE 03 0C 00][1F F1 B9 03 0C 00][1F F1 BA 03 0C 00][1F F1 BB 03 0C 00][1F F1 BC 03 0C 00]{unset(flag 11)}" call(data_36.l_0xc7dd7d) eob
 
 l_0xc8989f:
+    title(1,"Nice")	// Fatty guy
     "@The room next door seems suspicious somehow..." end
 
 l_0xc898bc:
+    title(1,"Lucky")	// Skinny guy
     "@I thought that I heard a girl's voice..." end
 
 l_0xc898d4:
+    title(1,"Groovy")	// Bass guy
     "@We would like to pay you back...{pause(20)}  We'll help you in whatever way we can..." end
 
 l_0xc89902:
+    title(1,"Gorgeous")	// Sax guy
     "@We don't have any money...{pause(15)} we are strong,{pause(15)} however..." end
 
 l_0xc89922:
+    title(1,"Okay")	// Drum guy
     "@Let's break into the room next door..." next
     "@'Cept I need to go to the bathroom first..." end
 
@@ -241,21 +261,27 @@ l_0xc899a6:
     "@Yep, somehow I know that's where we must go...{wait}{window_closeall}{pause(60)}{unset(flag 47)}{set(flag 48)}{set(flag 773)}{set(flag 143)}" call(data_36.l_0xc7de60) "{set(flag 536)}" eob
 
 l_0xc89a71:
-    "{unset(flag 2)}[1F F2 95 00 7A 00][1F F2 96 00 7B 00][1F F2 B9 00 7C 00][1F F2 BA 00 7D 00][1F F2 BB 00 7E 00]{window_open(1)}{window_open(1)}@Wow!{pause(20)}  You guys did a lot while I was in the bathroom!  Ha ha ha ha..." next
+    "{unset(flag 2)}[1F F2 95 00 7A 00][1F F2 96 00 7B 00][1F F2 B9 00 7C 00][1F F2 BA 00 7D 00][1F F2 BB 00 7E 00]{window_open(1)}{window_open(1)}"
+    title(1, "Nice")	// Fatty guy
+    "@Wow!{pause(20)}  You guys did a lot while I was in the bathroom!  Ha ha ha ha..." next
     "@What's that, [1C 02 02]?" next
     "@You want to get to Threek as soon as possible?" next
     "@We can take you to Threek in our tour bus." next
     "@I'll get the bus and wait for you just outside the building...[03]{window_closeall}{set(flag 317)}{unset(flag 318)}{set(flag 2)}[1F 61][1F 66 01 33 57 AF C7 00]" eob
 
 l_0xc89b32:
-    "{window_open(1)}@Okay!{pause(15)}  You can get on the bus now...[03]{window_closeall}" eob
+    "{window_open(1)}"
+    title(1, "Nice")	// Fatty guy
+    "@Okay!{pause(15)}  You can get on the bus now...[03]{window_closeall}" eob
 
 l_0xc89b4f:
     "[1F 41 05][1F 1A C0 03 01]{pause(60)}[1F 1B C0 03][1F F1 C0 03 BB 00][1F 61][1F E6 C0 03][19 22 01 02 C0 03][1F 13 01 00][19 22 02 02 C0 03][1F 13 02 00][19 22 03 02 C0 03][1F 13 03 00]{window_open(1)}@Heh heh heh..." linebreak
     "  There's no need to wait...[03]{window_closeall}[1F 15 6A 00 BD 00 01][1F EF 6A 00][1F E8 FF][1F E9 C0 03][1F 61]{pause(60)}[1F 1F 6A 00 06][1F ED][1F 15 B9 01 09 03 01][1F 15 6A 00 BF 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]{unset(flag 536)}{set(flag 535)}{music_resume}[1F E5 FF]{unset(flag 317)}[1F F1 C0 03 C0 00][1F 61]"
 
 l_0xc89bf6:
-    "{window_open(1)}@All right... on to Threek!" next
+    "{window_open(1)}"
+    title(1, "Nice")	// Fatty guy
+    "@All right... on to Threek!" next
     "{window_closeall}[1F F1 E2 03 C1 00]{pause(60)}[1F EE E2 03][1F E8 FF][1F 67 01]" eob
 
 l_0xc89c1d:
@@ -286,15 +312,19 @@ l_0xc89ca5:
     "[1F 07 03]{pause(60)}{unset(flag 535)}{music_resume}[1F 15 6A 00 4A 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61][1F 13 01 01][1F 13 02 01][1F 13 03 01][1F ED][1F E5 FF][1F 15 95 00 4B 00 01][1F 61]{pause(30)}[1F E7 95 00]" call(l_0xc89d0a) "{pause(20)}[1F F2 95 00 4C 00][1F 61]{pause(30)}[1F EA F3 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
 
 l_0xc89d0a:
-    call(data_36.l_0xc7de60) "{window_open(1)}@All right!{pause(20)}  We made it!" next
+    call(data_36.l_0xc7de60) "{window_open(1)}"
+    title(1, "Nice")	// Fatty guy
+    "@All right!{pause(20)}  We made it!" next
     "@I'm sorry we couldn't do more for you." next
     "@Remember,{pause(15)} though... we're on your side." next
     "@When you're having a tough time," next
-    "@just think of our songs and imagine the Runaway Brothers" next   "  singing somewhere far," next
+    "@just think of our songs and imagine" next   
+    "  the Runaway Brothers singing somewhere far," next
     "@far away..." next
     "@By the way,{pause(15)} why did you need to come back here?" next
     "@You must have forgotten some very important item or gadget here..." next
-    "@How's that for a guess?{pause(20)}  Am I close?" next
+    "@How's that for a guess?{pause(20)}" linebreak
+    "  Am I close?" next
     "@Well,{pause(15)} you don't have to tell me..." next
     "@See you later and good luck![03]{window_closeall}" eob
 

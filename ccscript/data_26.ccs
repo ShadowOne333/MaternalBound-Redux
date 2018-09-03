@@ -361,6 +361,7 @@ l_0xc6d852:
     "@...Then, you should give me a big hand.{wait}{set(flag 680)}" eob
 
 l_0xc6d86d:
+    title(1,"Nice")	// Fatty guy
     "@Again, we've been cheated by the theater owner." next
     "@We're stuck here with a phony contract.  Oh yeah!" end
 
@@ -370,22 +371,27 @@ l_0xc6d8af:
     "@But right now,{pause(15)} our fans are waiting for us." next
     "@We'll sing one more song before we go." next
     "@Ready?" next
-    "@Okay, let's go!{pause(15)}  Thanks, boogie boy![03]" eob
+    "@Okay, let's go!{pause(15)}" linebreak
+    "  Thanks, boogie boy![03]" eob
 
 l_0xc6d93f:
+    title(1,"Groovy")	// Bass guy
     "@We know how to sing but we don't know how to handle money or women." next
     "@Do-wap, do do wop." end
 
 l_0xc6d97a:
+    title(1,"Okay")	// Drum guy
     "@We owe you guys so much." next
     "@Sorry." end
 
 l_0xc6d993:
+    title(1,"Lucky")	// Skinny guy
     "@We're so helpless." next
     "@Really helpless, and hopeless..." linebreak
     "  Hyuk hyuk hyuk." end
 
 l_0xc6d9ca:
+    title(1,"Gorgeous")	// Sax guy
     "@To meet Geldegarde Monotoli, you'll need our help." next
     "@I don't exactly know why... it's just a hunch." end
 
