@@ -230,8 +230,12 @@ l_0xc57e1c:
 
 l_0xc58000:
     "{window_open(1)}" newline
-    "@Debug menu on." linebreak
-    "  What shall you do?{wait}[18 02]{open_hp}{open_wallet}{window_open(2)}[19 02]Party edit" eob
+    "@Debug menu on." next
+    goto(debug_main)
+
+debug_main:
+    "{window_open(1)}" newline
+    "@What shall you do?{wait}[18 02]{open_hp}{open_wallet}{window_open(2)}[19 02]Party edit" eob
 
 l_0xc58023:
     "[19 02]Goods Edit" eob
@@ -279,7 +283,7 @@ l_0xc5808c:
 l_0xc580da:
     newline
     "@The hint shop has been marked in your map." next
-    "{set(flag 681)}{set(flag 682)}{set(flag 683)}{set(flag 684)}{set(flag 685)}{set(flag 686)}" goto(l_0xc58000)
+    "{set(flag 681)}{set(flag 682)}{set(flag 683)}{set(flag 684)}{set(flag 685)}{set(flag 686)}" goto(debug_main)
 
 l_0xc58103:
     newline
@@ -290,7 +294,7 @@ l_0xc58115:
     "[19 02]Remove" eob
 
 l_0xc5811b:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5812f)} {e(l_0xc581ee)}]" goto(l_0xc58000)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5812f)} {e(l_0xc581ee)}]" goto(debug_main)
 
 l_0xc5812f:
     newline
@@ -346,7 +350,7 @@ l_0xc581c6:
     "[1C 0C 03][11][1B 05][19 04]{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc581e7)}]{swap}[1F 11 00]{open_hp}" goto(l_0xc58148)
 
 l_0xc581e7:
-    "{window_closetop}" goto(l_0xc58000)
+    "{window_closetop}" goto(debug_main)
 
 l_0xc581ee:
     "[19 10 02][1B 02 {e(l_0xc58250)}]@Which party member do you want to remove?{wait}" linebreak
@@ -357,7 +361,7 @@ l_0xc58214:
     goto(l_0xc58214)
 
 l_0xc5824b:
-    goto(l_0xc58000)
+    goto(debug_main)
 
 l_0xc58250:
     "@You can't have a party of zero!" next
@@ -387,7 +391,7 @@ l_0xc582bb:
 
 l_0xc582c5:
     "[1C 0C 01][11][1B 05]{window_closetop}[19 04]{window_switch(1)}" newline
-    "[1B 06][09 07 {e(l_0xc582f8)} {e(data_07.l_0xc58369)} {e(data_07.l_0xc58539)} {e(data_07.l_0xc58568)} {e(data_07.l_0xc585dc)} {e(data_07.l_0xc58614)} {e(data_07.l_0xc5863c)}]" goto(l_0xc58000)
+    "[1B 06][09 07 {e(l_0xc582f8)} {e(data_07.l_0xc58369)} {e(data_07.l_0xc58539)} {e(data_07.l_0xc58568)} {e(data_07.l_0xc585dc)} {e(data_07.l_0xc58614)} {e(data_07.l_0xc5863c)}]" goto(debug_main)
 
 l_0xc582f8:
     "@Input goods ID:" linebreak
@@ -403,7 +407,7 @@ l_0xc58358:
     "@Can't add more items.{wait}" goto(l_0xc58364)
 
 l_0xc58364:
-    goto(l_0xc58000)
+    goto(debug_main)
 
 l_0xc58369:
     "[18 02]{window_open(12)}[19 02]Key to the shack" eob

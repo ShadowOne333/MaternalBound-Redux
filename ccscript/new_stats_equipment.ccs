@@ -3,7 +3,6 @@
 import asm65816
 import ebs
 import ebpp_std
-//import asmref
 
 /*
 NOTES:
@@ -51,6 +50,14 @@ Windows 7, 45 and 52 require the following changes:
   X Offset: 15
   Y Offset: 13
 
+ROM 0xC2032B seems to read text and prints them as titles to a window.
+Parameters:
+	A: window ID
+	X: Length of the text
+	DPR 0x0E - 0x10: The text itself
+Returns:
+	Nothing
+  
 */
 
 
@@ -157,6 +164,11 @@ Status_Text:
 Resistances_Text:
 	"Resistances[00]"
 
+ROM[0xC1A1E8] = {
+	JSL (Title_Stats_Window)
+	NOP
+	NOP
+}
 	
 //Overwriting old code with this.
 ROM[0xC1A1F8] = {
@@ -164,7 +176,6 @@ ROM[0xC1A1F8] = {
 }
 
 NOROOM:
-
 //Stat names:
 
 // OFFENSE
@@ -722,15 +733,15 @@ NOROOM_End:
 
 /*-+-+-+-+-+-+-+-+-+-+RESISTANCE WINDOW-+-+-+-+-+-+-+-+-+-+*/
 	
-New_Resistance_Window_Display:{
+New_Resistance_Window_Display: {
 
 	LDA_i (52)
 	STA_a (0x8958) // Make window 52 the focus window
 	JSL (0xC1DD47) // Open window 52
+	JSL (Title_Resistance_Window)
 	JSL (0xC3E4E0) // Enable things to be written to the window
 	LDA_i (3)
 	JSL (UnknownJSRSubroutine2) // position of the numbers right of the stat
-
 
 //-----Main part of this routine-----
 	
@@ -2238,6 +2249,41 @@ UnknownJSRSubroutine6: { // Acts like 0xC10EB4, helps with the money window
 	STA_x (0x8662)
 
 Return:
+	PLD
+	RTL
+}
+
+Title_Stats_Window:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+	
+	LDA_i (0x002D) // Load 45
+	JSL (0xC1DD47) // Open window 45
+	
+	ASMLoadAddress0E(Status_Text)
+	LDA_i (45)
+	LDX_i (0x0006)
+	JSL (0xC2032B)
+	
+	PLD
+	RTL
+}
+
+Title_Resistance_Window:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+	
+	ASMLoadAddress0E(Resistances_Text)
+	LDA_i (52)
+	LDX_i (0xFFFF)
+	JSL (0xC2032B)
+	
 	PLD
 	RTL
 }

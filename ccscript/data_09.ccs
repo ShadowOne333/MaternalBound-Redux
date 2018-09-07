@@ -9,7 +9,7 @@ command e(label) "{long label}"
 // Text Data
 l_0xc58e31:
     "     [1F 52 02]{clearline}[1B 03 {e(l_0xc58e4a)}]@Hint system off." next //Hints closing
-    goto(data_06.l_0xc58000)
+    goto(data_06.debug_main)
 
 l_0xc58e4a:
     "{rtoarg}@Hint #[1C 0A 00 00 00 00]{wait}" linebreak
@@ -19,7 +19,7 @@ l_0xc58e4a:
 
 l_0xc58e73:
     "@Select your teleportation." linebreak
-    "  [1F 52 01]{clearline}[09 04 {e(l_0xc58e9f)} {e(l_0xc58ea6)} {e(l_0xc58ead)} {e(l_0xc58eb4)}]" goto(data_06.l_0xc58000)
+    "  [1F 52 01]{clearline}[09 04 {e(l_0xc58e9f)} {e(l_0xc58ea6)} {e(l_0xc58ead)} {e(l_0xc58eb4)}]" goto(data_06.debug_main)
 
 l_0xc58e9f:
     "{window_closeall}[1F 20 04 01]" eob
@@ -165,7 +165,7 @@ l_0xc59894:
 l_0xc59895:
     "@Select your event." linebreak
     "  [1F 52 02]" newline
-    "[09 46 {e(l_0xc599d0)} {e(l_0xc599f4)} {e(l_0xc59a15)} {e(l_0xc59a40)} {e(l_0xc59a72)} {e(l_0xc59aa4)} {e(l_0xc59ace)} {e(l_0xc59af5)} {e(l_0xc59b25)} {e(l_0xc59b45)} {e(l_0xc59b78)} {e(l_0xc59bb5)} {e(l_0xc59bd7)} {e(l_0xc59bfc)} {e(l_0xc59c39)} {e(l_0xc59c67)} {e(l_0xc59c84)} {e(l_0xc59cb5)} {e(l_0xc59cd9)} {e(l_0xc59d06)} {e(l_0xc59d30)} {e(l_0xc59d61)} {e(l_0xc59d7f)} {e(l_0xc59da0)} {e(l_0xc59dbd)} {e(l_0xc59de1)} {e(l_0xc59e01)} {e(l_0xc59e21)} {e(l_0xc59e40)} {e(l_0xc59e62)} {e(l_0xc59e84)} {e(l_0xc59eb2)} {e(l_0xc59f08)} {e(l_0xc59f44)} {e(l_0xc59f60)} {e(l_0xc59f80)} {e(l_0xc59fa0)} {e(l_0xc59fbd)} {e(l_0xc59ff1)} {e(l_0xc5a00c)} {e(l_0xc5a036)} {e(l_0xc5a05b)} {e(l_0xc5a07e)} {e(l_0xc5a0b3)} {e(l_0xc5a0db)} {e(l_0xc5a0fe)} {e(l_0xc5a11a)} {e(l_0xc5a154)} {e(l_0xc5a17d)} {e(l_0xc5a1ae)} {e(data_10.l_0xc5a1cd)} {e(data_10.l_0xc5a1ff)} {e(data_10.l_0xc5a232)} {e(data_10.l_0xc5a25e)} {e(data_10.l_0xc5a27a)} {e(data_10.l_0xc5a29c)} {e(data_10.l_0xc5a2c2)} {e(data_10.l_0xc5a2ec)} {e(data_10.l_0xc5a318)} {e(data_10.l_0xc5a342)} {e(data_10.l_0xc5a36c)} {e(data_10.l_0xc5a396)} {e(data_10.l_0xc5a3c0)} {e(data_10.l_0xc5a3ea)} {e(data_10.l_0xc5a414)} {e(data_10.l_0xc5a43e)} {e(data_10.l_0xc5a465)} {e(data_10.l_0xc5a48b)} {e(data_10.l_0xc5a4b4)} {e(data_10.l_0xc5a4cd)}]@Events menu off.{wait}" goto(data_06.l_0xc58000)
+    "[09 46 {e(l_0xc599d0)} {e(l_0xc599f4)} {e(l_0xc59a15)} {e(l_0xc59a40)} {e(l_0xc59a72)} {e(l_0xc59aa4)} {e(l_0xc59ace)} {e(l_0xc59af5)} {e(l_0xc59b25)} {e(l_0xc59b45)} {e(l_0xc59b78)} {e(l_0xc59bb5)} {e(l_0xc59bd7)} {e(l_0xc59bfc)} {e(l_0xc59c39)} {e(l_0xc59c67)} {e(l_0xc59c84)} {e(l_0xc59cb5)} {e(l_0xc59cd9)} {e(l_0xc59d06)} {e(l_0xc59d30)} {e(l_0xc59d61)} {e(l_0xc59d7f)} {e(l_0xc59da0)} {e(l_0xc59dbd)} {e(l_0xc59de1)} {e(l_0xc59e01)} {e(l_0xc59e21)} {e(l_0xc59e40)} {e(l_0xc59e62)} {e(l_0xc59e84)} {e(l_0xc59eb2)} {e(l_0xc59f08)} {e(l_0xc59f44)} {e(l_0xc59f60)} {e(l_0xc59f80)} {e(l_0xc59fa0)} {e(l_0xc59fbd)} {e(l_0xc59ff1)} {e(l_0xc5a00c)} {e(l_0xc5a036)} {e(l_0xc5a05b)} {e(l_0xc5a07e)} {e(l_0xc5a0b3)} {e(l_0xc5a0db)} {e(l_0xc5a0fe)} {e(l_0xc5a11a)} {e(l_0xc5a154)} {e(l_0xc5a17d)} {e(l_0xc5a1ae)} {e(data_10.l_0xc5a1cd)} {e(data_10.l_0xc5a1ff)} {e(data_10.l_0xc5a232)} {e(data_10.l_0xc5a25e)} {e(data_10.l_0xc5a27a)} {e(data_10.l_0xc5a29c)} {e(data_10.l_0xc5a2c2)} {e(data_10.l_0xc5a2ec)} {e(data_10.l_0xc5a318)} {e(data_10.l_0xc5a342)} {e(data_10.l_0xc5a36c)} {e(data_10.l_0xc5a396)} {e(data_10.l_0xc5a3c0)} {e(data_10.l_0xc5a3ea)} {e(data_10.l_0xc5a414)} {e(data_10.l_0xc5a43e)} {e(data_10.l_0xc5a465)} {e(data_10.l_0xc5a48b)} {e(data_10.l_0xc5a4b4)} {e(data_10.l_0xc5a4cd)}]@Events menu off.{wait}" goto(data_06.debug_main)
 
 l_0xc599d0:
     "@{name(7)} runs away.{wait}" linebreak

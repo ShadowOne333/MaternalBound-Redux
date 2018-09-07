@@ -127,7 +127,7 @@ l_0xc58532:
 
 l_0xc58539:
     "@Inventory maxed out with Skip Sandwiches DX." next
-    call(l_0xc58555) goto(data_06.l_0xc58000)
+    call(l_0xc58555) goto(data_06.debug_main)
 
 l_0xc58555:
     "[1D 03 FF][1B 02 {e(l_0xc58567)}][1D 0E 00 E1]" goto(l_0xc58555)
@@ -177,7 +177,7 @@ l_0xc585f2:
     "{ctoarg}[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc5860e)}][1D 18 00]{inc}" goto(l_0xc585f2)
 
 l_0xc5860e:
-    "{wait}" goto(data_06.l_0xc58000)
+    "{wait}" goto(data_06.debug_main)
 
 l_0xc58614:
     "@Storage cleared." goto(l_0xc58624)
@@ -186,11 +186,11 @@ l_0xc58624:
     "[19 1A 01][1B 02 {e(l_0xc58636)}][19 1C FF 01]" goto(l_0xc58624)
 
 l_0xc58636:
-    "{wait}" goto(data_06.l_0xc58000)
+    "{wait}" goto(data_06.debug_main)
 
 l_0xc5863c:
     "@You now have been equipped" linebreak
-    "  with the ultimate weapons.[03]" call(l_0xc58659) goto(data_06.l_0xc58000)
+    "  with the ultimate weapons.[03]" call(l_0xc58659) goto(data_06.debug_main)
 
 l_0xc58659:
     "{counter(1)}" goto(l_0xc5865b)
@@ -265,7 +265,7 @@ l_0xc587a6:
     "[1C 0C 02][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][09 0D {e(l_0xc587f3)} {e(l_0xc58813)} {e(l_0xc5882f)} {e(l_0xc58841)} {e(l_0xc5884e)} {e(l_0xc5885b)} {e(l_0xc58868)} {e(l_0xc58875)} {e(l_0xc58882)} {e(l_0xc5888f)} {e(data_08.l_0xc5889c)} {e(data_08.l_0xc588a9)} {e(data_08.l_0xc588bb)}]" goto(l_0xc58718)
 
 l_0xc587ee:
-    goto(data_06.l_0xc58000)
+    goto(data_06.debug_main)
 
 l_0xc587f3:
     "{load_registers}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc58718)
