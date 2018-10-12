@@ -38,7 +38,8 @@ l_0xc58ebb:
     //"@SKtPSNDWKWEMS.{wait}"
 
 l_0xc58ed1:
-    "@NNMDKMSN." end //Unused debug option
+    "@Can't do anything." end
+    //"@NNMDKMSN." end //Debug option for Kirby Debug Menu - Option Banana
 
 l_0xc58edd:
     "[18 02]{window_open(7)}[1C 0C 01][11][09 06 {e(l_0xc58f07)} {e(l_0xc58f37)} {e(l_0xc58f61)} {e(l_0xc58f93)} {e(l_0xc58fc1)} {e(l_0xc58feb)}]{window_closetop}{window_switch(1)}" newline

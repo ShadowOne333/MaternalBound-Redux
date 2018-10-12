@@ -163,7 +163,8 @@ l_0xc9cd01:
 
 l_0xc9cd02:
     "[06 DD 00 {e(data_23.l_0xc685cb)}][19 10 01]{rtoarg}@[1C 02 00] opened the present." next
-    "@Inside was the [1C 05 64].{wait}[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 64][19 10 01]{rtoarg}@[1C 02 00] got it.{wait}{set(flag 221)}" eob
+    "@Inside was the [1C 05 64]." next
+    "[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 64][19 10 01]{rtoarg}@[1C 02 00] got it.{wait}{set(flag 221)}" eob
 
 l_0xc9cd4f:
     "[06 49 00 {e(l_0xc9cdf7)}]{counter(1)}" goto(l_0xc9cd58)

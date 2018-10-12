@@ -1,4 +1,5 @@
 # List all ranges which CoilSnake should not touch
 # Example:
 # - (0x3FFE00, 0x3FFE2F)
-- (0x00F8C2, 0x00F95D)
+ - (0x00F8C2, 0x00F95D)	# Reserved for EB++
+

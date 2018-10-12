@@ -358,7 +358,9 @@ l_0xc5fa72:
     "@I didn't think you would do so well against the mighty Onett police force..." next
     "@You want me to open the road to Twoson?" next
     "@Hang on for a sec, I'll radio my staff and give them the word..." next
-    "{window_closeall}{unset(flag 38)}{unset(flag 39)}[1F E4 4B 00 05][1F F3 4B 00 02]{pause(60)}{window_open(1)}@*Beep, beep* ...*Click*... *Rrrr*" next
+    "{window_closeall}{unset(flag 38)}{unset(flag 39)}[1F E4 4B 00 05][1F F3 4B 00 02]{pause(60)}{window_open(1)}"
+    title(1,"Capt. Strong")
+    "@*Beep, beep* ...*Click*... *Rrrr*" next
     "@*Click*  Strong here... do you read me?" next
     "@...*Krrrr* ...Hey!..." next
     "@...It's me, Captain Strong!..." next
@@ -366,7 +368,10 @@ l_0xc5fa72:
     "@He's a kid in a red cap... I want you to open the road to Twoson for him..." next
     "@I know that..." next
     "@I know that!..." next
-    "@Don't ask me why, just do it!  That's an order! ...Strong out...{wait}{window_closeall}{pause(60)}[1F F4 4B 00]{pause(30)}{unset(flag 6)}{music_resume}{pause(60)}[19 24 4B 00 01 01 00][1F E4 4B 00 00]{window_open(1)}@Well kid, I'm not going to question you now," next
+    "@Don't ask me why, just do it!  That's an order!" linebreak
+    "  ...Strong out...{wait}{window_closeall}{pause(60)}[1F F4 4B 00]{pause(30)}{unset(flag 6)}{music_resume}{pause(60)}[19 24 4B 00 01 01 00][1F E4 4B 00 00]{window_open(1)}"
+    title(1,"Capt. Strong")
+    "@Well kid, I'm not going to question you now," next
     "@but I do want to see you again..." next
     "@Good luck!{wait}{window_closeall}[1F F2 4B 00 6B 02][1F 61]{set(flag 105)}{unset(flag 450)}{unset(flag 35)}{unset(flag 37)}{unset(flag 742)}" eob
 
