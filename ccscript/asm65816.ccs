@@ -21,7 +21,9 @@
 // _s		Stack relative
 // _sy		Stack relative indexed,Y
 
-command adr24(a) "[{byte[0] a} {byte[1] a} {byte[2] a}]"
+command adr16(a)	"[{byte[0] a} {byte[1] a}]"
+command adr24(a)	"[{byte[0] a} {byte[1] a} {byte[2] a}]"
+command adr32(a)	"[{byte[0] a} {byte[1] a} {byte[2] a} 00]"
 
 command ADC_i(C)	"[69 {short C}]"
 command ADC_8(C)	"[69 {byte C}]"
@@ -39,7 +41,7 @@ command ADC_dxi(a)	"[61 {byte a}]"
 command ADC_diy(a)	"[71 {byte a}]"
 command ADC_dly(a)	"[77 {byte a}]"
 command ADC_s(a)	"[63 {byte a}]"
-command ADC_sy(a) "[73 {byte a}]"
+command ADC_sy(a)	"[73 {byte a}]"
 //
 command AND_i(C)	"[29 {short C}]"
 command AND_8(C)	"[29 {byte C}]"
