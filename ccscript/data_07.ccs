@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -66,7 +69,7 @@ l_0xc58425:
 
 l_0xc58432:
     "[1C 0C 01][11][1B 05]{window_closetop}[19 04]{window_switch(1)}" newline
-    "[1B 06][1B 02 {e(data_06.l_0xc58364)}]{swap}@To whom?{wait}" call(data_15.l_0xc5e52e) "[1B 02 {e(l_0xc58369)}]{swap}[1F C0 13 {e(l_0xc584b4)} {e(l_0xc584bb)} {e(l_0xc584c2)} {e(l_0xc584c9)} {e(l_0xc584d0)} {e(l_0xc584d7)} {e(l_0xc584de)} {e(l_0xc584e5)} {e(l_0xc584ec)} {e(l_0xc584f3)} {e(l_0xc584fa)} {e(l_0xc58501)} {e(l_0xc58508)} {e(l_0xc5850f)} {e(l_0xc58516)} {e(l_0xc5851d)} {e(l_0xc58524)} {e(l_0xc5852b)} {e(l_0xc58532)}]" goto(l_0xc58369)
+    "[1B 06][1B 02 {e(data_06.l_0xc58364)}]{swap}{diam}To whom?{wait}" call(data_15.l_0xc5e52e) "[1B 02 {e(l_0xc58369)}]{swap}[1F C0 13 {e(l_0xc584b4)} {e(l_0xc584bb)} {e(l_0xc584c2)} {e(l_0xc584c9)} {e(l_0xc584d0)} {e(l_0xc584d7)} {e(l_0xc584de)} {e(l_0xc584e5)} {e(l_0xc584ec)} {e(l_0xc584f3)} {e(l_0xc584fa)} {e(l_0xc58501)} {e(l_0xc58508)} {e(l_0xc5850f)} {e(l_0xc58516)} {e(l_0xc5851d)} {e(l_0xc58524)} {e(l_0xc5852b)} {e(l_0xc58532)}]" goto(l_0xc58369)
 
 l_0xc584b4:
     "{swap}[1D 0E 00 AA]" eob
@@ -126,7 +129,7 @@ l_0xc58532:
     "{swap}[1D 0E 00 FD]" eob
 
 l_0xc58539:
-    "@Inventory maxed out with Skip Sandwiches DX." next
+    "{diam}Inventory maxed out with Skip Sandwiches DX." next
     call(l_0xc58555) goto(data_06.debug_main)
 
 l_0xc58555:
@@ -136,7 +139,7 @@ l_0xc58567:
     eob
 
 l_0xc58568:
-    "@What items do you want to remove?" linebreak
+    "{diam}What items do you want to remove?" linebreak
     "[19 02]All" eob
 
 l_0xc5857c:
@@ -170,7 +173,7 @@ l_0xc585db:
     eob
 
 l_0xc585dc:
-    "@Storage filled with" linebreak
+    "{diam}Storage filled with" linebreak
     "  upper tier weapons.{counter(20)}" goto(l_0xc585f2)
 
 l_0xc585f2:
@@ -180,7 +183,7 @@ l_0xc5860e:
     "{wait}" goto(data_06.debug_main)
 
 l_0xc58614:
-    "@Storage cleared." goto(l_0xc58624)
+    "{diam}Storage cleared." goto(l_0xc58624)
 
 l_0xc58624:
     "[19 1A 01][1B 02 {e(l_0xc58636)}][19 1C FF 01]" goto(l_0xc58624)
@@ -189,7 +192,7 @@ l_0xc58636:
     "{wait}" goto(data_06.debug_main)
 
 l_0xc5863c:
-    "@You now have been equipped" linebreak
+    "{diam}You now have been equipped" linebreak
     "  with the ultimate weapons.[03]" call(l_0xc58659) goto(data_06.debug_main)
 
 l_0xc58659:
@@ -208,21 +211,21 @@ l_0xc5869b:
     eob
 
 l_0xc5869c:
-    "[1D 0E 01 19][1F 83 00 00][1D 0E 01 3D][1F 83 00 00][1D 0E 01 48][1F 83 00 00][1D 0E 01 56][1F 83 00 00]" eob
+    "[1D 0E 01 1A][1F 83 00 00][1D 0E 01 3D][1F 83 00 00][1D 0E 01 48][1F 83 00 00][1D 0E 01 56][1F 83 00 00]" eob
 
 l_0xc586bd:
     "[1D 0E 02 22][1F 83 00 00][1D 0E 02 C2][1F 83 00 00][1D 0E 02 47][1F 83 00 00][1D 0E 02 DC][1F 83 00 00]" eob
 
 l_0xc586de:
-    "[1D 0E 03 2F][1F 83 00 00][1D 0E 03 3C][1F 83 00 00][1D 0E 03 46][1F 83 00 00][1D 0E 03 55][1F 83 00 00]" eob
+    "[1D 0E 03 30][1F 83 00 00][1D 0E 03 3C][1F 83 00 00][1D 0E 03 46][1F 83 00 00][1D 0E 03 55][1F 83 00 00]" eob
 
 l_0xc586ff:
     "[1D 0E 04 23][1F 83 00 00][1D 0E 04 3F][1F 83 00 00][1D 0E 04 49][1F 83 00 00][1D 0E 04 57][1F 83 00 00]" eob
 
 l_0xc58718:
     newline
-    "@To whom?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc587ee)}]{store_registers}" linebreak
-    "@Which?{wait}" linebreak
+    "{diam}To whom?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc587ee)}]{store_registers}" linebreak
+    "{diam}Which?{wait}" linebreak
     "[18 02]{window_open(12)}[19 02]Heal" eob
 
 l_0xc58752:

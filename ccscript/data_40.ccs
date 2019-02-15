@@ -94,40 +94,40 @@ l_0xc82c6b:
     "@Gwaaagh, gwarrrgh!" next
     "@You finally made it." next
     "@This department store is gonna be your grave!{pause(20)}  Gwaaagh." next
-    "@Die and go to Hell-" next
+    "@Die, and go to Hell-" next
     "@No, to Heaven![03]" call(data_23.l_0xc6855b) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}"
     title(1,"Dept. Store Spook")
     "@...Even though you could beat me..." next
     "@Master Giygas will avenge me..." next
     "{pause(60)}" linebreak
-    "@At this moment, [1C 02 02] should be...Monotoli..." next
+    "@At this moment, [1C 02 02] should be...Monotoly..." next
     "@Gwaaaaarrrrgh!![03]{window_closeall}{pause(60)}{set(flag 139)}{set(flag 556)}{unset(flag 57)}{pause(1)}[1F F1 AD 03 7B 02]{set(flag 497)}[1F 41 05]" eob
 
 l_0xc82d6c:
     "[06 49 00 {e(l_0xc82dea)}][06 8F 00 {e(l_0xc82dc7)}]@The city of Fourside has developed quite a bit" next
-    "@since Mr. Geldegarde Monotoli hit the big time.{pause(20)}  It's been good for the city." end
+    "@since Mr. Geldegarde Monotoly hit the big time.{pause(20)}  It's been good for the city." end
 
 l_0xc82dc7:
-    "@That Mr. Monotoli has lost quite a bit of his resources..." end
+    "@That Mr. Monotoly has lost quite a bit of his resources..." end
 
 l_0xc82dea:
     "@In the future, you will build cities and even create a country..." next
     "@...I'm counting on you." end
 
 l_0xc82e26:
-    "[06 49 00 {e(l_0xc82eb1)}][06 8F 00 {e(l_0xc82e8c)}]@I've heard some bad rumors about Mr. Monotoli." next
-    "@I heard he made a deal with a pure evil entity in exchange for power..." next
+    "[06 49 00 {e(l_0xc82eb1)}][06 8F 00 {e(l_0xc82e8c)}]@I've heard some bad rumors about Mr. Monotoly." next
+    "@I heard he made a deal with the devil in exchange for power..." next
     "@you know... stuff like that." end
 
 l_0xc82e8c:
-    "@Just as I thought,{pause(15)} Monotoli has a portion of evil power." end
+    "@Just as I thought,{pause(15)} Monotoly has a portion of evil power." end
 
 l_0xc82eb1:
     "@My grandpa told me that everyone has at least one outstanding skill." next
     "@When I look at you, I know he's right." end
 
 l_0xc82ef8:
-    "[06 8F 00 {e(l_0xc82f71)}]@In the old days, Mr. Monotoli was just a regular," next
+    "[06 8F 00 {e(l_0xc82f71)}]@In the old days, Mr. Monotoly was just a regular," next
     "@unattractive real estate agent." next
     "@Now he has the power to control the police force." next
     "@I don't think the city of Fourside is better than before." end
@@ -139,13 +139,13 @@ l_0xc82f71:
 
 l_0xc82fa9:
     "[06 8F 00 {e(l_0xc82fe7)}]@The Runaway Brothers from Twoson seem very popular." next
-    "@I heard that the Topolla Theater is always full." end
+    "@I heard that the Topollo Theater is always full." end
 
 l_0xc82fe7:
     "@I heard you're friends of the Runaway Brothers{pause(20)}  I'm jealous." end
 
 l_0xc83002:
-    "[06 8F 00 {e(l_0xc83060)}]@Speaking of the Topolla Theater,{pause(15)} there's a new singer called Venus." next
+    "[06 8F 00 {e(l_0xc83060)}]@Speaking of the Topollo Theater,{pause(15)} there's a new singer called Venus." next
     "@She's better than the Runaway Brothers." next
     "@I'm totally bonkers about her..." end
 
@@ -155,23 +155,23 @@ l_0xc83060:
 
 l_0xc83082:
     "[06 49 00 {e(l_0xc83131)}][06 8F 00 {e(l_0xc830f6)}]@I don't get it." next
-    "@I heard that a guy who looks like Monotoli has been hanging out at Boris' Bar." next
+    "@I heard that a guy who looks like Monotoly has been hanging out at Borges' Bar." next
     "@You know, the totally unpopular place." next
     "@I heard he quietly goes in and out." end
 
 l_0xc830f6:
-    "@Boris' Bar was where the deal with the evil entity took place." next
+    "@Borges' Bar was where the deal with the demon took place." next
     "@I can't believe it... can you?" end
 
 l_0xc83131:
-    "@You guys are young,{pause(15)} but you did a great job here and out there." end
+    "@You guys may be little,{pause(15)} but you did all kinds of great things." end
 
 l_0xc83158:
     "[06 8F 00 {e(l_0xc83254)}]@No one knows anything.{pause(15)}  Grrrr." next
-    "@Monotoli's toadies stole everything from me,{pause(15)} including my house and land." next
+    "@Monotoly's toadies stole everything from me,{pause(15)} including my house and land." next
     "@Weep, weep..." next
     "@They are evil incarnate." next
-    "@Lawyers,{pause(15)} policemen,{pause(15)} everyone that follows Monotoli!" next
+    "@Lawyers,{pause(15)} policemen,{pause(15)} everyone that follows Monotoly!" next
     "@They're all his toadies!" next
     "@No matter how you fight him,{pause(15)} you can't win!" next
     "@No I ain't- hic! {pause(30)}drunk!" next
@@ -188,13 +188,13 @@ l_0xc83254:
     "@Hic!" end
 
 l_0xc832bf:
-    "[06 49 00 {e(l_0xc8337e)}][06 8F 00 {e(l_0xc8332b)}]@Protect Mr. Monotoli first." next
+    "[06 49 00 {e(l_0xc8337e)}][06 8F 00 {e(l_0xc8332b)}]@Protect Mr. Monotoly first." next
     "@The safety of the citizens of this city comes second." next
     "@Heh heh heh.  That's our job, you know." next
-    "@Heh heh." end
+    "@Heh heh.  That's the kind of town this is." end
 
 l_0xc8332b:
-    "@It was stupid of us to let Monotoli do whatever he wanted." next
+    "@It was stupid of us to let Monotoly do whatever he wanted." next
     "@We'll do our best to create an environment in which people can live safely." end
 
 l_0xc8337e:
@@ -202,7 +202,7 @@ l_0xc8337e:
     "@Don't you wanna be a police officer?" end
 
 l_0xc833b1:
-    "[06 49 00 {e(l_0xc834a8)}][06 8F 00 {e(l_0xc83457)}]@You boys are sneaking around, looking for Mr. Monotoli, aren't you?" next
+    "[06 49 00 {e(l_0xc834a8)}][06 8F 00 {e(l_0xc83457)}]@You boys are sneaking around, looking for Mr. Monotoly, aren't you?" next
     "@If I catch you boys doing anything,{pause(15)} I'll arrest you--no questions asked!" next
     "@Be prepared!" next
     "[19 10 01]{rtoarg}@Got it, [1C 02 00]..." next
@@ -211,7 +211,7 @@ l_0xc833b1:
 
 l_0xc83457:
     "@Oh, that rude comment was a slip of the tongue." next
-    "@Now Monotoli can kiss my butt!" next
+    "@Now Monotoly can kiss my butt!" next
     "[19 10 01]{rtoarg}@[1C 02 00], {swap}" call(data_37.l_0xc7e6b3) "." end
 
 l_0xc834a8:
@@ -245,9 +245,11 @@ l_0xc8361c:
     "@....." next
     "@Aren't you [1C 02 01]...?" next
     "@...I can't see too well..." next
-    "@Everything's blurry...{pause(20)}  You are [1C 02 01], aren't you?" next
+    "@Everything's blurry...{pause(20)}" linebreak
+    "  You are [1C 02 01], aren't you?" next
     "@It's me, we met in Twoson...{pause(20)}  Everdred from Burglin Park." next
-    "@You must remember.{pause(20)}  I'm the best thief around." next
+    "@You must remember.{pause(20)}" linebreak
+    "  I'm the best thief around." next
     "@That... Carpainter in Happy Happy Village was hiding something..." next
     "@*wheeze, wheeze*... strange." next
     "@I stole it, and thought about selling it in the big city..." next
@@ -257,7 +259,7 @@ l_0xc8361c:
     "  I'm in pain." next
     "@...and" next
     "@that bastard..." next
-    "@Monotoli tricked me and stole it...{pause(30)} from me!" next
+    "@Monotoly tricked me and stole it...{pause(30)} from me!" next
     "@He tricked a thief!" next
     "@He wanted to get rid of me because I know his secret..." next
     "@He gets his evil power from that statue!" next
@@ -297,9 +299,10 @@ l_0xc8392f:
 
 l_0xc83957:
     "@...Before I die, here's my last haiku poem:" next
-    "@When on your way out" next
+    "@<When on your way out" next
     "@Be sure that you say goodbye" next
-    "@then lock the door tight." next
+    "@then lock the door tight.>" next
+    "@                             -Everdred" next
     "@This is my final request...{pause(20)}" linebreak
     "  Don't follow me." next
     "@I must be on my way..." next
@@ -309,14 +312,15 @@ l_0xc83957:
 l_0xc839f7:
     "[06 91 00 {e(l_0xc83a24)}]@There's a person lying on the ground." next
     "@I wonder if he's...{pause(20)} he's...{pause(15)}" linebreak
-    "  d-{pause(20)}dead?  {pause(20)}Is he?!" end
+    "  d-{pause(20)}dead?  {pause(30)}Is he?!" end
 
 l_0xc83a24:
-    "@He's not dead..." next
-    "@I thought he may have passed on." end
+    "@Oh,{pause(20)} I guess he wasn't dead after all." next
+    "@But he looked like he was on the verge of death." end
 
 l_0xc83a45:
-    "[06 91 00 {e(l_0xc83a6a)}]@Yick... I can't believe someone's died in a place like this..." end
+    "[06 91 00 {e(l_0xc83a6a)}]@Yick... " next
+    "@How gross,{pause(20)} dying in a place like this..." end
 
 l_0xc83a6a:
     "@He should really go to the hospital like other sick people do." end
@@ -328,7 +332,7 @@ l_0xc83a89:
 l_0xc83ab3:
     "@Do you know him?" next
     "@You must be a dangerous kid!" next
-    "@I'll bet you're on your way to Boris' Bar right now!" end
+    "@I'll bet you're on your way to Borges' Bar right now!" end
 
 l_0xc83aee:
     "[06 91 00 {e(l_0xc83c5d)}][06 02 00 {e(l_0xc83c1e)}]@Don't cut in front of me!" next
@@ -405,9 +409,10 @@ l_0xc83d24:
 l_0xc83d9e:
     "[06 5A 00 {e(l_0xc83e3c)}]@What happened to those guys digging for the buried gold?" next
     "@If they found the gold, it would be worth a huge amount of money." next
-    "@They'd be able to pay off a million dollar debt very easily." next
-    "@If I were them,{pause(20)} I'd order pork cutlet meal sets" next
-    "@at the Kastuman restaurant in Tokyo!" end
+    "@They'd be able to pay off a zillion billion dollars debt very easily." next
+    "@If I were them,{pause(20)}" linebreak
+    "  I'd order three deep-fried pork cutlet meal sets" next
+    "@at the Katsuman restaurant in Tokyo!" end
 
 l_0xc83e3c:
     "@I heard they couldn't find the buried gold." next
@@ -417,7 +422,7 @@ l_0xc83e7f:
     "@I wonder why the department store's closed." end
 
 l_0xc83e97:
-    "@When Monotoli became the owner," next
+    "@When Monotoly became the owner," next
     "@this department store began having strange happenings." end
 
 l_0xc83ecd:
@@ -445,8 +450,8 @@ l_0xc83fcf:
     goto(l_0xc83fe6)
 
 l_0xc83fe6:
-    "@I'm Geldegarde Monotoli." next
-    title(1,"Geldegarde Monotoli")
+    "@I'm Geldegarde Monotoly." next
+    title(1,"Geldegarde Monotoly")
     "@Don't you remember me?" next
     "@I returned this building to Mr. Enrich Flavor." next
     "@Now I'm working as an elevator man." next
@@ -457,8 +462,8 @@ l_0xc84079:
     "@Wheeee!{pause(20)}  Hic!" next
     "@[1C 02 01]." next
     "@Porky left me, his own dad, and just disappeared." next
-    "@If you ever run into that idiot Porky, tell him he needs to treasure his father more." next
-    "@Don't tell my wife in Onett that I'm boozing it up here." next
+    "@If you ever run into that idiot Porky,{pause(30)} tell him he needs to treasure his father more." next
+    "@Don't tell my wife in Onett that I get boozed up all the time here." next
     "@Hic!{pause(15)}  Wheeeee!" end
 
 l_0xc84111:
@@ -468,7 +473,8 @@ l_0xc84111:
 
 l_0xc84168:
     "@Oh, I can't see the Runaway Brothers here anymore...?" next
-    "@I should dump this sorry excuse of a man and become a Runaway Brothers groupie." end
+    "@I should run away from this sorry excuse of a man" next
+    "@and become a Runaway Brothers groupie." end
 
 l_0xc841b3:
     "@I'm very punctual about time and careful with money." next

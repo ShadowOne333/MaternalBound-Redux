@@ -1859,9 +1859,17 @@ define MOVE_GIANT				= 0x0222
  * ROM manipulation helpers 
  */
 
+// Prints out the diamond from Mother 2 instead of the white dot bullet
+command diam "[1C 08 03]"
+
 // Converts a number to a little-endian formatted 24-bit value.
 command mem24(n) { 
 	"[{short n}{byte [2] n}]"
+}
+
+// Converts a number to a little-endian formatted 16-bit value.
+command mem16(n) { 
+	"[{short n}]"
 }
 
 // Links an item's help text pointer to a label.

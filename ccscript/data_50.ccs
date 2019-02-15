@@ -59,7 +59,7 @@ l_0xc91ffd:
 
 l_0xc920a2:
     call(data_24.l_0xc69082) "{music(111)}[1F 15 6A 00 FB 02 01][1F 61][1F EB FF 06][1F 21 51]{pause(120)}{window_open(1)}[19 10 01]{rtoarg}@([1C 02 00] had a dream, it was a very clear,{pause(15)} and very strange,{pause(5)} dream.)[03][1F 15 6A 00 79 02 01][1F 61]{window_closeall}[1F 64][1F 11 04][1F 12 01][1F 12 02][1F 12 03][1F EB FF 06]{set(flag 11)}[1F 07 03]{pause(60)}[1F 21 CA][1F 15 6A 00 85 02 01]" call(data_57.l_0xc9b4b8) "[1F 21 CB][1F 15 6A 00 86 02 01]" call(data_57.l_0xc9b4b8) "[1F EC FF 01][1F 21 4F][1F E5 FF][1F E6 41 04][1F E6 42 04]{pause(120)}[1F 07 03]{pause(120)}[1F 16 41 04 03]{music(119)}{pause(120)}{set(flag 149)}{window_open(1)}"
-    title(1, "Yi-Si-Qi")
+    title(1, "Yi-So-Chi")
     "@Prince [1C 02 04],{pause(15)} the time has now come for you to undertake your final trial." next
     "@Go to Mu, the <Place of Emptiness> and endure this final test." next
     "@I am praying for your success in this final stage of your training.{wait}{window_closeall}{set(flag 150)}{set(flag 10)}[1F 66 01 01 03 22 C9 00]{unset(flag 11)}[1F 41 06]{set(flag 216)}[19 26 09][1F 07 03]{pause(60)}{music_resume}[1F E8 FF]" eob
@@ -194,7 +194,7 @@ l_0xc92955:
 l_0xc92958:
     "{window_open(1)}@Prince [1C 02 04]!" next
     "@You have now completed your training!" next
-    "@Your Master, Yi-Si-Qi, must be so pleased!{pause(20)}  Hurry,{pause(15)} now,{pause(15)} and return to the palace.[03]{window_closeall}" eob
+    "@Your Master, Yi-So-Chi, must be so pleased!{pause(20)}  Hurry,{pause(15)} now,{pause(15)} and return to the palace.[03]{window_closeall}" eob
 
 l_0xc929ae:
     "{window_open(1)}" call(data_58.l_0xc9d523) "{window_closeall}[1F 1E 4F 04 06]{sound(99)}[1F 15 A9 00 9B 02 06][1F 61]" eob
@@ -380,8 +380,8 @@ l_0xc93381:
     "@Guargh!{pause(20)}  Oh no!  I... am..." next
     "@getting caught in the palm trees!{pause(20)}  Mmm... I cannot move." next
     "@Well,{pause(20)} if I cannot move, it is okay." next
-    "[19 10 01]{rtoarg}@[1C 02 00], it makes me sad," next
-    "@but I must say goodbye here,{pause(20)} at my eternal resting place.[03]{window_closeall}{pause(20)}[1F 12 0A][1F 17 80 04 08 00 01]{set(flag 274)}" call(data_36.l_0xc7de60) "{unset(flag 756)}{sound(17)}{unset(flag 662)}[1F E8 FF]{pause(20)}{sound(5)}" call(data_36.l_0xc7dd6b) "{music_resume}" eob
+    "[19 10 01]{rtoarg}@[1C 02 00]!" next
+    "@It makes me sad,{pause(20)} but we must part here![03]{window_closeall}{pause(20)}[1F 12 0A][1F 17 80 04 08 00 01]{set(flag 274)}" call(data_36.l_0xc7de60) "{unset(flag 756)}{sound(17)}{unset(flag 662)}[1F E8 FF]{pause(20)}{sound(5)}" call(data_36.l_0xc7dd6b) "{music_resume}" eob
 
 l_0xc9344f:
     "[06 DA 00 {e(l_0xc934e4)}]{window_open(1)}[06 97 00 {e(l_0xc934a4)}]"

@@ -48,7 +48,7 @@ l_0xc9c14b:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9c19b)} {e(l_0xc9c15f)}]" goto(l_0xc9c15f)
 
 l_0xc9c15f:
-    "@Oh, you lost your nerve..." next
+    "@Y-you wuss!" next
     "@[1C 02 01]!{pause(20)}  It is up to you..." linebreak
     "[19 02]Yes" eob
 
@@ -65,6 +65,7 @@ l_0xc9c19b:
     "@to be present at the beginning of this monumental undertaking...[03]{music(91)}{window_closeall}{set(flag 372)}{pause(1)}[1F 21 5D][1F E5 FF]{pause(60)}[1F EC FF 01][1F 15 6A 00 3C 01 01]" call(data_57.l_0xc9b4b8) "[19 26 01]{unset(flag 382)}{unset(flag 328)}{unset(flag 331)}{unset(flag 329)}{unset(flag 330)}{unset(flag 332)}{unset(flag 327)}{unset(flag 337)}{unset(flag 11)}[1F E8 FF]" eob
 
 l_0xc9c262:
+    title(1,"Apple Kid")
     "@You must warp to the past and fight, but...{wait}{set(flag 285)}" eob
 
 l_0xc9c27e:
@@ -72,7 +73,7 @@ l_0xc9c27e:
     "@Boing!{wait}{font_normal}" eob
 
 l_0xc9c293:
-    "[1F 07 03]{pause(180)}{music(72)}[1F 15 B7 01 63 01 01] {pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 23 02 01][1F 61][1F 15 6A 00 23 02 01][1F 15 72 01 24 02 01][1F 61][1F 15 6A 00 23 02 01][1F 61][1F ED][1F E5 FF][1F 1F B7 01 06]{pause(120)}{sound(70)}[19 10 01][19 22 00 03 72 01][1F 14 00][1F 15 CA 01 25 02 05][1F 61]{pause(100)}{window_open(1)}" call(data_06.l_0xc57e1c) "{window_closeall}{pause(120)}" call(data_23.l_0xc68577) "[1B 03 {e(data_23.l_0xc683de)}]{set(flag 73)}{unset(flag 632)}{set(flag 633)}{set(flag 108)}{unset(flag 468)}{unset(flag 741)}{set(flag 742)}{set(flag 422)}{set(flag 517)}{unset(flag 372)}{set(flag 19)}{set(flag 304)}{set(flag 11)}[1F 41 05][1F 01 00]" call(data_24.l_0xc69082) call(data_49.l_0xc915f4) "[1F EB FF 06][1F 15 6A 00 2B 02 01][1F 61][1F 21 D7][1F E5 FF]{set(flag 510)}" call(data_24.l_0xc6893b) "[1F 12 04][1F 12 03]{pause(180)}[1F 04 03]{window_open(14)}@The battle against Giygas{pause(15)} is over...{wait}{pause(30)}{window_closeall}[1F 04 01]{pause(30)}[1F 15 02 01 27 02 01][1F 61][1F E7 02 01]{set(flag 661)}{music_resume}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}[1F 07 1B][1F EA 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 28 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 29 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 2A 02 01][1F 61][1F 07 1C][1F 61]{set(flag 538)}[1F 15 10 00 41 02 FF][1F 15 89 01 42 02 FF][1F 15 8A 01 43 02 FF][1F 15 8B 01 44 02 FF][1F 21 D8]{music(181)}[1F E5 FF]{pause(100)}{pause(100)}{pause(100)}{pause(100)}{pause(100)}[1F 07 1B][1F 15 02 01 2F 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8B 01 06][1F 15 04 00 33 02 01][1F 61][1F E7 04 00][1F 07 1B][1F 15 02 01 2E 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8A 01 06][1F F1 DE 02 32 02][1F 61][1F E6 DE 02][1F 07 1B][1F 15 02 01 2D 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 89 01 06][1F 15 02 00 31 02 01][1F 61][1F E7 02 00][1F 07 1B][1F 15 02 01 2C 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 10 00 06][1F 15 01 00 30 02 01][1F 61][1F E7 01 00]{pause(60)}{unset(flag 661)}" call(data_36.l_0xc7dd6b) "{music_resume}[1F EA 04 00][1F 61][1F E7 04 00][1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(40)}{pause(30)}" call(data_38.l_0xc7f949) "{pause(60)}{window_open(1)}@I'll see you again someday!{wait}{window_closeall}{pause(30)}[1F EA 04 00][1F 61]{sound(99)}[1F 61][1F 15 F2 00 34 02 01]{pause(120)}{pause(60)}[1F 17 E8 02 3A 02 01]{pause(10)}[1F 15 58 01 3D 02 01][1F 61][1F 17 E9 02 3B 02 01]{pause(10)}[1F 15 58 01 3E 02 01][1F 61][1F 17 EA 02 3C 02 01]{pause(10)}[1F 15 58 01 3F 02 01][1F 61]{set(flag 628)}{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}" call(data_38.l_0xc7f9f8) "{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F F1 D8 02 35 02][1F 61][1F E6 D8 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00]{pause(60)}[1F F1 CF 02 36 02][1F 61][1F E6 CF 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 CF 02][1F 61][1F E6 CF 02]{pause(15)}[1F E9 D8 02][1F 61][1F E6 D8 02]{pause(80)}[1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(60)}" call(data_38.l_0xc7fb56) "[1F EA 02 00][1F 61][1F E7 02 00][1F F1 CF 02 0D 00][1F 67 01][1F 66 01 14 EC FB C7 00][1F 67 02][1F 66 02 16 22 FD C7 00][1F 1F 01 00 06][1F 1F 02 00 06][19 26 04][1F EC FF 01][1F E8 FF][1F 41 05]{unset(flag 498)}{isset(flag 99)}[1B 02 {e(data_55.l_0xc9992f)}]{set(flag 746)}" eob
+    "[1F 07 03]{pause(180)}{music(72)}[1F 15 B7 01 63 01 01] {pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 23 02 01][1F 61][1F 15 6A 00 23 02 01][1F 15 72 01 24 02 01][1F 61][1F 15 6A 00 23 02 01][1F 61][1F ED][1F E5 FF][1F 1F B7 01 06]{pause(120)}{sound(70)}[19 10 01][19 22 00 03 72 01][1F 14 00][1F 15 CA 01 25 02 05][1F 61]{pause(100)}{window_open(1)}" call(data_06.l_0xc57e1c) "{window_closeall}{pause(120)}" call(data_23.l_0xc68577) "[1B 03 {e(data_23.l_0xc683de)}]{set(flag 73)}{unset(flag 632)}{set(flag 633)}{set(flag 108)}{unset(flag 468)}{unset(flag 741)}{set(flag 742)}{set(flag 422)}{set(flag 517)}{unset(flag 372)}{set(flag 19)}{set(flag 304)}{set(flag 11)}[1F 41 05][1F 01 00]" call(data_24.l_0xc69082) call(data_49.l_0xc915f4) "[1F EB FF 06][1F 15 6A 00 2B 02 01][1F 61][1F 21 D7][1F E5 FF]{set(flag 510)}" call(data_24.l_0xc6893b) "[1F 12 04][1F 12 03]{pause(180)}[1F 04 03]{window_open(14)}@The battle against Giygas{pause(15)} is over...{wait}{pause(30)}{window_closeall}[1F 04 01]{pause(30)}[1F 15 02 01 27 02 01][1F 61][1F E7 02 01]{set(flag 661)}{music_resume}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}[1F 07 1B][1F EA 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 28 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 29 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 2A 02 01][1F 61][1F 07 1C][1F 61]{set(flag 538)}[1F 15 10 00 41 02 FF][1F 15 89 01 42 02 FF][1F 15 8A 01 43 02 FF][1F 15 8B 01 44 02 FF][1F 21 D8]{music(181)}[1F E5 FF]{pause(100)}{pause(100)}{pause(100)}{pause(100)}{pause(100)}[1F 07 1B][1F 15 02 01 2F 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8B 01 06][1F 15 04 00 33 02 01][1F 61][1F E7 04 00][1F 07 1B][1F 15 02 01 2E 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8A 01 06][1F F1 DE 02 32 02][1F 61][1F E6 DE 02][1F 07 1B][1F 15 02 01 2D 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 89 01 06][1F 15 02 00 31 02 01][1F 61][1F E7 02 00][1F 07 1B][1F 15 02 01 2C 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 10 00 06][1F 15 01 00 30 02 01][1F 61][1F E7 01 00]{pause(60)}{unset(flag 661)}" call(data_36.l_0xc7dd6b) "{music_resume}[1F EA 04 00][1F 61][1F E7 04 00][1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(40)}{pause(30)}" call(data_38.l_0xc7f949) "{pause(60)}{window_open(1)}{title_poo(1)}@I'll see you again someday!{wait}{window_closeall}{pause(30)}[1F EA 04 00][1F 61]{sound(99)}[1F 61][1F 15 F2 00 34 02 01]{pause(120)}{pause(60)}[1F 17 E8 02 3A 02 01]{pause(10)}[1F 15 58 01 3D 02 01][1F 61][1F 17 E9 02 3B 02 01]{pause(10)}[1F 15 58 01 3E 02 01][1F 61][1F 17 EA 02 3C 02 01]{pause(10)}[1F 15 58 01 3F 02 01][1F 61]{set(flag 628)}{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}" call(data_38.l_0xc7f9f8) "{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F F1 D8 02 35 02][1F 61][1F E6 D8 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00]{pause(60)}[1F F1 CF 02 36 02][1F 61][1F E6 CF 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 CF 02][1F 61][1F E6 CF 02]{pause(15)}[1F E9 D8 02][1F 61][1F E6 D8 02]{pause(80)}[1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(60)}" call(data_38.l_0xc7fb56) "[1F EA 02 00][1F 61][1F E7 02 00][1F F1 CF 02 0D 00][1F 67 01][1F 66 01 14 EC FB C7 00][1F 67 02][1F 66 02 16 22 FD C7 00][1F 1F 01 00 06][1F 1F 02 00 06][19 26 04][1F EC FF 01][1F E8 FF][1F 41 05]{unset(flag 498)}{isset(flag 99)}[1B 02 {e(data_55.l_0xc9992f)}]{set(flag 746)}" eob
 
 l_0xc9c65b:
     "{pause(20)}[1F 15 9B 00 FC 02 01][1F 61][1F E7 9B 00]{window_open(1)}{pause(10)}{counter(1)}[19 11 02]{rtoarg}@[1C 03 00]{pause(10)} [1C 03 00]{pause(10)} [1C 01 1E]!!{pause(20)}  Where are you?{pause(20)}  It's time for a yummy piece of pie!{pause(20)}[1F EA 9B 00][1F 61]{window_closeall}{set(flag 739)}" eob
@@ -102,7 +103,7 @@ l_0xc9c98a:
     "{pause(1)}" goto(l_0xc9c98a)
 
 l_0xc9c991:
-    title(1, "Yi-Si-Qi")
+    title(1, "Yi-So-Chi")
     "[06 49 00 {e(l_0xc9cbc4)}][06 10 00 {e(l_0xc9cb79)}][06 11 01 {e(l_0xc9c9e8)}][06 0A 00 {e(l_0xc9c9db)}]@I won't say anything." next
     "@Go to <Mu,> the Place of Emptiness again.{wait}" call(data_50.l_0xc92458) eob
 
@@ -112,8 +113,8 @@ l_0xc9c9db:
 l_0xc9c9e8:
     "@I am proud." next
     "@You have completed your Mu training." next
-    "@I, Yi-Si-Qi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
-    title(1, "Yi-Si-Qi")
+    "@I, Yi-So-Chi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
+    title(1, "Yi-So-Chi")
     "@Prince [1C 02 04]," next
     "@I shall relay a message to you from the heavens." next
     "@The evil entity that controls all wickedness is preparing" next
@@ -236,12 +237,12 @@ l_0xc9d011:
 l_0xc9d02d:
     "[06 49 00 {e(l_0xc9d0b1)}][06 10 00 {e(l_0xc9d073)}]@What is immortality.....?" next
     "@Is it the unbearable lightness of being?" next
-    "@Mmmmm Mmmmm." end
+    "@Mmmmm mmmmm." end
 
 l_0xc9d073:
     "@What's the difference between <existing> and <exiting>" next
     "@.....Nothing?" next
-    "@Mmmmm Mmmmm" end
+    "@Mmmmm mmmmm" end
 
 l_0xc9d0b1:
     "@I'm a little embarrassed to say it, but I'll tell you anyway..." next
@@ -269,7 +270,8 @@ l_0xc9d23f:
     "@...But I can't seem to get them off of my mind." end
 
 l_0xc9d2a5:
-    "@If it's safe, I want to be inside." end
+    "@If I'd known it was safe," next
+    "@I would've gone in and checked it out too." end
 
 l_0xc9d2ba:
     "[06 C3 00 {e(data_35.l_0xc7c588)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next
@@ -364,10 +366,12 @@ l_0xc9d735:
     "@We're shy..." end
 
 l_0xc9d743:
-    "@Welcome." next
-    "@To this far." next
-    "@Take a rest." next
-    "@Long journey, must have been." end
+    "@Amazed you came," next
+    "@a faraway place." next
+    "@Long journey," next
+    "@must have been." next
+    "@Rest." next
+    "@Welcome." end
 
 l_0xc9d779:
     call(data_48.l_0xc90dea) eob

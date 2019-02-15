@@ -51,7 +51,8 @@ l_0xc6c565:
     "@Anyway, these days there are many dangerous animals wandering around outside." end
 
 l_0xc6c606:
-    "[06 0F 00 {e(l_0xc6c63c)}]@The tame animals have become wild.{pause(20)}  Something evil is going on." end
+    "[06 0F 00 {e(l_0xc6c63c)}]@The tame animals have become wild.{pause(20)}" linebreak 
+    "  Something evil is going on." end
 
 l_0xc6c63c:
     "@Outside there are many monsters I've never seen before..." next
@@ -116,9 +117,9 @@ l_0xc6c942:
 
 l_0xc6c970:
     "[06 49 00 {e(l_0xc6cb14)}][06 76 02 {e(l_0xc6ca9a)}]@Kyi kya kiko kree." next
-    "@(I saw you once before just for a second...  You know my fiancee.)" next
+    "@(I saw you once before just for a second...  You know my fianc[C1].)" next
     "@Koo kya keke" linebreak
-    "  (My fiancee loves to chew gum." next
+    "  (My fianc[C1] loves to chew gum." next
     "@He went to visit Dr. Andonuts' lab...{pause(15)} but he hasn't returned yet.)" next
     "@Kye koko kikkya kekra," linebreak
     "  (I want to go there so I can get him home," next
@@ -184,6 +185,7 @@ l_0xc6ce34:
     "@Now, then. Leave everything here to us and hurry forth.{wait}{unset(flag 766)}" eob
 
 l_0xc6cebc:
+    title(1, "Maxwell")
     "@[1C 02 03] just called.{pause(20)}  He's with Dr. Andonuts." next
     "@The two of them may be able to develop some new scientific theories." next
     "@You've helped make a beautiful life for everyone..." end
@@ -222,8 +224,11 @@ l_0xc6d0db:
     "  ...Can't breathe..." end
 
 l_0xc6d0f0:
-    "{font_saturn}@Kay-o.{pause(15)}  Can breathe..." next
-    "@*Bloop*{pause(15)} *Bloop*{pause(15)} *Bloop*{pause(30)}" linebreak
+    "{font_saturn}@Kay-o.{pause(15)} Can" linebreak  
+    "  breathe..." next
+    "@*Bloop*{pause(15)}" linebreak 
+    "  *Bloop*{pause(15)}" linebreak 
+    "  *Bloop*{pause(30)}" linebreak
     "  Oh, no!{font_normal}" end
 
 l_0xc6d133:
@@ -235,6 +240,7 @@ l_0xc6d133:
     "@Where...{pause(15)} is...{pause(15)} [1C 02 03]...  *Bloop*" end
 
 l_0xc6d19c:
+    title(1, "Miss Fake")
     "[06 D7 00 {e(l_0xc6d325)}][06 92 00 {e(l_0xc6d2e8)}]@So, you're a Runaway Brothers fan, huh?" next
     "@What?" next
     "@Excuse me?" next
@@ -266,6 +272,7 @@ l_0xc6d37e:
     "[19 19 00 00]{swap}{result_is(182)}[1B 03 {e(l_0xc6d391)}]" goto(data_35.l_0xc7c6b6)
 
 l_0xc6d391:
+    title(1, "Miss Fake")
     "[19 10 01][19 22 00 02 47 03]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc6d4d6)}][1D 01 FF B6][1F 41 05]{sound(118)}[19 23 47 03 01 01 00][1F 16 47 03 00]@Yaaaieeee!!" next
     "@That that that [1C 05 B6]... you're going to pay with that [1C 05 B6]?!" next
     "@O... o... okay, th... that's fine.{pause(20)}  I'll rip up this contract." next
@@ -392,7 +399,7 @@ l_0xc6d993:
 
 l_0xc6d9ca:
     title(1,"Gorgeous")	// Sax guy
-    "@To meet Geldegarde Monotoli, you'll need our help." next
+    "@To meet Geldegarde Monotoly, you'll need our help." next
     "@I don't exactly know why... it's just a hunch." end
 
 l_0xc6da0b:
@@ -436,7 +443,7 @@ l_0xc6db0a:
 
 l_0xc6db2e:
     "[06 93 00 {e(l_0xc6dbd5)}]@Boys and girls, ladies and gents... this is a very special show," next
-    "@the final Runaway Brothers show here at the Topolla!" next
+    "@the final Runaway Brothers show here at the Topollo!" next
     "@Please, please, please don't miss this once in a lifetime chance to see their show." end
 
 l_0xc6dbae:
@@ -463,7 +470,7 @@ l_0xc6dc8d:
     call(data_13.l_0xc5d3dd) eob
 
 l_0xc6dc93:
-    "@Bread in this town has a very big city delectability to it, don't you think?" next
+    "@This city's baked goods have an exquisite, metropolitan delectableness." next
     "@To tell you the truth,{pause(20)} I'm the owner of this bakery." end
 
 l_0xc6dce7:

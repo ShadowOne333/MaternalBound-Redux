@@ -181,8 +181,8 @@ l_0xc6b0f9:
     eob
 
 l_0xc6b0fa:
-    "[06 34 00 {e(l_0xc6b161)}][06 81 00 {e(l_0xc6b144)}]@If I find Tessie, do you think I'll get in the newspaper?" next
-    "@I'm looking for my 15 minutes of fame..." end
+    "[06 34 00 {e(l_0xc6b161)}][06 81 00 {e(l_0xc6b144)}]@Do you think we'll end up in the newspaper if we find Tessie?" next
+    "@I don't want any attention on me, you see..." end
 
 l_0xc6b144:
     "@Do you think my name will make it into the newspaper?" end
@@ -279,7 +279,7 @@ l_0xc6b56e:
 
 l_0xc6b5b4:
     "@A boy named Apple Kid called." next
-    "@I don't know how he got the phone number...{pause(15)}  He's sounds very smart." next
+    "@I don't know how he got the phone number...{pause(15)}  He sounds very smart." next
     "@Don't worry, he's on his way here." end
 
 l_0xc6b60b:
@@ -289,7 +289,8 @@ l_0xc6b60b:
     "@I wonder what's inside the cave... I{pause(15)} uh, huh...{pause(20)}" linebreak
     "  I understand..." next
     "@While you're checking out that place, I'll work on remodeling the Sky Walker.[06 06 00 {e(l_0xc6b759)}]" next
-    "@Oh yes, yes.{pause(15)}  Bigfoot there dislikes violence." next
+    "@Oh yes, yes." next
+    "@My co-worker,{pause(20)} Bigfoot there dislikes violence." next
     "@He's such a nice guy, and he loves people." next
     "@I often buy beef jerky from him and such.{wait}{set(flag 6)}" eob
 
@@ -330,15 +331,16 @@ l_0xc6b952:
     "@Tessie is emerging!" end
 
 l_0xc6b99f:
-    "@First, I managed to catch a glimpse of Tessie," next
-    "@and now I've witnessed a UFO!" next
+    "@First, I finally see Tessie," next
+    "@then I see a UFO!" next
     "@It emerged from the lake and flew toward Stonehenge." next
     "@...It kidnapped one of my friends along the way." end
 
 l_0xc6ba02:
     "@I'm so glad I finally saw it." next
     "@I'm so happy, it brings tears to my eyes and makes my nose run." next
-    "@Boo hoo hoo.{pause(20)} *snort* Boo hoo..." end
+    "@Boo hoo hoo.{pause(20)} *snort*"linebreak 
+    "  Boo hoo..." end
 
 l_0xc6ba5f:
     "[06 7E 00 {e(l_0xc6bb1d)}][06 58 01 {e(l_0xc6bac0)}][06 13 01 {e(l_0xc6bad6)}]@So, you've also been bitten by Tessie-mania." next
@@ -369,6 +371,7 @@ l_0xc6bbaf:
     "@Maybe monkeys don't like gum." end
 
 l_0xc6bbe3:
+    title(1,"Sebastian")
     "@I can't believe that I was so brave..." end
 
 l_0xc6bbf9:
@@ -418,11 +421,26 @@ l_0xc6bdd2:
     eob
 
 l_0xc6bdd3:
-    "@You " call(data_37.l_0xc7e758) " don't look very bright.{pause(15)}  Let me explain." next
+    "@You " call(kid) " don't look very bright.{pause(15)}  Let me explain." next
     "@These stones are making a pattern.{pause(20)}  It's called Stonehenge." next
     "@UFO's often visit here." next
     "@You must have seen it on TV or read about it in the tabloids." next
     "@Yes,{pause(15)} THAT Stonehenge." end
+
+kid:
+    "[19 10 01]{swap}{counter(1)}" goto(kid1)
+kid1:
+    "{inc}{ctoarg}[1D 19 00][1B 03 {e(kid2)}][19 10 00][1D 0D 00 01 02][1B 03 {e(kid2)}][19 10 00][1D 0D 00 01 03][1B 03 {e(kid2)}]" goto(kid1)
+kid2:
+    "{ctoarg}{swap}[09 05 {e(kid3)} {e(kid3)} {e(kid4)} {e(kid5)} {e(kid5)}]" eob
+kid3:
+    "[19 10 01]{result_is(2)}[1B 03 {e(kid_paula)}]kid" eob
+kid_paula:
+    "girl" eob
+kid4:
+    "kids" eob
+kid5:
+    "kids" eob
 
 l_0xc6be74:
     "[06 C0 00 {e(data_35.l_0xc7c588)}][19 10 01]{result_is(1)}[1B 02 {e(data_24.l_0xc690a6)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next
@@ -448,16 +466,18 @@ l_0xc6bf0c:
     "@I was kidnapped by some of Giygas' toadies!{wait}{unset(flag 766)}" eob
 
 l_0xc6c035:
-    "{font_saturn}@Kidnapped.  Happy." next
+    "{font_saturn}@Kidnapped." linebreak
+    "  Happy." next
     "@Rescued.{isset(flag 644)}[1B 02 {e(l_0xc6c059)}]" end
 
 l_0xc6c059:
     next
-    "@I give you ribbon." next
+    "@I give you" linebreak 
+    "  ribbon." next
     "{font_normal}[1D 03 FF][1B 02 {e(l_0xc6c081)}][1D 0E 00 DC]" call(data_36.l_0xc7dccf) "{wait}{set(flag 644)}" eob
 
 l_0xc6c081:
-    "@Too much." next
+    "{font_saturn}@Too much." next
     "@...can't carry all.{wait}{font_normal}" eob
 
 l_0xc6c099:
@@ -488,12 +508,13 @@ l_0xc6c13a:
 l_0xc6c168:
     title(1, "Tony")
     "@Where's [1C 02 03]?" next
+    "@[1C 01 34], [1C 01 34]!" next
     "[19 10 01]{swap}@[1C 02 00], you've altered [1C 02 03]'s destiny." next
     "@Bring back [1C 02 03]!" next
-    "@Bring back my friendship with [1C 02 03]!!{wait} [1C 01 34] [1C 01 34]!" next
-    eob
+    "@Bring back my friendship with [1C 02 03]!!{wait}" eob
 
 l_0xc6c1c3:
+    title(1,"Sebastian")
     "@I was scared, but I knew I'd be saved if I courageously" next
     "@just sat here and waited long enough..." next
     "@That's what I thought, but I began to lose hope..." next

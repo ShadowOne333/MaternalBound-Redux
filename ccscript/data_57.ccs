@@ -13,7 +13,7 @@ command e(label) "{long label}"
 l_0xc9ad26:
     "[06 8E 00 {e(l_0xc9ad77)}]{window_open(1)}@(Private elevator!" next
     "@Not for operation by the general public." next
-    "@Monotoli Building Manager.){wait}{window_closeall}" eob
+    "@Monotoly Building Manager.){wait}{window_closeall}" eob
 
 l_0xc9ad77:
     "{unset(flag 350)}" eob
@@ -177,7 +177,7 @@ l_0xc9b17d:
 
 l_0xc9b1b1:
     "{window_open(1)}@(This is now a bar.{pause(20)}  Absolutely no minors admitted." next
-    "@The Management, <Lunatics for Life>){wait}{window_closeall}" eob
+    "@The Management, <Lifelong Lunatics>){wait}{window_closeall}" eob
 
 l_0xc9b20e:
     "{isset(flag 632)}[1B 02 {e(data_55.l_0xc9992f)}]{sound(111)}{pause(40)}" eob
@@ -220,15 +220,27 @@ l_0xc9b268:
 
 l_0xc9b270:
     "{set(flag 384)}[1F 41 06][1F 12 02][1F 12 03][1F 12 04]" call(data_24.l_0xc69082) "{set(flag 11)}" call(data_36.l_0xc7de60) "[1F 41 05][1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 01][1F 21 51]{pause(30)}[1F 41 10]{pause(30)}[1F 15 B3 01 B7 02 FF][1F 21 23][1F EF B3 01][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F B3 01 0A]{pause(180)}[1F 21 24][1F 15 6A 00 B8 02 01]" call(l_0xc9b4b8) "[1F 21 25][1F 15 6A 00 B9 02 01]" call(l_0xc9b4b8) "[1F 21 26][1F 15 6A 00 BA 02 01]" call(l_0xc9b4b8) "{pause(120)}{window_open(1)}"
+    title(1, "Dad")
     "@[1C 02 01]...{pause(30)} Hmmm..." next
-    "@I think [1C 02 01] is the right name for him.[03]{window_closeall}{pause(60)}{window_open(1)}@[1C 02 01]...{pause(30)} he smiled just from hearing his own name." next
-    "@Do you think he likes his name?[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}@Try putting that red cap on him." next
+    "@I think [1C 02 01] is the right name for him.[03]{window_closeall}{pause(60)}{window_open(1)}"
+    title(1, "Mom")
+    "@[1C 02 01]...{pause(30)} he smiled just from hearing his own name." next
+    "@Do you think he likes his name?[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}"
+    title(1, "Dad")
+    "@Try putting that red cap on him." next
     "@Ha ha ha!" linebreak
-    "  It's too big, but it looks good on him...[03]{window_closeall}{pause(60)}{window_open(1)}@I hope [1C 01 03] won't be jealous of the baby.[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}@Let's celebrate with" linebreak
-    "  some [1C 01 04]." next
-    "@This baby will grow up to be a hard worker just like you.[03]{window_closeall}{pause(60)}{window_open(1)}@I don't think he needs to be rich or famous..." next
+    "  It's too big, but it looks good on him...[03]{window_closeall}{pause(60)}{window_open(1)}"
+    title(1, "Mom")
+    "@I hope [1C 01 03] won't be jealous of the baby.[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}"
+    title(1, "Dad")
+    "@Let's celebrate with some [1C 01 04]." next
+    "@This baby will grow up to be a hard worker just like you.[03]{window_closeall}{pause(60)}{window_open(1)}"
+    title(1, "Mom")
+    "@I don't think he needs to be rich or famous..." next
     "@but I want him to be a thoughtful, strong boy." next
-    "{window_closeall}{pause(60)}{pause(60)}{pause(60)}{window_open(1)}@That's odd...{pause(20)} the baby bottle that he pointed at seemed to move a little bit..." next
+    "{window_closeall}{pause(60)}{pause(60)}{pause(60)}{window_open(1)}"
+    title(1, "Mom")
+    "@That's odd...{pause(20)} the baby bottle that he pointed at seemed to move a little bit..." next
     "@Hmmm...{wait}{pause(15)}{window_closeall}{pause(60)}" call(data_36.l_0xc7dd6b) "{set(flag 758)}{music_resume}{pause(120)}{pause(120)}{pause(120)}[1F E8 FF][1F 15 06 00 0C 03 FF][1F 21 A1][1F 1F 06 00 06][1F EC FF 01][19 26 01]" call(data_36.l_0xc7dd6b) "{unset(flag 758)}{music_resume}[1F 41 06]{unset(flag 11)}" eob
 
 l_0xc9b4b8:

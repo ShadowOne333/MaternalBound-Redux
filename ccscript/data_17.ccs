@@ -35,7 +35,7 @@ l_0xc606de:
 
 l_0xc6070c:
     "@(I'm a broken slot machine." next
-    "@But, the Sanchez Brothers and their friend are a very cheerful trio..." next
+    "@But, the S[C0]nchez Brothers and their friend are a very cheerful trio..." next
     "@they will make you happy.)" next
     "@(Would you like to insert a buck?)" linebreak
     call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc6078b)} {e(l_0xc607a5)}]" goto(l_0xc607a5)
@@ -90,28 +90,28 @@ l_0xc608ff:
 
 l_0xc6090b:
     "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1,"Tomas Jefferson")
+    title(1,"Tom[C0]s Jefferson")
     "@Amigo, you won a very big jackpot!" next
     "@Here's a big prize for you, amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 A8]@" call(data_37.l_0xc7e6d7) " won a [1C 05 A8] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60985:
     "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1,"Tomas Jefferson")
+    title(1,"Tom[C0]s Jefferson")
     "@Amigo, you won!{pause(20)}  A very big winning, I think!" next
     "@Here's a very nice prize for the important amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 E0]@" call(data_37.l_0xc7e6d7) " won a [1C 05 E0] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60a0d:
     "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1,"Tomas Jefferson")
+    title(1,"Tom[C0]s Jefferson")
     "@Amigo, you won!{pause(20)}  A very big winning, and you hit it!" next
     "@Here's the prize for the important amigo!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 62]@" call(data_37.l_0xc7e6d7) " won a [1C 05 62] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
 
 l_0xc60a97:
     "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1,"Tomas Jefferson")
+    title(1,"Tom[C0]s Jefferson")
     "@Amigo, you won!{pause(20)}  A very big winning, my friend!" next
     "@Here's the big prize for you!" next
     "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 6A]@" call(data_37.l_0xc7e6d7) " won a [1C 05 6A] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
@@ -129,19 +129,19 @@ l_0xc60b71:
     "{pause(2)}[1F F1 FD 02 08 00]{pause(2)}[1F F1 FE 02 08 00]{pause(2)}[1F F1 FF 02 08 00]" eob
 
 l_0xc60b8a:
-    title(1,"Pancho Sanchez")
+    title(1,"Pancho S[C0]nchez")
     "@I'm big brother Pancho." end
 
 l_0xc60b9b:
-    title(1,"Pincho Sanchez")
+    title(1,"Pincho S[C0]nchez")
     "@I'm kid brother Pincho." end
 
 l_0xc60bae:
-    title(1,"Tomas Jefferson")
-    "@I'm Tomas Jefferson." end
+    title(1,"Tom[C0]s Jefferson")
+    "@I'm Tom[C0]s Jefferson." end
 
 l_0xc60bbf:
-    "@(...I'm just a pile of bleached bones.{pause(20)}  I can't talk.)" end
+    "@(...I'm just some random no-boney, {pause(20)}  so I can't speak.)" end
 
 l_0xc60be3:
     "@(Even though I'm just a pile of bones," next
@@ -269,7 +269,7 @@ l_0xc61386:
 
 l_0xc613b3:
     "{music(155)}[06 09 02 {e(l_0xc614f2)}][06 08 02 {e(l_0xc614b1)}][06 07 02 {e(l_0xc6146d)}][06 06 02 {e(l_0xc61443)}]{window_open(1)}@I'm one of the masters of this hole." next
-    "@There are five masters in all.{pause(20)}  We are all moles, of course." next
+    "@There are five masters in all.{pause(20)}  All being moles, of course." next
     "@I believe I'm the third strongest amongst us." next
     "@Take your best shot![03]{window_closeall}" eob
 
@@ -284,7 +284,7 @@ l_0xc6146d:
 
 l_0xc614b1:
     "{window_open(1)}@I'm truly the third strongest master of this hole." next
-    "@I'll demonstrate the power of being third to you![03]{window_closeall}" eob
+    "@I'll demonstrate the power of being n[C4]mero tres to you![03]{window_closeall}" eob
 
 l_0xc614f2:
     "{window_open(1)}@Ha ha ha." next
@@ -389,7 +389,7 @@ l_0xc61966:
 
 l_0xc619ef:
     "@Uki Ukiekkiki!" next
-    "@(You useless monkey hater!)" end
+    "@(You insimian monster!)" end
 
 l_0xc61a14:
     call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc619ef)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc619ef)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukkin Ukkikeen" next

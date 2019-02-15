@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import asm65816
 import ebs
 import ebpp_std
 
@@ -71,10 +72,12 @@ l_0xc93a2e:
     "@while helping out at the Polestar preschool." end
 
 l_0xc93a82:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93ac1)}]@[1C 02 02]!{pause(15)} I heard you kicked the kidnappers' balls off!{pause(15)}" linebreak "  You're amazing!" end
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93ac1)}]@[1C 02 02]!{pause(15)} I heard you kicked the kidnapper's balls off!{pause(15)}" linebreak 
+    "  You're amazing!" end
 
 l_0xc93ac1:
-    "@I heard [1C 02 02] kicked the kidnappers' balls off!{pause(20)}" linebreak "  She's amazing!" end
+    "@I heard [1C 02 02] kicked the kidnapper's balls off!{pause(20)}" linebreak
+    "  She's amazing!" end
 
 l_0xc93aed:
     "[06 0D 00 {e(l_0xc93b33)}][06 0C 00 {e(l_0xc93b33)}]@I saw some weird bad guy following [1C 02 02].{pause(20)}  This guy gave me the creeps." end
@@ -83,19 +86,22 @@ l_0xc93b33:
     "@Kidnapping is wrong!" next
     "@I'll be careful not to kidnap anyone!" end
 
-l_0xc93b60:
+l_0xc93b60:	// Before rescuing Paula
     "[06 0C 00 {e(l_0xc93ba4)}][06 0D 00 {e(l_0xc93ba4)}]@I see that you're young but have had some adventures." next
     "@I think that [1C 02 02] would be a good friend for you." end
 
-l_0xc93ba4:
-    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93be3)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93be3)}]@Just as I thought,{pause(15)} you two make such a nice couple!" end
+l_0xc93ba4:	// After rescuing Paula, both Ness and Paula in the party
+    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93be3)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93be3)}]"
+    "[19 10 01]{result_is(2)}[1B 03 {e(l_0xc93be3)}] [19 10 02]{result_is(2)}[1B 02 {e(l_0xc93c38)}]" // Fix line calls
+    "@Just as I thought,{pause(15)} you two make such a nice couple!" end
 
-l_0xc93be3:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93c38)}]@Just as I thought,{pause(15)} you two make such a nice couple!" next
+l_0xc93be3:	// Ness unconscious or not in party, but Paula is alive and in-party
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc93c38)}]"
+    "@Just as I thought,{pause(15)} you two make such a nice couple!" next
     "@Well, I think you're cute..." next
     "@But I'm near-sighted, too..." end
 
-l_0xc93c38:
+l_0xc93c38:	// Paula unconscious/not-in party, but Ness and/or all the rest healed/present
     "[19 10 01]{rtoarg}@My grandson is playing a game called <MOTHER 2.>" next
     "@He's now talking to a plain,{pause(15)} old lady in Twoson." next
     "@I heard that the game has some messages that are just there for fun." end
@@ -306,15 +312,15 @@ l_0xc945a9:
     "@but he's actually quite warm-hearted for a crime boss." end
 
 l_0xc945f4:
-    "@What?{pause(15)}  Everdred is dead?{pause(20)}  That's crap!{pause(15)}  Don't believe it." end
+    "@What?{pause(15)}  Everdred is dead?" next
+    "@That's crap!{pause(15)}  I refuse to believe that!" end
 
 l_0xc9461f:
     "[06 91 00 {e(l_0xc9466c)}]@Everdred has always watched over Burglin Park." next
     "@That's why we don't have to bribe any crooked cops." end
 
 l_0xc9466c:
-    "@Even if Everdred has passed on,{pause(15)} he'll keep watch over us" next
-    "@from... wherever he's at." end
+    "@Even if Everdred is dead,{pause(15)} he'll always be watching over us from hell." end
 
 l_0xc946b1:
     "@I'm starting a line here.{pause(20)}  I want a ticket for today's show,{pause(15)} but I may not get it." end

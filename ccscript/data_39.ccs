@@ -148,10 +148,10 @@ l_0xc81934:
     "{unset(flag 294)}[06 52 00 {e(l_0xc81945)}][06 70 00 {e(l_0xc81970)}]" goto(l_0xc81945)
 
 l_0xc81945:
-    "@I am a mouse.{pause(20)}  No one has given me a name yet.[06 04 00 {e(l_0xc819f1)}]" end
+    "@I am a mouse.{pause(20)}  As yet I have no name.[06 04 00 {e(l_0xc819f1)}]" end
 
 l_0xc81970:
-    "[1F 41 06]@I am a mouse.{pause(20)}  No one has given me a name yet." next
+    "[1F 41 06]@I am a mouse.{pause(20)}  As yet I have no name." next
     "@You took care of my master." next
     "@In return,{pause(15)} I want to give you this.{pause(20)}  Please take it and say nothing.[03][1D 03 FF][1B 02 {e(l_0xc81a26)}][1D 0E 00 B5]" call(data_36.l_0xc7dcb6) "{set(flag 82)}[06 04 00 {e(l_0xc819f1)}]" end
 
@@ -207,7 +207,7 @@ l_0xc81c2f:
     "@*Sniff*{pause(15)} I suppose I'll never see the Runaway Brothers' show again." end
 
 l_0xc81c56:
-    "@Didn't I see you at the Topolla Theater in Fourside?" next
+    "@Didn't I see you at the Topollo Theater in Fourside?" next
     "@So you're a Runaway Brothers groupie, too!" end
 
 l_0xc81c91:
@@ -334,7 +334,7 @@ l_0xc82468:
     "@....." next
     "@Hmmmm..." next
     "{pause(60)}" linebreak
-    "@...You know, there's a new singer named Venus at the Topolla Theater." next
+    "@...You know, there's a new singer named Venus at the Topollo Theater." next
     "@Could you bring me her autograph on an eraser?" next
     "@Then, I'll show you something <extraordinary.>" next
     "@...Oh,{pause(15)} if you can get her autograph on anything,{pause(15)} don't worry about the eraser..." next
@@ -413,7 +413,7 @@ l_0xc82874:
     call(data_20.l_0xc64dd0) eob
 
 l_0xc8287a:
-    "@Would you like to buy tickets for the Topolla Theater?" next
+    "@Would you like to buy tickets for the Topollo Theater?" next
     "[19 02]Yes" eob
 
 l_0xc8289f:

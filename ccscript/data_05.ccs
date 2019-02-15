@@ -33,8 +33,8 @@ l_0xc562dd:
 l_0xc5630a:
     newline
     " <[1C 05 ED]>" next
-    "@A croquette made with mashed chick peas, then breaded and deep fried." next
-    "@Natives in Scarabia love to cook this." next
+    "@A croquette made from chickpeas native to Scarabia." next
+    "@The chickpeas are mashed, breaded and deep fried." next
     "@Salt improves it and the olive oil gives it a wonderful" linebreak
     "  flavor." next
     call(l_0xc56cb5) "40" call(l_0xc56cd6) end
@@ -210,6 +210,9 @@ l_0xc56b3e:
 
 l_0xc56b5d:
     "A cute teddy bear!" eob
+
+teddy:	// l_0xc56b5d (2)
+    "A very cute teddy bear!" eob
 
 l_0xc56b6f:
     "@That genius [1C 02 03] should be able to fix it sometime." eob

@@ -286,7 +286,7 @@ l_0xc7ec50:
     "@Dakota!{wait}{font_normal}" eob
 
 l_0xc7ec5c:
-    "@Chattanooga!{wait}{font_normal}" eob
+    "{font_saturn}@Chattanooga!{wait}{font_normal}" eob
 
 l_0xc7ec6c:
     "{font_saturn}[06 49 00 {e(l_0xc7ecdb)}][06 4A 00 {e(l_0xc7eccd)}][06 47 00 {e(l_0xc7ecbe)}]@Threek is" linebreak
@@ -469,8 +469,10 @@ l_0xc7f44a:
 
 l_0xc7f459:
     "@Even if you're not 100%,{pause(15)} perfectly,{pause(15)} completely ready..." next
-    "@Well, you should be as prepared as possible.{pause(20)}" linebreak "  It would be for the best." next
-    "@Without careful preparation, you would be in big trouble." next
+    "@Well, you should be as prepared as possible.{pause(20)}" linebreak
+    "  It would be for the best." next
+    "@You don't want to accidentally leave butt-naked,{pause(15)} you know." next
+    "@You'd be in for some serious trouble." next
     "@I just want to make sure you're ready." next
     "@Let me know when your preparations are complete.{wait}{set(flag 765)}" eob
 

@@ -1,0 +1,130 @@
+/* ASM code to restore the Diamond found in Mother 2 into EarthBound, made by D-Man */
+
+// This code makes it so that you can print out the Diamond from Mother 2 using the [1C 08 XX] control code with:
+// [1C 08 03]
+
+import asm65816
+
+// The [1C 08 XX] control code.
+ROM[0xC10EE3] = {
+	JSL	(Display_Window_Graphics)
+	RTS
+}
+
+Diamond_Table:
+	"[40 00 00 00]"
+
+Display_Window_Graphics:{
+	REP	(0x31)
+	CMP_i	(1)
+	BEQ_a	(SMAAAASH)
+	CMP_i	(2)
+	BEQ_a	(YOU_WON)
+	CMP_i	(3)
+	BEQ_a	(Window_Diamond)
+	BRA_a	(Return)
+	
+SMAAAASH:
+	JSL	(0xC12BF3)
+	BRA_a	(Return)
+
+
+YOU_WON:
+	JSL	(0xC12C36)
+	BRA_a	(Return)
+
+Window_Diamond:
+	JSL	(Display_Diamond)
+	BRA_a	(Return)
+
+Return:
+	RTL
+}
+
+/* This is pretty similar to the routine 0xC12BF3. Just no highlights and only prints out the diamond. */
+Display_Diamond:{
+	REP	(0x31)
+	PHD
+	TDC
+	ADC_i	(0xFFF0)
+	TCD
+	LDA_i	(0x0000)
+	JSL	(l_0xC10FEA)
+	ASMLoadAddress06(Diamond_Table)
+	BRA_a	(UNKNOWN3)
+
+UNKNOWN0:
+	INC_d	(0x06)
+	INC_d	(0x06)
+	JSL	(l_0xC10D60)
+	LDX_i	(0x0001)
+	STX_d	(0x0E)
+	BRA_a	(UNKNOWN2)
+
+UNKNOWN1:
+	JSL	(0xC12DD5)
+
+UNKNOWN2:
+	LDX_d	(0x0E)
+	TXA
+	DEC
+	STX_d	(0x0E)
+	CMP_i	(0x0000)
+	BNE_a	(UNKNOWN1)
+
+UNKNOWN3:
+	LDA_dl	(0x06)
+	BNE_a	(UNKNOWN0)
+	LDA_i	(0x0000)
+	JSL	(l_0xC10FEA)
+	PLD
+	RTL
+}
+
+// Misc Routines that the above routine uses
+l_0xC10D60:{
+	REP	(0x31)
+	JSL	(0xC10C80)
+	LDA_a	(0x8958)
+	ASL
+	TAX
+	LDA_x	(0x88E4)
+	CMP_a	(0x88E2)
+	BEQ_a	(Return)
+	SEP	(0x20)
+	LDA_8	(0x01)
+	STA_a	(0x9623)
+
+Return:
+	REP	(0x20)
+	RTL
+}
+
+l_0xC10FEA:{
+	REP	(0x31)
+	PHD
+	PHA
+	TDC
+	ADC_i	(0xFFF0)
+	TCD
+	PLA
+	STA_d	(0x0E)
+	LDA_a	(0x8958)
+	CMP_i	(0xFFFF)
+	BEQ_a	(Return)
+	LDA_a	(0x8958)
+	ASL
+	TAX
+	LDA_x	(0x88E4)
+	LDY_i	(0x0052)
+	JSL	(Eight_Bit_Mult_YxA)
+	TAX
+	LDY_i	(0x0400)
+	LDA_d	(0x0E)
+	JSL	(Mult_YxA)
+	STA_x	(0x8663)
+
+Return:
+	PLD
+	RTL
+}

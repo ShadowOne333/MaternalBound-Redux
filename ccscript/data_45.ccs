@@ -12,7 +12,7 @@ command e(label) "{long label}"
 // Text Data
 l_0xc8a5fc:
     "@Hey, talking to people at another table in a restaurant is like..." next
-    "@breaking into their room and checking their drawers for valuables." next
+    "@sneaking into your fianc[C1]e's home and checking her drawers for small medals." next
     "@Yeah, other people on important adventures do such things," next
     "@but you have to admit that it's bizarre!" end
 
@@ -175,8 +175,7 @@ l_0xc8aec1:
 
 l_0xc8af0f:
     "@It's nice seeing you in such good shape." next
-    "@I wonder what happened to that fatty named Porky..." next
-    "@or whatever who I met earlier." end
+    "@I wonder how that chubby guy named Porky I met a while back is doing..." end
 
 l_0xc8af57:
     call(data_47.l_0xc900d5) eob
@@ -219,15 +218,17 @@ l_0xc8b137:
     "@Because I'm not thinking about a{pause(20)}a{pause(20)}a{pause(20)}nything at all." end
 
 l_0xc8b158:
-    "[06 49 00 {e(l_0xc8b137)}]{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8b137)}]@Asian boy, you're so cool..." next
-    "@Don't look at me like that..." next    "@You're too charming!" end
+    "[06 49 00 {e(l_0xc8b137)}]{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8b137)}]@Oriental boy, you're so cool..." next
+    "@Don't look at me like that..." next    
+    "@You're too charming!" end
 
 l_0xc8b191:
-    "[06 49 00 {e(l_0xc8b22f)}][06 10 00 {e(data_20.l_0xc65015)}][1F 41 05]@I don't know who told you." next
+    "[06 49 00 {e(l_0xc8b22f)}][06 10 00 {e(data_20.l_0xc65015)}][1F 41 05]"
+    "@I don't know who told you." next
     "@You came from far off just to eat my Magic cake?..." next
     "@I thought making cakes would be the best career for me." next
     "@Dig in!" next
-    "@I used the last of my ingredients.{pause(20)}  This is a very special Magic cake![03]{window_closeall}{unset(flag 61)}" goto(data_50.l_0xc920a2)
+    "@I used up the last of my ingredients to make this special Magic cake![03]{window_closeall}{unset(flag 61)}" goto(data_50.l_0xc920a2)
 
 l_0xc8b22e:
     eob
@@ -279,10 +280,10 @@ l_0xc8b3f8:
     "@Are you scared?" end
 
 l_0xc8b460:
-    "@I'm a mighty sailor man" next
+    "@[AC]I'm a mighty sailor man" next
     "@A mountain man I'm not" next
     "@The open sea is home for me" next
-    "@And mountains aren't worth snot [ac]" next
+    "@And mountains aren't worth snot[AC]" next
     "@...I'm writing a song for sailors." end
 
 l_0xc8b4c9:
@@ -423,7 +424,7 @@ l_0xc8bae0:
     "@Pooooweeeet!{pause(60)}" linebreak
     "  Oooo... sorry..." next
     "@Y'know, I can't quite describe it..." next
-    "@Having beer in the daytime like this is truly...{pause(20)}" next
+    "@Having a beer in the middle of the day like this is truly...{pause(20)}" next
     "@How do I put it?{pause(20)}" next
     "@Buuuurp!{pause(90)}" linebreak
     "  Oooo... 'scuse me..." end

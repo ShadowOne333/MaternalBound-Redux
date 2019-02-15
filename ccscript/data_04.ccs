@@ -80,14 +80,13 @@ l_0xc54e1d:
 l_0xc54e20:
     newline
     " <[1C 05 91]>" next
-    call(data_05.l_0xc56db7) "@Fires a fast, powerful bottle rocket." next
+    call(data_05.l_0xc56db7) "@Fires 5 pencil rockets at once." next
     call(data_05.l_0xc56dab) end
 
 l_0xc54e54:
     newline
     " <[1C 05 92]>" next
-    call(data_05.l_0xc56db7) "@Possibly the strongest weapon around," next
-    "@it does a lot of damage due to its massive warhead." next
+    call(data_05.l_0xc56db7) "@Fires 20 pencil rockets at once." next
     call(data_05.l_0xc56dab) end
 
 l_0xc54ea7:
@@ -263,7 +262,7 @@ l_0xc55546:
 l_0xc5558a:
     newline
     " <[1C 05 AD]>" next
-    "@A key given to you by a maid who works at the Monotoli building." end
+    "@A key given to you by a maid who works at the Monotoly building." end
 
 l_0xc555b8:
     newline
@@ -285,7 +284,7 @@ l_0xc55627:
 l_0xc5566b:
     newline
     " <[1C 05 B1]>" next
-    "@You know, you shouldn't leave home without it..." next
+    "@You know, don't leave home without it..." next
     "@It even works overseas!" end
 
 l_0xc5569c:
@@ -354,7 +353,7 @@ l_0xc55897:
 l_0xc558ca:
     newline
     " <[1C 05 BD]>" next
-    "@A fashionable dessert for haute cuisine people in some big cities." next
+    "@A fashionable dessert for haute cuisine people popular in big cities." next
     call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
 
 l_0xc55915:

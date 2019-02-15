@@ -280,9 +280,9 @@ l_0xc8fb05:
     "  have any PP![03]" eob
 
 l_0xc8fb1b:
-    "{window_closetop}{pause(40)}{window_open(1)}" newline
+    "{window_closetop}{pause(40)}{window_open(1)}[1F 62 00]" newline
     title(1,"Porky")
-    "[1F 62 00]@I understand you guys are already claiming to be heroes.{prompt}" linebreak
+    "@I understand you guys are already claiming to be heroes.{prompt}" linebreak
     "@Well, it is a gazillion years too early for you to oppose Giygas!{prompt}" linebreak
     "@You must feel pretty stupid to keep fighting without even knowing{prompt}" linebreak
     "@what Giygas looks like!{prompt}" linebreak
@@ -294,9 +294,9 @@ l_0xc8fb1b:
 
 l_0xc8fc2e:
     newline
-    "{pause(80)}{window_open(1)}"
+    "{pause(80)}{window_open(1)}[1F 62 00]"
     title(1,"Porky")
-    "[1F 62 00]@So, isn't this terrifying?{pause(30)}" linebreak
+    "@So, isn't this terrifying?{pause(30)}" linebreak
     "  I'm terrified, too.{prompt}" linebreak
     "@Giygas cannot think rationally any more,{prompt}" linebreak
     "@and he isn't even aware of what he is doing now.{prompt}" linebreak
@@ -308,9 +308,8 @@ l_0xc8fc2e:
     "  just another meal to him!{pause(150)}{window_closetop}{window_open(14)}" eob
 
 l_0xc8fd11:
-    "{window_closetop}{pause(60)}{window_open(1)}"
+    "{window_closetop}{pause(60)}{window_open(1)}[1F 62 00]" newline
     title(1,"Porky")
-    "[1F 62 00]" newline
     "@Heh heh heh heh.{pause(30)}" linebreak
     "  You must really be" linebreak
     "  at the end of your rope.{prompt}" linebreak
@@ -333,16 +332,16 @@ l_0xc8fd11:
     "  I'm so frightened!  {pause(30)}I think" linebreak
     "  I'm gonna wet my pants!>{prompt}" linebreak
     "@I know you have telepathy, or something, so just try and call for help,{prompt}" linebreak
-    "@you weakling, stinkling" linebreak
+    "@you stupid weakling" linebreak
     "  heroes of so-called justice!{prompt}" linebreak
     "@No one will help you now!{prompt}" linebreak
     "@Ha ha ha haah...{prompt}" linebreak
     "@Don't worry, your pitiful suffering will be over soon!{pause(150)}{window_closetop}{window_open(14)}" eob
 
 l_0xc8ff31:
-    "{window_closetop}{pause(60)}{window_open(1)}"
+    "{window_closetop}{pause(60)}{window_open(1)}[1F 62 00]"
     title(1,"Porky")
-    "[1F 62 00]@[1C 01 08]!{pause(30)} Now, I..." linebreak
+    "@[1C 01 08]!{pause(30)} Now, I..." linebreak
     "  Well... {pause(20)}It's going to seem like" linebreak
     "  I'm running away.{prompt}" linebreak
     "@But perhaps I'll just sneak away to another era to think about my next plan.{prompt}" linebreak
@@ -483,7 +482,7 @@ l_0xc902f2:
     "  Be healthy!" end
 
 l_0xc90322:
-    "@(This is a $healstone.){wait}" call(data_49.l_0xc915e1) eob
+    "@(This is a Healstone.){wait}" call(data_49.l_0xc915e1) eob
 
 l_0xc90339:
     "[06 7F 01 {e(data_48.l_0xc9038d)}][1D 15 23 00]{swap}@Welcome to Hotel Onett." next

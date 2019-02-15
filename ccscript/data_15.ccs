@@ -132,76 +132,77 @@ l_0xc5e26a:
 
 l_0xc5e277:
     "{load_registers}{rtoarg}@([1C 02 00]'s[06 92 02 {e(l_0xc5e2c4)}][06 92 02 {e(l_0xc5e2c4)}] defense" linebreak
-    "  changed [09 04 {e(l_0xc5e2b0)} {e(l_0xc5e2b5)} {e(l_0xc5e2ba)} {e(l_0xc5e2bf)}]" goto(l_0xc5e2b0)
+    "  changed from [09 04 {e(l_0xc5e2b0)} {e(l_0xc5e2b5)} {e(l_0xc5e2ba)} {e(l_0xc5e2bf)}]" goto(l_0xc5e2b0)
 
 l_0xc5e2b0:
-    " [1C 01 12]" eob
+    "[1C 01 12]" eob
 
 l_0xc5e2b5:
-    " [1C 01 28]" eob
+    "[1C 01 28]" eob
 
 l_0xc5e2ba:
-    " [1C 01 3E]" eob
+    "[1C 01 3E]" eob
 
 l_0xc5e2bf:
-    " [1C 01 54]" eob
+    "[1C 01 54]" eob
 
 l_0xc5e2c4:
     " offense" linebreak
-    "  changed [09 04 {e(l_0xc5e2e3)} {e(l_0xc5e2e8)} {e(l_0xc5e2ed)} {e(l_0xc5e2f2)}]" goto(l_0xc5e2e3)
+    "  changed from [09 04 {e(l_0xc5e2e3)} {e(l_0xc5e2e8)} {e(l_0xc5e2ed)} {e(l_0xc5e2f2)}]" goto(l_0xc5e2e3)
 
 l_0xc5e2e3:
-    " [1C 01 11]" eob
+    "[1C 01 11]" eob
 
 l_0xc5e2e8:
-    " [1C 01 27]" eob
+    "[1C 01 27]" eob
 
 l_0xc5e2ed:
-    " [1C 01 3D]" eob
+    "[1C 01 3D]" eob
 
 l_0xc5e2f2:
-    " [1C 01 53]" eob
+    "[1C 01 53]" eob
 
 l_0xc5e2f7:
-    " to{rtoarg}[06 92 02 {e(l_0xc5e338)}][09 04 {e(l_0xc5e314)} {e(l_0xc5e31d)} {e(l_0xc5e326)} {e(l_0xc5e32f)}]" goto(l_0xc5e314)
+    " to {rtoarg}[06 92 02 {e(l_0xc5e338)}][09 04 {e(l_0xc5e314)} {e(l_0xc5e31d)} {e(l_0xc5e326)} {e(l_0xc5e32f)}]" goto(l_0xc5e314)
 
 l_0xc5e314:
-    "  [1C 01 12])" next
+    "[1C 01 12])" next
     eob
 
 l_0xc5e31d:
-    "  [1C 01 28])" next
+    "[1C 01 28])" next
     eob
 
 l_0xc5e326:
-    "  [1C 01 3E])" next
+    "[1C 01 3E])" next
     eob
 
 l_0xc5e32f:
-    "  [1C 01 54])" next
+    "[1C 01 54])" next
     eob
 
 l_0xc5e338:
     "[09 04 {e(l_0xc5e34a)} {e(l_0xc5e353)} {e(l_0xc5e35c)} {e(l_0xc5e365)}]" goto(l_0xc5e34a)
 
 l_0xc5e34a:
-    "  [1C 01 11])" next
+    "[1C 01 11])" next
     eob
 
 l_0xc5e353:
-    "  [1C 01 27])" next
+    "[1C 01 27])" next
     eob
 
 l_0xc5e35c:
-    "  [1C 01 3D])" next
+    "[1C 01 3D])" next
     eob
 
 l_0xc5e365:
-    "  [1C 01 53])" next
+    "[1C 01 53])" next
     eob
 
 l_0xc5e36e:
-    "{swap}{store_registers}[19 19 00 00][1D 0B 00]" eob
+    "{swap}{store_registers}{isset(flag 1008)}[1B 03 {e(data_35.loadZero)}]{load_registers}[19 19 00 00][1D 0B 00]" eob
+    //"{swap}{store_registers}[19 19 00 00][1D 0B 00]" eob
 
 l_0xc5e37a:
     "[1D 08 00 00]{open_wallet}{load_registers}[1D 0F 00 00]" eob

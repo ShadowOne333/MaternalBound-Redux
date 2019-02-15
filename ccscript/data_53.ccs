@@ -23,8 +23,9 @@ l_0xc96675:
 
 l_0xc966d6:
     "@I got a letter from my daughter.{pause(20)}  She wants me to see her next show." next
-    "@A book of photographs of her is coming out soon." next
-    "@I really hope she kept her clothes on...{pause(20)}  Times sure have changed..." end
+    "@Apparently they're going to publish a photo book of her." next
+    "@I really hope she kept her clothes on...{pause(20)}" linebreak
+    "  Times sure have changed..." end
 
 l_0xc9675a:
     "[06 49 00 {e(l_0xc9680e)}][06 44 00 {e(l_0xc967aa)}]@Dad and Mom have left for Happy Happy Village." next
@@ -371,7 +372,7 @@ l_0xc97554:
     "@I have no patience when people interrupt me while I'm busy doing nothing.[03]{window_closeall}{pause(1)}[1F 21 07]" eob
 
 l_0xc975cc:
-    "@Can you see me?" linebreak
+    "@Can ya'll see me?" linebreak
     "[19 02]Yes" eob
 
 l_0xc975dd:
@@ -382,30 +383,30 @@ l_0xc975e2:
 
 l_0xc975f1:
     "@Ha ha." linebreak
-    "  You can, huh?" next
-    "@He he.  You've become a real Moonsidian, haven't you?{wait}{set(flag 165)}[1F 66 01 20 89 76 C9 00][1F 41 05]{set(flag 11)}" eob
+    "  Ya'll can, huh?" next
+    "@He he.  Ya'll've become ay real Moonsidian, haven't y'all?{wait}{set(flag 165)}[1F 66 01 20 89 76 C9 00][1F 41 05]{set(flag 11)}" eob
 
 l_0xc9763a:
     "@Ha ha." linebreak
-    "  You can't?" next
-    "@You're definitely not from around here." next
-    "@Hee hee.  Get going now.{pause(20)}  Here's your hat, what's your hurry..." end
+    "  Ya'll can't?" next
+    "@Ya'll're definitely nahwt frawum 'round 'ere." next
+    "@Hee hee.  Get goin' now.{pause(20)}  'ere's ya'll's hat, what's ya'll's hurry..." end
 
 l_0xc97689:
-    "{window_open(1)}@He he ha!  It's me!{pause(20)}  You can see me, right?" next
-    "@There's something interesting about you, so I'm going to follow you." next
-    "@Don't worry, though...  Heh heh..." next
-    "@If you get into a fight,{pause(20)} I'll stay out of it...{wait}[1F 66 01 21 05 77 C9 00]{window_closetop}" eob
+    "{window_open(1)}@He he ha!  It's me!{pause(20)}  Ya'll can see me, right?" next
+    "@Their's somethin' interestin' 'bout ya, so ay'm gonna follow ya'll." next
+    "@Don't wawry, though...  Heh heh..." next
+    "@If ya'll get into ay fight,{pause(20)} ay'll stay out av it...{wait}[1F 66 01 21 05 77 C9 00]{window_closetop}" eob
 
 l_0xc97705:
     "{window_open(1)}@Heh heh." linebreak
-    "  You can't see me... right?{wait}[1F 66 01 22 28 77 C9 00]{window_closetop}" eob
+    "  Ya'll can't see me... right?{wait}[1F 66 01 22 28 77 C9 00]{window_closetop}" eob
 
 l_0xc97728:
     "{window_open(1)}@Hyuk huyk." linebreak
     "  Hey!" next
-    "@Don't you wish you had a gold tooth like mine?" next
-    "@Give me a smile!  Heh heh{wait}[1F 66 01 23 80 77 C9 00][1F 66 02 24 A8 77 C9 00]{window_closetop}" eob
+    "@Don't ya'll weysh ya'll had ay gold tooth like mine?" next
+    "@Gimme ay smile!  Heh heh{wait}[1F 66 01 23 80 77 C9 00][1F 66 02 24 A8 77 C9 00]{window_closetop}" eob
 
 l_0xc97780:
     "{window_open(1)}@*Grin* *Grin*." next
@@ -418,5 +419,5 @@ l_0xc977a8:
 l_0xc977d1:
     "{window_open(1)}@Uh... Heh heh...{pause(20)}" linebreak
     "  Yo!" next
-    "@Don't you think my eyebrows rock?" next
-    "@Check'em out... they're connected!{wait}{window_closetop}[1F 41 06]{unset(flag 11)}" eob
+    "@Don't ya think my eyebrows rock?" next
+    "@Check dem out... dey're connected!{wait}{window_closetop}[1F 41 06]{unset(flag 11)}" eob

@@ -134,7 +134,13 @@ l_0xc7c705:
     "  The [1C 05 00] would probably make you barf." end
 
 l_0xc7c742:
-    "[19 19 00 00]@The [1C 05 00] is one of the items that can be equipped." end
+    "{store_registers}[1D 11 00 00][1B 02 {e(failLines)}][19 1F]{swap}" call(data_15.l_0xc5e25b) "{load_registers}{set(flag 1008)}" goto(data_15.l_0xc5e136)
+    //"[19 19 00 00]@The [1C 05 00] is one of the items that can be equipped." end
+
+loadZero:
+    "{unset(flag 1008)}{isset(flag 1008)}" eob
+failLines:
+    "@{user} can't equip the [19 1F]{swap}[1C 05 00]." end 
 
 l_0xc7c761:
     "{load_registers}[19 19 00 00]{swap}@[1C 02 00] chewed" linebreak
@@ -184,8 +190,9 @@ l_0xc7c95e:
 
 l_0xc7c973:
     newline
+    "@What the heck?!" next
     "@We're very sorry..." next
-    "@but the record of adventure number {delta} has been lost..." end
+    "@but the record for Adventure No. {delta} has been lost..." end
 
 l_0xc7c9a8:
     "[06 49 00 {e(l_0xc7ca3c)}][19 10 01]{swap}"
@@ -199,8 +206,8 @@ l_0xc7c9a8:
 
 l_0xc7ca3c:
     title(1,"Stoic Club")
-    "@Yo, this is the <Lunatics for Life>" next
-    title(1,"Lunatics for Life")
+    "@Yo, this is the <Lifelong Lunatics>" next
+    title(1,"Lifelong Lunatics")
     "@Yeah, we're a new drinking spot... we just opened..." next
     "@What's that?  The Stoic Club?!  That lame old place shut down ages ago!" next
     "@We totally remodeled the place!" next
@@ -333,8 +340,7 @@ l_0xc7d36e:
     title(1, "Dad")
     "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
-    "@It may be none of my" linebreak
-    "  business," next
+    "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next
     "[19 02]Yes" eob
 

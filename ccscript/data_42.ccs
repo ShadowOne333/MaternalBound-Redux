@@ -18,24 +18,24 @@ l_0xc8574a:
     eob
 
 l_0xc85767:
-    call(l_0xc856fc) call(l_0xc8574a) "@<Over 70% of Fourside citizens support Monotoli>" end
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 70% of Fourside citizens support Monotoly>" end
 
 l_0xc85791:
-    call(l_0xc856fc) call(l_0xc8574a) "@<Over 80% of Fourside citizens support Monotoli>" end
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 80% of Fourside citizens support Monotoly>" end
 
 l_0xc857bb:
-    call(l_0xc856fc) call(l_0xc8574a) "@<Over 90% of Fourside citizens support Monotoli>" next
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 90% of Fourside citizens support Monotoly>" next
     "@Then on page 17, " next
     "@<Mysterious department store blackout caused by mouse>" end
 
 l_0xc8581b:
-    call(l_0xc856fc) call(l_0xc8574a) "@<Over 50% of Fourside citizens now support Anti-Monotoli campaign>" next
+    call(l_0xc856fc) call(l_0xc8574a) "@<Over 50% of Fourside citizens now support Anti-Monotoly campaign>" next
     "@And on page 23 of the Fourside Post." next
     "@<Lonely demise in the city.  Long-haired man with beard," next
     "@sunglasses and aloha shirt found in street>" end
 
 l_0xc858ba:
-    call(l_0xc856fc) call(l_0xc8574a) "@<Famed Mr. Monotoli leaves Fourside.  States he is going on a trip>" end
+    call(l_0xc856fc) call(l_0xc8574a) "@<Famed Mr. Monotoly leaves Fourside.  States he is going on a trip>" end
 
 l_0xc858f0:
     call(l_0xc856fc) "  The Fourside Post says..." next
@@ -61,7 +61,7 @@ l_0xc85a6c:
     call(l_0xc856fc) "  Here's an advertisement in today's Fourside Post." next
     "@<Higher than everywhere else!" linebreak
     " (That's height, not price)" linebreak
-    " Monotoli Grand Hotel>" next
+    " Monotoly Grand Hotel>" next
     "@Hey!  That's our hotel!" end
 
 l_0xc85ad8:
@@ -115,8 +115,8 @@ l_0xc85e27:
     "@...{pause(10)} This is big news here." end
 
 l_0xc85e65:
-    call(l_0xc85c55) call(l_0xc85c76) "@<Kraken Fin makes a beautiful soup!" next
-    "@New gourmet dish makes big waves at the beach>" end
+    call(l_0xc85c55) call(l_0xc85c76) "@<Kraken fins wash up on beach," next
+    "@made into soup and new restaurant dish>" end
 
 l_0xc85eb1:
     call(l_0xc85c55) "@There's a great advertisement in this morning's Daily Summers" next
@@ -138,37 +138,36 @@ l_0xc85ff7:
     eob
 
 l_0xc8603c:
-    "@...{pause(10)}Well ...there is some news here about..." next
-    eob
+    "@...{pause(10)}According to rumour!" end
 
 l_0xc86059:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Kraken, the evil sea monster, now gone forever!>" next
-    end
+    call(l_0xc85ff7) "@<Kraken, the evil sea monster, now gone forever!>" next
+    call(l_0xc8603c) eob
 
 l_0xc86088:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Activity at pyramid the first in 300 years>" next
-    end
+    call(l_0xc85ff7) "@<Activity at pyramid the first in 300 years>" next
+    call(l_0xc8603c) eob
 
 l_0xc860b9:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<[1C 05 AF] stolen from the pyramid in the desert!>" next
-    end
+    call(l_0xc85ff7) "@<[1C 05 AF] stolen from the pyramid in the desert!>" next
+    call(l_0xc8603c) eob
 
 l_0xc860e4:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Mysterious moving tower sighted in desert!>" next
-    end
+    call(l_0xc85ff7) "@<Mysterious moving tower sighted in desert!>" next
+    call(l_0xc8603c) eob
 
 l_0xc86112:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Miraculous foreign children overwhelm Kraken!>" next
-    end
+    call(l_0xc85ff7) "@<Miraculous foreign children overwhelm Kraken!>" next
+    call(l_0xc8603c) eob
 
 l_0xc86147:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Children who dash then disappear sighted, but only for an instant>" next
-    end
+    call(l_0xc85ff7) "@<Children who dash then disappear sighted, but only for an instant>" next
+    call(l_0xc8603c) eob
 
 l_0xc86186:
-    call(l_0xc85ff7) call(l_0xc8603c) "@<Terrible sound recently heard" next
+    call(l_0xc85ff7) "@<Terrible sound recently heard" next
     "@Possibly the sound of evil being destroyed beyond our time and space>" next
-    end
+    call(l_0xc8603c) eob
 
 l_0xc861dd:
     "@Good morn...{pause(10)}  Uhhh... not morning.{pause(10)}" next
@@ -207,7 +206,7 @@ l_0xc8634c:
     "@<Beak Point Real Estate>" end
 
 l_0xc86399:
-    "@<Bush Hospital>" next
+    "@<Mounteback Hospital>" next
     "@The best hospital care in Onett!{pause(15)}  We put our life into operating on you!" end
 
 l_0xc863da:
@@ -286,11 +285,12 @@ l_0xc866c4:
     "@(Home of Apple Kid, inventor)" end
 
 l_0xc866dd:
-    "  Hint Shop <Realization>" end
+    "@(Giving hints out for over 40 years:" linebreak
+    "  <Realization Hint Shop>)" end
 
 l_0xc866f3:
     "@(This Bulletin Board" linebreak
-    "  greets you on this evening." linebreak
+    "  greets you in this evening." linebreak
     "  All is well, Good Night.)" end
 
 l_0xc8672b:
@@ -379,18 +379,18 @@ l_0xc86b8f:
     "@(<Members needed>" linebreak
     "  Popular Music Club." next
     "@Those who have a guitar, bass or drums, apply now." next
-    "@Caracas Cathedral," linebreak
-    "  Napalm wound," linebreak
-    "  Minky Cadillac," next
-    "@Sun Bunnies," linebreak
-    "  the Creeps," next
-    "@Run Around TownKinky Kids," linebreak
+    "@Carcass and Cathedral," linebreak
+    "  Napalm Death," linebreak
+    "  The Cadillacs," next
+    "@Dust Bunnies," linebreak
+    "  The Creeps," next
+    "@Run Around Town KinKi Kids," linebreak
     "  Bjork," next
     "@Takashi Hosokawa" linebreak
     "  or Horenso." next
     "@We welcome anyone who likes to listen to these bands." next
     "@Only serious, mature fans need apply." next
-    "@Please contact Lou." end
+    "@Please contact Koji.)" end
 
 l_0xc86cb4:
     "@(Relax, take it easy!" linebreak

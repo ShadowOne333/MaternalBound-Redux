@@ -21,7 +21,7 @@ l_0xc978aa:
     "@Huzzah!{pause(20)}" linebreak
     "  You really surprised me!" next
     "@You're the man whose eyebrows are connected and who has a gold tooth!" next
-    "@How about we dump these kids and go get something to drink!?[03][1F F1 74 05 62 01][1F 61]{set(flag 63)}" eob
+    "@Whadya say we dump these brats and go drink us some bourbon or something?![03][1F F1 74 05 62 01][1F 61]{set(flag 63)}" eob
 
 l_0xc9794b:
     "@(It is a golden statue that you have seen before.)[03]" call(data_23.l_0xc68583) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}" call(data_24.l_0xc69082) "[1F F1 7E 05 7B 02]{set(flag 59)}{set(flag 75)}[1F 21 9A][1F 41 05][1F E5 FF]{pause(20)}" goto(l_0xc97990)
@@ -71,8 +71,9 @@ l_0xc97b0c:
     call(data_47.l_0xc9007f) eob
 
 l_0xc97b12:
+    title(1,"Geldegarde Monotoly")
     "@Don't do anything to me!" linebreak
-    "  I am... I am not Monotoli![03][1F 1E 73 05 09]{pause(120)}{set(flag 631)}" eob
+    "  I am... I am not Monotoly![03][1F 1E 73 05 09]{pause(120)}{set(flag 631)}" eob
 
 l_0xc97b35:
     "@Welcome to Moonside!" linebreak
@@ -119,7 +120,25 @@ l_0xc97c5f:
 l_0xc97c7b:
     newline
     "@" call(data_37.l_0xc7e6d7) "[19 1F]{swap} ate" linebreak
-    "  the [1C 05 00] together.{sound(68)}{pause(1)}[03]" eob
+    "  the [1C 05 00]" call(together) "{sound(68)}{pause(1)}[03]" eob
+
+together:
+    "[19 10 01]{swap}{counter(1)}" goto(tog1)
+
+tog1:
+    "{inc}{ctoarg}[1D 19 00][1B 03 {e(tog2)}][19 10 00][1D 0D 00 01 02][1B 03 {e(tog2)}][19 10 00][1D 0D 00 01 03][1B 03 {e(tog2)}]" goto(tog1)
+
+tog2:
+    "{ctoarg}{swap}[09 05 {e(tog3)} {e(tog3)} {e(tog4)} {e(tog5)} {e(tog5)}]" eob
+
+tog3:
+    "." eob
+
+tog4:
+    " together." eob
+
+tog5:
+    " together." eob
 
 l_0xc97c9d:
     "[1D 20][1B 02 {e(l_0xc97cb0)}]" newline
@@ -175,12 +194,12 @@ l_0xc97ddc:
 l_0xc97df5:
     newline
     "@{user}[19 1F]{swap} fired" linebreak
-    "  the [1C 05 00]!{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}[03]" eob
+    "  5 Pencil rockets!{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}[03]" eob
 
 l_0xc97e24:
     newline
     "@{user}[19 1F]{swap} fired" linebreak
-    "  the [1C 05 00]!{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}[03]" eob
+    "  20 Pencil rockets!{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}[03]" eob
 
 l_0xc97e9e:
     newline
@@ -257,7 +276,7 @@ l_0xc98148:
 l_0xc9817a:
     "{window_open(1)}" newline
     title(1,"Mr. Carpainter")
-    "@The gold-colored statue behind me..." next
+    "@Do you see the gold figure behind me..." next
     "@Since I got the statue,{pause(15)} I have been doing peculiar things." next
     "{set(flag 44)}" goto(l_0xc981c6)
 
@@ -279,7 +298,7 @@ l_0xc982b3:
 
 l_0xc982f2:
     "[06 44 00 {e(l_0xc9833f)}]@<Intruder!>{pause(10)}" next
-    "@I screamed,{pause(10)} but I don't know what to do beyond that!" end
+    "@I yelled,{pause(10)} but I don't know what to do beyond that!" end
 
 l_0xc9833f:
     "@So you're the boy that... that..." next

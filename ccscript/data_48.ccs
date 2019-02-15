@@ -125,7 +125,7 @@ l_0xc907be:
     "@If you have a Wet towel, you'll be all right." end
 
 l_0xc9083a:
-    "[06 7F 01 {e(l_0xc908b6)}][1D 15 4B 00]{swap}[06 49 00 {e(l_0xc90878)}]@Welcome to the Monotoli Grand Hotel." next
+    "[06 7F 01 {e(l_0xc908b6)}][1D 15 4B 00]{swap}[06 49 00 {e(l_0xc90878)}]@Welcome to the Monotoly Grand Hotel." next
     goto(l_0xc90861)
 
 l_0xc90861:
@@ -149,10 +149,10 @@ l_0xc908b6:
 
 l_0xc908bc:
     "[06 7F 01 {e(l_0xc90a62)}][1D 15 96 00]{swap}@Welcome to" linebreak
-    "  L'hotel de Summers." next
+    "  L'Hotel Du Summers." next
     "@My name is" linebreak
-    "  Resosha Richmonde," next
-    title(1,"Resosha Richmonde")
+    "  Reso'cha Richmond," next
+    title(1,"Reso'cha Richmond")
     "@and I am the assistant manager." next
     "@I'm sorry [19 10 01]" call(data_37.l_0xc7e6b3) ", but I'm afraid" linebreak
     "  that we do not have any reservation under your name." next

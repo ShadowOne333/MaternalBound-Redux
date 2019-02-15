@@ -353,8 +353,8 @@ l_0xc7678a:
 
 l_0xc76804:
     title(1,"Porky")
-    "@I was really scolded by my father." next
-    "@Aa, my butt hurts." end
+    "@Dad really scolded me." next
+    "@Oh, my butt hurts." end
 
 l_0xc7683a:
     title(1,"Picky")
@@ -387,7 +387,7 @@ l_0xc76980:
     "@I've seen you around a lot lately.  He he he." end
 
 l_0xc7699e:
-    title(1,"Capt. Strong")
+    title(1,"Captain Strong")
     "[06 49 00 {e(l_0xc76b36)}][06 69 00 {e(l_0xc76b0b)}][06 B6 00 {e(l_0xc76a1f)}]@The townspeople are in a state of confusion." next
     "@At times like this,{pause(15)} riots break out,{pause(15)} or people start acting wild," next
     "@so we police are being ultra cautious." end
@@ -417,7 +417,7 @@ l_0xc76b0b:
     "@I've been playing <MOTHER 2> lately...{pause(20)}  I'm having a tough time." end
 
 l_0xc76b36:
-    title(1, "Capt. Strong")
+    title(1, "Captain Strong")
     "@So you've traveled all over the world." next
     "@I bet you didn't meet anyone stronger than I,{pause(10)} did you?" next
     "@I know that you didn't...  Wa ha ha ha!" end

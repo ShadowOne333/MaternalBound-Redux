@@ -4,6 +4,10 @@
  * Generated using CCScriptWriter.
  */
 
+import asm65816
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -112,7 +116,7 @@ l_0xc5c804:
 
 l_0xc5c80d:
     "@[1C 02 00] seems to have too many things already." next
-    "@I don't think he can carry any more." next
+    "@I don't think {swap}" call(data_36.l_0xc7e5f3) " can carry any more." next
     "@Can someone else carry it?" linebreak
     " " eob
 
@@ -163,7 +167,7 @@ l_0xc5c92a:
 
 l_0xc5c933:
     "@[1C 02 00] seems to have too many things already." next
-    "@I don't think he can carry any more." next
+    "@I don't think {swap}" call(data_36.l_0xc7e5f3) " can carry any more." next
     "@Can someone else carry it?" linebreak
     eob
 
@@ -213,7 +217,7 @@ l_0xc5ca10:
 
 l_0xc5ca1e:
     "@[1C 02 00] seems to have too many things already." next
-    "@I don't think he can carry any more." next
+    "@I don't think {swap}" call(data_36.l_0xc7e5f3) " can carry any more." next
     "@Can someone else carry it?" linebreak
     eob
 
@@ -265,7 +269,7 @@ l_0xc5cb7b:
 
 l_0xc5cb88:
     "@[1C 02 00] seems to have too many things already." next
-    "@I don't think he can carry any more." next
+    "@I don't think {swap}" call(data_36.l_0xc7e5f3) " can carry any more." next
     "@Can someone else carry it?" linebreak
     eob
 

@@ -136,7 +136,8 @@ command CPY_8(C)	"[c0 {byte C}]"
 command CPY_a(a)	"[cc {short a}]"
 command CPY_d(a)	"[c4 {byte a}]"
 //
-command DEC			"[3a]"				command DEA 		DEC
+command DEC			"[3a]"
+command DEA 		DEC
 command DEC_a(a)	"[ce {short a}]"
 command DEC_d(a)	"[c6 {byte a}]"
 command DEC_x(a)	"[de {short a}]"
@@ -161,7 +162,8 @@ command EOR_dly(a)	"[57 {byte a}]"
 command EOR_s(a)	"[43 {byte a}]"
 command EOR_sy(a)	"[53 {byte a}]"
 //
-command INC			"[1a]"				command INA 		INC
+command INC			"[1a]"
+command INA 		INC
 command INC_d(a)	"[e6 {byte a}]"
 command INC_a(a)	"[ee {short a}]"
 command INC_x(a)	"[fe {byte a}]"
@@ -324,10 +326,14 @@ command TSX			"[ba]"
 command TXS			"[9a]"
 command TXY			"[9b]"
 command TYX			"[bb]"
-command TCD			"[5b]"				command TAD 		TCD
-command TDC			"[7b]"				command TDA 		TDC
-command TCS			"[1b]"				command TAS 		TCS
-command TSC			"[3b]"				command TSA 		TSC
+command TCD			"[5b]"
+command TAD 		TCD
+command TDC			"[7b]"
+command TDA 		TDC
+command TCS			"[1b]"
+command TAS 		TCS
+command TSC			"[3b]"
+command TSA 		TSC
 //
 command TRB_a(a)	"[1c {short a}]"
 command TRB_d(a)	"[14 {byte a}]"
@@ -336,7 +342,8 @@ command TSB_d(a)	"[04 {byte a}]"
 //
 command WAI			"[cb]"
 command WDM			"[42]"
-command XBA			"[eb]"				command SWA 		XBA
+command XBA			"[eb]"
+command SWA 		XBA
 command XCE			"[fb]"
 
 command ASMLoadAddress0E(Address) {

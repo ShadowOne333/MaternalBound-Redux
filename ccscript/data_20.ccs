@@ -179,7 +179,7 @@ l_0xc64b0b:
 
 l_0xc64b18:
     next
-    "@Our deliverymen are not available right now." next
+    "@Our delivery men are not available right now." next
     "@We can't deliver any pizza for the time being." next
     goto(l_0xc64a92)
 
@@ -192,7 +192,7 @@ l_0xc64b59:
 
 l_0xc64bbf:
     call(data_21.l_0xc659bf) "{unset(flag 180)}"
-    title(1, "Mach Pizza")
+    title(1, "Gonz[C0]les")
     "@Hello! Mach Pizza delivery!" linebreak
     "  Here is your pizza pie, sir." next
     "[1D 03 FF][1B 02 {e(l_0xc64c9e)}]{rtoarg}{store_registers}[06 B3 00 {e(l_0xc64c60)}]{counter(95)}" goto(l_0xc64c0a)

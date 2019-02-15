@@ -48,7 +48,7 @@ l_0xef8be8:
 l_0xef8bfb:
     newline
     "{sound(25)}@{user} grumbled" linebreak
-    "  about today's youth!{sound(84)}[03]" eob
+    "  drunkenly about today's youth!{sound(84)}[03]" eob
 
 l_0xef8c1d:
     newline
@@ -105,7 +105,7 @@ l_0xef8d2f:
 l_0xef8d4c:
     newline
     "@{user} ate a" linebreak
-    "  bologne sandwich!{sound(68)}" next
+    "  bologna sandwich!{sound(68)}" next
     call(data_61.l_0xef69a1) eob
 
 l_0xef8d72:

@@ -327,9 +327,27 @@ l_0xef72f7:
     newline
     "@Black smoke poured from" linebreak
     "  {user}'s body!{prompt}" linebreak
-    "@" call(data_37.l_0xc7e6d7) " was" linebreak
+    "@" call(data_37.l_0xc7e6d7) " " call(was) linebreak
     "  overcome by the smoke!{prompt}" linebreak
     "@You can't see a thing!{prompt}" eob
+
+was:
+    "[19 10 01]{swap}{counter(1)}" goto(was1)
+
+was1:
+    "{inc}{ctoarg}[1D 19 00][1B 03 {e(was2)}][19 10 00][1D 0D 00 01 02][1B 03 {e(was2)}][19 10 00][1D 0D 00 01 03][1B 03 {e(was2)}]" goto(was1)
+
+was2:
+    "{ctoarg}{swap}[09 05 {e(was3)} {e(was3)} {e(was4)} {e(was5)} {e(was5)}]" eob
+
+was3:
+    "was" eob
+
+was4:
+    "were" eob
+
+was5:
+    "were" eob
 
 l_0xef733d:
     newline
@@ -372,8 +390,8 @@ l_0xef74c9:
 
 l_0xef74e6:
     newline
-    "@Porky thought" linebreak
-    "  to himself![03]" eob
+    "@Porky is profusely" linebreak
+    "  showing remorse![03]" eob
 
 l_0xef74fa:
     newline
@@ -393,7 +411,7 @@ l_0xef7530:
 l_0xef7548:
     newline
     "@Porky tried to" linebreak
-    "  edge closer to the enemy![03]" eob
+    "  join the enemy's team instead![03]" eob
 
 l_0xef7569:
     newline

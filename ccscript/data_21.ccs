@@ -109,8 +109,8 @@ l_0xc655b1:
     "@I am a world-wise Tenda." next
     "@I was an exchange student who traveled to a country" next
     "@that is known as an economic superpower." next
-    "@My name is E-go Sutekki." next
-    title(1, "E-go Sutekki")
+    "@My name is Angrez Van der Pol." next
+    title(1, "Angrez Van der Pol")
     "@Let me know if I can do anything for you." next
     goto(l_0xc6564d)
 
@@ -193,8 +193,8 @@ l_0xc6593e:
     goto(l_0xc657ac)
 
 l_0xc65962:
-    "@Hi!  I'm E-go." next
-    title(1, "E-go Sutekki")
+    title(1, "Angrez Van der Pol")
+    "@Hi!  I'm Angrez." next
     goto(l_0xc6564d)
 
 l_0xc65975:
@@ -333,8 +333,8 @@ l_0xc6605f:
 
 l_0xc660a6:
     "[06 02 00 {e(l_0xc66392)}][06 40 00 {e(l_0xc66353)}][06 03 02 {e(l_0xc66469)}]@....." next
-    title(1, "Frank Fly")
     "@...I'm Frank.{pause(30)}  You are?" next
+    title(1, "Frank Fly")
     "@{pause(30)}C'mon,{pause(15)} can't you at least say your name?[03]" call(data_23.l_0xc683fb) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}"
     title(1, "Frank Fly")
     "@<Fail-proof> Frank can't be beaten." next
@@ -427,7 +427,7 @@ l_0xc665e7:
     title(1, "Frank Fly")
     "@So you made it back alive.{pause(20)}  You must have many stories to tell." next
     "@Let's get together for a drink,{pause(15)} when you have a chance so I can hear your stories." next
-    "@...I'm talking about drinking mineral water.{pause(15)}  I'm still under age,{pause(15)} you know.{wait}{set(flag 4)}" eob
+    "@By <a drink> I'm referring to mineral water.{pause(15)}  I'm still under age,{pause(15)} you know.{wait}{set(flag 4)}" eob
 
 l_0xc66670:
     "[06 BE 00 {e(data_35.l_0xc7c588)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next

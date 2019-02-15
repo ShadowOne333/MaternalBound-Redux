@@ -282,14 +282,14 @@ l_0xc71140:
     "@...I just sense it." call(data_29.l_0xc726cb) eob
 
 l_0xc7117e:
-    "@At the Topolla Theater in Fourside," next
+    "@At the Topollo Theater in Fourside," next
     "@the Runaway Brothers have booked a series of gigs." next
     "@This is just a rumor, but I hear that they've been snowed again" next
     "@and are in some kind of trouble." next
     "@So...  If I were you, I'd go and talk with them." call(data_29.l_0xc726cb) eob
 
 l_0xc71208:
-    "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]@At the Topolla Theater, the Runaway Brothers have booked a series of gigs." next
+    "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]@At the Topollo Theater, the Runaway Brothers have booked a series of gigs." next
     "@This is just a rumor, but I hear that they've been snowed again" next
     "@and are in some kind of trouble." next
     "@So...  If I were you, I'd go and talk with them." call(data_29.l_0xc726cb) eob
@@ -302,7 +302,7 @@ l_0xc712e3:
     "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]" goto(l_0xc712ec)
 
 l_0xc712ec:
-    "@The Runaway Brothers, who are now appearing at the Topolla Theater," next
+    "@The Runaway Brothers, who are now appearing at the Topollo Theater," next
     "@got stuck again because of financial problems." next
     "@To help them, a tremendous amount of money will be needed." next
     "@Hey, talking about a tremendous amount of money," next
@@ -327,7 +327,7 @@ l_0xc71435:
 
 l_0xc7152c:
     "@It's such a pity..." next
-    "@The Runaway Brothers have managed to get stuck at the Topolla Theater" next
+    "@The Runaway Brothers have managed to get stuck at the Topollo Theater" next
     "@because of their debt problems." next
     "@Why don't you go and talk to Miss Fake, the manager of the theater?" next
     "@That diamond you're carrying should come in handy." call(data_29.l_0xc726cb) eob
@@ -344,7 +344,7 @@ l_0xc7162b:
     "@the top floor of the department store is kind of suspicious..." call(data_29.l_0xc726cb) eob
 
 l_0xc71677:
-    "@Have you been to Boris' Bar?" next
+    "@Have you been to Borges' Bar?" next
     "@It's not difficult to find... the sign says <Bar.>" call(data_29.l_0xc726cb) eob
 
 l_0xc716b7:
@@ -355,7 +355,7 @@ l_0xc716b7:
     "@don't you think that you should really stop and try to help him?" call(data_29.l_0xc726cb) eob
 
 l_0xc7175b:
-    "@Did you go back to Boris' Bar?" next
+    "@Did you go back to Borges' Bar?" next
     "@There seems to be something mighty suspicious behind the counter..." call(data_29.l_0xc726cb) eob
 
 l_0xc7179a:
@@ -368,12 +368,12 @@ l_0xc717bc:
     "@That's what I say... on to the desert!" call(data_29.l_0xc726cb) eob
 
 l_0xc71808:
-    "@The maid out front of the Monotoli Building" next
+    "@The maid out front of the Monotoly Building" next
     "@is waiting for the [1C 05 8B]." call(data_29.l_0xc726cb) eob
 
 l_0xc71837:
     "@I heard that you were asked to dinner" next
-    "@by the cute maid at the Monotoli Building." next
+    "@by the cute maid at the Monotoly Building." next
     "@Lucky you!  I envy kids like you... but just a bit." call(data_29.l_0xc726cb) eob
 
 l_0xc7188e:
@@ -395,7 +395,7 @@ l_0xc71973:
 
 l_0xc719d7:
     "@Try placing a call to" linebreak
-    "  the Strip... ooops!  sorry," linebreak
+    "  the Strip- Oops!  sorry," linebreak
     "  I mean the Stoic Club." call(data_29.l_0xc726cb) eob
 
 l_0xc71a14:
@@ -407,9 +407,9 @@ l_0xc71a67:
     "@People say that there is a Magic cake vendor" next
     "@on the pavement by the beach in the resort of Summers." next
     "@Oh yeah, <Pavement> means <sidewalk.>" next
-    "@Well, I was just testing you..." next
-    "@Are you angry?" linebreak
-    "  I didn't mean it... sorry!" call(data_29.l_0xc726cb) eob
+    "@I just wanted to show off my knowledgeable side." next
+    "@Did I come off as a smarty-pants?" linebreak
+    "  Sorry 'bout that." call(data_29.l_0xc726cb) eob
 
 l_0xc71af0:
     "@Scarabia Cultural Museum..." next
@@ -516,10 +516,10 @@ l_0xc722c1:
     "@I say, go there and check out the site." call(data_29.l_0xc726cb) eob
 
 l_0xc72348:
-    "@I have no more hints for you." next
+    "@I have...{pause(20)} no more hints to give you." next
     "@You've done such a good job to this point." next
-    "@From here on out..." next
-    "@Trust your judgement, and also your luck." end
+    "@All that's left now..." next
+    "@Is to entrust luck to the heavens." end
 
 l_0xc72398:
     "@Well, I want to thank you for all the times" next
@@ -545,4 +545,4 @@ l_0xc7246a:
     "@A man called Mr. Spoon has a heavy mustache..." call(data_29.l_0xc726cb) eob
 
 l_0xc724ab:
-    "@If you want to meet Venus, you should go backstage at the Topolla Theater." call(data_29.l_0xc726cb) eob
+    "@If you want to meet Venus, you should go backstage at the Topollo Theater." call(data_29.l_0xc726cb) eob

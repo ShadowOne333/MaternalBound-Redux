@@ -183,7 +183,7 @@ l_0xc84973:
     call(l_0xc8437a) call(l_0xc843a7) "@<Meteorite landing in north Onett finally beginning to cool off>" end
 
 l_0xc849aa:
-    call(l_0xc8437a) call(l_0xc843a7) "@<Onett police chief finishes MOTHER 2, asks, <Where is the MOTHER 3?>" end
+    call(l_0xc8437a) call(l_0xc843a7) "@<Onett police chief finishes MOTHER 2, asks, 'Where is MOTHER 3?'>" end
 
 l_0xc849ed:
     call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84ad7)} {e(l_0xc84b3f)} {e(l_0xc84b5e)} {e(l_0xc84bbb)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84c1b)} {e(l_0xc84c1b)} {e(l_0xc84cac)} {e(l_0xc84cfa)} {e(l_0xc84d38)} {e(l_0xc84d6b)} {e(l_0xc84d9c)} {e(l_0xc84dbc)} {e(l_0xc84deb)} {e(l_0xc84e1f)} {e(l_0xc84e64)} {e(l_0xc84f19)} {e(l_0xc84f55)} {e(l_0xc84f98)}]" eob
@@ -200,16 +200,19 @@ l_0xc84aad:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<Ghosts found to inhabit tunnel to Threek>" end
 
 l_0xc84ad7:
-    call(l_0xc84a6e) call(l_0xc84a8a) "@<The brave local hero named [1C 02 01] who broke up the Sharks has left Onett." next
-    "@Reports that the Mayor stopped the Sharks have been proven to be false>" end
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<The brave local hero named [1C 02 01] who broke up the Sharks has left Onett." next
+    "@<[1C 02 01],{pause(20)} the courageous boy" next
+    "@who reformed the notorious Shark gang in neighboring city of Onett," next
+    "@no longer appears to be in Onett>" next
+    "@I heard that was all the mayor of Onett's doing,{pause(20)} but I guess not,{pause(20)} huh?" end
 
 l_0xc84b3f:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<Missing girl still not found>" end
 
 l_0xc84b5e:
-    call(l_0xc84a6e) call(l_0xc84a8a) "@<Regarding Mr. Carpainter" linebreak
-    "  Follower states Happy Happyism is wrong" next
-    "@Follower claims temporary insanity...>" end
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Mr. Carpainter speaks," next
+    "@'Looking back,{pause(20)} Happy Happyism was wrong" next
+    "@I wasn't in my right mind.{pause(25)} I cannot apologize enough'>" end
 
 l_0xc84bbb:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<[1C 02 02] found safe!" linebreak
@@ -230,7 +233,7 @@ l_0xc84cac:
     "@into the graveyard in Threek>" end
 
 l_0xc84cfa:
-    call(l_0xc84a6e) call(l_0xc84a8a) "@<Runaway Brothers present popular show at the Topolla Theater" next
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Runaway Brothers present popular show at the Topollo Theater" next
     "@in downtown Fourside>" end
 
 l_0xc84d38:
@@ -246,7 +249,9 @@ l_0xc84dbc:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<Prince [1C 02 04] of Dalaam secretly visiting Twoson?>" end
 
 l_0xc84deb:
-    call(l_0xc84a6e) call(l_0xc84a8a) "@<Former Happy Happyism followers claim to have been naive>" end
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<Former Happy Happyism followers claim to have been naive>" end
+    "@<'We were still so very blue back then'" next
+    "@Former Happy Happy cult followers discuss their past>" end
 
 l_0xc84e1f:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<You!  With the controller in your hand! Have you been getting enough sleep lately?>" end
@@ -258,7 +263,9 @@ l_0xc84e64:
     "@This title is now available at your local bookstore or library.>" end
 
 l_0xc84f19:
-    call(l_0xc84a6e) call(l_0xc84a8a) "@<In Twoson, Nintendo's eight-bit system, the NES, makes a comeback!>" end
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<In Twoson, Nintendo's eight-bit system, the NES, makes a comeback!>" end
+    "@<The old MOTHER game becomes popular among the people of Twoson!" next
+    "@Nintendo in chaos!>" end
 
 l_0xc84f55:
     call(l_0xc84a6e) call(l_0xc84a8a) "@<Onett Times a better newspaper than we imagined here at the Twoson Today>" end
@@ -278,7 +285,7 @@ l_0xc85059:
 l_0xc85065:
     "@The guest's newspapers that were delivered to the hotel today..." next
     "@are different than normal." next
-    "@The paper is called the Zombie Herald..." next
+    "@The paper is called the Zombie World..." next
     "@I'm scared, but let me tell you what is in it..." next
     eob
 
@@ -297,7 +304,7 @@ l_0xc850ff:
 
 l_0xc8514f:
     call(l_0xc85059) "  The weather for today is dark and gloomy." next
-    call(l_0xc85065) "@<Today's weather: thick, gray clouds all day>" linebreak
+    call(l_0xc85065) "@<Weather Forecast: Today's sky will be filled with truly gloomy,{pause(20)} wonderful clouds>" linebreak
     end
 
 l_0xc8519e:
@@ -311,11 +318,11 @@ l_0xc851e9:
 l_0xc8522f:
     call(l_0xc850d8) "@The pride of the Threek publishing community," next
     "@the Threek Journal, is back with a vengeance!" next
-    "@<Zombies vanquished!" linebreak
-    "  Tunnel now open!>" end
+    "@<Zombies gone from Threek!" linebreak
+    "  Tunnels now open!>" end
 
 l_0xc85291:
-    call(l_0xc850d8) call(l_0xc850e6) "@<Tessie exists, eyewitnesses report!" next
+    call(l_0xc850d8) call(l_0xc850e6) "@<Tessie exists, testimonials report!" next
     "@But Tessie Watching Society member forgets to put film in his camera!>" end
 
 l_0xc852f0:
@@ -344,7 +351,8 @@ l_0xc8549d:
     call(l_0xc850d8) call(l_0xc850e6) "@<Prince [1C 02 04] of Dalaam secretly visiting Threek?>" end
 
 l_0xc854cc:
-    call(l_0xc850d8) call(l_0xc850e6) "@<Zombie prison warden states inmates believe Our Nest is Best>" end
+    call(l_0xc850d8) call(l_0xc850e6) "@<Caged zombies in southern Threek speak out," next
+    "@'Out Nest is Best,{pause(20)} but this life isn't so bad when you get used to it'>" end
 
 l_0xc85507:
     call(l_0xc850d8) call(l_0xc850e6) "@<Pyramid mysteriously opens in distant Scarabia." linebreak

@@ -3,6 +3,8 @@
 import asm65816
 
 /* Button values for remapping purposes:
+FOR RAM ADDRESSES LOADED FROM 006D/006F/0065
+Addresses loaded from RAM $0066 are byte swapped (Ex: Y button becomes 0040 instead of 4000) 
 
 0010 = R button
 0020 = L button
@@ -16,6 +18,7 @@ import asm65816
 2000 = Select button
 4000 = Y button
 8000 = B button
+
 */
 
 ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
@@ -37,15 +40,15 @@ ROM[0xC1324D] = {
 
 	//The rest of the code up to Label 5 seems to be the same as in the original game, simply shifted due to the JSL
 	LDA_a	(0x5D62) 	// LDA $5D62
-	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62)
+	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62) - Label1
 	JMP	(0x3394) 	// Jump to $3394
 	LDA_a	(0x5D62)	// LDA $5D62
 	CMP_i	(0xFFFF)	// CMP #$FFFF
-	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62)
+	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62) - Label2
 	JMP	(0x3394) 	// Jump to $3394
 	LDA_a	(0x5D62)	// LDA $5D62
 	CMP_i	(0xFFFE)	// CMP #$FFFE
-	BNE	(0x0D)		// Branch if not equal to pointer to 0xCF8985
+	BNE	(0x0D)		// Branch if not equal to pointer to 0xCF8985 - Label3
 	LDA_a	(0x5DDE)	// LDA $5DDE
 	STA_d	(0x0A)		// STA $0A
 	LDA_a	(0x5DE0) 	// LDA $5DE0
@@ -70,12 +73,12 @@ ROM[0xC1324D] = {
 	LDA_dl	(0x06)		// LDA [$06]
 	AND_i	(0x00FF) 	// AND #$00FF
 	CMP_i	(0x0001) 	// CMP #$0001
-	BNE	(0x03)		// Branch if not equal to next CMP_i (0x0002)
+	BNE	(0x03)		// Branch if not equal to next CMP_i (0x0002) - Label4
 	JMP	(0x3394) 	// Jump to $3394
 	CMP_i	(0x0002) 	// CMP #$0002
-	BEQ	(0x0B)		// Branch if equal to next LDA_i (0x0001)
+	BEQ	(0x0B)		// Branch if equal to next LDA_i (0x0001) - Label5
 	CMP_i	(0x0003) 	// CMP #$0003
-	BNE	(0x03)		// Branch if not equal to next JMP (0x3394)
+	BNE	(0x03)		// Branch if not equal to next JMP (0x3394) - Label6
 	JMP	(0x3375) 	// Jump to $3375
 	JMP	(0x3394) 	// Jump to $3394
 	LDA_i	(0x0001)	// LDA #$0001

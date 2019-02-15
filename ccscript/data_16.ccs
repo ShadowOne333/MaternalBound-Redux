@@ -176,7 +176,7 @@ l_0xc5ef3e:
     "@By the way, I would be happy if you left sometime soon." next
     "@I'm tired of your family living next door." next
     "@We've loaned your father a lot of money." next
-    "@It may have been a hundred thousand dollars or more..." next
+    "@It may have been hundreds of trillions or thereabouts..." next
     "@Well, I guess it really could have been less," next
     "@but because of the loan,{pause(15)} my family and I now live in poverty![03]{window_closeall}[1F EA 5B 01][1F F1 2C 00 0C 00][1F F1 2D 00 54 00][1F 61][1F E6 2C 00][19 22 01 02 2D 00][1F 13 01 00]{window_open(1)}"
     title(1, "Lardna Minch")
@@ -185,7 +185,8 @@ l_0xc5ef3e:
     "{window_closeall}[1F EA 5B 01][1F E9 2C 00][1F E9 2D 00][1F F2 5B 01 34 00]{unset(flag 2)}[1F 61]{pause(120)}[1F E7 5B 01][1F E6 2C 00][1F E6 2D 00]{window_open(1)}"
     title(1, "Lardna Minch")
     "@Aya{pause(5)}a{pause(5)}a{pause(5)}e{pause(5)}e{pause(5)}e!" next
-    "@I think it's a dung beetle!{pause(15)}" linebreak    "  Die and go to Hell![03]{window_closeall}[1F EA 5B 01][1F F1 2D 00 76 02][1F 61]{music(113)}{set(flag 2)}[1F 61]{set(flag 104)}[1F 1F 5B 01 06][1F 17 2E 00 08 00 01][1F E9 2C 00][1F F1 2D 00 0C 00]{set(flag 303)}{set(flag 31)}{set(flag 35)}{set(flag 34)}{set(flag 633)}{unset(flag 21)}{unset(flag 20)}{unset(flag 18)}{unset(flag 11)}{set(flag 107)}[1F 66 01 2A FB F1 C5 00]{set(flag 479)}{set(flag 480)}{set(flag 481)}{set(flag 487)}{set(flag 488)}{set(flag 493)}{set(flag 495)}{set(flag 496)}{set(flag 500)}{set(flag 501)}{set(flag 502)}{set(flag 503)}{set(flag 505)}{set(flag 506)}" eob
+    "@A pesky toilet fly!{pause(15)}" linebreak    
+    "  Die and go to Hell![03]{window_closeall}[1F EA 5B 01][1F F1 2D 00 76 02][1F 61]{music(113)}{set(flag 2)}[1F 61]{set(flag 104)}[1F 1F 5B 01 06][1F 17 2E 00 08 00 01][1F E9 2C 00][1F F1 2D 00 0C 00]{set(flag 303)}{set(flag 31)}{set(flag 35)}{set(flag 34)}{set(flag 633)}{unset(flag 21)}{unset(flag 20)}{unset(flag 18)}{unset(flag 11)}{set(flag 107)}[1F 66 01 2A FB F1 C5 00]{set(flag 479)}{set(flag 480)}{set(flag 481)}{set(flag 487)}{set(flag 488)}{set(flag 493)}{set(flag 495)}{set(flag 496)}{set(flag 500)}{set(flag 501)}{set(flag 502)}{set(flag 503)}{set(flag 505)}{set(flag 506)}" eob
 
 l_0xc5f1d1:
     title(1, "Aloysius Minch")
@@ -323,7 +324,7 @@ l_0xc5f83b:
 
 l_0xc5f859:
     "{unset(flag 449)}[1F F1 47 00 DE 00][1F 15 6A 00 E1 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 4B 00 DF 00 FF][1F 21 43][1F 15 6A 00 E2 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 4B 00 E0 00 FF][1F 21 44][1F 15 6A 00 E3 00 01]" call(data_57.l_0xc9b4b8) "[1F 1F 6A 00 06][1F E7 4B 00][1F 07 02]{pause(10)}{window_open(1)}"
-    title(1, "Capt. Strong")
+    title(1, "Captain Strong")
     "@Show me what you got..." next
     "{pause(20)}" linebreak
     "{set(flag 6)}{music_resume}@See if you can get past five of my best men...[03]{window_closeall}[1F EA 4B 00][1F 61][1F F1 4D 00 E8 00][1F F1 4C 00 E7 00][1F F1 4B 00 E6 00][1F F1 4A 00 E5 00][1F F1 49 00 E4 00][1F 61]{pause(30)}[1F F1 49 00 E9 00][1F 61]{window_open(1)}" goto(l_0xc5f914)
@@ -342,7 +343,7 @@ l_0xc5f9dd:
     "@Don't let the Mayor's compliments give you a big head..." next
     "@Bring it on, fat boy![03]" call(data_23.l_0xc6844f) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
     "@Let's do this again sometime..." next
-    "@Next time, I'll take you out with my nuclear suplex attack!{wait}{set(flag 291)}{window_closeall}[1F F1 4B 00 EE 00][1F 61]{pause(30)}[1F F1 4C 00 EC 00][1F 61]{window_open(1)}" goto(l_0xc5fa72)
+    "@Next time, I'll take you out with my Hell Hold attack!{wait}{set(flag 291)}{window_closeall}[1F F1 4B 00 EE 00][1F 61]{pause(30)}[1F F1 4C 00 EC 00][1F 61]{window_open(1)}" goto(l_0xc5fa72)
 
 l_0xc5fa72:
     "@C'mon!" linebreak
@@ -351,15 +352,15 @@ l_0xc5fa72:
     "  I lost...{wait}{set(flag 292)}{window_closeall}[1F F1 4C 00 EE 00][1F 61]{pause(30)}[1F F1 4D 00 ED 00][1F 61]{window_open(1)}@That's it, buddy..." next
     "@You can forget about me, I'm going to call for my boss!" next
     "{set(flag 293)}{window_closeall}[1F F1 4D 00 EE 00][1F 61]{pause(30)}[1F F2 4B 00 EF 00][1F 61]{window_open(1)}"
-    title(1, "Capt. Strong")
+    title(1, "Captain Strong")
     "@There is no way I can beat you in a straight competition, so..." next
-    "@get ready for my <Super Ultra Sambo-Mambo-Tango martial arts>!{wait}" call(data_23.l_0xc68464) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{pause(60)}{window_open(1)}" newline
-    title(1, "Capt. Strong")
+    "@get ready for my <Super Ultra Sambo-Mambo martial arts>!{wait}" call(data_23.l_0xc68464) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{pause(60)}{window_open(1)}" newline
+    title(1, "Captain Strong")
     "@I didn't think you would do so well against the mighty Onett police force..." next
     "@You want me to open the road to Twoson?" next
     "@Hang on for a sec, I'll radio my staff and give them the word..." next
     "{window_closeall}{unset(flag 38)}{unset(flag 39)}[1F E4 4B 00 05][1F F3 4B 00 02]{pause(60)}{window_open(1)}"
-    title(1,"Capt. Strong")
+    title(1,"Captain Strong")
     "@*Beep, beep* ...*Click*... *Rrrr*" next
     "@*Click*  Strong here... do you read me?" next
     "@...*Krrrr* ...Hey!..." next
@@ -370,7 +371,7 @@ l_0xc5fa72:
     "@I know that!..." next
     "@Don't ask me why, just do it!  That's an order!" linebreak
     "  ...Strong out...{wait}{window_closeall}{pause(60)}[1F F4 4B 00]{pause(30)}{unset(flag 6)}{music_resume}{pause(60)}[19 24 4B 00 01 01 00][1F E4 4B 00 00]{window_open(1)}"
-    title(1,"Capt. Strong")
+    title(1,"Captain Strong")
     "@Well kid, I'm not going to question you now," next
     "@but I do want to see you again..." next
     "@Good luck!{wait}{window_closeall}[1F F2 4B 00 6B 02][1F 61]{set(flag 105)}{unset(flag 450)}{unset(flag 35)}{unset(flag 37)}{unset(flag 742)}" eob
@@ -428,9 +429,10 @@ l_0xc60000:
     call(data_13.l_0xc5d3a1) eob
 
 l_0xc60006:
-    "[19 10 01]@" call(data_37.l_0xc7e6c5) ", we also have motel facilities." call(data_49.l_0xc91693) eob
+    "[19 10 01]@" call(data_37.l_0xc7e6c5) ", we also run an inn here." call(data_49.l_0xc91693) eob
 
 l_0xc6002c:
+    "@Thanks for all your help." next
     "@It's a small house, but please stay the night.[03]" call(data_48.l_0xc90f7d) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 2C][06 F5 02 {e(l_0xc6005f)}]" eob
 
 l_0xc6005f:

@@ -299,9 +299,9 @@ l_0xc74ce8:
     "@Yeah?{wait}{window_closeall}[1F F1 02 00 0C 00]" eob
 
 l_0xc74cf7:
-    "[06 40 00 {e(l_0xc74d41)}]@Uh huh... Uh huh..." next
-    "@You sound like a real whiner to me." next
-    "@Don't get lippy,{pause(10)} or I'll kick your butt!" end
+    "[06 40 00 {e(l_0xc74d41)}]@Uh (huh)... (Uh) huh..." next
+    "@You so(und) like a real whi(ner) to me." next
+    "@Don't get li(ppy),{pause(10)} or I'll kick your bu(tt)!" end
 
 l_0xc74d41:
     "@You sure are strong!{pause(20)}  You got me,{pause(15)} at least..." end

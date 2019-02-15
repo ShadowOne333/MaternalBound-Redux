@@ -12,6 +12,9 @@ ROM[0xC435BF] = ADC_i(0x84BE)
 /*Rock Candy can now randomly give you a Luck boost */
 ROM[0xC2B3AA] = LDA_i(0005)
 
+/* Battle menu move Mirror command to the left */
+ROM[0xC2381F] = LDX_i (0x000B)
+
 /*Change PSI Rockin to PK Rockin */
 ROM[0xC1C415] = byte [0] 0x26
 ROM[0xC1FE3D] = byte [0] 0x80
@@ -22,7 +25,7 @@ ROM[0xC4EA4C] = "[EA EA EA EA]"
 ROM[0xC4EA60] = ASMLoadAddress12(poo_master) // Poo's master
 
 poo_master:
-    "Yi-Si-Qi[00]"
+    "Yi-So-Chi[00]"
 
 /* Fix the monkey teleport event to point to the new Dusty Dunes teleport entry: */
 ROM[0xC37CD1] = "[07]"
@@ -31,8 +34,61 @@ ROM[0xC37CD1] = "[07]"
 ROM[0xC292A0] = LDA_al (0xD57A6A)
 
 /* Fix the Clumsy Robot unused Smoke event to point to the new Fourside teleport entry (08).
- This one doesn't leave you outside of the Monotoli building, but rather in the Fourside Park, as if you used Teleport. This effectively frees up one teleport location to use for another one. Besides, the Smoke event is still unused in the main game, so no loss there. */
+ This one doesn't leave you outside of the Monotoly building, but rather in the Fourside Park, as if you used Teleport. This effectively frees up one teleport location to use for another one. Besides, the Smoke event is still unused in the main game, so no loss there. */
 ROM[0XC292DE] = "[08]"
+
+
+/* Fixes support for Playable Character sprites of non-uniform palettes */
+ROM[0xC07ACC] = {
+	JML (palettefix)		// 7ACC: 4C A0 F9	#JMP $F9A0 
+	NOP
+}
+
+palettefix: {
+	STA_x	(0x2A42)	// 9D 42 2A	;STA $2A42,X	# Overwritten instruction
+	LDA_d	(0x02)		// LDA $02
+	PHA
+
+	LDY_i	(0x0003)	// LDY #$0003
+	LDA_dly	(0x0E)		// LDA [$0E],Y	# Get palette byte.
+	AND_i	(0x00FF)	// AND #$00FF
+	STA_d	(0x02)		// STA $02
+
+	LDY_i	(0x0002)	// LDY #$0002 
+	LDA_dly	(0x0E)		// LDA [$0E],Y	# Get sprite size byte. $0e/ $10 can now be used.
+	AND_i	(0x0004)	// AND #$0004
+	BNE	(0x02)		// BNE +2 # if nonzero, skip next instruction(s)
+	INC
+	INC			// INC # Our loop counter is now either 2 or 4
+	TAY
+
+	LDA_x	(0x112E)	// LDA $112E,X
+	SEC
+	SBC_i	(0x0003)	// SBC $#0003 # so after our first +5 we are looking at index 2 of the 5 bytes
+	STA_d	(0x0E)		// STA $0e
+	LDA_x	(0x116A)	// LDA $116A,X
+	STA_d	(0x10)		// STA $10
+
+	SEP	(0x30)		// SEP #$30	# BEGIN 8-BIT MODE
+
+	LDA_d	(0x0E)		// LDA $0e # _begin loop_
+	CLC
+	ADC_8	(0x05)		// ADC #$05 # To next entry in sprite component table (size: 5 bytes)
+	STA_d	(0x0E)		// STA $0E
+	LDA_dl	(0x0E)		// LDA [$0E]
+	AND_8	(0xF0)		// AND #$F0
+	ORA_d	(0x02)		// ORA $02
+	STA_dl	(0x0E)		// STA [$0E]
+	DEY			// DEY # decrement and check counter
+	BNE	(0xEE)		// BNE _begin loop_
+
+	REP	(0x30)		// REP #$30	# END 8-BIT MODE
+	PLA
+	STA_d	(0x02)		// STA $02
+
+	LDA_d	(0x02)		// A5 02	;LDA $02	# Overwritten instruction
+	JML	(0xC07AD1)	// JMP $C07ACF -> JML $C07AD1
+}
 
 
 /* Change Cast names to uncensored versions */

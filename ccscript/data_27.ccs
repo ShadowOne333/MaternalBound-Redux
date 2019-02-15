@@ -22,12 +22,12 @@ l_0xc6df43:
 
 l_0xc6df83:
     "@There was a Monopoly tournament last night." next
-    "@Man, I really had my butt kicked." next
-    "@I'll invite you next time." next
-    "@Hey, wait...  Do you even know what Monopoly is?" end
+    "@Man, I lost big-time." next
+    "@I'll invite to play sometime." next
+    "@You can even play it on the Super Nintendo, actually." end
 
 l_0xc6dfe7:
-    "[06 49 00 {e(l_0xc6e05a)}][06 8F 00 {e(l_0xc6e018)}]@I'm an elite businessman who works in Mr. Monotoli's office." end
+    "[06 49 00 {e(l_0xc6e05a)}][06 8F 00 {e(l_0xc6e018)}]@I'm an elite businessman who works in Mr. Monotoly's office." end
 
 l_0xc6e018:
     "@I hope my salary stays the same." next
@@ -40,7 +40,7 @@ l_0xc6e05a:
 
 l_0xc6e088:
     "[06 49 00 {e(l_0xc6e0b4)}]@Hello, baby face." next
-    "@What brings you to the Monotoli Building?" end
+    "@What brings you to the Monotoly Building?" end
 
 l_0xc6e0b4:
     "@Hello, baby face." next
@@ -80,7 +80,7 @@ l_0xc6e2ab:
     "@This... this is my poor old friend..." next
     "@Ah... what's your name..." next
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc6e33a)}]@Ah, Pig's Butt..." next
-    "@No, You're [1C 02 01]'s friend." next
+    "@No, you're [1C 02 01]'s friend." next
     "@Pig's Butt, you came here to beg me for some money, right?" next
     goto(l_0xc6e36d)
 
@@ -95,9 +95,9 @@ l_0xc6e36d:
     "@I'm Master Porky!" next
     "@Porky!" next
     "@Get it?" next
-    "@I'm now Geldegarde Monotoli's partner," next
+    "@I'm now Geldegarde Monotoly's partner," next
     "@and I give him political and economic advice." next
-    "@I heard there were some ratty-looking kids asking for Mr. Monotoli..." next
+    "@I heard there were some ratty-looking kids asking for Mr. Monotoly..." next
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6e426)}]@Was that you [1C 02 01]?" next
     goto(l_0xc6e426)
 
@@ -141,8 +141,8 @@ l_0xc6e5a1:
 l_0xc6e69c:
     "[06 0A 00 {e(l_0xc6e759)}][06 8F 00 {e(l_0xc6e79a)}]@Shhh! Quiet!" linebreak
     "[19 10 01]{rtoarg}  Aren't you [1C 02 00]?" next
-    "@Mr. Monotoli's maid, Electra, told me about you." next
-    "@I'll take you to Mr. Monotoli's office on the 48th floor." next
+    "@Mr. Monotoly's maid, Electra, told me about you." next
+    "@I'll take you to Mr. Monotoly's office on the 48th floor." next
     "@Only you may go.[03][19 10 01]{rtoarg}" goto(l_0xc6e71e)
 
 l_0xc6e71e:
@@ -208,25 +208,25 @@ l_0xc6ea0f:
     "@Thanks for dropping by, even though there's nothing to do, honey." end
 
 l_0xc6ea34:
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]"
     "@Look at my skinny arms,{pause(20)} thin body,{pause(20)} and gray hair..." next
     "@I've become so weak since I lost the Mani Mani statue." next
     "@I'm sorry I kidnapped [1C 02 02]." next
     "@I haven't done anything to her." next
     "@...[1C 02 02] is a nice girl.[03]{window_closeall}{pause(60)}[1F 16 68 03 03]{pause(10)}{window_open(1)}"
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "@[1C 02 02]." next
     "@Return to [1C 02 01]." next
     "@I'm sorry I've created so much trouble for you.[03]{window_closeall}{pause(60)}" call(data_23.l_0xc68253) "{set(flag 15)}{unset(flag 776)}[19 23 68 03 01 FF 00][1F 16 68 03 00]{music_resume}{pause(120)}{window_open(1)}" goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "@....." next
     "@I'll tell you everything." next
     "@The Mani Mani statue creates an illusion." next
     "@It attracts evil spirits and weakens your heart." next
-    "@The power scared me so much, I hid the statue in the warehouse at Boris' Bar." next
+    "@The power scared me so much, I hid the statue in the warehouse at Borges' Bar." next
     "@I often went there to pray." next
     "@....." next
     "@Cryptic words appeared to me while I was in the illusion." next
@@ -256,19 +256,19 @@ l_0xc6ed65:
 l_0xc6ed74:
     "@Summers is located across the ocean.{pause(20)} Take my helicopter." next
     "@I'll open the door to my heliport.[03]{window_closeall}{pause(1)}[1F F1 68 03 BD 02][1F 61][1F F1 6C 03 BE 02][1F 61][1F F1 6C 03 2C 00][1F E6 68 03][1F 07 03]{pause(180)}{music(85)}[1F F1 6D 03 BF 02][1F 61][1F F1 6D 03 08 00][1F 07 02]{pause(30)}{sound(28)}{pause(60)}{music_resume}[1F E9 68 03][1F 61][1F F1 68 03 08 00]{window_open(1)}"
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "@You must go on!" next
     "@[1C 02 01]!" next
     "@This is your destiny." next
     "{set(flag 664)}{set(flag 741)}" goto(l_0xc6ee2e)
 
 l_0xc6ee2e:
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "@[1C 01 1E], it's time we said goodbye." next
     "@Take care.{wait}{window_closeall}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 11)}{set(flag 754)}{set(flag 779)}{unset(flag 759)}" eob
 
 l_0xc6ee6f:
-    title(1, "Geldegarde Monotoli")
+    title(1, "Geldegarde Monotoly")
     "@So Porky took the helicopter?" next
     "@I wonder if he'll be okay..." end
 
@@ -284,7 +284,7 @@ l_0xc6eeb4:
     "@...I'm fine." next
     "@I believed you'd come and save me." next
     "{pause(60)}" linebreak
-    "@Mr. Monotoli isn't really a bad person." next
+    "@Mr. Monotoly isn't really a bad person." next
     "@Take some time to listen to him.{wait}{set(flag 10)}" eob
 
 l_0xc6ef24:
@@ -328,14 +328,14 @@ l_0xc6f112:
 
 l_0xc6f175:
     "[06 8F 00 {e(l_0xc6f1d6)}]"
-    title(1, "Boris")
+    title(1, "Borges")
     "@What?" next
-    "@Does Mr. Geldegarde Monotoli come here often?" next
+    "@Does Mr. Geldegarde Monotoly come here often?" next
     "@Hello!{pause(20)}  Time to get up!!" next
     "@It could never happen!...  Well, actually that's not true." end
 
 l_0xc6f1d6:
-    title(1, "Boris")
+    title(1, "Borges")
     "@Sorry about the other day." next
     "@This sidewalk bar isn't as profitable as it used to be." next
     "@This is just a hangout for the regulars." end
@@ -344,7 +344,7 @@ l_0xc6f225:
     "[06 8F 00 {e(l_0xc6f354)}]@You know you can't drink alcohol, you're just kids." next
     "@Quit hanging around here." next
     "@What?" next
-    "@Mr. Monotoli's here?" next
+    "@Mr. Monotoly's here?" next
     "@You got that wrong, kid!" end
 
 l_0xc6f27c:
@@ -356,11 +356,11 @@ l_0xc6f2e7:
     "@Kids shouldn't drink alcohol.  It'll stunt your brain, stubby!" next
     "@And quit hanging out around here." next
     "@What?" next
-    "@Mr. Monotoli's here?" next
+    "@Mr. Monotoly's here?" next
     "@You must be thinking of someone else!" end
 
 l_0xc6f354:
-    "@Good evening, hero!{pause(20)}  How about an espresso?" end
+    "@Good evening, hero!" end
 
 l_0xc6f374:
     "[06 49 00 {e(l_0xc6f584)}][06 8F 00 {e(l_0xc6f4b1)}]@I'm surprised you talked to an ordinary guy like me." next
@@ -397,7 +397,7 @@ l_0xc6f584:
     "@Now my self confidence is TOTALLY shot!  Back to therapy..." end
 
 l_0xc6f659:
-    "[06 8F 00 {e(l_0xc6f717)}]@I was drunk," next
+    "[06 8F 00 {e(l_0xc6f717)}]@I was so drunk," next
     "@and I had to get to the bathroom fast!" next
     "@When I got there," next
     "@I accidentally knocked on the wall instead of the restroom door..." next
@@ -410,17 +410,17 @@ l_0xc6f717:
     "@We rock!  Ha ha ha." end
 
 l_0xc6f757:
-    "[06 8F 00 {e(l_0xc6f819)}]@I used to be Monotoli's employer." next
+    "[06 8F 00 {e(l_0xc6f819)}]@I used to be Monotoly's employer." next
     "@Then I realized his schemes made my company go bankrupt." next
     "@My house and land were taken away..." next
     "@Now I'm homeless..." next
-    "@Monotoli didn't used to be so powerful." next
+    "@Monotoly didn't used to be so powerful." next
     "@I want to find out his secrets, so I'm spending my time here," next
     "@watching to see if he ever drops in." end
 
 l_0xc6f819:
     "[19 10 01]{rtoarg}@I wanna say thanks." next
-    "@Monotoli destroyed my life... but I've decided not to blame anyone." next
+    "@Monotoly destroyed my life... but I've decided not to blame anyone." next
     "@I'm having a wonderful time each and every day now." next
     "@Thank you, thank you!" end
 
@@ -505,7 +505,7 @@ l_0xc6fb6d:
 
 l_0xc6fbb5:
     newline
-    "@By using the Insignificant Present, you had a very fruitful experience" next
+    "@By using the Insignificant Item, you had a very fruitful experience" next
     "@that cannot be understood by someone who does not use something insignificant." end
 
 l_0xc6fc1a:

@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import ebs
+import ebpp_std
+
 command e(label) "{long label}"
 
 // Text Data
@@ -26,7 +29,7 @@ l_0xc588cc:
     eob
 
 l_0xc588cd:
-    "@To where?{wait}{window_open(8)}[19 02]Onett" eob
+    "{diam}To where?{wait}{window_open(8)}[19 02]Onett" eob
 
 l_0xc588e4:
     "[19 02]Twoson" eob
@@ -83,7 +86,7 @@ l_0xc5896b:
     "[19 02]Present Cave" eob
 
 l_0xc58976:
-    "[19 02]Past Cave" eob
+    "[19 02]Cave of Past" eob
 
 l_0xc58981:
     "[1C 0C 03][11][1B 05]{window_closetop}{window_switch(1)}" newline
@@ -150,7 +153,7 @@ l_0xc58a32:
     "[1F 21 17]" eob
 
 l_0xc58a36:
-    "@Who will be leveled up?" linebreak
+    "{diam}Who will be leveled up?" linebreak
     "[19 02]Whole team" eob
 
 l_0xc58a47:
@@ -160,7 +163,7 @@ l_0xc58a4d:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58a61)} {e(l_0xc58a93)}]" goto(data_06.debug_main)
 
 l_0xc58a61:
-    call(l_0xc58add) "[1B 02 {e(l_0xc58a8d)}]{swap}[1E 08 01 00][1E 08 02 00][1E 08 03 00][1E 08 04 00]@Team leveled up.{wait}" goto(l_0xc58a8d)
+    call(l_0xc58add) "[1B 02 {e(l_0xc58a8d)}]{swap}[1E 08 01 00][1E 08 02 00][1E 08 03 00][1E 08 04 00]{diam}Team leveled up.{wait}" goto(l_0xc58a8d)
 
 l_0xc58a8d:
     goto(data_06.debug_main)
@@ -170,7 +173,7 @@ l_0xc58a92:
 
 l_0xc58a93:
     newline
-    "@Which party member will be leveled up?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc58ad7)}]{swap}" call(l_0xc58add) "[1B 02 {e(l_0xc58ad7)}]{swap}[1E 08 00 00]" goto(l_0xc58a8d)
+    "{diam}Which party member will be leveled up?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc58ad7)}]{swap}" call(l_0xc58add) "[1B 02 {e(l_0xc58ad7)}]{swap}[1E 08 00 00]" goto(l_0xc58a8d)
 
 l_0xc58ad7:
     goto(data_06.debug_main)
@@ -180,12 +183,12 @@ l_0xc58adc:
 
 l_0xc58add:
     newline
-    "@Select your level." linebreak
+    "{diam}Select your level." linebreak
     "   [1F 52 02]{clearline}" eob
 
 l_0xc58afb:
     newline
-    "@Choose your operation.{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Max bank account" eob
+    "{diam}Choose your operation.{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Max bank account" eob
 
 l_0xc58b21:
     "[19 02]Max cash" eob
@@ -201,7 +204,7 @@ l_0xc58b47:
     "[09 04 {e(l_0xc58b6c)} {e(l_0xc58bac)} {e(l_0xc58bd2)} {e(l_0xc58c30)}]" goto(data_06.debug_main)
 
 l_0xc58b6c:
-    "@You now have $9999999" linebreak
+    "{diam}You now have $9999999" linebreak
     "  in the bank.{wait}{counter(1)}" goto(l_0xc58b88)
 
 l_0xc58b88:
@@ -214,15 +217,15 @@ l_0xc58bab:
     eob
 
 l_0xc58bac:
-    "@You now have $99999" linebreak
+    "{diam}You now have $99999" linebreak
     "  in your wallet.{wait}[1D 08 60 EA][1D 08 40 9C]{open_wallet}" goto(data_06.debug_main)
 
 l_0xc58bd1:
     eob
 
 l_0xc58bd2:
-    "@Input your amount:" linebreak
-    "[18 05 04 0A]&[18 05 04 02]$[1F 52 05]{clearline}[1B 02 {e(l_0xc58c2a)}]{store_registers}" call(l_0xc58c55) "{load_registers}{swap}[1D 08 00 00]{open_wallet}@You now have" linebreak
+    "{diam}Input your amount:" linebreak
+    "[18 05 04 0A]&[18 05 04 02]$[1F 52 05]{clearline}[1B 02 {e(l_0xc58c2a)}]{store_registers}" call(l_0xc58c55) "{load_registers}{swap}[1D 08 00 00]{open_wallet}{diam}You now have" linebreak
     "  [1C 0A 00 00 00 00] in your wallet.{wait}" goto(l_0xc58c2a)
 
 l_0xc58c2a:
@@ -232,7 +235,7 @@ l_0xc58c2f:
     eob
 
 l_0xc58c30:
-    call(l_0xc58c55) "@You are now broke!" linebreak
+    call(l_0xc58c55) "{diam}You are now broke!" linebreak
     "  Your wallet is empty!{wait}" goto(data_06.debug_main)
 
 l_0xc58c54:
@@ -254,7 +257,7 @@ l_0xc58c7d:
     "[1D 09 01 00][1B 02 {e(l_0xc58c7d)}]" eob
 
 l_0xc58c88:
-    "@Which script do you want to access?{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Escargo delivery" eob
+    "{diam}Which script do you want to access?{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Escargo delivery" eob
 
 l_0xc58cb6:
     "[19 02]Escargo pickup" eob
@@ -266,14 +269,14 @@ l_0xc58cd0:
     "[19 02]Cash dispenser" eob
 
 l_0xc58cd8:
-    "[19 02]E-Go Sutekki" eob
+    "[19 02]Angrez Van" eob
 
 l_0xc58ce3:
     "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}" newline
     "[1B 06][1F C0 05 {e(data_19.l_0xc642a3)} {e(data_19.l_0xc63eb0)} {e(data_20.l_0xc64bbf)} {e(data_21.l_0xc65243)} {e(data_21.l_0xc655b1)}]" goto(data_06.debug_main)
 
 l_0xc58d09:
-    "@Select your option.{wait}[18 02]{open_hp}{open_wallet}{window_open(37)}[19 02]BGM" eob
+    "{diam}Select your option.{wait}[18 02]{open_hp}{open_wallet}{window_open(37)}[19 02]BGM" eob
 
 l_0xc58d18:
     "[19 02]Sound Effects" eob
@@ -286,7 +289,7 @@ l_0xc58d26:
 
 l_0xc58d46:
     newline
-    "@Which song would you like to hear?" linebreak
+    "{diam}Which song would you like to hear?" linebreak
     goto(l_0xc58d58)
 
 l_0xc58d58:
@@ -294,7 +297,7 @@ l_0xc58d58:
 
 l_0xc58d70:
     newline
-    "@Which sound effect would you like to hear?" linebreak
+    "{diam}Which sound effect would you like to hear?" linebreak
     goto(l_0xc58d80)
 
 l_0xc58d80:
@@ -302,7 +305,7 @@ l_0xc58d80:
 
 l_0xc58d96:
     newline
-    "@Which SPC effect would you like to hear?{wait}" linebreak
+    "{diam}Which SPC effect would you like to hear?{wait}" linebreak
     goto(l_0xc58da9)
 
 l_0xc58da9:
@@ -310,21 +313,21 @@ l_0xc58da9:
 
 l_0xc58dbf:
     newline
-    "@Toggle enemy spawn." linebreak
+    "{diam}Toggle enemy spawn." linebreak
     "[19 02]Enable" eob
 
 l_0xc58dd3:
     "[19 02]Disable" eob
 
 l_0xc58dd8:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58df1)} {e(l_0xc58e02)}]@Enemies unchanged.{wait}" eob
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58df1)} {e(l_0xc58e02)}]{diam}Enemies unchanged.{wait}" eob
 
 l_0xc58df1:
-    "@Enemies enabled.{wait}{unset(flag 11)}" eob
+    "{diam}Enemies enabled.{wait}{unset(flag 11)}" eob
 
 l_0xc58e02:
-    "@Enemies disabled.{wait}{set(flag 11)}" eob
+    "{diam}Enemies disabled.{wait}{set(flag 11)}" eob
 
 l_0xc58e13:
-    "@Select hint.{wait}" linebreak
+    "{diam}Select hint.{wait}" linebreak
     goto(data_09.l_0xc58e31)

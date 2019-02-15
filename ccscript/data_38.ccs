@@ -11,23 +11,26 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc7f71e:
+    title(1, "Gerardo Montague")
     "@The Apple Kid was lost, and he was just wandering around, so I brought him here." next
     "@That was quite a while ago...{pause(20)}  Would you like some tea? " next
     "@Ah,{pause(15)} I see that you're busy." next
     "@It looks like things are pretty rough.{pause(20)}  You take care now...{wait}{set(flag 668)}" eob
 
 l_0xc7f7a5:
-    "[06 9C 02 {e(l_0xc7f71e)}]@I'm not sure what will happen, but I sense big-time trouble ahead for you." next
+    "[06 9C 02 {e(l_0xc7f71e)}]"
+    title(1, "Gerardo Montague")
+    "@I'm not sure what will happen, but I sense big-time trouble ahead for you." next
     "@I'm going to stay here for a while and help Mr. Saturn." next
     "@It's important for a man to enjoy doing his duty." end
 
 l_0xc7f813:
+    title(1, "Gerardo Montague")
     "@Incredible!{pause(20)}" linebreak
     "  Excellent!" next
     "@I'm not quite sure what for, but congratulations on a job well done!" next
-    "@If we ever run into each other again," next
-    "@I'd love to pound some drinks." next
-    "@Maybe we could do some karaoke, too!" end
+    "@If we ever meet again,{pause(20)} I'd love to have a drink with ya." next
+    "@And sing some karaoke, too!" end
 
 l_0xc7f8ab:
     "{font_saturn}@(Hot" linebreak
@@ -181,7 +184,7 @@ l_0xc7fe61:
     "  hot springs!{wait}{font_normal}" eob
 
 l_0xc7fe96:
-    "@Bell rings" linebreak
+    "@Bell cricket" linebreak
     "  ding, ding.  Boing!{wait}{font_normal}" eob
 
 l_0xc7feb1:
@@ -197,6 +200,7 @@ l_0xc80000:
     call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8045b)}][06 71 00 {e(l_0xc8037f)}][06 7E 02 {e(l_0xc80027)}][06 0C 00 {e(l_0xc803ac)}][06 0D 00 {e(l_0xc803ac)}]" goto(l_0xc80027)
 
 l_0xc80027:
+    title(1, "Charlie")
     "@This is the cycle shop{pause(5)} <Punk-Sure>!" next
     "@Bicycles are so much fun and are so convenient..." next
     "@It's a lot faster than walking." next
@@ -215,7 +219,8 @@ l_0xc800c1:
     "@Me neither." end
 
 l_0xc800f5:
-    "[06 51 00 {e(l_0xc802b9)}]@Unfortunately, we don't have any more bikes for sale.{pause(20)}  We only have rentals." next
+    "[06 51 00 {e(l_0xc802b9)}]@Unfortunately, we don't have any more bikes for sale.{pause(20)}" linebreak
+    "  We only have rentals." next
     "@Do you want to rent one?" linebreak
     "[19 02]Yes" eob
 
@@ -259,12 +264,14 @@ l_0xc8034d:
     "@Yeah,{pause(10)} yeah,{pause(5)} sure, sure.{pause(20)}  You've already borrowed a bicycle." end
 
 l_0xc8037f:
+    title(1, "Charlie")
     "@Hey!{pause(15)}  Stubby legs!" next
     "[06 7E 02 {e(l_0xc80027)}][06 0D 00 {e(l_0xc803ac)}][06 0C 00 {e(l_0xc803ac)}]" goto(l_0xc80027)
 
 l_0xc803ac:
     "{counter(1)}@Do you wanna ride a bike?" next
-    "@That's not gonna work... two people on one bike is strictly forbidden.[03][1D 05 FF B0][1B 03 {e(l_0xc803f8)}]" end
+    "@That's not gonna work..." linebreak
+    "  two people on one bike is strictly forbidden.[03][1D 05 FF B0][1B 03 {e(l_0xc803f8)}]" end
 
 l_0xc803f8:
     next
@@ -281,15 +288,16 @@ l_0xc8042b:
     "@Well,{pause(15)} don't forget to return it...{pause(20)}  You're gonna have to sooner or later." end
 
 l_0xc8045b:
+    title(1, "Charlie")
     "@You know that two people can't ride a bike," next
     "@but did you know that you can't ride a bike" next
     "@when you are carrying an unconscious friend's stuff?" next
     "@Carrying a lot of items and riding around is impossible for you." end
 
 l_0xc804d1:
-    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]@Whistle, whistle anywhere.{pause(10)}" linebreak
+    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]@[AC]Whistle, whistle anywhere.{pause(10)}" linebreak
     "  It makes me smile{pause(10)}" linebreak
-    "  all the while." next
+    "  all the while.[AC]" next
     "@I'm [1C 02 02]'s mo" goto(l_0xc80530)
 
 l_0xc80530:
@@ -297,7 +305,7 @@ l_0xc80530:
     goto(l_0xc8054d)
 
 l_0xc8054d:
-    "@You shouldn't worry about [1C 02 02].{pause(20)}  She has a guardian angel,{pause(15)} it seems." end
+    "@You shouldn't worry about [1C 02 02].{pause(20)}  God{pause(15)} is with her." end
 
 l_0xc80579:
     "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80673)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80718)}]@Yahoo!{pause(5)}  I knew it!{pause(20)}  You saved [1C 02 02]." next
@@ -428,8 +436,8 @@ l_0xc80cd4:
     "@I wonder where she went?{pause(20)}  I'm sorry,{pause(20)} could you come back later?{wait}{set(flag 322)}{set(flag 635)}" eob
 
 l_0xc80dab:
-    "@Please leave." next
-    "@My daughter doesn't want to talk to media monkeys like you." end
+    "@Then leave." next
+    "@My daughter isn't a circus attraction!" end
 
 l_0xc80dd8:
     "@Now where did she go?" next
@@ -438,7 +446,8 @@ l_0xc80dd8:
 l_0xc80e03:
     "{counter(1)}[19 11 02]{rtoarg}@[1C 03 00]{pause(5)}-[1C 03 00]{pause(5)}-[1C 02 02]'s not home yet." next
     "@Everdred in Burglin Park might know something." next
-    "@Oh, boy!{pause(20)}" linebreak "  Now I'm really worried.{wait}{set(flag 321)}" eob
+    "@Oh, boy!{pause(20)}" linebreak 
+    "  Now I'm really worried.{wait}{set(flag 321)}" eob
 
 l_0xc80e61:
     "[06 08 03 {e(l_0xc80f1c)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f94)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f1c)}]@You're both fine... I'm so relieved!" next

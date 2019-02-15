@@ -288,6 +288,8 @@ l_0xc692f7:
     "@This is Escargo Express." next
     "@I had a phone call from a friend of yours recently." next
     "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil Eraser machine." next
+    "@I figured it's just some kind of prank,{pause(20)} but if it's legit," next
+    "@I can deliver it to you anytime." next
     "@Do you know anything about this?" next
     "{set(flag 692)}" goto(l_0xc693be)
 
@@ -387,7 +389,7 @@ l_0xc69928:
     "[06 49 00 {e(l_0xc69ac6)}]@Woof! Woof!" next
     "@(I'm Ruffini the dog." next
     title(1, "Ruffini")
-    "@I'm being possessed by the spirit of the game designer... (RUFF!)" next
+    "@I'm being possessed by the spirit of the game designer...{pause(20)} Ruff!" next
     "@Do you see the window showing HP and PP at the bottom of the screen?" next
     "@When you go to a store that has equippable items," next
     "@this window will either flash, look normal or become black." next
@@ -396,7 +398,7 @@ l_0xc69928:
     "@If the item's power is equal to, or less than your current equipped item," next
     "@the window looks normal." next
     "@If you can't equip an item, the window is black." next
-    "@*Ruff*  I thought you'd like to know." next
+    "@Ruff!  I thought you'd like to know." next
     "@Now it's time to become a regular dog again...)" end
 
 l_0xc69ac6:
@@ -405,7 +407,7 @@ l_0xc69ac6:
     "@I'm Ruffini the dog." next
     "@Here comes the spirit of the game designer again..." next
     "@Ruff!" next
-    "@(You're finally almost to the end of the game." next
+    "@(It looks like the game's finally almost over." next
     "@If you want to tell me your comments on this game," next
     "@you may write to me using Nintendo's address on the box." next
     "@Send your comments attention MOTHER 2, Ruffini the dog." next
@@ -523,7 +525,7 @@ l_0xc6a458:
     "@you will get more power than if you ate the food item plain." end
 
 l_0xc6a4f2:
-    "@I live in the mice's home and mooch off of them." next
+    "@I'm taking the liberty of living in the mice's home and mooching off of them." next
     "@The mice are known as <Exit mice.>" next
     "@They are very kind, and boy are they fast!" next
     "@I really love these guys!" end
@@ -565,11 +567,11 @@ l_0xc6a7a5:
     "@60 dollars per night for a single room." end
 
 l_0xc6a7d2:
-    "@<L'hotel du Summer>" next
+    "@<Hotel Du Summers>" next
     "@150 dollars per night for a single room." end
 
 l_0xc6a800:
-    "[06 49 00 {e(l_0xc6a832)}]@<Monotoli Grand Hotel>" next
+    "[06 49 00 {e(l_0xc6a832)}]@<Monotoly Grand Hotel>" next
     "@75 dollars per night for a single room." end
 
 l_0xc6a832:

@@ -97,7 +97,7 @@ l_0xc66f90:
 
 l_0xc66fe2:
     "@Onett police are infamous for closing roads if something is going on." next
-    "@We are going for the world record..." end
+    "@We are going for the Guinness record..." end
 
 l_0xc67026:
     "@Did you hear the big bang?{pause(20)}" linebreak
@@ -186,7 +186,7 @@ l_0xc674aa:
 
 l_0xc67501:
     "{music(124)}[1F 15 2B 00 6E 02 01][1F 61]{pause(30)}{window_open(1)}{music(155)}"
-    title(1, "Starman Jr.")
+    title(1, "Starman Junior")
     "@IT'S BEEN A LONG TIME,{pause(15)}" linebreak
     "  BUZZ BUZZ. " next
     "@YOU'VE BEEN SUCCESSFUL AT FOILING MASTER GIYGAS' PLANS." next
@@ -196,6 +196,7 @@ l_0xc67501:
     "{window_closeall}" call(data_23.l_0xc685b4) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F2 2B 00 7B 02]{pause(60)}[1F EA 5B 01]{window_open(1)}"
     title(1, "Buzz Buzz")
     "@Whew!...{pause(20)}  I was taking a big chance there..." next
+    "@That Starman Junior was a hired assassin sent by Giygas." next
     "@He came from 10 years in the future to kill me,{pause(15)} so we can't relax yet!" next
     "@From now on,{pause(15)} you'll be fighting enemies sent by Giygas," next
     "@as well as humans who have evil thoughts." next

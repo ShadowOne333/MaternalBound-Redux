@@ -126,7 +126,7 @@ l_0xc7a04a:
     "{window_closeall}[1F EA B6 00][1F 61][1F E7 B6 00]{window_open(1)}"
     title(1,"Tony")
     "@You know the dorm rules, right?" next
-    "@If you get caught,{pause(15)} you'll get spanked..." next
+    "@If you get caught,{pause(15)} you'll get a paddling..." next
     "@W.{pause(5)}.{pause(5)}.{pause(5)} what's wrong, [1C 02 03]." next
     "[19 22 03 03 B6 00][1F 13 03 00]@{pause(20)}...All right." next
     "@There must be some reason that I don't understand.{pause(20)}  I won't stop you." next
@@ -246,8 +246,8 @@ l_0xc7a7dd:
     "@It makes many different flavors of tofu." next
     "@The only problem is,{pause(15)} right now," next
     "@it can only make strawberry tofu..." next
-    "@So, I'm having the machine delivered to you via Escargo Express." next
-    "@It's coming <Neglected Class.>" next
+    "@I wasn't too happy with my last Escargo Express experience..." next
+    "@So,{pause(15)} I'm having the machine delivered to you via <Careless Express>." next
     "@Hopefully, you'll get it soon.{pause(20)}  Yeah,{pause(15)} everything is..." next
     "@(Kaboooom!)" next
     "@Uh, I'vegotsomeproblems" linebreak
@@ -259,8 +259,8 @@ l_0xc7a959:
     "@*Crunch*" next
     "@Ooops!" next
     "@...Greetings!" linebreak
-    "  (It's Escargo Express's neglected class.)" next
-    title(1,"Escargo Express")
+    "  (It's Careless Express.)" next
+    title(1,"Careless Express")
     "@Whew!{pause(15)}  I just got here from the Dusty Dune desert." next
     "@There was this sunbathing guy," next
     "@and he told me about a cave with lots of monkeys... or was it orangutans?" next
@@ -417,7 +417,7 @@ l_0xc7b576:
     title(1,"Electra")
     "@Hello!" next
     "@I heard you talking about strawberry tofu." next
-    "@I'm a maid who serves Mr. Monotoli," next
+    "@I'm a maid who serves Mr. Monotoly," next
     "@and I'm looking for strawberry tofu to give to our special guest." next
     "@If you know anything about it,{pause(15)} please tell me!" next
     "@I've been searching and searching..." next
@@ -494,7 +494,7 @@ l_0xc7bd89:
     title(1,"Porky")
     "@[1C 02 01], you pin-headed idiot,{pause(15)} you're just a half-step too slow!" next
     "@I'm getting outta here!" next
-    "@Since Monotoli has become a plain,{pause(5)} old man again,{pause(15)} I have no more use for him." next
+    "@Since Monotoly has become a plain,{pause(5)} old man again,{pause(15)} I have no more use for him." next
     "@This helicopter will really come in handy." next
     "@Spankety-spankety! Bleh! Blehhh!{wait}{window_closeall}{pause(20)}[1F 1F 52 00 06][1F EA 6A 00][1F E9 DD 03][1F E9 DE 03][1F E9 DF 03][1F 07 03][1F 61][1F 1F 6A 00 06][1F 1E DD 03 06][1F 1E DE 03 06][1F 1E DF 03 06]{pause(12)}{set(flag 672)}{unset(flag 11)}" eob
 

@@ -167,7 +167,7 @@ l_0xc891b7:
     "@come and get it at the treasure hunter's excavation office.[03]{window_closeall}{set(flag 757)}" goto(l_0xc89160)
 
 l_0xc89238:
-    "[1F 41 06][1F E5 FF]{window_closeall}[1F 07 03][1F 15 6A 00 64 01 01][1F 61]{window_open(1)}@Welcome to the final Runaway Brothers performance at the Topolla Theater![03]{window_closeall}[1F 15 3C 01 91 01 01][1F 15 11 01 92 01 01][1F 15 11 01 93 01 01][1F 15 5A 01 94 01 01][1F 15 BA 00 95 01 01][1F 15 B9 00 96 01 01][1F 15 BB 00 97 01 01][1F 15 60 01 98 01 01]       [1F 15 6A 00 63 01 01] {pause(1)}[1F EF 6A 00]" eob
+    "[1F 41 06][1F E5 FF]{window_closeall}[1F 07 03][1F 15 6A 00 64 01 01][1F 61]{window_open(1)}@Welcome to the final Runaway Brothers performance at the Topollo Theater![03]{window_closeall}[1F 15 3C 01 91 01 01][1F 15 11 01 92 01 01][1F 15 11 01 93 01 01][1F 15 5A 01 94 01 01][1F 15 BA 00 95 01 01][1F 15 B9 00 96 01 01][1F 15 BB 00 97 01 01][1F 15 60 01 98 01 01]       [1F 15 6A 00 63 01 01] {pause(1)}[1F EF 6A 00]" eob
 
 l_0xc892c3:
     "[1F E8 FF]{pause(60)}{window_open(1)}@It's going to be a great show!{pause(20)}  We're so good it makes me..." next
@@ -209,12 +209,12 @@ l_0xc8972a:
     "[06 8B 00 {e(l_0xc897a4)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc897f3)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc89758)}]{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc897f3)}]" goto(l_0xc89758)
 
 l_0xc89758:
-    "@(Somehow, I feel like the lights will get turned off in the department store." next
-    "@I guess it's just a mouse's sixth sense...)" end
+    "@(I somehow get the feeling there'll be a power outage at this department store." next
+    "@Call it a mouse's sixth sense...)" end
 
 l_0xc897a4:
-    "@(Somehow, I felt like the lights would get turned off in the department store." next
-    "@I guess it's just a mouse's memory...)" end
+    "@(I somehow get the feeling there was a power outage at this department store." next
+    "@Call it a mouse's memory...)" end
 
 l_0xc897f3:
     "@(Hey you!" next
@@ -249,7 +249,7 @@ l_0xc89922:
 
 l_0xc8995a:
     "[1F 41 05][1F E6 68 03]{window_open(1)}"
-    title(1,"Geldegarde Monotoli")
+    title(1,"Geldegarde Monotoly")
     "@Stop!{pause(20)}  That's enough!{pause(20)}  Please stop!" next
     "@I give up!{pause(15)}  I really do![03]" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_closeall}{music_resume}[1F E9 68 03]{pause(30)}" eob
 
@@ -348,15 +348,14 @@ l_0xc89f2d:
     "[06 69 02 {e(l_0xc8a023)}]@You know, I really want to eat some Magic cake." next
     "@It's a mysterious work of art...{pause(15)}  I can't get that cake off my mind." next
     "@There's only one woman who can make Magic cake..." next
-    "@She's hanging out in this club." next
+    "@She constantly visits this club now,{pause(20)} so she never makes any anymore." next
     "@Yeah, she's over there at the entrance..." next
-    "@Anyway, the absolute irony and study of self-identification is..." next
-    "@Blah, blah, blah..." next
-    "@I don't know what to do!{wait}[06 10 00 {e(data_55.l_0xc9992f)}]{set(flag 61)}" eob
+    "@Oh,{pause(20)} the absolute conflict of self-identity this plagues me with." next
+    "@Grumble, grumble..." next
+    "@What a pickle this puts me in, you know?{wait}[06 10 00 {e(data_55.l_0xc9992f)}]{set(flag 61)}" eob
 
 l_0xc8a023:
-    "@The woman who sells magic" next
-    "@cake seems to have quitted the club." end
+    "@The woman who sells magic cake seems to have quitted the club." end
 
 l_0xc8a056:
     "@You don't understand what the hey everyone is talking about, do you?" next
@@ -433,7 +432,7 @@ l_0xc8a43d:
     "@I know from experience." end
 
 l_0xc8a49e:
-    "@Excuse me." end
+    "@Excusez-moi." end
 
 l_0xc8a4a9:
     "[06 57 01 {e(l_0xc8a4f0)}]@I heard the security guard in the Scarabia Cultural Museum isn't very nice." next

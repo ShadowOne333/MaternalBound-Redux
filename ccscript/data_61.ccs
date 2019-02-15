@@ -93,9 +93,13 @@ l_0xef57eb:
     "@Take it from me,{pause(30)} if you dare...[03]" call(data_23.l_0xc6843a) "[1B 03 {e(data_23.l_0xc683de)}][1F 1E FC 04 08]{pause(120)}{set(flag 197)}" eob
 
 l_0xef5864:
-    "{font_saturn}@Kidnapped.{pause(20)}" linebreak "  I was." linebreak "  Boing!" next
-    "@Kidnapper.{pause(20)}  Bad guy." next
-    "@Bad guy gone.  Zoom!" next
+    "{font_saturn}@Kidnapped.{pause(20)}" linebreak
+    "  I was." linebreak
+    "  Boing!" next
+    "@Kidnapper.{pause(20)}" linebreak
+    "  Bad guy." next
+    "@Bad guy gone." linebreak
+    "  Zoom!" next
     "@Where?" linebreak
     "  To the past." next
     "@Ding, ding!{wait}{font_normal}" eob
@@ -109,7 +113,9 @@ l_0xef5917:
     "{sound(99)}[1F 15 A9 00 6C 02 01][1F 61][1F 1F A9 00 06][1F 15 62 00 08 00 01][1F E4 62 00 07][1F E4 62 00 01][1F E4 62 00 03][1F E4 62 00 05][1F E4 62 00 07]{pause(1)}[1F E4 62 00 01]{pause(2)}[1F E4 62 00 03]{pause(3)}[1F E4 62 00 05]{pause(4)}[1F E4 62 00 07]{pause(5)}[1F E4 62 00 01]{pause(6)}[1F E4 62 00 03]{pause(7)}[1F E4 62 00 05]{pause(8)}[1F E4 62 00 07]{window_open(1)}"
     title(1,"Star Master")
     "@Greetings!{pause(20)}" linebreak
-    "  So, you are finally here![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}@Excellent!{pause(20)}" linebreak
+    "  So, you are finally here![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}"
+    title(1,"Star Master")
+    "@Excellent!{pause(20)}" linebreak
     "  You are truly excellent!" next
     "@There is only a little time left!{pause(15)}  I'll give you the last power." next
     "@I must go now...[03]{window_closeall}[1F 71 04 03][1F 1F 62 00 06]{sound(99)}[1F 15 A9 00 6D 02 01][1F 61][1F 71 04 03]{window_open(1)}@([1C 01 4A] became conscious" linebreak "  of PK Starstorm _!){sound(103)}{wait}{window_closeall}" eob
@@ -121,7 +127,7 @@ l_0xef5a3e:
 l_0xef5a81:
     "@The rock suddenly stopped talking." next
     "@In other words..." next
-    "@it's not saying anything." end
+    "@it's as silent as a gravestone." end
 
 l_0xef5ab5:
     "@...You have a nice item." next
@@ -217,14 +223,16 @@ l_0xef610c:
     eob
 
 l_0xef610d:
-    "@(Don't feed the dinosaurs in the cage!" linebreak
-    "{pause(20)}  The Boss)" end
+    "@(Don't feed the dinosaurs in the cage!{pause(20)}" linebreak
+    "                            -The Boss)" end
 
 l_0xef6132:
-    "@(Don't talk to the rock if you have nothing to say.{pause(20)}  The Boss)" end
+    "@(Don't talk to the rock if you have nothing to say.{pause(20)}" linebreak
+    "                            -The Boss)" end
 
 l_0xef6157:
-    "@(In case of danger, evacuate here!{pause(20)}  The Boss)" end
+    "@(In case of danger, evacuate here!{pause(20)}" linebreak
+    "                            -The Boss)" end
 
 l_0xef617b:
     "[06 6E 01 {e(data_35.l_0xc7c588)}]{window_open(1)}@Did you bring some <Fly Honey>?" next

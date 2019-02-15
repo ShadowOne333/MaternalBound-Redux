@@ -58,8 +58,8 @@ l_0xc770b0:
     "@Of course, we're your courage." next
     "@But we warned you not to treat us like trash!" next
     "@Didn't you get it?!" next
-    "@This isn't courage, it's desperation." next
-    "@If you don't understand <courage,>{pause(15)} look it up in the dictionary." next
+    "@This isn't courage at all, it's temerity." next
+    "@If you don't understand <temerity,>{pause(15)} look it up in the dictionary." next
     "@Okay?" next
     title(1,"Final Flying Man")
     "@My name's The Final Flying Man.[03]" eob
@@ -173,7 +173,7 @@ l_0xc77529:
     "@Long time no see, [1C 02 01]!" end
 
 l_0xc77544:
-    "@La lalala! [ac]" next
+    "@[AC]La lalala![AC]" next
     title(1,"Nico")
     "@My name's Nico...{pause(20)} Let's run and sing and dance!" end
 
@@ -217,10 +217,9 @@ l_0xc7768f:
     "@(Onett was a quiet, small town, wasn't it?){wait}[1F E1 05 00 3C]" eob
 
 l_0xc776c8:
-    "@Let's look at Mr. Sun.{pause(25)}" linebreak
-    "@Let's face at Mr. Sun.{pause(25)}" linebreak
-    "  and put smiles on our" linebreak
-    "  faces! [ac]{wait}[1F E1 05 00 3C]" eob
+    "@[AC]Let's all look at Mr. Sun.{pause(25)}" linebreak
+    "@Let's all face Mr. Sun{pause(25)}" linebreak
+    "  and put smiles on our faces.[AC]{wait}[1F E1 05 00 3C]" eob
 
 l_0xc776ee:
     "@[1C 02 01]'s courage is resting here." next
