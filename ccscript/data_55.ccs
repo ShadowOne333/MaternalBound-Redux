@@ -12,7 +12,7 @@ command e(label) "{long label}"
 // Text Data
 l_0xc98db4:
     "[03][06 79 00 {e(l_0xc98dd9)}]" newline
-    "@Have you already paid?{pause(20)}  Ok, ok.{wait}{unset(flag 120)}" eob
+    "@Have you already paid?{pause(20)}  Okay, okay.{wait}{unset(flag 120)}" eob
 
 l_0xc98dd9:
     newline
@@ -62,14 +62,14 @@ l_0xc98fd3:
     "@You just want something!" end
 
 l_0xc99002:
-    "@I too was wrong in many ways." end
+    "@I, too, was wrong in many ways." end
 
 l_0xc99018:
     "[06 49 00 {e(l_0xc99088)}][06 44 00 {e(l_0xc99061)}]@The great Mr. Carpainter can communicate with all sorts of gods." next
     "@He then passes down their divine messages." end
 
 l_0xc99061:
-    "@We might have been listening to evil messages rather than good." end
+    "@We might have been listening to messages from the Devil rather than God..." end
 
 l_0xc99088:
     "@Don't you think the mental health of everyone in the village is improved?" end

@@ -351,10 +351,13 @@ l_0xef9756:
     " [19 02]No" eob
 
 l_0xef975c:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xef976b)} {e(l_0xef976b)}]" goto(l_0xef976b)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xef976b)} {e(noreply)}]" goto(noreply)
 
 l_0xef976b:
     "@I'm sorry for all the trouble I've caused you." end
+
+noreply:
+    "@I'm glad you're okay." end
 
 l_0xef9785:
     "@(Cross bridge to Happy Happy Village)" end

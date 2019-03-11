@@ -54,6 +54,7 @@ l_0xc99de1:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc99e48)}]" goto(l_0xc99e1b)
 
 l_0xc99e1b:
+    "@I'm a messenger for Everdred, one of his lackeys." next
     "@Everdred is looking for you." next
     "@He's got something for you.{wait}{window_closeall}[1F F1 43 01 82 02]{pause(60)}{unset(flag 611)}[1F 41 06]" eob
 
@@ -237,7 +238,7 @@ l_0xc9a4e6:
     "@...Sheesh, look at me--I'm talking to myself!{wait}{window_closetop}" eob
 
 l_0xc9a56a:
-    "{sound(111)}{pause(40)}{window_open(1)}@If you're looking for Venus's house, it's next door.{wait}{window_closetop}" eob
+    "{sound(111)}{pause(40)}{window_open(1)}@If you're looking for Venus' house, it's next door.{wait}{window_closetop}" eob
 
 l_0xc9a593:
     "{sound(111)}{pause(40)}{window_open(1)}@Yes, I'm coming!{pause(20)}" linebreak
@@ -301,7 +302,7 @@ l_0xc9a8cf:
     "@It's sunny out today.{wait}{window_closeall}" eob
 
 l_0xc9a8e0:
-    "[06 47 00 {e(l_0xc9a9dc)}]{sound(111)}{pause(40)}{window_open(1)}@I'm sorry, but I think you ought to leave now..." next
+    "[06 47 00 {e(l_0xc9a9dc)}]{sound(111)}{pause(40)}{window_open(1)}@I'm sorry, but I think you oughta leave now..." next
     "@I have no guarantee that you're not a zombie out looking for a lunch.{wait}{window_closetop}" eob
 
 l_0xc9a930:
@@ -346,7 +347,8 @@ l_0xc9ab01:
 l_0xc9ab53:
     "@I heard that Kraken fin makes a good soup." next
     "@I can hardly believe that people actually eat it!" next
-    "@And yet, I've heard that it's a gourmet dish.{pause(20)}  I just don't get it!{wait}{window_closeall}" eob
+    "@And yet, I've heard that it's a gourmet dish.{pause(20)}" linebreak
+    "  I just don't get it!{wait}{window_closeall}" eob
 
 l_0xc9abbd:
     "{sound(111)}{pause(40)}{window_open(1)}@Meow.{wait}{window_closetop}" eob

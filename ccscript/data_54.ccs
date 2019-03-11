@@ -361,13 +361,13 @@ l_0xc98631:
     "@Lagoon blue, blue." end
 
 l_0xc9864b:
-    "[06 08 00 {e(l_0xc986b0)}]@Blew, blew." next
-    "@I'm trying to learn how to whistle." next
-    "@I heard that whistling makes one smile.  I'll practice over there.[03][1F F1 80 01 15 01][1F 61][1F F1 80 01 2A 00]{set(flag 8)}" eob
+    "[06 08 00 {e(l_0xc986b0)}]@Burrr, burrr." next
+    "@Don't glare at me with such a stern look!" next
+    "@Okay, fine.{pause(20)} I'll move out of your way.[03][1F F1 80 01 15 01][1F 61][1F F1 80 01 2A 00]{set(flag 8)}" eob
 
 l_0xc986b0:
-    "@Blew, blew." next
-    "@Whistling is hard..." end
+    "@Burrr, burrr." next
+    "@Is scaring me that much fun for you?" end
 
 l_0xc986cc:
     "[06 5F 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next

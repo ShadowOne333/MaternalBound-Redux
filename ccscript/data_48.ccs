@@ -298,7 +298,7 @@ l_0xc90fd4:
     "  Did you sleep well?" end
 
 l_0xc90fec:
-    "{ctoarg}{store_registers}@I can examine each one of you for $[1C 0A 00 00 00 00]." linebreak
+    "{ctoarg}{store_registers}@I can examine each person for $[1C 0A 00 00 00 00]." linebreak
     "[18 02]{open_hp}{open_wallet}[19 02]Yes, please" eob
 
 l_0xc91022:

@@ -53,7 +53,7 @@ l_0xc938a6:
     "@There is a hospital and the wonderful Chaos Theater." next
     "@There is the Polestar preschool,{pause(15)} and a nice bus station." next
     "@If you're curious,{pause(15)} you might want to check out Burglin Park.{pause(20)}  It's exciting." next
-    "@East of the town,{pause(15)} you find the Grateful Dead Valley." next
+    "@East of the town,{pause(15)} you'll find the Grateful Dead Valley." next
     "@On the other side of the valley is Happy Happy Village." next
     "@There's also a pizza parlor." next
     "@Do you want to know anything else?" next
@@ -220,7 +220,7 @@ l_0xc94190:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc941cd)} {e(l_0xc9419f)}]" goto(l_0xc9419f)
 
 l_0xc9419f:
-    "@Ok,{pause(15)} but your teen years will be ruined just because you didn't buy an Egg." end
+    "@Ok,{pause(15)} but your teen years will be ruined just because you didn't buy an egg." end
 
 l_0xc941cd:
     "[1D 0A 5C]{swap}@You're concerned about your health, even though you're young." next
@@ -330,7 +330,7 @@ l_0xc946e6:
     "@Queen,{pause(15)} quiet,{pause(15)} quick..." end
 
 l_0xc94730:
-    "@If I had some connections,{pause(15)} I could waltz right in,{pause(15)} but I'm just a regular joe." end
+    "@If I had some connections,{pause(15)} I could waltz right in,{pause(15)} but I'm just an average Joe." end
 
 l_0xc94769:
     "@(Runaway Brothers tour bus.)" end

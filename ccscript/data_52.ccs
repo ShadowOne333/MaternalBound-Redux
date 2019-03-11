@@ -315,7 +315,7 @@ l_0xc95c0e:
     "@Anyway, I lost and nothing will change that." next
     "@You know,{pause(15)} you're pretty strong." next
     "@Yeah, I know that you want to find out about a girl named [1C 02 02]." next
-    "@She went off to a secret hideout I rent in the Grateful Dead Valley." next
+    "@She went off to a secret cabin I rent at Grateful Dead Valley." next
     "@A chubby boy and a weird guy in a blue outfit have kidnapped her, though." next
     "@They said that they were going to make [1C 02 02] some sort of human sacrifice." next
     "@They were definitely hard-core strange." next
@@ -348,14 +348,17 @@ l_0xc95ea5:
 l_0xc95f0a:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc960ab)}]"
     title(1,"Everdred")
-    "@I was going to ask you to be my partner," next
-    "@but I know you'll refuse.{pause(20)}  It's written all over your face." next
-    "@If you accepted,{pause(15)} I was going to give you some money." next
-    "@Actually, I can't keep the money now anyway.{pause(20)}  Let me give this to you." next
-    "@It's 10,000 dollars." next
-    "@Use the money any way you like.{pause(20)}  You cannot refuse my generosity.{pause(20)}  Just accept it." next
-    "@Now I plan on looking for the evil Mani Mani Statue" next
-    "@that Lier X. Agerate unearthed in Onett." next
+    "@I was going to ask you to join me,{pause(15)} but I know you'll refuse." next
+    "@It's written all over your face." next
+    "@I was gonna give you this money if you became my lackey," next
+    "@but I can't exactly go back on that now, either." next
+    "@Actually, I can't keep the money now anyway.{pause(20)}  Let me give you this suitcase." next
+    "@There's 10,000 dollars in bills inside." next
+    "@Use the money any way you like, whether it's for good stuff or bad stuff." next
+    "@There's no use in trying to give it back to me!{pause(20)}" linebreak
+    "  Just give it up and take it!" next
+    "@Now I plan on looking for the evil Mani Mani Statue or whatever" next
+    "@that some petty bad guy named Lier X. Agerate or something dug up in Onett." next
     "@I'll see you at another time, in another space.[03][1D 03 FF][1B 02 {e(l_0xc9605d)}][1D 0E 00 B4]" call(data_36.l_0xc7dcb6) "{set(flag 85)}" end
 
 l_0xc9605d:
@@ -373,7 +376,8 @@ l_0xc960d7:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc960ab)}]"
     title(1,"Everdred")
     "@Please use the 10,000 dollars any way you wish." next
-    "@You cannot refuse my generosity,{pause(15)} just accept it." end
+    "@There's no use in trying to give it back to me!{pause(20)}" linebreak
+    "  Just give it up and take it!" end
 
 l_0xc96124:
     "[06 49 00 {e(l_0xc96267)}][06 CA 00 {e(l_0xc961d1)}]@Welcome to Mach Pizza!" next

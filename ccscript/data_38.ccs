@@ -295,9 +295,9 @@ l_0xc8045b:
     "@Carrying a lot of items and riding around is impossible for you." end
 
 l_0xc804d1:
-    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]@[AC]Whistle, whistle anywhere.{pause(10)}" linebreak
+    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]@[AC] Whistle, whistle anywhere.{pause(10)}" linebreak
     "  It makes me smile{pause(10)}" linebreak
-    "  all the while.[AC]" next
+    "  all the while. [AC]" next
     "@I'm [1C 02 02]'s mo" goto(l_0xc80530)
 
 l_0xc80530:

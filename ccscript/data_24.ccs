@@ -222,7 +222,7 @@ l_0xc690c5:
     "@Stop putting your grimy fingerprints all over my car, you little punk!" end
 
 l_0xc690ff:
-    "@Welcome to the very end of the world's longest traffic jam!" end
+    "@Welcome to the rear-end of the world's longest traffic jam!" end
 
 l_0xc69121:
     "[06 E2 02 {e(l_0xc692ea)}][06 E1 02 {e(l_0xc691e9)}][06 09 00 {e(l_0xc691c2)}][06 08 00 {e(l_0xc691b5)}][06 07 00 {e(l_0xc691a7)}][06 06 00 {e(l_0xc6919d)}][06 05 00 {e(l_0xc69191)}][06 04 00 {e(l_0xc69185)}][06 03 00 {e(l_0xc6917b)}][06 02 00 {e(l_0xc6916f)}]@What?{wait}{set(flag 2)}" eob
@@ -280,7 +280,7 @@ l_0xc692a0:
     "[1D 08 32 00]{sound(116)}{open_wallet}{pause(60)}[19 10 01]{rtoarg}@([1C 02 01] got 50 dollars.){wait}{set(flag 738)}" eob
 
 l_0xc692ea:
-    "@Good luck, ok?" end
+    "@Good luck, okay?" end
 
 l_0xc692f7:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
@@ -342,7 +342,7 @@ l_0xc695ba:
     "[19 10 01]{rtoarg}{result_is(1)}[1B 02 {e(data_55.l_0xc9992f)}][1D 0D 01 06 02][1B 02 {e(data_55.l_0xc9992f)}]" call(data_35.l_0xc7ce73) eob
 
 l_0xc695d8:
-    "@Yum yum... mmm... I'm eating a skip sandwich." next
+    "@Yum yum... mmm... I'm eating a Skip sandwich." next
     "@It makes you want to start skipping!" next
     "@I saw it on a TV ad, and I just had to try one." next
     "@I'll bet I can really move after eating this..." end

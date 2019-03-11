@@ -291,7 +291,7 @@ l_0xc9eb5d:
 
 l_0xc9eb76:
     "[19 23 D1 04 02 D2 04][1F 16 D1 04 00]{pause(10)}@Doc,{pause(15)} please treat the next patient!" next
-    "@...Treat " call(l_0xc9ec62) " right, ok!?{wait}{window_closeall}[1F F1 D2 04 A9 02][1F 61][1F E6 D2 04][19 10 01]{rtoarg}{window_open(1)}@(The great doctor whispered in each ear,{pause(15)} first right then left,{pause(15)} <be healthy.>){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 D2 04][1F 61][1F F1 D2 04 5D 02]{pause(1)}[1F 16 D2 04 03]{pause(30)}[19 23 D1 04 01 FF 00][1F 16 D1 04 00]{pause(10)}{window_open(1)}@I'm happy to do business with men outside of the monkey realm." next
+    "@...Treat " call(l_0xc9ec62) " right, okay!?{wait}{window_closeall}[1F F1 D2 04 A9 02][1F 61][1F E6 D2 04][19 10 01]{rtoarg}{window_open(1)}@(The great doctor whispered in each ear,{pause(15)} first right then left,{pause(15)} <be healthy.>){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 D2 04][1F 61][1F F1 D2 04 5D 02]{pause(1)}[1F 16 D2 04 03]{pause(30)}[19 23 D1 04 01 FF 00][1F 16 D1 04 00]{pause(10)}{window_open(1)}@I'm happy to do business with men outside of the monkey realm." next
     "@Please come back again.{wait}{window_closeall}" eob
 
 l_0xc9ec62:

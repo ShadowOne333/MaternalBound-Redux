@@ -6,20 +6,10 @@ import asm65816
 FOR RAM ADDRESSES LOADED FROM 006D/006F/0065
 Addresses loaded from RAM $0066 are byte swapped (Ex: Y button becomes 0040 instead of 4000) 
 
-0010 = R button
-0020 = L button
-0040 = X button
-0080 = A button
-0100 = D-Pad Right
-0200 = D-Pad Left
-0400 = D-Pad Down
-0800 = D-Pad Up
-1000 = Start button
-2000 = Select button
-4000 = Y button
-8000 = B button
+0010 = R Button		| 0020 = L Button	| 0040 = X Button	| 0080 = A Button
+0100 = D-Pad Right	| 0200 = D-Pad Left	| 0400 = D-Pad Down	| 0800 = D-Pad Up
+1000 = Start Button	| 2000 = Select Button	| 4000 = Y Button	| 8000 = B Button */
 
-*/
 
 ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
 ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for Opening the Main Menu (A button by default)
