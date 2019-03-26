@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -111,10 +109,10 @@ l_0xef58c7:
 
 l_0xef5917:
     "{sound(99)}[1F 15 A9 00 6C 02 01][1F 61][1F 1F A9 00 06][1F 15 62 00 08 00 01][1F E4 62 00 07][1F E4 62 00 01][1F E4 62 00 03][1F E4 62 00 05][1F E4 62 00 07]{pause(1)}[1F E4 62 00 01]{pause(2)}[1F E4 62 00 03]{pause(3)}[1F E4 62 00 05]{pause(4)}[1F E4 62 00 07]{pause(5)}[1F E4 62 00 01]{pause(6)}[1F E4 62 00 03]{pause(7)}[1F E4 62 00 05]{pause(8)}[1F E4 62 00 07]{window_open(1)}"
-    title(1,"Star Master")
+    title(1, Star)
     "@Greetings!{pause(20)}" linebreak
     "  So, you are finally here![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}"
-    title(1,"Star Master")
+    title(1, Star)
     "@Excellent!{pause(20)}" linebreak
     "  You are truly excellent!" next
     "@There is only a little time left!{pause(15)}  I'll give you the last power." next
@@ -284,7 +282,7 @@ l_0xef6419:
     "@Smiley.   Boing!{wait}{font_normal}" eob
 
 l_0xef6446:
-    title(1,"Master Belch")
+    title(1, Belch)
     "[06 47 00 {e(data_35.l_0xc7c588)}]{music(134)}{sound(78)}"
     "@Buuurp!" next
     "@So you are [1C 02 01]?" next
@@ -304,7 +302,7 @@ l_0xef6569:
     "  Get ready to feel the pain of true nausea!" next
     "{sound(78)}{pause(40)}@Ghe Ghe!" linebreak
     "  Come on, let's go![03]" call(data_23.l_0xc68554) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}{music(134)}"
-    title(1,"Master Belch")
+    title(1, Belch)
     "@{sound(78)}{pause(40)}Looks like it was an even fight...{pause(20)}  Buurp!" next
     "@But, Master Giygas has managed to get the Mani Mani statue into Fourside.{pause(20)}{sound(78)}{pause(40)}" next
     "@The city will soon be in worse condition than living in your own puke!" next

@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -46,7 +44,7 @@ l_0xc813d4:
     "@Well, perhaps you shouldn't be yappin' about having cash then,{pause(15)} buddy." end
 
 l_0xc81418:
-    title(1,"Orange Kid")
+    title(1, Orange)
     "{isset(flag 550)}[1B 02 {e(l_0xc81318)}][06 74 00 {e(l_0xc81475)}]"
     "@I'm hard at work... don't worry,{pause(15)} my brilliant invention will be ready soon." next
     "@Okay, okay...{pause(20)}  I'll get back to work!{wait}{set(flag 116)}" eob
@@ -56,7 +54,7 @@ l_0xc81475:
     "@I found a problem in one of Einstein's theories...{wait}{unset(flag 116)}" eob
 
 l_0xc814b9:
-    title(1,"Orange Kid")
+    title(1, Orange)
     "@You didn't invest any money in my venture," next
     "@but someone else donated a few million bucks,{pause(15)} so everything is great." next
     "@So would you like to invest,{pause(10)} say,{pause(15)} 50 bucks?" linebreak
@@ -76,7 +74,7 @@ l_0xc81585:
     "[1D 14 32 00 00 00][1B 03 {e(l_0xc813d4)}]{sound(118)}[1D 09 32 00]{open_wallet}" goto(l_0xc812e6)
 
 l_0xc8159f:
-    title(1,"Orange Kid")
+    title(1, Orange)
     "[06 75 00 {e(l_0xc815f9)}]@Well, you never invested in my genius,{pause(15)} did you?" next
     "@You had no idea of what I could do..." next
     "@*chortle*" next
@@ -92,7 +90,7 @@ l_0xc81676:
     "[06 52 00 {e(l_0xc818f1)}][06 70 00 {e(l_0xc818b9)}][06 27 02 {e(l_0xc81915)}]@Well,{pause(15)} I have sort of neglected doing my housework..." next
     "@I know it's a bit of a pig sty,{pause(15)} but anyway..." next
     "@I'm Apple Kid." next
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@I haven't taken a bath in quite a while,{pause(15)} so I may be kind of stinky." next
     "{pause(60)}@By the way,{pause(15)} I'm starving.{pause(20)}  Do you have something to eat?" next
     "@If you do,{pause(15)} can I have some?" linebreak
@@ -122,7 +120,7 @@ l_0xc818a2:
     "[1D 14 C8 00 00 00][1B 03 {e(l_0xc818dd)}][1D 09 C8 00]{open_wallet}{sound(118)}{pause(1)}" goto(l_0xc818b9)
 
 l_0xc818b9:
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Thank you.{pause(20)}  I won't let you down.{wait}{window_closeall}{set(flag 112)}{set(flag 294)}[1F 41 05]" goto(data_33.l_0xc79028)
 
 l_0xc818dc:
@@ -133,14 +131,14 @@ l_0xc818dd:
     goto(l_0xc81751)
 
 l_0xc818f1:
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Maybe you shouldn't spend too much time wandering around Twoson." goto(l_0xc81913)
 
 l_0xc81913:
     end
 
 l_0xc81915:
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@It seems like you are expecting something from me." next
     goto(l_0xc8180c)
 
@@ -261,7 +259,7 @@ l_0xc81f2a:
     "@You kids are bouncing around,{pause(15)} talking to everyone.{pause(20)}  It's getting annoying." end
 
 l_0xc81f56:
-    title(1,"Apple Kid")
+    title(1, Apple)
     "[06 53 00 {e(l_0xc8207c)}]@I'm feeling really out of it because I've been working all night," next
     "@but finally the [1C 05 B8] is ready." next
     "@This machine will eradicate all pencil-shaped figures in just one second." next
@@ -283,7 +281,7 @@ l_0xc82105:
     "[06 00 03 {e(l_0xc82285)}]@The Dinosaur Museum doesn't have any real dinosaurs...{pause(20)}  They're all replicas." next
     "@I'm sure everyone knows that." next
     "@If you still want to go see the dinosaurs," next
-    "@pay 5 dollars apiece for the entrance fee.{pause(20)}  Is that okay?" linebreak
+    "@pay 5 dollars each for the entrance fee.{pause(20)}  Is that okay?" linebreak
     "{open_wallet}[19 02]Yes" eob
 
 l_0xc8219e:
@@ -310,7 +308,7 @@ l_0xc82285:
 l_0xc822d2:
     "[06 02 00 {e(l_0xc82565)}][06 D7 00 {e(l_0xc82468)}]@I'm so happy there are some visitors today.{pause(15)}  These days, few people come here." next
     "@...I'm Mr. Spoon, the academic researcher." next
-    title(1,"Mr. Spoon")
+    title(1, Spoon)
     "{pause(60)}" linebreak
     "@I wonder if there are any famous female stars here today?" next
     "{pause(60)}" linebreak
@@ -329,7 +327,7 @@ l_0xc82467:
     eob
 
 l_0xc82468:
-    title(1,"Mr. Spoon")
+    title(1, Spoon)
     "@You want to know about something <extraordinary>?" next
     "@....." next
     "@Hmmmm..." next
@@ -341,7 +339,7 @@ l_0xc82468:
     "@I don't care if the autograph is written on toilet paper...{wait}{set(flag 140)}{unset(flag 687)}" eob
 
 l_0xc82565:
-    title(1,"Mr. Spoon")
+    title(1, Spoon)
     "@Please come back again to study," next
     "@'cause I don't like being alone..." end
 
@@ -350,7 +348,7 @@ l_0xc8258c:
 
 l_0xc8259f:
     "{sound(118)}"
-    title(1,"Mr. Spoon")
+    title(1, Spoon)
     "@You got it!" next
     "@That banana peel has an authentic <Venus> autograph?" next
     "@Yep,{pause(15)} there's no doubt about it!" next
@@ -430,5 +428,4 @@ l_0xc828ca:
     "@Orchestra seats and balcony seats are sold out." next
     "@Now, there's <standing room only> left.{pause(20)}  It's $30 per person." next
     "@Is that okay with you?" linebreak
-    goto(data_40.
-l_0xc8292c)
+    goto(data_40.l_0xc8292c)

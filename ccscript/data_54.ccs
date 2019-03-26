@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -71,7 +69,7 @@ l_0xc97b0c:
     call(data_47.l_0xc9007f) eob
 
 l_0xc97b12:
-    title(1,"Geldegarde Monotoly")
+    title(1, Monotoly)
     "@Don't do anything to me!" linebreak
     "  I am... I am not Monotoly![03][1F 1E 73 05 09]{pause(120)}{set(flag 631)}" eob
 
@@ -252,7 +250,7 @@ l_0xc98000:
     "@(The Mani Mani Statue is glowing strangely...){wait}{sound(113)}" eob
 
 l_0xc98024:
-    title(1,"Mr. Carpainter")
+    title(1, Carpainter)
     "[06 7A 00 {e(l_0xc981c6)}][06 44 00 {e(l_0xc982b3)}]{set(flag 744)}@Thanks for coming!{pause(15)}  I've been waiting for you." next
     "@I need your assistance to help make the world blue" next
     "@and change it into a happy and peaceful society." next
@@ -275,7 +273,7 @@ l_0xc98148:
 
 l_0xc9817a:
     "{window_open(1)}" newline
-    title(1,"Mr. Carpainter")
+    title(1, Carpainter)
     "@Do you see the gold figure behind me..." next
     "@Since I got the statue,{pause(15)} I have been doing peculiar things." next
     "{set(flag 44)}" goto(l_0xc981c6)
@@ -292,7 +290,7 @@ l_0xc9827c:
     "@You should take this even if you need to throw away one of your items." end
 
 l_0xc982b3:
-    title(1,"Mr. Carpainter")
+    title(1, Carpainter)
     "@Please forgive me, if you can...{pause(20)}  I just wanted to have a normal life." next
     "@I apologize to everyone." end
 
@@ -486,7 +484,7 @@ l_0xc98cc1:
 
 l_0xc98cd3:
     "[1F F1 9B 01 6F 02] [1F 61][1F E6 9B 01]{window_open(1)}"
-    title(1,"Porky")
+    title(1, Porky)
     "@That was really something, [1C 02 01]!{pause(20)}  It looks like I somehow woke up, too.{pause(15)}" next
     "@Let's be friends again!{pause(20)}" next
     "@C'mon, reply to me, will ya? I promise I'll be a good guy.{pause(60)}" next

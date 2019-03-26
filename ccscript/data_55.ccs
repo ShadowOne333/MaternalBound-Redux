@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -210,7 +208,7 @@ l_0xc997ee:
     "@It's located at the center of the village." end
 
 l_0xc9985a:
-    title(1,"Mr. Carpainter")
+    title(1, Carpainter)
     "@Hey [1C 01 08], it's been a long time." next
     "@Since we last met, the whole town has woken up." next
     "@The best happiness comes from being free... you kids made me realize that." end
@@ -243,14 +241,14 @@ l_0xc99991:
 
 l_0xc999a1:
     "[06 78 02 {e(data_57.l_0xc9b20e)}]{isset(flag 469)}[1B 02 {e(l_0xc9992f)}][06 68 00 {e(l_0xc9992f)}][06 12 00 {e(l_0xc9992f)}]{window_open(1)}[06 02 00 {e(l_0xc99a3c)}]"
-    title(1, "Porky")
+    title(1, Porky)
     "@Hey [1C 01 08]!" linebreak
     "[19 22 01 01 05 00][1F 13 01 00]  Like I said, my dad isn't home yet!" next
     "@You've got to bring Picky back before he comes home!" next
     "@I'll try to help you a little.[19 22 01 01 05 00][1F 13 01 00]{wait}{window_closeall}{set(flag 2)}" eob
 
 l_0xc99a3c:
-    title(1, "Porky")
+    title(1, Porky)
     "@[1C 01 08]!" next
     "[19 22 01 01 05 00][1F 13 01 00]@You haven't got a clue about what to do.{wait}{window_closeall}{unset(flag 2)}" eob
 
@@ -300,7 +298,7 @@ l_0xc99bb2:
 
 l_0xc99bb6:
     "{window_open(1)}"
-    title(1, "Porky")
+    title(1, Porky)
     "@The phone is ringing!{pause(15)}" linebreak "  Answer it!" next
     "@At my house, my dad gets bent if I don't get the phone..." next
     "@within the first three rings!{wait}{window_closeall}" eob

@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -242,7 +240,7 @@ l_0xc6866a:
 
 l_0xc6866b:
     "{save}{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{music_resume}{window_open(1)}"
-    title(1, "Dad")
+    title(1, Dad)
     "@Hello, it's me... your dad." next
     "@I don't mean to butt in, but don't you think you should take a break?" next
     "[19 02]Yes" eob

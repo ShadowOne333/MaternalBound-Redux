@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -137,7 +135,7 @@ l_0xc649fb:
     call(data_19.l_0xc645f2) "{set(flag 695)}[1F D3 0A]{set(flag 754)}" eob
 
 l_0xc64a1c:
-    title(1, "Mach Pizza")
+    title(1, Mach)
     "@Hello! This is Mach Pizza![06 49 00 {e(l_0xc64b59)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc64b18)}][06 B4 00 {e(l_0xc64b18)}]" goto(l_0xc64a47)
 
 l_0xc64a47:
@@ -192,7 +190,7 @@ l_0xc64b59:
 
 l_0xc64bbf:
     call(data_21.l_0xc659bf) "{unset(flag 180)}"
-    title(1, "Gonz[C0]les")
+    title(1, Gonzales)
     "@Hello! Mach Pizza delivery!" linebreak
     "  Here is your pizza pie, sir." next
     "[1D 03 FF][1B 02 {e(l_0xc64c9e)}]{rtoarg}{store_registers}[06 B3 00 {e(l_0xc64c60)}]{counter(95)}" goto(l_0xc64c0a)
@@ -223,7 +221,7 @@ l_0xc64cc9:
 
 l_0xc64cf8:
     "{unset(flag 180)}{unset(flag 179)}" call(data_36.l_0xc7de2f) "{window_open(1)}"
-    title(1, "Mach Pizza")
+    title(1, Mach)
     "@Hello!" linebreak
     "  This is Mach Pizza." linebreak
     " (hee, ha, he, ha)" next

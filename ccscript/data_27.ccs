@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -66,7 +64,7 @@ l_0xc6e1b9:
 
 l_0xc6e220:
     "[06 0A 00 {e(l_0xc6e298)}]@This elevator is going down." next
-    "@Look, don't stand behind me and stare at my hips!{wait}{window_closeall}[1F 16 58 03 01]{music(138)}[1F 15 B7 01 63 01 01]{pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 47 02 01][1F 61]{music(139)}{pause(90)}[1F ED][1F E5 FF][1F 1F B7 01 06]{set(flag 350)}{set(flag 10)}" eob
+    "@Look, don't stand behind me and stare at my buns!{wait}{window_closeall}[1F 16 58 03 01]{music(138)}[1F 15 B7 01 63 01 01]{pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 47 02 01][1F 61]{music(139)}{pause(90)}[1F ED][1F E5 FF][1F 1F B7 01 06]{set(flag 350)}{set(flag 10)}" eob
 
 l_0xc6e298:
     "@Ground floor." end
@@ -75,7 +73,7 @@ l_0xc6e2a4:
     "[06 4B 00 {e(l_0xc6e45a)}]" goto(l_0xc6e2ab)
 
 l_0xc6e2ab:
-    title(1, "Porky")
+    title(1, Porky)
     "@Oooo la la." next
     "@This... this is my poor old friend..." next
     "@Ah... what's your name..." next
@@ -106,7 +104,7 @@ l_0xc6e426:
     "@Get outta here!{pause(20)}  Now, loser![03]{window_closeall}" goto(data_44.l_0xc894ac)
 
 l_0xc6e45a:
-    title(1, "Porky")
+    title(1, Porky)
     "[06 71 02 {e(l_0xc6e2ab)}]@Oooo la la." next
     "@You shouldn't be satisfied with eating just some more [1C 01 04]." next
     "@You're so out of it." next
@@ -118,7 +116,7 @@ l_0xc6e45a:
     "@I'm starting to drool all over myself just thinking about it." end
 
 l_0xc6e557:    
-    title(1, "Aloysius Minch")
+    title(1, Aloysius)
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6e57d)}]@You haven't changed much, [1C 02 01]." next
     goto(l_0xc6e5a1)
 
@@ -143,7 +141,7 @@ l_0xc6e69c:
     "[19 10 01]{rtoarg}  Aren't you [1C 02 00]?" next
     "@Mr. Monotoly's maid, Electra, told me about you." next
     "@I'll take you to Mr. Monotoly's office on the 48th floor." next
-    "@Only you may go.[03][19 10 01]{rtoarg}" goto(l_0xc6e71e)
+    "@You may go.[03][19 10 01]{rtoarg}" goto(l_0xc6e71e)
 
 l_0xc6e71e:
     "{window_closeall}[1F 16 65 03 01]{music(137)}[1F 15 B7 01 63 01 01]{pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 46 02 01][1F 61]{music(139)}{pause(90)}[1F ED][1F E5 FF][1F 1F B7 01 06]{set(flag 350)}{set(flag 10)}" eob
@@ -195,7 +193,7 @@ l_0xc6e961:
     "@This elevator takes you to the 47th floor.{wait}" goto(l_0xc6e884)
 
 l_0xc6e982:
-    "[06 49 00 {e(l_0xc6ea0f)}][06 02 00 {e(l_0xc6e9d6)}][06 8D 00 {e(l_0xc6ea0f)}][1D 03 FF][1B 02 {e(l_0xc6e9d6)}][1D 0E 00 BD]@Your strawberry tofu, {store_registers}[19 10 01]" call(data_37.l_0xc7e6b3) ".[03]{load_registers}{set(flag 141)}{set(flag 2)}" call(data_36.l_0xc7dccf) next
+    "[06 49 00 {e(l_0xc6ea0f)}][06 02 00 {e(l_0xc6e9d6)}][06 8D 00 {e(l_0xc6ea0f)}][1D 03 FF][1B 02 {e(l_0xc6e9d6)}][1D 0E 00 BD]@Your Strawberry tofu, {store_registers}[19 10 01]" call(data_37.l_0xc7e6b3) ".[03]{load_registers}{set(flag 141)}{set(flag 2)}" call(data_36.l_0xc7dccf) next
     goto(l_0xc6e9d6)
 
 l_0xc6e9d6:
@@ -204,33 +202,33 @@ l_0xc6e9d6:
     "@He gave me something the other day, and said <this is fit for a maid...>" end
 
 l_0xc6ea0f:
-    title(1, "Electra")
+    title(1, Electra)
     "@Thanks for dropping by, even though there's nothing to do, honey." end
 
 l_0xc6ea34:
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "[06 A0 02 {e(l_0xc6ee6f)}][06 0F 00 {e(l_0xc6ee2e)}]"
     "@Look at my skinny arms,{pause(20)} thin body,{pause(20)} and gray hair..." next
     "@I've become so weak since I lost the Mani Mani statue." next
     "@I'm sorry I kidnapped [1C 02 02]." next
     "@I haven't done anything to her." next
     "@...[1C 02 02] is a nice girl.[03]{window_closeall}{pause(60)}[1F 16 68 03 03]{pause(10)}{window_open(1)}"
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "@[1C 02 02]." next
     "@Return to [1C 02 01]." next
     "@I'm sorry I've created so much trouble for you.[03]{window_closeall}{pause(60)}" call(data_23.l_0xc68253) "{set(flag 15)}{unset(flag 776)}[19 23 68 03 01 FF 00][1F 16 68 03 00]{music_resume}{pause(120)}{window_open(1)}" goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "@....." next
     "@I'll tell you everything." next
     "@The Mani Mani statue creates an illusion." next
-    "@It attracts evil spirits and weakens your heart." next
-    "@The power scared me so much, I hid the statue in the warehouse at Borges' Bar." next
-    "@I often went there to pray." next
+    "@It increases the evil in people's hearts and brings forth the devil's power." next
+    "@I was so afraid of that power that I hid the statue in the storeroom at Borges' Bar," next
+    "@where I went to look upon it on occasion." next
     "@....." next
-    "@Cryptic words appeared to me while I was in the illusion." next
-    "@[1C 02 01], your name appeared in the cryptic messages." next
+    "@Cryptic words appeared to me while I was in the illusion," next
+    "@including your name, [1C 02 01]." next
     "@<Stop [1C 02 01], and do so by your own hand.>" next
     "@Or..." next
     "@<Don't let them go to Summers.>" next
@@ -256,19 +254,19 @@ l_0xc6ed65:
 l_0xc6ed74:
     "@Summers is located across the ocean.{pause(20)} Take my helicopter." next
     "@I'll open the door to my heliport.[03]{window_closeall}{pause(1)}[1F F1 68 03 BD 02][1F 61][1F F1 6C 03 BE 02][1F 61][1F F1 6C 03 2C 00][1F E6 68 03][1F 07 03]{pause(180)}{music(85)}[1F F1 6D 03 BF 02][1F 61][1F F1 6D 03 08 00][1F 07 02]{pause(30)}{sound(28)}{pause(60)}{music_resume}[1F E9 68 03][1F 61][1F F1 68 03 08 00]{window_open(1)}"
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "@You must go on!" next
     "@[1C 02 01]!" next
     "@This is your destiny." next
     "{set(flag 664)}{set(flag 741)}" goto(l_0xc6ee2e)
 
 l_0xc6ee2e:
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "@[1C 01 1E], it's time we said goodbye." next
     "@Take care.{wait}{window_closeall}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 11)}{set(flag 754)}{set(flag 779)}{unset(flag 759)}" eob
 
 l_0xc6ee6f:
-    title(1, "Geldegarde Monotoly")
+    title(1, Monotoly)
     "@So Porky took the helicopter?" next
     "@I wonder if he'll be okay..." end
 
@@ -282,7 +280,7 @@ l_0xc6eeb4:
     "@...[1C 02 01]!" next
     "@You finally made it here!" next
     "@...I'm fine." next
-    "@I believed you'd come and save me." next
+    "@I had faith that you'd come and save me." next
     "{pause(60)}" linebreak
     "@Mr. Monotoly isn't really a bad person." next
     "@Take some time to listen to him.{wait}{set(flag 10)}" eob
@@ -323,19 +321,19 @@ l_0xc6f0b5:
 
 l_0xc6f112:
     "@Hey, you!..." next
-    "@If you meet a beautiful, seductive woman who's looking for me,{pause(15)} tell her <hi.>" next
+    "@If you meet a beautiful, seductive woman who's looking for me,{pause(15)} tell her <Hi.>" next
     "@...Anyway, I don't think a woman like that would be looking for me..." end
 
 l_0xc6f175:
     "[06 8F 00 {e(l_0xc6f1d6)}]"
-    title(1, "Borges")
+    title(1, Borges)
     "@What?" next
     "@Does Mr. Geldegarde Monotoly come here often?" next
     "@Hello!{pause(20)}  Time to get up!!" next
     "@It could never happen!...  Well, actually that's not true." end
 
 l_0xc6f1d6:
-    title(1, "Borges")
+    title(1, Borges)
     "@Sorry about the other day." next
     "@This sidewalk bar isn't as profitable as it used to be." next
     "@This is just a hangout for the regulars." end

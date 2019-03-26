@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -56,7 +54,7 @@ l_0xc63506:
     "@All right?[1F 50]" end
 
 l_0xc6354b:
-    title(1, "Dad")
+    title(1, Dad)
     "@Who is this?!  [1C 01 08]?!" linebreak
     "  Do you have a cold or something?" next
     "@Your voice sounds kind of funny." next
@@ -71,7 +69,7 @@ l_0xc635b4:
     "[19 05 01 06 01]{sound(37)}" eob
 
 l_0xc635bd:
-    title(1, "Dad")
+    title(1, Dad)
     "@Hi, it's your dad!" linebreak
     "  To get to the next level..." next
     "@Ha hah ha hah!" linebreak
@@ -88,7 +86,7 @@ l_0xc635bd:
     "  Beep-beep-beep...){wait}{set(flag 772)}" eob
 
 l_0xc636e5:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "[06 02 03 {e(data_31.l_0xc75929)}][06 49 00 {e(l_0xc639ca)}][06 B5 00 {e(l_0xc63958)}][06 85 02 {e(l_0xc63958)}][06 B6 02 {e(l_0xc63958)}][06 B7 02 {e(l_0xc63958)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc63958)}][06 B4 02 {e(data_20.l_0xc64946)}][06 B5 02 {e(data_20.l_0xc649b7)}]" call(l_0xc63963) goto(l_0xc6372d)
 
 l_0xc6372d:
@@ -158,13 +156,13 @@ l_0xc63958:
     call(l_0xc63de3) call(l_0xc645f2) eob
 
 l_0xc63963:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hello!  This is Escargo Express." next
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc639c9)}]" newline
     "@Oh, is that you, [1C 01 08]?" linebreak
     "  Big Bro!" next
     "@It's me, Tracy." next
-    title(1, "Tracy")
+    title(1, Tracy)
     "@I'm working part-time for Escargo Express." next
     goto(l_0xc639c9)
 
@@ -172,7 +170,7 @@ l_0xc639c9:
     eob
 
 l_0xc639ca:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hello! This is Escargo Express." next
     "@Tracy doesn't work here any more.  Yeah, she used to work here, part-time." next
     "@Hunh?  This is [1C 01 08]?" linebreak
@@ -246,7 +244,7 @@ l_0xc63d40:
     eob
 
 l_0xc63d54:
-    title(1, "Tracy")
+    title(1, Tracy)
     "[06 49 00 {e(l_0xc63dc8)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc63d93)}]"
     "@Hey big brother [1C 01 08]," linebreak
     "  we don't have any of your stuff in storage right now." next
@@ -263,7 +261,7 @@ l_0xc63dc8:
 
 l_0xc63de3:
     "[06 49 00 {e(l_0xc63e5a)}]"
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hello!" linebreak
     "  This is Escargo Express." next
     "@I'm very sorry, but all our delivery people are out, serving other customers." next
@@ -271,7 +269,7 @@ l_0xc63de3:
     "@Please call back a little later.[03]" eob
 
 l_0xc63e5a:
-    title(1,"Escargo Express")
+    title(1, Escargo)
     "@Hello, you have reached Escargo Express." next
     "@All of our staff members are currently out of the office." next
     "@Please call again." linebreak
@@ -279,7 +277,7 @@ l_0xc63e5a:
 
 l_0xc63eb0:
     call(data_21.l_0xc659bf) "{unset(flag 645)}[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc641b0)}][06 49 00 {e(l_0xc63f42)}]"
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hello, this is Escargo Express!" next
     "@Your delivery charge is $18." next
     "@You can cover the bill, right?" linebreak
@@ -290,7 +288,7 @@ l_0xc63f1f:
     "  Please try us again.{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
 
 l_0xc63f42:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hi, I'm from Escargo Express." next
     "@I'm here to pick up your stuff." next
     goto(l_0xc63f80)
@@ -357,7 +355,7 @@ l_0xc641a6:
     call(l_0xc64633) goto(l_0xc64078)
 
 l_0xc641b0:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Excuse me." next
     "@We checked your records and found" next
     "@that we are already storing too many of your items." next
@@ -366,19 +364,19 @@ l_0xc641b0:
 
 l_0xc64240:
     next
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@We're sorry, we cannot carry more than three items." next
     "@Please understand that it's our policy." next
     goto(l_0xc640a1)
 
 l_0xc6427c:
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@You don't have enough money." next
     "@Call us at another time.{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
 
 l_0xc642a3:
     call(data_21.l_0xc659bf) "{unset(flag 181)}"
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@I'm from Escargo Express!!" next
     "@I'm here to deliver your" next
     "[19 1D 01 00]@[1C 05 00][19 1D 02 00][1B 02 {e(l_0xc642fc)}]," linebreak
@@ -442,7 +440,7 @@ l_0xc64515:
 
 l_0xc6451a:
     "{unset(flag 181)}{unset(flag 645)}" call(data_36.l_0xc7de2f) "{window_open(1)}"
-    title(1, "Escargo Express")
+    title(1, Escargo)
     "@Hello!" linebreak
     "  This is Escargo Express." linebreak
     " (hee, ha, he, ha)" next

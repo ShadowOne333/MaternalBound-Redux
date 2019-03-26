@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -45,9 +43,9 @@ l_0xc6c52e:
     "@I'll wash my face, brush my teeth, pee and go to bed." end
 
 l_0xc6c565:
-    "@If you're going outside,{pause(15)} stop by and say hi to Maxwell before you leave." next
+    "@If you're going outside,{pause(15)} stop by and say hi to Gauss before you leave." next
     "@He always looks out for the younger students." next
-    "@Maxwell is still working hard in the lab downstairs." next
+    "@Gauss is still working hard in the lab downstairs." next
     "@Anyway, these days there are many dangerous animals wandering around outside." end
 
 l_0xc6c606:
@@ -117,7 +115,9 @@ l_0xc6c942:
 
 l_0xc6c970:
     "[06 49 00 {e(l_0xc6cb14)}][06 76 02 {e(l_0xc6ca9a)}]@Kyi kya kiko kree." next
-    "@(I saw you once before just for a second...  You know my fianc[C1].)" next
+    "@(I saw you once before just for a second..." next
+    "@I'm Monyeki.{pause(10)} You know my fianc[C1].)" next
+    title(1, Monyeki)
     "@Koo kya keke" linebreak
     "  (My fianc[C1] loves to chew gum." next
     "@He went to visit Dr. Andonuts' lab...{pause(15)} but he hasn't returned yet.)" next
@@ -128,6 +128,7 @@ l_0xc6c970:
     "@(I'm really worried that the mad doctor will use him in a crash test.)" end
 
 l_0xc6ca9a:
+    title(1, Monyeki)
     "@Ku kyo kika." next
     "@(It's me again, that chewing gum monkey's wife.)" next
     "@Kako kyuka kre." next
@@ -135,14 +136,17 @@ l_0xc6ca9a:
     "@Sheesh, what nerve!)" end
 
 l_0xc6cb14:
+    title(1, Monyeki)
     "@Kyakkro ki kyokke" linebreak
     "  (Ah, [1C 02 01]," next
     "@my husband has been returning home late these days.{pause(20)}  He says he's busy.)" next
     "@Kya." next
-    "@(I know he's out saving the earth, but a marriage is also important.)" end
+    "@(I know he's out saving the Earth, but a marriage is also important.)" end
 
 l_0xc6cb97:
-    "{window_open(1)}@Kekye koo kikkro" linebreak
+    "{window_open(1)}"
+    title(1, Monyeki)
+    "@Kekye koo kikkro" linebreak
     "  (Thanks for taking care of my husband the other day...)" next
     "@(Oh yes, we finally tied the knot...)" next
     "{window_closeall}{pause(30)}[1F 16 69 02 05]{pause(30)}{window_open(1)}@Kooki kekye ki!" next
@@ -150,7 +154,7 @@ l_0xc6cb97:
 
 l_0xc6cc31:
     "[1F 16 69 02 01]{window_open(1)}"
-    title(1, "Bubble Monkey")
+    title(1, Bubble)
     "@Krikko kyakya" linebreak
     "  (So...)" next
     "@Kekroo kyaki" linebreak
@@ -177,7 +181,7 @@ l_0xc6cdcd:
     "@just like a good night's sleep.)[03]" call(data_49.l_0xc915f4) "{music(12)}{pause(200)}{music_resume}" eob
 
 l_0xc6ce34:
-    title(1, "Dr. Andonuts")
+    title(1, Andonuts)
     "@Since our imprisonment is now over," next
     "@I want to start on the Phase Distorter as soon as possible." next
     "@...Oh, I should at least thank you, huh?" next
@@ -185,13 +189,13 @@ l_0xc6ce34:
     "@Now, then. Leave everything here to us and hurry forth.{wait}{unset(flag 766)}" eob
 
 l_0xc6cebc:
-    title(1, "Maxwell")
+    title(1, Gauss)
     "@[1C 02 03] just called.{pause(20)}  He's with Dr. Andonuts." next
     "@The two of them may be able to develop some new scientific theories." next
     "@You've helped make a beautiful life for everyone..." end
 
 l_0xc6cf2d:
-    title(1, "Tony")
+    title(1, Tony)
     "@...[1C 02 03] doesn't call me." next
     "@Maybe he thinks I'm too annoying..." next
     "@But I don't think so." next
@@ -201,7 +205,7 @@ l_0xc6cf2d:
 
 l_0xc6cfc5:
     "{window_open(1)}"
-    title(1, "Starman Deluxe")
+    title(1, StarmanDX)
     "@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
     "@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
     "@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
@@ -215,7 +219,7 @@ l_0xc6d082:
     "  Can't...{pause(15)} last...{pause(15)} much...{pause(15)} longer..." end
 
 l_0xc6d0b1:
-    title(1, "Apple Kid")
+    title(1, Apple)
     "@Next *Bloop*{pause(20)}" linebreak
     "  Next *Bloop*{pause(15)}  Room..." end
 
@@ -232,7 +236,7 @@ l_0xc6d0f0:
     "  Oh, no!{font_normal}" end
 
 l_0xc6d133:
-    title(1, "Tony")
+    title(1, Tony)
     "@Oh, no... *Bloop* *Glub*{pause(20)}" linebreak
     "  Can't see anything..." next
     "@*Bloop* *Glub*" linebreak
@@ -240,7 +244,7 @@ l_0xc6d133:
     "@Where...{pause(15)} is...{pause(15)} [1C 02 03]...  *Bloop*" end
 
 l_0xc6d19c:
-    title(1, "Miss Fake")
+    title(1, Fake)
     "[06 D7 00 {e(l_0xc6d325)}][06 92 00 {e(l_0xc6d2e8)}]@So, you're a Runaway Brothers fan, huh?" next
     "@What?" next
     "@Excuse me?" next
@@ -272,7 +276,7 @@ l_0xc6d37e:
     "[19 19 00 00]{swap}{result_is(182)}[1B 03 {e(l_0xc6d391)}]" goto(data_35.l_0xc7c6b6)
 
 l_0xc6d391:
-    title(1, "Miss Fake")
+    title(1, Fake)
     "[19 10 01][19 22 00 02 47 03]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc6d4d6)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc6d4d6)}][1D 01 FF B6][1F 41 05]{sound(118)}[19 23 47 03 01 01 00][1F 16 47 03 00]@Yaaaieeee!!" next
     "@That that that [1C 05 B6]... you're going to pay with that [1C 05 B6]?!" next
     "@O... o... okay, th... that's fine.{pause(20)}  I'll rip up this contract." next
@@ -320,7 +324,7 @@ l_0xc6d695:
     "[06 93 00 {e(l_0xc6d642)}]" goto(l_0xc6d61e)
 
 l_0xc6d6a1:
-    title(1, "Venus")
+    title(1, Venus)
     "[06 0A 00 {e(l_0xc6d822)}][06 5B 00 {e(l_0xc6d7b3)}][06 8C 00 {e(l_0xc6d707)}]@Oh, you're just a little kid." next
     "@I'm too busy right now to give you my autograph." next
     "@Maybe next time, little [19 10 01]{result_is(2)}[1B 03 {e(l_0xc6d702)}]man." end
@@ -368,11 +372,12 @@ l_0xc6d852:
     "@...Then, you should give me a big hand.{wait}{set(flag 680)}" eob
 
 l_0xc6d86d:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Again, we've been cheated by the theater owner." next
     "@We're stuck here with a phony contract.  Oh yeah!" end
 
 l_0xc6d8af:
+    title(1, Nice)	// Fatty guy
     "@Once again, I've made trouble for you." next
     "@This is it... we'll stop being so naive..." next
     "@But right now,{pause(15)} our fans are waiting for us." next
@@ -382,25 +387,26 @@ l_0xc6d8af:
     "  Thanks, boogie boy![03]" eob
 
 l_0xc6d93f:
-    title(1,"Groovy")	// Bass guy
+    title(1, Groovy)	// Bass guy
     "@We know how to sing but we don't know how to handle money or women." next
-    "@Do-wap, do do wop." end
+    "@[AC] Do-wap, do do wop. [AC]" end
 
 l_0xc6d97a:
-    title(1,"Okay")	// Drum guy
+    title(1, Okay)	// Drum guy
     "@We owe you guys so much." next
     "@Sorry." end
 
 l_0xc6d993:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@We're so helpless." next
     "@Really helpless, and hopeless..." linebreak
     "  Hyuk hyuk hyuk." end
 
 l_0xc6d9ca:
-    title(1,"Gorgeous")	// Sax guy
-    "@To meet Geldegarde Monotoly, you'll need our help." next
-    "@I don't exactly know why... it's just a hunch." end
+    title(1, Gorgeous)	// Sax guy
+    "@To meet Geldegarde Monotoly," next
+    "@you'll need our help." next
+    "@I don't exactly know why... it's just a musician's hunch." end
 
 l_0xc6da0b:
     "@Do you wanna buy a ticket?" linebreak
@@ -474,13 +480,14 @@ l_0xc6dc93:
     "@To tell you the truth,{pause(20)} I'm the owner of this bakery." end
 
 l_0xc6dce7:
+    title(1, Pettenella)
     "@I was thinking <There's a tight wad born every minute...>" end
 
 l_0xc6dd0a:
     "[19 19 00 00]{swap}{result_is(187)}[1B 03 {e(l_0xc6dd1d)}]" goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
-    title(1, "Pettenella Giovanni")
+    title(1, Pettenella)
     "@What?" next
     "@You came to deliver my grandma's memento, the [1C 05 BB]?!" next
     "@Thank you." next
@@ -498,5 +505,4 @@ l_0xc6dd1d:
 l_0xc6de7b:
     "[06 0A 00 {e(data_27.l_0xc6df35)}][06 8F 00 {e(data_27.l_0xc6df43)}]@This elevator is only for Master Porky's use." next
     "@It goes directly to the 47th floor." next
-    "@Quit staring at my hips... why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)
-
+    "@Quit staring at my buns... why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)

@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -220,26 +218,26 @@ l_0xc9b268:
 
 l_0xc9b270:
     "{set(flag 384)}[1F 41 06][1F 12 02][1F 12 03][1F 12 04]" call(data_24.l_0xc69082) "{set(flag 11)}" call(data_36.l_0xc7de60) "[1F 41 05][1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 01][1F 21 51]{pause(30)}[1F 41 10]{pause(30)}[1F 15 B3 01 B7 02 FF][1F 21 23][1F EF B3 01][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F B3 01 0A]{pause(180)}[1F 21 24][1F 15 6A 00 B8 02 01]" call(l_0xc9b4b8) "[1F 21 25][1F 15 6A 00 B9 02 01]" call(l_0xc9b4b8) "[1F 21 26][1F 15 6A 00 BA 02 01]" call(l_0xc9b4b8) "{pause(120)}{window_open(1)}"
-    title(1, "Dad")
+    title(1, Dad)
     "@[1C 02 01]...{pause(30)} Hmmm..." next
     "@I think [1C 02 01] is the right name for him.[03]{window_closeall}{pause(60)}{window_open(1)}"
-    title(1, "Mom")
+    title(1, Mom)
     "@[1C 02 01]...{pause(30)} he smiled just from hearing his own name." next
     "@Do you think he likes his name?[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}"
-    title(1, "Dad")
+    title(1, Dad)
     "@Try putting that red cap on him." next
     "@Ha ha ha!" linebreak
     "  It's too big, but it looks good on him...[03]{window_closeall}{pause(60)}{window_open(1)}"
-    title(1, "Mom")
+    title(1, Mom)
     "@I hope [1C 01 03] won't be jealous of the baby.[03]{window_closeall}{pause(60)}{pause(60)}{window_open(1)}"
-    title(1, "Dad")
+    title(1, Dad)
     "@Let's celebrate with some [1C 01 04]." next
     "@This baby will grow up to be a hard worker just like you.[03]{window_closeall}{pause(60)}{window_open(1)}"
-    title(1, "Mom")
+    title(1, Mom)
     "@I don't think he needs to be rich or famous..." next
     "@but I want him to be a thoughtful, strong boy." next
     "{window_closeall}{pause(60)}{pause(60)}{pause(60)}{window_open(1)}"
-    title(1, "Mom")
+    title(1, Mom)
     "@That's odd...{pause(20)} the baby bottle that he pointed at seemed to move a little bit..." next
     "@Hmmm...{wait}{pause(15)}{window_closeall}{pause(60)}" call(data_36.l_0xc7dd6b) "{set(flag 758)}{music_resume}{pause(120)}{pause(120)}{pause(120)}[1F E8 FF][1F 15 06 00 0C 03 FF][1F 21 A1][1F 1F 06 00 06][1F EC FF 01][19 26 01]" call(data_36.l_0xc7dd6b) "{unset(flag 758)}{music_resume}[1F 41 06]{unset(flag 11)}" eob
 
@@ -291,9 +289,9 @@ l_0xc9b8ff:
 
 l_0xc9b900:
     "[1F 15 6A 00 20 01 01]" call(l_0xc9b4b8) "[1F EB FF 06]{music(91)}[1F E9 E5 02][1F 61]{music(126)}{pause(100)}[19 05 01 08 02][1F 15 6A 00 21 01 01][1F EC FF 01]" call(l_0xc9b4b8) "{pause(120)}[1F F1 D8 02 22 01][1F 61]{music_resume}[1F E6 D8 02][19 05 01 08 00]{window_open(1)}"
-    title(1, "Dr. Andonuts")
+    title(1, Andonuts)
     "@Hmmm... it doesn't work.{pause(20)}  One thing is missing..." next
-    "@But that one material cannot normally be found on the earth." next
+    "@But that one material cannot normally be found on Earth." next
     "@The material I'm thinking of came from a meteorite" next
     "@that fell when I was much younger." next
     goto(l_0xc9b9d0)
@@ -336,7 +334,7 @@ l_0xc9bc48:
 
 l_0xc9bca1:
     "[06 1D 01 {e(l_0xc9bd69)}]{window_open(1)}"
-    title(1, "Dr. Andonuts")
+    title(1, Andonuts)
     "@The <Phase Distorter 3> has been completed." next
     "@We could finish it quickly because of Mr. Saturn's incredible scientific skill..." next
     "@Giygas is attacking from our exact location," next
@@ -344,14 +342,14 @@ l_0xc9bca1:
     "  many years in the past.[03]{window_closeall}" eob
 
 l_0xc9bd35:
-    title(1, "Dr. Andonuts")
+    title(1, Andonuts)
     "@This is very hard for me to tell you, but...[03][06 1D 01 {e(l_0xc9bd52)}]" eob
 
 l_0xc9bd52:
     "{window_closeall}[1F 1E F5 04 06][1F 17 F6 04 39 01 01]{pause(150)}{set(flag 331)}{unset(flag 328)}" eob
 
 l_0xc9bd69:
-    title(1, "Dr. Andonuts")
+    title(1, Andonuts)
     "@In order to defeat Giygas,{pause(15)} who is attacking from the past," next
     "@you must warp to the past." next
     "@This can be done by way of the <Phase Distorter 3.>" next

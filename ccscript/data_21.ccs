@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -110,7 +108,7 @@ l_0xc655b1:
     "@I was an exchange student who traveled to a country" next
     "@that is known as an economic superpower." next
     "@My name is Angrez Van der Pol." next
-    title(1, "Angrez Van der Pol")
+    title(1, Angrez)
     "@Let me know if I can do anything for you." next
     goto(l_0xc6564d)
 
@@ -193,7 +191,7 @@ l_0xc6593e:
     goto(l_0xc657ac)
 
 l_0xc65962:
-    title(1, "Angrez Van der Pol")
+    title(1, Angrez)
     "@Hi!  I'm Angrez." next
     goto(l_0xc6564d)
 
@@ -333,10 +331,10 @@ l_0xc6605f:
 
 l_0xc660a6:
     "[06 02 00 {e(l_0xc66392)}][06 40 00 {e(l_0xc66353)}][06 03 02 {e(l_0xc66469)}]@....." next
-    "@...I'm Frank.{pause(30)}  You are?" next
-    title(1, "Frank Fly")
+    "@...I'm Frank Fly.{pause(30)}  You are?" next
+    title(1, Frank)
     "@{pause(30)}C'mon,{pause(15)} can't you at least say your name?[03]" call(data_23.l_0xc683fb) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}"
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@<Fail-proof> Frank can't be beaten." next
     "@Puff,{pause(10)} puff,{pause(10)} puff" linebreak
     "  And this is{pause(15)}" linebreak
@@ -344,7 +342,7 @@ l_0xc660a6:
 
 l_0xc66175:
     newline
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@...This is my first defeat." next
     "@<Fail-proof> Frank is now just <failure> Frank." next
     "@I know you've been asking around,{pause(15)} so I'll tell you about Giant Step." next
@@ -363,7 +361,7 @@ l_0xc66175:
 
 l_0xc66353:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc663fe)}]"
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@You look much stronger.{pause(20)}  Would you like to rest?" linebreak
     "[19 02]Yes" eob
 
@@ -374,23 +372,23 @@ l_0xc66383:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc663c5)} {e(l_0xc66392)}]" goto(l_0xc66392)
 
 l_0xc66392:
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@[1C 02 01],{pause(15)} you've become stronger than I!{pause(20)}  Your adventure is just beginning..." end
 
 l_0xc663c5:
     call(data_49.l_0xc915d6) call(data_49.l_0xc91582) newline
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@[1C 02 01],{pause(15)} you're now stronger than I!{pause(20)}  Your adventure is just beginning." end
 
 l_0xc663fe:
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@What?{pause(20)}  You're a friend of [1C 02 01]'s?" next
     "@[1C 02 01] is my friend," next
     "@however I can't remember becoming a friend of a friend of [1C 02 01]'s." next
     "@Quit joking about a <Circle of Friends> and go home!" end
 
 l_0xc66469:
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@It's you again..." next
     "@Do you really think you can beat Franky's <Frankystein Mark II>?" next
     "[19 02]Yes" eob
@@ -416,7 +414,7 @@ l_0xc66523:
 
 l_0xc6653b:
     "[06 04 00 {e(l_0xc665e7)}]"
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@Hello sir, how may I help you?{pause(30)}  ...Uh...{pause(20)}  Aren't you [1C 02 01]?" next
     "@After our battle I became serious,{pause(15)} and have been working very hard." next
     "@I've even been doing some training for...{pause(15)} for..." next
@@ -424,7 +422,7 @@ l_0xc6653b:
     goto(l_0xc665e7)
 
 l_0xc665e7:
-    title(1, "Frank Fly")
+    title(1, Frank)
     "@So you made it back alive.{pause(20)}  You must have many stories to tell." next
     "@Let's get together for a drink,{pause(15)} when you have a chance so I can hear your stories." next
     "@By <a drink> I'm referring to mineral water.{pause(15)}  I'm still under age,{pause(15)} you know.{wait}{set(flag 4)}" eob
@@ -437,14 +435,14 @@ l_0xc66670:
 
 l_0xc666ea:
     "{window_open(1)}"
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@...So [1C 02 01] buddy,{pause(15)} I've found proof of a great treasure... a huge haul..." next
     "@yah,{pause(15)} hah,{pause(10)} hah...{pause(20)}" linebreak
     "  I'll show you,{pause(15)} but you're the only one.{pause(20)}  C'mon.[03]{window_closeall}" call(data_16.l_0xc5f642) "{unset(flag 307)}{set(flag 308)}" eob
 
 l_0xc66762:
     "[06 49 00 {e(data_29.l_0xc73ab9)}][06 D2 00 {e(l_0xc6681d)}]"
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@If this is a sign of what lies below,{pause(15)} I just need a little time." next
     "@My destiny is to find and dig up the buried treasure." next
     "@I'll eat garlic and work out to help strengthen myself." next
@@ -453,7 +451,7 @@ l_0xc66762:
 
 l_0xc6681d:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc66a06)}][06 02 00 {e(l_0xc668e4)}][06 65 00 {e(l_0xc66980)}]"
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@Hey [1C 02 01],{pause(15)} pal." next
     "@There was a man who insisted that he buy the golden statue,{pause(15)} so I sold it to him." next
     "@It's not that I needed the money..." next
@@ -462,7 +460,7 @@ l_0xc6681d:
     "@Bye, for now.{wait}{set(flag 101)}{set(flag 2)}" eob
 
 l_0xc668e4:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@Hey [1C 02 01],{pause(15)} pal." next
     "@There was a man who insisted that he buy the golden statue,{pause(15)} so I sold it to him." next
     "@It's not that I needed the money..." next
@@ -471,14 +469,14 @@ l_0xc668e4:
     "@Bye, for now." end
 
 l_0xc66980:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@I haven't been able to get my hands on the treasure..." next
     "@But when I do a job,{pause(15)} I do it well.{pause(20)}  I'm a{pause(10)} man{pause(5)}'s man." next
     "@When the game is over,{pause(15)} I may be a hero." next
     "@You might ignore me now,{pause(15)} but you'll see later..." end
 
 l_0xc66a06:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@Go ahead and laugh at me." next
     "@But when I do a job,{pause(15)} I do it well.{pause(20)}  I'm a{pause(10)} man{pause(5)}'s man." next
     "@When the game is over,{pause(15)} I may be a hero." next
@@ -489,17 +487,18 @@ l_0xc66a83:
     "@(The Golden Statue is glowing strangely...){sound(113)}" end
 
 l_0xc66aa4:
-    title(1, "Tracy")
-    "[06 49 00 {e(data_31.l_0xc7625e)}][06 B4 02 {e(data_22.l_0xc66bc0)}][06 B5 02 {e(data_22.l_0xc66c7d)}][06 78 02 {e(l_0xc66b33)}][06 61 00 {e(data_31.l_0xc76112)}][06 D6 01 {e(l_0xc66afe)}]@Hey,{pause(10)} bro.{pause(20)}  Did the sound wake you up?" next
+    title(1, Tracy)
+    "[06 49 00 {e(data_31.l_0xc7625e)}][06 B4 02 {e(data_22.l_0xc66bc0)}][06 B5 02 {e(data_22.l_0xc66c7d)}][06 78 02 {e(l_0xc66b33)}][06 61 00 {e(data_31.l_0xc76112)}][06 D6 01 {e(l_0xc66afe)}]@Hey,{pause(10)} bro.{pause(20)}" linebreak
+    "  Did the sound wake you up?" next
     "@Were you freaked out?{wait}{set(flag 470)}" eob
 
 l_0xc66afe:
-    title(1, "Tracy")
+    title(1, Tracy)
     "@Do you think Mom will let me stay up late tonight?" next
     "@I can't seem to fall back asleep." end
 
 l_0xc66b33:
-    title(1, "Tracy")
+    title(1, Tracy)
     "@I can only help by keeping your items here..." next
     "@I support you whole-heartedly.{pause(20)}  Don't get yourself knocked off." next
     "@...I will be strong while you're gone." next

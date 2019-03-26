@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -78,7 +76,8 @@ l_0xc72822:
     "@don't you think?" next
     "@I've started a movement" next
     "@that will stop all of the bad influences on the children of Onett." next
-    "@I call it the <Fresh Breeze Movement.>{pause(15)}  Hum de dum dum..." end
+    "@I call it the <Fresh Breeze Movement.>{pause(15)}"
+    "  [AC] Hum de dum dum... [AC]" end
 
 l_0xc72910:
     "@I'm really in a foul mood." next
@@ -113,7 +112,7 @@ l_0xc72ad6:
 
 l_0xc72af8:
     "[06 49 00 {e(l_0xc72e08)}][06 50 00 {e(l_0xc72dd0)}]@Hey{pause(10)} hey{pause(10)} hey!{pause(15)}  I'm Mayor B.H. Pirkle.{pause(15)}  It's so nice to meet you." next
-    title(1, "B.H. Pirkle")
+    title(1, Pirkle)
     "@You beat up the town bullies," next
     "@punched them out big time,{pause(10)} kicked their butts,{pause(10)} bit their heads off," next
     "@spit in their eyes,{pause(30)} and made them wet their pants." next
@@ -153,18 +152,18 @@ l_0xc72d2f:
 
 l_0xc72d6e:
     "{sound(5)}{pause(30)}" newline
-    title(1, "B.H. Pirkle")
+    title(1, Pirkle)
     "@Although it's small,{pause(15)} the key is very important." next
     "@You seem to have too much to carry." next
     "@Get rid of some stuff you don't need,{pause(15)} and come back for the key later on." end
 
 l_0xc72dd0:
-    title(1, "B.H. Pirkle")
+    title(1, Pirkle)
     "@Hey,{pause(30)} what's-your-name!" next
     "@I'm so busy with my election that I don't have time to meet with you." end
 
 l_0xc72e08:
-    title(1, "B.H. Pirkle")
+    title(1, Pirkle)
     "@Oh,{pause(15)} [1C 01 08]" next
     "@I saw a picture in the international newspaper of someone who looks like you," next
     "@but there's no way it was you." next
@@ -381,17 +380,17 @@ l_0xc738b6:
 
 l_0xc73940:
     "[06 49 00 {e(l_0xc73ab9)}][06 D2 00 {e(l_0xc73a03)}]"
-    title(1,"Lier X. Agerate")
+    title(1, Lier)
     "@I'm doing this because I trust you." next
     "@First,{pause(15)} let's go to the basement.[03]{window_closeall}{pause(60)}{window_open(1)}"
-    title(1,"Lier X. Agerate")
+    title(1, Lier)
     "@Ah!{pause(15)}  I can tell by the look on your face you don't want to hang out,{pause(10)} do you?" next
     "@That's all right.{pause(20)}  After all,{pause(15)} we are not even related." next
     "@I know you think I'm a big liar but maybe I'll surprise you!{wait}{window_closeall}" call(data_16.l_0xc5f639) "{unset(flag 31)}{set(flag 32)}" eob
 
 l_0xc73a03:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc73bcc)}]"
-    title(1,"Lier X. Agerate")
+    title(1, Lier)
     "@I'm doing this because I trust you." next
     "@First,{pause(15)} let's go to the basement." next
     "@Ah!{pause(15)}  I can tell by the look on your face you don't want to hang out,{pause(10)} do you?" next
@@ -399,7 +398,7 @@ l_0xc73a03:
     "@Someone like you should just hang around that dreamer Gerardo Montague." end
 
 l_0xc73ab9:
-    title(1,"Lier X. Agerate")
+    title(1, Lier)
     "@You're being vain, [1C 01 08]." next
     "@Life is...{pause(20)}  Not that easy." next
     "@You just saved the Earth from a crisis...{pause(15)}  Don't act so stuck up." next
@@ -422,7 +421,7 @@ l_0xc73b9d:
     "@When you grow up,{pause(15)} why don't you become my partner and we'll make lots of money." end
 
 l_0xc73bcc:
-    title(1,"Lier X. Agerate")
+    title(1, Lier)
     "@You might think me a fool but when I do a job,{pause(15)} I do it well." next
     "@I'm a{pause(15)} man{pause(10)}'s man.  I'll be a big hero." next
     "@Ignore me for now if you want..." end

@@ -4,14 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
 l_0xc7f71e:
-    title(1, "Gerardo Montague")
+    title(1, Gerardo)
     "@The Apple Kid was lost, and he was just wandering around, so I brought him here." next
     "@That was quite a while ago...{pause(20)}  Would you like some tea? " next
     "@Ah,{pause(15)} I see that you're busy." next
@@ -19,13 +17,13 @@ l_0xc7f71e:
 
 l_0xc7f7a5:
     "[06 9C 02 {e(l_0xc7f71e)}]"
-    title(1, "Gerardo Montague")
+    title(1, Gerardo)
     "@I'm not sure what will happen, but I sense big-time trouble ahead for you." next
     "@I'm going to stay here for a while and help Mr. Saturn." next
     "@It's important for a man to enjoy doing his duty." end
 
 l_0xc7f813:
-    title(1, "Gerardo Montague")
+    title(1, Gerardo)
     "@Incredible!{pause(20)}" linebreak
     "  Excellent!" next
     "@I'm not quite sure what for, but congratulations on a job well done!" next
@@ -200,7 +198,7 @@ l_0xc80000:
     call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8045b)}][06 71 00 {e(l_0xc8037f)}][06 7E 02 {e(l_0xc80027)}][06 0C 00 {e(l_0xc803ac)}][06 0D 00 {e(l_0xc803ac)}]" goto(l_0xc80027)
 
 l_0xc80027:
-    title(1, "Charlie")
+    title(1, Charlie)
     "@This is the cycle shop{pause(5)} <Punk-Sure>!" next
     "@Bicycles are so much fun and are so convenient..." next
     "@It's a lot faster than walking." next
@@ -264,7 +262,7 @@ l_0xc8034d:
     "@Yeah,{pause(10)} yeah,{pause(5)} sure, sure.{pause(20)}  You've already borrowed a bicycle." end
 
 l_0xc8037f:
-    title(1, "Charlie")
+    title(1, Charlie)
     "@Hey!{pause(15)}  Stubby legs!" next
     "[06 7E 02 {e(l_0xc80027)}][06 0D 00 {e(l_0xc803ac)}][06 0C 00 {e(l_0xc803ac)}]" goto(l_0xc80027)
 
@@ -288,7 +286,7 @@ l_0xc8042b:
     "@Well,{pause(15)} don't forget to return it...{pause(20)}  You're gonna have to sooner or later." end
 
 l_0xc8045b:
-    title(1, "Charlie")
+    title(1, Charlie)
     "@You know that two people can't ride a bike," next
     "@but did you know that you can't ride a bike" next
     "@when you are carrying an unconscious friend's stuff?" next
@@ -497,7 +495,7 @@ l_0xc81087:
 l_0xc81122:
     "[06 49 00 {e(data_39.l_0xc8159f)}][06 75 00 {e(data_39.l_0xc81318)}][06 55 01 {e(data_39.l_0xc814b9)}]"
     "@Greetings.{pause(20)}  I'm Orange Kid, the inventor." next
-    title(1,"Orange Kid")
+    title(1, Orange)
     "@Have you heard of me?{pause(20)}  I'm a bit embarrassed about my reputation." next
     "@I have a lot of inventions in development, but I'm running short of cash." next
     "@I'm basically a happy-go-lucky person,{pause(15)} so I'm not worried." next
@@ -512,4 +510,3 @@ l_0xc81248:
 
 l_0xc8124e:
     "[1C 07 02][11]{clearline}[09 02 {e(data_39.l_0xc81286)} {e(data_39.l_0xc8125d)}]" goto(data_39.l_0xc8125d)
-

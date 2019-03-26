@@ -38,7 +38,7 @@ ROM[0xC292A0] = LDA_al (0xD57A6A)
 ROM[0XC292DE] = "[08]"
 
 
-/* Fixes support for Playable Character sprites of non-uniform palettes */
+/* Fixes support for Playable Character sprites of non-uniform palettes 
 ROM[0xC07ACC] = {
 	JML (palettefix)		// 7ACC: 4C A0 F9	#JMP $F9A0 
 	NOP
@@ -88,7 +88,7 @@ palettefix: {
 
 	LDA_d	(0x02)		// A5 02	;LDA $02	# Overwritten instruction
 	JML	(0xC07AD1)	// JMP $C07ACF -> JML $C07AD1
-}
+}*/
 
 
 /* Change Cast names to uncensored versions */

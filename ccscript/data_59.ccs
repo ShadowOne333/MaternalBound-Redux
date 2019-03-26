@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -46,10 +44,10 @@ l_0xc9ddd1:
     "@The underground talking rock seems to want to talk a lot more than I do." end
 
 l_0xc9ddf8:
-    "@This is the earth's belly button!" end
+    "@This is the Earth's belly button!" end
 
 l_0xc9de0e:
-    title(1,"Mystery Rock")
+    title(1, Rock)
     "[06 A7 01 {e(data_35.l_0xc7c588)}][06 80 01 {e(l_0xc9e252)}]{music(119)}[06 02 00 {e(l_0xc9e041)}]@You finally came, [1C 01 08]." next
     "[19 05 01 01 01][19 05 01 02 01][19 05 01 06 01][1E 00 01 64][1E 04 01 64]{sound(37)}{pause(10)}@At last, you speak to me." next
     "@Listen [1C 01 08]." next
@@ -171,16 +169,16 @@ l_0xc9e613:
     call(data_48.l_0xc90d23) eob
 
 l_0xc9e619:
-    title(1,"Master Belch")
+    title(1, Belch)
     "[06 14 01 {e(data_35.l_0xc7c588)}]{music(134)}@You may have forgotten, but *Buuuuurp!*..." next
     "@I'm the return of Belch!{sound(78)}{pause(1)}" next
-    title(1,"Return of Belch")
+    title(1, Belch2)
     "@I've fought you before." next
     "{sound(78)}{pause(1)}@Peeeeyouuu!" next
     "@Don't you remember my ripe odor?" next
     "@Belch has trained more and has returned much stronger." next
     "@Buuuurp!{pause(20)}{sound(78)}{pause(1)}  Belch has also changed his name to Barf!..." next
-    title(1,"Master Barf")
+    title(1, Barf)
     "@Puke!  Vomit!  Barf, barf!  Chuck!  Chuck!" next
     "@Drown in puke and die!" next
     "@Don't you think that's an incredibly masculine taunt to throw at you?[03]" call(data_23.l_0xc68570) "[1B 03 {e(data_23.l_0xc683de)}][1F 11 04][1F 71 04 02]{set(flag 276)}{pause(1)}[1F F1 CD 04 7B 02]" eob
@@ -415,7 +413,7 @@ l_0xc9f196:
     "  from the bottom of her heart![03]{pause(60)}" newline
     "[1F 04 02]@<...Please give us strength!{prompt}" linebreak
     "@Speed this prayer" linebreak
-    "  to all the people of the earth.>[1F 04 01]{pause(150)}" eob
+    "  to all the people of the Earth.>[1F 04 01]{pause(150)}" eob
 
 l_0xc9f1fd:
     newline
@@ -447,7 +445,7 @@ l_0xc9f325:
     "  from the bottom of her heart![03]{pause(60)}" newline
     "[1F 04 02]@<...Please grant us power!{prompt}" linebreak
     "@Speed this prayer" linebreak
-    "  to all the people of the earth...>[1F 04 01]{pause(150)}" eob
+    "  to all the people of the Earth...>[1F 04 01]{pause(150)}" eob
 
 l_0xc9f389:
     newline
@@ -526,4 +524,3 @@ l_0xc9f75f:
 
 l_0xc9f780:
     "{inc}" goto(l_0xc9f75f)
-

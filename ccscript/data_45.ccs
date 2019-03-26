@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -151,7 +149,7 @@ l_0xc8ad22:
     "@Ha ha ha!{wait}{window_closeall}[1F E9 0E 04][1F 61]{set(flag 10)}" eob
 
 l_0xc8ad69:
-    title(1,"Mr. Fork")
+    title(1, Fork)
     "[06 49 00 {e(l_0xc8ae72)}][06 3A 00 {e(l_0xc8ae3b)}]@...mumble, mumble..." next
     "@Why would Mr. Spoon from the Fourside museum try to call me?" next
     "@I bet he just wants to brag about something..." next
@@ -220,7 +218,7 @@ l_0xc8b137:
 l_0xc8b158:
     "[06 49 00 {e(l_0xc8b137)}]{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8b137)}]@Oriental boy, you're so cool..." next
     "@Don't look at me like that..." next    
-    "@You're too charming!" end
+    "@You're too charming! [AC]" end
 
 l_0xc8b191:
     "[06 49 00 {e(l_0xc8b22f)}][06 10 00 {e(data_20.l_0xc65015)}][1F 41 05]"
@@ -267,7 +265,7 @@ l_0xc8b3c0:
     call(data_20.l_0xc65009) eob
 
 l_0xc8b3c6:
-    "@(It's a Myna bird!)" next
+    "@(Myyyyna biiiird!)" next
     "[1D 21 05][09 05 {e(l_0xc8b008)} {e(l_0xc8b130)} {e(l_0xc8b0d4)} {e(l_0xc8b342)} {e(l_0xc8b3f8)}]" goto(l_0xc8afad)
 
 l_0xc8b3f7:
@@ -396,8 +394,8 @@ l_0xc8b8d5:
 
 l_0xc8b9c4:
     next
-    "@What?  What?{pause(15)}  Magic Cake?" next
-    "@You came all this way just to eat my Magic Cake?" linebreak
+    "@What?  What?{pause(15)}  Magic cake?" next
+    "@You came all this way just to eat my Magic cake?" linebreak
     "[19 02]Yes" eob
 
 l_0xc8b9fe:

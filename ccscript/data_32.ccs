@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -32,17 +30,17 @@ l_0xc76fb2:
     "[06 CF 00 {e(l_0xc770b0)}][06 CE 00 {e(l_0xc7706a)}][06 CD 00 {e(l_0xc7703f)}][06 CC 00 {e(l_0xc77007)}]@I am your courage." next
     "@I follow you here in Magicant." next
     "@...My name?" next
-    title(1,"Flying Man")
+    title(1, Flying)
     "@Let's say Flying Man.[03]" eob
 
 l_0xc77007:
-    title(1,"Flying Man 2")
+    title(1, Flying2)
     "@I'll be your courage." next
     "@I'll remain unless you lose your courage." next
     "@Call me Flying Man 2.[03]" eob
 
 l_0xc7703f:
-    title(1,"Flying Man 3")
+    title(1, Flying3)
     "@I'm Flying Man 3." next
     "@Your courage hasn't died yet." next
     "@Let's go![03]" eob
@@ -50,7 +48,7 @@ l_0xc7703f:
 l_0xc7706a:
     "@I'm also your courage." next
     "@Call me Return of the Flying Man!" next
-    title(1,"Return of the Flying Man")
+    title(1, Return)
     "@...How's that?" next
     "@However... don't treat us like trash.[03]" eob
 
@@ -61,7 +59,7 @@ l_0xc770b0:
     "@This isn't courage at all, it's temerity." next
     "@If you don't understand <temerity,>{pause(15)} look it up in the dictionary." next
     "@Okay?" next
-    title(1,"Final Flying Man")
+    title(1, Final)
     "@My name's The Final Flying Man.[03]" eob
 
 l_0xc77148:
@@ -100,7 +98,7 @@ l_0xc77236:
     "@If you walk outside,{pause(15)} beware of the monsters." end
 
 l_0xc77251:
-    title(1,"Mom")
+    title(1, Mom)
     "@Oh [1C 02 01],{pause(15)} are you tired from traveling on your adventure?" next
     "[19 02]Yes" eob
 
@@ -120,7 +118,7 @@ l_0xc772c8:
     "@I'll make some [1C 01 04] for you.[03]" call(data_49.l_0xc915f4) call(data_49.l_0xc91693) "{unset(flag 383)}[1F 21 34][1F E1 1F 07 3C]" eob
 
 l_0xc772ff:
-    title(1,"Tracy")
+    title(1, Tracy)
     "@Brother [1C 02 01]!" next
     "@The <Sea of Eden> is at the end of Magicant." next
     "@Other people can't get close to it.{pause(20)}  It's a strange place." next
@@ -157,7 +155,7 @@ l_0xc774c3:
     "        " goto(l_0xc774c6)
 
 l_0xc774c6:
-    title(1,"Master Belch")
+    title(1, Belch)
     "@You destroyed my pride..." next
     "@AAaaaargh!{wait}[1F E1 1F 06 3C]" eob
 
@@ -174,11 +172,11 @@ l_0xc77529:
 
 l_0xc77544:
     "@[AC] La lalala! [AC]" next
-    title(1,"Nico")
+    title(1, Nico)
     "@My name's Nico...{pause(20)} Let's run and sing and dance!" end
 
 l_0xc77572:
-    title(1,"Picky")
+    title(1, Picky)
     "@[1C 02 01]!" next
     "@Porky took my snack!" end
 
@@ -245,15 +243,15 @@ l_0xc7779e:
     "@before he achieved his goal." end
 
 l_0xc777f2:
-    title(1,"Star Master")
+    title(1, Star)
     "@The Sea of Eden is a vortex of ultimate wisdom." next
     "@You can't go there unless you're truly ready." next
     "@It's a place where you can touch the truth of the universe for an instant." next
     "@Going there may bring sorrow.{wait}[1F E1 1F 05 3C]" eob
 
 l_0xc7786e:
-    title(1,"Star Master")
-    "@[1C 02 01], you've stood on the eight power spots of the earth." next
+    title(1, Star)
+    "@[1C 02 01], you've stood on the eight power spots of the Earth." next
     "@That was the requirement for creating this realm in your mind known as Magicant." next
     "@In Magicant,{pause(15)} there's beauty,{pause(15)} kindness,{pause(15)} sorrow,{pause(20)} and hatred." next
     "@Of course, there's an evil and violent side of you." next
@@ -309,7 +307,7 @@ l_0xc77cd0:
     "@Thank you for remembering me." end
 
 l_0xc77cdf:
-    title(1,"Porky")
+    title(1, Porky)
     "@[1C 02 01], you're so lucky..." next
     "@I envy you." next
     "@....." next
@@ -320,7 +318,7 @@ l_0xc77cdf:
     "@Let's be friends forever,{pause(15)} all right?" end
 
 l_0xc77d3a:
-    title(1,"Everdred")
+    title(1, Everdred)
     "@[1C 02 01]!" next
     "@Maybe you don't wanna hear this," next
     "@but you remind me of myself when I was young." next
@@ -385,7 +383,7 @@ l_0xc78000:
     "{set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01][1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61][1F F2 CD 00 42 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
 
 l_0xc78033:
-    "[1F 15 52 00 C5 01 01] {window_open(1)}[06 47 00 {e(l_0xc78166)}][1D 15 02 00]{swap}@Yep, this is the bus to Threek," next
+    "[1F 15 5F 01 C5 01 01] {window_open(1)}[06 47 00 {e(l_0xc78166)}][1D 15 02 00]{swap}@Yep, this is the bus to Threek," next
     "@but, ...I'm not sure if we can get there or not.{pause(15)}  The fare is $[1C 0A 00 00 00 00]." next
     "@...do you want to go?" linebreak
     "[19 02]Yes" eob
@@ -398,14 +396,14 @@ l_0xc780a1:
 
 l_0xc780b2:
     "@...Yep, I personally think it's better if you don't go." next
-    "@...I'm also not real confident about getting there.{wait}{window_closeall}[1F 1F 52 00 06]" eob
+    "@...I'm also not real confident about getting there.{wait}{window_closeall}[1F 1F 5F 01 06]" eob
 
 l_0xc780f7:
     "[1D 14 00 00 00 00][1B 03 {e(l_0xc7814b)}]{sound(118)}{pause(1)}[1D 09 00 00]{open_wallet}@Okay.{pause(20)}  Let's give it a shot." next
-    "@...I have a feeling this could get ugly, though.[03]{window_closeall}[1F 1F 52 00 06]" goto(l_0xc78000)
+    "@...I have a feeling this could get ugly, though.[03]{window_closeall}[1F 1F 5F 01 06]" goto(l_0xc78000)
 
 l_0xc7814b:
-    "@...I can't let you on if you don't pay.{wait}{window_closeall}[1F 1F 52 00 06]" eob
+    "@...I can't let you on if you don't pay.{wait}{window_closeall}[1F 1F 5F 01 06]" eob
 
 l_0xc78166:
     "[1D 15 02 00]{swap}@...This bus goes to Fourside via Threek." next
@@ -421,17 +419,17 @@ l_0xc781bd:
 
 l_0xc781ce:
     "@...If you don't have any money,{pause(15)} you should stroll around." next
-    "@Besides, walking is good for you...{wait}{window_closeall}[1F 1F 52 00 06]" eob
+    "@Besides, walking is good for you...{wait}{window_closeall}[1F 1F 5F 01 06]" eob
 
 l_0xc78208:
-    "[1D 14 00 00 00 00][1B 03 {e(l_0xc78240)}]{sound(118)}[1D 09 00 00]{open_wallet}@...Well,{pause(15)} hop aboard then!{wait}{window_closeall}[1F 1F 52 00 06]" goto(l_0xc78000)
+    "[1D 14 00 00 00 00][1B 03 {e(l_0xc78240)}]{sound(118)}[1D 09 00 00]{open_wallet}@...Well,{pause(15)} hop aboard then!{wait}{window_closeall}[1F 1F 5F 01 06]" goto(l_0xc78000)
 
 l_0xc7823f:
     eob
 
 l_0xc78240:
     "@...If you don't have any money,{pause(15)} you should stroll around." next
-    "@Besides,{pause(15)} walking is good for you...{wait}{window_closeall}[1F 1F 52 00 06]" eob
+    "@Besides,{pause(15)} walking is good for you...{wait}{window_closeall}[1F 1F 5F 01 06]" eob
 
 l_0xc7827c:
     "{set(flag 313)}[1F ED][1F 15 CD 00 43 00 FF][1F 21 3C][1F EF CD 00]" eob
@@ -443,7 +441,7 @@ l_0xc782a9:
     "[1F ED][1F 15 CD 00 46 00 FF][1F 21 3F][1F EF CD 00]{unset(flag 313)}" eob
 
 l_0xc782bd:
-    "[1F 15 52 00 C6 01 01] {window_open(1)}@...This bus continues on to Fourside." next
+    "[1F 15 5F 01 C6 01 01] {window_open(1)}@...This bus continues on to Fourside." next
     "@Do you want to get off here?" linebreak
     "[19 02]Yes" eob
 
@@ -454,17 +452,17 @@ l_0xc782f7:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc78323)} {e(l_0xc78306)}]" goto(l_0xc78306)
 
 l_0xc78306:
-    "{window_closeall}[1F 1F 52 00 06]   [1F E7 CD 00]{unset(flag 71)}[1F F2 CD 00 CF 00]{pause(1)}[1F EF CD 00]" eob
+    "{window_closeall}[1F 1F 5F 01 06]   [1F E7 CD 00]{unset(flag 71)}[1F F2 CD 00 CF 00]{pause(1)}[1F EF CD 00]" eob
 
 l_0xc78323:
-    "{window_closeall}[1F 1F 52 00 06]   [1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+    "{window_closeall}[1F 1F 5F 01 06]   [1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
 
 l_0xc78360:
     "[1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
 
 l_0xc78394:
     "{window_open(1)}@(For some reason,{pause(15)} the bus returned to Twoson.)[03]{window_closeall}{pause(30)}" newline
-    "[1F 15 52 00 C5 01 01] {window_open(1)}@...Yep!{pause(20)}  Just like I thought..." next
+    "[1F 15 5F 01 C5 01 01] {window_open(1)}@...Yep!{pause(20)}  Just like I thought..." next
     "@...Okay,{pause(15)} I'm starting to get the creeps..." next
     "@We're going back to the bus station." next
     "@Do you want to get off here?" linebreak

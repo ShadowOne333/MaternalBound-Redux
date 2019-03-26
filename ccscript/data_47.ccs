@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -281,7 +279,7 @@ l_0xc8fb05:
 
 l_0xc8fb1b:
     "{window_closetop}{pause(40)}{window_open(1)}[1F 62 00]" newline
-    title(1,"Porky")
+    title(1, Porky)
     "@I understand you guys are already claiming to be heroes.{prompt}" linebreak
     "@Well, it is a gazillion years too early for you to oppose Giygas!{prompt}" linebreak
     "@You must feel pretty stupid to keep fighting without even knowing{prompt}" linebreak
@@ -295,7 +293,7 @@ l_0xc8fb1b:
 l_0xc8fc2e:
     newline
     "{pause(80)}{window_open(1)}[1F 62 00]"
-    title(1,"Porky")
+    title(1, Porky)
     "@So, isn't this terrifying?{pause(30)}" linebreak
     "  I'm terrified, too.{prompt}" linebreak
     "@Giygas cannot think rationally any more,{prompt}" linebreak
@@ -309,7 +307,7 @@ l_0xc8fc2e:
 
 l_0xc8fd11:
     "{window_closetop}{pause(60)}{window_open(1)}[1F 62 00]" newline
-    title(1,"Porky")
+    title(1, Porky)
     "@Heh heh heh heh.{pause(30)}" linebreak
     "  You must really be" linebreak
     "  at the end of your rope.{prompt}" linebreak
@@ -340,7 +338,7 @@ l_0xc8fd11:
 
 l_0xc8ff31:
     "{window_closetop}{pause(60)}{window_open(1)}[1F 62 00]"
-    title(1,"Porky")
+    title(1, Porky)
     "@[1C 01 08]!{pause(30)} Now, I..." linebreak
     "  Well... {pause(20)}It's going to seem like" linebreak
     "  I'm running away.{prompt}" linebreak

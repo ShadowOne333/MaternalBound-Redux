@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -14,7 +12,7 @@ l_0xc7546f:
     "@Okay...{wait}{window_closeall}" call(data_24.l_0xc695ba) eob
 
 l_0xc7547d:
-    title(1, "Mom")
+    title(1, Mom)
     "[06 F1 02 {e(l_0xc755ad)}][06 83 02 {e(l_0xc755c4)}]@Wow,{pause(10)} you've become such a strong,{pause(10)} young man." next
     "@I'd like to hear all of your stories," next
     "@but I don't want to annoy you as soon as you walk through the door." next
@@ -29,11 +27,11 @@ l_0xc7552d:
     "@I'd like to look at it with you...{wait}{window_closeall}{set(flag 643)}{isset(flag 654)}[1B 02 {e(data_55.l_0xc9992f)}]{pause(60)}[1F F1 15 00 29 00]{set(flag 753)}" eob
 
 l_0xc755ad:
-    title(1, "Mom")
+    title(1, Mom)
     "@[1C 02 01],{pause(15)} could you get the phone?" end
 
 l_0xc755c4:
-    title(1, "Mom")
+    title(1, Mom)
     "@Did you finish doing everything that you wanted to?" next
     "[19 02]Yes" eob
 
@@ -55,8 +53,9 @@ l_0xc75695:
     "[1F EB 01 06][1F 15 01 00 0C 03 01]{pause(1)}[1F F2 01 00 0A 00][1F 16 0E 00 05][1F F1 0E 00 0A 00][1F 16 12 00 05][1F F1 12 00 0A 00]{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}[1F 15 92 00 06 03 01]{pause(60)}{pause(100)}[1F 15 6A 00 7A 02 01][1F 61][1F 41 0B]" call(data_36.l_0xc7dd6b) "[1F EB FF 06][1F 21 E1]{music(95)}[1F 15 8F 00 F8 02 01][1F 61][1F 15 58 01 F9 02 01][1F 61][1F 15 C1 01 FA 02 01][1F 61][1F 41 0C]{pause(60)}" call(data_58.l_0xc9c7fa) eob
 
 l_0xc75717:
+    "[06 49 00 {e(l_0xc75899)}][06 4A 00 {e(l_0xc75865)}]{isset(flag 469)}[1B 02 {e(l_0xc7576b)}][06 64 00 {e(l_0xc75827)}][06 5E 00 {e(l_0xc7579e)}]"
     title_dog(1)
-    "[06 49 00 {e(l_0xc75899)}][06 4A 00 {e(l_0xc75865)}]{isset(flag 469)}[1B 02 {e(l_0xc7576b)}][06 64 00 {e(l_0xc75827)}][06 5E 00 {e(l_0xc7579e)}]@(I've got fleas sucking me dry,{pause(15)} so I'm just going to lie still for now.)" end
+    "@(I've got fleas sucking me dry,{pause(15)} so I'm just going to lie still for now.)" end
 
 l_0xc7576b:
     title_dog(1)
@@ -80,8 +79,9 @@ l_0xc757fb:
     "@(I guess I have no choice.{pause(20)}  Let's go.)[03]{sound(16)}" call(data_22.l_0xc680f2) "{unset(flag 304)}{set(flag 444)}" eob
 
 l_0xc75827:
+    "{isset(flag 444)}[1B 02 {e(l_0xc758cc)}]"
     title_dog(1)
-    "{isset(flag 444)}[1B 02 {e(l_0xc758cc)}]@(I don't wanna go out anymore." next
+    "@(I don't wanna go out anymore." next
     "@I don't care if everyone thinks I'm a stubborn mutt.)" end
 
 l_0xc75865:
@@ -111,7 +111,7 @@ l_0xc75929:
 l_0xc75936:
     "@[1C 01 08] answered the phone." next
     "{sound(11)}{pause(20)}" call(data_16.l_0xc5e812) "@Hello,{pause(10)} it's your dad." next
-    title(1,"Dad")
+    title(1, Dad)
     "@<Make hay while the sun shines...>" next
     "@Have you ever heard of a weird saying like this?" next
     "@Just remember,{pause(15)} I'm always behind you 100%." linebreak "  Don't be afraid." next
@@ -138,7 +138,7 @@ l_0xc75b0f:
 
 l_0xc75c33:
     "[06 60 00 {e(l_0xc75f3b)}]{window_closeall}{pause(30)}{music(177)}{pause(120)}{pause(120)}{music_resume}{window_open(1)}"
-    title(1,"Porky")
+    title(1, Porky)
     "@Hey!{pause(15)}  L-{pause(15)}L-{pause(15)}Listen to what I've got to say!" next
     "@When I took Picky to the place where the meteorite landed..." next
     "[19 23 11 00 02 0E 00][1F 16 11 00 00]@Oh!{pause(20)}  Good evening ma'am.{pause(20)}  You're looking lovely as usual.  *snicker*" next
@@ -185,16 +185,16 @@ l_0xc75ebc:
     "[19 23 11 00 02 0E 00][1F 16 11 00 00]  Don't you agree,{pause(15)} ma'am?[03]{window_closeall}{pause(1)}[1F F1 0E 00 2B 00]" eob
 
 l_0xc75f3b:
-    title(1, "Porky")
+    title(1, Porky)
     "[06 5E 00 {e(l_0xc75f73)}]@Before we go,{pause(15)} why don't you say <goodbye> to your mom.{wait}{window_closeall}{pause(1)}[1F F1 13 00 2B 00]" eob
 
 l_0xc75f73:
-    title(1, "Porky")
+    title(1, Porky)
     "[1D 04 01 11][1B 03 {e(l_0xc760b7)}][06 25 03 {e(l_0xc75fb6)}]@You're not taking anything on our big adventure?" next
     "@Why don't you look around for your [1C 05 11] or something?" end
 
 l_0xc75fb6:
-    title(1, "Porky")
+    title(1, Porky)
     "@Sorry about giving you this game-type advice,{pause(15)}[19 22 01 03 2C 00][1F 13 01 00] but you should equip your weapon!" next
     "@Do you know what <equip> means?" linebreak
     "[19 02]Yes" eob
@@ -216,13 +216,13 @@ l_0xc76080:
     goto(l_0xc760b7)
 
 l_0xc760b7:
-    title(1, "Porky")
+    title(1, Porky)
     newline
     "@All right!{pause(20)}  You go out in front,{pause(15)} and I'll follow at a safe distance." next
     "@Let's get going![03]{window_closeall}{set(flag 30)}{set(flag 21)}{set(flag 466)}" call(data_22.l_0xc68174) "{unset(flag 310)}{unset(flag 301)}{unset(flag 530)}{unset(flag 531)}" eob
 
 l_0xc76112:
-    title(1, "Tracy")
+    title(1, Tracy)
     "[06 49 00 {e(l_0xc7625e)}][06 73 02 {e(l_0xc761eb)}][06 4C 00 {e(data_19.l_0xc64672)}]@I'll do everything I can to help you!{pause(20)}  Good luck on your adventure." next
     "@You might get hungry along the way,{pause(15)} so here is a [1C 05 58]." next
     "[1D 03 FF][1B 02 {e(l_0xc761dd)}][1D 0E 00 58]{set(flag 76)}" call(data_36.l_0xc7dccf) next
@@ -255,7 +255,7 @@ l_0xc7623e:
     "@Ooops!{pause(20)}  You seem to be carrying too much stuff already!" end
 
 l_0xc7625e:
-    title(1, "Tracy")
+    title(1, Tracy)
     "[06 01 03 {e(l_0xc76357)}]@Goody!{pause(20)}  My brother is back!" next
     "@You've got a lot of catching up to do with your schoolwork, *Hyork*!" next
     "@If you have any problems with your assignments,{pause(15)} I'll help you." next
@@ -329,16 +329,16 @@ l_0xc7661b:
 
 l_0xc76663:
     "[06 49 00 {e(l_0xc766c5)}][06 15 00 {e(l_0xc76689)}]"
-    title(1, "Lardna Minch")
+    title(1, Lardna)
     "@My husband is very soft-hearted." end
 
 l_0xc76689:
-    title(1, "Lardna Minch")
+    title(1, Lardna)
     "@Where in sam hill have you boys been?" next
     "@I'll have to think of a suitable punishment!" end
 
 l_0xc766c5:
-    title(1, "Lardna Minch")
+    title(1, Lardna)
     "@As usual,{pause(15)} you're wearing your grubbies!{pause(20)}  So,{pause(10)} what do you want?" next
     "@If you're looking for my pig of a son, he isn't here.{pause(20)}  Who knows where he's wandered off to." next
     "@Plus my husband went out to have some fun and never came back...{pause(30)}  Oh yes,{pause(15)} this is Mr. Prettyman." next
@@ -346,18 +346,18 @@ l_0xc766c5:
     "@You should keep in touch with him." end
 
 l_0xc7678a:
-    title(1, "Mr. Prettyman")
+    title(1, Prettyman)
     "@Salutations!{pause(20)}  You're the boy living next door." next
     "@I heard that your family is in debt.{pause(20)}  Mrs. Minch told me about it." next
     "@Well, live and learn.{pause(20)}  You just have to keep plugging away." end
 
 l_0xc76804:
-    title(1,"Porky")
+    title(1, Porky)
     "@Dad really scolded me." next
     "@Oh, my butt hurts." end
 
 l_0xc7683a:
-    title(1,"Picky")
+    title(1, Picky)
     "[06 49 00 {e(l_0xc7685a)}]@I don't wanna look at the meteorite anymore." end
 
 l_0xc7685a:
@@ -387,7 +387,7 @@ l_0xc76980:
     "@I've seen you around a lot lately.  He he he." end
 
 l_0xc7699e:
-    title(1,"Captain Strong")
+    title(1, Strong)
     "[06 49 00 {e(l_0xc76b36)}][06 69 00 {e(l_0xc76b0b)}][06 B6 00 {e(l_0xc76a1f)}]@The townspeople are in a state of confusion." next
     "@At times like this,{pause(15)} riots break out,{pause(15)} or people start acting wild," next
     "@so we police are being ultra cautious." end
@@ -417,7 +417,7 @@ l_0xc76b0b:
     "@I've been playing <MOTHER 2> lately...{pause(20)}  I'm having a tough time." end
 
 l_0xc76b36:
-    title(1, "Captain Strong")
+    title(1, Strong)
     "@So you've traveled all over the world." next
     "@I bet you didn't meet anyone stronger than I,{pause(10)} did you?" next
     "@I know that you didn't...  Wa ha ha ha!" end

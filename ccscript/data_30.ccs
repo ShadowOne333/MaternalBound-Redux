@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -87,13 +85,13 @@ l_0xc74141:
 
 l_0xc74180:
     "{isset(flag 469)}[1B 02 {e(l_0xc74207)}][06 14 00 {e(l_0xc7436c)}]"
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@Hey,{pause(10)} [1C 01 08]!" next
     "@I was too busy to investigate,{pause(15)} but I heard a child's voice on the hilltop." next
     "@I'm a busy man,{pause(15)} but when I do a job,{pause(15)} I do it well.{pause(20)}  I'm a{pause(10)} man{pause(5)}'s man." end
 
 l_0xc74207:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "[06 0A 00 {e(l_0xc7434d)}]@Hey [1C 01 08],{pause(15)} hiya buddy!" next
     "@A meteorite fell down and went boom!{pause(20)}  It was a real mess for a while." next
     "@I was fine because I always eat garlic and work out to help make my body stronger." next
@@ -106,11 +104,11 @@ l_0xc74207:
     "@Why don't you check out my work?{wait}{set(flag 10)}" eob
 
 l_0xc7434d:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@Sigh.{pause(20)}  I wonder when the cops will leave..." end
 
 l_0xc7436c:
-    title(1, "Lier X. Agerate")
+    title(1, Lier)
     "@[1C 01 08], buddy... I have something to tell you,{pause(15)} and only you." next
     "@Can you come visit me later,{pause(15)} alone?{sound(114)}" end
 
@@ -299,12 +297,14 @@ l_0xc74ce8:
     "@Yeah?{wait}{window_closeall}[1F F1 02 00 0C 00]" eob
 
 l_0xc74cf7:
-    "[06 40 00 {e(l_0xc74d41)}]@Uh (huh)... (Uh) huh..." next
-    "@You so(und) like a real whi(ner) to me." next
-    "@Don't get li(ppy),{pause(10)} or I'll kick your bu(tt)!" end
+    "[06 40 00 {e(l_0xc74d41)}]@Mm hmm... Mm hmm... *chew,{pause(10)} chew*{pause(20)}" next
+    "@You sound like a *chew*{pause(10)} whiner to me." next
+    "@Don-*chew*{pause(10)} get lippy,{pause(10)} or I'll *chew*{pause(10)} your butt!" end
 
 l_0xc74d41:
-    "@You sure are strong!{pause(20)}  You got me,{pause(15)} at least..." end
+    "@You sure are strong!" linebreak
+    "  *chew,{pause(10)} chew*{pause(20)}" linebreak
+    "  You *chew*{pause(10)} me,{pause(15)} at least..." end
 
 l_0xc74d5e:
     "@Spit spit spit{pause(15)}" linebreak
@@ -343,21 +343,21 @@ l_0xc74ef1:
     "@not just stuff you need right now." end
 
 l_0xc74f56:
-    title(1,"Mom")
+    title(1, Mom)
     "[06 5F 00 {e(l_0xc74fde)}][06 5E 00 {e(l_0xc750e3)}][06 60 00 {e(l_0xc74fec)}][06 62 00 {e(l_0xc74fb6)}][06 61 00 {e(l_0xc74fb6)}]@My land!{pause(20)}  Who could be knocking at the door at this time of night?" next
     "@Would you answer it?" end
 
 l_0xc74fb6:
-    title(1,"Mom")
+    title(1, Mom)
     "@Porky's waiting for you.{pause(20)}  You should listen to what he has to say." end
 
 l_0xc74fde:
-    title(1,"Mom")
+    title(1, Mom)
     "@Could you get that?" end
 
 l_0xc74fec:
     "{window_open(1)}"
-    title(1,"Mom")
+    title(1, Mom)
     "@I know that the dog is unreliable,{pause(15)} but you should take [1C 01 03] along." next
     "@The Cracked Bat in Tracy's room could help out at a time like this..." next
     "@No matter what anyone says,{pause(15)} you're a courageous,{pause(15)} strong boy." next
@@ -369,21 +369,21 @@ l_0xc750b3:
     "@But,{pause(15)} I think you should change out of your jammies before you leave.{wait}{window_closeall}{pause(1)}{unset(flag 749)}[1F 21 C4]" eob
 
 l_0xc750e3:
-    title(1, "Mom")
+    title(1, Mom)
     "[06 49 00 {e(data_31.l_0xc7547d)}][06 78 02 {e(l_0xc7533c)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc75124)}][06 D1 00 {e(l_0xc75124)}]@Yep,{pause(15)} looking good,{pause(15)} [1C 01 08]!" end
 
 l_0xc75124:
-    title(1, "Mom")
+    title(1, Mom)
     "[19 10 01]{rtoarg}{result_is(1)}[1B 03 {e(l_0xc75176)}][19 10 01]{rtoarg}@Any friend of [1C 02 01] is welcome in our home..." next
     "@I think it's great the way you kids have been working together." end
 
 l_0xc75176:
-    title(1, "Mom")
+    title(1, Mom)
     "[06 02 02 {e(l_0xc75262)}]{isset(flag 104)}[1B 02 {e(l_0xc751f1)}]@You're back!{pause(20)}  Don't bother yourself with talking now,{pause(15)} you look too tired." next
     "@Mothers understand these things.{pause(20)}  Eat some [1C 01 04] and scoot up to bed.[03]{window_closeall}" call(data_24.l_0xc695ba) call(data_49.l_0xc91693) "[1F 21 C4]{set(flag 514)}" eob
 
 l_0xc751f1:
-    title(1, "Mom")
+    title(1, Mom)
     "@You're hungry already?" next
     "@Why don't you have some" linebreak
     "  [1C 01 04]?" next
@@ -392,12 +392,12 @@ l_0xc751f1:
     "[1F 04 03]@[1F 04 01]T[1F 04 03]#{pause(15)}[1F 04 01]O[1F 04 03]#{pause(15)}[1F 04 01]O[1F 04 03]#{pause(15)}[1F 04 01]BAD!{wait}" call(data_49.l_0xc915d6) call(data_49.l_0xc91582) eob
 
 l_0xc75262:
-    title(1, "Mom")
+    title(1, Mom)
     "[1D 19 02][1B 02 {e(l_0xc752ce)}][06 02 00 {e(l_0xc752a3)}]@Good morning,{pause(15)} sleepy bones!{pause(20)}  Are you ready to start your adventure?" next
     goto(l_0xc752a3)
 
 l_0xc752a3:
-    title(1, "Mom")
+    title(1, Mom)
     "@I'm so proud of you!{pause(20)}  My little man is growing up too fast...{wait}{set(flag 2)}" eob
 
 l_0xc752ce:
@@ -410,7 +410,7 @@ l_0xc7531d:
 
 l_0xc7533c:
     "[06 0A 00 {e(data_31.l_0xc7546f)}]"
-    title(1,"Mom")
+    title(1, Mom)
     "@Oh,{pause(10)} [1C 02 01]!{pause(20)}" linebreak "  You finally showed up..." next
     "@There are plenty of creepy monsters running around Onett now." next
     "@The townspeople are barricaded in their homes,{pause(15)} afraid to go out." next
@@ -432,6 +432,6 @@ l_0xc7542c:
 
 l_0xc7544a:
     "{window_closeall}[1F 01 00]" call(data_23.l_0xc685da) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "{window_open(1)}"
-    title(1,"Mom")
+    title(1, Mom)
     "@Are you more relaxed?" next
     goto(data_31.l_0xc7546f)

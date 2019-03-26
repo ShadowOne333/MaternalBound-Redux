@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -20,40 +18,46 @@ l_0xc79997:
     "[1F 41 05][1F F1 E7 00 6D 00][1F 15 6A 00 6F 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 78 00 6E 00 FF][1F 15 6A 00 70 00 FF][1F 21 41]" call(data_57.l_0xc9b4b8) "[1F 1F 6A 00 06][1F 1F 78 00 06][1F 17 F7 00 0C 00 01][1F 41 06]" eob
 
 l_0xc799d7:
-    "{set(flag 11)}[1F 41 05]{set(flag 536)}{music_resume}[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]{window_closeall}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}[1F 61]{window_open(1)}" call(l_0xc79a64) "{window_closeall}{unset(flag 2)}[1F 61]{window_open(1)}" call(l_0xc79a98) "{window_closeall}{unset(flag 3)}[1F 61]{window_open(1)}" call(l_0xc79ab9) "{window_closeall}{unset(flag 4)}[1F 61]{window_open(1)}" call(l_0xc79ad7) "{window_closeall}{unset(flag 5)}[1F 61]{window_open(1)}" title(1,"Gorgeous") call(data_52.l_0xc9594d) "{window_closeall}{unset(flag 6)}[1F 61]" eob
+    "{set(flag 11)}[1F 41 05]{set(flag 536)}{music_resume}[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]{window_closeall}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}[1F 61]{window_open(1)}" call(l_0xc79a64) "{window_closeall}{unset(flag 2)}[1F 61]{window_open(1)}" call(l_0xc79a98) "{window_closeall}{unset(flag 3)}[1F 61]{window_open(1)}" call(l_0xc79ab9) "{window_closeall}{unset(flag 4)}[1F 61]{window_open(1)}" call(l_0xc79ad7) "{window_closeall}{unset(flag 5)}[1F 61]{window_open(1)}" call(gorgeoustext) "{window_closeall}{unset(flag 6)}[1F 61]" eob
 
 l_0xc79a64:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Well, what do you know?" next
     "@This little nipper took us from hell to heaven.[03]" eob
 
 l_0xc79a98:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@Ow!{pause(20)}  This means we can get out of this dump![03]" eob
 
 l_0xc79ab9:
-    title(1,"Okay")	// Drum guy
+    title(1, Okay)	// Drum guy
     "@I'm a good driver.{pause(15)}  C'mon, I'll show you.[03]" eob
 
 l_0xc79ad7:
-    title(1,"Groovy")	// Bass guy
+    title(1, Groovy)	// Bass guy
     "@All right,{pause(15)} let's move on to the next town." next
     "@I'm sure our ol' hunk o' junk will get us there...[03]" eob
 
+gorgeoustext:		// Sax guy
+    title(1, Gorgeous)
+    "@I didn't stand out and get much attention, did I?" end
+
 l_0xc79b12:
-    "[1F 1A 40 01 03]{pause(5)}[1F 1B 40 01]{pause(5)}[1F 1A 40 01 03]{pause(50)}[1F 1B 40 01][1F F1 40 01 B3 00][1F 61][1F E6 40 01][19 10 01][19 22 00 02 40 01][1F 13 00 00]{window_open(1)}@Hurry and get on!" next
+    "[1F 1A 40 01 03]{pause(5)}[1F 1B 40 01]{pause(5)}[1F 1A 40 01 03]{pause(50)}[1F 1B 40 01][1F F1 40 01 B3 00][1F 61][1F E6 40 01][19 10 01][19 22 00 02 40 01][1F 13 00 00]{window_open(1)}"
+    title(1, Nice)	// Fatty guy
+    "@Hurry and get on!" next
     "@Our tour bus is too loud for the ghosts![03]{window_closeall}[1F 15 6A 00 B4 00 01][1F EF 6A 00][1F E8 FF][1F E9 40 01][1F 61][1F 1F 6A 00 06][1F ED][1F 66 01 03 12 9B C7 00]" eob
 
 l_0xc79b98:
     "[1F 15 B9 01 09 03 01][1F 41 05]{set(flag 747)}[1F 15 6A 00 B6 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]{unset(flag 536)}{set(flag 535)}{music_resume}[1F E5 FF][1F F1 40 01 B7 00][1F 61]{unset(flag 309)}{window_open(1)}" call(l_0xc79bec) "{window_closeall}[1F F1 75 01 B8 00]{pause(60)}[1F EE 75 01][1F E8 FF][1F 67 01]" eob
 
 l_0xc79bec:
-    title(1,"Okay")	// Drums guy
+    title(1, Okay)	// Drums guy
     "@Okay, guys, here we go![03]" eob
 
 l_0xc79bff:
     "{window_open(1)}"
-    title(1,"Okay")	// Drums guy
+    title(1, Okay)	// Drums guy
     "@Hey, sidewalk!{pause(20)}" linebreak
     "  Get out of my way![03]{window_closeall}" eob
 
@@ -68,14 +72,14 @@ l_0xc79c46:
 
 l_0xc79cc8:
     "{window_open(1)}"
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Looks like we have to say goodbye for now." next
     "@This town seems pretty gloomy," next
     "@but I'm sure you can light up the place with your own little brand of sunshine...[03]{window_closeall}" eob
 
 l_0xc79d27:
     "{window_open(1)}"
-    title(1,"Okay")	// Drums guy
+    title(1, Okay)	// Drums guy
     "@Hope to see you again sometime." next
     "@Look for us to be singing at some theater in Fourside...[03]{window_closeall}" eob
 
@@ -121,10 +125,10 @@ l_0xc79f33:
 
 l_0xc7a04a:
     "[1F 1A 4F 02 03]{pause(60)}[1F 1B 4F 02]{pause(30)}[1F 1E 4F 02 06][1F 15 B6 00 72 00 01]{pause(1)}[1F E7 B6 00]{window_open(1)}"
-    title(1,"Tony")
+    title(1, Tony)
     "@[1C 02 03],{pause(20)} where are you going in the middle of the night?" next
     "{window_closeall}[1F EA B6 00][1F 61][1F E7 B6 00]{window_open(1)}"
-    title(1,"Tony")
+    title(1, Tony)
     "@You know the dorm rules, right?" next
     "@If you get caught,{pause(15)} you'll get a paddling..." next
     "@W.{pause(5)}.{pause(5)}.{pause(5)} what's wrong, [1C 02 03]." next
@@ -136,7 +140,7 @@ l_0xc7a04a:
 
 l_0xc7a1ba:
     "[1D 05 FF 24][1B 03 {e(l_0xc7a20c)}][1F 13 08 05][19 22 03 01 08 00][1F 13 03 00]{window_open(1)}"
-    title(1,"Tony")
+    title(1, Tony)
     "@I think you can get out by going over the gate..." next
     "@But you need to get some stuff to take with you.{wait}{window_closeall}" eob
 
@@ -144,9 +148,9 @@ l_0xc7a20c:
     call(data_23.l_0xc683d9) "[1F 15 B6 00 0A 01 01][1F 61][1F 1F B6 00 06][1F 17 7A 02 08 00 01]{set(flag 335)}" eob
 
 l_0xc7a22a:
-    title(1,"Tony")
+    title(1, Tony)
     "@Okay,{pause(15)} now use me as a step and climb over the gate.[03]{window_closeall}[1F EB FF 06][1F 15 51 01 0B 01 01] [1F 15 58 01 0C 01 01]{pause(1)}[1F EF 58 01][1F E8 FF][1F 61][1F E7 51 01][1F E7 58 01]{window_open(1)}"
-    title(1,"Tony")
+    title(1, Tony)
     "@Well...{pause(15)} I'll say goodbye for now." next
     "@I don't know where you're going or why," next
     "@but remember,{pause(20)} we are best friends{pause(5)} forever.[03]{window_closeall}[1F EA 51 01][1F EA 58 01][1F 61][1F ED][1F EC FF 01][1F 1E 7A 02 06][1F 15 B6 00 0D 01 01][1F 67 01][19 26 06]{unset(flag 335)}[1F 07 03]{pause(120)}{set(flag 544)}{music_resume}{unset(flag 11)}" eob
@@ -156,7 +160,7 @@ l_0xc7a2f7:
 
 l_0xc7a300:
     call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc7a2f7)}]{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Hello, this is Apple Kid." next
     "@I just wanted to let you know that I finished a pretty unique invention." next
     "@I'm not sure if it will help you or not..." next
@@ -180,7 +184,7 @@ l_0xc7a300:
 
 l_0xc7a542:
     "{window_open(1)}"
-    title(1,"Mach Pizza")
+    title(1, Mach)
     "@While delivering pizza, this weird guy asked me to help him out..." next
     "@He wanted me to deliver this to someone named [1C 02 01]" next
     "@...who is wandering around Threek." next
@@ -238,14 +242,14 @@ l_0xc7a7d9:
 
 l_0xc7a7dd:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Hello, this is Apple Kid." next
     "@I've come up with another wacky invention that I think has real potential." next
     "@Maybe you won't, but anyway..." next
     "@it's called the <Gourmet Tofu Machine.>" next
     "@It makes many different flavors of tofu." next
     "@The only problem is,{pause(15)} right now," next
-    "@it can only make strawberry tofu..." next
+    "@it can only make Strawberry tofu..." next
     "@I wasn't too happy with my last Escargo Express experience..." next
     "@So,{pause(15)} I'm having the machine delivered to you via <Careless Express>." next
     "@Hopefully, you'll get it soon.{pause(20)}  Yeah,{pause(15)} everything is..." next
@@ -260,13 +264,13 @@ l_0xc7a959:
     "@Ooops!" next
     "@...Greetings!" linebreak
     "  (It's Careless Express.)" next
-    title(1,"Careless Express")
+    title(1, Careless)
     "@Whew!{pause(15)}  I just got here from the Dusty Dune desert." next
     "@There was this sunbathing guy," next
     "@and he told me about a cave with lots of monkeys... or was it orangutans?" next
     "@Anyway,{pause(15)} he said...{pause(5)} well... uh...{pause(20)} I forgot." next
     "@Yep, I forgot... actually I forgot the stuff I was supposed to deliver, too." next
-    "@I think it was some weird machine to make strawberry tofu." next
+    "@I think it was some weird machine to make Strawberry tofu." next
     "@Yeah, I forgot it at the desert..." next
     "@I'm not going back that way, so don't ask me to get the package..." next
     "@I mean,{pause(15)} it's your package, right?" next
@@ -295,7 +299,7 @@ l_0xc7ac42:
 
 l_0xc7acb8:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[19 10 01]{rtoarg}{window_open(1)}@[1C 02 01], I haven't talked with you in ages!{pause(20)}  This is Orange Kid." next
-    title(1,"Orange Kid")
+    title(1, Orange)
     "@We're finally coming near to the end of our research on..." next
     "@how to change a boiled egg back into a raw egg." next
     "@By the way, Apple Kid is missing." next
@@ -310,7 +314,7 @@ l_0xc7acb8:
 
 l_0xc7ae41:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[19 10 01]{rtoarg}{window_open(1)}"
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Hello, it's been a while since we talked...{pause(15)} this is Apple Kid." next
     "@We're having beautiful weather here..." next
     "@I'm now at Dr. Andonuts lab in Winters." next
@@ -325,7 +329,7 @@ l_0xc7ae41:
 
 l_0xc7af57:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
-    title(1,"Apple Kid")
+    title(1, Apple)
     "@Hello!  How are you?{pause(20)}  This is Apple Kid." next
     "@I think I'm a real genius... In fact,{pause(15)} I know I'm a genius." next
     "@Why?{pause(20)}  Well, I have discovered the primary enemy of you and of all humanity." next
@@ -337,7 +341,7 @@ l_0xc7af57:
 
 l_0xc7b0a0:
     "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
-    title(1,"Orange Kid")
+    title(1, Orange)
     "@Hello!  This is Orange Kid." next
     "@Sorry I didn't call you before." next
     "@I'm still working on the way to change boiled eggs into raw eggs." next
@@ -414,11 +418,11 @@ l_0xc7b576:
     "@Kya" linebreak
     "  (Bye!)" next
     "{window_closeall}[1F F1 C7 03 7D 02][1F 61]{pause(1)}{music(13)}[1F 61]{music(14)}{pause(60)}{music(13)}{pause(60)}[1F 07 03]{pause(60)}{unset(flag 592)}[1F 15 40 00 7E 02 01][1F 61]{music_resume}[19 10 01][19 22 00 03 40 00][1F 13 00 00][1F F3 40 00 03]{pause(60)}[1F F4 40 00][1F F2 40 00 80 02][1F 61]{pause(10)}" call(l_0xc7a959) "[1F F2 40 00 7F 02][1F 61]{set(flag 745)}[1F 15 8C 01 81 02 01][1F 61][1F E7 8C 01]{window_open(1)}"
-    title(1,"Electra")
+    title(1, Electra)
     "@Hello!" next
-    "@I heard you talking about strawberry tofu." next
+    "@I heard you talking about Strawberry tofu." next
     "@I'm a maid who serves Mr. Monotoly," next
-    "@and I'm looking for strawberry tofu to give to our special guest." next
+    "@and I'm looking for Strawberry tofu to give to our special guest." next
     "@If you know anything about it,{pause(15)} please tell me!" next
     "@I've been searching and searching..." next
     "[1F EA 8C 01][1F 61]{pause(30)}" eob
@@ -491,12 +495,13 @@ l_0xc7bc96:
 
 l_0xc7bd89:
     "{unset(flag 522)}[1F 15 6A 00 C8 02 01][1F 61][1F E7 6A 00][1F 07 03]{pause(120)}{music(172)}[1F F1 DE 03 C9 02][1F F1 DF 03 CA 02][1F E9 DD 03][1F 61][1F EA 6A 00][1F F1 E0 03 CB 02][1F 61][1F E7 6A 00][1F E6 DD 03][1F E6 DE 03][1F E6 DF 03][1F 15 52 00 CC 02 01]{pause(60)}{window_open(1)}"
-    title(1,"Porky")
+    title(1, Porky)
     "@[1C 02 01], you pin-headed idiot,{pause(15)} you're just a half-step too slow!" next
     "@I'm getting outta here!" next
     "@Since Monotoly has become a plain,{pause(5)} old man again,{pause(15)} I have no more use for him." next
     "@This helicopter will really come in handy." next
-    "@Spankety-spankety! Bleh! Blehhh!{wait}{window_closeall}{pause(20)}[1F 1F 52 00 06][1F EA 6A 00][1F E9 DD 03][1F E9 DE 03][1F E9 DF 03][1F 07 03][1F 61][1F 1F 6A 00 06][1F 1E DD 03 06][1F 1E DE 03 06][1F 1E DF 03 06]{pause(12)}{set(flag 672)}{unset(flag 11)}" eob
+    "@Spankety-spankety!" linebreak
+    "  Bleh! Blehhh!{wait}{window_closeall}{pause(20)}[1F 1F 52 00 06][1F EA 6A 00][1F E9 DD 03][1F E9 DE 03][1F E9 DF 03][1F 07 03][1F 61][1F 1F 6A 00 06][1F 1E DD 03 06][1F 1E DE 03 06][1F 1E DF 03 06]{pause(12)}{set(flag 672)}{unset(flag 11)}" eob
 
 l_0xc7beb9:
     ":---------------------[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(32)}" call(data_35.l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7bf1e)}]{window_open(1)}@The power of Giant Step" call(data_35.l_0xc7c55d) goto(l_0xc7bf1e)

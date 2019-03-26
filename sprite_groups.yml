@@ -2781,13 +2781,14 @@
   Size: 32x32
   Swim Flags: [false, false, false, false, false, false, false, false, false]
 343:
-  East/West Collision Height: 0
-  East/West Collision Width: 0
-  Length: 8
-  North/South Collision Height: 0
-  North/South Collision Width: 0
+  East/West Collision Height: 8
+  East/West Collision Width: 8
+  Length: 16
+  North/South Collision Height: 8
+  North/South Collision Width: 8
   Size: 16x24
-  Swim Flags: [false, false, false, false, false, false, false, false]
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]
 344:
   East/West Collision Height: 0
   East/West Collision Width: 0
@@ -2880,11 +2881,12 @@
 355:
   East/West Collision Height: 8
   East/West Collision Width: 8
-  Length: 8
+  Length: 16
   North/South Collision Height: 8
   North/South Collision Width: 8
   Size: 16x24
-  Swim Flags: [false, false, false, false, false, false, false, false]
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]
 356:
   East/West Collision Height: 8
   East/West Collision Width: 8
@@ -3697,12 +3699,13 @@
   Swim Flags: [false, false, false, false, false, false, false, false]
 457:
   East/West Collision Height: 8
-  East/West Collision Width: 12
-  Length: 8
+  East/West Collision Width: 8
+  Length: 16
   North/South Collision Height: 8
-  North/South Collision Width: 12
-  Size: 24x16
-  Swim Flags: [false, false, false, false, false, false, false, false]
+  North/South Collision Width: 8
+  Size: 16x24
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]
 458:
   East/West Collision Height: 0
   East/West Collision Width: 0

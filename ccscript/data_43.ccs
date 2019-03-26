@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -395,7 +393,7 @@ l_0xc8824a:
 
 l_0xc882bd:
     "[1F E6 78 02] [1F 13 09 05][1F 1C 09 03]{pause(60)}[1F 1D 09]{window_open(1)}"
-    title(1,"Bubble Monkey")
+    title(1, Bubble)
     "@Kye uki kukyi" linebreak
     "  (Now she's my type...)" next
     "@Ki kukkyo uke" linebreak
@@ -441,4 +439,3 @@ l_0xc88636:
 
 l_0xc8863c:
     "[1C 07 02][11]{clearline}[09 02 {e(data_44.l_0xc88650)} {e(l_0xc885e0)}]" goto(l_0xc885e0)
-

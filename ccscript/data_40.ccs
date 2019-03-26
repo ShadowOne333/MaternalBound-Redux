@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -90,13 +88,13 @@ l_0xc82c48:
 
 l_0xc82c6b:
     "[06 8B 00 {e(data_35.l_0xc7c588)}]{music(155)}"
-    title(1,"Dept. Store Spook")
+    title(1, Spook)
     "@Gwaaagh, gwarrrgh!" next
     "@You finally made it." next
     "@This department store is gonna be your grave!{pause(20)}  Gwaaagh." next
     "@Die, and go to Hell-" next
     "@No, to Heaven![03]" call(data_23.l_0xc6855b) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{window_open(1)}"
-    title(1,"Dept. Store Spook")
+    title(1, Spook)
     "@...Even though you could beat me..." next
     "@Master Giygas will avenge me..." next
     "{pause(60)}" linebreak
@@ -202,8 +200,8 @@ l_0xc8337e:
     "@Don't you wanna be a police officer?" end
 
 l_0xc833b1:
-    "[06 49 00 {e(l_0xc834a8)}][06 8F 00 {e(l_0xc83457)}]@You boys are sneaking around, looking for Mr. Monotoly, aren't you?" next
-    "@If I catch you boys doing anything,{pause(15)} I'll arrest you--no questions asked!" next
+    "[06 49 00 {e(l_0xc834a8)}][06 8F 00 {e(l_0xc83457)}]@You kids are sneaking around, looking for Mr. Monotoly, aren't you?" next
+    "@If I catch you kids doing anything,{pause(15)} I'll arrest you--no questions asked!" next
     "@Be prepared!" next
     "[19 10 01]{rtoarg}@Got it, [1C 02 00]..." next
     "@Ha ha ha." next
@@ -220,8 +218,8 @@ l_0xc834a8:
     "@...I know better now." end
 
 l_0xc834e1:
-    title(1,"Electra")
-    "@I kept asking around for strawberry tofu, but...{wait}[1D 05 FF 8B][1B 03 {e(l_0xc83515)}]" eob
+    title(1, Electra)
+    "@I kept asking around for Strawberry tofu, but...{wait}[1D 05 FF 8B][1B 03 {e(l_0xc83515)}]" eob
 
 l_0xc83515:
     next
@@ -229,17 +227,17 @@ l_0xc83515:
     "@May I have it?" next
     "{sound(118)}{pause(10)}@(Before you could answer, she took the" linebreak
     "  <[1C 05 8B].>)" next
-    "@Now I can make strawberry tofu for my guests." next
+    "@Now I can make Strawberry tofu for my guests." next
     "@...You are so kind, I'll make some for you." next
     "@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1D 01 FF 8B]{set(flag 142)}[1F F1 B7 03 A8 02][1F 61][1F E6 B7 03][19 23 B7 03 01 FF 00][1F 16 B7 03 00]{pause(20)}{window_open(1)}"
-    title(1,"Electra")
+    title(1, Electra)
     "@My room's on the 48th floor.{pause(20)}  Don't forget to drop by!{wait}{window_closeall}[1F E9 B7 03]{unset(flag 59)}" eob
 
 l_0xc8361b:
     eob
 
 l_0xc8361c:
-    title(1,"Everdred")
+    title(1, Everdred)
     "@....." next
     "@*Wheeze, wheeze*..." next
     "@....." next
@@ -327,7 +325,7 @@ l_0xc83a6a:
 
 l_0xc83a89:
     "[06 91 00 {e(l_0xc83ab3)}]@He's breathing..." next
-    "@Has he just been playing too hard?" end
+    "@Has he just been drinking too much?" end
 
 l_0xc83ab3:
     "@Do you know him?" next
@@ -451,7 +449,7 @@ l_0xc83fcf:
 
 l_0xc83fe6:
     "@I'm Geldegarde Monotoly." next
-    title(1,"Geldegarde Monotoly")
+    title(1, Monotoly)
     "@Don't you remember me?" next
     "@I returned this building to Mr. Enrich Flavor." next
     "@Now I'm working as an elevator man." next

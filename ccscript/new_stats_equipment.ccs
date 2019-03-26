@@ -1,11 +1,8 @@
 /* Add all Stats and Resistances to the Equipment menu */
 
 import asm65816
-import ebs
-import ebpp_std
 
-/*
-NOTES:
+/*	NOTES:
 0xC1AA5D = Part of the main routine of the Equipment selection menu. When this routine exits, it closes the windows associated with the equipment menu.
 
 0xC19F29 = Seems to bring up the equipment selection menu for each character. Like the menu to see the Weapon, Body, Arms, and Other equipments the character has currently equipped.

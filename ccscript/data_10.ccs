@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -234,7 +232,7 @@ l_0xc5b666:
     "@Take care, mon!" end
 
 l_0xc5b674:
-    "@A scientific mon might be able to make good use of this here thing..." end
+    "@Ah scientific mon mig be able to mek gud use of dis ting here..." end
 
 l_0xc5b69d:
     "@So, what would you like, mon?[03]" eob

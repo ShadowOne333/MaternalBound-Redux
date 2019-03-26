@@ -5,9 +5,6 @@
  */
 
 import asm65816
-import ebs
-import ebpp_std
-
 command e(label) "{long label}"
 
 // Text Data
@@ -293,7 +290,7 @@ l_0xc94503:
     call(data_13.l_0xc5d2ed) eob
 
 l_0xc94509:
-    title(1,"Orange Kid")
+    title(1, Orange)
     "@Are you looking for that so-called genius, Apple Kid?" next
     "@As a true genius,{pause(15)} I'll tell you that he's in Burglin Park, looking for you." end
 
@@ -336,57 +333,57 @@ l_0xc94769:
     "@(Runaway Brothers tour bus.)" end
 
 l_0xc9477d:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "[06 0C 00 {e(l_0xc947e7)}][06 0D 00 {e(l_0xc947e7)}]@We--that's right--{pause(15)}we are the Runaway Brothers." next
     "@We're popular, but not rich." next
     "@We're bein' cheated by this theater,{pause(15)} and we're really deep in debt!" end
 
 l_0xc947e7:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc94870)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9484c)}]"
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@You're with a girl today.{pause(20)}  Ya must be pretty popular." next
     "@How about introducin' her to my bandmate?  He's right there." end
 
 l_0xc9484c:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice )	// Fatty guy
     "@Thanks for talking to me." next
     "@Didn't ya go off looking for some girls?" end
 
 l_0xc94870:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Hey,{pause(15)} someone was looking for ya." end
 
 l_0xc94883:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "[06 0C 00 {e(l_0xc948dc)}][06 0D 00 {e(l_0xc948dc)}]@We may be popular," next
     "@but that girl who lives at the house with the preschool is the talk of the town." next
     "@I wanna see her someday." end
 
 l_0xc948dc:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc949a2)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc949ce)}][06 29 02 {e(l_0xc94a1c)}]"
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@Hey,{pause(15)} ya came with [1C 02 02]!" next
     "@Then you deserve a present, playboy." next
     "@Here's a [1C 05 7D].{pause(20)}  You can get into our shows with this!" next
     "[1D 03 FF][1B 02 {e(l_0xc94966)}][1D 0E 00 7D]" call(data_36.l_0xc7dccf) "{wait}{set(flag 553)}{set(flag 484)}" eob
 
 l_0xc94966:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@It seems like you've got an awful lot of junk." next
     "@Get rid of somethin' and come back for the pass." end
 
 l_0xc949a2:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@Hey,{pause(15)} you're [1C 02 02]!" next
     "@A boy with a red cap seemed to be lookin' for ya." end
 
 l_0xc949ce:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@I heard you're workin' hard tryin' to find the girl who lives at the preschool." next
     "@If ya find her,{pause(15)} bring her to our concert." end
 
 l_0xc94a1c:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@With that [1C 05 7D],{pause(15)} you can even get into our dressing room." next
     "@Come with your girlfriend...  We'll be waitin'." end
 
@@ -398,7 +395,7 @@ l_0xc94a95:
     "@I'm not sure what happened,{pause(15)} but it looked like it was good news." end
 
 l_0xc94abc:
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Let's go to Threek!" next
     "@Our tour bus is too loud for any ghosts to bother us." next
     "@Do you want a ride?" linebreak
@@ -412,4 +409,3 @@ l_0xc94b06:
 
 l_0xc94b15:
     "@If ya change your mind,{pause(15)} come back anytime." end
-

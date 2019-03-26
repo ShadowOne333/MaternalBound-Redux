@@ -5,9 +5,6 @@
  */
 
 import asm65816
-import ebs
-import ebpp_std
-
 command e(label) "{long label}"
 
 // Text Data
@@ -222,9 +219,9 @@ l_0xc5ca1e:
     eob
 
 l_0xc5ca56:
-    "@I can no longer make Magic Cakes..." next
+    "@I can no longer make Magic cakes..." next
     "@But it doesn't matter because now I'm selling Magic Tarts," next
-    "@which taste even better than Magic Cakes!" next
+    "@which taste even better than Magic cakes!" next
     eob
 
 l_0xc5cab4:

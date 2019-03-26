@@ -4,14 +4,13 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
 l_0xc94b32:
-    "@Oh yeah!{pause(15)}  Let's go!{pause(20)}  Get on the bus!{wait}[1F F1 75 01 B5 00]" eob
+    "@Oh yeah!{pause(15)}  Let's go!{pause(20)}" linebreak
+    "  Get on the bus!{wait}[1F F1 75 01 B5 00]" eob
 
 l_0xc94b57:
     "[06 D3 00 {e(l_0xc94bad)}][06 0D 00 {e(l_0xc94b8e)}][06 0C 00 {e(l_0xc94b8e)}]@I heard [1C 02 02] was kidnapped, but it's still unconfirmed." end
@@ -161,10 +160,10 @@ l_0xc953bf:
     "@I'm so excited!{pause(20)}  I might just wet myself.{pause(20)}  My heart is going pitter patter!" end
 
 l_0xc953f7:
-    title(1,"Nice")	// Fatty guy
-    "[06 03 00 {e(l_0xc954b3)}][06 3F 01 {e(l_0xc954b3)}]@Shaba do wap, diddly dee da.{pause(20)}  Shaba di doo bee, bop wah." next
+    title(1, Nice)	// Fatty guy
+    "[06 03 00 {e(l_0xc954b3)}][06 3F 01 {e(l_0xc954b3)}]@[AC] Shaba do wap, diddly dee da.{pause(20)}  Shaba di doo bee, bop wah." next
     "@I got those debt blues," linebreak
-    "  hm mm mm." next
+    "  hm mm mm. [AC]" next
     "@If I had 10,000 dollars,{pause(15)} I could pay off my debts and move on to the next town." next
     "@I wonder if our bus still runs.{pause(20)}  It may be rusted out..." end
 
@@ -173,12 +172,12 @@ l_0xc954b3:
 
 l_0xc954e1:
     "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
-    title(1,"Nice")	// Fatty guy
+    title(1, Nice)	// Fatty guy
     "@Don't try to use your play money here, kid." next
     "@Oh... my... gosh...!{pause(20)}  That's not real money,{pause(15)} is it?{pause(15)}  Wow!" end
 
 l_0xc95532:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "[06 03 00 {e(l_0xc9569a)}][06 3F 01 {e(l_0xc9560b)}]@Well,{pause(15)} yeah, in the old days,{pause(15)} there was lots o' cute girl dancers and acts at this theater." next
     "@'cept now,{pause(15)} we're the only act playin' here." next
     "@We even gone into debt here,{pause(15)} so we're pretty near stuck, hyuk, hyuk, hyuk." next
@@ -203,20 +202,20 @@ l_0xc95673:
     "@This is your chance fer a once in a lifetime event.{wait}{unset(flag 319)}{set(flag 3)}" eob
 
 l_0xc9569a:
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@Ya got a once in a lifetime opportunity.{pause(20)}  How 'bout watchin'{pause(15)} one more show?" end
 
 l_0xc956d6:
     "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
-    title(1,"Lucky")	// Skinny guy
+    title(1, Lucky)	// Skinny guy
     "@Well, hello!  Ya got cash!{pause(20)}  And some nice stuff ta boot!  Hyuk, hyuk, hyuk." end
 
 l_0xc9571e:
-    title(1,"Okay")	// Drum guy
+    title(1, Okay)	// Drum guy
     "[06 03 00 {e(l_0xc9575e)}][06 3F 01 {e(l_0xc9575e)}]@Hey,{pause(15)} ya get to see our show, you lucky kid!{pause(20)}  I hope ya pay attention." end
 
 l_0xc9575e:
-    title(1,"Okay")	// Drum guy
+    title(1, Okay)	// Drum guy
     "@That was a great gig!" next
     "@We can't be this good all the time, can we? " end
 
@@ -227,34 +226,34 @@ l_0xc95786:
     "@he he he." end
 
 l_0xc957cb:
-    title(1,"Gorgeous")	// Sax guy
+    title(1, Gorgeous)	// Sax guy
     "[06 03 00 {e(l_0xc95881)}][06 3F 01 {e(l_0xc95881)}][06 02 00 {e(l_0xc957ff)}]@I wrote the lyrics to most of the Runaway Brothers songs." next
     goto(l_0xc957ff)
 
 l_0xc957ff:
-    "@Money, {pause(20)}that's what I want{pause(20)}" linebreak
+    "@[AC] Money, {pause(20)}that's what I want{pause(20)}" linebreak
     "  money, {pause(20)}that's what is hot{pause(20)}" linebreak
     "  money, {pause(20)}that's what I want" next
     "@money, {pause(20)}it's what we ain't got 'cept freedom, freedom," next
-    "@freedom is what we've really sought!{wait}{set(flag 2)}" eob
+    "@freedom is what we've really sought! [AC]{wait}{set(flag 2)}" eob
 
 l_0xc95881:
-    "@Cash, {pause(20)}that's what I want{pause(20)}" linebreak
+    "@[AC] Cash, {pause(20)}that's what I want{pause(20)}" linebreak
     "  cash, {pause(20)}that's what is hot{pause(20)}" linebreak
-    "  cash, {pause(20)}that's what I want" next
+    "  cash, {pause(20)}that's what I want [AC]" next
     "@...hey, I just made up a new song." end
 
 l_0xc958d7:
     "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
-    title(1,"Gorgeous")	// Sax guy
+    title(1, Gorgeous)	// Sax guy
     "@Wow!  10,000 dollars!{pause(20)}" linebreak
     "  I can make another song now." next
-    "@Ten G's,{pause(20)}  ten G's.{pause(20)}" linebreak
+    "@[AC] Ten G's,{pause(20)}  ten G's.{pause(20)}" linebreak
     "  That's dollars,{pause(20)} baby, dollars.{pause(20)}" linebreak
-    "  Yeah yeah yeah." end
+    "  Yeah yeah yeah. [AC]" end
 
 l_0xc9594d:
-    title(1,"Groovy")	// Bass guy
+    title(1, Groovy)	// Bass guy
     "[06 03 00 {e(l_0xc95988)}][06 3F 01 {e(l_0xc95988)}]@I want some bread." next
     "@I need the coinage." next
     "@I want more dough all the time." end
@@ -264,7 +263,7 @@ l_0xc95988:
 
 l_0xc959a5:
     "[19 19 00 00]{swap}{result_is(180)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
-    title(1,"Groovy")	// Bass guy
+    title(1, Groovy)	// Bass guy
     "@That is exactly what I want." next
     "@I can't believe that you have that much..." end
 
@@ -272,7 +271,7 @@ l_0xc959db:
     "[06 25 02 {e(l_0xc95ba0)}]" goto(l_0xc959e2)
 
 l_0xc959e2:
-    title(1,"Mr. Poochyfud")
+    title(1, Poochyfud)
     "[06 77 00 {e(l_0xc95a5f)}]@The Runaway Brothers owe me a lot of money." next
     "@They'll stay here until they pay me back." next
     "@They might be here for 100 years," next
@@ -287,7 +286,7 @@ l_0xc95a8d:
 
 l_0xc95aa0:
     "{isset(flag 319)}[1B 02 {e(l_0xc95ba0)}][19 10 01][19 22 00 02 FD 00]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc95b64)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc95b64)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc95b64)}]{sound(118)}[19 23 FD 00 01 01 00][1F 16 FD 00 00]"
-    title(1,"Mr. Poochyfud")
+    title(1, Poochyfud)
     "@Yipes!{pause(60)}  You surprised me.{pause(20)}  Now I'm not sure what to do." next
     "[1D 01 FF B4]@I got the money, of course,{pause(15)} and now the Runaway Brothers are free to leave." next
     "@I've got no complaints now that I have my money.[03]{set(flag 119)}{set(flag 309)}{unset(flag 624)}" goto(data_34.l_0xc799d7)
@@ -296,12 +295,12 @@ l_0xc95b63:
     eob
 
 l_0xc95b64:
-    title(1,"Mr. Poochyfud")
+    title(1, Poochyfud)
     "@W-what is that?!{pause(15)}" linebreak      "  Let me see it closer up!" linebreak
     "  Right{pause(5)} by{pause(5)} my{pause(5)} face{pause(5)}!" end
 
 l_0xc95ba0:
-    title(1,"Mr. Poochyfud")
+    title(1, Poochyfud)
     "[06 3F 01 {e(l_0xc959e2)}]@Pardon?{pause(30)}  You want to talk about money?" next
     "@How about later, after the show, even if we're talking big bucks." next
     "@I've got definite rules about how I handle my money matters..." end
@@ -310,7 +309,7 @@ l_0xc95c0e:
     "[06 55 00 {e(l_0xc960d7)}][06 0C 00 {e(l_0xc95f0a)}][06 0D 00 {e(l_0xc95df9)}][06 42 00 {e(l_0xc95dc6)}]"
     "@Wah ha ha ha ha!{pause(20)}" linebreak
     "  Why don't we chat later-after we've locked horns![03]" call(data_23.l_0xc6846b) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}@Yes, I'm Everdred, boss of Burglin Park." next
-    title(1,"Everdred")
+    title(1, Everdred)
     "@When I jumped off the roof,{pause(15)} I twisted my ankle." next
     "@Anyway, I lost and nothing will change that." next
     "@You know,{pause(15)} you're pretty strong." next
@@ -328,26 +327,26 @@ l_0xc95dc6:
 
 l_0xc95df9:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc95e73)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc95ea5)}]"
-    title(1,"Everdred")
+    title(1, Everdred)
     "@First, you must take her to her parents.{pause(20)}  They're really worried." next
     "@I also have something to give you,{pause(15)} so be sure to come back here." next
     "@Promise?{pause(20)}  All right." end
 
 l_0xc95e73:
-    title(1,"Everdred")
+    title(1, Everdred)
     "@[1C 01 1E]!" next
     "@I thought you were with your little hero, the kid in the red cap." next
     "@You seem cold." end
 
 l_0xc95ea5:
-    title(1,"Everdred")
+    title(1, Everdred)
     "@I heard that you've been pretty proud of yourself since you saved [1C 02 02]'s life." next
     "@Think about it,{pause(15)} you didn't actually save her." next
     "@Come back when you've accomplished something." end
 
 l_0xc95f0a:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc960ab)}]"
-    title(1,"Everdred")
+    title(1, Everdred)
     "@I was going to ask you to join me,{pause(15)} but I know you'll refuse." next
     "@It's written all over your face." next
     "@I was gonna give you this money if you became my lackey," next
@@ -363,25 +362,25 @@ l_0xc95f0a:
 
 l_0xc9605d:
     "{pause(60)}" linebreak
-    title(1,"Everdred")
+    title(1, Everdred)
     "{sound(5)}{pause(30)}@Your backpack is filled with junk.{pause(20)}  Get rid of something!" next
     "@I'll put the money in a safe place until you get back." end
 
 l_0xc960ab:
-    title(1,"Everdred")
+    title(1, Everdred)
     "@I need to talk to [1C 02 01]." next
     "@Even if you're his friend,{pause(15)} I won't talk to you." end
 
 l_0xc960d7:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc960ab)}]"
-    title(1,"Everdred")
+    title(1, Everdred)
     "@Please use the 10,000 dollars any way you wish." next
     "@There's no use in trying to give it back to me!{pause(20)}" linebreak
     "  Just give it up and take it!" end
 
 l_0xc96124:
     "[06 49 00 {e(l_0xc96267)}][06 CA 00 {e(l_0xc961d1)}]@Welcome to Mach Pizza!" next
-    title(1,"Mach Pizza")
+    title(1, Mach)
     "@We don't sell pizza here.{pause(20)}  We only deliver." next
     "@Let me give you our number so you can place an order sometime." next
     "@The best pizza is Mach Pizza.{pause(20)}  The number is... *psst psst psst*." next
@@ -473,4 +472,3 @@ l_0xc96625:
 
 l_0xc96650:
     " chubs." eob
-

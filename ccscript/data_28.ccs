@@ -4,9 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import ebs
-import ebpp_std
-
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -210,7 +208,7 @@ l_0xc70bff:
 
 l_0xc70c4d:
     "@I don't think there is anything else you need to do in this town." next
-    "@It's okay of you stay, but it's really okay if you leave..." call(data_29.l_0xc726cb) eob
+    "@It's okay if you stay, but it's really okay if you leave..." call(data_29.l_0xc726cb) eob
 
 l_0xc70c8d:
     "@There's a tunnel northwest of this town." next
