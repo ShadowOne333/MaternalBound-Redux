@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -258,56 +259,69 @@ l_0xc5c03c:
     eob
 
 l_0xc5c05f:
-    "@Hissss, Red Snake... come on!" next
+    "@Hissss, Red Snake! C'mon!" next
+    title(1, Snake)
     "@Kissss of Fire! Armpit hair fertilizer!" linebreak
     "  Yesssssss!" next
     eob
 
 l_0xc5c0ad:
+    title(1, Snake)
     "@Yesssss, you got ssssome good sssstuff!" end
 
 l_0xc5c0cb:
+    title(1, Snake)
     "@Oh, no..." next
     "@You dissssappoint me..." end
 
 l_0xc5c0e3:
+    title(1, Snake)
     "@What issss it you want to buy?[03]" eob
 
 l_0xc5c0f3:
+    title(1, Snake)
     "@Hisssss, here isssss" linebreak
     "  your [1C 05 00]!" next
     eob
 
 l_0xc5c10f:
+    title(1, Snake)
     "@Who issss going to carry thisssss?[03]" eob
 
 l_0xc5c125:
+    title(1, Snake)
     "@Oh, no..." next
     "@You dissssappoint me..." next
     eob
 
 l_0xc5c13e:
+    title(1, Snake)
     "@Oh, no..." next
     "@You dissssappoint me...  You don't have enough money..." next
     eob
 
 l_0xc5c161:
+    title(1, Snake)
     "@You are carrying too much ssssstuff" next
     "@Ssssell it, or tossss it, and come again!" end
 
 l_0xc5c192:
+    title(1, Snake)
     "@Thankssssss!" next
     eob
 
 l_0xc5c19d:
+    title(1, Snake)
     "@Thanksssss!" next
     eob
 
 l_0xc5c1a7:
+    title(1, Snake)
     "@Can I do anything elsssse for you?" linebreak
     eob
 
 l_0xc5c1be:
+    title(1, Snake)
     "@You have too many thingssss to carry." next
     "@Can anyone elsssse carry it?" linebreak
     eob

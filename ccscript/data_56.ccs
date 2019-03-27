@@ -373,7 +373,9 @@ l_0xc9ac6f:
     "@Don't try to come in... especially if you don't need to use the bathroom!{wait}{window_closeall}" eob
 
 l_0xc9acae:
-    "{sound(111)}{pause(40)}{window_open(1)}@I wonder why I'm in this rest room right here." next
-    "@Just who am I?{pause(10)}  What is life all about?..." next
-    "@Oh, I'm sorry.{pause(20)}  Did I make you curious?{pause(15)}  I'm not dangerous.  Don't worry.{wait}{window_closetop}" eob
-
+    "{sound(111)}{pause(40)}{window_open(1)}@Hmm,{pause(20)} what exactly am I doing in a restroom in a place like this?" next
+    "@And just who am I?{pause(10)}" linebreak
+    "  What is life all about?..." next
+    "@Oh, I'm sorry.{pause(20)}" linebreak
+    "  Did I make you curious?" next
+    "@I'm really just some unimportant guy.{wait}{window_closetop}" eob

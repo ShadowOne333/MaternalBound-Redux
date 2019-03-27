@@ -52,12 +52,15 @@ l_0xc575f8:
     "@But now I don't know why I did." end
 
 l_0xc5762c:
-    "[06 50 01 {e(l_0xc576e0)}]@I am not sure if it was the <Dungeon Man,> but..." next
+    "[06 50 01 {e(l_0xc576e0)}]"
+    title(1, Warrior)
+    "@I am not sure if it was the <Dungeon Man,> but..." next
     "@there is a strange looking tower to the northwest." next
     "@...This key I picked up a little while ago shall maybe open the tower." next
     "@You may have it, I do not need it.[1D 03 FF][1B 02 {e(l_0xc57718)}][03][1D 0E 00 C0][1B 05]" call(data_36.l_0xc7dcb6) "{set(flag 336)}{wait}{window_closeall}{isset(flag 691)}[1B 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_24.l_0xc692f7) eob
 
 l_0xc576e0:
+    title(1, Warrior)
     "@I'm not sure if it was the <Dungeon Man>..." next
     "@There's a strange looking tower to the northwest." end
 
@@ -82,7 +85,9 @@ l_0xc577c5:
     "@(The door's already opened.)" end
 
 l_0xc577d8:
-    "[06 DA 00 {e(l_0xc57911)}]@A scary place called Deep Darkness is on the other side of the river." next
+    "[06 DA 00 {e(l_0xc57911)}]"
+    title(1, Warrior)
+    "@A scary place called Deep Darkness is on the other side of the river." next
     "@The monsters are very strong..." next 
     "@And you can lose your health just by wandering in the swamp." next
     "@Do you want to cross the river,{pause(15)} even though you know it's a stupid idea?" next
@@ -104,6 +109,7 @@ l_0xc578b3:
     "@It is a different story if you have a submarine.{wait}{set(flag 151)}{set(flag 762)}" eob
 
 l_0xc57911:
+    title(1, Warrior)
     "@You returned from exploring the Deep Darkness?" next
     "@I cannot believe you made it back alive." end
 
