@@ -428,7 +428,8 @@ l_0xc76b87:
 
 l_0xc76bd2:
     "@Well,{pause(15)} the riot's over.{pause(15)}  Now I can move on to parking enforcement!" next
-    "@Hooray!{pause(15)}  Life is good.{pause(20)}  Dum dee dee dee..." end
+    "@Hooray!{pause(15)}  Life is good.{pause(20)}" linebreak
+    "  [AC] Dum dee dee dee... [AC]" end
 
 l_0xc76c29:
     "[06 69 00 {e(l_0xc76c55)}]@Man,{pause(15)} am I steamed...{pause(20)}  Don't even try talking to me." end

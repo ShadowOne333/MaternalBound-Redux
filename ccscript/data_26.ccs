@@ -149,7 +149,9 @@ l_0xc6cb97:
     "@Kekye koo kikkro" linebreak
     "  (Thanks for taking care of my husband the other day...)" next
     "@(Oh yes, we finally tied the knot...)" next
-    "{window_closeall}{pause(30)}[1F 16 69 02 05]{pause(30)}{window_open(1)}@Kooki kekye ki!" next
+    "{window_closeall}{pause(30)}[1F 16 69 02 05]{pause(30)}{window_open(1)}"
+    title(1, Monyeki)
+    "@Kooki kekye ki!" next
     "@(Honey, don't just stand there with your mouth open, say hello!)[03]{window_closeall}" eob
 
 l_0xc6cc31:
@@ -505,4 +507,5 @@ l_0xc6dd1d:
 l_0xc6de7b:
     "[06 0A 00 {e(data_27.l_0xc6df35)}][06 8F 00 {e(data_27.l_0xc6df43)}]@This elevator is only for Master Porky's use." next
     "@It goes directly to the 47th floor." next
-    "@Quit staring at my buns... why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)
+    "@Quit staring at my buns..." next
+    "@Why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)

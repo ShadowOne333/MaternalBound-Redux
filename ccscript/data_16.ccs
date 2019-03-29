@@ -91,7 +91,7 @@ l_0xc5ea45:
     "[1F 67 01][19 22 05 01 01 00][1F 13 05 00]{window_open(1)}[19 22 01 01 05 00][1F 13 01 00]"
     title(1, Porky)
     "@[1C 02 01]!" next
-    "@Do you hear a buzzing noise that sounds like a bee flying around?" next
+    "@Do you hear a buzzing noise that sounds like a beetle flying around?" next
     "[19 02]Yes" eob
 
 l_0xc5ea8e:
@@ -430,6 +430,7 @@ l_0xc60006:
     "[19 10 01]@" call(data_37.l_0xc7e6c5) ", we also run an inn here." call(data_49.l_0xc91693) eob
 
 l_0xc6002c:
+    title(1, George)
     "@Thanks for all your help." next
     "@It's a small house, but please stay the night.[03]" call(data_48.l_0xc90f7d) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 2C][06 F5 02 {e(l_0xc6005f)}]" eob
 

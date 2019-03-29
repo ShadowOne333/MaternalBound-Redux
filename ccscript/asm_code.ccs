@@ -13,7 +13,7 @@ ROM[0xC435BF] = ADC_i(0x84BE)
 ROM[0xC2B3AA] = LDA_i(0005)
 
 /* Battle menu move Mirror command to the left */
-ROM[0xC2381F] = LDX_i (0x000B)
+ROM[0xC2381F] = LDX_i(0x000B)
 
 /*Change PSI Rockin to PK Rockin */
 ROM[0xC1C415] = byte [0] 0x26
@@ -37,59 +37,38 @@ ROM[0xC292A0] = LDA_al (0xD57A6A)
  This one doesn't leave you outside of the Monotoly building, but rather in the Fourside Park, as if you used Teleport. This effectively frees up one teleport location to use for another one. Besides, the Smoke event is still unused in the main game, so no loss there. */
 ROM[0XC292DE] = "[08]"
 
-
-/* Fixes support for Playable Character sprites of non-uniform palettes 
-ROM[0xC07ACC] = {
-	JML (palettefix)		// 7ACC: 4C A0 F9	#JMP $F9A0 
+/* Crack for use in real hardware despite of region */
+ROM[0xC0281D] = {		//"[EA EA]"
+	NOP
 	NOP
 }
 
-palettefix: {
-	STA_x	(0x2A42)	// 9D 42 2A	;STA $2A42,X	# Overwritten instruction
-	LDA_d	(0x02)		// LDA $02
-	PHA
+ROM[0xC083A2] = BRA(0x0E)	//"[80]"
+ROM[0xC083AD] = BRA(0x03)	//"[80]"
+ROM[0xC0A12D] = BRA(0x0C)	//"[80]"
+ROM[0xC1FFE7] = {		//"[EA A9 00 00]"
+	NOP
+	LDA_i(0x0000)
+}
 
-	LDY_i	(0x0003)	// LDY #$0003
-	LDA_dly	(0x0E)		// LDA [$0E],Y	# Get palette byte.
-	AND_i	(0x00FF)	// AND #$00FF
-	STA_d	(0x02)		// STA $02
+ROM[0xC3FDD6] = {		//"[EA A9 00 00 80]"
+	NOP
+	LDA_i(0x0000)
+	BRA(0x15)
+}
 
-	LDY_i	(0x0002)	// LDY #$0002 
-	LDA_dly	(0x0E)		// LDA [$0E],Y	# Get sprite size byte. $0e/ $10 can now be used.
-	AND_i	(0x0004)	// AND #$0004
-	BNE	(0x02)		// BNE +2 # if nonzero, skip next instruction(s)
-	INC
-	INC			// INC # Our loop counter is now either 2 or 4
-	TAY
+/* Region FIX */
+ROM[0xC0A141] = BRA(0x0C)	//"[80]"
 
-	LDA_x	(0x112E)	// LDA $112E,X
-	SEC
-	SBC_i	(0x0003)	// SBC $#0003 # so after our first +5 we are looking at index 2 of the 5 bytes
-	STA_d	(0x0E)		// STA $0e
-	LDA_x	(0x116A)	// LDA $116A,X
-	STA_d	(0x10)		// STA $10
 
-	SEP	(0x30)		// SEP #$30	# BEGIN 8-BIT MODE
+/* Pointer to Death Graphics data [A9 AF CF 85 0E A9 E1 00 85 10] */
+ROM[0xC4C32F] = ASMLoadAddress0E(death_graphics) // Redirect to new Death graphics
+/* Also requires to change the pointer at 0xC4C388 manually
+[A9 E8 D5 85 0E A9 E1 00 85 10] (Death graphics arragement pointer) so that the tiles are not messed up */
+// Given how CoilSnake compiles the ROM, this change is not applied during compilation, as CoilSnakes overwrites whatever data has been put in the pointers with the data CoilSnake uses for the Death image module, so you have to search and repoint the data manually after the ROM is compiled in a Hex editor in order for Jeff's Death screen to be restored.
 
-	LDA_d	(0x0E)		// LDA $0e # _begin loop_
-	CLC
-	ADC_8	(0x05)		// ADC #$05 # To next entry in sprite component table (size: 5 bytes)
-	STA_d	(0x0E)		// STA $0E
-	LDA_dl	(0x0E)		// LDA [$0E]
-	AND_8	(0xF0)		// AND #$F0
-	ORA_d	(0x02)		// ORA $02
-	STA_dl	(0x0E)		// STA [$0E]
-	DEY			// DEY # decrement and check counter
-	BNE	(0xEE)		// BNE _begin loop_
-
-	REP	(0x30)		// REP #$30	# END 8-BIT MODE
-	PLA
-	STA_d	(0x02)		// STA $02
-
-	LDA_d	(0x02)		// A5 02	;LDA $02	# Overwritten instruction
-	JML	(0xC07AD1)	// JMP $C07ACF -> JML $C07AD1
-}*/
-
+death_graphics:
+    "[3F 00 3F FF 01 0F 0F 46 87 07 00 F0 46 FF F8 00 FF 8F 00 50 47 00 FF 01 FF 00 46 7F 80 91 00 70 46 FF 00 47 00 FF 00 0F 46 FF 9F 90 00 6F 47 3B 3C 47 C0 FF 47 FE 01 B0 00 D0 46 FC DC 00 FC 47 03 FF 47 7E 46 47 81 FF 47 FF BF 47 0F FF 47 87 07 4F F8 FF DD 00 DE 91 00 CE 45 FF BF 02 9F 9F FF 8E 01 71 01 6F 9F 46 FE 01 01 DE 05 46 00 FF 09 14 EB 6E 46 6E 5E 7E 5E 6E 5E 41 76 4E 05 56 10 18 81 81 FF 44 99 E7 0B 91 EF 18 E7 DF DF 6F FF 6F 6F DF 4F 27 FF 01 4F BF 41 6F 9F 01 4F BF 27 FF 45 3B 3C 03 3F 30 3C 20 47 C0 FF 19 C6 7D F0 0D D6 0D DE 35 B6 4B E6 01 01 24 25 3C 7C 83 3C C3 0C F3 3C C3 7E 81 42 3C C3 45 DC FC 02 FC 4C FC B0 02 6F 08 30 A9 20 B9 76 FF 30 B9 00 22 81 03 46 00 00 B9 41 38 C7 03 7E 81 38 C7 41 00 FF 0F 81 FF C7 FF 30 00 60 40 40 00 C3 83 C7 87 8F 8F 23 9F 00 C0 41 FF 80 06 FF 03 FC 07 F8 0F F0 41 1F E0 E0 24 3C 00 24 18 3C 00 98 A6 99 C1 9F A3 E9 F1 E5 E1 18 E7 3C C3 24 C3 FE 01 E5 02 BB 44 FD 02 ED 12 4E 02 04 02 03 22 01 03 21 21 B0 B1 41 F8 F9 41 01 FF 41 00 FF 03 20 DF B0 4F 41 F8 07 16 CF 8F C7 87 43 03 E0 40 B0 80 BC A0 9F D0 D0 E3 0F F0 07 F8 83 FC 80 84 00 F1 09 E0 FF FC FF B1 8D FD C1 FE FE 23 00 09 01 00 81 00 00 FE AD 52 C1 3E 89 01 0E 15 01 FF B1 B1 21 21 03 01 04 02 4E 03 FC 05 FB 49 4F 03 B0 4F 20 DF C4 03 34 A4 03 59 13 FF FF FA 00 F0 0F 86 0D 34 4F C8 77 F4 1C 8B 17 1B 64 00 FF 41 0F F0 41 7F 80 19 1C E3 1F E0 7F 80 DE 01 8E A1 7A F9 36 FD 16 FD 8E E1 7A 91 B0 4D 00 FF A0 5F C3 02 F9 01 FC 03 A3 02 F8 01 FC 03 43 87 07 07 8F 0E 9F 18 BE 30 78 60 89 00 58 C3 03 5C 07 80 FF F8 FF FC FF F8 FF A3 03 31 00 C0 86 00 1A 46 00 FF 41 7F 80 02 FF 00 F8 8A 00 16 46 00 FF 0F 2A 44 D4 60 E3 30 3D 13 19 0E 37 1E 43 24 33 44 41 7F 80 03 3F C0 1F E0 83 02 FA 13 3F C0 7C 80 A8 45 76 0D AF 18 59 B0 30 E0 D8 F0 8C 48 94 4C 41 FC 03 A3 04 56 A5 02 F8 06 7C 03 9F FF BF FF 9F BA 04 05 02 50 60 70 43 40 20 04 40 70 40 50 60 47 80 FF 23 00 01 0F 0F 25 7F C4 04 C5 83 00 BD 84 03 B5 03 7F 80 0F F0 83 00 AD 01 FE FE 27 FF 83 04 E2 A3 04 1E 43 FF 00 83 04 F2 E0 35 90 98 67 10 2F 30 8F 91 C8 CE 11 1C 2B 20 16 10 FF 00 78 80 3F C0 9F 60 CE 31 1C E3 38 C7 10 EF 1A 36 C5 1D DB 3B 49 81 99 81 B0 88 6C 18 88 00 FE 01 3D 02 FB 04 41 F9 06 03 F8 07 78 87 C5 04 12 A3 04 C4 83 04 EA 01 70 70 A9 04 CE 83 04 FA 01 70 8F 85 05 3E C3 05 4D 23 FE 87 05 4C 01 70 8F 42 FE 01 83 05 5C 0D 78 60 BE 30 5F 98 8F CE F3 C3 EC F0 FB FC 83 04 05 C5 03 FC 00 FC CA 00 26 00 C0 41 00 FF 05 C0 FF FF C7 07 BC 84 05 A4 C9 00 76 C9 00 21 C4 00 93 83 05 9D 8E 00 6F 00 C0 86 04 0A 83 00 AF 83 00 1F 01 C0 3F 46 00 FF 01 02 02 25 00 83 01 0F 83 00 1F 01 02 FD D1 04 1E A5 05 A4 04 7F FF E2 E0 3C B8 05 AF E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 F9 DA 08 17 F1 EA 00 23 91 01 0E F0 5F 02 20 11 FF C3 FF 42 FF 00 3C 00 C3 5A 00 52 BD 42 E7 5A 00 FF 46 7E 81 F0 60 02 A0 0E 24 7E 3C 4A 36 99 A7 47 7F 88 BA 1A 0E 58 64 41 3C C3 0B 76 89 E7 00 7F 80 BE 41 0E F1 64 9B F0 3F 03 20 01 01 01 C5 04 E5 87 03 68 C3 04 F3 F0 2B 03 74 0F FF 1F FF 20 A7 00 FA 45 5A 05 F4 4F A4 31 04 71 A5 03 D4 42 7F 80 13 3B C0 7B 80 FF F0 FF 08 CB 00 BF 44 A5 50 4F F4 5B 18 41 1C A5 02 FA 42 FC 03 02 B8 07 BC F0 60 03 DF 0F 51 0E DE 60 EB 30 35 1B 1F 08 2A 0F 75 39 22 58 89 04 50 15 0F F0 3D C2 7F 80 15 E0 F7 0C AF 18 5B B0 F0 20 A8 E0 54 30 8C 3C 89 04 70 04 E0 1F 70 8F FC F0 80 04 7F 1B 97 98 76 18 30 3F 90 9E CB CE 17 10 27 28 1C 37 F8 00 79 80 3F C0 9E 61 CE 31 10 EF 83 05 1C 15 C2 2E D4 3C 3A FA 80 C8 A4 98 88 B8 94 70 71 8C 2E 11 3C 03 FA 05 42 F8 07 87 05 5C F3 FF 05 44 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E7 FF 00 E6 BB 00 FF]"
 
 /* Change Cast names to uncensored versions */
 ROM[0xC4E446] = ASMLoadAddress0E(new_cast) // Redirect to new Cast names

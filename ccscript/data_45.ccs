@@ -222,6 +222,7 @@ l_0xc8b158:
 
 l_0xc8b191:
     "[06 49 00 {e(l_0xc8b22f)}][06 10 00 {e(data_20.l_0xc65015)}][1F 41 05]"
+    title(1, Gil)
     "@I don't know who told you." next
     "@You came from far off just to eat my Magic cake?..." next
     "@I thought making cakes would be the best career for me." next
@@ -232,6 +233,7 @@ l_0xc8b22e:
     eob
 
 l_0xc8b22f:
+    title(1, Gil)
     "@I can't make any more Magic cakes." next
     "@If you want to try something tastier..." next
     "@I have a <[1C 05 CF].>" next
@@ -239,6 +241,7 @@ l_0xc8b22f:
     "{wait}[1D 03 FF][1B 02 {e(l_0xc8b292)}][1D 0E FF CF]{sound(116)}@...I've made another tasty treat today!" end
 
 l_0xc8b292:
+    title(1, Gil)
     "@You seem to have too much stuff to carry." next
     "@Come back after you get rid of something." end
 
@@ -310,7 +313,7 @@ l_0xc8b57c:
 
 l_0xc8b57e:
     "@I don't feel like sending a ship out." next
-    "@I'm worried about my wife..." next
+    "@I'm worried about my wife Gil..." next
     "@I'm not afraid of the Kraken!" next
     "@....." next
     "{pause(60)}" linebreak
@@ -394,6 +397,7 @@ l_0xc8b8d5:
 
 l_0xc8b9c4:
     next
+    title(1, Gil)
     "@What?  What?{pause(15)}  Magic cake?" next
     "@You came all this way just to eat my Magic cake?" linebreak
     "[19 02]Yes" eob
