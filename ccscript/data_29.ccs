@@ -313,7 +313,7 @@ l_0xc73590:
 l_0xc735b3:
     "@It's another nice day.  What?{pause(15)}  You'd like the book <Overcoming Shyness>?" next
     "@I've read it.{pause(10)}  It's a great book.{pause(10)}  So you want to overcome shyness also?" next
-    "@You should be able to find it on the bookcase.{wait}{set(flag 102)}" eob
+    "@You should be able to find the book if you carefully check the bookcases.{wait}{set(flag 102)}" eob
 
 l_0xc73628:
     "@Are you a friend of [1C 01 08]?" linebreak

@@ -272,7 +272,7 @@ l_0xc79101:
     call(data_36.l_0xc7dd2c) "{result_is(184)}[1B 02 {e(data_35.l_0xc7c6f1)}]" call(l_0xc7911e) "[1F 1E 85 02 0A]{window_closeall}{set(flag 609)}" eob
 
 l_0xc7911e:
-    "[19 10 01]{rtoarg}@[1C 02 00] used the Pencil Eraser." next
+    "[19 10 01]{rtoarg}@[1C 02 00] used the Pencil eraser." next
     "@For some weird reason, the iron pencil statue" linebreak
     "  was erased![03]{sound(33)}" eob
 

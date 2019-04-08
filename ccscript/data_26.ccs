@@ -91,7 +91,7 @@ l_0xc6c77b:
 
 l_0xc6c7d9:
     "[06 46 00 {e(l_0xc6c8dd)}][06 6A 02 {e(l_0xc6c8d3)}]@I've been waiting for you." next
-    "@My master, Apple Kid completed this <Eraser Eraser Machine.>" next
+    "@My master, Apple Kid completed this <Eraser eraser machine.>" next
     "@While he was calling you, he was kidnapped.{pause(20)}  He felt like this...!{pause(5)}!{pause(5)}!{pause(5)}!{pause(5)}!" next
     "@I was there, but was helpless.{pause(15)}  Sorry about that." next
     "@Anyway, take this machine." next
@@ -328,7 +328,7 @@ l_0xc6d695:
 l_0xc6d6a1:
     title(1, Venus)
     "[06 0A 00 {e(l_0xc6d822)}][06 5B 00 {e(l_0xc6d7b3)}][06 8C 00 {e(l_0xc6d707)}]@Oh, you're just a little kid." next
-    "@I'm too busy right now to give you my autograph." next
+    "@I'm kinda busy right now to give you my autograph." next
     "@Maybe next time, little [19 10 01]{result_is(2)}[1B 03 {e(l_0xc6d702)}]man." end
 
 l_0xc6d702:
@@ -348,7 +348,7 @@ l_0xc6d786:
 
 l_0xc6d7b3:
     "[06 A8 02 {e(l_0xc6d852)}]@Oh, you again..." next
-    "@Look, I'm busy right now." next
+    "@Look, I'm a little busy right now." next
     "@I'll give you an autograph next time." next
     "@Are you here to see my show?" linebreak
     "[19 02]Yes" eob

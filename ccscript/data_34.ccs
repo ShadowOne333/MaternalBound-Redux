@@ -317,9 +317,9 @@ l_0xc7ae41:
     title(1, Apple)
     "@Hello, it's been a while since we talked...{pause(15)} this is Apple Kid." next
     "@We're having beautiful weather here..." next
-    "@I'm now at Dr. Andonuts lab in Winters." next
+    "@I'm now at Dr. Andonuts' lab in Winters." next
     "@The doctor doesn't seem to be around right now," next
-    "@but I'm just working on my Eraser Eraser Machine..." next
+    "@but I'm just working on my Eraser eraser machine..." next
     "{music(177)}{pause(160)}" linebreak
     "@!{pause(30)}!{pause(10)}!{pause(10)}!{pause(10)}!{pause(10)}!{music(153)}" next
     "{pause(60)}" linebreak
@@ -431,19 +431,19 @@ l_0xc7b7c8:
     eob
 
 l_0xc7b7c9:
-    call(l_0xc7b8f6) "{isset(flag 526)}[1B 02 {e(l_0xc7b826)}][1F 15 6A 00 A4 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 17 05]" call(l_0xc7b920) "[1F E6 17 05]{pause(1)}{window_open(1)}@(The hot spring energized you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 17 05][1F E8 FF]" eob
+    call(l_0xc7b8f6) "{isset(flag 526)}[1B 02 {e(l_0xc7b826)}][1F 15 6A 00 A4 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 17 05]" call(l_0xc7b920) "[1F E6 17 05]{pause(1)}{window_open(1)}@(The hot springs energized you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 17 05][1F E8 FF]" eob
 
 l_0xc7b826:
     "[1F E9 17 05]{pause(1)}" eob
 
 l_0xc7b82d:
-    call(l_0xc7b8f6) "{isset(flag 527)}[1B 02 {e(l_0xc7b88b)}][1F 15 6A 00 A5 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 18 05]" call(l_0xc7b920) "[1F E6 18 05]{pause(1)}{window_open(1)}@(The hot spring cured you completely.){wait}{window_closeall}" call(data_49.l_0xc9162c) "[1F E9 18 05][1F E8 FF]" call(data_49.l_0xc9162c) eob
+    call(l_0xc7b8f6) "{isset(flag 527)}[1B 02 {e(l_0xc7b88b)}][1F 15 6A 00 A5 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 18 05]" call(l_0xc7b920) "[1F E6 18 05]{pause(1)}{window_open(1)}@(The hot springs cured you completely.){wait}{window_closeall}" call(data_49.l_0xc9162c) "[1F E9 18 05][1F E8 FF]" call(data_49.l_0xc9162c) eob
 
 l_0xc7b88b:
     "[1F E9 18 05]{pause(1)}" eob
 
 l_0xc7b892:
-    call(l_0xc7b8f6) "{isset(flag 528)}[1B 02 {e(l_0xc7b8ef)}][1F 15 6A 00 A6 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 19 05]" call(l_0xc7b920) "[1F E6 19 05]{pause(1)}{window_open(1)}@(The hot spring energizes you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 19 05][1F E8 FF]" eob
+    call(l_0xc7b8f6) "{isset(flag 528)}[1B 02 {e(l_0xc7b8ef)}][1F 15 6A 00 A6 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 19 05]" call(l_0xc7b920) "[1F E6 19 05]{pause(1)}{window_open(1)}@(The hot springs energizes you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 19 05][1F E8 FF]" eob
 
 l_0xc7b8ef:
     "[1F E9 19 05]{pause(1)}" eob
@@ -470,7 +470,7 @@ l_0xc7b965:
     "[1F 61][1F EC FF 01]" eob
 
 l_0xc7b96c:
-    "[1F E6 F3 04][19 10 01]{rtoarg}{window_open(1)}@(Resting well in the hot spring healed you.){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 F3 04]" eob
+    "[1F E6 F3 04][19 10 01]{rtoarg}{window_open(1)}@(Resting well in the hot springs healed you.){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 F3 04]" eob
 
 l_0xc7b9a1:
     "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DD]{pause(120)}[1F E5 FF]{sound(18)}{pause(80)}[1F 15 91 00 CD 02 01][1F 61][1F E7 91 00][1F F3 91 00 03]{pause(60)}[1F F4 91 00][1F EA 91 00][1F 61][1F E7 91 00]{pause(120)}{sound(9)}{pause(30)}{sound(97)}{pause(20)}[1F E4 91 00 07]{pause(20)}[1F 15 92 00 CE 02 01][1F EA 91 00][1F 61]{pause(60)}[1F 15 28 00 CF 02 01][1F 61][1F E7 91 00][1F E7 92 00][1F E7 28 00]{pause(30)}" call(data_59.l_0xc9f442) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob

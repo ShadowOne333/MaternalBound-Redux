@@ -62,7 +62,7 @@ ROM[0xC0A141] = BRA(0x0C)	//"[80]"
 
 
 /* Pointer to Death Graphics data [A9 AF CF 85 0E A9 E1 00 85 10] */
-ROM[0xC4C32F] = ASMLoadAddress0E(death_graphics) // Redirect to new Death graphics
+ROM[0xC4C32F] = ASMLoadAddress0E(death_graphics) // Redirect to new Death graphics [A9 CB 62 85 0E A9 F8 00 85 10]
 /* Also requires to change the pointer at 0xC4C388 manually
 [A9 E8 D5 85 0E A9 E1 00 85 10] (Death graphics arragement pointer) so that the tiles are not messed up */
 // Given how CoilSnake compiles the ROM, this change is not applied during compilation, as CoilSnakes overwrites whatever data has been put in the pointers with the data CoilSnake uses for the Death image module, so you have to search and repoint the data manually after the ROM is compiled in a Hex editor in order for Jeff's Death screen to be restored.

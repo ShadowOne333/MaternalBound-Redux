@@ -18,19 +18,30 @@ l_0xc68264:
     "[1F 11 02][1F EB 02 06][1F F1 69 03 2F 00][1F 61][1F 1E 69 03 06][1F EC 02 01]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@([1C 02 02] joins you.)[03]{window_closeall}" eob
 
 l_0xc6829f:
-    "{window_closeall}[1F 11 0B][1F EB 0B 06][1F F1 21 05 2F 00][1F 61][1F 1E 21 05 06][1F EC 0B 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Flying Man joins you.)[03]{window_closeall}" eob
+    "{window_closeall}[1F 11 0B][1F EB 0B 06][1F F1 21 05 2F 00][1F 61][1F 1E 21 05 06][1F EC 0B 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
 
 l_0xc682dd:
-    "{window_closeall}[1F 11 0C][1F EB 0C 06][1F F1 22 05 2F 00][1F 61][1F 1E 22 05 06][1F EC 0C 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Flying Man joins you.)[03]{window_closeall}" eob
+    "{window_closeall}[1F 11 0C][1F EB 0C 06][1F F1 22 05 2F 00][1F 61][1F 1E 22 05 06][1F EC 0C 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
 
 l_0xc6831b:
-    "{window_closeall}[1F 11 0D][1F EB 0D 06][1F F1 23 05 2F 00][1F 61][1F 1E 23 05 06][1F EC 0D 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Flying Man joins you.)[03]{window_closeall}" eob
+    "{window_closeall}[1F 11 0D][1F EB 0D 06][1F F1 23 05 2F 00][1F 61][1F 1E 23 05 06][1F EC 0D 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
 
 l_0xc68359:
-    "{window_closeall}[1F 11 0E][1F EB 0E 06][1F F1 24 05 2F 00][1F 61][1F 1E 24 05 06][1F EC 0E 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Flying Man joins you.)[03]{window_closeall}" eob
+    "{window_closeall}[1F 11 0E][1F EB 0E 06][1F F1 24 05 2F 00][1F 61][1F 1E 24 05 06][1F EC 0E 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
 
 l_0xc68397:
-    "{window_closeall}[1F 11 0F][1F EB 0F 06][1F F1 25 05 2F 00][1F 61][1F 1E 25 05 06][1F EC 0F 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Flying Man joins you.)[03]{window_closeall}" eob
+    "{window_closeall}[1F 11 0F][1F EB 0F 06][1F F1 25 05 2F 00][1F 61][1F 1E 25 05 06][1F EC 0F 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+flyingman:
+ "[06 CF 00 {e(flyingman5)}][06 CE 00 {e(flyingman4)}][06 CD 00 {e(flyingman3)}][06 CC 00 {e(flyingman2)}]Flying Man" eob
+flyingman2:
+ "Flying Man 2" eob
+flyingman3:
+ "Flying Man 3" eob
+flyingman4:
+ "Return of the Flying Man" eob
+flyingman5:
+ "Final Flying Man" eob
 
 l_0xc683d5:
     "[1F 12 07]" eob

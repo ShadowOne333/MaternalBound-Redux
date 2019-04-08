@@ -34,9 +34,9 @@ l_0xc76fb2:
     "@Let's say Flying Man.[03]" eob
 
 l_0xc77007:
-    title(1, Flying2)
     "@I'll be your courage." next
     "@I'll remain unless you lose your courage." next
+    title(1, Flying2)
     "@Call me Flying Man 2.[03]" eob
 
 l_0xc7703f:
@@ -157,7 +157,7 @@ l_0xc774c3:
 l_0xc774c6:
     title(1, Belch)
     "@You destroyed my pride..." next
-    "@AAaaaargh!{wait}[1F E1 1F 06 3C]" eob
+    "@Aaaaaargh!{wait}[1F E1 1F 06 3C]" eob
 
 l_0xc774ec:
     "@[1C 02 01]..." next
@@ -239,8 +239,8 @@ l_0xc77790:
 
 l_0xc7779e:
     "@This is Buzz Buzz's tombstone." next
-    "@He appeared earlier in the game and gave up the ghost" next
-    "@before he achieved his goal." end
+    "@He appeared near the beginning of the game" next
+    "@and was tragically struck down,{pause(15)} making it partway to achieving his goal." end
 
 l_0xc777f2:
     title(1, Star)
@@ -315,7 +315,7 @@ l_0xc77cdf:
     "{pause(60)}" linebreak
     "@But, [1C 02 01]...{pause(15)} well, okay..." next
     "{pause(60)}" linebreak
-    "@Let's be friends forever,{pause(15)} all right?" end
+    "@Let's be friends forever,{pause(15)} alright?" end
 
 l_0xc77d3a:
     title(1, Everdred)

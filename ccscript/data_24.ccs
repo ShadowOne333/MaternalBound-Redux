@@ -286,7 +286,7 @@ l_0xc692f7:
     "@Sorry to bother you, big bro..." next
     "@This is Escargo Express." next
     "@I had a phone call from a friend of yours recently." next
-    "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil Eraser machine." next
+    "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil eraser machine." next
     "@I figured it's just some kind of prank,{pause(20)} but if it's legit," next
     "@I can deliver it to you anytime." next
     "@Do you know anything about this?" next
@@ -309,7 +309,7 @@ l_0xc6943a:
     title(1, Escargo)
     "@Escargo Express!" next
     "@<We treat your package like it was our only child>..." next
-    "@I'm here with your Pencil Eraser." next
+    "@I'm here with your Pencil eraser." next
     "[1D 03 FF][1B 02 {e(l_0xc694b9)}][1D 0E 00 B8]{sound(118)}@Here you are." next
     "@Thank you very much!{wait}{unset(flag 694)}{unset(flag 692)}{window_closeall}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
 
