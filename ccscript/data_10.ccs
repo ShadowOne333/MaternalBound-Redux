@@ -82,7 +82,7 @@ l_0xc5a48b:
 
 l_0xc5a4b4:
     "{diam}The battle against Giygas is over...{wait}" linebreak
-    "{window_closeall}{counter(66)}" call(l_0xc5a4ec) "[1F 11 02][1F 21 D8]" eob
+    "{window_closeall}{counter(66)}" call(l_0xc5a4ec) "{set(flag 698)}{set(flag 699)}{set(flag 700)}{set(flag 701)}{set(flag 702)}{set(flag 703)}{set(flag 704)}{set(flag 705)}{set(flag 706)}{set(flag 707)}{set(flag 708)}{set(flag 709)}{set(flag 710)}{set(flag 711)}{set(flag 712)}{set(flag 713)}{set(flag 714)}{set(flag 715)}{set(flag 716)}{set(flag 717)}{set(flag 718)}{set(flag 719)}{set(flag 720)}{set(flag 721)}{set(flag 722)}{set(flag 723)}{set(flag 724)}{set(flag 725)}{set(flag 726)}{set(flag 727)}{set(flag 728)}{set(flag 729)}[1F 11 02][1F 21 D8]" eob
 
 l_0xc5a4cd:
     "{diam}The End... ?{wait}" linebreak

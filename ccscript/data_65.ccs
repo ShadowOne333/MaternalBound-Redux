@@ -326,7 +326,9 @@ l_0xef95a3:
     "@You'll have to get the key from Carpainter.  He's got it hidden away." next
     "@I heard Carpainter can control lightning." next
     "@In that case,{pause(15)} you should wear this [1C 05 01], okay?[1D 03 FF][1B 02 {e(l_0xef96d3)}][1D 0E 00 01]" call(data_36.l_0xc7dcb6) next
-    "{set(flag 86)}{set(flag 45)}{unset(flag 634)}{unset(flag 635)}@I'll wait here until you return." next
+    "{set(flag 86)}{set(flag 45)}{unset(flag 634)}{unset(flag 635)}"
+    title_paula(1)
+    "@I'll wait here until you return." next
     "@Come back here and get me out once you defeat Carpainter." next
     "@Don't worry about me, just kick butt like I know you can!{wait}{set(flag 11)}[1F 41 05]" eob
 

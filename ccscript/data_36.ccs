@@ -82,7 +82,7 @@ l_0xc7dbd0:
     call(data_35.l_0xc7d991) "[1F 16 E9 02 05]" eob
 
 l_0xc7dbdb:
-    "[19 10 01]{swap}" call(l_0xc7d9ec) "{sound(16)}[1F 16 EA 02 03]" next
+    "[19 10 01]{swap}" call(l_0xc7d9ec) "{sound(16)}[1F 16 EA 02 01]" next // Changed [1F 16 EA 02 03] to [1F 16 EA 02 01], gift box for ending sequence Letter to kids
     "[06 9B 02 {e(l_0xc7d9fd)}]{counter(179)}{ctoarg}" call(data_35.l_0xc7d947) "[1D 03 FF][1B 02 {e(l_0xc7dc1e)}]{swap}" call(data_35.l_0xc7d958) "[1D 0E 00 00]{swap}{sound(116)}{pause(30)}{set(flag 667)}" eob
 
 l_0xc7dc1e:

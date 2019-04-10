@@ -443,7 +443,7 @@ l_0xc7b88b:
     "[1F E9 18 05]{pause(1)}" eob
 
 l_0xc7b892:
-    call(l_0xc7b8f6) "{isset(flag 528)}[1B 02 {e(l_0xc7b8ef)}][1F 15 6A 00 A6 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 19 05]" call(l_0xc7b920) "[1F E6 19 05]{pause(1)}{window_open(1)}@(The hot springs energizes you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 19 05][1F E8 FF]" eob
+    call(l_0xc7b8f6) "{isset(flag 528)}[1B 02 {e(l_0xc7b8ef)}][1F 15 6A 00 A6 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 19 05]" call(l_0xc7b920) "[1F E6 19 05]{pause(1)}{window_open(1)}@(The hot springs energize you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 19 05][1F E8 FF]" eob
 
 l_0xc7b8ef:
     "[1F E9 19 05]{pause(1)}" eob

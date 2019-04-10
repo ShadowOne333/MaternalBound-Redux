@@ -101,7 +101,8 @@ l_0xc5ea94:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5eabf)} {e(l_0xc5eaa3)}]" goto(l_0xc5eaa3)
 
 l_0xc5eaa3:
-    "@Oh, c'mon...{pause(20)}  You must hear it..." next
+    "@Oh, c'mon...{pause(20)}" linebreak
+    "  You must hear it..." next
     goto(l_0xc5eacf)
 
 l_0xc5eabf:
@@ -472,12 +473,10 @@ l_0xc6026c:
     "@They were a memento from my grandma, and very important to me." next
     "@If you find them, bring them to me and I'll give you a reward." next
     "@I'm Pettenella Giovanni." next
-    title(1, Pettenella)
     "@Find me at the Fourside Bakery, second floor.)[06 E0 02 {e(l_0xc60322)}]" end
 
 l_0xc60322:
     next
-    title(1, Pettenella)
     "@(Thank you, I found them.{pause(20)}  Thanks again for all your help.)" end
 
 l_0xc60349:

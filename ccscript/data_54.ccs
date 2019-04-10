@@ -489,7 +489,9 @@ l_0xc98cd3:
     "@Let's be friends again!{pause(20)}" next
     "@C'mon, reply to me, will ya? I promise I'll be a good guy.{pause(60)}" next
     "@I guess that's a no, huh?" next
-    "{window_closeall}[1F E9 9B 01][1F 61][1F E6 9B 01]{window_open(1)}@Bleeehhh!{pause(20)}  See you, sucker![03]{window_closeall}[1F E9 9B 01]{unset(flag 44)}[1F 41 06]" eob
+    "{window_closeall}[1F E9 9B 01][1F 61][1F E6 9B 01]{window_open(1)}"
+    title(1, Porky)
+    "@Bleeehhh!{pause(20)}  See you, sucker![03]{window_closeall}[1F E9 9B 01]{unset(flag 44)}[1F 41 06]" eob
 
 l_0xc98d78:
     "[06 49 00 {e(data_55.l_0xc98e5e)}][06 44 00 {e(data_55.l_0xc98e33)}][06 43 00 {e(data_55.l_0xc98df9)}]@I'm monitoring those who don't pay at the food stand.[06 78 00 {e(data_55.l_0xc98db4)}]" end

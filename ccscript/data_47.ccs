@@ -330,8 +330,7 @@ l_0xc8fd11:
     "  I'm so frightened!  {pause(30)}I think" linebreak
     "  I'm gonna wet my pants!>{prompt}" linebreak
     "@I know you have telepathy, or something, so just try and call for help,{prompt}" linebreak
-    "@you stupid weakling" linebreak
-    "  heroes of so-called justice!{prompt}" linebreak
+    "@you stupid weakling,{pause(15)} stinkling heroes of so-called justice!{prompt}" linebreak
     "@No one will help you now!{prompt}" linebreak
     "@Ha ha ha haah...{prompt}" linebreak
     "@Don't worry, your pitiful suffering will be over soon!{pause(150)}{window_closetop}{window_open(14)}" eob
