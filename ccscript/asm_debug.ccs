@@ -3,6 +3,13 @@ import asm65816
 
 /* NOTE: All of the options in this Debug menu utilize 10 bytes as a maximum */
 
+/* Change Kirby debug menu text
+2F = /	| 30 = 0	| 31 = 1	| 32 = 2	| 39 = 9			
+40 = @	| 41 = A	| 42 = B	| 43 = C ...	| 5A = Z */
+ROM[0xEFD8B5] = "[4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]"
+// Original - [4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]
+// MOTHER2 ROM  1994/07/09  VERSION
+
 /* Debug menu text fixes */
 ROM[0xC454BF] = ASMLoadAddress0E(tx6)
 
