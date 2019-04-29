@@ -87,7 +87,7 @@ l_0xc7e74e:
     "{store_registers}" call(l_0xc7e6d7) "{load_registers}" eob
 
 l_0xc7e758:
-    "[19 10 02][1D 0D 00 01 02][1B 03 {e(l_0xc7e779)}][19 10 02][1D 0D 00 01 03][1B 03 {e(l_0xc7e779)}]kids" eob
+    "[19 10 02][1D 0D 00 01 02][1B 03 {e(l_0xc7e779)}][19 10 02][1D 0D 00 01 03][1B 03 {e(l_0xc7e779)}] kids" eob
 
 l_0xc7e779:
     "kid" eob

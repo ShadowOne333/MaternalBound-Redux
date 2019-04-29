@@ -282,8 +282,8 @@ l_0xef6419:
     "@Smiley.   Boing!{wait}{font_normal}" eob
 
 l_0xef6446:
-    title(1, Belch)
     "[06 47 00 {e(data_35.l_0xc7c588)}]{music(134)}{sound(78)}"
+    title(1, Belch)
     "@Buuurp!" next
     "@So you are [1C 02 01]?" next
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xef66ca)}]@...I see...  Gyork!{pause(15)}  Gyork!{pause(15)}  Gyork!" next

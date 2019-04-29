@@ -421,7 +421,7 @@ l_0xc6bdd2:
     eob
 
 l_0xc6bdd3:
-    "@You " call(kid) " don't look very bright.{pause(15)}  Let me explain." next
+    "@You" call(kid) " don't look very bright.{pause(15)}  Let me explain." next
     "@These stones are making a pattern.{pause(20)}  It's called Stonehenge." next
     "@UFO's often visit here." next
     "@You must have seen it on TV or read about it in the tabloids." next
@@ -434,13 +434,13 @@ kid1:
 kid2:
     "{ctoarg}{swap}[09 05 {e(kid3)} {e(kid3)} {e(kid4)} {e(kid5)} {e(kid5)}]" eob
 kid3:
-    "[19 10 01]{result_is(2)}[1B 03 {e(kid_paula)}]kid" eob
+    "[19 10 01]{result_is(2)}[1B 03 {e(kid_paula)}]" eob //kid
 kid_paula:
-    "girl" eob
+    eob //girl
 kid4:
-    "kids" eob
+    " kids" eob
 kid5:
-    "kids" eob
+    " kids" eob
 
 l_0xc6be74:
     "[06 C0 00 {e(data_35.l_0xc7c588)}][19 10 01]{result_is(1)}[1B 02 {e(data_24.l_0xc690a6)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next

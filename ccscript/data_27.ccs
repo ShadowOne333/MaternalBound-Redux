@@ -193,11 +193,13 @@ l_0xc6e961:
     "@This elevator takes you to the 47th floor.{wait}" goto(l_0xc6e884)
 
 l_0xc6e982:
-    "[06 49 00 {e(l_0xc6ea0f)}][06 02 00 {e(l_0xc6e9d6)}][06 8D 00 {e(l_0xc6ea0f)}][1D 03 FF][1B 02 {e(l_0xc6e9d6)}][1D 0E 00 BD]@Your Strawberry tofu, {store_registers}[19 10 01]" call(data_37.l_0xc7e6b3) ".[03]{load_registers}{set(flag 141)}{set(flag 2)}" call(data_36.l_0xc7dccf) next
+    "[06 49 00 {e(l_0xc6ea0f)}][06 02 00 {e(l_0xc6e9d6)}][06 8D 00 {e(l_0xc6ea0f)}][1D 03 FF][1B 02 {e(l_0xc6e9d6)}][1D 0E 00 BD]"
+    title(1, Electra)
+    "@Your Strawberry tofu, {store_registers}[19 10 01]" call(data_37.l_0xc7e6b3) ".[03]{load_registers}{set(flag 141)}{set(flag 2)}" call(data_36.l_0xc7dccf) next
     goto(l_0xc6e9d6)
 
 l_0xc6e9d6:
-    title(1, "Electra")
+    title(1, Electra)
     "@Master Porky's cool!" next
     "@He gave me something the other day, and said <this is fit for a maid...>" end
 
