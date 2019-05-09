@@ -140,7 +140,8 @@ l_0xc82fa9:
     "@I heard that the Topollo Theater is always full." end
 
 l_0xc82fe7:
-    "@I heard you're friends of the Runaway Brothers{pause(20)}  I'm jealous." end
+    "@I heard you're friends of the Runaway Brothers.{pause(20)}" linebreak
+    "  I'm jealous." end
 
 l_0xc83002:
     "[06 8F 00 {e(l_0xc83060)}]@Speaking of the Topollo Theater,{pause(15)} there's a new singer called Venus." next
@@ -292,7 +293,7 @@ l_0xc8391b:
 
 l_0xc8392f:
     "@I'm not that nice of a guy.{pause(20)}" next
-    "@I really am close to dying here" next
+    "@I really am close to dying here." next
     goto(l_0xc83957)
 
 l_0xc83957:

@@ -1,0 +1,93 @@
+/* Script to modify the letters and characters available in the Naming Screens
+Made by PhoenixBound, based on previous work by TragicManner */
+
+import asm65816
+
+main_capital: {		// offset EFA460
+	text_pos(0, 0) "[2F]A[2F]B[2F]C[2F]D[2F]E[2F]F[2F]G[2F]H[2F]I"		text_pos(22, 0) "[2F]-[2F]#"
+	text_pos(0, 1) "[2F]J[2F]K[2F]L[2F]M[2F]N[2F]O[2F]P[2F]Q[2F]R"		text_pos(22, 1) "[2F]'[2F]~"
+	text_pos(0, 2) "[2F]S[2F]T[2F]U[2F]V[2F]W[2F]X[2F]Y[2F]Z[2F] "		text_pos(22, 2) "[2F].[2F][5F]"
+	text_pos(0, 3) "[2F][B0][2F][B1][2F][B2][2F][B3][2F][B4][2F][B5][2F][B7]" text_pos(22, 3) "[2F][B8][2F]?"
+	text_pos(0, 4) "[2F]0[2F]1[2F]2[2F]3[2F]4[2F]5[2F]6[2F]7[2F]8[2F]9"	text_pos(22, 4) "[2F][B9][2F]!"
+	text_pos(22,5) "[2F][AC][2F][AF]"
+	eob
+}
+
+main_small: {		// offset EFA4E3
+	text_pos(0, 0) "[2F]a[2F]b[2F]c[2F]d[2F]e[2F]f[2F]g[2F]h[2F]i"		text_pos(22, 0) "[2F]-[2F]#"
+	text_pos(0, 1) "[2F]j[2F]k[2F]l[2F]m[2F]n[2F]o[2F]p[2F]q[2F]r"		text_pos(22, 1) "[2F]'[2F]~"
+	text_pos(0, 2) "[2F]s[2F]t[2F]u[2F]v[2F]w[2F]x[2F]y[2F]z[2F] "		text_pos(22, 2) "[2F].[2F][5F]"
+	text_pos(0, 3) "[2F][C0][2F][C1][2F][C2][2F][C3][2F][C4][2F][C5][2F][C7]" text_pos(22, 3) "[2F][B8][2F]?"
+	text_pos(0, 4) "[2F]0[2F]1[2F]2[2F]3[2F]4[2F]5[2F]6[2F]7[2F]8[2F]9"	text_pos(22, 4) "[2F][B9][2F]!"
+	text_pos(22,5) "[2F][AC][2F][AF]"
+	eob
+}
+
+player_capital: {	// offset EFA566
+	text_pos(0, 0) "[2F]A[2F]B[2F]C[2F]D[2F]E[2F]F[2F]G[2F]H[2F]I"		text_pos(22, 0) "[2F]-[2F]#"
+	text_pos(0, 1) "[2F]J[2F]K[2F]L[2F]M[2F]N[2F]O[2F]P[2F]Q[2F]R"		text_pos(22, 1) "[2F]'[2F]~"
+	text_pos(0, 2) "[2F]S[2F]T[2F]U[2F]V[2F]W[2F]X[2F]Y[2F]Z[2F] "		text_pos(22, 2) "[2F].[2F][5F]"
+	text_pos(0, 3) "[2F][B0][2F][B1][2F][B2][2F][B3][2F][B4][2F][B5][2F][B7]" text_pos(22, 3) "[2F][B8][2F]?"
+	text_pos(0, 4) "[2F]0[2F]1[2F]2[2F]3[2F]4[2F]5[2F]6[2F]7[2F]8[2F]9"	text_pos(22, 4) "[2F][B9][2F]!"
+	text_pos(22,5) "[2F][AC][2F][AF]"
+	eob
+}
+
+player_small: {		// offset EFA5E9
+	text_pos(0, 0) "[2F]a[2F]b[2F]c[2F]d[2F]e[2F]f[2F]g[2F]h[2F]i"		text_pos(22, 0) "[2F]-[2F]#"
+	text_pos(0, 1) "[2F]j[2F]k[2F]l[2F]m[2F]n[2F]o[2F]p[2F]q[2F]r"		text_pos(22, 1) "[2F]'[2F]~"
+	text_pos(0, 2) "[2F]s[2F]t[2F]u[2F]v[2F]w[2F]x[2F]y[2F]z[2F] "		text_pos(22, 2) "[2F].[2F][5F]"
+	text_pos(0, 3) "[2F][C0][2F][C1][2F][C2][2F][C3][2F][C4][2F][C5][2F][C7]" text_pos(22, 3) "[2F][B8][2F]?"
+	text_pos(0, 4) "[2F]0[2F]1[2F]2[2F]3[2F]4[2F]5[2F]6[2F]7[2F]8[2F]9"	text_pos(22, 4) "[2F][B9][2F]!"
+	text_pos(22,5) "[2F][AC][2F][AF]"
+	eob
+}
+
+
+/* Table for the naming screen character recognition.
+Each value is an offset value added to the starting control code [18 05 XX YY] or text_pos(x,y). 
+For example, the first value [05] corresponds to the letter 'A', since [18 05 XX YY] takes up bytes 0-3, [2F] being byte 4 and the actual 'A' letter being the 0x05 byte. Then there's another 2F byte, which is 0x06 or byte 6, and then the next letter 'B', which is the 0x07 byte, and so on. The table has been split into the corresponding rows, with only the 5th row being modified to include additional characters, and added the 6th row in case anyone needs to add characters there, just take into account that you should not put characters in place of the CAPITAL/small words. FF means there's a blank space. */
+ROM[0xC440A2] = LDA_xl (character_table)
+
+character_table: {	// offset C20912
+	"[05 07 09 0B 0D 0F 11 13 15 FF FF 1B 1D FF \
+	  23 25 27 29 2B 2D 2F 31 33 FF FF 39 3B FF \
+	  41 43 45 47 49 4B 4D 4F 51 FF FF 57 59 FF \
+	  5F 61 63 65 67 69 6B FF FF FF FF 71 73 FF \
+	  79 7B 7D 7F 81 83 85 87 89 8B FF 91 93 FF \
+	  FF FF FF FF FF FF FF FF FF FF FF 99 9B FF]"
+}
+
+
+ROM[0xC1E992] = CMP_i (0x0005)	// Originally CMP_i (0x0004). This value should match the Y position in the text_pos used for the "CAPITAL" and "small" words. Changed to 0x0005 so that CAPITAL and small are printed in the 5th row instead of the 4th one. Change the value to match the X position/row of the CAPITAL/small row so it's detected in the game properly
+ROM[0xC1E99B] = CMP_i (0x0007)	// This value should match the X position in the text_pos used for the "small" word, so if you move the word with text_pos, the command for "small" works properly. 
+ROM[0xC1E934] = CMP_i (0x0011)	// This value should match the X position in the text_pos used for the "Backspace" word, so if you move the word with text_pos, the command for "Backspace" works properly. 
+ROM[0xC1E939] = CMP_i (0x0019)	// This value should match the X position in the text_pos used for the "OK" word, so if you move the word with text_pos, the command for "OK" works properly. 
+
+footer_main: {		// offset EFA66C
+	text_pos(0, 5) "[2F]CAPITAL" text_pos(7, 5) "[2F]small"
+	text_pos(0, 6) "[2F]Don't Care" text_pos(17, 6) "[2F]Backspace" text_pos(25, 6) "[2F]OK"
+	eob
+}
+
+footer_player: {	// offset EFA6A7
+	text_pos(0, 5) "[2F]CAPITAL" text_pos(7, 5) "[2F]small"
+	text_pos(17, 6) "[2F]Backspace" text_pos(25, 6) "[2F]OK"
+	eob
+}
+
+// ------------------------------
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// Don't modify anything below.
+// Thanks.
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ------------------------------
+
+ROM[0xEFA6D3] = {
+	main_capital
+	main_small
+	player_capital
+	player_small
+	footer_main
+	footer_player
+}
