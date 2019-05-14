@@ -319,13 +319,13 @@ l_0xc61616:
     "@(Do you have" linebreak
     "  a [1C 05 E0]?)" next
     "@Ukii Ukieki..." next
-    "@(I'll move away if you give me one.)" next
+    "@(I'll move away if you give me one...)" next
     "@Ukiki?" next
     "@(Can you give me one?)" linebreak
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc616b2)} {e(l_0xc61696)}]" goto(l_0xc61696)
 
 l_0xc61696:
-    "@Uki, Ukyakikya" next
+    "@Uki Ukyakikya" next
     "@(I won't move.)" end
 
 l_0xc616b2:
@@ -339,7 +339,7 @@ l_0xc61702:
 l_0xc61715:
     "[06 C4 01 {e(l_0xc61803)}]@Kikiki Kiki!" next
     "@(I wanna eat a [1C 05 5D]!)" next
-    "@Kikiki Kiki" next
+    "@Kikiki, Kiki" next
     "@(If you grant my wish,{pause(15)} I might open the entrance.)" next
     "@Kikiki Kiki?" next
     "@(Will you give me a [1C 05 5D]?)" linebreak
@@ -358,20 +358,20 @@ l_0xc61803:
     "@(Hee he he)" end
 
 l_0xc61817:
-    "[06 C5 01 {e(l_0xc61949)}]@Uki Ukikie" next
+    "[06 C5 01 {e(l_0xc61949)}]@Uki? Ukikie!" next
     "@(Doesn't it feel hot in here?{pause(20)}  My fur's all sweaty!)" next
-    "@Ukie Kikukie" next
-    "@(Maybe you don't usually keep a [1C 05 7F], but)" next
+    "@Ukie Kikukie," next
+    "@(Maybe you don't usually keep a [1C 05 7F],)" next
     "@Ukke Ukiki Ukkikie?" next
-    "@(if you have one,{pause(15)} will you share it with me?)" next
+    "@(but if you have one,{pause(15)} will you share it with me?)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc618ed)} {e(l_0xc618c2)}]" goto(l_0xc618c2)
 
 l_0xc618c2:
-    "@Ukie Ukie Ukikie" next
+    "@Ukie, Ukie Ukikie" next
     "@(Anyway,{pause(15)} it is humid in here.)" end
 
 l_0xc618ed:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc618c2)}]{store_registers}[19 19 00 00]{swap}{result_is(127)}[1B 02 {e(l_0xc618c2)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukokkie?  Ukike?" next
+    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc618c2)}]{store_registers}[19 19 00 00]{swap}{result_is(127)}[1B 02 {e(l_0xc618c2)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukokkie?  Ukike!" next
     "@(Do you have one?{pause(20)}" linebreak
     "  Thank you!){wait}{window_closeall}[1F 1E 24 03 06][1F 17 26 03 2B 00 01]{set(flag 453)}" eob
 
@@ -380,11 +380,11 @@ l_0xc61949:
     "@(It's humid here.)" end
 
 l_0xc61966:
-    "[06 C6 01 {e(l_0xc61a71)}]@Ukkkin Uki Uki Ukkin" next
+    "[06 C6 01 {e(l_0xc61a71)}]@Ukkkin... Uki Uki Ukkin" next
     title(1, Monkonna)
-    "@(Oooooooo...,{pause(15)} I'm Monkonna.{pause(20)}" linebreak
+    "@(Oooooooo...{pause(15)} I'm Monkonna.{pause(20)}" linebreak
     "  I wanna eat a tasty [1C 05 5F].)" next
-    "@Ukkyou kikinkyou" next
+    "@Ukkyou, kikinkyou?" next
     "@(If you have some,{pause(15)} will you give it to me?)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61a14)} {e(l_0xc619ef)}]" goto(l_0xc619ef)
 
@@ -393,12 +393,12 @@ l_0xc619ef:
     "@(You insimian monster!)" end
 
 l_0xc61a14:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc619ef)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc619ef)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukkin Ukkikeen" next
+    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc619ef)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc619ef)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukkin, Ukkikeen" next
     "@(Hah,{pause(15)} Monkonna's happy.){wait}{window_closeall}[1F 1E 23 03 06][1F 17 25 03 2B 00 01]{set(flag 454)}" eob
 
 l_0xc61a71:
     title(1, Monkonna)
-    "@Ukkien" next
+    "@Ukkien..." next
     "@(Oooooooo...)" end
 
 l_0xc61a88:
@@ -409,7 +409,7 @@ l_0xc61a88:
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61b03)} {e(l_0xc61add)}]" goto(l_0xc61add)
 
 l_0xc61add:
-    "@KyaKya Kyokyokyo?" next
+    "@Kyakya Kyokyokyo?" next
     "@('Cause I'm still a kid?)" end
 
 l_0xc61b03:
@@ -422,9 +422,9 @@ l_0xc61b70:
 
 l_0xc61b85:
     "[06 C8 01 {e(l_0xc61c76)}]@If you have a [1C 05 5F],{pause(15)} please give me one." next
-    "@...Ukiki Ukkike" next
+    "@...Ukiki, Ukkike" next
     "@(...Woops,{pause(20)} I spoke to you in the human's language.)" next
-    "@Ukiki Ukkike" next
+    "@Ukiki, Ukkike" next
     "@(If you have a [1C 05 5F],{pause(15)} please give me one.)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61c20)} {e(l_0xc61c0f)}]" goto(l_0xc61c0f)
 
@@ -433,20 +433,20 @@ l_0xc61c0f:
     "@(Darn...)" end
 
 l_0xc61c20:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61c0f)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc61c0f)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukki Ukikii!" next
+    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61c0f)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc61c0f)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukki, Ukikii!" next
     "@(Great,{pause(15)} pizza time!){wait}{window_closeall}[1F 1E 2D 03 06][1F 17 2F 03 2B 00 01]{set(flag 456)}" eob
 
 l_0xc61c76:
     "@Thank you." next
     "@...Kie ukkya" next
-    "@(...crap,{pause(15)} I used the human's language again.)" end
+    "@(...Crap,{pause(15)} I used the human's language again.)" end
 
 l_0xc61cac:
     "[06 C9 01 {e(l_0xc61da4)}]@Unkikie!  Uukiuki!" next
     "@(I love Hamburgers!)" next
     "@Ukie Unkikie..." next
     "@(The monkey next to me loves Hamburgers too...)" next
-    "@Uuu.{pause(20)}  Unkikkie Uki?" next
+    "@Uuu,{pause(20)} Unkikkie Uki?" next
     "@(If you have a [1C 05 5A],{pause(15)} will you please give it to me?)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61d5d)} {e(l_0xc61d50)}]" goto(l_0xc61d50)
 
@@ -459,7 +459,7 @@ l_0xc61d5d:
     "@([1C 05 5A]!){wait}{window_closeall}[1F 1E 28 03 06][1F 17 2A 03 2B 00 01]{set(flag 457)}" eob
 
 l_0xc61da4:
-    "@Uki Unkinki Ukinkie" next
+    "@Uki, Unkinki Ukinkie" next
     "@(Truth is, the monkey next to me is my twin brother.)" end
 
 l_0xc61ddb:
@@ -467,7 +467,6 @@ l_0xc61ddb:
     "@(I love Hamburgers!)" next
     "@Ukie Unkikie..." next
     "@(The monkey next to me loves Hamburgers too...)" next
-    "@Uuu.{pause(20)}  Unkikkie Uki?" next
+    "@Uuu,{pause(20)} Unkikkie Uki?" next
     "@(If you have a [1C 05 5A],{pause(15)} will you please give it to me?)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(data_18.l_0xc61e8e)} {e(data_18.l_0xc61e81)}]" goto(data_18.l_0xc61e81)
-

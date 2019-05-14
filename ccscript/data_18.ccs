@@ -26,7 +26,7 @@ l_0xc61f07:
     title(1, Mankman)
     "@Ukie Ukikikie" next
     "@(To me the most interesting thing is the [1C 05 A6].)" next
-    "@Ukie Ukikikie" next
+    "@Ukie?  Ukikikie?" next
     "@(What?{pause(20)}  Are you giving me a present?)" next
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61fab)} {e(l_0xc61f97)}]" goto(l_0xc61f97)
 
@@ -35,7 +35,7 @@ l_0xc61f97:
     "@(Tight wad...)" end
 
 l_0xc61fab:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61f97)}]{store_registers}[19 19 00 00]{swap}{result_is(166)}[1B 02 {e(l_0xc61f97)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukie!" next
+    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61f97)}]{store_registers}[19 19 00 00]{swap}{result_is(166)}[1B 02 {e(l_0xc61f97)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukki, Ukie!" next
     "@(Oh, I've died and gone to monkey heaven!){wait}{window_closeall}[1F 1E 37 03 06][1F 17 39 03 2B 00 01]{set(flag 459)}" eob
 
 l_0xc62008:
@@ -44,12 +44,12 @@ l_0xc62008:
     "@(I am Man K. Man.)" end
 
 l_0xc62026:
-    "[06 CC 01 {e(l_0xc620e3)}]@Uikkie Uiki Uki" next
-    "@(Let's get to the point.{pause(20)}  Give me a [1C 05 5A].)" linebreak
+    "[06 CC 01 {e(l_0xc620e3)}]@Uikkie, Uiki Uki" next
+    "@(Let's get to the point,{pause(20)} give me a [1C 05 5A].)" linebreak
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc62089)} {e(l_0xc6206b)}]" goto(l_0xc6206b)
 
 l_0xc6206b:
-    "@Uiki Uikki" next
+    "@Uiki, Uikki" next
     "@(Ok, shove off then.)" end
 
 l_0xc62089:
@@ -63,14 +63,14 @@ l_0xc620e3:
 l_0xc620f7:
     "[06 CD 01 {e(l_0xc62236)}]@Meow Meow fss fss fssss?" next
     "@(What strange chattering for a monkey.)" next
-    "@Coo Coo pepepe." next
+    "@Coo coo, pepepe." next
     "@(If I eat a [1C 05 5C],{pause(15)} it will cure my weird animal sounds.)" next
-    "@Croak croak breeeeeep?" next
+    "@Croak croak, breeeeeep?" next
     "@(If you have one, can I have one?)" linebreak
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc621d0)} {e(l_0xc6219a)}]" goto(l_0xc6219a)
 
 l_0xc6219a:
-    "@Bow wow ruff ruff bark!" next
+    "@Bow wow, ruff ruff bark!" next
     "@(Fine,{pause(15)} I'll just be a weird monkey.)" end
 
 l_0xc621d0:
@@ -82,9 +82,9 @@ l_0xc62236:
     "@(Monkey's true chattering!)" end
 
 l_0xc62257:
-    "[06 CE 01 {e(l_0xc6235d)}]@Kiki kikkeki!" next
+    "[06 CE 01 {e(l_0xc6235d)}]@Kiki, kikkeki!" next
     "@(Oh, I wanna measure something!)" next
-    "@Kiki kiku eki!" next
+    "@Kiki kiku eki..." next
     "@(But I don't have a [1C 05 8C]...)" next
     "@Kuki keikuki?" next
     "@(Do you have one I may borrow?)" linebreak
@@ -95,7 +95,7 @@ l_0xc622dc:
     "@(No measuring!)" end
 
 l_0xc622fc:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc622dc)}]{store_registers}[19 19 00 00]{swap}{result_is(140)}[1B 02 {e(l_0xc622dc)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Kikki ekruiki!" next
+    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc622dc)}]{store_registers}[19 19 00 00]{swap}{result_is(140)}[1B 02 {e(l_0xc622dc)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Kikki, ekruiki!" next
     "@(Finally, I can measure my own tail!){wait}{window_closeall}[1F 1E 31 03 06][1F 17 33 03 2B 00 01]{set(flag 462)}" eob
 
 l_0xc6235d:
@@ -121,29 +121,29 @@ l_0xc623be:
     eob
 
 l_0xc623bf:
-    "[06 CF 01 {e(l_0xc624f5)}]@Kyakyako Kyakie" next
+    "[06 CF 01 {e(l_0xc624f5)}]@Kyakyako Kyakie..." next
     "@(Somewhere amongst all these rooms...)" next
     "@Ukkiki Kyako Kyakki" next
     "@(you should be able to obtain Dragonite.)" next
     "@Ukyakki Kikiyakoke?" next
     "@(Do you think Dragonite is really made from dragons?)" next
-    "@KyokeKyoke Ukyokie" next
+    "@Kyokekyoke, Ukyokie" next
     "@(By the way, I'll give you a [1C 05 5C].)" next
-    "@Ukyakyokyo Kiekyo" next
+    "@Ukya, Kyokyo Kiekyo" next
     "@(If you run out,{pause(15)} just come back and I'll give you as many eggs as you want.)[03][1D 03 FF][1B 02 {e(l_0xc624d6)}][1D 0E 00 5C]" call(data_36.l_0xc7dccf) "{set(flag 463)}" end
 
 l_0xc624d6:
     next
-    "@Kyokyukyo kyakie" next
+    "@Kyokyukyo kyakie!" next
     "@(You have too much stuff!)" end
 
 l_0xc624f5:
     "@Ukyako kyakki?" next
     "@(Did you find a" linebreak
     "  [1C 05 3A]?)" next
-    "@Ukyakki Kokekyakya?" next
+    "@Ukyakki, Kokekyakya?" next
     "@(Oh no,{pause(15)} you don't have to answer.)" next
-    "@KyokeKyoke Ukyokie" next
+    "@Kyokekyoke Ukyokie..." next
     "@(Here's another [1C 05 5C]...)[03][1D 03 FF][1B 02 {e(l_0xc624d6)}][1D 0E 00 5C]" call(data_36.l_0xc7dccf) end
 
 l_0xc62578:
@@ -151,13 +151,13 @@ l_0xc62578:
     "@(One of my friends can use the teleport.)" next
     "@Kyu?{pause(15)}  Kyikki?" next
     "@(What?{pause(20)}  You've never heard of it?)" next
-    "@Kyukyu Kyui" next
+    "@Kyukyu, Kyui" next
     "@(Then,{pause(15)} I'll give you [1C 05 A6].)" next
-    "[1D 03 FF][1B 02 {e(l_0xc62641)}][1D 0E 00 A6]@Kyu Ukyukui?" next
+    "[1D 03 FF][1B 02 {e(l_0xc62641)}][1D 0E 00 A6]@Kyu, Ukyakki?  Uki, Ukyukui?" next
     "@(That didn't make sense, did it?{pause(20)}  But, anyway, I'm attractive, don't you think?)[03]" call(data_36.l_0xc7dcb6) "{set(flag 464)}" end
 
 l_0xc62641:
-    "@Kiee Kiee" next
+    "@Kiee. Kiee" next
     "@(You can't carry any more items.{pause(20)}  You've got too much stuff.)" end
 
 l_0xc6266c:
@@ -167,7 +167,7 @@ l_0xc6266c:
     "@(What?  You didn't ask me about that?)" next
     "@Kyukyu Kyui kyukyu" next
     "@(You guys must be hard workers.)" next
-    "@Kyu ukyukyoi?" next
+    "@Kyuiki, Kyu?{pause(20)}  Ukyu, kyoi?" next
     "@(I'm not making sense, am I?{pause(20)}  But I am attractive, don't you think?)" end
 
 l_0xc6271a:
@@ -189,11 +189,11 @@ l_0xc627ca:
     "@(Let's go outside.){wait}{window_closeall}[1F F1 3C 03 9C 02][1F 61]{set(flag 764)}{set(flag 613)}{set(flag 614)}" eob
 
 l_0xc62819:
-    "@Kyakya kyekyi?" next
-    "@(So... how 've you been?)" end
+    "@Kyakya... kyekyi?" next
+    "@(So... how've you been?)" end
 
 l_0xc6283d:
-    "@Hikikki." next
+    "@Hik, ikki." next
     "@(Follow me,{pause(15)} like this way.){wait}{window_closeall}[1F F1 04 03 9D 02]" eob
 
 l_0xc62865:
@@ -203,19 +203,19 @@ l_0xc62886:
     "[06 13 01 {e(l_0xc62b6f)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc62a9b)}][06 02 00 {e(l_0xc62a30)}]" goto(l_0xc628a1)
 
 l_0xc628a1:
-    "@Kyakya Kyokyo" next
+    "@Kyakya, Kyokyo" next
     "@(Ok,{pause(15)} I'll do a teacher's demonstration.)" next
-    "@Kyakyakya Kyakkya" next
+    "@Kyakyakya, Kyakkya" next
     "@(If you can learn this,{pause(15)} you can go anywhere you've been previously.)" next
     "@Kyakkyaki kiki" next
     "@(You can go there instantly.)" next
-    "@Kyakki Kyaki" next
+    "@Kyakki, Kyaki" next
     "@(This skill can't be used in a room or underground, though.)[03]{window_closeall}[1F F1 05 03 9E 02][1F 61][1F E6 05 03]{music(13)}[1F E9 05 03][1F 61][1F E6 05 03]{music_resume}[1F E9 05 03][1F 61][1F F1 05 03 08 00][19 23 05 03 01 FF 00][1F 16 05 03 00]{pause(30)}{window_open(1)}@Ukkie" next
     "@(I went to Fourside and returned.)" next
-    "@Kyaakyakkya" next
+    "@Kyaa, kyakkya" next
     "@(Just now I used a basic, straight course," next
     "@but you can also change direction during a teleport if there's room for it.)" next
-    "@Ukkikie" next
+    "@Ukki! Ukkiekie!" next
     "@(Ok!{pause(15)}  Why don't you try it, young man!){wait}{window_closeall}{set(flag 2)}" eob
 
 l_0xc62a30:
@@ -230,18 +230,18 @@ l_0xc62a66:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc628a1)} {e(l_0xc62a75)}]" goto(l_0xc62a75)
 
 l_0xc62a75:
-    "@Kyakyakya" next
+    "@Kyakyakya?..." next
     "@(You don't like the monkey teacher?...){wait}{window_closeall}" eob
 
 l_0xc62a9b:
-    "@Uki?" next
+    "@Uki? Kyakikie" next
     "@(What happened to the boy with the red cap?" next
     "@I was only going to teach him something.)" next
-    "@Kyakyo" next
+    "@Kyakyo..." next
     "@(He's not here...)" end
 
 l_0xc62ae7:
-    "{window_open(1)}@[1C 02 01] learned how to use PSI Teleport.{wait}{window_closeall}[1F 71 01 01]{set(flag 275)}[19 23 05 03 01 FF 00][1F 16 05 03 00][1F 1A 05 03 03]{pause(60)}[1F 1B 05 03][1F F1 05 03 80 02][1F 61]{window_open(1)}@Kyaho!" next
+    "{window_open(1)}@[1C 02 01] learned how to use PSI Teleport.{wait}{window_closeall}[1F 71 01 01]{set(flag 275)}[19 23 05 03 01 FF 00][1F 16 05 03 00][1F 1A 05 03 03]{pause(60)}[1F 1B 05 03][1F F1 05 03 80 02][1F 61]{window_open(1)}@Kyaho! Uki, Kyakkya" next
     "@(Great!{pause(20)}  Okay,{pause(15)} the teacher is going home now.){wait}{window_closeall}[1F F1 05 03 9F 02]{unset(flag 2)}{unset(flag 615)}{unset(flag 613)}" eob
 
 l_0xc62b6f:
@@ -249,21 +249,21 @@ l_0xc62b6f:
     "@(Bye bye.)" end
 
 l_0xc62b87:
-    "@Kukkukukku" next
+    "@Kukkukukku!" next
     "@(Welcome!)" next
     "@Kikikiykki" next
     "@(Our paradise exists beneath that hole.)" next
     "@Kuykku kikki..." next
     "@(Talah Rama is great and kind...)" next
-    "@Kikki Kuykku" next
+    "@Kikki, Kuykku" next
     "@(and he knows everything, Talah Rama does...)" next
-    "@Kikku Kuekki" next
+    "@Kikku Kuekki..." next
     "@(He made us the underground rooms...)" end
 
 l_0xc62c50:
     "@Kyakkyekyaekya Kyikkya" next
     "@(Talah Rama is now fasting and practicing silent meditation.)" next
-    "@Kyakkyakyekyakya" next
+    "@Kyakkya, kyekyakya" next
     "@(He is also abstaining from speaking, drinking alcohol and smoking.)" next
     "@Kyapi Kyapi" next
     "@(Please don't bother him.)" end

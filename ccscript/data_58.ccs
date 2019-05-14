@@ -288,7 +288,7 @@ l_0xc9d3a9:
 
 l_0xc9d3e0:
     "[06 49 00 {e(l_0xc9d4b0)}][06 10 00 {e(l_0xc9d47c)}]@Oh, Prince [1C 02 04]." next
-    "@Do you have time to play with me?" linebreak
+    "@Will you make out with me again like you used to?" linebreak
     "[19 02]Yes" eob
 
 l_0xc9d411:
@@ -298,12 +298,12 @@ l_0xc9d416:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9d45a)} {e(l_0xc9d425)}]" goto(l_0xc9d425)
 
 l_0xc9d425:
-    "@Hah, I knew it.{pause(20)}  <Training> changed you!" next
-    "@I'm jealous of your <training>!" end
+    "@Aww,{pause(15)} it's because you have training,{pause(15)} huh?" next
+    "@I hate your training!" end
 
 l_0xc9d45a:
-    "@Happy me!" next
-    "@(patty cake, patty cake...)" end
+    "@I'm so happy!" next
+    "@(*smo{pause(5)}o{pause(5)}o{pause(5)}o{pause(5)}och*)" end
 
 l_0xc9d47c:
     "@There are so many monsters around recently, we can't relax and have fun." next
@@ -314,7 +314,7 @@ l_0xc9d4b0:
 
 l_0xc9d4d3:
     "[06 10 00 {e(l_0xc9d4fd)}]@Prince [1C 02 04]... (blush)." next
-    "@You are such a hunk." end
+    "@Lately,{pause(15)} you seem really stoic and handsome!" end
 
 l_0xc9d4fd:
     "@I'm waiting for Prince [1C 02 04] to see me and say <I love you.>" end

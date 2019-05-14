@@ -219,7 +219,7 @@ l_0xc599d0:
     "{window_closeall}{counter(10)}" call(data_10.l_0xc5a4ec) "[1F 11 05][1F 11 07][1F 21 73]" eob
 
 l_0xc599f4:
-    "{diam}Face Starman Junior.{wait}" linebreak
+    "{diam}Get the Minchs to their house.{wait}" linebreak
     "{window_closeall}{counter(11)}" call(data_10.l_0xc5a4ec) "[1F 11 05][1F 11 06][1F 21 74]" eob
 
 l_0xc59a15:
@@ -283,7 +283,7 @@ l_0xc59c84:
     "{window_closeall}{counter(43)}" call(data_10.l_0xc5a4ec) "{set(flag 317)}{set(flag 142)}{set(flag 143)}[1F 11 03][1F 11 02][1F 21 82]" eob
 
 l_0xc59cb5:
-    "{diam}Ride the Sky Walker again,{wait}" linebreak
+    "{diam}Ride the Sky Walker again.{wait}" linebreak
     "{window_closeall}{counter(44)}" call(data_10.l_0xc5a4ec) "{set(flag 48)}[1F 11 03][1F 11 02][1F 21 83]" eob
 
 l_0xc59cd9:
@@ -351,7 +351,7 @@ l_0xc59f44:
     "{window_closeall}{counter(14)}" call(data_10.l_0xc5a4ec) "{set(flag 210)}[1F 21 92]" eob
 
 l_0xc59f60:
-    "{diam}Stuck in Apple Kid's house.{wait}" linebreak
+    "{diam}Meeting the Apple Kid.{wait}" linebreak
     "{window_closeall}{counter(14)}" call(data_10.l_0xc5a4ec) "{set(flag 210)}[1D 0E 01 5A][1F 21 93]" eob
 
 l_0xc59f80:
@@ -387,16 +387,16 @@ l_0xc5a07e:
     "{window_closeall}{counter(50)}" call(data_10.l_0xc5a4ec) call(data_10.l_0xc5a526) "[1D 0E 01 B7]{set(flag 150)}{set(flag 273)}{set(flag 16)}{set(flag 140)}{set(flag 91)}[1F 21 AA]" eob
 
 l_0xc5a0b3:
-    "{diam}Deep Darkness.{wait}" linebreak
+    "{diam}Deep Darkness with Hawk eye.{wait}" linebreak
     "{window_closeall}{counter(53)}" call(data_10.l_0xc5a4ec) "[1F 11 02][1F 11 03][1D 0E 01 AF]{set(flag 218)}[1F 21 AB]" eob
 
 l_0xc5a0db:
-    "{diam}Borges' bar storage.{wait}" linebreak
+    "{diam}Mani Mani defeated, inside Borges' bar storage.{wait}" linebreak
     "{window_closeall}{counter(42)}" call(data_10.l_0xc5a4ec) "{set(flag 59)}[1F 11 03][1F 21 9A]" eob
 
 l_0xc5a0fe:
-    "{diam}Go to Twoson.{wait}" linebreak
-    "{window_closeall}{counter(12)}" call(data_10.l_0xc5a4ec) "{set(flag 64)}{set(flag 2)}[1F 66 02 11 15 88 C6 00][1F 21 AD]" eob
+    "{diam}Get the Shack key from Pirkle.{wait}" linebreak
+    "{window_closeall}{counter(12)}" call(data_10.l_0xc5a4ec) "{set(flag 40)}{set(flag 64)}{set(flag 2)}[1F 66 02 11 15 88 C6 00][1F 21 AD]" eob
 
 l_0xc5a11a:
     "{diam}Leave Snow Wood.{wait}" linebreak
