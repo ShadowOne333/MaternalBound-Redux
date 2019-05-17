@@ -6,8 +6,8 @@ CCScript Compilation Summary
 Compilation statistics
 =================================================================
 Compilation start:           $f10000
-Compilation end:             $f8eedd
-Total compiled size:         519901 bytes
+Compilation end:             $f8eedc
+Total compiled size:         519900 bytes
 Fragmented space:            573 bytes
 -----------------------------------------------------------------
 
@@ -20,7 +20,7 @@ asm65816                     $f8e16b      878    bytes
 asm_code                     $f862cb      4465   bytes
 asm_controls                 $f1ffeb      0      bytes
 asm_debug                    $f8ea69      601    bytes
-asm_diamond                  $f8ee03      218    bytes
+asm_diamond                  $f8ee02      218    bytes
 asm_run                      $f2ff92      46     bytes
 data_00                      $f352e1      10451  bytes
 data_01                      $f8147a      5087   bytes
@@ -93,7 +93,7 @@ main                         $f1ffeb      0      bytes
 msu1                         $f8e808      609    bytes
 naming_screen_table          $f8e4d9      815    bytes
 new_stats_equipment          $f5efd3      4040   bytes
-Title_Window                 $f8ecc2      321    bytes
+Title_Window                 $f8ecc2      320    bytes
 stdarg                       $f1ffeb      0      bytes
 std                          $f1ffeb      0      bytes
 -----------------------------------------------------------------
@@ -215,11 +215,11 @@ tx6                          $f8ea69
 Labels in module asm_diamond
 Name                         Address
 -----------------------------------------------------------------
-Diamond_Table                $f8ee03
-Display_Diamond              $f8ee3a
-Display_Window_Graphics      $f8ee07
-l_0xC10D60                   $f8ee88
-l_0xC10FEA                   $f8eea8
+Diamond_Table                $f8ee02
+Display_Diamond              $f8ee39
+Display_Window_Graphics      $f8ee06
+l_0xC10D60                   $f8ee87
+l_0xC10FEA                   $f8eea7
 -----------------------------------------------------------------
 
 
@@ -7461,7 +7461,7 @@ Labels in module Title_Window
 Name                         Address
 -----------------------------------------------------------------
 Title_Char_Name              $f8ed24
-Title_Str_Name               $f8eda1
+Title_Str_Name               $f8eda0
 Win_Title                    $f8ecc2
 r_0xC1866D                   $f8ecf0
 -----------------------------------------------------------------

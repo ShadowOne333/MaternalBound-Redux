@@ -184,11 +184,11 @@ Title_Char_Name:{
 	
 	STX_d (0x06)	// Stores the current Control Code argument to DPR 0x06
 	LDA_a (0x97CA)	// Control Code Counter
-	CMP_i (0x0002)	// Check if we already stored all of our arguemtns to RAM
+	CMP_i (0x0002)	// Check if we already stored all of our arguments to RAM
 	BCS_a (Title_Name)	// If so, then we can proceed to write the character's name
 	
 	// If not, then we need to store the Control Code's arguments
-	TXA			// Transfer the CC argument to the A register
+	TXA		// Transfer the CC argument to the A register
 	SEP (0x20)	// Make A register 8-bit
 	LDX_a (0x97CA)	// Load in the CC counter to the X register
 	STA_x (0x97BA)	// Store the CC arguument to the CC argument storage in RAM
@@ -223,21 +223,21 @@ Title_Name_2:
 	BRA_a (Title_Name_3)	// Continue with the routine
 	
 Main_4_Names:
-	DEC				// Decrement the character's ID
+	DEC		// Decrement the character's ID
 	TAY
 	LDA_i (0x5F)	// Load in the character's stats table's entry size
 	JSL (Mult_YxA)	// Multiply
-	CLC				// Clear C bit in P register
+	CLC		// Clear C bit in P register
 	ADC_i (0x99CE)	// Add the offset to the starting address of the Chracter Stats Table in RAM to get the address of the names
 	STA_d (0x04)	// DPR 0x04 = Address of the chracter's name
 	
 Title_Name_3:
-	LDA_d (0x02)	// Load in the Widnow ID
+	LDA_d (0x02)	// Load in the Window ID
 	LDX_d (0x04)
 	STX_d (0x0E)
 	LDX_i (0x007E)
 	STX_d (0x10)	// Load in the character's Name address to DPR 0x0E and 0x10
-	LDX_i (0x06)	// Load in the length of the name
+	LDX_d (0x06)	// Load in the length of the name
 	JSL (Title_Window)	// Title the window
 	LDA_i (0x0000)
 	
