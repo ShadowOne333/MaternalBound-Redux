@@ -344,7 +344,8 @@ l_0xc6505d:
     "@Give me" linebreak
     "  the [1C 05 82]," next
     "@I give you something." next
-    "@Look at list.{window_open(7)}[06 A8 01 {e(l_0xc650ac)}][19 02]Plain roll" eob
+    "@Look at list." next
+    "{window_open(12)}[06 A8 01 {e(l_0xc650ac)}][19 02]Plain roll" eob
 
 l_0xc650ac:
     "[06 A9 01 {e(l_0xc650c2)}][19 02]Plain yogurt" eob

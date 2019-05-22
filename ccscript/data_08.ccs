@@ -291,7 +291,15 @@ l_0xc58d46:
     goto(l_0xc58d58)
 
 l_0xc58d58:
-    "    [1F 52 03]{clearline}[1B 02 {e(data_06.debug_main)}]{swap}{music(0)}" goto(l_0xc58d58)
+  "    [1F 52 03]{clearline}"
+  store_registers
+  if ("[18 07 C0 00 00 00 00]") {
+    "@Option 192 and above crash the game." next
+    goto(l_0xc58d58)    
+  }
+  load_registers
+  "[1B 02 {e(data_06.debug_main)}]{swap}{music(0)}" goto(l_0xc58d58)
+
 
 l_0xc58d70:
     newline
