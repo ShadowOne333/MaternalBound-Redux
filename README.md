@@ -106,7 +106,7 @@ Don’t get dizzy while reading the full changelog:
     D-Man made an amazing work on re-enabling the coloured diamond from Mother 2 which was replaced for a white dot/bullet in EarthBound. The way to enable it in game can be done by replacing all of the “@” from the ccscript files with the command {diam}.
     His work was just too good to not mention it.
     The reason why it was not implemented into MaternalBound Redux was due to two things:
-    - The diamond has 8 pixels wide. Leaving it as such would move some phrases which barely fit in three lines. Ways to fix this:
+    - The diamond is 8 pixels wide. Leaving it as such would move some phrases which barely fit in three lines. Ways to fix this:
        - This would require verifying the ENTIRE script once again (which is something I’m not fond with)
        - Modify the diamond code to just print out 6 pixels wide instead of 8.
        - Change the automatic linebreak code to make a space of 8 pixels instead of 6 from the window perimeter.
