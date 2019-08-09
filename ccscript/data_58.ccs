@@ -101,7 +101,7 @@ l_0xc9c98a:
     "{pause(1)}" goto(l_0xc9c98a)
 
 l_0xc9c991:
-    title(1, Yisochi)
+    title(1, Yisuchi)
     "[06 49 00 {e(l_0xc9cbc4)}][06 10 00 {e(l_0xc9cb79)}][06 11 01 {e(l_0xc9c9e8)}][06 0A 00 {e(l_0xc9c9db)}]@I won't say anything." next
     "@Go to <Mu,> the Place of Emptiness again.{wait}" call(data_50.l_0xc92458) eob
 
@@ -111,8 +111,8 @@ l_0xc9c9db:
 l_0xc9c9e8:
     "@I am proud." next
     "@You have completed your Mu training." next
-    "@I, Yi-So-Chi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
-    title(1, Yisochi)
+    "@I, Yi-Su-Chi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
+    title(1, Yisuchi)
     "@Prince [1C 02 04]," next
     "@I shall relay a message to you from the heavens." next
     "@The evil entity that controls all wickedness is preparing" next

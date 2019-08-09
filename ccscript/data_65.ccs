@@ -75,7 +75,7 @@ l_0xef8c92:
 l_0xef8cac:
     newline
     "{sound(25)}@{user} knitted" linebreak
-    "  its brow![03]" eob
+    "  {call(data_37.l_0xc7e66e)} brow![03]" eob
 
 l_0xef8cc7:
     "[1D 21 03][09 03 {e(l_0xef8cfb)} {e(l_0xef8d17)} {e(l_0xef8d2f)}]" goto(l_0xef8cdd)
@@ -409,7 +409,7 @@ l_0xef9a47:
 l_0xef9a5e:
     "{sound(25)}" newline
     "@{user} sowed" linebreak
-    "  some seeds around itself!{sound(72)}[03]" eob
+    "  some seeds around {call(data_63.self_gender)}!{sound(72)}[03]" eob
 
 l_0xef9a7e:
     newline

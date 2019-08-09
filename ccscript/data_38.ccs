@@ -310,7 +310,7 @@ l_0xc80579:
     goto(l_0xc805ba)
 
 l_0xc805ba:
-    "@[1C 02 02] if you must take a trip,{pause(15)} be sure to bring this along." next
+    "@[1C 02 02], if you must take a trip,{pause(15)} be sure to bring this along." next
     "@It's my very own hand-made band-aid!{pause(20)}  Ooo!{pause(15)} That rhymes!" next
     "@I know, I'll call it a Hand-aid!" next
     "[1D 03 FF][1B 02 {e(l_0xc8082a)}][1D 0E 00 BC]" call(data_36.l_0xc7dccf) "{wait}{set(flag 84)}" newline

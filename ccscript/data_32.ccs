@@ -269,8 +269,8 @@ l_0xc7794c:
     call(l_0xc77c50) "@But he and his followers are also in trouble." next
     call(l_0xc77c50) "@The Apple of Enlightenment has foretold" next
     call(l_0xc77c50) "@that Giygas' attempt will fail." next
-    call(l_0xc77c50) "@It is because of the existence of a boy named [1C 02 01]." next
-    call(l_0xc77c50) "@...That's me!" next
+    call(l_0xc77c50) "@It is because of the existence of a boy named [1C 02 01]." next "{window_closetop}{window_open(1)}"
+    call(l_0xc77c50) title_ness(1) "@...That's me!" next "{window_closetop}{window_open(1)}"
     call(l_0xc77c50) "@Listen." next
     call(l_0xc77c50) "@Free your mind and KNOW what you must do!" next
     call(l_0xc77c50) "@Your destiny has already been decided." next

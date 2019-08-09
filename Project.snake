@@ -1,6 +1,21 @@
 resources:
   common.PatchModule: {patches: patches.yml}
   common.UsedRangeModule: {used_ranges: used_ranges.yml}
+  eb.AnimationModule: {Animations/0/000: Animations/0/000.png, Animations/0/001: Animations/0/001.png,
+    Animations/0/002: Animations/0/002.png, Animations/0/003: Animations/0/003.png,
+    Animations/0/004: Animations/0/004.png, Animations/0/005: Animations/0/005.png,
+    Animations/1/000: Animations/1/000.png, Animations/1/001: Animations/1/001.png,
+    Animations/1/002: Animations/1/002.png, Animations/1/003: Animations/1/003.png,
+    Animations/1/004: Animations/1/004.png, Animations/1/005: Animations/1/005.png,
+    Animations/1/006: Animations/1/006.png, Animations/2/000: Animations/2/000.png,
+    Animations/2/001: Animations/2/001.png, Animations/2/002: Animations/2/002.png,
+    Animations/2/003: Animations/2/003.png, Animations/2/004: Animations/2/004.png,
+    Animations/2/005: Animations/2/005.png, Animations/2/006: Animations/2/006.png,
+    Animations/2/007: Animations/2/007.png, Animations/3/000: Animations/3/000.png,
+    Animations/3/001: Animations/3/001.png, Animations/4/000: Animations/4/000.png,
+    Animations/4/001: Animations/4/001.png, Animations/4/002: Animations/4/002.png,
+    Animations/5/000: Animations/5/000.png, Animations/5/001: Animations/5/001.png,
+    Animations/animations: Animations/animations.yml}
   eb.BattleBgModule: {BattleBGs/000: BattleBGs/000.png, BattleBGs/001: BattleBGs/001.png,
     BattleBGs/002: BattleBGs/002.png, BattleBGs/003: BattleBGs/003.png, BattleBGs/004: BattleBGs/004.png,
     BattleBGs/005: BattleBGs/005.png, BattleBGs/006: BattleBGs/006.png, BattleBGs/007: BattleBGs/007.png,
@@ -112,6 +127,8 @@ resources:
     BattleBGs/323: BattleBGs/323.png, BattleBGs/324: BattleBGs/324.png, BattleBGs/325: BattleBGs/325.png,
     BattleBGs/326: BattleBGs/326.png, bg_data_table: bg_data_table.yml, bg_distortion_table: bg_distortion_table.yml,
     bg_scrolling_table: bg_scrolling_table.yml}
+  eb.CastModule: {Cast/MiscGraphic: Cast/MiscGraphic.png, Cast/NameGraphic: Cast/NameGraphic.png,
+    Cast/dynamic_names: Cast/dynamic_names.yml, Cast/graphics_entries: Cast/graphics_entries.yml}
   eb.CccInterfaceModule: {ccscript/summary: ccscript/summary.txt}
   eb.CharacterSubstitutionsModule: {Fonts/character_substitutions: Fonts/character_substitutions.yml}
   eb.CompressedGraphicsModule: {Logos/APE: Logos/APE.png, Logos/GasStation1: Logos/GasStation1.png,
@@ -121,7 +138,8 @@ resources:
     TownMaps/Onett: TownMaps/Onett.png, TownMaps/Scarabia: TownMaps/Scarabia.png,
     TownMaps/Summers: TownMaps/Summers.png, TownMaps/Threed: TownMaps/Threed.png,
     TownMaps/Twoson: TownMaps/Twoson.png, TownMaps/icons: TownMaps/icons.png}
-  eb.DeathScreenModule: {Logos/DeathScreen: Logos/DeathScreen.png, Logos/DeathScreen_palettes: Logos/DeathScreen_palettes.yml}
+  eb.DeathScreenModule: {Logos/DeathScreen_Jeff: Logos/DeathScreen_Jeff.png, Logos/DeathScreen_Ness: Logos/DeathScreen_Ness.png,
+    Logos/DeathScreen_palettes: Logos/DeathScreen_palettes.yml}
   eb.DoorModule: {map_doors: map_doors.yml}
   eb.EnemyModule: {BattleSprites/001: BattleSprites/001.png, BattleSprites/002: BattleSprites/002.png,
     BattleSprites/003: BattleSprites/003.png, BattleSprites/004: BattleSprites/004.png,
@@ -573,7 +591,7 @@ resources:
     WindowGraphics/Windows2_4: WindowGraphics/Windows2_4.png, WindowGraphics/Windows2_5: WindowGraphics/Windows2_5.png,
     WindowGraphics/Windows2_6: WindowGraphics/Windows2_6.png, WindowGraphics/flavor_names: WindowGraphics/flavor_names.txt}
 romtype: Earthbound
-version: 9
+version: 10
 Title: Untitled
 Author: Anonymous
 Description: No Description

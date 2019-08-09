@@ -9,17 +9,6 @@ import asm65816
 // org $E60353
 // db $2f ; hardcore mute
 
-ROM[0xC08183] = {
-	JSL (nmi)
-	NOP
-	NOP
-}
-
-ROM[0xC0AC0C] = {
-	JSL (setFadeFlag)
-	NOP
-}
-
 ROM[0xC4FBF4] = {
 	JSL (msuTrack)
 	NOP
@@ -29,6 +18,14 @@ ROM[0xC4FD12] = {
 	JSL (newTrackFlag)
 }
 
+ROM[0xC0AC0C] = {
+	JSL (setFadeFlag)
+	NOP
+}
+
+ROM[0xC0834E] = {
+	JSL (nmi)
+}
 
 msuTrack: {			// //ROM[0xEFFE00] = 
 	LDX_d	(0x12)		// Native code
@@ -38,7 +35,7 @@ msuTrack: {			// //ROM[0xEFFE00] =
 	SEP	(0x20)
 	LDA_al	(0x002002)
 	CMP_8	(0x53)
-	BEQ	(0x03)		// BEQ $03 - BEQ (playmsu) Branch to playmsu
+	BEQ	(0x03)		// BEQ $03 - BEQ_a	(playmsu) Branch to playmsu
 	PLP			// Restore processor status
 	PLA			// Get track number from stack
 	RTL
@@ -57,10 +54,10 @@ playmsu: {
 loop: {
 	LDA_al	(0x002000)
 	AND_8	(0x40)
-	BNE	(0xF8)		// BNE $F8 - BNE(loop) Branch to loop
+	BNE	(0xF8)		// BNE $F8 - BNE_a	(loop) Branch to loop
 	LDA_al	(0x002000)
 	AND_8	(0x08)
-	BNE	(0x2C)		// BNE $2C - Branch to "playspc", error bit set?
+	BNE	(0x2C)		// BNE $2C - BNE_a	(playspc) Branch to "playspc", error bit set?
 	LDA_xl	(track_table)	// LDA_xl (0xEFFF00)
 	STA_al	(0x002007)
 	LDA_8	(0xFF)
@@ -104,7 +101,7 @@ endflag: {
 	BEQ	(0x08)		// BEQ $08
 	LDA_8	(0x00)
 	STA_al	(0x7FFFF0)	// Erase flag
-	BRA	(0xEA)		// BRA (endflag) - BRA $EA
+	BRA	(0xEA)		// BRA_a	(endflag) - BRA $EA
 	PLA
 	LDA_8	(0x00)
 	STA_al	(0x7FFFF0) 	// Erase flag
@@ -128,36 +125,39 @@ endsetflag: {
 	PLA
 	PHA
 	STA_al	(0x7FFFF3)
-	BRA	(0xF3)		// BRA (endsetflag) - BRA $F3
+	BRA	(0xF3)		// BRA_a	(endsetflag) - BRA $F3
 }
 
 nmi: {
-	LDA_a	(0x4210)
-	STZ_a	(0x420C)
+	SEP	(0x30)
 	LDA_al	(0x7FFFF3)
-	BNE	(0x01)		// BNE $01
-	RTL
+	BEQ	(0x22)		// BEQ_a	(endNMI) - BEQ $22
 	CMP_8	(0x02)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadefast)	// JMP (fadefast) - JMP $FDF7
+	JMP	(fadefast)	// JMP (fadefast) - JMP $FE03
 	CMP_8	(0x03)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadeslow)	// JMP (fadeslow) - JMP $FDDA
+	JMP	(fadeslow)	// JMP (fadeslow) - JMP $FDE4
 	CMP_8	(0x07)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadehalf)	// JMP (fadehalf) - JMP $FE16
+	JMP	(fadehalf)	// JMP (fadehalf) - JMP $FE24
 	CMP_8	(0x08)
 	BNE	(0x03)		// BNE $03
-	JMP	(fadefull)	// JMP (fadefull) - JMP $FE36
+	JMP	(fadefull)	// JMP (fadefull) - JMP $FE46
 	LDA_8	(0x00)
 	STA_al	(0x7FFFF3)	// Erase fade flag
+}
+
+endNMI: {
+	REP	(0x30)
+	STZ_d	(0x99)
 	RTL
 }
 
 fadeslow: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x00)
-	BEQ	(0x06)		// BEQ (endslow) - BEQ $06
+	BEQ	(0x06)		// BEQ_a	(endslow) - BEQ $06
 	DEC
 	DEC
 	CMP_8	(0x10)
@@ -169,13 +169,13 @@ endslow: {
 	STA_al	(0x7FFFF3)	// Erase fade flag
 	STA_al	(0x002006)
 	STA_al	(0x7FFFF2)
-	RTL
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
 }
 
 fadefast: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x00)
-	BEQ	(0x08)		// BEQ (endfast) - BEQ $08
+	BEQ	(0x08)		// BEQ_a	(endfast) - BEQ $08
 	DEC
 	DEC
 	DEC
@@ -189,13 +189,13 @@ endfast: {
 	STA_al	(0x7FFFF3)	// Erase fade flag
 	STA_al	(0x002006)
 	STA_al	(0x7FFFF2)
-	RTL
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
 }
 
 fadehalf: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0x40)		// Final level?
-	BEQ	(0x07)		// BEQ (endhalf) - BEQ $07
+	BEQ	(0x07)		// BEQ_a	(endhalf) - BEQ $07
 	DEC
 	DEC
 	DEC
@@ -209,13 +209,13 @@ endhalf: {
 	LDA_8	(0x40)		// Set final level
 	STA_al	(0x002006)
 	STA_al	(0x7FFFF2)
-	RTL
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
 }
 
 fadefull: {
 	LDA_al	(0x7FFFF2)
 	CMP_8	(0xFF)		// Final level?
-	BEQ	(0x07)		// BEQ (endfull) - BEQ $07
+	BEQ	(0x07)		// BEQ_a	(endfull) - BEQ $07
 	INC
 	INC
 	INC
@@ -229,7 +229,7 @@ endfull: {
 	LDA_8	(0xFF)
 	STA_al	(0x002006)
 	STA_al	(0x7FFFF2)
-	RTL
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
 }
 
 track_table:			//ROM[0xEFFF00] = 

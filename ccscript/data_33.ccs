@@ -375,7 +375,7 @@ l_0xc79796:
     "@Now wipe your eyes,{pause(15)} blow your nose,{pause(15)} and smile before we take off.[03]{window_closeall}{set(flag 611)}[1F 41 05]{pause(10)}" goto(l_0xc798bf)
 
 l_0xc798bf:
-    "{window_open(1)}@Goodbye [1C 02 02].{pause(20)}" linebreak
+    "{window_open(1)}@Goodbye, [1C 02 02].{pause(20)}" linebreak
     "  Don't worry,{pause(15)} I won't cry anymore...{wait}{window_closeall}[06 01 00 {e(l_0xc798f7)}]{set(flag 1)}" eob
 
 l_0xc798f7:

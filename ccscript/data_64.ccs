@@ -124,12 +124,12 @@ l_0xef82f7:
 l_0xef8317:
     newline
     "{sound(25)}@{user} scattered" linebreak
-    "  its pollen around!{sound(82)}[03]{pause(1)}" eob
+    "  {call(data_37.l_0xc7e66e)} pollen around!{sound(82)}[03]{pause(1)}" eob
 
 l_0xef833e:
     newline
     "{sound(25)}@{user} reached" linebreak
-    "  out with its icy hand.[03]" eob
+    "  out with {call(data_37.l_0xc7e66e)} icy hand.[03]" eob
 
 l_0xef835c:
     newline
@@ -154,7 +154,7 @@ l_0xef83ca:
 l_0xef83ed:
     newline
     "{sound(25)}@{user} leaped" linebreak
-    "  forward and spread its wings![03]" eob
+    "  forward and spread {call(data_37.l_0xc7e66e)} wings![03]" eob
 
 l_0xef8413:
     newline
@@ -392,7 +392,7 @@ l_0xef8a8c:
 l_0xef8aa3:
     newline
     "{sound(25)}@{user} scratched" linebreak
-    "  with its claws![03]" eob
+    "  with {call(data_37.l_0xc7e66e)} claws![03]" eob
 
 l_0xef8ac2:
     newline
@@ -411,5 +411,5 @@ l_0xef8af8:
 l_0xef8b11:
     newline
     "{sound(25)}@{user} spit" linebreak
-    "  its pumpkin seeds![03]" eob
+    "  {call(data_37.l_0xc7e66e)} pumpkin seeds![03]" eob
 

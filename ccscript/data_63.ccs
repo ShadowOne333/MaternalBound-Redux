@@ -131,40 +131,40 @@ l_0xef78f7:
     "@Here is " call(l_0xef798f) " opening attack![03]" eob
 
 l_0xef790b:
-    "[1C 14 02][09 03 {e(l_0xef792b)} {e(l_0xef792e)} {e(l_0xef793c)}]{user} and its cohorts" eob
+    "[1C 14 02][09 03 {e(l_0xef792b)} {e(l_0xef792e)} {e(l_0xef793c)}]{user} and {call(data_37.l_0xc7e66e)} cohorts" eob
 
 l_0xef792b:
     "{user}" eob
 
 l_0xef792e:
-    "{user} and its cohort" eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohort" eob
 
 l_0xef793c:
-    "{user} and its cohorts" eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohorts" eob
 
 l_0xef794b:
-    "[1C 14 02][09 03 {e(l_0xef796c)} {e(l_0xef7970)} {e(l_0xef797f)}]{user} and its cohorts." eob
+    "[1C 14 02][09 03 {e(l_0xef796c)} {e(l_0xef7970)} {e(l_0xef797f)}]{user} and {call(data_37.l_0xc7e66e)} cohorts." eob
 
 l_0xef796c:
     "{user}." eob
 
 l_0xef7970:
-    "{user} and its cohort." eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohort." eob
 
 l_0xef797f:
-    "{user} and its cohorts." eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohorts." eob
 
 l_0xef798f:
-    "[1C 14 02][09 03 {e(l_0xef79b1)} {e(l_0xef79b6)} {e(l_0xef79c6)}]{user} and its cohorts'" eob
+    "[1C 14 02][09 03 {e(l_0xef79b1)} {e(l_0xef79b6)} {e(l_0xef79c6)}]{user} and {call(data_37.l_0xc7e66e)} cohorts'" eob
 
 l_0xef79b1:
     "{user}'s" eob
 
 l_0xef79b6:
-    "{user} and its cohort's" eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohort's" eob
 
 l_0xef79c6:
-    "{user} and its cohorts'" eob
+    "{user} and {call(data_37.l_0xc7e66e)} cohorts'" eob
 
 l_0xef79d7:
     "{window_clear}{music(5)}" linebreak
@@ -364,12 +364,21 @@ l_0xef7e88:
 l_0xef7eac:
     newline
     "{sound(25)}@{user} took a bite" linebreak
-    "  using its poisonous fangs![03]" eob
+    "  using {call(data_37.l_0xc7e66e)} poisonous fangs![03]" eob
 
 l_0xef7ed5:
     newline
     "{sound(25)}@{user} fired" linebreak
-    "  a missile, making itself dizzy.{sound(70)}[03]{pause(1)}" eob
+    "  a missile, making {call(self_gender)} dizzy.{sound(70)}[03]{pause(1)}" eob
+
+self_gender:
+    "[1C 14 01][09 03 {e(himself)} {e(herself)} {e(itself)}]" goto(himself)
+himself:
+    "himself" eob
+herself:
+    "herself" eob
+itself:
+    "itself" eob
 
 l_0xef7f02:
     newline

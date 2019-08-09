@@ -150,8 +150,6 @@ TEXT CHANGES TO CHANGE "X BUTTON" REFERENCES TO "Y BUTTON" SHOULD BE SOUGHT OUT 
 
 
 
-
-
 ROM[0xC3E254] = "[0E 00 06]"	// Extends Game Menu from 0D to 0E to the right, and reduces heigth from 08 to 06
 NOTE: Since this will compile with CoilSnake, this change will NOT take effect.
 

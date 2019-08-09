@@ -155,19 +155,6 @@ kirby:
 	"[00 00 00 00 00 00 01 00 02 01 03 00 05 00 0B 04 00 00 00 00 00 00 00 00 00 00 01 00 03 00 03 00 00 00 3E 00 D5 36 3E 80 FF 00 FF 00 9F 60 9F 60 00 00 00 00 08 00 7F 00 FF 00 FF 00 FF 00 FF 00 00 00 00 00 80 00 40 80 A0 40 E0 00 F0 20 E8 10 00 00 00 00 00 00 00 00 80 00 C0 00 C0 00 E0 00 0B 00 17 08 1F 08 15 00 1F 0A 16 08 0F 05 06 01 07 00 07 00 07 00 0F 00 05 00 05 00 00 00 00 00 FF 00 FF 00 EB 14 1C 00 DD C1 FF 00 FF 00 7F 00 FF 00 EB 00 FF 00 EB 00 2A 00 FF 00 FF 00 F7 00 E8 00 F4 08 FC 08 54 00 FC A8 B4 08 F8 50 30 40 F0 00 F0 00 F0 00 F8 00 50 00 D0 00 80 00 80 00 03 00 05 03 07 03 04 03 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 3E 80 D5 36 7F 80 E3 00 80 00 00 00 00 00 00 00 7F 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 60 80 D0 60 70 E0 90 60 E0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
 
 
-/* KIRBY SPRITE ASSEMBLY */
-// This part focuses on fixing the Kirby sprite cursor that appears on the Boot-Up Debug Menu
-
-// Assembly 3-byte pointer
-ROM[0xC2FFB8] = "[00 00 DF]"	// Originally [D0 FF DE]
-
-// Assembly 2-byte pointer
-ROM[0xDF0000] = "[02 00]"	// Originally [D2 FF]
-
-// Assembly - Data bank determined by LDA opcode at 0xA0FE
-ROM[0xDF0002] = "[F4 00 30 F4 00 F4 01 30 FC 00 F4 02 30 04 00 FC 03 30 F4 00 FC 04 30 FC 00 FC 05 30 04 00 04 06 30 F4 00 04 07 30 FC 00 04 08 30 04 80]"
-
-
 /* Fix "Show battle" Battle debug menu to work properly */
 ROM[0xC1E21A] =	LDA_i (0x0060)	// Next 4 lines fix the garbled characters in Enemy Selection Menu for proper numbers (000, 001, etc)
 ROM[0xC1E21F] = LDA_i (0x0060)
