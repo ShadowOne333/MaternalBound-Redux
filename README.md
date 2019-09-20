@@ -18,6 +18,8 @@
 
 * [**Patching and Usage Instructions**](#instructions)
 
+* [**Project Licence**](#license)
+
 * [**Credits**](#credits)
 
 -------------
@@ -82,8 +84,9 @@ Don’t get dizzy while reading the full changelog:
 * Characters known by name now get their name displayed at the title of the text box
 * Dad no longer calls you after a while. You will no longer be interrupted by him
 * Every location of the game is now accessible through PSI Teleport
+* Some PSI animations had wrong tiles in them, those have been fixed
 * Fixed the Dusty Dunes teleport location not appearing
-* Some reworked enemy battle sprites
+* Reworked enemy battle sprites
 * Now using an equipabble item inside the Goods menu will equip said item, instead of giving the “is an item that can be equipped” message (Thanks, Chaz!)
 * Reworked Gas Station screen, so that all letters now letters use the same type of font, and also words are now evenly spaced out
 * Full localization/translation and revamp of the Debug menus found in the game:
@@ -112,7 +115,7 @@ Don’t get dizzy while reading the full changelog:
        - Change the automatic linebreak code to make a space of 8 pixels instead of 6 from the window perimeter.
        - Change every manual linebreak to have 3 spaces instead of 2 in all the ccscript files.
     - The diamond does not show up in battle. This is unknown, as Mother 2 also didn’t have the diamond for battles. (Why though?)
-* Other in-game bugfixes… ?
+* A lot more in-game and script bugfixes
 
 -----------------
 
@@ -125,8 +128,16 @@ https://app.box.com/s/fkmjx61w4m7xom1kmir5zk7xv6jx9u8f
 Simply rename your ROM to *"eb_msu1.smc"* and place it in the same folder as all the .pcm/.msu files.
 You need to use Snes9x v1.54 or above in order for the MSU-1 hack to work.
 
-**NOTE:** The *"DeathFix.ips"* is only added for archival purposes. It is *NOT needed* if you simply want to patch a clean EarthBound ROM. 
-This patch is provided in the case of someone wanting to compile the hack from source using CoilSnake. In this case, it is ***required*** that you apply the "DeathFix.ips" patch over your already patched ROM to fix the Death Screen for Jeff, as currently CoilSnake breaks this Death screen in its 3.0/3.33 release.
+---------------
+
+## License
+
+MaternalBound Redux is a project licensed under the terms of the GPLv3, which means that you are given legal permission to copy, distribute and/or modify this project, as long as:
+
+1) The source for the available modified project is shared and also available to the public without exception.
+2) The modified project subjects itself different naming convention, to differentiate it from the main and licensed MaternalBound Redux project.
+
+You can find a copy of the license in the LICENSE file.
 
 ---------------
 
@@ -141,4 +152,41 @@ This patch is provided in the case of someone wanting to compile the hack from s
 * **Herringway:**	For his New Controls hack, which was taken as a base, but then heavily reworked to be fully customizable using CoilSnake
 * **Howisthisaname:** For the EarthBound Enhanced hack, which is where some of the reworked battle sprites come from, while some were made entirely by me
 * **Conn:**	For the creation of the MSU hack for EarthBound. I transcribed the patch to CCS format and also helped with the loop table.
-* Special thanks to all the beta-testers and people on the MaternalBound Discord for their feedback and suggestions. Many thanks as well all of those that helped with other ASM code, and providing the overworld/battle sprites for this project as well!
+* Special thanks to all my beta-testers and people on the MaternalBound Discord (https://discord.gg/v7kyYrv) for their feedback and suggestions!
+
+
+### Sprites:
+
+* **Jamsilva:**	For all the incredible work he did with the overworld sprites as well as some battle sprites for both his own hack and Redux
+* **PhoenixBound:**	Besides all his previous credited work, also want to thank him for the awesome overworld sprites he made for Redux as well
+* **Crav (Great Space Pickle):** Sprite artist for the Mother: Cognitive Dissonance project, and for the permission to use some of the unique overworld sprites from that project into Redux!
+* **Rickstie:**	For the ongoing interchange of sprite between him and me for the diagonal sprites, inspiration for the robot sprites and other touches to the main characters
+
+* **Howisthisaname:** For the neat EarthBound Enhanced hack, which is where some of the reworked battle sprites come from. The specific sprites from his EB Enhanced project are as follows:
+
+|	Sprite number			|	Enemy name			|	Reason			|
+|:-----------------------------------:	|:----------------------------------:	|:-----------------------------------:| 
+|006                                     |Red Antoid				|(Slight body changes)|
+|007/008/210                             |Evil Mushroom(s)			|(Shading of the feet)|
+|012                                     |Mystical Record			|(Face edits)|
+|022/023                                 |Annoying Men				|(1 to 1)|
+|024                                     |Unassuming Guy			|(1 to 1)|
+|032                                     |Cranky Ladies				|(1 to 1)|
+|047/048                                 |Arachnid(s)				|(Straight line in the body)|
+|049/050/182/183                         |Kraken(s)				|(1 to 1, except colors)|
+|054                                     |Cop					|(Few, small changes)|
+|061                                     |Crazed Sign				|(Shading)|
+|064                                     |Skate Punk				|(Glasses, smile, bottom of the board)|
+|065/066                                 |Skelpion(s)				|(Tail and claws)|
+|067/068/069/074/075/184/185/186/187/188 |Starmen				|(Shading)|
+|079/080/228                             |Cops(s)				|(Various improvements)|
+|083/190				 |Diamond Dog				|(Eye and slight spikes/shading)|
+|089                                     |Dali's Clock				|(Shading)|
+|100                                     |Zap Eel				|(Color of the sparks)|
+|104/105                                 |Booka(s)				|(Changed eyes, reshaped body)|
+|131                                     |Frank					|(Overall design)|
+|135                                     |Tough Guy				|(1 to 1)|
+|140                                     |Sentry Robot				|(Added body detail)|
+|148                                     |Demonic Petunia			|(1 to 1)|
+|223/227                                 |Caterpillar(s)			|(Overall design)|
+|224                                     |Evil Eye				|(Slight body shading)|

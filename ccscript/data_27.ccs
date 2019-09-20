@@ -425,12 +425,42 @@ l_0xc6f819:
     "@Thank you, thank you!" end
 
 l_0xc6f881:
+    title(1, Enrich)
     "@You've brought the town of Fourside back to life." next
     "@I appreciate it from the bottom of my heart." next
     "@Thank you." end
 
 l_0xc6f8bf:
-    "@Seems like it's just for decoration." end
+    "@Seems like you can select a nice song." next
+    "@Would you like to listen to something?" linebreak
+    "[19 02]Yes" eob
+
+no_decision:
+    "[19 02]No" eob
+
+selection:
+    "[1C 07 02][11]{clearline}[09 02 {e(song_yes)} {e(song_no)}]" goto(song_no)
+
+song_no:
+    "@It's not just for decoration, you know!" end
+
+song_yes:
+    "@Which song would you like to hear?" linebreak
+    goto(song_select)
+
+song_select:
+    "    [1F 52 03]{clearline}"
+    store_registers
+    if ("[18 07 C0 00 00 00 00]") {
+    "@The jukebox only goes up to 191 songs!" next
+    goto(song_select)    
+    }
+    load_registers
+    "[1B 02 {e(song_set)}]{music_stop}{swap}{music(0)}" goto(song_select)
+
+song_set:
+    "@Enjoy your song!" end
+
 
 l_0xc6f8d9:
     "@This one is locked." end

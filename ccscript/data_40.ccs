@@ -350,7 +350,7 @@ l_0xc83b5a:
     "@Then stay right there where you're too short to see a thing!" end
 
 l_0xc83b7b:
-    "@So, what do I get?" call(data_15.l_0xc5e456) "{pause(60)}" newline
+    "@So, what do I get?[1F 60 1E]" call(data_15.l_0xc5e456) "{pause(60)}" newline
     "[1B 02 {e(l_0xc83b5a)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc83c2d)}]@Are you sure?" linebreak
     "[19 02]Yes" eob
 

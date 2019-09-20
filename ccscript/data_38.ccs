@@ -292,7 +292,9 @@ l_0xc8045b:
     "@Carrying a lot of items and riding around is impossible for you." end
 
 l_0xc804d1:
-    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]@[AC] Whistle, whistle anywhere.{pause(10)}" linebreak
+    "[06 49 00 {e(l_0xc808bd)}][06 08 03 {e(l_0xc8054d)}][06 55 00 {e(l_0xc807bc)}][06 54 00 {e(l_0xc806bb)}][06 0D 00 {e(l_0xc80579)}]"
+    title(1, MsJones)
+    "@[AC] Whistle, whistle anywhere.{pause(10)}" linebreak
     "  It makes me smile{pause(10)}" linebreak
     "  all the while. [AC]" next
     "@I'm [1C 02 02]'s mo" goto(l_0xc80530)
@@ -302,14 +304,18 @@ l_0xc80530:
     goto(l_0xc8054d)
 
 l_0xc8054d:
+    title(1, MsJones)
     "@You shouldn't worry about [1C 02 02].{pause(20)}  God{pause(15)} is with her." end
 
 l_0xc80579:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80673)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80718)}]@Yahoo!{pause(5)}  I knew it!{pause(20)}  You saved [1C 02 02]." next
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80673)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80718)}]"
+    title(1, MsJones)
+    "@Yahoo!{pause(5)}  I knew it!{pause(20)}  You saved [1C 02 02]." next
     call(l_0xc806bb) linebreak
     goto(l_0xc805ba)
 
 l_0xc805ba:
+    title(1, MsJones)
     "@[1C 02 02], if you must take a trip,{pause(15)} be sure to bring this along." next
     "@It's my very own hand-made band-aid!{pause(20)}  Ooo!{pause(15)} That rhymes!" next
     "@I know, I'll call it a Hand-aid!" next
@@ -318,43 +324,60 @@ l_0xc805ba:
     "@He is sorry that he suspected Mr. Everdred of Burglin Park.{wait}   " eob
 
 l_0xc80673:
+    title(1, MsJones)
     "@Is that you, [1C 02 02]?{pause(20)}  Oh,{pause(15)} I thought she would be back,{pause(15)} but not yet..." next
     "@Oh no, I'm not worried... I'll be okay." end
 
 l_0xc806bb:
-    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc807ac)}]@I don't really understand it," next
+    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(msjones_reassure_nessdead)}]"
+    title(1, MsJones)
+    "@I don't really understand it," next
     "@but I know that [1C 02 02]'s miraculous power" next
     "@and your great courage will allow you to stand up to any challenge." end
 
 l_0xc80718:
+    title(1, MsJones)
     "@Yahoo!{pause(15)}  I knew it!{pause(20)}  You got back here with no problem." next
-    "@Isn't [1C 02 01] with you?" next
-    "@...[1C 02 02],{pause(15)} your mom is trusting his courage and your miraculous power." next
-    "@I won't say I'm not worried." next
-    "@But I'll let you go along...  It's for a good cause..." goto(l_0xc807ac)
+    call(msjones_reassure_nessdead) goto(l_0xc807ac)
 
 l_0xc807ac:
-    "[06 54 00 {e(l_0xc807ba)}]" next
+    "[06 54 00 {e(l_0xc807ba)}]" linebreak
     goto(l_0xc805ba)
 
 l_0xc807ba:
     end
 
+msjones_reassure_nessdead:
+    "@Isn't [1C 02 01] with you?" next
+    "@...[1C 02 02],{pause(15)} your mom is trusting his courage and your miraculous power." next
+    "@I won't say I'm not worried." next
+    "@But I'll let you go along...  It's for a good cause..." end
+
 l_0xc807bc:
-    "[06 54 00 {e(l_0xc8087a)}]@[1C 02 02],{pause(15)} if you must go,{pause(15)} be sure to bring this along." next
+    title(1, MsJones)
+    "[06 54 00 {e(l_0xc8087a)}]"
+    "@[1C 02 02],{pause(15)} if you must go,{pause(15)} be sure to bring this along." next
     "@It's my very own hand-made band-aid!{pause(20)}  I love the way that rhymes!" next
     "[1D 03 FF][1B 02 {e(l_0xc8082a)}][1D 0E 00 BC]" call(data_36.l_0xc7dccf) "{wait}{set(flag 84)}" eob
 
 l_0xc8082a:
     newline
+    title(1, MsJones)
     "@What's that?{pause(15)}  You're being a little impatient..." next
     "@You need to sell,{pause(15)} use or drop something.{pause(20)}  After that,{pause(15)} I can give this to you." end
 
+no_ness:
+    "[19 10 01]{rtoarg}@Well, here you are.{pause(15)}" next
+    "@I'll make some [1C 01 04],{pause(20)}" linebreak
+    "  please give it to [1C 02 01] when you see him.[03]" call(data_49.l_0xc915d6) call(data_49.l_0xc91582) eob
+
 l_0xc8087a:
+    "[19 10 01]{result_is(1)}[1B 02 {e(no_ness)}]"
     "[19 10 01]{rtoarg}@Well, here you are,{pause(15)} [1C 02 01]." next
     "@I'll make you some [1C 01 04],{pause(20)} even though I'm not a very good cook.[03]" call(data_49.l_0xc915d6) call(data_49.l_0xc91582) eob
 
 l_0xc808bd:
+    title(1, MsJones)
     "@You've lost some weight since I saw you last, [1C 02 01]." next
     "@[1C 02 02] must have had quite an adventure!{pause(20)}  I'm glad you live so close to us." next
     "@Why don't you drop by more often?{pause(20)}  I'm working at making better [1C 01 04]." end
@@ -411,7 +434,9 @@ l_0xc80bf2:
     "@Then,{pause(20)} later I'll be old lady [1C 02 02]." end
 
 l_0xc80c31:
-    "[06 49 00 {e(l_0xc81087)}][06 55 00 {e(l_0xc80e61)}][06 0C 00 {e(data_33.l_0xc798bf)}][06 0D 00 {e(data_33.l_0xc7970b)}][06 76 00 {e(l_0xc80e03)}][06 42 01 {e(l_0xc80dd8)}]@So,{pause(15)} you wanna see [1C 02 02]?" next
+    "[06 49 00 {e(l_0xc81087)}][06 55 00 {e(l_0xc80e61)}][06 0C 00 {e(data_33.l_0xc798bf)}][06 0D 00 {e(data_33.l_0xc7970b)}][06 76 00 {e(l_0xc80e03)}][06 42 01 {e(l_0xc80dd8)}]"
+    title(1, MrJones)
+    "@So,{pause(15)} you wanna see [1C 02 02]?" next
     "@Many come here to see her miraculous powers,{pause(15)} but they're just leeches." next
     "@So... are you from a TV station, or what?" linebreak
     "[19 02]Yes" eob
@@ -429,25 +454,32 @@ l_0xc80cd4:
     "@You're the one that was in" linebreak
     "  [1C 02 02]'s dream." next
     "@You will save the world!" next
-    "@Let me go call [1C 02 02].[03]" call(data_33.l_0xc7903b) "@She doesn't seem to be here." next
+    "@Let me go call [1C 02 02].[03]" call(data_33.l_0xc7903b) 
+    title(1, MrJones)
+    "@She doesn't seem to be here." next
     "@I wonder where she went?{pause(20)}  I'm sorry,{pause(20)} could you come back later?{wait}{set(flag 322)}{set(flag 635)}" eob
 
 l_0xc80dab:
+    title(1, MrJones)
     "@Then leave." next
     "@My daughter isn't a circus attraction!" end
 
 l_0xc80dd8:
+    title(1, MrJones)
     "@Now where did she go?" next
     "@I'm sorry,{pause(15)} could you come back after a while?" end
 
 l_0xc80e03:
+    title(1, MrJones)
     "{counter(1)}[19 11 02]{rtoarg}@[1C 03 00]{pause(5)}-[1C 03 00]{pause(5)}-[1C 02 02]'s not home yet." next
     "@Everdred in Burglin Park might know something." next
     "@Oh, boy!{pause(20)}" linebreak 
     "  Now I'm really worried.{wait}{set(flag 321)}" eob
 
 l_0xc80e61:
-    "[06 08 03 {e(l_0xc80f1c)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f94)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f1c)}]@You're both fine... I'm so relieved!" next
+    "[06 08 03 {e(l_0xc80f1c)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f94)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc80f1c)}]"
+    title(1, MrJones)
+    "@You're both fine... I'm so relieved!" next
     "@Why don't you get some rest here?" linebreak
     "[19 02]Yes" eob
 
@@ -467,24 +499,31 @@ l_0xc80ef3:
     eob
 
 l_0xc80f1c:
-    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]@Hey!  Come on in!" next
+    "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]"
+    title(1, MrJones)
+    "@Hey!  Come on in!" next
     "@No, I don't need to hear about what happened...{pause(20)}  [1C 02 02] will be okay." next
     "@Why don't you just rest for now." next
     "@You know where the other room is...[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
 
 l_0xc80f94:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]@Oh [1C 02 02]!" next
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc81027)}]"
+    title(1, MrJones)
+    "@Oh [1C 02 02]!" next
     "@So even a tomboy like you thinks of her father occasionally!" next
     "@You should stay here tonight,{pause(15)} for old times' sake." next
-    "@How about we share a piece of pie like we used to?  Ha ha ha![03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
+    "@How about we share a piece of pie like we used to?" linebreak
+    "  Ha ha ha![03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
 
 l_0xc81027:
+    title(1, MrJones)
     "@Hmm... I understand." next
     "@So you're a friend of [1C 02 02]'s?" next
     "@Look me in the eye...{pause(20)}  Yes, you're telling the truth." next
     "@Would you like to get some shut eye?[03]" call(data_49.l_0xc91693) "[1F 21 22]{unset(flag 383)}" eob
 
 l_0xc81087:
+    title(1, MrJones)
     "@You're a very strong, young man.{pause(20)}  My opinion of you has changed." next
     "@Perhaps you should continue dating [1C 02 02]." next
     "@Just treat her right..." next

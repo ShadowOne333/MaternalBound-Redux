@@ -359,7 +359,11 @@ l_0xc79707:
     "[1F E6 D9 00]" goto(l_0xc7970b)
 
 l_0xc7970b:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc798fe)}]{window_open(1)}@Oh [1C 02 02]![03]{window_closeall}[19 22 01 02 D9 00][1F 13 01 00][19 22 02 02 D9 00][1F 13 02 00][1F E9 D9 00][1F 61][1F E6 D9 00][1F 16 D9 00 03]{window_open(1)}{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_34.l_0xc79942)}]@[1C 02 01],{pause(15)} thank you so much!" next
+    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc798fe)}]{window_open(1)}"
+    title(1, MrJones)
+    "@Oh [1C 02 02]![03]{window_closeall}[19 22 01 02 D9 00][1F 13 01 00][19 22 02 02 D9 00][1F 13 02 00][1F E9 D9 00][1F 61][1F E6 D9 00][1F 16 D9 00 03]{window_open(1)}{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_34.l_0xc79942)}]"
+    title(1, MrJones)
+    "@[1C 02 01],{pause(15)} thank you so much!" next
     "@You must be the boy who will save the world,{pause(15)} like in" linebreak
     "  [1C 02 02]'s dream." next
     goto(l_0xc79796)
@@ -375,13 +379,17 @@ l_0xc79796:
     "@Now wipe your eyes,{pause(15)} blow your nose,{pause(15)} and smile before we take off.[03]{window_closeall}{set(flag 611)}[1F 41 05]{pause(10)}" goto(l_0xc798bf)
 
 l_0xc798bf:
-    "{window_open(1)}@Goodbye, [1C 02 02].{pause(20)}" linebreak
+    "{window_open(1)}"
+    title(1, MrJones)
+    "@Goodbye, [1C 02 02].{pause(20)}" linebreak
     "  Don't worry,{pause(15)} I won't cry anymore...{wait}{window_closeall}[06 01 00 {e(l_0xc798f7)}]{set(flag 1)}" eob
 
 l_0xc798f7:
     "[1F F1 D9 00 2B 00]" eob
 
 l_0xc798fe:
-    "{window_open(1)}@Oh, [1C 02 02]!" next
+    "{window_open(1)}"
+     title(1, MrJones)
+    "@Oh, [1C 02 02]!" next
     "@....." next
     "@Am I dreaming?{pause(20)}  I feel like she just came home...[1F 16 D9 00 03][03]{sound(8)}{window_closeall}{pause(20)}{sound(9)}[1F 1E D9 00 06]" eob

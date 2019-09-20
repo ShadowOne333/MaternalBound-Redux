@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import asm65816
 command e(label) "{long label}"
 
 // Text Data
@@ -354,9 +355,13 @@ l_0xef733d:
     "@All of a sudden," linebreak
     "  some guys rushed into the room!{prompt}{music(149)}{pause(60)}" newline
     "@It was the Runaway Brothers!{prompt}{window_closetop}{pause(30)}{window_open(1)}" newline
-    "[1F 62 00]@Lucky quickly ducked behind the robot!{prompt}{sound(11)}{pause(60)}{window_clear}@<I flipped the switch, and it stopped. >" next
+    "[1F 62 00]@Lucky quickly ducked behind the robot!{prompt}{sound(11)}{pause(60)}{window_clear}"
+    title(1, Lucky)	// Skinny guy
+    "@<I flipped the switch, and it stopped. >" next
     "@<Ha ha ha hah..." linebreak
-    "  Geez, what a loser robot.  It was so easy to stop!>{pause(20)}{prompt}{window_clear}@<That was quick thinking!>{prompt}{pause(60)}[1F 62 01]{window_closetop}{window_open(14)}{set(flag 318)}" eob
+    "  Geez, what a loser robot.  It was so easy to stop!>{pause(20)}{prompt}{window_clear}"
+    //title(1, Lucky)	// Skinny guy
+    "@<That was quick thinking!>{prompt}{pause(60)}[1F 62 01]{window_closetop}{window_open(14)}{set(flag 318)}" eob
 
 l_0xef7415:
     "[1F 71 04 02]" newline

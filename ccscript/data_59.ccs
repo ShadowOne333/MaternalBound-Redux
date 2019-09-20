@@ -333,76 +333,94 @@ l_0xc9ee2f:
 
 l_0xc9ee68:
     newline
-    "[1F 04 02]@<.....[1C 01 08]{pause(1)}...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<.....[1C 01 08]{pause(1)}...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9ee7f:
     newline
+    title(14, Giygas)
     "[1F 04 02]@<It hurts,{pause(30)}" linebreak
-    "  [1C 01 08]{pause(1)}...>[1F 04 01][03]" eob
+    "  [1C 01 08]{pause(1)}...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9ee9f:
     newline
-    "[1F 04 02]@<...I'm h...{pause(10)} a...{pause(10)} p...{pause(10)} p...{pause(10)} y...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<...I'm h...{pause(10)} a...{pause(10)} p...{pause(10)} p...{pause(10)} y...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9eec7:
     newline
-    "[1F 04 02]@<...{pause(20)}friends...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<...{pause(20)}friends...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9eede:
     newline
-    "[1F 04 02]@<...It hurts,{pause(20)} ...it hurts...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<...It hurts,{pause(20)} ...it hurts...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9ef00:
     "[1F 04 02]" newline
-    "@<[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08]{pause(5)} {pause(15)}.....>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "@<[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08], {pause(1)}[1C 01 08]{pause(5)} {pause(15)}.....>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9efb9:
     newline
-    "[1F 04 02]@<...{pause(1)}go... {pause(1)}b... {pause(1)}a... {pause(1)}c...{pause(1)}k...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<...{pause(1)}go... {pause(1)}b... {pause(1)}a... {pause(1)}c...{pause(1)}k...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9efe1:
     newline
-    "[1F 04 02]@<...[1C 01 08]{pause(1)}...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<...[1C 01 08]{pause(1)}...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9eff6:
     newline
-    "[1F 04 02]@<I {pause(15)}feel...{pause(15)} g...{pause(15)} o...{pause(15)} o...{pause(15)} d...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<I {pause(15)}feel...{pause(15)} g...{pause(15)} o...{pause(15)} o...{pause(15)} d...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f020:
     newline
+    title(14, Giygas)
     "[1F 04 02]@<...I'm so sad..." linebreak
-    "  .....[1C 01 08]{pause(1)}.>[1F 04 01][03]" eob
+    "  .....[1C 01 08]{pause(1)}.>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f042:
     newline
-    "[1F 04 02]@<[1C 01 08]!>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<[1C 01 08]!>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f052:
     newline
-    "[1F 04 02]@<Ah, {pause(20)} Grrr, {pause(15)} Ohhh...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<Ah, {pause(20)} Grrr, {pause(15)} Ohhh...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f074:
     newline
-    "[1F 04 02]@<Argh...  Yaaagh!...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<Argh...  Yaaagh!...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f090:
     newline
-    "[1F 04 02]@<It's not right...{pause(20)} not right...{pause(20)} not right...>[1F 04 01][03]" eob
+    title(14, Giygas)
+    "[1F 04 02]@<It's not right...{pause(20)} not right...{pause(20)} not right...>[1F 04 01][03]{window_open(14)}" eob
 
 l_0xc9f0b8:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please give us strength,{prompt}" linebreak
     "@if it is possible..." linebreak
     "  Please, God, if you're there...>{prompt}" linebreak
     "@<................" linebreak
-    "  Somebody... help us...>[1F 04 01]{pause(150)}" eob
+    "  Somebody... Help us...>[1F 04 01]{pause(150)}" eob
 
 l_0xc9f134:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please give us strength!{prompt}" linebreak
     "@Anyone who can hear our plea...." linebreak
     "  Help us...>[1F 04 01]{pause(150)}" eob
@@ -411,6 +429,8 @@ l_0xc9f196:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please give us strength!{prompt}" linebreak
     "@Speed this prayer" linebreak
     "  to all the people of the Earth.>[1F 04 01]{pause(150)}" eob
@@ -419,6 +439,8 @@ l_0xc9f1fd:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please give us strength!{prompt}" linebreak
     "@Anyone who can hear our plea..." linebreak
     "  Help us...>[1F 04 01]{pause(150)}" eob
@@ -427,6 +449,8 @@ l_0xc9f25e:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please grant us power!{prompt}" linebreak
     "@Anyone who can hear our plea..." linebreak
     "  Help us...>[1F 04 01]{pause(150)}" eob
@@ -435,6 +459,8 @@ l_0xc9f2bc:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please grant us strength!{prompt}" linebreak
     "@Anyone who can hear our plea..." linebreak
     "  We ask for this...>[1F 04 01]{pause(150)}" eob
@@ -443,6 +469,8 @@ l_0xc9f325:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<...Please grant us power!{prompt}" linebreak
     "@Speed this prayer" linebreak
     "  to all the people of the Earth...>[1F 04 01]{pause(150)}" eob
@@ -451,6 +479,8 @@ l_0xc9f389:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<I can't think of" linebreak
     "  anyone else...{prompt}" linebreak
     "@...Someone, anyone..." linebreak
@@ -460,6 +490,8 @@ l_0xc9f3ec:
     newline
     "{sound(28)}@{user} prayed" linebreak
     "  from the bottom of her heart![03]{pause(60)}" newline
+    window_open(14)
+    title_paula(14)
     "[1F 04 02]@<Someone... can you hear me?!{prompt}" linebreak
     "@Please, give us strength!>[1F 04 01]{pause(150)}" eob
 

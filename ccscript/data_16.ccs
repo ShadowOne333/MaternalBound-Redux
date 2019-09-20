@@ -502,7 +502,8 @@ l_0xc604c5:
     "{set(flag 608)}" eob
 
 l_0xc604c9:
-    "@Come on!{pause(20)}  I can't eat this!" eob
+    "@Come on!{pause(20)}  I can't eat this!" next
+    eob
 
 l_0xc604db:
     title(1, Gerardo)
