@@ -129,12 +129,16 @@ l_0xc63848:
 
 l_0xc63888:
     "@Just to confirm, you're expecting delivery of the" next
-    "[19 1D 01 00]@[1C 05 00][19 1D 02 00][1B 02 {e(l_0xc638d4)}]" linebreak
-    "  [1C 05 00][19 1D 03 00][1B 02 {e(l_0xc638d4)}]" linebreak
-    "  and [1C 05 00]." goto(l_0xc638d4)
+    "[19 1D 01 00]@[1C 05 00][19 1D 02 00][1B 02 {e(l_0xc638d4)}][19 1D 03 00][1B 02 {e(second_and)}][19 1D 02 00]," linebreak
+    "  [1C 05 00][19 1D 03 00]" linebreak
+    "  and [1C 05 00]" goto(l_0xc638d4)
+
+second_and:
+    linebreak
+    "  and [19 1D 02 00][1C 05 00]" goto(l_0xc638d4)
 
 l_0xc638d4:
-    "[03]" newline
+    ".[03]" newline
     "@Is that correct?" linebreak
     call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc638f8)} {e(l_0xc6393e)}]" goto(l_0xc6393e)
 
