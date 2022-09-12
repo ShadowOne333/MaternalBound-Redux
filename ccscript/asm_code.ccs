@@ -29,6 +29,9 @@ ROM[0xC37CD1] = "[07]"
 /* Fix the Clumsy Robot event to check for flag associated with teleport 15 instead of 13 */
 ROM[0xC292A0] = LDA_al(0xD57A6A)
 
+/* Fix for the Piggy Nose item and the Magic Truffles to work with Sprite 440 instead of 376*/
+ROM[0xC490F6] = LDA_i(0x01B8)
+
 /* Fix the Clumsy Robot unused Smoke event to point to the new Fourside teleport entry (08).
  This one doesn't leave you outside of the Monotoly building, but rather in the Fourside Park, as if you used Teleport. This effectively frees up one teleport location to use for another one. Besides, the Smoke event is still unused in the main game, so no loss there. */
 ROM[0XC292DE] = "[08]"

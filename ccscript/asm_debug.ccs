@@ -61,19 +61,20 @@ debug_text: {	// ROM[0xC3E874]
 	"Event[00 00 00 00 00]"
 	"Warp[00 00 00 00 00 00]"
 	"Tea[00 00 00 00 00 00 00]"
-	"Back[00 00 00 00 00 00]"
+	"Teleport[00 00]"	// Learn Teleport
 
-	"Back[00 00 00 00 00 00]"
-	"Back[00 00 00 00 00 00]"
-	"Name[00 00 00 00 00 00]"
-	"Name[00 00 00 00 00 00]"
+	"Starst. [8B 00]"	// Learn Starstorm Alpha
+	"Starst. [8C 00]"	// Learn Starstorm Beta
+	"Eng. Name[00]"		// Input player's name (English)
+	"Jap. Name[00]"		// Input player's name (Katakana)
 	"Guide[00 00 00 00 00]"
 
 	"Track[00 00 00 00 00]"
 	"Cast[00 00 00 00 00 00]"
 	"Stone[00 00 00 00 00]"
 	"Staff[00 00 00 00 00]"
-	"Roll[00 00 00 00 00 00]"
+	"HP Roll[00 00 00]"	// Set Magicant HP/PP rolling flag (can't be undone, softlocks battles waiting for HP/PP to finish rolling)
+
 
 	"Replay[00 00 00 00]"
 	"Test 1[00 00 00 00]"

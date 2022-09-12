@@ -219,65 +219,65 @@ l_0xc5ca1e:
     eob
 
 l_0xc5ca56:
-    title(1, Gil)
+    title(1, Jill)
     "@I can no longer make Magic cakes..." next
     "@But it doesn't matter because now I'm selling Magic Tarts," next
     "@which taste even better than Magic cakes!" next
     eob
 
 l_0xc5cab4:
-    title(1, Gil)
+    title(1, Jill)
     "@You reminded me how much I love this job!" end
 
 l_0xc5cad0:
-    title(1, Gil)
+    title(1, Jill)
     "@You reminded me how much I love this job!" end
 
 l_0xc5caec:
-    title(1, Gil)
+    title(1, Jill)
     "@I only have this....." next
     eob
 
 l_0xc5cafe:
-    title(1, Gil)
+    title(1, Jill)
     "@You are going to buy" linebreak
     "  my [1C 05 00]?" next
     eob
 
 l_0xc5cb12:
-    title(1, Gil)
+    title(1, Jill)
     "@Who is going to carry it?[03]" eob
 
 l_0xc5cb1e:
-    title(1, Gil)
+    title(1, Jill)
     "@That's too bad." end
 
 l_0xc5cb29:
-    title(1, Gil)
+    title(1, Jill)
     "@You don't have enough money." end
 
 l_0xc5cb33:
-    title(1, Gil)
+    title(1, Jill)
     "@You are carrying too many things." next
     "@Come again when you reduce the number of things you are carrying." end
 
 l_0xc5cb67:
-    title(1, Gil)
+    title(1, Jill)
     "@Thank you very much." next
     eob
 
 l_0xc5cb71:
-    title(1, Gil)
+    title(1, Jill)
     "@Thank you again." next
     eob
 
 l_0xc5cb7b:
-    title(1, Gil)
+    title(1, Jill)
     "@Would you like to buy anything else?" linebreak
     eob
 
 l_0xc5cb88:
-    title(1, Gil)
+    title(1, Jill)
     "@[1C 02 00] seems to have too many things already." next
     "@I don't think {swap}" call(data_36.l_0xc7e5f3) " can carry any more." next
     "@Can someone else carry it?" linebreak

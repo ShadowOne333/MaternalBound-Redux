@@ -11,6 +11,7 @@ import asm65816
 // db $2f ; hardcore mute
 
 // 7E0100, 7E0102, 7E0103  instead of 7FFFF0, 7FFFF2 and 7FFFF3
+// In case of volume or fade errors, replace 7E0100-7E0103 to any value between 7E0720 and 7E0800
 
 
 ROM[0xC4FBF4] = {
