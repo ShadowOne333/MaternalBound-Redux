@@ -30,7 +30,8 @@
 https://github.com/ShadowOne333/MaternalBound-Redux/releases/download/1.0/MaternalBound-Redux.zip
 
 * **MSU-1 PCM pack:**
-https://www.zeldix.net/t1931-earthbound-msu-1
+* https://archive.org/details/earthbound-msu-1-pack
+* Mirror at Zeldix.net: https://www.zeldix.net/t1931-earthbound-msu-1
 
 * **MaternalBound Discord:**
 https://discord.gg/v7kyYrv
