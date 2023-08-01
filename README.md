@@ -27,7 +27,7 @@
 ## Links
 
 * **Main release patch:**
-https://github.com/ShadowOne333/MaternalBound-Redux/releases/download/1.0/MaternalBound-Redux.zip
+https://github.com/ShadowOne333/MaternalBound-Redux/releases
 
 * **MSU-1 PCM pack:**
 https://archive.org/details/earthbound-msu-1-pack
@@ -123,7 +123,7 @@ Don’t get dizzy while reading the full changelog:
 
 ## Instructions
 
-Grab the .zip file and patch it to a 4MB expanded ROM of EarthBound (.ips), or use the EarthBound Patcher to patch the hack into a clean 3MB EarthBound ROM (.ebp).
+Navigate to the [releases](https://github.com/ShadowOne333/MaternalBound-Redux/releases) page and grab either the BPS or IPS hacks which can be patched into a clean EarthBound ROM (4MB expanded EarthBound ROM for IPS) with either [Lunar IPS](https://www.romhacking.net/utilities/240/), [FLIPS](https://www.romhacking.net/utilities/1040/) or by using [Romhacking’s Online ROM Patcher](https://www.romhacking.net/patch/). Alternatively, the EBP hack can be patched into a clean EarthBound ROM by using the [EarthBound Patcher](https://github.com/Lyrositor/EBPatcher).
 
 If you want to use the hack with **MSU-1**, grab the **PCM pack** released alongside this hack from the Zeldix page at the beginning of this page, or from the following link:
 https://app.box.com/s/fkmjx61w4m7xom1kmir5zk7xv6jx9u8f
