@@ -44,11 +44,23 @@ ROM[0xC1324D] = {
 	LDA_a	(0x5DE0) 	// LDA $5DE0
 	STA_d	(0x0C) 		// STA $0C
 	JMP	(0x3394) 	// Jump to $3394
-	ASMLoadAddress06(0xCF8985)	// Load NPC Config table
-	LDA_d	(0x06) 		// LDA $06
-	STA_d	(0x14)		// STA $14
-	LDA_d	(0x08) 		// LDA $08
-	STA_d	(0x16)		// STA $16
+
+// cooprocks123e changed 2024-01-19
+    // Old Code:
+    //    ASMLoadAddress06(0xCF8985)    // Load NPC Config table
+    //    LDA_d    (0x06)        // LDA $06
+    //    STA_d    (0x14)        // STA $14
+    //    LDA_d    (0x08)        // LDA $08
+    //    STA_d    (0x16)        // STA $16
+    // New Code:
+        LDA_al    (0xC0C32F)
+        STA_d    (0x06)
+        STA_d    (0x14)
+        LDA_al    (0xC0C331)
+        STA_d    (0x08)
+        STA_d    (0x16)
+        BRA    (0)    // Faster than NOP NOP
+
 	LDA_a	(0x5D62) 	// LDA $5D62
 	STA_d	(0x04)		// STA $04
 	ASL			// Arithmetic Shift Left
