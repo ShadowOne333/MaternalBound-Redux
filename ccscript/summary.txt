@@ -8,7 +8,7 @@ Compilation statistics
 Compilation start:           $f10000
 Compilation end:             $f8e297
 Total compiled size:         516759 bytes
-Fragmented space:            762 bytes
+Fragmented space:            640 bytes
 -----------------------------------------------------------------
 
 
@@ -93,7 +93,7 @@ data_14                      $f7f4cf      2824   bytes
 data_41                      $f6b864      7320   bytes
 data_50                      $f49e07      9691   bytes
 data_34                      $f13fa3      14544  bytes
-asm_code                     $f2ff86      33     bytes
+asm_code                     $f3fed9      155    bytes
 stdarg                       $f1ffeb      0      bytes
 std                          $f1ffeb      0      bytes
 -----------------------------------------------------------------
@@ -7478,7 +7478,8 @@ l_0xc7c17b                   $f177ba
 Labels in module asm_code
 Name                         Address
 -----------------------------------------------------------------
-Crying_EnemyMissRates        $f2ff86
+Crying_EnemyMissRates        $f3fed9
+new_highlight_loop           $f3fefa
 -----------------------------------------------------------------
 
 
