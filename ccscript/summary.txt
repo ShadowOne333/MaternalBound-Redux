@@ -8,7 +8,7 @@ Compilation statistics
 Compilation start:           $f10000
 Compilation end:             $f8e297
 Total compiled size:         516759 bytes
-Fragmented space:            640 bytes
+Fragmented space:            679 bytes
 -----------------------------------------------------------------
 
 
@@ -17,12 +17,12 @@ Module information
 Name                         Address     Size
 -----------------------------------------------------------------
 data_09                      $f7350a      6608   bytes
-asm_controls                 $f1ffeb      0      bytes
+asm_controls                 $f1ffc4      0      bytes
 data_33                      $f6d4fc      7235   bytes
 data_54                      $f63f08      8007   bytes
 data_30                      $f56aef      8862   bytes
 new_stats_equipment          $f883e6      4040   bytes
-asm_diamond                  $f1fee3      218    bytes
+asm_diamond                  $f1fee3      179    bytes
 data_03                      $f7df57      5496   bytes
 data_44                      $f22ddc      11591  bytes
 data_42                      $f2de15      8561   bytes
@@ -30,7 +30,7 @@ data_06                      $f79997      6249   bytes
 data_26                      $f2b429      10732  bytes
 data_46                      $f477f0      9751   bytes
 data_29                      $f3cdba      10418  bytes
-asm_run                      $f1ffbd      46     bytes
+asm_run                      $f1ff96      46     bytes
 data_05                      $f71ad2      6712   bytes
 data_64                      $f893ae      3144   bytes
 data_51                      $f60000      8099   bytes
@@ -67,7 +67,7 @@ data_07                      $f8d07c      1689   bytes
 data_61                      $f52411      9158   bytes
 data_04                      $f5af9d      8555   bytes
 data_40                      $f40000      10367  bytes
-main                         $f1ffeb      0      bytes
+main                         $f1ffc4      0      bytes
 data_36                      $f87398      4174   bytes
 data_21                      $f4504f      10145  bytes
 data_28                      $f10000      16291  bytes
@@ -94,8 +94,8 @@ data_41                      $f6b864      7320   bytes
 data_50                      $f49e07      9691   bytes
 data_34                      $f13fa3      14544  bytes
 asm_code                     $f3fed9      155    bytes
-stdarg                       $f1ffeb      0      bytes
-std                          $f1ffeb      0      bytes
+stdarg                       $f1ffc4      0      bytes
+std                          $f1ffc4      0      bytes
 -----------------------------------------------------------------
 
 
@@ -636,8 +636,7 @@ Name                         Address
 Diamond_Table                $f1fee3
 Display_Diamond              $f1ff1a
 Display_Window_Graphics      $f1fee7
-l_0xC10D60                   $f1ff68
-l_0xC10FEA                   $f1ff88
+l_0xC10D60                   $f1ff76
 -----------------------------------------------------------------
 
 
@@ -1389,9 +1388,9 @@ l_0xc73db0                   $f3f5c1
 Labels in module asm_run
 Name                         Address
 -----------------------------------------------------------------
-burned_status                $f1ffbd
-button_check                 $f1ffd2
-run_status                   $f1ffe1
+burned_status                $f1ff96
+button_check                 $f1ffab
+run_status                   $f1ffba
 -----------------------------------------------------------------
 
 

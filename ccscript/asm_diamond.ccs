@@ -49,7 +49,12 @@ Display_Diamond:{
 	ADC_i	(0xFFF0)
 	TCD
 	LDA_i	(0x0000)
-	JSL	(l_0xC10FEA)
+	//JSL	(l_0xC10FEA)
+	PHK
+	PER(6)
+	PEA(0xC10002) // RTL in bank C1.
+	JML(0xC10FEA)
+
 	ASMLoadAddress06(Diamond_Table)
 	BRA_a	(UNKNOWN3)
 
@@ -76,7 +81,12 @@ UNKNOWN3:
 	LDA_dl	(0x06)
 	BNE_a	(UNKNOWN0)
 	LDA_i	(0x0000)
-	JSL	(l_0xC10FEA)
+	//JSL	(l_0xC10FEA)
+	PHK
+	PER(6)
+	PEA(0xC10002) // RTL in bank C1.
+	JML(0xC10FEA)
+	
 	PLD
 	RTL
 }
@@ -100,7 +110,7 @@ Return:
 	RTL
 }
 
-l_0xC10FEA:{
+/*l_0xC10FEA:{
 	REP	(0x31)
 	PHD
 	PHA
@@ -127,4 +137,4 @@ l_0xC10FEA:{
 Return:
 	PLD
 	RTL
-}
+}*/
