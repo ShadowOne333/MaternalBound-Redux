@@ -1,0 +1,167 @@
+// General ASM code for fixing or modifying different things in-game
+import asm65816
+//------------------------------------------------------------------
+/* Lower HP/PP windows by one tile */
+ROM[0xC2044C] = LDA_i(0x0013)
+ROM[0xC20453] = LDA_i(0x0014)
+ROM[0xC20856] = LDY_i(9)
+ROM[0xC21412] = ADC_i(0x80)
+ROM[0xC3E738] = ADC_i(0x82BE)
+ROM[0xC435BF] = ADC_i(0x84BE)
+//------------------------------------------------------------------
+/* Rock Candy can now randomly give you a Luck boost */
+ROM[0xC2B3AA] = LDA_i(0005)
+//------------------------------------------------------------------
+/* Battle menu move Mirror command to the left */
+ROM[0xC2381F] = LDX_i(0x000B)
+//------------------------------------------------------------------
+/* Change PSI Rockin to PK Rockin */
+ROM[0xC1C415] = byte [0] 0x26
+ROM[0xC1FE3D] = byte [0] 0x80
+ROM[0xC1FE42] = byte [0] 0x7B
+//------------------------------------------------------------------
+/* Restore original spanking sound from Mother 2 */
+//ROM[0xC3B989] = "[62]"	// Uncomment if you want to enable it
+//------------------------------------------------------------------
+/* Fix the monkey teleport event to point to the new Dusty Dunes teleport entry: */
+ROM[0xC37CD1] = "[07]"
+//------------------------------------------------------------------
+/* Fix the Clumsy Robot event to check for flag associated with teleport 15 instead of 13 */
+ROM[0xC292A0] = LDA_al(0xD57A6A)
+//------------------------------------------------------------------
+/* Fix for the Piggy Nose item and the Magic Truffles to work with Sprite 440 instead of 376*/
+ROM[0xC490F6] = LDA_i(0x01B8)
+//------------------------------------------------------------------
+/* Fix the Clumsy Robot unused Smoke event to point to the new Fourside teleport entry (08).
+ This one doesn't leave you outside of the Monotoly building, but rather in the Fourside Park, as if you used Teleport. This effectively frees up one teleport location to use for another one. Besides, the Smoke event is still unused in the main game, so no loss there. */
+ROM[0XC292DE] = "[08]"
+//------------------------------------------------------------------
+/* Crack for use in real hardware despite of region */
+ROM[0xC0281D] = {		//"[EA EA]"
+	NOP
+	NOP
+}
+
+ROM[0xC083A2] = BRA(0x0E)	//"[80]"
+ROM[0xC083AD] = BRA(0x03)	//"[80]"
+ROM[0xC0A12D] = BRA(0x0C)	//"[80]"
+ROM[0xC1FFE7] = {		//"[EA A9 00 00]"
+	NOP
+	LDA_i(0x0000)
+}
+
+ROM[0xC3FDD6] = {		//"[EA A9 00 00 80]"
+	NOP
+	LDA_i(0x0000)
+	BRA(0x15)
+}
+
+/* Region Fix */
+ROM[0xC0A141] = BRA(0x0C)	//"[80]"
+//------------------------------------------------------------------
+/* Patches to reduce flash brightness for some effects */
+ROM[0xC38753] = ASL_a(0x0300)
+ROM[0xC39F67] = ASL_a(0x0B00)
+ROM[0xC39F75] = COP(0xFF)
+//------------------------------------------------------------------
+/* Apply the Crying effect to also affect enemies, instead of just the party members (Credit to The Kirby) */
+ROM[0xC283AE] = JSL(Crying_EnemyMissRates)
+Crying_EnemyMissRates: {
+	PHX			//Push X.
+	LDX_a(0xA970)		//Load attacker’s pointer.
+	LDA_x(0x001F)		//Load attacker’s status.(crying)
+	AND_i(0x00FF)		//Clear high byte.
+	PLX			//Pull X.
+	CMP_i(0x0002)		//Check if the attacker is crying.
+	BEQ_a(IncMissRate)	//Branch if attacker is crying.
+	LDA_xl(0xD59589)	//Load enemy’s miss rate from ROM.
+	RTL
+IncMissRate:
+	LDA_xl(0xD59589)	//Load enemy entry’s miss rate from ROM.
+	CLC			//Clear carry flag.
+	ADC_i(0x0008)		//Add “8” to the enemy’s miss rate.
+	RTL
+}
+//------------------------------------------------------------------
+// Change the max number of highlighted tiles, for menu options in the file select menu
+ROM[0xC11DC6] = LDA_i (-1)
+
+// Fix a bug in the highlighting routine, to make it read the font widths when choosing whether to highlight tiles
+ROM[0xC43C20] = STZ_d (0x00)
+ROM[0xC43C59] = JML (new_highlight_loop)
+
+new_highlight_loop: {
+    LDX_d (0x14) // X = window
+    LDA_x (0x0015) // A = font number
+    // multiply by 12, size of the font table
+    STA_d (0x0A)
+    ASL
+    ADC_d (0x0A)
+    ASL
+    ASL
+    // we don't need to add any offsetof junk, because the widths are the first thing in the table
+    // add to address of the font table
+    ADC_i (0xF054)
+    STA_d (0x0A)
+    LDA_i (0x00C3)
+    STA_d (0x0C)
+    // A = hiword(widths table), X = loword(widths table)
+    LDA_dl (0x0A)
+    TAX
+    INC_d (0x0A)
+    INC_d (0x0A)
+    LDA_dl (0x0A)
+    // so store them here
+    STA_d (0x0C)
+    STX_d (0x0A)
+    // and index this array using the current character
+    LDA_dl (0x06)
+    SEC
+    SBC_i (0x0050)
+    AND_i (0x007F)
+    CLC
+    ADC_d (0x0A)
+    STA_d (0x0A)
+    LDA_dl (0x0A)
+    AND_i (0x00FF)
+    // and add the width we just read to $00
+    ADC_d (0x00)
+    INC
+    STA_d (0x00)
+
+_inner_loop:
+    LDA_d (0x00)
+    DEC
+    BMI_a (_rest_of_highlight_loop)
+
+    SEC
+    SBC_i (7)
+    STA_d (0x00)
+    
+    LDY_d (0x12)
+    LDX_d (0x14)
+    LDA_x (0x000A)
+    TAX
+    LDA_d (0x18)
+    PHP
+    LDA_d (0x04)
+    PLP
+    BEQ (6)
+        JSL (0xEF00E6)
+        BRA (4)
+    JSL (0xEF00BB)
+
+    INC_d (0x10)
+    INC_d (0x04)
+    INC_d (0x04)
+    DEC_d (0x16)
+    // make sure we don't exceed the max that the caller requested, even in this loop
+    BNE_a (_inner_loop)
+    // if we do, stop right away
+    JML (0xC43C98)
+
+_rest_of_highlight_loop:
+    INC_d (0x06)
+    JML (0xC43C8D)
+}
+//------------------------------------------------------------------

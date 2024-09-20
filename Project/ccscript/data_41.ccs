@@ -1,0 +1,379 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc842ab:
+    "{counter(4)}" eob
+
+l_0xc842ae:
+    "{counter(5)}" eob
+
+l_0xc842b1:
+    "{counter(6)}" eob
+
+l_0xc842b4:
+    "{counter(7)}" eob
+
+l_0xc842b7:
+    "{counter(8)}" eob
+
+l_0xc842ba:
+    "{counter(9)}" eob
+
+l_0xc842bd:
+    "{counter(10)}" eob
+
+l_0xc842c0:
+    "{counter(11)}" eob
+
+l_0xc842c3:
+    "{counter(12)}" eob
+
+l_0xc842c6:
+    "{counter(13)}" eob
+
+l_0xc842c9:
+    "{counter(14)}" eob
+
+l_0xc842cc:
+    "{counter(15)}" eob
+
+l_0xc842cf:
+    "{counter(16)}" eob
+
+l_0xc842d2:
+    "{counter(17)}" eob
+
+l_0xc842d5:
+    "{counter(18)}" eob
+
+l_0xc842d8:
+    "{counter(19)}" eob
+
+l_0xc842db:
+    "{counter(20)}" eob
+
+l_0xc842de:
+    "{counter(21)}" eob
+
+l_0xc842e1:
+    "{counter(22)}" eob
+
+l_0xc842e4:
+    "{counter(23)}" eob
+
+l_0xc842e7:
+    "{counter(24)}" eob
+
+l_0xc842ea:
+    "{counter(25)}" eob
+
+l_0xc842ed:
+    "{counter(26)}" eob
+
+l_0xc842f0:
+    "{counter(27)}" eob
+
+l_0xc842f3:
+    "{counter(28)}" eob
+
+l_0xc842f6:
+    "{counter(29)}" eob
+
+l_0xc842f9:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc843f6)} {e(l_0xc8442c)} {e(l_0xc8444c)} {e(l_0xc84485)} {e(l_0xc844bd)} {e(l_0xc844ea)} {e(l_0xc84525)} {e(l_0xc8455f)} {e(l_0xc84608)} {e(l_0xc84657)} {e(l_0xc84693)} {e(l_0xc84693)} {e(l_0xc84693)} {e(l_0xc84693)} {e(l_0xc84693)} {e(l_0xc846b6)} {e(l_0xc846b6)} {e(l_0xc846fc)} {e(l_0xc84728)} {e(l_0xc8474d)} {e(l_0xc8477f)} {e(l_0xc847e6)} {e(l_0xc8481a)} {e(l_0xc8484c)} {e(l_0xc848a4)} {e(l_0xc848db)} {e(l_0xc84930)} {e(l_0xc84973)} {e(l_0xc849aa)}]" eob
+
+l_0xc8437a:
+    "@Good morning!" linebreak
+    "  Here's your free copy of the morning newspaper!" next
+    eob
+
+l_0xc843a7:
+    "@Here's today's headlines in the Onett Times..." next
+    eob
+
+l_0xc843c8:
+    "@There's an advertisement in today's Onett Times that looks interesting." next
+    eob
+
+l_0xc843f6:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Mysterious meteorite north of Onett still burning brightly>" end
+
+l_0xc8442c:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Road to Twoson still closed>" end
+
+l_0xc8444c:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Complaints about Sharks gang suddenly melt into thin air>" end
+
+l_0xc84485:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Mayor of Onett teaches Sharks a lesson, brings peace to Onett>" end
+
+l_0xc844bd:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Tamer of the Sharks actually a boy in a red cap!>" end
+
+l_0xc844ea:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Many citizens of Onett suffer due to crooked real estate agents>" end
+
+l_0xc84525:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Girl named [1C 01 1E] listed as missing in neighboring town of Twoson>" end
+
+l_0xc8455f:
+    call(l_0xc8437a) "@Yes... the Onett Times... Uhhh..." next
+    "@Well, {pause(10)} I made a mistake and brought you a newspaper called Onett Star on accident." next
+    "@Let me read you the headline anyway..." next
+    "@<So called Mr. Leader Guy running for mayor of Onett>" next
+    "@Well,{pause(10)} that's Onett Star for you." end
+
+l_0xc84608:
+    call(l_0xc8437a) call(l_0xc843c8) "@<Isn't it about time for a fantastic vacation to the dream resort of Summers?" next
+    "@Someday, we'll see you there...>" end
+
+l_0xc84657:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Twoson kidnap victim [1C 01 1E] rescued by local Onett hero [1C 02 01]>" end
+
+l_0xc84693:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Situation in the town of Threek is dire>" end
+
+l_0xc846b6:
+    call(l_0xc8437a) call(l_0xc843c8) "@<Even our clerks get lost in the store!" next
+    "@The world's largest department store, the Fourside Grand>" end
+
+l_0xc846fc:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Meteorite north of Onett still burning hot>" end
+
+l_0xc84728:
+    call(l_0xc8437a) "@...{pause(10)}Oh,{pause(10)} there's no issue today... sorry." end
+
+l_0xc8474d:
+    call(l_0xc8437a) call(l_0xc843a7) "@<[1C 01 04] found to be major source of nutrition and energy>" end
+
+l_0xc8477f:
+    call(l_0xc8437a) call(l_0xc843c8) "@<Exotic atmosphere!" linebreak
+    "  Historical sites!" next
+    "@Come to the glorious jewel named Scarabia!" next
+    "@Scarabia Tourist Association>" end
+
+l_0xc847e6:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Onett Police chief still not through playing MOTHER 2!>" end
+
+l_0xc8481a:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Prince [1C 02 04] of Dalaam traveling incognito to Onett?>" end
+
+l_0xc8484c:
+    call(l_0xc8437a) call(l_0xc843c8) "@<Even a seasoned world traveler enjoys staying here." next
+    "@Hotel Onett in lovely downtown Onett.>" next
+    "@...Hey, this is our ad!" end
+
+l_0xc848a4:
+    call(l_0xc8437a) call(l_0xc843a7) "@<International news:  Pyramid in Scarabia vandalized>" end
+
+l_0xc848db:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Onett Library facing crisis" next
+    "@Many book borrowers giving library books away or never returning them>" end
+
+l_0xc84930:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Local survey shows most popular career among kids in Onett is adventurer>" end
+
+l_0xc84973:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Meteorite landing in north Onett finally beginning to cool off>" end
+
+l_0xc849aa:
+    call(l_0xc8437a) call(l_0xc843a7) "@<Onett police chief finishes MOTHER 2, asks, 'Where is MOTHER 3?'>" end
+
+l_0xc849ed:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84aad)} {e(l_0xc84ad7)} {e(l_0xc84b3f)} {e(l_0xc84b5e)} {e(l_0xc84bbb)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84bee)} {e(l_0xc84c1b)} {e(l_0xc84c1b)} {e(l_0xc84cac)} {e(l_0xc84cfa)} {e(l_0xc84d38)} {e(l_0xc84d6b)} {e(l_0xc84d9c)} {e(l_0xc84dbc)} {e(l_0xc84deb)} {e(l_0xc84e1f)} {e(l_0xc84e64)} {e(l_0xc84f19)} {e(l_0xc84f55)} {e(l_0xc84f98)}]" eob
+
+l_0xc84a6e:
+    "@How about reading the newspaper before you go?" next
+    eob
+
+l_0xc84a8a:
+    "@Here is this morning's Twoson Today headline..." next
+    eob
+
+l_0xc84aad:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Ghosts found to inhabit tunnel to Threek>" end
+
+l_0xc84ad7:
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<The brave local hero named [1C 02 01] who broke up the Sharks has left Onett." next
+    "@<[1C 02 01],{pause(20)} the courageous boy" next
+    "@who reformed the notorious Shark gang in neighboring city of Onett," next
+    "@no longer appears to be in Onett>" next
+    "@I heard that was all the mayor of Onett's doing,{pause(20)} but I guess not,{pause(20)} huh?" end
+
+l_0xc84b3f:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Missing girl still not found>" end
+
+l_0xc84b5e:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Mr. Carpainter speaks," next
+    "@'Looking back,{pause(20)} Happy Happyism was wrong" next
+    "@I wasn't in my right mind.{pause(25)} I cannot apologize enough'>" end
+
+l_0xc84bbb:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<[1C 02 02] found safe!" linebreak
+    "  Parents delighted to have her back>" end
+
+l_0xc84bee:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Ghosts continue to inhabit tunnel to Threek>" end
+
+l_0xc84c1b:
+    call(l_0xc84a6e) "@This morning's Twoson Today..." next
+    "@...Ooops!  My mistake... I brought the Twoson Star newspaper instead..." next
+    "@Well, let me read this anyway..." next
+    "@<Tessie in Lake Tess is cousin of Nessie>" next
+    "@...That's about it." end
+
+l_0xc84cac:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Explosion heard recently caused by unknown craft crashing" next
+    "@into the graveyard in Threek>" end
+
+l_0xc84cfa:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Runaway Brothers present popular show at the Topollo Theater" next
+    "@in downtown Fourside>" end
+
+l_0xc84d38:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Everdred, Burglin Park crime boss, missing>" end
+
+l_0xc84d6b:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Runaway Brothers' debut release sells out in minutes>" end
+
+l_0xc84d9c:
+    call(l_0xc84a6e) "@...There was no morning edition today..." end
+
+l_0xc84dbc:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Prince [1C 02 04] of Dalaam secretly visiting Twoson?>" end
+
+l_0xc84deb:
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<Former Happy Happyism followers claim to have been naive>" end
+    "@<'We were still so very blue back then'" next
+    "@Former Happy Happy cult followers discuss their past>" end
+
+l_0xc84e1f:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<You!  With the controller in your hand! Have you been getting enough sleep lately?>" end
+
+l_0xc84e64:
+    call(l_0xc84a6e) "@There's an interesting advertisement in today's Twoson Today." next
+    "@<Are you shy?  Do you have trouble talking to people you don't know?" next
+    "@If so, the book <Overcoming Shyness> is your self-help guide to becoming more outgoing." next
+    "@This title is now available at your local bookstore or library.>" end
+
+l_0xc84f19:
+    call(l_0xc84a6e) call(l_0xc84a8a) //"@<In Twoson, Nintendo's eight-bit system, the NES, makes a comeback!>" end
+    "@<The old MOTHER game becomes popular among the people of Twoson!" next
+    "@Nintendo in chaos!>" end
+
+l_0xc84f55:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Onett Times a better newspaper than we imagined here at the Twoson Today>" end
+
+l_0xc84f98:
+    call(l_0xc84a6e) call(l_0xc84a8a) "@<Monsters disappear!" linebreak
+    " Animals calm down!" linebreak
+    " The town is at peace!>" end
+
+l_0xc84fd8:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc850ff)} {e(l_0xc8514f)} {e(l_0xc8519e)} {e(l_0xc851e9)} {e(l_0xc8522f)} {e(l_0xc85291)} {e(l_0xc852f0)} {e(l_0xc8533a)} {e(l_0xc85370)} {e(l_0xc853b0)} {e(l_0xc8544c)} {e(l_0xc8549d)} {e(l_0xc854cc)} {e(l_0xc85507)} {e(l_0xc85548)} {e(l_0xc855d4)} {e(l_0xc85610)} {e(l_0xc85651)}]" eob
+
+l_0xc85059:
+    "@S... sir...?" linebreak
+    eob
+
+l_0xc85065:
+    "@The guest's newspapers that were delivered to the hotel today..." next
+    "@are different than normal." next
+    "@The paper is called the Zombie World..." next
+    "@I'm scared, but let me tell you what is in it..." next
+    eob
+
+l_0xc850d8:
+    "@Good Morning!!" next
+    eob
+
+l_0xc850e6:
+    "@Here's your copy of the Threek Journal." next
+    eob
+
+l_0xc850ff:
+    call(l_0xc85059) "  Are you going out?" next
+    call(l_0xc85065) "@<Destroy the humans!" next
+    "@Hold the town for our glory, and for the glory of our master!>" end
+
+l_0xc8514f:
+    call(l_0xc85059) "  The weather for today is dark and gloomy." next
+    call(l_0xc85065) "@<Weather Forecast: Today's sky will be filled with truly gloomy,{pause(20)} wonderful clouds>" linebreak
+    end
+
+l_0xc8519e:
+    call(l_0xc85059) "  Oh, you got up early today." next
+    call(l_0xc85065) "@<Two human kids escape by somehow opening their cage>" end
+
+l_0xc851e9:
+    call(l_0xc85059) "  You're working hard, even though you're young." next
+    call(l_0xc85065) "@<Boogey Tent falls!  Young human to blame!>" end
+
+l_0xc8522f:
+    call(l_0xc850d8) "@The pride of the Threek publishing community," next
+    "@the Threek Journal, is back with a vengeance!" next
+    "@<Zombies gone from Threek!" linebreak
+    "  Tunnels now open!>" end
+
+l_0xc85291:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Tessie exists, testimonials report!" next
+    "@But Tessie Watching Society member forgets to put film in his camera!>" end
+
+l_0xc852f0:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Department store panic!" next
+    "@Blackout hits popular department store in broad daylight>" end
+
+l_0xc8533a:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Someone working to fix machine left in hole at the Threek graveyard>" end
+
+l_0xc85370:
+    call(l_0xc850d8) call(l_0xc850e6) "@<[1C 02 01] and company save Threek" next
+    "@confirms chief of Zombie Relief Corps>" end
+
+l_0xc853b0:
+    call(l_0xc850d8) "@This morning's Threek Journal headlines read like this..." next
+    "@Uhh, I made a mistake and brought the Threek Star by accident..." next
+    "@Well, let me read it to you anyway..." next
+    "@<Zombie gives birth to hawk child>" next
+    "@Heh, heh, heh... yeah, right..." end
+
+l_0xc8544c:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Supernatural powers do not exist" next
+    "@Human beings cannot use teleportation states university professor>" end
+
+l_0xc8549d:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Prince [1C 02 04] of Dalaam secretly visiting Threek?>" end
+
+l_0xc854cc:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Caged zombies in southern Threek speak out," next
+    "@'Out Nest is Best,{pause(20)} but this life isn't so bad when you get used to it'>" end
+
+l_0xc85507:
+    call(l_0xc850d8) call(l_0xc850e6) "@<Pyramid mysteriously opens in distant Scarabia." linebreak
+    "@Is this a good portent?>" end
+
+l_0xc85548:
+    call(l_0xc850d8) "@Here's an interesting advertisement in today's Threek Journal..." next
+    "@<Morning newspapers brought to your room by a handsome, friendly bellboy." next
+    "@Threek Sunset Hotel>" next
+    "@...Uhhh ...hey! ...this is our ad!" end
+
+l_0xc855d4:
+    call(l_0xc850d8) "@Here's today's Threek Journal!..." next
+    "@Uh... whoops... there is no edition today..." end
+
+l_0xc85610:
+    call(l_0xc850d8) call(l_0xc850e6) "@<The Twoson Today, the neighboring town's newspaper, also worth reading>" end
+
+l_0xc85651:
+    call(l_0xc850d8) call(l_0xc850e6) "@<[1C 02 01] and friends made honorary citizens!>" end
+
+l_0xc8567b:
+    call(data_40.l_0xc841de) "{ctoarg}{swap}[1F C0 1D {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85767)} {e(data_42.l_0xc85791)} {e(data_42.l_0xc857bb)} {e(data_42.l_0xc8581b)} {e(data_42.l_0xc858ba)} {e(data_42.l_0xc858f0)} {e(data_42.l_0xc85985)} {e(data_42.l_0xc859b5)} {e(data_42.l_0xc85a11)} {e(data_42.l_0xc85a6c)} {e(data_42.l_0xc85ad8)} {e(data_42.l_0xc85b55)} {e(data_42.l_0xc85bab)}]" eob
+

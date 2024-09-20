@@ -1,0 +1,13 @@
+Pack number: 21
+Base instrument: default
+BRR sample dump offset: default
+
+#instruments
+{
+  "sample-1A-1B-1C.brr"         $FF $E0 $B8 $04 $00
+  "sample-1A-1B-1C.brr"         $FF $E0 $B8 $04 $00
+  "sample-1A-1B-1C.brr"         $FF $F2 $B8 $04 $00
+  "sample-1D.brr"               $FF $E0 $B8 $02 $E0
+  "sample-1E.brr"               $FF $F6 $B8 $03 $00
+  "sample-1F.brr"               $8F $E0 $B8 $06 $20
+}

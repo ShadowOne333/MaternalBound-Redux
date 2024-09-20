@@ -1,0 +1,398 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc8dad5:
+    "@The monsters are no longer in the tunnel!" end
+
+l_0xc8daee:
+    "@Since the tunnel was cleared,{pause(15)} many cars have started driving through it." next
+    "@It's incredibly noisy." end
+
+l_0xc8db32:
+    "[06 47 00 {e(l_0xc8dc2f)}][06 7C 00 {e(l_0xc8dbbe)}][06 28 02 {e(l_0xc8db92)}]@Why don't we get all the zombies in this tent and then set it on fire?" next
+    "@We may all get munched before we have a chance to do anything..." end
+
+l_0xc8db92:
+    "@Maybe a good idea would be to try to get all the zombies into a single spot." end
+
+l_0xc8dbbe:
+    "@Hey!  Stupid zombies!{pause(20)}  Come out, come out wherever you are!" next
+    "@The suspense is killing me..." end
+
+l_0xc8dbf8:
+    "@I was able to arrest" linebreak
+    "  many zombies because of your help." next
+    "@<Arrest> sounds strange, doesn't it..." end
+
+l_0xc8dc2f:
+    "@It became really quite peaceful compared to before." end
+
+l_0xc8dc4f:
+    "[06 D6 00 {e(l_0xc8dd12)}][06 47 00 {e(l_0xc8dcf9)}][06 7C 00 {e(l_0xc8dcb2)}][06 28 02 {e(l_0xc8dc8d)}]@I'm glad you're going to help us,{pause(20)} but you're pretty young." end
+
+l_0xc8dc8d:
+    "@Well, we'll give it a try.{pause(20)}  It's better than nothing, I guess." end
+
+l_0xc8dcb2:
+    "@Here, zombie, zombie, zombie...  I have a nice bone for you..." end
+
+l_0xc8dcd6:
+    "@You might not understand me saying this,{pause(10)} but,{pause(10)} poor zombies..." end
+
+l_0xc8dcf9:
+    "@Now you can go through the tunnel anytime you want!" end
+
+l_0xc8dd12:
+    "@Actually, I'm kind of glad I got to see real zombies." end
+
+l_0xc8dd35:
+    "[06 D6 00 {e(l_0xc8df28)}][06 47 00 {e(l_0xc8de88)}][06 7C 00 {e(l_0xc8de2c)}][06 28 02 {e(l_0xc8de13)}][06 0E 00 {e(l_0xc8dd98)}]@The zombies are slowly advancing toward the tent." next
+    "@Everyone, I repeat--{pause(15)}the zombies are on the move!" end
+
+l_0xc8dd98:
+    "@So, this weird object was flying around and crashed in the graveyard..." next
+    "@It looked like it was straight out of a{pause(20)} Saturday morning cartoon!" next
+    "@Wow!  Did you come here in that flying contraption?" end
+
+l_0xc8de13:
+    "@So you're going to use this tent as a trap..." end
+
+l_0xc8de2c:
+    "@Hey, hey, hey! ...stupid zombies... come on over!" end
+
+l_0xc8de4a:
+    "@We did it!{pause(15)}  Did you look in the tent?" next
+    "@Ya ha!  We taught those stupid zombies a lesson!" end
+
+l_0xc8de88:
+    "@That round flying object... a kid with glasses was on board." next
+    "@The craft landed near the graveyard, right?" next
+    "@Can you fix it?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc8dee1:
+    " [19 02]No" eob
+
+l_0xc8dee7:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc8def6)} {e(l_0xc8df0d)}]" goto(l_0xc8def6)
+
+l_0xc8def6:
+    "@It was heavily damaged, though, right?" end
+
+l_0xc8df0d:
+    "@It's such a waste, but we can't do much about it..." end
+
+l_0xc8df28:
+    "@I didn't like fighting the zombies,{pause(15)} but those days were never dull!" end
+
+l_0xc8df51:
+    "@We tried painting the outside of this Sky Walker to make it look like it was fixed," next
+    "@but we don't know how machines work,{pause(20)} so we can't get it to run." end
+
+l_0xc8df8a:
+    "@I want you to stay,{pause(15)} but if you can't ...so long!" next
+    "@Thanks for every little ol' thing." end
+
+l_0xc8dfbb:
+    call(data_22.l_0xc680e2) eob
+
+l_0xc8dfc1:
+    "[06 47 00 {e(l_0xc8dff7)}]@Be careful while walking around outside,{pause(15)} especially near the graveyard." end
+
+l_0xc8dff7:
+    "@Especially near the graveyard,{pause(15)} it's dangerous." next
+    "@But now it's been cleaned up, so it's safe, {pause(20)}just to let you know." end
+
+l_0xc8e044:
+    call(data_47.l_0xc900bd) eob
+
+l_0xc8e04a:
+    "[06 47 00 {e(l_0xc8e07c)}]@I'm stronger than a zombie,{pause(15)} but a bunch of zombies ganged up on me." end
+
+l_0xc8e07c:
+    "@If you would have taken me along to hunt zombies or something," next
+    "@I would have been a big help." end
+
+l_0xc8e0ad:
+    "[06 47 00 {e(l_0xc8e0d8)}]@The zombies got me..." next
+    "@I should have gotten some zombie insurance." end
+
+l_0xc8e0d8:
+    "@I'm not afraid of no zombie." next
+    "@When they come out, I'll beat them by myself." next
+    "@Actually I don't want them to come out.{pause(20)}  They're way too scary." end
+
+l_0xc8e132:
+    call(data_47.l_0xc9002b) eob
+
+l_0xc8e138:
+    call(data_13.l_0xc5d317) eob
+
+l_0xc8e13e:
+    call(data_13.l_0xc5d323) eob
+
+l_0xc8e144:
+    call(data_13.l_0xc5d341) eob
+
+l_0xc8e14a:
+    "[06 47 00 {e(l_0xc8e176)}]@Zombies and ghosts are on the loose here.{pause(20)}  Welcome to Threek." end
+
+l_0xc8e176:
+    "@Zombies and ghosts are{pause(20)} not on the loose anymore." next
+    "@Oh yeah, you guys got rid of the monsters.  Ooops!  He he." end
+
+l_0xc8e1bd:
+    "[06 47 00 {e(l_0xc8e251)}][06 7D 00 {e(l_0xc8e218)}]@Zombies and ghosts are on the loose here, so I can't get to Twoson or Fourside." next
+    "@Maybe the hidden road in the graveyard is safe..." end
+
+l_0xc8e218:
+    "@You guys got rid of the zombies," next
+    "@'cept the ghosts in the tunnel seem scarier than ever!" end
+
+l_0xc8e251:
+    "@If you weren't here,{pause(15)} I might have had to be friendly with the zombies!" end
+
+l_0xc8e275:
+    "[06 47 00 {e(l_0xc8e2c7)}]@This town seems very dark, right?" next
+    "@The people are mostly living at the center of town." next
+    "@I wonder how we should get the town back from the zombies?" end
+
+l_0xc8e2c7:
+    "@This town used to be dark,{pause(15)} but thanks to you, now it's bright." end
+
+l_0xc8e2ea:
+    "[06 47 00 {e(l_0xc8e33b)}]@Hey, you don't look so happy,{pause(15)} you'd better cheer up, or you'll become a zombie." next
+    "@Some people have already become tools of the zombies." end
+
+l_0xc8e33b:
+    "[19 10 01]{result_is(2)}@I'm so glad you wiped out the zombies.{pause(15)}  Let me give you a kiss." next
+    "@*smooch*  Tee hee hee...  I'm blushing." end
+
+l_0xc8e388:
+    "[06 47 00 {e(l_0xc8e42a)}][06 7D 00 {e(l_0xc8e3fb)}]@The headquarters of the Zombie Relief Corps" next
+    "@is in the circus tent at the center of town." next
+    "@We want to crush the zombies, except I think they'll crush us." end
+
+l_0xc8e3fb:
+    "@I thought the zombies were gone...  But look at the surroundings..." next
+    "@It's still dark!" end
+
+l_0xc8e42a:
+    "@We won because of our brains,{pause(15)} guts,{pause(15)} and togetherness." next
+    "@Wow!{pause(15)}  What a rush!" end
+
+l_0xc8e467:
+    "[06 47 00 {e(l_0xc8e501)}]@There's a rumor that there is an underground path at the edge of the graveyard" next
+    "@that takes you somewhere." next
+    "@When you get through the path," next
+    "@you'll meet a dirty,{pause(15)} stinky,{pause(15)} ugly,{pause(15)} powerful monster." next
+    "@I wet my pants just thinking about it." end
+
+l_0xc8e501:
+    "@You've been through some tough battles!" end
+
+l_0xc8e515:
+    "[06 47 00 {e(l_0xc8e5a4)}][06 45 00 {e(l_0xc8e576)}]@?{pause(5)}?{pause(5)}?  There's been a circus tent at the center of town for a long time." next
+    "@I saw another tent to the south.  I wonder when it went up?" end
+
+l_0xc8e576:
+    "@That strange tent...{pause(20)}  It was a monster!" next
+    "@I'm glad I didn't go inside!" end
+
+l_0xc8e5a4:
+    "@Visit Threek again!" end
+
+l_0xc8e5b1:
+    "[06 47 00 {e(l_0xc8e5f7)}][06 7D 00 {e(l_0xc8e5f7)}]@I'm so scared of the zombies, I spend all of my time running from them." next
+    "@I can't even get home!" end
+
+l_0xc8e5f7:
+    "@I had to run all over to escape the zombies." next
+    "@Now I can't remember where my house is..." end
+
+l_0xc8e62c:
+    "@Hey, do you remember me?" next
+    "@I had to run all over to escape the zombies." next
+    "@Now I can't remember where my house is..." next
+    "@I told you this before, remember?" next
+    "@Huh?  I never saw you before?" next
+    "@I guess I can't remember anything right." end
+
+l_0xc8e6a9:
+    "@(You're awfully kind taking time out to talk to a mouse.{pause(20)}  This mouse loves you!)" end
+
+l_0xc8e6e3:
+    "@Owoooo![03]" eob
+
+l_0xc8e6ed:
+    "[06 47 00 {e(l_0xc8e715)}]@How can you smile like that in a dangerous place like this?" end
+
+l_0xc8e715:
+    "@I thought there was something more to you than just your smile." end
+
+l_0xc8e734:
+    "[06 47 00 {e(l_0xc8e7b3)}]@I saw a beat-up tour bus going to Fourside.{pause(20)}  We can't go through the tunnel." next
+    "@The band was really noisy,{pause(15)} so the ghosts didn't approach the bus." next
+    "@It must be great to be so happy-go-lucky, huh!" end
+
+l_0xc8e7b3:
+    "@I wanted to catch one of the ghosts in the tunnel and keep it as a pet." next
+    "@I'm just teasin'.  I can tease like that now that they're gone." end
+
+l_0xc8e804:
+    "[06 49 00 {e(l_0xc8e9e8)}][06 47 00 {e(l_0xc8e95d)}]@You seem to be an outsider, so I'll fill you in." next
+    "@The truth is,{pause(15)} I work for the monsters." next
+    "@The humans seem to be losing," next
+    "@so I'm on the zombies' side for my own protection." next
+    "@The zombies' leader likes Fly Honey.  He makes his followers collect it." next
+    "@You know--bees make bee honey and flies make Fly Honey." next
+    "@The zombie leader is strong because" next
+    "@he always eats peanut butter and Fly Honey sandwiches...[06 45 00 {e(l_0xc8e95b)}]" next
+    "@I got lots of Fly Honey stored in that monster tent to the south." next
+    "@I'll deliver it to the zombie leader soon." end
+
+l_0xc8e95b:
+    end
+
+l_0xc8e95d:
+    "@I heard that you beat the zombie leader" next
+    "@after you got some important info from me." next
+    "@Heh heh heh..." next
+    "@You should at least thank me... or how about a shoulder massage..." next
+    "@Why are you giving me such a dirty look, you brat!{pause(10)}  Ptooie!" end
+
+l_0xc8e9e8:
+    "@...Since then, I've really matured." next
+    "@I am doing well in the health food business." next
+    "@People can get over any illness they might catch." next
+    "@Don't you think it's a great business?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc8ea55:
+    " [19 02]No" eob
+
+l_0xc8ea5b:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc8ea79)} {e(l_0xc8ea6a)}]" goto(l_0xc8ea6a)
+
+l_0xc8ea6a:
+    "@Okay... so it's not for you." end
+
+l_0xc8ea79:
+    "@I could make you believe anything..." end
+
+l_0xc8ea8b:
+    "@After the buses started running again," next
+    "@I decided to come see my boyfriend... I really shouldn't have, though." end
+
+l_0xc8eace:
+    "@Wo!  Dude!{pause(15)}  Like,{pause(15)} my old girlfriend from Twoson hunted me down, man." next
+    "@I'm totally bummed, 'cause I have another girlfriend here in Threek." end
+
+l_0xc8eb2c:
+    "@Ha ha ha ...check him out." next
+    "@I think he's the bee's knees,{pause(15)} oops, I mean way cool.{pause(20)}  He used to be in a band." end
+
+l_0xc8eb75:
+    "{window_open(1)}@Ga{pause(5)}a{pause(5)}o{pause(5)}o{pause(1)}o{pause(1)}o{pause(1)}r{pause(1)}r{pause(1)}g{pause(1)}g!!![03]{window_closeall}{pause(1)}{unset(flag 49)}" call(data_23.l_0xc68538) "[1B 03 {e(l_0xc8ebdd)}][1F 1E 13 02 09][1F 1E 14 02 09][1F 1E 15 02 09]{pause(120)}{set(flag 669)}{set(flag 69)}{unset(flag 373)}{pause(1)}[1F 21 A0]{pause(1)}[1F E5 FF]" call(data_44.l_0xc88761) "{unset(flag 11)}" goto(data_34.l_0xc7a2f7)
+
+l_0xc8ebdd:
+    "{unset(flag 11)}{set(flag 49)}" eob
+
+l_0xc8ebe4:
+    "{window_open(1)}@(He stares into your soul.)[03]{window_closeall}[06 0E 00 {e(data_55.l_0xc9992f)}]{set(flag 46)}{set(flag 433)}{set(flag 588)}" eob
+
+l_0xc8ec0f:
+    "[19 23 16 02 01 FF 00][1F 16 16 02 00][1F 1A 16 02 03]{pause(30)}[1F 1B 16 02]{window_open(1)}@(He stares into your soul.)[03]{window_closeall}{sound(114)}{pause(60)}[1F F1 17 02 F7 02][1F 61][1F E6 17 02][19 23 17 02 01 01 00][1F 16 17 02 00][1F 1A 17 02 03]{pause(30)}[1F 1B 17 02]{window_open(1)}@(He looks you over.)[03]{window_closeall}[1F E9 17 02][06 0E 00 {e(data_55.l_0xc9992f)}]{set(flag 46)}{set(flag 433)}{set(flag 588)}" eob
+
+l_0xc8ec90:
+    "{window_open(1)}@(He looks you over.)[03]{window_closeall}[06 0E 00 {e(data_55.l_0xc9992f)}]{set(flag 46)}{set(flag 433)}{set(flag 588)}" eob
+
+l_0xc8ecb4:
+    call(data_13.l_0xc5d32f) eob
+
+l_0xc8ecba:
+    "@The woman in front of the hotel..." next
+    "@She's looking pale, but man, she's a hottie...!" end
+
+l_0xc8ed1e:
+    "[06 D6 00 {e(l_0xc8edcc)}][06 47 00 {e(l_0xc8ed87)}]@I overheard the zombies whisper," next
+    "@<Master Belch will give us our lives back.>" next
+    "@...Master Belch is the zombie leader.{pause(15)}  He must be really pukey." end
+
+l_0xc8ed87:
+    "@Like I told you, there was a barfy bad guy named Belch." next
+    "@Thank you for giving him the big flush." end
+
+l_0xc8edcc:
+    "@This town has completely changed from the first time you were here." next
+    "@Can you feel the love?" end
+
+l_0xc8ee02:
+    "[06 49 00 {e(l_0xc8eeb4)}][06 47 00 {e(l_0xc8ee6e)}]@That's right, there is a rumor that a monster called Belch is screwing up the town." next
+    "@Belch!{pause(20)}  That's a gross,{pause(15)} twisted name even for a monster!" end
+
+l_0xc8ee6e:
+    "@Bu{pause(5)}u{pause(5)}u{pause(5)}u{pause(5)}rp!" next
+    "@Oops... now I'll get <Belch> for a nickname.  Hee hee hee... uh... crud." end
+
+l_0xc8eeb4:
+    "@Isn't your backpack worn out?{pause(20)}  Oh, if only those straps could talk..." end
+
+l_0xc8eee5:
+    "@Yeah, I worked for the zombies," next
+    "@but I betrayed them too.{pause(20)}  I'm a con man, so I know the score." next
+    "@Belch gives life to the zombies, but Belch works for Giygas," next
+    "@who I heard might be female." next
+    "@Well, I'm not really sure whether Giygas is a male or a female." next
+    "@I'm a helpful con man, don't you think?" end
+
+l_0xc8ef99:
+    "@I saw a suspicious woman talking with the zombies around here." end
+
+l_0xc8efb9:
+    "[06 47 00 {e(l_0xc8f0d2)}][06 7D 00 {e(l_0xc8f086)}][06 7C 00 {e(l_0xc8f066)}][06 28 02 {e(l_0xc8f031)}]@Frankly, I'm running scared." next
+    "@I don't mean that I actually run around.{pause(20)}  I just mean I am frightened." next
+    "@Conditions in the town are getting worse." end
+
+l_0xc8f031:
+    "@This guy at the pizza joint told me about a new product called <Zombie Paper.>" end
+
+l_0xc8f066:
+    "@<Zombie Paper> is a stupid product name." end
+
+l_0xc8f086:
+    "@Zombie Paper really works, so I hope someone comes up with <pretty girl paper.>" next
+    "@Oops,{pause(15)} that wasn't a nice thing to say." end
+
+l_0xc8f0d2:
+    "@You made our lives peaceful.  I can sleep again." next
+    "@It's like you used a bunch of <peace paper,> right?  Ha ha ha." end
+
+l_0xc8f11b:
+    "[06 47 00 {e(l_0xc8f208)}][06 7D 00 {e(l_0xc8f1b5)}][06 28 02 {e(l_0xc8f193)}]@People used to call me evil, but these zombies are much more scary." next
+    "@I left my wife and kids at home to escape to this tent." next
+    "@That's how scary the zombies are." end
+
+l_0xc8f193:
+    "@You can do whatever you want--" next
+    "@just save my life." end
+
+l_0xc8f1b5:
+    "@Those zombies stuck to the floor..." next
+    "@I wonder if they could still get me." next
+    "@I don't care what happens to anyone else,{pause(15)} I just want to save my own skin!" end
+
+l_0xc8f208:
+    "@The town is at peace,{pause(15)} but my wife and kids won't speak to me." next
+    "@What's the problem?" end
+
+l_0xc8f240:
+    "@A few days ago, the zombies got some kids at this hotel." next
+    "{unset(flag 589)}{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(data_47.l_0xc8f296)}]@The boy had a red cap...{pause(30)} or was it a blue cap?" end
+

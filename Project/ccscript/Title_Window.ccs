@@ -1,0 +1,306 @@
+/*	This script creates a new control code that titles the current window (without EB++) by D-man
+	
+	[18 0B XX YY ZZ]
+	- XX = Window ID
+		- 0x00 = Current focused window
+		- 0x01+ = Other Opened Windows
+		
+	- YY = Character ID
+		- 0x00 = Not sure at the moment
+		- 0x01 = Ness
+		- 0x02 = Paula
+		- 0x03 = Jeff
+		- 0x04 = Poo
+		- 0x05 = King
+		
+	- ZZ = Length
+	
+	[18 0C XX YY YY YY YY]
+	- XX = Window ID
+		- 0x00 = Current Focused Window
+		- 0x01+ = Other Opened Window
+	- YY YY YY YY = Text String
+	
+	HOW TO USE:
+	-----------
+	. You will need to combine this control code with the "clearline" command.
+	Reason why is that if you don't, you'll see the name of the character in
+	the text box in conjunction with the name on the window border. You can
+	create a custom command to combined them both like: 
+	
+	command title_ness {
+		"[18 0B 00 01 05]"
+		clearline
+	}
+	
+	so whenever you call title_ness, you don't have to specifiy the control code
+	and the "clearline" command
+	
+	. To title the window with a string, you would need to make a label that
+	contains your string to begin with, then use that label as a parameter for
+	the [18 0C XX YY YY YY YY] control code. For exmaple:
+	
+	Lets have a label named "Test" that contains the string "Hello World".
+	
+	Test:
+		"Hello World[00]"
+		
+	The string also needs a null terminator or else it'll keep on printing out
+	unneccessary characters. The control code [18 0C XX YY YY YY YY] requires a
+	window ID and the address of the string. The address of the string is formatted
+	in little endian. So to display the "Hello World" string as a window title you
+	would have to do something like this:
+	
+	[18 0C 00 {byte[0] Test} {byte[1] Test} {byte[2] Test} 00]
+	clearline
+	
+	Just like the above custom command, you can make a command that does just this:
+	
+	command title_string(Win_ID, Address){
+		"[18 0C {byte[0] Win_ID} {byte[0] Address} {byte[1] Address} {byte[2] Address} 00]"
+		clearline
+	}
+	
+	DON'T use this as a replacement for the [18 0B XX YY ZZ] control code if you
+	are planning to print the character's name on the window title since those names 
+	aren't null terminating.
+*/
+
+import asm65816
+
+
+define Title_Window = 0xC2032B
+
+ROM[0xC1794D] = {
+	JMP_l (Win_Title)
+	NOP
+}
+
+Win_Title:{
+	CMP_i (0x000B)
+	BEQ_a (CC_18_0B)
+	
+	CMP_i (0x000C)
+	BEQ_a (CC_18_0C)
+	
+	CMP_i (0x000D)
+	BEQ_a (CC_18_0D)
+	JMP_l (0xC179A5)	// UNKNOWN12 in CC_18_Tree
+	
+CC_18_0B:
+	LDA_i (0x8672)
+	JMP_l (0xC179A8)	// UNKNOWN13 in CC_18_Tree
+
+CC_18_0C:
+	LDA_i (0x8677)
+	JMP_l (0xC179A8)	// UNKNOWN13 in CC_18_Tree
+	
+CC_18_0D:	
+	JMP_l (0xC179A0)	// UNKNOWN11 in CC_18_Tree
+}
+
+
+/*	This is a bit hacky way to do things, but I'm gonna need to use the  routine 0xC1866D's address because of how the text parsing works in EarthBound. In the Control Code Trees, every control code that has parameters requires the lower 16-bit address of a ROM Address. For example:
+	
+	Looking at the CC_18_Tree Control Code Tree,
+	http://earthbound-rom-explorerr.herokuapp.com/address/$c1790b
+	we can see that Control Code [18 01 XX] takes in 1 parameter and so in the tree we can see it branch to here
+	
+	$c17959 UNKNOWN1:  LDA #$43c2
+	$c1795c            BRA UNKNOWN13
+	
+	Notice the LDA_i (0x43C2) opcode, this is the lower 16-bit address of where we are going to execute the control code at within bank 0xC1. So we would run a routine at 0xC143C2
+	http://earthbound-rom-explorerr.herokuapp.com/address/$c143c2
+	
+	So the reason why we are writing out the routine at 0xC1866D in this script is so that we can use that area of ROM as a jump table to short address. Sort of how like asmref's jump tables are mapped.
+*/
+
+
+// ROM 0xC1866D - 0xC1869C are free space
+// ROM 0xC1866D - 0xC18671 are used for the original routine
+ROM[0xC1866D] = {
+	JSL (r_0xC1866D)
+	RTS
+}
+
+// ROM 0xC18672 - 0xC18676 are used for Control Code [18 0B XX YY ZZ]
+ROM[0xC18672] = {
+	JSL (Title_Char_Name)
+	RTS
+}
+
+// ROM 0xC18677 - 0xC1867B are used for Control Code [18 0C XX YY YY YY YY]
+ROM[0xC18677] = {
+	JSL (Title_Str_Name)
+	RTS
+}
+
+r_0xC1866D:{
+	REP (0x31)
+	PHD
+	PHA
+	TDC
+	ADC_i (0xFFF0)
+	TCD
+	PLA
+	
+	STA_d (0x0E)
+	LDA_d (0x1E)
+	STA_d (0x06)
+	LDA_d (0x20)
+	STA_d (0x08)
+	LDA_d (0x0E)
+	
+	BNE_a (UNKNOWN0)
+	LDA_i (0x0000)
+	BRA_a (Return)
+	
+UNKNOWN0:
+	TAX
+	STZ_x (0x0004)
+	TAY
+	LDA_d (0x06)
+	STA_y (0x0000)
+	LDA_d (0x08)
+	STA_y (0x0002)
+	LDA_d (0x0E)
+	
+Return:
+	PLD
+	RTL
+}
+
+/*
+Parameters:
+	A: Unknown
+	X: The next argument
+*/
+Title_Char_Name:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+	
+	STX_d (0x06)	// Stores the current Control Code argument to DPR 0x06
+	LDA_a (0x97CA)	// Control Code Counter
+	CMP_i (0x0002)	// Check if we already stored all of our arguments to RAM
+	BCS_a (Title_Name)	// If so, then we can proceed to write the character's name
+	
+	// If not, then we need to store the Control Code's arguments
+	TXA		// Transfer the CC argument to the A register
+	SEP (0x20)	// Make A register 8-bit
+	LDX_a (0x97CA)	// Load in the CC counter to the X register
+	STA_x (0x97BA)	// Store the CC arguument to the CC argument storage in RAM
+	REP (0x20)	// Make A register 8-bit
+	INC_a (0x97CA)	// Increment the CC counter
+	LDA_i (0x8672)	// Load this routine's lower 16-bit ROM address
+	BRA_a (Return)	// Return to continue to write the CC's arguments to the CC argument storage
+
+Title_Name:
+	LDA_a (0x97BA)	// Load in the Widnow ID argument
+	AND_i (0x00FF)	// Get low byte
+	CMP_i (0x0000)	// Checks to see if it's 0
+	BEQ_a (Load_Current_Window)	// If so, then load in the current focused window
+	
+	// Else, load in the window ID in the argument
+	STA_d (0x02)	// DPR 0x02 = Window ID
+	BRA_a (Title_Name_2)
+	
+Load_Current_Window:
+	LDA_a (0x8958)	// Get the current window ID
+	STA_d (0x02)	// DPR 0x02 = Current Window ID
+	
+Title_Name_2:
+	LDA_a (0x97BB)	// Load in the character ID that's in the CC argument storage
+	AND_i (0x00FF)	// Get low byte
+	CMP_i (0x0005)	// Check if the Character ID isn't the main 4
+	BCC_a (Main_4_Names)	// If so, then load in the main 4's names
+	
+	// Else, it must be King
+	LDA_i (0x9819)	// Load in King's Name address
+	STA_d (0x04)	// DPR 0x04 = King's name address
+	BRA_a (Title_Name_3)	// Continue with the routine
+	
+Main_4_Names:
+	DEC		// Decrement the character's ID
+	TAY
+	LDA_i (0x5F)	// Load in the character's stats table's entry size
+	JSL (Mult_YxA)	// Multiply
+	CLC		// Clear C bit in P register
+	ADC_i (0x99CE)	// Add the offset to the starting address of the Chracter Stats Table in RAM to get the address of the names
+	STA_d (0x04)	// DPR 0x04 = Address of the chracter's name
+	
+Title_Name_3:
+	LDA_d (0x02)	// Load in the Window ID
+	LDX_d (0x04)
+	STX_d (0x0E)
+	LDX_i (0x007E)
+	STX_d (0x10)	// Load in the character's Name address to DPR 0x0E and 0x10
+	LDX_d (0x06)	// Load in the length of the name
+	JSL (Title_Window)	// Title the window
+	LDA_i (0x0000)
+	
+Return:
+	PLD
+	RTL
+}
+
+/*
+Parameters:
+	A: Nothing useful
+	X: The next argument
+*/
+Title_Str_Name:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+	
+	STX_d (0x06)	// Stores the current Control Code argument to DPR 0x06
+	LDA_a (0x97CA)	// Control Code Counter
+	CMP_i (0x0004)	// Check if we already stored all of our arguemtns to RAM
+	BCS_a (Title_Str)	// If so, then we can proceed to write the character's name
+	
+	// If not, then we need to store the Control Code's arguments
+	TXA			// Transfer the CC argument to the A register
+	SEP (0x20)	// Make A register 8-bit
+	LDX_a (0x97CA)	// Load in the CC counter to the X register
+	STA_x (0x97BA)	// Store the CC arguument to the CC argument storage in RAM
+	REP (0x20)	// Make A register 8-bit
+	INC_a (0x97CA)	// Increment the CC counter
+	LDA_i (0x8677)	// Load this routine's lower 16-bit ROM address
+	BRA_a (Return)	// Return to continue to write the CC's arguments to the CC argument storage
+	
+Title_Str:
+	LDA_d (0x06)	// Load in the last CC argument
+	SEP (0x20)		// Make A register 8-bit
+	LDX_a (0x97CA)	// Load in the CC counter to the X register
+	STA_x (0x97BA)	// Store the CC arguument to the CC argument storage in RAM
+	REP (0x20)	// Make A register 8-bit
+
+	LDA_a (0x97BA)	// Load in the window ID argument
+	AND_i (0x00FF)	// Get low byte
+	STA_d (0x02)	// Store it into DPR 0x02
+	CMP_i (0x0000)	// Check if the argument is 0
+	BNE_a (Title_Str_1)	// If not, then continue with the code
+	
+	// Else, it's the current window
+	LDA_a (0x8958)	// Load in the current window
+	STA_d (0x02)	// Store it into DPR 0x02
+	
+Title_Str_1:
+	LDA_a (0x97BB)	// Load in the lower short of the text address
+	STA_d (0x0E)	// Store it into DPR 0x0E
+	LDA_a (0x97BD)	// Load in the higher short of the text address
+	STA_d (0x10)	// Store it into DPR 0x10
+	LDA_d (0x02)	// Load in the window ID
+	LDX_i (0xFFFF)	// Get the maximum length of the string
+	JSL (Title_Window) // Title the window
+	LDA_i (0x0000)	// Load 0
+
+Return:
+	PLD
+	RTL
+}

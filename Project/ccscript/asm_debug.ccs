@@ -1,0 +1,172 @@
+// GENERAL ASM CODE FOR FIXES TO SEVERAL OF THE KIRBY DEBUG MENU OPTIONS
+import asm65816
+
+/* NOTE: All of the options in this Debug menu utilize 10 bytes as a maximum */
+
+/* Change Kirby debug menu text
+2F = /	| 30 = 0	| 31 = 1	| 32 = 2	| 39 = 9			
+40 = @	| 41 = A	| 42 = B	| 43 = C ...	| 5A = Z */
+ROM[0xEFD8B5] = "[4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]"
+// Original - [4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]
+// MOTHER2 ROM  1994/07/09  VERSION
+
+/* Debug menu text fixes */
+ROM[0xC454BF] = ASMLoadAddress0E(tx6)
+
+tx6:	// ROM[0xC3E44C]
+    "Next[00]"
+
+
+ROM[0xC12EBA] = ASMLoadAddress0A(debug_text)
+
+/*
+ROM[0xC3E874]	// Flag
+ROM[0xC3E87E]	// Goods
+ROM[0xC3E888]	// Save
+ROM[0xC3E892]	// Apple
+ROM[0xC3E89C]	// Banana
+
+ROM[0xC3E8A6]	// TV
+ROM[0xC3E8B0]	// Event
+ROM[0xC3E8BA]	// Warp
+ROM[0xC3E8C4]	// Tea
+ROM[0xC3E8CE]	// 6?K ---> E6 EF FB
+
+ROM[0xC3E8D8]	// $uz ---> +?u456789 ---> D4 B6 25 2B 
+ROM[0xC3E8E2]	// $u[ --> ??? --> D4 B6 25 @B
+ROM[0xC3E8EC]	// +?uu --> ??? --> DB EF 25 BD 25 30
+ROM[0xC3E8F6]	// +?uu --> ??? --> 
+ROM[0xC3E900]	// GUIDE
+
+ROM[0xC3E90A]	// TRACK
+ROM[0xC3E914]	// CAST
+ROM[0xC3E91E]	// STONE
+ROM[0xC3E928]	// STAFF
+ROM[0xC3E932]	// "uu ---> "ue' ()**,-./0123456789:; ---> EC 25 B6 25
+
+ROM[0xC3E93C]	// REPLAY
+ROM[0xC3E946]	// TEST1
+ROM[0xC3E950]	// TEST2
+*/
+
+debug_text: {	// ROM[0xC3E874]
+
+	"Flags[00 00 00 00 00]"
+	"Goods[00 00 00 00 00]"
+	"Save[00 00 00 00 00 00]"
+	"Apple[00 00 00 00 00]"
+	"Banana[00 00 00 00]"
+
+	"TV[00 00 00 00 00 00 00 00]"
+	"Event[00 00 00 00 00]"
+	"Warp[00 00 00 00 00 00]"
+	"Tea[00 00 00 00 00 00 00]"
+	"Teleport[00 00]"	// Learn Teleport
+
+	"Starst. [8B 00]"	// Learn Starstorm Alpha
+	"Starst. [8C 00]"	// Learn Starstorm Beta
+	"Eng. Name[00]"		// Input player's name (English)
+	"Jap. Name[00]"		// Input player's name (Katakana)
+	"Guide[00 00 00 00 00]"
+
+	"Track[00 00 00 00 00]"
+	"Cast[00 00 00 00 00 00]"
+	"Stone[00 00 00 00 00]"
+	"Staff[00 00 00 00 00]"
+	"HP Roll[00 00 00]"	// Set Magicant HP/PP rolling flag (can't be undone, softlocks battles waiting for HP/PP to finish rolling)
+
+
+	"Replay[00 00 00 00]"
+	"Test 1[00 00 00 00]"
+	"Test 2[00 00 00 00]"
+
+	"[00 00 00 00 00 00 00 00 00 00 00 06 00 00 01 06 01 00 02 06 02]"
+}
+
+
+/* Fix Palette for the Window colors */
+ROM[0xC47FD9] = {
+	LDA_a	(0x99CD)
+	JSL	(colorfix)
+}
+
+colorfix: {
+	AND_i	(0x00FF)
+	BNE	(0x06)		// Check if palette index has been set
+	LDA_i	(0x0001)	// Default palette index (01=Plain Flavor, 02=Mint, 03=Strawberry, 04=Banana, 05=Peanut)
+	STA_a	(0x99CD)
+	DEC
+	RTL
+}
+
+/* Load original Debug window palette from EarthBound */
+/* UNCOMMENT (AND COMMENT ABOVE CODE) IF YOU WANT THE ORIGINAL PINK PALETTE FOR THE DEBUG WINDOW MENU
+
+ROM[0xC47FE6] = {
+    JSL (pinkwindow)
+}
+       
+pinkwindow: {
+	LDA_a	(0x99CD)
+	BNE	(0x04)		// Check if palette index has been set
+	LDA_i	(0xFFFF)	// Incorrect data loaded in EarthBound
+	RTL
+	LDA_xl	(0xE01FB9)
+	RTL
+}*/
+
+
+/* Change button input layout for the Debug menu only */
+	
+ROM[0xEFE52F] = AND_i	(0x0040)	// Opens Main (Talk) menu when pressed (B button by default)
+
+ROM[0xEFE2F5] = {
+	JMP_l	(buttontalk)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+}
+
+buttontalk: {
+	JSL	(buttoncheck)
+	LDA_a	(0x006D)
+	AND_i	(0x8000)		// Fades screen to black / Reloads (A button by default)
+	BNE	(0x04)
+	JMP_l	(0xEFE387)
+	JMP_l	(0xEFE300)
+}
+
+buttoncheck: {
+	LDA_a	(0x006D)
+	AND_i	(0x00A0)		// AND operand check for A+L buttons. Talks to NPCs / Confirm selections at the Menus
+	BEQ	(0x04)
+	JSL	(0xC13C32)
+	RTL
+}
+
+
+/* Repoint Kirby's graphics (just for fun) */
+ROM[0xEFE55E] = ASMLoadAddress0E(kirby)
+
+kirby:
+	"[00 00 00 00 00 00 01 00 02 01 03 00 05 00 0B 04 00 00 00 00 00 00 00 00 00 00 01 00 03 00 03 00 00 00 3E 00 D5 36 3E 80 FF 00 FF 00 9F 60 9F 60 00 00 00 00 08 00 7F 00 FF 00 FF 00 FF 00 FF 00 00 00 00 00 80 00 40 80 A0 40 E0 00 F0 20 E8 10 00 00 00 00 00 00 00 00 80 00 C0 00 C0 00 E0 00 0B 00 17 08 1F 08 15 00 1F 0A 16 08 0F 05 06 01 07 00 07 00 07 00 0F 00 05 00 05 00 00 00 00 00 FF 00 FF 00 EB 14 1C 00 DD C1 FF 00 FF 00 7F 00 FF 00 EB 00 FF 00 EB 00 2A 00 FF 00 FF 00 F7 00 E8 00 F4 08 FC 08 54 00 FC A8 B4 08 F8 50 30 40 F0 00 F0 00 F0 00 F8 00 50 00 D0 00 80 00 80 00 03 00 05 03 07 03 04 03 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 3E 80 D5 36 7F 80 E3 00 80 00 00 00 00 00 00 00 7F 00 08 00 00 00 00 00 00 00 00 00 00 00 00 00 60 80 D0 60 70 E0 90 60 E0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+
+
+/* Fix "Show battle" Battle debug menu to work properly */
+ROM[0xC1E21A] =	LDA_i (0x0060)	// Next 4 lines fix the garbled characters in Enemy Selection Menu for proper numbers (000, 001, etc)
+ROM[0xC1E21F] = LDA_i (0x0060)
+ROM[0xC1E237] =	LDA_i (0x0060)
+ROM[0xC1E23C] = LDA_i (0x0060)
+
+ROM[0xEFE64E] = JSL (Init_Debug_Party)	// Fixes the "Show battle" option crashing when starting a battle from a fresh boot
+
+Init_Debug_Party: {
+	LDA_i	(0x0004)	// Load 4 into A register
+	STA_a	(0x98A3)	// Store it in 0x7E98A3
+	JSL	(0xC24821)	// Go to battle routine
+	RTL
+}

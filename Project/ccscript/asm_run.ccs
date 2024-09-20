@@ -1,0 +1,41 @@
+/*ASM Code to implement a proper Run Button patch to EarthBound with CoilSnake*/
+import asm65816
+
+ROM[0xC094E3] = {
+	
+	JSL	(burned_status)		// Jump to our ASM custom subroutine
+	NOP				// No operation
+	NOP				// No operation
+}
+
+burned_status: {
+/*Original ASM code from the previous offset ($C094E3-$C094E8)must be included at the beginning of our custom code to avoid crashes at startup*/
+
+	LDA_y	(0x125A)		// Code from the original ROM. Must be included at 
+	STA_a	(0x0A58)		// the beginning of our routine or the game crashes.
+
+/*ASM Code for a proper Run Button (Button Y enables Running)*/
+
+	LDA_a	(0x9840)		// LDA $9840,	Load RAM offset for current Character status in accumulator for memory
+	AND_i	(0x00FF)		// AND #$00FF,	AND accumulator operand
+	CMP_i	(0x0001)		// CMP #$0001,	Compare accumulator with HEX value #$01 (Burnt Status)
+	BNE_a	(button_check)		// BNE $FE12,	If comparison is NOT Burnt status (#$01), branch.
+	RTL				// RTL,		Return from subroutine
+}
+
+button_check: {
+	
+	LDA_a	(0x0066)		// LDA $0066,	Load RAM offset for Button Y input 
+	AND_i	(0x0040)		// AND #$0040,	AND accumulator operand for HEX value for Button Y input 
+	BNE_a	(run_status)		// BNE $FE1E,	If comparison is true, branch. 
+	STZ_a	(0x9840)		// STZ $9840, 	Stores Zero to memory. Puts #$00 in RAM offset $9840 if condition is false. 
+	RTL				// RTL,		Return from subroutine
+}
+
+run_status: {
+	
+	LDA_a	(0x9840)		// LDA $9840,	Load RAM offset for current Character status in accumulator for memory 
+	ORA_i	(0x0003)		// ORA #$0003,	OR accumulator for Skip Sandwich Status with memory.
+	STA_a	(0x9840)		// STA $9840,	Store accumulator value #$03 in memory
+	RTL				// RTL,		Return from subroutine
+}

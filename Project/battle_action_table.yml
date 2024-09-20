@@ -1,0 +1,2226 @@
+0:
+  Action type: nothing
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+1:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77dce
+2:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77df0
+3:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eb6
+4:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef848c
+5:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28740
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef84b6
+6:
+  Action type: other
+  Code Address: $c28770
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8530
+7:
+  Action type: other
+  Code Address: $c2ad1b
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef89e0
+8:
+  Action type: other
+  Code Address: $c2889b
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef84c6
+9:
+  Action type: other
+  Code Address: $c2903c
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+10:
+  Action type: psi
+  Code Address: $c29556
+  Direction: enemy
+  PP Cost: 10
+  Target: all
+  Text Address: data_64.l_0xef8543
+11:
+  Action type: psi
+  Code Address: $c2955f
+  Direction: enemy
+  PP Cost: 14
+  Target: all
+  Text Address: data_64.l_0xef8543
+12:
+  Action type: psi
+  Code Address: $c29568
+  Direction: enemy
+  PP Cost: 40
+  Target: all
+  Text Address: data_64.l_0xef8543
+13:
+  Action type: psi
+  Code Address: $c29571
+  Direction: enemy
+  PP Cost: 98
+  Target: all
+  Text Address: data_64.l_0xef8543
+14:
+  Action type: psi
+  Code Address: $c295ab
+  Direction: enemy
+  PP Cost: 6
+  Target: row
+  Text Address: data_64.l_0xef8543
+15:
+  Action type: psi
+  Code Address: $c295b4
+  Direction: enemy
+  PP Cost: 12
+  Target: row
+  Text Address: data_64.l_0xef8543
+16:
+  Action type: psi
+  Code Address: $c295bd
+  Direction: enemy
+  PP Cost: 20
+  Target: row
+  Text Address: data_64.l_0xef8543
+17:
+  Action type: psi
+  Code Address: $c295c6
+  Direction: enemy
+  PP Cost: 42
+  Target: row
+  Text Address: data_64.l_0xef8543
+18:
+  Action type: psi
+  Code Address: $c29647
+  Direction: enemy
+  PP Cost: 4
+  Target: one
+  Text Address: data_64.l_0xef8543
+19:
+  Action type: psi
+  Code Address: $c29650
+  Direction: enemy
+  PP Cost: 9
+  Target: one
+  Text Address: data_64.l_0xef8543
+20:
+  Action type: psi
+  Code Address: $c29659
+  Direction: enemy
+  PP Cost: 18
+  Target: one
+  Text Address: data_64.l_0xef8543
+21:
+  Action type: psi
+  Code Address: $c29662
+  Direction: enemy
+  PP Cost: 28
+  Target: one
+  Text Address: data_64.l_0xef8543
+22:
+  Action type: psi
+  Code Address: $c29871
+  Direction: enemy
+  PP Cost: 3
+  Target: all
+  Text Address: data_64.l_0xef8543
+23:
+  Action type: psi
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 7
+  Target: all
+  Text Address: data_64.l_0xef8543
+24:
+  Action type: psi
+  Code Address: $c29889
+  Direction: enemy
+  PP Cost: 16
+  Target: all
+  Text Address: data_64.l_0xef8543
+25:
+  Action type: psi
+  Code Address: $c29895
+  Direction: enemy
+  PP Cost: 20
+  Target: all
+  Text Address: data_64.l_0xef8543
+26:
+  Action type: psi
+  Code Address: $c29987
+  Direction: enemy
+  PP Cost: 8
+  Target: all
+  Text Address: data_64.l_0xef8543
+27:
+  Action type: psi
+  Code Address: $c299ae
+  Direction: enemy
+  PP Cost: 16
+  Target: all
+  Text Address: data_64.l_0xef8543
+28:
+  Action type: psi
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 24
+  Target: all
+  Text Address: data_64.l_0xef8543
+29:
+  Action type: psi
+  Code Address: $c29a35
+  Direction: enemy
+  PP Cost: 32
+  Target: all
+  Text Address: data_64.l_0xef8543
+30:
+  Action type: psi
+  Code Address: $c29aa6
+  Direction: enemy
+  PP Cost: 24
+  Target: all
+  Text Address: data_64.l_0xef8543
+31:
+  Action type: psi
+  Code Address: $c29aaf
+  Direction: enemy
+  PP Cost: 42
+  Target: all
+  Text Address: data_64.l_0xef8543
+32:
+  Action type: psi
+  Code Address: $c29ac6
+  Direction: party
+  PP Cost: 5
+  Target: one
+  Text Address: data_64.l_0xef8543
+33:
+  Action type: psi
+  Code Address: $c29acf
+  Direction: party
+  PP Cost: 8
+  Target: one
+  Text Address: data_64.l_0xef8543
+34:
+  Action type: psi
+  Code Address: $c29ad8
+  Direction: party
+  PP Cost: 13
+  Target: one
+  Text Address: data_64.l_0xef8543
+35:
+  Action type: psi
+  Code Address: $c29ae1
+  Direction: party
+  PP Cost: 24
+  Target: all
+  Text Address: data_64.l_0xef8543
+36:
+  Action type: psi
+  Code Address: $c29aea
+  Direction: party
+  PP Cost: 5
+  Target: one
+  Text Address: data_64.l_0xef8543
+37:
+  Action type: psi
+  Code Address: $c29b7a
+  Direction: party
+  PP Cost: 8
+  Target: one
+  Text Address: data_64.l_0xef8543
+38:
+  Action type: psi
+  Code Address: $c29c2c
+  Direction: party
+  PP Cost: 20
+  Target: one
+  Text Address: data_64.l_0xef8543
+39:
+  Action type: psi
+  Code Address: $c29cb8
+  Direction: party
+  PP Cost: 38
+  Target: one
+  Text Address: data_64.l_0xef8543
+40:
+  Action type: psi
+  Code Address: $c29d44
+  Direction: party
+  PP Cost: 6
+  Target: one
+  Text Address: data_64.l_0xef8543
+41:
+  Action type: psi
+  Code Address: $c29d81
+  Direction: party
+  PP Cost: 10
+  Target: one
+  Text Address: data_64.l_0xef8543
+42:
+  Action type: psi
+  Code Address: $c29d7a
+  Direction: party
+  PP Cost: 18
+  Target: all
+  Text Address: data_64.l_0xef8543
+43:
+  Action type: psi
+  Code Address: $c29db7
+  Direction: party
+  PP Cost: 30
+  Target: all
+  Text Address: data_64.l_0xef8543
+44:
+  Action type: psi
+  Code Address: $c29dbe
+  Direction: party
+  PP Cost: 8
+  Target: one
+  Text Address: data_64.l_0xef8543
+45:
+  Action type: psi
+  Code Address: $c29dfb
+  Direction: party
+  PP Cost: 14
+  Target: one
+  Text Address: data_64.l_0xef8543
+46:
+  Action type: psi
+  Code Address: $c29df4
+  Direction: party
+  PP Cost: 24
+  Target: all
+  Text Address: data_64.l_0xef8543
+47:
+  Action type: psi
+  Code Address: $c29e31
+  Direction: party
+  PP Cost: 42
+  Target: all
+  Text Address: data_64.l_0xef8543
+48:
+  Action type: psi
+  Code Address: $c29e38
+  Direction: party
+  PP Cost: 10
+  Target: one
+  Text Address: data_64.l_0xef8543
+49:
+  Action type: psi
+  Code Address: $c29e7f
+  Direction: party
+  PP Cost: 30
+  Target: all
+  Text Address: data_64.l_0xef8543
+50:
+  Action type: psi
+  Code Address: $c29e86
+  Direction: enemy
+  PP Cost: 6
+  Target: one
+  Text Address: data_64.l_0xef8543
+51:
+  Action type: psi
+  Code Address: $c29eff
+  Direction: enemy
+  PP Cost: 18
+  Target: all
+  Text Address: data_64.l_0xef8543
+52:
+  Action type: psi
+  Code Address: $c29f06
+  Direction: enemy
+  PP Cost: 6
+  Target: one
+  Text Address: data_64.l_0xef8543
+53:
+  Action type: psi
+  Code Address: $c29f57
+  Direction: enemy
+  PP Cost: 18
+  Target: all
+  Text Address: data_64.l_0xef8543
+54:
+  Action type: psi
+  Code Address: $c29f5e
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8543
+55:
+  Action type: psi
+  Code Address: $c29fe1
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_64.l_0xef8543
+56:
+  Action type: psi
+  Code Address: $c29ffe
+  Direction: enemy
+  PP Cost: 8
+  Target: one
+  Text Address: data_64.l_0xef8543
+57:
+  Action type: psi
+  Code Address: $c2a04f
+  Direction: enemy
+  PP Cost: 24
+  Target: all
+  Text Address: data_64.l_0xef8543
+58:
+  Action type: psi
+  Code Address: $c2a056
+  Direction: enemy
+  PP Cost: 10
+  Target: one
+  Text Address: data_64.l_0xef8543
+59:
+  Action type: psi
+  Code Address: $c2a0a7
+  Direction: enemy
+  PP Cost: 30
+  Target: all
+  Text Address: data_64.l_0xef8543
+60:
+  Action type: psi
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 2
+  Target: all
+  Text Address: data_64.l_0xef8543
+61:
+  Action type: psi
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 8
+  Target: all
+  Text Address: data_64.l_0xef8543
+62:
+  Action type: other
+  Code Address: $c2c145
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef9a47
+63:
+  Action type: other
+  Code Address: $c2c13c
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef9a5e
+64:
+  Action type: other
+  Code Address: $c2a821
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef9a7e
+65:
+  Action type: other
+  Code Address: $c2a821
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9a9e
+66:
+  Action type: other
+  Code Address: $c2889e
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9abb
+67:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c288eb
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9b02
+68:
+  Action type: other
+  Code Address: $c289ce
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9b20
+69:
+  Action type: other
+  Code Address: $c28a92
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9b43
+70:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9b73
+71:
+  Action type: other
+  Code Address: $c28aeb
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9b96
+72:
+  Action type: other
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9bc3
+73:
+  Action type: other
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9be6
+74:
+  Action type: other
+  Code Address: $c28b6d
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9c02
+75:
+  Action type: other
+  Code Address: $c28bbe
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9c30
+76:
+  Action type: other
+  Code Address: $c28bfd
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9c51
+77:
+  Action type: other
+  Code Address: $c28e3b
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9c7e
+78:
+  Action type: other
+  Code Address: $c28c69
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9cad
+79:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9cd1
+80:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9cf1
+81:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9d14
+82:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9d3e
+83:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9d62
+84:
+  Action type: other
+  Code Address: $c28d3a
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9d81
+85:
+  Action type: other
+  Code Address: $c28d5a
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9da1
+86:
+  Action type: other
+  Code Address: $c28dbb
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_66.l_0xef9dbd
+87:
+  Action type: other
+  Code Address: $c28dfc
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9dda
+88:
+  Action type: other
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9e05
+89:
+  Action type: other
+  Code Address: $c295ab
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9e22
+90:
+  Action type: other
+  Code Address: $c29f57
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9e47
+91:
+  Action type: other
+  Code Address: $c295bd
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9e69
+92:
+  Action type: other
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9e92
+93:
+  Action type: other
+  Code Address: $c295c6
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9eb4
+94:
+  Action type: other
+  Code Address: $c295bd
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_66.l_0xef9ed7
+95:
+  Action type: other
+  Code Address: $c28e42
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7e25
+96:
+  Action type: other
+  Code Address: $c29e38
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_63.l_0xef7e3e
+97:
+  Action type: other
+  Code Address: $c28eae
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7e55
+98:
+  Action type: other
+  Code Address: $c28f21
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7e70
+99:
+  Action type: other
+  Code Address: $c29ad8
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7e88
+100:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28f97
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7eac
+101:
+  Action type: other
+  Code Address: $c2a821
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7ed5
+102:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28ff9
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7f02
+103:
+  Action type: other
+  Code Address: $c2889b
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_63.l_0xef7f1e
+104:
+  Action type: other
+  Code Address: $c2900b
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7f32
+105:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c285da
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7f5a
+106:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7f7b
+107:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7f9a
+108:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7fc3
+109:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7fe0
+110:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef7ffc
+111:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef8010
+112:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef8026
+113:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef804b
+114:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef806d
+115:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef808d
+116:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef80ac
+117:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2902c
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_64.l_0xef80c4
+118:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2902c
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_64.l_0xef80e4
+119:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8109
+120:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef812b
+121:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef814f
+122:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef81a5
+123:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8186
+124:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8167
+125:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef81c4
+126:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef81d7
+127:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef81f1
+128:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8211
+129:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8226
+130:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8239
+131:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef825c
+132:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8281
+133:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef8299
+134:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef82bc
+135:
+  Action type: item
+  Code Address: $c2a0ae
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+136:
+  Action type: item
+  Code Address: $c2a0bf
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+137:
+  Action type: item
+  Code Address: $c2a0cf
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+138:
+  Action type: item
+  Code Address: $c29ac6
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+139:
+  Action type: item
+  Code Address: $c29acf
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+140:
+  Action type: item
+  Code Address: $c29ad8
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+141:
+  Action type: item
+  Code Address: $c29ae1
+  Direction: party
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97b6b
+142:
+  Action type: item
+  Code Address: $c2a0df
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+143:
+  Action type: item
+  Code Address: $c2a0ef
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+144:
+  Action type: item
+  Code Address: $c2a26f
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+145:
+  Action type: item
+  Code Address: $c2a27f
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+146:
+  Action type: item
+  Code Address: $c2a360
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+147:
+  Action type: item
+  Code Address: $c2a370
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+148:
+  Action type: item
+  Code Address: $c2a380
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+149:
+  Action type: item
+  Code Address: $c29aea
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+150:
+  Action type: item
+  Code Address: $c29b7a
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+151:
+  Action type: item
+  Code Address: $c29c2c
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+152:
+  Action type: item
+  Code Address: $c29cb8
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+153:
+  Action type: item
+  Code Address: $c2a39d
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+154:
+  Action type: item
+  Code Address: $c2a0ff
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+155:
+  Action type: item
+  Code Address: $c2a14b
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+156:
+  Action type: item
+  Code Address: $c2a193
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+157:
+  Action type: item
+  Code Address: $c2a1db
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+158:
+  Action type: item
+  Code Address: $c2a227
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+159:
+  Action type: item
+  Code Address: $c2a3d1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e3c
+160:
+  Action type: item
+  Code Address: $c2a422
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e9e
+161:
+  Action type: item
+  Code Address: $c2a46b
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e5e
+162:
+  Action type: item
+  Code Address: $c2a50e
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97f56
+163:
+  Action type: item
+  Code Address: $c2a5d1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97ddc
+164:
+  Action type: item
+  Code Address: $c2a5da
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97df5
+165:
+  Action type: item
+  Code Address: $c2a5e3
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97e24
+166:
+  Action type: item
+  Code Address: $c2a5ec
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97f56
+167:
+  Action type: item
+  Code Address: $c2a818
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97eb7
+168:
+  Action type: item
+  Code Address: $c2a821
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97eb7
+169:
+  Action type: item
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97d75
+170:
+  Action type: item
+  Code Address: $c2a86b
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97da3
+171:
+  Action type: item
+  Code Address: $c2a89d
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97ed1
+172:
+  Action type: item
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97eb7
+173:
+  Action type: item
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97eb7
+174:
+  Action type: item
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97efa
+175:
+  Action type: item
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97d43
+176:
+  Action type: item
+  Code Address: $c2a507
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8e7e
+177:
+  Action type: item
+  Code Address: $c2a99c
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97cca
+178:
+  Action type: item
+  Code Address: $c2aa0c
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97d21
+179:
+  Action type: item
+  Code Address: $c2aa15
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97d21
+180:
+  Action type: item
+  Code Address: $c2aa6d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97d21
+181:
+  Action type: item
+  Code Address: $c2aa76
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97d21
+182:
+  Action type: item
+  Code Address: $c2aa7f
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+183:
+  Action type: item
+  Code Address: $c2aac6
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8e27
+184:
+  Action type: item
+  Code Address: $c2ab0d
+  Direction: party
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8e27
+185:
+  Action type: item
+  Code Address: $c2ab71
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8e27
+186:
+  Action type: item
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fd82
+187:
+  Action type: item
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fdbb
+188:
+  Action type: item
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_54.l_0xc97f72
+189:
+  Action type: item
+  Code Address: $c2c1bd
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+190:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9f897
+191:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9f9f3
+192:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fb61
+193:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fb8b
+194:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fb9f
+195:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fdfb
+196:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fe1b
+197:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fbf2
+198:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fc48
+199:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fc6f
+200:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fd2e
+201:
+  Action type: other
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_64.l_0xef82d7
+202:
+  Action type: other
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_64.l_0xef82f7
+203:
+  Action type: other
+  Code Address: $c28a92
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8317
+204:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef833e
+205:
+  Action type: other
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef835c
+206:
+  Action type: other
+  Code Address: $c28c69
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef838a
+207:
+  Action type: other
+  Code Address: $c28d3a
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef83a8
+208:
+  Action type: other
+  Code Address: $c28e3b
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef83ca
+209:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef83ed
+210:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8413
+211:
+  Action type: other
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef89fe
+212:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8a18
+213:
+  Action type: other
+  Code Address: $c28b6d
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8a33
+214:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c286cb
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8a52
+215:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28740
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8a6f
+216:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8a8c
+217:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8aa3
+218:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8ac2
+219:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8add
+220:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8af8
+221:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28740
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef8b11
+222:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28740
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8b2f
+223:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8b4a
+224:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8b65
+225:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8b89
+226:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8ba8
+227:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c28651
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8bc0
+228:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2916e
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8be8
+229:
+  Action type: other
+  Code Address: $c28eae
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8bfb
+230:
+  Action type: other
+  Code Address: $c28eae
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8c1d
+231:
+  Action type: other
+  Code Address: $c28eae
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8c3a
+232:
+  Action type: other
+  Code Address: $c29254
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8c58
+233:
+  Action type: other
+  Code Address: $c28f21
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8c75
+234:
+  Action type: other
+  Code Address: $c28f21
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8c92
+235:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8cac
+236:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8cc7
+237:
+  Action type: other
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_66.l_0xef9c30
+238:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c2859f
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_63.l_0xef8010
+239:
+  Action type: physical (affected by shields and defending)
+  Code Address: $c1de43
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_32.l_0xc77eff
+240:
+  Action type: item
+  Code Address: $c1e00f
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+241:
+  Action type: other
+  Code Address: $c28b6d
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8d72
+242:
+  Action type: other
+  Code Address: $c28cb8
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_65.l_0xef8dc1
+243:
+  Action type: other
+  Code Address: $c29298
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef72f6
+244:
+  Action type: other
+  Code Address: $c292ee
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7415
+245:
+  Action type: other
+  Code Address: $c292eb
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+246:
+  Action type: physical (unaffected by shields and defending)
+  Code Address: $c1de43
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_32.l_0xc77eff
+247:
+  Action type: other
+  Code Address: $c290c6
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8e27
+248:
+  Action type: other
+  Code Address: $c290c6
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8d9f
+249:
+  Action type: item
+  Code Address: $c2b27d
+  Direction: party
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97b6b
+250:
+  Action type: item
+  Code Address: $c2b27d
+  Direction: party
+  PP Cost: 0
+  Target: all
+  Text Address: data_54.l_0xc97c7b
+251:
+  Action type: other
+  Code Address: $c2904e
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef727f
+252:
+  Action type: other
+  Code Address: $c29042
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7192
+253:
+  Action type: other
+  Code Address: $c2904b
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef71df
+254:
+  Action type: other
+  Code Address: $c2903f
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef71f6
+255:
+  Action type: other
+  Code Address: $c29045
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef6f0b
+256:
+  Action type: other
+  Code Address: $c29048
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef720c
+257:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef725a
+258:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_60.l_0xc9fefd
+259:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_66.l_0xef9ef4
+260:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef745f
+261:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef749d
+262:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef74b0
+263:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef74c9
+264:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7569
+265:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7579
+266:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7591
+267:
+  Action type: other
+  Code Address: $c29033
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_62.l_0xef7593
+268:
+  Action type: item
+  Code Address: $c2a89d
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97f8a
+269:
+  Action type: item
+  Code Address: $c28b2c
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_54.l_0xc97f8a
+270:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_66.l_0xefa0dc
+271:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_66.l_0xefa2ab
+272:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+273:
+  Action type: other
+  Code Address: $c29254
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8ebe
+274:
+  Action type: other
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f17
+275:
+  Action type: other
+  Code Address: $c2c4c0
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_47.l_0xc8fb1b
+276:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+277:
+  Action type: other
+  Code Address: $c2c513
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+278:
+  Action type: other
+  Code Address: $c2c516
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_32.l_0xc77eff
+279:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_64.l_0xef84f3
+280:
+  Action type: other
+  Code Address: $c2b0a1
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_64.l_0xef84d4
+281:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_27.l_0xc6fb6d
+282:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_27.l_0xc6fbb5
+283:
+  Action type: item
+  Code Address: $c28cf1
+  Direction: enemy
+  PP Cost: 0
+  Target: random
+  Text Address: data_27.l_0xc6fc1a
+284:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_27.l_0xc6fc6d
+285:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_28.l_0xc6ff9b
+286:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_28.l_0xc6ffbb
+287:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_28.l_0xc6fc94
+288:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_28.l_0xc6fdbe
+289:
+  Action type: item
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_28.l_0xc6fed6
+290:
+  Action type: other
+  Code Address: $c2c14e
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8dde
+291:
+  Action type: other
+  Code Address: $c2c572
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f0b8
+292:
+  Action type: other
+  Code Address: $c2c5d1
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f134
+293:
+  Action type: other
+  Code Address: $c2c5fa
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f196
+294:
+  Action type: other
+  Code Address: $c2c623
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f1fd
+295:
+  Action type: other
+  Code Address: $c2c64c
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f25e
+296:
+  Action type: other
+  Code Address: $c2c675
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f2bc
+297:
+  Action type: other
+  Code Address: $c2c69e
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f325
+298:
+  Action type: other
+  Code Address: $c2c6d0
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f389
+299:
+  Action type: other
+  Code Address: $c2c6f0
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9f3ec
+300:
+  Action type: other
+  Code Address: $c29647
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f17
+301:
+  Action type: other
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f17
+302:
+  Action type: other
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8ee2
+303:
+  Action type: other
+  Code Address: $c29647
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8ee2
+304:
+  Action type: other
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8ee2
+305:
+  Action type: other
+  Code Address: $c2987d
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f4a
+306:
+  Action type: other
+  Code Address: $c29647
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f4a
+307:
+  Action type: other
+  Code Address: $c299ef
+  Direction: enemy
+  PP Cost: 0
+  Target: all
+  Text Address: data_65.l_0xef8f4a
+308:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9ee2f
+309:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8f91
+310:
+  Action type: item
+  Code Address: $c2a818
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97e9e
+311:
+  Action type: item
+  Code Address: $c2a821
+  Direction: enemy
+  PP Cost: 0
+  Target: one
+  Text Address: data_54.l_0xc97e9e
+312:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_59.l_0xc9ee68
+313:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8d4c
+314:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8cdd
+315:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8cfb
+316:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8d17
+317:
+  Action type: other
+  Code Address: $c29039
+  Direction: party
+  PP Cost: 0
+  Target: none
+  Text Address: data_65.l_0xef8d2f

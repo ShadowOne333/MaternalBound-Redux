@@ -1,0 +1,12 @@
+Pack number: 00
+Base instrument: 00
+BRR sample dump offset: 7000
+
+#instruments
+{
+  "sample-00.brr"               $FF $E0 $B8 $09 $00
+  "sample-01.brr"               $FF $E0 $B8 $04 $F0
+  "sample-02.brr"               $FF $E0 $B8 $00 $50
+  "sample-03.brr"               $FF $E0 $B8 $09 $20
+  "sample-04.brr"               $FF $E0 $B8 $09 $10
+}

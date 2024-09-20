@@ -1,0 +1,407 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import asm65816
+command e(label) "{long label}"
+
+// Text Data
+l_0xc646bb:
+    "[19 02]Store" eob
+
+l_0xc646c3:
+    "[19 02]Check out" eob
+
+l_0xc646cf:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6474f)} {e(l_0xc6483c)}][06 49 00 {e(l_0xc646fa)}]@Well, take care and I'll talk to you later!" end
+
+l_0xc646fa:
+    "@Well, take care and talk to you later!" next
+    "@Oh, I said <take care>!" next
+    "@It just slipped out of my mouth," next
+    "@just like I was talking to you when you were gone..." end
+
+l_0xc6474f:
+    call(data_15.l_0xc5e431) "[1B 02 {e(l_0xc6480c)}][1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc647ef)}]@What do you want to store?[03]{open_hp}" call(data_15.l_0xc5e456) newline
+    "[1B 02 {e(l_0xc6491e)}]{store_registers}[1D 0C 00 00][1B 03 {e(l_0xc64823)}]{load_registers}[19 19 00 00]{sound(118)}" newline
+    "@The [1C 05 00]?" linebreak
+    "  Don't worry, I'll keep it safe." next
+    "{load_registers}[1D 12 00 00]" goto(l_0xc647bd)
+
+l_0xc647bd:
+    newline
+    "@Do you have anything else that you want me to store?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc647d6:
+    "[19 02]No" eob
+
+l_0xc647db:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6474f)} {e(l_0xc6491e)}]" goto(l_0xc6491e)
+
+l_0xc647ef:
+    newline
+    "@I'm sorry." linebreak
+    "  My locker is full.[03]" goto(l_0xc6491e)
+
+l_0xc6480c:
+    newline
+    "@I don't think you have anything to store.[03]" goto(l_0xc6491e)
+
+l_0xc64823:
+    newline
+    "@I think you should hang on to that." next
+    goto(l_0xc647bd)
+
+l_0xc6483c:
+    "{counter(1)}[19 14][1B 02 {e(l_0xc648e3)}][1D 03 FF][1B 02 {e(l_0xc648fc)}]" newline
+    "@What would you like" linebreak
+    "  returned?[03]{open_hp}[18 02]" goto(l_0xc64865)
+
+l_0xc64865:
+    "[1A 07]" newline
+    "[1B 02 {e(l_0xc64916)}]{swap}{store_registers}[18 02]" call(data_15.l_0xc5e54a) "[1B 02 {e(l_0xc648da)}][1B 05]{window_switch(13)}{window_closetop}{window_switch(1)}[1B 06]{sound(116)}[1D 13 00 00][19 19 00 00]@The [1C 05 00]?" linebreak
+    "  Take good care of it." next
+    "@Is there anything else you want returned?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc648c1:
+    "[19 02]No" eob
+
+l_0xc648c6:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6483c)} {e(l_0xc6491e)}]" goto(l_0xc6491e)
+
+l_0xc648da:
+    "{swap}{open_hp}" goto(l_0xc64865)
+
+l_0xc648e3:
+    newline
+    "@I'm not storing any of your stuff." next
+    goto(l_0xc6491e)
+
+l_0xc648fc:
+    newline
+    "@I think you are already carrying too many things." next
+    goto(l_0xc6491e)
+
+l_0xc64916:
+    "{window_switch(13)}{window_closetop}{window_switch(1)}" goto(l_0xc6491e)
+
+l_0xc6491e:
+    newline
+    "@Do you need anything else from me?" linebreak
+    goto(l_0xc646bb)
+
+l_0xc64930:
+    newline
+    "@I think [1C 02 00] is carrying too many things.[03]" eob
+
+l_0xc64946:
+    "@Are you calling about the delivery of the <Pencil eraser>?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc6496f:
+    "[19 02]No" eob
+
+l_0xc64974:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc64996)} {e(l_0xc64983)}]" goto(l_0xc64983)
+
+l_0xc64983:
+    "@Oh, that's not what you want?" next
+    goto(data_19.l_0xc6372d)
+
+l_0xc64996:
+    "@We'll send someone right away." next
+    call(data_19.l_0xc645f2) "{set(flag 694)}[1F D3 09]{set(flag 754)}" eob
+
+l_0xc649b7:
+    "@This is about the delivery of the <[1C 05 AF]>?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc649d4:
+    "[19 02]No" eob
+
+l_0xc649d9:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc649fb)} {e(l_0xc649e8)}]" goto(l_0xc649e8)
+
+l_0xc649e8:
+    "@Oh, that's not what you want?" next
+    goto(data_19.l_0xc6372d)
+
+l_0xc649fb:
+    "@We'll send someone right away." next
+    call(data_19.l_0xc645f2) "{set(flag 695)}[1F D3 0A]{set(flag 754)}" eob
+
+l_0xc64a1c:
+    title(1, Mach)
+    "@Hello! This is Mach Pizza![06 49 00 {e(l_0xc64b59)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc64b18)}][06 B4 00 {e(l_0xc64b18)}]" goto(l_0xc64a47)
+
+l_0xc64a47:
+    "  What would you like to order?" next
+    newline
+    "[18 02]{window_open(37)}[19 02]Small" eob
+
+l_0xc64a66:
+    "[19 02]Medium" eob
+
+l_0xc64a6f:
+    "[19 02]Large" eob
+
+l_0xc64a77:
+    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][09 03 {e(l_0xc64ab8)} {e(l_0xc64aa0)} {e(l_0xc64acf)}]" goto(l_0xc64a92)
+
+l_0xc64a92:
+    "@Call again!" next
+    goto(l_0xc64b0b)
+
+l_0xc64aa0:
+    "@Sorry, they are all sold out." linebreak
+    goto(l_0xc64a47)
+
+l_0xc64ab8:
+    "@You want one small pizza?" linebreak
+    goto(l_0xc64ae6)
+
+l_0xc64acf:
+    "@You want one large pizza?" linebreak
+    "{set(flag 179)}" goto(l_0xc64ae6)
+
+l_0xc64ae6:
+    "{rtoarg}  We'll deliver it within 3 minutes." next
+    "{set(flag 180)}[1F D3 01]{set(flag 754)}" goto(l_0xc64b0b)
+
+l_0xc64b0b:
+    "{sound(11)}@(Click!)" end
+
+l_0xc64b18:
+    next
+    "@Our delivery men are not available right now." next
+    "@We can't deliver any pizza for the time being." next
+    goto(l_0xc64a92)
+
+l_0xc64b59:
+    next
+    "@Our delivery men got tired and quit." next
+    "@So, we decided to close the shop." next
+    "@Thank you for consistently using us for all of your pizza needs." next
+    "{sound(11)}  (Click!)" end
+
+l_0xc64bbf:
+    call(data_21.l_0xc659bf) "{unset(flag 180)}"
+    title(1, Gonzales)
+    "@Hello! Mach Pizza delivery!" linebreak
+    "  Here is your pizza pie, sir." next
+    "[1D 03 FF][1B 02 {e(l_0xc64c9e)}]{rtoarg}{store_registers}[06 B3 00 {e(l_0xc64c60)}]{counter(95)}" goto(l_0xc64c0a)
+
+l_0xc64c0a:
+    "{ctoarg}[1D 0A 00]{swap}@That'll be $[1C 0A 00 00 00 00].  You have the money, don't you?" linebreak
+    "{store_registers}" call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc64c6a)} {e(l_0xc64c42)}]" goto(l_0xc64c42)
+
+l_0xc64c42:
+    "@I see." linebreak
+    "  Call us again." goto(l_0xc64c52)
+
+l_0xc64c52:
+    "{wait}{window_closeall}" call(data_36.l_0xc7dde8) call(data_21.l_0xc659c8) eob
+
+l_0xc64c60:
+    "{unset(flag 179)}{counter(97)}" goto(l_0xc64c0a)
+
+l_0xc64c6a:
+    "[1D 14 00 00 00 00][1B 03 {e(l_0xc64cc9)}]{load_registers}{swap}[1D 03 FF][1B 02 {e(l_0xc64c9e)}][1D 0E 00 00]{load_registers}[1D 09 00 00]{open_wallet}{sound(118)}@Thank you very much." goto(l_0xc64c52)
+
+l_0xc64c9e:
+    "{unset(flag 179)}@Oh, it looks like you can not carry any more." linebreak
+    "  Call us again some other time." goto(l_0xc64c52)
+
+l_0xc64cc9:
+    "@Oh? You are a little short of cash.  Well, call us again some other time." goto(l_0xc64c52)
+
+l_0xc64cf8:
+    "{unset(flag 180)}{unset(flag 179)}" call(data_36.l_0xc7de2f) "{window_open(1)}"
+    title(1, Mach)
+    "@Hello!" linebreak
+    "  This is Mach Pizza." linebreak
+    " (hee, ha, he, ha)" next
+    "@...You must be at somewhere really strange, (hee, ha, he, ha)..." next
+    "@I couldn't deliver the pizza." linebreak
+    "  The pizza got really cold and hard, and my legs are tired..." next
+    "@I am going to give up and go back." next
+    "@...I hope I can find the way home..." linebreak
+    " (hee, ha, he, ha)[03]" call(data_36.l_0xc7de54) call(data_36.l_0xc7de72) eob
+
+l_0xc64dd0:
+    newline
+    "@Would you like to return something?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc64e04)} {e(l_0xc64dee)}]" goto(l_0xc64dee)
+
+l_0xc64dee:
+    "@Oh, that's good." next
+    goto(l_0xc64df8)
+
+l_0xc64df8:
+    "@Please stop by again." end
+
+l_0xc64e04:
+    "@What do you want to return?[03]{open_wallet}" call(data_15.l_0xc5e456) newline
+    "[1B 02 {e(l_0xc64dee)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc64ea4)}]@The [1C 05 00]?" linebreak
+    "  We can give you" linebreak
+    "  back {swap}$[1C 0A 00 00 00 00]." next
+    "@Would you like to do that?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc64e6e)} {e(l_0xc64e69)}]" goto(l_0xc64e69)
+
+l_0xc64e69:
+    goto(l_0xc64e86)
+
+l_0xc64e6e:
+    "[1D 08 00 00]{open_wallet}{sound(118)}{load_registers}[1D 0F 00 00]@Thank you very much." next
+    goto(l_0xc64e86)
+
+l_0xc64e86:
+    "@Do you have anything else?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc64e04)} {e(l_0xc64df8)}]" goto(l_0xc64df8)
+
+l_0xc64ea4:
+    "@We're very sorry, but we don't deal with that product." next
+    goto(l_0xc64e86)
+
+l_0xc64eca:
+    "@(We trust you.  Feel free to shop here.)" next
+    "@What would you like to buy?[03]{open_wallet}{open_hp}[1A 06 30]" newline
+    "[1B 02 {e(l_0xc64fb3)}]{swap}[1D 03 FF][1B 02 {e(l_0xc64fde)}]{store_registers}@How much do you want to pay?" linebreak
+    "[18 05 09 02]&[18 05 04 02]$[1F 52 04]{clearline}{swap}[1B 02 {e(l_0xc64fb3)}]{store_registers}[1D 14 00 00 00 00][1B 03 {e(l_0xc64ff3)}]{load_registers}{swap}[1B 02 {e(l_0xc64fc8)}]{swap}{result_is(190)}[1B 03 {e(l_0xc64f66)}][18 07 0C 00 00 00 01][1B 02 {e(l_0xc64fab)}]" goto(l_0xc64f73)
+
+l_0xc64f66:
+    "[18 07 05 00 00 00 01][1B 02 {e(l_0xc64fab)}]" goto(l_0xc64f73)
+
+l_0xc64f73:
+    "{load_registers}[1D 09 00 00]{open_wallet}{sound(118)}@[1C 02 01] paid $[1C 0A 00 00 00 00] at the self-service stand.{wait}" goto(l_0xc64f9f)
+
+l_0xc64f9f:
+    "{load_registers}{swap}[1D 0E 01 00]{set(flag 120)}" eob
+
+l_0xc64fab:
+    "{set(flag 121)}" goto(l_0xc64f73)
+
+l_0xc64fb3:
+    "@[1C 02 01] decided not to buy anything." end
+
+l_0xc64fc8:
+    "@[1C 02 01] did not pay.{wait}{set(flag 121)}" goto(l_0xc64f9f)
+
+l_0xc64fde:
+    "@[1C 02 01] could not carry any more stuff." end
+
+l_0xc64ff3:
+    "@[1C 02 01] did not have that much money." end
+
+l_0xc65009:
+    call(data_13.l_0xc5d48b) eob
+
+l_0xc6500f:
+    call(data_13.l_0xc5d527) eob
+
+l_0xc65015:
+    call(data_13.l_0xc5d49d) eob
+
+l_0xc6501b:
+    call(data_13.l_0xc5d2ff) eob
+
+l_0xc65021:
+    call(data_13.l_0xc5d395) eob
+
+l_0xc65027:
+    call(data_13.l_0xc5d3ad) eob
+
+l_0xc6502d:
+    call(data_13.l_0xc5d503) eob
+
+l_0xc65033:
+    call(data_13.l_0xc5d503) eob
+
+l_0xc65039:
+    call(data_13.l_0xc5d515) eob
+
+l_0xc6503f:
+    call(data_13.l_0xc5d3b9) eob
+
+l_0xc65045:
+    call(data_13.l_0xc5d4af) eob
+
+l_0xc6504b:
+    call(data_13.l_0xc5d359) eob
+
+l_0xc65051:
+    call(data_13.l_0xc5d593) eob
+
+l_0xc65057:
+    call(data_35.l_0xc7c59e) eob
+
+l_0xc6505d:
+    "[06 AE 01 {e(l_0xc651cc)}]@I like the [1C 05 82]." next
+    "@Give me" linebreak
+    "  the [1C 05 82]," next
+    "@I give you something." next
+    "@Look at list." next
+    "{window_open(12)}[06 A8 01 {e(l_0xc650ac)}][19 02]Plain roll" eob
+
+l_0xc650ac:
+    "[06 A9 01 {e(l_0xc650c2)}][19 02]Plain yogurt" eob
+
+l_0xc650c2:
+    "[06 AA 01 {e(l_0xc650d6)}][19 02]Plain roll" eob
+
+l_0xc650d6:
+    "[06 AB 01 {e(l_0xc650eb)}][19 02]Spicy jerky" eob
+
+l_0xc650eb:
+    "[06 AC 01 {e(l_0xc65105)}][19 02]Bag of Dragonite" eob
+
+l_0xc65105:
+    "[06 AD 01 {e(l_0xc6511c)}][19 02]Talisman coin" eob
+
+l_0xc6511c:
+    "[19 02]Hall of fame bat" eob
+
+l_0xc6512f:
+    "[1C 0C 01]{wait}{window_closetop}{window_switch(1)}" newline
+    "@Will you give" linebreak
+    "  [1C 05 82]?[03]" call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc651a6)}]{store_registers}[19 19 00 00]{swap}{result_is(130)}[1B 02 {e(l_0xc651bf)}]{load_registers}[1D 0F 00 00]" call(l_0xc651ef) "{ctoarg}" newline
+    "@Okay." linebreak
+    "  I give you " linebreak
+    "  the [1C 05 00]." next
+    "@You happy." linebreak
+    "  I happy.[03]" newline
+    "[1D 03 FF]{store_registers}[1D 0E 00 00]" call(data_36.l_0xc7dccf) end
+
+l_0xc651a6:
+    newline
+    "@You not want? It Okay." linebreak
+    "  Come again." end
+
+l_0xc651bf:
+    newline
+    "@That not the one." end
+
+l_0xc651cc:
+    "@More [1C 05 82]?" next
+    "@I satisfied." next
+    "@See ya!" end
+
+l_0xc651ef:
+    "[06 AD 01 {e(data_21.l_0xc6523d)}][06 AC 01 {e(data_21.l_0xc65237)}][06 AB 01 {e(l_0xc65231)}][06 AA 01 {e(l_0xc6522b)}][06 A9 01 {e(l_0xc65225)}][06 A8 01 {e(l_0xc6521f)}]{counter(239)}{set(flag 424)}" eob
+
+l_0xc6521f:
+    "{counter(241)}{set(flag 425)}" eob
+
+l_0xc65225:
+    "{counter(239)}{set(flag 426)}" eob
+
+l_0xc6522b:
+    "{counter(244)}{set(flag 427)}" eob
+
+l_0xc65231:
+    "{counter(160)}{set(flag 428)}" eob
+

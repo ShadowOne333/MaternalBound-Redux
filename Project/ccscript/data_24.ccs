@@ -1,0 +1,584 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import asm65816
+command e(label) "{long label}"
+
+// Text Data
+l_0xc688af:
+    "{unset(flag 496)}[1F D2 12]{set(flag 715)}" eob
+
+l_0xc688b9:
+    "{unset(flag 497)}[1F D2 13]{set(flag 716)}" eob
+
+l_0xc688c3:
+    "{unset(flag 498)}[1F D2 14]{set(flag 717)}" eob
+
+l_0xc688cd:
+    "{unset(flag 499)}[1F D2 15]{set(flag 718)}" eob
+
+l_0xc688d7:
+    "{unset(flag 500)}[1F D2 16]{set(flag 719)}" eob
+
+l_0xc688e1:
+    "{unset(flag 501)}[1F D2 17]{set(flag 720)}" eob
+
+l_0xc688eb:
+    "{unset(flag 502)}[1F D2 18]{set(flag 721)}" eob
+
+l_0xc688f5:
+    "{unset(flag 503)}[1F D2 19]{set(flag 722)}" eob
+
+l_0xc688ff:
+    "{unset(flag 504)}[1F D2 1A]{set(flag 723)}" eob
+
+l_0xc68909:
+    "{unset(flag 505)}[1F D2 1B]{set(flag 724)}" eob
+
+l_0xc68913:
+    "{unset(flag 506)}[1F D2 1C]{set(flag 725)}" eob
+
+l_0xc6891d:
+    "{unset(flag 507)}[1F D2 1D]{set(flag 726)}" eob
+
+l_0xc68927:
+    "{unset(flag 508)}[1F D2 1E]{set(flag 727)}" eob
+
+l_0xc68931:
+    "[1F D2 1F]{set(flag 728)}{unset(flag 509)}" eob
+
+l_0xc6893b:
+    "[1F D2 20]{unset(flag 510)}{set(flag 729)}" eob
+
+l_0xc68945:
+    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}@Hello, [1C 02 03]?" next
+    "@Oh, happy day!" next
+    "@I finally got a hold of you..." next
+    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6899a)}]@Oh, [1C 01 34]!" next
+    goto(l_0xc689fb)
+
+l_0xc6899a:
+    "@Hey..." next
+    "@Oh, no!" next
+    "@You're not [1C 02 03]!" next
+    "@I've got to contact [1C 02 03]!" next
+    "@I know... just put the receiver close to his ear, and he'll hear me..." next
+    "@I know he will." next
+    goto(l_0xc689fb)
+
+l_0xc689fb:
+    "@Hi, it's me--Tony." next
+    title(1, Tony)
+    "@I'm collecting player's names for a school project." next
+    "@You know, players just like you!" next
+    "@That's right, you--the one holding the controller." next
+    "@Would you register your name, please?" next
+    "@Don't spell your name wrong![03]{window_closeall}[1F 07 02]{pause(30)}{music(2)}[1F 41 03]{window_open(1)}"
+    title(1, Tony)
+    "@Thanks, game player!" next
+    "@Thank you very much!" next
+    "@Is this correct?[03]{window_closeall}[1F 41 03][1F 07 02]{pause(30)}{window_open(1)}"
+    title(1, Tony)
+    "@I apologize for any trouble this may have caused you." next
+    "@Don't put my friend [1C 02 03] in any dangerous situations, okay?" next
+    "@I worry about him." next
+    "@I really do..." next
+    "@Well, talk to you later..." next
+    "@...[1C 02 03]..." next
+    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc68b7d)}]"
+    title(1, Tony)
+    "@It seems like you're not feeling well..." next
+    "@Get better soon..." next
+    goto(l_0xc68b7d)
+
+l_0xc68b7d:
+    "@I pray from the bottom of my heart that I'll get to see you again!" next
+    "@From{pause(15)} T-{pause(10)}O-{pause(10)}N-{pause(10)}Y..." next
+    "@You got that?" next
+    "@Well I've been on the phone too long..." next
+    "@Gotta go..." next
+    "@Good luck..." next
+    "@Take care..." next
+    "@So long..." next
+    "@This time, I'm really gonna hang up." next
+    "@Goodbye." next
+    "@*Beeeeep*{wait}{window_closeall}{sound(11)}{set(flag 539)}{music_resume}[1F 41 06]" eob
+
+l_0xc68c3f:
+    "{window_open(1)}@....." next
+    "@[1C 02 01]?" next
+    "@..." next
+    "@[1C 02 01]" next
+    "{pause(60)}" linebreak
+    "{pause(60)}" linebreak
+    "@...[1C 02 01]..." next
+    "@I'm a friend who you have never met before..." next
+    "@My name is [1C 02 02]." next
+    title_paula(1)
+    next
+    "{pause(60)}" linebreak
+    "@Can you hear me calling you?" next
+    "@I am [1C 02 02]..." next
+    "@..." next
+    "{pause(60)}" linebreak
+    "{pause(60)}" linebreak
+    "@.....{wait}{window_closeall}{pause(1)}{unset(flag 634)}" goto(data_48.l_0xc90f90)
+
+l_0xc68cc2:
+    eob
+
+l_0xc68cc3:
+    "{window_open(1)}@....." next
+    "@[1C 02 01]!" next
+    "@I...[1C 02 02]..." next
+    title_paula(1)
+    "@I am [1C 02 02]..." next
+    "@Can you hear me calling you?" next
+    "@Help!" next
+    "@Come and help me!" next
+    "@Um, I don't know where I am..." next
+    "@I can hear water running in the distance..." next
+    "{pause(20)}" linebreak
+    "{pause(60)}" linebreak
+    "@[1C 02 01], please help me!{wait}{window_closeall}{pause(1)}{unset(flag 635)}" goto(data_48.l_0xc90f90)
+
+l_0xc68d59:
+    eob
+
+l_0xc68d5a:
+    "{window_open(1)}"
+    title_paula(1)
+    "@You are a friend who I have never met before..." next
+    "@[1C 02 03]..." next
+    "@Head south..." next
+    "@I am [1C 01 1E]..." next
+    "@If you hear this message, go to the south...{wait}{window_closeall}{unset(flag 636)}" goto(data_48.l_0xc90f90)
+
+l_0xc68db4:
+    eob
+
+l_0xc68db5:
+    "{window_open(1)}@Ahhhhh.[03]{window_closeall}" eob
+
+l_0xc68dc4:
+    "{window_open(1)}@Hummmmmm.[03]{window_closeall}" eob
+
+l_0xc68dd5:
+    "{window_open(1)}@He he heh.[03]{window_closeall}" eob
+
+l_0xc68de4:
+    "@(This dungeon has no entrance fee." next
+    "@Come on in!)" end
+
+l_0xc68e0c:
+    "@(It looks like a doorway...)" end
+
+l_0xc68e1c:
+    "{sound(11)}{pause(20)}" call(data_57.l_0xc9b176) "@Hello!" next
+    "@Is this Mr. Fork of the Scarabia Cultural Museum?..." next
+    "@It doesn't sound like you..." next
+    "@Well, I'll quickly tell you my story, 'cause I'm busy, busy, busy!" next
+    "@I found something so extraordinary that mere words could not do it justice." next
+    "@What do you mean" linebreak
+    "  <who am I>?" next
+    "@Don't you recognize my voice?" next
+    "@It's me, Mr. Spoon from the Fourside Museum of Natural History!" next
+    title(1, Spoon)
+    "@Look Mr. Fork, I'm not exaggerating this find!" next
+    "@I'm telling you..." next
+    "@It's fantastic!....." next
+    "@It's outrageous!..." next
+    "@*Click*  Beeeeep{wait}{sound(11)}{unset(flag 687)}" eob
+
+l_0xc68f74:
+    "[19 19 00 00]{swap}{store_registers}{result_is(210)}[1B 03 {e(l_0xc68fa6)}]{load_registers}{result_is(184)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Do you really think this looks like a pencil?" end
+
+l_0xc68fa6:
+    "@It looks sort of like some primitive human statue" next
+    "@if you look at it from the right angle..." next
+    "@But it definitely doesn't look like an eraser... does it?" end
+
+l_0xc69007:
+    "[19 19 00 00]{swap}{result_is(253)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Cows and carrots?..." next
+    "@That's a nutty combination!" end
+
+l_0xc69038:
+    "[19 19 00 00]{swap}{result_is(167)}[1B 02 {e(data_35.l_0xc7c6b6)}][19 23 DE 02 01 01 00][1F 16 DE 02 00]@Ah, [1C 02 01]... you've read it already." next
+    "@...That Tony has a heart of gold..." end
+
+l_0xc69082:
+    "{unset(flag 180)}{unset(flag 181)}{unset(flag 645)}{unset(flag 446)}{unset(flag 646)}{unset(flag 647)}{unset(flag 648)}{unset(flag 694)}{unset(flag 695)}" call(data_19.l_0xc64650) "{unset(flag 754)}" eob
+
+l_0xc690a6:
+    "@Only [1C 02 01] can absorb the power of this place." end
+
+l_0xc690c5:
+    "@Hey, hey!!" next
+    "@Stop putting your grimy fingerprints all over my car, you little punk!" end
+
+l_0xc690ff:
+    "@Welcome to the rear-end of the world's longest traffic jam!" end
+
+l_0xc69121:
+    "[06 E2 02 {e(l_0xc692ea)}][06 E1 02 {e(l_0xc691e9)}][06 09 00 {e(l_0xc691c2)}][06 08 00 {e(l_0xc691b5)}][06 07 00 {e(l_0xc691a7)}][06 06 00 {e(l_0xc6919d)}][06 05 00 {e(l_0xc69191)}][06 04 00 {e(l_0xc69185)}][06 03 00 {e(l_0xc6917b)}][06 02 00 {e(l_0xc6916f)}]@What?{wait}{set(flag 2)}" eob
+
+l_0xc6916f:
+    "@So... what?{wait}{set(flag 3)}" eob
+
+l_0xc6917b:
+    "@Huh?{wait}{set(flag 4)}" eob
+
+l_0xc69185:
+    "@Pardon?{wait}{set(flag 5)}" eob
+
+l_0xc69191:
+    "@Geez...{wait}{set(flag 6)}" eob
+
+l_0xc6919d:
+    "@Mmm?{wait}{set(flag 7)}" eob
+
+l_0xc691a7:
+    "@You're annoying!{wait}{set(flag 8)}" eob
+
+l_0xc691b5:
+    "@Dang me!{wait}{set(flag 9)}" eob
+
+l_0xc691c2:
+    "@Yeah, yeah!{wait}{set(flag 737)}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}{unset(flag 7)}{unset(flag 8)}{unset(flag 9)}" eob
+
+l_0xc691e9:
+    "[06 08 00 {e(l_0xc692a0)}][06 07 00 {e(l_0xc6928a)}][06 06 00 {e(l_0xc69278)}][06 05 00 {e(l_0xc69258)}][06 04 00 {e(l_0xc69243)}][06 03 00 {e(l_0xc69230)}][06 02 00 {e(l_0xc69226)}]@Ah, ha ha!{wait}{set(flag 2)}" eob
+
+l_0xc69226:
+    "@Hey, you!{wait}{set(flag 3)}" eob
+
+l_0xc69230:
+    "@Later days, pal!{wait}{set(flag 4)}" eob
+
+l_0xc69243:
+    "@Ah!  Hah Hahhhh...{wait}{set(flag 5)}" eob
+
+l_0xc69258:
+    "@It's so{pause(5)}o{pause(5)}o hot today." next
+    "@It rocks!{wait}{set(flag 6)}" eob
+
+l_0xc69278:
+    "@Is it cold today?{wait}{set(flag 7)}" eob
+
+l_0xc6928a:
+    "@Oh ho ho!" next
+    "@See ya!{wait}{set(flag 8)}" eob
+
+l_0xc692a0:
+    "@Here, get yourself a juice or something..." next
+    "@*Ka-ching*" next
+    "[1D 08 32 00]{sound(116)}{open_wallet}{pause(60)}[19 10 01]{rtoarg}@([1C 02 01] got 50 dollars.){wait}{set(flag 738)}" eob
+
+l_0xc692ea:
+    "@Good luck, okay?" end
+
+l_0xc692f7:
+    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    title(1, Tracy)
+    "@Sorry to bother you, big bro..." next
+    "@This is Escargo Express." next
+    "@I had a phone call from a friend of yours recently." next
+    "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil eraser machine." next
+    "@I figured it's just some kind of prank,{pause(20)} but if it's legit," next
+    "@I can deliver it to you anytime." next
+    "@Do you know anything about this?" next
+    "{set(flag 692)}" goto(l_0xc693be)
+
+l_0xc69394:
+    "@He asked me to hold onto the [1C 05 AF] for you." next
+    "@Do you know anything about this?" next
+    "{set(flag 693)}" goto(l_0xc693be)
+
+l_0xc693be:
+    "@Well, since you know about the item, I'll hold onto it for you." next
+    "@If you need it, I'll deliver it to you anytime you want." next
+    "@Oh yeah, big bro..." next
+    "@I'm glad that I could help out you and your friends." next
+    "@*Click*{wait}{window_closeall}{sound(11)}{music_resume}{unset(flag 690)}{unset(flag 691)}" eob
+
+l_0xc6943a:
+    "{window_open(1)}"
+    title(1, Escargo)
+    "@Escargo Express!" next
+    "@<We treat your package like it was our only child>..." next
+    "@I'm here with your Pencil eraser." next
+    "[1D 03 FF][1B 02 {e(l_0xc694b9)}][1D 0E 00 B8]{sound(118)}@Here you are." next
+    "@Thank you very much!{wait}{unset(flag 694)}{unset(flag 692)}{window_closeall}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+
+l_0xc694b9:
+    "@You've really got too much stuff already." next
+    "@I hope I can deliver this to you soon![03]{window_closeall}{unset(flag 694)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+
+l_0xc694f4:
+    "{window_open(1)}"
+    title(1, Escargo)
+    "@Escargo Express." next
+    "@<We treat your package like it was our only child>..." next
+    "@I'm here to deliver" linebreak
+    "  the [1C 05 AF]." next
+    "[1D 03 FF][1B 02 {e(l_0xc69571)}][1D 0E 00 AF]{sound(118)}@Here you are." next
+    "@Thank you very much!{wait}{window_closeall}{unset(flag 695)}{unset(flag 693)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+
+l_0xc69571:
+    "@You've really got too much stuff already." next
+    "@I hope I can deliver this to you soon![03]{window_closeall}{unset(flag 695)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+
+l_0xc695ac:
+    "{unset(flag 694)}{unset(flag 754)}" eob
+
+l_0xc695b3:
+    "{unset(flag 695)}{unset(flag 754)}" eob
+
+l_0xc695ba:
+    "[19 10 01]{rtoarg}{result_is(1)}[1B 02 {e(data_55.l_0xc9992f)}][1D 0D 01 06 02][1B 02 {e(data_55.l_0xc9992f)}]" call(data_35.l_0xc7ce73) eob
+
+l_0xc695d8:
+    "@Yum yum... mmm... I'm eating a Skip sandwich." next
+    "@It makes you want to start skipping!" next
+    "@I saw it on a TV ad, and I just had to try one." next
+    "@I'll bet I can really move after eating this..." end
+
+l_0xc69651:
+    "@It seems like every bakery has been making Lucky sandwiches these days." next
+    "@They're kind of like fortune cookies, except you can win stuff." next
+    "@Oh yeah, and it's a sandwich." next
+    "@Okay, so maybe it's not like a fortune cookie." next
+    "@Anyway, the best thing that can happen is <recover PP.>" next
+    "@I just wish I knew what <PP> was..." end
+
+l_0xc6971e:
+    "@Don't you think you get more food value out of 14 bucks worth of burgers" next
+    "@than 8 bucks worth of french fries?" next
+    "@You'll feel better and more energetic if you eat better foods." next
+    "@You know--you'll recover more health if you eat more expensive food." end
+
+l_0xc697ba:
+    "@The information on the back of the <refreshing herb> reads as follows:" next
+    "@<If you catch a cold, if you're ill, or if you can't seem to heal," next
+    "@if you're poisoned, if you're depressed, a refreshing herb is the real deal.>" next
+    "@I know, it seems pretty iffy, but you should give it a try!" end
+
+l_0xc69861:
+    "{font_saturn}@So Boing!" linebreak
+    "  You have" linebreak
+    "  380 dollars," next
+    "@we trade" linebreak
+    "  [52]Secret" linebreak
+    "  herb.[52]" next
+    "@So Boing!" next
+    "@You have" linebreak
+    "  1780 dollars," next
+    "@we trade" linebreak
+    "  [52][1C 05 82].[52]{wait}{font_normal}" eob
+
+l_0xc698ca:
+    "@That teddy bear they sell over there...I heard it helps in battle." next
+    "@I don't know what they're talking about." next
+    "@It looks like a plain ol' teddy bear to me..." end
+
+l_0xc69928:
+    "[06 49 00 {e(l_0xc69ac6)}]@Woof! Woof!" next
+    "@(I'm Ruffini the dog." next
+    title(1, Ruffini)
+    "@I'm being possessed by the spirit of the game designer...{pause(20)} Ruff!" next
+    "@Do you see the window showing HP and PP at the bottom of the screen?" next
+    "@When you go to a store that has equippable items," next
+    "@this window will either flash, look normal or become black." next
+    "@If you are allowed to equip an item, and it is stronger than your current item," next
+    "@the window will flash." next
+    "@If the item's power is equal to, or less than your current equipped item," next
+    "@the window looks normal." next
+    "@If you can't equip an item, the window is black." next
+    "@Ruff!  I thought you'd like to know." next
+    "@Now it's time to become a regular dog again...)" end
+
+l_0xc69ac6:
+    title(1, Ruffini)
+    "@Woof! Woof!" next
+    "@I'm Ruffini the dog." next
+    "@Here comes the spirit of the game designer again..." next
+    "@Ruff!" next
+    "@(It looks like the game's finally almost over." next
+    "@If you want to tell me your comments on this game,{pause(20)}" linebreak
+    "  you may write to me." next
+    "@Address it to: MOTHER 2, Ruffini the dog," next
+    "@and send it to the address listed on the game's packaging." next
+    "@Now, get ready for the ending!" next
+    "@It's all that's left... enjoy it!" next
+    "@Bow woow wow!" next
+    "@Well, I told you some strange info again..." next
+    "@I'll go back to being a normal dog now...)" next
+    "@Woof!" end
+
+l_0xc69c03:
+    "@I'm cramming for the big test tomorrow." next
+    "@It's about games." next
+    "@<Hotel Rule> ...if you stay at a hotel, you'll wake up with full HP and PP." next
+    "@<Life Recovery Rule>" next
+    "@...recovering your life will give you full HP, but zero PP." next
+    "@...Hmmm... I bet this stuff will be on the test..." end
+
+l_0xc69cb5:
+    "@I recently read a book titled <Our Convenient Society.>" next
+    "@It said that our modern society demands" next
+    "@that there always be an ATM in hotels and drugstores." next
+    "@Just knowing that is convenient!" next
+    "@I'm glad I read the book..." next
+    "@I can't believe I didn't know this stuff." next
+    "@I'll check whether or not we have an ATM in our drugstore..." end
+
+l_0xc69d8e:
+    "@I read the book called <Our Society is Convenient.>" next
+    "@It said that these days, there are always telephones in hotels and drugstores." next
+    "@I also learned that to use a green pay phone costs a dollar," next
+    "@while the black phones are free." next
+    "@If you weren't aware of this," next
+    "@all your money could get eaten up by your phone calls." next
+    "@I'm glad I read that book..." end
+
+l_0xc69e74:
+    "@I can't believe I saw it with my own eyes." next
+    "@I was staring out the window and there it was, just fluttering there..." next
+    "@I'd only seen it in the encyclopedia before." next
+    "@What was it?" next
+    "@A Magic butterfly!" next
+    "@If you get close to a Magic butterfly, all your cares fly away," next
+    "@just like a fluttering butterfly." next
+    "@Yep, yep!" next
+    "@That's the effect of the legendary Magic butterfly." next
+    "@I love talking about it!" next
+    "@Ooops!" next
+    "@Sorry about the outburst..." next
+    "@I got carried away with all the talk about lovely butterflies..." end
+
+l_0xc69fa9:
+    "@(I am not your enemy." next
+    "@I am simply your average run-of-the-mill mole." next
+    "@Would you like some hints on fighting enemies?)" linebreak
+    "[19 02]Yes" eob
+
+l_0xc69ffe:
+    "[19 02]No" eob
+
+l_0xc6a003:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6a048)} {e(l_0xc6a012)}]" goto(l_0xc6a012)
+
+l_0xc6a012:
+    "@(Ah, I see..." next
+    "@You've already got a good grasp of how to fight effectively.)" end
+
+l_0xc6a048:
+    "@(Listen carefully." next
+    "@My hint involves which way you are facing when a battle with an enemy occurs." next
+    "@If you allow enemies to approach you from your back or side," next
+    "@they may get a surprise opening attack." next
+    "@When they approach you this way, your TV screen, no... no..." next
+    "@I mean the world in front of you will show a red swirl for a second." next
+    "@On the other hand, if you approach an enemy from the back or side," next
+    "@you may get a surprise opening attack." next
+    "@In that case, your TV...  Oops again!" next
+    "@...The world in front of you shows a green swirl." next
+    "@The point is, try to fight so that you always have the advantage.)" end
+
+l_0xc6a1bc:
+    "@(I am not your enemy." next
+    "@I am just a plain ol' mole." next
+    "@You are certainly stronger than you were while wandering around Onett." next
+    "@Have you ever suddenly gotten the <You Won> message" next
+    "@when you met a weak enemy?" next
+    "@That's sure-fire proof that you've become stronger." next
+    "@You don't want to waste your time fighting wimpy enemies, do you?)" end
+
+l_0xc6a286:
+    "@Hello... and you are...?" next
+    "@Say, have you ever suffered from some type of sickness or condition" next
+    "@that you couldn't get cured at a hospital?" next
+    "@For example, being <Diamondized,>" next
+    "@where your head gets as hard as a diamond..." next
+    "@Or... <Mushroomized,> where you have a mushroom on your head..." next
+    "@If you're ever stuck with these types of embarrassing conditions," next
+    "@we of the magic healing shrine are here to ease your pain." next
+    "@We're ready and waiting..." next
+    "@in the lobby of hospitals all over the world." next
+    "@The person next to me is the great teacher of magic healing." end
+
+l_0xc6a3de:
+    "@I wish I could recover my PP just by drinking water..." next
+    "@Even though I have never seen him before, I heard that the prince can do that." next
+    "@I guess I need more training..." next
+    "@By the way, just what is PP anyway?..." end
+
+l_0xc6a458:
+    "@I came to buy condiments..." next
+    "@I wonder what would be good..." next
+    "@The right condiment makes a dish taste better," next
+    "@while the wrong one makes it taste worse." next
+    "@If the condiment matches the food," next
+    "@you will get more power than if you ate the food item plain." end
+
+l_0xc6a4f2:
+    "@I'm taking the liberty of living in the mice's home and mooching off of them." next
+    "@The mice are known as <Exit mice.>" next
+    "@They are very kind, and boy are they fast!" next
+    "@I really love these guys!" end
+
+l_0xc6a551:
+    "@I always feel much better after hearing my mom's voice over the phone." next
+    "@I was really homesick recently, and my mom cheered me right up." next
+    "@You should call your mom sometime." next
+    "@Believe me, those melancholy feelings will be gone before you know it." end
+
+l_0xc6a5e0:
+    "@I have a lot of old, broken junk, but I hate to throw anything away." next
+    "@If you have a friend who is knowledgeable about mechanics," next
+    "@that person might be able to fix something for you overnight..." next
+    "@Man, a friend like that would be so handy..." end
+
+l_0xc6a666:
+    "{window_open(1)}@When you buy an item that should be equipped," next
+    "@do you bother to actually equip it?" next
+    "@Heh eh, I gave a hint to my own enemy..." next
+    "@I'm such a rockin' dude!" next
+    "@I obviously have total confidence in my own abilities." next
+    "@So... are you ready to get it on, Spanky?[03]{window_closeall}" call(data_23.l_0xc683df) "[1B 03 {e(data_23.l_0xc683de)}][1F 1E 07 00 06]{set(flag 697)}{window_closeall}" eob
+
+l_0xc6a725:
+    "[1F 15 B0 01 22 00 01][1F 61]{window_open(1)}" newline
+    "@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax.{wait}{window_closeall}[1F F2 B0 01 21 00]" eob
+
+l_0xc6a755:
+    "@<Hotel Onett>" next
+    "@35 dollars per night for a single room." end
+
+l_0xc6a77b:
+    "@<Twoson Hotel>" next
+    "@50 dollars per night for a single room." end
+
+l_0xc6a7a5:
+    "@<Threek Sunset Hotel>" next
+    "@60 dollars per night for a single room." end
+
+l_0xc6a7d2:
+    "@<Hotel Du Summers>" next
+    "@150 dollars per night for a single room." end
+
+l_0xc6a800:
+    "[06 49 00 {e(l_0xc6a832)}]@<Monotoly Grand Hotel>" next
+    "@75 dollars per night for a single room." end
+
+l_0xc6a832:
+    "@<Enrich Grand Hotel>" next
+    "@75 dollars per night for a single room." end
+
+l_0xc6a861:
+    "@<Hotel Dark Moon>" next
+    "@75 dollars for one sleep period for a single room." end
+

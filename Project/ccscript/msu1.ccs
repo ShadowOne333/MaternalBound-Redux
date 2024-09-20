@@ -1,0 +1,257 @@
+// Earthbound MSU1 patch by Conn 
+// Credits for addresses by byuu, looptable by ShadowOne333
+// Apply on non-header US rom
+
+// CCS transcription by ShadowOne333
+
+import asm65816
+
+// ROM[0xE60353] = "[2F]"
+// org $E60353
+// db $2f ; hardcore mute
+
+// 7E0100, 7E0102, 7E0103  instead of 7FFFF0, 7FFFF2 and 7FFFF3
+// In case of volume or fade errors, replace 7E0100-7E0103 to any value between 7E0720 and 7E0800
+
+
+ROM[0xC4FBF4] = {
+	JSL (msuTrack)
+	NOP
+}
+
+ROM[0xC4FD12] = {
+	JSL (newTrackFlag)
+}
+
+ROM[0xC0AC0C] = {
+	JSL (setFadeFlag)
+	NOP
+}
+
+ROM[0xC0834E] = {
+	JSL (nmi)
+}
+
+msuTrack: {			// //ROM[0xEFFE00] = 
+	LDX_d	(0x12)		// Native code
+	STX_a	(0xB53B)
+	PHA
+	PHP			// Save processor status
+	SEP	(0x20)
+	LDA_al	(0x002002)
+	CMP_8	(0x53)
+	BEQ	(0x03)		// BEQ $03 - BEQ_a	(playmsu) Branch to playmsu
+	PLP			// Restore processor status
+	PLA			// Get track number from stack
+	RTL
+}
+
+playmsu: {
+	LDA_8	(0x00)
+	STA_al	(0x002006)
+	STA_al	(0x7E0100)	// Rease new track introduced flag
+	TXA
+	STA_al	(0x002004)
+	LDA_8	(0x00)
+	STA_al	(0x002005)
+}
+
+loop: {
+	LDA_al	(0x002000)
+	AND_8	(0x40)
+	BNE	(0xF8)		// BNE $F8 - BNE_a	(loop) Branch to loop
+	LDA_al	(0x002000)
+	AND_8	(0x08)
+	BNE	(0x2C)		// BNE $2C - BNE_a	(playspc) Branch to "playspc", error bit set?
+	LDA_xl	(track_table)	// LDA_xl (0xEFFF00)
+	STA_al	(0x002007)
+	LDA_8	(0xFF)
+	STA_al	(0x002006)
+	STA_al	(0x7E0102)	// Volume flag
+	LDA_8	(0x01)
+	STA_al	(0x7E0100)	// Set new track introduced flag
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+	PLP			// Restore processor status
+	PLA			// Get track number from stack
+	CPX_i	(0x00C0)	// Compare with $C0 or 192 in decimal
+	BCC	(0x06)		// BCC $06 - If comparison is less than 192, branch to RTL
+	LDX_i	(0x0004)
+	STX_a	(0xB53B)
+	RTL
+}
+
+playspc: {
+	LDA_8	(0x00)
+	STA_al	(0x002007)
+	PLP
+	PLA
+	RTL
+}
+
+newTrackFlag: {
+	SEP	(0x20)
+	PHA
+	LDA_al 	(0x002002)
+	CMP_8 	(0x53)
+	BEQ	(0x06)		// BEQ $06
+}
+
+endflag: {
+	PLA
+	JSL	(0xC0ABBD)
+	RTL
+	LDA_al	(0x7E0100)
+	CMP_8	(0x01)
+	BEQ	(0x08)		// BEQ $08
+	LDA_8	(0x00)
+	STA_al	(0x7E0100)	// Erase flag
+	BRA	(0xEA)		// BRA_a	(endflag) - BRA $EA
+	PLA
+	LDA_8	(0x00)
+	STA_al	(0x7E0100) 	// Erase flag
+	LDA_8	(0x04)		// Mute
+	JSL	(0xC0ABBD)
+	RTL
+}
+
+setFadeFlag: {
+	SEP	(0x20)
+	PHA
+	LDA_al	(0x002002)
+	CMP_8	(0x53)
+	BEQ	(0x05)		// BEQ $05
+}
+
+endsetflag: {
+	PLA
+	ORA_a	(0x1ACB)
+	RTL
+	PLA
+	PHA
+	STA_al	(0x7E0103)
+	BRA	(0xF3)		// BRA_a	(endsetflag) - BRA $F3
+}
+
+nmi: {
+	SEP	(0x30)
+	LDA_al	(0x7E0103)
+	BEQ	(0x22)		// BEQ_a	(endNMI) - BEQ $22
+	CMP_8	(0x02)
+	BNE	(0x03)		// BNE $03
+	JMP	(fadefast)	// JMP (fadefast) - JMP $FE03
+	CMP_8	(0x03)
+	BNE	(0x03)		// BNE $03
+	JMP	(fadeslow)	// JMP (fadeslow) - JMP $FDE4
+	CMP_8	(0x07)
+	BNE	(0x03)		// BNE $03
+	JMP	(fadehalf)	// JMP (fadehalf) - JMP $FE24
+	CMP_8	(0x08)
+	BNE	(0x03)		// BNE $03
+	JMP	(fadefull)	// JMP (fadefull) - JMP $FE46
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+}
+
+endNMI: {
+	REP	(0x30)
+	STZ_d	(0x99)
+	RTL
+}
+
+fadeslow: {
+	LDA_al	(0x7E0102)
+	CMP_8	(0x00)
+	BEQ	(0x06)		// BEQ_a	(endslow) - BEQ $06
+	DEC
+	DEC
+	CMP_8	(0x10)
+	BCS	(0x06)		// BCS $06
+}
+
+endslow: {
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+	STA_al	(0x002006)
+	STA_al	(0x7E0102)
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
+}
+
+fadefast: {
+	LDA_al	(0x7E0102)
+	CMP_8	(0x00)
+	BEQ	(0x08)		// BEQ_a	(endfast) - BEQ $08
+	DEC
+	DEC
+	DEC
+	DEC
+	CMP_8	(0x10)
+	BCS	(0x06)		// BCS $06
+}
+
+endfast: {
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+	STA_al	(0x002006)
+	STA_al	(0x7E0102)
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
+}
+
+fadehalf: {
+	LDA_al	(0x7E0102)
+	CMP_8	(0x40)		// Final level?
+	BEQ	(0x07)		// BEQ_a	(endhalf) - BEQ $07
+	DEC
+	DEC
+	DEC
+	CMP_8	(0x40)
+	BCS	(0x08)		// BCS $08
+}
+
+endhalf: {
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+	LDA_8	(0x40)		// Set final level
+	STA_al	(0x002006)
+	STA_al	(0x7E0102)
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
+}
+
+fadefull: {
+	LDA_al	(0x7E0102)
+	CMP_8	(0xFF)		// Final level?
+	BEQ	(0x07)		// BEQ_a	(endfull) - BEQ $07
+	INC
+	INC
+	INC
+	CMP_8	(0xFB)
+	BCC	(0x08)		// BCC $08
+}
+
+endfull: {
+	LDA_8	(0x00)
+	STA_al	(0x7E0103)	// Erase fade flag
+	LDA_8	(0xFF)
+	STA_al	(0x002006)
+	STA_al	(0x7E0102)
+	JMP	(endNMI)	// JMP (endNMI) - JMP $FDDF
+}
+
+track_table:			//ROM[0xEFFF00] = 
+	// 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+	"[ 03 01 03 03 03 03 03 03 01 01 03 01 01 01 01 01 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"
+	"[ 01 01 01 01 01 01 01 01 03 03 03 03 03 03 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 01 03 01 03 ]"
+	"[ 01 03 03 03 01 03 03 03 03 03 01 01 03 03 01 01 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 01 01 01 ]"
+	"[ 03 01 03 03 03 03 03 03 03 03 03 01 01 03 01 01 ]"
+	"[ 03 03 03 03 03 03 03 01 03 01 01 01 03 03 01 01 ]"
+	"[ 03 03 03 01 03 03 03 03 03 03 03 03 03 01 01 03 ]"
+	"[ 01 01 01 01 01 01 01 01 01 03 03 03 03 03 01 01 ]"
+	"[ 01 01 03 03 01 01 03 03 03 03 03 03 03 01 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"
+	"[ 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 03 ]"

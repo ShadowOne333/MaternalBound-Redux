@@ -1,0 +1,546 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import asm65816
+command e(label) "{long label}"
+
+// Text Data
+l_0xc6fc94:
+    newline
+    "@(Dear [1C 01 08]," linebreak
+    "  How are you?" next
+    "@Since you left home on your journey, things have changed around here." next
+    "@For example, I don't have as much laundry." next
+    "@Also, we don't seem to eat [1C 01 04] as much as we used to." next
+    "@I heard that you defeated some universal evil character--what was it," next
+    "@Googi,{pause(20)} Giegue,{pause(20)} Geeg{pause(20)} or something like that?" next
+    "@Well, that sounds really great!" linebreak
+    "  I want to hear all the details, so hurry home, okay?" next
+    "@Tracy, [1C 01 03] and I are waiting for you." next
+    "@                                Love," linebreak
+    "                                  Mama)" end
+
+l_0xc6fdbe:
+    newline
+    "@(Dear [1C 01 34]," linebreak
+    "  Everything's really going great here." next
+    "@I wish I could have gone with you on your adventure, even just part of the way," next
+    "@but instead I'm sitting here, waiting for you in Winters." next
+    "@I want to see you again as soon as possible.  I can't wait to see your cheerful face." next
+    "@I bet your glasses are dirty... If you come back, I'll clean them for you!" next
+    "@Like I said, I'm waiting for you." next
+    "@                        Sincerely," linebreak
+    "                                   Tony " next
+    linebreak
+    "@P.S.  Don't show this letter to anyone!)" end
+
+l_0xc6fed6:
+    newline
+    "@(Dear [1C 01 1E]," linebreak
+    "  How are you doing?" linebreak
+    "  I'm fine." next
+    "@I fine too!" next
+    "@So are me!" next
+    "@Me also!" next
+    "@Me okay." next
+    "@Please come and play with us again at the Polestar Preschool." next
+    "@Oh yeah, one more thing, bring us some presents ...if you have any." next
+    "@                           Sincerely," linebreak
+    "               Your friends at the" linebreak
+    "               Polestar Preschool)" end
+
+l_0xc6ff9b:
+    newline
+    "@You would probably regret it if you ate this now...[03]" eob
+
+l_0xc6ffbb:
+    newline
+    "@This phone only receives calls. You cannot make outgoing calls from it.[03]" eob
+
+l_0xc70000:
+    "[09 50 {e(l_0xc70511)} {e(l_0xc7058d)} {e(l_0xc705e4)} {e(l_0xc7062a)} {e(l_0xc70688)} {e(l_0xc70711)} {e(l_0xc70789)} {e(l_0xc70868)} {e(l_0xc708dd)} {e(l_0xc70943)} {e(l_0xc709e8)} {e(l_0xc70a4c)} {e(l_0xc70ab5)} {e(l_0xc70b17)} {e(l_0xc70b59)} {e(l_0xc70bc4)} {e(l_0xc70bff)} {e(l_0xc70c4d)} {e(l_0xc70c8d)} {e(l_0xc70d2f)} {e(l_0xc70d5f)} {e(l_0xc70db0)} {e(l_0xc70db6)} {e(l_0xc70e26)} {e(l_0xc70e61)} {e(l_0xc70e95)} {e(l_0xc70f16)} {e(l_0xc7105d)} {e(l_0xc710bb)} {e(l_0xc71140)} {e(l_0xc7117e)} {e(l_0xc71208)} {e(l_0xc71295)} {e(l_0xc712e3)} {e(l_0xc712ec)} {e(l_0xc713cb)} {e(l_0xc71435)} {e(l_0xc7152c)} {e(l_0xc715b7)} {e(l_0xc7162b)} {e(l_0xc71677)} {e(l_0xc716b7)} {e(l_0xc7175b)} {e(l_0xc717bc)} {e(l_0xc71808)} {e(l_0xc71837)} {e(l_0xc7188e)} {e(l_0xc718e0)} {e(l_0xc7192c)} {e(l_0xc71973)} {e(l_0xc719d7)} {e(l_0xc71a14)} {e(l_0xc71a67)} {e(l_0xc71af0)} {e(l_0xc71b3f)} {e(l_0xc71baa)} {e(l_0xc71be2)} {e(l_0xc71cad)} {e(l_0xc71d08)} {e(l_0xc71d65)} {e(l_0xc71dd2)} {e(l_0xc71ea1)} {e(l_0xc71efb)} {e(l_0xc71f21)} {e(l_0xc71f78)} {e(l_0xc71fb8)} {e(l_0xc72026)} {e(l_0xc72139)} {e(l_0xc721d9)} {e(l_0xc72205)} {e(l_0xc72258)} {e(l_0xc72296)} {e(l_0xc722c1)} {e(l_0xc72348)} {e(l_0xc72398)} {e(l_0xc7246a)} {e(l_0xc724ab)} {e(data_29.l_0xc724d7)} {e(data_29.l_0xc7252b)} {e(data_29.l_0xc7259f)}]" end
+
+l_0xc70144:
+    "{set(flag 681)}{counter(35)}" call(l_0xc70198) eob
+
+l_0xc7014f:
+    "{set(flag 682)}{counter(50)}" call(l_0xc70198) eob
+
+l_0xc7015a:
+    "{set(flag 683)}{counter(60)}" call(l_0xc70198) eob
+
+l_0xc70165:
+    "{set(flag 684)}{set(flag 656)}{counter(75)}" call(l_0xc70198) "{unset(flag 656)}" eob
+
+l_0xc70176:
+    "{set(flag 685)}{set(flag 656)}{counter(150)}" call(l_0xc70198) "{unset(flag 656)}" eob
+
+l_0xc70187:
+    "{set(flag 686)}{set(flag 656)}{counter(100)}" call(l_0xc70198) "{unset(flag 656)}" eob
+
+l_0xc70198:
+    "[06 49 00 {e(l_0xc72398)}][06 4F 00 {e(l_0xc72348)}]{ctoarg}[06 08 00 {e(data_29.l_0xc726da)}]" call(data_29.l_0xc726b2) "@I could give you a great hint for just $[1C 0A 00 00 00 00]." next
+    "@You'd like a hint, wouldn't you?" linebreak
+    call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc7030f)} {e(l_0xc701f6)}]" goto(l_0xc701f6)
+
+l_0xc701f6:
+    "@So you're telling me that you don't want a hint?" next
+    "@You're either awfully confident or $[1C 0A 00 00 00 00] is too much to pay." next
+    "@Anyway, a young man like you is very unusual these days." next
+    "@If you happen to need a hint, c'mon back!" next
+    "@I'm here all the time..." end
+
+l_0xc70288:
+    "@So you're telling me that you don't want a hint?" next
+    "@You're either awfully confident or $[1C 0A 00 00 00 00] is too much to pay." next
+    "@Anyway, a young man like you is very unusual these days." next
+    "@You say that you don't want a hint?" next
+    "@Well, so long." end
+
+l_0xc7030f:
+    "[1D 14 00 00 00 00][1B 03 {e(data_29.l_0xc72664)}]{set(flag 8)}[1D 09 00 00]{open_wallet}{sound(118)}{pause(10)}" goto(l_0xc70329)
+
+l_0xc70329:
+    call(l_0xc72440) "[06 84 00 {e(l_0xc722c1)}][06 4A 00 {e(l_0xc72296)}][06 BD 00 {e(l_0xc72258)}][06 BC 00 {e(l_0xc72205)}][06 99 00 {e(l_0xc721d9)}][06 9B 00 {e(l_0xc72139)}][06 59 00 {e(l_0xc72026)}][06 7E 00 {e(l_0xc71fb8)}][06 6B 02 {e(l_0xc71f78)}][06 6A 02 {e(l_0xc71f21)}][06 7B 01 {e(l_0xc71efb)}][06 20 01 {e(l_0xc71ea1)}][06 DA 00 {e(l_0xc71dd2)}][06 12 01 {e(l_0xc71d65)}][06 5C 01 {e(l_0xc71d08)}][06 56 01 {e(l_0xc71cad)}][06 D9 00 {e(l_0xc71be2)}][06 94 00 {e(l_0xc71baa)}][06 10 00 {e(l_0xc71af0)}][06 69 02 {e(l_0xc71a67)}][06 51 01 {e(l_0xc71a14)}][06 CB 00 {e(l_0xc719d7)}][06 D7 00 {e(l_0xc71973)}][06 B8 00 {e(l_0xc7192c)}][06 76 02 {e(l_0xc718e0)}][06 8F 00 {e(l_0xc7188e)}][06 8E 00 {e(l_0xc71837)}][06 2A 02 {e(l_0xc71808)}][06 E9 02 {e(l_0xc717bc)}][06 4B 00 {e(l_0xc7179a)}][06 91 00 {e(l_0xc7175b)}][06 3C 00 {e(l_0xc716b7)}][06 8B 00 {e(l_0xc71677)}][06 39 00 {e(l_0xc7162b)}][06 93 00 {e(l_0xc715b7)}][06 5A 00 {e(l_0xc7152c)}][06 10 01 {e(l_0xc71435)}][06 1A 01 {e(l_0xc713cb)}][06 AE 00 {e(l_0xc712e3)}][06 5F 02 {e(l_0xc71295)}][06 D6 00 {e(l_0xc71208)}][06 89 00 {e(l_0xc7117e)}][06 47 00 {e(l_0xc71140)}][06 71 01 {e(l_0xc7105d)}][06 83 00 {e(l_0xc70f16)}][06 D5 00 {e(l_0xc70e95)}][06 5B 02 {e(l_0xc70e61)}][06 2C 01 {e(l_0xc70e26)}][06 28 02 {e(l_0xc70db6)}][06 31 00 {e(l_0xc70d5f)}][06 B1 01 {e(l_0xc70d2f)}][06 D3 00 {e(l_0xc70c8d)}][06 77 00 {e(l_0xc70c4d)}][06 55 00 {e(l_0xc70bff)}][06 0C 00 {e(l_0xc70bc4)}][06 0D 00 {e(l_0xc70b59)}][06 44 00 {e(l_0xc70b17)}][06 56 00 {e(l_0xc70ab5)}][06 E8 02 {e(l_0xc70a4c)}][06 E7 02 {e(l_0xc709e8)}][06 53 00 {e(l_0xc70943)}][06 2A 00 {e(l_0xc708dd)}][06 52 00 {e(l_0xc70868)}][06 D2 00 {e(l_0xc70789)}][06 69 00 {e(l_0xc70711)}][06 B6 00 {e(l_0xc70688)}][06 6C 00 {e(l_0xc7062a)}][06 50 00 {e(l_0xc705e4)}][06 40 00 {e(l_0xc7058d)}]" goto(l_0xc70511)
+
+l_0xc70511:
+    "@It seems that the citizens of Onett have been harassed" next
+    "@by those dang street punks called the Sharks." next
+    "@I wonder if going and talking to Frank," next
+    "@the leader of the Sharks, would do any good?" call(data_29.l_0xc726cb) eob
+
+l_0xc7058d:
+    "@So, have you met B. H. Pirkle, the mayor of Onett?" next
+    "@Mayor Pirkle's office is on the second floor of Onett City Hall." call(data_29.l_0xc726cb) eob
+
+l_0xc705e4:
+    "@Go northwest." next
+    "@A traveling entertainer is having some trouble getting into a locked shack..." call(data_29.l_0xc726cb) eob
+
+l_0xc7062a:
+    "@You're on your way to Giant Step, aren't you?" next
+    "@Just be careful, the police are pretty touchy about people," next
+    "@not to mention kids, going up there..." call(data_29.l_0xc726cb) eob
+
+l_0xc70688:
+    "@The police were here looking for you.  Did you do something illegal?" next
+    "@Head south on the street in front of my shop.  You'll find the Onett Police Station." next
+    "@I think it's best if you turn yourself in... no matter what you may have done." call(data_29.l_0xc726cb) eob
+
+l_0xc70711:
+    "@Have you heard of a girl named [1C 02 02]?" next
+    "@She lives in Twoson, the town next to Onett..." next
+    "@They say she has some pretty spectacular supernatural powers." next
+    "@You can get to Twoson by heading south." call(data_29.l_0xc726cb) eob
+
+l_0xc70789:
+    "@Have you been to Apple Kid and Orange Kid's houses?" next
+    "@Their places are south of the Polestar Preschool." next
+    "@They are great inventors ...to be." next
+    "@They need some financial help." next
+    "@If you help them ...later," next
+    "@for sure," next
+    "@without fail," next
+    "@certainly," next
+    "@something wonderful will happen." next
+    "@Believe me, this hint is worth a lot more than you paid." call(data_29.l_0xc726cb) eob
+
+l_0xc70868:
+    "@If you go east from the bus stop," next
+    "@you will enter the Grateful Dead Valley." next
+    "@If you keep going east, you will come to Happy Happy Village." next
+    "@You should maybe go there, unless you have something better to do?" call(data_29.l_0xc726cb) eob
+
+l_0xc708dd:
+    "@You got a call from Apple Kid on your Receiver phone?" next
+    "@What are you doing here, so far away from his home?" next
+    "@I can't give you any hints, but I'll keep your $[1C 0A 00 00 00 00]." call(data_29.l_0xc726cb) eob
+
+l_0xc70943:
+    "@Have you spoken to Everdred in Burglin Park?" linebreak
+    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc709ac)} {e(l_0xc70974)}]" goto(l_0xc70974)
+
+l_0xc70974:
+    "@Well, well, well...  That's not good." next
+    "@You really should take the time out to meet Everdred." call(data_29.l_0xc726cb) eob
+
+l_0xc709ac:
+    "@What?  You DID talk to him?  So, why are you here?" next
+    "@Go back to the Grateful Dead Valley." call(data_29.l_0xc726cb) eob
+
+l_0xc709e8:
+    "@Have you been to the Happy Happyism headquarters" next
+    "@at the center of Happy Happy Village?" next
+    "@Do you want to go there?" next
+    "@Or not?" next
+    "@What?" next
+    "@Why can't you make up your mind!" call(data_29.l_0xc726cb) eob
+
+l_0xc70a4c:
+    "@Do you remember seeing a litte mountain cabin on the way" next
+    "@through the Grateful Dead Valley?" next
+    "@There must be a cave in the Happy Happy Village that leads to that cabin." call(data_29.l_0xc726cb) eob
+
+l_0xc70ab5:
+    "@This is my business, so I'm happy to have customers." next
+    "@But, don't you know this is a crisis?{pause(20)}  You shouldn't be wasting time here." next
+    "@Anyway, I'll keep your $[1C 0A 00 00 00 00]." call(data_29.l_0xc726cb) eob
+
+l_0xc70b17:
+    "@You know that [1C 02 02] is in the mountain cabin, right?" next
+    "@By rescuing her, you actually rescue yourself." call(data_29.l_0xc726cb) eob
+
+l_0xc70b59:
+    "@[1C 02 02]'s father at the Polestar Preschool must be really worried." next
+    "@You should be considerate of a father's feelings toward his daughter." next
+    "@He's only human, y'know!" call(data_29.l_0xc726cb) eob
+
+l_0xc70bc4:
+    "@Go and see Everdred, the boss of Burglin Park." next
+    "@Just trust me... you go see him." call(data_29.l_0xc726cb) eob
+
+l_0xc70bff:
+    "@The Runaway Brothers, the band at the Chaos theater, is up to their eyes in debt." next
+    "@Could anyone pay off their debt for them?" call(data_29.l_0xc726cb) eob
+
+l_0xc70c4d:
+    "@I don't think there is anything else you need to do in this town." next
+    "@It's okay if you stay, but it's really okay if you leave..." call(data_29.l_0xc726cb) eob
+
+l_0xc70c8d:
+    "@There's a tunnel northwest of this town." next
+    "@There are two guard zombies that hang out at the entrance." next
+    "@They are actually pretty nice guys..." next
+    "@It might be a good idea to meet those guys..." next
+    "@But it's quite all right if you don't..." next
+    "@Though I think that you really ought to go there." call(data_29.l_0xc726cb) eob
+
+l_0xc70d2f:
+    "@So, how are you doin', kid?" next
+    "@If you're tired, you should go to the hotel and rest." call(data_29.l_0xc726cb) eob
+
+l_0xc70d5f:
+    "@Do you know about that mysterious tent that appeared" next
+    "@at the south end of town?" next
+    "@I don't know, but..." linebreak
+    "  it looks kinda..." linebreak
+    "  strange..." call(data_29.l_0xc726cb) eob
+
+l_0xc70db0:
+    call(data_29.l_0xc72620) eob
+
+l_0xc70db6:
+    "@<Zombie Paper only works well in a tent.>" next
+    "@<After you set the paper in a tent, go to the hotel and put your dogs up.>" next
+    "@What, didn't you read the Zombie paper instructions?" call(data_29.l_0xc726cb) eob
+
+l_0xc70e26:
+    "@There's an underground path northwest of this town." next
+    "@Those guard zombies should be gone now." call(data_29.l_0xc726cb) eob
+
+l_0xc70e61:
+    "@|Saturn Valley is very nice!" linebreak
+    "  You should go" linebreak
+    "  at least once or twice|" call(data_29.l_0xc726cb) eob
+
+l_0xc70e95:
+    "@It seems like you don't know what to do in Saturn Valley." next
+    "@The Mr. Saturn on the second floor of the cave should be able to tell you" next
+    "@a password to get you into the secret base." next
+    "@Now that sounds like some handy info!" call(data_29.l_0xc726cb) eob
+
+l_0xc70f16:
+    "@Mr. Saturn must have told you to wait for three minutes in front of the waterfall." next
+    "@What?  You don't know where the waterfall is?" next
+    "@The waterfall is actually named Grapefruit Falls." next
+    "@After you exit the tunnel that begins in the Threek graveyard," next
+    "@go to the north." next
+    "@You certainly know about the cave to Saturn Valley that is then on your right." next
+    "@But..." linebreak
+    "  You should not go in that cave." next
+    "@Keep going straight north." next
+    "@You'll eventually come to the Grapefruit Falls." next
+    "@Then, wait patiently for three minutes." call(data_29.l_0xc726cb) eob
+
+l_0xc7105d:
+    "[06 57 00 {e(l_0xc710bb)}]@Oh, you've forgotten to get something really important." next
+    "@Be sure to check the garbage can that is left behind by the Boogey Tent." call(data_29.l_0xc726cb) eob
+
+l_0xc710bb:
+    "@How about this for some extra special help--I'll teach you" next
+    "@some great tactics for dealing with Belch." next
+    "@Belch really loves Fly Honey, from what I've heard." next
+    "@Therefore, you should use the Fly Honey during battle." call(data_29.l_0xc726cb) eob
+
+l_0xc71140:
+    "@In the middle of Dusty Dunes Desert, there is someone who's starving." next
+    "@...I just sense it." call(data_29.l_0xc726cb) eob
+
+l_0xc7117e:
+    "@At the Topollo Theater in Fourside," next
+    "@the Runaway Brothers have booked a series of gigs." next
+    "@This is just a rumor, but I hear that they've been snowed again" next
+    "@and are in some kind of trouble." next
+    "@So...  If I were you, I'd go and talk with them." call(data_29.l_0xc726cb) eob
+
+l_0xc71208:
+    "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]@At the Topollo Theater, the Runaway Brothers have booked a series of gigs." next
+    "@This is just a rumor, but I hear that they've been snowed again" next
+    "@and are in some kind of trouble." next
+    "@So...  If I were you, I'd go and talk with them." call(data_29.l_0xc726cb) eob
+
+l_0xc71295:
+    "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]@If you happen to get weak, you should just go to sleep.  This is basic." next
+    "@That way, you can recover your strength." call(data_29.l_0xc726cb) eob
+
+l_0xc712e3:
+    "{isset(flag 137)}[1B 02 {e(l_0xc71140)}]" goto(l_0xc712ec)
+
+l_0xc712ec:
+    "@The Runaway Brothers, who are now appearing at the Topollo Theater," next
+    "@got stuck again because of financial problems." next
+    "@To help them, a tremendous amount of money will be needed." next
+    "@Hey, talking about a tremendous amount of money," next
+    "@do you know about the Dusty Dunes Desert?" next
+    "@You should head to the desert to look for buried treasure." next
+    "@It would be fabulous if you found it!" call(data_29.l_0xc726cb) eob
+
+l_0xc713cb:
+    "@Have you told the treasure hunter in the desert that you beat five bosses?" next
+    "@I used to be a businessman, and I can tell you from experience." next
+    "@Reporting is crucial." call(data_29.l_0xc726cb) eob
+
+l_0xc71435:
+    "@So, have you been out taking any walks lately?" next
+    "@Walking is great." next
+    "@You know, it's not good for you" next
+    "@to always be riding the bus 'cause it's way too easy." next
+    "@Walk down the road between Dusty Dunes Desert and Fourside." next
+    "@Especially be sure to walk across the bridge." next
+    "@There's nothing quite as exciting as walking across a bridge" next
+    "@when you don't know the train schedule..." call(data_29.l_0xc726cb) eob
+
+l_0xc7152c:
+    "@It's such a pity..." next
+    "@The Runaway Brothers have managed to get stuck at the Topollo Theater" next
+    "@because of their debt problems." next
+    "@Why don't you go and talk to Miss Fake, the manager of the theater?" next
+    "@That diamond you're carrying should come in handy." call(data_29.l_0xc726cb) eob
+
+l_0xc715b7:
+    "@The department store in Fourside has reopened after being renovated." next
+    "@People say that they have a good variety of things," next
+    "@but the prices are a little bit high." next
+    "@Have you been there yet?" call(data_29.l_0xc726cb) eob
+
+l_0xc7162b:
+    "@Well..." linebreak
+    "  I'm not exactly sure, but it seems to me that..." next
+    "@the top floor of the department store is kind of suspicious..." call(data_29.l_0xc726cb) eob
+
+l_0xc71677:
+    "@Have you been to Borges' Bar?" next
+    "@It's not difficult to find... the sign says <Bar.>" call(data_29.l_0xc726cb) eob
+
+l_0xc716b7:
+    "@These days, young people seem to be so indifferent" next
+    "@to what's happening in the real world." next
+    "@It's disappointing that you seem to be indifferent about the real world, too." next
+    "@For example, if you see someone lying in the street," next
+    "@don't you think that you should really stop and try to help him?" call(data_29.l_0xc726cb) eob
+
+l_0xc7175b:
+    "@Did you go back to Borges' Bar?" next
+    "@There seems to be something mighty suspicious behind the counter..." call(data_29.l_0xc726cb) eob
+
+l_0xc7179a:
+    "@The monkey...  got charred." next
+    "@Is he all right?" call(data_29.l_0xc726cb) eob
+
+l_0xc717bc:
+    "@You should be able to find something out at the Monkey Cave" next
+    "@in the Dusty Dunes Desert." next
+    "@That's what I say... on to the desert!" call(data_29.l_0xc726cb) eob
+
+l_0xc71808:
+    "@The maid out front of the Monotoly Building" next
+    "@is waiting for the [1C 05 8B]." call(data_29.l_0xc726cb) eob
+
+l_0xc71837:
+    "@I heard that you were asked to dinner" next
+    "@by the cute maid at the Monotoly Building." next
+    "@Lucky you!  I envy kids like you... but just a bit." call(data_29.l_0xc726cb) eob
+
+l_0xc7188e:
+    "@It was a while ago, but I heard that a silver flying contraption of some sort " next
+    "@crash landed in the graveyard in Threek." call(data_29.l_0xc726cb) eob
+
+l_0xc718e0:
+    "@In Winters, you've been to the cave north of Stonehenge, right?" next
+    "@I would bet it's one of <Your Sanctuary.>" call(data_29.l_0xc726cb) eob
+
+l_0xc7192c:
+    "@Do you remember that Dr. Andonuts had the Sky Walker?" next
+    "@What do you say to your going and giving it a whirl?" call(data_29.l_0xc726cb) eob
+
+l_0xc71973:
+    "@You need to make a reservation by phone to go to the Stoic Club." next
+    "@Someone in Toto, the port town next to Summers," next
+    "@should know the phone number." call(data_29.l_0xc726cb) eob
+
+l_0xc719d7:
+    "@Try placing a call to" linebreak
+    "  the Strip- Oops!  sorry," linebreak
+    "  I mean the Stoic Club." call(data_29.l_0xc726cb) eob
+
+l_0xc71a14:
+    "@After you get into the Stoic Club," next
+    "@be sure to talk to the man with the mustache at the back table." next
+    "@This is a pretty important hint." call(data_29.l_0xc726cb) eob
+
+l_0xc71a67:
+    "@People say that there is a Magic cake vendor" next
+    "@on the pavement by the beach in the resort of Summers." next
+    "@Oh yeah, <Pavement> means <sidewalk.>" next
+    "@I just wanted to show off my knowledgeable side." next
+    "@Did I come off as a smarty-pants?" linebreak
+    "  Sorry 'bout that." call(data_29.l_0xc726cb) eob
+
+l_0xc71af0:
+    "@Scarabia Cultural Museum..." next
+    "@Scarabia Cultural Museum..." next
+    "@Scarabia Cultural Museum..." call(data_29.l_0xc726cb) eob
+
+l_0xc71b3f:
+    "@Did you go to the second floor of the Scarabia Cultural Museum in Summers?" next
+    "@If you are lucky... you'll get to see the hieroglyph." next
+    "@...Yeah, you sure would be lucky." call(data_29.l_0xc726cb) eob
+
+l_0xc71baa:
+    "[1B 02 {e(l_0xc7244e)}]@If you want to sail across the ocean, who better than to ask but a sailor?" call(data_29.l_0xc726cb) eob
+
+l_0xc71be2:
+    "[1B 02 {e(l_0xc7244e)}]{isset(flag 148)}[1B 02 {e(l_0xc71b3f)}]@After you've made all the necessary preparations, go to the pyramid." next
+    "@In front of the pyramid, as the writing on the hieroglyph told," next
+    "@step on the round stone plates in front of the sphinx, and draw a star." next
+    "@That was really too much info to give out as a hint, wasn't it?" call(data_29.l_0xc726cb) eob
+
+l_0xc71cad:
+    "[1B 02 {e(l_0xc7244e)}]@Deep in the pyramid, there is an item called the [1C 05 AF], or so I've heard." next
+    "@You shouldn't exit the pyramid unless you have" linebreak
+    "  the [1C 05 AF]." call(data_29.l_0xc726cb) eob
+
+l_0xc71d08:
+    "[1B 02 {e(l_0xc7244e)}]@I don't know if he's an enemy of yours or not, but" next
+    "@the guy called <Dungeon Man> seems to be waiting for you." next
+    "@Have you already met him before this?" call(data_29.l_0xc726cb) eob
+
+l_0xc71d65:
+    "[1B 02 {e(l_0xc7244e)}]@There is a broken submarine in the Dungeon Man's tummy." next
+    "@Once the submarine gets fixed, you can go to the Deep Darkness." next
+    "@Uhhh... maybe..." call(data_29.l_0xc726cb) eob
+
+l_0xc71dd2:
+    "[1B 02 {e(l_0xc7244e)}]@If you need to brighten up a dark street you use..." next
+    "@Yep, that's right!  A flashlight!" next
+    "@Oh... you don't have one?  Actually, I knew that you didn't." next
+    "@Well, what comes in handy is something that you, y'know," next
+    "@picked up in, y'know, the pyramid..." next
+    "@I forgot the name...  It's that whatchyamacallit... ohhh... crud!" call(data_29.l_0xc726cb) eob
+
+l_0xc71ea1:
+    "[1B 02 {e(l_0xc7244e)}]@It's tough, but you have to keep pressing on through the Deep Darkness." next
+    "@That way, you'll find the village of the Tenda." next
+    "@Don't give up yet." call(data_29.l_0xc726cb) eob
+
+l_0xc71efb:
+    "[1B 02 {e(l_0xc7244e)}]@Apple..." next
+    "@Winters..." next
+    "@Andonuts..." call(data_29.l_0xc726cb) eob
+
+l_0xc71f21:
+    "[1B 02 {e(l_0xc7244e)}]@The Pencil eraser makes pencil-shaped stuff disappear." next
+    "@What do you think the Eraser eraser machine does?" call(data_29.l_0xc726cb) eob
+
+l_0xc71f78:
+    "[1B 02 {e(l_0xc7244e)}]@It looks like Apple Kid is trapped deep, deep, deep in the Stonehenge enemy base." call(data_29.l_0xc726cb) eob
+
+l_0xc71fb8:
+    "[1B 02 {e(l_0xc7244e)}]@Well, usually you find books at the library." next
+    "@One who goes to the fishmonger and expects" next
+    "@to find books is likely to get very embarrassed indeed." call(data_29.l_0xc726cb) eob
+
+l_0xc72026:
+    "[1B 02 {e(l_0xc7244e)}]@To correct shyness, you should let that person read a self-help book." next
+    "@<Overcoming Shyness> is probably the best...  It was a best-seller, y'know." next
+    "@If a whole group is shy, the leader of the group should read the book on shyness" next
+    "@to all the group members, and the whole group may get over shyness." next
+    "@Though at least a part will certainly stop being shy." next
+    "@So, how many times did I use the word <shy>?..." call(data_29.l_0xc726cb) eob
+
+l_0xc72139:
+    "[1B 02 {e(l_0xc7244e)}]@Oh, heeey!" next
+    "@Have you spoken with like, the Tenda" next
+    "@deep in the cute, little Tenda village?" next
+    "@Oh... my... gosh..." linebreak
+    "  Really???" next
+    "@Are you like, really serious???" next
+    "@I sound like a y'know, teenage girl?" next
+    "@Do you like the way I talk now?" call(data_29.l_0xc726cb) eob
+
+l_0xc721d9:
+    "[1B 02 {e(l_0xc7244e)}]@There is a very important place under the Tenda Village." call(data_29.l_0xc726cb) eob
+
+l_0xc72205:
+    "[1B 02 {e(l_0xc7244e)}]@Do you know about the talking rock in the Lost Underworld?" next
+    "@You should listen to what the rock has to say and then put it into practice." call(data_29.l_0xc726cb) eob
+
+l_0xc72258:
+    "[1B 02 {e(l_0xc7244e)}]@Do you know that talking rock in the Lost Underworld?" next
+    "@You should listen to what the rock has to say." call(data_29.l_0xc726cb) eob
+
+l_0xc72296:
+    "@Maybe ..." linebreak
+    "  where you should visit is" next
+    "@Saturn Valley..." call(data_29.l_0xc726cb) eob
+
+l_0xc722c1:
+    "@A very special substance is necessary to complete the Phase Distorter." next
+    "@You know, I wonder if the site in Onett" next
+    "@where the meteorite landed has something to do with this?" next
+    "@I say, go there and check out the site." call(data_29.l_0xc726cb) eob
+
+l_0xc72348:
+    "@I have...{pause(20)} no more hints to give you." next
+    "@You've done such a good job to this point." next
+    "@All that's left now..." next
+    "@Is to entrust luck to the heavens." end
+
+l_0xc72398:
+    "@Well, I want to thank you for all the times" next
+    "@that you used the hint shop.  It's been a while since I first saw you..." next
+    "@This is my final day in business." next
+    "@{pause(10)}..{pause(10)}..{pause(10)}..{pause(10)}..{pause(30)}.." next
+    "@Well, so long kid," linebreak
+    "  No, no... Master [1C 02 01]." next
+    "@See you again," linebreak
+    "  if fate allows it." end
+
+l_0xc72440:
+    "{isset(flag 652)}[1B 02 {e(l_0xc7244a)}]" eob
+
+l_0xc7244a:
+    "[1D 21 01]" eob
+
+l_0xc7244e:
+    "[06 BA 00 {e(data_29.l_0xc7259f)}][06 3A 00 {e(data_29.l_0xc7252b)}][06 5B 00 {e(data_29.l_0xc724d7)}][06 8C 00 {e(l_0xc724ab)}]" goto(l_0xc7246a)
+
+l_0xc7246a:
+    "@At the Dinosaur Museum in Fourside..." next
+    "@A man called Mr. Spoon has a heavy mustache..." call(data_29.l_0xc726cb) eob
+
+l_0xc724ab:
+    "@If you want to meet Venus, you should go backstage at the Topollo Theater." call(data_29.l_0xc726cb) eob

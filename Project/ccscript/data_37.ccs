@@ -1,0 +1,510 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import asm65816
+command e(label) "{long label}"
+
+// Text Data
+l_0xc7e659:
+    "she" eob
+
+l_0xc7e65d:
+    "it" eob
+
+l_0xc7e660:
+    "{result_is(2)}[1B 03 {e(l_0xc7e66b)}]his" eob
+
+l_0xc7e66b:
+    "her" eob
+
+l_0xc7e66e:
+    "[1C 14 01][09 03 {e(l_0xc7e67f)} {e(l_0xc7e682)} {e(l_0xc7e685)}]" goto(l_0xc7e67f)
+
+l_0xc7e67f:
+    "his" eob
+
+l_0xc7e682:
+    "her" eob
+
+l_0xc7e685:
+    "its" eob
+
+l_0xc7e689:
+    "[1C 15 01][09 03 {e(l_0xc7e69a)} {e(l_0xc7e69d)} {e(l_0xc7e6a0)}]" goto(l_0xc7e69a)
+
+l_0xc7e69a:
+    "his" eob
+
+l_0xc7e69d:
+    "her" eob
+
+l_0xc7e6a0:
+    "its" eob
+
+l_0xc7e6a4:
+    "{result_is(2)}[1B 03 {e(l_0xc7e6b0)}]him" eob
+
+l_0xc7e6b0:
+    "her" eob
+
+l_0xc7e6b3:
+    "{result_is(2)}[1B 03 {e(l_0xc7e6bf)}]sir" eob
+
+l_0xc7e6bf:
+    "ma'am" eob
+
+l_0xc7e6c5:
+    "{result_is(2)}[1B 03 {e(l_0xc7e6d1)}]Sir" eob
+
+l_0xc7e6d1:
+    "Ma'am" eob
+
+l_0xc7e6d7:
+    "[19 10 01]{swap}[1C 02 00]{counter(1)}" goto(l_0xc7e6e1)
+
+l_0xc7e6e1:
+    "{inc}{ctoarg}[1D 19 00][1B 03 {e(l_0xc7e70e)}][19 10 00][1D 0D 00 01 02][1B 03 {e(l_0xc7e70e)}][19 10 00][1D 0D 00 01 03][1B 03 {e(l_0xc7e70e)}]" goto(l_0xc7e6e1)
+
+l_0xc7e70e:
+    "{ctoarg}{swap}[09 05 {e(l_0xc7e729)} {e(l_0xc7e729)} {e(l_0xc7e72a)} {e(l_0xc7e735)} {e(l_0xc7e735)}]" eob
+
+l_0xc7e729:
+    eob
+
+l_0xc7e72a:
+    "[19 10 02]{swap} and [1C 02 00]" eob
+
+l_0xc7e735:
+    " and [19 10 01]{result_is(2)}[1B 03 {e(l_0xc7e748)}]his friends" eob
+
+l_0xc7e748:
+    "her friends" eob
+
+l_0xc7e74e:
+    "{store_registers}" call(l_0xc7e6d7) "{load_registers}" eob
+
+l_0xc7e758:
+    "[19 10 02][1D 0D 00 01 02][1B 03 {e(l_0xc7e779)}][19 10 02][1D 0D 00 01 03][1B 03 {e(l_0xc7e779)}] kids" eob
+
+l_0xc7e779:
+    "kid" eob
+
+l_0xc7e77d:
+    "{counter(1)}" goto(l_0xc7e77f)
+
+l_0xc7e77f:
+    "[19 28 02][1B 02 {e(l_0xc7e796)}]{swap}[1C 11 00][1C 03 00]{inc}" goto(l_0xc7e77f)
+
+l_0xc7e796:
+    eob
+
+l_0xc7e797:
+    "{font_saturn}[06 0A 00 {e(l_0xc7e7f8)}]@Do you want" linebreak
+    "  slumber?" linebreak
+    "{font_normal}[19 02]Yes" eob
+
+l_0xc7e7b8:
+    "[19 02]No" eob
+
+l_0xc7e7bd:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7e7d9)} {e(l_0xc7e7cc)}]" goto(l_0xc7e7cc)
+
+l_0xc7e7cc:
+    "{font_saturn}@Kay-o.{wait}{font_normal}" eob
+
+l_0xc7e7d9:
+    "{font_saturn}@Kay-o.[03]{window_closeall}{font_normal}" call(data_48.l_0xc90f7d) call(data_49.l_0xc91582) "[1F 21 30]{set(flag 10)}" eob
+
+l_0xc7e7f8:
+    "@Healthful" linebreak
+    "  and dandy!{wait}{font_normal}" eob
+
+l_0xc7e80d:
+    call(data_47.l_0xc901bb) eob
+
+l_0xc7e813:
+    call(data_13.l_0xc5d37d) eob
+
+l_0xc7e819:
+    "{font_saturn}[06 4A 00 {e(l_0xc7e890)}][06 47 00 {e(l_0xc7e86c)}]@We feel" linebreak
+    "  groove!" next
+    "@Hi ho." linebreak
+    "  Me" linebreak
+    "  Mr. Saturn." next
+    "@This place," linebreak
+    "  all are" linebreak
+    "  Mr. Saturn.{wait}{font_normal}" eob
+
+l_0xc7e86c:
+    "@Impressed!" next
+    "@Someday," linebreak
+    "  Sometime" linebreak
+    "  We help you.{wait}{font_normal}" eob
+
+l_0xc7e890:
+    "@When going" linebreak
+    "  gets tough..." next
+    "@Tough gets going.{wait}{font_normal}" eob
+
+l_0xc7e8ae:
+    "{font_saturn}[06 4A 00 {e(l_0xc7e962)}][06 47 00 {e(l_0xc7e91b)}]@Once upon" linebreak
+    "  a time," next
+    "@we were" linebreak
+    "  many, many." next
+    "@Everyday," linebreak
+    "  slowly" next
+    "@are" linebreak
+    "  less, less." next
+    "@Why?  Hmmmm..." linebreak
+    "  Boing!{wait}{font_normal}" eob
+
+l_0xc7e91b:
+    "@Delicious." linebreak
+    "[19 10 01]{swap}  [1C 02 00]!" next
+    "@You" linebreak
+    "  good name." next
+    "@We no name!" linebreak
+    "  Boing!" next
+    "@...All have" linebreak
+    "  same name!{wait}{font_normal}" eob
+
+l_0xc7e962:
+    "@Zoom!{wait}{font_normal}" eob
+
+l_0xc7e96c:
+    "{font_saturn}[06 4A 00 {e(l_0xc7e9ed)}][06 47 00 {e(l_0xc7e9b9)}]@Hot springs" linebreak
+    "  make happy...!" next
+    "@Happy happy!" linebreak
+    "  Ding ding!" next
+    "@Jump in" linebreak
+    "  hot springs!{wait}{font_normal}" eob
+
+l_0xc7e9b9:
+    "{isset(flag 629)}[1B 02 {e(l_0xc7e9ed)}]@Go in hot" linebreak
+    "  spring." next
+    "@Wash" linebreak
+    "  barf off" linebreak
+    "  you body!{wait}{font_normal}" eob
+
+l_0xc7e9ed:
+    "@Sweet fresh" linebreak
+    "  feel.{wait}{font_normal}" eob
+
+l_0xc7ea00:
+    "{font_saturn}[06 4A 00 {e(l_0xc7eb3c)}][06 AD 00 {e(l_0xc7eb16)}][06 47 00 {e(l_0xc7ea71)}]@We look" linebreak
+    "  like same!" next
+    "@I give you" linebreak
+    "  special" linebreak
+    "  thing." next
+    "@Not now," linebreak
+    "  Zoom!" next
+    "@I give you" linebreak
+    "  on the way" linebreak
+    "  back, boing!" next
+    "@Bye later!" goto(l_0xc7eb38)
+
+l_0xc7ea71:
+    "@Here is" linebreak
+    "  present." next
+    goto(l_0xc7ea80)
+
+l_0xc7ea80:
+    "[1D 03 FF][1B 02 {e(l_0xc7eb25)}]{store_registers}[06 AC 00 {e(l_0xc7eae1)}][06 AB 00 {e(l_0xc7eabd)}]{load_registers}[1D 0E 00 FC][19 19 00 00]{set(flag 171)}" newline
+    "@I hand you" linebreak
+    "  [1C 05 00].[03]{sound(116)}" goto(l_0xc7ea80)
+
+l_0xc7eabd:
+    "{load_registers}[1D 0E 00 F9][19 19 00 00]{set(flag 172)}" newline
+    "@I hand you" linebreak
+    "  [1C 05 00].[03]{sound(116)}" goto(l_0xc7ea80)
+
+l_0xc7eae1:
+    "{load_registers}[1D 0E 00 99][19 19 00 00]{set(flag 173)}" newline
+    "@I no hand you" next
+    "@my" linebreak
+    "  [1C 05 00]..." next
+    "@Oh!" linebreak
+    "  Tease you![03]{sound(116)}" goto(l_0xc7eb16)
+
+l_0xc7eb16:
+    newline
+    "@I have no" linebreak
+    "  something.{font_normal}" end
+
+l_0xc7eb25:
+    newline
+    "@You no room." linebreak
+    "  Bye later!" goto(l_0xc7eb38)
+
+l_0xc7eb38:
+    "{font_normal}" end
+
+l_0xc7eb3c:
+    "@Eureka!" linebreak
+    "  Ding!{wait}{font_normal}" eob
+
+l_0xc7eb4c:
+    "{font_saturn}[06 4A 00 {e(l_0xc7ebcf)}][06 47 00 {e(l_0xc7ebc3)}]@Scary, scary" linebreak
+    "  guy, boing!" next
+    "@Grapefruit" linebreak
+    "  Falls!" next
+    "@Scary, sick," linebreak
+    "  barfy..." next
+    "@Go and..." linebreak
+    "  la la la!" next
+    "@Ding!" linebreak
+    "  Scary!{wait}{font_normal}" eob
+
+l_0xc7ebc3:
+    "@No scared.{wait}{font_normal}" eob
+
+l_0xc7ebcf:
+    "@Make" linebreak
+    "  new thing!" next
+    "@Must make!" linebreak
+    "  Daddy!" linebreak
+    "  Boing!{wait}{font_normal}" eob
+
+l_0xc7ebf9:
+    "{font_saturn}[06 4A 00 {e(l_0xc7ec50)}][06 47 00 {e(l_0xc7ec3d)}]@Lots of" linebreak
+    "  friends..." next
+    "@Taken" linebreak
+    "  behind falls..." next
+    "@Why?  Why?" linebreak
+    "  Boing!{wait}{font_normal}" eob
+
+l_0xc7ec3d:
+    "@All home!" linebreak
+    "  Zoom!{wait}{font_normal}" eob
+
+l_0xc7ec50:
+    "@Dakota!{wait}{font_normal}" eob
+
+l_0xc7ec5c:
+    "{font_saturn}@Chattanooga!{wait}{font_normal}" eob
+
+l_0xc7ec6c:
+    "{font_saturn}[06 49 00 {e(l_0xc7ecdb)}][06 4A 00 {e(l_0xc7eccd)}][06 47 00 {e(l_0xc7ecbe)}]@Threek is" linebreak
+    "  zombie full!" next
+    "@I saw!" linebreak
+    "  Bad stink" linebreak
+    "  behind falls!" next
+    "@Zoom!{wait}{font_normal}" eob
+
+l_0xc7ecbe:
+    "@Appreciate!{wait}{font_normal}" eob
+
+l_0xc7eccd:
+    "@Dance is over...{wait}{font_normal}" eob
+
+l_0xc7ecdb:
+    "@Healthfull!{wait}{font_normal}" eob
+
+l_0xc7ece9:
+    "{font_saturn}[06 49 00 {e(l_0xc7edd9)}][06 47 00 {e(l_0xc7ed90)}]@Base..." linebreak
+    "  secret." next
+    "@Base behind" linebreak
+    "  Grapefruit" linebreak
+    "  Falls." next
+    "@Password?" linebreak
+    "  I tell." next
+    "@Belch man" linebreak
+    "  say" next
+    "@[52]Say" linebreak
+    "  password.[52]" next
+    "@Then" linebreak
+    "  stand still," next
+    "@wait for" linebreak
+    "  three" linebreak
+    "  minutes.{sound(114)}{pause(120)}{wait}{set(flag 131)}{font_normal}" eob
+
+l_0xc7ed90:
+    "@You wait three" linebreak
+    "  minutes!" next
+    "@Zoom!" next
+    "@You come" linebreak
+    "  here to" linebreak
+    "  wait" next
+    "@three" linebreak
+    "  minutes?" linebreak
+    "  No?{wait}{font_normal}" eob
+
+l_0xc7edd9:
+    "@I wish" linebreak
+    "  fall in" linebreak
+    "  love...{wait}{font_normal}" eob
+
+l_0xc7edf1:
+    "{font_saturn}@Drink coffee" linebreak
+    "  before go?" next
+    "@Say yes" linebreak
+    "  to me?" next
+    "@Say no" linebreak
+    "  to me?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc7ee28:
+    "[19 02]No" eob
+
+l_0xc7ee2d:
+    "{font_normal}[1C 07 02][11]{clearline}[09 02 {e(l_0xc7ee4f)} {e(l_0xc7ee3e)}]" goto(l_0xc7ee3e)
+
+l_0xc7ee3e:
+    "{font_saturn}@Why you" linebreak
+    "  say no?{wait}{font_normal}" eob
+
+l_0xc7ee4f:
+    "{font_saturn}@Bottoms up!" linebreak
+    "  Boing!{wait}{font_normal}{window_closeall}[06 DC 00 {e(data_55.l_0xc9992f)}]" call(data_36.l_0xc7dd74) "{music(92)}[1F 41 01]" eob
+
+l_0xc7ee7b:
+    "{font_saturn}[06 47 00 {e(l_0xc7eeb1)}]@Why?  Why?" next
+    "@You no" linebreak
+    "  go to" linebreak
+    "  hot springs..." next
+    "@Boo boo's." end
+
+l_0xc7eeb1:
+    "@Appreciate!" next
+    "@I so happy," linebreak
+    "  happy," linebreak
+    "  happy..." next
+    "@Zoom!{wait}{font_normal}" eob
+
+l_0xc7eede:
+    "{font_saturn}@Oh!  Oh!" linebreak
+    "  *wheeze*" next
+    "@Breathe is" linebreak
+    "  sooooo" linebreak
+    "  good!{wait}{font_normal}" eob
+
+l_0xc7ef0d:
+    "{font_saturn}@I think I'll" linebreak
+    "  Think about" next
+    "@Complex" linebreak
+    "  things..." linebreak
+    "  from now...{wait}{font_normal}" eob
+
+l_0xc7ef3b:
+    "[06 49 00 {e(l_0xc7f0e2)}][06 86 00 {e(l_0xc7f0d6)}][06 84 00 {e(l_0xc7ef67)}][06 4A 00 {e(l_0xc7efa2)}][19 10 01]{rtoarg}@Ah, [1C 02 00]." next
+    goto(l_0xc7ef67)
+
+l_0xc7ef67:
+    title(1, Apple)
+    "@The Phase Distorter will certainly be completed someday," next
+    "@in my humble opinion." end
+
+l_0xc7efa2:
+    title(1, Apple)
+    "@Excellent, excellent!" linebreak
+    "  Everything proceeded as planned." next
+    "@Dr. Andonuts, Mr. Saturn and I worked together" next
+    "@and finally completed the Phase Distorter." next
+    "@The purpose of the device is to enable instantaneous travel" next
+    "@through space and time." next
+    "@In this prototype, you can only travel to different points" next
+    "@within the same time period." next
+    "@It is able, however, to search out the locations of enemies." next
+    "@Right now, it is indicating the presence of enemies in the Lost Underworld!" end
+
+l_0xc7f0d6:
+    "[06 A9 00 {e(l_0xc7ef67)}]" goto(l_0xc7efa2)
+
+l_0xc7f0e2:
+    title(1, Apple)
+    "@The chance of Giygas gaining victory with his monstrous plan is 99%." next
+    "@However, your courage has produced a 1% chance that Giygas fails." next
+    "@I must try to come to a deeper understanding of this trait called <courage.>" end
+
+l_0xc7f165:
+    title(1, Andonuts)
+    "[06 49 00 {e(l_0xc7f634)}][06 FD 02 {e(l_0xc7f50b)}][06 86 00 {e(l_0xc7f34c)}][06 84 00 {e(l_0xc7f25b)}]@Yahah!  The Mr. Saturns are incredible folk." next
+    "@And the Apple Kid...  He is a most exceptional young man," next
+    "@very different from other kids." next
+    "@...Well, anyway...{pause(20)}" linebreak
+    "  The prototype Phase Distorter has been stolen." next
+    "@Someone resembling a pig wearing clothes took Mr. Saturn captive" next
+    "@and stole the device!{wait}{window_closeall}{pause(1)}[1F F1 E5 02 1F 01]" eob
+
+l_0xc7f25b:
+    "@Hmmmm..." next
+    "@If I only had a piece of a meteorite," next
+    "@I might be able to make some Zexonyte." end
+
+l_0xc7f29e:
+    "[19 19 00 00]{swap}{result_is(193)}[1B 03 {e(l_0xc7f2b1)}]" goto(data_35.l_0xc7c6b6)
+
+l_0xc7f2b1:
+    title(1, Andonuts)
+    "[1D 01 FF C1]{sound(118)}@Ah, yes!{pause(15)}" linebreak
+    "  This is fantastic!{pause(30)}" linebreak
+    "  What?" next
+    "@Well, I've never actually seen this incredibly rare element before..." next
+    "@It is very intriguing." next
+    "@All right, leave everything to us, and you get some rest." next
+    "@This is getting most fascinating!{wait}{set(flag 134)}{set(flag 169)}" eob
+
+l_0xc7f34c:
+    title(1, Andonuts)
+    "[06 A9 00 {e(l_0xc7f5ec)}]@Finally, it's complete! " next
+    "@The Phase Distorter, version two,{pause(15)} is equipped with two new features." next
+    "@First,{pause(20)} it can repair your biological functions." next
+    "@Second,{pause(20)} it can save your progress." next
+    "@Don't be afraid, get right in!" next
+    "@...There is just one thing, though..." next
+    "@You might not be able to return.{pause(20)}  So, make sure you are optimally outfitted." next
+    "@Are you ready to go?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc7f445:
+    "[19 02]No" eob
+
+l_0xc7f44a:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7f459)} {e(l_0xc7f459)}]" goto(l_0xc7f459)
+
+l_0xc7f459:
+    "@Even if you're not 100%,{pause(15)} perfectly,{pause(15)} completely ready..." next
+    "@Well, you should be as prepared as possible.{pause(20)}" linebreak
+    "  It would be for the best." next
+    "@You don't want to accidentally leave butt-naked,{pause(15)} you know." next
+    "@You'd be in for some serious trouble." next
+    "@I just want to make sure you're ready." next
+    "@Let me know when your preparations are complete.{wait}{set(flag 765)}" eob
+
+l_0xc7f50b:
+    "@Good.{pause(20)}  At last,{pause(15)} the time has come." next
+    "@Are you ready?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc7f533:
+    "[19 02]No" eob
+
+l_0xc7f538:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7f54c)} {e(l_0xc7f459)}]" goto(l_0xc7f459)
+
+l_0xc7f54c:
+    "@Remember, the Phase Distorter, version 2," next
+    "@is equipped with two new features." next
+    "@First,{pause(20)} it can repair your biological functions." next
+    "@Second,{pause(20)} it can save your progress." next
+    "@Don't be afraid!{pause(15)}  Get right in!{wait}{set(flag 133)}[1F F1 E5 02 1F 01]" eob
+
+l_0xc7f5ec:
+    "@Yes...{pause(20)}  Most intriguing..." next
+    "@Leave everything to us, and you get some rest." next
+    "@This is getting most fascinating!" end
+
+l_0xc7f634:
+    "@It's a miracle!" next
+    "@A miracle that has only happened because of your great courage!" next
+    "@...Believe me,{pause(15)} I went through a lifetime's worth of tears while you were gone..." next
+    "@I just wish I could have come with you as a robot." next
+    "@I should have used the Phase Distorter." next
+    "@What a story that would have been..." next
+    "@<Scientist and four kids save the world!>{pause(30)}  Wah ha ha ha ha!" end
+
+l_0xc7f710:
+    "[06 49 00 {e(data_38.l_0xc7f813)}][06 4A 00 {e(data_38.l_0xc7f7a5)}]" goto(data_38.l_0xc7f71e)
