@@ -7,8 +7,9 @@ CLEAN_ROM = EarthBound.smc
 BASE = PSIAnimsBase.smc
 CHECKSUM = e44b6a73359694c25dd4ecc768128d40ec9b6dd1
 PATCH_NAME = MaternalBound-Redux
-PATCHED_ROM_NAME = "Mother 2.smc"
+PATCHED_ROM_NAME = Mother 2.smc
 PATCH_DIR = Patches
+FLIPS = ./flips
 TIME = `date +'%T, %a %d/%b/%Y'`
 SHA1SUM = `sha1sum $(CLEAN_ROM) | awk '{ print $$1 }'`
 
@@ -47,19 +48,19 @@ create_base_rom:
 # Compile the full CoilSnake Project
 compile_project:
 	@echo "Starting compilation process..."; echo
-	@coilsnake-cli compile Project/ $(BASE) $(PATCHED_ROM_NAME)
+	@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"
 
 # Create the EBP patch based on the Project
 create_patch:
 	@echo
-	@coilsnake-cli createpatch $(CLEAN_ROM) $(PATCHED_ROM_NAME) "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
+	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
 
 # Create both additional BPS and IPS patches files
 create_both_patches:
 	@echo
 	@echo "Creating both BPS and IPS patches..."
-	@./flips -c $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).bps"
-	@./flips -c $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
+	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).bps"
+	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
 	@echo; echo "BPS & IPS patches created successfully!"; echo
 
 # Finish the process
