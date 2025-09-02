@@ -3,11 +3,11 @@ SHELL := /bin/bash
 
 # Variables
 START := $(shell date +%s)
-CLEAN_ROM = EarthBound.smc
-BASE = PSIAnimsBase.smc
-CHECKSUM = e44b6a73359694c25dd4ecc768128d40ec9b6dd1
+CLEAN_ROM = EarthBound.sfc
+BASE = PSIAnimsBase.sfc
+CHECKSUM = d67a8ef36ef616bc39306aa1b486e1bd3047815a
 PATCH_NAME = MaternalBound-Redux
-PATCHED_ROM_NAME = Mother 2.smc
+PATCHED_ROM_NAME = Mother 2.sfc
 PATCH_DIR = Patches
 FLIPS = ./flips
 TIME = `date +'%T, %a %d/%b/%Y'`
@@ -40,7 +40,8 @@ check_checksum:
 create_base_rom:
 	@if [ ! -f $(BASE) ]; then \
 		echo "Base ROM ($(BASE)) not found, creating it..."; \
-		coilsnake-cli patchrom $(CLEAN_ROM) $(BASE) "Patches/FixedPSIAnims.ebp" headered; echo; \
+		coilsnake-cli patchrom $(CLEAN_ROM) $(BASE) "Patches/FixedPSIAnims.ebp" false; echo; \
+		coilsnake-cli expand $(BASE) false; echo; \
 	else \
 		echo "$(BASE) already exists, proceeding..."; echo; \
 	fi
