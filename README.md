@@ -123,9 +123,24 @@ Don’t get dizzy while reading the full changelog:
 
 ## Instructions
 
+To play MaternalBound Redux, the following is required:
+
+* Snes9x 1.54 or above (any recent version of it should work)
+* EarthBound (U) SNES ROM:
+
+	EarthBound (USA).sfc
+	No-Intro: Super Nintendo Entertainment System (v. 20180813-062835)
+	File/ROM SHA-1: D67A8EF36EF616BC39306AA1B486E1BD3047815A
+	File/ROM CRC32: DC9BB451
+
+* Floating IPS (FLIPS)
+* MaternalBound-Redux.ips patch
+
 Navigate to the [releases](https://github.com/ShadowOne333/MaternalBound-Redux/releases) page and grab either the BPS or IPS hacks which can be patched into a clean EarthBound ROM (4MB expanded EarthBound ROM for IPS) with either [Lunar IPS](https://www.romhacking.net/utilities/240/), [FLIPS](https://www.romhacking.net/utilities/1040/) or by using [Romhacking’s Online ROM Patcher](https://www.romhacking.net/patch/). Alternatively, the EBP hack can be patched into a clean EarthBound ROM by using the [EarthBound Patcher](https://github.com/Lyrositor/EBPatcher).
 
-If you want to use the hack with **MSU-1**, grab the **PCM pack** released alongside this hack from the Zeldix page at the beginning of this page, or from the following link:
+If you want to use the hack with **MSU-1**, grab the **PCM pack** released alongside this hack from the following archived link:
+https://archive.org/details/earthbound-msu-1-pack
+Or, alternatively, from the mirrored download in Zeldix at the beginning of this page:
 https://app.box.com/s/fkmjx61w4m7xom1kmir5zk7xv6jx9u8f
 Simply rename your ROM to *"eb_msu1.smc"* and place it in the same folder as all the .pcm/.msu files.
 You need to use Snes9x v1.54 or above in order for the MSU-1 hack to work.
