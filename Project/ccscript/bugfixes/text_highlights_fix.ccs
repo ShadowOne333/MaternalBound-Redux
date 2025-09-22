@@ -1,0 +1,86 @@
+// General ASM code for fixing or modifying different things in-game
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+// Change the max number of highlighted tiles, for menu options in the file select menu
+ROM[0xC11DC6] = LDA_i (-1)
+
+// Fix a bug in the highlighting routine, to make it read the font widths when choosing whether to highlight tiles
+ROM[0xC43C20] = STZ_d (0x00)
+ROM[0xC43C59] = JML (new_highlight_loop)
+
+new_highlight_loop: {
+    LDX_d (0x14) // X = window
+    LDA_x (0x0015) // A = font number
+    // multiply by 12, size of the font table
+    STA_d (0x0A)
+    ASL
+    ADC_d (0x0A)
+    ASL
+    ASL
+    // we don't need to add any offset of junk, because the widths are the first thing in the table
+    // add to address of the font table
+    ADC_i (0xF054)
+    STA_d (0x0A)
+    LDA_i (0x00C3)
+    STA_d (0x0C)
+    // A = hiword(widths table), X = loword(widths table)
+    LDA_dl (0x0A)
+    TAX
+    INC_d (0x0A)
+    INC_d (0x0A)
+    LDA_dl (0x0A)
+    // so store them here
+    STA_d (0x0C)
+    STX_d (0x0A)
+    // and index this array using the current character
+    LDA_dl (0x06)
+    SEC
+    SBC_i (0x0050)
+    AND_i (0x007F)
+    CLC
+    ADC_d (0x0A)
+    STA_d (0x0A)
+    LDA_dl (0x0A)
+    AND_i (0x00FF)
+    // and add the width we just read to $00
+    ADC_d (0x00)
+    INC
+    STA_d (0x00)
+
+_inner_loop:
+    LDA_d (0x00)
+    DEC
+    BMI_a (_rest_of_highlight_loop)
+
+    SEC
+    SBC_i (7)
+    STA_d (0x00)
+    
+    LDY_d (0x12)
+    LDX_d (0x14)
+    LDA_x (0x000A)
+    TAX
+    LDA_d (0x18)
+    PHP
+    LDA_d (0x04)
+    PLP
+    BEQ (6)
+        JSL (0xEF00E6)
+        BRA (4)
+    JSL (0xEF00BB)
+
+    INC_d (0x10)
+    INC_d (0x04)
+    INC_d (0x04)
+    DEC_d (0x16)
+    // make sure we don't exceed the max that the caller requested, even in this loop
+    BNE_a (_inner_loop)
+    // if we do, stop right away
+    JML (0xC43C98)
+
+_rest_of_highlight_loop:
+    INC_d (0x06)
+    JML (0xC43C8D)
+}
+//------------------------------------------------------------------

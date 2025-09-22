@@ -1,0 +1,92 @@
+import "../essential/asm65816.ccs"
+
+/*
+ *  Basic explanation of usage:
+ *
+ *  To call a routine that ends in RTS in bank C1, use:
+ *      JSL_RTS_C1(pointer_to_rts_routine)
+ *
+ *  To call a routine that ends in RTS in bank C2, use:
+ *      JSL_RTS_C2(pointer_to_rts_routine)
+ *
+ *  Commands you can use are:
+ *    JSL_RTS_C0(rts_routine)
+ *    JSL_RTS_C1(rts_routine)
+ *    JSL_RTS_C2(rts_routine)
+ *    JSL_RTS_C3(rts_routine)
+ *    JSL_RTS_C4(rts_routine)
+ *    JSL_RTS_EF(rts_routine)
+ */
+
+// Pointers to one byte before an RTL in each bank containing code
+define BANKC0_RTL = 0xC00049
+define BANKC1_RTL = 0xC10002
+define BANKC2_RTL = 0xC200B7
+define BANKC3_RTL = 0xC30140
+define BANKC4_RTL = 0xC40007
+define BANKEF_RTL = 0xEF0050
+
+command ASM_JSL_RTS(bank_rtl, routine) {
+    PHK             // Push program bank (for RTL)
+    PER  (6)        // Push PC+6 (for RTL)
+    PEA  (bank_rtl) // Push pointer to one byte before an RTL in bank of routine (for routine RTS)
+    JML  (routine)  // Long jump to routine
+
+    // The routine will eventually reach an RTS, which will then make the program execution
+    // continue from the 'bank_rtl' address, which should be an RTL, which will then make
+    // the program execution continue from here. Whew!
+}
+
+command JSL_RTS_C0(routine) {
+    ASM_JSL_RTS(BANKC0_RTL, routine)
+}
+command JSL_RTS_C1(routine) {
+    ASM_JSL_RTS(BANKC1_RTL, routine)
+}
+command JSL_RTS_C2(routine) {
+    ASM_JSL_RTS(BANKC2_RTL, routine)
+}
+command JSL_RTS_C3(routine) {
+    ASM_JSL_RTS(BANKC3_RTL, routine)
+}
+command JSL_RTS_C4(routine) {
+    ASM_JSL_RTS(BANKC4_RTL, routine)
+}
+command JSL_RTS_EF(routine) {
+    ASM_JSL_RTS(BANKEF_RTL, routine)
+}
+
+/* EXAMPLES
+
+// Bank C0 doesn't seem to have any "useful" RTS functions? The command is still there anyways
+
+// Bank C1 example
+Counter69: {
+    REP   (0x30)
+    LDA_i (69)
+    JSL_RTS_C1(0xC10443) // Set COUNTER register to 69 (nice)
+    RTL
+}
+
+// Bank C2 example
+Battle_WaitOneSecond: {
+    REP   (0x30)
+    LDA_i (60)
+    JSL_RTS_C2(0xC269BE) // Wait 1 second (only for usage in battles!)
+    RTL
+}
+
+// Bank C3 doesn't seem to have any "useful" RTS functions?
+
+// Bank C4 example
+WaitInputWithTimeout: {
+    REP   (0x30)
+    LDA_i (120)
+    JSL_RTS_C4(0xC4C567) // Wait for player input with 2 seconds of timeout
+    // A now contains 0x0000 if the player pressed anything, or 0xFFFF if 2 seconds elapsed
+    RTL
+}
+
+// Bank EF doesn't seem to have any "useful" RTS functions?
+
+*/

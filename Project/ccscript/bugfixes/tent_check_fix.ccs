@@ -1,0 +1,31 @@
+// General ASM code for fixing or modifying different things in-game
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+// Tent glitch fix by PhoenixBound
+// Last updated 2025-05-07
+
+// Edit to C07477 / getMapObjectAt: add bounds checking
+ROM[0xC07482] = JSL (bounds_check_door_coords)
+
+bounds_check_door_coords: {
+	// A = tile X coordinate, X = tile Y coordinate
+	// EB's map is 1024x1280 minitiles in size, so the coordinates should always be in those bounds
+	CMP_i (1024)
+	BCS (10)
+	CPX_i (1280)
+	BCS (5)
+	// Original code
+	STY_d (0x10)
+	STA_d (0x0E)
+	RTL
+_bail:
+	// Return (signed char)-1 to the calling function (pulling 3 extra bytes off the stack for the JSL that got us here)
+	SEP (0x20)
+	PLA
+	PLX
+	LDA_8 (-1)
+	PLD
+	RTL
+}
+//------------------------------------------------------------------

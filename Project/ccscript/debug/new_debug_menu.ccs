@@ -1,0 +1,92 @@
+/* New Debug menu (By Livvy & ShadowOne333) */
+
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../debug/diamond.ccs"
+import "../essential/asm65816.ccs"
+
+// Debug Menu Options
+import "options/banana.ccs"
+import "options/events.ccs"
+import "options/enemy.ccs"
+import "options/flag_tester.ccs"
+import "options/goods.ccs"
+import "options/hints.ccs"
+import "options/item_desc.ccs"
+import "options/level.ccs"
+import "options/money.ccs"
+import "options/move.ccs"
+import "options/party.ccs"
+import "options/psi_anims.ccs"
+import "options/sound.ccs"
+import "options/status.ccs"
+import "options/teleport.ccs"
+import "options/unused_scripts.ccs"
+
+//------------------------------------------------------------------
+
+ROM[0xC58000] = goto(Main)	// Hijack the original debug menu. This doesn't work... probs the wrong offest
+
+Main:
+    window_closeall
+    window_open(53) newline
+    diam "Debug menu on." next
+    goto(debug_main)
+
+debug_main:
+    window_open(53) newline
+    diam "What shall you do?" wait
+    "[18 02]"		// Save text window state
+    open_hp
+    open_wallet
+    window_open(59)	// Previously Window 2
+    menu 2 {
+      "Party Edit":        {main_menu goto(Party_Edit)}
+      "Goods Edit":        {main_menu goto(Goods_Edit)}
+      "Special Status":    {main_menu goto(Special_Status)}
+      "Move to area":      {main_menu goto(Move_to_area)}
+      "Money Edit":        {main_menu goto(Money_Edit)}
+      "Level Up":          {main_menu goto(Level_Up)}
+      "Sound Test":        {main_menu goto(Sound_Test)}
+      "Flags":             {main_menu goto(Flag_Test)}
+      "Events":            {main_menu goto(Events)}
+      "Enemy Spawn":       {main_menu goto(Enemy_Spawn)}
+      "Enemy Test":        {main_menu goto(Battler)}
+      "PSI Animations":	   {main_menu goto(PSI_Anims)}
+      "Teleport":          {main_menu goto(Teleport_Test)}
+      "Hint Map":	   {main_menu goto(Hint_Map)}
+      "Hint Shop":         {main_menu goto(Hint_Shop)}
+      "Item Descriptions": {main_menu goto(Item_Desc)}
+      "Unused Script":	   {main_menu goto(Unused_Scripts)}
+    }
+    window_closetop
+    window_switch(53) clearline
+    diam "Debug mode off." end
+
+command main_menu {
+    copy_wram		// Copy Active Memory to WRAM
+    window_closetop
+    window_switch(53)
+    window_clear
+    newline
+    copy_active		// Copy WRAM to Active Memory
+}
+
+Save_The_Game:
+    save
+    sound(11)
+    window_closeall
+    eob
+
+define row1 = 1
+define row2 = 10
+Selector_Text:
+    text_pos(row1, 1)"Up: +1"
+    text_pos(row2, 1)"Left: +10"
+
+    text_pos(row1, 2)"Down: -1"
+    text_pos(row2, 2)"Right: -10"
+    eob
+
+//------------------------------------------------------------------

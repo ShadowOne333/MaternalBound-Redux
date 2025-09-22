@@ -1,0 +1,27 @@
+// General ASM code for fixing or modifying different things in-game
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------------------------------------
+/* Crack for use in real hardware despite of region */
+ROM[0xC0281D] = {		//"[EA EA]"
+	NOP
+	NOP
+}
+
+ROM[0xC083A2] = BRA(0x0E)	//"[80]"
+ROM[0xC083AD] = BRA(0x03)	//"[80]"
+ROM[0xC0A12D] = BRA(0x0C)	//"[80]"
+ROM[0xC1FFE7] = {		//"[EA A9 00 00]"
+	NOP
+	LDA_i(0x0000)
+}
+
+ROM[0xC3FDD6] = {		//"[EA A9 00 00 80]"
+	NOP
+	LDA_i(0x0000)
+	BRA(0x15)
+}
+
+/* Region Fix */
+ROM[0xC0A141] = BRA(0x0C)	//"[80]"
+//------------------------------------------------------------------

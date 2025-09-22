@@ -1,0 +1,26 @@
+// Apply the Crying effect to also affect enemies, instead of just the party members
+// Credit to The Kirby)
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+ROM[0xC283AE] = JSL(Crying_EnemyMissRates)
+
+Crying_EnemyMissRates: {
+	PHX			//Push X.
+	LDX_a(0xA970)		//Load attacker’s pointer.
+	LDA_x(0x001F)		//Load attacker’s status.(crying)
+	AND_i(0x00FF)		//Clear high byte.
+	PLX			//Pull X.
+	CMP_i(0x0002)		//Check if the attacker is crying.
+	BEQ_a(IncMissRate)	//Branch if attacker is crying.
+	LDA_xl(0xD59589)	//Load enemy’s miss rate from ROM.
+	RTL
+
+IncMissRate:
+	LDA_xl(0xD59589)	//Load enemy entry’s miss rate from ROM.
+	CLC			//Clear carry flag.
+	ADC_i(0x0008)		//Add “8” to the enemy’s miss rate.
+	RTL
+}
+//------------------------------------------------------------------

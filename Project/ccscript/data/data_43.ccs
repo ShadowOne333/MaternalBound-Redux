@@ -1,0 +1,444 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../redux/window_titles.ccs"
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc86e58:
+    "@([1C 01 4A] read the Hieroglyphs!)" next
+    title_poo(1)
+    "@<To fight against the invaders, we built this pyramid fortress." next
+    "@However, our efforts were futile, and we lost." next
+    "@Nonetheless, our pyramid was protected by the gods of Scarabia." next
+    "@The invaders from the heavens will be reborn every millennium and will attack again." next
+    "@Even now, the invaders hide beyond space and time and build their evil stronghold." next
+    "@A place out of time is beyond the Dark, and is even farther beyond the Lost Underworld." next
+    "@The Deep Darkness is shrouded, it is without light." next
+    "@Only one with the [1C 05 AF] can pierce the dark." next
+    "@The Sphinx now watches over everything," next
+    "@waiting for the coming of a truly brave hero." next
+    "@   #" linebreak
+    "  4   3" linebreak
+    "   2 5" next
+    "@Dance in front of the Sphinx!>[06 94 00 {e(l_0xc87099)}][03]{window_closeall}{pause(120)}[1F 1C 04 04]{pause(10)}[19 22 01 01 04 00][1F 13 01 00][19 22 02 01 04 00][1F 13 02 00][19 22 03 01 04 00][1F 13 03 00]{pause(50)}[1F 1D 04]{pause(30)}{window_open(1)}"
+    title_poo(1)
+    "[19 10 01]{rtoarg}@[1C 02 00]!  Let's go to Scarabia.{pause(15)}  The pyramid is the key!{wait}{set(flag 148)}[1F 66 01 31 6F AC C8 00]" eob
+
+l_0xc87099:
+    end
+
+l_0xc8709b:
+    end
+
+l_0xc8709d:
+    "[06 14 01 {e(l_0xc86e58)}]" goto(l_0xc870a4)
+
+l_0xc870a4:
+    "@(This set of hieroglyphs is believed to have been made around 4000 B.C." next
+    "@No one has ever understood the contents" next
+    "@because it's written in an unusual style with unusual characters." next
+    "@Won't you come closer and try to solve the puzzle of the ancient stone tablets?)" end
+
+l_0xc87155:
+    "@(Rum Raisin the fifth's training pot.)" end
+
+l_0xc87176:
+    "@(Rum Raisin the fourth's casket.)" end
+
+l_0xc87194:
+    "@(Rum Raisin the third's casket.)" end
+
+l_0xc871b2:
+    "@(Toten Karmen's lunch box.)" end
+
+l_0xc871cd:
+    "@(Toten Karmen's pencil box.)" end
+
+l_0xc871e9:
+    "@(Toten Karmen's casket.)" end
+
+l_0xc87202:
+    "[06 5C 01 {e(data_55.l_0xc9992f)}][06 56 01 {e(l_0xc87280)}][06 94 00 {e(l_0xc87220)}]{window_open(1)}@.....{wait}{window_closeall}" eob
+
+l_0xc87220:
+    "{window_open(1)}@Are you a thief, a warrior, or one who has come to see my majesty?" next
+    "@You must decide what you really are.  Therefore, what will you do?{wait}{window_closeall}{set(flag 7)}{set(flag 152)}" eob
+
+l_0xc87280:
+    "{window_open(1)}@Warriors, enter now.{pause(20)}" linebreak
+    "  Search for the [1C 05 AF].[03]{window_closeall}" eob
+
+l_0xc872a6:
+    "@Broken down, old submarine." next
+    "@The yellow color is purely coincidental." next
+    "@                      ...Brickroad" end
+
+l_0xc872e6:
+    "@Rusty Bicycle." linebreak
+    "  Rust is the perfect brake." next
+    "@                      ...Brickroad" end
+
+l_0xc87313:
+    "@Taxi with no engine." linebreak
+    "  Beautiful, even though the thing doesn't run." next
+    "@                      ...Brickroad" end
+
+l_0xc8734b:
+    "@Old Vehicle Collection." linebreak
+    "  This is my secret hobby." next
+    "@                      ...Brickroad" end
+
+l_0xc8737f:
+    "@I built a bulletin board without a message." next
+    "@                      ...Brickroad" end
+
+l_0xc873ab:
+    "@The grass is always greener on the other rope..." next
+    "@I wonder why that is..." next
+    "@                      ...Brickroad" end
+
+l_0xc873dd:
+    "@I put out a bulletin board,{pause(20)} but it's probably unnecessary." next
+    "@                      ...Brickroad" end
+
+l_0xc87411:
+    "@There is a useful item at the dead-end after you make quite a long walk." next
+    "@                      ...Brickroad" end
+
+l_0xc87444:
+    "@When attempting a dungeon trek,{pause(20)} one should purify both mind and body." next
+    "@                      ...Brickroad" end
+
+l_0xc87474:
+    "@Spare not sore effort." next
+    "@Heed this rule,{pause(20)} and most wondrous items shalt beest yours." next
+    "@                      ...Brickroad" end
+
+l_0xc874a2:
+    "@I couldn't agree more with the opinion on the left bill board." next
+    "@                      ...Brickroad" end
+
+l_0xc874d4:
+    "@I set up a telephone line in the dungeon." next
+    "@I'm sure that has its pros and cons, of course." next
+    "@                      ...Brickroad" end
+
+l_0xc87511:
+    "@You have a long way to go." next
+    "@Getting some rest and relaxation may save you." next
+    "@                      ...Brickroad" end
+
+l_0xc87546:
+    "@Once a dungeon is built,{pause(20)} monsters always start moving in." next
+    "@                      ...Brickroad" end
+
+l_0xc8757d:
+    "@Place an item at the dead end." next
+    "@You are free to take it whenever you want." next
+    "@                      ...Brickroad" end
+
+l_0xc875b0:
+    "@Items that are easy to get to are usually disappointing." next
+    "@                      ...Brickroad" end
+
+l_0xc875db:
+    "@It is a dungeon owner's obligation to hire a doctor and a nurse." next
+    "@                      ...Brickroad" end
+
+l_0xc87617:
+    "@Keep this board in mind." next
+    "@                      ...Brickroad" end
+
+l_0xc87632:
+    "@My statistics show about 70% of the people go to the right first." next
+    "@                      ...Brickroad" end
+
+l_0xc87664:
+    "@Your first goal is to reach the four ropes." next
+    "@                      ...Brickroad" end
+
+l_0xc8768c:
+    "@Sometimes there are places you can't reach at the moment," next
+    "@but that you will be able to in time." next
+    "@                      ...Brickroad" end
+
+l_0xc876b6:
+    "@Welcome [5F] Bienvenido." linebreak
+    "  You are inside of my body." next
+    "@                      ...Brickroad" end
+
+l_0xc876d6:
+    "@If but the water wheel be diligent,{pause(20)} the water has no time to freeze." next
+    "@                      ...Brickroad" end
+
+l_0xc876f9:
+    "@Learn from your mistakes." next
+    "@Failure is the MOTHER 2 of success." next
+    "@                      ...Brickroad" end
+
+l_0xc8773b:
+    "@You have a strong-looking body." next
+    "@Wouldn't you like to be a dungeon worker?" next
+    "@                      ...Brickroad" end
+
+l_0xc8776e:
+    "@There are lots of monsters up there,{pause(20)} but don't stress out." next
+    "@                      ...Brickroad" end
+
+l_0xc87798:
+    "@Dungeon exploration is tough,{pause(20)} but it's also fun." next
+    "@                      ...Brickroad" end
+
+l_0xc877c4:
+    "@That's a hole down below." next
+    "@You don't have to worry about this for now." next
+    "@                      ...Brickroad" end
+
+l_0xc877f1:
+    "@This is the second floor of my body." next
+    "@                      ...Brickroad" end
+
+l_0xc87811:
+    "@What's a dungeon?" next
+    "@That is my eternal question." next
+    "@                      ...Brickroad" end
+
+l_0xc8783f:
+    "@There is an item at the dead end,{pause(20)} but I have been known to be wrong occasionally." next
+    "@Sorry." next
+    "@                      ...Brickroad" end
+
+l_0xc87881:
+    "@It smells like flowers here." next
+    "@If you can't smell it, your nose must be stuffy." next
+    "@                      ...Brickroad" end
+
+l_0xc878b9:
+    "@This music is one of my greatest accomplishments." next
+    "@                      ...Brickroad" end
+
+l_0xc878e2:
+    "@Inside the dungeon,{pause(20)} flash photography is prohibited." next
+    "@                      ...Brickroad" end
+
+l_0xc8791a:
+    "@You are standing right around my belly button." next
+    "@                      ...Brickroad" end
+
+l_0xc87941:
+    "@This is the third floor of my body." next
+    "@                      ...Brickroad" end
+
+l_0xc87961:
+    "@<Mad Duck>" linebreak
+    "  They can be a nice pet if they stay far away." next
+    "@                      ...Brickroad" end
+
+l_0xc87995:
+    "@<Gruff Goat>" linebreak
+    "  They are a really gruff kind of goat." next
+    "@                      ...Brickroad" end
+
+l_0xc879c5:
+    "@<Good job,{pause(20)}" linebreak
+    "  you finally made it!>" next
+    "@There is a board upstairs that says that." next
+    "@                      ...Brickroad" end
+
+l_0xc879fe:
+    "@Why don't you take a nice, little rest here?" next
+    "@                      ...Brickroad" end
+
+l_0xc87a1d:
+    "@<Slimy Little Pile>" linebreak
+    "  He has a bad habit of burping." next
+    "@                      ...Brickroad" end
+
+l_0xc87a50:
+    "@Good job,{pause(20)}" linebreak
+    "  you finally made it." next
+    "@                      ...Brickroad" end
+
+l_0xc87a6f:
+    "@<Return Hole>" linebreak
+    "  Jump in with all your courage." next
+    "@                      ...Brickroad" end
+
+l_0xc87a9a:
+    "@Welcome to my modest dungeon!" next
+    "@                      ...Brickroad" end
+
+l_0xc87aba:
+    "@Watch for falling materials!" next
+    "@                      ...Brickroad" linebreak
+    "{wait}{window_closeall}[06 C1 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_23.l_0xc68851) eob
+
+l_0xc87aeb:
+    "@Way to go." linebreak
+    "  Please come back again." next
+    "@                      ...Brickroad" end
+
+l_0xc87b0b:
+    "@(<Safety First>" linebreak
+    "  Don't get injured!" next
+    "  Burp instead!)" end
+
+l_0xc87b33:
+    "@(Item shop here.)" end
+
+l_0xc87b40:
+    "@(Hot Springs.  Good all over)" end
+
+l_0xc87b56:
+    "@(Hotel here.)" end
+
+l_0xc87b60:
+    "@(Weird junk.)" end
+
+l_0xc87b70:
+    "@(Welcome to beautiful Onett, the wild flower of Eagleland.)" end
+
+l_0xc87b9e:
+    "@(Clean, quiet and beautiful Onett-- run by Mayor Pirkle...)" end
+
+l_0xc87bcf:
+    "@(If you have any trouble, consult your kind-hearted mayor!)" end
+
+l_0xc87bf5:
+    "@(Good and Strong, the kids of Onett..." linebreak
+    "  B.H. Pirkle)" end
+
+l_0xc87c1d:
+    "@(The people of Onett are proud of B.H. Pirkle!" next
+    "@The Mayor is proud of the people of Onett.)" end
+
+l_0xc87c57:
+    "@(Help Wanted - Policemen to close roads." linebreak
+    "  Onett Police Dept.)" end
+
+l_0xc87c8c:
+    "@(Twoson is different from Onett.  We have Burglin Park.)" end
+
+l_0xc87cb8:
+    "@(Tonight, the boogie is back!" linebreak
+    "  It's the Runaway Brothers' night!)" end
+
+l_0xc87cd9:
+    "@(Do you play some sports?  ...If you do, that's fine by us." next
+    "@<Twoson Athletic Committee>)" end
+
+l_0xc87d1f:
+    "@(I won't say anything to you adults," next
+    "@but I would stress to you young kids, don't play for more than two hours." next
+    "@Anything excessive is no good." next
+    "@Parents Opposing Obsession Plan)" end
+
+l_0xc87d94:
+    "@There's graffiti here." next
+    "@(This game stinks!)" end
+
+l_0xc87db4:
+    "@There's graffiti here." next
+    "@(Software Development House where you can see Mt. Fuji - HAL Laboratory)" end
+
+l_0xc87dff:
+    "[06 59 00 {e(data_35.l_0xc7c59e)}][06 7E 00 {e(l_0xc87e13)}]" call(data_35.l_0xc7c59e) eob
+
+l_0xc87e13:
+    "@(There are books other than <Overcoming shyness.>)" end
+
+l_0xc87e37:
+    "[06 59 00 {e(data_35.l_0xc7c59e)}][06 7E 00 {e(l_0xc87e4c)}]" call(data_35.l_0xc7c59e) end
+
+l_0xc87e4c:
+    "@(You found the book" linebreak
+    "  <Overcoming Shyness>!)" next
+    "[1D 03 FF][1B 02 {e(l_0xc87e8e)}][1D 0E 00 A4][1B 05]" call(data_36.l_0xc7dcb6) "{wait}{set(flag 89)}{unset(flag 766)}{unset(flag 51)}" eob
+
+l_0xc87e8e:
+    "@(But look, at this glorious moment you have no more room.)" next
+    eob
+
+l_0xc87eb2:
+    "@No problem here." eob
+
+l_0xc87ebc:
+    "@This is a gift from Dr. Andonuts." next 
+    "@Let's use it with care." next
+    "@                      ...Brickroad" end
+
+l_0xc87eee:
+    "@If you check into this bench, it's just like checking into a hotel." next
+    "@                      ...Brickroad" end
+
+l_0xc88000:
+    "{isset(flag 22)}[1B 02 {e(l_0xc8807d)}]@(The bubble monkey took a piece of bubble gum," next
+    "@chewed it and started blowing.)[03]{window_closeall}[06 52 01 {e(l_0xc8824a)}][1F EB 09 06][1F 15 31 00 FD 00 01][1F 61]{sound(14)}[1F 1F 31 00 06][1F 15 32 00 FE 00 01][1F 15 58 01 FF 00 01][1F 61][1F 1F 32 00 06][1F 1F 58 01 06][1F EC 09 01]" eob
+
+l_0xc8807d:
+    "[19 10 01]{rtoarg}@[1C 02 00] chewed a piece of bubble gum,{pause(15)} but it wasn't as satisfying as food." end
+
+l_0xc880b9:
+    "[1F 11 09][1F EB 09 06][1F 1E 61 02 06][1F 15 31 00 FC 00 01][1F 61]{sound(14)}[1F 1F 31 00 06][1F 15 32 00 FE 00 01][1F 15 58 01 FF 00 01][1F 61][1F 1F 58 01 06][1F 1F 32 00 06][1F 15 2E 00 31 00 01][1F 61][1F 1F 2E 00 06][1F EC 09 01]" eob
+
+l_0xc88103:
+    "[1F 67 02]{set(flag 11)}[1F 41 05][1F E9 8F 02][1F E9 90 02][1F 1F 2E 00 06][1F 15 31 00 FC 00 01][1F 61][1F 1F 31 00 06][1F 15 32 00 DF 01 01][1F 61]                              [1F 15 FC 00 E0 01 01]      [1F 61]                              {unset(flag 2)}[1F 1F 32 00 06][1F 15 2E 00 E1 01 01][1F 61]                              [1F E7 FC 00][1F E7 2E 00]{unset(flag 344)}     [1F 1E 82 02 06][1F 1E 83 02 06][1F 1E 84 02 06][1F 1E 8E 02 06][1F F1 8F 02 EB 01][1F F1 90 02 EC 01]{pause(120)}[1F EA 2E 00][1F EA FC 00][1F 61]                              [1F E7 FC 00]{set(flag 537)}{music_resume}[1F 15 6A 00 E3 01 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61]                              {set(flag 2)}                       {pause(60)}[1F EA FC 00]             [1F E5 03][1F 61]                              [1F E7 FC 00][1F F2 6A 00 E4 01]  [1F E8 03]{unset(flag 2)}                       [1F 61][1F ED][1F E5 FF][1F F2 2E 00 E2 01]     [1F 61][1F 1F 2E 00 06][1F EC 09 01]{pause(60)}[1F EA FC 00]             [1F 61][1F 15 73 01 ED 01 01][1F 15 73 01 EE 01 01][1F 61]                              [1F 1F FC 00 06][1F 1E 8F 02 06][1F 1E 90 02 06]{unset(flag 345)}{unset(flag 11)}" call(data_36.l_0xc7dd6b) "{unset(flag 537)}{music_resume}[19 26 06]{set(flag 129)}[1F 41 06]" eob
+
+l_0xc8824a:
+    "[1F EB 09 06][1F 15 31 00 FD 00 01][1F 61][1F 1F 31 00 06][1F 15 32 00 05 01 01][1F 15 58 01 FF 00 01] [1F 61][1F F2 58 01 06 01] [1F 61][1F 1F 32 00 06][1F 1F 58 01 06][1F 15 2E 00 07 01 01] [1F 61][1F 1E A5 02 06][1F 61][1F 1F 2E 00 06][1F 15 2F 00 08 01 01][1F 61][1F 1F 2F 00 06][1F 15 2E 00 09 01 01][1F 61][1F 1F 2E 00 06][1F EC 09 01]{unset(flag 338)}{set(flag 311)}" eob
+
+l_0xc882bd:
+    "[1F E6 78 02] [1F 13 09 05][1F 1C 09 03]{pause(60)}[1F 1D 09]{window_open(1)}"
+    title(1, Bubble)
+    "@Kye uki kukyi" linebreak
+    "  (Now she's my type...)" next
+    "@Ki kukkyo uke" linebreak
+    "  (I think I'll ask her for a date!)[03]{window_closeall}[1F 12 09][1F 15 2E 00 1D 01 01]{pause(4)}[1F E9 78 02] [1F 61]{unset(flag 22)}" eob
+
+l_0xc88332:
+    "{set(flag 11)}[1F 41 05]" call(data_24.l_0xc69082) "[1F 15 6A 00 91 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]" call(data_36.l_0xc7dd6b) "{set(flag 655)}{music_resume}[1F ED][1F E5 FF][1F F1 67 02 8B 00][1F 61][06 B8 00 {e(l_0xc88386)}]{unset(flag 9)}[1F F1 67 02 8C 00][1F 61][06 09 00 {e(l_0xc88386)}]" call(data_44.l_0xc886f9) goto(l_0xc88386)
+
+l_0xc88386:
+    eob
+
+l_0xc88387:
+    "[1F 15 B9 01 09 03 01][1F E9 6F 02][1F 61]{pause(30)}[1F 1E 6D 02 06][1F 61][1F 15 D1 00 92 00 FF][1F 21 BA][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 93 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 99 00 FF][1F 15 E6 00 9B 00 FF][1F 21 BD][1F EF E6 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 94 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 9D 00 FF][1F 15 E6 00 9F 00 FF][1F 21 BF][1F EF E6 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 95 00 FF][1F 21 BC][1F EF D1 00][1F E8 FF]{pause(1)}[1F 61][1F ED][1F 15 D1 00 A1 00 FF][1F 15 E6 00 A4 00 FF][1F 21 C1][1F EF E6 00][1F 61][1F E7 D1 00][1F E7 E6 00]" call(data_44.l_0xc886d7) "{pause(15)}" call(data_44.l_0xc886d7) "[1F EA D1 00][1F EA E6 00][1F 61][1F E7 D1 00][1F E7 E6 00]{unset(flag 655)}{music(110)}[1F E8 FF][1F EA D1 00][1F EA E6 00][1F 61][1F ED][1F E5 FF][1F 11 01][1F 11 02][1F 12 03]" call(data_49.l_0xc915f4) "{set(flag 47)}[1F 15 0D 00 B0 00 FF][1F 21 4D]{music_resume}[1F 15 6A 00 AF 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F 0D 00 06][1F 15 03 00 B1 00 01]{pause(1)}[1F E7 03 00]{window_open(1)}" goto(l_0xc884d0)
+
+l_0xc884d0:
+    title_jeff(1)
+    "@Man,{pause(15)} oh,{pause(5)} man,{pause(20)} did that ever scare me!..." next
+    "@The Sky Walker...{pause(20)}  I guess it took a little damage while landing..." next
+    "@Oh well...[03]{window_closeall}[1F EA 03 00][1F 61]{window_open(1)}" newline
+    title_jeff(1)
+    "@You don't have to explain a thing...{pause(20)}  I'm [1C 02 03]." next
+    "@I came because you" linebreak
+    "  called me." next
+    "@I'm not very strong,{pause(15)} really near-sighted,{pause(15)} kind of shy," next
+    "@and I tend to be a little reckless.{pause(20)}  This is just the way I am..." next
+    "@I hope you want me to be your friend... okay?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc885cb:
+    " [19 02]No" eob
+
+l_0xc885d1:
+    "[1C 07 02][11]{clearline}[09 02 {e(data_44.l_0xc88650)} {e(l_0xc885e0)}]" goto(l_0xc885e0)
+
+l_0xc885e0:
+    "@...So why did you call me?{pause(20)}  Are you just making fun of me?" next
+    "@This is just the way I am..." next
+    "@I hope you want me to be your friend... okay?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc88636:
+    " [19 02]No" eob
+
+l_0xc8863c:
+    "[1C 07 02][11]{clearline}[09 02 {e(data_44.l_0xc88650)} {e(l_0xc885e0)}]" goto(l_0xc885e0)

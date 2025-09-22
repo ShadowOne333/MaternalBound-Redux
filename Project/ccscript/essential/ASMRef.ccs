@@ -1,0 +1,289 @@
+import "../essential/asm65816.ccs"
+
+// Overwrites Teleport Box battle action code
+// 0xC2AB71 - 0xC2AC29
+define Atk_Fail_Chk = 0xC2AB71			define NPC_Check = 0xC2AB71
+define Miss_Calc = 0xC2AB75
+define Smash = 0xC2AB79
+define Determine_Dodge = 0xC2AB7D
+define Level_2_Atk = 0xC2AB81
+define Heal_Strangeness = 0xC2AB85
+define Inflict_Status = 0xC2AB89
+define Success_256 = 0xC2AB8D
+define Mult_A_x_Rand_050_150 = 0xC2AB91
+define Mult_A_x_Rand_075_125 = 0xC2AB95
+define Calc_Resist_Damage = 0xC2AB99		define Damage_Reduction = 0xC2AB99
+define Decrease_Offense_16th = 0xC2AB9D
+define Decrease_Defense_16th = 0xC2ABA1
+define Revive_Target = 0xC2ABA5
+define PSI_Cancel = 0xC2ABA9
+define Rand_0_to_A1 = 0xC2ABAD
+define Weaken_Shield = 0xC2ABB1
+define PSI_Shield_Nullify = 0xC2ABB5
+define Swap_Attack = 0xC2ABB9
+define Success_Luck_80 = 0xC2ABBD
+define Success_Luck_40 = 0xC2ABC1
+define Success_500 = 0xC2ABC5
+define Increase_Offense_16th = 0xC2ABC9
+define Increase_Defense_16th = 0xC2ABCD
+define Get_Enemy_Type = 0xC2ABD1
+define Success_Speed = 0xC2ABD5
+define Short_RNG = 0xC2ABD9
+define Escape_Battle_Check = 0xC2ABDD
+define Get_Battle_Action_Type = 0xC2ABE1
+define Calculate_Damage = 0xC2ABE5
+define Truncate_Value = 0xC2ABE9
+define Reduce_HP = 0xC2ABED
+define Reduce_PP = 0xC2ABF1
+define Set_Rolling_HP = 0xC2ABF5
+define Recover_HP = 0xC2ABF9
+define Recover_PP = 0xC2ABFD
+define Set_Rolling_PP = 0xC2AC01
+define Get_Battle_Sprite_Width = 0xC2AC05
+define Get_Battle_Sprite_Height = 0xC2AC09
+define Apply_Condiment = 0xC2AC0D
+
+
+define Rand = 0xC08E9A
+define Eight_Bit_Mult_AxA = 0xC08FE8
+define Eight_Bit_Mult_YxA = 0xC08FF7
+define Mult_YxA = 0xC09032
+define Divide_YxA = 0xC0914B
+define Halve_Number = 0xC0925B
+define Execute_Code_0x7E00BC = 0xC09279
+define Play_Sound = 0xC0ABE0
+
+define Give_Item = 0xC18BC6
+define Remove_Item = 0xC18EAD
+define Set_Window_Focus_Proxy = 0xC1DD4D
+define Create_Window_Proxy = 0xC1DD47
+define Selection_Menu_Item_Setup = 0xC1DDDA
+define Print_Menu_Items_Proxy = 0xC1DE25
+define Selection_Menu_Proxy = 0xC1DE2B
+define Battle_PSI_Menu_Proxy = 0xC1DE3D
+
+define Check_Event = 0xC21628
+define Set_Event = 0xC2165E
+define Adjust_Attacker_Name = 0xC23BCF		define Fix_Attacker_Name = 0xC23BCF
+define Adjust_Target_Name = 0xC23D05		define Fix_Target_Name = 0xC23D05
+define Select_First_Target = 0xC23E32
+define Execute_Battle_Action = 0xC240A4
+define Choose_Target = 0xC24477
+define Determine_Target_Flags = 0xC24703
+define Random_Targetting = 0xC26EF8
+define Is_Char_Targetted = 0xC27029
+define KO_Target = 0xC27550
+define Battle_Init_Enemy_Stats = 0xC2B6EB
+define Battle_Init_Player_Stats = 0xC2B930
+define Count_Characters = 0xC2BAC5
+
+define Check_For_Item = 0xC45683
+define Check_PSI_Learned = 0xC45ECE
+define Change_Music = 0xC4FBBD
+define Rand_Mod_A = 0xC45F7B
+
+define Item_Configuration_Table = 0xD55000
+
+define Pause_HP_Scrolling = 0xEF0256
+define Resume_HP_Scrolling = 0xEF026E
+
+
+ROM [Atk_Fail_Chk] = {
+	JSR	(0x7CFD)
+	RTL
+}
+
+ROM [Miss_Calc] = {
+	JSR	(0x82F8)
+	RTL
+}
+
+ROM [Smash] = {
+	JSR	(0x83F8)
+	RTL
+}
+
+ROM [Determine_Dodge] = {
+	JSR	(0x84AD)
+	RTL
+}
+
+ROM [Level_2_Atk] = {
+	JSR	(0x8523)
+	RTL
+}
+
+ROM [Heal_Strangeness] = {
+	JSR	(0x856B)
+	RTL
+}
+
+ROM [Inflict_Status] = {
+	JSR	(0x724A)
+	RTL
+}
+
+ROM [Success_256] = {
+	JSR	(0x6BB8)
+	RTL
+}
+
+ROM [Mult_A_x_Rand_050_150] = {
+	JSR	(0x6A44)
+	RTL
+}
+
+ROM [Mult_A_x_Rand_075_125] = {
+	JSR	(0x6AFD)
+	RTL
+}
+
+ROM [Calc_Resist_Damage] = {
+	JSR	(0x8125)
+	RTL
+}
+
+ROM [Decrease_Offense_16th] = {			//Reduces Offense by 1/16
+	JSR	(0x7DDC)
+	RTL
+}
+
+ROM [Decrease_Defense_16th] = {			//Reduces Defense by 1/16
+	JSR	(0x7E33)
+	RTL
+}
+
+ROM [Revive_Target] = {
+	JSR	(0x7397)
+	RTL
+}
+
+ROM [PSI_Cancel] = {
+	JSR	(0xAB79)
+	RTL
+}
+
+ROM [Rand_0_to_A1] = {
+	JSR	(0x6A2D)
+	RTL
+}
+
+ROM [Weaken_Shield] = {
+	JSR	(0x94CE)
+	RTL
+}
+
+ROM [PSI_Shield_Nullify] = {
+	JSR	(0x941D)
+	RTL
+}
+
+ROM [Swap_Attack] = {
+	JSR	(0x7E8A)
+	RTL
+}
+
+ROM [Success_Luck_80] = {
+	JSR	(0x7C96)
+	RTL
+}
+
+ROM [Success_Luck_40] = {
+	JSR	(0x8D41)
+	RTL
+}
+
+ROM [Success_500] = {
+	JSR	(0x6BDB)
+	RTL
+}
+
+ROM [Increase_Offense_16th] = {			//Increases Offense by 1/16
+	JSR	(0x7D28)
+	RTL
+}
+
+ROM [Increase_Defense_16th] = {			//Increases Defense by 1/16
+	JSR	(0x7D82)
+	RTL
+}
+
+ROM [Get_Enemy_Type] = {
+	JSR	(0x69A8)
+	RTL
+}
+
+ROM [Success_Speed] = {
+	JSR	(0x7CAF)
+	RTL
+}
+
+ROM [Short_RNG] = {
+	JSR	(0x69EF)
+	RTL
+}
+
+ROM [Escape_Battle_Check] = {
+	JSR	(0xAB14)
+	RTL
+}
+
+ROM [Get_Battle_Action_Type] = {
+	JSR	(0x698B)
+	RTL
+}
+
+ROM [Calculate_Damage] = {
+	JSR	(0x7EAF)
+	RTL
+}
+
+ROM [Truncate_Value] = {
+	JSR	(0x69F8)
+	RTL
+}
+
+ROM [Reduce_HP] = {
+	JSR	(0x71F0)
+	RTL
+}
+
+ROM [Reduce_PP] = {
+	JSR	(0x721D)
+	RTL
+}
+
+ROM [Set_Rolling_HP] = {
+	JSR	(0x7126)
+	RTL
+}
+
+ROM [Recover_HP] = {
+	JSR	(0x7294)
+	RTL
+}
+
+ROM [Recover_PP] = {
+	JSR	(0x7318)
+	RTL
+}
+
+ROM [Set_Rolling_PP] = {
+	JSR	(0x7191)
+	RTL
+}
+
+ROM [Get_Battle_Sprite_Width] = {
+	JSR	(0xEFFD)
+	RTL
+}
+
+ROM [Get_Battle_Sprite_Height] = {
+	JSR	(0xF04E)
+	RTL
+}
+
+ROM [Apply_Condiment] = {
+	JSR	(0xB172)
+	RTL
+}

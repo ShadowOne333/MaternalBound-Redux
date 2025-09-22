@@ -1,0 +1,19 @@
+// Flag Test debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+import "../../essential/cc_asmcall.ccs"
+
+//------------------------------------------------------------------
+
+Flag_Test:
+    window_open(53)
+    diam "Select an Event Flag." newline
+    call(new_debug_menu.Selector_Text)
+    cc_asmcall(0xC13D03, RET_NONE)
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------

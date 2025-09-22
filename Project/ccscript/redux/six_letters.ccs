@@ -1,0 +1,279 @@
+import "../essential/asm65816.ccs"
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Six letter names patch (WIP by Vittorio though reusing some code from other fellas, thanks Chaz and D-Man!).
+
+// Step 1: Expand the save struct, we need a new 28 bytes spot in RAM to save the names; these must be saved to SRAM.
+// Step 2: Allow to fill-in 6 characters for the chosen four names and save them to the new spot in RAM.
+// Step 3: Change every spot that loads names to get them from the new spot.
+// Step 4: Apply a minor change for the six letters to display properly in HP/PP boxes.
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+define RAM_NAMES = 0xB630 // 0xB600 is the start of the new space, but I'm leaving that space for the expanded flags by coop.
+define NAMES_SIZE = 7
+
+define NAMES_LENGTH = 6
+
+command change_size(addr) { ROMTBL[addr, 1, 1] = short[0] NAMES_SIZE }
+command change_spot(addr) { ROMTBL[addr, 1, 1] = short[0] RAM_NAMES }
+
+command change_length(addr) { ROMTBL[addr, 1, 1] = short[0] NAMES_LENGTH }
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to expanding the save struct.
+// This was made by Chaz. It adds 0x9D (157) new bytes starting from $B600.
+
+// Saving the new data.
+ROM[0xEF097E] = LDA_i (0x02BA)
+ROM[0xEF0985] = LDA_i (0x02BA)
+ROM[0xEF099B] = LDA_i (0xB600)
+ROM[0xEF09DA] = LDA_i (0x009D)
+
+// Loading the new data.
+ROM[0xEF0B2D] = LDA_i (0x02BA)
+ROM[0xEF0B34] = LDA_i (0x02BA)
+ROM[0xEF0B42] = LDA_i (0xB600)
+ROM[0xEF0B81] = LDA_i (0x009D)
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to saving the names to the new spot.
+
+// Allow to pick six letters in the naming screen.
+ROM[0xC1F984] = LDA_i(6)
+
+// Save them to the new spot.
+change_size(0xC1F978)
+change_spot(0xC1F980)
+
+// Minor fix when pressing "Don't care".
+ROM[0xC1E4FB] = LDX_i(6)
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to getting the names from the new spot.
+
+/////////////////////////////////////////////////////////////////////
+// BANK C0.
+// 9 spots referencing 5F/99CE, 0 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+// BANK C1.
+// 18 spots referencing 5F/99CE, 14 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+change_size(0xC193A3)
+change_spot(0xC193AB)
+change_length(0xC193BA)
+
+ROM[0xC19594] = JSL(sp_nameInStatusMenu)
+sp_nameInStatusMenu: {
+	LDA_d(0x02)
+	LDY_i(NAMES_SIZE)
+	JSL(0xC08FF7)
+	CLC
+	ADC_i(RAM_NAMES)
+	STA_d(0x0E)
+	PHB
+	SEP(0x20)
+	PLA
+	STA_d(0x10)
+	STZ_d(0x11)
+	REP(0x20)
+	RTL
+}
+change_length(0xC19598)
+
+change_size(0xC19905)
+change_spot(0xC1990D)
+change_length(0xC19924)
+
+change_size(0xC19F54)
+change_spot(0xC19F5C)
+change_length(0xC19F73)
+
+change_size(0xC1B2E1)
+change_spot(0xC1B2E9)
+change_length(0xC1B2DB)
+
+change_size(0xC1B32E)
+change_spot(0xC1B336)
+change_length(0xC1B329)
+
+change_size(0xC1B443)
+change_spot(0xC1B44B)
+change_length(0xC1B435)
+
+change_size(0xC1B863)
+change_spot(0xC1B86B)
+change_length(0xC1B85D)
+
+change_size(0xC1B881)
+change_spot(0xC1B889)
+change_length(0xC1B87C)
+
+change_size(0xC1B98A)
+change_spot(0xC1B992)
+change_length(0xC1B97C)
+
+change_size(0xC1C87F)
+change_spot(0xC1C887)
+change_length(0xC1C89E)
+
+ROM[0xC1D157] = JSL(sp_buildTargetName)
+sp_buildTargetName: {
+	LDA_d(0x1B)
+	LDY_i(NAMES_SIZE)
+	JSL(0xC08FF7)
+	CLC
+	ADC_i(RAM_NAMES)
+	RTL
+}
+change_length(0xC1D152)
+
+change_size(0xC1DBEE)
+change_spot(0xC1DBF6)
+change_length(0xC1DBE7)
+
+change_spot(0xC1EDB4)
+change_length(0xC1EDBC)
+change_length(0xC1EDC7)
+
+// Extra spot in Bank C1, related to the character selection menu.
+change_length(0xC1288C)
+ROM[0xC12898] = STZ_a(0x9CA5) // It should be 0x9C9F + NAMES_LENGTH
+
+// Extra spot in BANK C1, related to the character selection menu (control codes [1A 00] and [1A 01]).
+ROM[0xC124D7] = STZ_a(0x9CA5) // It should be 0x9C9F + NAMES_LENGTH
+
+/////////////////////////////////////////////////////////////////////
+// BANK C2.
+// 15 spots referencing 5F/99CE, 6 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+change_size(0xC22330)
+change_spot(0xC22338)
+
+change_size(0xC235B2)
+change_spot(0xC235BA)
+change_length(0xC235D1)
+
+change_spot(0xC23B91)
+change_length(0xC23BA6)
+
+change_size(0xC23CF2)
+change_spot(0xC23CFA)
+change_length(0xC23CE4)
+
+change_size(0xC23E1F)
+change_spot(0xC23E27)
+change_length(0xC23E11)
+
+// Related to displaying names properly in HP/PP boxes.
+ROM[0xC203C8] = ADC_i(0xFFD6) // enable $28.
+ROM[0xC204E7] = LDA_d(0x28)
+ROM[0xC2058B] = LDA_d(0x28)
+ROM[0xC203E0] = { JSL(sp_nameFix) NOP }
+sp_nameFix: {
+	TAX
+	CLC
+	ADC_i(0x99CE)
+	STA_d(0x24)
+	TXA
+	LDY_i(0x5F)
+	JSL(0xC090E6)
+	LDY_i(7)
+	JSL(0xC09032)
+	CLC
+	ADC_i(RAM_NAMES)
+	STA_d(0x28)
+	LDA_d(0x24)
+	RTL
+}
+
+/////////////////////////////////////////////////////////////////////
+// BANK C3.
+// 1 spot referencing 5F/99CE, 0 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+// BANK C4.
+// 10 spots referencing 5F/99CE, 7 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+change_size(0xC47D11)
+change_spot(0xC47D19)
+
+// Lumine Hall related.
+change_spot(0xC483BE)
+change_length(0xC483DC)
+change_length(0xC483E3)
+change_spot(0xC483ED)
+change_spot(0xC48894)
+change_size(0xC488B2)
+
+change_size(0xC49CCF)
+change_spot(0xC49CD7)
+change_length(0xC49CF8)
+
+change_size(0xC4E7EA)
+change_spot(0xC4E7F2)
+change_length(0xC4E809)
+
+change_size(0xC4EEBA)
+change_spot(0xC4EEC2)
+change_length(0xC4EEB5)
+
+// And here's a weird pointer table used by the control code "[1C 01 XX]".
+ROM[0xC45527] = "[06 30 B6]"
+ROM[0xC45569] = "[06 37 B6]"
+ROM[0xC455AB] = "[06 3E B6]"
+ROM[0xC455ED] = "[06 45 B6]"
+
+/////////////////////////////////////////////////////////////////////
+// BANK EF.
+// 5 spots referencing 5F/99CE, 0 of them are related to names.
+/////////////////////////////////////////////////////////////////////
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to the six letter names correctly displaying in the HP/PP windows.
+
+// Render 5 pixels instead of 6 for each letter.
+// ROM[0xC47CE4] = LDA_i(5)
+
+// Render 5 pixels instead of 6 if the name is 6 characters long.
+ROM[0xC47E27] = { JSL(calc_spacing) NOP }
+
+calc_spacing: {
+	LDA_d(0x04)
+	LDY_i(NAMES_SIZE)
+	JSL(0xC08FF7)
+	CLC
+	ADC_i(RAM_NAMES)
+	TAX
+	
+	LDA_x(5)
+	BEQ_a(_render6)
+	
+	LDA_i(5)
+	STA_d(0x22)
+	
+	BRA_a(_end)
+	
+	_render6:
+	LDA_i(6)
+	STA_d(0x22)
+	
+	_end:
+	LDA_d(0x04) // original code.
+	CMP_i(4) // original code.
+	
+	RTL
+}
+
+// <------------------------------------------------------------------------------------------------------------------------------>

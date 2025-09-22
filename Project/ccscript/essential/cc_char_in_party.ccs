@@ -1,0 +1,66 @@
+import "../essential/asm65816.ccs"
+import "../essential/ccexpand.ccs"
+
+// Get the position of a character in the party / check if a character is in the party
+// SupremeKirb
+
+// Put `CC_CharInParty` in CCExpand, define control code here
+define CONTROL_CODE_CHAR_IN_PARTY = "[1A 11]"
+
+// This script provides the command: char_in_party(char)
+// given a character (or 0 for argument register), return their 1-indexed position in the party or 0 if they're not present.
+// this also considers the order when party members die (ghosts go at the end), etc.
+// NPC party members also included
+// Even when the position isn't relevant, you can use this for an "is in party" check - any nonzero value is true, and is compatible with goto_if_false etc.
+// Eg. if the party is {Ninten, Lloyd, Teddy bear} then:
+//   char_in_party(1)  -> 1 (Ninten is first)
+//   char_in_party(3)  -> 2 (Lloyd is second)
+//   char_in_party(2)  -> 0 (Ana isn't here)
+//   char_in_party(16) -> 3 (Teddy bear is third)
+// In other words, this is the inverse of [19 10 XX] / party_pos_check
+command char_in_party(char) { CONTROL_CODE_CHAR_IN_PARTY byte char }
+
+
+
+// code zone
+
+
+
+define game_state_current_party_order = 0x988B
+
+CC_CharInParty: M_EB_Function_Wrapper({
+    // read one parameter byte, char ID
+    M_Read_Bytes_or_Arg(1)
+
+    // loop through the party order array,
+    // check if we've found a match
+    LDY_i (0)
+    _loop:
+        LDA_y (game_state_current_party_order)
+        AND_i (0xFF) // one-byte values
+        // found a match -> return position
+        CMP_d (0x06) // M_Read_Bytes_or_Arg ptus it in $06
+        BEQ_a (_break_true)
+        // end of loop -> return false
+        CPY_i (5)
+        BEQ_a (_break_false)
+        // next iter
+        INY
+        BRA_a (_loop)
+    
+    _break_false:
+        // 0 is false
+        STZ_d (0x0E)
+        STZ_d (0x10)
+        BRA_a (_return)
+    _break_true:
+        TYA
+        INC // make 1-indexed
+        STA_d (0x0E)
+        STZ_d (0x10)
+        BRA_a (_return)
+
+    _return:
+    JSL (R_Set_Working_Memory) // uses int32 starting from $0E
+    LDA_i (0) // lot of control codes do this, dunno why, but let's do it too
+})

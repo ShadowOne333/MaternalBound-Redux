@@ -1,0 +1,549 @@
+import "../essential/asm65816.ccs"
+import "../essential/fade_tools.ccs"
+import "../essential/cc_char_in_party.ccs"
+import "../redux/goods_menu_equip.ccs"
+
+// CCExpand v0.3 - Additional CCScript codes
+// Initial version by jtolmar
+// Rework and additional support functions by cooprocks123e
+// With thanks to Phoenixbound, Catador and Herringway
+// Changelog:
+// 0.3 - Correct bug with R_Read_Parameter_Bytes
+//   The parameter space was not properly zero'ed out, leading to issues with
+//   M_Read_Bytes_or_Arg not returning the argument when the value was 0.
+//   Thanks to 0xCrafty for discovering and helping troubleshoot this bug!
+// 0.2 - Combine separate "library" and "implementation" files into single file
+// 0.1 - Initial version!
+
+// Many CCScript commands are "trees" that branch into more commands based on the
+// next byte. Of these, 1A and 1B have very few commands and lots of space to
+// expand. EB++ uses 1B, so this one expands 1A. This frees up room for ~247 more
+// control codes.
+
+// In short, you can create custom control codes by modifying entries in the
+// CodeTable table below. You can then call them using "[1A xx]" where xx is
+// the entry where you put it in the table below.
+// It is recommended to use commands to call your custom control codes, so that
+// in the event it needs to be moved to another slot, only the command has to
+// be changed, and not your entire script.
+// To avoid having to import the module defining your functions, you can put
+// them prefixed with their module name, such as "custom_codes.CC_do_thing".
+
+// Expanded code table. You can replace any of the DoNothing codes with yours.
+// The Original1A* codes should not be replaced unless you are rewriting it
+// or it will go unused in your hack.
+CodeTable: {
+  long Original1A00 // [1A 00] -- character select menu, no cancel
+  long Original1A01 // [1A 01] -- character select menu, can cancel
+  long DoNothing // [1A 02]
+  long DoNothing // [1A 03]
+  long Original1A04 // [1A 04] -- unused
+  long Original1A05 // [1A 05] -- display character inventory
+  long Original1A06 // [1A 06] -- display shop menu
+  long Original1A07 // [1A 07] -- something about Escargo Express
+  long Original1A08 // [1A 08] -- unused
+  long Original1A09 // [1A 09] -- unused
+  long Original1A0A // [1A 0A] -- something about phones
+  long Original1A0B // [1A 0B] -- unused
+  long SwirlDisplayRGB // [1A 0C]
+  long CC_CustomFadeout // [1A 0D]
+  long CC_CustomFadein  // [1A 0E]
+  long DoNothing // [1A 0F]
+  long DoNothing // [1A 10]
+  long CC_CharInParty // [1A 11]
+  long DoNothing // [1A 12]
+  long DoNothing // [1A 13]
+  long DoNothing // [1A 14]
+  long DoNothing // [1A 15]
+  long DoNothing // [1A 16]
+  long DoNothing // [1A 17]
+  long DoNothing // [1A 18]
+  long DoNothing // [1A 19]
+  long DoNothing // [1A 1A]
+  long DoNothing // [1A 1B]
+  long DoNothing // [1A 1C]
+  long DoNothing // [1A 1D]
+  long DoNothing // [1A 1E]
+  long DoNothing // [1A 1F]
+  long DoNothing // [1A 20]
+  long CompareResToArg // [1A 21]
+  // ...
+  // You can keep adding them up to [1A FF].
+}
+
+// Here is documentation on the various helper functions and macros available
+// for use in your assembly code.
+/*
+Helper Table of Contents:
+  Macros:
+    M_JSL_RTS_C1(routine)
+      Allows the user to call a routine in bank C1 which ends in a RTS as if
+      it ended in a RTL. When the routine returns, it will execute the next
+      instruction.
+      Parameters:
+        routine: The address of the routine in bank C1 that you want to call.
+
+    M_JML_RTS_C1(routine)
+      Allows the user to call a routine in bank C1 which ends in a RTS as if
+      it ended in a RTL. Unlike the above, this behaves as a JML instead of
+      a JSL, so when the routine returns, it will return out of the function
+      that invoked this macro.
+      Parameters:
+        routine: The address of the routine in bank C1 that you want to call.
+
+    M_Read_Bytes_or_Arg(bytes)
+      Reads bytes from the text pointer (parameters to this control code).
+      It will then load the first four bytes into 0x06 and set them to the
+      argument register if they're zero. Note that the unused section of the
+      argument buffer will be set to zero, meaning that if you load 1-3 bytes,
+      the remaining upper bytes will be set to zero.
+      Parameters:
+        bytes: The number of bytes to load into the argument buffer.
+          Can be 1-16, but only the first four bytes will be loaded into 0x06
+          and checked against zero.
+
+    M_EB_Function_Wrapper(block)
+      Wrapper that applies the start and end macros to a block of code. It
+      allocates a stack frame of 0x12 bytes and preserves A. See macros
+      M_EB_ASMFunction_Start and M_EB_ASMFunction_End for more info.
+      Parameters:
+        block: The main code of the function.
+
+    M_EB_Function_Wrapper_Clobber(block)
+      Wrapper that applies the start and end macros to a block of code. It
+      allocates a stack frame of 0x12 bytes without preserving A. See macros
+      M_EB_ASMFunction_Start_Clobber and M_EB_ASMFunction_End for more info.
+      Parameters:
+        block: The main code of the function.
+
+    M_EB_Function_Wrapper_UserStack(neg_stack,block)
+      Wrapper that applies the start and end macros to a block of code. It
+      allocates a stack frame of neg_stack bytes and preserves A. See macros
+      M_EB_ASMFunction_Start and M_EB_ASMFunction_End for more info.
+      Parameters:
+        neg_stack: The negative of the amount of space to reserve on the stack.
+        block: The main code of the function.
+
+    M_EB_Function_Wrapper_UserStack_Clobber(neg_stack,block)
+      Wrapper that applies the start and end macros to a block of code. It
+      allocates a stack frame of neg_stack bytes without preserving A. See
+      macros M_EB_ASMFunction_Start and M_EB_ASMFunction_End for more info.
+      Parameters:
+        neg_stack: The negative of the amount of space to reserve on the stack.
+        block: The main code of the function.
+
+    M_EB_ASMFunction_Start_Clobber(negative_stack_adj)
+      Standard EarthBound function prologue. Sets CPU registers to 16-bit and
+      creates a stack frame of the specified size. Does not preserve A, so it
+      cannot be used to pass parameters (X, Y are preserved).
+      Parameters:
+        negative_stack_adj: The negative of the amount of space to reserve on
+          the stack. Ex. If you specify -0x12, you will be able to use from
+          0x00 to 0x11 for your local variables.
+          Reserving 0x12 bytes or more is highly recommended, as several
+          routines will return values into 0x0E to 0x11.
+
+    M_EB_ASMFunction_Start(negative_stack_adj)
+      Standard EarthBound function prologue. Sets CPU registers to 16-bit and
+      creates a stack frame of the specified size. Preserves the value of A,
+      allowing it to be used to pass parameters.
+      Parameters:
+        negative_stack_adj: The negative of the amount of space to reserve on
+          the stack. Ex. If you specify -0x12, you will be able to use from
+          0x00 to 0x11 for your local variables.
+          Reserving 0x12 bytes or more is highly recommended, as several
+          routines will return values into 0x0E to 0x11.
+
+    M_EB_ASMFunction_End
+      Standard EarthBound function epilogue. Removes our stack frame and does
+      a long return.
+      No parameters.
+
+  Routines: [ Call with: JSL(routine) ]
+    R_Read_Parameter_Bytes
+      Reads a specified number of bytes from the text pointer into D_cc_argv.
+      Used to load the control code's parameters.
+      Parameters:
+        Y register: The number of bytes to read into D_cc_argv.
+          Must be 1 to 16!
+      No return value.
+
+    R_Set_06_To_Argument_If_Zero
+      Reads 0x06 from the caller's stack frame and sets it to the argument if
+      it's zero.
+      Parameters:
+        0x06: The value to check against zero.
+      Return:
+        0x06: The previous value if not zero, otherwise the value of the
+          argument memory.
+
+    R_Get_{Argument,Working,Secondary}_Memory
+      These routines read the specified memory into 0x06 of the caller's stack
+      frame.
+      No parameters.
+      Return:
+        0x06: The value stored in the specified memory.
+
+    R_Set_{Argument,Working,Secondary}_Memory
+      These routines write the specified memory with the value of 0x0E in the
+      caller's stack frame.
+      Parameters:
+        0x0E: The value to store into the specified memory.
+      No return value.
+
+    R_memcpy
+      Copies Y bytes from the address in 0x12 to the address in 0x0E, where
+      both are 24-bit addresses.
+      Parameters:
+        Y register: The number of bytes to copy from [0x12] to [0x0E].
+        0x0E: The 24-bit destination pointer.
+        0x12: The 24-bit source pointer.
+      No return value.
+
+    R_memcpy_to_ram
+      Copies X/2 words from the address in 0x0E to the address in A, where
+      the address in A is used as a pointer into bank 0x7E. Note that this is
+      done on a word basis, meaning that an even number of bytes will be
+      copied. If you provide an odd number of bytes to copy in X, it will skip
+      the last byte. You may want to do INX before calling this function to
+      compensate, as long as it won't overrun your buffer.
+      Parameters:
+        A register: The 16-bit destination pointer, addressing bank 0x7E.
+        X register: The number of bytes to copy from [0x0E] to (A).
+        0x0E: The 24-bit source pointer.
+      No return value.
+
+    R_Call_Ptr_Trampoline
+      This calls the routine at D_Ptr_Trampoline (0x7E00BC). Useful for
+      implementing jump tables with 24-bit pointers.
+      Use:
+        LDA_i(ptr_lo_word)
+        STA_a(D_Ptr_Trampoline_0)
+        LDA_i(ptr_hi_word)
+        STA_a(D_Ptr_Trampoline_2)
+        JSL(R_Call_Ptr_Trampoline)
+
+  Defines:
+    D_cc_argv, D_cc_argv_*, D_cc_argc
+      Memory locations used to store arguments (parameters) to a control
+      code. The D_cc_argv_{0..15} are just D_cc_argv + the number, to
+      compensate for the fact that CCScript has no compile-time addition.
+      After running R_Read_Parameter_Bytes, this is where you get the data.
+      None of the routines provided by CCExpand touch D_cc_argc.
+
+    D_Ptr_Trampoline, D_Ptr_Trampoline_*
+      R_Call_Ptr_Trampoline uses D_Ptr_Trampoline as the address where it will
+      jump to when called. D_Ptr_Trampoline_{0..2} have been provided, similar
+      to D_cc_argv_*. See R_Call_Ptr_Trampoline above for more info.
+
+*/
+
+//// Macros ///////////////////////////////////////////////////////////////////
+
+// JSL_RTS by Catador, truncated to only handle C1, since that's all we need.
+command M_JSL_RTS_C1(routine) {
+  PHK
+  PER (6)
+  PEA (0xC10002)
+  JML (routine)
+}
+// Similar to the above, but won't return to the function that invoked it,
+// instead returning to that function's caller.
+command M_JML_RTS_C1(routine) {
+  PEA (0xC10002)
+  JML (routine)
+}
+
+// Useful blocks of code for starting and ending functions
+command M_EB_ASMFunction_Start_Clobber(negative_stack_adj) {
+  REP (0x31)
+  PHD
+  TDC
+  ADC_i(short negative_stack_adj)
+  TCD
+}
+command M_EB_ASMFunction_Start(negative_stack_adj) {
+  REP (0x31)
+  PHD
+  PHA
+  TDC
+  ADC_i(short negative_stack_adj)
+  TCD
+  PLA
+}
+command M_EB_ASMFunction_End { PLD RTL }
+
+// Wrappers for adding the standard code start and end to
+// a block of code.
+command M_EB_Function_Wrapper(block) {
+  M_EB_ASMFunction_Start(-0x12)
+  block
+  M_EB_ASMFunction_End
+}
+command M_EB_Function_Wrapper_Clobber(block) {
+  M_EB_ASMFunction_Start_Clobber(-0x12)
+  block
+  M_EB_ASMFunction_End
+}
+command M_EB_Function_Wrapper_UserStack(neg_stack,block) {
+  M_EB_ASMFunction_Start(neg_stack)
+  block
+  M_EB_ASMFunction_End
+}
+command M_EB_Function_Wrapper_UserStack_Clobber(neg_stack,block) {
+  M_EB_ASMFunction_Start_Clobber(neg_stack)
+  block
+  M_EB_ASMFunction_End
+}
+
+// Thanks jtolmar!
+command M_Read_Bytes_or_Arg(bytes) {
+  LDY_i(bytes)
+  JSL(R_Read_Parameter_Bytes)
+  LDA_a(D_cc_argv_0)
+  STA_d(0x06)
+  LDA_a(D_cc_argv_2)
+  STA_d(0x08)
+  JSL(R_Set_06_To_Argument_If_Zero)
+}
+
+//// Routines /////////////////////////////////////////////////////////////////
+
+// The way that EB handles CCScript arguments is quite convoluted.
+// 1. Commands return a value in A.
+// 2a. If 0, treat next byte as new command.
+// 2b. Otherwise, load next byte into X, then jump to script pointed to by A.
+// This is really inconvenient for us, since our code isn't even going to be
+// in a bank that the above jump can support.
+
+// Instead of using that convoluted method to get our arguments, we just read
+// them directly by getting our text pointer.
+
+// Some useful variables: (thanks to Catador for the initial docs on this)
+// 7E96AA - Array of 10 text box structs, each 27 bytes long
+//        - The first 3 bytes are the text pointer, the rest doesn't matter
+// 7E97B8 - Index into that array of current text box
+
+// Load Y with the number of bytes you want to read.
+// The data will be stored in D_cc_argv[0..Y-1]
+R_Read_Parameter_Bytes: M_EB_Function_Wrapper_UserStack(-0x12, {
+  // First things first: get the text pointer
+  LDA_a(0x97b8)
+  STA_d(0x00)
+  ASL           // 2
+  ADC_d(0x00)   // 3
+  ASL           // 6
+  ASL           // 12
+  ADC_d(0x00)   // 13
+  ASL           // 26
+  ADC_d(0x00)   // 27
+  // We now have [0x97b8] * 27 in A.
+  STA_d(0x00)
+  // Load the text pointer from the table at 0x7E96AA into 0x0E.
+  TAX
+  LDA_x(0x96aa)
+  STA_d(0x0e)
+  LDA_x(0x96ac) // 0x96aa + 2
+  STA_d(0x10)   // 0x0e + 2
+  // Load amount into X. Also store into 0x02 for later use
+  STY_d(0x02)
+  TYX
+  // The R_memcpy_to_ram routine copies words. If we have an odd number of
+  // bytes, it will round down. We add 1 so that it effectively rounds up.
+  INX
+  LDA_i(D_cc_argv)
+  // Copy it: X bytes from [0x0e] to (A).
+  JSL(R_memcpy_to_ram)
+  // Zero out upper bytes of D_cc_argv.
+  LDY_d(0x02)
+  TYA
+  LSR // Get lower order bit in carry, and branch if 0
+  LDA_i(0x0000)
+  BCC(14) // aligned
+  // Align Y to next word
+  SEP(0x20)
+  STA_y(D_cc_argv)
+  REP(0x31)
+  BRA(4) // unaligned
+  // loop:
+  STA_y(D_cc_argv)
+  INY
+  // unaligned:
+  INY
+  // aligned:
+  CPY_i(0x0010)
+  BMI(-10) // loop
+  // end:
+  // Adjust the text pointer and store back into table.
+  LDX_d(0x00)
+  LDA_d(0x0e)
+  CLC
+  ADC_d(0x02)
+  STA_x(0x96aa)
+  LDA_d(0x10)
+  STA_x(0x96ac)
+})
+
+R_Set_06_To_Argument_If_Zero: {
+  LDA_d(0x06)
+  BEQ(1) // Skip RTL if zero.
+  RTL
+  LDA_d(0x08)
+  BEQ(1) // Skip RTL if zero.
+  RTL
+  // Get the argument into 0x06.
+  // We use JML as a tail call optimization.
+  JML(R_Get_Argument_Memory)
+}
+
+// This writes 0x06 in the caller's stack frame
+// with the argument memory value.
+R_Get_Argument_Memory: { M_JML_RTS_C1(0xc103dc) }
+R_Get_Working_Memory: { M_JML_RTS_C1(0xC1040A) }
+R_Get_Secondary_Memory: { M_JSL_RTS_C1(0xc10400) STA_d(0x06) STZ_d(0x08) RTL }
+
+// This reads 0x0E in the caller's stack frame
+// into the specified memory.
+R_Set_Argument_Memory: { M_JML_RTS_C1(0xC10489) }
+R_Set_Working_Memory: { M_JML_RTS_C1(0xc1045d) }
+R_Set_Secondary_Memory: { LDA_d(0x0e) M_JML_RTS_C1(0xC10443) }
+
+// Assorted other functions to manipulate secondary memory.
+// The Get/Set here don't match up with the assembly function names, but
+// I decided to make them work in the same manner as the functions that
+// manipulate the argument and working memory.
+R_Increment_Secondary_Memory: { M_JML_RTS_C1(0xC1042E) }
+R_Get_Secondary_Memory_In_A: { M_JML_RTS_C1(0xC10400) }
+R_Set_Secondary_Memory_To_A: { M_JML_RTS_C1(0xC10443) }
+
+// This copies Y bytes from [$12] to [$0E] in the caller's stack
+// frame, where both are 24-bit pointers.
+define R_memcpy = 0xC08EED
+
+// This copies X bytes from [$0E] to the address in A.
+define R_memcpy_to_ram = 0xC08ED2
+
+// This calls the routine at D_Ptr_Trampoline_0 (0x7E00BC).
+// Use:
+// LDA_i(ptr_lo_word)
+// STA_a(D_Ptr_Trampoline_0)
+// LDA_i(ptr_hi_word)
+// STA_a(D_Ptr_Trampoline_2)
+// JSL(R_Call_Ptr_Trampoline)
+define R_Call_Ptr_Trampoline = 0xC09279
+
+//// Defines //////////////////////////////////////////////////////////////////
+define D_cc_argv    = 0x7E97BA // Control code argument vector
+define D_cc_argv_0  = 0x7E97BA // Control code argument vector
+define D_cc_argv_1  = 0x7E97BB // Control code argument vector
+define D_cc_argv_2  = 0x7E97BC // Control code argument vector
+define D_cc_argv_3  = 0x7E97BD // Control code argument vector
+define D_cc_argv_4  = 0x7E97BE // Control code argument vector
+define D_cc_argv_5  = 0x7E97BF // Control code argument vector
+define D_cc_argv_6  = 0x7E97C0 // Control code argument vector
+define D_cc_argv_7  = 0x7E97C1 // Control code argument vector
+define D_cc_argv_8  = 0x7E97C2 // Control code argument vector
+define D_cc_argv_9  = 0x7E97C3 // Control code argument vector
+define D_cc_argv_10 = 0x7E97C4 // Control code argument vector
+define D_cc_argv_11 = 0x7E97C5 // Control code argument vector
+define D_cc_argv_12 = 0x7E97C6 // Control code argument vector
+define D_cc_argv_13 = 0x7E97C7 // Control code argument vector
+define D_cc_argv_14 = 0x7E97C8 // Control code argument vector
+define D_cc_argv_15 = 0x7E97C9 // Control code argument vector
+define D_cc_argc    = 0x7E97CA // Control code argument count
+
+define D_Ptr_Trampoline   = 0x7E00BC
+define D_Ptr_Trampoline_0 = 0x7E00BC
+define D_Ptr_Trampoline_1 = 0x7E00BD
+define D_Ptr_Trampoline_2 = 0x7E00BE
+
+//// Base CCExpand functionality //////////////////////////////////////////////
+// Original code references:
+// https://github.com/Herringway/ebsrc/blob/master/src/text/ccs/tree_1A.asm
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c17b56
+
+// Overwrite the original 1A tree with our version.
+ROM[0xC17B56] = {
+  REP (0x31)
+  // Create stack frame, since we're going to be using some of the
+  // original code from this function, and it does a PLD before returning.
+  PHD
+  TDC
+  ADC_i(0xffee)
+  TCD
+  // The code we're calling does shenanigans to replace itself with the
+  // actual command we want, which will return with RTL, so JSL to it.
+  // Alternatively, the original code wrapper functions (Original1Axx)
+  // will remove this return address from the stack and jump to the
+  // original code path.
+  JSL(TableJumpUsing7E00BC)
+  // If returned A is 0, nothing happens.
+  // Otherwise it'll use the text parser's wacky call mechanism to RTS into A.
+  // No thank you, we already have our own wacky call mechanism.
+  // Again, note that this will be bypassed by the Original1Axx functions,
+  // and they will use whatever code they originally used to return.
+  LDA_i(0)
+  PLD
+  RTS // Original code was called with JSR
+}
+
+TableJumpUsing7E00BC: {
+  // The next byte of the CC sequence is already loaded in X.
+  // We preserve X on the stack, since the code we're jumping to
+  // may expect X = A = 2nd byte of CC sequence.
+  PHX
+  // Calculate X * 4 to index the jump table.
+  // Jump table is 4 byte pointers, because that's what Coil Snake writes naturally.
+  TXA
+  ASL
+  ASL
+  TAX
+  // Load pointer from table and store to 0x00BC.
+  // The vanilla code uses this for doing long jumps and calls, so we will too.
+  LDA_xl(CodeTable)
+  STA_a(D_Ptr_Trampoline_0)
+  INX
+  INX
+  LDA_xl(CodeTable)
+  STA_a(D_Ptr_Trampoline_2)
+  // Make sure to pull X and copy to A, since the original code
+  // may be expecting this.
+  PLX
+  TXA
+  // Execute jump to pointer.
+  // We don't need to return here so we can use JML.
+  // If we needed to return here, we could use JSL(R_Call_Ptr_Trampoline).
+  JML_i(D_Ptr_Trampoline)
+}
+
+// Code to jump back to the original branches in the tree.
+command ReturnToOriginalBranch(addr) {
+  // Remove return address of JSL(TableJumpUsing7E00BC)
+  // (3 bytes) from the stack.
+  // This lets us skip returning there, and instead
+  // execution will continue "normally", returning to
+  // DISPLAY_TEXT when the next RTS is hit.
+  PHB // Add 1
+  PLY // Remove 2
+  PLY // Remove 2
+  // Jump to the original branch in the tree.
+  JML(addr)
+}
+Original1A00: ReturnToOriginalBranch(0xc17b99)
+Original1A01: ReturnToOriginalBranch(0xc17b9f)
+Original1A04: ReturnToOriginalBranch(0xc17ba5)
+Original1A05: ReturnToOriginalBranch(0xc17bbf)
+Original1A06: ReturnToOriginalBranch(0xc17bc4)
+Original1A07: ReturnToOriginalBranch(0xc17bc9)
+Original1A08: ReturnToOriginalBranch(0xc17bdd)
+Original1A09: ReturnToOriginalBranch(0xc17bf4)
+Original1A0A: ReturnToOriginalBranch(0xc17c0b)
+Original1A0B: ReturnToOriginalBranch(0xc17c1f)
+
+DoNothing: {
+  RTL
+}
+
+SwirlDisplayRGB: {
+
+}

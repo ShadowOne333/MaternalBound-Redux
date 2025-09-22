@@ -1,0 +1,53 @@
+// Fix hardlocks regarding VRAM and spritemap allocation failures due to objects not despawning while teleporting
+// You can easily hardlock the game this way by teleporting out of Burglin Park
+// By Catador
+//------------------------------------------------------------------
+// This fix works by looping through all objects every frame, and deleting them if they're far away from the player
+
+// Remove a useless vanilla check that for some reason exists in "CheckIfFar"
+// It's checking if you're moving faster than 4 pixels per frame while teleporting and, if you are, considers the sprite as NOT being far away
+// The weird part is that (originally) this routine is never called while teleporting...
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+ROM[0xC0C6C4] = "[80]" // Change a BCC to BRA
+
+ROM[0xC0EB63] = JSL (TeleportSpriteDespawn)
+TeleportSpriteDespawn: {
+	// Save "current object"
+	LDA_a (0x1A42)
+	PHA
+
+	// Do our thing.. Loops object slots down from 22 to 0
+	LDA_i (22)
+	STA_a (0x1A42)
+_loop:
+	LDA_a (0x1A42)
+	ASL
+	TAX
+	LDA_x (0x2CD6)
+	BMI_a (_next)    // A rather hacky way to check if this object exists: check if its SpriteGroup number is negative
+	// -- Make sure we don't despawn the snake mode sprite
+	// -- This is PK Scramble specific, don't copy it to reasonable hacks
+	//CMP_i(snake_mode.snake_sprite_id)
+	//BEQ_a(_next)
+	// -- End of snake mode thing
+	JSL   (0xC0C6B6) // CheckIfFar
+	CMP_i (0)
+	BNE_a (_next)
+	// This sprite is at least 320 pixels away, destroy it
+	// We call $C02140 instead of $C020F1 because it also ends the movement script
+	LDA_a (0x1A42)
+	JSL   (0xC02140)
+_next:
+	DEC_a (0x1A42)
+	BPL_a (_loop)
+	// Restore "current object"
+	PLA
+	STA_a (0x1A42)
+
+	// Run original code (JSL WaitFrame)
+	JML   (0xC08756) // **TAIL CALL**
+}
+//------------------------------------------------------------------

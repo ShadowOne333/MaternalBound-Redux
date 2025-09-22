@@ -1,0 +1,34 @@
+// Events debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Enemy_Spawn:
+    window_clear
+    if (FLG_SYS_MONSTER_OFF) {
+      diam "Enemies enabled."
+      unset(FLG_SYS_MONSTER_OFF) // Enable back enemy spawns
+    }
+    else {
+      diam "Enemies disabled."
+      set(FLG_SYS_MONSTER_OFF) // Turn off enemy spawns
+    }
+    wait
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+Battler: //Thank you, phoenixbound and vittorio! --livvy
+    diam "Which Enemy Group?" newline
+    "   " number_input(3)
+    swap
+    copy_wram
+    window_closeall //now we can close the windows without losing the inputted number
+    copy_active
+    "[1F 23 00 00]" //same as battle() but it doesn't have a built-in window_closeall
+    eob
+//------------------------------------------------------------------

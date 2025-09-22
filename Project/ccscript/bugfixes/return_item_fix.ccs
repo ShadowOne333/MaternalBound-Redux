@@ -1,0 +1,21 @@
+// Fix 1D 15 xxxx's 0=arg handling, which doesn't actually store the argument register's value anywhere after fetching it...
+
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+
+ROM[0xC15C0E] = {
+    JML(hijack_cc_1D_15)
+    NOP
+}
+
+hijack_cc_1D_15: {
+    // Original/clobbered code
+    BEQ (4)
+    JML (0xC15C13)
+    JSL_RTS_C1(0xC103DC)
+
+    // Actually store the result in $12 where it's supposed to go
+    LDA_d (0x06)
+    STA_d (0x12)
+    JML (0xC15C13)
+}

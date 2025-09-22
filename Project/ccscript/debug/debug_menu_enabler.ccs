@@ -1,0 +1,187 @@
+// Script that enables debug mode if you hold L+R while the game boots
+
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../debug/diamond.ccs"
+import "../essential/asm65816.ccs"
+
+// OPTION 10 (Teleport) -- LEARN TELEPORT ALPHA
+// OPTION 11 (Star α) -- LEARN STARSTORM ALPHA
+// OPTION 12 (Star β) -- LEARN STARSTORM BETA
+// OPTION 13 (Player 0), input player's name (english)
+// OPTION 14 (Player 1), input player's name (kana?)
+// OPTION 20 (Meter), set magicant hp/pp rolling flag (can't be undone lol, softlocks battles waiting for HP/PP to finish rolling)
+
+ROM[0xC0B9B0] = {
+    STZ_a (0x436C) // Turn off the debug flag
+    JSL   (DebugCheck)
+}
+
+DebugCheck: {
+    JSL   (0xC08756) // WaitFrame (guarantee controllers are read on a cold reset)
+
+    LDA_a (0x0065) // Held buttons on controller 1
+    BIT_i (0x0030) // JOY_L | JOY_R
+    BEQ   (7)      // Branch to "RTL"
+      // If we reached this, it means we were holding L or R while the game was booting
+    DEC_a (0x436C)   // Enable debug flag
+    JSL   (DEBUG_EntryPoint)
+    RTL
+}
+
+//ROM[0xC12EBA] = ASMLoadAddress0A(debug_text)
+debug_text: {
+	// Fix broken debug options
+	ROMTBL[0xC3E874, 10, 0]  = "Flags[00]"
+	ROMTBL[0xC3E874, 10, 1]  = "Goods[00]"
+	ROMTBL[0xC3E874, 10, 2]  = "Save[00]"
+	ROMTBL[0xC3E874, 10, 3]  = "Apple[00]"
+	ROMTBL[0xC3E874, 10, 4]  = "Banana[00]"
+
+	ROMTBL[0xC3E874, 10, 5]  = "TV[00]"
+	ROMTBL[0xC3E874, 10, 6]  = "Event[00]"
+	ROMTBL[0xC3E874, 10, 7]  = "Warp[00]"
+	ROMTBL[0xC3E874, 10, 8]  = "Tea[00]"
+	ROMTBL[0xC3E874, 10, 9]  = "Teleport[00]"	// From MOTHER2 katakana "テレポ"
+
+	ROMTBL[0xC3E874, 10, 10] = "Star [8B][00]"	// From MOTHER2 katakana "スターα"
+	ROMTBL[0xC3E874, 10, 11] = "Star [8C][00]"	// From MOTHER2 katakana "スターβ"
+	ROMTBL[0xC3E874, 10, 12] = "EN Player[00]"	// From MOTHER2 katakana "プレーヤー０"
+	ROMTBL[0xC3E874, 10, 13] = "JP Player[00]"	// From MOTHER2 katakana "プレーヤー１"
+
+	ROMTBL[0xC3E874, 10, 14] = "Guide[00]"
+	ROMTBL[0xC3E874, 10, 15] = "Track[00]"
+	ROMTBL[0xC3E874, 10, 16] = "Cast[00]"
+	ROMTBL[0xC3E874, 10, 17] = "Stone[00]"
+	ROMTBL[0xC3E874, 10, 18] = "Staff[00]"
+	ROMTBL[0xC3E874, 10, 19] = "HP Roll[00]"	// From MOTHER2 katakana "メーター
+
+	ROMTBL[0xC3E874, 10, 20] = "Replay[00]"
+	ROMTBL[0xC3E874, 10, 21] = "Test 1[00]"
+	ROMTBL[0xC3E874, 10, 22] = "Test 2[00]"
+
+	"[00 00 00 00 00 00 00 00 00 00 00 06 00 00 01 06 01 00 02 06 02]"
+}
+
+// Change "tx6" text to "Next"
+ROM[0xC454BF] = ASMLoadAddress0E(TXT_NEXT)
+TXT_NEXT:
+    "Next[00]"
+
+// Translate "TV" debug option
+ROM[0xC12FEF] = ASMLoadAddress06(TV_Enemy)
+
+TV_Enemy: {
+    window_closetop window_open(53) newline
+    diam "Toggle enemy spawns." linebreak
+    menu {
+        "Enable": {
+            diam "Enemies enabled." wait
+            unset(FLG_SYS_MONSTER_OFF)
+            eob
+            }
+        "Disable": {
+	    diam "Enemies disabled." wait
+            set(FLG_SYS_MONSTER_OFF)
+            eob
+	}
+    }
+    window_clear newline
+    diam "Enemies unchanged." wait
+    eob
+}
+
+//******************** NEW! INITIALIZE GAME PROPERLY SO THE BOOT-UP OPTIONS AREN'T BUGGY ********************//
+DEBUG_EntryPoint: {
+    // Initialize according to some steps taken in C0B7D8
+    JSL   (0xC43317)  // Initialize "Chosen Four" pointers
+
+    // Initialize jmp_buf for not continuing after death (choosing to not countinuing will take you to the Boot-Up Debug Menu)
+    LDA_i (0x0A20)
+    JSL   (0xC08F42)  // setjmp
+
+    JSL   (0xC0927C)  // Initialize objects
+    JSL   (0xC200D9)  // Initialize text windows
+    JSL   (0xC432B1)  // Initialize party status (+ object surface flags)
+    JSL   (0xC01A86)  // Initialize spritemap buffer
+
+    // Initialize VRAM allocation table
+    LDX_i (0x0000)
+    LDA_i (0x8000)
+    JSL   (0xC01C11)
+
+    JSL   (0xC01A69)  // Initialize miscellaneous object data (player movement speed + NPC/enemy ID + collision state)
+
+    // Initialize text flavor to something valid
+    SEP   (0x20)
+    LDA_8 (1)
+    STA_a (0x99CD)
+    REP   (0x20)
+
+    JML   (0xEFE689)  // Into original code!
+}
+
+// Make "1. GAME" skip the title sequence
+ROM[0xEFE60F] = JSL (DEBUG_StartGame) // Replaces "JSL (0xC0B7D8)" (main)
+
+DEBUG_StartGame: {
+    // Set up stack frame for "main"
+    REP   (0x31)
+    PHD
+    TDC
+    ADC_i (-16)
+    TCD
+
+    // Play title screen/file select music
+    LDA_i (0x00AF)
+    JSL   (0xC4FBBD) // ChangeMusic
+
+    JML   (0xC0B7EF) // Jump in the middle of "main", skipping the title sequence
+}
+
+// Make other debug options not broken if "1. GAME" wasn't previously selected
+ROM[0xEFE2D6] = JML (DEBUG_FixOtherOptions)
+
+DEBUG_FixOtherOptions: {
+    //********** Copy some initialization from $C0B67F **********//
+
+    LDA_i (0x0001)
+    JSL   (0xC4FD45) // SetMusicChangeAllow
+
+    LDA_i (0x0697)
+    STA_a (0x9E54)   // Dad phone timer
+
+    STZ_a (0x9F41)   // Teleport type
+    STZ_a (0x9F3F)   // teleport destination
+
+    LDA_i (-1)
+    STA_a (0xB4A8)   // Object index for OBJFX
+
+    // These break the walk history for some reason...
+    //JSL   (0xC03A24) // Some party member initialization
+    //JSL   (0xC039E5) // More party member initialization
+
+
+    //********** Final initialization **********//
+
+    JSL   (0xC06A07) // Load and play sector music
+
+    // Initialize jmp_buf for text VRAM overflow
+    LDA_i (0x0A2A)
+    JSL   (0xC08F42) // setjmp
+
+    JSL   (0xC43F53) // Initialize VWF allocation table
+
+
+    //********** Back into original code! **********//
+
+    // ORIGINAL CODE (FADE IN)
+    LDX_i (0x0001)
+    TXA
+    JSL   (0xC0886C)
+    // ORIGINAL CODE (FADE IN)
+
+    JML   (0xEFE2DA)
+}
+

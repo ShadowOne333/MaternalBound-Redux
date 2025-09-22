@@ -1,0 +1,426 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../redux/window_titles.ccs"
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc66b97:
+    title(1, Tracy)
+    "@Someone's knocking at the door.{pause(20)}  What an annoying knock!" end
+
+l_0xc66bc0:
+    title(1, Tracy)
+    "@Hey bro... you're here for the [1C 05 B8],{pause(15)} aren't you?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc66be1:
+    " [19 02]No" eob
+
+l_0xc66be7:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc66c15)} {e(l_0xc66bf6)}]" goto(l_0xc66bf6)
+
+l_0xc66bf6:
+    "@Oh,{pause(15)} you aren't?{pause(20)}  ...I was ready to give it to you..." end
+
+l_0xc66c15:
+    "[1D 03 FF][1B 02 {e(l_0xc66d2b)}]@Here's the [1C 05 B8].{pause(20)}  What are you going to use it for?" next
+    "@Sorry...{pause(15)}  I really shouldn't inquire about a customer's private matters.[03][1D 0E 00 B8]{sound(116)}{pause(60)}{unset(flag 692)}" eob
+
+l_0xc66c7d:
+    title(1, Tracy)
+    "@Hey,{pause(10)} bro.{pause(20)}  You're here for the <[1C 05 AF],>{pause(15)} aren't you?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc66ca7:
+    " [19 02]No" eob
+
+l_0xc66cad:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc66cc1)} {e(l_0xc66bf6)}]" goto(l_0xc66bf6)
+
+l_0xc66cc1:
+    "[1D 03 FF][1B 02 {e(l_0xc66d2b)}]@Here's the <[1C 05 AF].>{pause(20)}  What are you going to use it for?" next
+    "@Sorry.{pause(20)}  I'm not supposed to inquire about a customer's private matters.[03][1D 0E 00 AF]{sound(116)}{pause(60)}{unset(flag 693)}" eob
+
+l_0xc66d2b:
+    "@It seems you have too many items to carry!" end
+
+l_0xc66d3e:
+    title(1, Mom)
+    "[06 EE 02 {e(l_0xc66e13)}][06 D7 01 {e(l_0xc66df2)}]@What was that noise?" next
+    "@[1C 02 01],{pause(15)} you don't seem scared.{pause(20)}  Are you nuts?" next
+    "@And now you want to go check it out?{pause(15)}  ...oh{pause(15)} ...okay." next
+    "@You'll sneak out of your room anyway,{pause(15)} even if I asked you not to." next
+    "@At least change out of your jammies before you go.[03]{window_closeall}{pause(1)}{set(flag 471)}{unset(flag 749)}[1F 21 C4]" eob
+
+l_0xc66df2:
+    "@Be careful!{pause(20)}  Come home as soon as you can." end
+
+l_0xc66e13:
+    "@What was that noise?" next
+    "@You don't seem scared at all.{pause(20)}  Be careful!" end
+
+l_0xc66e40:
+    title(1, Mom)
+    "@Welcome home,{pause(15)} [1C 02 01]." next
+    "@It's not necessary to talk about it tonight." next
+    "@It's late,{pause(20)} scoot off to bed now." linebreak
+    "[19 02]Yes" eob
+
+l_0xc66e8a:
+    " [19 02]No" eob
+
+l_0xc66e90:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc66eca)} {e(l_0xc66e9f)}]" goto(l_0xc66e9f)
+
+l_0xc66e9f:
+    "@Oh,{pause(15)} [1C 02 01].{pause(20)}  You don't understand the importance of a good night's sleep!" end
+
+l_0xc66eca:
+    "{window_closeall}[1F 07 03]{set(flag 295)}{set(flag 469)}{set(flag 530)}{unset(flag 474)}{set(flag 473)}{set(flag 468)}{set(flag 749)}{unset(flag 11)}{unset(flag 517)}[1F 15 6A 00 79 02 01][1F 61]{pause(120)}[1F EB FF 06][1F 15 6A 00 FD 02 01][1F 61][1F 21 51]{pause(180)}[1F 15 B5 01 0B 03 FF][1F 21 C4][1F E5 FF]{pause(1)}[1F 1F B5 01 06][1F EC FF 01]" eob
+
+l_0xc66f20:
+    "@Don't you know what time it is?!{pause(20)}  Get yer butt home,{pause(15)} pronto!" end
+
+l_0xc66f4a:
+    "@I want to return home,{pause(15)} but the road is closed." next
+    "@People are taking this meteorite situation too seriously!" end
+
+l_0xc66f90:
+    "@Don't panic!{pause(20)}  It's just a...{pause(20)} what?!... meteorite that...{pause(20)} who?!... fell." next
+    "@I just wanna...{pause(15)} what?!{pause(20)} ...go home..." end
+
+l_0xc66fe2:
+    "@Onett police are infamous for closing roads if something is going on." next
+    "@We are going for the Guinness record..." end
+
+l_0xc67026:
+    "@Did you hear the big bang?{pause(20)}" linebreak
+    "  I think a meteorite landed nearby." next
+    "@I want to be the first to see it.{pause(15)}  Okay?" next
+    "@I am going to try to be the first to get there..." end
+
+l_0xc67089:
+    "@A meteorite has landed,{pause(15)} the Sharks are running wild in town," next
+    "@you kids are wandering around,{pause(15)} and,{pause(15)} I'm hungry...{pause(20)}" linebreak
+    "  I hate my job!" end
+
+l_0xc670e6:
+    "[06 D8 01 {e(l_0xc67130)}]@It's dangerous to go to the hilltop." next
+    "@Even if I advise you not to go,{pause(15)} it won't stop you,{pause(15)} will it?" end
+
+l_0xc67130:
+    "@A{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}h{pause(15)}--h..." next
+    "@If I yawn like this...{pause(20)} it looks like I'm goofing off." next
+    "@A{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}h{pause(15)}--h..." linebreak
+    "  ...yes,{pause(15)} it does..." end
+
+l_0xc67194:
+    "@Hey, you!{pause(15)}  Don't you know what time it is?" end
+
+l_0xc671ad:
+    "@Clear out. Get out of my way." linebreak
+    "  Clear out. Get out of my way." linebreak
+    "  Clear out. Get out of my way." next
+    "@Clear out. Of way out get my" next
+    "@Whoops,{pause(15)} my mistake...{pause(20)}" linebreak
+    "  I mean <get out of my way!>" end
+
+l_0xc67229:
+    "@Shh.{pause(15)}  Shh!" end
+
+l_0xc67237:
+    "@Nice timing,{pause(15)} [1C 02 01].{pause(20)}  Will you do something about Porky?" next
+    "@He's driving me nuts.{pause(20)}  Are you two friends?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc67286:
+    " [19 02]No" eob
+
+l_0xc6728c:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc672cc)} {e(l_0xc6729b)}]" goto(l_0xc6729b)
+
+l_0xc6729b:
+    "@You're not friends,{pause(15)} but aren't you neighbors?" next
+    "@C'mon,{pause(15)} help me out here!" end
+
+l_0xc672cc:
+    "@And you live in the house next to his...{pause(20)}  I see..." end
+
+l_0xc672eb:
+    "@That meteorite looks different than usual." next
+    "@It's strange and marvelous...{pause(20)} as well as mysterious..." linebreak
+    "  {pause(20)}o{pause(5)}o{pause(5)}o{pause(5)}o{pause(5)}o!..." end
+
+l_0xc67349:
+    title(1, Porky)
+    "[06 D8 01 {e(l_0xc6739f)}]@Hey,{pause(15)} [1C 02 01]." next
+    "@Don't be rubberneckin'.{pause(20)}  You're gettin' in the cops,{pause(15)} oops..." next
+    "@I mean officers' way!" next
+    "{set(flag 472)}{set(flag 474)}" goto(l_0xc6739f)
+
+l_0xc6739f:
+    "@You can go home now." next
+    "@Tomorrow{pause(5)} I,{pause(15)} Porky,{pause(15)} will tell you more about the strange meteorite." next
+    "@I'm fine here,{pause(15)} but you're bugging the officers!" end
+
+l_0xc673f9:
+    title(1, Picky)
+    "[06 D8 01 {e(l_0xc674aa)}][06 02 00 {e(l_0xc67412)}]@Oh,{pause(15)} hi." next
+    goto(l_0xc67412)
+
+l_0xc67412:
+    "@Porky,{pause(5)} my brother, ran out of here to chase after a police car." next
+    "@He said{pause(5)} <Picky,{pause(15)} you should stay home.>{pause(15)}  So I'm home watching our house." next
+    "@Mom and Dad aren't home yet.{pause(20)}  They went out to an elegant restaurant.{wait}{set(flag 2)}" eob
+
+l_0xc674aa:
+    "@I'm so sleepy..." next
+    "@Mom and Dad haven't gotten back from town yet." next
+    "@Porky ran out,{pause(15)} and he hasn't returned.{pause(20)}  I'm thinking about going to bed." end
+
+l_0xc67501:
+    "{music(124)}[1F 15 2B 00 6E 02 01][1F 61]{pause(30)}{window_open(1)}{music(155)}"
+    title(1, StarmanJr)
+    "@IT'S BEEN A LONG TIME,{pause(15)}" linebreak
+    "  BUZZ BUZZ. " next
+    "@YOU'VE BEEN SUCCESSFUL AT FOILING MASTER GIYGAS' PLANS." next
+    "@BUT...{pause(20)}  BUZZ BUZZ,{pause(15)} YOU MUST NOW SURRENDER." next
+    "@YOU'RE NO LONGER A HERO,{pause(15)} BUT JUST A USELESS INSECT." next
+    "@I'LL STOMP YOU HARD!" next
+    "{window_closeall}" call(data_23.l_0xc685b4) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F2 2B 00 7B 02]{pause(60)}[1F EA 5B 01]{window_open(1)}"
+    title(1, Buzz)
+    "@Whew!...{pause(20)}  I was taking a big chance there..." next
+    "@That Starman Junior was a hired assassin sent by Giygas." next
+    "@He came from 10 years in the future to kill me,{pause(15)} so we can't relax yet!" next
+    "@From now on,{pause(15)} you'll be fighting enemies sent by Giygas," next
+    "@as well as humans who have evil thoughts." next
+    "@They'll definitely make trouble during your adventure!" next
+    "@Animals are also becoming violent" next
+    "@due to Giygas' influence over the evil in their minds!" next
+    "@It is the truth,{pause(15)} so listen!{wait}{window_closeall}" eob
+
+l_0xc676d4:
+    "@(Please take my son along." next
+    "@He may look like a regular,{pause(15)} small mouse," next
+    "@but he can lead you to an exit if you're lost in a maze.)" next
+    "[06 00 02 {e(l_0xc677cc)}]@(Will you take one of my sons along?)" linebreak
+    "[19 02]Yes" eob
+
+l_0xc6774e:
+    " [19 02]No" eob
+
+l_0xc67754:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6777f)} {e(l_0xc67763)}]" goto(l_0xc67763)
+
+l_0xc67763:
+    "@(You understand that you don't need any money for this...)" end
+
+l_0xc6777f:
+    "[1D 03 FF][1B 02 {e(l_0xc67804)}][1D 0E 00 C5]@(He's a tough boy.{pause(20)}  You can treat him as one of your items.)" next
+    call(data_36.l_0xc7dccf) "{wait}{window_closeall}[1F F1 5F 00 71 02][1F 61][1F 1E 5F 00 06]{set(flag 512)}" eob
+
+l_0xc677cc:
+    "[1D 05 FF C5][1B 02 {e(l_0xc677eb)}]@(Oh,{pause(15)} you have him already.)" end
+
+l_0xc677eb:
+    "@(Didn't you leave my son with someone?)" end
+
+l_0xc67804:
+    "@(You have too many items.{pause(20)}  You can't take my son.)" end
+
+l_0xc67820:
+    "@(Trust me on the dark road.)" end
+
+l_0xc67836:
+    "@(O{pause(15)}o{pause(10)}o{pause(5)}o.{pause(20)}  Do I get to come along too?)" end
+
+l_0xc67859:
+    "@(Please take my son along." next
+    "@He may look like a regular,{pause(15)} small mouse," next
+    "@but he can lead you to an exit if you're lost in a maze.)" next
+    "[06 00 02 {e(l_0xc677cc)}]@(Will you take one of my sons along?)" linebreak
+    "[19 02]Yes" eob
+
+l_0xc678d3:
+    " [19 02]No" eob
+
+l_0xc678d9:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc678ed)} {e(l_0xc67763)}]" goto(l_0xc67763)
+
+l_0xc678ed:
+    "[1D 03 FF][1B 02 {e(l_0xc67804)}][1D 0E 00 C5]@(He's a tough boy.  You can treat him as one of your items.)" next
+    call(data_36.l_0xc7dccf) "{wait}{window_closeall}[1F F1 43 03 71 02][1F 61][1F 1E 43 03 06]{set(flag 512)}" eob
+
+l_0xc67938:
+    "@(Please take my son along." next
+    "@He may look like a regular,{pause(15)} small mouse," next
+    "@but he can lead you to an exit if you're lost in a maze.)" next
+    "[06 00 02 {e(l_0xc677cc)}]@(Will you take one of my sons along?)" linebreak
+    "[19 02]Yes" eob
+
+l_0xc679b2:
+    "  [19 02]No" eob
+
+l_0xc679b9:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc679cd)} {e(l_0xc67763)}]" goto(l_0xc67763)
+
+l_0xc679cd:
+    "[1D 03 FF][1B 02 {e(l_0xc67804)}][1D 0E 00 C5]@(He's a tough boy. {pause(15)} You can treat him as one of your items.)" next
+    call(data_36.l_0xc7dccf) "{wait}{window_closeall}[1F F1 A2 02 71 02][1F 61][1F 1E A2 02 06]{set(flag 512)}" eob
+
+l_0xc67a1c:
+    "@Welcome to Onett Hospital.{pause(20)}  I run the place." next
+    "[06 02 00 {e(l_0xc67a4d)}][06 DE 02 {e(l_0xc67a7b)}]" goto(l_0xc67a4d)
+
+l_0xc67a4d:
+    "@Ah...{pause(5)} gotcha!!{pause(15)}  Sorry.{pause(20)}  I'm just a patient here.{wait}{set(flag 734)}{set(flag 2)}" eob
+
+l_0xc67a7b:
+    "@Have I told you this joke already?{pause(15)}  Oh, sorry..." end
+
+l_0xc67aa0:
+    "[06 49 00 {e(l_0xc67ac1)}]@I was SMAAAAASH{pause(10)}ED by a mouse." end
+
+l_0xc67ac1:
+    "@My SMAAAAASH wound will soon heal." end
+
+l_0xc67add:
+    "[06 02 00 {e(l_0xc67aeb)}][06 DF 02 {e(l_0xc67b5e)}]" goto(l_0xc67aeb)
+
+l_0xc67aeb:
+    "@What?{pause(20)}  You're here to visit my daughter?" next
+    "@So you're the one who calls her in the middle of the night and talks for hours!" next
+    "@...oh,{pause(15)} it's not you.{pause(20)}  Then why did you come to this room?{wait}{set(flag 735)}{set(flag 2)}" eob
+
+l_0xc67b5e:
+    "@It's you again." end
+
+l_0xc67b67:
+    "@(Treasure Hunter!{pause(20)}  This is Lier X. Agerate's house!)" end
+
+l_0xc67b91:
+    "@(Looks like quite a piece of work...)" end
+
+l_0xc67bad:
+    "@DON'T ENTER" end
+
+l_0xc67bb9:
+    "@I heard there's a guy who stops to read each bulletin board he encounters." next
+    "@Then he says,{pause(15)} <check-a-roony!>{pause(20)}  Is that you?" end
+
+l_0xc67c0c:
+    "@Oh,{pause(15)} oh...{pause(20)}  The road's closed again." next
+    "@It's Onett's claim to fame!" end
+
+l_0xc67c40:
+    "@You've found an old magazine." next
+    "@Are you going to read it?" linebreak
+    "[19 02]Yes" eob
+
+l_0xc67c69:
+    "[19 02]No" eob
+
+l_0xc67c6e:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc67c98)} {e(l_0xc67c7d)}]" goto(l_0xc67c7d)
+
+l_0xc67c7d:
+    "@Good.{pause(20)}  That may be the best choice." end
+
+l_0xc67c98:
+    next
+    "@<My Secret Life,{pause(15)} chapter three.>{pause(20)} (Story from the previous chapter.)" next
+    "@I was neither a murder suspect," next
+    "@nor a target for an international spy organization." next
+    "@But I drove a car down the Jersey Turnpike at 80 mph." next
+    "@...A police officer pulled me over and asked for my driver's license." next
+    "@He said I was going 20 mph over the speed limit." next
+    "@I instantly pointed to my wife and said <I'm in a hurry,{pause(15)} my wife is in labor.>" next
+    "@Fortunately,{pause(15)} my wife actually had a big stomach." next
+    "@I hoped he'd let me go with this excuse." next
+    "@<Oh,{pause(15)} since it's an emergency." next
+    "@I'll lead you to the hospital with my police car,>{pause(15)} he said." next
+    "@<No,{pause(15)} it's not necessary.>{pause(20)}" linebreak
+    "  <Why not?>{pause(15)} asked the officer." next
+    "@<Uh...{pause(15)} well...>{pause(30)}" linebreak
+    "  <Let's get going,>{pause(15)} said the officer..." next
+    "@<No,{pause(15)} no!{pause(20)}  We can't!{pause(30)}  This baby is a demon child!>" end
+
+l_0xc68000:
+    "{counter(7)}" call(l_0xc68017) eob
+
+l_0xc68008:
+    "{counter(7)}[06 AF 02 {e(data_24.l_0xc68e1c)}]" goto(l_0xc68017)
+
+l_0xc68016:
+    eob
+
+l_0xc68017:
+    "[19 10 01]{rtoarg}@[1C 02 00] picked up the receiver." next
+    "{sound(11)}" call(data_18.l_0xc63029) eob
+
+l_0xc6803d:
+    "{open_wallet}[1D 14 01 00 00 00][1B 03 {e(l_0xc68077)}][19 10 01]{swap}@[1C 02 00] picked up the receiver." next
+    "[1D 09 01 00]{open_wallet}{sound(11)}" call(data_18.l_0xc63033) eob
+
+l_0xc68077:
+    "@(The pay phone costs one dollar.)" end
+
+l_0xc68091:
+    "[06 0E 00 {e(l_0xc6809e)}]" call(data_18.l_0xc630ae) eob
+
+l_0xc6809e:
+    "{counter(6)}" call(l_0xc68017) eob
+
+l_0xc680a6:
+    "[1D 05 FF B1][1B 03 {e(data_18.l_0xc62d30)}]@Please insert your ATM card." end
+
+l_0xc680c2:
+    "[19 19 00 00]{swap}{result_is(177)}[1B 03 {e(l_0xc680dc)}]@Nothing happened." end
+
+l_0xc680dc:
+    call(data_18.l_0xc62d30) eob
+
+l_0xc680e2:
+    call(data_47.l_0xc90000) eob
+
+l_0xc680e8:
+    call(data_47.l_0xc9008d) eob
+
+l_0xc680ee:
+    newline
+    eob
+
+l_0xc680f0:
+    newline
+    eob
+
+l_0xc680f2:
+    "{window_closeall}[06 30 01 {e(l_0xc68139)}][1F 1E 10 00 06][1F 15 28 00 2F 00 01][1F 11 07][1F EB 07 06][1F 61][1F 1F 28 00 06][1F EC 07 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@[1C 01 03] joins you.[03]{window_closeall}{set(flag 19)}" eob
+
+l_0xc68139:
+    "[1F 1E 12 00 06][1F 15 28 00 2F 00 01][1F 11 07][1F EB 07 06][1F 61][1F 1F 28 00 06][1F EC 07 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@[1C 01 03] joins you.[03]{window_closeall}" eob
+
+l_0xc68174:
+    "{window_closeall}[1F 11 05][1F EB 05 06][06 2D 01 {e(l_0xc681b5)}][1F F1 13 00 2F 00][1F 61][1F 1E 13 00 06][1F EC 05 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(Porky joins you.)[03]{window_closeall}" eob
+
+l_0xc681b5:
+    "[1F F1 11 00 2F 00][1F 61][1F 1E 11 00 06][1F EC 05 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(Porky joins you.)[03]{window_closeall}" eob
+
+l_0xc681e6:
+    newline
+    "[1F 12 05]" eob
+
+l_0xc681eb:
+    newline
+    "[1F 12 06]" eob
+
+l_0xc681f0:
+    "{window_closeall}[1F 11 06][1F EB 06 06][1F F2 2D 00 30 00][1F 61][1F 1F 2D 00 06][1F EC 06 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(Picky joins you.)[03]{window_closeall}" eob
+

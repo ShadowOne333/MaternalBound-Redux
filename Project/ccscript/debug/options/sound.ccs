@@ -1,0 +1,95 @@
+// Sound Test debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Sound_Test:
+    window_clear
+    diam "Select your option." newline
+    save_text_window_state
+    window_open(37)
+    menu 1 {
+      "BGM": {
+        Sound_Test_Post_Selection
+        newline
+        diam "Which song?" linebreak
+        goto(Sound_Test_BGM_Selector)
+      }
+      "Sound Effects": {
+        Sound_Test_Post_Selection
+        newline
+        diam "Which sound effect?" linebreak
+        goto(Sound_Test_SFX_Selector)
+      }
+      "SPC Effects": {
+        Sound_Test_Post_Selection
+        newline
+        diam "Which effect?" linebreak
+        goto(Sound_Test_Effect_Selector)
+      }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+command Sound_Test_Post_Selection {
+    copy_wram
+    window_closetop
+    window_switch(53)
+    copy_active
+}
+
+Sound_Test_BGM_Selector:
+    number_input(3)
+    clearline
+    store_registers
+    if ("[18 07 C0 00 00 00 00]") {	// Input validation
+      diam "Options 192 and above crash the game." next
+      goto(Sound_Test_BGM_Selector)
+    }
+  
+    load_registers
+    goto_if_false(new_debug_menu.debug_main)
+    swap
+    music(0)
+    goto(Sound_Test_BGM_Selector)
+
+Sound_Test_SFX_Selector:
+    number_input(3)
+    clearline
+    goto_if_false(new_debug_menu.debug_main)
+    swap
+    sound(0)
+    goto(Sound_Test_SFX_Selector)
+
+Sound_Test_Effect_Selector:
+    window_open(8)	// This is gonna have to be a BIIIIG window.
+      menu 2 {
+        "1. Play normally":		{music_effect(1)}
+        "2. Quick fade out":		{music_effect(2)}
+        "3. Fade out":			{music_effect(3)}
+        "7. Dec. vol. slightly":	{music_effect(7)}
+        "8. Restore orig. vol.":	{music_effect(8)}
+        "9. Disable ch. 0":		{music_effect(9)}
+        "10. Disable ch. 1":		{music_effect(10)}
+        "11. Disable ch. 2":		{music_effect(11)}
+        "12. Disable ch. 3":		{music_effect(12)}
+        "13. Disable ch. 4":		{music_effect(13)}
+        "14. Disable ch. 5":		{music_effect(14)}
+        "15. Emphasize ch. 0":		{music_effect(15)}
+        "16. Emphasize ch. 1":		{music_effect(16)}
+        "17. Emphasize ch. 2":		{music_effect(17)}
+        "18. Emphasize ch. 3":		{music_effect(18)}
+        "19. Emphasize ch. 4":		{music_effect(19)}
+        "20. Emphasize ch. 5":		{music_effect(20)}
+        "21. Inc. overall pitch":	{music_effect(21)}
+        "23. Dec. vol. strongly":	{music_effect(23)}
+      }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------

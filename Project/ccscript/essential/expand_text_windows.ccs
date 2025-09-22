@@ -1,0 +1,366 @@
+// Expand_text_windows.ccs v2
+// cooprocks123e, 2021-2022
+// Public domain
+// v2:
+// - Fixes weird bug with Escargo Express, ATM, etc.
+//   Thanks ShrineFox for reporting the bug!
+
+import "../essential/asm65816.ccs"
+
+// X,Y,W,H are (X-position, Y-position, Width, Height) in 8x8 tiles
+// The screen's width and height are 32x28 tiles, but the outer tile probably won't be visible
+command WindowDefinition(idx,x,y,w,h) { short x short y short w short h }
+command _CustomWindows {
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////// PUT YOUR WINDOWS BELOW
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Start putting window definitions here, starting with window #53 (#0 to #52 are vanilla)
+// The index numbers don't do anything, they're just there so you can read the table easier.
+
+// Reminder:    ( #, X, Y,  W,  H)
+WindowDefinition(53, 12, 1, 19, 8)	// Out-of-battle text (EarthBound)
+WindowDefinition(54, 1, 1, 8, 18)	// Used for Debug Menu
+WindowDefinition(55, 9, 1, 20, 24)  	// Used for Debug Menu 
+WindowDefinition(56, 1, 13, 14, 12) 	// Used for Status window on Equipment
+WindowDefinition(57, 15, 13, 16, 14) 	// Used for Resistances window on Equipment (57,14,13,17,14)
+WindowDefinition(58, 1, 19, 30, 8) 	// Out-of-battle text (Mother)
+WindowDefinition(59, 7, 1, 24, 18)	// Debug menu
+WindowDefinition(60, 2, 12, 28, 4)	// Warning for illegal name input
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////////// PUT YOUR WINDOWS ABOVE
+//////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+// Previously, there were 53 window types. Now there's space for 106
+// (since each entry in the window existence table is 1/2 the size)
+define MAX_WINDOW_TYPES = 106
+
+// The window existence table, which is the reason this script is 300+ lines instead of ~60
+define windowExistenceTable = 0x7E88E4
+
+///////////
+/// Patches
+// CHECK_DEAD_PLAYERS
+    ROM[0xC2BBD0] = {
+        // Orig: LDX_a(0x8900) STX_d(0x16)
+        JSL(Patch_C2BBD0) TAX
+    }
+    Patch_C2BBD0: {
+        LDA_i(14)
+        JSL(GetExistenceAtA)
+        STA_d(0x16)
+        RTL
+    }
+
+// ENEMY_SELECT_MODE
+    ROM[0xC1E1C1] = {
+        // Orig: LDA_a(0x8900) LDY_i(0x0052)
+        JSL(Patch_C1E1C1) BRA(0)
+    }
+    Patch_C1E1C1: {
+        LDA_i(14)
+        JMP(GetExistenceAndLoadYWithSizeofStats)
+    }
+
+// FILE_MENU_LOOP 
+    ROM[0xC1FB70] = {
+        // Orig: LDA_a(0x8928) LDY_i(0x0052)
+        JSL(Patch_C1FB70) BRA(0)
+    }
+    Patch_C1FB70: {
+        LDA_i(34)
+        JMP(GetExistenceAndLoadYWithSizeofStats)
+    }
+    ROM[0xC1FC22] = {
+        // Orig: LDA_a(0x892A) LDY_i(0x0052)
+        JSL(Patch_C1FC22) BRA(0)
+    }
+    Patch_C1FC22: {
+        LDA_i(35)
+        JMP(GetExistenceAndLoadYWithSizeofStats)
+    }
+
+// CLOSE_WINDOW 
+    ROM[0xC3E5B3] = {
+        // Orig: ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
+        JSL(Patch_C3E5B3) BRA(2)
+    }
+    Patch_C3E5B3: {
+        TAX
+        SEP(0x20)
+        LDA_8(0xFF)
+        STA_x(windowExistenceTable)
+        REP(0x20)
+        RTL
+    }
+
+// CREATE_WINDOW
+    ROM[0xC104EE] = {
+        // Patch the whole beginning of the Create Window fn.
+        REP(0x31)			// 4EE 
+        PHD				// 4F0
+        TAY				// 4F1
+        TDC				// 4F2
+        ADC_i(0xFFEA)			// 4F3
+        TCD				// 4F6	
+        STY_d(0x14)			// 4F7
+        TYX				// 4F9
+        LDA_x(windowExistenceTable)	// 4FA
+        AND_i(0x00FF)			// 4FD
+        CMP_i(0x00FF)			// 500
+        BNE(3)				// 503
+        JMP(0xC10528) 	// UNKNOWN0	// 505
+        STY_a(0x8958)			// 508
+        JSR(0xC11383)			// 50B
+        LDX_d(0x14)			// 50E
+        LDA_x(windowExistenceTable)	// 510
+        AND_i(0x00FF)			// 513
+        NOP				// 516
+        // Rest of code...		// 517
+    }
+    ROM[0xC105C1] = {
+        TAX				// 5C1
+        LDA_d(0x0E)			// 5C2
+        JSL(SetExistenceAtXToA)		// 5C4
+        NOP				// 5C8
+        // Rest of code...		// 5C9
+    }
+
+// SELECTION_MENU
+    ROM[0xC11E94] = {
+        JSL(Patch_C11E94) BRA(0)
+    }
+    Patch_C11E94: {
+        LDA_i(0)
+        JSL(GetExistenceAtA)
+        CMP_a(0x88E2)
+        RTL
+    }
+    ROM[0xC11EA5] = {
+        JSL(Patch_C11EA5) BRA(0)
+    }
+    Patch_C11EA5: {
+        LDA_i(10)
+        JSL(GetExistenceAtA)
+        CMP_i(0xFFFF)
+        RTL
+    }
+
+// UNKNOWN_C20ABC
+    ROM[0xC20AD6] = {
+        // Replaces:
+        // ASL CLC ADC_i(0x88e4) TAX   LDA_x(0x0000)
+        JSL(GetExistenceAtA)
+        BRA(3)
+        NOP NOP NOP
+    }
+    ROM[0xC20AE7] = {
+        // Replaces:
+        // LDA_d(0x0E) STA_a(0x8958) LDA_x(0x0000)
+        LDX_d(0x0E)
+        STX_a(0x8958)
+        BRA(1)
+        NOP
+    }
+
+// UNKNOWN_C200D9
+    ROM[0xC2013D] = {
+        // Replaces:
+        // ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
+        TAX
+        LDA_i(0xFFFF)
+        JSL(SetExistenceAtXToA)
+    }
+    ROM[0xC2014A] = {
+        // Replaces: CMP_i(0x0035)
+        CMP_i(MAX_WINDOW_TYPES)
+    }
+    // The programmers did an oopsy here - let's skip past this code
+    // that will write garbage into memory
+    ROM[0xC2021F] = BRA(0x21)      // Skip computing X pointer to garbage
+    ROM[0xC20247] = { BRA(1) NOP } // Skip STA_x(...)
+
+// UNKNOWN_C436D7
+    ROM[0xC436E3] = {
+        // Replaces:
+        // ASL TAX LDY_x(0x88E4) STY_d(0x10) TYA
+        TAX
+        JSL(GetExistenceAtA)
+        STA_d(0x10)
+        NOP
+    }
+
+// All code that uses the following sequence: 0A AA BD E4 88
+// { ASL TAX LDA_x(0x88E4) }
+command _CommonPatch(a) { ROM[a]={ JSL(GetExistenceAtA) NOP } }
+_CommonPatch(0xC101BC)
+_CommonPatch(0xC10313)
+_CommonPatch(0xC104C7)
+_CommonPatch(0xC104DD)
+_CommonPatch(0xC10A97)
+_CommonPatch(0xC10BB9)
+_CommonPatch(0xC10BDF)
+_CommonPatch(0xC10CD1)
+_CommonPatch(0xC10CEB)
+_CommonPatch(0xC10D68)
+_CommonPatch(0xC10E30)
+_CommonPatch(0xC10ECB)
+_CommonPatch(0xC10F4F)
+_CommonPatch(0xC10FD6)
+_CommonPatch(0xC11001)
+_CommonPatch(0xC11048)
+_CommonPatch(0xC113FA)
+_CommonPatch(0xC11652)
+_CommonPatch(0xC11839)
+_CommonPatch(0xC1189B)
+_CommonPatch(0xC11989)
+_CommonPatch(0xC11F6D)
+_CommonPatch(0xC11F9F)
+_CommonPatch(0xC12602)
+_CommonPatch(0xC12624)
+_CommonPatch(0xC12997)
+_CommonPatch(0xC129B9)
+_CommonPatch(0xC12BDF)
+_CommonPatch(0xC154E9)
+_CommonPatch(0xC1CA87)
+_CommonPatch(0xC1E4DA)
+_CommonPatch(0xC1E724)
+_CommonPatch(0xC1EFDF)
+_CommonPatch(0xC1F4BC)
+_CommonPatch(0xC1F63A)
+//_CommonPatch(0xC20222)
+_CommonPatch(0xC202B8)
+_CommonPatch(0xC202FC)
+_CommonPatch(0xC20343)
+_CommonPatch(0xC208C9)
+_CommonPatch(0xC209AA)
+_CommonPatch(0xC20A41)
+_CommonPatch(0xC20A59)
+_CommonPatch(0xC20A71)
+_CommonPatch(0xC20A8D)
+_CommonPatch(0xC20AA5)
+_CommonPatch(0xC20B02)
+_CommonPatch(0xC20B1A)
+_CommonPatch(0xC20B36)
+_CommonPatch(0xC20B4E)
+_CommonPatch(0xC20B80)
+_CommonPatch(0xC3E537)
+_CommonPatch(0xC3E7F2)
+_CommonPatch(0xC43749)
+_CommonPatch(0xC4379F)
+_CommonPatch(0xC437C4)
+_CommonPatch(0xC4388B)
+_CommonPatch(0xC438C4)
+_CommonPatch(0xC43B20)
+_CommonPatch(0xC43BD2)
+_CommonPatch(0xC43C05)
+_CommonPatch(0xC43DA4)
+_CommonPatch(0xC43E4E)
+_CommonPatch(0xC43F0F)
+_CommonPatch(0xC43F91)
+_CommonPatch(0xC43FFA)
+_CommonPatch(0xC442DF)
+_CommonPatch(0xC44490)
+_CommonPatch(0xC44619)
+_CommonPatch(0xC44813)
+_CommonPatch(0xC44CA8)
+_CommonPatch(0xC44E99)
+_CommonPatch(0xC450A4)
+_CommonPatch(0xC45214)
+_CommonPatch(0xEF011F)
+_CommonPatch(0xEF017A)
+_CommonPatch(0xEF01E1)
+
+///////////////////
+/// Common ASM code
+
+// We need to patch out some things of the form:
+// LDA_a(windowExistenceTable+amount) LDY_i(0x0052)
+// This lets those patches load A with a value then jump here :)
+GetExistenceAndLoadYWithSizeofStats: {
+    JSL(GetExistenceAtA)
+    LDY_i(0x0052)
+    RTL
+}
+
+SetExistenceAtXToA: {
+    SEP(0x20)
+    STA_x(windowExistenceTable)
+    REP(0x20)
+    RTL
+}
+
+command SExt8 { AND_i(0x00FF) BIT_i(0x0080) BEQ(3) ORA_i(0xFF00) }
+GetExistenceAtA: {
+    TAX
+    LDA_x(windowExistenceTable)
+    SExt8
+    RTL
+}
+
+//////////////////////////
+/// Actual table expansion
+// Usually, you just need to relocate the table and change everything that points to it,
+// but thanks to the window existence table, this ended up being the easy part
+
+// Literally only one reference to this table.. smh I thought this would be so easy
+_asmptr(0xC105C9, NewWindowTable)
+NewWindowTable:
+	// 	      #,   X,	   Y, 	    W,	    H
+    WindowDefinition( 0, 1, 1, 13, 6) // 0, 01,01,0D,08
+    WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
+    WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
+    WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu
+    WindowDefinition( 4, 1, 3, 11, 6) // PSI Description box (Heigth: 8 -> 6)
+    WindowDefinition( 5, 20, 1, 11, 16) // Phone menu
+    WindowDefinition( 6, 8, 1, 20, 10) // Equip menu
+    WindowDefinition( 7, 18, 1, 13, 12) // Item list for equip menu (7, 12,01,0D,10->0C)
+    WindowDefinition( 8, 1, 1, 30, 18) // Status menu
+    WindowDefinition( 9, 12, 1, 19, 18) // Used by status screen?
+    WindowDefinition(10, 1, 7, 8, 4) // Carried money window
+    WindowDefinition(11, 1, 15, 11, 4) // Used by status screen?
+    WindowDefinition(12, 12, 1, 19, 16) //
+    WindowDefinition(13, 7, 1, 24, 16) //
+    WindowDefinition(14, 4, 1, 24, 6) // In-battle text
+    WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu (Fix for Teddy as last alive member: 21 -> 23)
+    WindowDefinition(16, 4, 1, 8, 8) //
+    WindowDefinition(17, 12, 1, 12, 4) //
+    WindowDefinition(18, 1, 1, 14, 6) // Jeff's Battle menu
+    WindowDefinition(19, 1, 2, 30, 8) // File Select
+    WindowDefinition(20, 5, 9, 22, 4) // Overworld Menu
+    WindowDefinition(21, 10, 16, 12, 8) // Copy Menu (2 choices)
+    WindowDefinition(22, 10, 16, 12, 6) // Copy Menu (1 choice)
+    WindowDefinition(23, 6, 17, 21, 10) // Delete confirmation
+    WindowDefinition(24, 3, 14, 16, 10) // Text Speed
+    WindowDefinition(25, 8, 15, 18, 8) // Music Mode
+    WindowDefinition(26, 5, 4, 11, 4) // Naming Box (05,04,08,04)
+    WindowDefinition(27, 13, 4, 17, 4) // "Name This Friend" (0D,04,11,04)
+    WindowDefinition(28, 1, 9, 30, 16) // Name input box
+    WindowDefinition(29, 7, 3, 7, 4) // Ness's Name
+    WindowDefinition(30, 7, 7, 7, 4) // Paula's Name
+    WindowDefinition(31, 7, 11, 7, 4) // Jeff's Name
+    WindowDefinition(32, 7, 15, 7, 4) // Poo's Name
+    WindowDefinition(33, 20, 3, 8, 4) // King's Name
+    WindowDefinition(34, 15, 7, 13, 6) // Favourite Food
+    WindowDefinition(35, 15, 13, 13, 6) // Favourite Thing
+    WindowDefinition(36, 4, 21, 24, 4) // "Are you sure?"
+    WindowDefinition(37, 18, 6, 13, 8) //
+    WindowDefinition(38, 12, 1, 12, 4) //
+    WindowDefinition(39, 3, 3, 26, 6) //
+    WindowDefinition(40, 1, 1, 7, 4) //
+    WindowDefinition(41, 16, 8, 15, 4) //
+    WindowDefinition(42, 10, 8, 21, 4) //
+    WindowDefinition(43, 4, 8, 27, 4) //
+    WindowDefinition(44, 8, 2, 24, 16) //
+    WindowDefinition(45, 1, 13, 14, 12) //
+    WindowDefinition(46, 4, 1, 8, 10) //
+    WindowDefinition(47, 1, 9, 30, 10) //
+    WindowDefinition(48, 1, 1, 28, 6) //
+    WindowDefinition(49, 10, 4, 20, 4) // Enemy Name
+    WindowDefinition(50, 14, 11, 15, 16) // File select: flavour selection
+    WindowDefinition(51, 22, 8, 9, 4) //
+    WindowDefinition(52, 15, 13, 16, 14) //
+CustomWindows:
+    _CustomWindows

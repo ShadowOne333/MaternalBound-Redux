@@ -1,0 +1,184 @@
+// Events debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+ROM[0xC58ED1] = goto(Banana)
+
+Banana:
+    /* ORIGINAL TEXT
+    "@Can't do anything." end
+    //"@NNMDKMSN." end //Debug option for Kirby Debug Menu - Option Banana */
+    "{diam}How far do you want to advance?" linebreak
+    goto(l_0xc58edd)
+
+l_0xc58edd:
+    "[18 02]{window_open(50)}{diam}Area:" linebreak
+    "[19 02]Onett[02]"
+    "[19 02]Twoson[02]"
+    "[19 02]Threek[02]"
+    "[19 02]Fourside[02]"
+    "[19 02]Summers [5F] Scarabia[02]"
+    "[19 02]The Rest[02]"
+    "[1C 0C 01][11][09 06 {e(l_0xc58f07)} {e(l_0xc58f37)} {e(l_0xc58f61)} {e(l_0xc58f93)} {e(l_0xc58fc1)} {e(l_0xc58feb)}]{window_closetop}{window_switch(1)}" newline
+    "{diam}Finished." end
+
+l_0xc58f07: // Onett
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Porky joined[02]"
+    "[19 02]2. Buzz buzz appeared[02]"
+    "[19 02]3. Buzz buzz died[02]"
+    "[19 02]4. Defeated Frank[02]"
+    "[19 02]5. Cleared Onett[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59019)} {e(l_0xc5901c)} {e(l_0xc5901f)} {e(l_0xc59022)} {e(l_0xc59025)}]" call(l_0xc59082) eob
+
+l_0xc58f35: // Shared "end early" path
+    //newline "@Finished." end
+    eob
+
+l_0xc58f37: // Twoson
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Paula kidnapped[02]"
+    "[19 02]2. Got Franklin badge[02]"
+    "[19 02]3. Rescued Paula[02]"
+    "[19 02]4. Cleared Twoson[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59028)} {e(l_0xc5902b)} {e(l_0xc5902e)} {e(l_0xc59031)}]" call(l_0xc59082) eob
+
+l_0xc58f61: // Threek
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Caught by zombies[02]"
+    "[19 02]2. Tessie appears[02]"
+    "[19 02]3. Dr. Andonuts[02]"
+    "[19 02]4. Jeff joined[02]"
+    "[19 02]5. Defeated zombies[02]"
+    "[19 02]6. Cleared Threek[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 06 {e(l_0xc59034)} {e(l_0xc59037)} {e(l_0xc5903a)} {e(l_0xc5903d)} {e(l_0xc59040)} {e(l_0xc59043)}]" call(l_0xc59082) eob
+
+l_0xc58f93: // Fourside
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Montague's big hole[02]"
+    "[19 02]2. Runaway Brothers freed[02]"
+    "[19 02]3. Everdred died[02]"
+    "[19 02]4. Beat Mani Mani[02]"
+    "[19 02]5. Cleared Fourside[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59046)} {e(l_0xc59049)} {e(l_0xc5904c)} {e(l_0xc5904f)} {e(l_0xc59052)}]" call(l_0xc59082) eob
+
+l_0xc58fc1: // Summers/Scaraba
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Massage at Dalaam[02]"
+    "[19 02]2. Pink and Magnet[02]"
+    "[19 02]3. Sail to Scarabia[02]"
+    "[19 02]4. Dungeon Man[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59055)} {e(l_0xc59058)} {e(l_0xc5905b)} {e(l_0xc5905e)}]" call(l_0xc59082) eob
+
+l_0xc58feb: // The rest
+    "{window_open(13)}{diam}Scene:" linebreak
+    "[19 02]1. Barf and Poo[02]"
+    "[19 02]2. Lumine Hall[02]"
+    "[19 02]3. Finished Sound Stone[02]"
+    "[19 02]4. Magicant[02]"
+    "[19 02]5. The End[02]"
+    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59061)} {e(l_0xc59064)} {e(l_0xc59067)} {e(l_0xc5906a)} {e(l_0xc5906d)}]" call(l_0xc59082) eob
+
+l_0xc59019:
+    "{counter(10)}" eob
+
+l_0xc5901c:
+    "{counter(11)}" eob
+
+l_0xc5901f:
+    "{counter(12)}" eob
+
+l_0xc59022:
+    "{counter(13)}" eob
+
+l_0xc59025:
+    "{counter(14)}" eob
+
+l_0xc59028:
+    "{counter(20)}" eob
+
+l_0xc5902b:
+    "{counter(21)}" eob
+
+l_0xc5902e:
+    "{counter(22)}" eob
+
+l_0xc59031:
+    "{counter(23)}" eob
+
+l_0xc59034:
+    "{counter(30)}" eob
+
+l_0xc59037:
+    "{counter(31)}" eob
+
+l_0xc5903a:
+    "{counter(32)}" eob
+
+l_0xc5903d:
+    "{counter(33)}" eob
+
+l_0xc59040:
+    "{counter(34)}" eob
+
+l_0xc59043:
+    "{counter(35)}" eob
+
+l_0xc59046:
+    "{counter(40)}" eob
+
+l_0xc59049:
+    "{counter(41)}" eob
+
+l_0xc5904c:
+    "{counter(42)}" eob
+
+l_0xc5904f:
+    "{counter(43)}" eob
+
+l_0xc59052:
+    "{counter(44)}" eob
+
+l_0xc59055:
+    "{counter(50)}" eob
+
+l_0xc59058:
+    "{counter(51)}" eob
+
+l_0xc5905b:
+    "{counter(52)}" eob
+
+l_0xc5905e:
+    "{counter(53)}" eob
+
+l_0xc59061:
+    "{counter(60)}" eob
+
+l_0xc59064:
+    "{counter(61)}" eob
+
+l_0xc59067:
+    "{counter(62)}" eob
+
+l_0xc5906a:
+    "{counter(63)}" eob
+
+l_0xc5906d:
+    "{counter(64)}" eob
+
+l_0xc59070:
+    "[11]{counter(1)}[1B 05]{window_closetop}{window_switch(50)}{window_closetop}{window_switch(1)}[1B 06]" goto(l_0xc58edd)// eob
+
+l_0xc59082:
+    "[1F 41 0F][18 07 0A 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 532)}{set(flag 375)}{unset(flag 532)}{set(flag 476)}{set(flag 477)}{unset(flag 477)}{set(flag 513)}{set(flag 533)}{set(flag 517)}{set(flag 470)}{set(flag 471)}{set(flag 472)}{unset(flag 533)}{set(flag 474)}{unset(flag 474)}{set(flag 530)}{set(flag 749)}{unset(flag 749)}{set(flag 295)}{set(flag 469)}{set(flag 473)}{set(flag 468)}{set(flag 477)}{unset(flag 477)}{unset(flag 295)}{unset(flag 473)}{set(flag 97)}{set(flag 467)}{set(flag 301)}{set(flag 531)}{set(flag 96)}{set(flag 94)}{set(flag 19)}{set(flag 76)}{set(flag 310)}{unset(flag 301)}{unset(flag 310)}{set(flag 466)}{set(flag 21)}{unset(flag 530)}{unset(flag 531)}{set(flag 30)}{set(flag 95)}{set(flag 98)}{unset(flag 95)}{unset(flag 467)}{set(flag 199)}{set(flag 200)}{set(flag 201)}{set(flag 209)}{set(flag 750)}[18 07 0B 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 304)}{set(flag 100)}{set(flag 20)}{unset(flag 466)}{unset(flag 468)}{set(flag 742)}{set(flag 302)}{unset(flag 302)}{set(flag 18)}{set(flag 37)}[18 07 0C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 35)}{set(flag 34)}{unset(flag 21)}{unset(flag 20)}{set(flag 104)}{unset(flag 18)}{set(flag 303)}{unset(flag 303)}{set(flag 107)}{set(flag 633)}{set(flag 31)}{set(flag 422)}{unset(flag 107)}[18 07 0D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 688)}{set(flag 511)}{set(flag 40)}{set(flag 64)}{set(flag 80)}{set(flag 108)}{set(flag 697)}{set(flag 363)}{set(flag 364)}{set(flag 365)}[18 07 0E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 190)}{set(flag 182)}{set(flag 634)}{unset(flag 634)}{set(flag 450)}{set(flag 449)}{set(flag 36)}{unset(flag 36)}{set(flag 109)}{set(flag 39)}{unset(flag 449)}{set(flag 38)}{set(flag 289)}{set(flag 290)}{set(flag 291)}{set(flag 292)}{set(flag 293)}{unset(flag 38)}{unset(flag 39)}{set(flag 105)}{unset(flag 450)}{unset(flag 35)}{unset(flag 37)}{unset(flag 742)}[18 07 14 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 210)}{set(flag 322)}{set(flag 635)}{unset(flag 635)}{set(flag 118)}{set(flag 321)}{set(flag 612)}{set(flag 624)}{set(flag 66)}{set(flag 112)}{set(flag 294)}{set(flag 117)}{set(flag 82)}{unset(flag 294)}[18 07 15 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 111)}{set(flag 341)}{set(flag 42)}{set(flag 175)}{set(flag 83)}{set(flag 339)}{unset(flag 42)}{set(flag 284)}{set(flag 743)}{set(flag 86)}{set(flag 45)}{unset(flag 45)}[18 07 16 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 68)}{set(flag 351)}{set(flag 352)}{set(flag 353)}{set(flag 354)}{set(flag 355)}{set(flag 356)}{unset(flag 175)}{set(flag 44)}{unset(flag 44)}{set(flag 198)}{set(flag 13)}{unset(flag 118)}{set(flag 191)}{set(flag 183)}{set(flag 12)}{set(flag 611)}{unset(flag 611)}[18 07 17 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 85)}{set(flag 553)}{set(flag 549)}{set(flag 43)}{unset(flag 43)}{set(flag 319)}{set(flag 115)}{set(flag 119)}{unset(flag 624)}{set(flag 309)}{set(flag 535)}{set(flag 314)}{unset(flag 314)}{unset(flag 535)}{unset(flag 309)}[18 07 1E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 211)}{set(flag 46)}{set(flag 433)}{set(flag 588)}{unset(flag 46)}{set(flag 296)}{unset(flag 296)}{set(flag 297)}{unset(flag 297)}{set(flag 298)}{unset(flag 298)}{unset(flag 433)}{set(flag 636)}{unset(flag 636)}{set(flag 212)}{set(flag 128)}[18 07 1F 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 23)}{set(flag 604)}{set(flag 605)}{set(flag 88)}{set(flag 335)}{unset(flag 335)}{set(flag 544)}{set(flag 323)}{set(flag 334)}{set(flag 22)}{set(flag 287)}{set(flag 696)}[18 07 20 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 129)}{set(flag 53)}{set(flag 416)}{set(flag 417)}{set(flag 418)}{set(flag 419)}{set(flag 420)}{set(flag 421)}{set(flag 50)}{unset(flag 50)}{set(flag 311)}{unset(flag 22)}[18 07 21 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 127)}{set(flag 748)}{set(flag 14)}{set(flag 626)}{unset(flag 626)}{set(flag 47)}{set(flag 622)}{set(flag 589)}{set(flag 49)}{set(flag 541)}[18 07 22 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 69)}{unset(flag 49)}{set(flag 669)}{set(flag 552)}{set(flag 669)}{set(flag 87)}{set(flag 124)}{unset(flag 124)}{set(flag 125)}{set(flag 773)}{set(flag 300)}[18 07 23 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 603)}{set(flag 213)}{set(flag 131)}{set(flag 369)}{set(flag 71)}{unset(flag 773)}{set(flag 629)}{set(flag 590)}{set(flag 623)}{unset(flag 623)}{set(flag 422)}{unset(flag 125)}{unset(flag 629)}{set(flag 193)}{set(flag 185)}[18 07 28 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 370)}{set(flag 596)}{set(flag 137)}{set(flag 55)}{set(flag 54)}{set(flag 136)}{set(flag 214)}{unset(flag 589)}{unset(flag 590)}{set(flag 607)}{set(flag 608)}{set(flag 174)}[18 07 29 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 277)}{set(flag 278)}{set(flag 279)}{set(flag 280)}{set(flag 281)}{set(flag 518)}{set(flag 519)}{set(flag 520)}{set(flag 521)}{set(flag 72)}{unset(flag 54)}{unset(flag 55)}{set(flag 333)}{set(flag 55)}{set(flag 282)}{set(flag 272)}{unset(flag 272)}{unset(flag 55)}{set(flag 90)}{set(flag 146)}{set(flag 147)}[18 07 2A 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 594)}{set(flag 776)}{set(flag 57)}{unset(flag 594)}{set(flag 555)}{set(flag 139)}{unset(flag 555)}{set(flag 556)}{unset(flag 57)}{set(flag 60)}{set(flag 145)}{unset(flag 60)}[18 07 2B 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 63)}{set(flag 774)}{set(flag 165)}{set(flag 160)}{set(flag 161)}{set(flag 162)}{set(flag 163)}{unset(flag 164)}{unset(flag 160)}{unset(flag 161)}{unset(flag 162)}{unset(flag 163)}{unset(flag 164)}{set(flag 63)}{set(flag 631)}{set(flag 75)}{set(flag 376)}{set(flag 591)}{unset(flag 591)}{set(flag 59)}{set(flag 745)}[18 07 2C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 451)}{set(flag 452)}{set(flag 453)}{set(flag 454)}{set(flag 455)}{set(flag 456)}{set(flag 457)}{set(flag 458)}{set(flag 459)}{set(flag 460)}{set(flag 462)}{set(flag 463)}{set(flag 464)}{set(flag 465)}{set(flag 516)}{set(flag 554)}{set(flag 613)}{set(flag 614)}{unset(flag 614)}{set(flag 615)}{unset(flag 615)}{unset(flag 613)}{set(flag 275)}{unset(flag 59)}{set(flag 142)}{set(flag 286)}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 318)}{unset(flag 318)}{unset(flag 776)}{set(flag 15)}{set(flag 664)}{set(flag 741)}{set(flag 672)}{set(flag 143)}{set(flag 377)}{set(flag 378)}{set(flag 317)}{unset(flag 317)}{unset(flag 47)}{set(flag 48)}{set(flag 773)}{unset(flag 48)}{unset(flag 773)}[18 07 2D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 621)}{unset(flag 621)}{unset(flag 748)}{set(flag 630)}{set(flag 609)}{set(flag 192)}{set(flag 184)}{set(flag 748)}{set(flag 215)}[18 07 32 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 203)}{set(flag 539)}{set(flag 337)}{set(flag 617)}{set(flag 61)}{unset(flag 61)}{set(flag 149)}{set(flag 216)}{set(flag 595)}[18 07 33 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 150)}{set(flag 273)}{set(flag 16)}{set(flag 346)}{set(flag 601)}{set(flag 602)}{set(flag 148)}{set(flag 343)}{set(flag 687)}{unset(flag 687)}{set(flag 140)}{set(flag 91)}{set(flag 58)}{set(flag 194)}{set(flag 186)}{set(flag 652)}{set(flag 195)}{set(flag 187)}[18 07 34 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 55)}[18 07 35 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 557)}{set(flag 217)}{set(flag 152)}{set(flag 342)}{set(flag 435)}{set(flag 347)}{set(flag 348)}{set(flag 283)}{set(flag 390)}{set(flag 391)}{set(flag 392)}{set(flag 393)}{set(flag 394)}{set(flag 395)}{set(flag 396)}{set(flag 397)}{set(flag 398)}{set(flag 399)}{set(flag 400)}{set(flag 401)}{set(flag 402)}{set(flag 403)}{set(flag 404)}{set(flag 405)}{set(flag 406)}{set(flag 407)}{set(flag 408)}{set(flag 409)}{set(flag 410)}{set(flag 411)}{set(flag 412)}{set(flag 413)}{set(flag 414)}{set(flag 415)}{set(flag 17)}[18 07 36 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 336)}{set(flag 606)}{set(flag 24)}{set(flag 62)}{set(flag 274)}{set(flag 445)}{set(flag 151)}{set(flag 762)}[18 07 3C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 218)}{set(flag 288)}{set(flag 276)}[18 07 3D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 219)}{set(flag 154)}{set(flag 379)}{set(flag 380)}{set(flag 52)}{set(flag 620)}{set(flag 618)}{unset(flag 620)}{set(flag 299)}{set(flag 619)}{set(flag 434)}{set(flag 70)}{set(flag 126)}{set(flag 51)}{unset(flag 51)}{set(flag 102)}{set(flag 89)}{set(flag 155)}{set(flag 540)}{set(flag 153)}{set(flag 649)}{set(flag 130)}{set(flag 538)}{set(flag 156)}{set(flag 157)}{set(flag 158)}{set(flag 196)}{set(flag 188)}[18 07 3E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 220)}{unset(flag 52)}{set(flag 651)}{set(flag 423)}{set(flag 616)}{set(flag 197)}{set(flag 189)}{unset(flag 182)}{unset(flag 183)}{unset(flag 184)}{unset(flag 185)}{unset(flag 186)}{unset(flag 187)}{unset(flag 188)}{unset(flag 189)}{set(flag 384)}[18 07 3F 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 371)}{set(flag 159)}{set(flag 436)}{set(flag 437)}{set(flag 438)}{set(flag 74)}{set(flag 382)}{unset(flag 476)}{set(flag 349)}{unset(flag 349)}[18 07 40 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 132)}{unset(flag 422)}{set(flag 632)}{unset(flag 633)}{unset(flag 517)}{set(flag 79)}{set(flag 134)}[18 07 41 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 133)}{set(flag 332)}{set(flag 328)}{set(flag 329)}{set(flag 330)}{unset(flag 328)}{set(flag 331)}{set(flag 327)}{set(flag 285)}{unset(flag 382)}{set(flag 337)}{set(flag 372)}[18 07 42 00 00 00 02][1B 02 {e(l_0xc59894)}]{unset(flag 372)}{set(flag 73)}{set(flag 742)}{set(flag 741)}{set(flag 422)}{unset(flag 632)}{set(flag 628)}{set(flag 633)}{set(flag 517)}{set(flag 637)}[18 07 43 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 638)}{set(flag 665)}{set(flag 666)}{set(flag 667)}{set(flag 777)}{set(flag 769)}{set(flag 643)}{set(flag 772)}{set(flag 771)}{set(flag 770)}{set(flag 769)}[18 07 44 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 763)}" goto(l_0xc59894)
+
+l_0xc59894:
+    eob
+
+//------------------------------------------------------------------

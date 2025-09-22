@@ -1,0 +1,31 @@
+// by JTolmar, but Phoenixbound did all the real work
+// Sprites in EB get tinted if the average shade of the current map palette is far
+// from the reference palette (map palette 1). Presumably that's the palette they were
+// drawn to look good on. So lock this down to the results in the original palette
+
+import "../essential/asm65816.ccs"
+
+// Updates the reference palette colors:
+// https://github.com/Herringway/ebsrc/blob/43361a1198820e59eb79ccc5a0fcf052bd2b1032/src/unknown/C0/C005E7.asm
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c005e7
+ROM[0xc005e7] = {
+  LDA_i(0x8A)
+  STA_a(0x43D6)
+  LDA_i(0x96)
+  STA_a(0x43D8)
+  LDA_i(0x74)
+  STA_a(0x43DA)
+  RTL
+}
+
+// Just how much tinting, anyway?
+// Uncomment this and change the 6 if you'd like more/less tint
+// https://github.com/Herringway/ebsrc/blob/43361a1198820e59eb79ccc5a0fcf052bd2b1032/src/unknown/C0/C00434.asm
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c00434
+define how_much_tinting = 4
+ROM[0xc00453] = CMP_i(how_much_tinting)
+ROM[0xc0045d] = SBC_i(how_much_tinting)
+ROM[0xc0046d] = CMP_i(how_much_tinting)
+ROM[0xc00477] = ADC_i(how_much_tinting)
+
+ROM[0xC34E0C] = "[1F 1F 1F]" //Elevator Palette Fix

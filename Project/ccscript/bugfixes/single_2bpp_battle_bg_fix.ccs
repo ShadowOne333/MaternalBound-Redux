@@ -1,0 +1,64 @@
+// Fix graphical corruption when only 1x 2BPP battle BG is used
+// cooprocks123e 2024-10-14
+// public domain
+
+// This occurs due to a coding bug - we never set the CURRENT_LAYER_CONFIG so it defaults to the previously used value (1).
+// This is fine, as long as we ensure we're displaying reasonable data on BG4 - which the original game doesn't do. It's possible they never tested with only one 2BPP background.
+// We can fix this by leavin CURRENT_LAYER_CONFIG at 1, and setting BG4 to display a blank tilemap. Luckily, we already have one in BG2, so we can duplicate the settings used there.
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+define setLayerConfig = 0xC0AFCD
+define setBG4VRAMLocation = 0xC08E5C
+define CURRENT_LAYER_CONFIG = 0x7EAD8A
+
+ROM[0xC2D899] = {
+    // Original code:
+    //  C2D899: A5 2C           LDA @LOCAL09
+    //  C2D89B: 85 04           STA @VIRTUAL04
+    //  C2D89D: D0 03 4C 9F     BEQL @UNKNOWN21
+    //          DA          
+    //  C2D8A2: A9 03 00        LDA #3
+    //  C2D8A5: 8D 8A AD        STA CURRENT_LAYER_CONFIG
+    //  C2D8A8: 22 CD AF C0     JSL UNKNOWN_C0AFCD
+    //  C2D8AC: A5 28 85 0A     MOVE_INT @LOCAL08, @VIRTUAL0A
+    //          A5 2A 85 0C 
+    //  C2D8B4: A5 04           LDA @VIRTUAL04
+    //  C2D8B6: 85 04 0A 0A     OPTIMIZED_MULT @VIRTUAL04, 17
+    //          0A 0A 65 04 
+    //  C2D8BE: 18              CLC
+    //  C2D8BF: 65 0A           ADC @VIRTUAL0A
+    //  C2D8C1: 85 0A           STA @VIRTUAL0A
+    //  C2D8C3: .....cont'd.....
+
+/* C2D899 */     // Check if Layer2 == 0
+/* C2D899 */     LDA_d(0x2C)
+/* C2D89B */     BNE(14) // Layer2Yes
+/* C2D89D */ Layer2No:
+/* C2D89D */     // Set BG4 to a blank tilemap (copy settings from BG2)
+/* C2D89D */     LDY_i(0)
+/* C2D8A0 */     LDX_i(0x5800)
+/* C2D8A3 */     TYA
+/* C2D8A4 */     JSL(setBG4VRAMLocation)
+/* C2D8A8 */     JMP(0xDA9F) // @UNKNOWN21 = 0xC2DA9F
+/* C2D8AB */ Layer2Yes:
+/* C2D8AB */     // We have a layer 2 to display. Compute the entry for Layer 2 in
+/* C2D8AB */     // BG_DATA_TABLE: VIRTUAL0A = LOCAL08 + LOCAL09 * 17
+/* C2D8AB */     // LOCAL09 is in A
+/* C2D8AB */     ASL ASL ASL ASL
+/* C2D8AF */     ADC_d(0x2C)
+/* C2D8B1 */     // A = LOCAL09 * 17
+/* C2D8B1 */     ADC_d(0x28)
+/* C2D8B3 */     STA_d(0x0A)
+/* C2D8B5 */     LDA_d(0x2A)
+/* C2D8B7 */     STA_d(0x0C)
+/* C2D8B9 */ 
+/* C2D8B9 */     // Call `setLayerConfig()` to set up colour math.
+/* C2D8B9 */     LDA_i(3)        // LayerConfig.ColourBackdropBG4AddAvg
+/* C2D8BC */     STA_a(CURRENT_LAYER_CONFIG)
+/* C2D8BF */     JSL(setLayerConfig)
+/* C2D8C3 */
+}
+
+//------------------------------------------------------------------

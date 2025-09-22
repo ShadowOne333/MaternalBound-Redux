@@ -1,0 +1,40 @@
+// Events debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Hint_Map:
+    newline
+    "{diam}The hint shop has been marked in your map." next
+    set(FLG_GM_ONET_HINT)
+    set(FLG_GM_TWOSON_HINT)
+    set(FLG_GM_THREEK_HINT)
+    set(FLG_GM_FOURSIDE_HINT)
+    set(FLG_GM_SUMMERS_HINT)
+    set(FLG_GM_SCARABI_HINT)
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+Hint_Shop:
+    "{diam}Select hint.{wait}" linebreak
+    input(2) clearline
+    goto_if_true(hint_number)
+    "{diam}Hint system off." next //Hints closing
+    goto(new_debug_menu.debug_main)
+
+hint_number:
+    rtoarg
+    "{diam}Hint #"
+    print_num_value(0)
+    wait linebreak
+    next
+    call(0xc70000) linebreak
+    goto(Hint_Shop)
+
+//------------------------------------------------------------------

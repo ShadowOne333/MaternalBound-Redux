@@ -1,0 +1,24 @@
+// Fixes a bug in Earthbound where guts saves are determined by the attacker's
+// guts, rather than the defender's
+// by jtolmar
+
+import "../essential/asm65816.ccs"
+
+// Main damage-calculation routine
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c27eaf
+// This is the guts save check
+// $c27f96            LDX $a970    ; pointer to current attacker
+// $c27f99            LDA $002c,X  ; index of guts stat
+// Record scratch. Wait what?
+// Yep, was supposed to be the defender's guts.
+// Honestly there's surprisingly few of these in this game. You should see the
+// average Final Fantasy, woah nelly.
+ROM[0xc27f96] = LDX_a(0xA972)
+
+// Fixing vanilla bug that has weird effect when PSI is reflected off Franklin Badge and PSI Shields
+/*ROM[0xC29425] = JML (BounceFix)
+BounceFix:
+    CMP_a (0xAA96)
+    LDA_i (0x0001)    //Clobbered instruction
+    JML (0xC29428)    //Go back to original code
+*/

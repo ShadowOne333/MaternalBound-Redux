@@ -1,0 +1,271 @@
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+import "../essential/ccexpand.ccs"
+
+// Fade tools
+// Standardised functions for fading in and out
+// Also, a CCS implementation to fade at any time in text script.
+// Supremekirb
+
+// CCS commands provided here:
+//// custom_fadeout - Custom fade to colour ////
+// args:
+// short colour         - Colour to fade to
+// short mask           - Palette mask
+// short duration       - Frames fade should last for
+// byte runActionscript - If nonzero, Actionscripts will run during the fade
+
+//// custom_fadein - Custom fade from colour ////
+// args:
+// short colour         - Colour to fade from
+// short mask           - Palette mask
+// short duration       - Frames fade should last for
+// byte runActionscript - If nonzero, Actionscripts will run during the fade
+
+// Colour format is the BGR555.
+// To convert from hex/HTML to BGR555:
+// Take the five most significant bits of each colour
+// Place them in the order B-G-R with a leading zero bit
+// For example: #AABBCC 
+// R: AA --> 10101|010 (look at five most significant)
+// G: BB --> 10111|011
+// B: CC --> 11001|100
+// Becomes...
+// Z BLUE  GREEN RED
+// 0|11001|10111|10101
+// = 0x66F5
+
+// Or use this Python to convert:
+// ```
+// def BGR555(input: int):
+//     r = ((input & 0xFF0000) >> 16) >> 3
+//     g = ((input & 0x00FF00) >> 8) >> 3
+//     b = (input & 0x0000FF) >> 3
+//     return hex((b << 10) | (g << 5) | r)
+// ```
+
+// Mask format is one bit per palette
+// Starting from least significant and counting up,
+// the 8 BG palettes followed by the 8 sprite palettes
+// See https://github.com/Herringway/earthbound/blob/25315d8d9b88bd1cb1c0733df616a9e3b60bdc6b/source/earthbound/commondefs.d#L5971
+// Some convenient values you can use:
+define PALETTEMASK_ALL = 0xFFFF
+define PALETTEMASK_BGONLY = 0x00FF
+define PALETTEMASK_SPRONLY = 0xFF00
+define PALETTEMASK_ALLBUTPARTY = 0xDFFF
+
+// Add the following labels to CCExpand:
+// CC_CustomFadeout
+// CC_CustomFadein
+// and then define their control codes here
+define CONTROL_CODE_FADEOUT = "[1A 0D]"
+define CONTROL_CODE_FADEIN  = "[1A 0E]"
+
+// Now you are ready to use :)
+
+
+//////// !! MAGIC ZONE !! ////////
+
+define BUFFER = 0x7F0000
+define BUFFER200 = 0x7F0200
+define BUFFER400 = 0x7F0400
+define BUFFER600 = 0x7F0600
+define BUFFER800 = 0x7F0800
+define BUFFERA00 = 0x7F0A00
+define BUFFERC00 = 0x7F0C00
+define PALETTES = 0x7E0200
+
+define Memcpy24 = 0xC08EED
+define PrepareLoadedPaletteFadeTables = 0xC496E7
+define UpdatePaletteFade = 0xC426ED
+define UpdateScreen = 0xC08B26
+define OAMClear = 0xC088B1
+define RunActionscriptFrame = 0xC09466
+define WaitUntilNextFrame = 0xC08756
+define FinishPaletteFade = 0xC49740
+
+define _LOCAL_COLOUR = 0x00
+define _LOCAL_MASK = 0x02
+define _LOCAL_DURATION = 0x04
+define _LOCAL_RUNACTIONSCRIPT = 0x06
+define _LOCAL_LOOPCOUNT1 = 0x08
+define _VIRTUAL_RUNACTIONSCRIPT = 0x20 // DP stuff that I vaguely understand
+
+// ASM macros
+command MEMCPY24(source, target, length) {
+    ASMLoadAddress12 (source)
+    ASMLoadAddress0E (target)
+    LDA_i (length)
+    JSL (Memcpy24)
+}
+
+// CCS commands
+command custom_fadeout(colour, mask, duration, runActionscript) { 
+    CONTROL_CODE_FADEOUT
+    short colour
+    short mask
+    short duration
+    byte runActionscript
+}
+
+command custom_fadein(colour, mask, duration, runActionscript) {
+    CONTROL_CODE_FADEIN
+    short colour
+    short mask
+    short duration
+    byte runActionscript
+}
+
+
+// ASM that the control codes execute
+CC_CustomFadeout: M_EB_Function_Wrapper({
+    JSR (_sub_ccGetFadeParameters)
+    JSL (ASM_CustomFadeout)
+})
+
+CC_CustomFadein: M_EB_Function_Wrapper({
+    JSR (_sub_ccGetFadeParameters)
+    JSL (ASM_CustomFadein)
+})
+
+// Fade code
+
+/* 
+
+Fading is creating palettes for each step of the fade,
+then iterating over the duration and applying each step's palettes.
+There exists a function - $C496E7 PrepareLoadedPaletteFadeTables
+- which, given the current palettes and a target loaded in the buffer
+at $7E0000, calculates each fade step and fills the buffer from $7E0200.
+
+Then, simply loop while waiting frames and calling $C426ED UpdatePaletteFade
+to execute the fade. Fades can even be chained into each other.
+However it takes a few frames to calculate the interpolation.
+
+This implementation allows the target/start colour, palette masking,
+duration of the fade, and if Actionscripts should run during the fade to
+be specified for both fading to and from a solid colour.
+
+Calling conventions for both ASM_CustomFadeout and ASM_CustomFadein are:
+    * A: Colour (BGR555)
+    * X: Palette mask
+    * Y: Fade duration
+    * DP $0E: Run Actionscript or not
+
+If you want to write your own fade logic, see _sub_doFade below for an example.
+
+* Please note that there is no code here for partially fading to a colour.
+  To do that, you'll need to create new functions to calculate
+  the palette fade tables. Bank 4 has a lot of this stuff.
+  Probably better off using the colour math hardware registers though.
+
+*/
+
+ASM_CustomFadeout: M_EB_Function_Wrapper({
+    JSR (_sub_copyParamsToStack)
+
+    // Fill the buffer with the colour (target palettes)
+    LDA_i (0)
+    STA_d (_LOCAL_LOOPCOUNT1)
+    BRA_a (_checkBufferFillLoop)
+    _bufferFillLoop:
+        ASL
+        TAX
+        LDA_d  (_LOCAL_COLOUR)
+        STA_xl (BUFFER)
+        LDA_d  (_LOCAL_LOOPCOUNT1)
+        INC
+        STA_d  (_LOCAL_LOOPCOUNT1)
+    _checkBufferFillLoop:
+        CMP_i  (0x0100)
+        BCC_a  (_bufferFillLoop)
+
+    // Start palettes are the existing ones, so no code for that
+
+    JSR (_sub_doFade)
+})
+
+
+ASM_CustomFadein: M_EB_Function_Wrapper({
+    JSR (_sub_copyParamsToStack)
+
+    // Copy current palettes to buffer (target palettes)
+    MEMCPY24 (PALETTES, BUFFER, 0x0200)
+
+    // Fill the palettes with the colour (start palettes)
+    LDA_i (0)
+    STA_d (_LOCAL_LOOPCOUNT1)
+    BRA_a (_checkPaletteCalcLoop)
+    _paletteCalcLoop:
+        ASL
+        TAX
+        LDA_d (_LOCAL_COLOUR)
+        STA_x (PALETTES)
+        LDA_d (_LOCAL_LOOPCOUNT1)
+        INC
+        STA_d (_LOCAL_LOOPCOUNT1)
+    _checkPaletteCalcLoop:
+        CMP_i (0x0100)
+        BCC_a (_paletteCalcLoop)
+
+    JSR (_sub_doFade)
+})
+
+
+_sub_ccGetFadeParameters: {
+    // read 7 control code parameter bytes
+    LDY_i (7)
+    JSL (R_Read_Parameter_Bytes)
+    // get & store actionscript byte
+    LDA_a (D_cc_argv_6)
+    STA_d (0x0E)
+    // get other parameters
+    LDA_a (D_cc_argv_0)
+    LDX_a (D_cc_argv_2)
+    LDY_a (D_cc_argv_4)
+    RTS
+}
+
+_sub_copyParamsToStack: {
+    // Copy parameters to stack
+    STA_d (_LOCAL_COLOUR)
+    STX_d (_LOCAL_MASK)
+    STY_d (_LOCAL_DURATION)
+    LDA_d (_VIRTUAL_RUNACTIONSCRIPT)
+    STA_d (_LOCAL_RUNACTIONSCRIPT)
+    RTS
+}
+
+_sub_doFade: {
+    // Prepare fade tables in the buffer
+    LDA_d (_LOCAL_DURATION)
+    LDX_d (_LOCAL_MASK)
+    JSL   (PrepareLoadedPaletteFadeTables)
+
+    // Perform the fade
+    LDX_i (0)
+    STX_d (_LOCAL_LOOPCOUNT1)
+    BRA_a (_checkFadeLoop)
+    _fadeLoop:
+        JSL (UpdatePaletteFade)
+
+        // if (runActionscript)
+        LDA_d (_LOCAL_RUNACTIONSCRIPT)
+        BEQ_a (_continue)
+        // then
+            JSL (OAMClear)
+            JSL (RunActionscriptFrame)
+            JSL (UpdateScreen)
+        _continue:
+        JSL (WaitUntilNextFrame)
+        LDX_d (_LOCAL_LOOPCOUNT1)
+        INX
+        STX_d (_LOCAL_LOOPCOUNT1)
+    _checkFadeLoop:
+        CPX_d (_LOCAL_DURATION)
+        BCC_a (_fadeLoop)
+    
+    // Commit the new palettes
+    JSL (FinishPaletteFade)
+    RTS
+}

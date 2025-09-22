@@ -1,0 +1,713 @@
+/*
+command _asmptr(loc,target) {
+	ROMTBL[loc, 1, 1] = short [0] target
+	ROMTBL[loc, 6, 1] = short [1] target
+}
+
+
+// Links a TPT entry's text pointer to a label
+command sprite_link(tptnum, target) {
+	ROMTBL[0xCF898E, 0x11, tptnum] = target
+}
+
+// Sets the starting coordinates, in pixels
+command newgame_location(x, y) {
+	ROM[0xC1FE9E] = short x
+	ROM[0xC1FE9B] = short y
+}
+
+// Sets the new game startup code pointer
+command newgame_startup(target) {
+	_asmptr(0xC1FEA4, target)
+}
+
+// Sets a pointer to be used whenever the screen refreshes
+command on_refresh(target) {
+	_asmptr(0xC06B29, target)
+}
+
+// Sets default "check" pointer (No problem here.)
+command on_check(target) {
+	_asmptr(0xC13BE9, target)
+}
+
+
+// Sets the file select music
+command setup_music(music) {
+	ROM[0xC1f04a] = byte music
+}
+
+// Sets the naming screen music
+command setup_music2(music) {
+	ROM[0xC1f8fc] = byte music
+}
+
+// Sets the setup background
+command setup_background(bg) {
+	ROM[0xC0B5F1] = short bg
+}
+
+ 
+// Update 8/23: newline redefined as [01] - only break when
+//  current line is not blank.
+// New linebreak command has old newline behavior.
+command linebreak "[00]"
+command newline "[01]"
+
+command eob "[02]"
+
+command wait "[13]"
+
+command prompt "[14]"
+
+command next "[03 00]"
+
+command end "[13 02]"
+
+command set(num) "[04 {short num}]"
+
+command unset(num) "[05 {short num}]"
+
+command isset(num) "[07 {short num}]"
+
+command toggle(num)	if isset(num) unset(num) else set(num)
+
+command call(target) "[08 {long target}]"
+
+command 
+
+command goto(target) "[0A {long target}]"
+
+command pause(len) "[10 {byte len}]"
+
+command longpause(len) {
+	pause(len)
+	pause(len)
+	pause(len)
+	pause(len)
+	pause(len)
+}
+
+command clearline "[12]"
+
+command window_open(n) "[18 01 {byte n}]"
+
+command window_closetop "[18 00]"
+
+command window_switch(n) "[18 03 {byte n}]"
+
+command window_closeall "[18 04]"
+
+command window_close(n)
+{
+	window_switch(n)
+	window_closetop()
+}
+
+command window_clear "[18 06]"
+
+command open_wallet "[18 0A]"
+
+command open_hp "[1C 04]"
+
+command input(n) "[1F 52 {byte n} 0D 00]"
+
+command arg(n) "[0E {byte n} 0D 01]"
+
+command arg_zero {
+	hasmoney(0xffffffff)
+	swap
+}
+
+command counter(n) "[0E {byte n}]"
+
+command counter_zero {
+	arg_zero
+	counter(0)
+}
+
+command counter_is(n) {
+	ctoarg
+	swap
+	result_is(n)
+}
+
+command inc "[0F]"
+
+command swap "[1B 04]"
+
+command ctoarg "[0D 01]"
+
+command rtoarg "[0D 00]"
+
+command result_is(n) "[0B {byte n}]"
+
+command result_not(n) "[0C {byte n}]"
+
+command store_registers "[1B 00]"
+
+command load_registers "[1B 01]"
+
+command text_pos(x,y) "[18 05 {byte x} {byte y}]"
+
+command text_color(n) "[1C 00 {byte n}]"
+
+command text_blips(n) "[1F 04 {byte n}]"
+
+command font_normal "[1F 30]"
+
+command font_saturn "[1F 31]"
+
+command stat(n) "[1C 01 {byte n}]"
+
+command name(char) "[1C 02 {byte char}]"
+
+command itemname(item) "[1C 05 {byte item}]"
+
+command teleportname(dest) "[1C 06 {byte dest}]"
+
+command smash "[1C 08 01]  "
+
+command youwon "[1C 08 02]  "
+
+command number(n) "[1C 0A {long n}]"
+
+command money(n) "[1C 0B {long n}]"
+
+command user "[1C 0D]"
+
+command target "[1C 0E]"
+
+command delta "[1C 0F]"
+
+command psiname(psi) "[1C 12 {byte psi}]"
+
+command give(character,item) "[1D 00 {byte character} {byte item}]"
+
+command take(character,item) "[1D 01 {byte character} {byte item}]"
+
+command full(character) not "[1D 03 {byte character}]"
+
+command notfull(char) "[1D 03 {byte char}]"
+
+command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
+
+command givemoney(amt) "[1D 08 {short amt}]"
+
+command takemoney(amt) "[1D 09 {short amt}]"
+
+command deposit(amt) "[1D 06 {long amt}]"
+
+command withdraw(amt) "[1D 07 {long amt}]"
+
+command hasmoney(amt) not "[1D 14 {long amt}]"
+
+command usable(char, item) "[1F 81 {byte char} {byte item}]"
+
+command healall {
+	heal_percent(0xFF, 100)
+	recoverpp_percent(0xFF, 100)
+}
+
+command inflict(char, status) "[19 05 {byte char} {short status}]"
+
+command heal_percent(char,n) "[1E 00 {byte char} {byte n}]"
+
+command hurt_percent(char,n) "[1E 01 {byte char} {byte n}]"
+
+command heal(char,n) "[1E 02 {byte char} {byte n}]"
+
+command hurt(char,n) "[1E 03 {byte char} {byte n}]"
+
+command recoverpp_percent(char,n) "[1E 04 {byte char} {byte n}]"
+
+command consumepp_percent(char,n) "[1E 05 {byte char} {byte n}]"
+
+command recoverpp(char,n) "[1E 06 {byte char} {byte n}]"
+
+command consumepp(char,n) "[1E 07 {byte char} {byte n}]"
+
+command change_level(char,n) "[1E 08 {byte char} {byte n}]"
+
+command boost_exp(char,n) "[1E 09 {byte char} {byte[0] n} {byte[1] n} {byte[2] n}]"
+
+command boost_iq(char,n) "[1E 0A {byte char} {byte n}]"
+
+command boost_guts(char,n) "[1E 0B {byte char} {byte n}]"
+
+command boost_speed(char,n) "[1E 0C {byte char} {byte n}]"
+
+command boost_vitality(char,n) "[1E 0D {byte char} {byte n}]"
+
+command boost_luck(char,n) "[1E 0E {byte char} {byte n}]"
+
+command sound(n) "[1F 02 {byte n}]"
+
+command music(n) "[1F 00 00 {byte n}]"
+
+command music_stop "[1F 01 02]"
+
+command music_resume "[1F 03]"
+
+command music_effect(n) "[1F 07 {byte n}]"
+
+command music_switching_off "[1F 05]"
+
+command music_switching_on "[1F 06]"
+
+command battle(num) {
+	window_closeall()
+	if "[1F 23 {short num}]" eob
+}
+
+command warp(dest) "[1F 21 {byte dest}]"
+
+command teleport(dest, style) "[1F 20 {byte dest} {byte style}]"
+
+command anchor_set "[1F 68]"
+
+command anchor_warp "[1F 69]"
+
+command party_add(char) "[1F 11 {byte char}]"
+
+command party_remove(char) "[1F 12 {byte char}]"
+
+command event(n) "[1F 41 {byte n}]"
+
+command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
+
+command save "[1F B0]"
+
+command lock_movement(num) "[1F E5 {byte num}]"
+
+command hotspot_on(slot, hotspot, target) "[1F 66 {byte slot} {byte hotspot} {long target}]"
+	
+command hotspot_off(hotspot) "[1F 67 {byte hotspot}]"
+
+
+command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"
+
+command sprite_direction(tpt, dir) "[1F 16 {short tpt} {byte dir}]"
+
+command show_party(effect) show_char(0xFF, effect)
+
+command show_char(char, style) "[1F EC {byte char} {byte style}]"
+
+command show_char_float(char, float) "[1F 1C {byte char} {byte float}]"
+
+command show_sprite_float(tpt, float) "[1F 1A {short tpt} {byte float}]"
+
+command hide_char(char) "[1F EB {byte char} 06]"
+
+command hide_party hide_char(0xFF)
+
+command hide_char_float(char) "[1F 1D {byte char}]"
+
+command hide_sprite(tpt, effect) "[1F 1E {short tpt} {byte effect}]"
+
+command hide_sprite_float(tpt)	"[1F 1B {short tpt}]"
+*/
+
+// Adding a whole bunch of useful control codes as commands that are missing from CCScript. All the codes below are from https://datacrystal.romhacking.net/wiki/EarthBound:Control_Codes.
+// v0.1, by Supremekirb
+// Import this at the start of your CCS files for maximum efficiency!
+// It's a bit haphazard but it should *hopefully* all work. There's some really handy stuff here that while you can use as direct control codes, I thought it would be nice to have them like the rest of the language.
+
+
+/* TABLE OF CONTENTS
+	- MEMORY COMMANDS (line 27)
+		- Stat and party info 
+		- Directions
+		- Boolean checks or other checks
+	- TEXT AND WINDOW COMMANDS (line 74)
+		- Printing
+		- Menus
+		- Open windows with special purposes
+	- ITEMS AND INVENTORY COMMANDS (line 115)
+		- Escargo Express
+		- Direct inventory manipulation
+		- Item checks
+	- NPC, CHARACTER, AND OTHER SPRITE COMMANDS (line 147)
+		- Present boxes
+		- Camera
+		- Movement codes
+		- Create and delete sprites
+	- MISC (line 182) */
+
+import "cc_asmcall.ccs"
+
+/* MEMORY COMMANDS */
+// Commands relating to memory, and commands that check for and load info into various Registers, as well as stuff that shouldn't go in Misc but also shouldn't go anywhere else
+command promptw "[03]"
+command get_selling_price(item) "[1D 0B {byte item}]"
+
+command two_choice_menu(opt1, label1, opt2, label2) {
+	add_menu_string(opt1)
+	add_menu_string(opt2)
+	print_horizontal(2)
+	create_menu_cancellable
+	clearline
+	"[09 02 {long label1} {long label2}]"
+}
+
+// Same as above, but you cannot cancel with B.
+command two_choice_menu_not_cancellable(opt1, label1, opt2, label2) {
+	add_menu_string(opt1)
+	add_menu_string(opt2)
+	print_horizontal(2)
+	create_menu
+	clearline
+	"[09 02 {long label1} {long label2}]"
+}
+
+command copy_wram "[1B 05]" // Copies the active memory to WRAM.
+command copy_active "[1B 06]" // Copies WRAM to the active memory.
+
+command goto_if_true(label) "[1B 03 {long label}]" // If the Result Register is 1 (true), go to 'label.'
+command goto_if_false(label) "[1B 02 {long label}]" // If the Result Register is 0 (false), go to 'label.'
+command random(size) "[1D 21 {byte size}]" // Not entirely sure, but after basic testing possibly generates a character in range 0 to 'size' and loads into the Result Register. See https://datacrystal.romhacking.net/wiki/EarthBound:Standard_Arguments#Characters.
+
+command goto_if_flag(flg, label) "[06 {short flg} {long label}]"
+
+// Stat and party info
+command return_user_info(type) "[1C 14 {byte type}]" // Loads result into Result Register. If 'type' is 01, it returns the gender of the action's user. Any other value returns the amount of living members of a side (ie alive party members or undefeated enemies)
+command return_target_info(type) "[1C 15 {byte type}]" // Same as above, but returns the info of the target an action is directed towards.
+command return_exp_to_levelup(char) "[19 18 {byte char}]" // Returns the amount of EXP needed to reach the next level for a given 'char.' Used in Dad's save text.
+command return_menu_strings(window) "[19 1B {byte window}]" // Returns the amount of strings loaded with command add_menu_string (CC [19 02]) in the specified window.
+command return_delta "[19 1E]" // Similar to the delta command included in CCS (or [1C 0F]), but instead of printing it stores the value in the Result Register.
+command return_action_argument "[19 1F]" // Unsure, but likely similar to above in that it is of a similar function to another command but stores in the Result Register instead of printing.
+command return_party_size "[19 20]" // Unsure, likely gets the amount of members in the party and stores in the Result Register.
+command return_stat(statistic) "[19 27 {byte statistic}]" // Puts the value of the specified stat into the Result Register. See the CCS Command Reference for what's what. If the stat doesn't have a numerical value, the 3-byte pointer to the stat will be loaded into the Result Register instead.
+command return_stat_letter(statistic) "[19 28 {byte statistic}]" // Similar to above, but works differently and ONLY for stats that are stored as strings. It will find the specified stat, and then get the character in the position dictated by the Secondary Register, and load the value for this letter into the Result Register. For a list of characters, see https://datacrystal.romhacking.net/wiki/EarthBound:Standard_Arguments#Characters
+command return_char_letter(char) "[19 11 {byte char}]" // Looks at 'char' character ID, gets number from the Secondary Register, and loads SR position letter of 'char''s name into the Result Register.
+
+command char1_facing_char2(char1, char2) "[19 22 {byte char1} 01 {byte char2} 00] [1F 13 {byte char1} 00]"
+command char_facing_npc(char, npc) "[19 22 {byte char} 02 {short npc}] [1F 13 {byte char} 00]"
+
+// Directions
+command return_direction_char_to_object(char, type, id) "[19 22 {byte char} {byte type} {short id}]"
+command return_direction_npc_to_object(npc, type, id) "[19 23 {short npc} {byte type} {short id}]"
+command return_direction_sprite_to_object(sprite, type, id) "[19 24 {short sprite} {byte type} {short id}]"
+// The above three commands:
+	// 'char'/'npc'/'sprite' is the ID number of their corresponding type
+	// 'type' can be 01 for characters, 02 for NPCs, or 03 for generated sprites
+	// 'id' is the ID of the thing you want to target of the category specified in 'type'
+	// It loads the direction (clockwise 1 through 8) of the source char/npc/sprite to the object and loads it into the Argument Register
+	// if char/npc/sprite is 0, the Result Register is used
+	// if id is 0, the Argument Register is used 
+command return_direction_truffle "[1F D1]" // Looks for a nearby Magic Truffle and gets the direction from you to it (in the same format as above commands.)
+command change_active_sprite_direction(id, direction) "[1F E4 {short id} {byte direction}]"
+
+
+// Boolean checks or other checks
+command amount_costs_too_much(num) "[1D 14 {long num}]"
+command check_atm_cash(num) "[1D 17 {long num}]"
+command party_size_check(num) "[1D 19 {byte num}]" // Checks if the amount of members in the party (not counting NPC party members) is fewer than 'num'. If so, the Result Register is set to 1. Otherwise, it is set to 0. If 'num' is 0, the Argument Register is used.
+command party_pos_check(position) "[19 10 {byte position}]" // Returns the ID number of a character (Ness is 1, Paula is 2, etc) in position 'position.' While this may seem useless, if Ness is dead for instance, and 'position' is set to 1, it will return "02" as Paula (ID of 2) is in the first position.
+command exit_mouse_check "[1D 22]" // Checks if the Exit Mouse can be used where you are. If so, the Result Register will be set to 1. Otherwise, it will be set to 0.
+
+
+
+
+/* TEXT AND WINDOW COMMANDS */
+// Commands relating to the text system and windows and menus.
+
+// Printing
+command delay_or_input(time) "[1F 60 {byte time}]" // Pauses text parsing, like the pause command, until either 'time' frames has passed or the player presses a button. If 'time' is 0, a default amount of frames will be paused based on text speed. (30 for fast, 60 for medium, 0 for slow.) In this state, the command behaves like [03] in battles.
+command wait_for_movement "[1F 61]" // Pauses text parsing until a movement script says it can go again. I'm not 100% sure of the usage of this.
+command print_character(character) "[1C 03 {byte character}]" // Prints a specified character. See DataCrystal's entry for this code. If 'character' is 0 the Argument Register used instead.
+command print_horizontal(rows) "[1C 07 {byte rows)}]" //Same as above but horizontal.
+command print_num_value(num) "[1C 0A {long num}]" // Prints the value of $XXXXXXXX as a decimal number in the current window. If the value of $XXXXXXXX is 0x00000000, the engine will instead read the value stored in Argumentary Memory, and display that value as a decimal number. Care must be taken not to display a number greater than 9,999,999; due to a faulty range check, printing such numbers can corrupt memory, including the number of the current window. This applies equally to all number printing commands involving 32-bit numbers.
+command print_vertical(columns) "[1C 0C {byte columns}]" // Display text strings vertically in a given amount of columns. Used for menus only, I think.
+command print_escargo_item "[19 14]" // Looks at the Secondary Register, and prints item name of the item in that slot of Escargo Express's inventory.
+command zwsp "[1C 11 01]" // Prints nothing, but the auto-formatter thinks something has been printed and may insert a linebreak, so functionally a zero-width space. In MOTHER 2, this displays party stats, but not in EarthBound, apparently.
+command save_text_window_state "[18 02]" // This code saves information about the current window's text cursor position, font, color, and number padding setting. This state is often restored by other control codes that do text rendering, after they finish.
+command clear "[18 06]" // Clears the contents of the current text window.
+
+
+// Menus
+// You'd be better off using the inbuilt menu functions, because manual menus are complicated. But I thought I'd include it here in case you think you can handle it. Uncomment the stuff below if you like.
+
+command add_menu_string(string) "[19 02 {string} 02]" // Loads a string into "menu storage."
+command clear_menu_string "[19 04]" // Clears all strings loaded into "menu storage."
+command create_menu "[1A 04]" // Creates menu with strings stored with above command. Cannot back out with B.
+command create_menu_cancellable "[11]" // Same as above, but you can back out with B.
+command create_menu_in_window(window) "[18 08 {byte window}]" // Like create_menu, but switches to a window first. Cannot back out.
+command create_menu_in_window_cancellable(window)  "[18 09 {byte window}]" // Same as above but you can press B to back out.
+command create_menu_persist "[1A 08]" // Like create_menu, but keeps the strings loaded with store_menu_text in memory so they can be reused.
+command create_menu_persist_cancellable "[1A 09]" // Like create_menu_cancellable, but keeps the strings loaded with store_menu_text in memory so they can be reused.
+
+
+command create_party_menu(label1, label2, label3, label4, display) "[1A 00 {long(label1)} {long(label2)} {long(label3)} {long(label4)} {byte(display)}]" // Displays a selection menu of the current party members. Unable to use B to back out. The display parameter should be set to 1, because for some reason it only displays when this is so. Each label points to what should run when you select the party member. (1 is Ness, 2 is Paula, etc)
+command create_party_menu_cancellable(label1, label2, label3, label4, display) "[1A 00 {long(label1)} {long(label2)} {long(label3)} {long(label4)} {byte(display)}]" // Same as above but you can use B to cancel.
+command char_select_menu_cancellable_labels(label1, label2, label3, label4, display) "[1A 01 {long(label1)} {long(label2)} {long(label3)} {long(label4)} {byte(display)}]"
+command char_select_menu_cancellable "[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01]"
+
+
+// Open / close windows with special purposes
+command show_party_boxes "[1C 04]" // Opens HP/PP windows of the party.
+command close_hp cc_asmcall(0xC10000,RET_NONE)
+command show_inventory(window, char) "[1A 05 {byte window} {byte char}]" // Displays 'char''s inventory in specified window
+command show_escargo_items "[1A 07]"
+command show_phone "[1A 0A]" // Opens phone menu, and from there you can make calls and such. The Result Register is set to the telephone contacts table ID of who you called, or 0 if nobody was.
+command show_teleport "[1A 0B]" // Opens PSI Teleport menu.
+command show_stats(char) "[18 0D 01 {byte char}]" // Opens window 8 (stats menu) and displays the stats for character 'char.' They do not need to be in your party for this to work. There is a second parameter in place of "01" here, but the control code does not function if it is any other value.
+command show_shop(id) "[1A 06 {byte id}]" // Opens window 9 (shop menu) and displays a shop (defined in store_table.yml). Selected item ID or 0 is returned.
+command show_phone_dontcall "[1F 90]" // Opens phone menu, puts the choice in the result register, but doesn't place the call
+
+
+
+
+/* ITEMS AND INVENTORY COMMANDS */
+// Commands related to item and inventory management
+
+// Escargo Express
+command return_escargo_item(item) "[19 1A {byte item}]" // Sets working memory to the value of the $XXth item in item storage. If $XX is 0, the value in argumentary memory is used instead of $XX.
+command queue_escargo_item(char, slot) "[19 1C {byte char} {byte slot}]" // Removes item in a specified slot in 'char''s inventory, and adds it to a queue of 3 items, along with info which can be acessed with command return_queue_info. If slot is 255, an item will be removed from Escargo instead. If 'char' is 0, the value in the Result Register is used. If 'slot' is 0, the value in the Argument Register is used.
+command add_escargo_item(item) "[1D 18 {short item}]" // Adds 'item' to Escargo Express's inventory.
+command force_add_escargo(char, slot) "[1D 12 {byte char} {byte slot}]" // IMMEDIATELY stores the item in 'char''s inventory space 'slot.'
+command force_withdraw_escargo(char, slot) "[1D 13 {byte char} {byte slot}]" // IMMEDIATELY takes the item in Escargo space 'slot' and adds it to 'char''s inventory.
+command check_escargo(char, slot) "[1D 0C {byte char} {byte slot}]" // Checks if item in inventory space 'slot' of character 'char''s inventory is OK to store in Escargo. Specifically, if the item is OK to store and Escargo has space, it will return 0. If the item is NOT storable and Escargo has space, it will return 1. If the item is storable but there is no space, it will return 2. If the item cannot be stored and Escargo is full, it will return 3.
+command return_queue_info(slot, delete) "[19 1D {byte slot} {byte delete}]" // Returns info about the 'slot'th item in the queue made with command queue_escargo_item. If 'delete' is non-zero, an item will be erased from the queue as well. The Result Register is set to the ID of the original holder of the item, and the Argument Register is set to the item ID.
+
+
+// Direct inventory manipulation
+command equip(char, slot) "[1F 83 {byte char} {byte slot}]" // Equips party member 'char' with the item in the slot number 'slot.'
+command repair(chance) "[1F D0 {short chance}] " // Looks at Jeff's inventory. If there is a broken item and his IQ is enough to repair it, it will remove the item and replace it with its repaired counterpart. The number of the broken item is loaded into the Argument Register, and the number of the fixed one is loaded into the Result Register. There is a 'chance'% that this will work, otherwise it will do nothing.
+command char_inventory_vacancy(char) "[1D 03 {byte char}]"	// Checks if a character has available space in his/her inventory
+command give_and_check(char, item) "[1D 0E {byte char} {byte item}]" // Like the built-in command give but if successful, the Argument Register will be changed to the amount of items in 'char''s inventory (including the new one) and the Result Register will be changed to the ID of who recieved the item.
+command take_slot(char, slot) "[1D 0F {byte char} {byte slot}]" // Removes the item in inventory space 'slot' of party member 'char.'
+
+
+// Item checks
+command return_item_price(item) "[1D 0A {byte item}]" // Loads the price of item ID 'item' into the Result Register.
+command return_item_sell_price(item) "[1D 0A {byte item}]" // Similar to above, but it loads the selling price instead of the purchase price. Selling price is half the purchase price.
+command return_food_type(item) "[19 21 {byte item}]" // Returns food info about 'item.' Loads 1, 2, or 3 into the Result Register depending on if it is a food, drink, or condiment respectively.
+command equip_type_check(item) "[1D 23 {short item}]" // Checks if 'item' is a weapon equippable, or a defensive equippable, and loads 1 into the Result Register if it is a weapon, or 2 if it is a defensive item. Non-equippables will give strange results so don't use those here. If 'item' is 0, the Argument Register will be used.
+command equip_slot_check(char, slot) "[1D 10 {byte char} {byte slot}]" // Checks if the item in party member 'char''s 'slot' inventory space is equipped. 'slot' refers to the slots in the ENTIRE inventory, not the equip menu.
+command use_item_check(char, slot) "[1D 11 {byte char} {byte slot}]" // Checks if party member 'char' can use the item in 'slot', with slot referring to the ENTIRE inventory, not the equip menu. If 'char' is 0, working memory is used, if 'slot' is 0, argumentary memory is used
+command equipped_item_check(char, item) "[1D 04 {byte char} {byte item}]" // Checks if party member 'char' has 'item' equipped. If 'char' is 0, working memory is used, if 'item' is 0, argumentary memory is used
+command return_price(amt) "[1D 15 {short amt}]" // multiplies amt by the number of party members and puts the result in working memory. This is often used to determine hotel prices and bus fares.
+command item_condiment_check(item) "[19 25 {byte item}]" // Used when applying condiments. Checks if item ID of 'item' is of a valid type (food) and then searches the inventory for the first applicable condiment. If these parameters are met, the Result Register will be set to the ID of the condiment to use. If either the item isn't a food or there are no correct condiments, the Result Register will be set to 0. If 'item' is 0, the Argument Register is used instead.
+command item_type_check(type) "[1D 02 {byte type}]" // Performs a boolean check of the type of an item specfied in the Argument Register. Possible values for 'type' are: 1 for "special" items like the Franklin Badge (items 0-15), 2 for equippables (items 16-31), 3 for edible items (items 32-47), or 4 for other special items (items 48-63). Will load the normal Boolean result into the Result Register. (1 true, 0 false)
+command return_item_in_slot(char, slot) "[19 19 {byte char} {byte slot}]" // Returns item ID of the item in 'slot' position of 'char''s inventory.
+
+// Custom 
+command compare_register(num, reg) "[18 07 {long num} {byte reg}]" // Compares 'num' to the value in a register (identified with 'reg': 0 for the Result Register, 1 for the Argument Register, and 2 for the Secondary Register.) And returns 0, 1, or 2, if the value of 'num' is less, equal to, or greater than (respectively) the value in the specified register. 
+command compare_result(num) compare_register(num, 0)
+command compare_argument(num) compare_register(num, 1)
+command compare_counter(num) compare_register(num, 2)
+command get_stat(s) "[19 27 {byte s}]"
+
+
+/* NPC, CHARACTER, AND OTHER SPRITE COMMANDS */
+// Commands relating to NPCs, sprites, and how they are displayed and such.
+
+// Present boxes
+command open "[1F A0]" // Sets the NPC's associated flag and makes the NPC face up. Used by presents when they are 'opened'.
+command close "[1F A1]" // Opposite of above. Unsets the flag and makes them face down. Used when you try to open a present but it's full?
+command check_npc_flag "[1F A2]" // Checks the state of the flag associated with an NPC. I assume it loads the result into the Result Register.
+
+
+// Camera
+command focus_camera_npc(id) "[1F EE {short id}]" // Moves the camera to focus on specified NPC. Note that your party will move too, so hide them and make sure the movement script of the specified NPC doesn't check collision.
+command focus_camera_sprite(id) "[1F EF {short id}]" // Same as above, but on a generated sprite instead.
+command reset_camera "[1F ED]" // Moves the camera back to focus on the party leader.
+
+
+// Movement codes
+command change_npc_movement(id, movement) "[1F F1 {short id} {short movement}]" // Gives an NPC of 'id' a new movement script of 'movement.'
+command change_sprite_movement(id, movement) "[1F F2 {short id} {short movement}]" // Same as above, but for generated sprites?
+command freeze_char_movement(char) "[1F E5 {byte char}]" // Freezes character 'char''s movement.
+command freeze_npc_movement(id) "[1F E6 {short id}]" // Like above, but for NPCs.
+command freeze_sprite_movement(id) "[1F E7 {short id}]" // Like above, but for generated sprites?
+command unfreeze_char_movement(char) "[1F E8 {byte char}]" // Resumes movement for 'char.'
+command unfreeze_npc_movement(id) "[1F E9 {short id}]" // Like above, but for NPCs.
+command unfreeze_sprite_movement(id) "[1F EA {short id}]" // Like above, but for generated sprites?
+
+
+// Create and delete sprites
+command generate_active_sprite(id, movement, style) "[1F 15 {short(id)} {short(movement)} {byte(style)}]" // Generates an "active sprite." 'id' is the sprite number, 'movement' is the movement script, 'style' is how it should appear (see CCS command reference.) I am not sure of what this does exactly, or how an "active sprite" differs from an NPC or floating sprite.
+command generate_active_npc(id, movement, style) "[1F 17 {short(id)} {short(movement)} {byte(style)}]" 
+command delete_active_sprite(id, style) "[1F 1F {short(id)} {byte(style)}]" // Deletes a sprite 'id' made with the above command, dissapearing with the specified style.
+command show_active_float(id, float) "[1F F3 {short id} {short float}]" // Generates a floating sprite near a sprite made with the generate_active_sprite command.
+command hide_active_float(id) "[1F F4 {short id}]" // Deletes a floating sprite made with the above command.
+
+
+command queue_text(a) "[1F 63 {long a}]"
+
+/* MISC */
+command set_respawn(tpbox) "[19 26 {byte tpbox}]" //Sets respawn point when you die to the current coords of the party leader. 'warpid' is only for the unused Teleport Box item, which would have warped the party to the specified Warp ID, so just set it to 0 unless you're using that, I guess.
+
+command psi_animation(toparty, toenemy) "[1C 13 {byte toparty} {byte toenemy}]" // Displays a PSI animation during combat. If it is to the party, have 'toenemy' be 0, and visa versa. Animations can be found in the PSI Animation editor or on DataCrystal's EB control code page.
+
+command add_party_member(char) "[1F 11 {byte char}]"	// Add a selected party member 
+
+command party_direction(dir) "[1F 14 {byte dir}]" // Make all party members face a specific direction.
+	// Changes the direction the party is facing in a clockwise pattern from 1 through 8, with 1=Up, 2=Up-right, 3=Right, etc.
+	// If dir is 0, the Argument Register is used.
+
+command teleport_animation(type) "[1F 20 04 {byte type}]"	// Overworld Teleport animation, varies depending on type 1-Alpha, 2-Beta, etc.
+
+command special_event(id) "[1F 41 {byte id}]" // Triggers a special event. There's a long list:
+/*
+	0x01: Plays the coffee scene from Saturn Valley.
+	0x02: Plays the tea scene from Tenda Village.
+	0x03: Opens the menu for entering the player's name in Summers and sets the Result Register.
+	0x04: Originally opened the menu for entering the player's name in Japanese in Tenda Village. This code was only used in Mother 2, not in EarthBound, but it remainds functional and uses an English keyboard.
+	0x05: Sets the "overworld status suppression" (OSS) flag, preventing the player from taking damage on the overworld even if they are underwater or have a status that deals damage over time.
+	0x06: Clears the "overworld status suppression" (OSS) flag, allowing the player to take damage on the overworld again. If flag 49 00 (in CCScript dumps, flag 73) is set, this instead sets the OSS flag as if 05 were used.
+	0x07: Opens a view of the town map for the current area, if a map exists. the Result Register is set to the ID of the town map that is displayed, or 0 if the current area does not have a town map.
+	0x08: Sets the Result Register to 1 if the current action user is an enemy, or 0 if the current action user is on the player's side.
+	0x09: Shows the normal sound stone screen that can be canceled by pressing a button.
+	0x0A: Shows a still image of the title screen that fades away when the player presses a button.
+	0x0B: Shows the "Cast" scene that plays during the first part of the ending.
+	0x0C: Shows the "Credits" scene with the names of the developers and the photos taken by the photo man.
+	0x0D: Causes all HP and PP meters to begin scrolling randomly, as when Ness powers up at the end of Magicant.
+	0x0E: Resets the effect caused by 0D.
+	0x0F: Clears all event flags in the game.
+	0x10: Shows the final sound stone screen that cannot be canceled early.
+	0x11: Attempts to inflict homesickness on Ness based on his level. Sets the Result Register to 1 if Ness became homesick, otherwise 0.
+	0x12: Kicks Ness out of bicycle mode if he is currently in it. Sets the Result Register to 1 if Ness was just on a bicycle, otherwise 0.
+	
+	(from DataCrystal)
+	Unless stated otherwise, this code sets the Result Register to 0. 
+	This code is already in CCScript but does not include all of the values listed here so I thought I'd include it.*/
+
+command OSS_on special_event(5)
+command OSS_off special_event(6)
+	
+command disable_input "[1F 50]" // Does what is says on the tin. Stops inputs being accepted from the controller until...
+command enable_input "[1F 51]" // Re-enables input if it was disabled with the above command.
+command number_input(digits) "  [1F 52 {byte digits}]"	// Enable two digits input
+
+command create_backup "[1F 64]" // Creates a backup of the party, things like who's there and cash held. It will then clear the party. Used for Jeff and Poo's solo journeys.
+command restore_backup "[1F 65]" // Restores the backup created above.
+
+command transition_palette(tileset, palette, speed) "[1F E1 {byte tileset} {byte palette} {byte speed}]" // Transition a specified tileset to new specified palette over 'speed' frames (is it frames?). Think Onett sunrise.
+
+command activate_bicycle "[1F F0]" // Puts Ness on his bike. Use the special event command to kick him off.
+command summon_photographer(entry) "[1F D2 {short(entry)}]" // Summoms the Photo Guy. Say, Fuzzy Pickles! I am not sure what the parameter needed is but I assume it's some sort of entry of which photo to take.
+
+command battle_no_handling(battle) "[1F 23 {short battle}]" // trigger a battle but don't automatically handle losing it. Returns 1 if you lose. Close windows beforehand.
+command get_status(char, group) "[19 16 {byte char} {byte group}]" // get the status of a specific character
+command has_status(char, status) "[1D 0D {byte char} {short status}]" // return true if char has this status
+command character_has_status(char, group, status) "[1D 0D {byte char} {byte group} {byte status}]" // Same as above, but splits status into group + value
+command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {byte status}]" // Like the standard `inflict` command, but splits status into group + value
+    // Meant to be used with character_has_status and inflict_status.
+    // DO NOT USE THESE IN ASSEMBLY CODE. Use the ones from battle/attack_script.ccs instead.
+    // I think I got all of the changes in this hack from EarthBound...
+    define SCR_STATUS_GROUP_0 = 1
+    define SCR_STATUS_0_NONE = 1
+    define SCR_STATUS_0_UNCONSCIOUS = 2
+    define SCR_STATUS_0_PETRIFIED = 3
+    define SCR_STATUS_0_NUMB = 4
+    define SCR_STATUS_0_NAUSEOUS = 5
+    define SCR_STATUS_0_POISONED = 6
+    define SCR_STATUS_0_SUNSTROKE = 7
+    define SCR_STATUS_0_COLD = 8
+
+    define SCR_STATUS_GROUP_1 = 2
+    define SCR_STATUS_1_NONE = 1
+    define SCR_STATUS_1_MUSHROOMIZED = 2
+    define SCR_STATUS_1_POSSESSED = 3
+
+    define SCR_STATUS_GROUP_2 = 3
+    define SCR_STATUS_2_NONE = 1
+    define SCR_STATUS_2_ASLEEP = 2
+    define SCR_STATUS_2_CRYING = 3
+    define SCR_STATUS_2_BOUND = 4
+    define SCR_STATUS_2_SOLIDIFIED = 5
+
+    define SCR_STATUS_GROUP_3 = 4
+    define SCR_STATUS_3_NONE = 1
+    define SCR_STATUS_3_FEELING_STRANGE = 2
+
+    define SCR_STATUS_GROUP_4 = 5
+    define SCR_STATUS_4_NONE = 1
+    define SCR_STATUS_4_CANT_CONCENTRATE = 2
+    define SCR_STATUS_4_CANT_CONCENTRATE_4 = 5
+
+    define SCR_STATUS_GROUP_5 = 6
+    define SCR_STATUS_5_NONE = 1
+    define SCR_STATUS_5_ASTHMA = 2
+
+    define SCR_STATUS_GROUP_6 = 7
+    define SCR_STATUS_6_NONE = 1
+    define SCR_STATUS_6_PSI_POWER_SHIELD = 2
+    define SCR_STATUS_6_PSI_SHIELD = 3
+    define SCR_STATUS_6_POWER_SHIELD = 4
+    define SCR_STATUS_6_SHIELD = 5
+
+command get_dad_deposit_money_base(n) "[1D 24 {byte n}]"
+    command get_dad_deposit_money get_dad_deposit_money_base(1)
+    command clear_dad_deposit_money get_dad_deposit_money_base(2)
+
+command switch_call(n, labels) { "[1F C0 {byte n}]" labels }
+command switch_goto(n, labels) { "[09 {byte n}]" labels }
+
+/*
+Loader subroutines need to be put in the ROM at 0x40010, or $C3FE10.
+
+$C3FE10:  1A 73 4E 05 00 00 00 00 00 00 00 00 00 00 00 00
+$C3FE20:  1A 59 AB 05 00 00 00 00 00 00 00 00 00 00 00 00
+$C3FE30:  1A 1E AA 05 00 00 00 00 00 00 00 00 00 00 00 00
+$C3FE40:  1A 38 AA 05 00 00 00 00 00 00 00 00 00 00 00 00
+*/
+
+// Demo numbers for the demo sequence pointer-table.
+define DEMO_SUMMERS		= 0 	// 1st demo sequence
+define DEMO_THREED		= 1 	// unused/hidden demo sequence -- Ness & Paula walk around zombie Threed cemetary
+define DEMO_DEEPDARK	= 2 	// 2nd
+define DEMO_BUS			= 3 	// 3rd
+define DEMO_PYRAMID		= 4 	// 4th
+define DEMO_TWOSON		= 5 	// 5th
+define DEMO_SCARABA		= 6 	// 6th
+define DEMO_FOURSIDE	= 7 	// 7th
+define DEMO_SUMMERS_X	= 8 	// unused/hidden demo sequence -- Ness & co. walk around upper summers
+define DEMO_GIANT		= 9 	// 8th
+
+// Movement codes for each demo sequence.
+define MOVE_SUMMERS				= 0x0217
+define MOVE_THREED				= 0x0218
+define MOVE_DEEPDARK			= 0x0219
+define MOVE_DEEPDARK_PETUNIA1	= 0x002C	// I'm assuming this is a "stay still" movement code.
+define MOVE_DEEPDARK_PETUNIA2	= 0x021A	// Demonic Petunia has its own movement code for this particular demo sequence, when it moves east a little towards the party.
+define MOVE_BUS					= 0x021B
+define MOVE_BUS_SCOOP			= 0x021C	// The dirt scooper in this demo sequence has its own movement code, heading east.
+define MOVE_PYRAMID				= 0x021D
+define MOVE_TWOSON				= 0x021E
+define MOVE_SCARABA				= 0x021F
+define MOVE_FOURSIDE			= 0x0220
+define MOVE_SUMMERS_X			= 0x0221
+define MOVE_GIANT				= 0x0222
+
+/*
+ * Attract mode codes
+ */
+
+
+// Links a demo sequence to a label.
+command demo_link(seqnum, target) {
+	ROMTBL[0xC3FD8D, 0x04, seqnum] = target
+}
+
+// Sets which demo is played in which slot.
+// There are a maximum of 10 demoes: 0-9, and there are a maximum of 8 slots: 0-7.
+command demo_slot(seqnum, slot) {
+	ROMTBL[0xC4DC48, 0x0C, slot] = byte seqnum
+}
+
+// Changes the demo's music track.
+command demo_music(tracknum) {
+	ROM[0xC4DC41] = byte tracknum
+}
+	
+// Change the style of the spotlight:
+// 0 - normal
+// 1 - wide
+// 2 - closes (difficult to explain without seeing it)
+command spotlight_style(style) {
+	ROM[0xC4DA12] = byte style
+}
+

@@ -1,0 +1,227 @@
+// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+import "../essential/asm65816.ccs"
+
+// 1 byte of RAM for the primary timer, pick an unused address.
+define RAM_primary_timer = 0x3250
+
+// 1 byte of RAM for the secondary timer, pick an unused address.
+define RAM_secondary_timer = 0x3251
+
+// Time in seconds that you can run for non-stop.
+define stamina_max = 15
+
+// Time in seconds that you have to wait to be able to run again (cooldown).
+define stamina_cooldown = 8
+
+// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+// RAM_primary_timer:
+	// MSB (O x x x x x x x) is used for a cooldown after running and stopping (useful to avoid spam-pressing Y being op).
+	// Bits 0-5 are the timer itself in frames (from 0 to 63).
+
+// RAM_secondary_timer:
+	// MSB (O x x x x x x x) is whether you can run or not (set is "can run").
+	// The rest (bits 0-6) are the timer itself in seconds. Running decreases the timer, not running increases it.
+	// Running out of stamina & recovering from being tired both set the timer based on the values defined above.
+
+// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+// Code for stamina timers (Vittorio).
+
+ROM[0xC0B824] = JSL(stamina_update)
+
+stamina_update: {
+	JSL(0xC08756) // WaitFrame, original function.
+	
+	// To do this properly we need two timers, a per-frame one (we can't use the default one because of cycling) and one in seconds.
+	
+	JSL(primary_timer_update)
+	JSL(secondary_timer_update)
+	
+	RTL
+}
+
+primary_timer_update: {
+	SEP(0x20)
+	
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x80)
+	BEQ_a(_isNotRunning) // If secondary timer's MSB is 0, player isn't running.
+	
+	LDA_a(0x9889) // Check if player is moving.
+	ASL
+	TAX
+	LDA_x(0x1003)
+	BNE_a(_isNotRunning) // If player isn't moving, it isn't running.
+	
+	LDA_a(0x0066) // Controller state.
+	AND_8(0x40) // Y button.
+	BNE_a(_isRunning) // If Y button is pressed, player is running.
+	
+	_isNotRunning:
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x7F)
+	CMP_8(stamina_max)
+	BEQ_a(_end) // If stamina is already maxed, don't keep increasing the timer.
+	
+	LDA_a(0x0002)
+	ASL
+	BNE(8)
+	LDA_a(RAM_primary_timer)
+	ORA_8(0x80)
+	STA_a(RAM_primary_timer) // Enable recovery when (game per-frame timer << 2) hits 0 (~ every 2 secs).
+	
+	LDA_a(RAM_primary_timer)
+	AND_8(0x80)
+	BEQ_a(_end) // If recovery isn't enabled don't increase.
+	
+	INC_a(RAM_primary_timer)
+	
+	// Overflow check.
+	LDA_a(RAM_primary_timer)
+	AND_8(63)
+	CMP_8(63)
+	BNE(8)
+	LDA_a(RAM_primary_timer)
+	AND_8(0x80)
+	STA_a(RAM_primary_timer)
+	
+	BRA_a(_end)
+	
+	_isRunning:
+	LDA_a(RAM_primary_timer)
+	AND_8(0x7F)
+	STA_a(RAM_primary_timer)
+	
+	DEC_a(RAM_primary_timer)
+	
+	// Overflow check.
+	LDA_a(RAM_primary_timer)
+	BNE(5)
+	ORA_8(63)
+	STA_a(RAM_primary_timer)
+	BRA_a(_end)
+	
+	_end:
+	REP(0x20)
+	RTL
+}
+
+secondary_timer_update: {
+	SEP(0x20)
+	
+	LDA_a(0x9889) // Check if player is moving.
+	ASL
+	TAX
+	LDA_x(0x1003)
+	BNE_a(_isNotRunning) // If player isn't moving, it isn't running.
+	
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x80)
+	BEQ_a(_isNotRunning) // If MSB is 0, player isn't running.
+	
+	LDA_a(0x0066) // Controller state.
+	AND_8(0x40) // Y button.
+	BNE_a(_isRunning) // If Y button is pressed, player is running.
+	
+	_isNotRunning:
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x7F)
+	CMP_8(stamina_max)
+	BEQ_a(_end) // If stamina is already maxed, don't keep increasing the timer.
+	
+	LDA_a(RAM_primary_timer)
+	AND_8(0x3F)
+	BNE_a(_end) // Primary timer, every 64 frames (~1 second) this should be true.
+	INC_a(RAM_secondary_timer)
+	
+	LDA_a(RAM_secondary_timer)
+	CMP_8(0x80)
+	BEQ_a(_recovered) // If the cooldown ended, restore up to max stamina.
+	BRA_a(_end)
+	
+	_recovered:
+	CLC
+	ADC_8(stamina_max)
+	STA_a(RAM_secondary_timer)
+	BRA_a(_end)
+	
+	_isRunning:
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x7F)
+	BEQ_a(_ranOut) // If ran out of stamina, subtract from timer (cooldown).
+	
+	LDA_a(RAM_primary_timer)
+	AND_8(0x3F)
+	CMP_8(1)
+	BNE_a(_end)
+	LDA_a(RAM_secondary_timer)
+	AND_8(0x7F)
+	BNE_a(_decrease) // If it isn't already 0, decrease stamina.
+	BRA_a(_end)
+	
+	_ranOut:
+	SEC
+	SBC_8(stamina_cooldown)
+	AND_8(0x7F)
+	STA_a(RAM_secondary_timer)
+	BRA_a(_end)
+	
+	_decrease:
+	DEC_a(RAM_secondary_timer)
+	
+	_end:
+	REP(0x20)
+	RTL
+}
+
+// Initialize RAM after loading a save.
+
+ROM[0xC0B805] = JSL(stamina_init)
+
+stamina_init: {
+	JSL(0xC08B26) // UpdateScreen, original function.
+	JML(stamina_reset) // Reset values.
+}
+
+// Sweating effect.
+
+ROM[0xC07846] = { JSL(sweating_effect) BRA(0) }
+
+sweating_effect: {
+	STZ_x(0x2E7A)
+
+	LDA_a(RAM_secondary_timer)
+	AND_i(0x80)
+	BNE_a(_return)
+	
+	LDA_x(0x0E5E)
+	CMP_i(4)
+	BCS_a(_return)
+	
+	LDA_x(0x2E7A)
+	ORA_i(0x8000)
+	STA_x(0x2E7A)
+	
+	_return:
+	LDA_a(0x9840)
+	RTL
+}
+
+// Set stamina to initial max values.
+
+stamina_reset: {
+	SEP(0x20)
+	
+	LDA_8(191)
+	STA_a(RAM_primary_timer)
+	
+	LDA_8(stamina_max)
+	ORA_8(0x80)
+	STA_a(RAM_secondary_timer)
+	
+	REP(0x20)
+	
+	RTL
+}

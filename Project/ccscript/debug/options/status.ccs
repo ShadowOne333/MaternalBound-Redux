@@ -1,0 +1,113 @@
+// Special Status debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Special_Status:
+    clearline
+    diam "To whom?" newline
+    char_select_menu_cancellable	// Current party member selection menu, lets you cancel with the B button
+    goto_if_false(new_debug_menu.debug_main)		//"[1B 02 00 C5 87 EE]"		// TODO: Test this...
+    store_registers
+    window_clear
+    diam "Which?" wait
+    save_text_window_state
+    window_open(12)
+    menu 2 {
+      "Heal": {
+        special_status_post_selection
+        "[19 05 00 01 01]"  //TODO: convert these to ccscript_missing_commands
+        "[19 05 00 02 01]"  //[19 05 XX YY YY] is inflict(byte char, short status)
+        "[19 05 00 06 01]"
+        swap
+        "[1E 00 00 64]"
+        "[1E 04 00 64]"
+        goto(Special_Status)
+      }
+      "Unconsious": {
+        special_status_post_selection
+        "[19 05 00 01 01]"
+        "[19 05 00 01 02]"
+        swap
+        "[1E 01 00 64]"
+        "[1E 05 00 64]"
+        goto(Special_Status)
+      }
+      "Petrified": {
+        special_status_post_selection
+        "[19 05 00 01 01]"
+        "[19 05 00 01 03]"
+        goto(Special_Status)
+      }
+      "Paralyzed": {
+        special_status_post_selection
+        "[19 05 00 01 04]"
+        goto(Special_Status)
+      }
+      "Nauseated": {
+        special_status_post_selection
+        "[19 05 00 01 05]"
+        goto(Special_Status)
+      }
+      "Poisoned": {
+        special_status_post_selection
+        "[19 05 00 01 06]"
+        goto(Special_Status)
+      }
+      "Sunstroke": {
+        special_status_post_selection
+        "[19 05 00 01 07]"
+        goto(Special_Status)
+      }
+      "Cold": {
+        special_status_post_selection
+        "[19 05 00 01 08]"
+        goto(Special_Status)
+      }
+      "Mushroomized": {
+        special_status_post_selection
+        "[19 05 00 02 02]"
+        goto(Special_Status)
+      }
+      "Possessed": {
+        special_status_post_selection
+        "[19 05 00 02 03]"
+        goto(Special_Status)
+      }
+      "Asthma": {
+        special_status_post_selection
+        "[19 05 00 06 02]"
+        goto(Special_Status)
+      }
+      "Decrease HP": {
+        special_status_post_selection
+        swap
+        "[1E 00 00 64]"
+        "[1E 01 00 5E]"
+        goto(Special_Status)
+      }
+      "Decrease PP": {
+        special_status_post_selection
+        swap
+        "[1E 04 00 64]"
+        "[1E 05 00 63]"
+        goto(Special_Status)
+      }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+command special_status_post_selection {
+    copy_wram
+    window_closetop
+    window_switch(53)
+    copy_active
+    load_registers
+}
+
+//------------------------------------------------------------------

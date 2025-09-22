@@ -1,0 +1,183 @@
+//Originally created by Chaz for the EarthBound Randomizer
+//CCScript adaptation by phoenixbound, ShadowOne333, and vince94
+//This patch lets you ignore the Equip menu and equip stuff right in Goods!
+//This version also adds the word "from" and removes the extra spaces in the message that displays.
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/commands.ccs"
+
+command e(label) "{long label}"
+
+define UsingEquipmentCheckFlag = flag 0x3F0
+
+ROM[0xC7C742] = goto(newUse)
+ROM[0xC5E36E] = goto(newCheck)
+ROM[0xC5E277] = goto(equipMessagePartOne)
+ROM[0xC5E2F7] = goto(equipMessagePartTwo)
+
+/////////////////////////////////////////////////////////////
+// Changes to what happens when you Use an equippable item //
+newUse:
+    store_registers
+
+    use_item_check(0,0)
+    goto_if_false(_cant_equip)
+
+    /*load_registers
+    equipped_item_check(0,0)
+    goto_if_true(_already_equipped)*/
+
+    load_registers
+    // counter = current equipped item's inventory slot number (temporarily equips the other item)
+    equip(0, 0)
+    counter(0)
+    equip(0, 0)
+    // Move them to the result and arg registers
+    swap
+    ctoarg
+    // Are the two inventory slots equal?
+    result_is_arg
+    goto_if_true(_already_equipped)
+
+    return_action_argument swap
+    call(0xc5e25b) // Equip check
+
+    load_registers
+    set(UsingEquipmentCheckFlag)
+    goto(0xc5e136) // Second Check
+
+newCheck:
+    swap
+    store_registers
+
+    if isset(UsingEquipmentCheckFlag)
+    {
+        //loadZero
+        unset(UsingEquipmentCheckFlag)
+        isset(UsingEquipmentCheckFlag)
+        eob
+    }
+
+    load_registers
+    return_item_in_slot(0,0)
+    get_selling_price(0)
+    eob
+
+_cant_equip:
+    "@{user} can't equip the {return_action_argument}{swap}{itemname(0)}." end
+
+_already_equipped:
+    "@{user} has already equipped the {return_action_argument}{swap}{itemname(0)}." end
+
+//////////////////////////////////
+// Changes to the Equip message //
+equipMessagePartOne:
+    load_registers
+    rtoarg
+    "@({name(0)}'s " //[NAME]'s
+    goto_if_flag(FLG_SHOPTEMP_3, initialOffense)
+    goto(initialDefense)
+
+initialDefense:
+    "defense" linebreak
+    "  changed from "
+    switch_goto(4, {
+   	long nessDefenseStat
+   	long paulaDefenseStat
+   	long jeffDefenseStat
+   	long pooDefenseStat
+    })
+
+initialOffense:
+    "offense" linebreak
+    "  changed from "
+    switch_goto(4, {
+   	long nessOffenseStat
+   	long paulaOffenseStat
+   	long jeffOffenseStat
+   	long pooOffenseStat
+    })
+
+equipMessagePartTwo:
+    " to "
+    rtoarg
+    goto_if_flag(FLG_SHOPTEMP_3, finalOffense)
+    goto(finalDefense)
+
+finalDefense:
+    switch_call(4, {
+   	long nessDefenseStat
+   	long paulaDefenseStat
+   	long jeffDefenseStat
+   	long pooDefenseStat
+    })
+    ".)" wait newline eob
+
+finalOffense:
+    switch_call(4, {
+   	long nessOffenseStat
+   	long paulaOffenseStat
+   	long jeffOffenseStat
+   	long pooOffenseStat
+    })
+    ".)" wait newline eob
+
+///////////////////////////////////////
+//Stat printing for each party member//
+nessDefenseStat:
+    stat(18) eob
+
+paulaDefenseStat:
+    stat(40) eob
+
+jeffDefenseStat:
+    stat(62) eob
+
+pooDefenseStat:
+    stat(84) eob
+
+nessOffenseStat:
+    stat(17) eob
+
+paulaOffenseStat:
+    stat(39) eob
+
+jeffOffenseStat:
+    stat(61) eob
+
+pooOffenseStat:
+    stat(83) eob
+
+// ASM function for comparing the result register to the argument register. By cooprocks123e. Thanks!
+command result_is_arg { "[1A 21]" }
+CompareResToArg: M_EB_Function_Wrapper({
+    JSL(R_Get_Working_Memory)
+    // Move value from $06 to $00 temporarily
+    LDA_d(0x06)
+    STA_d(0x00)
+    LDA_d(0x08)
+    STA_d(0x02)
+    JSL(R_Get_Argument_Memory)
+    // Initialize output value to 0
+    STZ_d(0x0e)
+    STZ_d(0x10)
+    // Compare arg in $06 with working memory in $00
+    LDX_d(0x06)
+    CPX_d(0x00)
+    // If not equal, we're done - return 0
+    BNE_a(done)
+    // Compare high word
+    LDX_d(0x08)
+    CPX_d(0x02)
+    // If not equal, we're done - return 0
+    BNE_a(done)
+    // If we're here then Arg == Working - set return value to 1
+    INC_d(0x0e)
+done:
+    // Write return value into working memory
+    JSL(R_Set_Working_Memory)
+})

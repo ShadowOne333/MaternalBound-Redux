@@ -1,0 +1,605 @@
+// PSI Animations tester debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/cc_asmcall.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+define debug_group = 0	// 100
+
+// This happens right after the encounter text script finishes.
+ROM[0xC24FC5] = JML(debug_battle_check)
+
+debug_battle_check: {
+    LDA_a(0x4A8C)	// Check current group.
+    CMP_i(debug_group)
+    BEQ(8)
+    STZ_d(0x23)		// If it's not the debug group do the default code.
+    LDA_d(0x23)
+    JML(0xC24FC9)
+    JML(0xC255FF)	// If it is the debug group jump to the code that will end the battle instantly.
+}
+
+//------------------------------------------------------------------
+
+/* This one requires changing enemy_group 0 to the following:
+
+0: # Debug fight
+  Background 1: 0
+  Background 2: 313
+  Enemies:
+  - {Amount: 1, Enemy: 161}
+  Fear event flag: 0
+  Fear mode: run away if flag is unset
+  Letterbox Size: 0
+
+Enemy 161 is Pippi, so it loads a blank sprite with very low damage to Ninten if it starts the fight
+*/
+
+PSI_Anims:
+    window_open(53) newline
+    diam "Starting Debug battle for PSI testing..." wait
+    battle(0)
+    goto(new_debug_menu.debug_main)
+    
+PSI_Test:
+    music(4)
+    close_hp
+    window_open(8)
+    menu 3 {
+	"PK Rockin [8B]":	{ window_closeall call(RockinA) pause(30) goto(PSI_Test) }
+	"PK Rockin [8C]":	{ window_closeall call(RockinB) pause(30) goto(PSI_Test) }
+	"PK Rockin [8D]":	{ window_closeall call(RockinG) pause(60) goto(PSI_Test) }
+	"PK Rockin [8F]":	{ window_closeall call(RockinO) pause(60) goto(PSI_Test) }
+	"PK Fire [8B]":		{ window_closeall call(FireA) pause(30) goto(PSI_Test) }
+	"PK Fire [8C]":		{ window_closeall call(FireB) pause(30) goto(PSI_Test) }
+	"PK Fire [8D]":		{ window_closeall call(FireG) pause(30) goto(PSI_Test) }
+	"PK Fire [8F]":		{ window_closeall call(FireO) pause(30) goto(PSI_Test) }
+	"PK Freeze [8B]":	{ window_closeall call(FreezeA) pause(30) goto(PSI_Test) }
+	"PK Freeze [8C]":	{ window_closeall call(FreezeB) pause(30) goto(PSI_Test) }
+	"PK Freeze [8D]":	{ window_closeall call(FreezeG) pause(30) goto(PSI_Test) }
+	"PK Freeze [8F]":	{ window_closeall call(FreezeO) pause(30) goto(PSI_Test) }
+	"PK Thunder":		{ window_closeall call(l_0xef8813) pause(30) goto(PSI_Test) }
+	"Thunder [8B] [5F] [8C]":	{ window_closeall call(ThunderAB) pause(30) goto(PSI_Test) }
+	"Thunder [8D] [5F] [8F]":	{ window_closeall call(ThunderGO) pause(30) goto(PSI_Test) }
+	"Thunder Fail":		{ window_closeall call(ThunderFail) pause(30) goto(PSI_Test) }
+	"PK Flash [8B]":	{ window_closeall call(FlashA) pause(30) goto(PSI_Test) }
+	"PK Flash [8C]":	{ window_closeall call(FlashB) pause(30) goto(PSI_Test) }
+	"PK Flash [8D]":	{ window_closeall call(FlashG) pause(30) goto(PSI_Test) }
+	"PK Flash [8F]":	{ window_closeall call(FlashO) pause(30) goto(PSI_Test) }
+	"Starstorm [8B]":	{ window_closeall call(StarstormA) pause(30) goto(PSI_Test) }
+	"Starstorm [8F]":	{ window_closeall call(StarstormO) pause(30) goto(PSI_Test) }
+	"Lifeup [8B]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Lifeup [8C]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Lifeup [8D]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Lifeup [8F]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Healing [8B]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Healing [8C]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Healing [8D]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Healing [8F]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	// Shields require more pause time to finish properly
+	"Shield [8B]":		{ window_closeall call(ShieldA) pause(90) goto(PSI_Test) }
+	"Shield [8E]":		{ window_closeall call(ShieldE) pause(90) goto(PSI_Test) }
+	"Shield [8C]":		{ window_closeall call(ShieldB) pause(90) goto(PSI_Test) }
+	"Shield [8F]":		{ window_closeall call(ShieldO) pause(90) goto(PSI_Test) }
+	"PSI Shield [8B]":	{ window_closeall call(PSIShieldA) pause(90) goto(PSI_Test) }
+	"PSI Shield [8E]":	{ window_closeall call(PSIShieldE) pause(90) goto(PSI_Test) }
+	"PSI Shield [8C]":	{ window_closeall call(PSIShieldB) pause(90) goto(PSI_Test) }
+	"PSI Shield [8F]":	{ window_closeall call(PSIShieldO) pause(90) goto(PSI_Test) }
+	"Offense up [8B]":	{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Offense up [8F]":	{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+	"Def. down [8B]":	{ window_closeall call(DefenseUpA) pause(30) goto(PSI_Test) }
+	"Def. down [8F]":	{ window_closeall call(DefenseUpO) pause(30) goto(PSI_Test) }
+	"Hypnosis [8B]":	{ window_closeall call(HypnosisA) pause(30) goto(PSI_Test) }
+	"Hypnosis [8F]":	{ window_closeall call(HypnosisO) pause(30) goto(PSI_Test) }
+	"PSI Magnet [8B]":	{ window_closeall call(PSIMagnetA) pause(30) goto(PSI_Test) }
+	"PSI Magnet [8F]":	{ window_closeall call(PSIMagnetO) pause(30) goto(PSI_Test) }
+	"Paralysis [8B]":	{ window_closeall call(ParalysisA) pause(30) goto(PSI_Test) }
+	"Paralysis [8F]":	{ window_closeall call(ParalysisO) pause(30) goto(PSI_Test) }
+	"Brainshock [8B]":	{ window_closeall call(BrainshockA) pause(30) goto(PSI_Test) }
+	"Brainshock [8F]":	{ window_closeall call(BrainshockO) pause(30) goto(PSI_Test) }
+	// Item animations
+	"Counter PSI-Unit":	{ window_closeall call(CounterPSIUnit) pause(180) goto(PSI_Test) }
+	"HP Sucker":		{ window_closeall call(HPSucker) pause(60) goto(PSI_Test) }
+	"Hungry HP":		{ window_closeall call(HungryHPSucker) pause(60) goto(PSI_Test) }
+	"Shield Killer":	{ window_closeall call(ShieldKiller) pause(120) goto(PSI_Test) }
+	"Teleport Box":		{ window_closeall call(TeleportBox) pause(150) goto(PSI_Test) }
+	"Giygas' Attack":	{ window_closeall call(GiygasAttack) pause(60) goto(PSI_Test) }
+	// Teleport a & B
+	// Telepathy
+	}
+	//window_close(14)
+	window_closetop
+    	eob
+
+//------------------------------------------------------------------
+
+RockinA:
+    psi_animation(0, 19)
+    pause(10)
+    sound(48)
+    pause(32)
+    sound(74)
+    pause(2)
+    sound(48)
+    psi_animation(42, 0)
+    pause(32)
+    sound(74)
+    pause(14)
+    sound(91)
+    eob
+
+RockinB:
+    sound(48)
+    psi_animation(0, 20)
+    pause(32)
+    sound(74)
+    pause(2)
+    sound(48)
+    pause(29)
+    sound(74)
+    pause(2)
+    sound(49)
+    psi_animation(42, 0)
+    pause(29)
+    sound(49)
+    pause(25)
+    sound(91)
+    eob
+
+RockinG:
+    psi_animation(0, 21)
+    pause(5)
+    sound(49)
+    pause(32)
+    sound(50)
+    pause(26)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(7)
+    psi_animation(42, 0)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(7)
+    sound(71)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(5)
+    sound(91)
+    eob
+
+RockinO:
+    psi_animation(0, 22)
+    pause(30)
+    sound(49)
+    pause(34)
+    sound(49)
+    pause(34)
+    sound(49)
+    pause(34)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(11)
+    sound(91)
+    pause(11)
+    sound(91)
+    pause(11)
+    psi_animation(42, 0)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    pause(3)
+    sound(91)
+    eob
+//------------------------------------------------------------------
+FireA:
+    sound(51)
+    psi_animation(0, 7)
+    pause(28)
+    sound(53)
+    pause(6)
+    psi_animation(36, 0)
+    pause(30)
+    eob
+
+FireB:
+    sound(51)
+    psi_animation(0, 8)
+    pause(28)
+    sound(53)
+    pause(24)
+    sound(52)
+    psi_animation(36, 0)
+    pause(30)
+    eob
+
+FireG:
+    sound(51)
+    psi_animation(0, 9)
+    pause(28)
+    sound(53)
+    pause(24)
+    sound(52)
+    psi_animation(36, 0)
+    pause(35)
+    eob
+
+FireO:
+    sound(51)
+    psi_animation(0, 10)
+    pause(28)
+    sound(53)
+    pause(29)
+    sound(53)
+    pause(24)
+    sound(53)
+    psi_animation(36, 0)
+    pause(55)
+    eob
+//------------------------------------------------------------------
+FreezeA:
+    sound(56)
+    psi_animation(0, 15)
+    pause(30)
+    sound(57)
+    pause(20)
+    psi_animation(41, 0)
+    pause(15)
+    pause(27)
+    eob
+
+FreezeB:
+    sound(56)
+    psi_animation(0, 16)
+    pause(34)
+    sound(57)
+    pause(20)
+    psi_animation(41, 0)
+    pause(15)
+    pause(27)
+    eob
+
+FreezeG:
+    sound(56)
+    psi_animation(0, 17)
+    pause(38)
+    sound(57)
+    pause(11)
+    psi_animation(41, 0)
+    pause(27)
+    sound(58)
+    pause(42)
+    eob
+
+FreezeO:
+    sound(56)
+    psi_animation(0, 18)
+    pause(54)
+    sound(57)
+    pause(5)
+    psi_animation(41, 0)
+    pause(31)
+    sound(58)
+    pause(27)
+    sound(58)
+    pause(20)
+    eob
+//------------------------------------------------------------------
+l_0xef8813:	// After failed Thunder?
+    eob
+
+ThunderAB:
+    sound(61)
+    psi_animation(46, 33)
+    pause(22)
+    sound(63)
+    pause(30)
+    eob
+
+ThunderGO:
+    sound(62)
+    psi_animation(46, 34)
+    pause(22)
+    sound(63)
+    pause(23)
+    sound(63)
+    pause(30)
+    eob
+
+ThunderFail:	// Failed PK Thunder
+    sound(60)
+    pause(60)
+    eob
+//------------------------------------------------------------------
+FlashA:
+    sound(65)
+    psi_animation(40, 11)
+    pause(30)
+    eob
+
+FlashB:
+    sound(65)
+    psi_animation(40, 12)
+    pause(30)
+    eob
+
+FlashG:
+    sound(67)
+    pause(10)
+    psi_animation(0, 13)
+    pause(20)
+    psi_animation(40, 0)
+    pause(19)
+    sound(66)
+    pause(26)
+    eob
+
+FlashO:
+    sound(67)
+    psi_animation(0, 14)
+    pause(17)
+    psi_animation(40, 0)
+    pause(50)
+    sound(66)
+    pause(5)
+    sound(66)
+    pause(14)
+    eob
+//------------------------------------------------------------------
+StarstormA:
+    psi_animation(0, 31)
+    pause(10)
+    sound(64)
+    pause(50)
+    psi_animation(45, 0)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(15)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    pause(7)
+    sound(91)
+    eob
+
+StarstormO:
+    psi_animation(0, 32)
+    pause(20)
+    sound(64)
+    pause(40)
+    psi_animation(45, 0)
+    pause(24)
+    sound(64)
+    sound(91)
+    pause(19)
+    sound(91)
+    pause(15)
+    sound(91)
+    pause(15)
+    sound(91)
+    pause(11)
+    sound(91)
+    pause(4)
+    sound(91)
+    eob
+//------------------------------------------------------------------
+Lifeup_Healing_Offenseup:
+    pause(30)
+    eob
+//------------------------------------------------------------------
+ShieldA:
+    sound(38)
+    psi_animation(0, 50)
+    pause(1)
+    eob
+
+ShieldE:
+    sound(38)
+    psi_animation(0, 50)
+    pause(1)
+    eob
+
+ShieldB:
+    sound(38)
+    psi_animation(0, 51)
+    pause(1)
+    eob
+
+ShieldO:
+    sound(38)
+    psi_animation(0, 51)
+    pause(1)
+    eob
+//------------------------------------------------------------------
+PSIShieldA:
+    sound(39)
+    psi_animation(0, 52)
+    pause(1)
+    eob
+
+PSIShieldE:
+    sound(39)
+    psi_animation(0, 52)
+    pause(1)
+    eob
+
+PSIShieldB:
+    sound(39)
+    psi_animation(0, 53)
+    pause(1)
+    eob
+
+PSIShieldO:
+    sound(39)
+    psi_animation(0, 53)
+    pause(1)
+    eob
+//------------------------------------------------------------------
+DefenseUpA:
+    sound(44)
+    psi_animation(0, 5)
+    pause(40)
+    psi_animation(39, 0)
+    pause(100)
+    eob
+
+DefenseUpO:
+    sound(79)
+    psi_animation(0, 6)
+    pause(40)
+    psi_animation(39, 0)
+    pause(125)
+    eob
+//------------------------------------------------------------------
+HypnosisA:
+    sound(42)
+    psi_animation(0, 28)
+    pause(25)
+    psi_animation(47, 0)
+    pause(30)
+    eob
+
+HypnosisO:
+    sound(42)
+    psi_animation(0, 29)
+    pause(25)
+    psi_animation(47, 0)
+    pause(30)
+    eob
+//------------------------------------------------------------------
+PSIMagnetA:
+    sound(43)
+    psi_animation(0, 25)
+    pause(45)
+    psi_animation(44, 0)
+    pause(57)
+    eob
+
+PSIMagnetO:
+    sound(76)
+    psi_animation(0, 26)
+    pause(45)
+    psi_animation(44, 0)
+    pause(33)
+    eob
+//------------------------------------------------------------------
+ParalysisA:
+    sound(44)
+    psi_animation(0, 23)
+    pause(60)
+    psi_animation(43, 0)
+    pause(70)
+    eob
+
+ParalysisO:
+    sound(79)
+    psi_animation(0, 24)
+    pause(60)
+    psi_animation(43, 0)
+    pause(70)
+    eob
+//------------------------------------------------------------------
+BrainshockA:
+    pause(20)
+    sound(45)
+    psi_animation(0, 2)
+    pause(20)
+    psi_animation(47, 0)
+    pause(76)
+    eob
+
+BrainshockO:
+    pause(20)
+    sound(80)
+    psi_animation(0, 3)
+    pause(40)
+    psi_animation(47, 0)
+    pause(128)
+    eob
+//------------------------------------------------------------------
+CounterPSIUnit:
+    pause(30)
+    sound(54)
+    pause(30)
+    psi_animation(0, 1)
+    pause(60)
+    eob
+
+HPSucker:
+    pause(30)
+    sound(59)
+    psi_animation(0, 4)
+    pause(60)
+    eob
+
+HungryHPSucker:
+    pause(30)
+    sound(59)
+    psi_animation(0, 30)
+    pause(60)
+    eob
+
+ShieldKiller:
+    pause(30)
+    sound(99)
+    psi_animation(0, 27)
+    pause(60)
+    eob
+
+TeleportBox:
+    sound(99)
+    psi_animation(0, 48)
+    sound(99)
+    //sound(5)	// 'errorbeep' sound
+    // Should be psi_animation(35,0), but doing that loads PK Beam Alpha instead
+    psi_animation(35, 0)
+    eob
+
+GiygasAttack:
+    psi_animation(0, 49)
+    psi_animation(0, 54)
+    sound(81)
+    pause(40)
+    sound(81)
+    eob
+//------------------------------------------------------------------

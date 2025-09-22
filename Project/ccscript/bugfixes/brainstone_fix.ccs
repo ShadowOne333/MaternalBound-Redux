@@ -1,0 +1,35 @@
+// General ASM code for fixing or modifying different things in-game
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+// Fix the Brainstone behaviour, it should now prevent loss of concentration if found in the inventory during a battle
+// Fix by Phoenixbound
+ROM[0xC28D92] = JML (distract_check_for_brain_stone)
+
+distract_check_for_brain_stone: {
+    LDX_a (0xA972)
+    LDA_x (0x000E) // target's "side." 0 for allies, 1 for enemies
+    AND_i (0x00FF)
+    BNE_a (_success)
+
+    LDA_x (0x0010) // character ID, for non-NPC party members
+    AND_i (0x00FF)
+    INC            // Add 1 to turn it into a 1-based ID
+    LDX_i (0x00C9) // Brain stone
+    JSL (0xC45683) // Does that character have a brain stone?
+    CMP_i (0x0000)
+    BEQ (4)
+    JML (0xC28DAB) // if they do, fail to inflict the status
+
+_success:
+    // Restore the previous state of the registers
+    LDA_a (0xA972)
+    CLC
+    ADC_i (0x0021)
+    TAX
+    // Clobbered code
+    SEP (0x20)
+    LDA_8 (0x04)
+    JML (0xC28D96)
+}
+//------------------------------------------------------------------

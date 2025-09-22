@@ -1,0 +1,97 @@
+// GENERAL ASM CODE FOR FIXES TO SEVERAL OF THE KIRBY DEBUG MENU OPTIONS
+
+import "../essential/asm65816.ccs"
+
+/* NOTE: All of the options in this Debug menu utilize 10 bytes as a maximum */
+
+/* Change Kirby debug menu text
+2F = /	| 30 = 0	| 31 = 1	| 32 = 2	| 39 = 9			
+40 = @	| 41 = A	| 42 = B	| 43 = C ...	| 5A = Z */
+ROM[0xEFD8B5] = "[4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]" // Mother 2
+// Original - [4D 4F 54 48 45 52 32 20 52 4F 4D 20 20 31 39 39 34 2F 30 37 2F 30 39 20 20 56 45 52 53 49 4F 4E]
+// MOTHER2 ROM  1994/07/09  VERSION
+
+/* Fix Palette for the Window colors */
+ROM[0xC47FD9] = {
+	LDA_a	(0x99CD)
+	JSL	(colorfix)
+}
+
+colorfix: {
+	AND_i	(0x00FF)
+	BNE	(0x06)		// Check if palette index has been set
+	LDA_i	(0x0001)	// Default palette index (01=Plain Flavor, 02=Mint, 03=Strawberry, 04=Banana, 05=Peanut)
+	STA_a	(0x99CD)
+	DEC
+	RTL
+}
+
+/* Load original Debug window palette from EarthBound */
+/* UNCOMMENT (AND COMMENT ABOVE CODE) IF YOU WANT THE ORIGINAL PINK PALETTE FOR THE DEBUG WINDOW MENU
+
+ROM[0xC47FE6] = {
+    JSL (pinkwindow)
+}
+       
+pinkwindow: {
+	LDA_a	(0x99CD)
+	BNE	(0x04)		// Check if palette index has been set
+	LDA_i	(0xFFFF)	// Incorrect data loaded in EarthBound
+	RTL
+	LDA_xl	(0xE01FB9)
+	RTL
+}*/
+
+/* Change button input layout for the Debug menu only */
+ROM[0xEFE52F] = AND_i	(0x0040)	// Opens Main (Talk) menu when pressed (B button by default)
+
+ROM[0xEFE2F5] = {
+	JMP_l	(buttontalk)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+}
+
+buttontalk: {
+	JSL	(buttoncheck)
+	LDA_a	(0x006D)
+	AND_i	(0x8000)		// Fades screen to black / Reloads (A button by default)
+	BNE	(0x04)
+	JMP_l	(0xEFE387)
+	JMP_l	(0xEFE300)
+}
+
+buttoncheck: {
+	LDA_a	(0x006D)
+	AND_i	(0x00A0)		// AND operand check for A+L buttons. Talks to NPCs / Confirm selections at the Menus
+	BEQ	(0x04)
+	JSL	(0xC13C32)
+	RTL
+}
+
+/* Fix "Show battle" Battle debug menu to work properly */
+ROM[0xC1E21A] =	LDA_i (0x0060)	// Next 4 lines fix the garbled characters in Enemy Selection Menu for proper numbers (000, 001, etc)
+ROM[0xC1E21F] = LDA_i (0x0060)
+ROM[0xC1E237] =	LDA_i (0x0060)
+ROM[0xC1E23C] = LDA_i (0x0060)
+
+ROM[0xEFE64E] = JSL (Init_Debug_Party)	// Fixes the "Show battle" option crashing when starting a battle from a fresh boot
+
+Init_Debug_Party: {
+	LDA_i	(0x0004)	// Load 4 into A register
+	STA_a	(0x98A3)	// Store it in 0x7E98A3
+	JSL	(0xC24821)	// Go to battle routine
+	RTL
+}
+
+/* Repoint Kirby's graphics (just for fun) */
+ROM[0xEFE55E] = ASMLoadAddress0E(kirby)
+
+kirby: {
+	insertbin "kirby.bin"
+}
+

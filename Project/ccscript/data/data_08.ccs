@@ -1,0 +1,343 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../redux/window_titles.ccs"
+import "../debug/diamond.ccs"
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc5889c:
+    "{load_registers}[19 05 00 06 02]" goto(data_07.l_0xc58718)
+
+l_0xc588a8:
+    eob
+
+l_0xc588a9:
+    "{load_registers}{swap}[1E 00 00 64][1E 01 00 5E]" goto(data_07.l_0xc58718)
+
+l_0xc588ba:
+    eob
+
+l_0xc588bb:
+    "{load_registers}{swap}[1E 04 00 64][1E 05 00 63]" goto(data_07.l_0xc58718)
+
+l_0xc588cc:
+    eob
+
+l_0xc588cd:
+    "{diam}To where?{wait}{window_open(8)}[19 02]Onett" eob
+
+l_0xc588e4:
+    "[19 02]Twoson" eob
+
+l_0xc588eb:
+    "[19 02]H. H. Village" eob
+
+l_0xc588f2:
+    "[19 02]G. D. Valley" eob
+
+l_0xc588fb:
+    "[19 02]Threek" eob
+
+l_0xc58902:
+    "[19 02]Winters" eob
+
+l_0xc5890b:
+    "[19 02]Saturn Valley" eob
+
+l_0xc58915:
+    "[19 02]Belch's Base" eob
+
+l_0xc5891d:
+    "[19 02]D. D. Desert" eob
+
+l_0xc58927:
+    "[19 02]Fourside" eob
+
+l_0xc58930:
+    "[19 02]Moonside" eob
+
+l_0xc58939:
+    "[19 02]Summers" eob
+
+l_0xc58940:
+    "[19 02]Dalaam" eob
+
+l_0xc58946:
+    "[19 02]Scarabia" eob
+
+l_0xc5894d:
+    "[19 02]Deep Darkness" eob
+
+l_0xc58954:
+    "[19 02]Tenda Village" eob
+
+l_0xc58959:
+    "[19 02]L. Underworld" eob
+
+l_0xc58963:
+    "[19 02]Magicant" eob
+
+l_0xc5896b:
+    "[19 02]Present Cave" eob
+
+l_0xc58976:
+    "[19 02]Cave of Past" eob
+
+l_0xc58981:
+    "[1C 0C 03][11][1B 05]{window_closetop}{window_switch(1)}" newline
+    "[1B 06][09 14 {e(l_0xc589e6)} {e(l_0xc589ea)} {e(l_0xc589ee)} {e(l_0xc589f2)} {e(l_0xc589f6)} {e(l_0xc589fa)} {e(l_0xc589fe)} {e(l_0xc58a02)} {e(l_0xc58a06)} {e(l_0xc58a0a)} {e(l_0xc58a0e)} {e(l_0xc58a12)} {e(l_0xc58a16)} {e(l_0xc58a1a)} {e(l_0xc58a1e)} {e(l_0xc58a22)} {e(l_0xc58a2e)} {e(l_0xc58a32)} {e(l_0xc58a26)} {e(l_0xc58a2a)}]" goto(data_06.debug_main)
+
+l_0xc589e6:
+    "[1F 21 19]" eob
+
+l_0xc589ea:
+    "[1F 21 1D]" eob
+
+l_0xc589ee:
+    "[1F 21 B9]" eob
+
+l_0xc589f2:
+    "[1F 21 15]" eob
+
+l_0xc589f6:
+    "[1F 21 1C]" eob
+
+l_0xc589fa:
+    "[1F 21 1E]" eob
+
+l_0xc589fe:
+    "[1F 21 8F]" eob
+
+l_0xc58a02:
+    "[1F 21 64]" eob
+
+l_0xc58a06:
+    "[1F 21 90]" eob
+
+l_0xc58a0a:
+    "[1F 21 14]" eob
+
+l_0xc58a0e:
+    "[1F 21 18]" eob
+
+l_0xc58a12:
+    "[1F 21 1F]" eob
+
+l_0xc58a16:
+    "[1F 21 1B]" eob
+
+l_0xc58a1a:
+    "[1F 21 20]" eob
+
+l_0xc58a1e:
+    "[1F 21 AC]" eob
+
+l_0xc58a22:
+    "[1F 21 16]" eob
+
+l_0xc58a26:
+    "[1F 21 91]" eob
+
+l_0xc58a2a:
+    "[1F 21 1A]" eob
+
+l_0xc58a2e:
+    "[1F 21 21]" eob
+
+l_0xc58a32:
+    "[1F 21 17]" eob
+
+l_0xc58a36:
+    "{diam}Who will be leveled up?" linebreak
+    "[19 02]Whole team" eob
+
+l_0xc58a47:
+    "[19 02]One member" eob
+
+l_0xc58a4d:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58a61)} {e(l_0xc58a93)}]" goto(data_06.debug_main)
+
+l_0xc58a61:
+    call(l_0xc58add) "[1B 02 {e(l_0xc58a8d)}]{swap}[1E 08 01 00][1E 08 02 00][1E 08 03 00][1E 08 04 00]{diam}Team leveled up.{wait}" goto(l_0xc58a8d)
+
+l_0xc58a8d:
+    goto(data_06.debug_main)
+
+l_0xc58a92:
+    eob
+
+l_0xc58a93:
+    newline
+    "{diam}Which party member will be leveled up?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc58ad7)}]{swap}" call(l_0xc58add) "[1B 02 {e(l_0xc58ad7)}]{swap}[1E 08 00 00]" goto(l_0xc58a8d)
+
+l_0xc58ad7:
+    goto(data_06.debug_main)
+
+l_0xc58adc:
+    eob
+
+l_0xc58add:
+    newline
+    "{diam}Select your level." linebreak
+    "   [1F 52 02]{clearline}" eob
+
+l_0xc58afb:
+    newline
+    "{diam}Choose your operation.{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Max bank account" eob
+
+l_0xc58b21:
+    "[19 02]Max cash" eob
+
+l_0xc58b2e:
+    "[19 02]Cash edit" eob
+
+l_0xc58b3b:
+    "[19 02]Zero cash" eob
+
+l_0xc58b47:
+    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06]" newline
+    "[09 04 {e(l_0xc58b6c)} {e(l_0xc58bac)} {e(l_0xc58bd2)} {e(l_0xc58c30)}]" goto(data_06.debug_main)
+
+l_0xc58b6c:
+    "{diam}You now have $9999999" linebreak
+    "  in the bank.{wait}{counter(1)}" goto(l_0xc58b88)
+
+l_0xc58b88:
+    "{ctoarg}{swap}{result_is(200)}[1B 03 {e(l_0xc58ba0)}][1D 06 50 C3 00 00]{inc}" goto(l_0xc58b88)
+
+l_0xc58ba0:
+    "[1D 06 4F C3 00 00]" goto(data_06.debug_main)
+
+l_0xc58bab:
+    eob
+
+l_0xc58bac:
+    "{diam}You now have $99999" linebreak
+    "  in your wallet.{wait}[1D 08 60 EA][1D 08 40 9C]{open_wallet}" goto(data_06.debug_main)
+
+l_0xc58bd1:
+    eob
+
+l_0xc58bd2:
+    "{diam}Input your amount:" linebreak
+    "[18 05 04 0A]&[18 05 04 02]$[1F 52 05]{clearline}[1B 02 {e(l_0xc58c2a)}]{store_registers}" call(l_0xc58c55) "{load_registers}{swap}[1D 08 00 00]{open_wallet}{diam}You now have" linebreak
+    "  [1C 0A 00 00 00 00] in your wallet.{wait}" goto(l_0xc58c2a)
+
+l_0xc58c2a:
+    goto(data_06.debug_main)
+
+l_0xc58c2f:
+    eob
+
+l_0xc58c30:
+    call(l_0xc58c55) "{diam}You are now broke!" linebreak
+    "  Your wallet is empty!{wait}" goto(data_06.debug_main)
+
+l_0xc58c54:
+    eob
+
+l_0xc58c55:
+    "[1D 09 10 27][1B 02 {e(l_0xc58c55)}]" goto(l_0xc58c5f)
+
+l_0xc58c5f:
+    "[1D 09 E8 03][1B 02 {e(l_0xc58c5f)}]" goto(l_0xc58c69)
+
+l_0xc58c69:
+    "[1D 09 64 00][1B 02 {e(l_0xc58c69)}]" goto(l_0xc58c73)
+
+l_0xc58c73:
+    "[1D 09 0A 00][1B 02 {e(l_0xc58c73)}]" goto(l_0xc58c7d)
+
+l_0xc58c7d:
+    "[1D 09 01 00][1B 02 {e(l_0xc58c7d)}]" eob
+
+l_0xc58c88:
+    "{diam}Which script do you want to access?{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Escargo delivery" eob
+
+l_0xc58cb6:
+    "[19 02]Escargo pickup" eob
+
+l_0xc58cc3:
+    "[19 02]M. Pizza delivery" eob
+
+l_0xc58cd0:
+    "[19 02]Cash dispenser" eob
+
+l_0xc58cd8:
+    "[19 02]Angrez Van" eob
+
+l_0xc58ce3:
+    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}" newline
+    "[1B 06][1F C0 05 {e(data_19.l_0xc642a3)} {e(data_19.l_0xc63eb0)} {e(data_20.l_0xc64bbf)} {e(data_21.l_0xc65243)} {e(data_21.l_0xc655b1)}]" goto(data_06.debug_main)
+
+l_0xc58d09:
+    "{diam}Select your option.{wait}[18 02]{open_hp}{open_wallet}{window_open(37)}[19 02]BGM" eob
+
+l_0xc58d18:
+    "[19 02]Sound Effects" eob
+
+l_0xc58d1d:
+    "[19 02]SPC Effects" eob
+
+l_0xc58d26:
+    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][09 03 {e(l_0xc58d46)} {e(l_0xc58d70)} {e(l_0xc58d96)}]" goto(data_06.debug_main)
+
+l_0xc58d46:
+    newline
+    "{diam}Which song would you like to hear?" linebreak
+    goto(l_0xc58d58)
+
+l_0xc58d58:
+    "    [1F 52 03]{clearline}"
+    store_registers
+    if ("[18 07 C0 00 00 00 00]") {
+    "@Option 192 and above crash the game." next
+    goto(l_0xc58d58)    
+    }
+    load_registers
+    "[1B 02 {e(data_06.debug_main)}]{swap}{music(0)}" goto(l_0xc58d58)
+
+
+l_0xc58d70:
+    newline
+    "{diam}Which sound effect would you like to hear?" linebreak
+    goto(l_0xc58d80)
+
+l_0xc58d80:
+    "     [1F 52 03]{clearline}[1B 02 {e(data_06.debug_main)}]{swap}{sound(0)}" goto(l_0xc58d80)
+
+l_0xc58d96:
+    newline
+    "{diam}Which SPC effect would you like to hear?{wait}" linebreak
+    goto(l_0xc58da9)
+
+l_0xc58da9:
+    "     [1F 52 02]{clearline}[1B 02 {e(data_06.debug_main)}]{swap}[1F 07 00]" goto(l_0xc58da9)
+
+l_0xc58dbf:
+    newline
+    "{diam}Toggle enemy spawn." linebreak
+    "[19 02]Enable" eob
+
+l_0xc58dd3:
+    "[19 02]Disable" eob
+
+l_0xc58dd8:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58df1)} {e(l_0xc58e02)}]{diam}Enemies unchanged.{wait}" eob
+
+l_0xc58df1:
+    "{diam}Enemies enabled.{wait}{unset(flag 11)}" eob
+
+l_0xc58e02:
+    "{diam}Enemies disabled.{wait}{set(flag 11)}" eob
+
+l_0xc58e13:
+    "{diam}Select hint.{wait}" linebreak
+    goto(data_09.l_0xc58e31)

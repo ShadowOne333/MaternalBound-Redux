@@ -1,0 +1,388 @@
+// Goods Edit debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+import "../../essential/cc_asmcall.ccs"
+
+//------------------------------------------------------------------
+
+Goods_Edit:
+    newline
+    diam "Select your option." wait
+    "[18 02]"
+    open_hp
+    open_wallet
+    window_open(7)
+    // TODO: We'll need to implement the inventory-is-full fallbacks for a lot of this
+    menu 1 {
+      "Add goods": {
+              window_closetop window_switch(53) newline
+          Add_Goods:
+              window_clear
+              diam "Select an item."
+              call(new_debug_menu.Selector_Text)
+              pause(10)
+              cc_asmcall(0xC13EE7, RET_NONE)
+              window_closetop window_switch(53) newline
+              goto(new_debug_menu.debug_main)
+      }
+      "Important goods": {
+        window_open(7) newline
+        menu 1 {
+          "Key to the shack":	{ give(0xFF, 170)  } //Page 1
+          "Receiver phone":	{ give(0xFF, 181) }
+          "Pencil eraser":	{ give(0xFF, 184) }
+          "Franklin badge":	{ give(0xFF, 1) }
+          "Key to the cabin":	{ give(0xFF, 171)  }
+
+          "Suitcase of bills":	{ give(0xFF, 180)  } //Page 2
+          "Bad key machine":	{ give(0xFF, 172) }
+          "Zombie paper":	{ give(0xFF, 174) }
+          "Diamond":		{ give(0xFF, 182) }
+          "Tofu machine":	{ give(0xFF, 189)  }
+
+          "Hieroglyph copy":	{ give(0xFF, 185) } //Page 3
+          "Hawk eye":		{ give(0xFF, 175) }
+          "Pak of bubble gum":	{ give(0xFF, 104) }
+          "Shyness book":	{ give(0xFF, 164) }
+          "Meteorite piece":	{ give(0xFF, 193) }
+
+          "Signed banana":	{ give(0xFF, 183) } // Page 4
+          "Eraser eraser":	{ give(0xFF, 210) }
+          "Tendakraut":		{ give(0xFF, 211) }
+          "Rabbits' carrot":	{ give(0xFF, 253) }
+        }
+        window_closetop
+        goto(new_debug_menu.debug_main)
+      }
+      "Fill inventory": {
+            window_closetop window_switch(53) newline
+	    diam "Inventory maxed out with Skip Sandwiches DX." next
+	    call(fill)
+	    goto(new_debug_menu.debug_main)
+      }
+      "Clear inventory": {
+        window_closetop window_switch(53) newline
+        diam "What items do you want to remove?" linebreak
+        menu {
+            "All": {
+            rem_all_main:
+                counter(1)
+                goto(rem_loop)
+            
+            rem_loop:
+                ctoarg
+                party_size_check(0)
+                goto_if_true(remove_all_end)
+                party_pos_check(0)
+                goto(remove_all)
+                
+            remove_all:
+	        return_item_in_slot(0, 1)
+	        swap
+	        goto_if_false(return_to_all)
+	        swap
+	        take_slot(0, 1)
+	        goto(remove_all)
+
+	    return_to_all:
+	        inc
+	        goto(rem_loop)
+
+	    remove_all_end:
+	        eob
+            }
+            "Individual": {
+	        open_hp
+	        goto(remove_manually)
+	    }
+        }
+        goto(new_debug_menu.debug_main)
+      }
+      "Fill storage": {
+	    window_closetop
+	    window_switch(53)
+	    window_clear
+	    diam "Storage filled with" linebreak
+	    "   upper tier weapons."
+	    counter(20)
+	    goto(fill_storage_loop)
+      }
+      "Clear storage": {
+	    window_closetop
+	    window_switch(53)
+	    window_clear
+	    diam "Storage cleared."
+	    goto(clear_storage)
+      }
+      "Ultimate weapons": {
+            call(Ultimate_Weapons)
+            window_closetop
+            window_switch(53)
+            window_clear
+            diam "You now have been equipped" linebreak
+            "   with the ultimate weapons." wait
+            goto(new_debug_menu.debug_main)
+      }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+give_item_to:
+    char_select_menu_cancellable_labels(l_0xc5e584, l_0xc5e58b, l_0xc5e592, l_0xc5e599, 2)
+    window_switch(2)
+    window_closetop
+    window_switch(53)
+    eob
+
+give_loop:
+    char_select_menu_cancellable_labels(l_0xc5e5a0, l_0xc5e5a7, l_0xc5e5ae, l_0xc5e5b5, 2)
+    copy_wram
+    goto_if_false(l_0xc5e579)
+    swap
+    char_inventory_vacancy(0)
+    goto_if_true(l_0xc5e579)
+    copy_active
+    swap
+    goto(give_loop)
+
+l_0xc5e579:
+    copy_active
+    window_switch(44)
+    window_closetop window_switch(53)
+    eob
+
+l_0xc5e584:
+    save_text_window_state
+    show_inventory(2, 1)
+    eob
+
+l_0xc5e58b:
+    save_text_window_state
+    show_inventory(2, 2)
+    eob
+
+l_0xc5e592:
+    save_text_window_state
+    show_inventory(2, 3)
+    eob
+
+l_0xc5e599:
+    save_text_window_state
+    show_inventory(2, 4)
+    eob
+
+l_0xc5e5a0:
+    save_text_window_state
+    show_inventory(44, 1)
+    eob
+
+l_0xc5e5a7:
+    save_text_window_state
+    show_inventory(44, 2)
+    eob
+
+l_0xc5e5ae:
+    save_text_window_state
+    show_inventory(44, 3)
+    eob
+
+l_0xc5e5b5:
+    save_text_window_state
+    show_inventory(44, 4)
+    eob
+
+//------------------------------------------------------------------
+
+full_inventory:
+    diam "Inventory full." linebreak
+    diam "Can't add more items." wait
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+fill:
+    char_inventory_vacancy(0xFF)
+    goto_if_false(end_fill)
+    give_and_check(0, 225)
+    goto(fill)
+
+end_fill:
+    eob
+
+//------------------------------------------------------------------
+
+clear_storage:
+    return_escargo_item(1)
+    goto_if_false(end_clear_storage)
+    queue_escargo_item(0xFF, 1)
+    goto(clear_storage)
+
+end_clear_storage:
+    wait
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+remove_manually:
+    call(item_remove)
+    goto_if_false(end_sel_choice)
+    take_slot(0, 0)
+    goto(remove_manually)
+
+end_sel_choice:
+    eob
+
+
+item_remove:
+    open_hp
+    party_size_check(2)
+    goto_if_true(l_0xc5e499)
+    char_select_menu_cancellable_labels(l_0xc5e584, l_0xc5e58b, l_0xc5e592, l_0xc5e599, 0)
+    rtoarg
+    goto_if_false(l_0xc5e48e)
+    return_menu_strings(2)
+    goto_if_false(item_remove)
+    create_menu_in_window_cancellable(2)
+    goto_if_false(item_remove)
+    goto(l_0xc5e48e)
+
+l_0xc5e48e:
+    window_switch(2)
+    window_closetop
+    window_switch(53)
+    swap
+    eob
+    goto(l_0xc5e499)
+
+l_0xc5e499:
+    party_pos_check(1)
+    rtoarg
+    copy_wram
+    save_text_window_state
+    copy_active
+    show_inventory(2, 0)
+    copy_active
+    "[18 09 02]"
+    copy_wram
+    window_switch(2)
+    window_closetop
+    window_switch(53)
+    copy_active
+    goto_if_false(l_0xc5e4c2)
+    swap
+    eob
+    goto(l_0xc5e4c2)
+
+l_0xc5e4c2:
+    eob
+
+//------------------------------------------------------------------
+
+fill_storage_loop:
+    ctoarg
+    check_escargo(1, 1)
+    compare_register(2, 0)	// [18 07 02 00 00 00 00]
+    goto_if_true(exit_fill_storage)
+    add_escargo_item(0)
+    inc
+    goto(fill_storage_loop)
+
+exit_fill_storage:
+    wait
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+Ultimate_Weapons:
+    counter(1)
+    goto(start_ultweap)
+
+start_ultweap:
+    ctoarg
+    party_size_check(0)
+    goto_if_true(UltWeap_End)
+    party_pos_check(0)
+    goto(UltWeap_loop)
+
+UltWeap_loop:
+    return_item_in_slot(0, 7)
+    swap
+    goto_if_false(give_ultweap)
+    swap
+    take_slot(0, 7)
+    goto(UltWeap_loop)
+
+give_ultweap:
+    swap
+    "[1F C0 04 {e(Ness_UltEquip)} {e(Paula_UltEquip)} {e(Jeff_UltEquip)} {e(Poo_UltEquip)}]"	// Multiple addresses reference pointer
+    inc
+    goto(start_ultweap)
+
+UltWeap_End:
+    eob
+
+Ness_UltEquip:
+    give_and_check(1, 0x1A) equip(0, 0)	// 1D 0E is "Give item to character"
+    give_and_check(1, 0x3D) equip(0, 0)	// 1F 83 is "Equip character XX with their YYth item"
+    give_and_check(1, 0x48) equip(0, 0)
+    give_and_check(1, 0x56) equip(0, 0)
+    eob
+
+Paula_UltEquip:
+    give_and_check(2, 0x22) equip(0, 0)
+    give_and_check(2, 0xC2) equip(0, 0)
+    give_and_check(2, 0x47) equip(0, 0)
+    give_and_check(2, 0xDC) equip(0, 0)
+    eob
+
+Jeff_UltEquip:
+    give_and_check(3, 0x30) equip(0, 0)
+    give_and_check(3, 0x3C) equip(0, 0)
+    give_and_check(3, 0x46) equip(0, 0)
+    give_and_check(3, 0x55) equip(0, 0)
+    eob
+
+Poo_UltEquip:
+    give_and_check(4, 0x23) equip(0, 0)
+    give_and_check(4, 0x3F) equip(0, 0)
+    give_and_check(4, 0x49) equip(0, 0)
+    give_and_check(4, 0x57) equip(0, 0)
+    eob
+
+//------------------------------------------------------------------
+
+// Remove All copy for Events menu
+rem_all_events:
+    counter(1)
+    goto(rem_loop_events)
+
+rem_loop_events:
+    ctoarg
+    party_size_check(0)
+    goto_if_true(remove_all_end_events)
+    party_pos_check(0)
+    goto(remove_all_events)
+    
+remove_all_events:
+    return_item_in_slot(0, 1)
+    swap
+    goto_if_false(return_to_all_events)
+    swap
+    take_slot(0, 1)
+    goto(remove_all_events)
+
+return_to_all_events:
+   inc
+   goto(rem_loop_events)
+
+remove_all_end_events:
+    eob
+
+
+//------------------------------------------------------------------

@@ -1,0 +1,20 @@
+// Reset routine by D-man
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+Reset: {
+    LDA_i (0x0000)   // Initialize the Direct Page Register
+    TCD
+    LDA_i (0x01FF)   // Initialize the Stack Pointer
+    TCS
+    
+    LDA_i (0x0000)
+    LDX_i (0x0000)
+    LDY_i (0x0000)   // Initialize Registers
+    CLC
+    XCE
+    SEP (0x35)
+    REP (0xCA)       // Initialize P Register
+    JMP_l (0xC08000) // Reset routine
+}

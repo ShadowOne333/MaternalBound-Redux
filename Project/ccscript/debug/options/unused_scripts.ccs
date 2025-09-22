@@ -1,0 +1,39 @@
+// Teleport debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Unused_Scripts:
+    "{diam}Which script do you want to access?" wait
+    save_text_window_state
+    open_hp
+    open_wallet
+    window_open(7)
+    
+    add_menu_string("Escargo delivery")
+    add_menu_string("Escargo pickup")
+    add_menu_string("M. Pizza delivery")
+    add_menu_string("Cash dispenser")
+    add_menu_string("Angrez Van")
+
+    print_vertical(1)
+    create_menu_cancellable
+    copy_wram
+    window_closetop
+    window_switch(53) newline
+    copy_active
+    switch_call(5, {
+    	long 0xc642a3
+    	long 0xc63eb0
+    	long 0xc64bbf
+    	long 0xc65243
+    	long 0xc655b1
+    })
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------

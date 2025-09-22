@@ -1,0 +1,347 @@
+/*
+ * EarthBound Text Dump
+ * Time: 21:34:20 - 24/01/2013
+ * Generated using CCScriptWriter.
+ */
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../redux/window_titles.ccs"
+
+command e(label) "{long label}"
+
+// Text Data
+l_0xc6822a:
+    "{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Bubble Monkey joins you.)[03]{window_closeall}" eob
+
+l_0xc68253:
+    "[06 0A 00 {e(l_0xc68264)}]{window_open(1)}" call(data_27.l_0xc6eeb4) "{window_closeall}" goto(l_0xc68264)
+
+l_0xc68264:
+    "[1F 11 02][1F EB 02 06][1F F1 69 03 2F 00][1F 61][1F 1E 69 03 06][1F EC 02 01]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@([1C 02 02] joins you.)[03]{window_closeall}" eob
+
+l_0xc6829f:
+    "{window_closeall}[1F 11 0B][1F EB 0B 06][1F F1 21 05 2F 00][1F 61][1F 1E 21 05 06][1F EC 0B 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+l_0xc682dd:
+    "{window_closeall}[1F 11 0C][1F EB 0C 06][1F F1 22 05 2F 00][1F 61][1F 1E 22 05 06][1F EC 0C 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+l_0xc6831b:
+    "{window_closeall}[1F 11 0D][1F EB 0D 06][1F F1 23 05 2F 00][1F 61][1F 1E 23 05 06][1F EC 0D 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+l_0xc68359:
+    "{window_closeall}[1F 11 0E][1F EB 0E 06][1F F1 24 05 2F 00][1F 61][1F 1E 24 05 06][1F EC 0E 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+l_0xc68397:
+    "{window_closeall}[1F 11 0F][1F EB 0F 06][1F F1 25 05 2F 00][1F 61][1F 1E 25 05 06][1F EC 0F 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+
+flyingman:
+ "[06 CF 00 {e(flyingman5)}][06 CE 00 {e(flyingman4)}][06 CD 00 {e(flyingman3)}][06 CC 00 {e(flyingman2)}]Flying Man" eob
+flyingman2:
+ "Flying Man 2" eob
+flyingman3:
+ "Flying Man 3" eob
+flyingman4:
+ "Return of the Flying Man" eob
+flyingman5:
+ "Final Flying Man" eob
+
+l_0xc683d5:
+    "[1F 12 07]" eob
+
+l_0xc683d9:
+    newline
+    "[1F 12 08]" eob
+
+l_0xc683de:
+    eob
+
+l_0xc683df:
+    "{window_closeall}[1F 23 AF 01]" eob
+
+l_0xc683e6:
+    "{window_closeall}[1F 23 B0 01]" eob
+
+l_0xc683ed:
+    "{window_closeall}[1F 23 B0 01]" eob
+
+l_0xc683f4:
+    "{window_closeall}[1F 23 B1 01]" eob
+
+l_0xc683fb:
+    "{window_closeall}[1F 23 C0 01]" eob
+
+l_0xc68402:
+    "{window_closeall}[1F 23 C1 01]" eob
+
+l_0xc68409:
+    "{window_closeall}[1F 23 C2 01]" eob
+
+l_0xc68410:
+    "{window_closeall}[1F 23 C7 01]" eob
+
+l_0xc68417:
+    "{window_closeall}[1F 23 D1 01]" eob
+
+l_0xc6841e:
+    "{window_closeall}[1F 23 C9 01]" eob
+
+l_0xc68425:
+    "{window_closeall}[1F 23 CF 01]" eob
+
+l_0xc6842c:
+    "{window_closeall}[1F 23 D0 01]" eob
+
+l_0xc68433:
+    "{window_closeall}[1F 23 D6 01]" eob
+
+l_0xc6843a:
+    "{window_closeall}[1F 23 D7 01]" eob
+
+l_0xc68441:
+    "{window_closeall}[1F 23 C3 01]" eob
+
+l_0xc68448:
+    "{window_closeall}[1F 23 C3 01]" eob
+
+l_0xc6844f:
+    "{window_closeall}[1F 23 C3 01]" eob
+
+l_0xc68456:
+    "{window_closeall}[1F 23 C3 01]" eob
+
+l_0xc6845d:
+    "{window_closeall}[1F 23 C3 01]" eob
+
+l_0xc68464:
+    "{window_closeall}[1F 23 C4 01]" eob
+
+l_0xc6846b:
+    "{window_closeall}[1F 23 C5 01]" eob
+
+l_0xc68472:
+    eob
+
+l_0xc68473:
+    "{window_closeall}[1F 23 B3 01]" eob
+
+l_0xc6847a:
+    "[1D 05 FF 01][1B 03 {e(l_0xc684a6)}]{window_closeall}{pause(1)}{music(124)}[1F 15 6A 00 C1 02 01]{pause(80)}[1F EB FF 06]{pause(70)}[1F 21 69][1F EC FF 02]{set(flag 10)}" eob
+
+l_0xc684a6:
+    "{window_closeall}{pause(1)}{music(124)}[1F 15 6A 00 C2 02 01][1F 61][1F 07 02][1F 61]{window_open(1)}[1D 05 02 01][1B 03 {e(l_0xc684ce)}]" goto(l_0xc684ce)
+
+l_0xc684ce:
+    "@Carpainter's lightning was reflected by the Franklin Badge.[03]{window_closeall}[1F 23 C6 01]" eob
+
+l_0xc68500:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc68507:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc6850e:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc68515:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc6851c:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc68523:
+    "{window_closeall}[1F 23 B2 01]" eob
+
+l_0xc6852a:
+    "{window_closeall}[1F 23 B3 01]" eob
+
+l_0xc68531:
+    "{window_closeall}[1F 23 B4 01]" eob
+
+l_0xc68538:
+    "{window_closeall}[1F 23 CA 01]" eob
+
+l_0xc6853f:
+    "{window_closeall}[1F 23 B5 01]" eob
+
+l_0xc68546:
+    "{window_closeall}[1F 23 B5 01]" eob
+
+l_0xc6854d:
+    "{window_closeall}[1F 23 B5 01]" eob
+
+l_0xc68554:
+    "{window_closeall}[1F 23 C8 01]" eob
+
+l_0xc6855b:
+    "{window_closeall}[1F 23 CC 01]" eob
+
+l_0xc68562:
+    "{window_closeall}[1F 23 B9 01]" eob
+
+l_0xc68569:
+    "{window_closeall}[1F 23 CE 01]" eob
+
+l_0xc68570:
+    "{window_closeall}[1F 23 D5 01]" eob
+
+l_0xc68577:
+    "[1F 23 DB 01]" eob
+
+l_0xc6857c:
+    "{window_closeall}[1F 23 D8 01]" eob
+
+l_0xc68583:
+    "{window_closeall}[1F 23 CD 01]" eob
+
+l_0xc6858a:
+    "{window_closeall}[1F 23 CB 01]" eob
+
+l_0xc68591:
+    "{window_closeall}[1F 23 CB 01]" eob
+
+l_0xc68598:
+    "{window_closeall}[1F 23 CB 01]" eob
+
+l_0xc6859f:
+    "{window_closeall}[1F 23 CB 01]" eob
+
+l_0xc685a6:
+    "{window_closeall}[1F 23 CB 01]" eob
+
+l_0xc685ad:
+    "{window_closeall}[1F 23 D3 01]" eob
+
+l_0xc685b4:
+    "{window_closeall}[1F 23 DA 01]" eob
+
+l_0xc685bb:
+    newline
+    "@But, you can't carry anything else." end
+
+l_0xc685cb:
+    newline
+    "@But, it was empty." end
+
+l_0xc685da:
+    "[1D 0D 03 01 02][1B 03 {e(l_0xc68650)}][1D 0D 03 01 03][1B 03 {e(l_0xc68650)}][06 B8 02 {e(l_0xc68651)}][1F D0 64]" goto(l_0xc685fa)
+
+l_0xc685fa:
+    "[1B 02 {e(l_0xc68650)}][1B 05]{window_open(1)}" newline
+    "[1B 06]@Working through the night," linebreak
+    "  [1C 02 03] fixed" linebreak
+    "  the [1C 05 00]." next
+    "@After being fixed, the [1C 05 00] became" linebreak
+    "  the {swap}[1C 05 00].[03]{set(flag 696)}{window_closeall}" goto(l_0xc68650)
+
+l_0xc68650:
+    eob
+
+l_0xc68651:
+    "[1F D0 19]" goto(l_0xc685fa)
+
+l_0xc68659:
+    "[19 26 03]" goto(l_0xc6866b)
+
+l_0xc68661:
+    eob
+
+l_0xc68662:
+    "[19 26 08]" goto(l_0xc6866b)
+
+l_0xc6866a:
+    eob
+
+l_0xc6866b:
+    "{save}{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{music_resume}{window_open(1)}"
+    title(1, Dad)
+    "@Hello, it's me... your dad." next
+    "@I don't mean to butt in, but don't you think you should take a break?" next
+    "[19 02]Yes" eob
+
+l_0xc686b4:
+    "[19 02]No" eob
+
+l_0xc686b9:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc68726)} {e(l_0xc686c8)}]" goto(l_0xc686c8)
+
+l_0xc686c8:
+    "[19 10 01]{rtoarg}@Like mother, like son..." next
+    "@[1C 02 01], you are a hard worker." next
+    "@I've made a record of your adventure." next
+    "@Don't work too hard, though..." next
+    "@*Click!*{wait}{window_closeall}{sound(11)}" eob
+
+l_0xc68726:
+    "@Okay." next
+    "@Y'know, I'm feeling kind of tired myself." next
+    "@I made a record of your adventure." next
+    "@Now I'm gonna hit the sack." next
+    "@Be sure you get some rest." linebreak
+    "[19 02]Continue" eob
+
+l_0xc6878f:
+    "[19 02]Quit" eob
+
+l_0xc68796:
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc687a5)} {e(l_0xc687e4)}]" goto(l_0xc687a5)
+
+l_0xc687a5:
+    "[19 10 01]{rtoarg}@[1C 02 00], you're a hard worker, just like your mom." next
+    "@Don't work too hard, though..." next
+    "@*Click*{wait}{window_closeall}{sound(11)}" eob
+
+l_0xc687e4:
+    "@What a great adventure we had together." next
+    "@Please turn off the power.[1F 50]" eob
+
+l_0xc6880b:
+    "{unset(flag 479)}[1F D2 01]{set(flag 698)}" eob
+
+l_0xc68815:
+    "{unset(flag 480)}[1F D2 02]{set(flag 699)}" eob
+
+l_0xc6881f:
+    "{unset(flag 481)}[1F D2 03]{set(flag 700)}" eob
+
+l_0xc68829:
+    "{unset(flag 482)}[1F D2 04]{set(flag 701)}" eob
+
+l_0xc68833:
+    "{unset(flag 483)}[1F D2 05]{set(flag 702)}" eob
+
+l_0xc6883d:
+    "{unset(flag 484)}[1F D2 06]{set(flag 703)}" eob
+
+l_0xc68847:
+    "{unset(flag 485)}[1F D2 07]{set(flag 704)}" eob
+
+l_0xc68851:
+    "[1F D2 08]{set(flag 705)}" eob
+
+l_0xc68858:
+    "{unset(flag 487)}[1F D2 09]{set(flag 706)}" eob
+
+l_0xc68862:
+    "{unset(flag 488)}[1F D2 0A]{set(flag 707)}" eob
+
+l_0xc6886c:
+    "{unset(flag 489)}[1F D2 0B]{set(flag 708)}" eob
+
+l_0xc68876:
+    "{unset(flag 490)}[1F D2 0C]{set(flag 709)}" eob
+
+l_0xc68880:
+    "[1F D2 0D]{set(flag 710)}" eob
+
+l_0xc68887:
+    "{unset(flag 492)}[1F D2 0E]{set(flag 711)}" eob
+
+l_0xc68891:
+    "{unset(flag 493)}[1F D2 0F]{set(flag 712)}" eob
+
+l_0xc6889b:
+    "{unset(flag 494)}[1F D2 10]{set(flag 713)}" eob
+
+l_0xc688a5:
+    "{unset(flag 495)}[1F D2 11]{set(flag 714)}" eob

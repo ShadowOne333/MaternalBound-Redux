@@ -1,0 +1,517 @@
+import "../essential/asm65816.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../redux/run_stamina_mechanic.ccs"
+
+command false_goto(target) "[1B 02 {long target}]"
+
+command true_goto(target) "[1B 03 {long target}]"
+
+command fullsave "copy_active[19 26 00][1F B0]"
+
+command input_num (n) "[1F 52 {byte n}]"
+
+//n is the number of digits
+
+command boolean_pointer(addr) "[1B 03 {mem24(addr)}]" // Boolean-True Pointer
+
+command delete_tpt(entry, effect) "[1F 1E {short entry} {byte effect}]" // delete sprite loaded on-screen
+
+command inst_pack_loc (target) "[{byte[2] target} {byte[0] target} {byte[1] target}]"
+
+
+command fade_1 "[1f 15 6a 00 fe 02 01]" // Simple fade out. (106, 766)
+
+command fade_2 "[1f 15 6a 00 79 02 01][1f 61][10 78][1f 1f 6a 00 06]" // Fade out, but stays black until a warp is used. (106, 633)
+
+command fade_in "[1f ea 6a 00][1f 61]" // To be used at some point after fade_1 if you want the screen to fade back in.
+
+// Defines certain people (npc type person) as being possible to check.
+// By JTolmar
+
+command e(label) "{long label}"
+
+define checkable_people = {
+  //checkable_person(TPT, file.label)
+}
+
+command checkable_person(tpt_id, text_pointer) {
+  LDA_a(CURRENT_TPT_ENTRY)
+  CMP_i(tpt_id) // Check if right entry
+  BNE_a(_end) // If nope end
+  // Yep
+  // Load text_pointer into $0A/$0C
+  LDA_i(short [0] text_pointer)
+  STA_d(0x0A)
+  LDA_i(short [1] text_pointer)
+  STA_d(0x0C)
+_end:
+}
+
+define CURRENT_TPT_ENTRY = 0x7E5D62
+
+ROM[0xc132a5] = { JML(CheckTalkHijack) NOP NOP }
+
+CheckTalkHijack:
+  AND_i(0x00FF) // We clobbered this and
+  CMP_i(0x0001) // We clobbered this cmp
+  BEQ_a(IsPerson)
+  NotPerson:
+    JML(0xc132b0) // Resume normally
+  IsPerson:
+    checkable_people
+  Success:
+    // jump to end of main function, which saves whatever is in $0A/$0C to the text pointer you'll receive (it was initialized null)
+    JML(0xc13394)
+    RTL
+
+
+Door_Open:
+set(flag 0x95)
+eob
+
+Door_Closed:
+eob
+
+Door_Locked:
+eob
+
+command handle_item_give(item, failLabel)
+{
+    notfull(-1)
+    goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
+    give_and_check(0, item)
+    sound(SND_BOXTAKE)
+    pause(60)
+    call(0xc7dcda) //Print the "[character] got an item" message
+    //Usage example:
+    //--------------
+    //pizzaguy:
+    //"@Hey, take this pizza." next
+    //give2(95, pizzaguy_noroom)
+    //eob
+    //
+    //pizzaguy_noroom:
+    //"@Oh... it won't fit." next
+    //"@Make some room in your bag and come back later." end
+}
+
+command handle_item_give_special(item, failLabel)
+{
+    notfull(-1)
+    goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
+    sound(SND_BOXTAKE)
+    pause(60)
+    window_closeall
+    sound(SND_SPECIALITEM)
+    pause(90)
+    window_open(53)
+    notfull(-1)
+    give_and_check(0, item)
+    call(0xc7dcda) //Print the "[character] got an item" message
+}
+
+command handle_item_give_shops(item, failLabel)
+{
+    notfull(-1)
+    goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
+    give_and_check(0, item)
+    pause(60)
+    //call(0xc7dcda) //Print the "[character] got an item" message
+}
+
+command handle_item_give_desert(item, failLabel)
+{
+    notfull(-1)
+    goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
+    give_and_check(0, item)
+    sound(SND_BOXTAKE)
+    pause(20)
+    swap
+    "@({name(0)} got" newline 
+    "  {call(item_determiners.CCSub_determiner)}{itemname(item)}.)" next
+}
+
+command errorbeep
+{
+    sound(5)
+    pause(20)
+}
+
+command inflict_cold
+{
+    inflict(1, 0x801)
+    eob
+}
+
+// Use this command at the start of a secondary text
+// block if telepathy isn't supposed to trigger it.
+command handle_telepathy_fail goto_if_flag(telepathy_flag, psi_functions.TelepathyFail)
+
+// Use this command to refill stamina.
+// Ideally it should be used whenever the party gets a "full heal".
+command refill_stamina cc_asmcall(stamina_reset, RET_NONE)
+
+
+_sub_Sleepover1: {
+    // Close all windows to begin fade out sequence
+    window_closeall
+
+    // The following flag is required so that the Good Night track keeps playing after the fadein
+    set(FLG_HOTEL_PAPERBOY_APPEAR)
+
+    // Fade out the original map music
+    music_effect(3)
+    pause(30) // Increase to 30 if that feels too tight
+
+    // Begin fading the screen to black AND play the "good night" music at the same time
+    generate_active_sprite(106, 633, 1)
+    pause(120) // Wait a bit more to play the new track
+
+    // If the player has already slept, then stop the music so we can start it back again, else the music won't play
+    // This might need a special flag!!!
+
+    // Change track to "Good Night Sleep"
+    music(27)
+    wait_for_movement
+    // The fade will take 124 frames to run. The music is longer than that. Especially if we keep the original tempo and tweeting bird intro...
+    pause(90)
+
+    // The EB song would continue after that. Cancel it cleanly instead.
+    music_resume
+
+    eob
+}
+
+// Use this command to call a Sleepover at will
+// ONLY for Hotels and places where the full song should play
+_sub_Sleepover2: {
+  // heal
+  healall refill_stamina
+  // Freeze the party in place until after we close the window
+  freeze_char_movement(0xFF)
+  // Open normal window to continue with whatever text follows
+  window_open(53)
+  eob
+}
+
+
+command sleepover(dest)
+{
+    call(_sub_Sleepover1)
+    warp(dest)
+    call(_sub_Sleepover2)
+    // If this is used in a specific NPC, the door/trigger that teleports to it should have pointer $c9b11e added to both sides of the door!
+}
+
+_sub_ShortSleepover1: {
+    // Sleepover with Good night sleep (intro only) plays
+    window_closeall // Close all windows to begin fade out sequence
+    music_effect(3) // Fade out the original map music
+    pause(30) // Increase to 30 if that feels too tight
+
+    // Begin fading the screen to black AND play the "good night" music at the same time
+    generate_active_sprite(106, 633, 1)
+    pause(120) // Wait a bit more to play the new track
+    music(27)
+    wait_for_movement
+
+    // The fade will take 124 frames to run. The music is longer than that. Especially if we keep the original tempo and tweeting bird intro...
+    pause(250) pause(150)
+
+    // The EB song would continue after that. Cancel it cleanly instead.
+    music_effect(2)
+    pause(30)
+
+    eob
+}
+
+_sub_ShortSleepover2: {
+    // heal
+    healall refill_stamina
+
+    // Freeze the party in place until after we close the window
+    freeze_char_movement(0xFF)
+
+    // Open normal window to continue with whatever text follows
+    window_open(53)
+    eob
+}
+
+// Call a Sleepover but only play the intro for Good Night Sleep
+// Asks for both the warp destination and the destination's music track
+// In instances where the warp changes music, only the new music from the new warp should play instead of the previous map's track
+command sleepover_intro(dest,track)
+{
+    call(_sub_ShortSleepover1)
+    music(track)
+    warp(dest) 
+    call(_sub_ShortSleepover2)
+}
+
+command goto_if_diamondized(char,label)
+{
+    party_pos_check(char)
+    store_registers
+    character_has_status(char, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
+    goto_if_true(label)
+}
+
+command goto_if_unconscious(char,label)
+{
+    party_pos_check(char)
+    goto_if_false(label)
+    store_registers
+    compare_result(5)
+    goto_if_true(label)
+    load_registers
+    character_has_status(char, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
+    goto_if_true(label)
+}
+
+
+define DIAMOND_SPRITE = 12
+
+command spawn_fixed_sprite(char, ghost_sprite, mov, style) {
+    has_status(char, "[01 02]")
+    goto_if_true(_ghost_sprite)
+    has_status(char, "[01 03]")
+    goto_if_true(_diamond_sprite)
+    
+    generate_active_sprite(char, mov, style)
+    goto(_end)
+    
+    _ghost_sprite:
+    generate_active_sprite(ghost_sprite, mov, style)
+    goto(_end)
+    
+    _diamond_sprite:
+    generate_active_sprite(DIAMOND_SPRITE, mov, style)
+    
+    _end:
+}
+
+command change_fixed_sprite(char, ghost_sprite, mov) {
+    has_status(char, "[01 02]")
+    goto_if_true(_ghost_sprite)
+    has_status(char, "[01 03]")
+    goto_if_true(_diamond_sprite)
+    
+    change_sprite_movement(char, mov)
+    goto(_end)
+    
+    _ghost_sprite:
+    change_sprite_movement(ghost_sprite, mov)
+    goto(_end)
+    
+    _diamond_sprite:
+    change_sprite_movement(DIAMOND_SPRITE, mov)
+    
+    _end:
+}
+
+command delete_fixed_sprite(char, ghost_sprite, mov) {
+    has_status(char, "[01 02]")
+    goto_if_true(_ghost_sprite)
+    has_status(char, "[01 03]")
+    goto_if_true(_diamond_sprite)
+    
+    delete_active_sprite(char, 6)
+    goto(_end)
+    
+    _ghost_sprite:
+    delete_active_sprite(ghost_sprite, 6)
+    goto(_end)
+    
+    _diamond_sprite:
+    delete_active_sprite(DIAMOND_SPRITE, 6)
+    
+    _end:
+}
+
+command focus_camera_fixed_sprite(char,ghost_sprite) {
+    has_status(char, "[01 02]")
+    goto_if_true(_ghost_sprite)
+    has_status(char, "[01 03]")
+    goto_if_true(_diamond_sprite)
+    
+    focus_camera_sprite(char)
+    goto(_end)
+    
+    _ghost_sprite:
+    focus_camera_sprite(ghost_sprite)
+    goto(_end)
+    
+    _diamond_sprite:
+    focus_camera_sprite(DIAMOND_SPRITE)
+    
+    _end:
+}
+
+
+// Commands for printing party information
+// Lowercase unless otherwise specified
+// Clobbers several registers, usually result but sometimes more
+
+define PC_NESS = 1
+define PC_PAULA = 2
+define PC_JEFF = 3
+define PC_POO = 4
+define PC_PORKY	= 5
+define PC_DUNGEON_MAN = 6
+
+// Leader's name
+command leader_name {
+    party_pos_check(1)
+    swap
+    name(0)
+}
+
+// Leader's pronoun (neutral)
+command leader_he_she {
+    party_pos_check(1)
+    call(0xC7E5F3)
+}
+
+// Leader's pronoun (posessive)
+command leader_his_her {
+    party_pos_check(1)
+    call(0xC7E660)
+}
+
+// Leader's pronoun (third person)
+command leader_him_her {
+    party_pos_check(1)
+    call(0xC7E6A4)
+}
+
+// Leader's honorific
+command leader_sir_maam {
+    party_pos_check(1)
+    call(0xC7E6B3)
+}
+
+// Leader's honorific (in uppercase)
+command leader_sir_maam_upper {
+    party_pos_check(1)
+    call(0xC7E6C5)
+}
+
+// Depending on party size and status,
+// Leader (1 char)
+// Leader & second character (2 chars)
+// Leader & ('his'/'her') friends (3+ chars)
+// (We don't really have a good word for this in English...
+//  in Japanese the word "-tachi" is used.
+//  MSG script calls this "DSP_PARTY" so we'll do the same) 
+command dsp_party {
+    call(0xC7E6D7)
+}
+
+// Depending on party size and status,
+// 'kid' (1 char)
+// 'kids' (2 chars)
+command kid_kids {
+    call(0xC7E758)
+}
+
+// If Ness is leader, print "your"
+// If anyone else is leader, print "Ness'"
+command your_ness {
+    call(_sub_your_ness)
+}
+_sub_your_ness: {
+    party_pos_check(1)
+    result_is(PC_NESS)
+    goto_if_false(_ness)
+    "your"
+    eob
+    _ness:
+        "{name(PC_NESS)}'"
+        eob
+}
+
+// Prints out an appropriate phrase for "you" based on the makeup of the party,
+// not excluding dead party members.
+// Intended functionality:
+// * print "you've" for one party member,
+// * print "you two have" for 2 party members
+// * print "you all have" for 3+ party members
+// Clobbers the result register
+command youve_you_all_have {
+    call(_sub_partydesc_youve)
+}
+_sub_partydesc_youve: {
+    party_size_check(3)
+    goto_if_false(_you_all)
+    party_size_check(2)
+    goto_if_false(_you_two)
+    "you've"
+    eob
+_you_two:
+    "you two have"
+    eob
+_you_all:
+    "you all have"
+    eob
+}
+
+// If Paula is leader, print "girl"
+// If anyone else is leader, print "boy"
+command boy_girl {
+    call(_sub_boy_girl)
+}
+_sub_boy_girl: {
+    party_pos_check(1)
+    result_is(PC_PAULA)
+    goto_if_true(_girl)
+    _boy:
+        "boy"
+        eob
+    _girl:
+        "girl"
+        eob
+}
+
+// If the party size is 3+, print "you all"
+// If the party size is 2, print "you two"
+// If the party size is 1, print "you"
+command you_you_all {
+    call(_sub_you_you_all)
+}
+_sub_you_you_all: {
+    party_size_check(3)
+    goto_if_false(_you_all)
+    party_size_check(2)
+    goto_if_false(_you_two)
+    "you"
+    eob
+    _you_all:
+        "you all"
+        eob
+    _you_two:
+        "you two"
+        eob
+}
+
+// If the party size is 3+, print "For the lot of you"
+// If the party size is 2, print "For the two of you"
+// If the party size is 1, print "In your case"
+command in_your_case_caps {
+    call(_sub_in_your_case)
+}
+_sub_in_your_case: {
+    party_size_check(3)
+    goto_if_false(_you_all)
+    party_size_check(2)
+    goto_if_false(_you_two)
+    "In your case"
+    eob
+    _you_all:
+        "For the lot of you"
+        eob
+    _you_two:
+        "For the two of you"
+        eob
+}

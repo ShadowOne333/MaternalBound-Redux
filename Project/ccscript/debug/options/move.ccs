@@ -1,0 +1,93 @@
+// Move To Area debug menu option
+// When adding new stuff here to help test story things, don't forget to update Warps.md!
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+command close_and_warp(id) {
+  window_closeall
+  disable_input
+  pause(6)
+  warp(id)
+  enable_input
+  eob
+}
+
+
+Move_to_area:
+    window_closeall
+    window_open(8)
+    menu 3 {
+      "Onett":		close_and_warp(25)
+      "Twoson":		close_and_warp(29)
+      "H. H. Village":	close_and_warp(185)
+      "G. D. Valley":	close_and_warp(21)
+      "Threek":		close_and_warp(28)
+      "Winters":	close_and_warp(30)
+      "Saturn Valley":	close_and_warp(143)
+      "Belch's Base":	close_and_warp(100)
+      "D. D. Desert":	close_and_warp(144)
+      "Fourside":	close_and_warp(20)
+      "Moonside":	close_and_warp(24)
+      "Summers":	close_and_warp(31)
+      "Dalaam":		close_and_warp(27)
+      "Scarabia":	close_and_warp(32)
+      "Deep Darkness":	close_and_warp(172)
+      "Stonehenge Base":	close_and_warp(136)
+      "Tenda Village":	close_and_warp(22)
+      "L. Underworld":	close_and_warp(33)
+      "Magicant":	close_and_warp(23)
+      "Present Cave":	close_and_warp(145)
+      "Cave of Past":	close_and_warp(26)
+      "Page 2":		{ goto(Warps_Page_2) }
+      "Page 3":		{ goto(Warps_Page_3) }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+Warps_Page_2: //Dungeons
+    window_closeall
+    window_open(8)
+    menu 3 {
+      "Giant Step":	close_and_warp(183)
+      "Lilliput Steps":	close_and_warp(197)
+      "Milky Well":	close_and_warp(198)
+      "Rainy Circle":	close_and_warp(84)
+      "Magnet Hill":	close_and_warp(20)
+      "Pink Cloud":	close_and_warp(199)
+      "Lumine Hall":	close_and_warp(41)
+      "Fire Spring":	close_and_warp(158)
+      "Pre-Lumine":	close_and_warp(141)
+      "Page 1": 	{ goto(Move_to_area) }
+      "Page 3":		{ goto(Warps_Page_3) }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+Warps_Page_3: //Bosses
+    window_closeall
+    window_open(8)
+    menu 3 {
+      "Titanic Ant":	close_and_warp(183)
+      "Mondo Mole":	close_and_warp(197)
+      "Trillion Sprout": close_and_warp(198)
+      "Shroom!":	close_and_warp(84)
+      "Rat of Doom":	close_and_warp(20)
+      "Thunder[5F]Storm":	close_and_warp(199)
+      "Elec. Specter": close_and_warp(141)
+      "Carbon dog": close_and_warp(142)
+      "Carpainter":	close_and_warp(119)
+      "Starman DX":	close_and_warp(136)
+      "Mani Mani":	close_and_warp(167)
+      "Giygas Entry":	close_and_warp(215)
+      "Page 1":		{ goto(Move_to_area) }
+      "Page 2":		{ goto(Warps_Page_2) }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------

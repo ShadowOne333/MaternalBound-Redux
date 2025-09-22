@@ -1,0 +1,85 @@
+import "../essential/asm65816.ccs"
+import "../redux/run_stamina_mechanic.ccs"
+
+// Invertable, flag-controlled run button
+// By jtolmar
+// Unlike the standard run button patch, this one does not affect the skip sandwich status in memory. Useful if you want skip sandwiches to do something else.
+
+define invert_run_button = flag 305 // Replace this flag with the one you want
+
+// New function, sets accumulator to 0 if run, 1 if not.
+InRunMode: {
+  LDA_a(RAM_secondary_timer)
+  AND_i(0x80)
+  BNE(4)
+  LDA_i(1)
+  RTL
+  PHX
+  PHY
+  LDA_i(invert_run_button)
+  JSL(0xC21628) // Flag A -> result in A
+  CMP_i(0)
+  BEQ(9) // Manually computed jump to not inverted
+  // Inverted
+  LDA_a(0x0066) // Controller state
+  AND_i(0x0040) // Y button
+  PLY
+  PLX
+  RTL
+  // Not inverted
+  LDA_a(0x0066) // Controller state
+  AND_i(0x0040) // Y button
+  EOR_i(0x0040) // Reverse it
+  PLY
+  PLX
+  RTL
+}
+
+// We're going to overwrite a lot of places that look like this:
+/*
+$c02f30 UNKNOWN8:  LDA $9840 // Load skip sandwich status
+$c02f33            AND #$00ff
+$c02f36            CMP #$0003 // Check if skippy
+*/
+// So define that
+define hijack_run = {
+  JSL(InRunMode) // 4 bytes (reaches into the AND)
+  NOP NOP // Extra bytes from that AND
+  CMP_i(0) // Check if run mode
+}
+
+
+/*
+Labeled "ADJUST_POSITION" but I strongly suspect it's X only.
+Which makes this code even worse than I thought lol.
+https://earthbound-rom-explorerr.herokuapp.com/address/$c02d8f
+$c02f30 UNKNOWN8:  LDA $9840 // Load skip sandwich status
+$c02f33            AND #$00ff
+$c02f36            CMP #$0003 // Check if skippy
+$c02f39            BEQ UNKNOWN9
+$c02f3b            JMP $UNKNOWN13
+*/
+ROM[0xc02f30] = hijack_run
+
+/*
+Unlabeled. I suspect it's a complete copy of adjust position, but for Y.
+https://earthbound-rom-explorerr.herokuapp.com/address/$c03017
+$c031b8 UNKNOWN8:  LDA $9840
+$c031bb            AND #$00ff
+$c031be            CMP #$0003
+$c031c1            BEQ UNKNOWN9
+$c031c3            JMP $3269
+*/
+ROM[0xc031b8] = hijack_run
+
+/*
+No clue what the overall purpose of this function is, if any
+Here it sets the party's animation speed:
+https://earthbound-rom-explorerr.herokuapp.com/address/$c0780f
+$c07960 UNKNOWN21: LDA $9840
+$c07963            AND #$00ff
+$c07966            CMP #$0003
+$c07969            BNE UNKNOWN22
+(and then some code that writes to animation speed)
+*/
+ROM[0xc07960] = hijack_run

@@ -1,0 +1,200 @@
+// Fix party member spacing not updating when moving diagonally - Supremekirb
+// 1.0 - New algorithm type A
+
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+
+// When moving diagonally and you've either just started running or just stopped running, party members following you may not update their positions correctly.
+// This is a big issue for the run button patch!
+
+// The game avoids updating the party members' screen positions each frame because they would jitter around the place (you don't move at 1 px/frame).
+// A number of conditions are checked to see if their screen positions should update.
+// If any of these conditions are true, then the position will update.
+// One such condition is a call to one of three functions depending on direction - horizontal, vertical, or diagonal.
+// Horizontal and vertical are mostly fine, so we can leave them be.
+
+// The issue with the diagonal one lies here:
+// https://github.com/Herringway/earthbound/blob/558ed6fcc01a6cf466a9df4b49057dc555aaad4d/source/earthbound/bank00.d#L7535
+// This line checks if the party member is directly diagonally behind the leader, and if so, don't update their screen pos.
+// So that's the issue: if you're heading directly diagonally and the speed changes, the party members' positions will not update.
+
+// A new algorithm is implemented instead.
+
+ROM[0xC0A28C] = { JML (newDirectionalUpdateCheck) }
+
+define DifferenceForRecalc = 2
+
+command abs {
+    BPL (4)
+    EOR_i (0xFFFF)
+    INC
+}
+
+newDirectionalUpdateCheck: {
+    // x = facing direction *2 (aka function index)
+    JSR_ix (updateDirectionalIndexFuncList)
+    _return:
+    ASL
+    JML (0x80A290)
+}
+
+// jump table for directional checks
+updateDirectionalIndexFuncList: {
+    short dirVertical // u
+    short dirDiagonal // ur
+    short dirHorizontal // r
+    short dirDiagonal // dr DELTA RUNE ???????
+    short dirVertical // d
+    short dirDiagonal // dl DELTA LUNE ??????????????
+    short dirHorizontal // l
+    short dirDiagonal // ul UNDER LALE ???????????????????????????????????
+}
+     
+dirVertical: {
+    JSL_RTS_C0 (0xC0A2B7) // no huge issues; vanilla
+    RTS
+}
+
+dirHorizontal: {
+    JSL_RTS_C0 (0xC0A2E1) // no huge issues; vanilla
+    RTS
+}
+
+
+dirDiagonal: {
+    LDA_a (0x1A42) // CURRENT_ENTITY
+    ASL
+    TAX // x = entity index
+
+    // new algorithm:
+    // * predict where we should be on the screen, then check where we actually are. If the difference is too great, update.
+    // if (abs(predictedScreenX - currentScreenX) >= DifferenceForRecalc) { return true; }
+    // if (abs(predictedScreenY - currentScreenY) >= DifferenceForRecalc) { return true; }
+    // return false;
+    // ...this algorithm is effective, but only updates the position once every few frames.
+
+    // abs(predictedScreenX - currentScreenX)
+    LDA_x (0x0B8E) // entity abs X
+    SEC
+    SBC_a (0x0031) // BG1 scroll
+    // a = what our screen pos "should" be
+    SEC
+    SBC_x (0x0B16) // entity screen X
+    abs()
+    //
+
+    // if ... >= DifferenceForRecalc { return true }
+    CMP_i (DifferenceForRecalc)
+    BMI (4)
+    LDA_i (1)
+    RTS
+    //
+
+    // abs(predictedScreenY - currentScreenY)
+    LDA_x (0x0BCA) // entity abs Y
+    SEC
+    SBC_a (0x0033) // BG1 scroll
+    // a = what our screen pos "should" be
+    SEC
+    SBC_x (0x0B52) // entity screen Y
+    abs()
+    //
+
+    // if ... >= DifferenceForRecalc { return true }
+    CMP_i (DifferenceForRecalc)
+    BMI (4)
+    LDA_i (1)
+    RTS
+    //
+
+    // return false
+    LDA_i (0)
+    RTS
+    //
+
+}
+
+
+// Idea for another algorithm:
+
+// * if the difference in our movement deltas over the last 2 frames is too great, update.
+// if abs(abs(currentX - lastX) - abs(lastX - xBeforeThat)) >= DifferenceForRecalc { return true; }
+// if abs(abs(currentY - lastY) - abs(lastY - yBeforeThat)) >= DifferenceForRecalc { return true; }
+// return false;
+// ... this algorithm was not as effective as I had hoped. Even when running, our per-frame delta is usually 1.
+// also messy as hell code lmao
+
+// LDY_x (0x0F8A) // var5 (char id?)
+// LDA_y (0x4DC8) // pointer to a char struct
+// TAY
+// LDA_y (61) // position buffer index from char struct
+// PHA // s: index
+
+// // multiply by size of position buffer, which is 12
+// PHA // s: scratch, index
+// ASL
+// ADC_s (1) // add scratch
+// ASL
+// ASL
+// TAY
+// PLA // s: index
+// TYA
+// PLY // s: [empty]
+// TAY // y = memory address
+
+// LDA_y (0x5156) // x coord of THIS move
+
+// PHA
+
+// TYA
+// CLC
+// ADC_i (12)
+// TAY
+// LDA_y (0x5156) // x coord of LAST move
+// PHA
+
+// TYA
+// CLC
+// ADC_i (12)
+// TAY
+// LDA_y (0x5156) // x coord of move BEFORE THAT
+// PHA
+
+// // s: before, last, this
+
+// LDA_s (5) // this
+// SEC
+// SBC_s (3) // - last
+// abs()
+// PHA // s: d1, before, last, this
+
+// LDA_s (5) // last
+// SEC
+// SBC_s (3) // - before
+// abs()
+// PHA //s: d2, d1, before, last, this
+
+// LDA_s (3) // d1
+// SEC
+// SBC_s (1) // - d2
+// abs()
+
+// CMP_i (DifferenceForRecalc)
+// BMI (9)
+// // fix stack
+// PLA
+// PLA
+// PLA
+// PLA 
+// PLA
+// LDA_i (1)
+// RTS
+
+// // fix stack for this path too
+// PLA
+// PLA
+// PLA
+// PLA 
+// PLA
+// LDA_i (0)
+// RTS

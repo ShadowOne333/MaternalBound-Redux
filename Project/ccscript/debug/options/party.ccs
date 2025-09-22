@@ -1,0 +1,78 @@
+// Party Edit debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Party_Edit:
+    diam "What do you want to do?" linebreak
+    menu {
+        "Add": {
+            window_clear
+            pause(6)
+            window_open(8)
+            menu 3 {
+              "Ness":         { add_party_member(1) goto(PartyReturn) }
+              "Paula":            { add_party_member(2) goto(PartyReturn) }
+              "Jeff":          { add_party_member(3) goto(PartyReturn) }
+              "Poo":          { add_party_member(4) goto(PartyReturn) }
+              "Porky":          { add_party_member(5) goto(PartyReturn) }
+              "Picky":          { add_party_member(6) goto(PartyReturn) }
+              "King":           { add_party_member(7) goto(PartyReturn) }
+              "Tony":           { add_party_member(8) goto(PartyReturn) }
+              "Bubble Monkey":  { add_party_member(9) goto(PartyReturn) }
+              "Dungeon Man":         { add_party_member(10) goto(PartyReturn) }
+              "Flying Man 1":   { add_party_member(11) goto(PartyReturn) }
+              "Flying Man 2":   { add_party_member(12) goto(PartyReturn) }
+              "Flying Man 3":   { add_party_member(13) goto(PartyReturn) }
+              "Flying Man 4":   { add_party_member(14) goto(PartyReturn) }
+              "Flying Man 5":   { add_party_member(15) goto(PartyReturn) }
+            }
+            window_closeall
+        }
+        "Remove": {
+            party_pos_check(2)
+            goto_if_false(Remove_Party_Error)
+            diam "Which party member?" wait linebreak
+            goto(Remove_Party_Member_Selector)
+        }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+
+PartyReturn:
+    window_closetop
+    window_open(53)
+    goto(Party_Edit)
+
+//------------------------------------------------------------------
+
+Remove_Party_Member_Selector:
+    party_pos_check(2)	// Return character number (02)
+    goto_if_false(new_debug_menu.debug_main)
+    number_input(1)
+    goto_if_false(new_debug_menu.debug_main)
+    clearline
+    swap
+    party_pos_check(0)	// Return character number (00)
+    goto_if_false(Remove_Party_Member_Selector)
+    swap
+    close_hp
+    party_remove(0)
+    open_hp
+    diam "{name(0)} was removed." wait linebreak
+    goto(Remove_Party_Member_Selector)
+
+Remove_Party_Error:
+    diam "You can't have a party of zero! The game will freeze if you do so." wait
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------
+

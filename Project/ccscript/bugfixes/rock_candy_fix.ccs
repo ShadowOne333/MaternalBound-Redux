@@ -1,0 +1,7 @@
+// General ASM code for fixing or modifying different things in-game
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------------------------------------
+/* Rock Candy can now randomly give you a Luck boost */
+ROM[0xC2B3AA] = LDA_i(0005)
+//------------------------------------------------------------------

@@ -1,0 +1,473 @@
+import "../essential/asm65816.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/cc_asmcall.ccs"
+
+/* <---------------------------------------------------------------------------------------------------------------------->
+
+
+// Some cc_asmcall macros for effects.
+
+
+-- cc_start_ellipse(num, mask)
+		- Starts ellipse number <num> with mask <mask>.
+		- The mask parameter is a bitmask, some decimal values are:
+		- 19 (default): hide BG1, BG2 and sprites.
+		- 31 (hide all): hide BG1, BG2, BG3, BG4 and sprites.
+		- 3 (don't hide sprites): hide BG1 and BG2.
+		- 16 (hide only sprites): hide sprites.
+
+
+-- cc_stop_ellipse
+		- Removes the current ellipse effect.
+
+
+-- cc_fade_out(speed)
+		- Makes a fade out at speed <speed>. A higher number means slower, max speed is 0.
+
+
+-- cc_fade_in(speed)
+		- Makes a fade in at speed <speed>. A higher number means slower, max speed is 0.
+
+
+-- cc_set_brightness(brightness, mask)
+		- Sets brightness to <brightness>, affecting layers acording to <mask>.
+		- The value for brightness goes from 1 (completely black) to 63 (completely white), 32 is normal brightness.
+		- The mask setting is the same as explained in cc_start_ellipse.
+		- bit 6 (0x20) of the mask is 'background', which includes the black frame in interiors or HDMA windowing overlays like ellipses.
+
+
+-- cc_reset_brightness
+		- Sets brightness to 32 (normal) in all layers.
+
+
+-- cc_open_letterbox
+		- Opens a letterbox.
+
+
+-- cc_close_letterbox
+		- Closes a letterbox.
+
+
+-- cc_disable_music_changes
+		- Disables music changes (e.g. when warping).
+
+
+-- cc_enable_music_changes
+		- Enables music changes (e.g. when warping).
+
+
+-- register_startup_pointer(address)
+		- Don't use this inside a text script.
+		- This is like `on_refresh` or `on_check`, it lets you register a script that will be executed
+		  each time you start a new game or continue the game from a save, after the fade in.
+
+
+<---------------------------------------------------------------------------------------------------------------------->
+
+
+-- EllipseEntry(duration, centreX, centreY, initialWidth, initialHeight, centreXAdd, centreYAdd, widthVel, heightVel, widthAccel, heightAccel)
+
+   - duration: Number of frames of animation.
+   - centreX: Initial centre X of the ellipse, or use 0x8000 to keep whatever was loaded already.
+   - centreY: Initial centre Y of the ellipse, or use 0x8000 to keep whatever was loaded already.
+   - initialWidth: Initial width of the oval, or 0x8000 to keep whatever was loaded before.
+   - initialHeight: Initial height of the oval, or 0x8000 to keep whatever was loaded before.
+   - centreXAdd: Added to centreX each frame.
+   - centreYAdd: Added to centreY each frame.
+   - widthVel: Initial width velocity, added to width every frame. Supports negative numbers for closing.
+   - heightVel: Initial height velocity, added to height every frame. Supports negative numbers for closing.
+   - widthAccel: Width acceleration, added to width velocity every frame. Supports negative numbers for closing.
+   - heightAccel: Height acceleration, added to height velocity every frame. Supports negative numbers for closing.
+   
+   - Max of 255 entries.
+*/
+
+ellipse_table: {
+	EllipseEntry(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)     // 0
+	// Don't remove this first empty entry, it's needed.
+
+	EllipseEntry(80, 128, 112, 0, 0, 0, 0, 180, 180, 3, 3)                 // 1 - opening (ending scene)
+	EllipseEntry(80, 128, 112, 24000, 24000, 0, 0, -180, -180, -3, -3)     // 2 - closing (ending scene)
+	
+	// modify the above or add more entries.
+}
+
+
+// <---------------------------------------------------------------------------------------------------------------------->
+
+// CCS/ASM stuff below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Ellipse.
+
+command EllipseEntry(duration, centreX, centreY, initialWidth, initialHeight, centreXAdd, centreYAdd, widthVel, heightVel, widthAccel, heightAccel) "[{byte duration} 00 {short centreX} {short centreY} {short initialWidth} {short initialHeight} {short centreXAdd} {short centreYAdd} {short widthVel} {short heightVel} {short widthAccel} {short heightAccel} 00]"
+
+doEllipse: {
+	// Read CCScript arguments (2 bytes).
+	LDY_i(2)
+	JSL(R_Read_Parameter_Bytes)
+	LDA_a(D_cc_argv_1)
+	AND_i(0xFF)
+	TAX
+	LDA_a(D_cc_argv_0)
+	AND_i(0xFF)
+	
+	JSL(loadEllipse)
+	
+	_loop:
+	JSL(0xC4A7B0)
+	JSL(0xC1004E)
+	LDA_a(0xAEC2)
+	AND_i(0xFF)
+	BNE_a(_loop)
+	
+	RTL
+}
+
+loadEllipse: {
+    // A: entry, X: mask.
+    SEP(0x20)
+    STA_a(0xAEEF)
+    REP(0x20)
+    PHA
+    PHX
+    LDA_i(0)
+    TAX
+    JSL(0xC4A67E)
+    PLX
+    PLA
+    SEP(0x20)
+    STX_a(0xAEC8)
+    REP(0x20)
+    LDY_i(23)
+    JSL(0xC09032)
+    
+    CLC
+    ADC_i({short[0] ellipse_table})
+    STA_a(0xAECC)
+    LDA_i({short[1] ellipse_table})
+    STA_a(0xAECE)
+    
+    RTL
+}
+
+stopEllipse: {
+	JSL(0xC2EAAA)
+	SEP(0x20)
+	STZ_a(0xAEEF)
+	REP(0x20)
+	RTL
+}
+
+command cc_start_ellipse(num, mask) {
+	cc_asmcall(doEllipse, RET_NONE)
+	byte num
+	byte mask
+}
+
+command cc_stop_ellipse {
+	cc_asmcall(stopEllipse, RET_NONE)
+}
+
+
+
+// Fades.
+
+doFadeIn: {
+	// Read CCScript arguments (1 byte).
+	LDY_i(1)
+	JSL(R_Read_Parameter_Bytes)
+	LDA_a(D_cc_argv_0)
+	AND_i(0xFF)
+	TAX
+	
+	LDA_i(1)
+	JSL(0xC0886C)
+	
+	_loop:
+	LDA_a(0x0028)
+	AND_i(0xFF)
+	BNE_a(_loop)
+	
+	RTL
+}
+
+command cc_fade_in(speed) {
+	cc_asmcall(doFadeIn, RET_NONE)
+	byte speed
+}
+
+doFadeOut: {
+	// Read CCScript arguments (1 byte).
+	LDY_i(1)
+	JSL(R_Read_Parameter_Bytes)
+	LDA_a(D_cc_argv_0)
+	AND_i(0xFF)
+	TAX
+	
+	LDA_i(1)
+	JSL(0xC0887A)
+	
+	_loop:
+	LDA_a(0x0028)
+	AND_i(0xFF)
+	BNE_a(_loop)
+	
+	RTL
+}
+
+command cc_fade_out(speed) {
+	cc_asmcall(doFadeOut, RET_NONE)
+	byte speed
+}
+
+
+
+// Brightness.
+
+setBrightness: {
+	// Read CCScript arguments (2 bytes).
+	LDY_i(2)
+	JSL(R_Read_Parameter_Bytes)
+	LDA_a(D_cc_argv_1)
+	AND_i(0xFF)
+	TAX
+	LDA_a(D_cc_argv_0)
+	AND_i(0xFF)
+	
+	SEC
+	SBC_i(32)
+	CMP_i(100)
+	BCC_a(_brighten)
+	EOR_i(0xFFFF)
+	INC
+	TAY
+	TXA
+	ORA_i(0x80)
+	BRA_a(_colorMath)
+	
+	_brighten:
+	TAY
+	TXA
+	
+	_colorMath:
+	TYX
+	
+	// A: mask, X: brightness.
+	SEP(0x20)
+	STA_al(0x002131) // CGADSUB
+	AND_8(0x1F)
+	STA_al(0x00212E) // TMW
+	TXA
+	ORA_8(0xE0)
+	STA_al(0x002132)
+	REP(0x20)
+	
+	RTL
+}
+
+command cc_set_brightness(brightness, mask) {
+	cc_asmcall(setBrightness, RET_NONE)
+	byte brightness
+	byte mask
+}
+
+command cc_reset_brightness cc_set_brightness(32, 63)
+
+
+
+// Letterbox.
+
+doLetterbox: {
+	LDA_i(23)
+	STA_a(0xADAE)
+	LDA_i(4)
+	STA_a(0xADB0)
+	
+	LDA_i(0)
+	LDY_i(224)
+	
+	_loop:
+	PHA
+	PHY
+	
+	STA_a(0xADB2)
+	STY_a(0xADB4)
+	
+	JSL(0xC2D0AC)
+	
+	LDA_i(2)
+	JSL(0xC429E8)
+	
+	JSL(0xC08756)
+	
+	PLY
+	PLA
+	
+	DEY DEY DEY
+	INC INC INC
+	CMP_i(40)
+	BCC_a(_loop)
+	
+	RTL
+}
+
+closeLetterbox: {
+	LDA_i(23)
+	STA_a(0xADAE)
+	LDA_i(4)
+	STA_a(0xADB0)
+	
+	LDA_i(39)
+	LDY_i(185)
+	
+	_loop:
+	PHA
+	PHY
+	
+	STA_a(0xADB2)
+	STY_a(0xADB4)
+	
+	JSL(0xC2D0AC)
+	
+	LDA_i(2)
+	JSL(0xC429E8)
+	
+	JSL(0xC08756)
+	
+	PLY
+	PLA
+	
+	INY INY INY
+	DEC DEC DEC
+	CMP_i(0)
+	BNE_a(_loop)
+	
+	LDA_i(2)
+	JSL(0xC0AE34)
+	
+	RTL
+}
+
+command cc_open_letterbox cc_asmcall(doLetterbox, RET_NONE)
+command cc_close_letterbox cc_asmcall(closeLetterbox, RET_NONE)
+
+
+
+musicChangesOff: {
+	STZ_a(0x5DD8)
+    INC_a(0x5DD8)
+	RTL
+}
+
+musicChangesOn: {
+	STZ_a(0x5DD8)
+	RTL
+}
+
+command cc_disable_music_changes cc_asmcall(musicChangesOff, RET_NONE)
+command cc_enable_music_changes cc_asmcall(musicChangesOn, RET_NONE)
+
+
+
+// Startup pointer.
+
+command register_startup_pointer(address) {
+	ROM[0xC0B801] = JSL(_runText)
+	
+	_runText:
+	JSL(0xC0886C)
+	MText(address)
+	RTL
+}
+
+
+
+// Keep ellipse between doors and warps.
+// This makes the fade in slighty slower during doors and warps,
+// comment out the whole thing if you don't need it.
+
+/*
+ROM[0xC067FD] = BRA(2)
+ROM[0xC068A3] = BRA(2)
+ROM[0xC06DF9] = JSL(ellipseFadeIn)
+ROM[0xC1BE42] = JSL(ellipseFadeIn)
+*/
+
+ellipseFadeIn: {
+	JSL(0xC06B21)
+	
+	LDA_a(0xAEC8)
+	PHA
+	
+	LDA_a(0xAEEF)
+	AND_i(0xFF)
+	BEQ_a(_end)
+	
+	LDY_i(23)
+	JSL(0xC09032)
+	
+	PHA
+	
+	LDA_i(0)
+	TAX
+	JSL(0xC4A67E)
+	
+	PLA
+	
+	CLC
+	ADC_i({short[0] ellipse_table})
+	STA_a(0xAECC)
+	LDA_i({short[1] ellipse_table})
+	STA_a(0xAECE)
+	
+	JSL(0xC4A7B0)
+	
+	_end:
+	PLA
+	STA_a(0xAEC8)
+	
+	LDA_i(1)
+	TAX
+	JSL(0xC0886C)
+	LDX_i(0)
+	
+	_tinyWait:
+	PHX
+	JSL(0xC08756)
+	PLX
+	INX
+	CPX_i(10)
+	BCC_a(_tinyWait)
+
+	JSL(0xC09451)
+	RTL
+}

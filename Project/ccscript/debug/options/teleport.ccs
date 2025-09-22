@@ -1,0 +1,27 @@
+// Teleport debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Teleport_Test:
+    diam "Select your teleportation." wait
+    "[18 02]"
+    window_open(7)
+    //number_input(1)
+    //clearline
+    menu 1 {
+      "Teleport [8B]":		{window_closeall teleport_animation(1) eob}
+      "Teleport [8C]":		{window_closeall teleport_animation(2) eob}
+      "Teleport (Broken)":	{window_closeall teleport_animation(3) eob}
+      "Teleport [8F]":		{window_closeall teleport_animation(4) eob}
+    }
+    //"[09 04 {e(Teleport_Alpha)} {e(Teleport_Beta)} {e(Teleport_Broken)} {e(Teleport_Omega)}]"
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+//------------------------------------------------------------------

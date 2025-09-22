@@ -1,0 +1,34 @@
+// Fixes the bug where, when the OSS flag is on and the player loses a scripted battle,
+// the game hard locks.
+// By Catador
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+define oss_flag = 0x5D98
+
+// https://github.com/Herringway/ebsrc/blob/5101f9babed92d2bef5adce9bab3f1f031647061/src/battle/init_scripted.asm#L74
+/*  Original code:
+ *    LDA #$0001
+ *    BRA $3006  // PLD RTL
+ */
+
+ROM[0xC22FD1] = {
+    JML (LostScriptedBattle)
+    NOP // Align nicely to the next instruction. Not needed, but makes a future disassembly easier (if that would ever be done for some reason)
+}
+
+// $C22FEC has the same code, it's for the unused case of "using PSI Teleport before getting into the battle", but it doesn't hurt to change this one too
+ROM[0xC22FEC] = {
+    JML (LostScriptedBattle)
+    NOP // Align nicely to the next instruction. Not needed, but makes a future disassembly easier (if that would ever be done for some reason)
+}
+
+// When you lose a scripted battle, forcibly clear the OSS flag so you don't end up with the "Game Over Glitch"
+LostScriptedBattle: {
+                STZ_a (oss_flag) // Clear the OSS Flag!!
+                LDA_i (1)        // Return 1 to signify "lost battle" (same as original code)
+                PLD
+                RTL
+}
+//------------------------------------------------------------------

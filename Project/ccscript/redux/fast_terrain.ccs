@@ -1,0 +1,14 @@
+// Movement speed hacks by jtolmar
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+// Swamps, sewers, and hot springs don't slow you down.
+//ROM[0xC04575] = LDA_i (0x0000)
+
+// Fast movement in the lost underworld
+ROM[0xc03ae3] = byte 0x05 // A load here stores 0x0a to your walking mode. This replaces it 0, the normal one
+
+// Allow the run button to work for non-standard movement.
+ROM[0xc02f45] = { NOP NOP NOP } // X movement function
+ROM[0xc031cd] = { NOP NOP NOP } // Y movement function

@@ -1,0 +1,51 @@
+// Level Up debug menu option
+
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/commands.ccs"
+import "../../essential/flags.ccs"
+import "../../debug/diamond.ccs"
+import "../../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+Level_Up:
+    diam "Who will be leveled up?" linebreak
+    menu {
+    "Whole team": {
+      call(Level_Select)
+      goto_if_false(new_debug_menu.debug_main) //Go back if the player hits the B Button
+      swap
+      change_level(1, 0)
+      change_level(2, 0)
+      change_level(3, 0)
+      change_level(4, 0)
+      diam "Team leveled up." wait
+      window_closetop
+      goto(new_debug_menu.debug_main)
+    }
+    "One member": {
+      window_clear
+      diam "Which party member will be leveled up?"
+      char_select_menu_cancellable
+      goto_if_false(new_debug_menu.debug_main) //Go back if the player hits the B Button
+      swap
+      linebreak
+      call(Level_Select)
+      goto_if_false(new_debug_menu.debug_main) //Go back if the player hits the B Button
+      swap
+      change_level(0, 0)
+      diam "Character leveled up." wait
+      window_closetop
+      goto(new_debug_menu.debug_main)
+      }
+    }
+    window_closetop
+    goto(new_debug_menu.debug_main)
+
+Level_Select:
+    diam "Select your level." linebreak
+    number_input(2)
+    clearline
+    eob
+
+//------------------------------------------------------------------
