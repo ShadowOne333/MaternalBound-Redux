@@ -7,7 +7,7 @@ import "../essential/ASMRef.ccs"
 //ROM[0xC04575] = LDA_i (0x0000)
 
 // Fast movement in the lost underworld
-ROM[0xc03ae3] = byte 0x05 // A load here stores 0x0a to your walking mode. This replaces it 0, the normal one
+ROM[0xc03ae3] = byte 0x06 // A load here stores 0x0a to your walking mode. This replaces it 0, the normal one, or 6 for an inbetween
 
 // Allow the run button to work for non-standard movement.
 ROM[0xc02f45] = { NOP NOP NOP } // X movement function

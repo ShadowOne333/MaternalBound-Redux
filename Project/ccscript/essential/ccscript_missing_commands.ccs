@@ -600,7 +600,7 @@ command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {by
     define SCR_STATUS_GROUP_0 = 1
     define SCR_STATUS_0_NONE = 1
     define SCR_STATUS_0_UNCONSCIOUS = 2
-    define SCR_STATUS_0_PETRIFIED = 3
+    define SCR_STATUS_0_DIAMONDIZED = 3
     define SCR_STATUS_0_NUMB = 4
     define SCR_STATUS_0_NAUSEOUS = 5
     define SCR_STATUS_0_POISONED = 6

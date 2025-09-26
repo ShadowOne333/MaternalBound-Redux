@@ -12,90 +12,89 @@ Special_Status:
     clearline
     diam "To whom?" newline
     char_select_menu_cancellable	// Current party member selection menu, lets you cancel with the B button
-    goto_if_false(new_debug_menu.debug_main)		//"[1B 02 00 C5 87 EE]"		// TODO: Test this...
+    goto_if_false(new_debug_menu.debug_main)
     store_registers
     window_clear
-    diam "Which?" wait
     save_text_window_state
     window_open(12)
     menu 2 {
       "Heal": {
         special_status_post_selection
-        "[19 05 00 01 01]"  //TODO: convert these to ccscript_missing_commands
-        "[19 05 00 02 01]"  //[19 05 XX YY YY] is inflict(byte char, short status)
-        "[19 05 00 06 01]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)
+        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)
         swap
-        "[1E 00 00 64]"
-        "[1E 04 00 64]"
+        heal_percent(0, 100)
+        recoverpp_percent(0, 100)
         goto(Special_Status)
       }
-      "Unconsious": {
+      "Unconscious": {
         special_status_post_selection
-        "[19 05 00 01 01]"
-        "[19 05 00 01 02]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
         swap
-        "[1E 01 00 64]"
-        "[1E 05 00 64]"
+        hurt_percent(0, 100)
+        consumepp_percent(0, 100)
         goto(Special_Status)
       }
       "Petrified": {
         special_status_post_selection
-        "[19 05 00 01 01]"
-        "[19 05 00 01 03]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
         goto(Special_Status)
       }
       "Paralyzed": {
         special_status_post_selection
-        "[19 05 00 01 04]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NUMB)
         goto(Special_Status)
       }
       "Nauseated": {
         special_status_post_selection
-        "[19 05 00 01 05]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NAUSEOUS)
         goto(Special_Status)
       }
       "Poisoned": {
         special_status_post_selection
-        "[19 05 00 01 06]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_POISONED)
         goto(Special_Status)
       }
       "Sunstroke": {
         special_status_post_selection
-        "[19 05 00 01 07]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_SUNSTROKE)
         goto(Special_Status)
       }
       "Cold": {
         special_status_post_selection
-        "[19 05 00 01 08]"
+        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)
         goto(Special_Status)
       }
       "Mushroomized": {
         special_status_post_selection
-        "[19 05 00 02 02]"
+        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)
         goto(Special_Status)
       }
       "Possessed": {
         special_status_post_selection
-        "[19 05 00 02 03]"
+        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)
         goto(Special_Status)
       }
       "Asthma": {
         special_status_post_selection
-        "[19 05 00 06 02]"
+        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)
         goto(Special_Status)
       }
       "Decrease HP": {
         special_status_post_selection
         swap
-        "[1E 00 00 64]"
-        "[1E 01 00 5E]"
+        heal_percent(0, 100)
+        hurt_percent(0, 94) // $5E
         goto(Special_Status)
       }
       "Decrease PP": {
         special_status_post_selection
         swap
-        "[1E 04 00 64]"
-        "[1E 05 00 63]"
+        recoverpp_percent(0, 100)
+        consumepp_percent(0, 99)
         goto(Special_Status)
       }
     }
