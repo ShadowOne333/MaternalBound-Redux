@@ -21,6 +21,8 @@
 * [**Project Licence**](#license)
 
 * [**Credits**](#credits)
+* 
+* [**Sprite Credits**](#sprites)
 
 -------------
 
@@ -30,9 +32,8 @@
 https://github.com/ShadowOne333/MaternalBound-Redux/releases
 
 * **MSU-1 PCM pack:**
-https://archive.org/details/earthbound-msu-1-pack
-
-(Mirror at Zeldix.net: https://www.zeldix.net/t1931-earthbound-msu-1 )
+https://archive.org/details/earthbound-msu-1-pack <br />
+	(Mirror at Zeldix.net: https://www.zeldix.net/t1931-earthbound-msu-1 )
 
 * **MaternalBound Discord:**
 https://discord.gg/v7kyYrv
@@ -41,12 +42,12 @@ https://discord.gg/v7kyYrv
 
 ## MaternalBound Redux
 
-***MaternalBound Redux is a completely revamped and improved version of the original MaternalBound:***
+***MaternalBound Redux is a completely revamped and improved version of the original MaternalBound:*** <br />
 https://forum.starmen.net/forum/Community/PKHack/WIP-MaternalBound-Uncensoring-Other-junk-hack/
 
 **What does this mean?**
 
-That everything you found in the original MaternalBound can also be found here, but with a much more polished detail and also with a ton of Quality of Life improvements made to it.
+That everything you found in the original MaternalBound can also be found here, but with a much more polished detail and also with a ton of Quality of Life improvements made to it.<br />
 The whole source code for the project is available as well! Be sure to check out the release page at the bottom of this post to enter the GitHub page for the project, alongside the release page for the patches.
 
 **So… What changes can you expect out of MaternalBound Redux in addition to the ones found in the original MaternalBound?**
@@ -144,11 +145,10 @@ To play MaternalBound Redux, the following is required:
 * Snes9x 1.54 or above (any recent version of it should work)
 * EarthBound (U) SNES ROM:
 
-	EarthBound (USA).sfc
-	No-Intro: Super Nintendo Entertainment System (v. 20180813-062835)
-	File/ROM SHA-1: D67A8EF36EF616BC39306AA1B486E1BD3047815A
-	File/ROM CRC32: DC9BB451
-
+		EarthBound (USA).sfc
+		No-Intro: Super Nintendo Entertainment System (v. 20180813-062835)
+		File/ROM SHA-1: D67A8EF36EF616BC39306AA1B486E1BD3047815A
+		File/ROM CRC32: DC9BB451
 * Floating IPS (FLIPS)
 * MaternalBound-Redux.ips patch
 
@@ -190,11 +190,10 @@ You can find a copy of the license in the LICENSE file.
 
 ### Sprites:
 
-* **Jamsilva:**	For all the incredible work he did with the overworld sprites as well as some battle sprites for both his own hack and Redux
-* **PhoenixBound:**	Besides all his previous credited work, also want to thank him for the awesome overworld sprites he made for Redux as well
-* **Crav (Great Space Pickle):** Sprite artist for the Mother: Cognitive Dissonance project, and for the permission to use some of the unique overworld sprites from that project into Redux!
-* **Rickstie:**	For the ongoing interchange of sprite between him and me for the diagonal sprites, inspiration for the robot sprites and other touches to the main characters
-
+* **Jamsilva:**	For all the incredible work he did with the overworld sprites as well as some battle sprites for both his own hack and Redux <br />
+* **PhoenixBound:**	Besides all his previous credited work, also want to thank him for the awesome overworld sprites he made for Redux as well <br />
+* **Crav (Great Space Pickle):** Sprite artist for the Mother: Cognitive Dissonance project, and for the permission to use some of the unique overworld sprites from that project into Redux! <br />
+* **Rickstie:**	For the ongoing interchange of sprite between him and me for the diagonal sprites, inspiration for the robot sprites and other touches to the main characters <br />
 * **Howisthisaname:** For the neat EarthBound Enhanced hack, which is where some of the reworked battle sprites come from. The specific sprites from his EB Enhanced project are as follows:
 
 |	Sprite number			|	Enemy name			|	Reason			|
