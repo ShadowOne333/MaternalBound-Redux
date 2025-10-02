@@ -21,7 +21,7 @@
 * [**Project Licence**](#license)
 
 * [**Credits**](#credits)
-* 
+
 * [**Sprite Credits**](#sprites)
 
 -------------
