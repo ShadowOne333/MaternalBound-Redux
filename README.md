@@ -57,6 +57,22 @@ The whole source code for the project is available as well! Be sure to check out
 
 Don’t get dizzy while reading the full changelog:
 
+* A lot of bugfixes from the original EarthBound have been fixed:
+    - Brain stone bug
+    - Crying status ailment bug
+    - Game over OSS bug
+    - Guts bug
+    - Palette tint bug
+    - Party members diagonal run bug
+    - Return item control code bug
+    - Rock candy bug
+    - Single 2BPP battle backgrounds bug
+    - Teleport hardlock bug
+    - Tent check bug
+    - Text highlight bug
+    - Several debug menu bugs have been fixed
+    - PSI Special fixed to PK Special (PK Rockin)
+    - Region crack to make the game playable in any region
 * Fully functional title screen with NO glitches (no more “TH” in the middle like before)
 * MSU-1 integration (alongside the very first PCM pack for EarthBound)
 * Fully hardware compatible (can be played in reproduction cartridges)

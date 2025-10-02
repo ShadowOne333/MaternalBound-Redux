@@ -1,20 +1,62 @@
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+/* ---------------------------------------------------
+-------|--------------------------------------|-------
+------ |                                      | ------
+------ |        SIX LETTER NAMES PATCH        | ------
+------ |                                      | ------
+------ |     by Vittorio, Chaz, and D-Man     | ------
+------ |                                      | ------
+-------|--------------------------------------|-------
+--------------------------------------------------- */
+
+// - v1.0
+
+// - This patch changes a lot of routines in the game,
+//   so there's room for something breaking. If you find
+//   any bug, please report it.
+
+// NOTE: CoilSnake doesn't allow to input 6 character names in 'naming_skip.yml'.
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Imports.
+
 import "../essential/asm65816.ccs"
 
 // <------------------------------------------------------------------------------------------------------------------------------>
 
-// Six letter names patch (WIP by Vittorio though reusing some code from other fellas, thanks Chaz and D-Man!).
+// Defines.
 
-// Step 1: Expand the save struct, we need a new 28 bytes spot in RAM to save the names; these must be saved to SRAM.
-// Step 2: Allow to fill-in 6 characters for the chosen four names and save them to the new spot in RAM.
-// Step 3: Change every spot that loads names to get them from the new spot.
-// Step 4: Apply a minor change for the six letters to display properly in HP/PP boxes.
+// This patch can be used with expand_flags or as a standalone patch.
+// Please ensure you have the correct block commented / uncommented depending on whether expand_flags
+// is also used in the same project.
 
-// <------------------------------------------------------------------------------------------------------------------------------>
+// BEGIN - STANDALONE
 
-define RAM_NAMES = 0xB630 // 0xB600 is the start of the new space, but I'm leaving that space for the expanded flags by coop.
+	define RAM_NAMES = 0xB630
+	define RAM_NAME_NESS = 0xB630
+	define RAM_NAME_PAULA = 0xB637
+	define RAM_NAME_JEFF = 0xB63E
+	define RAM_NAME_POO = 0xB645
+	apply_save_patch
+
+// END - STANDALONE
+
+// BEGIN - WITH EXPAND_FLAGS
+/*
+	define RAM_NAMES = 0xB680
+	define RAM_NAME_NESS = 0xB680
+	define RAM_NAME_PAULA = 0xB687
+	define RAM_NAME_JEFF = 0xB68E
+	define RAM_NAME_POO = 0xB695
+*/
+// END - WITH EXPAND_FLAGS
+
 define NAMES_SIZE = 7
-
 define NAMES_LENGTH = 6
+
+// Macros.
 
 command change_size(addr) { ROMTBL[addr, 1, 1] = short[0] NAMES_SIZE }
 command change_spot(addr) { ROMTBL[addr, 1, 1] = short[0] RAM_NAMES }
@@ -24,33 +66,35 @@ command change_length(addr) { ROMTBL[addr, 1, 1] = short[0] NAMES_LENGTH }
 // <------------------------------------------------------------------------------------------------------------------------------>
 
 // Code related to expanding the save struct.
-// This was made by Chaz. It adds 0x9D (157) new bytes starting from $B600.
+// This was made by Chaz. It adds 0x4D (77) new bytes starting from $B600 (which is normally free space).
+// This should only be applied if expand_flags is not used (see the section above regarding commenting).
+command apply_save_patch {
+	// Saving the new data.
+	ROM[0xEF097E] = LDA_i (0x02BA)
+	ROM[0xEF0985] = LDA_i (0x02BA)
+	ROM[0xEF099B] = LDA_i (0xB600)
+	ROM[0xEF09DA] = LDA_i (0x004D)
 
-// Saving the new data.
-ROM[0xEF097E] = LDA_i (0x02BA)
-ROM[0xEF0985] = LDA_i (0x02BA)
-ROM[0xEF099B] = LDA_i (0xB600)
-ROM[0xEF09DA] = LDA_i (0x009D)
-
-// Loading the new data.
-ROM[0xEF0B2D] = LDA_i (0x02BA)
-ROM[0xEF0B34] = LDA_i (0x02BA)
-ROM[0xEF0B42] = LDA_i (0xB600)
-ROM[0xEF0B81] = LDA_i (0x009D)
+	// Loading the new data.
+	ROM[0xEF0B2D] = LDA_i (0x02BA)
+	ROM[0xEF0B34] = LDA_i (0x02BA)
+	ROM[0xEF0B42] = LDA_i (0xB600)
+	ROM[0xEF0B81] = LDA_i (0x004D)
+}
 
 // <------------------------------------------------------------------------------------------------------------------------------>
 
 // Code related to saving the names to the new spot.
 
 // Allow to pick six letters in the naming screen.
-ROM[0xC1F984] = LDA_i(6)
+change_length(0xC1F984)
 
 // Save them to the new spot.
 change_size(0xC1F978)
 change_spot(0xC1F980)
 
 // Minor fix when pressing "Don't care".
-ROM[0xC1E4FB] = LDX_i(6)
+change_length(0xC1E4FB)
 
 // <------------------------------------------------------------------------------------------------------------------------------>
 
@@ -224,15 +268,69 @@ change_size(0xC4E7EA)
 change_spot(0xC4E7F2)
 change_length(0xC4E809)
 
+// The game will read the raw addresses where Paula and Poo's names
+// are stored to display "Paula's dad", "Paula's mom" and "Poo's master"
+// in the cast scene. We need to change this by also getting past
+// CoilSnake's code that updates these spots as well.
+
+ROM[0xC4E8C3] = JML(sp_paulasRelatives)
+sp_paulasRelatives: {
+	JSL(0xC08F15) // original code.
+	LDA_i(RAM_NAME_PAULA)
+	STA_d(0x06)
+	PHB
+	SEP(0x20)
+	PLA
+	STA_d(0x08)
+	STZ_d(0x09)
+	REP(0x20)
+	LDA_d(0x06) STA_d(0x2A) STA_d(0x12)
+	LDA_d(0x08) STA_d(0x2C) STA_d(0x14)
+	LDA_d(0x0A) STA_d(0x0E)
+	LDA_d(0x0C) STA_d(0x10)
+	LDA_i(NAMES_LENGTH)
+	JML(0xC4E901)
+}
+
+ROM[0xC4E97C] = JML(sp_paulasRelatives2)
+sp_paulasRelatives2: {
+	JSL(0xC08F15) // original code.
+	LDA_d(0x0A) STA_d(0x0E)
+	LDA_d(0x0C) STA_d(0x10)
+	LDA_d(0x2A) STA_d(0x12)
+	LDA_d(0x2C) STA_d(0x14)
+	LDA_i(NAMES_LENGTH)
+	JML(0xC4E9A3)
+}
+
+ROM[0xC4EA1E] = JML(sp_poosMaster)
+sp_poosMaster: {
+	JSL(0xC08F15) // original code.
+	LDA_d(0x0A) STA_d(0x0E)
+	LDA_d(0x0C) STA_d(0x10)
+	LDA_i(RAM_NAME_POO)
+	STA_d(0x06)
+	PHB
+	SEP(0x20)
+	PLA
+	STA_d(0x08)
+	STZ_d(0x09)
+	REP(0x20)
+	LDA_d(0x06) STA_d(0x12)
+	LDA_d(0x08) STA_d(0x14)
+	LDA_i(NAMES_LENGTH)
+	JML(0xC4EA4C)
+}
+
 change_size(0xC4EEBA)
 change_spot(0xC4EEC2)
 change_length(0xC4EEB5)
 
-// And here's a weird pointer table used by the control code "[1C 01 XX]".
-ROM[0xC45527] = "[06 30 B6]"
-ROM[0xC45569] = "[06 37 B6]"
-ROM[0xC455AB] = "[06 3E B6]"
-ROM[0xC455ED] = "[06 45 B6]"
+// And here's a pointer table used by the control code "[1C 01 XX]".
+ROM[0xC45527] = "[06 {short RAM_NAME_NESS}]"
+ROM[0xC45569] = "[06 {short RAM_NAME_PAULA}]"
+ROM[0xC455AB] = "[06 {short RAM_NAME_JEFF}]"
+ROM[0xC455ED] = "[06 {short RAM_NAME_POO}]"
 
 /////////////////////////////////////////////////////////////////////
 // BANK EF.
@@ -277,3 +375,127 @@ calc_spacing: {
 }
 
 // <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to compatibility with saves without this patch.
+
+// ch 2025-09-28: commented out since this isn't needed
+/*
+// We hijack the 'loadGameSlot' routine to check if the new RAM spot for
+// the names is empty, loading them from the old spot if that's the case.
+
+ROM[0xEF0B97] = { JSL(compatibility_old_saves) NOP }
+
+compatibility_old_saves: {
+	LDA_d(0x08) // original code.
+	STA_a(0x00A9) // original code.
+	
+	JML(fill_new_names)
+}
+
+fill_new_names: {
+	LDA_a(RAM_NAMES)
+	BNE_a(_return)
+	
+	SEP(0x20)
+	
+	LDX_i(0)
+	
+	_loop:
+	LDA_x(0x99CE)
+	STA_x(RAM_NAME_NESS)
+	
+	LDA_x(0x9A2D)
+	STA_x(RAM_NAME_PAULA)
+	
+	LDA_x(0x9A8C)
+	STA_x(RAM_NAME_JEFF)
+	
+	LDA_x(0x9AEB)
+	STA_x(RAM_NAME_POO)
+	
+	INX
+	CPX_i(5)
+	BNE_a(_loop)
+	
+	REP(0x20)
+	
+	_return:
+	RTL
+}
+*/
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to compatibility with the naming skip module.
+
+// ch 2025-09-28: commented out since this isn't needed
+/*
+ROM[0xC1FAC3] = JSL(compatibility_naming_skip_1)
+
+compatibility_naming_skip_1: {
+	JSL(0xC3E4D4) // original code.
+	
+	JML(fill_new_names)
+}
+
+ROM[0xC1FD05] = JSL(compatibility_naming_skip_2)
+
+compatibility_naming_skip_2: {
+	JSL(0xC021E6) // original code.
+	
+	JML(fill_new_names)
+}
+*/
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Code related to limiting the width of the names in pixels to fit into vanilla windows.
+
+define MAX_LENGTH_ALLOWED = 40 
+
+ROM[0xC4432B] = { JML(run_new_naming_logic) NOP NOP }
+
+run_new_naming_logic: {
+	LDX_d(0x1A)
+	CPX_i(20) // Check if we're inputting the player's name (length > 20).
+	BCS_a(_allow)
+	
+	LDX_a(0x9662)
+	STA_x(0x1B86) // Write the character to the buffer.
+	
+	ASMLoadAddress0E(0x7E1B86) // Load the buffer address in 0E/10.
+	
+	LDA_a(0x9662) // Load current_index + 1 as the string length.
+	INC
+	
+	JSL(0xC43E31) // Return string length, measured in pixels.
+	
+	CMP_i(MAX_LENGTH_ALLOWED) // Compare it to the allowed maximum.
+	BEQ_a(_allow)
+	BCC_a(_allow)
+	
+	_dont_allow:
+	LDX_a(0x9662)
+	STZ_x(0x1B86) // Undo the initial writing.
+	
+	LDA_i(1)
+	JML(0xC444F9) // Return without writing.
+	
+	_allow:
+	LDA_d(0x1C)
+	
+	// Run normal code and return.
+	
+	// Catador's JSL-RTS trick.
+	PHK
+	PER(6)
+	PEA(0xC40007)
+	JML(0xC4424A)
+	
+	INC_a(0x9662)
+	LDA_a(0x9662)
+	JML(0xC44335)
+}
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
