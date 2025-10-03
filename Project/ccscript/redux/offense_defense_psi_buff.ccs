@@ -1,0 +1,26 @@
+// Offense Up and Defense Down buff changes
+// Changed from 1/16 to 1/8 (2/16)
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+//------------------------------------
+// The original Increase and Decrease routines for both Offense/Defense have 4 consecutive LSR opcodes, NOP'ing one of them would effectively make the increase/decrease be 1/8 instead.
+// If we want to increase/decrease the change to 1/4, we can NOP two LSRs instead of just one.
+
+// Shift value right to take a percentage of the full amount
+//LSR	// 1/2 = 50% - NOP for 100%
+//LSR	// 1/4 = 25% - NOP for 50%
+//LSR	// 1/8 = 12.5% - NOP for 25%
+//NOP	// Change to LSR if we want 1/16 (6.25%) increase
+//------------------------------------
+// Increase Offense 1/16 -> 1/8
+ROM[0xC27D3C] = { LSR LSR LSR NOP }
+// Increase Defense 1/16 -> 1/8
+ROM[0xC27D96] = { LSR LSR LSR NOP }
+
+// Decrease Ofense 1/16 -> 1/8
+ROM[0xC27DF0] = { LSR LSR LSR NOP }
+// Decrease Defense 1/16 -> 1/8
+ROM[0xC27E47] = { LSR LSR LSR NOP }
+//------------------------------------
