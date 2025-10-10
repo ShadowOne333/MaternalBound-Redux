@@ -344,34 +344,22 @@ ROM[0xC455ED] = "[06 {short RAM_NAME_POO}]"
 // Render 5 pixels instead of 6 for each letter.
 // ROM[0xC47CE4] = LDA_i(5)
 
-// Render 5 pixels instead of 6 if the name is 6 characters long.
-ROM[0xC47E27] = { JSL(calc_spacing) NOP }
+// Fonts
+ROM[0xC47D42] = JSL (StatusFont_WidthHack)
 
-calc_spacing: {
-	LDA_d(0x04)
-	LDY_i(NAMES_SIZE)
-	JSL(0xC08FF7)
-	CLC
-	ADC_i(RAM_NAMES)
-	TAX
-	
-	LDA_x(5)
-	BEQ_a(_render6)
-	
-	LDA_i(5)
-	STA_d(0x22)
-	
-	BRA_a(_end)
-	
-	_render6:
-	LDA_i(6)
-	STA_d(0x22)
-	
-	_end:
-	LDA_d(0x04) // original code.
-	CMP_i(4) // original code.
-	
-	RTL
+StatusFont_WidthHack: { // Y is always the current character to be printed in this case
+    // Get the pointer to the status font width table in $06
+    LDA_al  (0xC3F06C)
+    STA_d   (0x06)
+    LDA_al  (0xC3F06E)
+    STA_d   (0x08)
+
+    LDA_dly (0x06)    // Get the width of this character
+    AND_i   (0x00FF)
+    STA_d   (0x22)    // Store in $22 (used in the original code as the width variable)
+
+    LDA_al  (0xC3F070) // RESTORE ORIGINAL CODE
+    RTL
 }
 
 // <------------------------------------------------------------------------------------------------------------------------------>
@@ -451,7 +439,8 @@ compatibility_naming_skip_2: {
 
 // Code related to limiting the width of the names in pixels to fit into vanilla windows.
 
-define MAX_LENGTH_ALLOWED = 40 
+define MAX_LENGTH_ALLOWED = 40            // Measured in pixels.
+define MAX_LENGTH_ALLOWED_FAV_FOOD = 56   // Measured in pixels.
 
 ROM[0xC4432B] = { JML(run_new_naming_logic) NOP NOP }
 
@@ -469,19 +458,30 @@ run_new_naming_logic: {
 	INC
 	
 	JSL(0xC43E31) // Return string length, measured in pixels.
-	
+
+	LDX_d(0x1A)
+	CPX_i(favorite_food.FAV_FOOD_LENGTH)	// Check if we're inputting the favorite food's name.
+	BEQ_a(_favorite_food)
+
 	CMP_i(MAX_LENGTH_ALLOWED) // Compare it to the allowed maximum.
 	BEQ_a(_allow)
 	BCC_a(_allow)
+
+	BRA_a(_dont_allow)
 	
-	_dont_allow:
+_favorite_food:
+	CMP_i(MAX_LENGTH_ALLOWED_FAV_FOOD)	// Compare it to the allowed maximum.
+	BEQ_a(_allow)
+	BCC_a(_allow)
+
+_dont_allow:
 	LDX_a(0x9662)
 	STZ_x(0x1B86) // Undo the initial writing.
 	
 	LDA_i(1)
 	JML(0xC444F9) // Return without writing.
 	
-	_allow:
+_allow:
 	LDA_d(0x1C)
 	
 	// Run normal code and return.

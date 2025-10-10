@@ -1,15 +1,22 @@
 import "../essential/asm65816.ccs"
-import "../essential/jsl_rts.ccs"
+import "../essential/ccexpand.ccs"
 
-define cc_argv   = 0x97BA // Control code argument vector
-define cc_argc   = 0x97CA // Control code argument count
+// cc_asmcall
+// By Catador
+// Modified by cooprocks123e to fit with ccexpand
 
-command adr24(ptr) "[{byte[0] ptr} {byte[1] ptr} {byte[2] ptr}]"
+command cc_asmcall(routine, ret_type) "[1A 0C {adr24(routine)} {byte ret_type}]"
 
-command cc_asmcall(routine, ret_type) "[1F 60 {adr24(routine)} {byte ret_type}]"
+// 'ret_type' definitions for 'cc_asmcall'
+define RET_NONE        = 0x00
+define RET_RESULT      = 0x01
+define RET_ARG         = 0x02
+define RET_COUNTER     = 0x03
+define RET_RESULT_LONG = 0x81
+define RET_ARG_LONG    = 0x82
 
 /*
- * Replaces the unused control code [1F 60 XX] with:
+ * Replaces an unused control code with:
  *   cc_asmcall(adr24 routine, byte ret_type)
  *
  * Where:
@@ -34,54 +41,20 @@ command cc_asmcall(routine, ret_type) "[1F 60 {adr24(routine)} {byte ret_type}]"
  *   0x83 = COUNTER register, 16-bit number (truncated because the COUNTER register is a 16-bit register)
 */
 
-// 'ret_type' definitions for 'cc_asmcall'
-define RET_NONE        = 0x00
-define RET_RESULT      = 0x01
-define RET_ARG         = 0x02
-define RET_COUNTER     = 0x03
-define RET_RESULT_LONG = 0x81
-define RET_ARG_LONG    = 0x82
 
 define SetTBoxCounter = 0xC10443
 define SetTBoxResult  = 0xC1045D
 define SetTBoxArg     = 0xC10489
 
-
-define ENTRY_POINT = 0xC15494 // Entry point of control code [1F 60]
-ROM[ENTRY_POINT] = {
-            JSL   (CC_AsmCall)
-            RTS   // Must end in RTS
-
-            // Fill remaining unused bytes with NOP (5 bytes)
-            NOP NOP NOP NOP NOP
-}
-
-CC_AsmCall: {
-            REP   (0x30)
-            LDY_a (cc_argc)
-            CPY_i (3)
-            BCS_a (DoCall) // Branch if fetched 3 bytes plus current byte
-              SEP   (0x20)
-              TXA                 // Current byte
-              STA_y (cc_argv)
-              REP   (0x20)
-              INC_a (cc_argc)     // Increment argument count
-              LDA_i (ENTRY_POINT) // Return pointer to self (to fetch the next byte)
-              RTL
-
-DoCall:     // Allocate local variables
-            REP   (0x31)
-            PHD
-            TDC
-            ADC_i (-0x12)    // 0x12 bytes
-            TCD
+CC_code_AsmCall: M_EB_Function_Wrapper({
+            LDY_i (0x0004)
+            JSL   (R_Read_Parameter_Bytes)
 
             SEP   (0x10)
-            STX_d (0x00)     // Store 'ret_type'
 
-            LDA_a (0x97BC)   // cc_argv+2 (I could only wish CCScript accepted compile-time math expressions...)
+            LDA_a (D_cc_argv_2)   // D_cc_argv+2 (I could only wish CCScript accepted compile-time math expressions...)
             STA_a (0x0A5C)
-            LDA_a (cc_argv)
+            LDA_a (D_cc_argv)
             STA_a (0x0A5A)
             REP   (0x30)     // Call with 16-bit accumulator/indexes
             JSL   (0xC09D9E) // Long ASM call from $0A5A
@@ -91,13 +64,13 @@ DoCall:     // Allocate local variables
             STZ_d (0x10)     // Clear high byte
 
             SEP   (0x20)
-            LDA_d (0x00)     // Load 'ret_type'
+            LDA_a (D_cc_argv_3)// Load 'ret_type'
             BPL_a (NotLong)  // Check the 'l' bit
               LDX_d (0x06) // Low word of 32-bit return value
               STX_d (0x0E)
               LDX_d (0x08) // High word of 32-bit return value
               STX_d (0x10)
-NotLong:    LDA_d (0x00)     // Load 'ret_type'
+NotLong:    LDA_a (D_cc_argv_3)// Load 'ret_type'
             AND_8 (0x03)     // mask only 'r' bits
             BEQ_a (Exit)     // If register == 0, don't store the return value anywhere
             DEC
@@ -107,16 +80,13 @@ NotLong:    LDA_d (0x00)     // Load 'ret_type'
 
             // If we reached here, then register == 3 (store to COUNTER) register
 ToCounter:  LDA_d (0x0E)   // Load low word of return value into accumulator
-            JSL_RTS_C1(SetTBoxCounter) // Set COUNTER register to this value
+            M_JSL_RTS_C1(SetTBoxCounter) // Set COUNTER register to this value
             BRA_a (Exit)
 
-ToArg:      JSL_RTS_C1(SetTBoxArg)
+ToArg:      M_JSL_RTS_C1(SetTBoxArg)
             BRA_a (Exit)
 
-ToResult:   JSL_RTS_C1(SetTBoxResult)
+ToResult:   M_JSL_RTS_C1(SetTBoxResult)
 
 Exit:       REP   (0x30)
-            LDA_i (0)        // Return NULL (end CC processing)
-            PLD
-            RTL
-}
+})

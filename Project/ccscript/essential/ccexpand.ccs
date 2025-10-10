@@ -1,5 +1,6 @@
 import "../essential/asm65816.ccs"
 import "../essential/fade_tools.ccs"
+import "../essential/cc_asmcall.ccs"
 import "../essential/cc_char_in_party.ccs"
 import "../redux/goods_menu_equip.ccs"
 
@@ -35,7 +36,7 @@ import "../redux/goods_menu_equip.ccs"
 CodeTable: {
   long Original1A00 // [1A 00] -- character select menu, no cancel
   long Original1A01 // [1A 01] -- character select menu, can cancel
-  long DoNothing // [1A 02]
+  long SwirlDisplayRGB // [1A 02]
   long DoNothing // [1A 03]
   long Original1A04 // [1A 04] -- unused
   long Original1A05 // [1A 05] -- display character inventory
@@ -45,7 +46,7 @@ CodeTable: {
   long Original1A09 // [1A 09] -- unused
   long Original1A0A // [1A 0A] -- something about phones
   long Original1A0B // [1A 0B] -- unused
-  long SwirlDisplayRGB // [1A 0C]
+  long CC_code_AsmCall // [1A 0C]
   long CC_CustomFadeout // [1A 0D]
   long CC_CustomFadein  // [1A 0E]
   long DoNothing // [1A 0F]
