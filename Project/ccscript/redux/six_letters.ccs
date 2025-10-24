@@ -33,24 +33,24 @@ import "../essential/asm65816.ccs"
 // is also used in the same project.
 
 // BEGIN - STANDALONE
-
+/*
 	define RAM_NAMES = 0xB630
 	define RAM_NAME_NESS = 0xB630
 	define RAM_NAME_PAULA = 0xB637
 	define RAM_NAME_JEFF = 0xB63E
 	define RAM_NAME_POO = 0xB645
 	apply_save_patch
-
+*/
 // END - STANDALONE
 
 // BEGIN - WITH EXPAND_FLAGS
-/*
+
 	define RAM_NAMES = 0xB680
 	define RAM_NAME_NESS = 0xB680
 	define RAM_NAME_PAULA = 0xB687
 	define RAM_NAME_JEFF = 0xB68E
 	define RAM_NAME_POO = 0xB695
-*/
+
 // END - WITH EXPAND_FLAGS
 
 define NAMES_SIZE = 7
@@ -344,10 +344,22 @@ ROM[0xC455ED] = "[06 {short RAM_NAME_POO}]"
 // Render 5 pixels instead of 6 for each letter.
 // ROM[0xC47CE4] = LDA_i(5)
 
-// Fonts
+// Fonts 
 ROM[0xC47D42] = JSL (StatusFont_WidthHack)
 
 StatusFont_WidthHack: { // Y is always the current character to be printed in this case
+    PHY
+    LDA_d(0x04)
+    LDY_i(NAMES_SIZE)
+    JSL(0xC08FF7)
+    CLC
+    ADC_i(RAM_NAMES)
+    TAX
+    PLY
+    
+    LDA_x(5)
+    BEQ_a(_render6) // If there isn't a 6th character, use a fixed width of 6 pixels.
+
     // Get the pointer to the status font width table in $06
     LDA_al  (0xC3F06C)
     STA_d   (0x06)
@@ -360,6 +372,14 @@ StatusFont_WidthHack: { // Y is always the current character to be printed in th
 
     LDA_al  (0xC3F070) // RESTORE ORIGINAL CODE
     RTL
+    
+    _render6:
+    LDA_i(6)
+    STA_d(0x22)
+    
+    LDA_al  (0xC3F070) // RESTORE ORIGINAL CODE
+    RTL
+    
 }
 
 // <------------------------------------------------------------------------------------------------------------------------------>
