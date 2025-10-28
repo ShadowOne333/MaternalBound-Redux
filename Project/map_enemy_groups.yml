@@ -1,12 +1,13 @@
 0:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 0, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#000000'
 1:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 1, Probability: 2}
     1: {Enemy Group: 2, Probability: 3}
@@ -18,8 +19,9 @@
     2: {Enemy Group: 6, Probability: 2}
     3: {Enemy Group: 7, Probability: 2}
   Sub-Group 2 Rate: 8
+  EBME_Colour: '#0b1e15'
 2:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 1, Probability: 2}
     1: {Enemy Group: 2, Probability: 3}
@@ -31,8 +33,9 @@
     2: {Enemy Group: 6, Probability: 2}
     3: {Enemy Group: 7, Probability: 2}
   Sub-Group 2 Rate: 8
+  EBME_Colour: '#169c0a'
 3:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 1, Probability: 3}
     1: {Enemy Group: 2, Probability: 3}
@@ -44,8 +47,9 @@
     2: {Enemy Group: 6, Probability: 2}
     3: {Enemy Group: 7, Probability: 2}
   Sub-Group 2 Rate: 8
+  EBME_Colour: '#821a1f'
 4:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 3, Probability: 6}
     1: {Enemy Group: 2, Probability: 2}
@@ -56,8 +60,9 @@
     2: {Enemy Group: 6, Probability: 2}
     3: {Enemy Group: 7, Probability: 2}
   Sub-Group 2 Rate: 8
+  EBME_Colour: '#8d9814'
 5:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 1, Probability: 3}
     1: {Enemy Group: 2, Probability: 3}
@@ -69,8 +74,9 @@
     2: {Enemy Group: 6, Probability: 2}
     3: {Enemy Group: 7, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#991609'
 6:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 2, Probability: 4}
     1: {Enemy Group: 1, Probability: 3}
@@ -78,16 +84,18 @@
   Sub-Group 1 Rate: 5
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#04941e'
 7:
-  Event Flag: 0x84
+  Event Flag: 132
   Sub-Group 1:
     0: {Enemy Group: 1, Probability: 4}
     1: {Enemy Group: 3, Probability: 4}
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#101293'
 8:
-  Event Flag: 0x40
+  Event Flag: 64
   Sub-Group 1:
     0: {Enemy Group: 8, Probability: 3}
     1: {Enemy Group: 9, Probability: 2}
@@ -96,8 +104,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1b9088'
 9:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
@@ -106,8 +115,9 @@
     2: {Enemy Group: 17, Probability: 2}
     3: {Enemy Group: 18, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#870e9d'
 10:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1:
     0: {Enemy Group: 12, Probability: 3}
     1: {Enemy Group: 13, Probability: 3}
@@ -119,8 +129,9 @@
     2: {Enemy Group: 17, Probability: 2}
     3: {Enemy Group: 18, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#928c92'
 11:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1:
     0: {Enemy Group: 12, Probability: 3}
     1: {Enemy Group: 13, Probability: 2}
@@ -132,8 +143,9 @@
     2: {Enemy Group: 17, Probability: 2}
     3: {Enemy Group: 18, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#9e0a87'
 12:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1:
     0: {Enemy Group: 19, Probability: 0}
     1: {Enemy Group: 20, Probability: 8}
@@ -141,8 +153,9 @@
   Sub-Group 2:
     0: {Enemy Group: 25, Probability: 8}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#09889d'
 13:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1:
     0: {Enemy Group: 20, Probability: 8}
   Sub-Group 1 Rate: 100
@@ -150,8 +163,9 @@
     0: {Enemy Group: 23, Probability: 0}
     1: {Enemy Group: 25, Probability: 8}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#150712'
 14:
-  Event Flag: 0xf
+  Event Flag: 15
   Sub-Group 1:
     0: {Enemy Group: 26, Probability: 8}
   Sub-Group 1 Rate: 90
@@ -160,31 +174,35 @@
     1: {Enemy Group: 28, Probability: 0}
     2: {Enemy Group: 29, Probability: 3}
   Sub-Group 2 Rate: 90
+  EBME_Colour: '#008507'
 15:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 30, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8c031c'
 16:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 31, Probability: 5}
     1: {Enemy Group: 32, Probability: 3}
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#978111'
 17:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 35, Probability: 2}
     1: {Enemy Group: 33, Probability: 6}
   Sub-Group 1 Rate: 12
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#831f06'
 18:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 40, Probability: 4}
     1: {Enemy Group: 38, Probability: 2}
@@ -192,8 +210,9 @@
   Sub-Group 1 Rate: 5
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0e9d1b'
 19:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 40, Probability: 2}
     1: {Enemy Group: 39, Probability: 2}
@@ -203,32 +222,36 @@
   Sub-Group 1 Rate: 5
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1a1b90'
 20:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 34, Probability: 2}
     1: {Enemy Group: 35, Probability: 6}
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#059985'
 21:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 41, Probability: 2}
     1: {Enemy Group: 42, Probability: 6}
   Sub-Group 1 Rate: 12
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#91179a'
 22:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 41, Probability: 4}
     1: {Enemy Group: 42, Probability: 4}
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9c958f'
 23:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 50, Probability: 4}
     1: {Enemy Group: 46, Probability: 1}
@@ -236,8 +259,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#881384'
 24:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 53, Probability: 2}
     1: {Enemy Group: 45, Probability: 2}
@@ -246,8 +270,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#13919a'
 25:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 45, Probability: 1}
     1: {Enemy Group: 47, Probability: 1}
@@ -256,8 +281,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1f100f'
 26:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 43, Probability: 3}
     1: {Enemy Group: 52, Probability: 3}
@@ -265,8 +291,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0a8e04'
 27:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 48, Probability: 2}
     1: {Enemy Group: 44, Probability: 2}
@@ -275,15 +302,17 @@
   Sub-Group 1 Rate: 12
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#960c19'
 28:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 48, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#818a0e'
 29:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 44, Probability: 2}
     1: {Enemy Group: 43, Probability: 2}
@@ -292,8 +321,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8d0803'
 30:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 44, Probability: 2}
     1: {Enemy Group: 43, Probability: 2}
@@ -301,37 +331,42 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#188618'
 31:
-  Event Flag: 0xaf
+  Event Flag: 175
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
     0: {Enemy Group: 54, Probability: 8}
   Sub-Group 2 Rate: 10
+  EBME_Colour: '#04048d'
 32:
-  Event Flag: 0xaf
+  Event Flag: 175
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
     0: {Enemy Group: 55, Probability: 8}
   Sub-Group 2 Rate: 7
+  EBME_Colour: '#0f8282'
 33:
-  Event Flag: 0xaf
+  Event Flag: 175
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
     0: {Enemy Group: 55, Probability: 8}
   Sub-Group 2 Rate: 7
+  EBME_Colour: '#9b0097'
 34:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 56, Probability: 5}
     1: {Enemy Group: 57, Probability: 3}
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#869e8c'
 35:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 60, Probability: 3}
     1: {Enemy Group: 59, Probability: 3}
@@ -339,8 +374,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#921c82'
 36:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 59, Probability: 3}
     1: {Enemy Group: 58, Probability: 3}
@@ -348,8 +384,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1d9a97'
 37:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 58, Probability: 3}
     1: {Enemy Group: 60, Probability: 3}
@@ -357,15 +394,17 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#09190c'
 38:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 60, Probability: 8}
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#149701'
 39:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 61, Probability: 2}
     1: {Enemy Group: 63, Probability: 2}
@@ -376,8 +415,9 @@
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#801516'
 40:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 61, Probability: 2}
     1: {Enemy Group: 63, Probability: 2}
@@ -388,8 +428,9 @@
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8b930b'
 41:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 66, Probability: 1}
     1: {Enemy Group: 67, Probability: 1}
@@ -398,8 +439,9 @@
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#971100'
 42:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 70, Probability: 1}
     1: {Enemy Group: 71, Probability: 1}
@@ -409,23 +451,26 @@
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#028f15'
 43:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 75, Probability: 8}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0e0d8a'
 44:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 76, Probability: 5}
     1: {Enemy Group: 77, Probability: 3}
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#198b9f'
 45:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 84, Probability: 5}
     1: {Enemy Group: 85, Probability: 3}
@@ -433,8 +478,9 @@
   Sub-Group 2:
     0: {Enemy Group: 99, Probability: 8}
   Sub-Group 2 Rate: 15
+  EBME_Colour: '#850994'
 46:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 78, Probability: 1}
     1: {Enemy Group: 81, Probability: 1}
@@ -446,8 +492,9 @@
     1: {Enemy Group: 95, Probability: 3}
     2: {Enemy Group: 93, Probability: 2}
   Sub-Group 2 Rate: 15
+  EBME_Colour: '#908789'
 47:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 80, Probability: 3}
     1: {Enemy Group: 83, Probability: 3}
@@ -459,8 +506,9 @@
     2: {Enemy Group: 94, Probability: 2}
     3: {Enemy Group: 101, Probability: 2}
   Sub-Group 2 Rate: 15
+  EBME_Colour: '#9c059f'
 48:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 86, Probability: 2}
     1: {Enemy Group: 82, Probability: 2}
@@ -473,8 +521,9 @@
     2: {Enemy Group: 102, Probability: 2}
     3: {Enemy Group: 94, Probability: 2}
   Sub-Group 2 Rate: 40
+  EBME_Colour: '#078394'
 49:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 90, Probability: 2}
     1: {Enemy Group: 89, Probability: 3}
@@ -484,16 +533,18 @@
     0: {Enemy Group: 97, Probability: 6}
     1: {Enemy Group: 102, Probability: 2}
   Sub-Group 2 Rate: 40
+  EBME_Colour: '#130209'
 50:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 103, Probability: 6}
     1: {Enemy Group: 104, Probability: 2}
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1e801e'
 51:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 105, Probability: 1}
     1: {Enemy Group: 106, Probability: 1}
@@ -503,14 +554,16 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8a1e13'
 52:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#959c08'
 53:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 113, Probability: 2}
     1: {Enemy Group: 117, Probability: 1}
@@ -522,8 +575,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#011a1d'
 54:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 109, Probability: 2}
     1: {Enemy Group: 112, Probability: 1}
@@ -534,8 +588,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0c9812'
 55:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 109, Probability: 2}
     1: {Enemy Group: 119, Probability: 1}
@@ -547,16 +602,18 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#181687'
 56:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 125, Probability: 4}
     1: {Enemy Group: 126, Probability: 4}
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#83949c'
 57:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 126, Probability: 1}
     1: {Enemy Group: 125, Probability: 2}
@@ -565,8 +622,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8f1291'
 58:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 124, Probability: 4}
     1: {Enemy Group: 127, Probability: 1}
@@ -575,8 +633,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9a9087'
 59:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 129, Probability: 1}
     1: {Enemy Group: 131, Probability: 2}
@@ -586,8 +645,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#060e9c'
 60:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 129, Probability: 1}
     1: {Enemy Group: 131, Probability: 2}
@@ -597,8 +657,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#118c91'
 61:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 134, Probability: 2}
     1: {Enemy Group: 135, Probability: 4}
@@ -606,8 +667,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1d0b06'
 62:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 137, Probability: 4}
     1: {Enemy Group: 138, Probability: 2}
@@ -615,8 +677,9 @@
   Sub-Group 1 Rate: 5
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#88891b'
 63:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 146, Probability: 2}
     1: {Enemy Group: 145, Probability: 2}
@@ -627,8 +690,9 @@
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#940710'
 64:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 146, Probability: 2}
     1: {Enemy Group: 148, Probability: 1}
@@ -640,8 +704,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9f8505'
 65:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 153, Probability: 4}
     1: {Enemy Group: 151, Probability: 3}
@@ -649,8 +714,9 @@
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0b031a'
 66:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 153, Probability: 4}
     1: {Enemy Group: 151, Probability: 2}
@@ -659,8 +725,9 @@
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#16810f'
 67:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 153, Probability: 4}
     1: {Enemy Group: 151, Probability: 3}
@@ -668,8 +735,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#019f84'
 68:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 154, Probability: 2}
     1: {Enemy Group: 155, Probability: 3}
@@ -677,8 +745,9 @@
   Sub-Group 1 Rate: 18
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8d1d99'
 69:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 157, Probability: 2}
     1: {Enemy Group: 160, Probability: 2}
@@ -687,8 +756,9 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#989b8e'
 70:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 157, Probability: 2}
     1: {Enemy Group: 160, Probability: 2}
@@ -698,8 +768,9 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#841984'
 71:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 165, Probability: 2}
     1: {Enemy Group: 157, Probability: 2}
@@ -708,8 +779,9 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0f9799'
 72:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 157, Probability: 2}
     1: {Enemy Group: 164, Probability: 2}
@@ -718,8 +790,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1b158e'
 73:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 166, Probability: 3}
     1: {Enemy Group: 158, Probability: 2}
@@ -727,8 +800,9 @@
   Sub-Group 1 Rate: 3
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#069403'
 74:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 159, Probability: 2}
     1: {Enemy Group: 167, Probability: 2}
@@ -737,15 +811,17 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#921218'
 75:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 170, Probability: 8}
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9d900d'
 76:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 170, Probability: 5}
     1: {Enemy Group: 171, Probability: 2}
@@ -753,8 +829,9 @@
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#890e02'
 77:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 170, Probability: 4}
     1: {Enemy Group: 171, Probability: 3}
@@ -762,8 +839,9 @@
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#148c17'
 78:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 171, Probability: 4}
     1: {Enemy Group: 170, Probability: 3}
@@ -771,8 +849,9 @@
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#000a0c'
 79:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 171, Probability: 5}
     1: {Enemy Group: 170, Probability: 2}
@@ -780,8 +859,9 @@
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0b8881'
 80:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 177, Probability: 3}
     1: {Enemy Group: 176, Probability: 3}
@@ -790,8 +870,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#970696'
 81:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 178, Probability: 2}
     1: {Enemy Group: 175, Probability: 1}
@@ -801,8 +882,9 @@
   Sub-Group 1 Rate: 50
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#82848c'
 82:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 179, Probability: 3}
     1: {Enemy Group: 180, Probability: 2}
@@ -811,8 +893,9 @@
   Sub-Group 1 Rate: 70
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8e0281'
 83:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 180, Probability: 1}
     1: {Enemy Group: 181, Probability: 1}
@@ -822,8 +905,9 @@
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#198096'
 84:
-  Event Flag: 0xe
+  Event Flag: 14
   Sub-Group 1:
     0: {Enemy Group: 183, Probability: 3}
     1: {Enemy Group: 182, Probability: 2}
@@ -835,8 +919,9 @@
     2: {Enemy Group: 189, Probability: 3}
     3: {Enemy Group: 191, Probability: 1}
   Sub-Group 2 Rate: 60
+  EBME_Colour: '#051e8b'
 85:
-  Event Flag: 0xe
+  Event Flag: 14
   Sub-Group 1:
     0: {Enemy Group: 185, Probability: 2}
     1: {Enemy Group: 182, Probability: 3}
@@ -847,8 +932,9 @@
     1: {Enemy Group: 192, Probability: 3}
     2: {Enemy Group: 193, Probability: 3}
   Sub-Group 2 Rate: 60
+  EBME_Colour: '#109d00'
 86:
-  Event Flag: 0xe
+  Event Flag: 14
   Sub-Group 1:
     0: {Enemy Group: 186, Probability: 4}
     1: {Enemy Group: 184, Probability: 4}
@@ -858,8 +944,9 @@
     1: {Enemy Group: 194, Probability: 2}
     2: {Enemy Group: 193, Probability: 2}
   Sub-Group 2 Rate: 60
+  EBME_Colour: '#9c1b15'
 87:
-  Event Flag: 0xe
+  Event Flag: 14
   Sub-Group 1:
     0: {Enemy Group: 185, Probability: 4}
     1: {Enemy Group: 186, Probability: 4}
@@ -869,16 +956,18 @@
     1: {Enemy Group: 192, Probability: 3}
     2: {Enemy Group: 195, Probability: 2}
   Sub-Group 2 Rate: 65
+  EBME_Colour: '#87990a'
 88:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 202, Probability: 6}
     1: {Enemy Group: 204, Probability: 2}
   Sub-Group 1 Rate: 55
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#93171f'
 89:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 202, Probability: 2}
     1: {Enemy Group: 204, Probability: 2}
@@ -887,8 +976,9 @@
   Sub-Group 1 Rate: 35
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1e9514'
 90:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 205, Probability: 2}
     1: {Enemy Group: 198, Probability: 4}
@@ -896,56 +986,63 @@
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0a1309'
 91:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 197, Probability: 5}
     1: {Enemy Group: 203, Probability: 3}
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#15911e'
 92:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 203, Probability: 6}
     1: {Enemy Group: 202, Probability: 2}
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#810f93'
 93:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 199, Probability: 5}
     1: {Enemy Group: 201, Probability: 3}
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8c8d89'
 94:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 199, Probability: 7}
     1: {Enemy Group: 201, Probability: 1}
   Sub-Group 1 Rate: 65
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#980b9e'
 95:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 199, Probability: 6}
     1: {Enemy Group: 201, Probability: 2}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#038993'
 96:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 201, Probability: 4}
     1: {Enemy Group: 199, Probability: 4}
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0f0788'
 97:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 198, Probability: 3}
     1: {Enemy Group: 200, Probability: 3}
@@ -953,15 +1050,17 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1a859d'
 98:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 206, Probability: 8}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#860412'
 99:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 211, Probability: 2}
     1: {Enemy Group: 207, Probability: 2}
@@ -970,8 +1069,9 @@
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#918207'
 100:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 213, Probability: 4}
     1: {Enemy Group: 214, Probability: 2}
@@ -979,8 +1079,9 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9d001c'
 101:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 212, Probability: 3}
     1: {Enemy Group: 209, Probability: 2}
@@ -990,16 +1091,18 @@
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#089e11'
 102:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 218, Probability: 5}
     1: {Enemy Group: 221, Probability: 3}
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#141c06'
 103:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 216, Probability: 2}
     1: {Enemy Group: 215, Probability: 3}
@@ -1008,8 +1111,9 @@
   Sub-Group 1 Rate: 36
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1f9a1b'
 104:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 218, Probability: 2}
     1: {Enemy Group: 219, Probability: 2}
@@ -1018,8 +1122,9 @@
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8b1891'
 105:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 216, Probability: 4}
     1: {Enemy Group: 215, Probability: 3}
@@ -1027,8 +1132,9 @@
   Sub-Group 1 Rate: 36
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#969686'
 106:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 219, Probability: 2}
     1: {Enemy Group: 221, Probability: 3}
@@ -1036,23 +1142,26 @@
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#02149b'
 107:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 221, Probability: 4}
     1: {Enemy Group: 220, Probability: 4}
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0d9290'
 108:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 222, Probability: 8}
   Sub-Group 1 Rate: 70
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#191085'
 109:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 225, Probability: 4}
     1: {Enemy Group: 224, Probability: 3}
@@ -1060,8 +1169,9 @@
   Sub-Group 1 Rate: 75
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#848e9a'
 110:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 227, Probability: 4}
     1: {Enemy Group: 226, Probability: 3}
@@ -1069,16 +1179,18 @@
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#900d0f'
 111:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 235, Probability: 4}
     1: {Enemy Group: 234, Probability: 4}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9b8b04'
 112:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 224, Probability: 4}
     1: {Enemy Group: 231, Probability: 3}
@@ -1086,8 +1198,9 @@
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#070919'
 113:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 230, Probability: 4}
     1: {Enemy Group: 228, Probability: 3}
@@ -1095,8 +1208,9 @@
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#12870e'
 114:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1:
     0: {Enemy Group: 229, Probability: 2}
     1: {Enemy Group: 232, Probability: 2}
@@ -1105,8 +1219,9 @@
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1e0503'
 115:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 236, Probability: 2}
     1: {Enemy Group: 237, Probability: 1}
@@ -1115,8 +1230,9 @@
   Sub-Group 1 Rate: 8
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#898318'
 116:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 240, Probability: 1}
     1: {Enemy Group: 241, Probability: 1}
@@ -1126,16 +1242,18 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#95018e'
 117:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 247, Probability: 4}
     1: {Enemy Group: 248, Probability: 4}
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#809f83'
 118:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 245, Probability: 4}
     1: {Enemy Group: 247, Probability: 2}
@@ -1143,8 +1261,9 @@
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0c1d98'
 119:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 247, Probability: 3}
     1: {Enemy Group: 248, Probability: 2}
@@ -1153,16 +1272,18 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#179b8d'
 120:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 252, Probability: 6}
     1: {Enemy Group: 256, Probability: 2}
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#031982'
 121:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 252, Probability: 4}
     1: {Enemy Group: 257, Probability: 3}
@@ -1170,16 +1291,18 @@
   Sub-Group 1 Rate: 25
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8e9797'
 122:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 252, Probability: 6}
     1: {Enemy Group: 249, Probability: 2}
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9a160c'
 123:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 253, Probability: 3}
     1: {Enemy Group: 251, Probability: 3}
@@ -1187,8 +1310,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#859401'
 124:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 258, Probability: 3}
     1: {Enemy Group: 259, Probability: 2}
@@ -1197,8 +1321,9 @@
   Sub-Group 1 Rate: 70
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#111216'
 125:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 260, Probability: 2}
     1: {Enemy Group: 261, Probability: 3}
@@ -1207,8 +1332,9 @@
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1c900b'
 126:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 262, Probability: 3}
     1: {Enemy Group: 263, Probability: 3}
@@ -1217,8 +1343,9 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#080e00'
 127:
-  Event Flag: 0x11a
+  Event Flag: 282
   Sub-Group 1:
     0: {Enemy Group: 261, Probability: 4}
     1: {Enemy Group: 250, Probability: 3}
@@ -1226,8 +1353,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#938c15'
 128:
-  Event Flag: 0x39
+  Event Flag: 57
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
@@ -1237,8 +1365,9 @@
     3: {Enemy Group: 269, Probability: 1}
     4: {Enemy Group: 266, Probability: 1}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#9f0a8b'
 129:
-  Event Flag: 0x39
+  Event Flag: 57
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
@@ -1246,8 +1375,9 @@
     1: {Enemy Group: 270, Probability: 2}
     2: {Enemy Group: 271, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#8a8880'
 130:
-  Event Flag: 0x39
+  Event Flag: 57
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
@@ -1256,14 +1386,16 @@
     2: {Enemy Group: 272, Probability: 2}
     3: {Enemy Group: 266, Probability: 2}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#160695'
 131:
-  Event Flag: 0x39
+  Event Flag: 57
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#01848a'
 132:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 273, Probability: 2}
     1: {Enemy Group: 274, Probability: 2}
@@ -1273,8 +1405,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0d029f'
 133:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 278, Probability: 3}
     1: {Enemy Group: 279, Probability: 2}
@@ -1284,8 +1417,9 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#988094'
 134:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 283, Probability: 3}
     1: {Enemy Group: 284, Probability: 2}
@@ -1294,45 +1428,51 @@
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#839f09'
 135:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 287, Probability: 4}
     1: {Enemy Group: 288, Probability: 4}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8f1d1e'
 136:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 289, Probability: 8}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1a9b13'
 137:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 290, Probability: 3}
     1: {Enemy Group: 291, Probability: 5}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#061908'
 138:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 292, Probability: 8}
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#11971d'
 139:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 293, Probability: 8}
   Sub-Group 1 Rate: 20
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9d1513'
 140:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 294, Probability: 3}
     1: {Enemy Group: 295, Probability: 2}
@@ -1341,105 +1481,119 @@
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#889388'
 141:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 298, Probability: 8}
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#94119d'
 142:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 299, Probability: 5}
     1: {Enemy Group: 300, Probability: 3}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1f8f92'
 143:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 303, Probability: 4}
     1: {Enemy Group: 307, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0b0d87'
 144:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 304, Probability: 4}
     1: {Enemy Group: 306, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#168b9c'
 145:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 310, Probability: 4}
     1: {Enemy Group: 313, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#820991'
 146:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 309, Probability: 4}
     1: {Enemy Group: 322, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8d8806'
 147:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 309, Probability: 4}
     1: {Enemy Group: 312, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#99061b'
 148:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1:
     0: {Enemy Group: 309, Probability: 4}
     1: {Enemy Group: 312, Probability: 4}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#048410'
 149:
-  Event Flag: 0x11
+  Event Flag: 17
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#100205'
 150:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 323, Probability: 8}
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1b801a'
 151:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#871e10'
 152:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 324, Probability: 4}
     1: {Enemy Group: 325, Probability: 4}
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#929c85'
 153:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 326, Probability: 8}
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9e1a9a'
 154:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 327, Probability: 4}
     1: {Enemy Group: 328, Probability: 2}
@@ -1447,16 +1601,18 @@
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#09988f'
 155:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 330, Probability: 5}
     1: {Enemy Group: 331, Probability: 3}
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#151684'
 156:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 332, Probability: 0}
     1: {Enemy Group: 333, Probability: 0}
@@ -1465,28 +1621,32 @@
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#809499'
 157:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 336, Probability: 5}
     1: {Enemy Group: 337, Probability: 3}
   Sub-Group 1 Rate: 7
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8c128e'
 158:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#979103'
 159:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#030f18'
 160:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 338, Probability: 3}
     1: {Enemy Group: 339, Probability: 3}
@@ -1494,15 +1654,17 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0e8d0d'
 161:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 341, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1a0b02'
 162:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 342, Probability: 2}
     1: {Enemy Group: 343, Probability: 3}
@@ -1510,8 +1672,9 @@
   Sub-Group 1 Rate: 24
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#858918'
 163:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 345, Probability: 1}
     1: {Enemy Group: 346, Probability: 1}
@@ -1520,8 +1683,9 @@
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#91070d'
 164:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 349, Probability: 4}
     1: {Enemy Group: 350, Probability: 2}
@@ -1530,8 +1694,9 @@
   Sub-Group 1 Rate: 32
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9c8582'
 165:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 353, Probability: 2}
     1: {Enemy Group: 354, Probability: 2}
@@ -1540,8 +1705,9 @@
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#080397'
 166:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 357, Probability: 2}
     1: {Enemy Group: 358, Probability: 2}
@@ -1549,24 +1715,27 @@
   Sub-Group 1 Rate: 64
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#13818c'
 167:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 360, Probability: 3}
     1: {Enemy Group: 361, Probability: 5}
   Sub-Group 1 Rate: 64
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1f1f81'
 168:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 362, Probability: 4}
     1: {Enemy Group: 363, Probability: 4}
   Sub-Group 1 Rate: 64
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8a9d96'
 169:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 364, Probability: 3}
     1: {Enemy Group: 365, Probability: 2}
@@ -1574,16 +1743,18 @@
   Sub-Group 1 Rate: 24
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#961b8b'
 170:
-  Event Flag: 0x7e
+  Event Flag: 126
   Sub-Group 1:
     0: {Enemy Group: 367, Probability: 5}
     1: {Enemy Group: 368, Probability: 3}
   Sub-Group 1 Rate: 64
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#819a00'
 171:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 369, Probability: 3}
     1: {Enemy Group: 370, Probability: 3}
@@ -1591,24 +1762,27 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0d1815'
 172:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 372, Probability: 6}
     1: {Enemy Group: 373, Probability: 2}
   Sub-Group 1 Rate: 75
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#18960a'
 173:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 374, Probability: 6}
     1: {Enemy Group: 375, Probability: 2}
   Sub-Group 1 Rate: 60
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#04141f'
 174:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 376, Probability: 3}
     1: {Enemy Group: 377, Probability: 3}
@@ -1616,16 +1790,18 @@
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8f9215'
 175:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 379, Probability: 4}
     1: {Enemy Group: 380, Probability: 4}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9b100a'
 176:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 381, Probability: 3}
     1: {Enemy Group: 382, Probability: 3}
@@ -1633,8 +1809,9 @@
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#868e1f'
 177:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 384, Probability: 3}
     1: {Enemy Group: 385, Probability: 3}
@@ -1642,84 +1819,95 @@
   Sub-Group 1 Rate: 30
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#120c94'
 178:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 387, Probability: 4}
     1: {Enemy Group: 388, Probability: 4}
   Sub-Group 1 Rate: 95
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1d8a89'
 179:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 389, Probability: 5}
     1: {Enemy Group: 390, Probability: 3}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#09089e'
 180:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 391, Probability: 4}
     1: {Enemy Group: 392, Probability: 4}
   Sub-Group 1 Rate: 70
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#948693'
 181:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 393, Probability: 6}
     1: {Enemy Group: 394, Probability: 2}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#800488'
 182:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 395, Probability: 5}
     1: {Enemy Group: 396, Probability: 3}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8b829d'
 183:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 397, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#170112'
 184:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 398, Probability: 8}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#029f07'
 185:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 399, Probability: 8}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0e1d1d'
 186:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 400, Probability: 8}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#999b12'
 187:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 401, Probability: 6}
     1: {Enemy Group: 402, Probability: 2}
   Sub-Group 1 Rate: 80
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#851907'
 188:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 403, Probability: 2}
     1: {Enemy Group: 404, Probability: 2}
@@ -1729,8 +1917,9 @@
   Sub-Group 1 Rate: 72
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#90971c'
 189:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 408, Probability: 2}
     1: {Enemy Group: 409, Probability: 2}
@@ -1740,94 +1929,108 @@
   Sub-Group 1 Rate: 72
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#1c1591'
 190:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 413, Probability: 6}
     1: {Enemy Group: 414, Probability: 2}
   Sub-Group 1 Rate: 10
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#079386'
 191:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 414, Probability: 4}
     1: {Enemy Group: 415, Probability: 4}
   Sub-Group 1 Rate: 16
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#13119b'
 192:
-  Event Flag: 0xaf
+  Event Flag: 175
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
     0: {Enemy Group: 426, Probability: 8}
   Sub-Group 2 Rate: 100
+  EBME_Colour: '#9e8f90'
 193:
-  Event Flag: 0xaf
+  Event Flag: 175
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2:
     0: {Enemy Group: 417, Probability: 8}
   Sub-Group 2 Rate: 8
+  EBME_Colour: '#8a0d85'
 194:
-  Event Flag: 0x47
+  Event Flag: 71
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#958b9a'
 195:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 421, Probability: 8}
   Sub-Group 1 Rate: 40
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#010a0f'
 196:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1: {}
   Sub-Group 1 Rate: 0
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#0c8804'
 197:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 423, Probability: 8}
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#18061a'
 198:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 424, Probability: 8}
   Sub-Group 1 Rate: 15
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#83840f'
 199:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 425, Probability: 8}
   Sub-Group 1 Rate: 90
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#8f0204'
 200:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 428, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#9a8019'
 201:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 429, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#059e8e'
 202:
-  Event Flag: 0x0
+  Event Flag: 0
   Sub-Group 1:
     0: {Enemy Group: 430, Probability: 8}
   Sub-Group 1 Rate: 100
   Sub-Group 2: {}
   Sub-Group 2 Rate: 0
+  EBME_Colour: '#111c83'

@@ -7,7 +7,7 @@
   - 0
   Cost: 2
   Help Text Pointer: data_02.l_0xc539c4
-  Misc Flags: 0
+  Misc Flags: []
   Name: 'Null'
   Type: 255
 1:
@@ -19,7 +19,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53711
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Franklin badge
   Type: 0
 2:
@@ -31,7 +35,11 @@
   - 0
   Cost: 178
   Help Text Pointer: data_02.l_0xc53750
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Teddy bear
   Type: 4
 3:
@@ -43,7 +51,11 @@
   - 0
   Cost: 1198
   Help Text Pointer: data_02.l_0xc53761
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Super plush bear
   Type: 4
 4:
@@ -55,7 +67,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53772
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken machine
   Type: 8
 5:
@@ -67,7 +83,11 @@
   - 0
   Cost: 109
   Help Text Pointer: data_02.l_0xc537bc
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken gadget
   Type: 8
 6:
@@ -79,7 +99,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53809
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken air gun
   Type: 8
 7:
@@ -91,7 +115,11 @@
   - 0
   Cost: 189
   Help Text Pointer: data_02.l_0xc5382a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken spray can
   Type: 8
 8:
@@ -103,7 +131,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc5384d
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken laser
   Type: 8
 9:
@@ -115,7 +147,11 @@
   - 0
   Cost: 149
   Help Text Pointer: data_02.l_0xc53870
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken iron
   Type: 8
 10:
@@ -127,7 +163,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53897
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken pipe
   Type: 8
 11:
@@ -139,7 +179,11 @@
   - 0
   Cost: 218
   Help Text Pointer: data_02.l_0xc538bc
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken cannon
   Type: 8
 12:
@@ -151,7 +195,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc538e0
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken tube
   Type: 8
 13:
@@ -163,7 +211,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53908
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken bazooka
   Type: 8
 14:
@@ -175,7 +227,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53929
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken trumpet
   Type: 8
 15:
@@ -187,7 +243,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53960
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken harmonica
   Type: 8
 16:
@@ -199,7 +259,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc5398e
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Broken antenna
   Type: 8
 17:
@@ -211,7 +275,8 @@
   - 1
   Cost: 18
   Help Text Pointer: data_02.l_0xc539c4
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Cracked bat
   Type: 16
 18:
@@ -223,7 +288,8 @@
   - 1
   Cost: 48
   Help Text Pointer: data_02.l_0xc539d4
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Tee ball bat
   Type: 16
 19:
@@ -235,7 +301,8 @@
   - 1
   Cost: 98
   Help Text Pointer: data_02.l_0xc539e4
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Sand lot bat
   Type: 16
 20:
@@ -247,7 +314,8 @@
   - 1
   Cost: 399
   Help Text Pointer: data_02.l_0xc539f4
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Minor league bat
   Type: 16
 21:
@@ -259,7 +327,8 @@
   - 1
   Cost: 498
   Help Text Pointer: data_02.l_0xc53a04
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Mr. Baseball bat
   Type: 16
 22:
@@ -271,7 +340,8 @@
   - 1
   Cost: 3080
   Help Text Pointer: data_02.l_0xc53a14
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Big league bat
   Type: 16
 23:
@@ -283,7 +353,8 @@
   - 1
   Cost: 1880
   Help Text Pointer: data_02.l_0xc53a47
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Hall of fame bat
   Type: 16
 24:
@@ -295,7 +366,8 @@
   - 1
   Cost: 0
   Help Text Pointer: data_02.l_0xc53a57
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Magicant bat
   Type: 16
 25:
@@ -307,7 +379,8 @@
   - 1
   Cost: 0
   Help Text Pointer: data_02.l_0xc53a67
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Legendary bat
   Type: 16
 26:
@@ -319,7 +392,8 @@
   - 1
   Cost: 2980
   Help Text Pointer: data_02.l_0xc53a77
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Gutsy bat
   Type: 16
 27:
@@ -331,7 +405,8 @@
   - 12
   Cost: 38
   Help Text Pointer: data_02.l_0xc53a9f
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Casey bat
   Type: 16
 28:
@@ -343,7 +418,8 @@
   - 1
   Cost: 56
   Help Text Pointer: data_02.l_0xc53ae6
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Fry pan
   Type: 16
 29:
@@ -355,7 +431,8 @@
   - 1
   Cost: 198
   Help Text Pointer: data_02.l_0xc53af6
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Thick fry pan
   Type: 16
 30:
@@ -367,7 +444,8 @@
   - 1
   Cost: 598
   Help Text Pointer: data_02.l_0xc53b06
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Deluxe fry pan
   Type: 16
 31:
@@ -379,7 +457,8 @@
   - 1
   Cost: 1198
   Help Text Pointer: data_02.l_0xc53b16
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Chef's fry pan
   Type: 16
 32:
@@ -391,7 +470,8 @@
   - 1
   Cost: 1790
   Help Text Pointer: data_02.l_0xc53b26
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: French fry pan
   Type: 16
 33:
@@ -403,7 +483,8 @@
   - 4
   Cost: 4790
   Help Text Pointer: data_02.l_0xc53b36
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Magic fry pan
   Type: 16
 34:
@@ -415,7 +496,8 @@
   - 1
   Cost: 3480
   Help Text Pointer: data_02.l_0xc53b46
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Holy fry pan
   Type: 16
 35:
@@ -427,7 +509,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_02.l_0xc53b56
-  Misc Flags: 8
+  Misc Flags:
+  - poo can use
   Name: Sword of kings
   Type: 16
 36:
@@ -439,7 +522,8 @@
   - 0
   Cost: 110
   Help Text Pointer: data_03.l_0xc53b76
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Pop gun
   Type: 17
 37:
@@ -451,7 +535,8 @@
   - 0
   Cost: 150
   Help Text Pointer: data_03.l_0xc53b86
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Stun gun
   Type: 17
 38:
@@ -463,7 +548,8 @@
   - 0
   Cost: 215
   Help Text Pointer: data_03.l_0xc53b96
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Toy air gun
   Type: 17
 39:
@@ -475,7 +561,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc53ba6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Magnum air gun
   Type: 17
 40:
@@ -487,7 +574,8 @@
   - 0
   Cost: 425
   Help Text Pointer: data_03.l_0xc53bb6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Zip gun
   Type: 17
 41:
@@ -499,7 +587,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc53bc6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Laser gun
   Type: 17
 42:
@@ -511,7 +600,8 @@
   - 0
   Cost: 850
   Help Text Pointer: data_03.l_0xc53bd6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Hyper beam
   Type: 17
 43:
@@ -523,7 +613,8 @@
   - 0
   Cost: 1150
   Help Text Pointer: data_03.l_0xc53be6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Crusher beam
   Type: 17
 44:
@@ -535,7 +626,8 @@
   - 0
   Cost: 1650
   Help Text Pointer: data_03.l_0xc53bf6
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Spectrum beam
   Type: 17
 45:
@@ -547,7 +639,8 @@
   - 0
   Cost: 2300
   Help Text Pointer: data_03.l_0xc53c06
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Death ray
   Type: 17
 46:
@@ -559,7 +652,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc53c16
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Baddest beam
   Type: 17
 47:
@@ -571,7 +665,8 @@
   - 0
   Cost: 4450
   Help Text Pointer: data_03.l_0xc53c26
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Moon beam gun
   Type: 17
 48:
@@ -583,7 +678,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc53c36
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Gaia beam
   Type: 17
 49:
@@ -595,7 +691,11 @@
   - 3
   Cost: 29
   Help Text Pointer: data_03.l_0xc53c46
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Yo-yo
   Type: 17
 50:
@@ -607,7 +707,11 @@
   - 3
   Cost: 89
   Help Text Pointer: data_03.l_0xc53c5f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Slingshot
   Type: 17
 51:
@@ -619,7 +723,11 @@
   - 3
   Cost: 449
   Help Text Pointer: data_03.l_0xc53c7a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bionic slingshot
   Type: 17
 52:
@@ -631,7 +739,11 @@
   - 3
   Cost: 998
   Help Text Pointer: data_03.l_0xc53c95
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Trick yo-yo
   Type: 17
 53:
@@ -643,7 +755,11 @@
   - 3
   Cost: 1148
   Help Text Pointer: data_03.l_0xc53caf
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Combat yo-yo
   Type: 17
 54:
@@ -655,7 +771,11 @@
   - 64
   Cost: 60
   Help Text Pointer: data_03.l_0xc53cc8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Travel charm
   Type: 20
 55:
@@ -667,7 +787,11 @@
   - 128
   Cost: 400
   Help Text Pointer: data_03.l_0xc53cd8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Great charm
   Type: 20
 56:
@@ -679,7 +803,11 @@
   - 192
   Cost: 600
   Help Text Pointer: data_03.l_0xc53d00
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Crystal charm
   Type: 20
 57:
@@ -691,7 +819,11 @@
   - 192
   Cost: 1800
   Help Text Pointer: data_03.l_0xc53d21
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rabbit's foot
   Type: 20
 58:
@@ -703,7 +835,11 @@
   - 3
   Cost: 3000
   Help Text Pointer: data_03.l_0xc53d46
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Flame pendant
   Type: 20
 59:
@@ -715,7 +851,11 @@
   - 12
   Cost: 3000
   Help Text Pointer: data_03.l_0xc53d6a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rain pendant
   Type: 20
 60:
@@ -727,7 +867,11 @@
   - 48
   Cost: 3000
   Help Text Pointer: data_03.l_0xc53d8f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Night pendant
   Type: 20
 61:
@@ -739,7 +883,11 @@
   - 63
   Cost: 5000
   Help Text Pointer: data_03.l_0xc53db8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Sea pendant
   Type: 20
 62:
@@ -751,7 +899,11 @@
   - 255
   Cost: 7000
   Help Text Pointer: data_03.l_0xc53de8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Star pendant
   Type: 20
 63:
@@ -763,7 +915,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc53e23
-  Misc Flags: 8
+  Misc Flags:
+  - poo can use
   Name: Cloak of kings
   Type: 20
 64:
@@ -775,7 +928,11 @@
   - 0
   Cost: 98
   Help Text Pointer: data_03.l_0xc53e4f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cheap bracelet
   Type: 24
 65:
@@ -787,7 +944,11 @@
   - 0
   Cost: 349
   Help Text Pointer: data_03.l_0xc53e5f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Copper bracelet
   Type: 24
 66:
@@ -799,7 +960,11 @@
   - 0
   Cost: 599
   Help Text Pointer: data_03.l_0xc53e6f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Silver bracelet
   Type: 24
 67:
@@ -811,7 +976,11 @@
   - 0
   Cost: 2799
   Help Text Pointer: data_03.l_0xc53e7f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Gold bracelet
   Type: 24
 68:
@@ -823,7 +992,11 @@
   - 0
   Cost: 6899
   Help Text Pointer: data_03.l_0xc53e8f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Platinum band
   Type: 24
 69:
@@ -835,7 +1008,11 @@
   - 0
   Cost: 9998
   Help Text Pointer: data_03.l_0xc53e9f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Diamond band
   Type: 24
 70:
@@ -847,7 +1024,11 @@
   - 1
   Cost: 1590
   Help Text Pointer: data_03.l_0xc53eaf
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pixie's bracelet
   Type: 24
 71:
@@ -859,7 +1040,11 @@
   - 2
   Cost: 1790
   Help Text Pointer: data_03.l_0xc53ec6
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Angel band
   Type: 24
 72:
@@ -871,7 +1056,11 @@
   - 2
   Cost: 1980
   Help Text Pointer: data_03.l_0xc53edd
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Goddess band
   Type: 24
 73:
@@ -883,7 +1072,8 @@
   - 2
   Cost: 0
   Help Text Pointer: data_03.l_0xc53ef4
-  Misc Flags: 8
+  Misc Flags:
+  - poo can use
   Name: Bracer of kings
   Type: 24
 74:
@@ -895,7 +1085,11 @@
   - 0
   Cost: 19
   Help Text Pointer: data_03.l_0xc53f58
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Baseball cap
   Type: 28
 75:
@@ -907,7 +1101,11 @@
   - 0
   Cost: 59
   Help Text Pointer: data_03.l_0xc53f89
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Holmes hat
   Type: 28
 76:
@@ -919,7 +1117,11 @@
   - 0
   Cost: 199
   Help Text Pointer: data_03.l_0xc53fc9
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Mr. Baseball cap
   Type: 28
 77:
@@ -931,7 +1133,11 @@
   - 0
   Cost: 298
   Help Text Pointer: data_03.l_0xc5400a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Hard hat
   Type: 28
 78:
@@ -943,7 +1149,8 @@
   - 0
   Cost: 89
   Help Text Pointer: data_03.l_0xc54055
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Ribbon
   Type: 28
 79:
@@ -955,7 +1162,8 @@
   - 0
   Cost: 179
   Help Text Pointer: data_03.l_0xc54065
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Red ribbon
   Type: 28
 80:
@@ -967,7 +1175,8 @@
   - 0
   Cost: 6980
   Help Text Pointer: data_03.l_0xc54075
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Goddess ribbon
   Type: 28
 81:
@@ -979,7 +1188,11 @@
   - 0
   Cost: 1500
   Help Text Pointer: data_03.l_0xc54085
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Coin of serenity
   Type: 28
 82:
@@ -991,7 +1204,11 @@
   - 0
   Cost: 2000
   Help Text Pointer: data_03.l_0xc54095
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Coin of defense
   Type: 28
 83:
@@ -1003,7 +1220,11 @@
   - 0
   Cost: 6000
   Help Text Pointer: data_03.l_0xc540a5
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky coin
   Type: 28
 84:
@@ -1015,7 +1236,11 @@
   - 0
   Cost: 3500
   Help Text Pointer: data_03.l_0xc540b5
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Talisman coin
   Type: 28
 85:
@@ -1027,7 +1252,11 @@
   - 0
   Cost: 4000
   Help Text Pointer: data_03.l_0xc540c5
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Shiny coin
   Type: 28
 86:
@@ -1039,7 +1268,11 @@
   - 0
   Cost: 6000
   Help Text Pointer: data_03.l_0xc540d5
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Souvenir coin
   Type: 28
 87:
@@ -1051,7 +1284,8 @@
   - 85
   Cost: 0
   Help Text Pointer: data_03.l_0xc540e5
-  Misc Flags: 8
+  Misc Flags:
+  - poo can use
   Name: Diadem of kings
   Type: 28
 88:
@@ -1063,7 +1297,12 @@
   - 0
   Cost: 7
   Help Text Pointer: data_03.l_0xc54106
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cookie
   Type: 32
 89:
@@ -1075,7 +1314,12 @@
   - 0
   Cost: 8
   Help Text Pointer: data_03.l_0xc5411c
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bag of fries
   Type: 32
 90:
@@ -1087,7 +1331,12 @@
   - 0
   Cost: 14
   Help Text Pointer: data_03.l_0xc54133
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Hamburger
   Type: 32
 91:
@@ -1099,7 +1348,12 @@
   - 0
   Cost: 9
   Help Text Pointer: data_03.l_0xc54156
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Boiled egg
   Type: 32
 92:
@@ -1111,7 +1365,13 @@
   - 0
   Cost: 12
   Help Text Pointer: data_03.l_0xc5416d
-  Misc Flags: 159
+  Misc Flags:
+  - item can change
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Fresh Egg
   Type: 32
 93:
@@ -1123,7 +1383,12 @@
   - 0
   Cost: 24
   Help Text Pointer: data_03.l_0xc54197
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Picnic lunch
   Type: 32
 94:
@@ -1135,7 +1400,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_03.l_0xc541cb
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pasta di Summers
   Type: 32
 95:
@@ -1147,7 +1417,12 @@
   - 0
   Cost: 48
   Help Text Pointer: data_03.l_0xc54321
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pizza
   Type: 32
 96:
@@ -1159,7 +1434,12 @@
   - 0
   Cost: 298
   Help Text Pointer: data_03.l_0xc54339
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Chef's special
   Type: 32
 97:
@@ -1171,7 +1451,12 @@
   - 0
   Cost: 238
   Help Text Pointer: data_03.l_0xc543a4
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Large pizza
   Type: 44
 98:
@@ -1183,7 +1468,12 @@
   - 0
   Cost: 100
   Help Text Pointer: data_03.l_0xc543da
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: PSI caramel
   Type: 32
 99:
@@ -1195,7 +1485,12 @@
   - 0
   Cost: 298
   Help Text Pointer: data_03.l_0xc543f5
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Magic truffle
   Type: 32
 100:
@@ -1207,7 +1502,12 @@
   - 0
   Cost: 800
   Help Text Pointer: data_03.l_0xc54451
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Brain food lunch
   Type: 32
 101:
@@ -1219,7 +1519,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc54471
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rock candy
   Type: 32
 102:
@@ -1231,7 +1536,12 @@
   - 0
   Cost: 18
   Help Text Pointer: data_03.l_0xc544af
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Croissant
   Type: 32
 103:
@@ -1243,7 +1553,12 @@
   - 0
   Cost: 12
   Help Text Pointer: data_03.l_0xc544c6
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bread roll
   Type: 32
 104:
@@ -1255,7 +1570,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc544dd
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pak of bubble gum
   Type: 56
 105:
@@ -1267,7 +1586,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc5453e
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Jar of Fly Honey
   Type: 53
 106:
@@ -1279,7 +1602,12 @@
   - 0
   Cost: 4
   Help Text Pointer: data_03.l_0xc545a1
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Can of fruit juice
   Type: 36
 107:
@@ -1291,7 +1619,12 @@
   - 0
   Cost: 78
   Help Text Pointer: data_03.l_0xc545b7
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Royal iced tea
   Type: 36
 108:
@@ -1303,7 +1636,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc54660
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Grownup drink
   Type: 36
 109:
@@ -1315,7 +1653,12 @@
   - 0
   Cost: 648
   Help Text Pointer: data_03.l_0xc546bc
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Kraken soup
   Type: 36
 110:
@@ -1327,7 +1670,12 @@
   - 0
   Cost: 4
   Help Text Pointer: data_03.l_0xc54733
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bottled water
   Type: 36
 111:
@@ -1339,7 +1687,12 @@
   - 0
   Cost: 22
   Help Text Pointer: data_03.l_0xc5475a
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cold remedy
   Type: 36
 112:
@@ -1351,7 +1704,12 @@
   - 0
   Cost: 58
   Help Text Pointer: data_03.l_0xc54789
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Vial of serum
   Type: 36
 113:
@@ -1363,7 +1721,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc547b0
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: IQ capsule
   Type: 36
 114:
@@ -1375,7 +1738,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc547cb
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Guts capsule
   Type: 36
 115:
@@ -1387,7 +1755,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc547e8
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Speed capsule
   Type: 36
 116:
@@ -1399,7 +1772,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc54806
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Vital capsule
   Type: 36
 117:
@@ -1411,7 +1789,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_03.l_0xc54826
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Luck capsule
   Type: 36
 118:
@@ -1423,7 +1806,12 @@
   - 0
   Cost: 2
   Help Text Pointer: data_03.l_0xc54842
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Ketchup packet
   Type: 40
 119:
@@ -1435,7 +1823,12 @@
   - 0
   Cost: 3
   Help Text Pointer: data_03.l_0xc54852
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Sugar packet
   Type: 40
 120:
@@ -1447,8 +1840,13 @@
   - 0
   Cost: 4
   Help Text Pointer: data_03.l_0xc54862
-  Misc Flags: 143
-  Name: Bag of chocochips
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
+  Name: Tin of Cocoa
   Type: 40
 121:
   Action: 249
@@ -1459,7 +1857,12 @@
   - 0
   Cost: 4
   Help Text Pointer: data_03.l_0xc54872
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Carton of milk
   Type: 40
 122:
@@ -1471,7 +1874,12 @@
   - 0
   Cost: 2
   Help Text Pointer: data_03.l_0xc54882
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Sprig of parsley
   Type: 40
 123:
@@ -1483,7 +1891,12 @@
   - 0
   Cost: 3
   Help Text Pointer: data_03.l_0xc54892
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Jar of hot sauce
   Type: 40
 124:
@@ -1495,7 +1908,12 @@
   - 0
   Cost: 2
   Help Text Pointer: data_03.l_0xc548a2
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Salt packet
   Type: 40
 125:
@@ -1507,7 +1925,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc548b2
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Backstage pass
   Type: 59
 126:
@@ -1519,7 +1941,12 @@
   - 0
   Cost: 300
   Help Text Pointer: data_03.l_0xc548fc
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Jar of delisauce
   Type: 40
 127:
@@ -1531,7 +1958,12 @@
   - 0
   Cost: 24
   Help Text Pointer: data_03.l_0xc54952
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Wet towel
   Type: 48
 128:
@@ -1543,7 +1975,12 @@
   - 0
   Cost: 80
   Help Text Pointer: data_03.l_0xc54979
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Refreshing herb
   Type: 48
 129:
@@ -1555,7 +1992,12 @@
   - 0
   Cost: 380
   Help Text Pointer: data_03.l_0xc549c3
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Secret herb
   Type: 48
 130:
@@ -1567,7 +2009,12 @@
   - 0
   Cost: 1780
   Help Text Pointer: data_03.l_0xc549ff
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Horn of life
   Type: 48
 131:
@@ -1579,7 +2026,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc54a3a
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Counter-PSI unit
   Type: 52
 132:
@@ -1591,7 +2039,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc54a6c
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Shield killer
   Type: 52
 133:
@@ -1603,7 +2052,8 @@
   - 0
   Cost: 950
   Help Text Pointer: data_03.l_0xc54aa1
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Bazooka
   Type: 52
 134:
@@ -1615,7 +2065,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_03.l_0xc54af5
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Heavy bazooka
   Type: 52
 135:
@@ -1627,8 +2078,9 @@
   - 0
   Cost: 800
   Help Text Pointer: data_04.l_0xc54b67
-  Misc Flags: 4
-  Name: HP-Sucker
+  Misc Flags:
+  - jeff can use
+  Name: HP-sucker
   Type: 52
 136:
   Action: 176
@@ -1639,8 +2091,9 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc54bb0
-  Misc Flags: 4
-  Name: Hungry HP-Sucker
+  Misc Flags:
+  - jeff can use
+  Name: Hungry HP-sucker
   Type: 52
 137:
   Action: 179
@@ -1651,7 +2104,11 @@
   - 0
   Cost: 630
   Help Text Pointer: data_04.l_0xc54bfa
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Xterminator spray
   Type: 52
 138:
@@ -1663,7 +2120,8 @@
   - 0
   Cost: 420
   Help Text Pointer: data_04.l_0xc54c32
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Slime generator
   Type: 52
 139:
@@ -1675,8 +2133,9 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc54c6d
-  Misc Flags: 4
-  Name: Tofu Machine
+  Misc Flags:
+  - jeff can use
+  Name: Tofu machine
   Type: 52
 140:
   Action: 186
@@ -1687,7 +2146,11 @@
   - 0
   Cost: 2
   Help Text Pointer: data_04.l_0xc54ceb
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Ruler
   Type: 48
 141:
@@ -1699,7 +2162,11 @@
   - 0
   Cost: 98
   Help Text Pointer: data_04.l_0xc54d10
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Snake bag
   Type: 52
 142:
@@ -1711,7 +2178,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc54d99
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Mummy wrap
   Type: 52
 143:
@@ -1723,7 +2195,11 @@
   - 0
   Cost: 2
   Help Text Pointer: data_04.l_0xc54ddc
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Protractor
   Type: 48
 144:
@@ -1735,7 +2211,9 @@
   - 0
   Cost: 29
   Help Text Pointer: data_04.l_0xc54e01
-  Misc Flags: 132
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
   Name: Pencil rocket
   Type: 52
 145:
@@ -1747,7 +2225,9 @@
   - 0
   Cost: 139
   Help Text Pointer: data_04.l_0xc54e20
-  Misc Flags: 132
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
   Name: Pencil rocket x5
   Type: 52
 146:
@@ -1759,7 +2239,9 @@
   - 0
   Cost: 2139
   Help Text Pointer: data_04.l_0xc54e54
-  Misc Flags: 132
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
   Name: Pencil rocket x20
   Type: 52
 147:
@@ -1771,7 +2253,12 @@
   - 0
   Cost: 149
   Help Text Pointer: data_04.l_0xc54ea7
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bomb
   Type: 52
 148:
@@ -1783,7 +2270,12 @@
   - 0
   Cost: 399
   Help Text Pointer: data_04.l_0xc54ef7
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Super bomb
   Type: 52
 149:
@@ -1795,7 +2287,12 @@
   - 0
   Cost: 19
   Help Text Pointer: data_04.l_0xc54f6a
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Insecticide spray
   Type: 52
 150:
@@ -1807,7 +2304,12 @@
   - 0
   Cost: 89
   Help Text Pointer: data_04.l_0xc54fa2
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rust promoter
   Type: 52
 151:
@@ -1819,7 +2321,12 @@
   - 0
   Cost: 289
   Help Text Pointer: data_04.l_0xc54ff0
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rust promoter DX
   Type: 52
 152:
@@ -1831,7 +2338,12 @@
   - 0
   Cost: 2
   Help Text Pointer: data_04.l_0xc55057
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pettenella's socks
   Type: 52
 153:
@@ -1843,7 +2355,12 @@
   - 0
   Cost: 8
   Help Text Pointer: data_04.l_0xc5509e
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Stag beetle
   Type: 52
 154:
@@ -1855,7 +2372,12 @@
   - 0
   Cost: 3
   Help Text Pointer: data_04.l_0xc550e3
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Toothbrush
   Type: 52
 155:
@@ -1867,7 +2389,12 @@
   - 0
   Cost: 39
   Help Text Pointer: data_04.l_0xc55105
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Handbag strap
   Type: 52
 156:
@@ -1879,7 +2406,12 @@
   - 0
   Cost: 290
   Help Text Pointer: data_04.l_0xc5514f
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pharaoh's curse
   Type: 52
 157:
@@ -1891,7 +2423,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5519f
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Defense shower
   Type: 53
 158:
@@ -1903,7 +2436,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc551cd
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Letter from mom
   Type: 59
 159:
@@ -1915,7 +2452,12 @@
   - 0
   Cost: 500
   Help Text Pointer: data_04.l_0xc551ea
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Sudden guts pill
   Type: 53
 160:
@@ -1927,7 +2469,12 @@
   - 0
   Cost: 1000
   Help Text Pointer: data_04.l_0xc55230
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bag of Dragonite
   Type: 53
 161:
@@ -1939,7 +2486,12 @@
   - 0
   Cost: 500
   Help Text Pointer: data_04.l_0xc5528d
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Defense spray
   Type: 53
 162:
@@ -1951,7 +2503,11 @@
   - 0
   Cost: 300
   Help Text Pointer: data_04.l_0xc552c4
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Piggy nose
   Type: 56
 163:
@@ -1963,7 +2519,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc553d7
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: For Sale sign
   Type: 56
 164:
@@ -1975,7 +2535,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55409
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Shyness book
   Type: 59
 165:
@@ -1987,7 +2551,11 @@
   - 0
   Cost: 2
   Help Text Pointer: data_04.l_0xc55433
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Picture postcard
   Type: 56
 166:
@@ -1999,7 +2567,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5546c
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: King banana
   Type: 56
 167:
@@ -2011,7 +2583,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55496
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Letter from Tony
   Type: 59
 168:
@@ -2023,7 +2599,13 @@
   - 0
   Cost: 25
   Help Text Pointer: data_04.l_0xc554b3
-  Misc Flags: 159
+  Misc Flags:
+  - item can change
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Chick
   Type: 56
 169:
@@ -2035,7 +2617,13 @@
   - 0
   Cost: 220
   Help Text Pointer: data_04.l_0xc554cf
-  Misc Flags: 159
+  Misc Flags:
+  - item can change
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Chicken
   Type: 56
 170:
@@ -2047,7 +2635,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc554f6
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Key to the shack
   Type: 59
 171:
@@ -2059,7 +2651,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5551d
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Key to the cabin
   Type: 59
 172:
@@ -2071,7 +2667,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55546
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bad key machine
   Type: 59
 173:
@@ -2083,7 +2683,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5558a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Temporary goods
   Type: 56
 174:
@@ -2095,7 +2699,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc555b8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Zombie paper
   Type: 58
 175:
@@ -2107,7 +2715,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55602
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Hawk eye
   Type: 58
 176:
@@ -2119,7 +2731,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55627
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bicycle
   Type: 58
 177:
@@ -2131,7 +2747,13 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5566b
-  Misc Flags: 111
+  Misc Flags:
+  - cannot be given away
+  - cannot be stored with escargo express
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: ATM card
   Type: 59
 178:
@@ -2143,7 +2765,11 @@
   - 0
   Cost: 12
   Help Text Pointer: data_04.l_0xc5569c
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Show ticket
   Type: 59
 179:
@@ -2155,7 +2781,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc556c1
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Letter from kids
   Type: 59
 180:
@@ -2167,7 +2797,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc556e3
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Suitcase of bills
   Type: 59
 181:
@@ -2179,7 +2813,13 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5570b
-  Misc Flags: 111
+  Misc Flags:
+  - cannot be given away
+  - cannot be stored with escargo express
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Receiver phone
   Type: 59
 182:
@@ -2191,7 +2831,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55740
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Diamond
   Type: 59
 183:
@@ -2203,7 +2847,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5576a
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Signed banana
   Type: 59
 184:
@@ -2215,7 +2863,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55794
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Pencil eraser
   Type: 59
 185:
@@ -2227,7 +2879,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc557e7
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Hieroglyph copy
   Type: 59
 186:
@@ -2239,7 +2895,11 @@
   - 0
   Cost: 4000
   Help Text Pointer: data_04.l_0xc55831
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Meteotite
   Type: 56
 187:
@@ -2251,7 +2911,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc5587e
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Contact lens
   Type: 59
 188:
@@ -2263,7 +2927,12 @@
   - 0
   Cost: 19
   Help Text Pointer: data_04.l_0xc55897
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Hand-Aid
   Type: 48
 189:
@@ -2275,7 +2944,12 @@
   - 0
   Cost: 48
   Help Text Pointer: data_04.l_0xc558ca
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Strawberry tofu
   Type: 32
 190:
@@ -2287,7 +2961,12 @@
   - 0
   Cost: 5
   Help Text Pointer: data_04.l_0xc55915
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Banana
   Type: 32
 191:
@@ -2299,7 +2978,12 @@
   - 0
   Cost: 18
   Help Text Pointer: data_04.l_0xc5592c
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Energy bar
   Type: 32
 192:
@@ -2311,7 +2995,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55943
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Key to the tower
   Type: 59
 193:
@@ -2323,7 +3011,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55957
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Meteorite piece
   Type: 59
 194:
@@ -2335,7 +3027,11 @@
   - 42
   Cost: 4000
   Help Text Pointer: data_04.l_0xc559a8
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Earth pendant
   Type: 20
 195:
@@ -2347,7 +3043,8 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc559d9
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Neutralizer
   Type: 52
 196:
@@ -2359,7 +3056,13 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55ad5
-  Misc Flags: 111
+  Misc Flags:
+  - cannot be given away
+  - cannot be stored with escargo express
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Sound Stone
   Type: 56
 197:
@@ -2371,7 +3074,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55b21
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Exit mouse
   Type: 56
 198:
@@ -2383,7 +3090,12 @@
   - 0
   Cost: 49
   Help Text Pointer: data_04.l_0xc55b79
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Gelato de resort
   Type: 32
 199:
@@ -2395,7 +3107,12 @@
   - 0
   Cost: 220
   Help Text Pointer: data_04.l_0xc55bc1
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Snake
   Type: 52
 200:
@@ -2407,7 +3124,12 @@
   - 0
   Cost: 550
   Help Text Pointer: data_04.l_0xc55c03
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Viper
   Type: 52
 201:
@@ -2419,7 +3141,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55c46
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Brain stone
   Type: 56
 202:
@@ -2431,7 +3157,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55cce
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Town map
   Type: 56
 203:
@@ -2443,8 +3173,12 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55d2e
-  Misc Flags: 15
-  Name: Video Drug
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
+  Name: Video drug
   Type: 56
 204:
   Action: 281
@@ -2455,7 +3189,12 @@
   - 0
   Cost: 50
   Help Text Pointer: data_04.l_0xc55d46
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Suporma
   Type: 56
 205:
@@ -2467,7 +3206,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55d82
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Key to the locker
   Type: 59
 206:
@@ -2479,7 +3222,11 @@
   - 0
   Cost: 2
   Help Text Pointer: data_04.l_0xc55da1
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Insignificant item
   Type: 59
 207:
@@ -2491,7 +3238,12 @@
   - 0
   Cost: 480
   Help Text Pointer: data_04.l_0xc55dc8
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Magic tart
   Type: 32
 208:
@@ -2503,7 +3255,10 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55de0
-  Misc Flags: 104
+  Misc Flags:
+  - cannot be given away
+  - cannot be stored with escargo express
+  - poo can use
   Name: Tiny ruby
   Type: 59
 209:
@@ -2515,7 +3270,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55dfe
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Monkey's love
   Type: 52
 210:
@@ -2527,7 +3286,11 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55e28
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Eraser eraser
   Type: 59
 211:
@@ -2539,7 +3302,12 @@
   - 0
   Cost: 0
   Help Text Pointer: data_04.l_0xc55e77
-  Misc Flags: 79
+  Misc Flags:
+  - cannot be stored with escargo express
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Tendakraut
   Type: 59
 212:
@@ -2551,7 +3319,8 @@
   - 1
   Cost: 698
   Help Text Pointer: data_04.l_0xc55eab
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: T-rex's bat
   Type: 16
 213:
@@ -2563,7 +3332,8 @@
   - 1
   Cost: 1380
   Help Text Pointer: data_04.l_0xc55ebb
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Big league bat
   Type: 16
 214:
@@ -2575,7 +3345,8 @@
   - 1
   Cost: 2298
   Help Text Pointer: data_04.l_0xc55ef6
-  Misc Flags: 1
+  Misc Flags:
+  - ness can use
   Name: Ultimate bat
   Type: 16
 215:
@@ -2587,7 +3358,8 @@
   - 0
   Cost: 1000
   Help Text Pointer: data_04.l_0xc55f06
-  Misc Flags: 4
+  Misc Flags:
+  - jeff can use
   Name: Double beam
   Type: 17
 216:
@@ -2599,7 +3371,11 @@
   - 0
   Cost: 3899
   Help Text Pointer: data_04.l_0xc55f16
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Platinum band
   Type: 24
 217:
@@ -2611,7 +3387,11 @@
   - 0
   Cost: 5198
   Help Text Pointer: data_03.l_0xc53e9f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Diamond band
   Type: 24
 218:
@@ -2623,7 +3403,8 @@
   - 0
   Cost: 389
   Help Text Pointer: data_04.l_0xc55f36
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Defense ribbon
   Type: 28
 219:
@@ -2635,7 +3416,8 @@
   - 0
   Cost: 3500
   Help Text Pointer: data_04.l_0xc55f5d
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Talisman ribbon
   Type: 28
 220:
@@ -2647,7 +3429,8 @@
   - 0
   Cost: 3980
   Help Text Pointer: data_04.l_0xc55f84
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Saturn ribbon
   Type: 28
 221:
@@ -2659,7 +3442,11 @@
   - 0
   Cost: 2500
   Help Text Pointer: data_04.l_0xc55fcc
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Coin of silence
   Type: 28
 222:
@@ -2671,7 +3458,11 @@
   - 0
   Cost: 3000
   Help Text Pointer: data_04.l_0xc55fdc
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Charm coin
   Type: 28
 223:
@@ -2683,7 +3474,12 @@
   - 0
   Cost: 98
   Help Text Pointer: data_04.l_0xc55fec
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cup of noodles
   Type: 32
 224:
@@ -2695,7 +3491,12 @@
   - 100
   Cost: 38
   Help Text Pointer: data_04.l_0xc56011
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Skip sandwich
   Type: 32
 225:
@@ -2707,7 +3508,12 @@
   - 200
   Cost: 98
   Help Text Pointer: data_04.l_0xc56054
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Skip sandwich DX
   Type: 32
 226:
@@ -2719,7 +3525,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc56097
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 227:
@@ -2731,7 +3542,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc560d3
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 228:
@@ -2743,7 +3559,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc5610f
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 229:
@@ -2755,7 +3576,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc5614b
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 230:
@@ -2767,7 +3593,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc56187
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 231:
@@ -2779,7 +3610,12 @@
   - 0
   Cost: 128
   Help Text Pointer: data_04.l_0xc561c3
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Lucky sandwich
   Type: 32
 232:
@@ -2791,7 +3627,12 @@
   - 0
   Cost: 6
   Help Text Pointer: data_04.l_0xc561ff
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cup of coffee
   Type: 36
 233:
@@ -2803,7 +3644,12 @@
   - 0
   Cost: 24
   Help Text Pointer: data_04.l_0xc56230
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Double burger
   Type: 32
 234:
@@ -2815,7 +3661,12 @@
   - 0
   Cost: 22
   Help Text Pointer: data_05.l_0xc56253
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Peanut cheese`bar
   Type: 32
 235:
@@ -2827,7 +3678,12 @@
   - 0
   Cost: 222
   Help Text Pointer: data_05.l_0xc5629b
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Piggy jelly
   Type: 32
 236:
@@ -2839,7 +3695,12 @@
   - 0
   Cost: 88
   Help Text Pointer: data_05.l_0xc562dd
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bowl of rice gruel
   Type: 32
 237:
@@ -2851,7 +3712,12 @@
   - 0
   Cost: 12
   Help Text Pointer: data_05.l_0xc5630a
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bean croquette
   Type: 32
 238:
@@ -2863,7 +3729,12 @@
   - 0
   Cost: 20
   Help Text Pointer: data_05.l_0xc563a9
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Molokheiya soup
   Type: 36
 239:
@@ -2875,7 +3746,12 @@
   - 0
   Cost: 38
   Help Text Pointer: data_05.l_0xc56417
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Plain roll
   Type: 32
 240:
@@ -2887,7 +3763,12 @@
   - 0
   Cost: 54
   Help Text Pointer: data_05.l_0xc5645d
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Kabob
   Type: 32
 241:
@@ -2899,7 +3780,12 @@
   - 0
   Cost: 78
   Help Text Pointer: data_05.l_0xc564d1
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Plain yogurt
   Type: 32
 242:
@@ -2911,7 +3797,12 @@
   - 0
   Cost: 70
   Help Text Pointer: data_05.l_0xc564ff
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Beef jerky
   Type: 32
 243:
@@ -2923,7 +3814,12 @@
   - 0
   Cost: 98
   Help Text Pointer: data_05.l_0xc565bc
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Mammoth burger
   Type: 32
 244:
@@ -2935,7 +3831,12 @@
   - 0
   Cost: 140
   Help Text Pointer: data_05.l_0xc565d4
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Spicy jerky
   Type: 32
 245:
@@ -2947,7 +3848,12 @@
   - 0
   Cost: 210
   Help Text Pointer: data_05.l_0xc566b7
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Luxury jerky
   Type: 32
 246:
@@ -2959,7 +3865,12 @@
   - 0
   Cost: 198
   Help Text Pointer: data_05.l_0xc5678d
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Bottled water DX
   Type: 36
 247:
@@ -2971,7 +3882,12 @@
   - 0
   Cost: 680
   Help Text Pointer: data_05.l_0xc567dc
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Magic pudding
   Type: 32
 248:
@@ -2983,7 +3899,8 @@
   - 1
   Cost: 1490
   Help Text Pointer: data_05.l_0xc567f4
-  Misc Flags: 2
+  Misc Flags:
+  - paula can use
   Name: Non-stick frypan
   Type: 16
 249:
@@ -2995,7 +3912,11 @@
   - 0
   Cost: 1000
   Help Text Pointer: data_05.l_0xc56804
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Mr. Saturn coin
   Type: 28
 250:
@@ -3007,7 +3928,11 @@
   - 0
   Cost: 2000
   Help Text Pointer: data_05.l_0xc5682e
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Meteonium
   Type: 56
 251:
@@ -3019,7 +3944,12 @@
   - 0
   Cost: 7
   Help Text Pointer: data_05.l_0xc5687b
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Popsicle
   Type: 32
 252:
@@ -3031,7 +3961,12 @@
   - 0
   Cost: 178
   Help Text Pointer: data_05.l_0xc56892
-  Misc Flags: 143
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Cup of Lifenoodles
   Type: 48
 253:
@@ -3043,6 +3978,10 @@
   - 0
   Cost: 0
   Help Text Pointer: data_05.l_0xc5689f
-  Misc Flags: 15
+  Misc Flags:
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
   Name: Rabbits' carrot
   Type: 59

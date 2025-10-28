@@ -23,7 +23,7 @@ Hint_Map:
 
 Hint_Shop:
     "{diam}Select hint.{wait}" linebreak
-    input(2) clearline
+    "     " input(2) clearline
     goto_if_true(hint_number)
     "{diam}Hint system off." next //Hints closing
     goto(new_debug_menu.debug_main)
