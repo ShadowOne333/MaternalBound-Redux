@@ -1,0 +1,23 @@
+// Movement speed hacks by jtolmar
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+// Cast scene: copy palettes to the second 2bpp palette, not the first
+ROM[0xC4E48D] = LDA_i (0x0208)
+
+// Cast scene: set up window flavor palette in the right format for CAST
+ROM[0xC4E4C0] = JSL (cast_window_flavor_palette_mixup)
+
+cast_window_flavor_palette_mixup: {
+    STZ_a (0x0200) // color 0: black
+//    LDA_a (0x0202) // (switch colors 1 and 2 that are already there)
+//    LDX_a (0x0204)
+//    STA_a (0x0204)
+//    STX_a (0x0202)
+    STZ_a (0x0206) // color 3: black
+    // original code
+    SEP (0x20)
+    LDA_8 (0x18)
+    RTL
+}

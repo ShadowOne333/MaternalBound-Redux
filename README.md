@@ -179,12 +179,13 @@ You can find a copy of the license in the LICENSE file.
 * **TragicManner:**	For the Legends of Localization: EarthBound book, from which the entirety of the script rewrite was done
 * **D-Man:** A lot of the ASM work was thanks to him and his amazing skills at 65816 knowledge
 * **H.S:**	Bunch of troubleshooting and ASM help as well
-* **PhoenixBound:**	Beta testing the hack, feedback and also bringing up details which eventually ended up being more features (and ASM help too)
+* **PhoenixBound:**	Beta testing the hack, feedback and also bringing up details which eventually ended up being more features, and a lot of ASM implementations too.
 * **Karmageddon:**	For being such a detailed beta tester, and all his feedback which helped polish MaternalBound Redux to where it is right now!
 * **DarkSamus993:**	His debugging and ASM skills are amazing, he helped a lot to figure out the Kirby sprite assembly and its fix, as well as the palette issue in the Debug menu.
 * **Herringway:**	For his New Controls hack, which was taken as a base, but then heavily reworked to be fully customizable using CoilSnake
 * **Howisthisaname:** For the EarthBound Enhanced hack, which is where some of the reworked battle sprites come from, while some were made entirely by me
 * **Conn:**	For the creation of the MSU hack for EarthBound. I transcribed the patch to CCS format and also helped with the loop table.
+* **Miles:**	For the coloured "CAST" text in the ending, identical to how it was in Mother 2. The code for this was made by PhoenixBound.
 * Special thanks to all my beta-testers and people on the MaternalBound Discord (https://discord.gg/v7kyYrv) for their feedback and suggestions!
 
 
