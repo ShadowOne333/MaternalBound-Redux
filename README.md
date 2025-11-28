@@ -186,6 +186,7 @@ You can find a copy of the license in the LICENSE file.
 * **Howisthisaname:** For the EarthBound Enhanced hack, which is where some of the reworked battle sprites come from, while some were made entirely by me
 * **Conn:**	For the creation of the MSU hack for EarthBound. I transcribed the patch to CCS format and also helped with the loop table.
 * **Miles:**	For the coloured "CAST" text in the ending, identical to how it was in Mother 2. The code for this was made by PhoenixBound.
+* **Vittorio:**	For several ASM and movement script codes that were of great help for the project, like the Run Stamina code and a fix for the M2 title screen post-fadein shining effect.
 * Special thanks to all my beta-testers and people on the MaternalBound Discord (https://discord.gg/v7kyYrv) for their feedback and suggestions!
 
 

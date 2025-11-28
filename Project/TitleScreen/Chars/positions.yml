@@ -1,80 +1,80 @@
-0:
+0: # M
   height: 48
   top_left_offset:
-    x: -12
-    y: -67
+    x: -12 #-12
+    y: -35 #-67
   unknown: 12
-  width: 24
+  width: 48
   x: 0
   y: 0
-1:
-  height: 48
-  top_left_offset:
-    x: -8
-    y: -67
-  unknown: 12
-  width: 24
-  x: 24
-  y: 0
-2:
+1: # World (Originally 2nd half of M)
   height: 48
   top_left_offset:
     x: -12
-    y: -67
+    y: -35 #-67
   unknown: 12
-  width: 24
-  x: 48
+  width: 48
+  x: 48 #24
   y: 0
-3:
+2: # Empty (Original 1st half of World)
   height: 48
   top_left_offset:
     x: -12
-    y: -67
+    y: -35 #-67
   unknown: 12
   width: 24
-  x: 72
+  x: 192 #48
   y: 0
-4:
+3: # Empty (Original 2nd half of World)
   height: 48
   top_left_offset:
     x: -12
-    y: -67
+    y: -35 #-67
+  unknown: 12
+  width: 24
+  x: 192 #72
+  y: 0
+4: # T
+  height: 48
+  top_left_offset:
+    x: -12
+    y: -35 #-67
   unknown: 12
   width: 24
   x: 96
   y: 0
-5:
+5: # H
   height: 48
   top_left_offset:
-    x: -46
-    y: -67
+    x: -12 #-46
+    y: -35 #-67
   unknown: 12
   width: 24
   x: 120
   y: 0
-6:
+6: # E
   height: 48
   top_left_offset:
-    x: -38
-    y: -67
+    x: -12 #-38
+    y: -35 #-67
   unknown: 12
   width: 24
   x: 144
   y: 0
-7:
+7: # R
   height: 48
   top_left_offset:
-    x: -28
-    y: -67
+    x: -12 #-28
+    y: -35 #-67
   unknown: 12
   width: 24
   x: 168
   y: 0
-8:
+8: # Unused/Empty
   height: 48
   top_left_offset:
-    x: -24
-    y: -67
+    x: -12 #-24
+    y: -35 #-67
   unknown: 12
   width: 24
   x: 192

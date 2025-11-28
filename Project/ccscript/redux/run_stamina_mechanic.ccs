@@ -27,6 +27,16 @@ define stamina_cooldown = 8
 
 // <-------------------------------------------------------------------------------------------------------------------------------------------------------->
 
+// Initialize RAM during attract mode.
+ROM[0xC4D995] = JSL(ASM_InitObjects_ResetStamina)
+
+ASM_InitObjects_ResetStamina: {
+    JSL(stamina_reset)
+    JML(0xC0927C) // InitObjects
+}
+
+// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 // Code for stamina timers (Vittorio).
 
 ROM[0xC0B824] = JSL(stamina_update)

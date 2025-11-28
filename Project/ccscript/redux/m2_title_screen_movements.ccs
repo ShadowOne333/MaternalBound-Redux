@@ -1,0 +1,630 @@
+//------------------------------------
+
+import "../essential/asm65816.ccs"
+import "../redux/movscr_codes.ccs"
+
+//------------------------------------
+
+// Hijack all of the Xpos values for each letter
+
+M_C4220E:
+/* C4220E */   m_set_spritemap(0xE1CF9D)
+/* C42212 */   m_ondraw(0xA0FA)
+/* C42215 */   m_priority(1)
+/* C42217 */   m_onposition(0xA0BB)
+/* C4221A */   m_asmcall(0xC0EE53)
+/* C4221E */   m_rts
+
+// This task makes the screen flash black and white once, used in the title screen.
+TASK_C4221F:
+/* C4221F */   m_asmcall(0xC0ED14)
+/* C42223 */   m_pause(2)
+/* C42225 */   m_asmcall(0xC0ED39)
+/* C42229 */   m_endtask
+
+Script_789:
+/* C4222A */   m_get_mem16(0x9F75)
+/* C4222D */   m_jeq(M_C42235)
+
+/* C42230 */   m_asmcall(0xC0ED5C)
+/* C42234 */   m_end
+
+M_C42235:
+/* C42235 */   m_pause(150)
+/* C42237 */   m_pause(60)	// Extend pause for shine fadein (30)
+
+// HIJACK #1
+/* C42239 */   //m_task(TASK_C4221F)	// Remove white flash
+		m_set_result(0)
+
+/* C4223C */   m_set_result(0)
+/* C4223F */   m_asmcall(0xC0EC77)
+/* C42243 */   m_set_var0(0)
+/* C42247 */   m_set_var1(8)
+/* C4224B */   m_set_var2(14)
+
+/* C4224F */   m_loop(14)
+/* C42251 */   m_asmcall(0xC0EDDA)
+/* C42255 */   m_pause(2)
+/* C42257 */   m_endloop
+
+/* C42258 */   m_pause(32)
+/* C4225A */   m_pause(30)
+/* C4225C */   m_asmcall(0xC0ECB7)
+		m_pause(60)	// Extend pause for BG fadein (60)
+
+/* C42260 */   m_loop(165)
+/* C42262 */   m_asmcall(0xC426ED)
+/* C42266 */   m_ontick_nop	// Removed to match M2 fadein speed
+		m_ontick_nop
+/* C42268 */   m_endloop
+
+/* C42269 */   m_asmcall(0xC49740)
+
+// v: I commented this part so it doesn't interfere with Glowing_Effects.
+
+/* C4226D */   //m_set_result(1)
+/* C42270 */   //m_asmcall(0xC0EC77)
+/* C42274 */   //m_set_var0(0)
+/* C42278 */   //m_set_var1(7)
+/* C4227C */   //m_set_var2(20)
+
+/* C42280 */   //m_loop(20)
+/* C42282 */   //m_asmcall(0xC0EDDA)
+/* C42286 */   //m_pause(4)	// Originally m_pause(8)
+/* C42288 */   //m_endloop
+
+/* C42289 */   m_asmcall(0xC0EDD1)
+/* C4228D */   m_pause(133)
+/* C4228F */   m_end
+
+Script_788:
+// HIJACK #2
+/* C42290 */   //m_get_mem16(0x9F75)
+		m_jml(l_Earth_Fadein)
+		m_ontick_nop
+		m_ontick_nop
+/* C42293 */   //m_jne(M_C42298)
+
+/* C42296 */   m_pause(60)
+
+M_C42298:
+/* C42298 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 789
+/* C4229E */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+
+// HIJACK #3-A
+               //short 790
+          	short 798
+/* C422A4 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+
+               short 791
+/* C422AA */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 792
+/* C422B0 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 793
+/* C422B6 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 794
+/* C422BC */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 795
+/* C422C2 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 796
+/* C422C8 */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 797
+/* C422CE */   m_asmcall(0xC09E71)   // Creates a new object with the specified script, unknown behavior for the new object's position.
+               short 798
+
+// HIJACK #3-B
+/* C422D4 */   m_pause(150)
+/* C422D6 */   m_pause(30)
+		//m_jml(M_Title_Conditional_Pause)
+
+/* C422D8 */   m_pause(60)
+/* C422DA */   m_pause(30)
+/* C422DC */   m_pause(165)
+/* C422DE */   m_pause(161)
+/* C422E0 */   m_pause(140)
+/* C422E2 */   m_pause(29)
+/* C422E4 */   m_asmcall(0xC46E46)   // Unlocks CCScript execution, analogous to 'm_unlock_text'.
+/* C422E8 */   m_halt
+
+Script_790:
+/* C422E9 */   m_jsr(M_C4220E)
+/* C422EC */   m_set_anim(0)
+/* C422EE */   m_set_ypos(100)
+/* C422F1 */   m_get_mem16(0x9F75)
+/* C422F4 */   m_jne(M_C42300)
+
+
+// HIJACK #4
+/* C422F7 */   //m_set_xpos(64875)
+		m_jml(M2_C4224E)
+		m_ontick_nop
+		m_ontick_nop
+/* C422FA */   //m_set_xvel(1186)
+/* C422FD */   m_pause(150)
+/* C422FF */   m_zerovel
+
+M_C42300:
+// HIJACK #5
+/* C42300 */   //m_set_xpos(34)
+		m_jml(M2_C42247)
+/* C42303 */   //m_halt
+
+Script_791:
+/* C42304 */   m_jsr(M_C4220E)
+/* C42307 */   m_set_anim(1)
+/* C42309 */   m_set_ypos(100)
+/* C4230C */   m_get_mem16(0x9F75)
+/* C4230F */   m_jne(M_C4231B)
+
+// HIJACK #6
+/* C42312 */   //m_set_xpos(65035)
+		m_jml(M2_Earth_Pos)
+		m_ontick_nop
+		m_ontick_nop
+/* C42315 */   //m_set_xvel(947)
+/* C42318 */   m_pause(150)
+/* C4231A */   m_zerovel
+
+M_C4231B:
+// HIJACK #7
+/* C4231B */   //m_set_xpos(54)
+		m_jml(M2_Earth_QuickPos)
+/* C4231E */   //m_halt
+
+Script_792:
+/* C4231F */   m_jsr(M_C4220E)
+/* C42322 */   m_set_anim(2)
+/* C42324 */   m_set_ypos(100)
+/* C42327 */   m_get_mem16(0x9F75)
+/* C4232A */   m_jne(M_C42336)
+
+/* C4232D */   m_set_xpos(65195)
+
+// HIJACK #8
+/* C42330 */   //m_set_xvel(711)
+		m_halt
+		m_ontick_nop
+		m_ontick_nop
+
+/* C42333 */   m_pause(150)
+/* C42335 */   m_zerovel
+
+M_C42336:
+/* C42336 */   m_set_xpos(76)
+/* C42339 */   m_halt
+
+Script_793:
+/* C4233A */   m_jsr(M_C4220E)
+/* C4233D */   m_set_anim(3)
+/* C4233F */   m_set_ypos(100)
+/* C42342 */   m_get_mem16(0x9F75)
+/* C42345 */   m_jne(M_C42351)
+
+// HIJACK #9
+/* C42348 */   //m_set_xpos(65355)
+		m_halt
+		m_ontick_nop
+		m_ontick_nop
+
+/* C4234B */   m_set_xvel(469)
+/* C4234E */   m_pause(150)
+/* C42350 */   m_zerovel
+
+M_C42351:
+// HIJACK #10
+/* C42351 */   //m_set_xpos(94)
+		m_halt
+		m_ontick_nop
+		m_ontick_nop
+		//m_ontick_nop	// Can we remove the below halt?
+/* C42354 */   m_halt
+
+Script_794:
+/* C42355 */   m_jsr(M_C4220E)
+/* C42358 */   m_set_anim(4)
+/* C4235A */   m_set_ypos(100)
+/* C4235D */   m_get_mem16(0x9F75)
+/* C42360 */   m_jne(M_C4236C)
+
+// HIJACK #11
+/* C42363 */   //m_set_xpos(65515)
+		m_jml(M2_C42278)
+/* C42366 */   m_set_xvel(226)
+/* C42369 */   m_pause(150)
+/* C4236B */   m_zerovel
+
+M_C4236C:
+// HIJACK #12
+/* C4236C */   //m_set_xpos(112)
+		m_jml(M2_C42271)
+/* C4236F */   //m_halt
+
+Script_795:
+/* C42370 */   m_jsr(M_C4220E)
+/* C42373 */   m_set_anim(5)
+/* C42375 */   m_set_ypos(100)
+/* C42378 */   m_get_mem16(0x9F75)
+/* C4237B */   m_jne(M_C42387)
+
+// HIJACK #13
+/* C4237E */   //m_set_xpos(339)
+		m_jml(M2_C422A2)
+		m_ontick_nop
+		m_ontick_nop
+/* C42381 */   //m_set_xvel(-305)
+/* C42384 */   m_pause(150)
+/* C42386 */   m_zerovel
+
+M_C42387:
+// HIJACK #14
+/* C42387 */   //m_set_xpos(160)
+		m_jml(M2_C4229B)
+		m_ontick_nop
+		m_ontick_nop
+/* C4238A */   //m_halt
+
+Script_796:
+/* C4238B */   m_jsr(M_C4220E)
+/* C4238E */   m_set_anim(6)
+/* C42390 */   m_set_ypos(100)
+/* C42393 */   m_get_mem16(0x9F75)
+/* C42396 */   m_jne(M_C423A2)
+
+// HIJACK #15
+/* C42399 */   //m_set_xpos(539)
+		m_jml(M2_C422CC)
+		m_ontick_nop
+		m_ontick_nop
+/* C4239C */   //m_set_xvel(-612)
+/* C4239F */   m_pause(150)
+/* C423A1 */   m_zerovel
+
+M_C423A2:
+// HIJACK #16
+/* C423A2 */   //m_set_xpos(180)
+		m_jml(M2_C422C5)
+		m_ontick_nop
+		m_ontick_nop
+/* C423A5 */   //m_halt
+
+Script_797:
+/* C423A6 */   m_jsr(M_C4220E)
+/* C423A9 */   m_set_anim(7)
+/* C423AB */   m_set_ypos(100)
+/* C423AE */   m_get_mem16(0x9F75)
+/* C423B1 */   m_jne(M_C423BD)
+
+// HIJACK #17
+/* C423B4 */   //m_set_xpos(739)
+		m_jml(M2_C422F6)
+		m_ontick_nop
+		m_ontick_nop
+/* C423B7 */   //m_set_xvel(-918)
+/* C423BA */   m_pause(150)
+/* C423BC */   m_zerovel
+
+M_C423BD:
+// HIJACK #17
+/* C423BD */   //m_set_xpos(201)
+		m_jml(M2_C422EF)
+		m_ontick_nop
+		m_ontick_nop
+/* C423C0 */   //m_halt
+
+Script_798:
+/* C423C1 */   m_jsr(M_C4220E)
+/* C423C4 */   m_set_anim(8)
+/* C423C6 */   m_set_ypos(100)
+/* C423C9 */   m_get_mem16(0x9F75)
+/* C423CC */   m_jne(M_C423D8)
+
+// HIJACK #18
+/* C423CF */   //m_set_xpos(939)
+		m_halt
+		m_ontick_nop
+		m_ontick_nop
+/* C423D2 */   m_set_xvel(-1223)
+/* C423D5 */   m_pause(150)
+/* C423D7 */   m_zerovel
+
+M_C423D8:
+// HIJACK #19
+/* C423D8 */   //m_set_xpos(222)
+		m_halt
+		m_ontick_nop
+		m_ontick_nop
+/* C423DB */   m_halt
+
+//------------------------------------
+//	NEW CODE
+//------------------------------------
+
+// Modify EB Title Screen timing and fadeouts to match M2
+
+//ROM[0xC3F582] = LDX_i (2) // Fadeout "speed" -- delay between each brightness step (originally 4)
+//ROM[0xEF0575] = LDX_i (2) // Fadeout "speed" -- delay between each brightness step (originally 4)
+//ROM[0xC422E0] = m_pause(140)
+//ROM[0xC422E2] = m_pause(29)
+
+M_Title_Conditional_Pause: {
+	m_pause(180)	// This is the total hijacked pause
+	m_get_mem16(0x9F75)
+	m_jeq(_skip)
+    
+	m_pause(120)	// This is approximately the difference in frames
+    
+_skip:
+	m_jml(0xC422D8)	// Return
+}
+
+//------------------------------------
+
+// All m_set_ypos() from the original M2 had 38 as their value:
+	//m_set_ypos(38)
+	//m_set_xpos(XX)
+	//m_halt
+
+// Make the 2's shine faster
+ROM[0xC42286] = m_pause(4)
+
+// Original Mother 2 M_C42232 script
+M2_C42232: {
+	m_zerovel
+	m_pause(60)
+	m_set_yvel(-256)
+	m_pause(32)
+	m_zerovel
+
+	m_pause(80)
+
+// Implement a 2nd flash for the letters after being positioned
+_M2_C4215A:
+// 0x3937B1
+	m_task(Glowing_Effects)
+	m_halt	// m_rts
+}
+
+// Handles both the glowing for "MOTHER" and "2".
+// Implemented by Vittorio
+Glowing_Effects: {
+	m_asmcall(ASM_copy_2_into_high_buffer) // Copy the palettes for the "2" glowing into $7F1000.
+        
+        m_set_result(0)
+        m_asmcall(0xC0EC77) // Copy the palettes for the "MOTHER" glowing into $7F0000.
+
+        m_set_var0(0) // First source palette.
+        m_set_var2(32) // Max source palette, it doesn't really matter as long as the value in m_loop is correct.
+
+        m_loop(14)
+        
+        m_set_var1(8)
+        m_set_var3(0)
+        m_asmcall(0xC0EDDA)
+        m_add_var0(-1)
+        
+        m_set_var1(7)
+        m_set_var3(3) // load from 7F1000.
+        m_asmcall(0xC0EDDA)
+        
+        m_pause(2)
+        m_endloop
+        
+        // Just in case.
+        m_set_var1(7)
+        m_set_var3(3)
+        
+        // Finish animating the 2 (OPTIONAL, DELETE/COMMENT IF YOU WANT).
+        // This adds an extra cycle of the flashing to the 2
+        //m_loop(6)
+            //m_asmcall(0xC0EDDA)
+            //m_pause(4)
+        //m_endloop
+        
+        // Restore the original palettes.
+        m_set_var0(0)
+        m_set_var1(7)
+        m_set_var3(3)
+        m_asmcall(0xC0EDDA)
+        
+        m_set_var0(0)
+        m_set_var1(8)
+        m_set_var3(0)
+        m_asmcall(0xC0EDDA)
+        
+        m_endtask
+}
+
+// -----------------------------------
+
+// Custom ASM stuff.
+
+ASM_copy_2_into_high_buffer: {
+    REP(0x31)
+    PHD
+    TDC
+    ADC_i(0xFFEA)
+    TCD
+    LDA_al(0xC0EC9E)
+    STA_d(0x0E)
+    LDA_al(0xC0ECA3)
+    STA_d(0x10)
+    LDA_i(0x1000)
+    STA_d(0x12)
+    LDA_i(0x007F)
+    STA_d(0x14)
+    JSL(0xC41A9E) // Decomp into buffer.
+    PLD
+    RTL
+}
+
+// Hijack to make it load the palettes from a different part of the buffer based on VAR3.
+
+ROM[0xC0EDF6] = JML(ASM_var3_buffer_hijack)
+
+ASM_var3_buffer_hijack: {
+    LDA_x(0x0F12)
+    CMP_i(3)
+    BEQ_a(_load_from_1000)
+    
+    LDA_i(0x0000)
+    STA_d(0x06)
+    JML(0xC0EDFB) // Return.
+    
+    _load_from_1000:
+    LDA_i(0x1000)
+    STA_d(0x06)
+    JML(0xC0EDFB) // Return.
+}
+
+// -----------------------------------
+
+// Make the EARTH sprite appear on screen fadein
+l_Earth_Fadein: {
+	// Restore hijacked portion from Script 789
+	m_asmcall(0xC09E71)
+	short 791
+
+_M2_C42191:
+	// Implement Quick Title Screen check code (M2_C42191)
+	m_get_mem16(0x9F75)	// 0xA177 in M2
+	m_jne(_skip)
+	//m_pause(30)
+
+_skip:
+	// m_jeq(M2_C421C8) in M2, equivalent is M_C42298 in EB
+	m_jml(0xC42298) // Jump to the original M_C42298 script
+}
+
+//------------------------------------
+// Letter scripts begin here
+//------------------------------------
+
+// Original Mother 2 Script 789, 790 in EB
+// Used for letter "M"
+M2_C42247:
+	m_set_xpos(45)	// 33, adjusted for EB title screen
+	m_set_ypos(68)	// 70, adjusted for EB title screen
+	m_halt
+
+M2_C4224E:
+	m_set_xpos(65387) // 0xFF68, 65377, adjusted for EB title screen
+	m_set_ypos(100)	// 70, adjusted for EB title screen
+	m_pause(60)	// Wait for Earth to fadein fully
+	m_set_xvel(700)
+
+	m_loop(140)
+		m_pause(1)
+		m_add_xvel(-5)	// 0xFFFB
+	m_endloop
+
+	m_set_xpos(45)	// 33, adjusted for EB title screen
+	m_jsl(M2_C42232)
+	m_halt
+//------------------------------------
+// EARTH sprite
+// Repurpose one of the same position setups as the letters
+M2_Earth_QuickPos:
+	m_set_xpos(78)	// 66, adjusted for EB title screen
+	m_set_ypos(68)	// 38, adjusted for EB title screen
+	m_halt
+
+// Repurpose one of the Letter codes with no loop and zero velocity
+M2_Earth_Pos:
+	m_set_xpos(78)	// 66, adjusted for EB title screen
+	//m_set_ypos(68)	// Given by the above code
+	m_pause(60)	// Wait for Earth to fadein fully
+
+	m_pause(140)	// Match timing with letters
+	m_zerovel	// Don't move the Earth sprite
+
+	m_jsl(M2_C42232)
+	m_halt
+//------------------------------------
+// Original Mother 2 Script 790, 794 in EB
+// Used for letter "T"
+M2_C42271:
+	m_set_xpos(126)	// 114, adjusted for EB title screen
+	m_set_ypos(68)	// 38, adjusted for EB title screen
+	m_halt
+
+M2_C42278:
+	m_set_xpos(320)	// 306, adjusted for EB title screen
+	m_set_ypos(100)	// 70, adjusted for EB title screen
+	m_pause(60)	// Wait for Earth to fadein fully
+	m_set_xvel(-700) // 0xFD44
+
+	m_loop(140)
+		m_pause(1)
+		m_add_xvel(5)	// 0xFFFB
+	m_endloop
+
+	m_set_xpos(126)	// 114, adjusted for EB title screen
+	m_jsl(M2_C42232)
+	m_halt
+//------------------------------------
+// Original Mother 2 Script 791, 795 in EB
+// Used for letter "H"
+M2_C4229B:
+	m_set_xpos(154)	// 142, adjusted for EB title screen
+	m_set_ypos(68)	// 38, adjusted for EB title screen
+	m_halt
+
+M2_C422A2:
+	m_set_xpos(386)	// 373, adjusted for EB title screen
+	m_set_ypos(100)	// 70, adjusted for EB title screen
+	m_pause(60)	// Wait for Earth to fadein fully (60)
+	m_set_xvel(-840) // FCB8
+
+	m_loop(140)
+		m_pause(1)
+		m_add_xvel(6)	// 0xFFFB
+	m_endloop
+
+	m_set_xpos(154)	// 142, adjusted for EB title screen
+	m_jsl(M2_C42232)
+	m_halt
+//------------------------------------
+// Original Mother 2 Script 792, 796 in EB
+// Used for letter "E"
+M2_C422C5:
+	m_set_xpos(185)	// 173, adjusted for EB title screen
+	m_set_ypos(68)	// 38, adjusted for EB title screen
+	m_halt
+
+M2_C422CC:
+	m_set_xpos(455)	// 442, adjusted for EB title screen
+	m_set_ypos(100)	// 70, adjusted for EB title screen
+	m_pause(60)	// Wait for Earth to fadein fully
+	m_set_xvel(-980) // FC2C
+
+	m_loop(140)
+		m_pause(1)
+		m_add_xvel(7)	// 0xFFFB
+	m_endloop
+
+	m_set_xpos(185)	// 173, adjusted for EB title screen
+	m_jsl(M2_C42232)
+//------------------------------------
+// Original Mother 2 Script 793, 797 in EB
+// Used for letter "R"
+M2_C422EF:
+	m_set_xpos(210)	// 198, adjusted for EB title screen
+	m_set_ypos(68)	// 38, adjusted for EB title screen
+	m_halt
+
+M2_C422F6:
+	m_set_xpos(518)	// 506, adjusted for EB title screen
+	m_set_ypos(100)	// 70, adjusted for EB title screen
+	m_pause(60)	// Wait for Earth to fadein fully
+	m_set_xvel(-1120) // FBA0
+
+	m_loop(140)
+		m_pause(1)
+		m_add_xvel(8)	// 0xFFFB
+	m_endloop
+
+	m_set_xpos(210)	// 198, adjusted for EB title screen
+	m_jsl(M2_C42232)
+//------------------------------------

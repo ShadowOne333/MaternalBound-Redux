@@ -1,0 +1,1539 @@
+import "../essential/asm65816.ccs"
+
+// Use a space that is completely unused in RAM
+// cooprocks123e's "Battle OverWorld Sprites" patch already uses 0x31C2 through 0x31C9
+define OBJ_destructor_lo = 0x31CA // 60 bytes (30*2)
+define OBJ_destructor_hi = 0x3206 // 60 bytes (30*2)
+// Next free addresses are 0x3242 through 0x3329
+/*
+ONMOVE, sprite movement:
+  $9FC8 -> Apply XY velocities [DEFAULT]
+  $9FF0 -> NOP
+  $9FF1 -> Apply XYZ velocities + update surface flags
+  $A00C -> Apply XYZ velocities
+  $A26B -> Special-purpose? Specifics still unknown
+  $A360 -> Apply XY velocities + update surface flags (if not blocked by obstacle)
+  $A37A -> Apply XY velocities + update surface flags
+  $A384 -> Apply XY velocities (if not blocked by obstacle)
+
+ONPOSITION, set screen position for sprite:
+  $A023 -> Position based on layer 1 scroll [DEFAULT]
+  $A039 -> NOP
+  $A03A -> Position based on layer 1 scroll + Z coordinate (height)
+  $A055 -> Position based on layer 3 scroll
+  $A06C -> Unused. And not a good idea to use (ends up setting the absolute position along with screen position)
+  $A089 -> Unused. "Mirrored" version of $A055? (Uses addition instead of subtraction)
+  $A0A0 -> Position based on layer 3 scroll + Z coordinate (height)
+  $A0BB -> Position using absolute coordinates
+
+ONDRAW, draw sprite:
+  $A0FA -> Disregard priority entirely, don't care about Z-Sorting or foreground
+  $A3A4 -> Respect priority settings [DEFAULT]
+*/
+/*
+ * TABLE OF CONTENTS (CTRL+F to search)
+ *   1. INSTRUCTIONS
+ *     1.1. SCRIPT CONTROL INSTRUCTIONS
+ *     1.2. DATA MOVEMENT INSTRUCTIONS
+ *     1.3. ARITHMETIC AND LOGICAL INSTRUCTIONS
+ *     1.4. CONTROL FLOW INSTRUCTIONS
+ *     1.5. LOOP INSTRUCTIONS
+ *     1.6. TASK INSTRUCTIONS
+ *     1.7. CALLBACK INSTRUCTIONS
+ *     1.8. ENTITY INSTRUCTIONS
+ *     1.9. OTHER INSTRUCTIONS
+ *   2. CONVENIENCE MACROS
+ *   3. CALLBACKS
+ *     3.1. TICK CALLBACK
+ *     3.2. ONDRAW CALLBACK
+ *     3.3. ONPOSITION CALLBACK
+ *     3.4. ONMOVE CALLBACK
+ *     3.5. ONDESTROY CALLBACK
+ *   4. TASKS
+ *   5. VARIABLES
+ *   6. THE RESULT REGISTER
+ *
+ *
+ * 1. INSTRUCTIONS
+ *   1.1. SCRIPT CONTROL INSTRUCTIONS
+ *     m_halt
+ *       Halts script execution (infinite loop)
+ *     m_pause(delay)
+ *       Pauses the script execution for `delay` frames. `delay` must be in range 0..255
+ *     m_pause_result
+ *       Pauses the script execution for [RESULT] frames
+ *     m_pause_var0
+ *       Pauses the script execution for [VAR0] frames
+ *     m_pause_var1 through m_pause_var7
+ *       Same as `m_pause_var0`, but for the other variables
+ *
+ *   1.2. DATA MOVEMENT INSTRUCTIONS
+ *     m_set_var0(value)
+ *       VAR0 = value
+ *     m_set_var1(value) through m_set_var7(value)
+ *       Same as `m_set_var0`, but for the other variables
+ *     m_set_result(value)
+ *       RESULT = value
+ *     m_rtovar0
+ *       VAR0 = RESULT
+ *     m_rtovar1 through m_rtovar7
+ *       Same as `m_rtovar0`, but for the other variables
+ *     m_get_var0
+ *       RESULT = VAR0
+ *     m_get_var1 through m_get_var7
+ *       Same as `m_get_var0`, but for the other variables
+ *     m_get_mem16(address)
+ *       RESULT = memory[address]
+ *       The address must be in bank 7E
+ *       The value at the address is interpreted as 16-bit
+ *     m_set_mem8(address, value)
+ *       memory[address] = value
+ *       The address must be in bank 7E
+ *       The value at the address is interpreted as 8-bit
+ *     m_set_mem16(address, value)
+ *       Same as `m_set_mem8`, but the value at the address is interpreted as 16-bit
+ *
+ *   1.3. ARITHMETIC AND LOGICAL INSTRUCTIONS
+ *     In the following instructions, `op` can be any of
+ *       add - addition (supports negative)
+ *       and - bitwise AND
+ *       or  - bitwise OR
+ *       xor - bitwise XOR
+ *
+ *     m_op_result(value)
+ *       RESULT = RESULT op value
+ *     m_op_var0(value)
+ *       VAR0 = VAR0 op value
+ *     m_op_var1(value) through m_op_var7(value)
+ *       Same as `m_op_var0`, but for the other variables
+ *     m_op_mem8(address, value)
+ *       memory[address] = memory[address] op value
+ *       The address must be in bank 7E
+ *       The value at `address` is interpreted as 8-bit
+ *     m_op_mem16(address, value)
+ *       Same as `m_op_mem8`, but the value at `address` is interpreted as 16-bit
+ *
+ *   1.4. CONTROL FLOW INSTRUCTIONS
+ *     m_jmp(address)
+ *       Jump to `address`. Works exactly like assembly JMP
+ *     m_jml(address)
+ *       Long jump to `address`. Works exactly like assembly JML
+ *     m_multijmp(amount)
+ *       Table jump based on the RESULT register. `amount` tells the amount of addresses in the jump table
+ *       Works exactly like CCScript control code "[09 XX (YYYYYY)*XX]"
+ *       Example usage:
+ *         ```
+ *         m_multijmp(3)
+ *           short Label1 // Jump to `Label1` if RESULT register is 0
+ *           short Label2 // Jump to `Label2` if RESULT register is 1
+ *           Short label3 // Jump to `Label3` if RESULT register is 2
+ *         // Execution will resume here if RESULT is not any of the above values
+ *         ```
+ *     m_jeq(address)
+ *       Absolute jump to `address` if RESULT register is zero. Works exactly like `BEQ_a(address)`
+ *     m_jne(address)
+ *       Absolute jump to `address` if RESULT register is not zero. Works exactly like `BNE_a(address)`
+ *     m_jsr(address)
+ *       Jump to subroutine. Works exactly like assembly JSR
+ *     m_jsl(address)
+ *       Long jump to subroutine. Works exactly like assembly JSL
+ *     m_multijsr(amount)
+ *       Table subroutine jump based on the RESULT register. `amount` tells the amount of addresses in the jump table
+ *       Works exactly like CCScript control code "[1F C0 XX (YYYYYY)*XX]"
+ *     m_rts
+ *       Returns from subroutine. Works exactly like assembly RTS
+ *     m_rtl
+ *       Returns from subroutine. Works exactly like assembly RTL
+ *
+ *   1.5. LOOP INSTRUCTIONS
+ *     m_loop(count)
+ *       Starts a loop with `count` iterations
+ *     m_loop_result
+ *       Starts a loop with [RESULT] iterations
+ *     m_endloop
+ *       Ends a loop iteration
+ *     m_breakeq(address)
+ *       Break out of a loop and jump to `address` if RESULT register is zero
+ *     m_breakne(address)
+ *       Break out of a loop and jump to `address` if RESULT register is not zero
+ *
+ *   1.6. TASK INSTRUCTIONS
+ *     m_task(address)
+ *       Register and begin task at `address`. The address must be at the same bank as the current bank
+ *     m_task_long(address)
+ *       Register and begin task at `address`. The address can be at any bank
+ *       NOTE: This is not a vanilla instruction!
+ *     m_endtask
+ *       Ends a task. Unknown (not undefined!) behavior if the script isn't a task
+ *     m_endlasttask
+ *       Ends the last registered task. Unknown (not undefined!) behavior if the script has no registered tasks
+ *
+ *   1.7. CALLBACK INSTRUCTIONS
+ *     m_ontick(address)
+ *       Sets the entity's ONTICK callback. The address can be at any bank
+ *     m_ontick_nop
+ *       Sets the entity's ONTICK callback to NOP (no-operation, do nothing)
+ *     m_ondraw(address)
+ *       Sets the entity's ONDRAW callback. The address must be in bank C0
+ *     m_onposition(address)
+ *       Sets the entity's ONPOSITION callback. The address must be in bank C0
+ *     m_onmove(address)
+ *       Sets the entity's ONMOVE callback. The address must be in bank C0
+ *     m_ondestroy(address)
+ *       Sets the entity's ONDESTROY callback. The address can be at any bank
+ *       NOTE: This is not a vanilla instruction!
+ *
+ *   1.8. ENTITY INSTRUCTIONS
+ *     m_set_spritemap(address)
+ *       Sets the entity's spritemap. The address can be at any bank
+ *       This is mostly undocumented, and not really useful unless you're uploading graphics to VRAM on your own
+ *     m_set_anim(value)
+ *       Sets the entity's animation frame to `value`
+ *       If `value` is -1, the entity is made invisible
+ *     m_set_anim_var0
+ *       Sets the entity's animation frame to [VAR0]
+ *       If VAR0 is a negative number, the entity is made invisible
+ *     m_set_anim_var1 through m_set_anim_var7
+ *       Same as `m_set_anim_var0`, but for the other variables
+ *     m_add_anim(value)
+ *       Adds `value` to the entity's animation frame (supports negative)
+ *       If the resulting frame is negative, the entity is made invisible
+ *     m_inc_anim
+ *       Same as `m_add_anim(1)`
+ *     m_dec_anim
+ *       Same as `m_add_anim(-1)`
+ *     m_priority(value)
+ *       Sets the entity's drawing priority to `value`
+ *       The value must be in range 0..3. Undefined behavior if the value is outside this range
+ *     m_set_xpos(value)
+ *       Sets the entity's X position to `value`
+ *     m_set_ypos(value)
+ *       Sets the entity's Y position to `value`
+ *     m_set_zpos(value)
+ *       Sets the entity's Z position to `value`
+ *     m_add_xpos(value)
+ *       Adds `value` to the entity's X position (supports negative)
+ *     m_add_ypos(value)
+ *       Adds `value` to the entity's Y position (supports negative)
+ *     m_add_zpos(value)
+ *       Adds `value` to the entity's Z position (supports negative)
+ *     m_set_xvel(value)
+ *       Sets the entity's X velocity to `value`
+ *       To get the value in pixels per frame, divide `value` by 256
+ *     m_set_yvel(value)
+ *       Same as `m_set_xvel`, but for the Y velocity
+ *     m_set_zvel(value)
+ *       Same as `m_set_xvel`, but for the Z velocity
+ *     m_add_xpos(value)
+ *       Adds `value` to the entity's X velocity (supports negative)
+ *       To get the value in pixels per frame, divide `value` by 256
+ *     m_add_yvel(value)
+ *       Same as `m_add_xvel`, but for the Y velocity
+ *     m_add_zvel(value)
+ *       Same as `m_add_xvel`, but for the Z velocity
+ *     m_zerovel
+ *       Sets the entity's X/Y/Z velocities to zero
+ *
+ *   1.9. OTHER INSTRUCTIONS
+ *     m_end
+ *       Ends the script. Shouldn't be called before the entity is deleted via `asmcall(0xC020F1)`
+ *       You don't really have to worry about calling this, as it's already done via the convenience macro `m_destroy_self`
+ *     m_asmcall(address)
+ *       Call ASM routine at `address`
+ *       The RESULT register is passed as a parameter to the ASM routine in the accumulator
+ *       The RESULT register will also be set to whatever the ASM routine returns in the accumulator
+ *     m_store_result
+ *       Write RESULT register to storage
+ *       Works similar to CCScript control code `store_registers`
+ *     m_load_result
+ *       Load RESULT register from storage
+ *       Works similar to CCScript control code `load_registers`
+ *
+ *
+ * 2. CONVENIENCE MACROS
+ *   NOTE: Most of these will clobber the value in the RESULT register. Please keep this in mind
+ *
+ *   m_destroy_self
+ *     Deletes the entity and ends the script
+ *   m_choose_random_2(n1, n2)
+ *     Select a random number and store it in the RESULT register
+ *   m_choose_random_3(n1, n2, n3) through m_choose_random_8(n1, n2, n3, n4, n5, n6, n7, n8)
+ *     Same as `m_choose_random_2`, but select a random number from a greater sample
+ *   m_result_greater(value)
+ *     Returns 1 if (RESULT > value), otherwise returns 0
+ *   m_x_less_than(value)
+ *     Returns 1 if (entity_x < value), otherwise returns 0
+ *   m_y_less_than(value)
+ *     Returns 1 if (entity_y < value), otherwise returns 0
+ *   m_rand
+ *     Returns a random number in range 0..255
+ *   m_rand_mod4
+ *     Returns a random number in range 0..3
+ *   m_rand_mod8
+ *     Returns a random number in range 0..7
+ *   m_get_random_angle
+ *     Returns `rand() << 8`, useful for getting a random angle value
+ *   m_get_distance_from_player
+ *     Sets the RESULT register to the distance between the entity and the party leader
+ *   m_wait_until_touch
+ *     Halts script execution until the player touches the entity
+ *   m_wait_until_near_self(rx, ry)
+ *     Halts script execution until the player is near the entity in radius (rx, ry)
+ *   m_wait_until_near_pos(px, py, rx, ry)
+ *     Halts script execution until the player is near position (px, py) in radius (rx, ry)
+ *   m_unlock_text
+ *     Unlocks the text (CCScript) script after a "[1F 61]" control code
+ *   m_make_invisible
+ *     Makes the entity invisible. Equivalent to `m_set_anim(-1)`
+ *   m_disable_collision
+ *     Disables collisions with the entity
+ *   m_invisible_no_collision
+ *     Makes the entity invisible and disables collision
+ *   m_enable_collision
+ *     Enables collisions with the entity
+ *   m_call_npc_text
+ *     Calls the NPC's primary text script
+ *     Undefined behavior if the entity is not an NPC
+ *   m_textcall(address)
+ *     Calls the text script at `address`
+ *     Respects door transitions and such
+ *   m_textcall2(address)
+ *     Calls the text script at `address`
+ *     Immediately call, don't respect door transitions
+ *   m_fadein(delta, delay)
+ *     Perform a screen fade-in
+ *     `delta` is how much the brightness will change every `delay` frames
+ *     NOTE: The game will keep running normally while the fade is in progress
+ *   m_fadeout(delta, delay)
+ *     Same as `m_fadein`, but performs a screen fade-out
+ *   m_wait_fade
+ *     Waits until a screen fade (`m_fadein` or `m_fadeout`) is done
+ *   m_mosaic_in(delta, delay, bgs)
+ *     Perform a screen fade-in with mosaic
+ *     `delta` is how much the brightness will change every `delay` frames
+ *     `bgs` tell which BG layers are affected by the mosaic (bitwise: 0x01, 0x02, 0x04, 0x08)
+ *     NOTE: The game is paused until the screen fade is done
+ *   m_mosaic_out(delta, delay, bgs)
+ *     Same as `m_mosaic_in`, but performs a screen fade-out
+ *   m_create_entity(spr, scr)
+ *     Creates a new entity with spritegroup `spr` and script `scr`
+ *   m_set_surface_flags(flags)
+ *     Sets the entity's surface flags
+ *   m_set_speed(value)
+ *     Sets the entity's movement speed
+ *     To get the value in pixels per frame, divide `value` by 256
+ *   m_set_speed_to_result
+ *     Sets the entity's movement speed to the RESULT register
+ *   m_get_speed
+ *     Stores the entity's movement speed into the RESULT register
+ *     To get the value in pixels per frame, divide `value` by 256
+ *   m_set_facing_anim(dir, anim)
+ *     Sets the entity's facing direction to `dir` and animation frame to `anim`
+ *     If VAR0 is not zero, then something slightly different happens
+ *   m_set_facing(dir)
+ *     Sets the entity's facing direction to `dir`
+ *   m_set_facing_to_result
+ *     Sets the entity's facing direction to the RESULT register
+ *   m_reverse_facing
+ *     Reverses the entity's facing direction
+ *   m_get_facing
+ *     Stores the entity's facing direction into the RESULT register
+ *   m_start_walk(dir)
+ *     Makes the entity start walking towards a certain direction
+ *   m_walk_pixels(pixels)
+ *     Makes the entity walk a certain number of pixels with its current facing direction
+ *   m_set_flag(flagid)
+ *     Sets the event flag `flagid`
+ *   m_unset_flag(flagid)
+ *     Unsets the event flag `flagid`
+ *   m_get_flag(flagid)
+ *     Stores the state of event flag `flagid` into the RESULT register
+ *   m_sound(snd)
+ *     Plays a sound effect
+ *   m_warp_to_pc(pc)
+ *     Instantly teleports the entity to the location of the party character `pc`
+ *   m_warp_to_leader
+ *     Instantly teleports the entity to the location of the party leader
+ *   m_warp_to_sprite(spr)
+ *     Instantly teleports the entity to the location of another entity with spritegroup `spr`
+ *   m_warp_to_dest
+ *    Instantly teleports the entity to its destination
+ *   m_set_new_entity_spawn_pos(x, y, dir)
+ *     Sets the "anchor point" for new entities/npcs created with CCScript control codes "[1F 15]" and "[1F 17]"
+ *   m_set_new_entity_spawn_pos_from_leader
+ *     Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from the party leader
+ *   m_set_new_entity_spawn_pos_from_self
+ *     Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from the current entity
+ *   m_set_new_entity_spawn_pos_from_warp(warpid)
+ *     Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from a warp (as used with CCScript control code `warp`)
+ *   m_face_dest
+ *     Makes the entity face its destination
+ *   m_refresh_graphics
+ *     Forces a refresh on the entity's graphics, using the current animation frame
+ *   m_refresh_graphics_frame0
+ *     Forces a refresh on the entity's graphics, using animation frame 0
+ *     NOTE: This doesn't actually set the entity's animation frame, it just displays frame 0
+ *   m_refresh_graphics_frame1
+ *     Forces a refresh on the entity's graphics, using animation frame 1
+ *     NOTE: This doesn't actually set the entity's animation frame, it just displays frame 1
+ *   m_copy_xy_to_var01
+ *     Copies the entity's (X, Y) position to (VAR0, VAR1)
+ *   m_move_until_at(px, py)
+ *     Makes the entity move towards (px, py), halting script execution until reaching the destination
+ *   m_move_until_at_radius(px, py, radius)
+ *     Same as `m_move_until_at`, but with a configurable detection radius
+ *   m_set_dest_pos(px, py)
+ *     Sets the entity's destination to (px, py)
+ *   m_set_dest_npc(npc)
+ *     Sets the entity's destination to NPC `npc`
+ *   m_set_dest_sprite(spr)
+ *     Sets the entity's destination to sprite with spritegroup `spr`
+ *   m_set_dest_pc(pc)
+ *     Sets the entity's destination to party character `pc`
+ *     Undefined behavior if `pc` is not in the party
+ *   m_set_dest_leader
+ *     Sets the entity's destination to the party leader
+ *   m_set_dest_party_tail
+ *     Sets the entity's destination to the party "tail"
+ *   m_default_dest_radius
+ *     Sets the destination radius check to the lowest possible value, taking into account the entity's movement speed
+ *   m_set_dest_radius(radius)
+ *     Sets the destination radius check to `radius`
+ *   m_walk_to_dest
+ *     Makes the entity move towards its current destination, halting script execution until reaching the destination
+ *   m_walk_to_leader
+ *     Makes the entity walk next to the party leader, halting script execution until reaching the destination
+ *   m_init_basic_moving(speed)
+ *     Initializes a basic moving entity with movement speed `speed`
+ *     To get the speed in pixels per frame, divide `speed` by 256
+ *     The entity will animate with 16-frame delay and respect collision with map tiles
+ *     The entity will also be destroyed automatically if it goes off-screen far enough
+ *
+ *
+ * 3. CALLBACKS
+ *   3.1. TICK CALLBACK
+ *     An optional function that is executed every frame
+ *     DP local variables $00 through $7F can be freely used by the function
+ *   3.2. ONDRAW CALLBACK
+ *     A function that is executed every frame, responsible for pushing values into OAM
+ *     DP local variables $00 through $7F can be freely used by the function
+ *   3.3. ONPOSITION CALLBACK
+ *     A function that is executed every frame, responsible for setting the entity's on-screen position
+ *     DP local variables $00 through $7F can be freely used by the function
+ *   3.4. ONMOVE CALLBACK
+ *     A function that is executed every frame, responsible for moving the entity based on its velocity values
+ *     DP local variables $00 through $7F can be freely used by the function
+ *   3.5. ONDESTROY CALLBACK
+ *     An optional function that is executed whenever the entity is destroyed
+ *     DP local variables $00 through $1F can be freely used by the function
+ *     NOTE: This is not a vanilla callback!
+ *
+ *
+ * 4. TASKS:
+ *   "Tasks" are auxiliary scripts that run alongside a main script.
+ *   The tasks will always run after the main script
+ *
+ *
+ * 5. VARIABLES
+ *   "Variables" are a special form of general-purpose storage that are paralyzed to the ENTITY.
+ *   They differ from the RESULT register, which is, in turn, paralyzed to the SCRIPT.
+ *   This means that variables can be used to communicate between the main script and its tasks, since they share the same ENTITY.
+ *   Common examples of this include the "MovTask_Anim" tasks, which generally use VAR4 as a toggle.
+ *   Each entity has eight 16-bit variables, named VAR0 through VAR7.
+ *   Most of the times, the pair (VAR6, VAR7) is the entity's current (X, Y) destination point
+ *
+ *
+ * 6. THE RESULT REGISTER
+ *   The RESULT register is a 16-bit number, and a special form of storage that is paralyzed to the SCRIPT
+ *   This means that the main script and its tasks all have their own distinct RESULT register.
+ *   When an ASMCALL instruction is executed, this register is passed as a parameter to the called ASM routine in the accumulator.
+ *   The RESULT register will also get its value from the return value of the ASM routine
+ */
+
+// DO NOT TOUCH ANYTHING BELOW HERE!!
+
+
+//*****************************************************************************
+// MOVEMENT SCRIPT INSTRUCTION DEFINES
+//*****************************************************************************
+// Unused instructions that can still be replaced: 34, 35, 36, 37, 38, 3A
+
+// SCRIPT CONTROL INSTRUCTIONS
+command m_pause(frames)        "[06 {byte frames}]"
+command m_halt                 "[09]"
+command m_pause_var0           "[21 00]"
+command m_pause_var1           "[21 01]"
+command m_pause_var2           "[21 02]"
+command m_pause_var3           "[21 03]"
+command m_pause_var4           "[21 04]"
+command m_pause_var5           "[21 05]"
+command m_pause_var6           "[21 06]"
+command m_pause_var7           "[21 07]"
+command m_pause_result         "[44]"
+
+// DATA MOVEMENT INSTRUCTIONS
+command m_var(var, value)    "[0E {byte var} {short value}]"    // Set a specific object VAR to immediate value ('var' must be in range 0..7)
+command m_set_var0(val)        "[0E 00 {short val}]"
+command m_set_var1(val)        "[0E 01 {short val}]"
+command m_set_var2(val)        "[0E 02 {short val}]"
+command m_set_var3(val)        "[0E 03 {short val}]"
+command m_set_var4(val)        "[0E 04 {short val}]"
+command m_set_var5(val)        "[0E 05 {short val}]"
+command m_set_var6(val)        "[0E 06 {short val}]"
+command m_set_var7(val)        "[0E 07 {short val}]"
+command m_set_mem8(addr, val)  "[12 {short addr} {byte val}]"
+command m_set_mem16(addr, val) "[15 {short addr} {short val}]"
+command m_set_result(val)      "[1D {short val}]"
+command m_get_mem16(addr)      "[1E {short addr}]"
+command m_rtovar0              "[1F 00]"
+command m_rtovar1              "[1F 01]"
+command m_rtovar2              "[1F 02]"
+command m_rtovar3              "[1F 03]"
+command m_rtovar4              "[1F 04]"
+command m_rtovar5              "[1F 05]"
+command m_rtovar6              "[1F 06]"
+command m_rtovar7              "[1F 07]"
+command m_get_var0             "[20 00]"
+command m_get_var1             "[20 01]"
+command m_get_var2             "[20 02]"
+command m_get_var3             "[20 03]"
+command m_get_var4             "[20 04]"
+command m_get_var5             "[20 05]"
+command m_get_var6             "[20 06]"
+command m_get_var7             "[20 07]"
+
+// ARITHMETIC AND LOGICAL INSTRUCTIONS
+command m_and_mem16(addr, val) "[0D {short addr} 00 {short val}]"
+command m_or_mem16(addr, val)  "[0D {short addr} 01 {short val}]"
+command m_add_mem16(addr, val) "[0D {short addr} 02 {short val}]"
+command m_xor_mem16(addr, val) "[0D {short addr} 03 {short val}]"
+command m_and_var0(val)        "[14 00 00 {short val}]"
+command m_and_var1(val)        "[14 01 00 {short val}]"
+command m_and_var2(val)        "[14 02 00 {short val}]"
+command m_and_var3(val)        "[14 03 00 {short val}]"
+command m_and_var4(val)        "[14 04 00 {short val}]"
+command m_and_var5(val)        "[14 05 00 {short val}]"
+command m_and_var6(val)        "[14 06 00 {short val}]"
+command m_and_var7(val)        "[14 07 00 {short val}]"
+command m_or_var0(val)         "[14 00 01 {short val}]"
+command m_or_var1(val)         "[14 01 01 {short val}]"
+command m_or_var2(val)         "[14 02 01 {short val}]"
+command m_or_var3(val)         "[14 03 01 {short val}]"
+command m_or_var4(val)         "[14 04 01 {short val}]"
+command m_or_var5(val)         "[14 05 01 {short val}]"
+command m_or_var6(val)         "[14 06 01 {short val}]"
+command m_or_var7(val)         "[14 07 01 {short val}]"
+command m_add_var0(val)        "[14 00 02 {short val}]"
+command m_add_var1(val)        "[14 01 02 {short val}]"
+command m_add_var2(val)        "[14 02 02 {short val}]"
+command m_add_var3(val)        "[14 03 02 {short val}]"
+command m_add_var4(val)        "[14 04 02 {short val}]"
+command m_add_var5(val)        "[14 05 02 {short val}]"
+command m_add_var6(val)        "[14 06 02 {short val}]"
+command m_add_var7(val)        "[14 07 02 {short val}]"
+command m_xor_var0(val)        "[14 00 03 {short val}]"
+command m_xor_var1(val)        "[14 01 03 {short val}]"
+command m_xor_var2(val)        "[14 02 03 {short val}]"
+command m_xor_var3(val)        "[14 03 03 {short val}]"
+command m_xor_var4(val)        "[14 04 03 {short val}]"
+command m_xor_var5(val)        "[14 05 03 {short val}]"
+command m_xor_var6(val)        "[14 06 03 {short val}]"
+command m_xor_var7(val)        "[14 07 03 {short val}]"
+command m_and_mem8(addr, val)  "[18 {short addr} 00 {byte val}]"
+command m_or_mem8(addr, val)   "[18 {short addr} 01 {byte val}]"
+command m_add_mem8(addr, val)  "[18 {short addr} 02 {byte val}]"
+command m_xor_mem8(addr, val)  "[18 {short addr} 03 {byte val}]"
+command m_and_result(val)      "[27 00 {short val}]"
+command m_or_result(val)       "[27 01 {short val}]"
+command m_add_result(val)      "[27 02 {short val}]"
+command m_xor_result(val)      "[27 03 {short val}]"
+
+// CONTROL FLOW INSTRUCTIONS
+command m_jml(addr)            "[03 {adr24(addr)}]"
+command m_jsl(addr)            "[04 {adr24(addr)}]"
+command m_rtl                  "[05]"
+command m_jeq(addr)            "[0A {short addr}]"
+command m_jne(addr)            "[0B {short addr}]"
+command m_multijmp(amount)     "[10 {byte amount}]"
+command m_multijsr(amount)     "[11 {byte amount}]"
+command m_jmp(addr)            "[19 {short addr}]"
+command m_jsr(addr)            "[1A {short addr}]"
+command m_rts                  "[1B]"
+
+// LOOP INSTRUCTIONS
+command m_loop(c)              "[01 {byte c}]"
+command m_loop_result          "[24]"
+command m_endloop              "[02]"
+command m_breakeq(addr)        "[16 {short addr}]"
+command m_breakne(addr)        "[17 {short addr}]"
+
+// TASK INSTRUCTIONS
+command m_task(addr)           "[07 {short addr}]"
+command m_endtask              "[0C]"
+command m_endlasttask          "[13]"
+command m_task_long(addr)      "[31 {adr24(addr)}]" // NON-VANILLA!
+
+// CALLBACK INSTRUCTIONS
+command m_ontick(addr)         "[08 {adr24(addr)}]"
+command m_ontick_nop           "[0F]"
+command m_ondraw(addr)         "[22 {short addr}]"
+command m_onposition(addr)     "[23 {short addr}]"
+command m_onmove(addr)         "[25 {short addr}]"
+command m_ondestroy(addr)      "[34 {adr24(addr)}]" // NON-VANILLA!
+
+// ENTITY INSTRUCTIONS
+command m_set_spritemap(addr)  "[1C {adr24(addr)}]"
+command m_set_anim_var0        "[26 00]"
+command m_set_anim_var1        "[26 01]"
+command m_set_anim_var2        "[26 02]"
+command m_set_anim_var3        "[26 03]"
+command m_set_anim_var4        "[26 04]"
+command m_set_anim_var5        "[26 05]"
+command m_set_anim_var6        "[26 06]"
+command m_set_anim_var7        "[26 07]"
+command m_set_xpos(val)        "[28 {short val}]"
+command m_set_ypos(val)        "[29 {short val}]"
+command m_set_zpos(val)        "[2A {short val}]"
+command m_add_xpos(val)        "[2B {short val}]"
+command m_add_ypos(val)        "[2C {short val}]"
+command m_add_zpos(val)        "[2D {short val}]"
+command m_add_xvel(val)        "[2E {short val}]"
+command m_add_yvel(val)        "[2F {short val}]"
+command m_add_zvel(val)        "[30 {short val}]"
+command m_zerovel              "[39]"
+command m_set_anim(val)        "[3B {byte val}]"
+command m_inc_anim             "[3C]"
+command m_dec_anim             "[3D]"
+command m_add_anim(val)        "[3E {byte val}]"
+command m_set_xvel(val)        "[3F {short val}]"
+command m_set_yvel(val)        "[40 {short val}]"
+command m_set_zvel(val)        "[41 {short val}]"
+command m_priority(val)        "[43 {byte val}]"
+
+// OTHER INSTRUCTIONS
+command m_end                  "[00]"
+command m_store_result         "[32]" // NON-VANILLA!
+command m_load_result          "[33]" // NON-VANILLA!
+command m_asmcall(addr)        "[42 {adr24(addr)}]"
+command m_asmcall_w1(addr)     "[F1 {adr24(addr)}]"
+
+
+//*****************************************************************************
+// VANILLA TASK DEFINES
+//*****************************************************************************
+define MovTask_Anim8                     = 0xC3A09F // Animate with 8 frame delay
+MovTask_Anim8_Diagonals: { // Animate every 8 frames using directionals and diagonals depending on angle
+    m_set_anim(0)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(8)
+    m_set_anim(2)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(8)
+    m_jmp(MovTask_Anim8_Diagonals)
+}
+
+define MovTask_Anim24                    = 0xC3A0B2 // Animate with 24 frame delay
+MovTask_Anim24_Diagonals: { // Animate every 24 frames using directionals and diagonals depending on angle
+    m_set_anim(0)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(24)
+    m_set_anim(2)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(24)
+    m_jmp(MovTask_Anim24_Diagonals)
+}
+
+define MovTask_Anim12                    = 0xC3A0C5 // Animate with 12 frame delay
+MovTask_Anim12_Diagonals: { // Animate every 24 frames using directionals and diagonals depending on angle
+    m_set_anim(0)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(12)
+    m_set_anim(2)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(12)
+    m_jmp(MovTask_Anim12_Diagonals)
+}
+
+// Version of "MovTask_Anim16_DestroyIfFar" without the "DestroyIfFar" part
+MovTask_Anim16: {
+    m_pause    (16)
+    m_set_anim (1)
+    m_refresh_graphics_frame1
+
+    m_pause    (16)
+    m_set_anim (0)
+    m_refresh_graphics_frame0
+
+    m_jmp      (MovTask_Anim16)
+}
+MovTask_Anim16_Diagonals: { // Animate every 24 frames using directionals and diagonals depending on angle
+    m_set_anim(0)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(16)
+    m_set_anim(2)
+    m_asmcall(0xC0AAAC) // refresh graphics for diagonal movement
+    m_pause(16)
+    m_jmp      (MovTask_Anim16_Diagonals)
+}
+
+define MovTask_Anim_Var4                 = 0xC3A12E // Animate with [VAR4] frame delay
+define MovTask_Anim8_Toggle_DestroyIfFar = 0xC3A15E // Animate with 8 frame delay (togglable via VAR4) and destroy if far
+define MovTask_Anim12_24_DestroyIfFar    = 0xC3A17B // Animate with 12 then 24 frame delay and destroy if far
+define MovTask_Anim24_DestroyIfFar       = 0xC3A18F // Animate with 24 frame delay and destroy if far
+define MovTask_Anim9_DestroyIfFar        = 0xC3A1B7 // Animate with 9 frame delay and destroy if far
+define MovTask_Anim6_DestroyIfFar        = 0xC3A1CB // Animate with 6 frame delay and destroy if far
+define MovTask_Anim16_DestroyIfFar       = 0xC3A1F3 // Animate with 16 frame delay and destroy if far
+define MovTask_HandleCollision           = 0xC3A262 // Handle collisions. Doesn't need to be used by stationary entities
+define MovTask_Event_8_Entry_2           = 0xC3A2B8
+define MovTask_DestroyIfFar              = 0xC3A2B8 // Destroy if far
+
+define MovTask_EnemyTouch1               = 0xC3A434 // Start battle with enemy on touch
+define MovTask_EnemyTouch2               = 0xC3A448 // Very similar to above, I don't actually know what's different
+
+define MovTask_PartyLook                 = 0xC3AFA3 // Party members look at ENTITY
+
+define MovTask_DestroyIfFar_UnsetFlag_10 = 0xC3B431 // Destroy if far and unset event flag 10
+
+define MovTask_ButterflyTouch            = 0xC3DEED // Butterfly effect on touch
+
+define MovTask_CallNpcScriptOnTouch      = 0xC36D18 // Call NPC primary text script on touch
+
+//*****************************************************************************
+// CONVENIENCE MACROS DEFINITION
+//*****************************************************************************
+// Select a random number and store it in the RESULT register
+
+command m_choose_random_2(a, b) {
+        m_asmcall (0xC09F82)
+        "[02 {short a} {short b}]"
+}
+command m_choose_random_3(a, b, c) {
+        m_asmcall (0xC09F82)
+        "[03 {short a} {short b} {short c}]"
+}
+command m_choose_random_4(a, b, c, d) {
+        m_asmcall (0xC09F82)
+        "[04 {short a} {short b} {short c} {short d}]"
+}
+command m_choose_random_5(a, b, c, d, e) {
+        m_asmcall (0xC09F82)
+        "[05 {short a} {short b} {short c} {short d} {short e}]"
+}
+command m_choose_random_6(a, b, c, d, e, f) {
+        m_asmcall (0xC09F82)
+        "[06 {short a} {short b} {short c} {short d} {short e} {short f}]"
+}
+command m_choose_random_7(a, b, c, d, e, f, g) {
+        m_asmcall (0xC09F82)
+        "[07 {short a} {short b} {short c} {short d} {short e} {short f} {short g}]"
+}
+command m_choose_random_8(a, b, c, d, e, f, g, h) {
+        m_asmcall (0xC09F82)
+        "[08 {short a} {short b} {short c} {short d} {short e} {short f} {short g} {short h}]"
+}
+command m_choose_random_9(a, b, c, d, e, f, g, h, i) {
+        m_asmcall (0xC09F82)
+        "[09 {short a} {short b} {short c} {short d} {short e} {short f} {short g} {short h} {short i}]"
+}
+command m_choose_random_10(a, b, c, d, e, f, g, h, i, j) {
+        m_asmcall (0xC09F82)
+        "[0A {short a} {short b} {short c} {short d} {short e} {short f} {short g} {short h} {short i} {short j}]"
+}
+
+// RESULT = 1 if (RESULT > value) else 0
+command m_result_greater(val) {
+        m_asmcall (_ASM_resultgreater)
+        short     val
+}
+
+// RESULT = 1 if (ENTITY_x < value) else 0
+command m_x_less_than(val) {
+        m_set_result (val)
+        m_asmcall    (0xC468B5)
+}
+
+// RESULT = 1 if (entity_y < value) else 0
+command m_y_less_than(val) {
+        m_set_result (val)
+        m_asmcall    (0xC468DC)
+}
+
+// Halts script execution until the player is near the entity in radius (rx, ry)
+command m_wait_until_near_self(rx, ry) {
+        m_set_var2 (rx)
+        m_set_var3 (ry)
+        m_jsl      (_SCR_waituntilnearself)
+}
+
+// Halts script execution until the player is near position (px, py) in radius (rx, ry)
+command m_wait_until_near_pos(px, py, rx, ry) {
+        m_set_var0 (px)
+        m_set_var1 (py)
+        m_set_var2 (rx)
+        m_set_var3 (ry)
+        m_jsl      (_SCR_waituntilnear)
+}
+
+// Makes the entity invisible and disables collision
+command m_invisible_no_collision {
+        m_make_invisible
+        m_disable_collision
+}
+
+// Calls a text script (respects door transitions and such)
+command m_textcall(textptr) {
+        m_asmcall (0xC0A88D)
+        short[1]  textptr
+        short[0]  textptr
+}
+
+// Calls a text script (Immediately, don't respect door transitions)
+command m_textcall2(textptr) {
+        m_asmcall (0xC0A8A0)
+        short[1]  textptr
+        short[0]  textptr
+}
+
+// Deletes the entity and ends the script
+command m_destroy_self {
+        m_asmcall (0xC020F1)
+        m_end
+}
+
+// Perform a screen fade-in
+command m_fadein(amount, speed) {
+        m_asmcall (0xC09FAE)
+        byte      amount
+        byte      speed
+}
+
+// Perform a screen fade-out
+command m_fadeout(amount, speed) {
+        m_asmcall (0xC09FBB)
+        byte      amount
+        byte      speed
+}
+
+// Perform a screen fade-in with mosaic
+command m_mosaic_in(amount, speed, bgs) {
+        m_asmcall (_ASM_mosaicin)
+        short     amount
+        short     speed
+        short     bgs
+}
+
+// Perform a screen fade-out with mosaic
+command m_mosaic_out(amount, speed, bgs) {
+        m_asmcall (0xC0AA07)
+        short     amount
+        short     speed
+        short     bgs
+}
+
+// Load battle backgrounds in the overworld (blend BG2 making BG1 darker)
+command m_battlebg_bg2_blend(bg1, bg2) {
+        m_asmcall (0xC0A977)
+        byte[0] bg1 
+        byte[1] bg1
+        byte[0] bg2 
+        byte[1] bg2
+}
+
+// Load battle backgrounds in the overworld (no BG2 blend)
+command m_battlebg(bg1, bg2) {
+        m_asmcall    (0xC0A977)
+        short        bg1
+        short        bg2
+
+        m_set_mem16  (0xAD8A, 1) // Blending parameters mirror
+        m_set_result (1)
+        m_asmcall    (0xC0AFCD)  // Set blending parameters
+}
+
+// Creates a new entity with spritegroup `spr` and script `scr`
+command m_create_entity(spr, scr) {
+        m_asmcall (0xC0A98B)
+        short     spr
+        short     scr
+}
+
+// Sets the entity's surface flags
+command m_set_surface_flags(flags) {
+        m_asmcall (0xC0A679)
+        byte      flags
+}
+
+// Sets the entity's movement speed
+command m_set_speed(speed) {
+        m_asmcall (0xC0A685)
+        short     speed
+}
+
+// Sets the entity's facing direction to `dir` and animation frame to `anim`
+command m_set_facing_anim(facing, anim) {
+        m_asmcall (0xC0AA6E)
+        byte      facing
+        byte      anim
+}
+
+// Sets the entity's facing direction to `dir`
+command m_set_facing(dir) {
+        m_set_result (dir)
+        m_set_facing_to_result
+}
+
+// Reverses the entity's facing direction
+command m_reverse_facing {
+        m_get_facing
+        m_asmcall (0xC46B37)
+        m_set_facing_to_result
+}
+
+// Makes the entity start walking towards a certain direction
+command m_start_walk(dir) {
+        m_set_result (dir)
+        m_asmcall    (0xC0C83B)
+}
+
+// Makes the entity walk a certain number of pixels with its current facing direction
+command m_walk_pixels(pixels) {
+        m_asmcall (0xC0A6A2)
+        short     pixels
+}
+
+// Sets the event flag `flagid`
+command m_set_flag(flagid) {
+        m_set_result (1)
+        m_asmcall    (0xC0A857)
+        short        flagid
+}
+
+// Unsets the event flag `flagid`
+command m_unset_flag(flagid) {
+        m_set_result (0)
+        m_asmcall    (0xC0A857)
+        short        flagid
+}
+
+// Stores the state of event flag `flagid` into the RESULT REGISTER
+command m_get_flag(flagid) {
+        m_asmcall (0xC0A84C)
+        short     flagid
+}
+
+// Plays a sound effect
+command m_sound(snd) {
+        m_asmcall (0xC0A841)
+        short     snd
+}
+
+// Instantly teleports the entity to the location of the party character `pc`
+command m_warp_to_pc(pc) {
+        m_asmcall (0xC0A864)
+        byte      pc
+}
+
+// Instantly teleports the entity to the location of the party character `pc`
+command m_warp_to_leader {
+        m_warp_to_pc (-1)
+}
+
+// Instantly teleports the entity to the location of another entity with spritegroup `spr`
+command m_warp_to_sprite(spr) {
+        m_asmcall (0xC0A86F)
+        short     spr
+}
+
+// Sets the "anchor point" for new entities/npcs created with CCScript control codes "[1F 15]" and "[1F 17]"
+command m_set_new_entity_spawn_pos(x, y, dir) {
+        m_asmcall (0xC0A912)
+        short     x
+        short     y
+        byte      dir
+}
+
+// Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from the party leader
+command m_set_new_entity_spawn_pos_from_leader {
+        m_set_result (1)
+        m_asmcall    (0xC46DAD)
+}
+
+// Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from the current entity
+command m_set_new_entity_spawn_pos_from_self {
+        m_set_result (0)
+        m_asmcall    (0xC46DAD)
+}
+
+// Same as `m_set_new_sprite_spawn_pos`, but the coordinates are taken from a "preset warp" (as used with CCScript control code `warp`)
+command m_set_new_entity_spawn_pos_from_warp(warpid) {
+        m_set_result (warpid)
+        m_asmcall    (0xC46DE5)
+}
+
+// Makes the entity face its destination
+command m_face_dest {
+        m_asmcall (0xC46ADB) // Get angle towards destination
+        m_asmcall (0xC46B0A) // Set movement direction based on angle. Returns the direction
+        m_asmcall (0xC0A65F) // Set facing direction
+}
+
+// Makes the entity move towards (px, py), halting script execution until reaching the destination
+command m_move_until_at(px, py) {
+        m_default_dest_radius
+        m_set_dest_pos (px, py)
+        m_walk_to_dest
+}
+
+// Makes the entity move towards (px, py), halting script execution until reaching the destination and without changing the sprite's facing direction
+command m_move_until_at_no_face(px, py) {
+        m_default_dest_radius
+        m_set_dest_pos (px, py)
+        m_walk_to_dest_no_face
+}
+
+// Same as `m_move_until_at`, but with a configurable detection radius
+command m_move_until_at_radius(px, py, radius) {
+        m_set_dest_radius (radius)
+        m_set_dest_pos        (px, py)
+        m_walk_to_dest
+}
+
+// Sets the entity's destination to (px, py)
+command m_set_dest_pos(px, py) {
+        m_set_var6 (px)
+        m_set_var7 (py)
+}
+
+// Sets the entity's destination to NPC `npc`
+command m_set_dest_npc(npc) {
+        m_asmcall (0xC0A92D)
+        short     npc
+}
+
+// Sets the entity's destination to sprite with spritegroup `spr`
+command m_set_dest_sprite(spr) {
+        m_asmcall (0xC0A938)
+        short     spr
+}
+
+// Sets the entity's destination to party character `pc`
+command m_set_dest_pc(pc) {
+        m_asmcall (0xC0A943)
+        byte      pc
+}
+
+// Sets the entity's destination to the party leader
+command m_set_dest_leader {
+        m_asmcall (0xC46B65)
+}
+
+// Sets the entity's destination to the party "tail"
+command m_set_dest_party_tail {
+        m_set_dest_pc (-2)
+}
+
+// Obtain the party number count, use JSL/RTL
+command m_get_party_count m_asmcall(0xC47333)
+_C3B70C:
+    m_onposition(0xA039)
+    m_onmove(0x9FC8)
+    m_make_invisible
+    m_ontick(0xC48BE1)
+    m_set_var5(1)
+    m_add_var7(-1)
+    m_set_speed(0x00C0)
+    m_walk_to_dest
+    m_get_party_count // EDIT: forgot this
+    m_loop_result
+        m_loop(12)
+            m_set_facing(4)
+            m_set_xvel(1)
+            m_pause(1)
+            m_set_xvel(-1)
+            m_pause(1)
+        m_endloop
+    m_endloop
+    m_zerovel
+    m_rtl
+
+// Locks player movement and interactions
+command m_lock_player   m_set_mem16 (0x5D9A, 1)
+
+// Unlocks player movement and interactions
+command m_unlock_player m_set_mem16 (0x5D9A, 0)
+
+// Sets the destination radius check to the lowest possible value, taking into account the entity's movement speed
+command m_default_dest_radius {
+        m_asmcall (_ASM_ceilspeed)
+        m_rtovar5
+}
+
+// Sets the destination radius check to `radius`
+command m_set_dest_radius(radius) {
+        m_asmcall (_ASM_ceilspeed)
+        m_asmcall (_ASM_mathmax)
+        short     radius
+
+        m_rtovar5
+}
+
+// Makes the entity move towards its current destination, halting script execution until reaching the destination
+command m_walk_to_dest {
+        m_jsl (_SCR_moveuntilatdest)
+}
+
+// Makes the entity move towards its current destination, halting script execution until reaching the destination
+command m_walk_to_dest_no_face {
+        m_jsl (_SCR_moveuntilatdest_noface)
+}
+
+// Makes the entity walk next to the party leader, halting script execution until reaching the destination
+command m_walk_to_leader {
+        m_set_dest_radius (17)
+        m_set_dest_leader
+        m_walk_to_dest
+}
+
+// Initializes a basic moving entity with movement speed `speed`
+command m_init_basic_moving(speed) {
+        m_set_result (speed)
+        m_jsl        (_SCR_initbasicmoving)
+}
+
+
+// Waits until a screen fade is done
+command m_wait_fade                m_jsl       (_SCR_waitfade)
+
+// Halts script execution until the player touches the entity
+command m_wait_until_touch         m_jsl       (_SCR_waituntiltouch)
+
+// Makes the entity invisible
+command m_make_invisible           m_set_anim  (-1)
+
+// Unlocks the text (CCScript) script after a "[1F 61]" control code
+command m_unlock_text              m_set_mem16 (0x9641, 1)
+
+command m_yield_text               m_asmcall(0xC46E46)
+
+// Copies the entity's (X, Y) position to (VAR0, VAR1)
+command m_copy_xy_to_var01         m_asmcall   (0xC46C45)
+
+// Instantly teleports the entity to its destination
+command m_warp_to_dest             m_asmcall   (0xC46C87)
+
+// Sets the entity's movement speed to the RESULT register
+command m_set_speed_to_result      m_asmcall   (0xC0A68B)
+
+// Stores the entity's facing direction into the RESULT register
+command m_get_facing               m_asmcall   (0xC0A673)
+
+// Sets the entity's facing direction from the RESULT register
+command m_set_facing_to_result     m_asmcall   (0xC0A66D)
+
+// Returns a random number in range 0..255
+command m_rand                     m_asmcall   (0xC08E9A)
+
+// Returns a random number in range 0..3
+command m_rand_mod4                m_asmcall   (0xC0A633)
+
+// Returns a random number in range 0..7
+command m_rand_mod8                m_asmcall   (0xC0A63B)
+
+// Returns `rand() << 8`, useful for getting a random angle value
+command m_get_random_angle         m_asmcall   (0xC09FA8)
+
+// Sets the RESULT register to the distance between the entity and the party leader
+command m_get_distance_from_player m_asmcall   (_ASM_distancefromplayer)
+
+// Disables collisions with the entity
+command m_disable_collision        m_asmcall   (0xC0A82F)
+
+// Enables collisions with the entity
+command m_enable_collision         m_asmcall   (0xC0A838)
+
+// Calls the NPC's primary text script (undefined behavior if entity is not an NPC)
+command m_call_npc_text            m_asmcall   (0xC4681A)
+
+// Forces a refresh on the entity's graphics (use current frame)
+// Well, I could just use 0xC0A480, but that does unnecessary setup wasting 33 cycles
+command m_refresh_graphics         m_asmcall   (_ASM_refreshgraphics)
+
+// Forces a refresh on the entity's graphics (use frame 0)
+command m_refresh_graphics_frame0  m_asmcall   (0xC0A4BF)
+
+// Forces a refresh on the entity's graphics (use frame 1)
+command m_refresh_graphics_frame1  m_asmcall   (0xC0A4B2)
+
+// Stores the entity's movement speed into the RESULT register
+command m_get_speed                m_asmcall   (0xC0A691)
+
+
+//*****************************************************************************
+// PRIVATE ASM ROUTINES
+//*****************************************************************************
+//----- Local variables ------//
+define _scr_ptr    = 0x80
+define _scr_stack  = 0x84
+// 0x86 is never used. It's probably safe to use, but I'm not risking it.
+define _obj_offset = 0x88
+define _scr_offset = 0x8A
+define _temp1      = 0x8C
+define _temp2      = 0x8E
+define _temp3      = 0x90
+define _temp4      = 0x92
+define _pc         = 0x94 // $94 should not be used as a temp, it's already used to hold the "program counter" of the movement script
+define _temp5      = 0x96
+define _temp6      = 0x98
+define _temp7      = 0x9A
+define _temp8      = 0x9C
+define _temp9      = 0x9E
+
+define self_offset = 0x1A44
+
+define camera_x    = 0x9877
+define camera_y    = 0x987B
+
+//----- Script variables ------//
+define SCR_stack_offset = 0x12E6
+define SCR_pc           = 0x13FE // Script program counter
+define SCR_pb           = 0x148A // Script program bank
+define SCR_result       = 0x1516
+
+//----- Entity variables ------//
+define OBJ_map_x        = 0x0B8E
+define OBJ_map_y        = 0x0BCA
+
+define OBJ_vel_x        = 0x0CF6
+define OBJ_vel_y        = 0x0D32
+define OBJ_vel_xf       = 0x0DAA
+define OBJ_vel_yf       = 0x0DE6
+
+define OBJ_anim_frame   = 0x10F2
+
+define OBJ_speed        = 0x2B32
+
+//----- MACROS ------//
+// Ceils an 8.8 fixed-point number that's loaded in the accumulator
+// Bit magic suggested by Alcaro on SnesLab ( https://canary.discord.com/channels/485971752992636929/486247695795879946/865718830603829248 )
+command _CEIL {
+        DEC
+        ORA_i (0x00FF)
+        INC
+}
+
+// Fetch byte and increment PC (8-bit accumulator)
+command _READBYTE8 {
+        LDA_dly (_scr_ptr)
+        INY
+}
+
+// Fetch byte and increment PC (16-bit accumulator)
+command _READBYTE {
+        _READBYTE8
+        AND_i   (0x00FF)
+}
+
+// Fetch word and increment PC
+command _READWORD {
+        LDA_dly (_scr_ptr)
+        INY
+        INY
+}
+command m_reset_no_interact_flag m_set_mem16(0x5D9A, 0) // Or maybe "unset" to be more inline with std.ccs's set/unset control codes
+command m_set_no_interact_flag   m_set_mem16(0x5D9A, 1)
+
+//----- Routines ------//
+// Return distance from player
+_ASM_distancefromplayer: {
+        LDX_d (_obj_offset)
+        LDA_a (camera_x)
+        SEC
+        SBC_x (OBJ_map_x)
+        BPL   (4)
+          EOR_i (0xFFFF)
+          INC
+        STA_d (_temp1)
+
+        LDA_a (camera_y)
+        SEC
+        SBC_x (OBJ_map_y)
+        BPL   (4)
+          EOR_i (0xFFFF)
+          INC
+        CLC
+        ADC_d (_temp1)
+
+        // return abs(OBJ_map_x - camera_x) + abs(OBJ_map_y - camera_y)
+        RTL
+}
+
+// return (result > argument)
+_ASM_resultgreater: {
+        _READWORD
+        STY_d (_pc)
+
+        CMP_x (SCR_result)
+        LDA_i (0) // FALSE
+          BCS   (1)
+        INC     // TRUE
+        RTL
+}
+
+// ceil(movespeed)
+_ASM_ceilspeed: {
+        LDX_d (_obj_offset)
+        LDA_x (OBJ_speed)
+        _CEIL
+        XBA             // THIS SHOULD EXIST
+        AND_i (0x00FF)  // THIS SHOULD EXIST
+        RTL
+}
+
+// max(result, value)
+_ASM_mathmax: {
+        _READWORD
+        STY_d (_pc)
+
+        CMP_x (SCR_result)
+        BCS   (3)
+          LDA_x (SCR_result) // 3 bytes
+        RTL
+}
+
+_ASM_mosaicin: {
+        _READWORD
+        PHA
+        _READWORD
+        TAX
+        _READWORD
+        STY_d (_pc)
+
+        TAY
+        PLA
+        JML   (0xC087CE)
+}
+
+// Refresh graphics using current animation frame
+_ASM_refreshgraphics: {
+        LDY_d (_obj_offset)
+        LDA_y (OBJ_anim_frame)
+        STA_a (0x2892)
+        JML   (0xC0A4C4)
+}
+
+//*****************************************************************************
+// PRIVATE MOVEMENT SCRIPT ROUTINES
+//*****************************************************************************
+_SCR_moveuntilatdest: {
+        m_asmcall (0xC46ADB) // Get angle towards destination
+        m_asmcall (0xC47044) // Set velocity based on angle (does not modify RESULT)
+        m_asmcall (0xC46B0A) // Set movement direction based on angle
+        m_asmcall (0xC0A65F) // Set facing direction
+        m_refresh_graphics
+
+_loop:    m_pause   (1)        // Wait 1 frame
+          m_asmcall (0xC0A8DC) // Move towards destination and check for proximity
+          m_jeq     (_loop)    // Go back if still not near destination
+
+        m_zerovel  // Zero velocities when done
+        m_rtl
+}
+
+_SCR_moveuntilatdest_noface: {
+        m_asmcall (0xC46ADB) // Get angle towards destination
+        m_asmcall (0xC47044) // Set velocity based on angle (does not modify RESULT)
+        m_asmcall (0xC46B0A) // Set movement direction based on angle
+        m_refresh_graphics
+
+_loop:    m_pause   (1)        // Wait 1 frame
+          m_asmcall (0xC0A8DC) // Move towards destination and check for proximity
+          m_jeq     (_loop)    // Go back if still not near destination
+
+        m_zerovel  // Zero velocities when done
+        m_rtl
+}
+
+_SCR_initbasicmoving: {
+        m_set_speed_to_result
+        m_onmove    (0xA360)   // Move if not blocked and update surface flags
+        m_set_anim  (0)
+        m_refresh_graphics_frame0
+        m_task_long (MovTask_Anim16_DestroyIfFar)
+        m_task_long (MovTask_HandleCollision)
+        m_zerovel
+        m_rtl
+}
+
+_SCR_waituntiltouch: {
+        m_pause   (1)
+        m_asmcall (0xC0D15C) // Return TRUE if this entity is colliding with the player
+        m_jeq     (_SCR_waituntiltouch)
+
+        m_rtl
+}
+
+_SCR_waituntilnearself: {
+        m_pause   (1)
+        m_asmcall (0xC46EF8) // Return TRUE if player is near self in radius (var2, var3) -- always FALSE when teleporting
+        m_jeq     (_SCR_waituntilnearself)
+
+        m_rtl
+}
+
+_SCR_waituntilnear: {
+        m_pause   (1)
+        m_asmcall (0xC46E74) // Return TRUE if player is near (var0, var1) in radius (var2, var3) -- always FALSE when teleporting
+        m_jeq     (_SCR_waituntilnear)
+
+        m_rtl
+}
+
+_SCR_waitfade: {
+        m_pause      (1)
+        m_get_mem16  (0x0028)         // Screen fade amount
+        m_and_result (0x00FF)         // 8-bit variable, so AND it with 0xFF
+        m_jne        (_SCR_waitfade)  // Go back if still fading in or out...
+        m_rtl
+}
+
+//*****************************************************************************
+// CUSTOM MOVEMENT SCRIPT INSTRUCTION IMPLEMENTATION
+//*****************************************************************************
+// IMPLEMENTATION: m_task_long [31]
+// $C097DC is the entry point for movement instruction 0x31
+// It's safe to overwrite until $C097EE (18 bytes)
+ROM[0xC097DC] = {
+        JSR     (0x99DD)   // Call the original "m_task" movement instruction implementation
+        // Before we continue, we need to keep this in mind:
+        // 1. If there are no more script slots available, "m_task" fails silently (it just advances the program counter by 2)
+        // 2. In case of failure, the carry flag will be set. Otherwise, it will be clear
+        // 3. The offset of the task script will be in X, but only if "m_task" didn't fail
+
+        BCS     (5)        // Just increment PC by one if "m_task" failed "BCS_a (_ret)"
+          // No need for 8-bit accumulator, the high byte of the program bank is completely ignored in all cases
+          LDA_dly (_scr_ptr) // Fetch bank byte of task address
+          STA_x   (SCR_pb)   // Store it to the program bank of the new task script
+_ret:   INY
+        RTS
+
+        // 12 out of 18 bytes
+}
+
+// IMPLEMENTATION: m_store_result [32]
+// $C097EF is the entry point for movement instruction 0x32
+// It's safe to overwrite until $C09801 (18 bytes)
+ROM[0xC097EF] = {
+        TYX
+
+        LDY_d   (_scr_offset)
+        LDA_y   (SCR_result)
+        // Scripts have a 16 byte stack
+        // Our local storage will be at the absolute top of the stack, lowering the script stack capacity to 14 bytes...
+        LDY_i   (14)
+        STA_diy (_scr_stack)
+
+        TXY
+        RTS
+
+        // 13 out of 18 bytes
+}
+
+// IMPLEMENTATION: m_load_result [33]
+// $C09802 is the entry point for movement instruction 0x33
+// It's safe to overwrite until $C09825 (35 bytes)
+ROM[0xC09802] = {
+        TYX
+
+        // Scripts have a 16 byte stack
+        // Our local storage will be at the absolute top of the stack, lowering the script stack capacity to 14 bytes...
+        LDY_i   (14)
+        LDA_diy (_scr_stack)
+        LDY_d   (_scr_offset)
+        STA_y   (SCR_result)
+
+        TXY
+        RTS
+
+        // 13 out of 35 bytes
+}
+
+// IMPLEMENTATION: m_ondestroy [34]
+// $C09826 is the entry point for movement instruction 0x34
+// It's safe to overwrite until $C09849 (35 bytes)
+ROM[0xC09826] = {
+        LDX_d (_obj_offset)
+        _READWORD // 4 bytes
+        STA_x (OBJ_destructor_lo)
+        _READBYTE // 6 bytes
+        STA_x (OBJ_destructor_hi)
+        RTS
+
+        // 19 out of 35 bytes
+}
+
+// Patch so that the game calls the destructor when an entity is destroyed
+// Initialize destructor to NULL pointer on entity creation
+ROM[0xC020E7] = {
+        JSL (_nulldestructor)
+        NOP
+        NOP
+}
+
+_nulldestructor: {
+        STZ_x (OBJ_destructor_lo)
+        STZ_x (OBJ_destructor_hi)
+        // ORIGINAL CODE
+        STZ_x (0x2AF6)
+        STZ_x (0x28DA)
+        // ORIGINAL CODE
+        RTL
+}
+
+// "destroy current entity" (used by movement scripts)
+/*
+ *  C0/2109: A2 00 00     LDX #$0000
+ *  C0/210C: A5 02        LDA $02
+ */
+ROM[0xC02109] = {
+        JSL (_calldestructor)
+        NOP
+}
+
+// "destroy arbitrary entity" (used by ASM)
+/*
+ *  C0/2157: A2 00 00     LDX #$0000
+ *  C0/215A: A5 02        LDA $02
+ */
+ROM[0xC02157] = {
+        JSL (_calldestructor)
+        NOP
+}
+
+_calldestructor: {
+        LDY_d (0x0E)
+        LDA_y (OBJ_destructor_lo)
+        ORA_y (OBJ_destructor_hi)
+        BEQ_a (_ret)     // Return if destructor is a NULL pointer
+
+        // Allocate a few local variables for the destructor
+        PHD
+        TDC
+        SEC
+        SBC_i (32)       // Give DP locals $00-$1F for free to the destructor
+        TCD
+
+        LDA_y (OBJ_destructor_lo)
+        STA_a (0x00BC)
+        LDA_y (OBJ_destructor_hi)
+        STA_a (0x00BE)
+        TYA              // Pass the entity offset to the destructor
+        JSL   (0xC09279) // Call ASM pointer from $00BC
+
+        PLD
+
+_ret:   // ORIGINAL CODE
+        LDX_i (0)
+        LDA_d (0x02)
+        // ORIGINAL CODE
+        RTL
+}
