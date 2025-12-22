@@ -97,6 +97,7 @@ Don’t get dizzy while reading the full changelog:
 * Extended Naming Screen Character Table, for both the party and the player’s name prompt
 * Completely rewritten script based on Tomato’s Legends of Localization book (Thanks TragicManner!)
 * Poo’s “Mirror” command has been renamed to “Transform” to more accurately represent what the move does, and it’s actual Japanese name
+* Giygas' background (BG 225) now loops properly, it jumped between distortions in the original EarthBound.
 * Even MORE uncensoring (based on the Legends of Localization book by Clyde Mandelin)
 * A ton of NPC dialogue bugfixes (examples include no more “Ness ate the pizza together”, Twoson old lady NPC dialogue, etc)
 * More typo fixes from the original script
