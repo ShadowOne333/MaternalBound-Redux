@@ -3,12 +3,13 @@
 import "../essential/asm65816.ccs"
 //------------------------------------------------------------------
 /* Lower HP/PP windows by one tile */
-ROM[0xC2044C] = LDA_i(0x0013)
-ROM[0xC20453] = LDA_i(0x0014)
-ROM[0xC20856] = LDY_i(9)
-ROM[0xC21412] = ADC_i(0x80)
-ROM[0xC3E738] = ADC_i(0x82BE)
-ROM[0xC435BF] = ADC_i(0x84BE)
+// REMOVED IN FAVOUR OF M3 SPRITES CODE BY VITTORIO
+//ROM[0xC2044C] = LDA_i(0x0013)
+//ROM[0xC20453] = LDA_i(0x0014)
+//ROM[0xC20856] = LDY_i(9)
+//ROM[0xC21412] = ADC_i(0x80)
+//ROM[0xC3E738] = ADC_i(0x82BE)
+//ROM[0xC435BF] = ADC_i(0x84BE)
 //------------------------------------------------------------------
 /* Battle menu move Mirror command to the left */
 ROM[0xC2381F] = LDX_i(0x000B)

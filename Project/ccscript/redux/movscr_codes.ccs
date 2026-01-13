@@ -2,9 +2,9 @@ import "../essential/asm65816.ccs"
 
 // Use a space that is completely unused in RAM
 // cooprocks123e's "Battle OverWorld Sprites" patch already uses 0x31C2 through 0x31C9
-define OBJ_destructor_lo = 0x31CA // 60 bytes (30*2)
-define OBJ_destructor_hi = 0x3206 // 60 bytes (30*2)
-// Next free addresses are 0x3242 through 0x3329
+define OBJ_destructor_lo = 0x31D0 // 60 bytes (30*2)
+define OBJ_destructor_hi = 0x320C // 60 bytes (30*2)
+// Next free addresses are 0x3248 through 0x3329
 /*
 ONMOVE, sprite movement:
   $9FC8 -> Apply XY velocities [DEFAULT]

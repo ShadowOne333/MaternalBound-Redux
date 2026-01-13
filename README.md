@@ -74,7 +74,8 @@ Don’t get dizzy while reading the full changelog:
     - Several debug menu bugs have been fixed
     - PSI Special fixed to PK Special (PK Rockin)
     - Region crack to make the game playable in any region
-* Fully functional title screen with NO glitches (no more “TH” in the middle like before)
+* Fully functional title screen with NO glitches (no more “TH” in the middle like before).
+* The title screen letters' movement now behave the same as they did in Mother 2, with their flashes and shines as well!
 * MSU-1 integration (alongside the very first PCM pack for EarthBound)
 * Fully hardware compatible (can be played in reproduction cartridges)
 * New Controls hack implemented. Full button remapping to something similar to other RPGs of the era, like FFVI.
@@ -86,6 +87,7 @@ Don’t get dizzy while reading the full changelog:
 * Unique overworld enemy sprites for EVERY enemy found in the game, to give it a little bit of a Mother 3 vibe
 * Sprites have been edited to match their official artwork (clay models) of some characters
 * All 4 robot sprites are now unique, and each one has a specific object from the character to differentiate them from each other
+* The character sprites now show up while in battle, just above their HP/PP boxes, just like they do in Mother 3. This also takes into account sprite changes, like Ness in Magicant or the party in the Cave of the Past (Thanks to Vittorio for this feature!)
 * New custom diagonal sprites for ALL characters that join the party at one point (Porky, Picky, King, Tony, Bubble Monkey, Flying Man, Dungeon Man). This also includes:
     - All character tiny sprites (Ness, Paula, Jeff, Poo)
     - All ghost sprites (Normal and tiny)
@@ -97,7 +99,6 @@ Don’t get dizzy while reading the full changelog:
 * Extended Naming Screen Character Table, for both the party and the player’s name prompt
 * Completely rewritten script based on Tomato’s Legends of Localization book (Thanks TragicManner!)
 * Poo’s “Mirror” command has been renamed to “Transform” to more accurately represent what the move does, and it’s actual Japanese name
-* Giygas' background (BG 225) now loops properly, it jumped between distortions in the original EarthBound.
 * Even MORE uncensoring (based on the Legends of Localization book by Clyde Mandelin)
 * A ton of NPC dialogue bugfixes (examples include no more “Ness ate the pizza together”, Twoson old lady NPC dialogue, etc)
 * More typo fixes from the original script
@@ -187,7 +188,7 @@ You can find a copy of the license in the LICENSE file.
 * **Howisthisaname:** For the EarthBound Enhanced hack, which is where some of the reworked battle sprites come from, while some were made entirely by me
 * **Conn:**	For the creation of the MSU hack for EarthBound. I transcribed the patch to CCS format and also helped with the loop table.
 * **Miles:**	For the coloured "CAST" text in the ending, identical to how it was in Mother 2. The code for this was made by PhoenixBound.
-* **Vittorio:**	For several ASM and movement script codes that were of great help for the project, like the Run Stamina code and a fix for the M2 title screen post-fadein shining effect.
+* **Vittorio:**	For several ASM and movement script codes that were of great help for the project, like the Run Stamina code and a fix for the M2 title screen post-fadein shining effect. Also the M3 Sprites hack as well.
 * Special thanks to all my beta-testers and people on the MaternalBound Discord (https://discord.gg/v7kyYrv) for their feedback and suggestions!
 
 

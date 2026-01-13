@@ -42,11 +42,13 @@ import "essential/flags.ccs"
 import "essential/jsl_rts.ccs"
 //------------------------------------------------------------------
 // Redux
+import "redux/Bowspr.ccs"
 import "redux/cast_coloured_text.ccs"
 import "redux/debug_fixes.ccs"
 import "redux/fast_terrain.ccs"
 import "redux/goods_menu_equip.ccs"
 import "redux/m2_title_screen_movements.ccs"
+import "redux/m3sprites.ccs"
 import "redux/movement_reloc.ccs"
 import "redux/movscr_codes.ccs"
 import "redux/msu1.ccs"

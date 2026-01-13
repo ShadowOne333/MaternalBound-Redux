@@ -1511,24 +1511,22 @@
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
-176:
+176: # Removed Care Free Bomb to not glitch out the M3 sprites
   Background 1: 67
   Background 2: 0
   Enemies:
   - {Amount: 1, Enemy: 44}
-  - {Amount: 0, Enemy: 115}
-  - {Amount: 0, Enemy: 133}
+  - {Amount: 0, Enemy: 115} # - {Amount: 0, Enemy: 133}
   - {Amount: 0, Enemy: 151}
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
-177:
+177: # Removed Fobby to not glitch out the M3 sprites
   Background 1: 323
   Background 2: 0
   Enemies:
   - {Amount: 1, Enemy: 195}
-  - {Amount: 0, Enemy: 17}
-  - {Amount: 0, Enemy: 99}
+  - {Amount: 0, Enemy: 17} # - {Amount: 0, Enemy: 99}
   - {Amount: 0, Enemy: 71}
   Fear event flag: 0
   Fear mode: run away if flag is unset

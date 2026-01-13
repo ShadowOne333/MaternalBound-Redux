@@ -1,0 +1,880 @@
+// Bowspr.ccs - v0.71
+// Battle OverWorld Sprites
+// cooprocks123e, 2021-2024
+// v0.71:
+//  - fixed crash with movscr_codes destructors again (oops!)
+//  - resolve sprites appearing behind battle backgrounds
+//    - set the priority bits in the spritemap to 2 when creating a sprite
+//    - add new Bowspr-specific draw callback which doesn't change the priority bits
+//  - load SPRITE_GROUPING_PTR_TABLE from ROM function instead of hardcoding
+//    - fixes issues with Coilsnake relocating the sprite group table
+// v0.7 - added priority, fixed crash with new movscr_codes, updated example
+
+/// IF YOU EXPERIENCE CRASHES AFTER BATTLE ENDS
+// This is an issue with the memory used for the new destructor features in
+// the latest movscr_codes.ccs. Please use the version of movscr_codes
+// bundled with Bowspr.
+
+/// PRIORITY EXPLANATION
+// With Bowspr v0.7, the sprite priority now affects whether sprites will
+// appear in front or behind the enemy sprites. The priority is as follows:
+//   Front
+//     Bowspr sprites with priority 0
+//     Bowspr sprites with priority 1
+//     Enemy front row
+//     Bowspr sprites with priority 2
+//     Enemy back row
+//     Bowspr sprites with priority 3
+//
+// Note that priority 1 is special cased in the default code:
+// any sprites with priority 1 will be sorted by their Y position on screen,
+// so that sprites lower on screen appear on top. This doesn't happen with
+// priority settings 0, 2, and 3. If you require this sorting feature, use
+// priority 1. If you don't require it, use priority 0 as the sorting does take
+// time and can cause lag.
+
+import "../essential/asm65816.ccs"
+import "../redux/movscr_codes.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/cc_asmcall.ccs"
+
+define SPRITE_GROUPING_PTR_TABLE = 0xEF133F
+define SPRITE_GROUPING_PTR_TABLE_p2 = 0xEF1341
+
+define SPRITEMAP_TEMPLATE_PTR_TABLE = 0xC42B0D
+define SPRITEMAP_TEMPLATE_PTR_TABLE_p2 = 0xC42B0F
+
+define SPRITE_COLLISION_ENABLE_TABLE = 0xC42AEB
+
+define ALWAYS_ZEROS = 0xC40BE8
+
+// Number of sprite palettes (also -1)
+define NUM_PALETTES = 8
+define NUM_PALETTES_m1 = 7
+
+// Memory locations - please select memory locations that are unused
+/////////////////////////////////// vvv Must be below 0x0100
+define MEM_BowsprDrawOamOnePriority_Temp1 = 0x00C2 // 2 bytes
+define MEM_BowsprDrawOamOnePriority_Temp2 = 0x00C4 // 2 bytes
+/////////////////////////////////// ^^^ Must be below 0x0100
+/////////////////////////////////// vvv Must be below 0x2000
+define MEM_BowsprDmaThreshold       = 0x1BD6 // 2 bytes
+define MEM_BowsprDmaThresholdP1     = 0x1BD8 // 2 bytes
+define MEM_BowsprDmaThresholdDiv2   = 0x1BDA // 2 bytes
+/////////////////////////////////// ^^^ Must be below 0x2000
+define MEM_BowsprEnable             = 0x31c2 // 2 bytes
+define MEM_BowsprTileAllocIdx       = 0x31c4 // 2 bytes
+define MEM_BowsprPrevObjListHead    = 0x31c6 // 2 bytes
+define MEM_BowsprPaletteMap         = 0x31c8 // NUM_PALETTES bytes
+
+define MEM_SpritemapBank = 0x000B
+define MEM_DmaMode = 0x0091
+    define DMA_MODE_FIXED_WORD = 3
+define MEM_DmaSize = 0x0092
+define MEM_DmaSrcAddr = 0x0094
+define MEM_DmaSrcBank = 0x0096
+define MEM_DmaVramAddr = 0x0097
+
+define MEM_SpritemapTable = 0x467E
+
+define MEM_ObjListHead                  = 0x0A50
+define MEM_ObjListNextEntry             = 0x0A9E
+define MEM_ObjSpritemapPtrLo            = 0x112E
+define MEM_ObjSpritemapPtrHi            = 0x116A
+define MEM_ObjDrawCallback              = 0x11E2
+define MEM_ObjCollisionEWHitboxHeight   = 0x1A4A
+define MEM_ObjBlockedByObject           = 0x289E
+define MEM_ObjBlockedByObstacle         = 0x28DA
+define MEM_ObjFlippedSpritemapOffset    = 0x2916
+define MEM_ObjSpriteVramAllocationIndex = 0x2952
+define MEM_ObjSpriteVramAddr            = 0x298E
+define MEM_ObjSpriteGraphicsPtrLo       = 0x29CA
+define MEM_ObjSpriteGraphicsPtrHi       = 0x2A06
+define MEM_ObjSpriteGraphicsBank        = 0x2A42
+define MEM_ObjSpriteNumBytesWide        = 0x2A7E
+define MEM_ObjSpriteHeight              = 0x2ABA
+define MEM_ObjMovementDirection         = 0x2AF6
+define MEM_ObjMovementSpeed             = 0x2B32
+define MEM_ObjCollisionBoxIndex         = 0x2B6E
+define MEM_ObjSurfaceFlags              = 0x2BAA
+define MEM_ObjSpritemapDrawMisc         = 0x2BE6
+define MEM_ObjNpcId                     = 0x2C9A
+define MEM_ObjForceIgnoreCollision      = 0x2C5E
+define MEM_ObjSpriteGroup               = 0x2CD6
+define MEM_ObjEnemyId                   = 0x2D12
+define MEM_ObjEnemyUnknown              = 0x2D4E
+define MEM_ObjEnemyUnknown2             = 0x2D8A
+define MEM_ObjEnemyUnknown3             = 0x2DC6
+define MEM_ObjCollisionEnable           = 0x332A
+define MEM_ObjCollisionNSHitboxWidth    = 0x3366
+define MEM_ObjCollisionNSHitboxHeight   = 0x33A2
+define MEM_ObjCollisionEWHitboxWidth    = 0x33DE
+define MEM_ObjGraphicsPtrLo             = 0x341A
+
+/* Warning: This patch overwrites the ROM from $C0FFE0 to $C0FFE3 */
+define ASMNEAR_C0_BowsprDrawCallback = 0xC0FFE0
+
+define ASM_SetSpritemapBank = 0xC088A5
+define ASM_OamClear = 0xC088B1
+define ASM_UpdateScreen = 0xC08B26
+define ASM_RenderSpriteToOAM = 0xC08CD5
+define ASM_ProcessObjects = 0xC09466
+define ASM_InitEntityWipe = 0xC092F5
+define ASM_InitEntityUnknown2 = 0xC09403
+define ASM_DmaGraphics = 0xC0A56E
+define ASM_AllocateSpritemap = 0xC01A9D
+define ASMNEAR_C0_FillSpritemapFromTemplate = 0xC01D38
+
+define MOV_Event_35 = 0xC3A204
+
+command JSL_RTS_C0(routine) {
+  PHK
+  PER (6)
+  PEA (0xC020ef)
+  JML (routine)
+}
+
+// Arguments:
+//   A: Number of Battle BGs in use (or 0 for auto-detect)
+//        0 = Auto-detect
+//        1 = Only one battle BG layer is in use (use VRAM from $3000-$3FFF)
+//        2 = Multiple battle BG layers are in use (don't use that VRAM)
+//      Using multiple battle BG laters limits the amount of VRAM available
+//      for sprites, including both Bowspr sprites and enemies.
+//      If you get enemy sprite corruption, consider setting this to 1.
+//      If you get battle BG corruption, consider setting this to 2.
+//   X: Bitmap of sprite palettes available (or 0 for auto-detect)
+//      Bits 0-7 in this value represent whether palettes 0-7 are available 
+//      for Bowspr use. Sprite palettes in battle are grouped into two
+//      sections: the first half is the "normal" palette used by default for
+//      all enemies of the same type. The 2nd half is a copy of the palette
+//      for each enemy type, and is modified to create the dimmed copy used
+//      for un-selected enemies, and also to do the fade-to-white on enemy
+//      death. As an example, if there are two types of enemies in the current
+//      enemy group, it should be safe to use palettes 2-3 and 6-7. Thus, the
+//      bitmask should be 0xCC
+ASM_BowsprBegin: {
+    REP (0x31)
+    // Do nothing if we're already initialized / enabled
+    LDY_a(MEM_BowsprEnable)
+    BEQ(1) RTL
+    PHD
+    TAY
+    TDC
+    ADC_i(-0x12)
+    TCD
+
+    // Locals:
+    // $00: VRAM parameter
+    // $02: Palette parameter
+    // $06: 32-bit temp value (pointer)
+    STY_d(0x00)
+    STX_d(0x02)
+
+    // Initialize graphics stuff
+    // Set DMA threshold to lower value to avoid HDMA bug
+    JSL(ASM_BowsprWriteOurDmaThresh)
+    // Start off with the last tile in our list, since we allocate backwards
+    LDX_i(0x0080)
+    // When using 2 battle BGs, BG graphics are stored at word $3000 in VRAM,
+    // which overlaps with the 2nd half of the OAM VRAM.
+    // When the user says this is the case by passing a non-zero argument,
+    // we won't touch the 2nd half of sprite VRAM.
+    LDA_d(0x00)
+    DEC
+    BPL_a(VRAM_No_Autodetect)
+        // Check for Giygas battle - this is the exception to the rule.
+        LDA_a(0x4A8C)     // CURRENT_BATTLE_GROUP
+        CMP_i(0x01DE)     // GIYGAS_5 + POKEY
+        BEQ_a(VRAM_Do_Not_Use_Upper_Half)
+        // When in battle, the VRAM from $3000-$3FFF will only be in use if
+        // we are in Mode-0. If !(BGMODE & 0x7), then we can't use the memory.
+        LDY_i(0)
+        LDA_a(0x000F) // Load cached BGMODE register
+        AND_i(0x0007) // Get current mode
+        BNE(1)
+        INY           // Y=1 if PPU is in Mode-0
+        TYA           // Move Y -> A to set zero flag
+    VRAM_No_Autodetect:
+    // If we ran autodetect code, the zero flag will be set from the TAY.
+    // If we didn't autodetect, the zero flag is from the DEC.
+    // In both cases, zero flag set means use all the VRAM.
+    BEQ(3)
+    VRAM_Do_Not_Use_Upper_Half:
+        LDX_i(0x0040) // Only allocate VRAM starting at $2FFF
+    STX_a(MEM_BowsprTileAllocIdx)
+
+    // Init palette stuff
+    LDX_d(0x02)
+    BNE_a(Palette_No_Autodetect)
+        // Get the current battle group and determine the number of different
+        // enemies in it.
+        TXY               // Y=0
+        LDA_a(0x4A8C)     // CURRENT_BATTLE_GROUP
+        ASL ASL ASL       // Multiply by 8
+        TAX
+        LDA_xl(0xD0C60D)  // BTL_ENTRY_PTR_TABLE
+        STA_d(0x06)
+        LDA_xl(0xD0C60F)  // BTL_ENTRY_PTR_TABLE+2
+        STA_d(0x08)
+        TYX               // Y=0,X=0
+        SEP(0x20)         // Accumulator 8-bit
+        // Little loop - assumes there's always at least one enemy in the group
+            INX           // X+=1
+            INY INY INY   // Y+=3
+            LDA_dly(0x06) // Load enemy count
+            CMP_8(0xFF)   // Check if 255
+            BNE(-10)      // Branch if there's another enemy
+        // End of little loop
+        // Load our palette setting based on the number of types of enemies
+        LDA_xl(TBL_EnemyTypeCountToPaletteSetting)
+        REP(0x20)
+        AND_i(0x00FF)
+        // ASM_BowsprPaletteInit requires the palette bitmask in the X register
+        TAX
+    Palette_No_Autodetect:
+    JSL(ASM_BowsprPaletteInit)
+
+    // Store previous object linked list
+    LDA_a(MEM_ObjListHead)
+    STA_a(MEM_BowsprPrevObjListHead)
+    // Reset linked list so that we maintain a separate list of battle objects
+    LDA_i(0xffff)
+    STA_a(MEM_ObjListHead)
+    // Enable hijack
+    INC_a(MEM_BowsprEnable)
+    // Return
+    PLD RTL
+}
+
+TBL_EnemyTypeCountToPaletteSetting:
+    byte 0xFF // no enemies in the group - can't happen.
+    byte 0xEE // 1 enemy   - palettes 1-3 and 5-7 are safe.
+    byte 0xCC // 2 enemies - palettes 2-3 and 6-7 are safe.
+    byte 0x88 // 3 enemies - palettes  3  and  7  are safe.
+    byte 0x00 // 4 enemies in the group - no palettes available.
+
+ASM_BowsprEnd: {
+    // Do nothing if we're not enabled
+    LDA_a(MEM_BowsprEnable)
+    BNE(1) RTL
+
+    // Disable hijack
+    STZ_a(MEM_BowsprEnable)
+    // Deallocate all our objects and scripts
+    JSL(ASM_ObjDeleteAll)
+    // Replace old list head
+    LDA_a(MEM_BowsprPrevObjListHead)
+    STA_a(MEM_ObjListHead)
+    // Reset DMA threshold
+    JSL(ASM_BowsprWriteDefaultDmaThresh)
+    
+    RTL
+}
+
+// Replace ASM_DrawBattleSprites with our custom code
+ROM[0xC2F8F9] = {
+    JML(ASM_DrawBattleSprites_New)
+/* C2F8FD */
+    // ASM_Trampoline_RenderBattleSpriteRow:
+    JSR(0xC2F724) RTL
+/* C2F901 */
+    NOP NOP NOP NOP NOP
+/* C2F906 */
+    // ASM_DrawBattleSprites_PartialOrig:
+    // original code here...
+}
+define ASM_Trampoline_RenderBattleSpriteRow = 0xC2F8FD
+define ASM_DrawBattleSprites_PartialOrig = 0xC2F906
+
+command MACRO_BowsprDrawOamOnePriority(tblMapAddr, tblXpos, tblYpos, tblMapBank, tblCount) {
+    LDX_i(0x0000)
+    CPX_a(tblCount)
+    BCS_a(done)
+    PHD
+    TXA
+    TCD
+loop:
+    STX_d(MEM_BowsprDrawOamOnePriority_Temp1)
+    LDA_x(tblMapBank)
+    STA_a(MEM_SpritemapBank)
+    LDA_x(tblMapAddr)
+    STA_d(MEM_BowsprDrawOamOnePriority_Temp2)
+    LDY_x(tblYpos)
+    LDA_x(tblXpos)
+    TAX
+    LDA_d(MEM_BowsprDrawOamOnePriority_Temp2)
+    JSL(ASM_RenderSpriteToOAM)
+    LDX_d(MEM_BowsprDrawOamOnePriority_Temp1)
+    INX
+    INX
+    CPX_a(tblCount)
+    BCC_a(loop)
+cleanup:
+    PLD
+done:
+}
+
+ASM_DrawBattleSprites_New: {
+    REP(0x31)
+    LDA_i(0x007E)
+    JSL(ASM_SetSpritemapBank)
+    JSL(ASM_OamClear)
+
+    // If Bowspr is not enabled, jump back to original code
+    LDA_a(MEM_BowsprEnable)
+    BNE(4)
+    JML(ASM_DrawBattleSprites_PartialOrig)
+
+    // Run actionscript for Bowspr
+    JSL(ASM_ProcessObjects)
+
+    ///////////////////////////////////////////////////////////////////////////
+    // vvvvv Sprite drawing section
+    // Draw Bowspr sprites with priority 0 - on top
+    MACRO_BowsprDrawOamOnePriority(0x2404, 0x2444, 0x2484, 0x24C4, 0x2504)
+    // Draw Bowspr sprites with priority 1 - below prio 0
+    MACRO_BowsprDrawOamOnePriority(0x2506, 0x2546, 0x2586, 0x25C6, 0x2606)
+
+    // Draw front row of enemy sprites - below prio 1
+    LDA_i(0)
+    JSL(ASM_Trampoline_RenderBattleSpriteRow)
+
+    // Draw Bowspr sprites with priority 2 - below front row
+    MACRO_BowsprDrawOamOnePriority(0x2608, 0x2648, 0x2688, 0x26C8, 0x2708)
+
+    // Draw back row of enemy sprites - below prio 2
+    LDA_i(1)
+    JSL(ASM_Trampoline_RenderBattleSpriteRow)
+
+    // Draw Bowspr sprites with priority 3 - below back row
+    MACRO_BowsprDrawOamOnePriority(0x270A, 0x274A, 0x278A, 0x27CA, 0x280A)
+    // ^^^^^ Sprite drawing section
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Jump partway through UpdateScreen to avoid drawing sprites again
+    JML(0xC08B2B)
+}
+
+ASM_ObjDeleteAll: {
+    REP(0x31)
+    PHD
+    TDC
+    ADC_i(0xfff8)
+    TCD
+
+    LDX_a(MEM_ObjListHead)
+loop:
+    STX_d(0x02)
+    BPL(6)
+        // Return if we've reached the end of the list
+        // Process objects so that they all delete themselves
+        JSL(ASM_ProcessObjects)
+        PLD RTL
+    JSL(ASM_ObjSetUpDeletion)
+    LDX_d(0x02)
+    LDA_x(MEM_ObjListNextEntry)
+    TAX
+    BRA_a(loop)
+}
+
+// X = Index to object tables
+ASM_ObjSetUpDeletion: {
+    // X = Object number * 2 (index to tables)
+    // A = Movscr addr lo word
+    // Y = Movscr addr hi word
+    LDA_i(short [0] MOV_Event_35)
+    LDY_i(short [1] MOV_Event_35)
+    JML(ASM_InitEntityUnknown2)
+}
+
+// Inputs:
+//   0x0E: Movement script long pointer
+//   A: Sprite group
+ASM_BowsprCreateEntity: M_EB_Function_Wrapper_UserStack(-0x20, {
+    // Locals:
+    // 0x00 (2): Index to object tables
+    // 0x02 (2): Sprite group
+    // 0x04 (2): Temp
+    // 0x06 (4): Sprite group pointer
+    // 0x0a (4): Spritemap template
+    // 0x0e (2): Spritemap index (into $7E4682)
+    // 0x10 (2): Sprite attributes byte
+    // 0x12 (4): SPRITE_GROUPING_PTR_TABLE (ptr loaded from the function at $C01DED)
+    STA_d(0x02)
+    
+    // Default position of 0,0
+    LDX_i(0)
+    TXY
+    // Use MOV_Event_35 as a no-op of sorts - we will overwrite it before it gets called
+    LDA_i(35)
+    JSL(ASM_InitEntityWipe)
+    ASL
+    TAX
+    // X = Index to object tables
+    STX_d(0x00)
+
+    // Clear out a bunch of things we won't be setting
+    LDA_i(0xffff)
+    STA_x(MEM_ObjEnemyUnknown)
+    STA_x(MEM_ObjEnemyId)
+    STA_x(MEM_ObjNpcId)
+    STA_x(MEM_ObjBlockedByObject)
+    STZ_x(MEM_ObjSurfaceFlags)
+    STZ_x(MEM_ObjEnemyUnknown3)
+    STZ_x(MEM_ObjEnemyUnknown2)
+    STZ_x(MEM_ObjForceIgnoreCollision)
+    STZ_x(MEM_ObjMovementSpeed)
+    STZ_x(MEM_ObjMovementDirection)
+    STZ_x(MEM_ObjBlockedByObstacle)
+    // Clear destructor memory - remove if not using destructors
+    STZ_x(movscr_codes.OBJ_destructor_lo)
+    STZ_x(movscr_codes.OBJ_destructor_hi)
+    // v0.71: Set up default draw callback to be our new one
+    LDA_i(short [0] ASMNEAR_C0_BowsprDrawCallback)
+    STA_x(MEM_ObjDrawCallback)
+
+    // Set up collision
+    STZ_x(MEM_ObjCollisionNSHitboxWidth)
+    STZ_x(MEM_ObjCollisionNSHitboxHeight)
+    STZ_x(MEM_ObjCollisionEWHitboxWidth)
+    STZ_x(MEM_ObjCollisionEWHitboxHeight)
+    SEP(0x20)
+    LDY_i(0x0004)
+    LDA_dly(0x06)
+    STA_x(MEM_ObjCollisionNSHitboxWidth)
+    INY
+    LDA_dly(0x06)
+    STA_x(MEM_ObjCollisionNSHitboxHeight)
+    INY
+    LDA_dly(0x06)
+    STA_x(MEM_ObjCollisionEWHitboxWidth)
+    INY
+    LDA_dly(0x06)
+    STA_x(MEM_ObjCollisionEWHitboxHeight)
+    REP(0x20)
+
+    // Set sprite group and sprite graphics ptr
+    LDA_d(0x02)
+    STA_x(MEM_ObjSpriteGroup)
+    // spr_grp * 4
+    ASL
+    ASL
+    TAY
+    // v0.71: Load "SPRITE_GROUPING_PTR_TABLE" from a function in ROM
+    // This is because CoilSnake relocates this table now, and will
+    // write the correct table address at this location. However, it
+    // can't relocate our reference here, so we need to load a pointer
+    // which it has overwritten.
+    LDA_al(0xC01DFA)
+    STA_d(0x12)
+    LDA_al(0xC01DFF)
+    STA_d(0x14)
+    // Load the correct sprite group pointer from the table
+    LDA_dly(0x12)
+    STA_d(0x06)
+    CLC
+    ADC_i(9) // Don't know what this is for but the vanilla code has it
+    STA_x(MEM_ObjSpriteGraphicsPtrLo)
+    INY
+    INY
+    LDA_dly(0x12)
+    STA_d(0x08)
+    STA_x(MEM_ObjSpriteGraphicsPtrHi)
+    // $06 = Sprite group data ptr
+
+    // Calculate value for $467A and MEM_ObjSpriteWidth
+    LDY_i(0x0001)
+    LDA_dly(0x06) // Width in 8x8 tiles * 0x10
+    AND_i(0x00ff)
+    ASL
+    STA_x(MEM_ObjSpriteNumBytesWide)
+    LSR
+    LSR
+    LSR
+    LSR
+    LSR
+    // Width in 8x8 tiles
+    INC // Round up
+    LSR
+    // Width in 16x16 tiles
+    TAY
+    // Load value for $467C and MEM_ObjSpriteHeight
+    LDA_dl(0x06) // Height in 8x8 tiles
+    AND_i(0x00ff)
+    STA_x(MEM_ObjSpriteHeight)
+    INC // Round up
+    LSR
+    // Height in 16x16 tiles
+    JSL(0xc08ff7) // MULT168
+    // Number of 16x16 tiles
+    STA_d(0x04)
+    // Allocate those tiles
+    LDA_a(MEM_BowsprTileAllocIdx)
+    SEC
+    SBC_d(0x04)
+    STA_a(MEM_BowsprTileAllocIdx)
+    STA_x(MEM_ObjSpriteVramAllocationIndex)
+    // Get starting tile number
+    ASL
+    TXY
+    TAX
+    LDA_xl(TBL_TileAllocIdxToTileNumFull)
+    TYX
+    // Convert tile number to VRAM address
+    ASL
+    ASL
+    ASL
+    ASL
+    ADC_i(0x2000)
+    STA_d(0x04)
+    STA_x(MEM_ObjSpriteVramAddr)
+    LDA_x(MEM_ObjSpriteHeight)
+    LSR
+    LDA_i(0x0000)
+    BCC_a(NoSpriteBlankSpace)
+        LDA_i(0x0100) // One row of 8x8 tiles
+        CLC
+        ADC_d(0x04)
+        STA_x(MEM_ObjSpriteVramAddr)
+
+        // DMA to the actual VRAM address (not offset by 1 row)
+        LDA_d(0x04)
+        STA_a(MEM_DmaVramAddr)
+
+        LDA_x(MEM_ObjSpriteNumBytesWide)
+        STA_a(MEM_DmaSize)
+
+        SEP(0x20)
+            // DMA constant zero value from this location in ROM
+            LDA_8(DMA_MODE_FIXED_WORD)
+            STA_a(MEM_DmaMode)
+            LDA_8(byte [2] ALWAYS_ZEROS)
+            STA_a(MEM_DmaSrcBank)
+        REP(0x20)
+        LDA_i(short [0] ALWAYS_ZEROS)
+        STA_a(MEM_DmaSrcAddr)
+        JSL(ASM_DmaGraphics)
+NoSpriteBlankSpace:
+    LDX_d(0x00)
+    // Load bank byte of graphics data
+    LDY_i(0x0008)
+    LDA_dly(0x06)
+    AND_i(0x00ff)
+    STA_x(MEM_ObjSpriteGraphicsBank)
+    // Load value for MEM_ObjCollisionBoxIndex
+    LDY_i(0x0002)
+    LDA_dly(0x06)
+    AND_i(0x00ff)
+    STA_x(MEM_ObjCollisionBoxIndex)
+    ASL
+    TXY
+    TAX
+    LDA_xl(SPRITE_COLLISION_ENABLE_TABLE)
+    STA_y(MEM_ObjCollisionEnable)
+    TXA
+    ASL
+    TAX
+    LDA_xl(SPRITEMAP_TEMPLATE_PTR_TABLE)
+    STA_d(0x0a)
+    LDA_xl(SPRITEMAP_TEMPLATE_PTR_TABLE_p2)
+    STA_d(0x0c)
+    // $0A = Spritemap info ptr
+    LDA_dl(0x0a)
+    AND_i(0x00ff)
+    STA_d(0x04)
+    ASL
+    ASL
+    ADC_d(0x04)
+    LDX_d(0x00)
+    STA_x(MEM_ObjFlippedSpritemapOffset)
+    ASL
+    JSL(ASM_AllocateSpritemap)
+    STA_d(0x0e)
+        // Loop forever if the spritemap is invalid
+        LDA_d(0x0e)
+        CMP_i(0x0000)
+        BMI(-7)
+    CLC
+    ADC_i(MEM_SpritemapTable)
+    LDX_d(0x00)
+    STA_x(MEM_ObjSpritemapPtrLo)
+    LDA_i(0x007E)
+    STA_x(MEM_ObjSpritemapPtrHi)
+    /// This shouldn't do anything actually...
+    /// // Set priority 1
+    /// LDA_i(0x0001)
+    /// STA_a(0x0a4a)
+    // Load byte 3 of sprite group data which is attributes - includes palette
+    LDY_i(0x0003)
+    LDA_dly(0x06)
+    AND_i(0x00ff)
+    STA_d(0x04)
+    // Save a copy without palette
+    // v0.71: Set spritemap priority bits to 2
+    AND_i(0x00c1)
+    ORA_i(0x0020)
+    STA_d(0x10)
+    // Get sprite's new palette
+    LDA_d(0x04)
+    AND_i(0x000e)
+    JSL(ASM_BowsprPaletteGetIndex)
+    // Combine with non-palette attribute data
+    ORA_d(0x10)
+    // This is the real attributes byte
+    TAY
+    // Load the spritemap index we just allocated
+    LDA_d(0x0e)
+    // Copy spritemap template from $0A to $0E
+    LDX_d(0x0a)
+    STX_d(0x0e)
+    LDX_d(0x0c)
+    STX_d(0x10)
+    // Load our tile index
+    LDX_a(MEM_BowsprTileAllocIdx)
+    // Build the spritemap
+    JSL_RTS_C0(ASMNEAR_C0_FillSpritemapFromTemplate)
+
+    // Set up MEM_ObjSpritemapDrawMisc
+    SEP(0x21)
+    LDY_i(0x0001)
+    LDA_dly(0x0a)
+    STA_d(0x04)
+    XBA
+    LDA_dl(0x0a)
+    SBC_d(0x04)
+    STA_d(0x04)
+    REP(0x20)
+    LDX_d(0x00)
+    STA_x(MEM_ObjSpritemapDrawMisc)
+
+
+    // Load A and Y with address of movement script from 0x0E in parent's stack frame
+    LDA_d(0x2E)
+    LDY_d(0x30)
+    // Load object number in X
+    // Already done :)
+    JSL(ASM_InitEntityUnknown2)
+})
+
+// The table in the game only goes up to 88 entries, but
+// we need all 128 since we start allocating from the end.
+ROM[0xc01d82] = LDA_xl(TBL_TileAllocIdxToTileNumFull)
+TBL_TileAllocIdxToTileNumFull: {
+    short 0x0000 short 0x0002 short 0x0004 short 0x0006
+    short 0x0008 short 0x000A short 0x000C short 0x000E
+    short 0x0020 short 0x0022 short 0x0024 short 0x0026
+    short 0x0028 short 0x002A short 0x002C short 0x002E
+    short 0x0040 short 0x0042 short 0x0044 short 0x0046
+    short 0x0048 short 0x004A short 0x004C short 0x004E
+    short 0x0060 short 0x0062 short 0x0064 short 0x0066
+    short 0x0068 short 0x006A short 0x006C short 0x006E
+    short 0x0080 short 0x0082 short 0x0084 short 0x0086
+    short 0x0088 short 0x008A short 0x008C short 0x008E
+    short 0x00A0 short 0x00A2 short 0x00A4 short 0x00A6
+    short 0x00A8 short 0x00AA short 0x00AC short 0x00AE
+    short 0x00C0 short 0x00C2 short 0x00C4 short 0x00C6
+    short 0x00C8 short 0x00CA short 0x00CC short 0x00CE
+    short 0x00E0 short 0x00E2 short 0x00E4 short 0x00E6
+    short 0x00E8 short 0x00EA short 0x00EC short 0x00EE
+    short 0x0100 short 0x0102 short 0x0104 short 0x0106
+    short 0x0108 short 0x010A short 0x010C short 0x010E
+    short 0x0120 short 0x0122 short 0x0124 short 0x0126
+    short 0x0128 short 0x012A short 0x012C short 0x012E
+    short 0x0140 short 0x0142 short 0x0144 short 0x0146
+    short 0x0148 short 0x014A short 0x014C short 0x014E
+    short 0x0160 short 0x0162 short 0x0164 short 0x0166
+    short 0x0168 short 0x016A short 0x016C short 0x016E
+    short 0x0180 short 0x0182 short 0x0184 short 0x0186
+    short 0x0188 short 0x018A short 0x018C short 0x018E
+    short 0x01A0 short 0x01A2 short 0x01A4 short 0x01A6
+    short 0x01A8 short 0x01AA short 0x01AC short 0x01AE
+    short 0x01C0 short 0x01C2 short 0x01C4 short 0x01C6
+    short 0x01C8 short 0x01CA short 0x01CC short 0x01CE
+    short 0x01E0 short 0x01E2 short 0x01E4 short 0x01E6
+    short 0x01E8 short 0x01EA short 0x01EC short 0x01EE
+}
+
+// X: Palette free map - see ASM_BowsprBegin
+ASM_BowsprPaletteInit: {
+    PHD
+    TDC
+    DEC
+    TCD
+
+    // Set up palette allocation map space
+    SEP(0x30)
+    STX_d(0x00)
+    LDX_8(NUM_PALETTES_m1)
+PaletteMapInitLoop:
+    LDA_8(0xff)
+    ASL_d(0x00)
+    BCS(2)
+        // If the bit is clear, we can't use the entry so set it to 0x7f.
+        // The top bit isn't set, meaning it can't be overwritten,
+        // and the palette index we're getting in is only 3 bits so it
+        // can't match 0x7f.
+        LDA_8(0x7f)
+    STA_x(MEM_BowsprPaletteMap)
+    DEX
+    BPL_a(PaletteMapInitLoop)
+
+    REP(0x31)
+    PLD
+    RTL
+}
+
+ASM_BowsprPaletteGetIndex: M_EB_Function_Wrapper({
+    STA_d(0x00)
+    LDX_i(NUM_PALETTES_m1)
+PaletteSearchLoop:
+    LDA_x(MEM_BowsprPaletteMap)
+    AND_i(0x00ff)
+    CMP_i(0x0080)
+    BPL_a(PaletteNotFound)
+    CMP_d(0x00)
+    BEQ_a(PaletteFound)
+    DEX
+    BPL_a(PaletteSearchLoop)
+    // Error condition - use palette 0
+    LDA_i(0x0000)
+    BRA_a(ReturnPaletteBits)
+PaletteNotFound:
+    // X: target
+    STX_d(0x02)
+    SEP(0x20)
+    LDA_d(0x00)
+    STA_x(MEM_BowsprPaletteMap)
+    REP(0x20)
+    
+    // Calculate source address
+    LDA_i(0x00c3)
+    STA_d(0x10)
+    LDA_d(0x00)
+    ASL
+    ASL
+    ASL
+    ASL
+    STA_d(0x0e)
+
+    // Calculate CGRAM buffer address
+    TXA
+    ASL
+    ASL
+    ASL
+    ASL
+    ASL
+    ADC_i(0x0300)
+
+    // Get CGRAM palette size
+    LDX_i(0x0020)
+
+    // Copy X bytes from address in 0x0e to address in A
+    JSL(R_memcpy_to_ram)
+
+    // Mark that we need to reupload the palette
+    LDA_a(0x0030)
+    ORA_i(0x0010)
+    STA_a(0x0030)
+
+    LDA_d(0x02)
+    BRA_a(ReturnPaletteBits)
+PaletteFound:
+    TXA
+ReturnPaletteBits:
+    ASL
+})
+
+// Bugfix for HDMA starting during frame:
+// Default DMA thresholds
+define DEFAULT_DMA_THRESHOLD      = 0x1200
+define DEFAULT_DMA_THRESHOLD_p1   = 0x1201
+define DEFAULT_DMA_THRESHOLD_div2 = 0x0900
+// Reduced DMA thresholds for during battle with Bowspr
+// Further reduced for maximum safety (I hit another graphical glitch)
+define BOWSPR_DMA_THRESHOLD       = 0x0b00
+define BOWSPR_DMA_THRESHOLD_p1    = 0x0b01
+define BOWSPR_DMA_THRESHOLD_div2  = 0x0580
+
+ROM[0xC08139] = JSL(ASM_BowsprResetHijackWriteDefaultDmaThresh)
+ASM_BowsprResetHijackWriteDefaultDmaThresh: {
+    JSL(ASM_BowsprWriteDefaultDmaThresh)
+    JML(0xC08B19) // The jump we replaced
+}
+ASM_BowsprWriteDefaultDmaThresh: {
+    LDA_i(DEFAULT_DMA_THRESHOLD)
+    STA_a(MEM_BowsprDmaThreshold)
+    LDA_i(DEFAULT_DMA_THRESHOLD_p1)
+    STA_a(MEM_BowsprDmaThresholdP1)
+    LDA_i(DEFAULT_DMA_THRESHOLD_div2)
+    STA_a(MEM_BowsprDmaThresholdDiv2)
+    RTL
+}
+ASM_BowsprWriteOurDmaThresh: {
+    LDA_i(BOWSPR_DMA_THRESHOLD)
+    STA_a(MEM_BowsprDmaThreshold)
+    LDA_i(BOWSPR_DMA_THRESHOLD_p1)
+    STA_a(MEM_BowsprDmaThresholdP1)
+    LDA_i(BOWSPR_DMA_THRESHOLD_div2)
+    STA_a(MEM_BowsprDmaThresholdDiv2)
+    RTL
+}
+
+ROM[0xC085D3] = LDA_a(MEM_BowsprDmaThreshold)
+ROM[0xC085EC] = ADC_a(MEM_BowsprDmaThreshold)
+ROM[0xC085FE] = SBC_a(MEM_BowsprDmaThreshold)
+
+ROM[0xC085CE] = CPX_a(MEM_BowsprDmaThresholdP1)
+ROM[0xC085D9] = CPX_a(MEM_BowsprDmaThresholdP1)
+ROM[0xC0866C] = CMP_a(MEM_BowsprDmaThresholdP1)
+
+ROM[0xC085F6] = ADC_a(MEM_BowsprDmaThresholdDiv2)
+
+// Draw callback
+// This must be only 4 bytes!
+ROM[ASMNEAR_C0_BowsprDrawCallback] = { JML(ASM_BowsprDrawCallback) }
+ASM_BowsprDrawCallback: {
+    // Load low 16-bits of graphics data pointer and use the flipped spritemap
+    // if the low bit is 1
+    LDA_x(MEM_ObjGraphicsPtrLo)
+    AND_i(0x0001)
+    BEQ_a(NoFlip)
+    LDA_x(MEM_ObjFlippedSpritemapOffset)
+    CLC
+    ADC_d(0x8C)
+    STA_d(0x8C)
+NoFlip:
+    // Reuse the existing code to handle priority sorting
+    // and also stuff like ripples, sweating, mushroomized
+    // Needs to be bank 80!
+    JML(0x80A406)
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Notes
+
+/*
+OAM writing:
+    UNKNOWN_C1004E -> Calls C43568 in battle
+    UNKNOWN_C43568 -> Calls WaitFrame and then C2DB3F
+    UNKNOWN_C2DB3F -> All of the battle-specific per-frame code (I think some call this RunVideoDrugs or similar)
+    UNKNOWN_C2F8F9 -> Seems to handle sprite drawing and screen update for battle
+    UPDATE_SCREEN  -> Updates screen - we insert our code before this gets called
+    UNKNOWN_C08B8E -> loads sprite data from "sprite draw arrays" at $2400-$280B
+    UNKNOWN_C08CD5 -> writes to OAM
+
+Object processing (new!):
+    UNKNOWN_C1004E -> Calls C43568 in battle
+    UNKNOWN_C43568 -> Calls WaitFrame and then C2DB3F
+    UNKNOWN_C2DB3F -> All of the battle-specific per-frame code (I think some call this RunVideoDrugs or similar)
+    UNKNOWN_C2F8F9 -> Seems to handle sprite drawing and screen update for battle
+    Hijack_C2F8F9  -> Calls the normal object handling code (if we should)
+    UNKNOWN_C09466 -> Processes all movement codes and then calls (using function pointer?)...
+    UNKNOWN_C0DB0F -> ...This lovely function which calls the draw function for all objects on screen (sorted if priority==1)
+    UNKNOWN_C0A0CA -> Wrapper that creates 160-byte stack frame (aligned) ($88=obj.id)
+    UNKNOWN_C0A0E3 -> Load sprite pointer and anim frame and call draw function if all valid ($8C=longptr(sprmap), A=anim frame)
+    <Sprite Draw Fn>
+
+*/
+
+// 0xC0A0BB is direct pos -> screen pos CALC SCREEN POSITION function
