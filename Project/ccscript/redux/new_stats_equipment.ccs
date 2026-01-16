@@ -1,6 +1,7 @@
 /* Add all Stats and Resistances to the Equipment menu */
 
 import "../essential/asm65816.ccs"
+import "../essential/expand_text_windows.ccs"
 
 /*	NOTES:
 0xC1AA5D = Part of the main routine of the Equipment selection menu. When this routine exits, it closes the windows associated with the equipment menu.
@@ -2095,9 +2096,11 @@ UNKNOWN0:
 	
 UNKNOWN1:
 	LDA_a (0x8958)
-	TAX		// ASL
+	// Fix to work with Expanded Window Table hack
+	/*TAX		// ASL
 	LDA_x (0x88E4)	// TAX
-	AND_i (0x00FF)	// LDA_x (0x88E4)
+	AND_i (0x00FF)	// LDA_x (0x88E4)*/
+	JSL(expand_text_windows.GetExistenceAtA)
 	LDY_i (0x0052)
 	JSL (0xC08FF7)
 	CLC
@@ -2235,9 +2238,11 @@ UnknownJSRSubroutine6: { // Acts like 0xC10EB4, helps with the money window
 	CMP_i (0xFFFF)
 	BEQ_a (Return)
 	LDA_a (0x8958)
-	TAX		// ASL
+	// Fix to work with Expanded Window Table hack
+	/*TAX		// ASL
 	LDA_x (0x88E4)	// TAX
-	AND_i (0x00FF)	// LDA_x (0x88E4)
+	AND_i (0x00FF)	// LDA_x (0x88E4)*/
+	JSL(expand_text_windows.GetExistenceAtA)
 	LDY_i (0x0052)
 	JSL (0xC08FF7)
 	TAX

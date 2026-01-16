@@ -88,6 +88,10 @@ ROM[0xC1324D] = {
 	JSR	(0x04EE)	// Jump to address $04EE
 }
 
+// CMP_i 0x0005 -> 0x0006 so Key Items show up in the menu
+// 5 for only 4 menu entries (up to Stats)
+// 6 for 5 entries (up to Check)
+// 7 for all 6 menu entries
 ROM[0xC13493] = CMP_i	(0x0005)// CMP #$0005
 
 // Open Menu subroutine modifications

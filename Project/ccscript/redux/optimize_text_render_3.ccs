@@ -1,0 +1,479 @@
+import "../essential/asm65816.ccs"
+import "../essential/expand_text_windows.ccs"
+
+/* Optimized text drawing
+ * Lots of ideas by cooprocks123e and JTolmar. Thank you!
+ *
+ * by Catador, cooprocks123e and JTolmar
+ */
+
+// GLOBAL VARIABLES
+define vwf_buffer    = 0x3492 // vwf_buffer[52][32]
+define vwf_buffer_1  = 0x3493 // vwf_buffer+1
+define vwf_buffer_3  = 0x3495 // vwf_buffer+3
+define vwf_buffer_5  = 0x3497 // vwf_buffer+5
+define vwf_buffer_7  = 0x3499 // vwf_buffer+7
+define vwf_buffer_9  = 0x349B // vwf_buffer+9
+define vwf_buffer_11 = 0x349D // vwf_buffer+11
+define vwf_buffer_13 = 0x349F // vwf_buffer+13
+define vwf_buffer_15 = 0x34A1 // vwf_buffer+15
+define vwf_buffer_17 = 0x34A3 // vwf_buffer+17
+define vwf_buffer_19 = 0x34A5 // vwf_buffer+19
+define vwf_buffer_21 = 0x34A7 // vwf_buffer+21
+define vwf_buffer_23 = 0x34A9 // vwf_buffer+23
+define vwf_buffer_25 = 0x34AB // vwf_buffer+25
+define vwf_buffer_27 = 0x34AD // vwf_buffer+27
+define vwf_buffer_29 = 0x34AF // vwf_buffer+29
+define vwf_buffer_31 = 0x34B1 // vwf_buffer+31
+define vwf_x         = 0x9E23
+define vwf_tile      = 0x9E25
+
+// LOCAL VARIABLES
+define _height     = 0  // Glyph height in pixels
+define _pixelx     = 2
+define _bufofs     = 4  // Offset into 'vwf_buffer' (set to vwf_tile*32)
+define _gfxdata_0  = 6
+define _gfxdata_1  = 7
+define _gfxdata_2  = 8
+define _gfxdata_3  = 9
+define _gfxdata_4  = 10
+define _gfxdata_5  = 11
+define _gfxdata_6  = 12
+define _gfxdata_7  = 13
+define _gfxdata_8  = 14
+define _gfxdata_9  = 15
+define _gfxdata_10 = 16
+define _gfxdata_11 = 17
+define _gfxdata_12 = 18
+define _gfxdata_13 = 19
+define _gfxdata_14 = 20
+define _gfxdata_15 = 21
+define _LOCALS_SUB = -22 // - LOCALS_SIZE
+
+// Loop unrolling idea by JTolmar, loop bodies by cooprocks123e
+
+// Further optimization by "caching" the graphics data inside DP local variables by Catador
+// This optimization avoids loading graphics data from ROM with "LDA [$xx],y", which is hecking slow (6 cycles!)
+// This also allows us to use the Y register for the buffer offset, without needing to reload it every iteration
+
+// LOOP BODY FOR FIRST LOOP
+command LoopBody_1(buffer_address, gfxlocal) {
+	LDA_d  (gfxlocal)       // [+3] 3  - DO NOT USE LDX, WE NEED THE HIGH BYTE OF A!
+	TAX	   // [+2] 5
+	LDA_y  (buffer_address) // [+5] 15
+	AND_xl (0xEFC51B)       // [+5] 10
+	STA_y  (buffer_address) // [+5] 20
+}
+
+// LOOP BODY FOR SECOND LOOP
+command LoopBody_2(buffer_address, gfxlocal)
+{
+	LDA_d(gfxlocal)       // [+3] 3  - DO NOT USE LDX, WE NEED THE HIGH BYTE OF A!
+	TAX	   // [+2] 5
+	LDA_xl(0xEFCD1B)       // [+5] 10
+	STA_y(buffer_address) // [+5] 15
+}
+
+// LOOP BODY IF PIXELX == 0
+command LoopBody_3(buffer_address, gfxlocal)
+{
+	LDA_d(gfxlocal)       // [+3] 3
+	STA_y(buffer_address) // [+5] 8
+}
+
+command CopyGfxData(offset, gfxlocal)
+{
+	LDA_y(offset)	// [+5] 5
+	STA_d(gfxlocal)        // [+3] 8
+}
+
+ROM[0xC44B3A] = JML(RenderText) // Jump to free space because labels don't work correctly inside ROM[] blocks
+
+RenderText:
+{
+	// Allocate local stack frame
+	REP(0x31)
+	PHD
+	PHA
+
+	PHB    // PUSH DATA BANK
+	LDY_d(0x0E)   // Load caller's $0E into Y (graphics data address)
+	PEI(0x10)   // Push caller's $10 (graphics data bank)
+
+	TDC
+	ADC_i(_LOCALS_SUB)
+	AND_i(0xFF00) // Align DP for extra cycle on instructions using DP (idea by cooprocks123e)
+	TCD
+
+	STX_d(_height) // Save X 'height' parameter on the local stack frame
+
+	// "Cache" graphics data in DP local variables
+	SEP(0x20)
+	PLB    // DB = caller's $10 (graphics data bank)
+	PLA    // Dummy pull, "PEI" always pushes two bytes
+
+	// Y is already the graphics data address...
+	REP(0x20)
+	CopyGfxData(0, _gfxdata_0)
+	CopyGfxData(2, _gfxdata_2)
+	CopyGfxData(4, _gfxdata_4)
+	CopyGfxData(6, _gfxdata_6)
+	CopyGfxData(8, _gfxdata_8)
+	CopyGfxData(10, _gfxdata_10)
+	CopyGfxData(12, _gfxdata_12)
+	CopyGfxData(14, _gfxdata_14)
+_copydone:
+	PLB    // POP DATA BANK
+
+	LDA_a(vwf_tile)
+	ASL    // *2
+	ASL    // *4
+	ASL    // *8
+	ASL    // *16
+	ASL    // *32
+	STA_d(_bufofs)
+
+	LDA_a(vwf_x)
+	AND_i(7)
+	STA_d(_pixelx)
+	BNE_a(_skipmemset)
+
+	// We're at the start of a tile! Clear everything in this tile to avoid writing graphics on top of graphics
+	// inline memset
+	// X is already the font height in pixels
+	LDY_d(_bufofs)
+	LDA_i(0xFFFF)     // Clear to 0xFFFF
+_memsetloop:
+  	STA_y(vwf_buffer)
+	INY
+	INY
+	DEX
+	BNE(-8) // BNE_a (_memsetloop)
+
+	SEP(0x20)
+	LDY_d(_bufofs)
+	LoopBody_3(vwf_buffer_1, _gfxdata_0)
+	LoopBody_3(vwf_buffer_3, _gfxdata_1)
+	LoopBody_3(vwf_buffer_5, _gfxdata_2)
+	LoopBody_3(vwf_buffer_7, _gfxdata_3)
+	LoopBody_3(vwf_buffer_9, _gfxdata_4)
+	LoopBody_3(vwf_buffer_11, _gfxdata_5)
+	LoopBody_3(vwf_buffer_13, _gfxdata_6)
+	LoopBody_3(vwf_buffer_15, _gfxdata_7)
+
+	LDA_d(_height)
+	CMP_8(0x08)
+	BEQ_a(_endloop1) // End early if tiny font (height == 8)
+
+	LoopBody_3(vwf_buffer_17, _gfxdata_8)
+	LoopBody_3(vwf_buffer_19, _gfxdata_9)
+	LoopBody_3(vwf_buffer_21, _gfxdata_10)
+	LoopBody_3(vwf_buffer_23, _gfxdata_11)
+	LoopBody_3(vwf_buffer_25, _gfxdata_12)
+	LoopBody_3(vwf_buffer_27, _gfxdata_13)
+	LoopBody_3(vwf_buffer_29, _gfxdata_14)
+	LoopBody_3(vwf_buffer_31, _gfxdata_15)
+	BRA_a(_endloop1)
+
+_skipmemset:
+	SEP(0x20)
+	LDY_d(_bufofs)
+	LDA_d(_pixelx)
+	XBA    // A high = pixelx
+_loop1:
+	LoopBody_1(vwf_buffer_1, _gfxdata_0)
+	LoopBody_1(vwf_buffer_3, _gfxdata_1)
+	LoopBody_1(vwf_buffer_5, _gfxdata_2)
+	LoopBody_1(vwf_buffer_7, _gfxdata_3)
+	LoopBody_1(vwf_buffer_9, _gfxdata_4)
+	LoopBody_1(vwf_buffer_11, _gfxdata_5)
+	LoopBody_1(vwf_buffer_13, _gfxdata_6)
+	LoopBody_1(vwf_buffer_15, _gfxdata_7)
+
+	LDA_d(_height)
+	CMP_8(0x08)
+	BEQ_a(_endloop1) // End early if tiny font (height == 8)
+
+	LoopBody_1(vwf_buffer_17, _gfxdata_8)
+	LoopBody_1(vwf_buffer_19, _gfxdata_9)
+	LoopBody_1(vwf_buffer_21, _gfxdata_10)
+	LoopBody_1(vwf_buffer_23, _gfxdata_11)
+	LoopBody_1(vwf_buffer_25, _gfxdata_12)
+	LoopBody_1(vwf_buffer_27, _gfxdata_13)
+	LoopBody_1(vwf_buffer_29, _gfxdata_14)
+	LoopBody_1(vwf_buffer_31, _gfxdata_15)
+
+_endloop1:
+	REP(0x21) // Also clears the carry flag for ADC
+	// !!!
+	// Remember how we didn't pop the A parameter ('width') off the stack? NOW we will use it
+	// Yes, we're doing this just now. It's been a long time since we were holding this in the stack...
+	// !!!
+	PLA
+	ADC_a(vwf_x)
+	CMP_i(0x01A0) // 52*8
+	BCC(3) // BCC_a (_skipwrap)
+	SBC_i(0x01A0)
+_skipwrap:
+	STA_a(vwf_x)
+	LSR
+	LSR
+	LSR
+	CMP_a(vwf_tile)
+	BNE(2)
+	// Return on equal
+	PLD
+	RTL
+
+	STA_a(vwf_tile) // vwf_x / 8
+	ASL    // *2
+	ASL    // *4
+	ASL    // *8
+	ASL    // *16
+	ASL    // *32
+	STA_d(_bufofs)
+
+	// We're at a new tile! Clear everything in this tile to avoid writing graphics on top of graphics
+	// inline memset
+	LDX_d(_height)
+	LDY_d(_bufofs)
+	LDA_i(0xFFFF)     // Clear to 0xFFFF
+_memsetloop2:
+  	STA_y(vwf_buffer)
+	INY
+	INY
+	DEX
+	BNE(-8) // BNE_a (_memsetloop2)
+
+	LDA_d(_pixelx)
+	BNE(2)
+	// Return on equal
+	PLD
+	RTL
+
+	SEP(0x21)
+	LDY_d(_bufofs)
+	LDA_8(0x08)
+	SBC_d(_pixelx)
+	XBA    // A high = pixelx
+_loop2:
+	LoopBody_2(vwf_buffer_1, _gfxdata_0)
+	LoopBody_2(vwf_buffer_3, _gfxdata_1)
+	LoopBody_2(vwf_buffer_5, _gfxdata_2)
+	LoopBody_2(vwf_buffer_7, _gfxdata_3)
+	LoopBody_2(vwf_buffer_9, _gfxdata_4)
+	LoopBody_2(vwf_buffer_11, _gfxdata_5)
+	LoopBody_2(vwf_buffer_13, _gfxdata_6)
+	LoopBody_2(vwf_buffer_15, _gfxdata_7)
+
+	LDA_d(_height)
+	CMP_8(0x08)
+	BEQ_a(_endloop2) // End early if tiny font (height == 8)
+
+	LoopBody_2(vwf_buffer_17, _gfxdata_8)
+	LoopBody_2(vwf_buffer_19, _gfxdata_9)
+	LoopBody_2(vwf_buffer_21, _gfxdata_10)
+	LoopBody_2(vwf_buffer_23, _gfxdata_11)
+	LoopBody_2(vwf_buffer_25, _gfxdata_12)
+	LoopBody_2(vwf_buffer_27, _gfxdata_13)
+	LoopBody_2(vwf_buffer_29, _gfxdata_14)
+	LoopBody_2(vwf_buffer_31, _gfxdata_15)
+
+	// Finally. That's the end of it.
+_endloop2:
+	REP(0x20)
+_return:
+	PLD
+	RTL
+
+	// "[44 4F 4E 45]" // Write ascii for "DONE" just so I can clearly see where this ends in a hex editor
+}
+
+
+// Optimized outer routine by cooprocks123e
+ROM[0xc44e61] = JML(TextDrawCharacter)
+TextDrawCharacter:
+{
+	REP(0x31)
+	PHD
+	PHA
+	TDC
+	ADC_i(0xffe2)
+	TCD
+	PLA
+	TXY
+	STY_d(0x1c)
+	STA_d(0x02)
+	LDX_a(0x8958)
+	CPX_i(0xffff)
+	BNE(2) PLD RTL
+	// Calculate font struct pointer (see *1*)
+	ASL
+	ADC_d(0x02)
+	ASL
+	ASL
+	ADC_i(0xf054)
+	STA_d(0x0a)
+	LDA_i(0x00c3)
+	STA_d(0x0c)
+
+	CPY_i(0x002f)
+	BEQ(10) // UNKNOWN1
+	CPY_i(0x0022)
+	BEQ(5)  // UNKNOWN1
+	CPY_i(0x0020)
+	BNE(11) // UNKNOWN2
+UNKNOWN1:
+	TYA
+	JSL(0xc43f77)
+	JSL(0xc43caa)
+	PLD
+	RTL
+UNKNOWN2:
+	LDA_a(0x8958)
+	// Fix to work with Expanded Window Table hack
+	/*ASL
+	TAX
+	LDA_x(0x88e4)*/
+	JSL(expand_text_windows.GetExistenceAtA)
+	LDY_i(0x0052)
+	JSL(0xc08ff7)
+	CLC
+	ADC_i(0x8650)
+	TAX
+	LDY_d(0x1c)
+	CPY_i(0x0050)
+	BNE(13) // UNKNOWN4
+	LDA_a(0x5e75)
+	AND_i(0x00ff)
+	// If it's zero, goto 6
+	BNE(3) JMP(UNKNOWN6)
+	// Else return
+	PLD
+	RTL
+UNKNOWN4:
+	LDA_a(0x5e75)
+	AND_i(0x00ff)
+	BEQ(26) // UNKNOWN6 // This branch always taken in my limited testing
+	STZ_x(0x000e)
+	CPY_i(0x0070)
+	BEQ(11) // UNKNOWN5
+	LDA_x(0x0010)
+	TAX
+	LDA_i(0x0006)
+	JSL(0xc43d75)
+UNKNOWN5:
+	SEP(0x20)
+	STZ_a(0x5e75)
+	LDY_d(0x1c)
+UNKNOWN6:
+	SEP(0x20)
+	TYA
+	STA_a(0x5e76)
+	SEC
+	SBC_8(0x50)
+	REP(0x20)
+	AND_i(0x007f)
+	STA_d(0x1a)
+
+	// *1*:
+	// Instead of always loading the font table index from Y and then adding
+	// the offset to it, and then adding that to the font table address,
+	// let's pre-add the struct index to $0A and then we can use:
+	//   LDY_i(0x0008)
+	//   LDA_dly(0x0A)
+	// instead of:
+	//   TYA
+	//   CLC
+	//   ADC #$0008
+	//   LDX $0a
+	//   STX $06
+	//   LDX $0c
+	//   STX $08
+	//   CLC
+	//   ADC $06
+	//   STA $06
+	//   LDA [$06]
+	//
+	// Let's calculate the pointer at the start of the function, since at that point
+	// we will have the font number in a register, instead of having to load it
+	// from memory.
+
+
+	// This next bit of code has been greatly reorganized to be
+	// more optimal.
+	// Load num of bytes in character? (struct[8])
+	LDY_i(0x0008)
+	LDA_dly(0x0A)
+	// Multiply by which character
+	LDY_d(0x1a)
+	JSL(0xC08FF7) // Use MULT168 instead of MULT16 since 0x1a will always be 0x00-0x7f
+	CLC
+	// Add lo-word of font gfx pointer (struct[4])
+	LDY_i(0x0004)
+	ADC_dly(0x0A)
+	STA_d(0x0e)
+	// Load hi-word of font gfx pointer (struct[6])
+	LDY_i(0x0006) // 1 more byte, but 1 cyc faster than DEY DEY
+	LDA_dly(0x0A)
+	STA_d(0x10)
+	// Load height of font, presumably (struct[10])
+	LDY_i(0x000a)
+	LDA_dly(0x0a)
+	STA_d(0x02)
+
+	// Load and index the font "data" pointer (struct[0])
+	// hi-word loaded into Y (struct[2])
+	LDY_i(0x0002)
+	LDA_dly(0x0a)
+	TAY
+	// Add DP[0x1a] with lo-word of pointer (struct[0])
+	LDA_d(0x1a)
+	CLC
+	ADC_dl(0x0a)
+	STA_d(0x0a)
+	STY_d(0x0c)
+
+	// We're adding the width of the current character with
+	// the current horizontal letter spacing (in px)
+	// This is a big optimization, by doing the AND later
+	// we don't need to do two ANDs. It could give a different
+	// result if the result of the addition is >= 0x100...
+	// ...but that should never happen (your textbox would have
+	// to be more than 256 px wide???)
+	LDA_dl(0x0a)
+	CLC
+	ADC_a(0x5e6d)
+	AND_i(0x00ff)
+	STA_d(0x12)
+	// Save 1 branch by doing A < 9 instead of A <= 8
+	CMP_i(0x0009)
+	BMI(29) // UNKNOWN8
+UNKNOWN7:
+	// This loop draws 8px at a time
+	// Call text drawing routine to draw 8px of letter
+	LDX_d(0x02)
+	LDA_i(0x0008)
+	JSL(RenderText)
+	// Adjust text pointer forward by `height` bytes
+	LDA_d(0x02)
+	CLC
+	ADC_d(0x0e)
+	STA_d(0x0e)
+
+	LDA_d(0x12)
+	SEC
+	SBC_i(0x0008)
+	STA_d(0x12)
+	// Save 1 branch by doing A >= 9 instead of A != 8 && A >= 8
+	CMP_i(0x0009)
+	BPL(-29) // UNKNOWN7
+UNKNOWN8:
+	// Draw final <=8px of letter
+	LDX_d(0x02)
+	JSL(RenderText)
+	JSL(0xc44dca)
+TDC_end:
+	PLD
+	RTL
+}

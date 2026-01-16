@@ -309,7 +309,7 @@ GetExistenceAtA: {
 _asmptr(0xC105C9, NewWindowTable)
 NewWindowTable:
 	// 	      #,   X,	   Y, 	    W,	    H
-    WindowDefinition( 0, 1, 1, 13, 6) // 0, 01,01,0D,08
+    WindowDefinition( 0, 1, 1, 13, 8) // 0, 01,01,0D,08
     WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
     WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
     WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu
@@ -319,12 +319,12 @@ NewWindowTable:
     WindowDefinition( 7, 18, 1, 13, 12) // Item list for equip menu (7, 12,01,0D,10->0C)
     WindowDefinition( 8, 1, 1, 30, 18) // Status menu
     WindowDefinition( 9, 12, 1, 19, 18) // Used by status screen?
-    WindowDefinition(10, 1, 7, 8, 4) // Carried money window
+    WindowDefinition(10, 1, 9, 8, 4) // Cash window (1,10,8,4)
     WindowDefinition(11, 1, 15, 11, 4) // Used by status screen?
     WindowDefinition(12, 12, 1, 19, 16) //
     WindowDefinition(13, 7, 1, 24, 16) //
     WindowDefinition(14, 4, 1, 24, 6) // In-battle text
-    WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu (Fix for Teddy as last alive member: 21 -> 23)
+    WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu
     WindowDefinition(16, 4, 1, 8, 8) //
     WindowDefinition(17, 12, 1, 12, 4) //
     WindowDefinition(18, 1, 1, 14, 6) // Jeff's Battle menu
