@@ -429,6 +429,7 @@ command clear "[18 06]" // Clears the contents of the current text window.
 // You'd be better off using the inbuilt menu functions, because manual menus are complicated. But I thought I'd include it here in case you think you can handle it. Uncomment the stuff below if you like.
 
 command add_menu_string(string) "[19 02 {string} 02]" // Loads a string into "menu storage."
+command add_menu_option_with_callback(string, callback) "[19 02 {string} 01 {long callback}]" // Menu option name ending with 01 refers to the address of a script that runs when the option is highlighted in a menu. 
 command clear_menu_string "[19 04]" // Clears all strings loaded into "menu storage."
 command create_menu "[1A 04]" // Creates menu with strings stored with above command. Cannot back out with B.
 command create_menu_cancellable "[11]" // Same as above, but you can back out with B.

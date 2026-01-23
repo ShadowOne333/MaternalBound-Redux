@@ -1,0 +1,162 @@
+/* Enums */
+import "../../enums/flags.ccs"
+import "../../enums/windows.ccs"
+import "../../enums/labels.ccs"
+/* Commands */
+import "../../commands/window_cmds.ccs"
+import "../../commands/flag_cmds.ccs"
+import "../../commands/health_cmds.ccs"
+
+Set_Count_1: { SetDescription(1, wnd_KeyItems, ShowDescription) } Set_Count_2: { SetDescription(2, wnd_KeyItems, ShowDescription) } 
+Set_Count_3: { SetDescription(3, wnd_KeyItems, ShowDescription) } Set_Count_4: { SetDescription(4, wnd_KeyItems, ShowDescription) }
+Set_Count_5: { SetDescription(5, wnd_KeyItems, ShowDescription) } Set_Count_6: { SetDescription(6, wnd_KeyItems, ShowDescription) }
+Set_Count_7: { SetDescription(7, wnd_KeyItems, ShowDescription) } Set_Count_8: { SetDescription(8, wnd_KeyItems, ShowDescription) }
+Set_Count_9: { SetDescription(9, wnd_KeyItems, ShowDescription) } Set_Count_10: { SetDescription(10, wnd_KeyItems, ShowDescription) }
+Set_Count_11: { SetDescription(11, wnd_KeyItems, ShowDescription) } Set_Count_12: { SetDescription(12, wnd_KeyItems, ShowDescription) }
+Set_Count_13: { SetDescription(13, wnd_KeyItems, ShowDescription) }
+
+ChaosModeConfig: {
+	CloseAllModMenuWnd()
+	OpenKeyItemWnd()
+	Lbl(lbl_Randomizers)
+	counter_zero
+	if not flag flg_DisableChaosEffect_RandomPalette {
+        MenuOptionWithCallback("[ac]Palette", Set_Count_1)
+	} else {
+		MenuOptionWithCallback("Palette", Set_Count_1)
+	}
+	if not flag flg_DisableChaosEffect_RandomBattle {
+        MenuOptionWithCallback("[ac]Battles", Set_Count_2)
+	} else {
+		MenuOptionWithCallback("Battles", Set_Count_2)
+	}
+	if not flag flg_DisableChaosEffect_RandomWarp {
+        MenuOptionWithCallback("[ac]Warps", Set_Count_3)
+	} else {
+		MenuOptionWithCallback("Warps", Set_Count_3)
+	}
+	if not flag flg_DisableChaosEffect_RandomBGM {
+        MenuOptionWithCallback("[ac]Music", Set_Count_4)
+	} else {
+		MenuOptionWithCallback("Music", Set_Count_4)
+	}
+	if not flag flg_DisableChaosEffect_CorruptMap {
+		MenuOptionWithCallback("[ac]Tile Corrupt", Set_Count_5)
+	} else {
+		MenuOptionWithCallback("Tile Corrupt", Set_Count_5)
+	}
+	if not flag flg_DisableChaosEffect_BacktrackWarp {
+		MenuOptionWithCallback("[ac]Backtrack Warp", Set_Count_6)
+	} else {
+		MenuOptionWithCallback("Backtrack Warp", Set_Count_6)
+	}
+	if not flag flg_DisableChaosEffect_RandomFloatSprite {
+		MenuOptionWithCallback("[ac]Float Sprites", Set_Count_7)
+	} else {
+		MenuOptionWithCallback("Float Sprites", Set_Count_7)
+	}
+	if not flag flg_DisableChaosEffect_RandomSound {
+		MenuOptionWithCallback("[ac]Sounds", Set_Count_8)
+	} else {
+		MenuOptionWithCallback("Sounds", Set_Count_8)
+	}
+	if not flag flg_DisableChaosEffect_RandomizeMainParty {
+		MenuOptionWithCallback("[ac]Main Party", Set_Count_9)
+	} else {
+		MenuOptionWithCallback("Main Party", Set_Count_9)
+	}
+	if not flag flg_DisableChaosEffect_RandomizeNpcParty {
+		MenuOptionWithCallback("[ac]NPC Party", Set_Count_10)
+	} else {
+		MenuOptionWithCallback("NPC Party", Set_Count_10)
+	}
+	if not flag flg_DisableChaosEffect_RandomDistortion {
+		MenuOptionWithCallback("[ac]Distortion", Set_Count_11)
+	} else {
+		MenuOptionWithCallback("Distortion", Set_Count_11)
+	}
+	if not flag flg_DisableChaosEffect_RandomDoors {
+		MenuOptionWithCallback("[ac]Doors", Set_Count_12)
+	} else {
+		MenuOptionWithCallback("Doors", Set_Count_12)
+	}
+    if not flag flg_DisableChaosEffect_RandomBBG {
+        MenuOptionWithCallback("[ac]Battle BG", Set_Count_13)
+    } else
+    {
+        MenuOptionWithCallback("Battle BG", Set_Count_13)
+    }
+    DisplayVertical(2)
+    if not "[11]" {
+        // Exit
+        ConfirmYesNo(lbl_Confirm, "These settings OK?", EndConfig)
+    }
+    ctoarg
+    swap
+    SwitchGoto(13)
+        SwitchCase(chose_palette)
+        SwitchCase(chose_battles)
+        SwitchCase(chose_warps)
+        SwitchCase(chose_music)
+		SwitchCase(chose_tilecorrupt)
+		SwitchCase(chose_backtrackwarp)
+		SwitchCase(chose_floatsprite)
+		SwitchCase(chose_sounds)
+        SwitchCase(chose_mainparty)
+        SwitchCase(chose_npcparty)
+        SwitchCase(chose_distortion)
+		SwitchCase(chose_doors)
+        SwitchCase(chose_bbg)
+    swap
+    "@Error! No option {number(0)} in this menu." next goto(ChaosModeConfig)
+    chose_palette:
+		ToggleWithSound(flg_DisableChaosEffect_RandomPalette) goto(ChaosModeConfig)
+    chose_battles:
+		ToggleWithSound(flg_DisableChaosEffect_RandomBattle) goto(ChaosModeConfig)
+    chose_warps:
+		ToggleWithSound(flg_DisableChaosEffect_RandomWarp) goto(ChaosModeConfig)
+    chose_music:
+		ToggleWithSound(flg_DisableChaosEffect_RandomBGM) goto(ChaosModeConfig)
+    chose_tilecorrupt:
+		ToggleWithSound(flg_DisableChaosEffect_CorruptMap) goto(ChaosModeConfig)
+    chose_backtrackwarp:
+		ToggleWithSound(flg_DisableChaosEffect_BacktrackWarp) goto(ChaosModeConfig)
+    chose_floatsprite:
+		ToggleWithSound(flg_DisableChaosEffect_RandomFloatSprite) goto(ChaosModeConfig)
+    chose_sounds:
+		ToggleWithSound(flg_DisableChaosEffect_RandomSound) goto(ChaosModeConfig)
+    chose_mainparty:
+		ToggleWithSound(flg_DisableChaosEffect_RandomizeMainParty) goto(ChaosModeConfig)
+    chose_npcparty:
+		ToggleWithSound(flg_DisableChaosEffect_RandomizeNpcParty) goto(ChaosModeConfig)
+    chose_distortion:
+		ToggleWithSound(flg_DisableChaosEffect_RandomDistortion) goto(ChaosModeConfig)
+    chose_doors:
+		ToggleWithSound(flg_DisableChaosEffect_RandomDoors) goto(ChaosModeConfig)
+    chose_bbg:
+		ToggleWithSound(flg_DisableChaosEffect_RandomBBG) goto(ChaosModeConfig)
+}
+
+ShowDescription:
+	if counter_is(1) { "<Random Palette>" newline "Shuffles the colors of the" newline "map you're currently on." }
+	if counter_is(2) { "<Random Battles>" newline "Starts a sudden battle with" newline "a random set of enemies." }
+	if counter_is(3) { "<Random Warps>" newline "Sometimes unexpectedly warp" newline "to a new location." }
+	if counter_is(4) { "<Random Music>" newline "Occasionally change the background" newline "music to a random BGM track." }
+	if counter_is(5) { "<Tile Corruption>" newline "Randomly corrupt all map" newline "tiles until you use the" newline "Mod Menu to warp again." }
+	if counter_is(6) { "<Backtrack Warp>" newline "Randomly warp to a place" newline "you were previously at." }
+	if counter_is(7) { "<Float Sprites>" newline "Have a chance of a random" newline "sprite appearing in the air" newline "next to the player." }
+	if counter_is(8) { "<Random Sounds>" newline "Play a random sound effect" newline "every now and then." }
+	if counter_is(9) { "<Random Main Party>" newline "Replaces playable party" newline "members in your squad with" newline "different ones at random." }
+	if counter_is(10) { "<Random NPC Party>" newline "Replaces non-playable NPC" newline "followers in your party with" newline "different ones at random." }
+	if counter_is(11) { "<Random Distortion>" newline "Distorts the map using a" newline "random battle BG filter." }
+	if counter_is(12) { "<Random Doors>" newline "When you enter a new map," newline "have a chance of a different" newline "map loading instead." }
+	if counter_is(13) { "<Random Battle BG>" newline "Shows a battle background in" newline "the overworld. Pauses other effects" newline "until a battle starts." }
+
+eob
+
+EndConfig:
+	CloseModMenuConfirmWnd()
+	SetTextSpeed(1)
+	CloseAllModMenuWnd()
+	window_closeall
+eob

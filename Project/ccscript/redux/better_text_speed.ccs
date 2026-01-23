@@ -1,0 +1,202 @@
+// better_text_speed.ccs
+// cooprocks123e 2023
+// public domain
+// v3: fix race condition with interrupt handler in v2 fix
+// v2: fixes bug with HDMA corruption in battle (battles look broken)
+
+import "../essential/asm65816.ccs"
+
+// Each text speed has three pieces of information associated with it:
+// 1. How many frames to wait per character printed (unit: 1/256 frames/character)
+//      Upper bound: 0x800 (or 8 frames per character)
+// 2. The HP/PP roller rate (unit: 1/65536 HP/frame)
+// 3. How many frames to wait when `[03]` is used in battle (0 for "forever")
+//      This can also be -1 to use the default calculation, which is:
+//        framesPerChar * 30
+
+// Needs 2 bytes of free RAM
+define FreeRAM_TextSpeedAccum            = 0x962B // short
+
+command _DefineTextSpeed(framesPerChar, hpPpRollerRate, framesForNextInBattle) {
+    long hpPpRollerRate
+    short framesPerChar
+    short framesForNextInBattle
+}
+TextSpeedData:
+    // Starts with a null entry so that we can use CCScript labels
+TextSpeedData_hpPpRollerRate_lo:
+    short 0
+TextSpeedData_hpPpRollerRate_hi:
+    short 0
+TextSpeedData_framesPerChar:
+    short 0
+TextSpeedData_framesForNextInBattle:
+    short 0
+
+    // Faster, fast, medium, slow
+    _DefineTextSpeed(0x0AA, 0x00010000, 15) // 0.66 frames/char
+    _DefineTextSpeed(0x100, 0x0000AAAA, -1) // 1.00 frames/char (default fast)
+    _DefineTextSpeed(0x200, 0x00009999, -1) // 2.00 frames/char
+    _DefineTextSpeed(0x300, 0x00008000,  0) // 3.00 frames/char
+
+    // // Vanilla values
+    // _DefineTextSpeed(0x100, 0x00012000, -1)
+    // _DefineTextSpeed(0x200, 0x00011800, -1)
+    // _DefineTextSpeed(0x300, 0x00011000,  0)
+
+
+ROM[0xC1FEC9] = {
+    JSL(SetTextSpeedFromGameState)
+    BRA_a(0xC1FF19)
+}
+SetTextSpeedFromGameState: {
+    LDA_a(0x98B6)
+    AND_i(0x00FF)
+    // tail call optimization
+    //JML(SetTextSpeed)
+}
+SetTextSpeed: {
+    REP(0x31)
+    PHD
+    TAY
+    TDC
+    ADC_i(-2)
+    TCD
+    TYA
+
+    // Use the one-based index as is, since we want to skip over the
+    // null entry
+    ASL
+    ASL
+    ASL
+    TAX
+    LDA_xl(TextSpeedData_hpPpRollerRate_lo)
+    STA_a(0x9627)
+    LDA_xl(TextSpeedData_hpPpRollerRate_hi)
+    STA_a(0x9629)
+    LDA_xl(TextSpeedData_framesPerChar)
+    STA_a(0x9625)
+    // Preserve FPC in case we need it later
+    STA_d(0x00)
+    LDA_xl(TextSpeedData_framesForNextInBattle)
+    CMP_i(0xFFFF)
+    BNE_a(FFNIB_Set)
+    // FFNIB = 30 * FPC / 256 = 2 * (16 * FPC - FPC) / 256
+    // Find 30 * FPC
+    LDA_d(0x00)
+    ASL
+    ASL
+    ASL
+    ASL         // A = FPC * 16
+    SEC
+    SBC_d(0x00) // A = FPC * 15
+    ASL
+    // Divide-by-256 to get frames
+    XBA
+    AND_i(0x00FF)
+FFNIB_Set:
+    STA_a(0x964B)
+
+    // Clear text speed accumulator when changing text speed to prevent
+    // odd effects...
+    STZ_a(FreeRAM_TextSpeedAccum)
+    PLD
+    RTL
+}
+
+command _CommonHijack {
+    JSL(WaitTextOneTick)
+    BRA(13)
+    NOP NOP NOP NOP NOP
+    NOP NOP NOP NOP NOP
+    NOP NOP NOP
+}
+ROM[0xC10D4B] = { _CommonHijack }
+ROM[0xC44055] = { _CommonHijack }
+ROM[0xC444E3] = { _CommonHijack }
+
+WaitTextOneTick: {
+    REP(0x31)
+    PHD
+    TDC
+    ADC_i(-2)
+    TCD
+
+    // Load leftover portion of # of frames to wait
+    LDA_a(FreeRAM_TextSpeedAccum)
+    // Add our text speed
+    CLC
+    ADC_a(0x9625)
+    TAY
+    // Save the remaining fractional portion back to memory
+    AND_i(0x00FF)
+    STA_a(FreeRAM_TextSpeedAccum)
+    // Determine the integer number of frames to wait
+    TYA
+    XBA
+    AND_i(0x00FF)
+    STA_d(0x00)
+    // Wait for N frames
+    BEQ_a(FrameWaitDone)
+FrameWaitLoop:
+    JSL(0xC12DD5)
+    DEC_d(0x00)
+    BNE_a(FrameWaitLoop)
+FrameWaitDone:
+    PLD RTL
+}
+
+// Somehow this exposed an issue where BG3 can be uploaded multiple times a
+// frame, causing HDMA corruption in battle. Fix this by using the existing
+// global variable $7E00AB which gets cleared in NMI to track whether BG3 has
+// been uploaded during this frame.
+ROM[0xC2038B] = JML(HijackBg3Upload)
+
+HijackBg3Upload: {
+    // Return early if we have already marked BG3 for upload
+    // this frame.
+    LDA_a(0x00AB)
+    BEQ(1) RTL
+
+    // Do original code
+    REP(0x31)
+    PHD
+    TDC
+    ADC_i(-18)
+    TCD
+    LDA_i(0x007E)
+    STA_d(0x0E)
+    LDA_i(0x7C00)
+    STA_d(0x10)
+    LDY_i(0x7DFE)
+    LDX_i(0x0700)
+    JSL(0xC0862E)
+    // Mark that BG3 is added to the upload queue.
+    INC_a(0x00AB)
+    // ...however sometimes the DMA could have already processed by this point.
+    // It could happen if we get unlucky and hit a NMI after the DMA is added
+    // to the queue, but before we do `INC`. Check the current queue index and
+    // if it's equal to the last uploaded queue index, set the marker to zero.
+    // Note that we don't care about checking this atomically, since if we do
+    // NMI after the INC instruction, the NMI handler will reset $AB to zero.
+    LDA_a(0x0000)
+    AND_i(0x00FF)
+    STA_d(0x02)
+    LDA_a(0x0001)
+    AND_i(0x00FF)
+    CMP_d(0x02)
+    BNE(3) STZ_a(0x00AB)
+    // Do original code, cont'd - upload zeros to the
+    // Save a few cycles with micro-optimizations
+    LDA_i(0x7F80)
+    STA_d(0x10)
+    LDA_i(0x00C4)
+    STA_d(0x0E)
+    LDY_i(0x0BE8)
+    LDX_i(0x0040)
+    XBA
+    JSL(0xC0862E)
+
+    PLD
+    RTL
+}

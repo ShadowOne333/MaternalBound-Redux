@@ -1,0 +1,141 @@
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/flags.ccs"
+import "../commands/window_cmds.ccs"
+import "../commands/flag_cmds.ccs"
+/* ASM */
+import "../asm/cc_text_speed.ccs"
+import "../asm/custom_windows_standalone.ccs"
+/* Enums */
+import "../enums/modmenu_flags.ccs"
+import "../enums/labels.ccs"
+import "../enums/modmenu_party.ccs"
+import "../enums/items.ccs"
+import "../enums/windows.ccs"
+
+
+/* Item Management */
+
+// Give Item in argument register to party
+command GiveItem(charaID)
+{
+	window_open(wnd_Dialog)
+	sound(SND_BOXTAKE)
+	copy_active
+	give_and_check(charaID, 0)	// "[1D 0E {byte charaID} 00]"
+	call(0xc7dccf) next
+	window_close(wnd_Dialog)
+}
+
+command GiveKeyItem(charaID)
+{
+	copy_wram
+	window_open(wnd_Dialog)
+	sound(SND_SPECIALITEM)
+	copy_active
+	give_and_check(charaID, 0)	// "[1D 0E {byte charaID} 00]"
+	call(0xc7dcb6) next
+	window_close(wnd_Dialog)
+}
+
+command GiveItemToParty(itemID)
+{
+	copy_wram
+	arg(itemID)
+	if not full(0xFF)
+	{
+		if not full(1) { GiveItem(1) }
+		else if not full(2) { GiveItem(2) }
+		else if not full(3) { GiveItem(3) }
+		else if not full(4) { GiveItem(4) }
+	}
+	else
+	{
+		NotifyInventoryFull()
+	}
+}
+
+command GiveKeyItemToParty(itemID)
+{
+    arg(itemID)
+
+    goto(givepartykeyitem)
+}
+
+givepartykeyitem:
+	if not flag flg_KeyItems
+	{
+		if not full(0xFF)
+		{
+			if not full(1) and flag flg_Ness { GiveKeyItem(pty_Ness) }
+			else if not full(2) and flag flg_Paula { GiveKeyItem(pty_Paula) }
+			else if not full(3) and flag flg_Jeff { GiveKeyItem(pty_Jeff) }
+			else if not full(4) and flag flg_Poo { GiveKeyItem(pty_Poo) }
+			else { goto(sendtoescargo) }
+		}
+        else
+		{
+			goto(sendtoescargo)
+		}
+	}
+	else
+	{
+		window_closeall
+		window_open(1)
+		GiveMenuKeyItem(0)
+		window_closeall
+	}
+eob
+
+sendtoescargo:
+	// Store key item with Escargo Express
+	add_escargo_item(0)	// "[1D 18 00]"
+	window_closeall
+	window_open(1)
+	"@(The {itemname(0)} was sent to Escargo Express.)" next
+	window_closeall
+
+	// TODO: handle what to do when Escargo Express is full?
+eob
+
+// Set the flag for the corresponding Key Item
+command GiveMenuKeyItem(itemID)
+{
+	counter(itemID)
+	call(keyitemcounter)
+
+	sound(SND_SPECIALITEM)
+	"@(The {itemname(itemID)} was added to your Key Items.)" next
+}
+
+keyitemcounter:
+	if counter_is(item_Sound_Stone) { ToggleWithSound(flg_BuzzBuzzDead) }
+	if counter_is(item_Key_Shack) { ToggleWithSound(FLG_KEY_TABIGOYA) }
+	if counter_is(item_Bicycle) { ToggleWithSound(FLG_ITEM_CYCLE) }
+	if counter_is(item_Town_Map) { ToggleWithSound(FLG_ITEM_MAP) }
+	if counter_is(item_Receiver_Phone) { ToggleWithSound(FLG_ITEM_PHONE) }
+	if counter_is(item_Eraser_Pencil) { ToggleWithSound(FLG_ITEM_TACO_ERASER) }
+	if counter_is(item_Key_Cabin) { ToggleWithSound(FLG_HAPPY_CARPAINTER_ITEMFULL) }
+	if counter_is(item_Wad_Bills) { ToggleWithSound(FLG_TWSN_ITEM_TONCHIKI) }
+	if counter_is(item_Zombie_Paper) { ToggleWithSound(FLG_ITEM_HOIHOI) }
+	if counter_is(item_Key_Locker) { ToggleWithSound(FLG_ITEM_KEY_LOCKER) }
+	if counter_is(item_Bad_Key_Machine) { ToggleWithSound(FLG_ITEM_GAUS) }
+	if counter_is(item_Eraser_Eraser) { ToggleWithSound(FLG_ITEM_KOKESHI) }
+	if counter_is(item_Diamond) { ToggleWithSound(FLG_DSRT_ITEM_DIA) }
+	if counter_is(item_Signed_Banana) { ToggleWithSound(FLG_ITEM_BANANA) }
+	if counter_is(item_Hieroglyph_Copy) { ToggleWithSound(FLG_SUMS_HIEROGLYPH) }
+	if counter_is(item_Key_Carrot) { ToggleWithSound(flg_KeyItem_CarrotKey) }
+	if counter_is(item_Key_Tower) { ToggleWithSound(FLG_ITEM_KEY_PUPUKA) }
+	if counter_is(item_Hawk_Eye) { ToggleWithSound(FLG_ITEM_TAKANOME) }
+	if counter_is(item_Shyness_Book) { ToggleWithSound(FLG_ITEM_MUKUCHI) }
+	if counter_is(item_Tendakraut) { ToggleWithSound(FLG_GUMI_OLDMAN_ITEM) }
+	if counter_is(item_Meteorite_Piece) { ToggleWithSound(FLG_ITEM_XYZ) }
+	if counter_is(item_Bubble_Gum) { ToggleWithSound(FLG_ITEM_BUBBLE_GUM) }
+	if counter_is(item_Pass_Backstage) { ToggleWithSound(flg_KeyItem_BackstagePass) }
+	if counter_is(item_Yogurt_Dispenser) { ToggleWithSound(flg_KeyItem_YogurtMachine) }
+	if counter_is(item_Show_Ticket) { ToggleWithSound(flg_KeyItem_ShowTicket) }
+eob
+
+command NotifyInventoryFull()
+{
+	NotificationWnd(wnd_ModMenu2, "There's no space for new items.")
+}

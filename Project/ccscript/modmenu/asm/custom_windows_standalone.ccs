@@ -1,0 +1,144 @@
+// custom_windows_standalone.ccs - v1
+// Allows you to open 2 windows simultaneously with variable sizes
+// Doesn't require expand_text_windows (hence the standalone part)
+// cooprocks123e 2021
+
+import "../../essential/asm65816.ccs"
+import "../../essential/ccexpand.ccs"
+import "../../essential/cc_asmcall.ccs"
+
+// Summary:
+//   Use the command: CustomWindow_open(window number, X position, Y position, width, height)
+//   The position and size parameters are in 8x8 tile units, same as the normal window definitions in the window table.
+//   For window number, you must use windows from CustomWindow0 to CustomWindow1
+// Examples:
+//   Open window the size of the screen:
+//     CustomWindow_open(CustomWindow0, 1, 1, 30, 26)
+//   Open window with same size and position as default text window:
+//     CustomWindow_open(CustomWindow0, 0x000C, 0x0001, 0x0013, 0x0008)
+
+// These are the custom windows available.
+// Use them with the CustomWindow_open CCScript command,
+// or by setting MEM_CustomWindowParams_{X,Y,W,H} and then
+// creating one of these windows normally.
+
+// In the event that you have more unused windows,
+// replace the -1s in this list with the window #
+// (make sure to do it in order from CustomWindow0 to 9)
+define CustomWindow0 = 55
+define CustomWindow1 = -1
+define CustomWindow2 = -1
+define CustomWindow3 = -1
+define CustomWindow4 = -1
+define CustomWindow5 = -1
+define CustomWindow6 = -1
+define CustomWindow7 = -1
+define CustomWindow8 = -1
+define CustomWindow9 = -1
+
+CustomWindowList: {
+    byte CustomWindow0
+    byte CustomWindow1
+    byte CustomWindow2
+    byte CustomWindow3
+    byte CustomWindow4
+    byte CustomWindow5
+    byte CustomWindow6
+    byte CustomWindow7
+    byte CustomWindow8
+    byte CustomWindow9
+    byte -1 // List terminator, in case all 10 windows are used
+}
+
+command CustomWindow_open(num, x, y, w, h) {
+    cc_asmcall(ASM_CustomWindow_open, RET_NONE)
+    byte num
+    byte x
+    byte y
+    byte w
+    byte h
+}
+
+////////////
+// ASM stuff
+
+// Needs to be 4 sequential bytes in memory
+define MEM_CustomWindowParams_X = 0x7E965C
+define MEM_CustomWindowParams_Y = 0x7E965D
+define MEM_CustomWindowParams_W = 0x7E965E
+define MEM_CustomWindowParams_H = 0x7E965F
+
+define CreateWindowFar = 0xC1DD47
+
+ASM_CustomWindow_open: {
+    LDY_i(0x0005)
+    JSL(R_Read_Parameter_Bytes)
+
+    LDA_a(D_cc_argv_1)
+    STA_a(MEM_CustomWindowParams_X) // and Y
+    LDA_a(D_cc_argv_3)
+    STA_a(MEM_CustomWindowParams_W) // and H
+
+    LDA_a(D_cc_argv_0)
+    AND_i(0x00FF)
+    JML(CreateWindowFar)
+}
+
+// Partway through CreateWindow:
+ROM[0xC105D3] = {
+    // Orig: TYA ASL ASL ASL STA_d(0x02)
+    /* 5d3 */ JSL(ASM_CustomWindow_setupWindow)
+              // The function we call will either set or clear the carry to let us know
+              //   if we should skip the original parameter loading code or not.
+    /* 5d7 */ BCS(0x56)
+    /* 5d9 */ // STA_d(0x02) ...
+}
+
+ASM_CustomWindow_setupWindow: {
+    SEP(0x30)
+    LDX_8(0x00)
+_SearchCustomWindowListLoop:
+    LDA_xl(CustomWindowList)
+    BMI_a(_WindowNotInList)
+    CMP_d(0x14)
+    BEQ(4) // _WindowInList
+        INX
+        JMP(_SearchCustomWindowListLoop)
+
+_WindowInList:
+    REP(0x30)
+    // We're using the custom window stuff.
+    // Read the window parameters from the global variables.
+    LDA_a(MEM_CustomWindowParams_X)
+    AND_i(0x00FF)
+    LDX_d(0x10)
+    STA_x(0x0006)
+
+    LDA_a(MEM_CustomWindowParams_Y)
+    AND_i(0x00FF)
+    STA_x(0x0008)
+
+    LDA_a(MEM_CustomWindowParams_W)
+    AND_i(0x00FF)
+    DEC DEC
+    STA_x(0x000A)
+
+    LDA_a(MEM_CustomWindowParams_H)
+    AND_i(0x00FF)
+    DEC DEC
+    STA_x(0x000C)
+
+    // Set carry to skip the original code with the BCS instruction we return to.
+    SEC
+    RTL
+
+_WindowNotInList:
+    REP(0x30)
+    // We're using a built-in window. Finish computing the offset into the window table.
+    TYA ASL ASL ASL STA_d(0x02) // Code we replaced
+    // Note that we need to preserve this value in A! Don't overwrite it!
+    
+    // Clear carry to run the original code after we return.
+    CLC
+    RTL
+}

@@ -1,0 +1,58 @@
+define sts_Normal_0 = 0x101
+define sts_KO = 0x201
+define sts_Diamondized = 0x301
+define sts_Nauseous = 0x401
+define sts_Poisoned = 0x501
+define sts_Sunstroke = 0x601
+define sts_Cold = 0x701
+
+define sts_Normal_1 = 0x102
+define sts_Mushroomized = 0x202
+define sts_Possessed = 0x302
+
+define sts_Normal_2 = 0x103
+define sts_Asleep = 0x203
+define sts_Crying = 0x303
+define sts_Paralyzed = 0x403
+define sts_Solidified = 0x503
+
+define sts_Normal_3 = 0x104
+define sts_Strange = 0x204
+
+define sts_Normal_4 = 0x105
+define sts_CantConcentrate = 0x205
+
+define sts_Normal_5 = 0x106
+define sts_Homesick = 0x206
+
+/*
+	Status Group 0:
+	0:    Normal
+	1:    KO'd
+	2:    Diamondized
+	3:    Paralyzed
+	4:    Nauseous
+	5:    Poisoned
+	6:    Sunstruck
+	7:    Sniffling
+	Status Group 1:
+	0:    Normal
+	1:    Mushroomized
+	2:    Possessed
+
+	Status Group 2:
+	0:    Normal
+	1:    Asleep
+	2:    Crying
+	3:    Immobilized
+	4:    Solidified
+	Status Group 3:
+	0:    Normal
+	1:    Feeling Strange
+	Status Group 4:
+	0:    Normal
+	1:    Can't Concentrate
+	Status Group 5:
+	0:    Normal
+	1:    Homesick
+*/

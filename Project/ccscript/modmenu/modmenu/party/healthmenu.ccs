@@ -1,0 +1,140 @@
+/* Enums */
+import partymenu
+import "../../enums/labels.ccs"
+import "../../enums/party.ccs"
+import "../../enums/windows.ccs"
+import "../../enums/status.ccs"
+/* Commands */
+import "../../commands/window_cmds.ccs"
+import "../../commands/flag_cmds.ccs"
+import "../../commands/item_cmds.ccs"
+import "../../commands/health_cmds.ccs"
+
+HealthMenu:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Health)
+	menu 1 {
+		"Heal":  { 
+			if (counter_is(0)) { healall NotificationWnd(wnd_ModMenu2, "{sound(SND_RECOVER)}@Restored everyone's HP and PP.") }
+			else { NotificationWnd(wnd_ModMenu2, "{call(data_45.l_0xc91675)}{sound(SND_RECOVER)}@{name(argument)}'s HP and PP are restored.") load_registers_global } 
+		}
+		"Set Status":  { goto(StatusMenu) }
+		"Clear Status":
+		{
+			if (counter_is(0)) 
+			{
+				ClearStatus(pty_Ness) ClearStatus(pty_Paula) ClearStatus(pty_Jeff) ClearStatus(pty_Poo)
+				ClearStatusNotification("everyone")
+			}
+			else if (counter_is(pty_Ness))  { ClearStatus(pty_Ness)  ClearStatusNotification("{name(pty_Ness)}")  }
+			else if (counter_is(pty_Paula)) { ClearStatus(pty_Paula) ClearStatusNotification("{name(pty_Paula)}") }
+			else if (counter_is(pty_Jeff))  { ClearStatus(pty_Jeff)  ClearStatusNotification("{name(pty_Jeff)}")  }
+			else if (counter_is(pty_Poo))   { ClearStatus(pty_Poo)   ClearStatusNotification("{name(pty_Poo)}")   }
+		}
+		"Kill":  { 
+			if (counter_is(0)) { Kill(pty_Ness) Kill(pty_Paula) Kill(pty_Jeff) Kill(pty_Poo) }
+			else if (counter_is(pty_Ness))  { Kill(pty_Ness)  }
+			else if (counter_is(pty_Paula)) { Kill(pty_Paula) }
+			else if (counter_is(pty_Jeff))  { Kill(pty_Jeff)  }
+			else if (counter_is(pty_Poo))   { Kill(pty_Poo)   }
+		}
+		"AlmostKill": { 
+			if (counter_is(0)) { AlmostKill(pty_Ness) AlmostKill(pty_Paula) AlmostKill(pty_Jeff) AlmostKill(pty_Poo) }
+			else if (counter_is(pty_Ness))  { AlmostKill(pty_Ness)  }
+			else if (counter_is(pty_Paula)) { AlmostKill(pty_Paula) }
+			else if (counter_is(pty_Jeff))  { AlmostKill(pty_Jeff)  }
+			else if (counter_is(pty_Poo))   { AlmostKill(pty_Poo)   }
+		}
+		"Revive":  { 
+			if (counter_is(0)) { "[08 2c 16 c9 00]" ReviveNotification("the whole party") }
+			else if (counter_is(pty_Ness))  { Revive(pty_Ness)  ReviveNotification("{name(pty_Ness)}")  }
+			else if (counter_is(pty_Paula)) { Revive(pty_Paula) ReviveNotification("{name(pty_Paula)}") }
+			else if (counter_is(pty_Jeff))  { Revive(pty_Jeff)  ReviveNotification("{name(pty_Jeff)}")  }
+			else if (counter_is(pty_Poo))   { Revive(pty_Poo)   ReviveNotification("{name(pty_Poo)}")   }
+		}
+		 default "Back": { goto(PartyMenu) }
+	}
+goto(PartyMenu)
+
+StatusMenu:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Status)
+	menu 1 {
+		"Group 0": { goto(StatusGroup_0) }
+		"Group 1": { goto(StatusGroup_1) }
+		"Group 2": { goto(StatusGroup_2) }
+		"Group 3": { goto(StatusGroup_3) }
+		"Group 4": { goto(StatusGroup_4) }
+		"Group 5": { goto(StatusGroup_5) }
+		 default "Back": { goto(HealthMenu) }
+	}
+goto(StatusMenu)
+
+StatusGroup_0:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group0)
+	menu 1 {
+		"Normal":   { InflictParty(sts_Normal_0, "Normal") }
+		"KO'd":     { InflictParty(sts_KO, "KO'd") }
+		"Diamondized": { InflictParty(sts_Diamondized, "Diamondized") }
+		"Nauseous":  { InflictParty(sts_Nauseous, "Nausea") }
+		"Poisoned":  { InflictParty(sts_Poisoned, "Poison") }
+		"Sunstroke": { InflictParty(sts_Sunstroke, "Sunstroke") }
+		"Cold":      { InflictParty(sts_Cold, "a Cold") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_0)
+
+StatusGroup_1:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group1)
+	menu 1 {
+		"Normal": 	    { InflictParty(sts_Normal_1, "Normal") }
+		"Mushroomized": { InflictParty(sts_Mushroomized, "Mushroomized") }
+		"Possessed":    { sound(SND_POSSESSED) InflictParty(sts_Possessed, "Possession") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_1)
+
+StatusGroup_2:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group2)
+	menu 1 {
+		"Normal": 	 { InflictParty(sts_Normal_2, "Normal") }
+		"Asleep":    { InflictParty(sts_Asleep, "Sleep") }
+		"Crying":    { InflictParty(sts_Crying, "Crying") }
+		"Paralyzed": { InflictParty(sts_Paralyzed, "Paralysis") }
+		"Solidified": { InflictParty(sts_Solidified, "Solidified") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_2)
+
+StatusGroup_3:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group3)
+	menu 1 {
+		"Normal":  { InflictParty(sts_Normal_3, "Normal") }
+		"Strange": { InflictParty(sts_Strange, "Feeling Strange") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_3)
+
+StatusGroup_4:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group4)
+	menu 1 {
+		"Normal": 	    { InflictParty(sts_Normal_4, "Normal") }
+		"CantConcentrate": { InflictParty(sts_CantConcentrate, "Can't Concentrate") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_4)
+
+StatusGroup_5:
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Group5)
+	menu 1 {
+		"Normal": 	{ InflictParty(sts_Normal_5, "Normal") }
+		"Homesick": { InflictParty(sts_Homesick, "Homesickness") }
+		default "Back": { goto(StatusMenu) }
+	}
+goto(StatusGroup_5)

@@ -2,7 +2,11 @@ import "../essential/asm65816.ccs"
 import "../essential/fade_tools.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/cc_char_in_party.ccs"
+import "../essential/jsl_rts.ccs"
 import "../redux/goods_menu_equip.ccs"
+import "../redux/movscr_codes.ccs"
+import "../modmenu/asm/drug_util.ccs"
+import "../modmenu/asm/cc_actionscript.ccs"
 
 // CCExpand v0.3 - Additional CCScript codes
 // Initial version by jtolmar
@@ -49,20 +53,20 @@ CodeTable: {
   long CC_code_AsmCall // [1A 0C]
   long CC_CustomFadeout // [1A 0D]
   long CC_CustomFadein  // [1A 0E]
-  long DoNothing // [1A 0F]
-  long DoNothing // [1A 10]
+  long cc_text_speed.CC_code_gettextspeed // [1A 0F]
+  long cc_text_speed.CC_code_settextspeed // [1A 10]
   long CC_CharInParty // [1A 11]
-  long DoNothing // [1A 12]
-  long DoNothing // [1A 13]
-  long DoNothing // [1A 14]
-  long DoNothing // [1A 15]
+  long CC_BreakEverything // [1A 12]
+  long CC_Drug // [1A 13]
+  long cc_main_menu.CC_Goods // [1A 14]
+  long cc_main_menu.CC_Equip // [1A 15]
   long DoNothing // [1A 16]
-  long DoNothing // [1A 17]
-  long DoNothing // [1A 18]
-  long DoNothing // [1A 19]
+  long cc_main_menu.CC_Status // [1A 17]
+  long cc_main_menu.CC_PSI // [1A 18]
+  long cc_main_menu.CC_Close_HP // [1A 19]
   long DoNothing // [1A 1A]
-  long DoNothing // [1A 1B]
-  long DoNothing // [1A 1C]
+  long cc_actionscript.IMPL_SpriteScript // [1A 1B]
+  long cc_actionscript.IMPL_NpcScript    // [1A 1C]
   long DoNothing // [1A 1D]
   long DoNothing // [1A 1E]
   long DoNothing // [1A 1F]
@@ -71,6 +75,21 @@ CodeTable: {
   // ...
   // You can keep adding them up to [1A FF].
 }
+
+CC_BreakEverything: M_EB_Function_Wrapper({
+  JSL(Brk)
+})
+
+Brk: {
+  //LDA_i(0x0420) // Junk values
+  //LDX_i(0x0069)
+  ASM_JSL_RTS(BANKC0_RTL, 0xC008C3)
+	RTL }
+
+CC_Drug: M_EB_Function_Wrapper({
+    LDA_a(0x97CC)  // Global backup result window register
+    JSL(InitDrug)
+})
 
 // Here is documentation on the various helper functions and macros available
 // for use in your assembly code.

@@ -12,7 +12,7 @@ import "../../essential/cc_asmcall.ccs"
 Goods_Edit:
     newline
     diam "Select your option." wait
-    "[18 02]"
+    save_text_window_state
     open_hp
     open_wallet
     window_open(7)
@@ -268,7 +268,7 @@ l_0xc5e499:
     copy_active
     show_inventory(2, 0)
     copy_active
-    "[18 09 02]"
+    create_menu_in_window_cancellable(2)
     copy_wram
     window_switch(2)
     window_closetop
@@ -320,7 +320,12 @@ UltWeap_loop:
 
 give_ultweap:
     swap
-    "[1F C0 04 {e(Ness_UltEquip)} {e(Paula_UltEquip)} {e(Jeff_UltEquip)} {e(Poo_UltEquip)}]"	// Multiple addresses reference pointer
+    switch_call(4, {
+    	long Ness_UltEquip
+    	long Paula_UltEquip
+    	long Jeff_UltEquip
+    	long Poo_UltEquip
+    })	// Multiple addresses reference pointer
     inc
     goto(start_ultweap)
 

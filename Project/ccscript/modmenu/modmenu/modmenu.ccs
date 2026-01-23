@@ -1,0 +1,90 @@
+import "party/partymenu.ccs"
+import "warp/warpmenu.ccs"
+import "flags/flagsmenu.ccs"
+import "battle/battlemenu.ccs"
+import "goods/goodsmenu.ccs"
+import "music/musicmenu.ccs"
+import "map/palettemenu.ccs"
+/* ASM */
+import "../asm/cc_text_speed.ccs"
+import "../asm/movement_reloc.ccs"
+import "../asm/cc_main_menu.ccs"
+import "../asm/ccexpand.ccs"
+import "../asm/cc_asmcall.ccs"
+import "../asm/movement.ccs"
+import "../asm/asm65816_2.ccs"
+import "../asm/movscr_codes.ccs"
+/* Enums */
+import "../enums/flags.ccs"
+import "../enums/labels.ccs"
+import "../enums/party.ccs"
+import "../enums/windows.ccs"
+import "../enums/counter.ccs"
+/* Commands */
+import "../commands/window_cmds.ccs"
+import "../commands/flag_cmds.ccs"
+import "../commands/health_cmds.ccs"
+
+/* Procedures */
+
+ModMenu: {
+	// Close unnecessary windows
+	CloseAllModMenuWnd()
+	window_closeall
+	// Open main Mod Menu Window
+	OpenModMenuWnd()
+	// Set label to "MOD MENU"
+	Lbl(lbl_ModMenu)
+	counter_zero ctoarg
+	// Pick a menu option
+	MenuOptionWithCallback("Party", Set_Count_1)
+	MenuOptionWithCallback("Save", Set_Count_2)
+	MenuOptionWithCallback("BGM", Set_Count_3)
+	MenuOptionWithCallback("Goods", Set_Count_4)
+	MenuOptionWithCallback("Map", Set_Count_5)
+	MenuOptionWithCallback("Battle", Set_Count_6)
+	MenuOptionWithCallback("Flags", Set_Count_7)
+    MenuOptionWithCallback("Effects", Set_Count_8)
+    MenuOptionWithCallback("About", Set_Count_9)
+	DisplayVertical(3) if not "[11]" { eob }
+	ctoarg swap
+    SwitchGoto(9)
+        SwitchCase(chose_party)
+        SwitchCase(chose_save)
+        SwitchCase(chose_bgm)
+        SwitchCase(chose_goods)
+		SwitchCase(chose_warp)
+		SwitchCase(chose_battle)
+		SwitchCase(chose_flags)
+        SwitchCase(chose_effects)
+        SwitchCase(chose_about)
+	swap
+	"@Error! No option {number(0)} in this menu." eob
+	chose_party:
+		Highlight("Party") goto(PartyMenu)
+	chose_save:
+		Highlight("Save") save NotificationWnd(wnd_ModMenu, "@Game saved.") goto(ModMenu)
+	chose_bgm:
+		Highlight("BGM") goto(MusicMenu)
+	chose_goods:
+		Highlight("Goods") goto(GoodsMenu)
+	chose_warp:
+		Highlight("Map") goto(WarpMenu)
+	chose_battle:
+		Highlight("Battle") goto(BattleMenu)
+	chose_flags:
+		Highlight("Flags") goto(FlagsMenu)
+    chose_effects:
+		Highlight("Effects") goto(chaosmode.ChooseEffect)
+    chose_about:
+		Highlight("About") goto(ModMenu_AboutDlg)
+}
+
+ModMenu_AboutDlg:
+	window_open(wnd_Dialog)
+	Lbl(lbl_About)
+	"@EB Mod Menu v0.9.2 by ShrineFox." newline
+	"@Made using Coilsnake." newline
+	"@Updated 8[5F]24[5F]25." next
+	window_close(wnd_Dialog)
+goto(ModMenu)

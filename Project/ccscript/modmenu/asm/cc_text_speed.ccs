@@ -1,0 +1,23 @@
+import "../../essential/asm65816.ccs"
+import "../../essential/ccexpand.ccs"
+
+command gettextspeed "[1A 0F]"
+command settextspeed(x) "[1A 10 {byte x}]"
+
+// Get text speed in result.
+CC_code_gettextspeed: M_EB_Function_Wrapper({
+  LDA_a(0x9625)
+  INC
+  STA_d(0x0e)
+  STZ_d(0x10)
+  JSL(R_Set_Working_Memory)
+})
+
+// Set text speed. Lower is faster. 0 for arg.
+// By jtolmar
+CC_code_settextspeed: M_EB_Function_Wrapper({
+  M_Read_Bytes_or_Arg(1)
+  LDA_d(0x06)
+  DEC // Fastest speed is actually 0, but 0 means arg, so dec.
+  STA_a(0x9625) // In-game text speed
+})

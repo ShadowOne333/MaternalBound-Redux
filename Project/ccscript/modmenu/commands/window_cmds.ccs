@@ -1,0 +1,225 @@
+/* ASM */
+import "../../essential/ccscript_missing_commands.ccs"
+import "../../redux/window_titles.ccs"
+import "../asm/cc_text_speed.ccs"
+import "../asm/custom_windows_standalone.ccs"
+/* Enums */
+import "../enums/modmenu_flags.ccs"
+import "../enums/labels.ccs"
+import "../enums/modmenu_party.ccs"
+import "../enums/items.ccs"
+import "../enums/windows.ccs"
+
+/* Menu Options */
+
+// Overwrite selected menu option with purple background color
+command Highlight(text) 
+{ 
+	SetTextSpeedInstant() 
+	clearline 
+	sound(SND_CURSORCONFIRM) 
+	" " text_color(6) "  {text}" 
+	SetTextSpeed(1) 
+}
+
+/* Window Printing */
+
+// Get current Text Speed as argument
+command GetTextSpeed() { gettextspeed }
+// Set Text Speed
+command SetTextSpeed(num) { settextspeed(num) }
+// Set Text Speed to Zero
+command SetTextSpeedInstant() { store_registers arg_zero SetTextSpeed(0) load_registers }
+// Show description of selected item in desc window
+command SetDescription(countNo, prevWndType, DescLabel)
+{ 
+	SetTextSpeedInstant()
+	counter(countNo)
+	copy_wram
+	OpenKeyItemDescWnd()
+	copy_active
+	call(DescLabel)
+	window_switch(prevWndType)
+	SetTextSpeed(1)
+	eob
+}
+
+/* Window Management */
+
+// (Re)open/focus specific window while retaining register values
+command OpenWnd(wndType)
+{
+	window_open(wndType)
+	copy_active
+}
+
+// Close specific window while retaining register values
+command CloseWnd(wndType)
+{
+	copy_wram
+	window_close(wndType)
+}
+
+// Open Mod Menu window and set flag that it's open
+command OpenFlagWnd(wndType, flg) { OpenWnd(wndType) set(flg) }
+
+// Closes a window if a flag indicates that it's open
+// (to prevent crashing from attempting to close unopened windows)
+command CloseFlagWnd(wndType, flg) 
+{ 
+	copy_wram
+	if flag flg { CloseWnd(wndType) unset(flg) }
+	copy_active
+}
+
+// Open a specific flag-dependent custom window
+command OpenModMenuWnd() { CloseModMenuWnd() OpenFlagWnd(wnd_ModMenu, flg_ModMenuWnd) }
+command OpenModMenu2Wnd(height) { CloseModMenu2Wnd() CustomWindow_open(wnd_ModMenu2, 4, 1, 15, height) copy_active set(flg_ModMenuWnd2) }
+command OpenModMenuConfirmWnd() { CloseModMenuConfirmWnd() OpenFlagWnd(wnd_ModMenuConfirm, flg_ModMenuConfirmWnd) }
+command OpenKeyItemWnd() { CloseKeyItemWnd() OpenFlagWnd(wnd_KeyItems, flg_KeyItemsWnd) }
+command OpenItemWnd() { CloseItemWnd() OpenFlagWnd(wnd_Item, flg_ItemWnd) }
+command OpenDebugWnd() { CloseDebugWnd() SetTextSpeedInstant() OpenFlagWnd(wnd_ModMenuDebug, flg_ModMenuDebugWnd) }
+command OpenKeyItemDescWnd() { CloseKeyItemDescWnd() OpenFlagWnd(wnd_KeyItemDescription, flg_KeyItemDescWnd) }
+
+// Hide unnecessary custom windows that may be open
+command CloseModMenuWnd() { CloseFlagWnd(wnd_ModMenu, flg_ModMenuWnd) } // main mod menu window to the left
+command CloseModMenu2Wnd() { CloseFlagWnd(wnd_ModMenu2, flg_ModMenuWnd2) } // smaller mod menu window to the right
+command CloseModMenuConfirmWnd() { CloseFlagWnd(wnd_ModMenuConfirm, flg_ModMenuConfirmWnd) } // confirmation of choice window
+command CloseKeyItemWnd() { CloseFlagWnd(wnd_KeyItems, flg_KeyItemsWnd) } // duplicate goods window only for key items
+command CloseItemWnd() { CloseFlagWnd(wnd_Item, flg_ItemWnd) } // action menu for use, help etc.
+command CloseDebugWnd() { CloseFlagWnd(wnd_ModMenuDebug, flg_ModMenuDebugWnd) } // debug print window
+command CloseKeyItemDescWnd() { CloseFlagWnd(wnd_KeyItemDescription, flg_KeyItemDescWnd) } // window below key items window for description
+// Hide all possible custom windows that may be open
+command CloseAllModMenuWnd()
+{ 
+	CloseModMenuWnd() CloseModMenu2Wnd() 
+	CloseModMenuConfirmWnd() CloseKeyItemWnd() 
+	CloseItemWnd() CloseDebugWnd() CloseKeyItemDescWnd() 
+}
+
+// Show debug info if Debug flag is on,
+// then switch back to active window
+command DebugPrint(prevWndType)
+{
+	copy_wram
+	if flag flg_Debug
+	{
+		OpenDebugWnd()
+		Lbl(lbl_Debug)
+		copy_active ctoarg
+		"@Counter: {number(argument)}" newline
+        copy_active
+        "@Argument: {number(argument)}" newline
+        copy_active rtoarg
+		"@Result: {number(argument)}" pause(60)
+		// Go back to original window
+		OpenWnd(prevWndType)
+		SetTextSpeed(1)
+	}
+	copy_active
+}
+
+// Temporary window showing confirmation of action
+// waits about a second, then closes and returns to previous window
+command NotificationWnd(prevWndType, string)
+{
+	window_open(wnd_ModMenuNotification)
+	SetTextSpeedInstant()
+	copy_active
+	Lbl(lbl_System)
+	"{string}"
+	SetTextSpeed(1)
+	"||||" // Pause for a moment
+	window_close(wnd_ModMenuNotification)
+	window_switch(prevWndType)
+	copy_active
+}
+
+// Redraw screen using giant window
+command RefreshScreen(prevWndType)
+{
+	window_open(wnd_FullScreen)
+	window_close(wnd_FullScreen)
+	window_switch(prevWndType)
+}
+// Same as above, but don't return to previous window
+command RefreshScreen_NoPrevWnd()
+{
+	window_open(wnd_FullScreen)
+	window_close(wnd_FullScreen)
+}
+
+/* Input Confirmation */
+
+// Prompts user to enter a number, saves to argument register, then calls procedure if Yes
+command ConfirmNumber(wndLabel, digits, string, yesLabel)
+{
+	CloseModMenuConfirmWnd()
+	OpenModMenuConfirmWnd()
+	SetTextSpeedInstant()
+	Lbl(wndLabel)
+	input(digits)
+	rtoarg
+	copy_wram
+	" " newline
+	"@{string}" newline
+	" {number(argument)}" newline
+	menu 2
+	{
+		"Yes": { copy_active SetTextSpeed(1) CloseModMenuConfirmWnd() call(yesLabel) }
+default "No": { }
+	}
+	CloseModMenuConfirmWnd()
+	SetTextSpeed(1)
+}
+
+// Asks the user something, then  go to procedure if Yes
+command ConfirmYesNo(wndLabel, string, yesLabel)
+{
+	CloseModMenuConfirmWnd()
+	OpenModMenuConfirmWnd()
+	Lbl(wndLabel)
+	SetTextSpeedInstant()
+	"@{string}" newline
+	menu 2
+	{
+		"Yes": { CloseModMenuConfirmWnd() SetTextSpeed(1) copy_active goto(yesLabel) }
+		default "No": { }
+	}
+	CloseModMenuConfirmWnd()
+	SetTextSpeed(1)
+}
+
+
+/* Window Labels */
+
+// Preset title commands for strings
+command Lbl(text) { "[18 0C 00 {byte[0] text} {byte[1] text} {byte[2] text} 00]" clearline }
+command PtyLbl(partyMemberID) { "[18 0B 00 {byte[0] partyMemberID} 05]" clearline }
+
+// Set the selected party member to the name of the new window
+command SetPartyLabel()
+{
+	if counter_is(pty_Ness)  { PtyLbl(pty_Ness) }
+	else if counter_is(pty_Paula) { PtyLbl(pty_Paula) }
+	else if counter_is(pty_Jeff)  { PtyLbl(pty_Jeff) }
+	else if counter_is(pty_Poo)   { PtyLbl(pty_Poo) }
+	else if counter_is(pty_Pokey) { Lbl(lbl_Pokey) }
+	else if counter_is(pty_Picky) { Lbl(lbl_Picky) }
+	else if counter_is(pty_King)  { PtyLbl(pty_King) }
+	else if counter_is(pty_Tony)  { Lbl(lbl_Tony) }
+	else if counter_is(pty_BubbleMonkey) { Lbl(lbl_BubbleMonkey) }
+	else if counter_is(pty_BrickRoad) { Lbl(lbl_BrickRoad) }
+	else if counter_is(pty_FlyingMan) { Lbl(lbl_FlyingMan) }
+	else if counter_is(pty_TeddyBear) { Lbl(lbl_TeddyBear) }
+	else if counter_is(pty_PlushBear) { Lbl(lbl_PlushBear) }
+	else { Lbl(lbl_Party) }
+}
+
+
+/* Screen Fade */
+
+command FadeOutSimple() { "[1f 15 6a 00 fe 02 01]" }
+command FadeInSimple() { "[1f ea 6a 00][1f 61]" }
+command FadeOutUntilWarp() { "[1f 15 6a 00 79 02 01][1f 61][1f 1f 6a 00 06]" }
+    

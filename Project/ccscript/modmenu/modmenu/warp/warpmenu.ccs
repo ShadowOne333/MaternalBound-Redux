@@ -1,0 +1,67 @@
+/* Enums */
+import "../../enums/flags.ccs"
+import "../../enums/labels.ccs"
+import "../../enums/party.ccs"
+import "../../enums/windows.ccs"
+/* Commands */
+import "../../commands/window_cmds.ccs"
+import "../../commands/flag_cmds.ccs"
+import "../../asm/drug_util.ccs"
+import "../../asm/cc_actionscript.ccs"
+
+command WarpNotification(string) { NotificationWnd(wnd_ModMenu, "{sound(SND_EDENWARP)}@Warped to {string}.") }
+
+WarpMenu:
+	CloseModMenuConfirmWnd()
+	CloseModMenu2Wnd()
+	OpenModMenu2Wnd(18)
+	Lbl(lbl_Map)
+	menu 1 {
+		"Warp List":    { goto(WarpList) }
+		"Warp by ID":     { goto(WarpID) }
+		"Set Anchor":   { anchor_set NotificationWnd(wnd_ModMenu2, "{sound(SND_BOXOPEN1)}@Anchor set to current position.") goto(WarpMenu) }
+		"Go To Anchor": { anchor_warp WarpNotification("anchor position") goto(mainmenu.goto_end) }
+		"Palette": { call(palettemenu.PaletteMenu) goto(WarpMenu) }
+		"Corrupt": { "[1A 0F]" goto(WarpMenu) }
+		"Distort": { call(DistortMenu) goto(WarpMenu) }
+	}
+goto(modmenu.ModMenu)
+
+WarpList:
+	CloseModMenuConfirmWnd()
+	CloseModMenu2Wnd()
+	OpenModMenu2Wnd(30)
+	Lbl(lbl_Warp)
+		menu 1 {
+		"Onett":         { warp(25)  WarpNotification("{teleportname(1)}") goto(mainmenu.goto_end) }
+		"Twoson":        { warp(29)  WarpNotification("{teleportname(2)}") goto(mainmenu.goto_end) }
+		"Threed":        { warp(15)  WarpNotification("{teleportname(3)}") goto(mainmenu.goto_end) }
+		"Fourside":      { warp(20)  WarpNotification("{teleportname(5)}") goto(mainmenu.goto_end) }
+		"Moonside":      { warp(24)  WarpNotification("Moonside") goto(mainmenu.goto_end) }
+		"Winters":       { warp(30)  WarpNotification("{teleportname(6)}") goto(mainmenu.goto_end) }
+		"Summers":       { warp(31)  WarpNotification("{teleportname(7)}") goto(mainmenu.goto_end) }
+		"Saturn Valley": { warp(143) WarpNotification("{teleportname(4)}") goto(mainmenu.goto_end) }
+		"Tenda Village": { warp(22)  WarpNotification("{teleportname(11)}") goto(mainmenu.goto_end) }
+		"Magicant":      { warp(23)  WarpNotification("Magicant") goto(mainmenu.goto_end) }
+		"Cave of the Past":  { warp(26)  WarpNotification("Cave of the Past") goto(mainmenu.goto_end) }
+		"Scaraba":       { warp(32)  WarpNotification("{teleportname(8)}") goto(mainmenu.goto_end) }
+		"Dalaam":        { warp(27)  WarpNotification("{teleportname(9)}") goto(mainmenu.goto_end) }
+	}
+goto(WarpMenu)
+
+WarpID:
+	ConfirmNumber(lbl_Warp, 3, "Warp using this ID?", WarpToID)
+goto(WarpMenu)
+
+WarpToID:
+	warp(argument) WarpNotification("selected Warp ID.") goto(mainmenu.goto_end)
+eob
+
+DistortMenu:
+	ConfirmNumber(lbl_Warp, 3, "Use this Distortion ID?", Distort)
+goto(WarpMenu)
+
+Distort:
+    store_registers_global
+    create_sprite_actionscript(106, movscr_Drug, 1)
+eob

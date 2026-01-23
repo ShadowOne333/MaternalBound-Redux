@@ -1,0 +1,228 @@
+import "chaosmodeconfig.ccs"
+/* Enums */
+import "../../enums/flags.ccs"
+import "../../enums/bgm.ccs"
+import "../../enums/windows.ccs"
+import "../../enums/labels.ccs"
+/* Commands */
+import "../../commands/window_cmds.ccs"
+import "../../commands/flag_cmds.ccs"
+import "../../commands/health_cmds.ccs"
+import "../../asm/bg_viewer.ccs"
+
+Selected_1:
+counter(1) eob
+
+Selected_2:
+counter(2) eob
+
+Selected_3:
+counter(3) eob
+
+ConfigMenuStart:
+if flg_ModConfigured {
+	CloseModMenuConfirmWnd()
+	OpenModMenuConfirmWnd()
+	Lbl(lbl_ModSetup)
+	counter_zero
+	"@Start the game?" newline
+		MenuOptionWithCallback("Begin", Selected_1)
+		MenuOptionWithCallback("Config", Selected_2)
+		MenuOptionWithCallback("BGView", Selected_3)
+	DisplayVertical(2)
+	if not "[11]" {
+        // Exit
+		goto(ConfigMenuStart)
+    }
+	ctoarg
+    swap
+	SwitchGoto(3)
+        SwitchCase(chose_begin)
+        SwitchCase(chose_configuremod)
+		SwitchCase(chose_bgview)
+	swap
+    "@Error! No option {number(0)} in this menu." next goto(ConfigMenuStart)
+	chose_begin:
+		goto(EndConfig)
+	chose_configuremod:
+		goto(ConfigMenuPrompt)
+	chose_bgview:
+		goto(BGView)
+}
+else { goto(ConfigMenuPrompt) }
+eob
+
+ConfigMenuPrompt:
+	set(flg_SetBBG)
+	ShowBattleBG(298, 298, 0)
+    music(bgm_Moonside)
+    CloseModMenuConfirmWnd()
+	if not flg_ModConfigured 
+	{
+		window_open(1)
+		Lbl(lbl_ShrineFox)
+		"@Thanks for using this mod!" next
+		"@Please enable any features" newline
+		" you would like to use." next
+		window_close(1)
+	}
+    call(ConfigMenu)
+eob
+
+Set_Count_1: { SetDescription(1, wnd_KeyItems, ShowDescription) } Set_Count_2: { SetDescription(2, wnd_KeyItems, ShowDescription) } 
+Set_Count_3: { SetDescription(3, wnd_KeyItems, ShowDescription) } Set_Count_4: { SetDescription(4, wnd_KeyItems, ShowDescription) }
+Set_Count_5: { SetDescription(5, wnd_KeyItems, ShowDescription) } Set_Count_6: { SetDescription(6, wnd_KeyItems, ShowDescription) }
+Set_Count_7: { SetDescription(7, wnd_KeyItems, ShowDescription) } Set_Count_8: { SetDescription(8, wnd_KeyItems, ShowDescription) }
+Set_Count_9: { SetDescription(9, wnd_KeyItems, ShowDescription) }
+
+ConfigMenu: {
+	set(flg_ModConfigured)
+	CloseAllModMenuWnd()
+	OpenKeyItemWnd()
+	Lbl(lbl_ToggleMods)
+	counter_zero
+	if flag flg_KeyItems {
+        MenuOptionWithCallback("[ac]Key Items", Set_Count_1)
+	} else {
+		MenuOptionWithCallback("Key Items", Set_Count_1)
+	}
+	if flag flg_UnrestrictBike {
+        MenuOptionWithCallback("[ac]Unrestrict Bike", Set_Count_2)
+	} else {
+		MenuOptionWithCallback("Unrestrict Bike", Set_Count_2)
+	}
+	if flag flg_NoPhotoGuy {
+        MenuOptionWithCallback("[ac]No Photo Guy", Set_Count_3)
+	} else {
+		MenuOptionWithCallback("No Photo Guy", Set_Count_3)
+	}
+	if flag flg_ChaosMode {
+        MenuOptionWithCallback("[ac]Chaos Mode", Set_Count_4)
+	} else {
+		MenuOptionWithCallback("Chaos Mode", Set_Count_4)
+	}
+	if flag flg_SkipStatIncMsgs {
+		MenuOptionWithCallback("[ac]Skip Levlup Text", Set_Count_5)
+	} else {
+		MenuOptionWithCallback("Skip Levlup Text", Set_Count_5)
+	}
+	if flag flg_ModMenu {
+		MenuOptionWithCallback("[ac]Mod Menu", Set_Count_6)
+	} else {
+		MenuOptionWithCallback("Mod Menu", Set_Count_6)
+	}
+	if flag flg_EasyDeaths {
+		MenuOptionWithCallback("[ac]Easy Deaths", Set_Count_7)
+	} else {
+		MenuOptionWithCallback("Easy Deaths", Set_Count_7)
+	}
+	if flag flg_FastSaving {
+		MenuOptionWithCallback("[ac]Fast Saving", Set_Count_8)
+	} else {
+		MenuOptionWithCallback("Fast Saving", Set_Count_8)
+	}
+	if flag flg_DisableHomesick {
+		MenuOptionWithCallback("[ac]No Homesickness", Set_Count_9)
+	} else {
+		MenuOptionWithCallback("No Homesickness", Set_Count_9)
+	}
+    DisplayVertical(2)
+    if not "[11]" {
+        // Exit
+        ConfirmYesNo(lbl_Confirm, "These settings OK?", EndConfig)
+		goto(ConfigMenu)
+    }
+    ctoarg
+    swap
+    SwitchGoto(9)
+        SwitchCase(chose_keyitems)
+        SwitchCase(chose_unrestrictbike)
+        SwitchCase(chose_nophotoguy)
+        SwitchCase(chose_chaosmode)
+		SwitchCase(chose_skiplvluptxt)
+		SwitchCase(chose_modmenu)
+		SwitchCase(chose_easydeaths)
+		SwitchCase(chose_fastsaving)
+        SwitchCase(chose_nohomesick)
+    swap
+    "@Error! No option {number(0)} in this menu." next goto(ConfigMenu)
+	chose_keyitems:
+		ToggleWithSound(flg_KeyItems) goto(ConfigMenu)
+	chose_unrestrictbike:
+		ToggleWithSound(flg_UnrestrictBike) goto(ConfigMenu)
+	chose_nophotoguy:
+		ToggleWithSound(flg_NoPhotoGuy) goto(ConfigMenu)
+	chose_chaosmode:
+		ToggleWithSound(flg_ChaosMode) if flag flg_ChaosMode { call(chaosmodeconfig.ChaosModeConfig) } goto(ConfigMenu)
+	chose_skiplvluptxt:
+		ToggleWithSound(flg_SkipStatIncMsgs) goto(ConfigMenu)
+	chose_modmenu:
+		ToggleWithSound(flg_ModMenu) goto(ConfigMenu)
+	chose_easydeaths:
+		ToggleWithSound(flg_EasyDeaths) goto(ConfigMenu)
+	chose_fastsaving:
+		ToggleWithSound(flg_FastSaving) goto(ConfigMenu)
+    chose_nohomesick:
+		ToggleWithSound(flg_DisableHomesick) goto(ConfigMenu)
+}
+
+
+ShowDescription:
+	if counter_is(1) { "<Key Items>" newline "Makes Key Items separate from your" newline "Goods, so you have more space" newline "in your inventory." }
+	if counter_is(2) { "<Unrestrict Bike>" newline "Use your bicycle anywhere, even when" newline "you have other characters in" newline "your party." }
+	if counter_is(3) { "<No Photo Guy>" newline "Replaces Photo Guy cutscenes with a" newline "quick, unobtrusive shutter effect." }
+	if counter_is(4) { "<Chaos Mode>" newline "Have a random chance of something" newline "unpredictable happening every" newline "now and then." }
+	if counter_is(5) { "<Skip Levelup Text>" newline "Don't show the text after" newline "a level-up about stat increases." }
+	if counter_is(6) { "<Mod Menu>" newline "Always have access to an in-game" newline "trainer, full of cheats and" newline "other fun stuff." }
+	if counter_is(7) { "<Easy Deaths> by JTolmar" newline "Fully revive and heal party after you" newline "lose a battle, without taking" newline "half of your money." }
+	if counter_is(8) { "<Fast Saving>" newline "Shorten the dialog you see when" newline "saving your game over the phone." }
+	if counter_is(9) { "<Disable Homesickness>" newline "Skip the random chance of" newline "becoming homesick after battle." }
+eob
+
+EndConfig:
+	CloseModMenuConfirmWnd()
+	if flag flg_SetBBG { unset(flg_SetBBG) HideBattleBG() }
+	SetTextSpeed(1)
+	CloseAllModMenuWnd()
+	window_closeall
+	goto(End_)
+eob
+
+End_:
+eob
+
+BGView:
+	window_closeall
+    window_open(4)
+    menu 1 {
+        "Input IDs": { goto(InputIDs) }
+        "Back...": { goto(ConfigMenuStart)  }
+    }
+goto(ConfigMenuStart)
+
+InputIDs:
+{
+    // Reset all registers
+    counter_zero
+    arg_zero
+    swap
+    arg_zero
+    // Select Layer 1
+    window_open(4)
+    "Layer 1:" newline
+    " " input(3) newline
+    // Store Layer 1 value
+    counter(0)
+    // Select Layer 2
+    "Layer 2:" newline
+    " " input(3)
+    // Load Layer 1 value
+    ctoarg
+    // Display Layers 1 and 2
+    show_battle_bg(-1, -1, 0)
+    // Hide textbox until user input
+    window_close(4)
+    wait
+    // Restart
+    goto(BGView)
+}

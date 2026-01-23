@@ -1,0 +1,27 @@
+// Bug fix for player/enemy advantage when Ness isn't in the party
+// by PhoenixBound
+// Last updated 2025-11-04
+
+import "../essential/asm65816.ccs"
+
+// Speedrunners noticed in the past that the logic for getting red and
+// green swirls in Winters as solo Jeff seemed to be completely bonkers.
+// One (acetrainerbrooke) realized that as long as you face a consistent
+// direction in specific areas, and the enemy is also facing a certain
+// way, you could sometimes get a green swirl.
+// It turns out this observation was correct.
+// The swirl logic when the player walks into an enemy has a special
+// case when the party leader is the one walking into the enemy, instead
+// of the other way around: the position of entity 24 is used instead of
+// the entity that ran the movement logic (23). 24 is always Ness. Even
+// when he's not in the party and hanging out at some unspecified
+// coordinate (probably (0, 0)), it's always Ness.
+// They actually probably wanted to use "whatever the entity of the party
+// leader is," which is a field in the game state.
+// This changes the code there to load the proper party leader entity,
+// to minimize weirdness. It'll still make player-initiated swirls
+// depend on Ness's position if he's in the party, though.
+
+// Edit to C0D5B0: mark GameState.partyLeaderEntity as the "enemy
+// pathfinding target entity," not entity 24 (Ness)
+ ROM[0xC0D668] = LDA_a (0x9889)

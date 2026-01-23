@@ -5,47 +5,79 @@ import "../redux/run_stamina_mechanic.ccs"
 // By jtolmar
 // Unlike the standard run button patch, this one does not affect the skip sandwich status in memory. Useful if you want skip sandwiches to do something else.
 
-define invert_run_button = flag 305 // Replace this flag with the one you want
+define invert_run_button	= flag 305 // Replace this flag with the one you want
+define run_flag			= flag 1000 // From four_frames_run.ccs patch
+define GET_EVENT_FLAG	= 0xC21628
+define SET_EVENT_FLAG	= 0xC2165E
 
 // New function, sets accumulator to 0 if run, 1 if not.
 InRunMode: {
-  LDA_a(RAM_secondary_timer)
-  AND_i(0x80)
-  BNE(4)
-  LDA_i(1)
-  RTL
-  PHX
-  PHY
-  LDA_i(invert_run_button)
-  JSL(0xC21628) // Flag A -> result in A
-  CMP_i(0)
-  BEQ(9) // Manually computed jump to not inverted
-  // Inverted
-  LDA_a(0x0066) // Controller state
-  AND_i(0x0040) // Y button
-  PLY
-  PLX
-  RTL
-  // Not inverted
-  LDA_a(0x0066) // Controller state
-  AND_i(0x0040) // Y button
-  EOR_i(0x0040) // Reverse it
-  PLY
-  PLX
-  RTL
+	LDA_a	(RAM_secondary_timer)	// 0x3251
+	AND_i	(0x0080)
+	BNE_a	(_check_input)
+	LDA_i	(run_flag)
+	PHX
+	PHY
+	LDX_i	(0)
+	JSL	(0xC2165E) // Unset run flag.
+	PLY
+	PLX
+	LDA_i	(1) // Return 1 - not running
+	RTL
+
+_check_input:
+	PHX
+	PHY
+
+	LDA_i	(invert_run_button)
+	JSL	(GET_EVENT_FLAG) // Flag A -> result in A
+	CMP_i	(0)
+	BEQ	(9) // Manually computed jump to not inverted
+
+	// Inverted
+	LDA_a	(0x0066) // Controller state
+	AND_i	(0x0040) // Y button
+	PLY
+	PLX
+	RTL
+
+_not_inverted:
+	// Not inverted
+	LDA_a	(0x0066) // Controller state
+	AND_i	(0x0040) // Y button
+	EOR_i	(0x0040) // Reverse it
+
+	// New code by Vittorio to work with 4 frames / running sprites hack
+	PHA
+
+	CMP_i	(0)
+	BNE	(5)
+	LDX_i	(1)
+	BRA	(3)
+	LDX_i	(0)
+
+	LDA_i	(run_flag)
+	JSL	(SET_EVENT_FLAG)
+
+	PLA
+
+	// Restore back the last opcodes from the original run patch code
+	PLY
+	PLX
+	RTL
 }
 
 // We're going to overwrite a lot of places that look like this:
 /*
-$c02f30 UNKNOWN8:  LDA $9840 // Load skip sandwich status
-$c02f33            AND #$00ff
-$c02f36            CMP #$0003 // Check if skippy
+$c02f30 UNKNOWN8:	LDA $9840 // Load skip sandwich status
+$c02f33						AND #$00ff
+$c02f36						CMP #$0003 // Check if skippy
 */
 // So define that
 define hijack_run = {
-  JSL(InRunMode) // 4 bytes (reaches into the AND)
-  NOP NOP // Extra bytes from that AND
-  CMP_i(0) // Check if run mode
+	JSL(InRunMode) // 4 bytes (reaches into the AND)
+	NOP NOP // Extra bytes from that AND
+	CMP_i(0) // Check if run mode
 }
 
 
@@ -53,22 +85,22 @@ define hijack_run = {
 Labeled "ADJUST_POSITION" but I strongly suspect it's X only.
 Which makes this code even worse than I thought lol.
 https://earthbound-rom-explorerr.herokuapp.com/address/$c02d8f
-$c02f30 UNKNOWN8:  LDA $9840 // Load skip sandwich status
-$c02f33            AND #$00ff
-$c02f36            CMP #$0003 // Check if skippy
-$c02f39            BEQ UNKNOWN9
-$c02f3b            JMP $UNKNOWN13
+$c02f30 UNKNOWN8:	LDA $9840 // Load skip sandwich status
+$c02f33						AND #$00ff
+$c02f36						CMP #$0003 // Check if skippy
+$c02f39						BEQ UNKNOWN9
+$c02f3b						JMP $UNKNOWN13
 */
 ROM[0xc02f30] = hijack_run
 
 /*
 Unlabeled. I suspect it's a complete copy of adjust position, but for Y.
 https://earthbound-rom-explorerr.herokuapp.com/address/$c03017
-$c031b8 UNKNOWN8:  LDA $9840
-$c031bb            AND #$00ff
-$c031be            CMP #$0003
-$c031c1            BEQ UNKNOWN9
-$c031c3            JMP $3269
+$c031b8 UNKNOWN8:	LDA $9840
+$c031bb						AND #$00ff
+$c031be						CMP #$0003
+$c031c1						BEQ UNKNOWN9
+$c031c3						JMP $3269
 */
 ROM[0xc031b8] = hijack_run
 
@@ -77,9 +109,9 @@ No clue what the overall purpose of this function is, if any
 Here it sets the party's animation speed:
 https://earthbound-rom-explorerr.herokuapp.com/address/$c0780f
 $c07960 UNKNOWN21: LDA $9840
-$c07963            AND #$00ff
-$c07966            CMP #$0003
-$c07969            BNE UNKNOWN22
+$c07963						AND #$00ff
+$c07966						CMP #$0003
+$c07969						BNE UNKNOWN22
 (and then some code that writes to animation speed)
 */
 ROM[0xc07960] = hijack_run

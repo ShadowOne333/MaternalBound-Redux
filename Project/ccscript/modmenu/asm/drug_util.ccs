@@ -1,0 +1,201 @@
+// by Catador
+import "../../essential/asm65816.ccs"
+import "../asm/movement.ccs"
+import "../../redux/movscr_codes.ccs"
+
+movscr_Drug: {
+    m_disable_collision        // Wherever it ends, don't wanna collide with it!
+    
+    m_get_mem16 (0x97CC)       // Use the globally backuped window register
+    m_asmcall (InitDrug)       // Initialize our drug
+
+    m_ontick  (StepVideoDrug)  // Run this every frame!
+    m_halt                     // Sprite is basically a dead weight now, running StepVideoDrug every frame
+}
+
+// Loads distortion data from the battle backgrounds table and applies it to BG layer 2
+InitDrug: {
+    REP   (0x31)
+    PHD
+    PHA
+    TDC
+    ADC_i (-0x12)
+    TCD
+    PLA
+
+    STA_d (0x00)
+    ASL          // *2
+    ASL          // *4
+    ASL          // *8
+    ASL          // *16
+    ADC_d (0x00) // *17
+    // We need to get a pointer to "0xCADCA1 + (drug*17)" into $0E
+    ADC_i  (0xDCA1)
+    STA_d  (0x0E)
+    LDA_i  (0x00CA)
+    STA_d  (0x10)
+
+    LDA_i  (0xADD4)   // This is a parameter to the function, the pointer to the "VideoDrug" struct were the values will be loaded into
+    JSL    (0xC2CFE5) // LoadVideoDrugData(VideoDrug *drug, VideoDrugConfig FAR *config) // Params passed in A and $0E
+    PLD
+    RTL
+}
+
+/*
+ * StepVideoDrug
+ *
+ * This is simply a re-implementation of $C2C92D, with more
+ * optimized code and without all the unnecessary stuff like
+ * background movement and palette cycling
+ *
+ * Always uses the first HDMA table and layer 1
+*/
+StepVideoDrug: {
+    LDA_a (0xAE3A) // Access offset 0x66 (effect transition timer)
+    BEQ_a (L_CF29)
+    DEC_a (0xAE3A) // Decrement it
+    BNE_a (L_CF29)
+      SEP   (0x30)   // Note: Also setting indexes to 8-bit!
+      LDA_a (0xAE39) // Acess offset 0x65 (index to current effect)
+      INC
+      AND_8 (3)
+      STA_a (0xAE39) // Increment, limiting it in range [0..3]
+      TAX            // And use it to index offset 0x61 (array of effect IDs, four in total)
+      LDY_x (0xAE35) // Access offset 0x61 (array of effect IDs)
+      BNE   (11)
+        // If effect ID is zero, go back to first index...
+        STZ_a (0xAE39)    // Zero offset 0x65 (index to current effect)
+        LDY_a (0xAE35)    // Access first effect ID
+        BEQ_a (L_CF29)    // If zero, don't load new effect
+      REP    (0x30)     // 16-bit accumulator and indexes
+      TYA               // Effect ID was previously stored in Y
+      PHA               // Store in the top of the stack
+      ASL               // *2
+      ASL               // *4
+      ASL               // *8
+      ASL               // *16
+      ADC_s  (1)        // *17 (*16 + top of the stack)
+      TAX               // To X for indexing
+      PLA               // Pull effect ID off of the stack
+
+      // 16-bit attributes
+      LDA_xl (0xCAF708) // Get effect duration from ROM
+      STA_a  (0xAE3A)   // Store to offset 0x66 (effect transition timer)
+
+      LDA_xl (0xCAF70B) // Get effect frequency from ROM
+      STA_a  (0xAE3D)   // Store to offset 0x69 (effect frequency)
+
+      LDA_xl (0xCAF70D) // Get effect amplitude from ROM
+      STA_a  (0xAE3F)   // Store to offset 0x6B (effect amplitude)
+
+      LDA_xl (0xCAF710) // Get effect compression from ROM
+      STA_a  (0xAE42)   // Store to offset 0x6E (effect compression)
+
+      LDA_xl (0xCAF712) // Get effect frequency acceleration from ROM
+      STA_a  (0xAE44)   // Store to offset 0x70 (effect frequency acceleration)
+
+      LDA_xl (0xCAF714) // Get effect amplitude acceleration from ROM
+      STA_a  (0xAE46)   // Store to offset 0x72 (effect amplitude acceleration)
+
+      LDA_xl (0xCAF717) // Get effect compression acceleration from ROM
+      STA_a  (0xAE49)   // Store to offset 0x75 (effect compression acceleration)
+
+      // 8-bit attributes
+      SEP    (0x20)     // 8-bit accumulator
+      LDA_xl (0xCAF70F) // Get effect step from ROM
+      STA_a  (0xAE41)   // Store to offset 0x6D (effect step)
+
+      LDA_xl (0xCAF716) // Get effect speed from ROM
+      STA_a  (0xAE48)   // Store to offset 0x74 (effect speed)
+
+      LDA_xl (0xCAF70A) // Get effect mode from ROM
+      STA_a  (0xAE3C)   // Store to offset 0x68 (effect mode)
+
+      // LAYER 1
+      LDX_i  (1)        // Prepare LAYER parameter for $C0ADB2
+      CMP_8  (3)
+      REP    (0x20)     // (Ensure 16-bit accumulator)
+      BNE    (3)        // Branch if not effect mode #3
+        LDX_i  (5)        // Or 4 if in effect mode #3
+      LDY_i  (0)        // HDMA Table parameter to $C0ADB2 (use first HDMA table)
+      LDA_i  (5)        // HDMA channel = HDMA Table + 5
+      JSL    (0xC0ADB2) // CHANNEL, LAYER, TABLE
+
+      // LAYER 2
+      SEP    (0x20)
+      LDA_a  (0xAE3C)   // Effect mode
+      LDX_i  (2)        // Prepare LAYER parameter for $C0ADB2
+      CMP_8  (3)
+      REP    (0x20)     // (Ensure 16-bit accumulator)
+      BNE    (3)        // Branch if not effect mode #3
+        LDX_i  (6)        // Or 4 if in effect mode #3
+      LDY_i  (1)        // HDMA Table parameter to $C0ADB2 (use first HDMA table)
+      LDA_i  (6)        // HDMA channel = HDMA Table + 5
+      JSL    (0xC0ADB2) // CHANNEL, LAYER, TABLE
+
+L_CF29:
+    REP   (0x30)   // Ensure 16-bit accumulator and indexes
+    LDA_a (0xAE3C) // Access offset 0x68 (effect mode)
+    AND_i (0x00FF)
+    BNE   (1)      // Branch if not zero
+    RTL            // If the effect mode was zero, just return (no effect to run here.)
+
+    // Add frequency acceleration
+    LDA_a (0xAE3D) // Access offset 0x69 (effect frequency)
+    CLC
+    ADC_a (0xAE44) // Add offset 0x70 (effect frequency acceleration)
+    STA_a (0xAE3D) // Store to effect frequency
+
+    // Add amplitude acceleration
+    LDA_a (0xAE3F) // Access offset 0x6B (effect amplitude)
+    CLC
+    ADC_a (0xAE46) // Add offset 0x72 (effect amplitude acceleration)
+    STA_a (0xAE3F) // Store to effect amplitude
+
+    // Add compression acceleration
+    LDA_a (0xAE42) // Access offset 0x6E (effect compression)
+    CLC
+    ADC_a (0xAE49) // Add offset 0x75 (effect compression acceleration)
+    STA_a (0xAE42) // Store to effect compression
+
+    // Add effect speed to step
+    SEP   (0x20)
+    LDA_a (0xAE41) // Access offset 0x6D (effect step)
+    CLC
+    ADC_a (0xAE48) // Add offset 0x74 (effect speed)
+    STA_a (0xAE41) // Store to effect step
+
+    REP   (0x20)
+    LDA_a (0xAE3C) // Access offset 0x68 (effect mode)
+    AND_i (0x00FF)
+    DEC
+    STA_a (0x1ACC) // (Effect mode) - 1
+
+    // LAYER 1
+    LDA_i (1)
+    STA_a (0x1ACE) // Layer
+    STZ_a (0x1AD2) // HDMA table
+
+    REP   (0x20)
+    LDA_a (0xAE42) // Access offset 0x6E (effect compression)
+    STA_a (0x1AD4) // Compression
+
+    LDA_a (0xAE3F)   // Access offset 0x6B (effect amplitude)
+    XBA
+    AND_i (0x00FF)   // >>8
+    TAX
+    LDY_a (0xAE41)   // Access offset 0x6D (effect step)
+    LDA_a (0xAE3D)   // Access offset 0x69 (effect frequency)
+    JSL   (0xC0AE5A) // Build VideoDrug HDMA
+
+    // LAYER 2 COPIED FROM LAYER 1 TABLE
+    LDX_i (0x01BE)
+      LDA_x (0x3C46)
+      STA_x (0x3E06)
+      DEX
+      DEX
+      BPL   (-10)
+
+    RTL
+}
+
