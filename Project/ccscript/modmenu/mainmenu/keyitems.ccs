@@ -290,244 +290,359 @@ descwndlbl:
 	eob
 
 DescATM:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(1) { //call(data_04.l_0xc5566b)  ATM Card
-	item_name_in_quotes(ATM_CARD) newline
-	"You know, you shouldn't leave home" newline 
-	"without... It even works overseas!" 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(ATM_CARD)
+	"@You know, don't leave home without it..." next
+	"@It even works overseas!" wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 ShowDesc2:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(2) { //call(data_04.l_0xc55ad5) Sound Stone
-	item_name_in_quotes(SOUND_STONE) newline
-	"If you touch this to your forehead and" newline
-	"concentrate on your thoughts, Your" newline 
-	"Sanctuary melodies can be heard." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(SOUND_STONE)
+	"@If you touch this to your forehead and concentrate on your thoughts," next
+	"@Your Sanctuary melodies can be heard." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 ShowDesc3:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(3) { //call(data_03.l_0xc55cce) Town Map
-	item_name_in_quotes(TOWN_MAP) newline
-	"A handy town map. It can be used in" newline
-	"Onett, as well as other towns. View" newline
-	"the map with the Start button." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(TOWN_MAP)
+	"@A handy town map. It can be used in Onett, as well as other towns." next
+	"@You can view the map quickly, simply by pressing the Start button." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescShackKey:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(4) { //call(data_04.l_0xc554f6) // Shack Key
-	item_name_in_quotes(SHACK_KEY) newline
-	"A key to the traveling" newline
-	"entertainer shack in Onett." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(SHACK_KEY)
+	"@A key to the traveling entertainers' shack in Onett." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 ShowDesc5:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(5) { //call(data_04.l_0xc55627) // Bicycle
-	item_name_in_quotes(BICYCLE) newline
-	"Riding this makes you feel like" newline
-	"whistling! You can even ring the" newline 
-	"bell by pressing the R button." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(BICYCLE)
+	"@Riding this makes you feel like whistling!" next
+	"@You can even ring the bell by pressing the R button." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 ShowDesc6:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(6) { //call(data_04.l_0xc5570b) Receiver Phone
-	item_name_in_quotes(RECEIVER_PHONE) newline
-	"Apple Kid's invention. Now, you" newline
-	"can receive important calls." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(RECEIVER_PHONE)
+	"@Apple Kid's invention." next
+	"@Now, you can receive important calls." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescPencilEraser:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(7) { //call(data_04.l_0xc55794) Pencil Eraser
-	item_name_in_quotes(PENCIL_ERASER) newline
-	"Apple Kid's invention. It makes" newline
-	"something blocking your way that" newline
-	"looks like a pencil disappear." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(PENCIL_ERASER)
+	"@Apple Kid's invention." next
+	"@It makes something blocking your way" next
+	"@that looks like a pencil disappear in just a second." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescEraserEraser:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(8) { //call(data_04.l_0xc55e28) Eraser Eraser
-	item_name_in_quotes(ERASER_ERASER) newline
-	"Apple Kid's invention. It erases" newline
-	"something that looks like an eraser" newline
-	"that might be blocking your way." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(ERASER_ERASER)
+	"@Apple Kid's invention." next
+	"@It erases something that looks like an eraser" next
+	"@that also might be blocking your way." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescCabinKey:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(9) { //call(data_04.l_0xc5551d) Cabin Key
-	item_name_in_quotes(CABIN_KEY) newline
-	"A key to a holding cell made" newline
-	"specially for [1C 02 02]." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(CABIN_KEY)
+	"@A key to a holding cell made specially for {name(2)}." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescWadBills:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(10) { //call(data_04.l_0xc556e3) Wad of Bills
-	item_name_in_quotes(WAD_BILLS) newline
-	"A bundle of brand new, crisp bills." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(WAD_BILLS)
+	"@A suitcase full of brand new, crisp bills." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescBackstagePass:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(11) { //call(data_03.l_0xc548b2) Backstage Pass
-	item_name_in_quotes(BACKSTAGE_PASS) newline
-	"It allows you go back stage at the" newline
-	"Chaos Theater. Of course, you can" newline
-	"also watch the show using the pass." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(BACKSTAGE_PASS)
+	"@It allows you go back stage at the Chaos Theater." next
+	"@Of course, you can also watch the show using the pass." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescShowTicket:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(12) { //call(data_04.l_0xc5569c) Show Ticket
-	item_name_in_quotes(SHOW_TICKET) newline
-	"It says, <Section B, seat 3D.>" 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(SHOW_TICKET)
+	"@It says, <Section B, seat 3D.>" wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescZombiePaper:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(13) { //call(data_04.l_0xc555b8) Zombie Paper
-	item_name_in_quotes(ZOMBIE_PAPER) newline
-	"Apple Kid's invention. Lay this out" newline
-	"in the tent, and the  day, a lot" newline
-	"of zombies may be stuck to it." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(ZOMBIE_PAPER)
+	"@Apple Kid's invention." next
+	"@Lay this out in the tent, and the next day, a lot of zombies may be stuck to it." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescDiamond:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(14) { //call(data_04.l_0xc55740) Diamond
-	item_name_in_quotes(DIAMOND) newline
-	"A big, beautiful, and expensive" newline
-	"looking gem." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(DIAMOND)
+	"@A big, beautiful, and expensive-looking gem." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescYogurtDisp:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(15) { //call(data_04.l_0xc54c6d) Yogurt Dispenser
+	window_clear
+	window_open(1)
+	newline
 	item_name_in_quotes(YOGURT_DISP) newline
-	"Invented by Apple Kid. If used during" newline
-	"combat, some damage will be dealt to" newline
-	"an enemy but it's not understood why." 
-	SetTextSpeed(1)
+	call(data_05.l_0xc56db7)
+	"@Invented by Apple Kid." next
+	"@If used during combat, some damage will be dealt to the enemy," next
+	"@though it's not understood why this happens... it's just tofu after all..." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescSignedBanana:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(16) { //call(data_04.l_0xc5576a) Signed Banana
-	item_name_in_quotes(SIGNED_BANANA) newline
-	"A banana skin with Venus's autograph." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(SIGNED_BANANA)
+	"@A banana skin with Venus's autograph." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescHieroglyph:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(17) { //call(data_04.l_0xc557e7) Hieroglyph Copy
-	item_name_in_quotes(HIEROGLYPH) newline
-	"A copy of a hieroglyph. Something" newline
-	"important is recorded in the ancient" newline
-	"characters." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(HIEROGLYPH)
+	"@A copy of a hieroglyph." next
+	"@Something important is recorded in the ancient characters." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescCarrotKey:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(18) { //call(data_05.l_0xc5689f) Carrot Key
-	item_name_in_quotes(CARROT_KEY) newline
-	"A special type of bunny's favorite" newline
-	"carrot." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(CARROT_KEY)
+	"@A special type of bunny's favorite carrot." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescTowerKey:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(19) { //call(data_04.l_0xc55943) Tower Key
-	item_name_in_quotes(TOWER_KEY) newline
-	"An old key." 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(TOWER_KEY)
+	"@An old key." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescHawkEye:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(20) { //call(data_04.l_0xc55602) Hawk Eye
-	item_name_in_quotes(HAWK_EYE) newline
-	"What a miracle! Now you can see" newline
-	"in the dark!" 
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(HAWK_EYE)
+	"@What a miracle! Now you can see in the dark!" wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescShynessBook:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(21) { //call(data_04.l_0xc55409) Shyness Book
-	item_name_in_quotes(SHYNESS_BOOK) newline
-	"As the title says, it helps one" newline
-	"overcome shyness."
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(SHYNESS_BOOK)
+	"@As the title says, it helps one overcome shyness." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescTendakraut:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(22) { //call(data_04.l_0xc55e77) Tendakraut
-	item_name_in_quotes(TENDAKRAUT) newline
-	"A very strong-smelling dish. Those" newline
-	"who like it go nuts for it..."
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(TENDAKRAUT)
+	"@A very strong-smelling dish." next
+	"@Those who like it go nuts for it..." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescMeteoritePiece:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(23) { //call(data_04.l_0xc55957) Meteorite Piece
-	item_name_in_quotes(METEORITE) newline
-	"It looks like a plain old rock, but" newline
-	"to someone who knows about it, it's" newline
-	"a very precious, unusual element."
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(METEORITE)
+	"@It looks like a plain old rock," next
+	"@but for someone who knows about it, it is actually a very precious, unusual element." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescBadKeyMachine:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(24) { //call(data_04.l_0xc55546) Locker Key
-	item_name_in_quotes(BAD_KEY_MACHINE) newline
-	"The <Machine that Opens Doors," newline
-	"especially when you have a slightly" newline
-	"bad key> machine."
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(BAD_KEY_MACHINE)
+	"@The <Machine that Opens Locks," next
+	"@especially when you have a slightly bad key> machine." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescLockerKey:
-	call(descwndlbl)
+	//call(descwndlbl)
 	//if counter_is(25) { //call(data_04.l_0xc55d82) Locker Key
-	item_name_in_quotes(LOCKER_KEY) newline
-	"A key to a regular locker."
-	SetTextSpeed(1)
+	window_clear
+	window_open(1)
+	newline
+	item_name_in_quotes(LOCKER_KEY)
+	"@A key to a regular locker." wait
+	window_closetop
 	eob
+	//SetTextSpeed(1)
+	//eob
 
 DescBubbleGum:
+	window_clear
 	window_open(1)
 	newline
 	//if counter_is(26) { //call(data_03.l_0xc544dd) Pak of bubble gum
-	item_name_in_quotes(BUBBLE_GUM) next
+	item_name_in_quotes(BUBBLE_GUM)
 	"@This is the Bubble Monkey's favorite." next
 	"@It will not help you recover, but" next
-	"@you'll also never run out, 'cause it's a super jumbo pack!" end
+	"@you'll also never run out, 'cause it's a super jumbo pack!" wait
+	window_closetop
+	eob
 
 // Temporarily remove party if using unrestricted bike feature
 BicycleStart:

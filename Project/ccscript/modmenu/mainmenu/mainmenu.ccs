@@ -56,14 +56,14 @@ MainMenu:
 	// Open appropriately sized window
 	window_closeall
 	window_open(wnd_Action)
-	// Don't show a window title for the Main menu
-	//Lbl(lbl_Action)	//title(0, "Action[00]") <- 'title' doesn't work, but why?
+	sound(SND_CURSORBLIP)	// Sound effect for opening the menu
+	//Lbl(lbl_Action)	// Don't show a window title for the Main menu
+	//title(0, "Action[00]") <- 'title' doesn't work, but why?
 	counter_zero
 	ctoarg
 	// Options
 	add_menu_option_with_callback("Goods", Selected_Goods)	// MenuOptionWithCallback("Goods", Selected_Goods)
-	//if flg_KeyItems { add_menu_option_with_callback("Key Items", Selected_KeyItems) }
-	add_menu_option_with_callback("Key Items", Selected_KeyItems)
+	add_menu_option_with_callback("Equip", Selected_Equip)
 	/*if flag flg_LearnedPSI 
 	{
 		CheckIfCharacterInParty(1)
@@ -81,10 +81,11 @@ MainMenu:
 		}
 	}*/
 	add_menu_option_with_callback("PSI", Selected_PSI)
-	add_menu_option_with_callback("Equip", Selected_Equip)
 	//if flg_ModMenu { add_menu_option_with_callback("Mod Menu", Selected_ModMenu) }
 	//if not flg_ModMenu { add_menu_option_with_callback("Config", Selected_ModMenu) }
 	add_menu_option_with_callback("Status", Selected_Status)
+	//if flg_KeyItems { add_menu_option_with_callback("Key Items", Selected_KeyItems) }
+	add_menu_option_with_callback("Key Items", Selected_KeyItems)
 	// Width
 	print_vertical(2)
 	// Exit by default
@@ -104,11 +105,11 @@ MainMenu:
 	swap
 	"@Error! No option {number(0)} in this menu." goto(goto_end)
 	goto_goods:
-		window_closeall open_hp open_goods goto(goto_end)
+		window_closeall open_hp open_goods goto(MainMenu)
 	goto_equip:
 		window_closeall open_equip goto(MainMenu)
 	goto_psi:
-		window_closeall open_hp open_psi goto(goto_end)
+		window_closeall open_hp open_psi goto(MainMenu)
 	goto_keyitems:
 		window_closeall call(KeyItems) goto(MainMenu)
 	//goto_modmenu:
