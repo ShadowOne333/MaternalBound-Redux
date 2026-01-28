@@ -1,10 +1,10 @@
 /* ASM */
 import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/flags.ccs"
 import "../../redux/window_titles.ccs"
 import "../asm/cc_text_speed.ccs"
 import "../asm/custom_windows_standalone.ccs"
 /* Enums */
-import "../enums/modmenu_flags.ccs"
 import "../enums/labels.ccs"
 import "../enums/modmenu_party.ccs"
 import "../enums/items.ccs"

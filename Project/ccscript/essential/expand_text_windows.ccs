@@ -36,6 +36,7 @@ WindowDefinition(66, 15, 15, 16, 13) // Mod Menu Debug window
 WindowDefinition(67, 7, 1, 24, 16) // Mod Menu Key Items window
 WindowDefinition(68, 7, 17, 24, 10) // Mod Menu Item Description window
 WindowDefinition(69, 0, 0, 32, 4) // Top LetterBox window
+WindowDefinition(70, 1, 1, 6, 6) // Inventory menu for Key items (Use/Help)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// PUT YOUR WINDOWS ABOVE
@@ -318,35 +319,35 @@ GetExistenceAtA: {
 _asmptr(0xC105C9, NewWindowTable)
 NewWindowTable:
 	// 	      #,   X,	   Y, 	    W,	    H
-    WindowDefinition( 0, 1, 1, 15, 8) // 0, 01,01,0D(13),08
+    WindowDefinition( 0, 1, 1, 13, 8) // Main gameplay menu
     WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
     WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
-    WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu
+    WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu (Use/Give/Drop/Help)
     WindowDefinition( 4, 1, 3, 11, 6) // PSI Description box (Heigth: 8 -> 6)
     WindowDefinition( 5, 20, 1, 11, 16) // Phone menu
     WindowDefinition( 6, 8, 1, 20, 10) // Equip menu
     WindowDefinition( 7, 18, 1, 13, 12) // Item list for equip menu (7, 12,01,0D,10->0C)
     WindowDefinition( 8, 1, 1, 30, 18) // Status menu
-    WindowDefinition( 9, 12, 1, 19, 18) // Used by status screen?
+    WindowDefinition( 9, 12, 1, 19, 18) // Shop windows
     WindowDefinition(10, 1, 9, 8, 4) // Cash window (1,10,8,4)
-    WindowDefinition(11, 1, 15, 11, 4) // Used by status screen?
-    WindowDefinition(12, 12, 1, 19, 16) //
-    WindowDefinition(13, 7, 1, 24, 16) //
+    WindowDefinition(11, 1, 15, 11, 4) // ??? (Unused)
+    WindowDefinition(12, 12, 1, 19, 16) // Store window/Debug menu status effect window
+    WindowDefinition(13, 7, 1, 24, 16) // Escargo Express inventory (Taking items back)
     WindowDefinition(14, 4, 1, 24, 6) // In-battle text
     WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu
-    WindowDefinition(16, 4, 1, 8, 8) //
-    WindowDefinition(17, 12, 1, 12, 4) //
+    WindowDefinition(16, 4, 1, 8, 8) // Offense/Defense/Assist PSI selection menu (used in-battle)
+    WindowDefinition(17, 12, 1, 12, 4) // PSI name when selected in-battle
     WindowDefinition(18, 1, 1, 14, 6) // Jeff's Battle menu
-    WindowDefinition(19, 1, 2, 30, 8) // File Select
-    WindowDefinition(20, 5, 9, 22, 4) // Overworld Menu
+    WindowDefinition(19, 1, 2, 30, 8) // File Select menu
+    WindowDefinition(20, 5, 9, 22, 4) // Continue/Copy/Delete menu
     WindowDefinition(21, 10, 16, 12, 8) // Copy Menu (2 choices)
     WindowDefinition(22, 10, 16, 12, 6) // Copy Menu (1 choice)
-    WindowDefinition(23, 6, 17, 21, 10) // Delete confirmation
-    WindowDefinition(24, 3, 14, 16, 10) // Text Speed
-    WindowDefinition(25, 8, 15, 18, 8) // Music Mode
-    WindowDefinition(26, 5, 4, 11, 4) // Naming Box (05,04,08,04)
+    WindowDefinition(23, 6, 17, 21, 10) // Delete confirmation menu
+    WindowDefinition(24, 3, 14, 16, 10) // Text Speed menu
+    WindowDefinition(25, 8, 15, 18, 8) // Music Mode menu
+    WindowDefinition(26, 5, 4, 11, 4) // Character name input (05,04,08,04)
     WindowDefinition(27, 13, 4, 17, 4) // "Name This Friend" (0D,04,11,04)
-    WindowDefinition(28, 1, 9, 30, 16) // Name input box
+    WindowDefinition(28, 1, 9, 30, 16) // Name/Letter input box
     WindowDefinition(29, 7, 3, 7, 4) // Ness's Name
     WindowDefinition(30, 7, 7, 7, 4) // Paula's Name
     WindowDefinition(31, 7, 11, 7, 4) // Jeff's Name
@@ -355,21 +356,21 @@ NewWindowTable:
     WindowDefinition(34, 15, 7, 13, 6) // Favourite Food
     WindowDefinition(35, 15, 13, 13, 6) // Favourite Thing
     WindowDefinition(36, 4, 21, 24, 4) // "Are you sure?"
-    WindowDefinition(37, 18, 6, 13, 8) //
-    WindowDefinition(38, 12, 1, 12, 4) //
-    WindowDefinition(39, 3, 3, 26, 6) //
-    WindowDefinition(40, 1, 1, 7, 4) //
-    WindowDefinition(41, 16, 8, 15, 4) //
-    WindowDefinition(42, 10, 8, 21, 4) //
-    WindowDefinition(43, 4, 8, 27, 4) //
-    WindowDefinition(44, 8, 2, 24, 16) //
-    WindowDefinition(45, 1, 13, 14, 12) //
-    WindowDefinition(46, 4, 1, 8, 10) //
-    WindowDefinition(47, 1, 9, 30, 10) //
-    WindowDefinition(48, 1, 1, 28, 6) //
-    WindowDefinition(49, 10, 4, 20, 4) // Enemy Name
-    WindowDefinition(50, 14, 11, 15, 16) // File select: flavour selection
-    WindowDefinition(51, 22, 8, 9, 4) //
-    WindowDefinition(52, 15, 13, 16, 14) //
+    WindowDefinition(37, 18, 6, 13, 8) // Healer/Mach Pizza window (room for 3 choices)
+    WindowDefinition(38, 12, 1, 12, 4) // Selected PSI name when selecting a target for single enemy/single row
+    WindowDefinition(39, 3, 3, 26, 6) // "Register your name, please" window above Player's name input window used in Scarabi
+    WindowDefinition(40, 1, 1, 7, 4) // Menu helper window (At top left of screen, displays "Who?", "Where?", etc)
+    WindowDefinition(41, 16, 8, 15, 4) // Character select window with 2 characters
+    WindowDefinition(42, 10, 8, 21, 4) // Character select window with 3 characters
+    WindowDefinition(43, 4, 8, 27, 4) // Character select window with 4 characters
+    WindowDefinition(44, 8, 2, 24, 16) // Give items to other chars
+    WindowDefinition(45, 1, 13, 14, 12) // Equip menu Offense/Defense list
+    WindowDefinition(46, 4, 1, 8, 10) // Offense/Defense/Assist/Other PSI menu (for outside of battle)
+    WindowDefinition(47, 1, 9, 30, 10) // Save game corrupted window, PSI information window
+    WindowDefinition(48, 1, 1, 28, 6) // Party leader battle menu
+    WindowDefinition(49, 10, 4, 20, 4) // "To: Enemy" (Battle window)
+    WindowDefinition(50, 14, 11, 15, 16) // Flavour chooser window
+    WindowDefinition(51, 22, 8, 9, 4) // Character select window with 1 character (Normally not seen, but used in debug menu)
+    WindowDefinition(52, 15, 13, 16, 14) // ??? (Unused)
 CustomWindows:
     _CustomWindows

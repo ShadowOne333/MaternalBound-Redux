@@ -775,3 +775,191 @@ define FLG_GUMI_OLDMAN_END      	= flag 777
 define FLG_SYS_DIS_MOUSE        	= flag 778
 define FLG_SYS_DISTLPT_EVENT    	= flag 779
 define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
+// Flags 780-800 free to use
+
+//------------------------------------
+// New flags for Key items
+//------------------------------------
+// Whether a party member has been selected for editing
+define flg_NessEdit			= flag 800
+define flg_PaulaEdit			= flag 801
+define flg_JeffEdit			= flag 802
+define flg_PooEdit			= flag 803
+// Whether a party member is in the party (to prevent removing them all)
+define flg_Ness				= flag 804
+define flg_Paula			= flag 805
+define flg_Jeff				= flag 806
+define flg_Poo				= flag 807
+// Whether to continue with current operation (used for reopening mod menu after selection)
+define flg_Proceed			= flag 808
+// Whether you are adding or removing a party member, item etc.
+define flg_Add				= flag 809
+define flg_Remove			= flag 810
+// Whether you confirmed a confirmation prompt or not
+define flg_Yes				= flag 811
+define flg_No				= flag 812
+// Whether menu should loop or not (used for skipping mainmenu reopen on bicycle use)
+define flg_EndLoop			= flag 813
+// Whether Debug messages should appear or not
+define flg_Debug			= flag 814
+// Whether Mod Menu window is open
+define flg_ModMenuWnd			= flag 815
+// Whether Mod Menu window 2 is open
+define flg_ModMenuWnd2			= flag 816
+// Whether Mod Menu confirmation window is open
+define flg_ModMenuConfirmWnd		= flag 817
+// Whether Stat increase messages auto-advance
+define flg_AutoAdvStatIncMsgs		= flag 818
+// Whether Stat increase messages are skipped
+define flg_SkipStatIncMsgs		= flag 819
+// Whether collisions are disabled or not
+define flg_DisableCollision		= flag 820
+// Whether bike is unrestricted or not
+define flg_UnrestrictBike		= flag 821
+// Whether to replace dad call routine with a random event
+define flg_ChaosMode			= flag 822
+// Whether the photo guy interrupts you or not
+define flg_NoPhotoGuy			= flag 823
+// Whether Mod Menu Key Items window is open
+define flg_KeyItemsWnd			= flag 824
+// Whether Mod Menu Item Action window is open
+define flg_ItemWnd			= flag 825
+// Whether Mod Menu Debug Window is open
+define flg_ModMenuDebugWnd		= flag 826
+// Whether Mod Menu is enabled
+define flg_ModMenu			= flag 827
+// Whether Key Item Menu is enabled
+define flg_KeyItems			= flag 828
+// Whether Key Item Description Window is open
+define flg_KeyItemDescWnd		= flag 829
+// Whether the user has configured the mod before
+define flg_ModConfigured		= flag 830
+// Whether Backstage Pass has been obtained or not
+define flg_KeyItem_BackstagePass	= flag 831
+// Whether Trout Yogurt Machine has been obtained or not
+define flg_KeyItem_YogurtMachine	= flag 832
+// Whether Show Ticket has been obtained or not
+define flg_KeyItem_ShowTicket		= flag 833
+// Whether Run Button is inverted or not
+define flg_RunButton_Inverted		= flag 834
+// Whether Battle Background rendered or not
+define flg_SetBBG			= flag 835
+// Whether followers are in your party or not
+define flg_Pokey			= flag 836
+define flg_Picky			= flag 837
+define flg_King				= flag 838
+define flg_Tony				= flag 839
+define flg_BubbleMonkey			= flag 840
+define flg_BrickRoad			= flag 841
+define flg_FlyingMan			= flag 842
+define flg_TeddyBear			= flag 843
+define flg_PlushBear			= flag 844
+// Whether the Bicycle can't normally be used right now
+define flg_BikeCantNormallyBeUsed	= flag 845
+// Whether to close the main menu
+define flg_CloseMainMenu		= flag 846
+// Whether Easy Deaths is enabled
+define flg_EasyDeaths			= flag 847
+// Whether Fast Saving is enabled
+define flg_FastSaving			= flag 848
+// Whether Continue is chosen after Game Over
+define flg_GameOverContinue		= flag 849
+// Whether Buzz Buzz has died
+define flg_BuzzBuzzDead			= flag 850
+// Whether music should stay muted
+define flg_MuteMusic			= flag 851
+// Whether Ness has learned PSI yet
+define flg_LearnedPSI			= flag 852
+// Whether Homesickness is disabled
+define flg_DisableHomesick		= flag 853
+// Whether player is riding bike (with unrestricted bike enabled)
+define flg_RidingBike			= flag 854
+// Whether player is in Deep Darkness (to use hawk eye)
+define flg_InDeepDarkness		= flag 855
+// Jeff & Poo solo missions
+define flg_JeffSoloMission		= flag 1569	// 856
+define flg_PooSoloMission		= flag 1568	// 857
+
+/* Key Items */
+// 0x6C = Traveling Entertainer's Shack unlocked
+define flg_KeyItem_CarrotKey		= flag 858
+
+/* Original Game Flags */
+define flg_BuzzBuzz = flag 0x12
+define flg_DadCantCall_Original = flag 0x307
+define flg_PajamaNess = flag 0x2ED
+define flg_NoEnemies = flag 0x0B
+define flg_LightsOnAtHome = flag 0x205
+define flg_NoOnettNPCs = flag 0x20B
+define flg_UnshyTendas = flag 0x9B
+define flg_WintersDaytime = flag 0x1F1
+define flg_OnettDaytime = flag 0x1A6
+define flg_OnettDaytimeMusic = flag 0x68
+define flg_Venus = flag 0x093
+define flg_CarrotKeyUsed = flag 0x28C
+define flg_UsedYogurtMachine = flag 0x08E // Trout Flavored Yogurt Machine given to Electra, activates elevator lady sprite 0×0365.
+
+/* Phone Numbers */
+define flg_Phone_Dad = flag 0xC7
+define flg_Phone_Mom = flag 0xC8
+define flg_Phone_EscargoExpress = flag 0xC9
+define flg_Phone_MachPizza = flag 0xCA
+define flg_Phone_StoicClub = flag 0xCB
+
+/* Teleport Destinations */
+define flg_Onett = flag 0xD1
+define flg_Twoson = flag 0xD2
+define flg_Threed = flag 0xD3
+define flg_Winters = flag 0xD4
+define flg_SaturnValley = flag 0xD5
+define flg_Fourside = flag 0xD6
+define flg_Summers = flag 0xD7
+define flg_Dalaam = flag 0xD8
+define flg_Scaraba = flag 0xD9
+define flg_DeepDarkness = flag 0xDA
+define flg_TendaVillage = flag 0xDB
+define flg_Underworld = flag 0xDC
+
+/* Sound Stone */
+define flg_GiantStep = flag 0xB6
+define flg_LilliputSteps = flag 0xB7
+define flg_MilkyWell = flag 0xB8
+define flg_RainyCircle = flag 0xB9
+define flg_MagnetHill = flag 0xBA
+define flg_PinkCloud = flag 0xBB
+define flg_LumineHall = flag 0xBC
+define flg_FireSpring = flag 0xBD
+define flg_AllSoundStone = flag 0x180
+
+/* Defeated Bosses */
+define flg_Defeat_TitanicAnt = flag 0xBE
+define flg_Defeat_MondoMole = flag 0xBF
+define flg_Defeat_TrillionageSprout = flag 0xC1
+define flg_Defeat_Shrooom = flag 0xC0
+define flg_Defeat_PlagueRatofDoom = flag 0xC2
+define flg_Defeat_ThunderandStorm = flag 0xC3
+define flg_Defeat_ElectroSpecter = flag 0xC4
+define flg_Defeat_CarbonDog = flag 0xC5
+define flg_Defeat_Giygas = flag 0x49
+
+/* Defeated Midbosses */
+define flg_Defeat_Frank = 0x40
+define flg_Defeat_CaptStrong = flag 0x69
+define flg_Defeat_Everdred = 0x42
+define flg_Defeat_EggStandGuy = 0x43
+define flg_Defeat_Carpainter = 0x44
+define flg_Defeat_BoogeyTent = 0x45
+define flg_Defeat_StarmanDX = 0x46
+define flg_Defeat_ManiManiStatue = 0x4B
+define flg_Defeat_ClumsyRobot = 0x13E
+define flg_Defeat_3rdStrongMole_1 = 0x115
+define flg_Defeat_3rdStrongMole_2 = 0x116
+define flg_Defeat_3rdStrongMole_3 = 0x117
+define flg_Defeat_3rdStrongMole_4 = 0x118
+define flg_Defeat_3rdStrongMole_5 = 0x119
+define flg_Defeat_3rdStrongMoles = 0x48
+
+/* Roadblocks */
+define flg_OnettRoadblock = flag 0x1DC
+define flg_BoughtOnettHouse = flag 0x063
+// 0x6F = Marks that you have visited the Iron Pencil in Peaceful Rest Valley.

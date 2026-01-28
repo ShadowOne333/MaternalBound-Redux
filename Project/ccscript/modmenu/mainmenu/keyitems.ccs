@@ -1,17 +1,16 @@
 /* ASM */
 import "../../essential/asm65816.ccs"
+import "../../essential/cc_asmcall.ccs"
 import "../../essential/ccscript_missing_commands.ccs"
 import "../../essential/flags.ccs"
 import "../../redux/window_titles.ccs"
 /* Enums */
 import "../enums/windows.ccs"
 import "../enums/labels.ccs"
-import "../enums/modmenu_flags.ccs"
 import "../enums/items.ccs"
 /* Commands */
 import "../commands/window_cmds.ccs"
-import "../commands/flag_cmds.ccs"
-import "../commands/item_cmds.ccs"
+//import "../commands/item_cmds.ccs"
 
 // New command for the item name during descriptions
 command item_name_in_quotes(id) {
@@ -75,11 +74,67 @@ SetCount24: { counter(24) ctoarg eob }
 SetCount25: { counter(25) ctoarg eob }
 SetCount26: { counter(26) ctoarg eob }
 
+Use_Help_Menu: {
+	//copy_wram
+	//isset(flg_KeyItemsWnd)
+	//goto_if_false(_false_here)
+	copy_wram
+	window_switch(67)
+	window_closetop
+	unset(flg_KeyItemsWnd)
+	//goto(_false_here) 
+//_false_here:
+	copy_active
+	window_open(67)
+	copy_active
+	set(flg_KeyItemsWnd)
+	// clearline
+	counter_zero
+	ctoarg
+	
+	add_menu_option_with_callback("Use", _Test1)
+	add_menu_option_with_callback("Help!", _Test1)
+
+	print_vertical(2)
+	if not create_menu_cancellable {
+		// Exit
+		eob
+	}
+	ctoarg
+	swap
+	switch_goto(22, {
+		long _use
+		long _help
+	})
+
+_use:
+	window_open(1) call(data_60.l_0xc9fbf2) goto(KeyItems)
+_help:
+	call(DescATM) goto(KeyItems)
+
+_Test1:
+	ctoarg eob
+}
+
 KeyItems: {
-	//if not flag flg_Ness and not flag flg_Jeff { /* NotificationWnd(wnd_ModMenuNotification, "@Error: No party flags set.") */ eob }
-	OpenKeyItemWnd()
+	copy_wram
+	isset(flg_KeyItemsWnd)
+	goto_if_false(_KeyFlagNotSet)
+	copy_wram
+	window_switch(67)
+	window_closetop
+	unset(flg_KeyItemsWnd)
+	goto(_KeyFlagNotSet)
+
+_KeyFlagNotSet:
+	copy_active
+	window_open(67)
+	copy_active
+	set(flg_KeyItemsWnd) 
 	//title(0,"Key Items[00]")	// Lbl(lbl_KeyItems)
 	Lbl(lbl_KeyItems)
+	clearline
+
 	counter_zero
 	ctoarg
 	if not flag flg_PooSoloMission and not flag flg_JeffSoloMission
@@ -119,7 +174,7 @@ KeyItems: {
 		}
 		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURABUS_APPEAR
 		{
-			add_menu_option_with_callback("Wad of Bills", SetCount10)
+			add_menu_option_with_callback("Suitcase of Bills", SetCount10)
 		}
 		if flag flg_KeyItem_BackstagePass
 		{
@@ -226,12 +281,33 @@ KeyItems: {
 	})
 	swap
 	"@Error! No option {number(0)} in this menu." next goto(KeyItems)
-	atm:
+	atm: {
+		window_open(70)
+		add_menu_string("Use")
+		add_menu_string("Help!")
+		print_vertical(1)
+		create_menu_cancellable
+		clearline
+		switch_goto(2, {
+			long _use
+			long _help
+		})
+		window_closetop
+		goto(KeyItems)
+	_use:
+		/*counter(ATM_CARD)
+		ctoarg
+		cc_asmcall(0xC1AF74, RET_NONE)
+		goto(KeyItems)*/
+		CCUseItem
+		//window_open(1) call(data_60.l_0xc9fbf2) window_closetop goto(KeyItems)
+	_help:
 		call(DescATM) goto(KeyItems)
+	}
 	soundstone:
 		window_closeall window_open(1) counter(item_Sound_Stone) ctoarg call(data_60.l_0xc9fefd) goto(KeyItems)
 	townmap:
-		window_closeall event(7) goto(KeyItems)
+		window_closeall special_event(7) goto(KeyItems)
 	shackkey:
 		call(DescShackKey) goto(KeyItems)
 	bike:
@@ -292,7 +368,6 @@ descwndlbl:
 DescATM:
 	//call(descwndlbl)
 	//if counter_is(1) { //call(data_04.l_0xc5566b)  ATM Card
-	window_clear
 	window_open(1)
 	newline
 	item_name_in_quotes(ATM_CARD)
@@ -650,7 +725,7 @@ BicycleStart:
 	window_closeall
 	if flag flg_UnrestrictBike
 	{
-		TempSoloPartyMember(pty_Ness)
+		call(tempnessonly)	// TempSoloPartyMember(pty_Ness)
 		set(flg_RidingBike)
 		activate_bicycle
 	}
@@ -668,8 +743,52 @@ eob
 BicycleEnd:
 	if flag flg_UnrestrictBike
 	{
-		RestorePartyFromFlags()
+		call(restoreparty)	// RestorePartyFromFlags()
 		unset(flg_RidingBike)
 	}
 	window_closeall
 eob
+
+tempnessonly:
+	party_add(1)
+	counter(1)
+	_loop1:
+	if counter_is(18) { goto(_loop1end) }
+	else if not counter_is(1) { ctoarg party_remove(0) }
+	inc
+	goto(_loop1)
+	RefreshScreen_NoPrevWnd()
+	_loop1end:
+	eob
+
+restoreparty:
+	if flag flg_Ness  { party_add(1)  }
+	if flag flg_Paula { party_add(2) }
+	if flag flg_Jeff  { party_add(3)  }
+	if flag flg_Poo   { party_add(4)   }
+	if flag flg_Pokey { party_add(5) }
+	if flag flg_Picky { party_add(6) }
+	if flag flg_King  { party_add(7)  }
+	if flag flg_Tony  { party_add(8)  }
+	if flag flg_BubbleMonkey { party_add(9) }
+	if flag flg_BrickRoad    { party_add(10) }
+	if flag flg_FlyingMan  { party_add(11) }
+	if flag flg_TeddyBear  { party_add(16) }
+	if flag flg_PlushBear  { party_add(17) }
+	if not flag flg_Ness  { party_remove(1)  }
+	if not flag flg_Paula { party_remove(2) }
+	if not flag flg_Jeff  { party_remove(3)  }
+	if not flag flg_Poo   { party_remove(4)   }
+	if not flag flg_Pokey { party_remove(5) }
+	if not flag flg_Picky { party_remove(6) }
+	if not flag flg_King  { party_remove(7)  }
+	if not flag flg_Tony  { party_remove(8)  }
+	if not flag flg_BubbleMonkey { party_remove(9) }
+	if not flag flg_BrickRoad    { party_remove(10) }
+	if not flag flg_FlyingMan  { party_remove(11) }
+	if not flag flg_TeddyBear  { party_remove(16) }
+	if not flag flg_PlushBear  { party_remove(17) }
+	//RefreshScreen_NoPrevWnd()
+	window_open(wnd_FullScreen)
+	window_close(wnd_FullScreen)
+	eob

@@ -4,15 +4,13 @@ import keyitems
 /* ASM */
 import "../../essential/asm65816.ccs"
 import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/flags.ccs"
 import "../../redux/window_titles.ccs"
 import "../asm/cc_main_menu.ccs"
 /* Enums */
 import "../enums/windows.ccs"
 import "../enums/labels.ccs"
-import "../enums/modmenu_flags.ccs"
 /* Commands */
-import "../commands/flag_cmds.ccs"
-//import "../commands/health_cmds.ccs"
 import "../commands/window_cmds.ccs"
 
 

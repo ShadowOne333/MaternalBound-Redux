@@ -41,7 +41,7 @@ CodeTable: {
   long Original1A00 // [1A 00] -- character select menu, no cancel
   long Original1A01 // [1A 01] -- character select menu, can cancel
   long SwirlDisplayRGB // [1A 02]
-  long DoNothing // [1A 03]
+  long CCUseItem // [1A 03]
   long Original1A04 // [1A 04] -- unused
   long Original1A05 // [1A 05] -- display character inventory
   long Original1A06 // [1A 06] -- display shop menu
@@ -567,3 +567,18 @@ DoNothing: {
 SwirlDisplayRGB: {
 
 }
+
+CCUseItem: M_EB_Function_Wrapper({
+  // Get character from arg
+  JSL(R_Get_Argument_Memory)
+  LDA_d(0x06)
+  STA_d(0x00)
+  // Get slot from result
+  JSL(R_Get_Working_Memory)
+  LDA_d(0x06)
+  STA_d(0x02)
+  // Call overworldUseItem
+  LDA_d(0x00)
+  LDX_d(0x02)
+  JSL_RTS_C1(0xC1AF74)
+})
