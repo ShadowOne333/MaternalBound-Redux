@@ -43,8 +43,8 @@ import "essential/flags.ccs"
 import "essential/jsl_rts.ccs"
 //------------------------------------------------------------------
 // Mod Menu
-import "modmenu/mainmenu/mainmenu.ccs"
-import "modmenu/mainmenu/keyitems.ccs"
+import "modmenu/mainmenu.ccs"
+import "modmenu/keyitems.ccs"
 //------------------------------------------------------------------
 // Redux
 //import "redux/better_text_speed.ccs"

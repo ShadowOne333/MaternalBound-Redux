@@ -3,6 +3,15 @@
 
 import "../essential/asm65816.ccs"
 
+// Defines
+
+define FIND_NEARBY_CHECKABLE_TPT_ENTRY	= 0xC04279
+
+define CREATE_WINDOW			= 0x04EE	// C104EE
+define LOAD_NPC_TEXT_POINTER		= 0x3375	// C13375
+define PRINT_MESSAGE			= 0x3394	// C13394
+define INTERACTING_NPC_ID		= 0x5D62	// C15D62
+
 // Button values for remapping purposes:
 // FOR RAM ADDRESSES LOADED FROM 006D/006F/0065
 // Addresses loaded from RAM $0066 are byte swapped (Ex: Y button becomes 0040 instead of 4000) 
@@ -11,12 +20,12 @@ import "../essential/asm65816.ccs"
 // 0100 = D-Pad Right	| 0200 = D-Pad Left	| 0400 = D-Pad Down	| 0800 = D-Pad Up
 // 1000 = Start Button	| 2000 = Select Button	| 4000 = Y Button	| 8000 = B Button
 
-
 ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
 ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for Opening the Main Menu (A button by default)
 ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Opening the Map (X button by default)
 ROM[0xC0B915] = AND_i	(0x00A0)	// AND operand check for A+L buttons. This determines which buttons can talk to people / Confirm selections at the Menus
 
+// Skip opening the "No problem here" window for "Talk to"
 ROM[0xC13199] = {
 	NOP
 	NOP
@@ -26,18 +35,19 @@ ROM[0xC13199] = {
 	NOP
 }
 
+// Hijack and skip opening the "No problem here" window for "Check"
 ROM[0xC1324D] = {	
-	JSL	(0xC04279)	// Jump to subroutine at $C04279
+	JSL	(FIND_NEARBY_CHECKABLE_TPT_ENTRY)
 
 	//The rest of the code up to Label 5 seems to be the same as in the original game, simply shifted due to the JSL
-	LDA_a	(0x5D62) 	// LDA $5D62
+	LDA_a	(INTERACTING_NPC_ID) 	// LDA $5D62
 	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62) - Label1
 	JMP	(0x3394) 	// Jump to $3394
-	LDA_a	(0x5D62)	// LDA $5D62
+	LDA_a	(INTERACTING_NPC_ID)	// LDA $5D62
 	CMP_i	(0xFFFF)	// CMP #$FFFF
 	BNE	(0x03)		// Branch if not equal to next LDA_a (0x5D62) - Label2
 	JMP	(0x3394) 	// Jump to $3394
-	LDA_a	(0x5D62)	// LDA $5D62
+	LDA_a	(INTERACTING_NPC_ID)	// LDA $5D62
 	CMP_i	(0xFFFE)	// CMP #$FFFE
 	BNE	(0x0D)		// Branch if not equal to pointer to 0xCF8985 - Label3
 	LDA_a	(0x5DDE)	// LDA $5DDE
@@ -47,22 +57,22 @@ ROM[0xC1324D] = {
 	JMP	(0x3394) 	// Jump to $3394
 
 // cooprocks123e changed 2024-01-19
-    // Old Code:
-    //    ASMLoadAddress06(0xCF8985)    // Load NPC Config table
-    //    LDA_d    (0x06)        // LDA $06
-    //    STA_d    (0x14)        // STA $14
-    //    LDA_d    (0x08)        // LDA $08
-    //    STA_d    (0x16)        // STA $16
-    //New Code:
-        LDA_al	(0xC0C32F)
+	// Old Code:
+	//    ASMLoadAddress06(0xCF8985)    // Load NPC Config table
+	//    LDA_d    (0x06)        // LDA $06
+	//    STA_d    (0x14)        // STA $14
+	//    LDA_d    (0x08)        // LDA $08
+	//    STA_d    (0x16)        // STA $16
+//New Code:
+        LDA_al	(0xC0C32F)	// Load NPC_CONFIG_TABLE?
         STA_d	(0x06)
         STA_d	(0x14)
-        LDA_al	(0xC0C331)
+        LDA_al	(0xC0C331)	// Load GET_EVENT_FLAG routine?
         STA_d	(0x08)
         STA_d	(0x16)
         BRA	(0)    // Faster than NOP NOP
 
-	LDA_a	(0x5D62) 	// LDA $5D62
+	LDA_a	(INTERACTING_NPC_ID) 	// LDA $5D62
 	STA_d	(0x04)		// STA $04
 	ASL			// Arithmetic Shift Left
 	ASL			// Arithmetic Shift Left
@@ -85,7 +95,7 @@ ROM[0xC1324D] = {
 	JMP	(0x3375) 	// Jump to $3375
 	JMP	(0x3394) 	// Jump to $3394
 	LDA_i	(0x0001)	// LDA #$0001
-	JSR	(0x04EE)	// Jump to address $04EE
+	JSR	(CREATE_WINDOW)	// Jump to address $04EE
 }
 
 // CMP_i 0x0005 -> 0x0006 so Key Items show up in the menu
@@ -101,10 +111,10 @@ ROM[0xC134E1] = {
 	NOP			// No operation
 	NOP			// No operation
 	NOP			// No operation
-	CMP_i	(0x0001)	// CMP #$0001
+	CMP_i	(0x0001)	// Change Goods to be option 1 instead of 2
 }
 
-ROM[0xC134F3] = CMP_i	(0x0002)// CMP #$0002
+ROM[0xC134F3] = CMP_i	(0x0002)// Change Equip to be option 2 instead of 4
 
 ROM[0xC134FB] = {
 	NOP			// No operation
@@ -115,12 +125,12 @@ ROM[0xC134FB] = {
 	NOP			// No operation
 	NOP			// No operation
 	NOP			// No operation
-	CMP_i	(0x0004)	// AND $0004
+	CMP_i	(0x0004)	// Change Check to be option 4 instead of 5
 }
 
 
 // Talk/Check Button subroutine modifications.
-//I believe this is the one that removes the "No problem here" dialog
+// Bypass the SFX that plays when opening the window for "No problem here."
 ROM[0xC13C3E] = {
 	NOP			// No operation
 	NOP			// No operation
@@ -131,13 +141,14 @@ ROM[0xC13C3E] = {
 	NOP			// No operation
 }
 
+
 ROM[0xC13C5D] = BNE	(0x13)	// BNE $13, Branch if not equal to STA $06 at $C13C72
 
 ROM[0xC13C6D] = {
 	BNE	(0x03)		// BNE $03, Branch if not equal to LDA (0x0001)
-	JMP	(0x3C8F)	// JMP $3C8F
+	JMP	(0x3C8F)	// JMP $3C8F, WINDOW_TICK?
 	LDA_i	(0x0001)	// LDA #$0001
-	JSR	(0x04EE)	// Jump to RAM address $04EE
+	JSR	(CREATE_WINDOW)	// Jump to RAM address $04EE
 	NOP			// No operation
 }
 

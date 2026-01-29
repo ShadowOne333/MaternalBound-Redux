@@ -885,81 +885,81 @@ define flg_PooSoloMission		= flag 1568	// 857
 define flg_KeyItem_CarrotKey		= flag 858
 
 /* Original Game Flags */
-define flg_BuzzBuzz = flag 0x12
-define flg_DadCantCall_Original = flag 0x307
-define flg_PajamaNess = flag 0x2ED
-define flg_NoEnemies = flag 0x0B
-define flg_LightsOnAtHome = flag 0x205
-define flg_NoOnettNPCs = flag 0x20B
-define flg_UnshyTendas = flag 0x9B
-define flg_WintersDaytime = flag 0x1F1
-define flg_OnettDaytime = flag 0x1A6
-define flg_OnettDaytimeMusic = flag 0x68
-define flg_Venus = flag 0x093
-define flg_CarrotKeyUsed = flag 0x28C
-define flg_UsedYogurtMachine = flag 0x08E // Trout Flavored Yogurt Machine given to Electra, activates elevator lady sprite 0×0365.
+define flg_BuzzBuzz			= flag 18	// 0x12
+define flg_DadCantCall_Original		= flag 775 	// FLG_SYS_DIS_2H_PAPA, 0x307
+define flg_PajamaNess			= flag 749	// 0x2ED
+define flg_NoEnemies			= flag 11	// FLG_SYS_MONSTER_OFF, 0x0B
+define flg_LightsOnAtHome		= flag 0x205
+define flg_NoOnettNPCs			= flag 0x20B
+define flg_UnshyTendas			= flag 0x9B
+define flg_WintersDaytime		= flag 0x1F1
+define flg_OnettDaytime			= flag 0x1A6
+define flg_OnettDaytimeMusic		= flag 104	// 0x68
+define flg_Venus			= flag 0x093
+define flg_CarrotKeyUsed		= flag 0x28C
+define flg_UsedYogurtMachine		= flag 0x08E // Trout Flavored Yogurt Machine given to Electra, activates elevator lady sprite 0×0365.
 
 /* Phone Numbers */
-define flg_Phone_Dad = flag 0xC7
-define flg_Phone_Mom = flag 0xC8
-define flg_Phone_EscargoExpress = flag 0xC9
-define flg_Phone_MachPizza = flag 0xCA
-define flg_Phone_StoicClub = flag 0xCB
+define flg_Phone_Dad			= flag 0xC7
+define flg_Phone_Mom			= flag 0xC8
+define flg_Phone_EscargoExpress		= flag 0xC9
+define flg_Phone_MachPizza		= flag 0xCA
+define flg_Phone_StoicClub		= flag 0xCB
 
 /* Teleport Destinations */
-define flg_Onett = flag 0xD1
-define flg_Twoson = flag 0xD2
-define flg_Threed = flag 0xD3
-define flg_Winters = flag 0xD4
-define flg_SaturnValley = flag 0xD5
-define flg_Fourside = flag 0xD6
-define flg_Summers = flag 0xD7
-define flg_Dalaam = flag 0xD8
-define flg_Scaraba = flag 0xD9
-define flg_DeepDarkness = flag 0xDA
-define flg_TendaVillage = flag 0xDB
-define flg_Underworld = flag 0xDC
+define flg_Onett			= flag 0xD1
+define flg_Twoson			= flag 0xD2
+define flg_Threed			= flag 0xD3
+define flg_Winters			= flag 0xD4
+define flg_SaturnValley			= flag 0xD5
+define flg_Fourside			= flag 0xD6
+define flg_Summers			= flag 0xD7
+define flg_Dalaam			= flag 0xD8
+define flg_Scaraba			= flag 0xD9
+define flg_DeepDarkness			= flag 0xDA
+define flg_TendaVillage			= flag 0xDB
+define flg_Underworld			= flag 0xDC
 
 /* Sound Stone */
-define flg_GiantStep = flag 0xB6
-define flg_LilliputSteps = flag 0xB7
-define flg_MilkyWell = flag 0xB8
-define flg_RainyCircle = flag 0xB9
-define flg_MagnetHill = flag 0xBA
-define flg_PinkCloud = flag 0xBB
-define flg_LumineHall = flag 0xBC
-define flg_FireSpring = flag 0xBD
-define flg_AllSoundStone = flag 0x180
+define flg_GiantStep			= flag 0xB6
+define flg_LilliputSteps		= flag 0xB7
+define flg_MilkyWell			= flag 0xB8
+define flg_RainyCircle			= flag 0xB9
+define flg_MagnetHill			= flag 0xBA
+define flg_PinkCloud			= flag 0xBB
+define flg_LumineHall			= flag 0xBC
+define flg_FireSpring			= flag 0xBD
+define flg_AllSoundStone		= flag 384	// 0x180
 
 /* Defeated Bosses */
-define flg_Defeat_TitanicAnt = flag 0xBE
-define flg_Defeat_MondoMole = flag 0xBF
-define flg_Defeat_TrillionageSprout = flag 0xC1
-define flg_Defeat_Shrooom = flag 0xC0
-define flg_Defeat_PlagueRatofDoom = flag 0xC2
-define flg_Defeat_ThunderandStorm = flag 0xC3
-define flg_Defeat_ElectroSpecter = flag 0xC4
-define flg_Defeat_CarbonDog = flag 0xC5
-define flg_Defeat_Giygas = flag 0x49
+define flg_Defeat_TitanicAnt		= flag 0xBE
+define flg_Defeat_MondoMole		= flag 0xBF
+define flg_Defeat_TrillionageSprout	= flag 0xC1
+define flg_Defeat_Shrooom		= flag 0xC0
+define flg_Defeat_PlagueRatofDoom	= flag 0xC2
+define flg_Defeat_ThunderandStorm	= flag 0xC3
+define flg_Defeat_ElectroSpecter	= flag 0xC4
+define flg_Defeat_CarbonDog		= flag 0xC5
+define flg_Defeat_Giygas		= flag 73	// 0x49
 
 /* Defeated Midbosses */
-define flg_Defeat_Frank = 0x40
-define flg_Defeat_CaptStrong = flag 0x69
-define flg_Defeat_Everdred = 0x42
-define flg_Defeat_EggStandGuy = 0x43
-define flg_Defeat_Carpainter = 0x44
-define flg_Defeat_BoogeyTent = 0x45
-define flg_Defeat_StarmanDX = 0x46
-define flg_Defeat_ManiManiStatue = 0x4B
-define flg_Defeat_ClumsyRobot = 0x13E
-define flg_Defeat_3rdStrongMole_1 = 0x115
-define flg_Defeat_3rdStrongMole_2 = 0x116
-define flg_Defeat_3rdStrongMole_3 = 0x117
-define flg_Defeat_3rdStrongMole_4 = 0x118
-define flg_Defeat_3rdStrongMole_5 = 0x119
-define flg_Defeat_3rdStrongMoles = 0x48
+define flg_Defeat_Frank 		= flag 64	// 0x40
+define flg_Defeat_CaptStrong		= flag 105	// 0x69
+define flg_Defeat_Everdred 		= flag 66	// 0x42
+define flg_Defeat_EggStandGuy 		= flag 67	// 0x43
+define flg_Defeat_Carpainter 		= flag 68	// 0x44
+define flg_Defeat_BoogeyTent		= flag 69	// 0x45
+define flg_Defeat_StarmanDX 		= flag 70	// 0x46
+define flg_Defeat_ManiManiStatue 	= flag 7	// 0x4B
+define flg_Defeat_ClumsyRobot 		= flag 318	// 0x13E
+define flg_Defeat_3rdStrongMole_1 	= flag 277	// 0x115
+define flg_Defeat_3rdStrongMole_2 	= flag 278	// 0x116
+define flg_Defeat_3rdStrongMole_3 	= flag 279	// 0x117
+define flg_Defeat_3rdStrongMole_4 	= flag 280	// 0x118
+define flg_Defeat_3rdStrongMole_5 	= flag 281	// 0x119
+define flg_Defeat_3rdStrongMoles 	= flag 72	// 0x48
 
 /* Roadblocks */
-define flg_OnettRoadblock = flag 0x1DC
-define flg_BoughtOnettHouse = flag 0x063
+define flg_OnettRoadblock		= flag 476	// 0x1DC
+define flg_BoughtOnettHouse		= flag 99	// 0x063
 // 0x6F = Marks that you have visited the Iron Pencil in Peaceful Rest Valley.
