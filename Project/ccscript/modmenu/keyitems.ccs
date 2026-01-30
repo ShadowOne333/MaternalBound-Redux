@@ -12,6 +12,8 @@ command item_name_in_quotes(id) {
     " <{itemname(id)}>" next
 }
 
+command use_item(char, slot) { "[1A 1D {byte char} {byte slot} ]" }
+
 // Definitions for each Key item:
 define ATM_CARD		= 177	// 0xB1
 define SOUND_STONE	= 196	// 0xC4
@@ -36,8 +38,8 @@ define HAWK_EYE		= 175	// 0xAF
 define SHYNESS_BOOK	= 164	// 0xA4
 define TENDAKRAUT	= 211	// 0xD3
 define METEORITE	= 193	// 0xC1
-define BAD_KEY_MACHINE	= 172	// 0xAC
 define LOCKER_KEY	= 205	// 0xCD
+define BAD_KEY_MACHINE	= 172	// 0xAC
 define BUBBLE_GUM	= 104	// 0x68
 
 // Define window constants
@@ -76,8 +78,7 @@ SetCount24: { counter(24) ctoarg eob }
 SetCount25: { counter(25) ctoarg eob }
 SetCount26: { counter(26) ctoarg eob }
 
-// command KeySubMenu() 
-Use_Help_Menu: {
+command use_help_submenu( itemID, help_text ) {
 	window_open(USE_HELP_WINDOW)
 	add_menu_string("Use")
 	add_menu_string("Help!")
@@ -89,11 +90,24 @@ Use_Help_Menu: {
 	})
 	window_close(DIALOGUE_WINDOW)
 	window_close(USE_HELP_WINDOW)
+	window_open(KEYITEMS_WINDOW)
 	goto(_KeyItemsReturn)
 _use:
-	eob
+	window_closeall
+	window_open(DIALOGUE_WINDOW)
+	party_pos_check(1) ctoarg use_item(0,itemID)
+	window_closeall
+	//call(data_60.l_0xc9fbf2)
+	goto(_KeyItemsReturn)
 _help:
-	eob
+	window_switch(KEYITEMS_WINDOW)
+	window_clear
+	window_open(DIALOGUE_WINDOW)
+	call(help_text)
+	window_close(DIALOGUE_WINDOW)
+	window_close(USE_HELP_WINDOW)
+	window_switch(KEYITEMS_WINDOW)
+	goto(_KeyItemsReturn)
 }
 
 KeyItems: //{
@@ -111,13 +125,13 @@ _KeyFlagNotSet:
 	window_open(KEYITEMS_WINDOW)
 	copy_active
 	set(flg_KeyItemsWnd)
+
+_KeyItemsReturn:
 	title(0, KeyItems_Title)	// Lbl(lbl_KeyItems)
 	clearline
-
 	counter_zero
 	ctoarg
 
-_KeyItemsReturn:
 	if not flag flg_PooSoloMission and not flag flg_JeffSoloMission
 	{
 		add_menu_option_with_callback("ATM Card", SetCount1)
@@ -230,6 +244,7 @@ _KeyItemsReturn:
 		// Exit
 		eob
 	}
+
 	ctoarg
 	swap
 	switch_goto(26, {
@@ -262,86 +277,60 @@ _KeyItemsReturn:
 	})
 	swap
 	"@Error! No option {number(0)} in this menu." next goto(KeyItems)
-	atm: {
-		window_open(USE_HELP_WINDOW)
-		add_menu_string("Use")
-		add_menu_string("Help!")
-		print_vertical(1)
-		create_menu_cancellable
-		//clearline
-		switch_goto(2, {
-			long _use
-			long _help
-		})
-		window_close(DIALOGUE_WINDOW)
-		window_close(USE_HELP_WINDOW)
-		goto(_KeyItemsReturn)
-	_use:
-		window_closeall
-		window_open(DIALOGUE_WINDOW)
-		call(data_60.l_0xc9fbf2)
-		eob
-	_help:
-		window_switch(KEYITEMS_WINDOW)
-		window_clear
-		window_open(DIALOGUE_WINDOW)
-		call(data_04.l_0xc5566b)
-		window_close(DIALOGUE_WINDOW)
-		window_close(USE_HELP_WINDOW)
-		window_switch(KEYITEMS_WINDOW)
-		goto(_KeyItemsReturn)
-	}
-	soundstone:
-		window_closeall window_open(DIALOGUE_WINDOW) counter(SOUND_STONE) ctoarg call(data_60.l_0xc9fefd) goto(KeyItems)
-	townmap:
-		window_closeall special_event(7) goto(KeyItems)
-	shackkey:
-		call(DescShackKey) window_switch(KEYITEMS_WINDOW) eob //goto(KeyItems)
-	bike:
-		goto(BicycleStart)
-	phone:
-		window_closeall window_open(DIALOGUE_WINDOW) call(data_22.l_0xc68017) goto(KeyItems)
-	pencileraser:
-		call(DescPencilEraser) eob // goto(KeyItems)
-	erasereraser:
-		call(DescEraserEraser) eob //goto(KeyItems)
-	cabinkey:
-		call(DescCabinKey) goto(KeyItems)
-	wadofbills:
-		call(DescWadBills) goto(KeyItems)
-	backstagepass:
-		call(DescBackstagePass) goto(KeyItems)
-	zombiepaper:
-		call(DescZombiePaper) goto(KeyItems)
-	showticket:
-		call(DescShowTicket) goto(KeyItems)
-	diamond:
-		call(DescDiamond) goto(KeyItems)
-	yogurtdisp:
-		call(DescYogurtDisp) goto(KeyItems)
-	signedbanana:
-		call(DescSignedBanana) goto(KeyItems)
-	hieroglyph:
-		call(DescHieroglyph) goto(KeyItems)
-	carrotkey:
-		call(DescCarrotKey) goto(KeyItems)
-	towerkey:
-		call(DescTowerKey) goto(KeyItems)
-	hawkeye:
-		if not flag flg_InDeepDarkness { call(DescHawkEye) } else { window_closeall window_open(DIALOGUE_WINDOW) call(data_60.l_0xc9fc6f) }
-		goto(KeyItems)
-	shynessbook:
-		call(DescShynessBook) goto(KeyItems)
-	tendakraut:
-		call(DescTendakraut) goto(KeyItems)
-	meteoritepiece:
-		call(DescMeteoritePiece) goto(KeyItems)
-	lockerkey:
-		call(DescLockerKey) goto(KeyItems)
-	badkeymachine:
-		call(DescBadKeyMachine) goto(KeyItems)
-	gum:
-		window_closeall window_open(DIALOGUE_WINDOW) call(data_54.l_0xc97f72) goto(KeyItems)
+	atm:		use_help_submenu(177, data_04.l_0xc5566b)
+	soundstone:	use_help_submenu(196, data_60.l_0xc9fefd)
+		//window_closeall window_open(DIALOGUE_WINDOW) counter(SOUND_STONE) ctoarg call(data_60.l_0xc9fefd) goto(KeyItems)
+	townmap:	use_help_submenu(202, data_04.l_0xc55cce)
+		//window_closeall special_event(7) goto(KeyItems)
+	shackkey: 	use_help_submenu(170, data_04.l_0xc554f6)
+		//call(DescShackKey) window_switch(KEYITEMS_WINDOW) eob //goto(KeyItems)
+	bike:		use_help_submenu(176, data_04.l_0xc55627)
+		//goto(BicycleStart)
+	phone:		use_help_submenu(181, data_04.l_0xc5570b)
+		//window_closeall window_open(DIALOGUE_WINDOW) call(data_22.l_0xc68017) goto(KeyItems)
+	pencileraser:	use_help_submenu(184, data_04.l_0xc55794)
+		//call(DescPencilEraser) eob // goto(KeyItems)
+	erasereraser:	use_help_submenu(210, data_04.l_0xc55e28)
+		//call(DescEraserEraser) eob //goto(KeyItems)
+	cabinkey:	use_help_submenu(171, data_04.l_0xc5551d)
+		//call(DescCabinKey) goto(KeyItems)
+	wadofbills:	use_help_submenu(180, data_04.l_0xc556e3)
+		//call(DescWadBills) goto(KeyItems)
+	backstagepass:	use_help_submenu(125, data_03.l_0xc548b2)
+		//call(DescBackstagePass) goto(KeyItems)
+	zombiepaper:	use_help_submenu(178, data_04.l_0xc555b8)
+		//call(DescZombiePaper) goto(KeyItems)
+	showticket:	use_help_submenu(174, data_04.l_0xc5569c)
+		//call(DescShowTicket) goto(KeyItems)
+	diamond:	use_help_submenu(182, data_04.l_0xc55740)
+		//call(DescDiamond) goto(KeyItems)
+	yogurtdisp:	use_help_submenu(139, data_04.l_0xc54c6d)	// Tofu machine
+		//call(DescYogurtDisp) goto(KeyItems)
+	signedbanana:	use_help_submenu(183, data_04.l_0xc5576a)
+		//call(DescSignedBanana) goto(KeyItems)
+	hieroglyph:	use_help_submenu(185, data_04.l_0xc557e7)
+		//call(DescHieroglyph) goto(KeyItems)
+	carrotkey:	use_help_submenu(253, data_05.l_0xc5689f)
+		//call(DescCarrotKey) goto(KeyItems)
+	towerkey:	use_help_submenu(192, data_04.l_0xc55943)
+		//call(DescTowerKey) goto(KeyItems)
+	hawkeye:	//use_help_submenu(175, data_04.l_0xc55602)
+		if not flag flg_InDeepDarkness { call(data_04.l_0xc55602) }	// Hawk eye description
+		else { use_help_submenu(175, data_04.l_0xc55602) }
+		//else { window_closeall window_open(DIALOGUE_WINDOW) call(data_60.l_0xc9fc6f) }
+		//goto(KeyItems)
+	shynessbook:	use_help_submenu(164, data_04.l_0xc55409)
+		//call(DescShynessBook) goto(KeyItems)
+	tendakraut:	use_help_submenu(211, data_04.l_0xc55e77)
+		//call(DescTendakraut) goto(KeyItems)
+	meteoritepiece:	use_help_submenu(193, data_04.l_0xc55957)
+		//call(DescMeteoritePiece) goto(KeyItems)
+	lockerkey:	use_help_submenu(205, data_04.l_0xc55d82)
+		//call(DescLockerKey) goto(KeyItems)
+	badkeymachine:	use_help_submenu(172, data_04.l_0xc55546)
+		//call(DescBadKeyMachine) goto(KeyItems)
+	gum:		use_help_submenu(104, data_03.l_0xc544dd)
+		//window_closeall window_open(DIALOGUE_WINDOW) call(data_54.l_0xc97f72) goto(KeyItems)
 //}
 
 /* Item Descriptions */

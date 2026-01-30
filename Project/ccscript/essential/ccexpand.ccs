@@ -65,7 +65,7 @@ CodeTable: {
   long DoNothing // [1A 1A]
   long cc_main_menu.CC_Goods // [1A 1B]
   long cc_main_menu.CC_Equip // [1A 1C]
-  long DoNothing // [1A 1D]
+  long CCUseItem // [1A 1D]
   long cc_main_menu.CC_Status // [1A 1E]
   long cc_main_menu.CC_PSI // [1A 1F]
   long cc_main_menu.CC_Close_HP // [1A 20]

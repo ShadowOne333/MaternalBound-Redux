@@ -780,28 +780,23 @@ define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
 //------------------------------------
 // New flags for Key items
 //------------------------------------
-// Whether a party member has been selected for editing
-define flg_NessEdit			= flag 800
-define flg_PaulaEdit			= flag 801
-define flg_JeffEdit			= flag 802
-define flg_PooEdit			= flag 803
 // Whether a party member is in the party (to prevent removing them all)
-define flg_Ness				= flag 804
-define flg_Paula			= flag 805
-define flg_Jeff				= flag 806
-define flg_Poo				= flag 807
+define flg_Ness				= flag 800
+define flg_Paula			= flag 801
+define flg_Jeff				= flag 802
+define flg_Poo				= flag 803
 // Whether to continue with current operation (used for reopening mod menu after selection)
-define flg_Proceed			= flag 808
+define flg_Proceed			= flag 804
 // Whether you are adding or removing a party member, item etc.
-define flg_Add				= flag 809
-define flg_Remove			= flag 810
+define flg_Add				= flag 805
+define flg_Remove			= flag 806
 // Whether you confirmed a confirmation prompt or not
-define flg_Yes				= flag 811
-define flg_No				= flag 812
+define flg_Yes				= flag 807
+define flg_No				= flag 808
 // Whether menu should loop or not (used for skipping mainmenu reopen on bicycle use)
-define flg_EndLoop			= flag 813
+define flg_EndLoop			= flag 809
 // Whether Debug messages should appear or not
-define flg_Debug			= flag 814
+define flg_Debug			= flag 810
 // Whether Mod Menu window is open
 define flg_ModMenuWnd			= flag 815
 // Whether Mod Menu window 2 is open

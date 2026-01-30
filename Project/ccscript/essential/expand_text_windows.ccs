@@ -352,7 +352,7 @@ NewWindowTable:
     WindowDefinition(37, 18, 6, 13, 8) // Healer/Mach Pizza window (room for 3 choices)
     WindowDefinition(38, 12, 1, 12, 4) // Selected PSI name when selecting a target for single enemy/single row
     WindowDefinition(39, 3, 3, 26, 6) // "Register your name, please" window above Player's name input window used in Scarabi
-    WindowDefinition(40, 1, 1, 6, 4) // Menu helper window (At top left of screen, displays "Who?", "Where?", etc)
+    WindowDefinition(40, 1, 1, 7, 4) // Menu helper window (At top left of screen, displays "Who?", "Where?", "Which?", "Whom?")
     WindowDefinition(41, 16, 8, 15, 4) // Character select window with 2 characters
     WindowDefinition(42, 10, 8, 21, 4) // Character select window with 3 characters
     WindowDefinition(43, 4, 8, 27, 4) // Character select window with 4 characters

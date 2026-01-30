@@ -4,6 +4,9 @@
  * Generated using CCScriptWriter.
  */
 
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/flags.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
@@ -238,9 +241,14 @@ l_0xef7b46:
     "@" call(l_0xef7ba0) "Maximum PP went up by {delta}!{prompt}" eob
 
 l_0xef7b64:
-    newline
-    "{sound(103)}@{target} realized the power of" linebreak
-    "[19 1F]{swap}  [1C 12 00].{prompt}" eob
+	set(flg_LearnedPSI)
+	if not flg_SkipStatIncMsgs {
+		newline
+		sound(103)
+		"@{target} realized the power of" linebreak
+		"{return_action_argument}{swap}  {psiname(0)}." prompt
+	}
+	eob
 
 l_0xef7b83:
     "{store_registers}[19 1E][18 07 14 00 00 00 00][1B 02 {e(l_0xef7b9d)}]Sweet!" linebreak

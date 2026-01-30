@@ -64,22 +64,22 @@ MainMenu:
 	// Options
 	add_menu_option_with_callback("Goods", Selected_Goods)	// MenuOptionWithCallback("Goods", Selected_Goods)
 	add_menu_option_with_callback("Equip", Selected_Equip)
-	/*if flag flg_LearnedPSI 
+	if flag flg_LearnedPSI 
 	{
-		CheckIfCharacterInParty(1)
+		check_party_char(1)
 		if result_is(1)
 		{
 			add_menu_option_with_callback("PSI", Selected_PSI)
 		}
 		else
 		{
-			CheckIfCharacterInParty(4)
+			check_party_char(4)
 			if result_is(1)
 			{
 				add_menu_option_with_callback("PSI", Selected_PSI)
 			}
 		}
-	}*/
+	}
 	add_menu_option_with_callback("PSI", Selected_PSI)
 	//if flg_ModMenu { add_menu_option_with_callback("Mod Menu", Selected_ModMenu) }
 	//if not flg_ModMenu { add_menu_option_with_callback("Config", Selected_ModMenu) }
@@ -129,7 +129,7 @@ eob
 //		Commands
 //------------------------------------
 // Check if you currently have a specific party member
-command CheckIfCharacterInParty(charaID)
+command check_party_char(charaID)
 {
     counter(1)
 _loop:
