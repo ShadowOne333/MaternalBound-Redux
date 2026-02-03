@@ -787,32 +787,12 @@ define flg_Jeff				= flag 802
 define flg_Poo				= flag 803
 // Whether to continue with current operation (used for reopening mod menu after selection)
 define flg_Proceed			= flag 804
-// Whether you are adding or removing a party member, item etc.
-define flg_Add				= flag 805
-define flg_Remove			= flag 806
-// Whether you confirmed a confirmation prompt or not
-define flg_Yes				= flag 807
-define flg_No				= flag 808
 // Whether menu should loop or not (used for skipping mainmenu reopen on bicycle use)
-define flg_EndLoop			= flag 809
-// Whether Debug messages should appear or not
-define flg_Debug			= flag 810
-// Whether Mod Menu window is open
-define flg_ModMenuWnd			= flag 815
-// Whether Mod Menu window 2 is open
-define flg_ModMenuWnd2			= flag 816
-// Whether Mod Menu confirmation window is open
-define flg_ModMenuConfirmWnd		= flag 817
-// Whether Stat increase messages auto-advance
-define flg_AutoAdvStatIncMsgs		= flag 818
-// Whether Stat increase messages are skipped
-define flg_SkipStatIncMsgs		= flag 819
+define flg_EndLoop			= flag 807
 // Whether collisions are disabled or not
-define flg_DisableCollision		= flag 820
+define flg_DisableCollision		= flag 808
 // Whether bike is unrestricted or not
-define flg_UnrestrictBike		= flag 821
-// Whether to replace dad call routine with a random event
-define flg_ChaosMode			= flag 822
+define flg_UnrestrictBike		= flag 809
 // Whether the photo guy interrupts you or not
 define flg_NoPhotoGuy			= flag 823
 // Whether Mod Menu Key Items window is open

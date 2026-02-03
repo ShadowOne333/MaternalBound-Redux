@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -345,15 +348,25 @@ l_0xc795bd:
 
 l_0xc795c1:
     "{store_registers}[19 19 00 00]{swap}{result_is(171)}[1B 02 {e(l_0xc796ee)}][1D 01 FF AB]@(" call(data_37.l_0xc7e74e) " used the [1C 05 AB].)" next
-    "{window_closeall}{sound(119)}[1F 1E B4 01 06]{pause(60)}{window_open(1)}"
+    goto(rescuepaula)
+
+rescuepaula:
+    set(flg_Paula)
+    window_closeall
+    sound(SND_PSI3)	// 119
+    hide_sprite(436, 6)
+    pause(60)
+    window_open(1)
     title_paula(1)
-    "@Thank you, [1C 02 01]!" next
+    "@Thank you, {name(1)}!" next
     "@You're just like I imagined you would be..." next
     "@I'm sure that some people in Twoson are worried about me..." next
     "@Getting back there may be dangerous," next
     "@but we can do it if we combine our strength." next
     "@I'm able to use a little psychic power that is actually pretty deadly..." next
-    "@Let's head back to Twoson![03]{window_closeall}[1F F1 B5 01 F1 00][1F 61][1F 1E B6 01 06][1F 61][1F 1E B5 01 06][1F 11 02]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@[1C 02 02] joined you.[03]{window_closeall}{set(flag 13)}{set(flag 198)}{unset(flag 118)}{set(flag 321)}{set(flag 689)}{set(flag 483)}" eob
+    "@Let's head back to Twoson!" promptw
+    window_closeall
+    "[1F F1 B5 01 F1 00][1F 61][1F 1E B6 01 06][1F 61][1F 1E B5 01 06][1F 11 02]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@[1C 02 02] joined you.[03]{window_closeall}{set(flag 13)}{set(flag 198)}{unset(flag 118)}{set(flag 321)}{set(flag 689)}{set(flag 483)}" eob
 
 l_0xc796ee:
     "@(You must use the [1C 05 AB] to open this.){wait}{window_closeall}" eob

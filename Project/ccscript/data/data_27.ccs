@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -224,6 +227,7 @@ l_0xc6ea34:
     "@I'm sorry I've created so much trouble for you.[03]{window_closeall}{pause(60)}" call(data_23.l_0xc68253) "{set(flag 15)}{unset(flag 776)}[19 23 68 03 01 FF 00][1F 16 68 03 00]{music_resume}{pause(120)}{window_open(1)}" goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
+    set(flg_Paula)
     title(1, Monotoly)
     "@....." next
     "@I'll tell you everything." next
@@ -233,15 +237,15 @@ l_0xc6eb2c:
     "@where I went to look upon it on occasion." next
     "@....." next
     "@Cryptic words appeared to me while I was in the illusion," next
-    "@including your name, [1C 02 01]." next
-    "@<Stop [1C 02 01], and do so by your own hand.>" next
+    "@including your name, {name(1)}." next
+    "@<Stop {name(1)}, and do so by your own hand.>" next
     "@Or..." next
     "@<Don't let them go to Summers.>" next
     "@Or..." next
     "@<Make sure they know nothing of the Pyramid>..." next
     "@I don't fully understand the messages," next
     "@but someone obviously doesn't want you to go to Summers." next
-    "{pause(60)}" linebreak
+    pause(60) linebreak
     "@...Evil... Giygas... or something... I could hear the name..." next
     "@Anyway, the evil side would be in trouble if you visit Summers..." next
     "@Oh!  On the contrary, you should definitely go to Summers," next

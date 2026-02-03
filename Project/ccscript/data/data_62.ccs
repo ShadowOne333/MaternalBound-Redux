@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -367,7 +370,9 @@ l_0xef733d:
     "@<That was quick thinking!>{prompt}{pause(60)}[1F 62 01]{window_closetop}{window_open(14)}{set(flag 318)}" eob
 
 l_0xef7415:
-    "[1F 71 04 02]" newline
+    set(flg_Poo)
+    learnpsi(4,2)	// Poo learns Starstorm
+    newline
     "@Suddenly, [1C 02 04] swooped down" linebreak
     "  from the sky!{pause(50)}" eob
 

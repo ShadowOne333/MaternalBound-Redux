@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -191,6 +194,7 @@ l_0xc89566:
     "{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc89580)}]{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8955a)}]" goto(l_0xc89580)
 
 l_0xc89580:
+    unset(flg_Paula)
     "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc8955a)}][1F 07 02]{pause(10)}[1F 01 00][1F E1 1F 00 01]{pause(20)}[1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01]{pause(1)}[1F E1 14 01 01]{pause(1)}[1F E1 1F 00 01]{pause(1)}{music(177)}{pause(20)}[1F 15 C7 01 99 02 01]{pause(50)}[1F EB 02 06][1F 12 02][1F E1 14 01 01]{pause(20)}[1F E1 1F 00 01][1F 1E 98 03 06][1F 1E 99 03 06][1F 1E A3 03 06]{set(flag 776)}{set(flag 57)}{set(flag 555)}{unset(flag 594)}{pause(30)}{pause(60)}" call(data_36.l_0xc7dd7d) "{sound(114)}{pause(180)}{window_open(1)}"
     "@Your attention please," next
     "@would the customer from Onett,{pause(15)} Mr. [1C 02 01]," next

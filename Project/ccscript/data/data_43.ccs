@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -395,7 +398,13 @@ l_0xc8824a:
     "[1F EB 09 06][1F 15 31 00 FD 00 01][1F 61][1F 1F 31 00 06][1F 15 32 00 05 01 01][1F 15 58 01 FF 00 01] [1F 61][1F F2 58 01 06 01] [1F 61][1F 1F 32 00 06][1F 1F 58 01 06][1F 15 2E 00 07 01 01] [1F 61][1F 1E A5 02 06][1F 61][1F 1F 2E 00 06][1F 15 2F 00 08 01 01][1F 61][1F 1F 2F 00 06][1F 15 2E 00 09 01 01][1F 61][1F 1F 2E 00 06][1F EC 09 01]{unset(flag 338)}{set(flag 311)}" eob
 
 l_0xc882bd:
-    "[1F E6 78 02] [1F 13 09 05][1F 1C 09 03]{pause(60)}[1F 1D 09]{window_open(1)}"
+    unset(flg_BubbleMonkey)
+    freeze_npc_movement(632)
+    char_direction(9, 5)
+    show_char_float(9, 3)
+    pause(60)
+    hide_char_float(9)
+    window_open(1)
     title(1, Bubble)
     "@Kye uki kukyi" linebreak
     "  (Now she's my type...)" next
@@ -403,7 +412,36 @@ l_0xc882bd:
     "  (I think I'll ask her for a date!)[03]{window_closeall}[1F 12 09][1F 15 2E 00 1D 01 01]{pause(4)}[1F E9 78 02] [1F 61]{unset(flag 22)}" eob
 
 l_0xc88332:
-    "{set(flag 11)}[1F 41 05]" call(data_24.l_0xc69082) "[1F 15 6A 00 91 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]" call(data_36.l_0xc7dd6b) "{set(flag 655)}{music_resume}[1F ED][1F E5 FF][1F F1 67 02 8B 00][1F 61][06 B8 00 {e(l_0xc88386)}]{unset(flag 9)}[1F F1 67 02 8C 00][1F 61][06 09 00 {e(l_0xc88386)}]" call(data_44.l_0xc886f9) goto(l_0xc88386)
+    set(flg_Ness)
+    set(flg_Paula)
+    unset(flg_JeffSoloMission)
+    set(FLG_SYS_MONSTER_OFF)
+    special_event(5)	// OSS flag set
+    
+    call(data_24.l_0xc69082)
+    
+    generate_active_sprite(106, 145, 1)
+    focus_camera_sprite(106)
+    unfreeze_char_movement(-1)
+    wait_for_movement
+    hide_char(-1)
+    
+    call(data_36.l_0xc7dd6b)
+    
+    set(FLG_BGM_SW)	// 655
+    music_resume
+    reset_camera
+    freeze_char_movement(-1)
+    change_npc_movement(615, 139)
+    wait_for_movement
+    goto_if_flag(FLG_POWR_RAIN, l_0xc88386)
+    unset(FLG_TEMP_8)
+    change_npc_movement(615, 140)
+    wait_for_movement
+    goto_if_flag(FLG_TEMP_8, l_0xc88386)
+    
+    call(data_44.l_0xc886f9)
+    goto(l_0xc88386)
 
 l_0xc88386:
     eob

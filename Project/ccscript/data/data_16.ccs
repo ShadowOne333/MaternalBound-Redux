@@ -6,6 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -35,8 +40,45 @@ l_0xc5e6d7:
 l_0xc5e6f4:
     "[1F E5 FF][1F 21 B7][1F 15 6A 00 22 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
 
-l_0xc5e70b:
-    "{set(flag 469)}{set(flag 11)}[1F EB FF 06][1F 15 6A 00 DC 01 01]" call(data_57.l_0xc9b4b8) "[1F 21 96][1F E6 BA 00][1F 15 6A 00 DD 01 01]" call(data_57.l_0xc9b4b8) "[1F 21 97][1F 15 6A 00 DE 01 01]" call(data_57.l_0xc9b4b8) "{set(flag 477)}{set(flag 532)}{set(flag 749)}[1F 21 0A][1F E9 1A 00][1F E9 1B 00]{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}[1F 1E 1B 00 06][1F 15 6A 00 24 00 01]{unset(flag 532)}{set(flag 533)}{music_resume}[1F 61][1F 1E 1A 00 06][1F EC FF 01][1F F2 6A 00 72 02][1F EF 6A 00][1F E8 FF][1F 61][1F ED]{set(flag 476)}{unset(flag 477)}{unset(flag 469)}{save}" eob
+l_0xc5e70b:	// Game startup at Ness' bed in Onett
+    set(FLG_YAZIUMA_DISAPPEAR)	// 469
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    hide_char(-1)
+    generate_active_sprite(106, 476, 1)
+    call(data_57.l_0xc9b4b8)
+    warp(150)	// 96
+    freeze_npc_movement(186)
+    generate_active_sprite(106, 477, 1)
+    call(data_57.l_0xc9b4b8)
+    warp(151)	// 97
+    generate_active_sprite(106, 478, 1)
+    call(data_57.l_0xc9b4b8)
+    set(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+    set(FLG_BGM_INSEKI_FALL_A)	// 532
+    set(FLG_MYHOME_NES_CHANGE)	// 749
+    warp(FLG_TEMP_9)	// 10
+    unfreeze_npc_movement(26)
+    unfreeze_npc_movement(27)
+    pause(120) pause(120) pause(120) pause(120) pause(120) pause(60)
+    hide_sprite(27, 6)
+    generate_active_sprite(106, 36, 1)
+    unset(FLG_BGM_INSEKI_FALL_A)	// 532
+    set(FLG_BGM_INSEKI_FALL_B)	// 533
+    music_resume
+    wait_for_movement
+    hide_sprite(26, 6)
+    show_char(-1, 1)
+    change_sprite_movement(106, 626)
+    focus_camera_sprite(106)
+    unfreeze_char_movement(-1)
+    wait_for_movement
+    reset_camera
+    set(FLG_INSEKI_STOPPER_APPEAR)	// 476
+    unset(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+    unset(FLG_YAZIUMA_DISAPPEAR)	// 469
+    save
+    set(flg_Ness)	// Added for Key items menu
+    eob
 
 l_0xc5e79f:
     "{set(flag 375)}{music_resume}[1F 17 16 00 26 00 01]" eob

@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -224,13 +227,23 @@ l_0xc8b158:
     "@You're too charming! [AC]" end
 
 l_0xc8b191:
-    "[06 49 00 {e(l_0xc8b22f)}][06 10 00 {e(data_20.l_0xc65015)}][1F 41 05]"
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc8b22f)	// Flag 73
+    goto_if_flag(FLG_PU, data_20.l_0xc65015)	// Flag 16
+    special_event(5)	// OSS flag set
     title(1, Jill)
     "@I don't know who told you." next
     "@You came from far off just to eat my Magic cake?..." next
     "@I thought making cakes would be the best career for me." next
     "@Dig in!" next
-    "@I used up the last of my ingredients to make this special Magic cake![03]{window_closeall}{unset(flag 61)}" goto(data_50.l_0xc920a2)
+    unset(flg_Ness)
+    unset(flg_Jeff)
+    unset(flg_Paula)
+    set(flg_Poo)
+    set(flg_PooSoloMission)
+    "@I used up the last of my ingredients to make this special Magic cake!" promptw
+    window_closeall
+    unset(FLG_SUMS_MASSAGE_APPEAR)	// 61
+    goto(data_50.l_0xc920a2)
 
 l_0xc8b22e:
     eob

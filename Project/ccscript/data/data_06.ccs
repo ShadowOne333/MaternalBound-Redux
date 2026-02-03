@@ -6,6 +6,7 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -24,6 +25,7 @@ l_0xc573dc:
     "@Stay with me for a while, do you understand?![03]{window_closeall}{pause(30)}" goto(data_50.l_0xc9329b)
 
 l_0xc5749a:
+    unset(flg_Poo)
     "{window_open(1)}"
     title(1, Star)
     "@It depends on [1C 02 04]'s efforts.  That will determine the reuniting of the group." next

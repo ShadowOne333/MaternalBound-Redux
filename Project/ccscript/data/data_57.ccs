@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -220,6 +223,10 @@ l_0xc9b268:
     "[06 BD 00 {e(l_0xc9b270)}]" eob
 
 l_0xc9b270:
+    unset(flg_Paula)
+    unset(flg_Jeff)
+    unset(flg_Poo)
+    set(FLG_POWR_ALL)	// All Sound Stone
     "{set(flag 384)}[1F 41 06][1F 12 02][1F 12 03][1F 12 04]" call(data_24.l_0xc69082) "{set(flag 11)}" call(data_36.l_0xc7de60) "[1F 41 05][1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 01][1F 21 51]{pause(30)}[1F 41 10]{pause(30)}[1F 15 B3 01 B7 02 FF][1F 21 23][1F EF B3 01][1F E8 FF][1F 61][1F ED][1F E5 FF][1F 1F B3 01 0A]{pause(180)}[1F 21 24][1F 15 6A 00 B8 02 01]" call(l_0xc9b4b8) "[1F 21 25][1F 15 6A 00 B9 02 01]" call(l_0xc9b4b8) "[1F 21 26][1F 15 6A 00 BA 02 01]" call(l_0xc9b4b8) "{pause(120)}{window_open(1)}"
     title(1, Dad)
     "@[1C 02 01]...{pause(30)} Hmmm..." next

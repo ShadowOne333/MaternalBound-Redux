@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -108,24 +111,53 @@ l_0xc79e55:
     title_paula(1)
     "@I'm calling out to you who I've never met..." next
     "@I'm calling our friend who we've never met..." next
-    "@[1C 02 03]!{pause(30)}  [1C 02 03]!{pause(20)}" linebreak
+    "@{name(3)}!{pause(30)}  {name(3)}!{pause(20)}" linebreak
     "  We need your help!" next
-    "@I am [1C 02 02] and I am with another friend,{pause(15)} [1C 02 01]..." next
-    "@We are trying to contact you...{wait}{pause(30)}{window_closeall}{pause(1)}[1F 1F 6A 00 06][1F EB FF 06][1F 21 C8][1F 15 6A 00 83 02 01]" call(data_57.l_0xc9b4b8) "[1F 21 C9][1F 15 6A 00 84 02 01]" call(data_57.l_0xc9b4b8) "{unset(flag 11)}[1F 41 06]" goto(l_0xc79f33)
+    "@I am {name(2)} and I am with another friend,{pause(15)} {name(1)}..." next
+    "@We are trying to contact you...{wait}{pause(30)}{window_closeall}{pause(1)}[1F 1F 6A 00 06][1F EB FF 06][1F 21 C8][1F 15 6A 00 83 02 01]" call(data_57.l_0xc9b4b8) "[1F 21 C9][1F 15 6A 00 84 02 01]" call(data_57.l_0xc9b4b8) "{unset(flag 11)}[1F 41 06]"
+    goto(l_0xc79f33)
 
 l_0xc79f32:
     eob
 
 l_0xc79f33:
-    "[1F 21 42][1F E5 FF][1F 64][1F 11 03][1D 08 02 00][1F 12 01][1F 12 02]{unset(flag 298)}{unset(flag 433)}{set(flag 636)}{pause(180)}{window_open(1)}"
+    warp(66)
+    freeze_char_movement(-1)
+    create_backup
+    party_add(3)	// Add Jeff
+    givemoney(2)
+    party_remove(1) party_remove(2)	// Remove Ness & Paula
+    unset(FLG_THRK_HOTELZOMBI_APPEAR)	// 298
+    unset(FLG_THRK_HOTELMAN_DISAPPEAR)	// 433
+    set(FLG_WINS_POLA_TELEPATHY)	// 636
+    pause(180)
+    window_open(1)
     title_paula(1)
-    "@I am [1C 02 02],{pause(20)} and I am with another friend,{pause(15)} [1C 02 01]..." next
+    "@I am {name(2)},{pause(20)} and I am with another friend,{pause(15)} {name(1)}..." next
     "@We are trying to contact you..." next
     "@If you hear me,{pause(15)} please wake up and...{pause(20)} head south!" next
-    "@Only you,{pause(15)} though far away,{pause(15)} can save us, [1C 02 03]..." next
+    "@Only you,{pause(15)} though far away,{pause(15)} can save us, {name(3)}..." next
     "@Please hear my call and begin heading south..." next
-    "@[1C 02 03]!{pause(20)}  You are a friend who we've never met..." next
-    "@But you are our one and only hope!...[03]{window_closeall}[1F 07 03]{pause(120)}{pause(180)}[1F 1E 50 02 06][1F EC FF 01][1F E8 FF]{set(flag 128)}[19 26 06]{unset(flag 297)}{unset(flag 11)}{set(flag 212)}" eob
+    "@{name(3)}!{pause(20)}  You are a friend who we've never met..." next
+    set(flg_Jeff)
+    set(flg_Tony)
+    unset(flg_Ness)
+    unset(flg_Paula)
+    unset(flg_TeddyBear)
+    set(flg_JeffSoloMission)
+    "@But you are our one and only hope!..." promptw
+    window_closeall
+    music_effect(3)
+    pause(120) pause(180)
+    hide_sprite(592, 6)
+    show_char(-1, 1)
+    unfreeze_char_movement(-1)
+    set(FLG_WINS_START)	// 128
+    set_respawn(6)
+    unset(FLG_THRK_BIKINIZOMBI_P_APPEAR)	// 297
+    unset(FLG_SYS_MONSTER_OFF)	// 11
+    set(FLG_TLPT_WINS)	// 212
+    eob
 
 l_0xc7a04a:
     "[1F 1A 4F 02 03]{pause(60)}[1F 1B 4F 02]{pause(30)}[1F 1E 4F 02 06][1F 15 B6 00 72 00 01]{pause(1)}[1F E7 B6 00]{window_open(1)}"

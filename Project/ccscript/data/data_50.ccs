@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -202,13 +205,22 @@ l_0xc929ae:
     "{window_open(1)}" call(data_58.l_0xc9d523) "{window_closeall}[1F 1E 4F 04 06]{sound(99)}[1F 15 A9 00 9B 02 06][1F 61]" eob
 
 l_0xc929ca:
-    "{window_open(1)}"
+    set(flg_Ness)
+    set(flg_Jeff)
+    set(flg_Paula)
+    set(flg_Poo)
+    unset(flg_PooSoloMission)
+
+    window_open(1)
     title_poo(1)
-    "@My name is [1C 02 04].{pause(20)}  I am the one who will fight beside you." next
-    "@I am the servant of [1C 02 01].{pause(15)}" linebreak
-    "  I will obey [1C 02 01]." next
-    "@[1C 02 01]!{pause(20)}" linebreak
-    "  My life is in your hands.[03]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc92a48)}]{window_closeall}{set(flag 16)}{set(flag 504)}{set(flag 499)}" eob
+    "@My name is {name(4)}.{pause(20)}  I am the one who will fight beside you." next
+    "@I am the servant of {name(1)}.{pause(15)}" linebreak
+    "  I will obey {name(1)}." next
+    "@{name(1)}!{pause(20)}" linebreak
+    "  My life is in your hands." promptw
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    "[1B 03 {e(l_0xc92a48)}]{window_closeall}{set(flag 16)}{set(flag 504)}{set(flag 499)}" eob
 
 l_0xc92a48:
     newline
