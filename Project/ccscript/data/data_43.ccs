@@ -398,7 +398,6 @@ l_0xc8824a:
     "[1F EB 09 06][1F 15 31 00 FD 00 01][1F 61][1F 1F 31 00 06][1F 15 32 00 05 01 01][1F 15 58 01 FF 00 01] [1F 61][1F F2 58 01 06 01] [1F 61][1F 1F 32 00 06][1F 1F 58 01 06][1F 15 2E 00 07 01 01] [1F 61][1F 1E A5 02 06][1F 61][1F 1F 2E 00 06][1F 15 2F 00 08 01 01][1F 61][1F 1F 2F 00 06][1F 15 2E 00 09 01 01][1F 61][1F 1F 2E 00 06][1F EC 09 01]{unset(flag 338)}{set(flag 311)}" eob
 
 l_0xc882bd:
-    unset(flg_BubbleMonkey)
     freeze_npc_movement(632)
     char_direction(9, 5)
     show_char_float(9, 3)
@@ -409,7 +408,15 @@ l_0xc882bd:
     "@Kye uki kukyi" linebreak
     "  (Now she's my type...)" next
     "@Ki kukkyo uke" linebreak
-    "  (I think I'll ask her for a date!)[03]{window_closeall}[1F 12 09][1F 15 2E 00 1D 01 01]{pause(4)}[1F E9 78 02] [1F 61]{unset(flag 22)}" eob
+    "  (I think I'll ask her for a date!)" promptw
+    window_closeall
+    party_remove(9)	// Remove Bubble monkey from party
+    generate_active_sprite(46, 285, 1)	// 002E, 011D, 1
+    pause(4)
+    unfreeze_npc_movement(632)
+    wait_for_movement
+    unset(FLG_BALLOONMONKEY)	// 22
+    eob
 
 l_0xc88332:
     set(flg_Ness)

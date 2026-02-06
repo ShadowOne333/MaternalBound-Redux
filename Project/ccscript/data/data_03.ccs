@@ -4,12 +4,19 @@
  * Generated using CCScriptWriter.
  */
 
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/window_titles.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc53b76:
     newline
-    " <[1C 05 24]>" next
+    item_name_in_quotes(36)
+    //" <[1C 05 24]>" next
     call(data_05.l_0xc56ba0) end
 
 l_0xc53b86:

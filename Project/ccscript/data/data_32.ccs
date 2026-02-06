@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -15,45 +19,84 @@ l_0xc76f20:
     call(data_13.l_0xc5d581) eob
 
 l_0xc76f26:
-    call(l_0xc7716d) "[1B 03 {e(l_0xc77148)}]" call(l_0xc76fb2) call(data_23.l_0xc6829f) "{set(flag 587)}{set(flag 25)}" eob
+    call(l_0xc7716d)
+    goto_if_true(l_0xc77148)
+    call(l_0xc76fb2)
+    call(data_23.l_0xc6829f)
+    set(FLG_BGM_FLYINGMAN)	// 587
+    set(FLG_FLYINGMAN_1)		// 25
+    eob
 
 l_0xc76f42:
-    call(l_0xc7716d) "[1B 03 {e(l_0xc77148)}]" call(l_0xc76fb2) call(data_23.l_0xc682dd) "{set(flag 587)}{set(flag 26)}" eob
+    call(l_0xc7716d)
+    goto_if_true(l_0xc77148)
+    call(l_0xc76fb2)
+    call(data_23.l_0xc682dd)
+    set(FLG_BGM_FLYINGMAN)	// 587
+    set(FLG_FLYINGMAN_2)	// 26
+    eob
 
 l_0xc76f5e:
-    call(l_0xc7716d) "[1B 03 {e(l_0xc77148)}]" call(l_0xc76fb2) call(data_23.l_0xc6831b) "{set(flag 587)}{set(flag 27)}" eob
+    call(l_0xc7716d)
+    goto_if_true(l_0xc77148)
+    call(l_0xc76fb2)
+    call(data_23.l_0xc6831b)
+    set(FLG_BGM_FLYINGMAN)	// 587
+    set(FLG_FLYINGMAN_3)	// 27
+    eob
 
 l_0xc76f7a:
-    call(l_0xc7716d) "[1B 03 {e(l_0xc77148)}]" call(l_0xc76fb2) call(data_23.l_0xc68359) "{set(flag 587)}{set(flag 28)}" eob
+    call(l_0xc7716d)
+    goto_if_true(l_0xc77148)
+    call(l_0xc76fb2)
+    call(data_23.l_0xc68359)
+    set(FLG_BGM_FLYINGMAN)	// 587
+    set(FLG_FLYINGMAN_4)	// 28
+    eob
 
 l_0xc76f96:
-    call(l_0xc7716d) "[1B 03 {e(l_0xc77148)}]" call(l_0xc76fb2) call(data_23.l_0xc68397) "{set(flag 587)}{set(flag 29)}" eob
+    call(l_0xc7716d)
+    goto_if_true(l_0xc77148)
+    call(l_0xc76fb2)
+    call(data_23.l_0xc68397)
+    set(FLG_BGM_FLYINGMAN)	// 587
+    set(FLG_FLYINGMAN_5)	// 29
+    eob
 
 l_0xc76fb2:
-    "[06 CF 00 {e(l_0xc770b0)}][06 CE 00 {e(l_0xc7706a)}][06 CD 00 {e(l_0xc7703f)}][06 CC 00 {e(l_0xc77007)}]@I am your courage." next
+    set(flg_FlyingMan)
+    goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_D, l_0xc770b0)	// 0xCF, 207
+    goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_C, l_0xc7706a)	// 0xCE, 206
+    goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_B, l_0xc7703f)	// 0xCD, 205
+    goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_A, l_0xc77007)	// 0xCC, 204
+    "@I am your courage." next
     "@I follow you here in Magicant." next
     "@...My name?" next
     title(1, Flying)
-    "@Let's say Flying Man.[03]" eob
+    "@Let's say Flying Man." promptw
+    eob
 
 l_0xc77007:
     "@I'll be your courage." next
     "@I'll remain unless you lose your courage." next
     title(1, Flying2)
-    "@Call me Flying Man 2.[03]" eob
+    "@Call me Flying Man 2." promptw
+    eob
 
 l_0xc7703f:
     title(1, Flying3)
     "@I'm Flying Man 3." next
     "@Your courage hasn't died yet." next
-    "@Let's go![03]" eob
+    "@Let's go!" promptw
+    eob
 
 l_0xc7706a:
     "@I'm also your courage." next
     "@Call me Return of the Flying Man!" next
     title(1, Return)
     "@...How's that?" next
-    "@However... don't treat us like trash.[03]" eob
+    "@However... don't treat us like trash." promptw
+    eob
 
 l_0xc770b0:
     "@Of course, we're your courage." next
@@ -63,7 +106,8 @@ l_0xc770b0:
     "@If you don't understand <temerity,>{pause(15)} look it up in the dictionary." next
     "@Okay?" next
     title(1, Final)
-    "@My name's The Final Flying Man.[03]" eob
+    "@My name's The Final Flying Man." promptw
+    eob
 
 l_0xc77148:
     "@Did you want to talk to me?" next
@@ -262,9 +306,24 @@ l_0xc7786e:
     "@It takes you to the truth about yourself.{wait}[1F E1 1F 06 3C]" eob
 
 l_0xc7794c:
-    "[06 4A 00 {e(data_35.l_0xc7c588)}]@(I am the evil in your heart." next
+    goto_if_flag(FLG_WIN_OSCAR, data_35.l_0xc7c588)	// 0x4A, 74
+    "@(I am the evil in your heart." next
     "@You can't beat me." next
-    "@Because you are the one who forced me into being...)[03]" call(data_23.l_0xc6857c) "[1B 03 {e(data_23.l_0xc683de)}]{set(flag 74)}{pause(1)}[1F F1 4E 05 7B 02]{pause(40)}[1F 15 6A 00 00 03 01][1F 61][1F E7 6A 00]{window_open(1)}@([1C 02 01] heard a familiar voice at the center of the Sea of Eden.)" next
+    "@Because you are the one who forced me into being...)" promptw
+    call(data_23.l_0xc6857c)
+    goto_if_true(data_23.l_0xc683de)
+
+    set(FLG_WIN_OSCAR)	// 74
+    pause(1)
+    change_npc_movement(1358, 635)	// 054E, 027B
+    pause(40)
+    generate_active_sprite(106, 768, 1)	// 006A, 0300, 1
+    wait_for_movement
+    freeze_sprite_movement(106)	// 006A
+
+    unset(flg_FlyingMan)
+    window_open(1)
+    "@({name(1)} heard a familiar voice at the center of the Sea of Eden.)" next
     call(l_0xc77c50) "@Giygas' goal is" linebreak
     "  to destroy you." next
     call(l_0xc77c50) "@Listen carefully!" next
@@ -272,7 +331,7 @@ l_0xc7794c:
     call(l_0xc77c50) "@But he and his followers are also in trouble." next
     call(l_0xc77c50) "@The Apple of Enlightenment has foretold" next
     call(l_0xc77c50) "@that Giygas' attempt will fail." next
-    call(l_0xc77c50) "@It is because of the existence of a boy named [1C 02 01]." next window_open(1)
+    call(l_0xc77c50) "@It is because of the existence of a boy named {name(1)}." next window_open(1)
     call(l_0xc77c50) title_ness(1) "@...That's me!" next window_open(1)
     call(l_0xc77c50) "@Listen." next
     call(l_0xc77c50) "@Free your mind and KNOW what you must do!" next
@@ -285,18 +344,32 @@ l_0xc7794c:
     call(l_0xc77c50) "@Saturn Valley...{pause(20)} yes..." next
     call(l_0xc77c50) "@Go to the valley where the Mr. Saturn live." next
     call(l_0xc77c50) "@...You'll get something new there." next
-    call(l_0xc77c50) "@Soon, Magicant will be no more.{pause(20)}  We must be quick![03]" call(l_0xc77c50) "{window_closetop}{pause(120)}{window_open(1)}@([1C 02 01] really heard his own voice." next
+    call(l_0xc77c50) "@Soon, Magicant will be no more.{pause(20)}  We must be quick!" promptw
+    call(l_0xc77c50)
+    window_closetop
+    pause(120)
+
+    window_open(1)
+    "@({name(1)} really heard his own voice." next
     "@Go to Saturn Valley!" next
-    "@Go to Saturn Valley now!){wait}{window_closetop}[1F 07 03]" call(l_0xc77c50) "{pause(60)}" goto(data_36.l_0xc7dfbe)
+    "@Go to Saturn Valley now!)" wait
+    window_closetop
+    music_effect(3)	// Music fadeout
+    call(l_0xc77c50)
+    pause(60)
+    goto(data_36.l_0xc7dfbe)
 
 l_0xc77c4f:
     eob
 
 l_0xc77c50:
-    "[1F EA 6A 00][1F 61][1F E7 6A 00]" eob
+    unfreeze_sprite_movement(106)	// 006A
+    wait_for_movement
+    freeze_sprite_movement(106)		// 006A
+    eob
 
 l_0xc77c5b:
-    "@[1C 02 01]!" next
+    "@{name(1)}!" next
     "@Did you learn how to tell what time I'm indicating?" end
 
 l_0xc77c84:
@@ -311,22 +384,28 @@ l_0xc77cd0:
 
 l_0xc77cdf:
     title(1, Porky)
-    "@[1C 02 01], you're so lucky..." next
+    "@{name(1)}, you're so lucky..." next
     "@I envy you." next
     "@....." next
     "@I have no luck." next
     "{pause(60)}" linebreak
-    "@But, [1C 02 01]...{pause(15)} well, okay..." next
+    "@But, {name(1)}...{pause(15)} well, okay..." next
     "{pause(60)}" linebreak
     "@Let's be friends forever,{pause(15)} alright?" end
 
 l_0xc77d3a:
     title(1, Everdred)
-    "@[1C 02 01]!" next
+    "@{name(1)}!" next
     "@Maybe you don't wanna hear this," next
     "@but you remind me of myself when I was young." next
     "@I can't do anything more for you." next
-    "@Good luck, [1C 02 01]!{wait}{window_closeall}{pause(1)}[1F E1 1F 04 3C][1F 1E 42 05 09]{set(flag 639)}" eob
+    "@Good luck, {name(1)}!" wait
+    window_closeall
+    pause(1)
+    transition_palette(29, 4, 60)	// Tileset 1F, palette 4, speed 3C
+    hide_sprite(1346, 9)	// 0542, 9
+    set(FLG_MGKT_TONCHIKI_DISAPPEAR)	// 639
+    eob
 
 l_0xc77d9f:
     "{window_closeall}[1F 21 D6]" eob

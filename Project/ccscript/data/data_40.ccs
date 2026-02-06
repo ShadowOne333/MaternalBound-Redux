@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -223,7 +227,18 @@ l_0xc834a8:
 
 l_0xc834e1:
     title(1, Electra)
-    "@I kept asking around for Strawberry tofu, but...{wait}[1D 05 FF 8B][1B 03 {e(l_0xc83515)}]" eob
+    "@I kept asking around for Strawberry tofu, but..." wait
+    if flag flg_KeyItems and flg_KeyItem_YogurtMachine
+    {
+        unset(flg_KeyItem_YogurtMachine)
+        goto(l_0xc83515)
+    }
+    else
+    {
+        hasitem(-1, YOGURT_DISP)
+        goto_if_true(l_0xc83515)
+    }
+    eob
 
 l_0xc83515:
     next

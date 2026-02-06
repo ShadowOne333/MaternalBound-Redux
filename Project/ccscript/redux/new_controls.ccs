@@ -116,7 +116,8 @@ ROM[0xC134E1] = {
 
 ROM[0xC134F3] = CMP_i	(0x0002)// Change Equip to be option 2 instead of 4
 
-ROM[0xC134FB] = {
+// Modified so we can use the Key items menu
+/*ROM[0xC134FB] = {
 	NOP			// No operation
 	NOP			// No operation
 	NOP			// No operation
@@ -124,7 +125,8 @@ ROM[0xC134FB] = {
 	NOP			// No operation
 	NOP			// No operation
 	NOP			// No operation
-	NOP			// No operation
+	NOP			// No operation*/
+ROM[0xC13503] = {
 	CMP_i	(0x0004)	// Change Check to be option 4 instead of 5
 }
 

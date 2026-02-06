@@ -6,13 +6,23 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc6822a:
-    "{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The Bubble Monkey joins you.)[03]{window_closeall}" eob
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Bubble Monkey joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc68253:
     "[06 0A 00 {e(l_0xc68264)}]{window_open(1)}" call(data_27.l_0xc6eeb4) "{window_closeall}" goto(l_0xc68264)

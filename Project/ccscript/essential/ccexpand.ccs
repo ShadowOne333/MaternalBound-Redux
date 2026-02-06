@@ -39,7 +39,7 @@ CodeTable: {
   long Original1A00 // [1A 00] -- character select menu, no cancel
   long Original1A01 // [1A 01] -- character select menu, can cancel
   long SwirlDisplayRGB // [1A 02]
-  long DoNothing // [1A 03]
+  long CCUseItem // [1A 03]
   long Original1A04 // [1A 04] -- unused
   long Original1A05 // [1A 05] -- display character inventory
   long Original1A06 // [1A 06] -- display shop menu
@@ -63,12 +63,12 @@ CodeTable: {
   long DoNothing // [1A 18]
   long DoNothing // [1A 19]
   long DoNothing // [1A 1A]
-  long cc_main_menu.CC_Goods // [1A 1B]
-  long cc_main_menu.CC_Equip // [1A 1C]
-  long CCUseItem // [1A 1D]
-  long cc_main_menu.CC_Status // [1A 1E]
-  long cc_main_menu.CC_PSI // [1A 1F]
-  long cc_main_menu.CC_Close_HP // [1A 20]
+  long DoNothing // [1A 1B]
+  long DoNothing // [1A 1C]
+  long DoNothing // [1A 1D]
+  long DoNothing // [1A 1E]
+  long DoNothing // [1A 1F]
+  long DoNothing // [1A 20]
   long CompareResToArg // [1A 21]
   // ...
   // You can keep adding them up to [1A FF].
@@ -544,24 +544,73 @@ Original1A0A: ReturnToOriginalBranch(0xc17c0b)
 Original1A0B: ReturnToOriginalBranch(0xc17c1f)
 
 DoNothing: {
-  RTL
+	RTL
 }
 
 SwirlDisplayRGB: {
 
 }
 
-CCUseItem: M_EB_Function_Wrapper({
-  // Get character from arg
-  JSL(R_Get_Argument_Memory)
-  LDA_d(0x06)
-  STA_d(0x00)
-  // Get slot from result
-  JSL(R_Get_Working_Memory)
-  LDA_d(0x06)
-  STA_d(0x02)
-  // Call overworldUseItem
-  LDA_d(0x00)
-  LDX_d(0x02)
-  JSL_RTS_C1(0xC1AF74)
-})
+CCUseItem: {
+	// Allocate what the routine uses (+2).
+	REP	(0x31)
+	PHD
+	TDC
+	ADC_i	(0xFFD0)
+	TCD
+
+	// Character to $2A, slot to $2C, item ID to $01.
+
+	// Get item ID from arg, stored to $06.
+	JSL	(R_Get_Argument_Memory)
+	LDA_d	(0x06)
+	SEP	(0x20)
+	STA_d	(0x01)
+	REP	(0x20)
+
+	// Get party leader.
+	LDA_a	(0x9891)
+	AND_i	(0xFF)
+	INC
+	STA_d	(0x2A)
+
+	// Make the slot 0.
+	STZ_d	(0x2C)
+
+	// Mark this as a custom call.
+	LDA_i	(1)
+	STA_d	(0x2E)
+
+	// These are initialized to 0 too.
+	STZ_d	(0x02)
+	STZ_d	(0x24)
+	STZ_d	(0x26)
+	STZ_d	(0x28)
+
+	// It makes cItem (action arg) the item ID, so the secondary script of NPCs should be changed accordingly.
+	JSL_RTS_C1	(0xC1AFAB) // Right after it gets the item from the character and the slot.
+	PLD
+	RTL
+}
+
+ROM[0xC1AF79] = ADC_i	(0xFFD0) // Reserve 2 more bytes (so we can use $2E).
+
+// Length optimization, and zero out $2E (which indicates a normal call).
+ROM[0xC1AF84] = {
+	STZ_d	(0x06)
+	STZ_d	(0x08)
+	STZ_d	(0x2E)
+	NOP NOP
+	NOP NOP
+}
+
+ROM[0xC1B5AD] = JML(C1AF74_End_Hijack)
+
+C1AF74_End_Hijack: {
+	JSL	(0xC3E521) // Original call to CloseWindow.
+	LDA_d	(0x2E)
+	BNE	(4)
+	JML	(0xC1B5B1) // Normal return with PLD.
+	LDA_i	(1)
+	JML	(0xC1B5B5) // Return without PLD (jump to the RTS).
+}

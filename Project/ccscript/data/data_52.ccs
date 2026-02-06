@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -300,24 +303,58 @@ l_0xc959db:
 
 l_0xc959e2:
     title(1, Poochyfud)
-    "[06 77 00 {e(l_0xc95a5f)}]@The Runaway Brothers owe me a lot of money." next
+    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc95a5f)	// 0x77, 119
+    "@The Runaway Brothers owe me a lot of money." next
     "@They'll stay here until they pay me back." next
     "@They might be here for 100 years," next
-    "@unless you decide to pay off their debt...  Heh, heh, heh." end
+    "@unless you decide to pay off their debt...  Heh, heh, heh." next	//end
+    if flag flg_KeyItems and flag FLG_TWSN_ITEM_TONCHIKI // flg_KeyItem_WadofBills
+    {
+        unset(FLG_TWSN_ITEM_TONCHIKI)
+        unset(flg_KeyItem_BackstagePass)
+        goto(chaostheatermanager_paid)
+    }
 
 l_0xc95a5f:
     "@The Runaway Brothers are free to leave." next
     "@I've got no complaints now that I have my money." end
 
 l_0xc95a8d:
-    "[19 19 00 00]{swap}{result_is(180)}[1B 03 {e(l_0xc95aa0)}]" goto(data_35.l_0xc7c6b6)
+    return_item_in_slot(0, 0) swap
+    result_is(180)	// Suitcase/Wad of bills
+    goto_if_true(l_0xc95aa0)
+    goto(data_35.l_0xc7c6b6)
 
 l_0xc95aa0:
-    "{isset(flag 319)}[1B 02 {e(l_0xc95ba0)}][19 10 01][19 22 00 02 FD 00]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc95b64)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc95b64)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc95b64)}]{sound(118)}[19 23 FD 00 01 01 00][1F 16 FD 00 00]"
+    isset(FLG_TWSN_CHAOS_STAGE_START)	// 319
+    goto_if_false(l_0xc95ba0)
+    party_pos_check(1)
+    return_direction_char_to_object(0, 2, 253)	// Char 0, type 2 , ID 00FD
+    swap
+    store_registers
+    result_is(1)
+    goto_if_true(l_0xc95b64)
+    load_registers
+    result_is(2)
+    goto_if_true(l_0xc95b64)
+    load_registers
+    result_is(8)
+    goto_if_true(l_0xc95b64)
+    goto(chaostheatermanager_paid)
+
+chaostheatermanager_paid:
+    sound(SND_CHICKEN2)	// 118
+    return_direction_npc_to_object(253, 1, 1)		// NPC 00FD, type 1, ID 0001
+    sprite_direction(253, 0)	// 00FD
     title(1, Poochyfud)
     "@Yipes!{pause(60)}  You surprised me.{pause(20)}  Now I'm not sure what to do." next
-    "[1D 01 FF B4]@I got the money, of course,{pause(15)} and now the Runaway Brothers are free to leave." next
-    "@I've got no complaints now that I have my money.[03]{set(flag 119)}{set(flag 309)}{unset(flag 624)}" goto(data_34.l_0xc799d7)
+    take(-1, 180)	// Take the Suitecase/Wad of bills from inventory
+    "@I got the money, of course,{pause(15)} and now the Runaway Brothers are free to leave." next
+    "@I've got no complaints now that I have my money." promptw
+    set(FLG_TWSN_TONZURA_FREE)	// 119
+    set(FLG_TWSN_TONZURABUS_APPEAR)	// 309
+    unset(FLG_TWSN_TONCHIKI_APPEAR)	// 624
+    goto(data_34.l_0xc799d7)
 
 l_0xc95b63:
     eob

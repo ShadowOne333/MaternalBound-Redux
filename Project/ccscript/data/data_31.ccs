@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -50,13 +54,29 @@ l_0xc755fb:
 
 l_0xc7562f:
     "@Okay!{pause(20)}  Now you can finally share your incredible experiences with me..." next
-    "@You did so well![03]{window_closeall}" call(data_24.l_0xc69082) call(data_36.l_0xc7dd6b) "{music(94)}[1F 14 05][06 7E 02 {e(l_0xc75695)}][1F EB 02 06][1F 15 02 00 0D 03 01]{pause(1)}[1F F2 02 00 0A 00]" goto(l_0xc75695)
+    "@You did so well!" promptw
+    window_closeall
+    call(data_24.l_0xc69082)
+    call(data_36.l_0xc7dd6b)
+    music(94)
+    party_direction(5)
+    goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc75695)	// 638, 0x027E
+    hide_char(2)	// Hide Paula
+    generate_active_sprite(2, 781, 1)	// 0002, 030D, 1
+    pause(1)
+    change_sprite_movement(2, 10)	// 0002, 000A
+    goto(l_0xc75695)
 
 l_0xc75695:
     "[1F EB 01 06][1F 15 01 00 0C 03 01]{pause(1)}[1F F2 01 00 0A 00][1F 16 0E 00 05][1F F1 0E 00 0A 00][1F 16 12 00 05][1F F1 12 00 0A 00]{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}[1F 15 92 00 06 03 01]{pause(60)}{pause(100)}[1F 15 6A 00 7A 02 01][1F 61][1F 41 0B]" call(data_36.l_0xc7dd6b) "[1F EB FF 06][1F 21 E1]{music(95)}[1F 15 8F 00 F8 02 01][1F 61][1F 15 58 01 F9 02 01][1F 61][1F 15 C1 01 FA 02 01][1F 61][1F 41 0C]{pause(60)}" call(data_58.l_0xc9c7fa) eob
 
 l_0xc75717:
-    "[06 49 00 {e(l_0xc75899)}][06 4A 00 {e(l_0xc75865)}]{isset(flag 469)}[1B 02 {e(l_0xc7576b)}][06 64 00 {e(l_0xc75827)}][06 5E 00 {e(l_0xc7579e)}]"
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc75899)	// Flag 73, 0x49
+    goto_if_flag(FLG_WIN_OSCAR, l_0xc75865)	// Flag 74, 0x4A
+    isset(FLG_YAZIUMA_DISAPPEAR)	// 469
+    goto_if_false(l_0xc7576b)
+    goto_if_flag(FLG_INSEKI, l_0xc75827)	// Flag 100, 0x64
+    goto_if_flag(FLG_MYHOME_MAMA_YEAH, l_0xc7579e)	// Flag 94, 0x5E
     title_dog(1)
     "@(I've got fleas sucking me dry,{pause(15)} so I'm just going to lie still for now.)" end
 
@@ -79,10 +99,17 @@ l_0xc757cd:
     "@(Oh,{pause(10)} I get it.{pause(20)}  You just wanted to talk to me because I'm so lovable.)" end
 
 l_0xc757fb:
-    "@(I guess I have no choice.{pause(20)}  Let's go.)[03]{sound(16)}" call(data_22.l_0xc680f2) "{unset(flag 304)}{set(flag 444)}" eob
+    "@(I guess I have no choice.{pause(20)}  Let's go.)" promptw
+    sound(SND_GIFTOPEN)		// 16
+    set(flg_King)
+    call(data_22.l_0xc680f2)
+    unset(FLG_DOG_LATER_APPEAR)	// 304
+    set(FLG_MYHOME_DOG_MOVED)	// 444
+    eob
 
 l_0xc75827:
-    "{isset(flag 444)}[1B 02 {e(l_0xc758cc)}]"
+    isset(FLG_MYHOME_DOG_MOVED)	// 444
+    goto_if_false(l_0xc758cc)
     title_dog(1)
     "@(I don't wanna go out anymore." next
     "@I don't care if everyone thinks I'm a stubborn mutt.)" end
@@ -212,7 +239,8 @@ l_0xc7601a:
     "@It means <use> or <wear.>" next
     "@You must equip items in order to use or wear them." next
     "@<Equip> is used a lot in games like this," next
-    "@but you already knew that...[03]" goto(l_0xc760b7)
+    "@but you already knew that..." promptw
+    goto(l_0xc760b7)
 
 l_0xc76080:
     "@Okay,{pause(15)} that's good.{pause(20)}  Be sure to pay attention to details like that." next
@@ -222,7 +250,17 @@ l_0xc760b7:
     title(1, Porky)
     newline
     "@All right!{pause(20)}  You go out in front,{pause(15)} and I'll follow at a safe distance." next
-    "@Let's get going![03]{window_closeall}{set(flag 30)}{set(flag 21)}{set(flag 466)}" call(data_22.l_0xc68174) "{unset(flag 310)}{unset(flag 301)}{unset(flag 530)}{unset(flag 531)}" eob
+    "@Let's get going!" promptw
+    window_closeall
+    set(FLG_MYHOME_POKEY_DISAPPEAR)	// 30
+    set(FLG_POKEY)			// 21
+    set(FLG_INSEKI_PICKEY_APPEAR)	// 466
+    call(data_22.l_0xc68174)
+    unset(FLG_MYHOME_POKEY2_APPEAR)	// 310
+    unset(FLG_MYHOME_POKEY_APPEAR)	// 301
+    unset(FLG_MYHOME_TRACY_DISAPPEAR)	// 530
+    unset(FLG_MYHOME_1F_TRACY_APPEAR)	// 531
+    eob
 
 l_0xc76112:
     title(1, Tracy)

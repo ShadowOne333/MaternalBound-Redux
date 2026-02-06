@@ -446,15 +446,19 @@ command char_select_menu_cancellable "[1A 01 00 00 00 00 00 00 00 00 00 00 00 00
 
 
 // Open / close windows with special purposes
-command show_party_boxes "[1C 04]" // Opens HP/PP windows of the party.
-command close_hp cc_asmcall(0xC10000,RET_NONE)
+command show_party_boxes 	"[1C 04]" // Opens HP/PP windows of the party.
+command show_goods_menu		cc_asmcall(0xC13599, RET_NONE)
+command show_equip_menu		cc_asmcall(0xC13BAD, RET_NONE)
+command show_psi_menu		cc_asmcall(0xC13B62, RET_NONE)
+command show_status_menu	cc_asmcall(0xC13C01, RET_NONE)
+command close_hp 		cc_asmcall(0xC10000, RET_NONE)
 command show_inventory(window, char) "[1A 05 {byte window} {byte char}]" // Displays 'char''s inventory in specified window
-command show_escargo_items "[1A 07]"
-command show_phone "[1A 0A]" // Opens phone menu, and from there you can make calls and such. The Result Register is set to the telephone contacts table ID of who you called, or 0 if nobody was.
-command show_teleport "[1A 0B]" // Opens PSI Teleport menu.
-command show_stats(char) "[18 0D 01 {byte char}]" // Opens window 8 (stats menu) and displays the stats for character 'char.' They do not need to be in your party for this to work. There is a second parameter in place of "01" here, but the control code does not function if it is any other value.
-command show_shop(id) "[1A 06 {byte id}]" // Opens window 9 (shop menu) and displays a shop (defined in store_table.yml). Selected item ID or 0 is returned.
-command show_phone_dontcall "[1F 90]" // Opens phone menu, puts the choice in the result register, but doesn't place the call
+command show_escargo_items	"[1A 07]"
+command show_phone		"[1A 0A]" // Opens phone menu, and from there you can make calls and such. The Result Register is set to the telephone contacts table ID of who you called, or 0 if nobody was.
+command show_teleport		"[1A 0B]" // Opens PSI Teleport menu.
+command show_stats(char)	"[18 0D 01 {byte char}]" // Opens window 8 (stats menu) and displays the stats for character 'char.' They do not need to be in your party for this to work. There is a second parameter in place of "01" here, but the control code does not function if it is any other value.
+command show_shop(id)		"[1A 06 {byte id}]" // Opens window 9 (shop menu) and displays a shop (defined in store_table.yml). Selected item ID or 0 is returned.
+command show_phone_dontcall	"[1F 90]" // Opens phone menu, puts the choice in the result register, but doesn't place the call
 
 
 
@@ -641,8 +645,8 @@ command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {by
     define SCR_STATUS_6_SHIELD = 5
 
 command get_dad_deposit_money_base(n) "[1D 24 {byte n}]"
-    command get_dad_deposit_money get_dad_deposit_money_base(1)
-    command clear_dad_deposit_money get_dad_deposit_money_base(2)
+command get_dad_deposit_money get_dad_deposit_money_base(1)
+command clear_dad_deposit_money get_dad_deposit_money_base(2)
 
 command switch_call(n, labels) { "[1F C0 {byte n}]" labels }
 command switch_goto(n, labels) { "[09 {byte n}]" labels }

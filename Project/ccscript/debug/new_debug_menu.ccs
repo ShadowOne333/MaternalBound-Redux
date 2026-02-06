@@ -37,7 +37,7 @@ Main:
 debug_main:
     window_open(53) newline
     diam "What shall you do?" wait
-    "[18 02]"		// Save text window state
+    save_text_window_state
     open_hp
     open_wallet
     window_open(59)	// Previously Window 2

@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -128,14 +132,34 @@ l_0xc7c6c9:
     "  the {swap}[1C 05 00]." end
 
 l_0xc7c6f1:
-    "[19 1F]{swap}@The [1C 05 00] can't be used here." end
+    /*return_action_argument swap
+    if result_is(176) {
+    	set(flg_BikeCantNormallyBeUsed)
+    	goto(keyitems.BicycleStart) }
+    else {*/
+    	return_action_argument swap
+    	"@The {itemname(0)} can't be used here." wait
+    	eob //}
 
 l_0xc7c705:
-    "{store_registers}[19 19 00 00]{swap}{result_is(104)}[1B 03 {e(l_0xc7c761)}]{load_registers}[19 19 00 00]@Why would you do that?" linebreak
-    "  The [1C 05 00] would probably make you barf." end
+    store_registers
+    return_item_in_slot(0, 0) swap
+    result_is(BUBBLE_GUM)	// Bubble gum check
+    goto_if_true(l_0xc7c761)
+    load_registers
+    return_item_in_slot(0, 0)
+    "@Why would you do that?" linebreak
+    "  The {itemname(0)} would probably make you barf." end
 
 l_0xc7c742:
-    "{store_registers}[1D 11 00 00][1B 02 {e(failLines)}][19 1F]{swap}" call(data_15.l_0xc5e25b) "{load_registers}{set(flag 1008)}" goto(data_15.l_0xc5e136)
+    store_registers
+    use_item_check(0, 0)
+    goto_if_false(failLines)
+    return_action_argument swap
+    call(data_15.l_0xc5e25b)
+    load_registers
+    set(flag 1008)
+    goto(data_15.l_0xc5e136)
     //"[19 19 00 00]@The [1C 05 00] is one of the items that can be equipped." end
 
 loadZero:
@@ -144,14 +168,16 @@ failLines:
     "@{user} can't equip the [19 1F]{swap}[1C 05 00]." end 
 
 l_0xc7c761:
-    "{load_registers}[19 19 00 00]{swap}@[1C 02 00] chewed" linebreak
-    "  the {swap}[1C 05 00]." end
+    load_registers
+    return_item_in_slot(0, 0) swap
+    "@{name(0)} chewed" linebreak
+    "  the {swap}{itemname(0)}." end
 
 l_0xc7c77e:
-    "@[1C 02 00] got sunstroke." end
+    "@{name(0)} got sunstroke." end
 
 l_0xc7c78f:
-    "@[1C 02 00] was horribly poisoned and collapsed." end
+    "@{name(0)} was horribly poisoned and collapsed." end
 
 l_0xc7c7af:
     "@Alert!" next
@@ -169,7 +195,8 @@ l_0xc7c833:
     "@You should ride your bike in a less confining area." end
 
 l_0xc7c850:
-    "[06 F2 02 {e(l_0xc7c865)}]@You cannot teleport here." end
+    goto_if_flag(FLG_SYS_DISTLPT, l_0xc7c865)	// 0x02F2, 754
+    "@You cannot teleport here." end
 
 l_0xc7c865:
     "[06 F4 02 {e(l_0xc7c93f)}][06 B4 00 {e(l_0xc7c8c0)}][06 B5 00 {e(l_0xc7c912)}][06 85 02 {e(l_0xc7c912)}][06 BE 01 {e(l_0xc7c8e8)}][06 86 02 {e(l_0xc7c8e8)}][06 87 02 {e(l_0xc7c8e8)}][06 88 02 {e(l_0xc7c8e8)}][06 A3 02 {e(l_0xc7c912)}][06 B6 02 {e(l_0xc7c912)}][06 B7 02 {e(l_0xc7c912)}]@You cannot teleport now." end

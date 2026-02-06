@@ -61,8 +61,10 @@ create_both_patches:
 	@echo
 	@echo "Creating both BPS and IPS patches..."
 	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).bps"
-	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
-	@echo; echo "BPS & IPS patches created successfully!"; echo
+# IPS patches will no longer be made due to them not checking the base ROM for patching, causing glitches in wrong base ROMs
+#	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
+#	@echo; echo "BPS & IPS patches created successfully!"; echo
+	@echo; echo "BPS patch created successfully!"; echo
 
 # Finish the process
 finish:

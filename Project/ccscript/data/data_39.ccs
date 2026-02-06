@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -171,7 +175,12 @@ l_0xc81a84:
     "{set(flag 522)}" eob
 
 l_0xc81a88:
-    "[06 D3 00 {e(l_0xc81ac4)}][06 02 00 {e(l_0xc81b04)}][06 77 00 {e(l_0xc81ade)}][19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]@Hello,{pause(15)} please present your ticket." end
+    "[06 D3 00 {e(l_0xc81ac4)}][06 02 00 {e(l_0xc81b04)}][06 77 00 {e(l_0xc81ade)}][19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]@Hello,{pause(15)} please present your ticket." next //end
+    if flag flg_KeyItems and flag flg_KeyItem_BackstagePass
+    {
+        goto(chaostheaterticket)
+    }
+    eob
 
 l_0xc81ac4:
     "@Sorry,{pause(15)} the show is on hold for a while." end
@@ -189,7 +198,18 @@ l_0xc81b0c:
     "{store_registers}[06 02 00 {e(l_0xc81baf)}][06 77 00 {e(l_0xc81b9b)}]{load_registers}[19 19 00 00]{swap}{store_registers}{result_is(125)}[1B 03 {e(l_0xc81b50)}][19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]@Please show me your ticket." end
 
 l_0xc81b50:
-    "[19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]{sound(118)}@Here you go.{pause(15)}  Hurry!{pause(20)}  You're just in time to see the Runaway Brothers show![03]" call(data_33.l_0xc79211) "{set(flag 549)}{set(flag 2)}" eob
+    return_direction_char_to_object(-1, 2, 226)	// FF, 02, 00E2
+    call(data_36.l_0xc7dc9b)
+    goto_if_false(l_0xc81ade)
+    goto(chaostheaterticket)
+
+chaostheaterticket:
+    sound(SND_CHICKEN2)	// 118
+    "@Here you go.{pause(15)}  Hurry!{pause(20)}  You're just in time to see the Runaway Five show!" promptw
+    call(data_33.l_0xc79211)
+    set(FLG_TWSN_FIELD_TONZ_DISAPPEAR)	// 549
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc81b9b:
     "@The show is on hold for a while." end
@@ -198,10 +218,12 @@ l_0xc81baf:
     "@How do you do?" end
 
 l_0xc81bb8:
-    "@Oh, here you are!{pause(20)}  Hurry up, you're just in time to see the Runaway Brothers show.[03]" eob
+    "@Oh, here you are!{pause(20)}  Hurry up, you're just in time to see the Runaway Brothers show." promptw
+    eob
 
 l_0xc81be2:
-    "[06 77 00 {e(l_0xc81c2f)}]@I guess I lost my ticket,{pause(15)} so now I can't get in." next
+    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81c2f)	// 0x77, 119
+    "@I guess I lost my ticket,{pause(15)} so now I can't get in." next
     "@The ticket counter at the department store was even sold out." end
 
 l_0xc81c2f:
@@ -217,12 +239,19 @@ l_0xc81c91:
     "@We started to nod off while waiting..." end
 
 l_0xc81cd6:
-    "[06 77 00 {e(l_0xc81dc3)}][06 73 00 {e(l_0xc81db5)}]@Lucky of the Runaway Brothers told me to come see him backstage," next
+    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81dc3)	// 0x77, 119
+    goto_if_flag(FLG_TWSN_MICHIKO_THANKYOU, l_0xc81db5)	// 0x73, 115
+    "@Lucky of the Runaway Brothers told me to come see him backstage," next
     "@but I don't have a pass." next
     "@I'm sure security will stop me.{pause(20)}  Hey!{pause(20)}  Really?{pause(30)}  You have a pass?" next
     "@I can't believe it!{pause(20)}  Can you take me with you, please{pause(5)} please{pause(10)} please?" next
     "@I could pose as your sister.{pause(15)}  Yes?  This rocks.{pause(15)}  Let's go." next
-    "@Ooo.{pause(15)} My heart is pounding.[03]{window_closeall}" call(data_34.l_0xc79997) "{unset(flag 43)}{set(flag 115)}" eob
+    "@Ooo.{pause(15)} My heart is pounding." promptw
+    window_closeall
+    call(data_34.l_0xc79997)
+    unset(FLG_TWSN_MICHIKO_APPEAR)	// 43
+    set(FLG_TWSN_MICHIKO_THANKYOU)	// 115
+    eob
 
 l_0xc81db5:
     "@Thank you for your kindness!" end
@@ -340,7 +369,15 @@ l_0xc82468:
     "@Could you bring me her autograph on an eraser?" next
     "@Then, I'll show you something <extraordinary.>" next
     "@...Oh,{pause(15)} if you can get her autograph on anything,{pause(15)} don't worry about the eraser..." next
-    "@I don't care if the autograph is written on toilet paper...{wait}{set(flag 140)}{unset(flag 687)}" eob
+    "@I don't care if the autograph is written on toilet paper..." wait
+    set(FLG_FOUR_KOMORITA)	// 140
+    unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+    if flag flg_KeyItems and flag FLG_ITEM_BANANA
+    {
+        next
+        call(l_0xc8259f)
+    }
+    eob
 
 l_0xc82565:
     title(1, Spoon)
@@ -348,10 +385,13 @@ l_0xc82565:
     "@'cause I don't like being alone..." end
 
 l_0xc8258c:
-    "[19 19 00 00]{swap}{result_is(183)}[1B 03 {e(l_0xc8259f)}]" goto(data_35.l_0xc7c6b6)
+    return_item_in_slot(0, 0) swap
+    result_is(SIGNED_BANANA)	// Signed Banana
+    goto_if_true(l_0xc8259f)
+    goto(data_35.l_0xc7c6b6)
 
 l_0xc8259f:
-    "{sound(118)}"
+    sound(SND_CHICKEN2)	// 118
     title(1, Spoon)
     "@You got it!" next
     "@That banana peel has an authentic <Venus> autograph?" next
@@ -361,7 +401,16 @@ l_0xc8259f:
     "@In the next room, there is a light shining from far, far below the manhole." next
     "@There,{pause(15)} I found a huge,{pause(15)} monster rat!" next
     "@I'm not trying to pull your leg..." next
-    "@I'll let you go there and check it out for yourself.{wait}{sound(16)}{window_closeall}[1D 01 FF B7][1F 1E 8C 03 06][1F 17 8D 03 F3 00 01][1F 61]{set(flag 58)}{set(flag 2)}" eob
+    "@I'll let you go there and check it out for yourself." wait
+    sound(SND_GIFTOPEN)	// 16
+    window_closeall
+    take(-1, SIGNED_BANANA)
+    hide_sprite(908, 6)	// 038C
+    generate_active_npc(909, 243, 1)	// 38D, F3, 1
+    wait_for_movement
+    set(FLG_FOUR_KOMORITA_APPEAR)	// 58
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc826bc:
     "[06 DC 00 {e(l_0xc826c8)}]" goto(l_0xc82565)

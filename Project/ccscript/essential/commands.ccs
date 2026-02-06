@@ -515,3 +515,9 @@ _sub_in_your_case: {
         "For the two of you"
         eob
 }
+
+// New command for the item name during descriptions
+command item_name_in_quotes(id) {
+    //Only one space here because a space and the open quote mark is the same length as a @
+    " <{itemname(id)}>" next
+}

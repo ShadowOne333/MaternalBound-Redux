@@ -887,7 +887,7 @@ Fire:
 	BEQ_a(Freeze)
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33F68B
+	LDA_i(0x0050)//Text's horizontal positioning. $33F68B
 	STA_d(0x20)
 	LDA_i(0x0000)//Text's vertical positioning.
 	STA_d(0x22)
@@ -998,7 +998,7 @@ Freeze:
 	BEQ_a(Flash)
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33F745
+	LDA_i(0x0050)//Text's horizontal positioning. $33F745
 	STA_d(0x20)
 	LDA_i(0x0001)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1110,7 +1110,7 @@ Flash:
 	BEQ_a(Paralysis)
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33F7FF
+	LDA_i(0x0050)//Text's horizontal positioning. $33F7FF
 	STA_d(0x20)
 	LDA_i(0x0002)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1222,7 +1222,7 @@ Paralysis:
 	BEQ_a(Hypnosis)
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33F8B9
+	LDA_i(0x0050)//Text's horizontal positioning. $33F8B9
 	STA_d(0x20)
 	LDA_i(0x0003)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1327,7 +1327,7 @@ Hypnosis:
 	BEQ_a(Brainshock)
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33F961
+	LDA_i(0x0050)//Text's horizontal positioning. $33F961
 	STA_d(0x20)
 	LDA_i(0x0004)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1434,7 +1434,7 @@ Brainshock:
 	
 	
 //Preparing text.
-	LDA_i(0x004F)//Text's horizontal positioning. $33FA0D
+	LDA_i(0x0050)//Text's horizontal positioning. $33FA0D
 	STA_d(0x20)
 	LDA_i(0x0005)//Text's vertical positioning.
 	STA_d(0x22)

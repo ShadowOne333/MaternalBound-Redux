@@ -184,15 +184,45 @@ l_0xc7a20c:
     call(data_23.l_0xc683d9) "[1F 15 B6 00 0A 01 01][1F 61][1F 1F B6 00 06][1F 17 7A 02 08 00 01]{set(flag 335)}" eob
 
 l_0xc7a22a:
+    unset(flg_Tony)
     title(1, Tony)
-    "@Okay,{pause(15)} now use me as a step and climb over the gate.[03]{window_closeall}[1F EB FF 06][1F 15 51 01 0B 01 01] [1F 15 58 01 0C 01 01]{pause(1)}[1F EF 58 01][1F E8 FF][1F 61][1F E7 51 01][1F E7 58 01]{window_open(1)}"
+    "@Okay,{pause(15)} now use me as a step and climb over the gate." promptw
+    window_closeall
+    hide_char(-1)
+    generate_active_sprite(337, 267, 1)	// 0151, 010B, 1
+    generate_active_sprite(344, 268, 1)	// 0158, 010C, 1
+    pause(1)
+    focus_camera_sprite(344)	// 0158
+    unfreeze_char_movement(-1)
+    wait_for_movement
+    freeze_sprite_movement(337)	// 0151
+    freeze_sprite_movement(344)	// 0158
+    window_open(1)
     title(1, Tony)
     "@Well...{pause(15)} I'll say goodbye for now." next
     "@I don't know where you're going or why," next
-    "@but remember,{pause(20)} we are best friends{pause(5)} forever.[03]{window_closeall}[1F EA 51 01][1F EA 58 01][1F 61][1F ED][1F EC FF 01][1F 1E 7A 02 06][1F 15 B6 00 0D 01 01][1F 67 01][19 26 06]{unset(flag 335)}[1F 07 03]{pause(120)}{set(flag 544)}{music_resume}{unset(flag 11)}" eob
+    "@but remember,{pause(20)} we are best friends{pause(5)} forever." promptw
+    window_closeall
+    unfreeze_sprite_movement(337)	// 0151
+    unfreeze_sprite_movement(344)	// 0158
+    wait_for_movement
+    reset_camera
+    show_char(-1, 1)
+    hide_sprite(634, 6)			// 027A, 6
+    generate_active_sprite(182, 269, 1)	// 00B6, 010D, 1
+    hotspot_off(1)
+    set_respawn(6)
+    unset(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
+    music_effect(3)			// Music fadeout
+    pause(120)
+    set(FLG_BGM_WINT1)			// Change music to Winters
+    music_resume
+    unset(FLG_SYS_MONSTER_OFF)		// 11
+    eob
 
 l_0xc7a2f7:
-    "[1F 66 01 36 00 A3 C7 00]" eob
+    hotspot_on(1, 54, l_0xc7a300)	// 1, 0x36, 0x00C7A300
+    eob
 
 l_0xc7a300:
     call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc7a2f7)}]{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"

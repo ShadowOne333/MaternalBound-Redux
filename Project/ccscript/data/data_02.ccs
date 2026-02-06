@@ -4,6 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/window_titles.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
@@ -337,13 +343,14 @@ l_0xc536d2:
     eob
 
 l_0xc536e1:
-    "@It looks like [1C 02 00] is overloaded with items." next
+    "@It looks like {name(0)} is overloaded with items." next
     "@You want to have one of your friends carry it?" linebreak
     eob
 
 l_0xc53711:
     newline
-    " <[1C 05 01]>" next
+    item_name_in_quotes(1)
+    //" <[1C 05 01]>" next
     "@By keeping it as one of your items," next
     "@it deflects a lightning attack back at the attacker." end
 

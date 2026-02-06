@@ -6,6 +6,8 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -13,7 +15,8 @@ command e(label) "{long label}"
 // Text Data
 l_0xc56253:
     newline
-    " <[1C 05 EA]>" next
+    item_name_in_quotes(234)
+    //" <[1C 05 EA]>" next
     "@It's one of Mr Saturn's favorite foods." next
     "@It tastes pretty yummy." next
     call(l_0xc56cb5) "100" call(l_0xc56cd6) end

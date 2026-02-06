@@ -6,6 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -170,29 +174,45 @@ l_0xc74565:
     "@I must totally stand out..." end
 
 l_0xc74578:
-    "@[1C 01 08], that rocks!" next
+    "@{stat(8)}, that rocks!" next
     "@Yesterday,{pause(15)} I finally became a hideout member.{pause(20)}  I'm glad to be a club member along with you." end
 
 l_0xc745b9:
-    "[06 6C 00 {e(l_0xc7460b)}]@I heard there's a big footprint on the hilltop behind this shack." next
+    goto_if_flag(FLG_OPEN_TABIGOYA, l_0xc7460b)	// 0x6C, 108
+    "@I heard there's a big footprint on the hilltop behind this shack." next
     "@I haven't seen it myself...{pause(15)}  It's just a rumor." end
 
 l_0xc7460b:
     "@Uh, huh.{pause(15)}  The big footprint is called Giant Step.{pause(20)}  What a way cool name!" end
 
 l_0xc74646:
-    "[19 19 00 00]{swap}{result_is(170)}[1B 02 {e(data_35.l_0xc7c6b6)}][19 23 80 00 01 01 00][1F 16 80 00 00][19 23 A2 00 01 01 00][1F 16 A2 00 00]@Yep,{pause(15)} that's the key!{pause(20)}  Hurry and open the door." end
+    load_registers
+    swap return_action_argument	//return_item_in_slot(0, 0) swap
+    result_is(SHACK_KEY)	// 170
+    goto_if_false(data_35.l_0xc7c6b6)
+    return_direction_npc_to_object(128, 1, 1)	// 0080, 1, 0001
+    sprite_direction(128, 0)	// 0080, 0
+    return_direction_npc_to_object(162, 1, 1)	// 00A2, 1, 0001
+    sprite_direction(162, 0)	// 00A2, 0
+    "@Yep,{pause(15)} that's the key!{pause(20)}  Hurry and open the door." end
 
 l_0xc74690:
-    "[06 6C 00 {e(l_0xc7472f)}]@This shack was locked by someone from City Hall,{pause(15)} so we can't use it." next
+    goto_if_flag(FLG_OPEN_TABIGOYA, l_0xc7472f)	// 0x6C, 108
+    "@This shack was locked by someone from City Hall,{pause(15)} so we can't use it." next
     "@The reason it was closed was 'cause a punk named Frank may have trashed the place." next
     "@What a drag." next
     "@We can't even change our clothes,{pause(15)} and hotels are too expensive..." end
 
 l_0xc7472f:
-    "[06 4E 00 {e(l_0xc747dc)}]@Wow.{pause(15)}  You opened the door!{pause(15)}  All right!" next
-    "@Here's a trinket for good luck.{pause(15)}  It's the [1C 05 36]!" next
-    "[1D 03 FF][1B 02 {e(l_0xc74787)}][1D 0E 00 36]" call(data_36.l_0xc7dccf) "{set(flag 78)}" end
+    goto_if_flag(FLG_ITEM_PRETZ, l_0xc747dc)	// 78
+    "@Wow.{pause(15)}  You opened the door!{pause(15)}  All right!" next
+    "@Here's a trinket for good luck.{pause(15)}  It's the {itemname(54)}!" next
+    // Item 0x36 / 54, Travel charm
+    char_inventory_vacancy(-1)	// FF
+    goto_if_false(l_0xc74787)
+    give_and_check(0, 54)	// 0, 36
+    call(data_36.l_0xc7dccf)
+    set(FLG_ITEM_PRETZ) end	// Flag 78
 
 l_0xc74787:
     newline

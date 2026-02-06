@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -139,7 +143,8 @@ l_0xc6af5d:
     "@Is it cold outside?" end
 
 l_0xc6af6c:
-    "[1D 05 FF 68][1B 03 {e(l_0xc6af8a)}]"
+    hasitem(-1, BUBBLE_GUM)	// 0x68, 104
+    goto_if_true(l_0xc6af8a)
     title(1, Bubble)
     "@Kyee Kyee! (Yeah!)" end
 
@@ -147,7 +152,11 @@ l_0xc6af8a:
     title(1, Bubble)
     "@Kyu Ukyee" linebreak
     "  (Gimme some gum.)" next
-    "@(The monkey got a piece of bubble gum from [1C 02 03] and blew a bubble!)[03]{window_closeall}{set(flag 334)}{set(flag 22)}" call(data_43.l_0xc880b9) call(data_23.l_0xc6822a) eob
+    "@(The monkey got a piece of bubble gum from {name(3)} and blew a bubble!)" promptw
+    window_closeall
+    set(FLG_WINS_BMONKEY_DISAPPEAR)	// 334
+    set(FLG_BALLOONMONKEY)	// 22
+    call(data_43.l_0xc880b9) call(data_23.l_0xc6822a) eob
 
 l_0xc6afe1:
     "@I'm the cook for the Tessie-Watching club." next

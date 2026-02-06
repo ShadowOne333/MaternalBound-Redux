@@ -42,10 +42,6 @@ import "essential/fade_tools.ccs"
 import "essential/flags.ccs"
 import "essential/jsl_rts.ccs"
 //------------------------------------------------------------------
-// Mod Menu
-import "modmenu/mainmenu.ccs"
-import "modmenu/keyitems.ccs"
-//------------------------------------------------------------------
 // Redux
 //import "redux/better_text_speed.ccs"
 import "redux/Bowspr.ccs"
@@ -54,6 +50,7 @@ import "redux/debug_fixes.ccs"
 import "redux/fast_terrain.ccs"
 import "redux/four_frames_run.ccs"
 import "redux/goods_menu_equip.ccs"
+import "redux/keyitems.ccs"
 import "redux/m2_title_screen_movements.ccs"
 import "redux/m3sprites.ccs"
 import "redux/movement_reloc.ccs"

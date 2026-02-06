@@ -11,6 +11,7 @@ import "../essential/ccexpand.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -41,29 +42,29 @@ l_0xc5e6f4:
     "[1F E5 FF][1F 21 B7][1F 15 6A 00 22 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
 
 l_0xc5e70b:	// Game startup at Ness' bed in Onett
-    set(FLG_YAZIUMA_DISAPPEAR)	// 469
-    set(FLG_SYS_MONSTER_OFF)	// 11
+    set(FLG_YAZIUMA_DISAPPEAR)		// 469
+    set(FLG_SYS_MONSTER_OFF)		// 11
     hide_char(-1)
     generate_active_sprite(106, 476, 1)
     call(data_57.l_0xc9b4b8)
-    warp(150)	// 96
+    warp(150)				// 96
     freeze_npc_movement(186)
     generate_active_sprite(106, 477, 1)
     call(data_57.l_0xc9b4b8)
-    warp(151)	// 97
+    warp(151)				// 97
     generate_active_sprite(106, 478, 1)
     call(data_57.l_0xc9b4b8)
     set(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
-    set(FLG_BGM_INSEKI_FALL_A)	// 532
-    set(FLG_MYHOME_NES_CHANGE)	// 749
-    warp(FLG_TEMP_9)	// 10
+    set(FLG_BGM_INSEKI_FALL_A)		// 532
+    set(FLG_MYHOME_NES_CHANGE)		// 749
+    warp(FLG_TEMP_9)			// 10
     unfreeze_npc_movement(26)
     unfreeze_npc_movement(27)
     pause(120) pause(120) pause(120) pause(120) pause(120) pause(60)
     hide_sprite(27, 6)
     generate_active_sprite(106, 36, 1)
     unset(FLG_BGM_INSEKI_FALL_A)	// 532
-    set(FLG_BGM_INSEKI_FALL_B)	// 533
+    set(FLG_BGM_INSEKI_FALL_B)		// 533
     music_resume
     wait_for_movement
     hide_sprite(26, 6)
@@ -76,55 +77,131 @@ l_0xc5e70b:	// Game startup at Ness' bed in Onett
     set(FLG_INSEKI_STOPPER_APPEAR)	// 476
     unset(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
     unset(FLG_YAZIUMA_DISAPPEAR)	// 469
+
+    // Added for Key items menu
+    set(flg_Ness)
+    set(flg_KeyItems)
+	
     save
-    set(flg_Ness)	// Added for Key items menu
     eob
 
 l_0xc5e79f:
-    "{set(flag 375)}{music_resume}[1F 17 16 00 26 00 01]" eob
+    set(FLG_MYHOME_START)	// 375
+    music_resume
+    generate_active_npc(22, 38, 1)	// 0016, 0026, 1
+    eob
 
 l_0xc5e7ac:
-    "[06 FB 02 {e(data_58.l_0xc9c85d)}][1F 01 00]{sound(8)}[1F 15 6A 00 27 00 01]" call(data_57.l_0xc9b4b8) "[1F 17 11 00 0B 00 01][1F 1E 16 00 06]{sound(9)}[1F ED][19 23 11 00 01 01 00][1F 16 11 00 00][19 22 01 02 11 00][1F 13 01 00][1F E5 FF]{pause(1)}[1F E6 11 00]{set(flag 97)}{set(flag 301)}{unset(flag 295)}{set(flag 467)}{set(flag 531)}{unset(flag 473)}{window_open(1)}" call(data_31.l_0xc75c33) "{window_closeall}" eob
+    goto_if_flag(FLG_MYHOME_TO_BE, data_58.l_0xc9c85d)	// 0x02FB, 763
+    "[1F 01 00]"	// music_stop(0)
+    sound(8)
+    generate_active_sprite(106, 39, 1)	// 006A, 0027, 1
+    call(data_57.l_0xc9b4b8)
+    generate_active_npc(17, 11, 1)	// 0011, 000B, 1
+    hide_sprite(22, 6)		// 0016, 6
+    sound(9)
+    reset_camera
+    return_direction_npc_to_object(17, 1, 1)	// 0011, 1, 0001
+    sprite_direction(17, 0)	// 0011, 0
+    char_facing_npc(1, 17)	// 1, 0011
+    freeze_char_movement(-1)	// FF
+    pause(1)
+    freeze_npc_movement(17)	// 0011
+    set(FLG_MYHOME_POKEY_ENTER)	// 97
+    set(FLG_MYHOME_POKEY_APPEAR)	// 301
+    unset(FLG_MYHOME_KNOCK_APPEAR)	// 295
+    set(FLG_MYHOME_DOOR_CLOSE)	// 467
+    set(FLG_MYHOME_1F_TRACY_APPEAR)	// 531
+    unset(FLG_KAIDAN_TRACY_APPEAR)	// 473
+    window_open(1)
+    call(data_31.l_0xc75c33)
+    window_closeall
+    eob
 
 l_0xc5e812:
-    "[1F F1 15 00 08 00]" eob
+    change_npc_movement(21, 8)	// 0015, 0008
+    eob
 
 l_0xc5e819:
-    "[1F F1 15 00 29 00]" eob
+    change_npc_movement(21, 41)	// 0015, 0029
+    eob
 
 l_0xc5e820:
-    "[1F E9 13 00][1F 61][1F E6 13 00]{window_open(1)}" goto(data_31.l_0xc75c33)
+    unfreeze_npc_movement(19)	// 0013
+    wait_for_movement
+    freeze_npc_movement(19)	// 0013
+    window_open(1)
+    goto(data_31.l_0xc75c33)
 
 l_0xc5e832:
     eob
 
 l_0xc5e833:
-    "[1F 1E 10 00 06][1F 17 12 00 2B 00 01]" eob
+    hide_sprite(16, 6)	// 0010, 6
+    generate_active_npc(18, 43, 1)	// 0012, 002B
+    eob
 
 l_0xc5e840:
-    "[1F 1C 05 03]{pause(60)}[1F 1D 05]{window_open(1)}"
+    show_char_float(5, 3)
+    pause(60)
+    hide_char_float(5)
+    window_open(1)
     title(1, Porky)
-    "@Hey [1C 01 08]!{pause(20)}[19 22 01 01 05 00][1F 13 01 00]  So, are you just gonna wander around wherever you please?" next
-    "@Don't you think we should focus on getting Picky home?[03]{window_closeall}" eob
+    "@Hey {stat(8)}!{pause(20)}"
+    char1_facing_char2(1, 5)
+    "  So, are you just gonna wander around wherever you please?" next
+    "@Don't you think we should focus on getting Picky home?" promptw
+    window_closeall
+    eob
 
 l_0xc5e8a0:
-    "[1F 1A 7C 00 03]{pause(60)}[1F 1B 7C 00][1F 1E 7C 00 06][1F 15 2D 00 08 00 01]"
+    show_sprite_float(124, 3)	// 7C, 3
+    pause(60)
+    hide_sprite_float(124)	// 7C
+    hide_sprite(124, 6)		// 7C, 6
+    generate_active_sprite(45, 8, 1)	// 002D, 0008, 1
     title(1, Picky)
     "@Wha-!" next
-    "[19 24 2D 00 01 01 00][1F E4 2D 00 00]@Oh!" next
+    return_direction_sprite_to_object(45, 1, 1)	// 002D, 01, 0001
+    change_active_sprite_direction(45, 0)	// 002D, 00
+    "@Oh!" next
     "@You woke me up..." next
     "@Porky!{pause(15)}  I've been looking all over for you..." next
     "@You see,{pause(15)} Porky got scared and ran away..." next
     "@Well, I'm glad that you're okay at least..." next
     "@Let's go home now.{pause(20)}  I bet Mom and Dad are worried sick about us." next
-    "@Geez!{pause(15)}  Sometimes I wonder which one of us is the real big brother.[03]{sound(16)}" call(data_22.l_0xc681f0) "{set(flag 20)}{set(flag 37)}{set(flag 742)}[1F 66 01 0F 45 EA C5 00]{set(flag 100)}{unset(flag 466)}{unset(flag 468)}{set(flag 11)}" eob
+    "@Geez!{pause(15)}  Sometimes I wonder which one of us is the real big brother." promptw
+    sound(SND_GIFTOPEN)			// 16
+    call(data_22.l_0xc681f0)
+    set(FLG_PICKEY)
+    set(FLG_ONET_MINCES_APPEAR)		// 37
+    set(FLG_ONET_LARDNA_APPEAR)
+    hotspot_on(1, 15, l_0xc5ea45)	// 01, 0F, 0x00C5EA45
+    set(FLG_INSEKI)			// 100
+    unset(FLG_INSEKI_PICKEY_APPEAR)	// 466
+    unset(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+    set(FLG_SYS_MONSTER_OFF)		// 11
+    eob
 
 l_0xc5e9a8:
-    "[19 10 03]{result_is(7)}[1B 02 {e(data_55.l_0xc9992f)}]{window_open(1)}[19 22 01 01 07 00][1F 13 01 00][19 22 05 01 07 00][1F 13 05 00]"
+    party_pos_check(3)
+    result_is(7)	// Check for King in party
+    goto_if_false(data_55.l_0xc9992f)
+    window_open(1)
+    char1_facing_char2(1, 7)	// 01, 07
+    char1_facing_char2(5, 7)	// 05, 07
     title_dog(1)
     "@Awo{pause(5)}o{pause(5)}o{pause(5)}o{pause(5)}of!" next
     "@(If I knew this was going to be such a scary place," next
-    "@I wouldn't have come along...{pause(20)}  I'm outta here!){wait}" call(data_23.l_0xc683d5) "{window_closeall}[1F 15 28 00 2E 00 01][1F 61][1F F1 7C 00 73 02]{set(flag 304)}" eob
+    "@I wouldn't have come along...{pause(20)}  I'm outta here!)" wait
+    unset(flg_King)
+    call(data_23.l_0xc683d5)
+    window_closeall
+    generate_active_sprite(49, 46, 1)	// 0028, 002E, 1
+    wait_for_movement
+    change_npc_movement(124, 627)	// 7C, 0273
+    set(FLG_DOG_LATER_APPEAR)
+    eob
 
 l_0xc5ea35:
     "[06 12 00 {e(l_0xc5ea3d)}]" eob
@@ -202,57 +279,171 @@ l_0xc5edd4:
 
 l_0xc5ee13:
     "@Thank you for listening to my long story." next
-    "@You are as exceptional as I expected you to be...[03]{window_closeall}{music(11)}{pause(120)}{pause(60)}{pause(120)}{pause(120)}{window_open(1)}@Buzz Buzz now joins you.[03]{window_closeall}[1F EA 5B 01]{set(flag 18)}{music_resume}[1F EA 5B 01]{pause(60)}[1F 1C 05 03]{pause(60)}[1F 1D 05][1F E7 5B 01]{window_open(1)}"
+    "@You are as exceptional as I expected you to be..." promptw
+    window_closeall
+    music(11)
+    pause(120) pause(60)
+    pause(120) pause(120)
+
+    window_open(1)
+    "@Buzz Buzz now joins you." promptw
+    window_closeall
+    unfreeze_sprite_movement(347)	// 015B
+    set(FLG_BUNBUN)			// 18
+    music_resume
+    unfreeze_sprite_movement(347)	// 015B
+    pause(60)
+    show_char_float(5, 3)
+    pause(60)
+    hide_char_float(5)
+    freeze_sprite_movement(347)	// 015B
+
+    window_open(1)
     title(1, Porky)
-    "@[1C 02 01]!" next
+    "@{name(1)}!" next
     "@It looks like you're really in a lot of trouble this time..." next
     "@Three boys,{pause(15)} he said?  ...Uhhh..." next
     "@I'm not one of those three, am I?..." next
     "@...'Cause... I'm not into this kind of thing at all..." next
-    "@Geez.{pause(20)}  My heart is almost pounding right out of my chest!...[03]{window_closeall}[1F 66 01 2B 01 75 C6 00]" eob
+    "@Geez.{pause(20)}  My heart is almost pounding right out of my chest!..." promptw
+    window_closeall
+    hotspot_on(1, 43, data_22.l_0xc67501)	// 01, 2B, 0x00C67501 
+    eob
 
 l_0xc5ef3e:
-    "[06 68 00 {e(l_0xc5f1d1)}]"
+    goto_if_flag(FLG_ONET_AMBRAMI, l_0xc5f1d1)	// 0x68, 104
     title(1, Aloysius)
     "@I'm really sorry that my kids troubled you so much..." next
-    "@Both of you are really going to get it now![03]{window_closeall}[1F EA 5B 01][1F E9 2D 00][1F 12 05][1F 15 2C 00 51 00 01][1F 12 06][1F 15 2D 00 52 00 01][1F 61][1F F1 2C 00 53 00][1F 61][1F E6 2D 00][19 22 01 02 2C 00][1F 13 01 00]{window_open(1)}"
+    "@Both of you are really going to get it now!" promptw
+    window_closeall
+
+    unfreeze_sprite_movement(347)	// 015B
+    unfreeze_npc_movement(45)		// 002D
+    party_remove(5)			// Remove Porky from party
+    generate_active_sprite(44, 81, 1)	// 002C, 0051, 1
+    party_remove(6)			// Remove Picky from party
+    generate_active_sprite(45, 82, 1)	// 002D, 0052, 1
+    wait_for_movement
+    change_npc_movement(44, 83)		// 002C, 0053
+    wait_for_movement
+    freeze_npc_movement(45)		// 002D
+    char_facing_npc(1, 44)		// 002C
+
+    window_open(1)
     title(1, Aloysius)
     "@By the way, I would be happy if you left sometime soon." next
     "@I'm tired of your family living next door." next
     "@We've loaned your father a lot of money." next
     "@It may have been hundreds of trillions or thereabouts..." next
     "@Well, I guess it really could have been less," next
-    "@but because of the loan,{pause(15)} my family and I now live in poverty![03]{window_closeall}[1F EA 5B 01][1F F1 2C 00 0C 00][1F F1 2D 00 54 00][1F 61][1F E6 2C 00][19 22 01 02 2D 00][1F 13 01 00]{window_open(1)}"
+    "@but because of the loan,{pause(15)} my family and I now live in poverty!" promptw
+    window_closeall
+
+    unfreeze_sprite_movement(347)	// 015B
+    change_npc_movement(44, 12)		// 002C, 000C
+    change_npc_movement(45, 84)		// 002D, 0054
+    wait_for_movement
+    freeze_npc_movement(44)		// 002C
+    char_facing_npc(1, 45)		// 002D
+
+    window_open(1)
     title(1, Lardna)
     "@I'm fed up with how generous-to-a-fault my husband is." next
     "@Oh well,{pause(15)} nice guys finish last.{pause(20)}  That's the story of our life..." next
-    "{window_closeall}[1F EA 5B 01][1F E9 2C 00][1F E9 2D 00][1F F2 5B 01 34 00]{unset(flag 2)}[1F 61]{pause(120)}[1F E7 5B 01][1F E6 2C 00][1F E6 2D 00]{window_open(1)}"
+    window_closeall
+    unfreeze_sprite_movement(347)	// 015B
+    unfreeze_npc_movement(44)		// 002C
+    unfreeze_npc_movement(45)		// 002D
+    change_sprite_movement(347, 52)	// 015B, 0034
+    unset(FLG_TEMP_1)			// Flag 2
+    wait_for_movement
+    pause(120)
+    freeze_sprite_movement(347)		// 015B
+    freeze_npc_movement(44)		// 002C
+    freeze_npc_movement(45)		// 002D
+    
+    window_open(1)
     title(1, Lardna)
     "@Aya{pause(5)}a{pause(5)}a{pause(5)}e{pause(5)}e{pause(5)}e!" next
     "@A pesky toilet fly!{pause(15)}" linebreak    
-    "  Die and go to Hell![03]{window_closeall}[1F EA 5B 01][1F F1 2D 00 76 02][1F 61]{music(113)}{set(flag 2)}[1F 61]{set(flag 104)}[1F 1F 5B 01 06][1F 17 2E 00 08 00 01][1F E9 2C 00][1F F1 2D 00 0C 00]{set(flag 303)}{set(flag 31)}{set(flag 35)}{set(flag 34)}{set(flag 633)}{unset(flag 21)}{unset(flag 20)}{unset(flag 18)}{unset(flag 11)}{set(flag 107)}[1F 66 01 2A FB F1 C5 00]{set(flag 479)}{set(flag 480)}{set(flag 481)}{set(flag 487)}{set(flag 488)}{set(flag 493)}{set(flag 495)}{set(flag 496)}{set(flag 500)}{set(flag 501)}{set(flag 502)}{set(flag 503)}{set(flag 505)}{set(flag 506)}" eob
+    "  Die and go to Hell!" promptw
+    window_closeall
+
+    unfreeze_sprite_movement(347)	// 015B
+    change_npc_movement(45, 630)	// 002D, 0276
+    wait_for_movement
+    music(113)
+    set(FLG_TEMP_1)			// Flag 2
+    wait_for_movement
+    set(FLG_ONET_AMBRAMI)			// 104
+    delete_active_sprite(347, 6)	// 015B
+    generate_active_npc(46, 8, 1)	// 002E, 0008, 1
+    unfreeze_npc_movement(44)		// 002C
+    change_npc_movement(45, 12)		// 002D, 000C
+
+    set(FLG_ONET_MYHOME_BUNBUN_APPEAR)	// 303
+    set(FLG_1FMIZUNO_APPEAR)		// 31
+    set(FLG_ONET_2FPOKEY_APPEAR)	// 35
+    set(FLG_ONET_2FPICKEY_APPEAR)	// 34
+    set(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+    unset(FLG_POKEY)			// 21
+    unset(FLG_PICKEY)			// 20
+    unset(FLG_BUNBUN)			// 18
+    unset(FLG_SYS_MONSTER_OFF)		// 11
+    set(FLG_ONET_LARDNA)		// 107
+    
+    hotspot_on(1, 42, l_0xc5f1fb)	// 01, 2A, 0x00C5F1FB
+
+    // Initialize several Photo man flags
+    set(FLG_PHOTO_MYHOME)	// 479
+    set(FLG_PHOTO_ONETMISAKI)	// 480
+    set(FLG_PHOTO_CYCLESHOP)	// 481
+    set(FLG_PHOTO_HAKABA)	// 487
+    set(FLG_PHOTO_WATERFALL)	// 488
+    set(FLG_PHOTO_BRIDGE)	// 493
+    set(FLG_PHOTO_DINOSOR)	// 495
+    set(FLG_PHOTO_BUILDING)	// 496
+    set(FLG_PHOTO_STONEHENGE)	// 500
+    set(FLG_PHOTO_SUMS_HOTEL)	// 501
+    set(FLG_PHOTO_SUMS_REST)	// 502
+    set(FLG_PHOTO_SUMS_BEACH)	// 503
+    set(FLG_PHOTO_SKARABI)	// 505
+    set(FLG_PHOTO_PYRAMID)	// 506
+    eob
 
 l_0xc5f1d1:
     title(1, Aloysius)
     "@*Sigh*{pause(15)} ...I'm so tired... nag,{pause(5)} nag,{pause(5)} nag..." end
 
 l_0xc5f1fb:
-    "{isset(flag 303)}[1B 02 {e(data_35.l_0xc7c588)}][1F 1A 2E 00 03]{pause(60)}[1F 1B 2E 00][19 22 01 02 2E 00][1F 13 01 00][1F 01 00]{window_open(1)}"
+    isset(FLG_ONET_MYHOME_BUNBUN_APPEAR)	// 303
+    goto_if_false(data_35.l_0xc7c588)
+    show_sprite_float(46, 3)	// 002E, 3
+    pause(60)
+    hide_sprite_float(46)
+    char_facing_npc(1, 46)	// 01, 002E
+    music_stop
+
+    window_open(1)
     title(1, Buzz)
     "@Agh!{pause(15)} *Gasp*{pause(30)}" linebreak
     "  I was..." next
     "@...much weaker than I thought..." next
     "@So you must now begin your adventure..." next
     "@see..." next
-    "@you...{wait}{window_closeall}{pause(60)}" linebreak
-    "{pause(60)}" linebreak
-    "{window_open(1)}"
+    "@you..." wait
+    window_closeall
+    pause(60) linebreak
+    pause(60) linebreak
+
+    window_open(1)
     title(1, Buzz)
     "@Oh,{pause(15)} I just remembered..." next
     "@Listen to my final words..." next
-    "{pause(60)}" linebreak
-    "{pause(60)}" linebreak
-    "{music(119)}" goto(l_0xc5f2ad)
+    pause(60) linebreak
+    pause(60) linebreak
+    music(119)
+    goto(l_0xc5f2ad)
 
 l_0xc5f2ad:
     "@To defeat Giygas, your own power must unite with the Earth's..." next
@@ -262,13 +453,20 @@ l_0xc5f2ad:
     "@One of them is near Onett.{pause(20)}  It is called <Giant Step.>" next
     "@Go there first..." next
     "@Do you understand?" linebreak
-    "[19 02]Yes" eob
+    add_menu_string("Yes")
 
 l_0xc5f388:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc5f38e:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5f3d2)} {e(l_0xc5f39d)}]" goto(l_0xc5f39d)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+    	long l_0xc5f3d2
+    	long l_0xc5f39d
+    })
+    goto(l_0xc5f39d)
 
 l_0xc5f39d:
     "@...I see." next
@@ -286,22 +484,47 @@ l_0xc5f3d2:
     "@into this stone.{pause(20)}  It is an awesome item..." next
     "@By the way...{pause(15)} I'm almost gone," next
     "@but did you want to hear the story one more time?" linebreak
-    "[19 02]Yes" eob
+    add_menu_string("Yes")
 
 l_0xc5f4df:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc5f4e5:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5f564)} {e(l_0xc5f4f4)}]" goto(l_0xc5f4f4)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+    	long l_0xc5f564
+    	long l_0xc5f4f4
+    })
+    goto(l_0xc5f4f4)
 
 l_0xc5f4f4:
     "@Good!" next
-    "[1D 03 FF][1B 02 {e(l_0xc5f575)}]@It's already dawn outside..." next
+    if not flg_KeyItems {
+    	char_inventory_vacancy(-1)
+    	goto_if_false(l_0xc5f575) } // Check if item has space to be carried
+    "@It's already dawn outside..." next
     "@But it doesn't matter to me.{pause(20)}  I'm fading fast..." next
-    "@Argh!{pause(15)} *Gasp*[03][1D 0E 00 C4]" call(data_36.l_0xc7dcb6) "{wait}" goto(l_0xc5f551)
+    "@Argh!{pause(15)} *Gasp*" promptw
+    if flg_KeyItems {
+    	newline
+    	give_menu_key_item(SOUND_STONE) }
+    else {
+    	char_inventory_vacancy(-1)
+    	give_and_check(0, SOUND_STONE)
+    	call(data_36.l_0xc7dcb6) } 
+    wait
+    goto(l_0xc5f551)
 
 l_0xc5f551:
-    "{window_closeall}{pause(1)}[1F F1 2E 00 7B 02]{unset(flag 303)}[1F 67 01]{music_resume}" eob
+    window_closeall
+    pause(1)
+    change_npc_movement(46, 635)	// 2E, 027B
+    unset(FLG_ONET_MYHOME_BUNBUN_APPEAR)	// 303
+    hotspot_off(1)
+    music_resume
+    eob
 
 l_0xc5f564:
     "@Oh,{pause(20)} okay..." next
@@ -315,10 +538,14 @@ l_0xc5f575:
     "@Ee{pause(5)}eyah!" next
     "@....." next
     "@It's already dawn outside..." next
-    "@but it doesn't matter to me.{pause(15)}  I'm fading fast...{pause(20)}  Argh!{pause(15)} *Gasp*{wait}{set(flag 627)}" goto(l_0xc5f551)
+    "@but it doesn't matter to me.{pause(15)}  I'm fading fast...{pause(20)}  Argh!{pause(15)} *Gasp*" wait
+    set(FLG_ONET_STONE_REJECTED)	// 627
+    goto(l_0xc5f551)
 
 l_0xc5f639:
-    "[1F F1 77 00 38 00][1F 61]" eob
+    change_npc_movement(119, 56)	// 0077, 0038
+    wait_for_movement
+    eob
 
 l_0xc5f642:
     eob
@@ -337,15 +564,20 @@ l_0xc5f679:
     "{window_open(1)}@Doesn't it seem like restrooms in bookstores and libraries are always crowded?{wait}{window_closeall}" eob
 
 l_0xc5f6b2:
-    "[06 02 00 {e(l_0xc5f6fa)}][06 67 00 {e(l_0xc5f72e)}]@'Scuse me!  Just ten more minutes, please!" next
-    "@Show some self control, will ya!{wait}{set(flag 103)}{set(flag 2)}" eob
+    goto_if_flag(FLG_TEMP_1, l_0xc5f6fa)
+    goto_if_flag(FLG_LIBRARY_TOILET, l_0xc5f72e)
+    "@'Scuse me!  Just ten more minutes, please!" next
+    "@Show some self control, will ya!" wait
+    set(FLG_LIBRARY_TOILET)	// 103
+    set(FLG_TEMP_1)		// 2
+    eob
 
 l_0xc5f6fa:
     "@'Scuse me!  Just ten more minutes, please!" next
     "@Show some self control, will ya!" end
 
 l_0xc5f72e:
-    "[03]" eob
+    promptw eob
 
 l_0xc5f730:
     "@Sorry for keeping your waiting!" next
@@ -358,7 +590,13 @@ l_0xc5f760:
     "@Hey, are you the guy who's trying to reform the Sharks?" next
     "@Wa ho!  Wa ho!  Wa ho!" next
     "@You've got to be kidding!" next
-    "@Scram![03]{window_closeall}[1F E9 58 00][1F 15 ED 00 3E 00 01]{pause(1)}[1F EF ED 00][1F E8 FF][1F 61][1F ED][1F 21 40]{set(flag 2)}" eob
+    "@Scram!" promptw
+    window_closeall
+    "[1F E9 58 00][1F 15 ED 00 3E 00 01]"
+    pause(1)
+    "[1F EF ED 00][1F E8 FF][1F 61][1F ED][1F 21 40]"
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc5f828:
     "@Thank you so much for all of your help..." end
@@ -367,7 +605,17 @@ l_0xc5f83b:
     "[1F 13 01 03]{pause(30)}[1F F1 7E 00 85 00][1F 61][1F E6 7E 00]" call(data_30.l_0xc743b0) "[1F E9 7E 00]{pause(80)}" eob
 
 l_0xc5f859:
-    "{unset(flag 449)}[1F F1 47 00 DE 00][1F 15 6A 00 E1 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 4B 00 DF 00 FF][1F 21 43][1F 15 6A 00 E2 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 4B 00 E0 00 FF][1F 21 44][1F 15 6A 00 E3 00 01]" call(data_57.l_0xc9b4b8) "[1F 1F 6A 00 06][1F E7 4B 00][1F 07 02]{pause(10)}{window_open(1)}"
+    unset(FLG_POLICE_STRONG_B_APPEAR)	// 449
+    "[1F F1 47 00 DE 00][1F 15 6A 00 E1 00 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 15 4B 00 DF 00 FF][1F 21 43][1F 15 6A 00 E2 00 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 15 4B 00 E0 00 FF][1F 21 44][1F 15 6A 00 E3 00 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 1F 6A 00 06][1F E7 4B 00][1F 07 02]"
+    pause(10)
+
+    window_open(1)
     title(1, Strong)
     "@Show me what you got..." next
     "{pause(20)}" linebreak
@@ -376,60 +624,188 @@ l_0xc5f859:
 l_0xc5f914:
     "@Eeeeyah!" next
     "@Hey, small fry!" linebreak
-    "  You must be shaking in your boots![03]" call(data_23.l_0xc68441) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
-    "@You're tough.  You should join the police force!{wait}{set(flag 289)}{window_closeall}[1F F1 49 00 EE 00][1F 61]{pause(30)}[1F F1 4A 00 EA 00][1F 61]{window_open(1)}" goto(l_0xc5f984)
+    "  You must be shaking in your boots!" promptw
+    call(data_23.l_0xc68441)
+    goto_if_true(data_23.l_0xc683de)
+    window_open(1)
+    newline
+    "@You're tough.  You should join the police force!" wait
+    set(FLG_ONET_COPA_DISAPPEAR)	// 289
+    window_closeall
+
+    change_npc_movement(73, 238)	// 0049, 00EE
+    wait_for_movement
+    pause(30)
+    change_npc_movement(74, 234)	// 004A, 00EA
+    wait_for_movement
+
+    window_open(1)
+    goto(l_0xc5f984)
 
 l_0xc5f984:
-    "@Your average policeman is stronger than Superman, you know![03]" call(data_23.l_0xc68448) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
-    "@Oh... you won...{wait}{set(flag 290)}{window_closeall}[1F F1 4A 00 EE 00][1F 61]{pause(30)}[1F F1 4B 00 EB 00][1F 61]{window_open(1)}" goto(l_0xc5f9dd)
+    "@Your average policeman is stronger than Superman, you know!" promptw
+    call(data_23.l_0xc68448)
+    goto_if_true(data_23.l_0xc683de)
+    window_open(1)
+    newline
+    "@Oh... you won..." wait
+    set(FLG_ONET_COPB_DISAPPEAR)	// 290
+    window_closeall
+    
+    change_npc_movement(74, 238)	// 004A, 00EE
+    wait_for_movement
+    pause(30)
+    change_npc_movement(75, 235)	// 004B, 00EB
+    wait_for_movement
+
+    window_open(1)
+    goto(l_0xc5f9dd)
 
 l_0xc5f9dd:
     "@Don't let the Mayor's compliments give you a big head..." next
-    "@Bring it on, fat boy![03]" call(data_23.l_0xc6844f) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
+    "@Bring it on, fat boy!" promptw
+    call(data_23.l_0xc6844f)
+    goto_if_true(data_23.l_0xc683de)
+    window_open(1)
+    newline
     "@Let's do this again sometime..." next
-    "@Next time, I'll take you out with my Hell Hold attack!{wait}{set(flag 291)}{window_closeall}[1F F1 4B 00 EE 00][1F 61]{pause(30)}[1F F1 4C 00 EC 00][1F 61]{window_open(1)}" goto(l_0xc5fa72)
+    "@Next time, I'll take you out with my Hell Hold attack!" wait
+    set(FLG_ONET_COPC_DISAPPEAR)	// 291
+    window_closeall
+
+    change_npc_movement(75, 238)	// 004B, 00EE
+    wait_for_movement
+    pause(30)
+    change_npc_movement(76, 236)	// 004C, 00EC
+    wait_for_movement
+
+    window_open(1)
+    goto(l_0xc5fa72)
 
 l_0xc5fa72:
     "@C'mon!" linebreak
-    "  I'm going to take you apart right here, right now, baby![03]" call(data_23.l_0xc68456) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
+    "  I'm going to take you apart right here, right now, baby!" promptw
+    call(data_23.l_0xc68456)
+    goto_if_true(data_23.l_0xc683de)
+
+    window_open(1)
+    newline
     "@Grrr..." linebreak
-    "  I lost...{wait}{set(flag 292)}{window_closeall}[1F F1 4C 00 EE 00][1F 61]{pause(30)}[1F F1 4D 00 ED 00][1F 61]{window_open(1)}@That's it, buddy..." next
+    "  I lost..." wait
+    set(FLG_ONET_COPD_DISAPPEAR)	// 292
+    window_closeall
+
+    change_npc_movement(76, 238)	// 004C, 00EE
+    wait_for_movement
+    pause(30)
+    change_npc_movement(77, 237)	// 004D, 00ED
+    wait_for_movement
+
+    window_open(1)
+    "@That's it, buddy..." next
     "@You can forget about me, I'm going to call for my boss!" next
-    "{set(flag 293)}{window_closeall}[1F F1 4D 00 EE 00][1F 61]{pause(30)}[1F F2 4B 00 EF 00][1F 61]{window_open(1)}"
+    set(FLG_ONET_COPE_DISAPPEAR)	// 293
+    window_closeall
+
+    change_npc_movement(77, 238)	// 004D, 00EE
+    wait_for_movement
+    pause(30)
+    change_sprite_movement(75, 239)	// 004B, 00EF
+    wait_for_movement
+
+    window_open(1)
     title(1, Strong)
     "@There is no way I can beat you in a straight competition, so..." next
-    "@get ready for my <Super Ultra Sambo-Mambo martial arts>!{wait}" call(data_23.l_0xc68464) "[1B 03 {e(data_23.l_0xc683de)}][1F 01 00]{pause(60)}{window_open(1)}" newline
+    "@get ready for my <Super Ultra Sambo-Mambo martial arts>!" wait
+    call(data_23.l_0xc68464)
+    goto_if_true(data_23.l_0xc683de)
+    music_stop
+    pause(60)
+
+    window_open(1)
+    newline
     title(1, Strong)
     "@I didn't think you would do so well against the mighty Onett police force..." next
     "@You want me to open the road to Twoson?" next
     "@Hang on for a sec, I'll radio my staff and give them the word..." next
-    "{window_closeall}{unset(flag 38)}{unset(flag 39)}[1F E4 4B 00 05][1F F3 4B 00 02]{pause(60)}{window_open(1)}"
+    window_closeall
+    unset(FLG_POLICE_5COP_APPEAR)	// 38
+    unset(FLG_POLICE_KANBANCOP_APPEAR)	// 39
+    change_active_sprite_direction(75, 5)	// 004B, 5
+    show_active_float(75, 2)	// 004B, 2, show walkie talkie on Strong's hand
+    pause(60)
+
+    window_open(1)
     title(1, Strong)
     "@*Beep, beep* ...*Click*... *Rrrr*" next
     "@*Click*  Strong here... do you read me?" next
     "@...*Krrrr* ...Hey!..." next
     "@...It's me, Captain Strong!..." next
-    "@Okay, listen, a kid named [1C 02 01] will be there in a few minutes..." next
+    "@Okay, listen, a kid named {name(1)} will be there in a few minutes..." next
     "@He's a kid in a red cap... I want you to open the road to Twoson for him..." next
     "@I know that..." next
     "@I know that!..." next
     "@Don't ask me why, just do it!  That's an order!" linebreak
-    "  ...Strong out...{wait}{window_closeall}{pause(60)}[1F F4 4B 00]{pause(30)}{unset(flag 6)}{music_resume}{pause(60)}[19 24 4B 00 01 01 00][1F E4 4B 00 00]{window_open(1)}"
+    "  ...Strong out..." wait
+    window_closeall
+
+    pause(60)
+    hide_active_float(75)	// 004B, Hide small walkie talkie
+    pause(30)
+    unset(FLG_TEMP_5)	// 6
+    music_resume
+    pause(60)
+    return_direction_sprite_to_object(75, 1, 1)	// 004B, 1, 0001
+    change_active_sprite_direction(75, 0)	// 004B, 0
+
+    window_open(1)
     title(1, Strong)
     "@Well kid, I'm not going to question you now," next
     "@but I do want to see you again..." next
-    "@Good luck!{wait}{window_closeall}[1F F2 4B 00 6B 02][1F 61]{set(flag 105)}{unset(flag 450)}{unset(flag 35)}{unset(flag 37)}{unset(flag 742)}" eob
+    "@Good luck!" wait
+    window_closeall
+
+    change_sprite_movement(75, 619)	// 004B, 026B
+    wait_for_movement
+    set(FLG_ONET_GATEOPEN)	// 105
+    unset(FLG_POLICE_STRONG_DISAPPEAR)	// 450
+    unset(FLG_ONET_2FPOKEY_APPEAR)	// 35
+    unset(FLG_ONET_MINCES_APPEAR)	// 37
+    unset(FLG_ONET_LARDNA_APPEAR)	// 742
+    eob
 
 l_0xc5fd72:
-    call(l_0xc5ff12) "[1B 03 {e(l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule.)" next
-    "[06 0A 00 {e(l_0xc5fdca)}]@(It looks like the next bus will come pretty soon.)[03]{window_closeall}[1F 15 CD 00 40 00 01][1F 61]{set(flag 10)}" eob
+    call(l_0xc5ff12)
+    goto_if_true(l_0xc5ff4e)
+    party_pos_check(1)
+    rtoarg
+    "@({name(0)} checked the bus schedule.)" next
+    goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// Flag 0x0A, 10
+    "@(It looks like the next bus will come pretty soon.)" promptw
+    window_closeall
+    generate_active_sprite(205, 64, 1)	// 00CD, 0040, 1
+    wait_for_movement
+    set(FLG_TEMP_9)	// 10
+    eob
 
 l_0xc5fdca:
     "@(It looks like it's going to be a while before the next bus comes.)" end
 
 l_0xc5fdea:
-    "{isset(flag 71)}[1B 02 {e(l_0xc5feac)}]" call(l_0xc5fef4) "[1B 03 {e(l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule.)" next
-    "[06 0A 00 {e(l_0xc5fdca)}]@(It looks like the next bus will come pretty soon.)[03]{window_closeall}[1F 15 CD 00 CA 00 01][1F 61]{set(flag 10)}" eob
+    isset(FLG_WIN_GEPPU)	// 71
+    goto_if_false(l_0xc5feac)
+    call(l_0xc5fef4)
+    goto_if_true(l_0xc5ff4e)
+    party_pos_check(1)
+    rtoarg
+    "@({name(0)} checked the bus schedule.)" next
+    goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// Flag 0x0A, 10
+    "@(It looks like the next bus will come pretty soon.)" promptw
+    window_closeall
+    generate_active_sprite(205, 202, 1)	// 00CD, 00CA, 1
+    wait_for_movement
+    set(FLG_TEMP_9)	// 10
+    eob
 
 l_0xc5fe4b:
     "{isset(flag 71)}[1B 02 {e(l_0xc5feac)}]" call(l_0xc5ff03) "[1B 03 {e(l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule.)" next

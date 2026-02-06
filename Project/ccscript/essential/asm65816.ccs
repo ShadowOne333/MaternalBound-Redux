@@ -376,20 +376,20 @@ command ASMLoadAddress0A(Address) {
 
 //Displays text in battles
 command BText (text) {
-    LDA_i   (short[0] text)
-    STA_d   (0x0e)
-    LDA_i   (short[1] text)
-    STA_d   (0x10)
-    JSL (0xC1DC1C)
+	LDA_i	(short[0] text)
+	STA_d	(0x0E)
+	LDA_i	(short[1] text)
+	STA_d	(0x10)
+	JSL	(0xC1DC1C)
 }
 
 //Displays text outside battles
 command RText (text) {
-    LDA_i   (short[0] text)
-    STA_d   (0x0e)
-    LDA_i   (short[1] text)
-    STA_d   (0x10)
-    JSL (0xC1DC66)
+	LDA_i	(short[0] text)
+	STA_d	(0x0E)
+	LDA_i	(short[1] text)
+	STA_d	(0x10)
+	JSL	(0xC1DC66)
 }
 
 // https://gist.github.com/HS39/860d79169459dc256acfbeecdb3e2281#file-asm65816-ccs-L354

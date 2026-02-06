@@ -71,8 +71,13 @@ l_0xc9ae73:
     "{set(flag 390)}{set(flag 391)}{set(flag 392)}{set(flag 393)}{set(flag 394)}{set(flag 395)}{set(flag 396)}{set(flag 397)}{set(flag 398)}{set(flag 399)}{set(flag 400)}{set(flag 401)}{set(flag 402)}{set(flag 403)}{set(flag 404)}{set(flag 405)}{set(flag 406)}{set(flag 407)}{set(flag 408)}{set(flag 409)}{set(flag 410)}{set(flag 411)}{set(flag 412)}{set(flag 413)}{set(flag 414)}{set(flag 415)}[06 11 00 {e(data_55.l_0xc9992f)}][1F 66 01 10 58 32 C9 00]{set(flag 754)}{set(flag 779)}" eob
 
 l_0xc9aed7:
-    "{isset(flag 756)}[1B 02 {e(l_0xc9b10b)}]{window_open(1)}@(You can't fit through this small entrance with the Dungeon Man." next
-    "@...Don't you know?!){wait}{window_closeall}" eob
+    isset(FLG_DUNGEONMAN)
+    goto_if_false(l_0xc9b10b)
+    window_open(1)
+    "@(You can't fit through this small entrance with the Dungeon Man." next
+    "@...Don't you know?!)" wait
+    window_closeall
+    eob
 
 l_0xc9af16:
     "[06 5C 01 {e(data_55.l_0xc9992f)}]{window_open(1)}@Didn't you come here to look for the <[1C 05 AF]>?{wait}{window_closeall}" eob
@@ -81,10 +86,23 @@ l_0xc9af3a:
     "[06 49 00 {e(data_55.l_0xc9992f)}][1F 66 01 0E 93 C2 C9 00]" eob
 
 l_0xc9af4a:
-    "[06 12 01 {e(l_0xc9af79)}]{isset(flag 24)}[1B 02 {e(l_0xc9af75)}]{set(flag 62)}[1F 11 0A]{set(flag 662)}{set(flag 754)}{set(flag 779)}{set(flag 756)}[1F 21 A3]{pause(1)}[19 26 08]" eob
+    goto_if_flag(FLG_SKRB_BRICKROAD_MAKYO_APPEAR, l_0xc9af79)	// 274
+    isset(FLG_BRICKROAD)	// 24
+    goto_if_false(l_0xc9af75)
+    set(FLG_SKRB_BRICKROAD_DISAPPEAR)	// 62
+    add_party_member(10)	// Add Dungeon man
+    set(FLG_BGM_DUNGEONMAN)	// 662
+    set(FLG_SYS_DISTLPT)	// 754
+    set(FLG_SYS_DISTLPT_EVENT)	// 779
+    set(FLG_DUNGEONMAN)		// 756
+    warp(163)	// A3
+    pause(1)
+    set_respawn(8)
+    eob
 
 l_0xc9af75:
-    "[1F 21 A3]" eob
+    warp(163)	// A3
+    eob
 
 l_0xc9af79:
     "[1F 21 A4]{pause(1)}[19 26 08]" eob
@@ -144,7 +162,8 @@ l_0xc9b107:
     "{unset(flag 350)}" eob
 
 l_0xc9b10b:
-    "[1F 63 {e(l_0xc9b112)}]" eob
+    queue_text(l_0xc9b112)
+    eob
 
 l_0xc9b112:
     "{unset(flag 778)}[1F 68]" eob

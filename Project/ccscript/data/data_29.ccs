@@ -6,6 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -151,11 +155,20 @@ l_0xc72cee:
 
 l_0xc72d2f:
     "@You're such a smart kid...{pause(20)}  Here's the key to the shack." next
-    "[1D 03 FF][1B 02 {e(l_0xc72d6e)}][1D 0E 00 AA][1B 05]" call(data_36.l_0xc7dcb6) "{set(flag 80)}" end
+    if flag flg_KeyItems { newline give_menu_key_item(SHACK_KEY) }
+    else {
+	load_registers	// 
+	char_inventory_vacancy(-1)
+	goto_if_false(l_0xc72d6e)
+	give_and_check(0, SHACK_KEY)	// 170
+	copy_wram
+	call(data_36.l_0xc7dcb6) }
+    set(FLG_KEY_TABIGOYA) end	// Flag 80
 
 l_0xc72d6e:
-    "{sound(5)}{pause(30)}" newline
-    title(1, Pirkle)
+    sound(SND_ERRORBEEP)	// 5
+    pause(30)
+    newline
     "@Although it's small,{pause(15)} the key is very important." next
     "@You seem to have too much to carry." next
     "@Get rid of some stuff you don't need,{pause(15)} and come back for the key later on." end
@@ -167,7 +180,7 @@ l_0xc72dd0:
 
 l_0xc72e08:
     title(1, Pirkle)
-    "@Oh,{pause(15)} [1C 01 08]" next
+    "@Oh,{pause(15)} {stat(8)}" next
     "@I saw a picture in the international newspaper of someone who looks like you," next
     "@but there's no way it was you." next
     "@Maybe you'd like to study my city management techniques" next
@@ -191,7 +204,8 @@ l_0xc72f18:
     "@I will dedicate my life *sniff* to peace in Onett... *boo hoo*" end
 
 l_0xc72f7b:
-    "[06 49 00 {e(l_0xc72fbe)}]@In the next election, please give a speech supporting Mayor Pirkle." next
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc72fbe)	// 49
+    "@In the next election, please give a speech supporting Mayor Pirkle." next
     "@Hee hee hee." end
 
 l_0xc72fbe:
@@ -209,8 +223,8 @@ l_0xc73039:
     "@In the next town, there is the... what is the name?{pause(20)}..." next
     "@Uh... Polar Star preschool." next
     "@The preschool is at" linebreak
-    "  [1C 01 1E]'s house." next
-    "@[1C 01 1E] uses... what is it called?{pause(15)}... uh... magic." end
+    "  {stat(30)}'s house." next
+    "@{stat(30)} uses... what is it called?{pause(15)}... uh... magic." end
 
 l_0xc730cf:
     "[06 08 03 {e(l_0xc73039)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc73039)}]@I wanted to see you, [1C 01 1E]!" next

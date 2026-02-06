@@ -9,6 +9,7 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -522,15 +523,29 @@ l_0xc6fae5:
     "[06 1D 02 {e(data_55.l_0xc9992f)}]" call(l_0xc6fb20) "[06 0E 00 {e(data_55.l_0xc9992f)}]{window_closeall}{pause(1)}" call(data_34.l_0xc79e55) eob
 
 l_0xc6fb02:
-    "{store_registers}[19 19 00 00]{swap}{result_is(172)}[1B 02 {e(l_0xc6fb5d)}]" call(l_0xc6fb33) "[1F 1E DF 01 06]{set(flag 541)}" eob
+    store_registers
+    return_item_in_slot(0, 0) swap
+    result_is(BAD_KEY_MACHINE)	// 172
+    goto_if_false(l_0xc6fb5d)
+    call(l_0xc6fb33)
+    hide_sprite(479, 6)	// 01DF, 6
+    set(FLG_THRK_PRISON_OPEN)	// 541
+    eob
 
 l_0xc6fb20:
-    "{window_open(1)}@The door is locked.{wait}{window_closeall}" eob
+    window_open(1)
+    "@The door is locked." wait
+    window_closeall
+    eob
 
 l_0xc6fb33:
-    "{load_registers}[19 19 00 00]{swap}@[1C 02 00]{swap} used" linebreak
-    "  the [1C 05 00]." next
-    "@The door opened.{wait}{sound(119)}" eob
+    load_registers
+    swap return_action_argument	//return_item_in_slot(0, 0) swap
+    "@{name(0)}{swap} used" linebreak
+    "  the {itemname(0)}." next
+    "@The door opened." wait
+    sound(SND_PSI3)	// 119
+    eob
 
 l_0xc6fb5d:
     "@It wasn't the key for this." end
@@ -549,7 +564,8 @@ l_0xc6fc1a:
     newline
     "@{user} used the Monkey Love." next
     "@All of a sudden, a monkey came along," next
-    "  and pinned the enemy down with its tiny monkey body.[03]" eob
+    "  and pinned the enemy down with its tiny monkey body." promptw
+    eob
 
 l_0xc6fc6d:
     newline

@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -437,41 +441,102 @@ l_0xc6da59:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6da6d)} {e(l_0xc6da37)}]" goto(l_0xc6da37)
 
 l_0xc6da6d:
-    "[1D 03 FF][1B 02 {e(l_0xc6daa0)}]{store_registers}[1D 14 1E 00 00 00][1B 03 {e(l_0xc6dac0)}]{sound(118)}{pause(1)}[1D 09 1E 00]{open_wallet}@Thanks a lot.{wait}{sound(116)}{load_registers}[1D 0E 00 B2]" eob
+    char_inventory_vacancy(-1)
+    goto_if_false(l_0xc6daa0)
+    store_registers
+    amount_costs_too_much(30)	// 0x0000001E
+    goto_if_true(l_0xc6dac0)
+    sound(SND_CHICKEN2) pause(1)	// Sound 118
+    takemoney(30)	// 001E
+    open_wallet
+    "@Thanks a lot." wait
+    sound(SND_BOXTAKE)	// 116
+    load_registers
+    give_and_check(0, SHOW_TICKET)	// 178, 0xB2
+    eob
 
 l_0xc6daa0:
-    "@Excuse me [19 10 01]" call(data_37.l_0xc7e6b3) ", but your hands are full..." end
+    "@Excuse me " party_pos_check(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." end
 
 l_0xc6dac0:
     "@I'm sorry sir..." next
-    "[1F 16 99 03 07]@We don't just give away the tickets... you must pay 30 dollars." end
+    sprite_direction(921, 7)	// 0399, 7
+    "@We don't just give away the tickets... you must pay 30 dollars." end
 
 l_0xc6daf5:
-    "[06 02 00 {e(l_0xc6dbbf)}][06 93 00 {e(l_0xc6db0a)}][06 92 00 {e(l_0xc6db2e)}]" goto(l_0xc6db0a)
+    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6db0a)	// 0x93, 147
+    goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
+    goto(l_0xc6db0a)
 
 l_0xc6db0a:
-    "[19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}]@Please have your tickets ready..." end
+    if flag flg_KeyItems and flag flg_KeyItem_ShowTicket
+    {
+        goto(l_0xc6dc0c)
+    }
+    else
+    {
+        return_direction_char_to_object(-1, 2, 849)	// FF, 2, 0351
+        call(data_36.l_0xc7dc9b)
+        goto_if_false(l_0xc6dbae)
+        "@Please have your tickets ready..." end
+        goto(l_0xc6db2e)
+    }
+    eob
 
 l_0xc6db2e:
-    "[06 93 00 {e(l_0xc6dbd5)}]@Boys and girls, ladies and gents... this is a very special show," next
+    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6dbd5)	// 0x93, 147
+    "@Boys and girls, ladies and gents... this is a very special show," next
     "@the final Runaway Brothers show here at the Topollo!" next
     "@Please, please, please don't miss this once in a lifetime chance to see their show." end
 
 l_0xc6dbae:
-    "@Oh, hi.{wait}{window_closeall}" call(data_44.l_0xc88988) "{set(flag 2)}" eob
+    "@Oh, hi." wait
+    window_closeall
+    call(data_44.l_0xc88988)
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc6dbbf:
     "@Are you enjoying yourself?" end
 
 l_0xc6dbce:
-    "[06 92 00 {e(l_0xc6db2e)}]" goto(l_0xc6dbd5)
+    goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
+    goto(l_0xc6dbd5)
 
 l_0xc6dbd5:
-    "[06 02 00 {e(l_0xc6dbbf)}]{store_registers}{load_registers}[19 19 00 00]{swap}{store_registers}{result_is(178)}[1B 03 {e(l_0xc6dc0c)}][19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}]@No kidding..." end
+    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+    store_registers
+    load_registers
+    return_item_in_slot(0, 0) swap
+    store_registers
+    result_is(SHOW_TICKET)	// 178
+    goto_if_true(l_0xc6dc0c)
+    return_direction_char_to_object(-1, 2, 849)	// FF, 2, 0351
+    call(data_36.l_0xc7dc9b)
+    goto_if_false(l_0xc6dbae)
+    "@No kidding..." end
 
 l_0xc6dc0c:
-    "[19 22 FF 02 51 03]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc6dbae)}][06 02 00 {e(l_0xc6dbbf)}]{sound(118)}{pause(1)}[1D 01 FF B2]@Thanks a lot." next
-    "@Please hurry.{pause(20)}  The show will be starting at any moment.{wait}{window_closeall}" call(data_44.l_0xc8897f) "{set(flag 2)}" eob
+    if flag flg_KeyItems and flag flg_KeyItem_ShowTicket
+    {
+        goto(useshowticket)
+    }
+    return_direction_char_to_object(-1, 2, 849)	// FF, 2, 0351
+    call(data_36.l_0xc7dc9b)
+    goto_if_false(l_0xc6dbae)
+    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+    take(-1, SHOW_TICKET)	// 178
+    goto(useshowticket)
+
+useshowticket:
+    sound(118) pause(1)
+    "@Thanks a lot." next
+    "@Please hurry.{pause(20)}  The show will be starting at any moment." wait
+    window_closeall
+    call(data_44.l_0xc8897f)
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc6dc62:
     "@Thanks a lot." next
@@ -489,12 +554,15 @@ l_0xc6dce7:
     "@I was thinking <There's a tight wad born every minute...>" end
 
 l_0xc6dd0a:
-    "[19 19 00 00]{swap}{result_is(187)}[1B 03 {e(l_0xc6dd1d)}]" goto(data_35.l_0xc7c6b6)
+    return_item_in_slot(0, 0) swap
+    result_is(187)	// Contact lens
+    goto_if_true(l_0xc6dd1d)
+    goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
     title(1, Pettenella)
     "@What?" next
-    "@You came to deliver my grandma's memento, the [1C 05 BB]?!" next
+    "@You came to deliver my grandma's memento, the {itemname(187)}?!" next
     "@Thank you." next
     "@Thank you so{pause(5)}o{pause(5)}o{pause(1)}o{pause(1)}o much!" next
     "@It's our family tradition to keep things forever." next
@@ -504,11 +572,20 @@ l_0xc6dd1d:
     "@There are no holes, and they've only been worn once since the last washing." next
     "@They stink a little... but they're still good." next
     "@Hey, don't refuse me here... I'm being generous!" next
-    "{sound(116)}[1D 01 FF BB][1D 03 FF][1D 0E 00 98]" call(data_36.l_0xc7dccf) next
-    "@Please take good care of my socks... *sniff!*{wait}{set(flag 736)}" eob
+    sound(SND_BOXTAKE)	// 116
+    take(-1, 187)	// FF, BB
+    char_inventory_vacancy(-1)
+    give_and_check(-1, 152)	// Pettenella's socks
+    call(data_36.l_0xc7dccf) next
+    "@Please take good care of my socks... *sniff!*" wait
+    set(FLG_FOUR_PETENERA)	// 736
+    eob
 
 l_0xc6de7b:
-    "[06 0A 00 {e(data_27.l_0xc6df35)}][06 8F 00 {e(data_27.l_0xc6df43)}]@This elevator is only for Master Porky's use." next
+    goto_if_flag(FLG_TEMP_9, data_27.l_0xc6df35)	// Flag 10, 0x0A
+    goto_if_flag(FLG_FOUR_OK, data_27.l_0xc6df43)	// 0x8F, 143
+    "@This elevator is only for Master Porky's use." next
     "@It goes directly to the 47th floor." next
     "@Quit staring at my butt..." next
-    "@Why don't you stand somewhere else instead of behind me?[03]" goto(data_27.l_0xc6defa)
+    "@Why don't you stand somewhere else instead of behind me?" promptw
+    goto(data_27.l_0xc6defa)

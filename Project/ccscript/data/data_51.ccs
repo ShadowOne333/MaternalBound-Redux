@@ -6,7 +6,11 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../redux/window_titles.ccs"
+import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
@@ -367,8 +371,19 @@ l_0xc948dc:
     title(1, Lucky)	// Skinny guy
     "@Hey,{pause(15)} ya came with [1C 02 02]!" next
     "@Then you deserve a present, playboy." next
-    "@Here's a [1C 05 7D].{pause(20)}  You can get into our shows with this!" next
-    "[1D 03 FF][1B 02 {e(l_0xc94966)}][1D 0E 00 7D]" call(data_36.l_0xc7dccf) "{wait}{set(flag 553)}{set(flag 484)}" eob
+    "@Here's a {itemname(BACKSTAGE_PASS)}.{pause(20)}  You can get into our shows with this!" next
+    if flag flg_KeyItems
+    {
+        give_menu_key_item(BACKSTAGE_PASS)
+    }
+    else
+    {
+        char_inventory_vacancy(-1)
+        goto_if_false(l_0xc94966)
+        give_and_check(0, BACKSTAGE_PASS)
+        call(data_36.l_0xc7dccf) next
+    }
+    "{wait}{set(flag 553)}{set(flag 484)}" eob
 
 l_0xc94966:
     title(1, Lucky)	// Skinny guy

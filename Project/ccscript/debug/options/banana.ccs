@@ -19,22 +19,22 @@ Banana:
 
 l_0xc58edd:
     "[18 02]{window_open(50)}{diam}Area:" linebreak
-    "[19 02]Onett[02]"
-    "[19 02]Twoson[02]"
-    "[19 02]Threek[02]"
-    "[19 02]Fourside[02]"
-    "[19 02]Summers [5F] Scarabia[02]"
-    "[19 02]The Rest[02]"
+    "[19 02]Onett" eob
+    "[19 02]Twoson" eob
+    "[19 02]Threek" eob
+    "[19 02]Fourside" eob
+    "[19 02]Summers [5F] Scarabia" eob
+    "[19 02]The Rest" eob
     "[1C 0C 01][11][09 06 {e(l_0xc58f07)} {e(l_0xc58f37)} {e(l_0xc58f61)} {e(l_0xc58f93)} {e(l_0xc58fc1)} {e(l_0xc58feb)}]{window_closetop}{window_switch(1)}" newline
     "{diam}Finished." end
 
 l_0xc58f07: // Onett
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Porky joined[02]"
-    "[19 02]2. Buzz buzz appeared[02]"
-    "[19 02]3. Buzz buzz died[02]"
-    "[19 02]4. Defeated Frank[02]"
-    "[19 02]5. Cleared Onett[02]"
+    "[19 02]1. Porky joined" eob
+    "[19 02]2. Buzz buzz appeared" eob
+    "[19 02]3. Buzz buzz died" eob
+    "[19 02]4. Defeated Frank" eob
+    "[19 02]5. Cleared Onett" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59019)} {e(l_0xc5901c)} {e(l_0xc5901f)} {e(l_0xc59022)} {e(l_0xc59025)}]" call(l_0xc59082) eob
 
 l_0xc58f35: // Shared "end early" path
@@ -43,46 +43,46 @@ l_0xc58f35: // Shared "end early" path
 
 l_0xc58f37: // Twoson
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Paula kidnapped[02]"
-    "[19 02]2. Got Franklin badge[02]"
-    "[19 02]3. Rescued Paula[02]"
-    "[19 02]4. Cleared Twoson[02]"
+    "[19 02]1. Paula kidnapped" eob
+    "[19 02]2. Got Franklin badge" eob
+    "[19 02]3. Rescued Paula" eob
+    "[19 02]4. Cleared Twoson" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59028)} {e(l_0xc5902b)} {e(l_0xc5902e)} {e(l_0xc59031)}]" call(l_0xc59082) eob
 
 l_0xc58f61: // Threek
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Caught by zombies[02]"
-    "[19 02]2. Tessie appears[02]"
-    "[19 02]3. Dr. Andonuts[02]"
-    "[19 02]4. Jeff joined[02]"
-    "[19 02]5. Defeated zombies[02]"
-    "[19 02]6. Cleared Threek[02]"
+    "[19 02]1. Caught by zombies" eob
+    "[19 02]2. Tessie appears" eob
+    "[19 02]3. Dr. Andonuts" eob
+    "[19 02]4. Jeff joined" eob
+    "[19 02]5. Defeated zombies" eob
+    "[19 02]6. Cleared Threek" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 06 {e(l_0xc59034)} {e(l_0xc59037)} {e(l_0xc5903a)} {e(l_0xc5903d)} {e(l_0xc59040)} {e(l_0xc59043)}]" call(l_0xc59082) eob
 
 l_0xc58f93: // Fourside
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Montague's big hole[02]"
-    "[19 02]2. Runaway Brothers freed[02]"
-    "[19 02]3. Everdred died[02]"
-    "[19 02]4. Beat Mani Mani[02]"
-    "[19 02]5. Cleared Fourside[02]"
+    "[19 02]1. Montague's big hole" eob
+    "[19 02]2. Runaway Brothers freed" eob
+    "[19 02]3. Everdred died" eob
+    "[19 02]4. Beat Mani Mani" eob
+    "[19 02]5. Cleared Fourside" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59046)} {e(l_0xc59049)} {e(l_0xc5904c)} {e(l_0xc5904f)} {e(l_0xc59052)}]" call(l_0xc59082) eob
 
 l_0xc58fc1: // Summers/Scaraba
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Massage at Dalaam[02]"
-    "[19 02]2. Pink and Magnet[02]"
-    "[19 02]3. Sail to Scarabia[02]"
-    "[19 02]4. Dungeon Man[02]"
+    "[19 02]1. Massage at Dalaam" eob
+    "[19 02]2. Pink and Magnet" eob
+    "[19 02]3. Sail to Scarabia" eob
+    "[19 02]4. Dungeon Man" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59055)} {e(l_0xc59058)} {e(l_0xc5905b)} {e(l_0xc5905e)}]" call(l_0xc59082) eob
 
 l_0xc58feb: // The rest
     "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Barf and Poo[02]"
-    "[19 02]2. Lumine Hall[02]"
-    "[19 02]3. Finished Sound Stone[02]"
-    "[19 02]4. Magicant[02]"
-    "[19 02]5. The End[02]"
+    "[19 02]1. Barf and Poo" eob
+    "[19 02]2. Lumine Hall" eob
+    "[19 02]3. Finished Sound Stone" eob
+    "[19 02]4. Magicant" eob
+    "[19 02]5. The End" eob
     "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59061)} {e(l_0xc59064)} {e(l_0xc59067)} {e(l_0xc5906a)} {e(l_0xc5906d)}]" call(l_0xc59082) eob
 
 l_0xc59019:
