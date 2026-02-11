@@ -20,18 +20,32 @@ import "../redux/window_titles.ccs"
 //------------------------------------
 
 // Define routines
-define SHOW_HPPP_WINDOWS	= 0xC10A04
-define OPEN_MENU		= 0xC134A7
-define SET_INSTANT_PRINTING	= 0xC3E4D4 
+define PLAY_SOUND		= 0xC0ABE0
+
+define SET_WINDOW_FOCUS		= 0xC1007E
+define CLOSE_FOCUS_WINDOW	= 0xC10084
+define CREATE_WINDOW		= 0xC104EE
+define PRINT_STRING		= 0xC10EFC
+define MAIN_PAUSE_MENU		= 0xC134CD
+define CLOSE_INVENTORY_WHICH_WINDOWS	= 0xC135DE
+define CLOSE_INVENTORY_MENU	= 0xC13648
+define DISPLAY_TEXT		= 0xC186B1
+define OPEN_WHICH_WINDOW	= 0xC193E7
+define CLOSE_WHICH_WINDOW	= 0xC19437
+define CREATE_WINDOW_REDIRECT	= 0xC1DD47
+
+define SET_WINDOW_TITLE		= 0xC2032B
+
+define CLEAR_INSTANT_PRINTING	= 0xC3E4CA
+define SET_INSTANT_PRINTING	= 0xC3E4D4
+define CLOSE_WINDOW		= 0xC3E521
 
 // Define window constants
 define MAINMENU_WINDOW	= 0
 define DIALOGUE_WINDOW	= 1
+define INVENTORY_WINDOW	= 2
 define WHICH_WINDOW	= 40
-define FULL_WINDOW	= 61
-define KEYITEMS_WINDOW	= 62
-define USE_HELP_WINDOW	= 63
-define PSI_MAIN_WINDOW	= 64
+define USE_HELP_WINDOW	= 61
 
 // Definitions for each Key item:
 define ATM_CARD		= 177	// 0xB1
@@ -65,17 +79,41 @@ define BUBBLE_GUM	= 104	// 0x68
 // 	Check code hijack
 //------------------------------------
 // Hijack the 'Check' routine
-// Hijack the 'Check' routine
 ROM[0xC13BCF] = {
+	// Jump to our ccscript menu
 	MText	(Key_Items_Prep)
-	JMP	(0xC13C8C)
+	// Jump to our custom subroutine for closing our custom windows
+	JSL	(CC_Close_Custom_Windows)
+	// Jump back to the Main menu after closing our custom Key items menu
+	JMP	(MAIN_PAUSE_MENU)	// Jump back to the Main menu
+
+	// Limit for this section is up to 0xC13C01
+	// 0xC13BE4
+	BRA	(0x1B)
+}
+
+CC_Close_Custom_Windows: {
+	// Close all windows properly through ASM
+	LDA_i	(DIALOGUE_WINDOW)	// Load standard dialogue window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(USE_HELP_WINDOW)	// Load inventory menu (Use/Help) window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(WHICH_WINDOW)		// Load "Which?" text window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(INVENTORY_WINDOW)	// Load inventory window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(SND_SHOOT)		// 0x1B, 27, #SFX::MENU_OPEN_CLOSE
+	JSL	(PLAY_SOUND)
+
+	RTL
 }
 
 Key_Items_Prep: {
-	freeze_char_movement(0xFF)	// Stop player movement
-	call(open_which_window)		// Open up the side "Which?" window
-	sound(SND_CURSORBLIP)		// Sound effect for opening the menu
-	window_open(KEYITEMS_WINDOW)
+	call(open_which_window)
 	open_hp
 	open_wallet
 	goto(KeyItems)
@@ -116,25 +154,13 @@ SetCount26: { counter(26) ctoarg eob }
 //   Main Key items ccscript code
 //------------------------------------
 KeyItems:
-	copy_wram
-	isset(flg_KeyItemsWnd)
-	goto_if_false(_KeyFlagNotSet)
-	copy_wram
-	window_switch(KEYITEMS_WINDOW)
-	//window_closetop
-	unset(flg_KeyItemsWnd)
-	goto(_KeyFlagNotSet)
-
-_KeyFlagNotSet:
-	copy_active
-	window_open(KEYITEMS_WINDOW)
-	copy_active
-	set(flg_KeyItemsWnd)
-	clearline
-	title(0, KeyItems_Title)
-	save_text_window_state
-
 _KeyItemsReturn:
+	copy_wram
+	save_text_window_state
+	window_open(INVENTORY_WINDOW)
+	title(0, KeyItems_Title)
+	copy_active
+
 	counter_zero
 	ctoarg
 
@@ -178,7 +204,7 @@ _KeyItemsReturn:
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
 			add_menu_option_with_callback("Hieroglyph copy", SetCount17) }
 		if flag flg_KeyItem_CarrotKey {	// Rabbit's carrot ->
-			add_menu_option_with_callback("Rabbit's carrot", SetCount18) }
+			add_menu_option_with_callback("Rabbits' carrot", SetCount18) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
 			add_menu_option_with_callback("Key to the tower", SetCount19) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
@@ -190,6 +216,7 @@ _KeyItemsReturn:
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
 			add_menu_option_with_callback("Meteorite piece", SetCount23) }
 	}
+
 	if not flag flg_PooSoloMission {
 
 		if flag FLG_ITEM_KEY_LOCKER {
@@ -199,19 +226,17 @@ _KeyItemsReturn:
 		if flag FLG_ITEM_BUBBLE_GUM {
 			add_menu_option_with_callback("Bubble Gum Pak", SetCount26) }
 	}
+
 	print_vertical(2)
-	if not create_menu_cancellable {
+	if not create_menu_in_window_cancellable(INVENTORY_WINDOW) {
 		// Exit
-		window_close(WHICH_WINDOW)
-		window_close(KEYITEMS_WINDOW)
-		sound(SND_SHOOT)	// Sound effect for opening the menu
-		window_switch(MAINMENU_WINDOW)
-		//cc_asmcall(OPEN_MENU, RET_NONE)
+		// Closing the windows is handled through ASM after returning from the Key items menu
 		eob
 	}
 
 	ctoarg
 	swap
+
 	switch_goto(26, {
 		long atm
 		long soundstone
@@ -240,16 +265,8 @@ _KeyItemsReturn:
 		long badkeymachine
 		long gum
 	})
-	window_close(WHICH_WINDOW)
-	window_close(KEYITEMS_WINDOW)
-	sound(SND_SHOOT)	// Sound effect for opening the menu
-	window_switch(MAINMENU_WINDOW)
-	//cc_asmcall(OPEN_MENU, RET_NONE)
-	eob
 
-	/*swap
-	"@Error! No option {number(0)} in this menu." next
-	goto(_KeyItemsReturn)*/
+	eob
 
 //------------------------------------
 // 	  Item scripts
@@ -287,6 +304,7 @@ open_which_window: {
 	cc_asmcall(SET_INSTANT_PRINTING, RET_NONE)
 	window_open(WHICH_WINDOW)
 	"Which?"
+	cc_asmcall(CLEAR_INSTANT_PRINTING, RET_NONE)
 	eob
 }
 
@@ -302,6 +320,7 @@ command use_item(itemID) {
 
 // Use/Help submenu command
 command use_help_submenu( itemID, help_text ) {
+	window_close(WHICH_WINDOW)
 	window_open(USE_HELP_WINDOW)
 	add_menu_string("Use")
 	add_menu_string("Help!")
@@ -311,26 +330,32 @@ command use_help_submenu( itemID, help_text ) {
 		long _use
 		long _help
 	})
-	window_close(DIALOGUE_WINDOW)
 	window_close(USE_HELP_WINDOW)
-	window_open(KEYITEMS_WINDOW)
+	call(open_which_window)
+	window_switch(INVENTORY_WINDOW)
 	goto(_KeyItemsReturn)
 _use:
-	window_closeall
+	window_closetop
 	window_open(DIALOGUE_WINDOW)
 	use_item(itemID)
-	window_closeall
+	cc_asmcall(JUMP, RET_NONE)
 	eob
 _help:
-	window_switch(KEYITEMS_WINDOW)
+	window_switch(INVENTORY_WINDOW)
 	window_clear
 	window_open(DIALOGUE_WINDOW)
 	call(help_text)
 	window_close(DIALOGUE_WINDOW)
 	window_close(USE_HELP_WINDOW)
 	call(open_which_window)
-	window_switch(KEYITEMS_WINDOW)
+	window_switch(INVENTORY_WINDOW)
 	goto(_KeyItemsReturn)
+}
+
+JUMP:	{
+	LDA_i	(MAINMENU_WINDOW)	// Load main menu window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+	RTL
 }
 
 // Set the flag for the corresponding Key Item

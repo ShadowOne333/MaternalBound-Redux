@@ -229,7 +229,7 @@ l_0xc8b158:
 l_0xc8b191:
     goto_if_flag(FLG_WIN_GIEGU, l_0xc8b22f)	// Flag 73
     goto_if_flag(FLG_PU, data_20.l_0xc65015)	// Flag 16
-    special_event(5)	// OSS flag set
+    OSS_on	// special_event(5)
     title(1, Jill)
     "@I don't know who told you." next
     "@You came from far off just to eat my Magic cake?..." next

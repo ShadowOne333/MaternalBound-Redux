@@ -9,6 +9,7 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -342,15 +343,29 @@ l_0xc9ba0a:
     goto(l_0xc9b9d0)
 
 l_0xc9ba78:
-    "@Eureka!{pause(15)}  That's it!" next
-    "@With even just a piece of the meteorite,{pause(15)} I can synthesize the material Zexonyte." next
+    "@Eureka!" pause(15)
+    "  That's it!" next
+    "@With even just a piece of the meteorite," pause(15)
+    " I can synthesize the material Zexonyte." next
     "@...I doubt that your mortal enemy Giygas," next
     "@or whatever, will allow you to go to Onett and get a piece of the meteorite." next
     "@By now, Onett is in his evil hands." next
     "@You must go,{pause(5)} though,{pause(15)} so take every possible precaution." next
     "@The Mr. Saturns have introduced some of their new developments at their shop." next
     "@Please check them out before you leave." next
-    "@...I wonder what Onett is like at this point in time?...{wait}{window_closeall}{set(flag 132)}{set(flag 632)}{set(flag 468)}{unset(flag 108)}{unset(flag 633)}{unset(flag 422)}{unset(flag 517)}{isset(flag 99)}[1B 02 {e(data_55.l_0xc9992f)}]{unset(flag 746)}" eob
+    "@...I wonder what Onett is like at this point in time?..." wait
+    window_closeall
+    set(FLG_INFO_XYZ)		// 132
+    set(FLG_ONET_DOOR_CLOSE)	// 632
+    set(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+    unset(FLG_OPEN_TABIGOYA)	// 108
+    unset(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+    unset(FLG_ONET_DAYBREAK)	// 422
+    unset(FLG_MYHOME_LIGHT_ON)	// 517
+    isset(FLG_GOT_CAPEESTATE)	// 99
+    goto_if_false(data_55.l_0xc9992f)
+    unset(FLG_ONET_ESTATE_DOOR_OPEN)	// 746
+    eob
 
 l_0xc9bbd3:
     "{set(flag 775)}" call(data_24.l_0xc69082) "[1F 15 6A 00 50 01 01]  " call(l_0xc9b4b8) "[1F EB FF 06]{set(flag 760)}{music_resume}[1F 1E E5 02 09]{pause(180)}[1F 21 5E]{pause(100)}[1F 17 FA 04 51 01 04]{pause(80)}" call(data_36.l_0xc7dd6b) "{unset(flag 760)}{music_resume}[1F EC FF 01][1F 15 6A 00 52 01 01]" call(l_0xc9b4b8) "[19 26 01][1F 66 01 07 3C BC C9 00][1F 66 02 29 17 59 EF 00]{set(flag 332)}" eob

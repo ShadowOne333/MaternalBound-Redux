@@ -4,6 +4,14 @@
  * Generated using CCScriptWriter.
  */
 
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
+import "../redux/window_titles.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
@@ -76,30 +84,59 @@ l_0xc99eb8:
     eob
 
 l_0xc99eb9:
-    call(data_57.l_0xc9b10b) "[06 47 00 {e(data_55.l_0xc9992f)}]{set(flag 312)}" eob
+    call(data_57.l_0xc9b10b)
+    "[06 47 00 {e(data_55.l_0xc9992f)}]"
+    set(FLG_TUNNEL_TWSN_THRK_WR)	// 312
+    eob
 
 l_0xc99ec9:
-    call(data_57.l_0xc9b10b) "[06 47 00 {e(data_55.l_0xc9992f)}]{set(flag 315)}" eob
+    call(data_57.l_0xc9b10b)
+    "[06 47 00 {e(data_55.l_0xc9992f)}]"
+    set(FLG_TUNNEL_THRK_TWSN_WL)	// 315
+    eob
 
 l_0xc99ed9:
-    "{unset(flag 312)}" eob
+    unset(FLG_TUNNEL_TWSN_THRK_WR)	// 312
+    eob
 
 l_0xc99edd:
-    "[06 78 02 {e(data_57.l_0xc9b20e)}][06 6C 00 {e(data_55.l_0xc9992f)}]{window_open(1)}[1D 05 FF AA][1B 02 {e(l_0xc99f2d)}][1D 01 FF AA]@(" call(data_37.l_0xc7e6d7) " used the key to the traveling entertainers' shack.)[03]{sound(119)}{set(flag 108)}{window_closeall}" eob
+    goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
+    goto_if_flag(FLG_OPEN_TABIGOYA, data_55.l_0xc9992f)		// 0x006C, 108
+    window_open(1)
+    hasitem(-1, SHACK_KEY)	// 0xAA, 170
+    goto_if_false(l_0xc99f2d)
+    take(-1, SHACK_KEY)		// 0xAA, 170
+    "@(" call(data_37.l_0xc7e6d7) " used the key to the traveling entertainers' shack.)" promptw
+    sound(SND_PSI3)	// 119
+    set(FLG_OPEN_TABIGOYA)	// 108
+    window_closeall
+    eob
 
 l_0xc99f2d:
-    "@(The door is locked.){wait}{window_closeall}" eob
+    "@(The door is locked.)" wait
+    window_closeall
+    eob
 
 l_0xc99f40:
     eob
 
 l_0xc99f41:
-    "{window_open(1)}@(" call(data_37.l_0xc7e6d7) " used <Machine that opens doors," next
+    window_open(1)
+    "@(" call(data_37.l_0xc7e6d7) " used <Machine that opens doors," next
     "@especially when you have a slightly bad key>" next
-    "@...to open the door.)[03]{window_closeall}" eob
+    "@...to open the door.)" promptw
+    window_closeall
+    eob
 
 l_0xc99f91:
-    "[06 77 00 {e(data_55.l_0xc9992f)}]{sound(111)}{pause(40)}{window_open(1)}[06 73 00 {e(l_0xc99fc7)}]@I'm changing my clothes now.  Don't come in!{wait}{window_closeall}" eob
+    "[06 77 00 {e(data_55.l_0xc9992f)}]"
+    sound(SND_RAPIDKNOCK)	// 111
+    pause(40)
+    window_open(1)
+    "[06 73 00 {e(l_0xc99fc7)}]"
+    "@I'm changing my clothes now.  Don't come in!" wait
+    window_closeall
+    eob
 
 l_0xc99fc7:
     "@Come in quick!  Don't be shy.{wait}{window_closeall}" eob

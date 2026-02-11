@@ -319,13 +319,13 @@ l_0xef9ef4:
     isset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
     goto_if_true(l_0xefa07e)
     goto_if_flag(FLG_WINS_ESCAPE_MOUSE_NG, l_0xefa0b7)	// 0x02FE, 766
-    special_event(5)	// 05, Set OSS flag
+    OSS_on	// special_event(5)
     "@(The mouse found the way out and waved for you to follow.)" promptw
     anchor_warp
     load_registers
     take_slot(0, 0)
     unset(FLG_ITEM_ESCAPE_MOUSE)	// 512
-    special_event(6)	// 06, Clear OSS flag
+    OSS_off	// special_event(6)
     call(data_36.l_0xc7de60) eob
 
 l_0xef9f9f:

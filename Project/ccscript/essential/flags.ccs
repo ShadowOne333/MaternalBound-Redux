@@ -777,52 +777,54 @@ define FLG_SYS_DISTLPT_EVENT    	= flag 779
 define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
 // Flags 780-800 free to use
 
+// Flags 800-976 are taken by item box flags
+
 //------------------------------------
 // New flags for Key items
 //------------------------------------
 // Whether a party member is in the party (to prevent removing them all)
-define flg_Ness				= flag 800
-define flg_Paula			= flag 801
-define flg_Jeff				= flag 802
-define flg_Poo				= flag 803
+define flg_Ness				= flag 977
+define flg_Paula			= flag 978
+define flg_Jeff				= flag 979
+define flg_Poo				= flag 980
 // Whether to continue with current operation (used for reopening mod menu after selection)
-define flg_Proceed			= flag 804
+define flg_Proceed			= flag 981
 // Whether menu should loop or not (used for skipping mainmenu reopen on bicycle use)
-define flg_EndLoop			= flag 807
+define flg_EndLoop			= flag 982
 // Whether collisions are disabled or not
-define flg_DisableCollision		= flag 808
+define flg_DisableCollision		= flag 983
 // Whether bike is unrestricted or not
-define flg_UnrestrictBike		= flag 809	// Test
+define flg_UnrestrictBike		= flag 984	// Test
 // Whether Mod Menu Key Items window is open
-define flg_KeyItemsWnd			= flag 810
+define flg_KeyItemsWnd			= flag 985
 // Whether Key Item Menu is enabled
-define flg_KeyItems			= flag 811
+define flg_KeyItems			= flag 986
 // Whether Backstage Pass has been obtained or not
-define flg_KeyItem_BackstagePass	= flag 812
+define flg_KeyItem_BackstagePass	= flag 987
 // Whether Trout Yogurt Machine has been obtained or not
-define flg_KeyItem_YogurtMachine	= flag 813
+define flg_KeyItem_YogurtMachine	= flag 988
 // Whether Show Ticket has been obtained or not
-define flg_KeyItem_ShowTicket		= flag 814
+define flg_KeyItem_ShowTicket		= flag 989
 
 // Whether followers are in your party or not
-define flg_King				= flag 815
-define flg_Tony				= flag 816
-define flg_FlyingMan			= flag 817
-define flg_TeddyBear			= flag 818
-define flg_PlushBear			= flag 819
+define flg_King				= flag 990
+define flg_Tony				= flag 991
+define flg_FlyingMan			= flag 992
+define flg_TeddyBear			= flag 993
+define flg_PlushBear			= flag 994
 // Whether the Bicycle can't normally be used right now
-define flg_BikeCantNormallyBeUsed	= flag 820	// Test
+define flg_BikeCantNormallyBeUsed	= flag 995	// Test
 // Whether to close the main menu
-define flg_CloseMainMenu		= flag 821
+define flg_CloseMainMenu		= flag 996
 // Whether Ness has learned PSI yet
-define flg_LearnedPSI			= flag 823
+define flg_LearnedPSI			= flag 997
 // Whether player is riding bike (with unrestricted bike enabled)
-define flg_RidingBike			= flag 824
+define flg_RidingBike			= flag 998
 // Whether player is in Deep Darkness (to use hawk eye)
-define flg_InDeepDarkness		= flag 825
+define flg_InDeepDarkness		= flag 999
 // Jeff & Poo solo missions
-define flg_JeffSoloMission		= flag 1569	// 856
-define flg_PooSoloMission		= flag 1568	// 857
+define flg_JeffSoloMission		= flag 1000	// 856
+define flg_PooSoloMission		= flag 1001	// 857
 
 /* Original Game Flags */
 define flg_BuzzBuzz = flag 0x12

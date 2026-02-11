@@ -593,6 +593,7 @@ command transition_palette(tileset, palette, speed) "[1F E1 {byte tileset} {byte
 
 command activate_bicycle "[1F F0]" // Puts Ness on his bike. Use the special event command to kick him off.
 command summon_photographer(entry) "[1F D2 {short(entry)}]" // Summoms the Photo Guy. Say, Fuzzy Pickles! I am not sure what the parameter needed is but I assume it's some sort of entry of which photo to take.
+command timed_event(id)	"[1F D3 {byte id}]"	// Triggers a timed event
 
 command battle_no_handling(battle) "[1F 23 {short battle}]" // trigger a battle but don't automatically handle losing it. Returns 1 if you lose. Close windows beforehand.
 command get_status(char, group) "[19 16 {byte char} {byte group}]" // get the status of a specific character

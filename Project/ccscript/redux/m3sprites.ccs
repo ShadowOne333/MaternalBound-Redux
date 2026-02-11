@@ -430,6 +430,9 @@ m3sbs_sprite_detect: {
     BRA_a (d_end)
 
     mc1:
+    LDA_a(0xA97A)
+    BNE_a(mc1_use_robot_sprite)
+
     LDA_a(0x9887)
     CMP_i(4)
     BEQ_a(mc1_use_magicant_sprite)
@@ -445,6 +448,9 @@ m3sbs_sprite_detect: {
     LDA_i (mc1_altsprite2) BRA_a (d_end)
     
     mc2:
+    LDA_a(0xA97A)
+    BNE_a(mc2_use_robot_sprite)
+
     LDA_a(0x9887)
     CMP_i(5)
     BEQ_a(mc2_use_robot_sprite)
@@ -455,6 +461,9 @@ m3sbs_sprite_detect: {
     LDA_i (mc2_altsprite1) BRA_a (d_end)
 
     mc3:
+    LDA_a(0xA97A)
+    BNE_a(mc3_use_robot_sprite)
+
     LDA_a(0x9887)
     CMP_i(5)
     BEQ_a(mc3_use_robot_sprite)
@@ -465,6 +474,9 @@ m3sbs_sprite_detect: {
     LDA_i (mc3_altsprite1) BRA_a (d_end)
     
     mc4:
+    LDA_a(0xA97A)
+    BNE_a(mc4_use_robot_sprite)
+
     LDA_a(0x9887)
     CMP_i(5)
     BEQ_a(mc4_use_robot_sprite)

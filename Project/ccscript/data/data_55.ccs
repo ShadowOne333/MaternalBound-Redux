@@ -6,6 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -174,7 +178,8 @@ l_0xc9965a:
     "[19 02]No" eob
 
 l_0xc9965f:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc99686)} {e(l_0xc9966e)}]" goto(l_0xc9966e)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc99686)} {e(l_0xc9966e)}]"
+    goto(l_0xc9966e)
 
 l_0xc9966e:
     "@You seem to thrive in places like that." end
@@ -191,10 +196,12 @@ l_0xc99703:
 
 l_0xc99720:
     "@There are only three people remaining..." next
-    "@I don't want to stay.{pause(20)}  I'll get out of here..." end
+    "@I don't want to stay." pause(20)
+    "  I'll get out of here..." end
 
 l_0xc99757:
-    "@Sorry about everything!{pause(15)}  Let's be buddies." end
+    "@Sorry about everything!" pause(15)
+    "  Let's be buddies." end
 
 l_0xc99776:
     "@We wanted to join the Happy Happy religious group." next
@@ -212,12 +219,13 @@ l_0xc997ee:
 
 l_0xc9985a:
     title(1, Carpainter)
-    "@Hey [1C 01 08], it's been a long time." next
+    "@Hey {stat(8)}, it's been a long time." next
     "@Since we last met, the whole town has woken up." next
     "@The best happiness comes from being free... you kids made me realize that." end
 
 l_0xc998c1:
-    "[06 44 00 {e(l_0xc998fd)}]@(All of our products are blessed.{pause(20)}" linebreak
+    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc998fd)	// 0x0044, 68
+    "@(All of our products are blessed." pause(20) linebreak
     "             --Blue-Blue Drugstore)" end
 
 l_0xc998fd:
@@ -228,41 +236,90 @@ l_0xc9992f:
     eob
 
 l_0xc99930:
-    "[06 D1 00 {e(l_0xc9992f)}][06 05 02 {e(l_0xc9992f)}][1F 63 {e(l_0xc99945)}]" eob
+    goto_if_flag(FLG_TLPT_ONET, l_0xc9992f)	// 0x00D1, 209
+    goto_if_flag(FLG_MYHOME_LIGHT_ON, l_0xc9992f)	// 0x0205, 517
+    queue_text(l_0xc99945)
+    eob
 
 l_0xc99945:
-    "{pause(30)}{set(flag 517)}[1F E1 10 03 1E][06 D5 01 {e(l_0xc9992f)}]{set(flag 476)}{set(flag 11)}" eob
+    pause(30)
+    set(FLG_MYHOME_LIGHT_ON)	// 517
+    transition_palette(16, 3, 30)	// 0x10 Tileset, 0x03 palette, 0x1E speed
+    goto_if_flag(FLG_YAZIUMA_DISAPPEAR, l_0xc9992f)	// 0x01D5, 469
+    set(FLG_INSEKI_STOPPER_APPEAR)	// 476
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    eob
 
 l_0xc9995d:
-    "{set(flag 513)}{isset(flag 469)}[1B 02 {e(l_0xc9992f)}][06 1E 00 {e(l_0xc99991)}]{isset(flag 97)}[1B 02 {e(l_0xc9992f)}][06 25 03 {e(l_0xc99981)}]" eob
+    set(FLG_MYHOME_2F_1F)	// 513
+    isset(FLG_YAZIUMA_DISAPPEAR)	// 469
+    goto_if_false(l_0xc9992f)
+    goto_if_flag(FLG_MYHOME_POKEY_DISAPPEAR, l_0xc99991)	// 0x001E, 30
+    isset(FLG_MYHOME_POKEY_ENTER)	// 97
+    goto_if_false(l_0xc9992f)
+    goto_if_flag(805, l_0xc99981)	// 0x0325, 805, Cracked bat taken
+    eob
 
 l_0xc99981:
-    "{isset(flag 94)}[1B 02 {e(l_0xc9992f)}]{set(flag 310)}{unset(flag 301)}" eob
+    isset(FLG_MYHOME_MAMA_YEAH)	// 94
+    goto_if_false(l_0xc9992f)
+    set(FLG_MYHOME_POKEY2_APPEAR)	// 310
+    unset(FLG_MYHOME_POKEY_APPEAR)	// 301
+    eob
 
 l_0xc99991:
-    "{isset(flag 95)}[1B 02 {e(l_0xc9992f)}][1F 63 {e(data_16.l_0xc5e819)}]" eob
+    isset(flag 95)
+    goto_if_false(l_0xc9992f)
+    queue_text(data_16.l_0xc5e819)
+    eob
 
 l_0xc999a1:
-    "[06 78 02 {e(data_57.l_0xc9b20e)}]{isset(flag 469)}[1B 02 {e(l_0xc9992f)}][06 68 00 {e(l_0xc9992f)}][06 12 00 {e(l_0xc9992f)}]{window_open(1)}[06 02 00 {e(l_0xc99a3c)}]"
+    goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
+    isset(flag 469)
+    goto_if_false(l_0xc9992f)
+    goto_if_flag(FLG_ONET_AMBRAMI, l_0xc9992f)	// 0x0068, 104
+    goto_if_flag(FLG_BUNBUN, l_0xc9992f)	// 0x0012, 18
+    window_open(1)
+    goto_if_flag(FLG_TEMP_1, l_0xc99a3c)	// 0x0002, 2
     title(1, Porky)
-    "@Hey [1C 01 08]!" linebreak
-    "[19 22 01 01 05 00][1F 13 01 00]  Like I said, my dad isn't home yet!" next
+    "@Hey {stat(8)}!" linebreak
+    "[19 22 01 01 05 00][1F 13 01 00]"
+    "  Like I said, my dad isn't home yet!" next
     "@You've got to bring Picky back before he comes home!" next
-    "@I'll try to help you a little.[19 22 01 01 05 00][1F 13 01 00]{wait}{window_closeall}{set(flag 2)}" eob
+    "@I'll try to help you a little."
+    "[19 22 01 01 05 00][1F 13 01 00]"
+    wait
+    window_closeall
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc99a3c:
     title(1, Porky)
-    "@[1C 01 08]!" next
-    "[19 22 01 01 05 00][1F 13 01 00]@You haven't got a clue about what to do.{wait}{window_closeall}{unset(flag 2)}" eob
+    "@{stat(8)}!" next
+    "[19 22 01 01 05 00][1F 13 01 00]"
+    "@You haven't got a clue about what to do." wait
+    window_closeall
+    unset(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc99a6b:
-    "{isset(flag 107)}[1B 02 {e(l_0xc9992f)}][1F 63 {e(l_0xc99a7b)}]" eob
+    isset(FLG_ONET_LARDNA)	// 107
+    goto_if_false(l_0xc9992f)
+    queue_text(l_0xc99a7b)
+    eob
 
 l_0xc99a7b:
-    "{music(122)}{pause(155)}[1F E1 01 00 FF]{set(flag 422)}{unset(flag 107)}{music_resume}" eob
+    music(122)
+    pause(155)
+    transition_palette(1, 0, 255)	// 0x01 Tileset, 0x00 palette, 0xFF speed
+    set(FLG_ONET_DAYBREAK)	// 422
+    unset(FLG_ONET_LARDNA)	// 107
+    music_resume
+    eob
 
 l_0xc99a8f:
-    "{unset(flag 103)}" eob
+    unset(FLG_LIBRARY_TOILET)	// 103
+    eob
 
 l_0xc99a93:
     "[06 78 02 {e(data_57.l_0xc9b20e)}][06 69 00 {e(l_0xc9992f)}]{unset(flag 38)}{set(flag 289)}{set(flag 290)}{set(flag 291)}{set(flag 292)}{set(flag 293)}[06 B6 00 {e(l_0xc99abb)}]" eob

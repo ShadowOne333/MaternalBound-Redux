@@ -201,6 +201,7 @@ l_0xc75e5e:
 l_0xc75e6d:
     "@Okay, okay... I won't say anything to hurt you." next
     "@Will you please come with me?" linebreak
+    //two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc75ea2:
@@ -210,23 +211,43 @@ l_0xc75ea8:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc75ebc)} {e(l_0xc75e1c)}]" goto(l_0xc75e1c)
 
 l_0xc75ebc:
-    "{set(flag 96)}@Ok,{pause(15)} good buddy!{pause(20)}  Let's blow this popsicle stand..." next
-    "@Before we go,{pause(15)} why don't you say <goodbye> to your mom.{pause(15)}" linebreak
-    "[19 23 11 00 02 0E 00][1F 16 11 00 00]  Don't you agree,{pause(15)} ma'am?[03]{window_closeall}{pause(1)}[1F F1 0E 00 2B 00]" eob
+    set(FLG_MYHOME_POKEY)	// 96
+    "@Ok,{pause(15)} good buddy!" pause(20)
+    "  Let's blow this popsicle stand..." next
+    "@Before we go," pause(15) " why don't you say <goodbye> to your mom." pause(15) linebreak
+    "[19 23 11 00 02 0E 00][1F 16 11 00 00]"
+    "  Don't you agree," pause(15) " ma'am?" promptw
+    window_closeall
+    pause(1)
+    "[1F F1 0E 00 2B 00]"
+    eob
 
 l_0xc75f3b:
     title(1, Porky)
-    "[06 5E 00 {e(l_0xc75f73)}]@Before we go,{pause(15)} why don't you say <goodbye> to your mom.{wait}{window_closeall}{pause(1)}[1F F1 13 00 2B 00]" eob
+    goto_if_flag(FLG_MYHOME_MAMA_YEAH, l_0xc75f73)	// 0x005E, 94
+    "@Before we go," pause(15)
+    " why don't you say <goodbye> to your mom." wait
+    window_closeall
+    pause(1)
+    change_npc_movement(19, 43)	// 0x0013, 0x002B
+    eob
 
 l_0xc75f73:
     title(1, Porky)
-    "[1D 04 01 11][1B 03 {e(l_0xc760b7)}][06 25 03 {e(l_0xc75fb6)}]@You're not taking anything on our big adventure?" next
-    "@Why don't you look around for your [1C 05 11] or something?" end
+    equipped_item_check(1, 17)	// 0x11, 17, Cracked bat
+    goto_if_true(l_0xc760b7)
+    goto_if_flag(805, l_0xc75fb6)	// 0x0325, 805, Cracked bat taken
+    "@You're not taking anything on our big adventure?" next
+    "@Why don't you look around for your {itemname(17)} or something?" end
 
 l_0xc75fb6:
     title(1, Porky)
-    "@Sorry about giving you this game-type advice,{pause(15)}[19 22 01 03 2C 00][1F 13 01 00] but you should equip your weapon!" next
+    "@Sorry about giving you this game-type advice," pause(15)
+    return_direction_char_to_object(1, 3, 44)	// 01, 03, 002C
+    char_direction(1, 0)
+    " but you should equip your weapon!" next
     "@Do you know what <equip> means?" linebreak
+    //two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc76005:
@@ -243,13 +264,15 @@ l_0xc7601a:
     goto(l_0xc760b7)
 
 l_0xc76080:
-    "@Okay,{pause(15)} that's good.{pause(20)}  Be sure to pay attention to details like that." next
+    "@Okay," pause(15) " that's good." pause(20)
+    "  Be sure to pay attention to details like that." next
     goto(l_0xc760b7)
 
 l_0xc760b7:
     title(1, Porky)
     newline
-    "@All right!{pause(20)}  You go out in front,{pause(15)} and I'll follow at a safe distance." next
+    "@All right!" pause(20)
+    "  You go out in front," pause(15) " and I'll follow at a safe distance." next
     "@Let's get going!" promptw
     window_closeall
     set(FLG_MYHOME_POKEY_DISAPPEAR)	// 30

@@ -423,7 +423,7 @@ l_0xc88332:
     set(flg_Paula)
     unset(flg_JeffSoloMission)
     set(FLG_SYS_MONSTER_OFF)
-    special_event(5)	// OSS flag set
+    OSS_on	// special_event(5)
     
     call(data_24.l_0xc69082)
     

@@ -16,7 +16,11 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc9f786:
-    "{pause(30)} prayed for the kids, having never even met them before.{pause(150)}{window_closeall}" eob
+    pause(30)
+    " prayed for the kids, having never even met them before."
+    pause(150)
+    window_closeall
+    eob
 
 l_0xc9f7af:
     "#" goto(data_59.l_0xc9f750)
@@ -26,49 +30,79 @@ l_0xc9f7b5:
 
 l_0xc9f7bb:
     newline
-    "{pause(60)}{window_open(1)}@{counter(1)}" goto(l_0xc9f7c4)
+    pause(60)
+    window_open(1)
+    "@{counter(1)}"
+    goto(l_0xc9f7c4)
 
 l_0xc9f7c4:
     "[19 28 02][1B 02 {e(l_0xc9f7eb)}]{swap}[1D 21 63][18 07 28 00 00 00 00][1B 02 {e(l_0xc9f7fe)}][1C 11 00][1C 03 00]" goto(l_0xc9f7e5)
 
 l_0xc9f7e5:
-    "{inc}" goto(l_0xc9f7c4)
+    inc
+    goto(l_0xc9f7c4)
 
 l_0xc9f7eb:
-    "{pause(30)} kept praying.{pause(150)}{window_closeall}" eob
+    pause(30)
+    " kept praying."
+    pause(150)
+    window_closeall
+    eob
 
 l_0xc9f7fe:
     "#" goto(l_0xc9f7e5)
 
 l_0xc9f804:
     newline
-    "{pause(60)}{window_open(1)}@{counter(1)}" goto(l_0xc9f80d)
+    pause(60)
+    window_open(1)
+    "@{counter(1)}"
+    goto(l_0xc9f80d)
 
 l_0xc9f80d:
     "[19 28 02][1B 02 {e(l_0xc9f834)}]{swap}[1D 21 63][18 07 14 00 00 00 00][1B 02 {e(l_0xc9f847)}][1C 11 00][1C 03 00]" goto(l_0xc9f82e)
 
 l_0xc9f82e:
-    "{inc}" goto(l_0xc9f80d)
+    inc
+    goto(l_0xc9f80d)
 
 l_0xc9f834:
-    "{pause(30)} kept praying.{pause(150)}{window_closeall}" eob
+    pause(30)
+    " kept praying."
+    pause(150)
+    window_closeall
+    eob
 
 l_0xc9f847:
     "#" goto(l_0xc9f82e)
 
 l_0xc9f84d:
     newline
-    "{pause(60)}{window_open(1)}@" call(data_37.l_0xc7e77d) " kept praying.{pause(150)}{window_closeall}" eob
+    pause(60)
+    window_open(1)
+    "@" call(data_37.l_0xc7e77d) " kept praying."
+    pause(150)
+    window_closeall
+    eob
 
 l_0xc9f86a:
     newline
     "@Giygas' defenses became" linebreak
-    "  unstable.{sound(90)}{pause(70)}{sound(90)}{pause(65)}{sound(90)}{pause(74)}{sound(90)}" eob
+    "  unstable."
+    sound(SND_GIYGASWEAK)	// 90
+    pause(70)
+    sound(SND_GIYGASWEAK)	// 90
+    pause(65)
+    sound(SND_GIYGASWEAK)	// 90
+    pause(74)
+    sound(SND_GIYGASWEAK)	// 90
+    eob
 
 l_0xc9f897:
     newline
-    "@{user}[19 1F]{swap} put" linebreak
-    "  the [1C 05 00] on " call(data_37.l_0xc7e66e) " nose!{sound(115)}" next
+    "@{user}{return_action_argument}{swap} put" linebreak
+    "  the {itemname(0)} on " call(data_37.l_0xc7e66e) " nose!"
+    sound(SND_BOXOPEN1) next	// 115
     "@{user} searched for the" linebreak
     "  smell of the magic truffle." next
     "[1F D1][1B 02 {e(l_0xc9f970)}]{store_registers}{result_is(1)}[1B 03 {e(l_0xc9f946)}]{load_registers}{result_is(10)}[1B 03 {e(l_0xc9f936)}]{load_registers}" newline
@@ -116,13 +150,13 @@ l_0xc9f9cf:
 
 l_0xc9f9f3:
     "[06 FB 02 {e(l_0xc9fab9)}][06 49 00 {e(l_0xc9fab9)}][06 74 01 {e(data_35.l_0xc7c6f1)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc9fa74)}][06 BE 01 {e(l_0xc9fa74)}][06 86 02 {e(l_0xc9fa74)}][06 87 02 {e(l_0xc9fa74)}][06 88 02 {e(l_0xc9fa74)}]" newline
-    "@{user}[19 1F]{swap} used" linebreak
+    "@{user}{return_action_argument}{swap} used" linebreak
     "  the [1C 05 00]!" next
     "@A customer is heading this way.{wait}{window_closeall}[1D 21 03][09 03 {e(l_0xc9fb43)} {e(l_0xc9fb4d)} {e(l_0xc9fb57)}][1F D3 04]{set(flag 446)}{set(flag 754)}" eob
 
 l_0xc9fa74:
     newline
-    "@{user}[19 1F]{swap} used" linebreak
+    "@{user}{return_action_argument}{swap} used" linebreak
     "  the [1C 05 00]!" next
     "@Wait!  Someone is already heading this way.  Wait for them to get here first." end
 
@@ -156,7 +190,7 @@ l_0xc9fb9f:
 
 l_0xc9fbc4:
     newline
-    "@{user}[19 1F]{swap} opened" linebreak
+    "@{user}{return_action_argument}{swap} opened" linebreak
     "  the [1C 05 00]." next
     "@The enemy may not notice that you are present.[03]" eob
 
@@ -174,12 +208,12 @@ l_0xc9fc32:
 
 l_0xc9fc48:
     newline
-    "@{user}[19 1F]{swap} placed the [1C 05 00] on the floor.{sound(115)}{pause(1)}" next
+    "@{user}{return_action_argument}{swap} placed the [1C 05 00] on the floor.{sound(115)}{pause(1)}" next
     "{set(flag 124)}[1D 01 FF AE]" eob
 
 l_0xc9fc6f:
     newline
-    "@{user}[19 1F]{swap} used the [1C 05 00]!{sound(95)}{pause(1)}{wait}{window_closeall}[1D 01 FF AF]{set(flag 288)}[1F 1E CF 04 06]" call(data_50.l_0xc935b1) "){set(flag 508)}" eob
+    "@{user}{return_action_argument}{swap} used the [1C 05 00]!{sound(95)}{pause(1)}{wait}{window_closeall}[1D 01 FF AF]{set(flag 288)}[1F 1E CF 04 06]" call(data_50.l_0xc935b1) "){set(flag 508)}" eob
 
 l_0xc9fc9e:
     "@(For some reason," next
@@ -201,25 +235,31 @@ l_0xc9fd60:
 
 l_0xc9fd82:
     newline
-    "@{user}[19 1F]{swap} used the [1C 05 00]!" next
-    "@Now, " call(data_36.l_0xc7e602) " can figure out the length of things easily.[03]" eob
+    "@{user}{return_action_argument}{swap} used the {itemname(0)}!" next
+    "@Now, " call(data_36.l_0xc7e602) " can figure out the length of things easily." promptw
+    eob
 
 l_0xc9fdbb:
     newline
-    "@{user}[19 1F]{swap} used the [1C 05 00]!" next
-    "@Now, " call(data_36.l_0xc7e602) " can fairly easily figure out the angle of various things.[03]" eob
+    "@{user}{return_action_argument}{swap} used the [1C 05 00]!" next
+    "@Now, " call(data_36.l_0xc7e602) " can fairly easily figure out the angle of various things." promptw
+    eob
 
 l_0xc9fdfb:
     newline
     sound(SND_BIRDS)	// 101
-    "@Seeing chicks makes you happy.{sound(101)}[03]" eob
+    "@Seeing chicks makes you happy."
+    sound(SND_BIRDS)
+    promptw
+    eob
 
 l_0xc9fe1b:
     newline
     sound(SND_CHICKEN)	// 104
     pause(10)
     sound(SND_CHICKEN)	// 104
-    "@A chicken ran away as fast as it could.[03]" eob
+    "@A chicken ran away as fast as it could." promptw
+    eob
 
 l_0xc9fe41:
     newline

@@ -16,16 +16,58 @@ command e(label) "{long label}"
 // Text Data
 l_0xc79942:
     title(1, MrJones)
-    "@Where's [1C 02 01]?" next
-    "@He isn't here?{pause(20)}  I just wanted to thank him." next
+    "@Where's {name(1)}?" next
+    "@He isn't here?" pause(20)
+    "  I just wanted to thank him." next
     "@You know,{pause(15)} I bet he's the boy you dreamt would save the world..." next
     goto(data_33.l_0xc79796)
 
 l_0xc79997:
-    "[1F 41 05][1F F1 E7 00 6D 00][1F 15 6A 00 6F 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 78 00 6E 00 FF][1F 15 6A 00 70 00 FF][1F 21 41]" call(data_57.l_0xc9b4b8) "[1F 1F 6A 00 06][1F 1F 78 00 06][1F 17 F7 00 0C 00 01][1F 41 06]" eob
+    "[1F 41 05][1F F1 E7 00 6D 00][1F 15 6A 00 6F 00 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 15 78 00 6E 00 FF][1F 15 6A 00 70 00 FF][1F 21 41]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 1F 6A 00 06][1F 1F 78 00 06][1F 17 F7 00 0C 00 01][1F 41 06]" eob
 
 l_0xc799d7:
-    "{set(flag 11)}[1F 41 05]{set(flag 536)}{music_resume}[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]{window_closeall}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}[1F 61]{window_open(1)}" call(l_0xc79a64) "{window_closeall}{unset(flag 2)}[1F 61]{window_open(1)}" call(l_0xc79a98) "{window_closeall}{unset(flag 3)}[1F 61]{window_open(1)}" call(l_0xc79ab9) "{window_closeall}{unset(flag 4)}[1F 61]{window_open(1)}" call(l_0xc79ad7) "{window_closeall}{unset(flag 5)}[1F 61]{window_open(1)}" call(gorgeoustext) "{window_closeall}{unset(flag 6)}[1F 61]" eob
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    OSS_on	// special_event(5)
+    set(FLG_BGM_TONZURA_FREE)	// 536
+    music_resume
+    "[1F 15 95 00 73 00 01][1F 15 96 00 74 00 01][1F 15 B9 00 75 00 01][1F 15 BA 00 76 00 01][1F 15 BB 00 77 00 01]"
+    window_closeall
+    unset(FLG_TEMP_1)	// 2
+    unset(FLG_TEMP_2)	// 3
+    unset(FLG_TEMP_3)	// 4
+    unset(FLG_TEMP_4)	// 5
+    unset(FLG_TEMP_5)	// 6
+    wait_for_movement
+    window_open(1)
+    call(l_0xc79a64)
+    window_closeall
+    unset(FLG_TEMP_1)	// 2
+    wait_for_movement
+    window_open(1)
+    call(l_0xc79a98)
+    window_closeall
+    unset(FLG_TEMP_2)	// 3
+    wait_for_movement
+    window_open(1)
+    call(l_0xc79ab9)
+    window_closeall
+    unset(FLG_TEMP_3)	// 4
+    wait_for_movement
+    window_open(1)
+    call(l_0xc79ad7)
+    window_closeall
+    unset(FLG_TEMP_4)	// 5
+    wait_for_movement
+    window_open(1)
+    call(gorgeoustext)
+    window_closeall
+    unset(FLG_TEMP_5)	// 6
+    wait_for_movement
+    eob
 
 l_0xc79a64:
     title(1, Nice)	// Fatty guy
@@ -50,13 +92,33 @@ gorgeoustext:		// Sax guy
     "@I didn't stand out and get much attention, did I?" end
 
 l_0xc79b12:
-    "[1F 1A 40 01 03]{pause(5)}[1F 1B 40 01]{pause(5)}[1F 1A 40 01 03]{pause(50)}[1F 1B 40 01][1F F1 40 01 B3 00][1F 61][1F E6 40 01][19 10 01][19 22 00 02 40 01][1F 13 00 00]{window_open(1)}"
+    "[1F 1A 40 01 03]"
+    pause(5)
+    "[1F 1B 40 01]"
+    pause(5)
+    "[1F 1A 40 01 03]"
+    pause(50)
+    "[1F 1B 40 01][1F F1 40 01 B3 00]"
+    wait_for_movement
+    "[1F E6 40 01][19 10 01][19 22 00 02 40 01][1F 13 00 00]"
+    window_open(1)
     title(1, Nice)	// Fatty guy
     "@Hurry and get on!" next
-    "@Our tour bus is too loud for the ghosts![03]{window_closeall}[1F 15 6A 00 B4 00 01][1F EF 6A 00][1F E8 FF][1F E9 40 01][1F 61][1F 1F 6A 00 06][1F ED][1F 66 01 03 12 9B C7 00]" eob
+    "@Our tour bus is too loud for the ghosts!" promptw
+    window_closeall
+    "[1F 15 6A 00 B4 00 01][1F EF 6A 00][1F E8 FF][1F E9 40 01]"
+    wait_for_movement
+    "[1F 1F 6A 00 06]"
+    reset_camera
+    hotspot_on(1, 3, l_0xc79b12)	// 1, 0x03, 0x00C79B12
+    eob
 
 l_0xc79b98:
-    "[1F 15 B9 01 09 03 01][1F 41 05]{set(flag 747)}[1F 15 6A 00 B6 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F EB FF 06]{unset(flag 536)}{set(flag 535)}{music_resume}[1F E5 FF][1F F1 40 01 B7 00][1F 61]{unset(flag 309)}{window_open(1)}" call(l_0xc79bec) "{window_closeall}[1F F1 75 01 B8 00]{pause(60)}[1F EE 75 01][1F E8 FF][1F 67 01]" eob
+    "[1F 15 B9 01 09 03 01][1F 41 05]{set(flag 747)}[1F 15 6A 00 B6 00 01][1F EF 6A 00][1F E8 FF]"
+    wait_for_movement
+    "[1F EB FF 06]{unset(flag 536)}{set(flag 535)}{music_resume}[1F E5 FF][1F F1 40 01 B7 00]"
+    wait_for_movement
+    "{unset(flag 309)}{window_open(1)}" call(l_0xc79bec) "{window_closeall}[1F F1 75 01 B8 00]{pause(60)}[1F EE 75 01][1F E8 FF][1F 67 01]" eob
 
 l_0xc79bec:
     title(1, Okay)	// Drums guy
@@ -69,13 +131,28 @@ l_0xc79bff:
     "  Get out of my way![03]{window_closeall}" eob
 
 l_0xc79c1e:
-    "[1F ED]{set(flag 314)}[1F 15 F3 00 B9 00 FF][1F 21 3C][1F EF F3 00]" eob
+    reset_camera
+    "{set(flag 314)}[1F 15 F3 00 B9 00 FF][1F 21 3C][1F EF F3 00]" eob
 
 l_0xc79c32:
-    "[1F ED]{unset(flag 314)}[1F 15 F3 00 BA 00 FF][1F 21 3F][1F EF F3 00]" eob
+    reset_camera
+    "{unset(flag 314)}[1F 15 F3 00 BA 00 FF][1F 21 3F][1F EF F3 00]" eob
 
 l_0xc79c46:
-    "[1F ED][1F 15 6A 00 4A 00 01][1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61][1F 13 01 05][1F 13 02 05]{unset(flag 535)}{music_resume}[1F ED][1F E5 FF][1F 15 95 00 4B 00 01][1F 61]{pause(30)}" call(l_0xc79cc8) "{pause(20)}[1F F2 95 00 4C 00][1F 61]{pause(30)}[1F F3 F3 00 08]{pause(30)}[1F 13 01 01][1F 13 02 01]{pause(30)}" call(l_0xc79d27) "{pause(30)}[1F F4 F3 00]{pause(30)}[1F EA F3 00][1F 61][1F 67 01][19 26 03]{set(flag 211)}{set(flag 761)}{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+    reset_camera
+    "[1F 15 6A 00 4A 00 01][1F EF 6A 00][1F EC FF 01][1F E8 FF]"
+    wait_for_movement
+    "[1F 13 01 05][1F 13 02 05]"
+    unset(flag 535)
+    music_resume
+    reset_camera
+    "[1F E5 FF][1F 15 95 00 4B 00 01]"
+    wait_for_movement
+    "{pause(30)}" call(l_0xc79cc8) "{pause(20)}[1F F2 95 00 4C 00]"
+    wait_for_movement
+    "{pause(30)}[1F F3 F3 00 08]{pause(30)}[1F 13 01 01][1F 13 02 01]{pause(30)}" call(l_0xc79d27) "{pause(30)}[1F F4 F3 00]{pause(30)}[1F EA F3 00]"
+    wait_for_movement
+    "[1F 67 01][19 26 03]{set(flag 211)}{set(flag 761)}{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
 
 l_0xc79cc8:
     "{window_open(1)}"
@@ -91,10 +168,14 @@ l_0xc79d27:
     "@Look for us to be singing at some theater in Fourside...[03]{window_closeall}" eob
 
 l_0xc79d5f:
-    "[1F E9 1A 02][1F 61]" eob
+    "[1F E9 1A 02]"
+    wait_for_movement
+    eob
 
 l_0xc79d66:
-    "[1F E9 1A 02][1F 61]{unset(flag 46)}{set(flag 296)}" eob
+    "[1F E9 1A 02]"
+    wait_for_movement
+    "{unset(flag 46)}{set(flag 296)}" eob
 
 l_0xc79d73:
     "{unset(flag 296)}{set(flag 297)}" eob
@@ -103,11 +184,17 @@ l_0xc79d7a:
     "{unset(flag 297)}{set(flag 298)}" eob
 
 l_0xc79d81:
-    "[1F E5 FF][1F 41 05][19 10 01][1F 1C 00 03]{pause(60)}[1F 1D 00][1F E9 ED 01][1F E9 EE 01][1F E9 EF 01][1F E9 F0 01][1F 07 02]{pause(10)}{music(111)}[1F 15 6A 00 8B 02 01][1F 61]{pause(120)}{window_open(1)}@(Oh,{pause(5)} oh...{pause(20)} you're losing consciousness..." next
-    "@What could be the fate of [1C 02 01] and his friend?){wait}{window_closeall}" call(data_49.l_0xc915f4) call(data_24.l_0xc69082) "{set(flag 11)}[1F EB FF 06][1F 15 10 00 96 02 FF][1F 15 89 01 97 02 FF][1F 21 4D][1F E5 FF]{pause(240)}[1F 1F 10 00 06][1F EC 01 01]{pause(30)}[19 22 01 03 89 01][1F 13 01 00]{pause(20)}[1F 1F 89 01 06][1F 15 02 00 08 00 01]{pause(60)}[1F F2 02 00 2F 00][1F 61][1F 1F 02 00 06][1F EC FF 01][1F E8 FF]" eob
+    "[1F E5 FF][1F 41 05][19 10 01][1F 1C 00 03]{pause(60)}[1F 1D 00][1F E9 ED 01][1F E9 EE 01][1F E9 EF 01][1F E9 F0 01][1F 07 02]{pause(10)}{music(111)}[1F 15 6A 00 8B 02 01]"
+    wait_for_movement
+    "{pause(120)}{window_open(1)}@(Oh,{pause(5)} oh...{pause(20)} you're losing consciousness..." next
+    "@What could be the fate of {name(1)} and his friend?){wait}{window_closeall}" call(data_49.l_0xc915f4) call(data_24.l_0xc69082) "{set(flag 11)}[1F EB FF 06][1F 15 10 00 96 02 FF][1F 15 89 01 97 02 FF][1F 21 4D][1F E5 FF]{pause(240)}[1F 1F 10 00 06][1F EC 01 01]{pause(30)}[19 22 01 03 89 01][1F 13 01 00]{pause(20)}[1F 1F 89 01 06][1F 15 02 00 08 00 01]{pause(60)}[1F F2 02 00 2F 00]"
+    wait_for_movement
+    "[1F 1F 02 00 06][1F EC FF 01][1F E8 FF]" eob
 
 l_0xc79e55:
-    call(data_24.l_0xc69082) "{pause(60)}[1F 13 02 05]{pause(60)}[1F 07 03][1F 15 6A 00 FE 02 01][1F 61][1F E7 6A 00]{pause(120)}{window_open(1)}"
+    call(data_24.l_0xc69082) "{pause(60)}[1F 13 02 05]{pause(60)}[1F 07 03][1F 15 6A 00 FE 02 01]"
+    wait_for_movement
+    "[1F E7 6A 00]{pause(120)}{window_open(1)}"
     title_paula(1)
     "@I'm calling out to you who I've never met..." next
     "@I'm calling our friend who we've never met..." next
@@ -163,7 +250,9 @@ l_0xc7a04a:
     "[1F 1A 4F 02 03]{pause(60)}[1F 1B 4F 02]{pause(30)}[1F 1E 4F 02 06][1F 15 B6 00 72 00 01]{pause(1)}[1F E7 B6 00]{window_open(1)}"
     title(1, Tony)
     "@[1C 02 03],{pause(20)} where are you going in the middle of the night?" next
-    "{window_closeall}[1F EA B6 00][1F 61][1F E7 B6 00]{window_open(1)}"
+    "{window_closeall}[1F EA B6 00]"
+    wait_for_movement
+    "[1F E7 B6 00]{window_open(1)}"
     title(1, Tony)
     "@You know the dorm rules, right?" next
     "@If you get caught,{pause(15)} you'll get a paddling..." next
@@ -172,7 +261,9 @@ l_0xc7a04a:
     "@There must be some reason that I don't understand.{pause(20)}  I won't stop you." next
     "@But it's dangerous to leave without taking anything along." next
     "@Hey,{pause(15)} I think there's some stuff in the locker room that you should get." next
-    "@I'll help you get out of here...[03]{window_closeall}[1F 11 08][1F EB 08 06][1F F2 B6 00 2F 00][1F 61][1F 1F B6 00 06][1F EC 08 01]{music(123)}{pause(120)}{pause(60)}{window_open(1)}@(Tony joined you.)[03]{window_closeall}{set(flag 23)}{music_resume}" eob
+    "@I'll help you get out of here...[03]{window_closeall}[1F 11 08][1F EB 08 06][1F F2 B6 00 2F 00]"
+    wait_for_movement
+    "[1F 1F B6 00 06][1F EC 08 01]{music(123)}{pause(120)}{pause(60)}{window_open(1)}@(Tony joined you.)[03]{window_closeall}{set(flag 23)}{music_resume}" eob
 
 l_0xc7a1ba:
     "[1D 05 FF 24][1B 03 {e(l_0xc7a20c)}][1F 13 08 05][19 22 03 01 08 00][1F 13 03 00]{window_open(1)}"
@@ -181,7 +272,9 @@ l_0xc7a1ba:
     "@But you need to get some stuff to take with you.{wait}{window_closeall}" eob
 
 l_0xc7a20c:
-    call(data_23.l_0xc683d9) "[1F 15 B6 00 0A 01 01][1F 61][1F 1F B6 00 06][1F 17 7A 02 08 00 01]{set(flag 335)}" eob
+    call(data_23.l_0xc683d9) "[1F 15 B6 00 0A 01 01]"
+    wait_for_movement
+    "[1F 1F B6 00 06][1F 17 7A 02 08 00 01]{set(flag 335)}" eob
 
 l_0xc7a22a:
     unset(flg_Tony)
@@ -241,7 +334,7 @@ l_0xc7a300:
     "@that are terrorizing the area with this paper!" next
     "{pause(60)}" linebreak
     "@Anyway, I just asked the Mach Pizza delivery man" next
-    "@to deliver the Zombie Paper to you, [1C 02 01]." next
+    "@to deliver the Zombie Paper to you, {name(1)}." next
     "@You should get it pretty soon." next
     "@I've never actually seen a zombie, but if there really are any," next
     "@Zombie Paper would be very useful..." next
@@ -252,62 +345,104 @@ l_0xc7a542:
     "{window_open(1)}"
     title(1, Mach)
     "@While delivering pizza, this weird guy asked me to help him out..." next
-    "@He wanted me to deliver this to someone named [1C 02 01]" next
+    "@He wanted me to deliver this to someone named {name(1)}" next
     "@...who is wandering around Threek." next
     "@No one else knows about this, right?" next
-    "@Let's just pretend that you're [1C 02 01],{pause(15)} and I'll give this to you." next
-    "@Oh!{pause(15)}  Hello, [1C 02 01]!" next
+    "@Let's just pretend that you're {name(1)},{pause(15)} and I'll give this to you." next
+    "@Oh!{pause(15)}  Hello, {name(1)}!" next
     "@Just go along with me on this one, okay." next
-    "@I made the decision that you're [1C 02 01],{pause(15)} no matter what..." next
+    "@I made the decision that you're {name(1)},{pause(15)} no matter what..." next
     "[1D 03 FF][1B 02 {e(l_0xc7a6a9)}]" goto(l_0xc7a63e)
 
 l_0xc7a63e:
-    "[1D 0E 00 AE]" call(data_36.l_0xc7dcb6) next
-    "@That's right, [1C 02 01]... *wink, wink*" next
+    "[1D 0E 00 AE]"
+    call(data_36.l_0xc7dcb6) next
+    "@That's right, {name(1)}... *wink, wink*" next
     "@I've done my duty and given you Apple Kid's thingamajig..." next
-    "@Well, goodbye!...[03]{window_closeall}{unset(flag 675)}{set(flag 552)}" call(data_36.l_0xc7dde8) "{unset(flag 754)}" eob
+    "@Well, goodbye!..." promptw
+    window_closeall
+    unset(FLG_DELIVERY_HOIHOI)	// 675
+    set(FLG_ITEM_HOIHOI)	// 552
+    call(data_36.l_0xc7dde8)
+    unset(FLG_SYS_DISTLPT)	// 754
+    eob
 
 l_0xc7a6a9:
     "@You have too much stuff, so I can't give this to you..." next
     "@Why don't you get rid of something?" linebreak
-    "[19 02]Yes" eob
+    //two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7a6d5:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7a6db:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7a72f)} {e(l_0xc7a6ea)}]" goto(l_0xc7a6ea)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc7a72f
+	long l_0xc7a6ea
+    })
+    goto(l_0xc7a6ea)
 
 l_0xc7a6ea:
     "@Look, this is really important!" next
     "@You've got to dump something!!" linebreak
-    "[19 02]Yes" eob
+    //two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7a715:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7a71b:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7a72f)} {e(l_0xc7a754)}]" goto(l_0xc7a754)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc7a72f
+	long l_0xc7a754
+    })
+    goto(l_0xc7a754)
 
 l_0xc7a72f:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc7a6ea)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc7a7a6)}]{load_registers}[1D 0F 00 00]" goto(l_0xc7a63e)
+    call(data_15.l_0xc5e456)
+    goto_if_false(l_0xc7a6ea)
+    store_registers
+    return_item_in_slot(0, 0)
+    get_selling_price(0)
+    goto_if_false(l_0xc7a7a6)
+    load_registers
+    take_slot(0, 0)
+    goto(l_0xc7a63e)
 
 l_0xc7a754:
     "@All righty, I'm just going to hang out around here, then." next
-    "@Ya gotta have some space for this thing by the time I come back, okay?[03]{window_closeall}" call(data_36.l_0xc7dde8) "{unset(flag 754)}" eob
+    "@Ya gotta have some space for this thing by the time I come back, okay?" promptw
+    window_closeall
+    call(data_36.l_0xc7dde8)
+    unset(FLG_SYS_DISTLPT)	// 754
+    eob
 
 l_0xc7a7a6:
-    "@Hang on!{pause(20)}  That's way too cool to just throw away!{pause(20)}  Keep it!" next
+    "@Hang on!" pause(20)
+    "  That's way too cool to just throw away!" pause(20)
+    "  Keep it!" next
     goto(l_0xc7a72f)
 
 l_0xc7a7d8:
     eob
 
 l_0xc7a7d9:
-    "[1F D3 08]" eob
+    timed_event(8)	// 08
+    eob
 
 l_0xc7a7dd:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    music(115)
+    pause(60) wait
+    "[1F 01 00]"	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    window_open(1)
     title(1, Apple)
     "@Hello, this is Apple Kid." next
     "@I've come up with another wacky invention that I think has real potential." next
@@ -321,10 +456,16 @@ l_0xc7a7dd:
     "@Hopefully, you'll get it soon.{pause(20)}  Yeah,{pause(15)} everything is..." next
     "@(Kaboooom!)" next
     "@Uh, I'vegotsomeproblems" linebreak
-    "  heregottago, bye!{wait}{sound(11)}{window_closeall}{music_resume}" eob
+    "  heregottago, bye!" wait
+    sound(SND_PHONEPICKUP)	// 11
+    window_closeall
+    music_resume
+    eob
 
 l_0xc7a959:
-    "[19 10 01]{rtoarg}{window_open(1)}@*Crash*" next
+    party_pos_check(1) rtoarg
+    window_open(1)
+    "@*Crash*" next
     "@Ooops!" next
     "@*Crunch*" next
     "@Ooops!" next
@@ -343,28 +484,74 @@ l_0xc7a959:
     "@So YOU go get it!" next
     "@Go on, get out of here." next
     "@Maybe that thing I forgot is important to you..." next
-    "@So... have a good time in the desert!...{wait}{window_closeall}" eob
+    "@So... have a good time in the desert!..." wait
+    window_closeall
+    eob
 
 l_0xc7ab3f:
-    "[06 FE 01 {e(data_55.l_0xc9992f)}]" call(data_36.l_0xc7dd74) "{music(88)}{pause(180)}{pause(60)}[1F 15 8F 00 C0 01 01]          [1F 61]                                      [1F 15 58 01 C1 01 01]  [1F 61][1F E7 8F 00][19 10 01][19 22 00 03 8F 00][1F 14 00]{window_open(1)}[1F 41 12]@Pictures taken instantaneously!" next
+    "[06 FE 01 {e(data_55.l_0xc9992f)}]"
+    call(data_36.l_0xc7dd74)
+    music(88)
+    pause(180) pause(60)
+    "[1F 15 8F 00 C0 01 01]"
+    "          "
+    wait_for_movement
+    "                                      "
+    "[1F 15 58 01 C1 01 01]"
+    "  "
+    wait_for_movement
+    "[1F E7 8F 00][19 10 01][19 22 00 03 8F 00][1F 14 00]"
+    window_open(1)
+    special_event(18)	// 0x12, force out of bicycle
+    "@Pictures taken instantaneously!" next
     "@I'm a photographic genius,{pause(15)}" linebreak
     "  if I do say so myself!" next
     "@Okay,{pause(15)} get ready for an instant memory!" next
     "@Look at the camera...{pause(20)}" linebreak
     "  Ready..." next
     "@Say,{pause(15)} <fuzzy pickles.>" next
-    "{window_closeall}[1F EB 01 06][06 FD 01 {e(l_0xc7ac3a)}][1F 15 0E 00 C2 01 01] " goto(l_0xc7ac42)
+    window_closeall
+    "[1F EB 01 06][06 FD 01 {e(l_0xc7ac3a)}][1F 15 0E 00 C2 01 01] "
+    goto(l_0xc7ac42)
 
 l_0xc7ac3a:
-    "[1F 15 0E 00 C3 01 01] " goto(l_0xc7ac42)
+    "[1F 15 0E 00 C3 01 01]"
+    " "
+    goto(l_0xc7ac42)
 
 l_0xc7ac42:
-    "{pause(64)}[1F 15 6A 00 C4 01 01]  [1F 61][1F 1F 0E 00 06]        [1F EC 01 01]{window_open(1)}@Wow, what a great photograph!" next
+    pause(64)
+    "[1F 15 6A 00 C4 01 01]"
+    "  "
+    wait_for_movement
+    "[1F 1F 0E 00 06]"
+    "        "
+    "[1F EC 01 01]"
+    window_open(1)
+    "@Wow, what a great photograph!" next
     "@It will always bring back the fondest of memories..." next
-    "{window_closeall}[1F EA 8F 00]                      [1F 61][1F 1F 58 01 06]      [1F 61][1F 07 03]{pause(60)}{music_resume}" eob
+    window_closeall
+    "[1F EA 8F 00]"
+    "                      "
+    wait_for_movement
+    "[1F 1F 58 01 06]"
+    "      "
+    wait_for_movement
+    "[1F 07 03]"
+    pause(60)
+    music_resume
+    eob
 
 l_0xc7acb8:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[19 10 01]{rtoarg}{window_open(1)}@[1C 02 01], I haven't talked with you in ages!{pause(20)}  This is Orange Kid." next
+    music(115)
+    pause(60)
+    wait
+    "[1F 01 00]" 	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    party_pos_check(1)
+    rtoarg
+    window_open(1)
+    "@{name(1)}, I haven't talked with you in ages!{pause(20)}  This is Orange Kid." next
     title(1, Orange)
     "@We're finally coming near to the end of our research on..." next
     "@how to change a boiled egg back into a raw egg." next
@@ -376,25 +563,46 @@ l_0xc7acb8:
     "@I haven't read the book, so I'm not very good at talking... sorry." next
     "@I'm also working hard on my invention,{pause(15)} so I hope you'll understand." next
     "@Say hello to your friends for me!" next
-    "@*Click*{wait}{window_closeall}{sound(11)}{music_resume}" eob
+    "@*Click*" wait
+    window_closeall
+    sound(SND_PHONEPICKUP)	// 11
+    music_resume
+    eob
 
 l_0xc7ae41:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[19 10 01]{rtoarg}{window_open(1)}"
+    music(115)
+    pause(60)
+    wait
+    "[1F 01 00]" 	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    party_pos_check(1)
+    rtoarg
+    window_open(1)
     title(1, Apple)
     "@Hello, it's been a while since we talked...{pause(15)} this is Apple Kid." next
     "@We're having beautiful weather here..." next
     "@I'm now at Dr. Andonuts' lab in Winters." next
     "@The doctor doesn't seem to be around right now," next
     "@but I'm just working on my Eraser eraser machine..." next
-    "{music(177)}{pause(160)}" linebreak
+    music(177)
+    pause(160) linebreak
     "@!{pause(30)}!{pause(10)}!{pause(10)}!{pause(10)}!{pause(10)}!{music(153)}" next
     "{pause(60)}" linebreak
     "@Hey!{pause(20)}  Oh no!  What are you doing to me?" next
     "{pause(60)}" linebreak
-    "@Who are you ?{pause(15)}!!!... *Click*{wait}{window_closeall}{sound(11)}{set(flag 620)}" eob
+    "@Who are you ?{pause(15)}!!!... *Click*" wait
+    window_closeall
+    sound(SND_PHONEPICKUP)	// 11
+    set(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
+    eob
 
 l_0xc7af57:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    music(115)
+    pause(60)
+    wait
+    "[1F 01 00]" 	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    window_open(1)
     title(1, Apple)
     "@Hello!  How are you?{pause(20)}  This is Apple Kid." next
     "@I think I'm a real genius... In fact,{pause(15)} I know I'm a genius." next
@@ -403,70 +611,189 @@ l_0xc7af57:
     "@To do so, we need to invent a machine called the <Phase Distorter.>" next
     "@I've got to find the wandering scientist," next
     "@Dr. Andonuts, and make the distorter.{pause(15)}  So, I may be gone for a while." next
-    "@Later... *Click*{wait}{window_closeall}{sound(11)}{unset(flag 42)}{music_resume}{isset(flag 117)}[1B 02 {e(data_55.l_0xc9992f)}][1F 66 01 34 A0 B0 C7 00]" eob
+    "@Later... *Click*" wait
+    window_closeall
+    sound(SND_PHONEPICKUP)	// 11
+    unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
+    music_resume
+    isset(FLG_TWSN_ORANGE_THANKS)	// 117
+    goto_if_false(data_55.l_0xc9992f)
+    hotspot_on(1, 52, l_0xc7b0a0)	// 1, 0x34, 0x00C7B0A0
+    eob
 
 l_0xc7b0a0:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    music(115)
+    pause(60)
+    wait
+    "[1F 01 00]" 	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    window_open(1)
     title(1, Orange)
     "@Hello!  This is Orange Kid." next
     "@Sorry I didn't call you before." next
     "@I'm still working on the way to change boiled eggs into raw eggs." next
     "@It's taking longer than I thought..." next
     "@I'm going to really work at it, though... talk to me later." next
-    "@*Click*{wait}{window_closeall}{sound(11)}{music_resume}" eob
+    "@*Click*" wait
+    window_closeall
+    sound(SND_PHONEPICKUP)	// 11
+    music_resume
+    eob
 
 l_0xc7b146:
-    "[1F 1A 8A 03 03]{pause(30)}[1F 1B 8A 03]{window_open(1)}@Hey, you!{pause(15)}  Over there!{pause(20)}  Get over here![03]{window_closeall}[1F F1 8A 03 63 02][1F 61][1F E6 8A 03][19 10 01]{swap}[19 23 8A 03 01 00 00][1F 16 8A 03 00]{window_open(1)}@The admission fee is $5.00 per person." next
+    "[1F 1A 8A 03 03]{pause(30)}[1F 1B 8A 03]"
+    window_open(1)
+    "@Hey, you!{pause(15)}  Over there!{pause(20)}  Get over here!" promptw
+    window_closeall
+    "[1F F1 8A 03 63 02]"
+    wait_for_movement
+    "[1F E6 8A 03][19 10 01]{swap}[19 23 8A 03 01 00 00][1F 16 8A 03 00]"
+    window_open(1)
+    "@The admission fee is $5.00 per person." next
     "@Is that okay with you?" linebreak
-    "[19 02]Yes" eob
+    //two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7b1c1:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7b1c7:
-    "{open_wallet}[1C 07 02][11]{clearline}[09 02 {e(l_0xc7b2bd)} {e(l_0xc7b1d8)}]" goto(l_0xc7b1d8)
+    open_wallet
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc7b2bd
+	long l_0xc7b1d8
+    })
+    goto(l_0xc7b1d8)
 
 l_0xc7b1d8:
     "[1D 15 05 00]{swap}@You can't afford to spend" linebreak
     "  $[1C 0A 00 00 00 00]?," next
-    "@or are you just not into dinosaurs?{pause(20)}  You must be nuts...{wait}{window_closeall}[1F F1 8A 03 64 02][1F 15 6A 00 65 02 01]{pause(1)}[1F EF 6A 00][1F E9 8A 03][1F E8 FF][1F 61][1F E5 FF][1F ED][1F E6 8A 03][19 10 01]{swap}[19 23 8A 03 01 00 00][1F 16 8A 03 00]{window_open(1)}[1D 15 05 00]{swap}@You don't even have" linebreak
+    "@or are you just not into dinosaurs?{pause(20)}  You must be nuts...{wait}{window_closeall}[1F F1 8A 03 64 02][1F 15 6A 00 65 02 01]{pause(1)}[1F EF 6A 00][1F E9 8A 03][1F E8 FF]"
+    wait_for_movement
+    "[1F E5 FF]"
+    reset_camera
+    "[1F E6 8A 03][19 10 01]{swap}[19 23 8A 03 01 00 00][1F 16 8A 03 00]{window_open(1)}[1D 15 05 00]{swap}@You don't even have" linebreak
     "  $[1C 0A 00 00 00 00]?," next
-    "@an unusual specimen like you should be on display in the museum.[03]{window_closeall}[1F 1F 6A 00 06][1F F1 8A 03 66 02][1F 61][1F F1 8A 03 5D 02][1F 66 01 28 46 B1 C7 00]" eob
+    "@an unusual specimen like you should be on display in the museum.[03]{window_closeall}[1F 1F 6A 00 06][1F F1 8A 03 66 02]"
+    wait_for_movement
+    "[1F F1 8A 03 5D 02]"
+    hotspot_on(1, 40, l_0xc7b146)	// 1, 0x28, 0x00C7B146
+    eob
 
 l_0xc7b2bd:
     "[1D 15 05 00]{swap}[1D 14 00 00 00 00][1B 03 {e(l_0xc7b1d8)}]{sound(118)}[1D 09 00 00]{open_wallet}@Please go in." next
-    "@You'll find an expert in the area of Arts and Sciences.[03]{window_closeall}[1F F1 8A 03 66 02][1F 61][1F F1 8A 03 5D 02]{set(flag 768)}" eob
+    "@You'll find an expert in the area of Arts and Sciences.[03]{window_closeall}[1F F1 8A 03 66 02]"
+    wait_for_movement
+    "[1F F1 8A 03 5D 02]{set(flag 768)}" eob
 
 l_0xc7b318:
-    "[1F 1A 09 04 03]{pause(30)}[1F 1B 09 04]{window_open(1)}@Tsk, tsk, tsk...{pause(20)}" linebreak
-    "  You should know better...[03]{window_closeall}[1F F1 09 04 67 02][1F 61][1F E6 09 04][19 10 01]{swap}[19 23 09 04 01 00 00][1F 16 09 04 00]{window_open(1)}@You cannot get in without paying admission.{pause(20)}  It's $3 per person." next
+    show_sprite_float(1033, 3)	// 0409, 3
+    pause(30)
+    hide_sprite_float(1033)
+    window_open(1)
+    "@Tsk, tsk, tsk..." pause(20) linebreak
+    "  You should know better..." promptw
+    window_closeall
+    "[1F F1 09 04 67 02]"
+    wait_for_movement
+    "[1F E6 09 04]"
+    party_pos_check(1) swap
+    "[19 23 09 04 01 00 00][1F 16 09 04 00]"
+    window_open(1)
+    "@You cannot get in without paying admission." pause(20)
+    "  It's $3 per person." next
     "@You'll pay, won't you?" linebreak
-    "{open_wallet}[19 02]Yes" eob
+    open_wallet
+    //two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7b3ab:
-    " [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7b3b1:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7b4a2)} {e(l_0xc7b3c0)}]" goto(l_0xc7b3c0)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc7b4a2
+	long l_0xc7b3c0
+    })
+    goto(l_0xc7b3c0)
 
 l_0xc7b3c0:
-    "[1D 15 03 00]{swap}@Is $[1C 0A 00 00 00 00] too expensive for you?" next
-    "@Or are you just not interested in ancient culture?{wait}{window_closeall}[1F F1 09 04 68 02][1F 15 6A 00 69 02 01]{pause(1)}[1F EF 6A 00][1F E9 09 04][1F E8 FF][1F 61][1F E5 FF][1F ED][1F E6 09 04][19 10 01]{swap}[19 23 09 04 01 00 00][1F 16 09 04 00]{window_open(1)}[1D 15 03 00]{swap}@You don't even have" linebreak
-    "  $[1C 0A 00 00 00 00]?" next
-    "@If it were up to me, an oddity like you would be exhibited in the museum...[03]{window_closeall}[1F 1F 6A 00 06][1F F1 09 04 6A 02][1F 61][1F F1 09 04 5D 02][1F 66 01 32 18 B3 C7 00]" eob
+    return_price(3) swap
+    "@Is ${print_num_value(0)} too expensive for you?" next
+    "@Or are you just not interested in ancient culture?" wait
+    window_closeall
+    "[1F F1 09 04 68 02][1F 15 6A 00 69 02 01]"
+    pause(1)
+    "[1F EF 6A 00][1F E9 09 04][1F E8 FF]"
+    wait_for_movement
+    "[1F E5 FF]"
+    reset_camera
+    "[1F E6 09 04]"
+    party_pos_check(1) swap
+    "[19 23 09 04 01 00 00][1F 16 09 04 00]"
+    window_open(1)
+    return_price(3) swap
+    "@You don't even have" linebreak
+    "  ${print_num_value(0)}?" next
+    "@If it were up to me, an oddity like you would be exhibited in the museum..." promptw
+    window_closeall
+    "[1F 1F 6A 00 06][1F F1 09 04 6A 02]"
+    wait_for_movement
+    "[1F F1 09 04 5D 02]"
+    hotspot_on(1, 50, l_0xc7b318)	// 1, 0x32, 0x00C7B318
+    eob
 
 l_0xc7b4a2:
-    "[1D 15 03 00]{swap}[1D 14 00 00 00 00][1B 03 {e(l_0xc7b3c0)}]{sound(118)}[1D 09 00 00]{open_wallet}@Please go right in." next
-    "@Ask someone inside for more detailed information.[03]{window_closeall}[1F F1 09 04 6A 02][1F 61][1F F1 09 04 5D 02]{set(flag 768)}" eob
+    return_price(3) swap
+    amount_costs_too_much(0)
+    goto_if_true(l_0xc7b3c0)
+    sound(SND_CHICKEN2)	// 118
+    takemoney(0)
+    open_wallet
+    "@Please go right in." next
+    "@Ask someone inside for more detailed information." promptw
+    window_closeall
+    "[1F F1 09 04 6A 02]"
+    wait_for_movement
+    "[1F F1 09 04 5D 02]"
+    set(FLG_GLOBAL_MUSEUM_PAID)	// 768
+    eob
 
 l_0xc7b4fb:
-    "[19 23 4E 01 01 01 00][1F 16 4E 01 00][1F 1A 4E 01 03]{pause(60)}[1F 1B 4E 01][1F 1E 4E 01 06][1F 15 8D 01 88 02 01][1F 15 58 01 89 02 01][1F 61][1F 1F 8D 01 06][1F 17 4E 01 80 02 01][1F 61]{pause(10)}{window_open(1)}" call(data_52.l_0xc95c0e) "{window_closeall}[1F F1 4E 01 8A 02][1F 61]{set(flag 612)}{set(flag 624)}" eob
+    "[19 23 4E 01 01 01 00][1F 16 4E 01 00][1F 1A 4E 01 03]"
+    pause(60)
+    "[1F 1B 4E 01][1F 1E 4E 01 06][1F 15 8D 01 88 02 01][1F 15 58 01 89 02 01]"
+    wait_for_movement
+    "[1F 1F 8D 01 06][1F 17 4E 01 80 02 01]"
+    wait_for_movement
+    pause(10)
+    window_open(1)
+    call(data_52.l_0xc95c0e)
+    window_closeall
+    "[1F F1 4E 01 8A 02]"
+    wait_for_movement
+    set(FLG_TWSN_TONCHIKI_R_DISAPPEAR)	// 612
+    set(FLG_TWSN_TONCHIKI_APPEAR)	// 624
+    eob
 
 l_0xc7b550:
-    "[1F 1A C7 03 03]{pause(60)}[1F 1B C7 03][1F F1 C7 03 7C 02][1F 61][1F 1E C7 03 06][1F 17 C8 03 08 00 01]{set(flag 592)}{unset(flag 591)}" eob
+    "[1F 1A C7 03 03]{pause(60)}[1F 1B C7 03][1F F1 C7 03 7C 02]"
+    wait_for_movement
+    "[1F 1E C7 03 06][1F 17 C8 03 08 00 01]{set(flag 592)}{unset(flag 591)}" eob
 
 l_0xc7b576:
-    "[1F 1E C8 03 06][1F 17 C7 03 08 00 01][19 23 C7 03 01 FF 00][1F 16 C7 03 00]{window_open(1)}@Kikye uke kya" linebreak
+    hide_sprite(968, 6)	// 03C8, 6
+    generate_active_npc(967, 8, 1)	// 03C7, 0008, 1
+    return_direction_npc_to_object(967, 1, 255)	// 03C7, 01, 00FF
+    sprite_direction(967, 0)	// 03C7, 0
+    window_open(1)
+    "@Kikye uke kya" linebreak
     "  (I'm not a delivery man.)" next
     "@Keke ku iokki kokyo" linebreak
     "  (I can't remember if we've met.)" next
@@ -483,7 +810,39 @@ l_0xc7b576:
     "  to...)" next
     "@Kya" linebreak
     "  (Bye!)" next
-    "{window_closeall}[1F F1 C7 03 7D 02][1F 61]{pause(1)}{music(13)}[1F 61]{music(14)}{pause(60)}{music(13)}{pause(60)}[1F 07 03]{pause(60)}{unset(flag 592)}[1F 15 40 00 7E 02 01][1F 61]{music_resume}[19 10 01][19 22 00 03 40 00][1F 13 00 00][1F F3 40 00 03]{pause(60)}[1F F4 40 00][1F F2 40 00 80 02][1F 61]{pause(10)}" call(l_0xc7a959) "[1F F2 40 00 7F 02][1F 61]{set(flag 745)}[1F 15 8C 01 81 02 01][1F 61][1F E7 8C 01]{window_open(1)}"
+    window_closeall
+    change_npc_movement(967, 637)	// 03C7, 027D
+    wait_for_movement
+    pause(1)
+    music(13)
+    wait_for_movement
+    music(14)
+    pause(60)
+    music(13)
+    pause(60)
+    music_effect(3)	// Music fadeout
+    pause(60)
+    unset(FLG_FOUR_SARU_K_APPEAR)	// 592
+    generate_active_sprite(64, 638, 1)	// 0040, 027E, 1
+    wait_for_movement
+    music_resume
+    party_pos_check(1)
+    return_direction_char_to_object(0, 3, 64)	// 00, 03, 0040
+    char_direction(0, 0)	// 00, 00
+    show_active_float(64, 3)	// 0040, 3
+    pause(60)
+    hide_active_float(64)	// 0040
+    change_sprite_movement(64, 640)	// 0040, 0280
+    wait_for_movement
+    pause(10)
+    call(l_0xc7a959)
+    change_sprite_movement(64, 639)	// 0040, 027F
+    wait_for_movement
+    set(FLG_DSRT_TJAB_MOVE)	// 745
+    generate_active_sprite(396, 641, 1)	// 018C, 0281, 1
+    wait_for_movement
+    freeze_sprite_movement(396)	// 018C
+    window_open(1)
     title(1, Electra)
     "@Hello!" next
     "@I heard you talking about Strawberry tofu." next
@@ -491,121 +850,440 @@ l_0xc7b576:
     "@and I'm looking for Strawberry tofu to give to our special guest." next
     "@If you know anything about it,{pause(15)} please tell me!" next
     "@I've been searching and searching..." next
-    "[1F EA 8C 01][1F 61]{pause(30)}" eob
+    unfreeze_sprite_movement(396)	// 018C
+    wait_for_movement
+    pause(30)
+    eob
 
 l_0xc7b7c8:
     eob
 
 l_0xc7b7c9:
-    call(l_0xc7b8f6) "{isset(flag 526)}[1B 02 {e(l_0xc7b826)}][1F 15 6A 00 A4 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 17 05]" call(l_0xc7b920) "[1F E6 17 05]{pause(1)}{window_open(1)}@(The hot springs energized you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 17 05][1F E8 FF]" eob
+    call(l_0xc7b8f6)
+    isset(FLG_ANIM_PORT_4)	// 526
+    goto_if_false(l_0xc7b826)
+    "[1F 15 6A 00 A4 02 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F EB FF 06][1F E9 17 05]"
+    call(l_0xc7b920)
+    "[1F E6 17 05]"
+    pause(1)
+    window_open(1)
+    "@(The hot springs energized you completely.)" wait
+    window_closeall
+    call(data_49.l_0xc91582)
+    "[1F E9 17 05][1F E8 FF]"
+    eob
 
 l_0xc7b826:
-    "[1F E9 17 05]{pause(1)}" eob
+    unfreeze_npc_movement(1303)	// 0517
+    pause(1)
+    eob
 
 l_0xc7b82d:
-    call(l_0xc7b8f6) "{isset(flag 527)}[1B 02 {e(l_0xc7b88b)}][1F 15 6A 00 A5 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 18 05]" call(l_0xc7b920) "[1F E6 18 05]{pause(1)}{window_open(1)}@(The hot springs cured you completely.){wait}{window_closeall}" call(data_49.l_0xc9162c) "[1F E9 18 05][1F E8 FF]" call(data_49.l_0xc9162c) eob
+    call(l_0xc7b8f6)
+    isset(FLG_ANIM_PORT_5)	// 527
+    goto_if_false(l_0xc7b88b)
+    "[1F 15 6A 00 A5 02 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F EB FF 06][1F E9 18 05]"
+    call(l_0xc7b920)
+    "[1F E6 18 05]"
+    pause(1)
+    window_open(1)
+    "@(The hot springs cured you completely.)" wait
+    window_closeall
+    call(data_49.l_0xc9162c)
+    "[1F E9 18 05][1F E8 FF]"
+    call(data_49.l_0xc9162c)
+    eob
 
 l_0xc7b88b:
-    "[1F E9 18 05]{pause(1)}" eob
+    unfreeze_npc_movement(1304)	// 0518
+    pause(1)
+    eob
 
 l_0xc7b892:
-    call(l_0xc7b8f6) "{isset(flag 528)}[1B 02 {e(l_0xc7b8ef)}][1F 15 6A 00 A6 02 01]" call(data_57.l_0xc9b4b8) "[1F EB FF 06][1F E9 19 05]" call(l_0xc7b920) "[1F E6 19 05]{pause(1)}{window_open(1)}@(The hot springs energize you completely.){wait}{window_closeall}" call(data_49.l_0xc91582) "[1F E9 19 05][1F E8 FF]" eob
+    call(l_0xc7b8f6)
+    isset(FLG_ANIM_PORT_6)	// 528
+    goto_if_false(l_0xc7b8ef)
+    "[1F 15 6A 00 A6 02 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F EB FF 06][1F E9 19 05]"
+    call(l_0xc7b920)
+    "[1F E6 19 05]"
+    pause(1)
+    window_open(1)
+    "@(The hot springs energize you completely.)" wait
+    window_closeall
+    call(data_49.l_0xc91582)
+    "[1F E9 19 05][1F E8 FF]"
+    eob
 
 l_0xc7b8ef:
-    "[1F E9 19 05]{pause(1)}" eob
+    unfreeze_npc_movement(1305)	// 0519
+    pause(1)
+    eob
 
 l_0xc7b8f6:
-    "[1F 07 19][1F 15 B7 01 63 01 01]{pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 A3 02 01][1F 61][1F 07 1A][1F ED][1F E5 FF][1F 1F B7 01 06]" eob
+    music_effect(25)	// 0x19
+    generate_active_sprite(439, 355, 1)	// 01B7, 0163, 1
+    pause(1)
+    focus_camera_sprite(439)	// 01B7
+    unfreeze_char_movement(-1)
+    generate_active_sprite(106, 675, 1)	// 006A, 02A3, 1
+    wait_for_movement
+    music_effect(26)	// 0x1A
+    reset_camera
+    freeze_char_movement(-1)	// FF
+    delete_active_sprite(439, 6)	// 01B7, 6
+    eob
 
 l_0xc7b920:
-    "[19 10 01][09 04 {e(l_0xc7b935)} {e(l_0xc7b941)} {e(l_0xc7b94d)} {e(l_0xc7b959)}]" goto(l_0xc7b935)
+    party_pos_check(1)
+    switch_goto(4, {
+	long l_0xc7b935
+	long l_0xc7b941
+	long l_0xc7b94d
+	long l_0xc7b959
+    })
+    goto(l_0xc7b935)
 
 l_0xc7b935:
-    "[1F 15 1B 00 A7 02 01]" goto(l_0xc7b965)
+    generate_active_sprite(27, 679, 1)	// 001B, 02A7, 1
+    goto(l_0xc7b965)
 
 l_0xc7b941:
-    "[1F 15 1C 00 A7 02 01]" goto(l_0xc7b965)
+    generate_active_sprite(28, 679, 1)	// 001C, 02A7, 1
+    goto(l_0xc7b965)
 
 l_0xc7b94d:
-    "[1F 15 1D 00 A7 02 01]" goto(l_0xc7b965)
+    generate_active_sprite(29, 679, 1)	// 001D, 02A7, 1
+    goto(l_0xc7b965)
 
 l_0xc7b959:
-    "[1F 15 1E 00 A7 02 01]" goto(l_0xc7b965)
+    generate_active_sprite(30, 679, 1)	// 001E, 02A7, 1
+    goto(l_0xc7b965)
 
 l_0xc7b965:
-    "[1F 61][1F EC FF 01]" eob
+    wait_for_movement
+    show_char(-1, 1)	// FF, 01
+    eob
 
 l_0xc7b96c:
-    "[1F E6 F3 04][19 10 01]{rtoarg}{window_open(1)}@(Resting well in the hot springs healed you.){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 F3 04]" eob
+    freeze_npc_movement(1267)	// 04F3
+    party_pos_check(1)
+    rtoarg
+    window_open(1)
+    "@(Resting well in the hot springs healed you.)" wait
+    call(data_49.l_0xc9162c)
+    window_closeall
+    unfreeze_npc_movement(1267)	// 04F3
+    eob
 
 l_0xc7b9a1:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DD]{pause(120)}[1F E5 FF]{sound(18)}{pause(80)}[1F 15 91 00 CD 02 01][1F 61][1F E7 91 00][1F F3 91 00 03]{pause(60)}[1F F4 91 00][1F EA 91 00][1F 61][1F E7 91 00]{pause(120)}{sound(9)}{pause(30)}{sound(97)}{pause(20)}[1F E4 91 00 07]{pause(20)}[1F 15 92 00 CE 02 01][1F EA 91 00][1F 61]{pause(60)}[1F 15 28 00 CF 02 01][1F 61][1F E7 91 00][1F E7 92 00][1F E7 28 00]{pause(30)}" call(data_59.l_0xc9f442) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    "[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DD]{pause(120)}[1F E5 FF]{sound(18)}{pause(80)}[1F 15 91 00 CD 02 01]"
+    wait_for_movement
+    "[1F E7 91 00][1F F3 91 00 03]{pause(60)}[1F F4 91 00][1F EA 91 00]"
+    wait_for_movement
+    "[1F E7 91 00]{pause(120)}{sound(9)}{pause(30)}{sound(97)}{pause(20)}[1F E4 91 00 07]{pause(20)}[1F 15 92 00 CE 02 01][1F EA 91 00]"
+    wait_for_movement
+    "{pause(60)}[1F 15 28 00 CF 02 01]"
+    wait_for_movement
+    "[1F E7 91 00][1F E7 92 00][1F E7 28 00]{pause(30)}" call(data_59.l_0xc9f442) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]"
+    unset(FLG_SYS_MONSTER_OFF)	// 11
+    eob
 
 l_0xc7ba2c:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DE][1F E5 FF]{pause(120)}{pause(60)}[1F 1A 31 04 03]{pause(40)}[1F 16 30 04 03]{pause(1)}[1F 16 32 04 03]{pause(10)}[1F F1 33 04 D0 02]{pause(10)}[1F 1B 31 04][1F F1 32 04 D1 02]{pause(30)}[1F 15 BA 00 D2 02 01]{pause(100)}[1F 15 BB 00 D3 02 01][1F 61]{pause(30)}[1F 16 30 04 05]{pause(20)}[1F E4 BB 00 03]{pause(8)}[1F E4 BB 00 05]{pause(14)}[1F E4 BA 00 03]{pause(8)}[1F E4 BA 00 05]{pause(14)}[1F 16 32 04 03]{pause(8)}[1F 16 32 04 05]{pause(60)}" call(data_59.l_0xc9f4a2) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DE][1F E5 FF]{pause(120)}{pause(60)}[1F 1A 31 04 03]{pause(40)}[1F 16 30 04 03]{pause(1)}[1F 16 32 04 03]{pause(10)}[1F F1 33 04 D0 02]{pause(10)}[1F 1B 31 04][1F F1 32 04 D1 02]{pause(30)}[1F 15 BA 00 D2 02 01]{pause(100)}[1F 15 BB 00 D3 02 01]"
+    wait_for_movement
+    "{pause(30)}[1F 16 30 04 05]{pause(20)}[1F E4 BB 00 03]{pause(8)}[1F E4 BB 00 05]{pause(14)}[1F E4 BA 00 03]{pause(8)}[1F E4 BA 00 05]{pause(14)}[1F 16 32 04 03]{pause(8)}[1F 16 32 04 05]{pause(60)}" call(data_59.l_0xc9f4a2) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]{unset(flag 11)}" eob
 
 l_0xc7bac7:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DF][1F E5 FF]{pause(120)}[1F 15 9B 00 D4 02 01][1F 61][1F E7 9B 00][1F F3 9B 00 03]{pause(60)}[1F F4 9B 00][1F EA 9B 00][1F 61]{pause(30)}[1F 15 9C 00 D5 02 01]{pause(30)}[1F 15 7B 00 D6 02 01]{pause(30)}[1F 15 7F 00 D7 02 01]{pause(30)}[1F 15 80 00 D8 02 01][1F 61]{pause(30)}" call(data_59.l_0xc9f4f6) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 DF][1F E5 FF]{pause(120)}[1F 15 9B 00 D4 02 01]"
+    wait_for_movement
+    "[1F E7 9B 00][1F F3 9B 00 03]{pause(60)}[1F F4 9B 00][1F EA 9B 00]"
+    wait_for_movement
+    "{pause(30)}[1F 15 9C 00 D5 02 01]{pause(30)}[1F 15 7B 00 D6 02 01]{pause(30)}[1F 15 7F 00 D7 02 01]{pause(30)}[1F 15 80 00 D8 02 01]"
+    wait_for_movement
+    "{pause(30)}" call(data_59.l_0xc9f4f6) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]{unset(flag 11)}" eob
 
 l_0xc7bb38:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E0][1F E5 FF]{pause(120)}[1F 15 B6 00 D9 02 01]{pause(5)}[1F F1 58 02 DA 02][1F F1 59 02 DA 02][1F F1 5A 02 DA 02][1F F1 5B 02 DA 02][1F 61][1F E7 B6 00][1F F1 58 02 DB 02][1F F1 59 02 DC 02][1F F1 5A 02 DD 02][1F F1 5B 02 DE 02][1F 61]{pause(100)}[1F EA B6 00]{pause(70)}[1F 15 45 00 DF 02 01][1F 61][1F F2 B6 00 E0 02][1F 61]{pause(20)}[1F F1 58 02 E1 02][1F F1 59 02 E3 02]{pause(20)}[1F F1 5A 02 E2 02]{pause(10)}[1F F2 45 00 E1 02]{pause(20)}[1F F1 5B 02 E1 02]{pause(20)}[1F F1 59 02 E1 02][1F F1 5A 02 E1 02]{pause(60)}" call(data_59.l_0xc9f557) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E0][1F E5 FF]{pause(120)}[1F 15 B6 00 D9 02 01]{pause(5)}[1F F1 58 02 DA 02][1F F1 59 02 DA 02][1F F1 5A 02 DA 02][1F F1 5B 02 DA 02]"
+    wait_for_movement
+    "[1F E7 B6 00][1F F1 58 02 DB 02][1F F1 59 02 DC 02][1F F1 5A 02 DD 02][1F F1 5B 02 DE 02]"
+    wait_for_movement
+    "{pause(100)}[1F EA B6 00]{pause(70)}[1F 15 45 00 DF 02 01]"
+    wait_for_movement
+    "[1F F2 B6 00 E0 02]"
+    wait_for_movement
+    "{pause(20)}[1F F1 58 02 E1 02][1F F1 59 02 E3 02]{pause(20)}[1F F1 5A 02 E2 02]{pause(10)}[1F F2 45 00 E1 02]{pause(20)}[1F F1 5B 02 E1 02]{pause(20)}[1F F1 59 02 E1 02][1F F1 5A 02 E1 02]{pause(60)}" call(data_59.l_0xc9f557) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]{unset(flag 11)}" eob
 
 l_0xc7bbf3:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E2][1F E5 FF]{pause(120)}[1F 1A 56 04 03]{pause(60)}[1F 1B 56 04][1F F1 56 04 E5 02][1F 61]{pause(50)}[1F 15 59 00 E6 02 01][1F 61]{pause(30)}[1F F1 56 04 E1 02][1F F2 59 00 E1 02]{pause(50)}[1F F1 57 04 E7 02][1F 61]{pause(60)}" call(data_59.l_0xc9f5a8) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E2][1F E5 FF]{pause(120)}[1F 1A 56 04 03]{pause(60)}[1F 1B 56 04][1F F1 56 04 E5 02]"
+    wait_for_movement
+    "{pause(50)}[1F 15 59 00 E6 02 01]"
+    wait_for_movement
+    "{pause(30)}[1F F1 56 04 E1 02][1F F2 59 00 E1 02]{pause(50)}[1F F1 57 04 E7 02]"
+    wait_for_movement
+    "{pause(60)}" call(data_59.l_0xc9f5a8) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]{unset(flag 11)}" eob
 
 l_0xc7bc56:
-    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E3][1F E5 FF]{pause(120)}[1F 1A 26 00 03]{pause(60)}[1F 1B 26 00][1F F1 26 00 E8 02][1F 61]{pause(30)}" call(data_59.l_0xc9f60d) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}" eob
+    "{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E3][1F E5 FF]{pause(120)}[1F 1A 26 00 03]{pause(60)}[1F 1B 26 00][1F F1 26 00 E8 02]"
+    wait_for_movement
+    "{pause(30)}" call(data_59.l_0xc9f60d) "{set(flag 522)}"
+    wait_for_movement
+    "[1F EC FF 01]{unset(flag 11)}" eob
 
-l_0xc7bc96:
-    "{unset(flag 220)}{unset(flag 74)}{set(flag 11)}[1F EB FF 06]{unset(flag 522)}[1F 15 B8 01 F5 02 FF][1F 21 E5][1F E5 FF][1F 16 D9 02 03][1F F1 D9 02 0A 00]{pause(180)}[1F 17 E5 02 EA 02 04]{pause(180)}[1F F1 D9 02 08 00]{pause(9)}[1F 16 DF 02 03]{pause(1)}[1F F1 DF 02 08 00]{pause(120)}{pause(30)}[1F 17 D8 02 EB 02 01][1F 17 D7 02 ED 02 01][1F 61]{pause(30)}[1F 1A D9 02 03][1F 1A D7 02 03][1F 1A D8 02 03]{pause(60)}[1F 1B D9 02][1F 1B D7 02][1F 1B D8 02][1F F1 D9 02 F3 02][1F F1 D7 02 F3 02]{pause(3)}[1F F1 D8 02 F3 02]{pause(70)}[1F F1 D9 02 F4 02][1F F1 D8 02 EC 02][1F F1 DF 02 EE 02][1F 61][1F 15 AB 00 EF 02 01][1F 15 AB 00 F0 02 01][1F 15 AB 00 F1 02 01][1F 15 AB 00 F2 02 01][1F 61][1F F1 D9 02 E1 02]{pause(30)}[1F F1 D7 02 E1 02]{pause(40)}[1F F1 D8 02 E1 02]{pause(50)}" call(data_59.l_0xc9f66f) "{set(flag 522)}[1F 61][1F EC FF 01]{unset(flag 11)}{set(flag 220)}{set(flag 74)}" eob
+l_0xc7bc96:	// Saturn Village prayer movements
+    unset(FLG_TLPT_DKFD)	// 220
+    unset(FLG_WIN_OSCAR)	// 74
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    hide_char(-1)
+    unset(FLG_ANIM_PORT_0)	// 522
+    generate_active_sprite(440, 757, -1)	// 01B8, 02F5, FF
+    warp(229)	// 0xE5
+    freeze_char_movement(-1)	// FF
+    sprite_direction(729, 3)	// 02D9, 3
+    change_npc_movement(729, 10)	// 02D9, 000A
+    pause(180)
+    generate_active_npc(741, 746, 4)	// 02E5, 02EA, 4
+    pause(180)
+    change_npc_movement(729, 8)	// 02D9, 0008
+    pause(9)
+    sprite_direction(735, 3)	// 02DF, 3
+    pause(1)
+    change_npc_movement(735, 8)	// 02DF, 0008
+    pause(120)
+    pause(30)
+    generate_active_npc(728, 747, 1)	// 02D8, 02EB, 01
+    generate_active_npc(727, 749, 1)	// 02D7, 02ED, 01
+    wait_for_movement
+    pause(30)
+    show_sprite_float(729, 3)	// 02D9, 03
+    show_sprite_float(727, 3)	// 02D7, 03
+    show_sprite_float(728, 3)	// 02D8, 03
+    pause(60)
+    hide_sprite_float(729)	// 02D9
+    hide_sprite_float(727)	// 02D7
+    hide_sprite_float(728)	// 02D8
+    change_npc_movement(729, 755)	// 02D9, 02F3
+    change_npc_movement(727, 755)	// 02D7, 02F3
+    pause(3)
+    change_npc_movement(728, 755)	// 02D8, 02F3
+    pause(70)
+    change_npc_movement(729, 756)	// 02D9, 02F4
+    change_npc_movement(728, 748)	// 02D8, 02EC
+    change_npc_movement(735, 750)	// 02DF, 02EE
+    wait_for_movement
+    generate_active_sprite(171, 751, 1)	// 00AB, 02EF, 1
+    generate_active_sprite(171, 752, 1)	// 00AB, 02F0, 1
+    generate_active_sprite(171, 753, 1)	// 00AB, 02F1, 1
+    generate_active_sprite(171, 754, 1)	// 00AB, 02F2, 1
+    wait_for_movement
+    change_npc_movement(729, 737)	// 02D9, 02E1
+    pause(30)
+    change_npc_movement(727, 737)	// 02D7, 02E1
+    pause(40)
+    change_npc_movement(728, 737)	// 02D8, 02E1
+    pause(50)
+    call(data_59.l_0xc9f66f)
+    set(FLG_ANIM_PORT_0)	// 522
+    wait_for_movement
+    show_char(-1, 1)	// FF, 01
+    unset(FLG_SYS_MONSTER_OFF)	// 11
+    set(FLG_TLPT_DKFD)	// 220
+    set(FLG_WIN_OSCAR)	// 74
+    eob
 
 l_0xc7bd89:
-    "{unset(flag 522)}[1F 15 6A 00 C8 02 01][1F 61][1F E7 6A 00][1F 07 03]{pause(120)}{music(172)}[1F F1 DE 03 C9 02][1F F1 DF 03 CA 02][1F E9 DD 03][1F 61][1F EA 6A 00][1F F1 E0 03 CB 02][1F 61][1F E7 6A 00][1F E6 DD 03][1F E6 DE 03][1F E6 DF 03][1F 15 52 00 CC 02 01]{pause(60)}{window_open(1)}"
+    unset(FLG_ANIM_PORT_0)	// 522
+    "[1F 15 6A 00 C8 02 01]"
+    wait_for_movement
+    "[1F E7 6A 00][1F 07 03]"
+    pause(120)
+    music(172)
+    "[1F F1 DE 03 C9 02][1F F1 DF 03 CA 02][1F E9 DD 03]"
+    wait_for_movement
+    "[1F EA 6A 00][1F F1 E0 03 CB 02]"
+    wait_for_movement
+    "[1F E7 6A 00][1F E6 DD 03][1F E6 DE 03][1F E6 DF 03][1F 15 52 00 CC 02 01]"
+    pause(60)
+    window_open(1)
     title(1, Porky)
-    "@[1C 02 01], you pin-headed idiot,{pause(15)} you're just a half-step too slow!" next
+    "@{name(1)}, you pin-headed idiot,{pause(15)} you're just a half-step too slow!" next
     "@I'm getting outta here!" next
     "@Since Monotoly has become a plain,{pause(5)} old man again,{pause(15)} I have no more use for him." next
     "@This helicopter will really come in handy." next
     "@Spankety-spankety!" linebreak
-    "  Bleh! Blehhh!{wait}{window_closeall}{pause(20)}[1F 1F 52 00 06][1F EA 6A 00][1F E9 DD 03][1F E9 DE 03][1F E9 DF 03][1F 07 03][1F 61][1F 1F 6A 00 06][1F 1E DD 03 06][1F 1E DE 03 06][1F 1E DF 03 06]{pause(12)}{set(flag 672)}{unset(flag 11)}" eob
+    "  Bleh! Blehhh!" wait
+    window_closeall
+    pause(20)
+    "[1F 1F 52 00 06][1F EA 6A 00][1F E9 DD 03][1F E9 DE 03][1F E9 DF 03][1F 07 03]"
+    wait_for_movement
+    "[1F 1F 6A 00 06][1F 1E DD 03 06][1F 1E DE 03 06][1F 1E DF 03 06]"
+    pause(12)
+    set(FLG_FOUR_HELI_DISAPPEAR)	// 672
+    unset(FLG_SYS_MONSTER_OFF)	// 11
+    eob
 
 l_0xc7beb9:
-    ":---------------------[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(32)}" call(data_35.l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7bf1e)}]{window_open(1)}@The power of Giant Step" call(data_35.l_0xc7c55d) goto(l_0xc7bf1e)
+    ":---------------------"
+    generate_active_sprite(106, 352, 1)	// 006A, 0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(32)
+    call(data_35.l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7bf1e)
+    window_open(1)
+    "@The power of Giant Step" call(data_35.l_0xc7c55d)
+    goto(l_0xc7bf1e)
 
-l_0xc7bf1e:
-    call(data_35.l_0xc7c57d) "{set(flag 4)}{music_resume}[06 B6 00 {e(l_0xc7bf94)}]{window_open(1)}@[1C 02 01] caught a glimpse of a small, cute puppy.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Giant Step.{wait}{set(flag 182)}{set(flag 36)}{set(flag 449)}{set(flag 450)}{set(flag 634)}{window_closetop}" goto(l_0xc7bf94)
+l_0xc7bf1e:	// Giant Step recording
+    call(data_35.l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_GIAN, l_0xc7bf94)	// 0xB6, 182
+    window_open(1)
+    "@{name(1)} caught a glimpse of a small, cute puppy." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Giant Step." wait
+    set(FLG_POWR_GIAN)	// 182
+    set(FLG_ONET_KANBANCOP_APPEAR)	// 36
+    set(FLG_POLICE_STRONG_B_APPEAR)	// 449
+    set(FLG_POLICE_STRONG_DISAPPEAR)	// 450
+    set(FLG_ONET_POLA_TELEPATHY)	// 634
+    window_closetop
+    goto(l_0xc7bf94)
 
 l_0xc7bf94:
     eob
 
 l_0xc7bf95:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(33)}" call(data_35.l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7bfe8)}]{window_open(1)}@The power of Lilliput Steps" call(data_35.l_0xc7c55d) goto(l_0xc7bfe8)
+    generate_active_sprite(106, 352, 1)	// 006A, 0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(33)
+    call(data_35.l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7bfe8)
+    window_open(1)
+    "@The power of Lilliput Steps" call(data_35.l_0xc7c55d)
+    goto(l_0xc7bfe8)
 
 l_0xc7bfe8:
-    call(data_35.l_0xc7c57d) "{set(flag 4)}{music_resume}[06 B7 00 {e(l_0xc7c058)}]{window_open(1)}@[1C 02 01] briefly had a vision of a baby in a red cap.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Lilliput Steps.{wait}{set(flag 183)}{window_closetop}" goto(l_0xc7c058)
+    call(data_35.l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_LLPT, l_0xc7c058)	// 0x00B7, 183
+    window_open(1)
+    "@{name(1)} briefly had a vision of a baby in a red cap." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Lilliput Steps." wait
+    set(FLG_POWR_LLPT)	// 183
+    window_closetop
+    goto(l_0xc7c058)
 
 l_0xc7c058:
-    call(data_49.l_0xc915f4) call(data_57.l_0xc9b226) "[06 80 01 {e(l_0xc7c06a)}]" eob
+    call(data_49.l_0xc915f4)
+    call(data_57.l_0xc9b226)
+    goto_if_flag(FLG_POWR_ALL, l_0xc7c058)	// 0x0180, 384
+    eob
 
 l_0xc7c06a:
-    "{set(flag 545)}" eob
+    set(FLG_MGKT_BACK_LLPT)	// 545
+    eob
 
 l_0xc7c06e:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(35)}" call(data_35.l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c0c0)}]{window_open(1)}@The power of Rainy Circle" call(data_35.l_0xc7c55d) goto(l_0xc7c0c0)
+    generate_active_sprite(106, 352, 1)	// 006A, 0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(35)
+    call(data_35.l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c0c0)
+    window_open(1)
+    "@The power of Rainy Circle" call(data_35.l_0xc7c55d)
+    goto(l_0xc7c0c0)
 
 l_0xc7c0c0:
-    call(data_35.l_0xc7c57d) "{set(flag 4)}{music_resume}[06 B8 00 {e(l_0xc7c129)}]{window_open(1)}@[1C 02 01] caught a whiff of [1C 01 04], but just for a second.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Rainy Circle.{wait}{set(flag 184)}{window_closetop}" eob
+    call(data_35.l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_RAIN, l_0xc7c129)	// 0x00B8, 184
+    window_open(1)
+    "@{name(1)} caught a whiff of {stat(4)}, but just for a second." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Rainy Circle." wait
+    set(FLG_POWR_RAIN)	// 184
+    window_closetop
+    eob
 
 l_0xc7c129:
     eob
 
 l_0xc7c12a:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(34)}" call(data_35.l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c17b)}]{window_open(1)}@The power of Milky Well" call(data_35.l_0xc7c55d) goto(l_0xc7c17b)
+    generate_active_sprite(106, 352, 1)	// 006A, 0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(34)
+    call(data_35.l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c17b)
+    window_open(1)
+    "@The power of Milky Well" call(data_35.l_0xc7c55d)
+    goto(l_0xc7c17b)
 
 l_0xc7c17b:
-    call(data_35.l_0xc7c57d) "{set(flag 4)}{music_resume}[06 B9 00 {e(data_35.l_0xc7c1f7)}]{window_open(1)}@[1C 02 01] thought he heard his mother from far away... she said" next
-    "@<Be a thoughtful, strong boy...>[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Milky Well.{wait}{set(flag 185)}{window_closetop}" goto(data_35.l_0xc7c1f7)
+    call(data_35.l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_MLKY, data_35.l_0xc7c1f7)	// 0x00B9, 185
+    window_open(1)
+    "@{name(1)} thought he heard his mother from far away... she said" next
+    "@<Be a thoughtful, strong boy...>" promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Milky Well." wait
+    set(FLG_POWR_MLKY)	// 185
+    window_closetop
+    goto(data_35.l_0xc7c1f7)

@@ -447,7 +447,7 @@ l_0xc934e4:
 
 l_0xc934ed:
     set(FLG_SYS_MONSTER_OFF)	// 11
-    special_event(5)	// OSS flag set
+    OSS_on	// special_event(5)
     freeze_char_movement(-1)
     music_effect(3)	// Fade out
     generate_active_sprite(106, 633, 1)
@@ -493,7 +493,7 @@ l_0xc934ed:
     set(FLG_TLPT_MAKY)	// 218
     unset(FLG_DSRT_KANBAN_44_MOVE)	// 762
     set_respawn(10)
-    special_event(6)	// OSS flag unset
+    OSS_off	// special_event(6)
     eob
 
 l_0xc935b1:

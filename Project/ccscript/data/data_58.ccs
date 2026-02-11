@@ -6,6 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -13,19 +17,26 @@ command e(label) "{long label}"
 // Text Data
 l_0xc9bfcd:
     title(1, Andonuts)
-    "@...Yes... I see...{pause(20)}" linebreak
+    "@...Yes... I see..." pause(20) linebreak
     "  You have really set your mind on this..." next
     "@Let me take a good look at you now..." next
-    "@[1C 02 01],{pause(15)} please give me that red cap..." next
-    "{pause(60)}" linebreak
-    "@Ready... stand by...[03]{window_closeall}{pause(1)}" call(data_24.l_0xc69082) "[1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 06][1F 21 51][1F E5 FF][1F 15 6A 00 0E 03 01][1F 61][1F E6 6A 00]{music(179)}[1F E9 6A 00][1F 61][1F 01 00][1F 15 A2 00 3B 01 FF][1F 21 68][1F E5 FF][1F EB FF 06]{window_open(1)}"
+    "@{name(1)},{pause(15)} please give me that red cap..." next
+    pause(60) linebreak
+    "@Ready... stand by..." promptw
+    window_closeall
+    pause(1)
+    call(data_24.l_0xc69082)
+    "[1F 07 03][1F 15 6A 00 79 02 01][1F 61][1F EB FF 06][1F 21 51][1F E5 FF][1F 15 6A 00 0E 03 01][1F 61][1F E6 6A 00]"
+    music(179)
+    "[1F E9 6A 00][1F 61][1F 01 00][1F 15 A2 00 3B 01 FF][1F 21 68][1F E5 FF][1F EB FF 06]"
+    window_open(1)
     title(1, Andonuts)
-    "@[1C 02 01]!" linebreak
-    "  [1C 02 02]!" linebreak
-    "  [1C 02 04]!" next
-    "@[1C 02 03]!...{pause(20)} my son..." next
+    "@{name(1)}!" linebreak
+    "  {name(2)}!" linebreak
+    "  {name(4)}!" next
+    "@{name(3)}!...{pause(20)} my son..." next
     "@There is no turning back now." next
-    "@[1C 02 01], activate the Phase Distorter 3 by your own" linebreak
+    "@{name(1)}, activate the Phase Distorter 3 by your own" linebreak
     "  hand," next
     "@thereby following your own destiny..." next
     "@Will you do so?" linebreak
@@ -50,7 +61,7 @@ l_0xc9c14b:
 
 l_0xc9c15f:
     "@Y-you wuss!" next
-    "@[1C 02 01]!{pause(20)}  It is up to you..." linebreak
+    "@{name(1)}!{pause(20)}  It is up to you..." linebreak
     "[19 02]Yes" eob
 
 l_0xc9c186:
@@ -63,50 +74,210 @@ l_0xc9c19b:
     "@Only a few people know of your amazing courage," next
     "@but the number of people you save through that bravery is immense." next
     "@I feel very fortunate..." next
-    "@to be present at the beginning of this monumental undertaking...[03]{music(91)}{window_closeall}{set(flag 372)}{pause(1)}[1F 21 5D][1F E5 FF]{pause(60)}[1F EC FF 01][1F 15 6A 00 3C 01 01]" call(data_57.l_0xc9b4b8) "[19 26 01]{unset(flag 382)}{unset(flag 328)}{unset(flag 331)}{unset(flag 329)}{unset(flag 330)}{unset(flag 332)}{unset(flag 327)}{unset(flag 337)}{unset(flag 11)}[1F E8 FF]" eob
+    "@to be present at the beginning of this monumental undertaking..." promptw
+    music(91)
+    window_closeall
+    set(FLG_STEP_PAST)	// 372
+    pause(1)
+    "[1F 21 5D][1F E5 FF]"
+    pause(60)
+    "[1F EC FF 01][1F 15 6A 00 3C 01 01]"
+    call(data_57.l_0xc9b4b8)
+    "[19 26 01]"
+    unset(FLG_DKFD_DOSEI_ST1_APPEAR)	// 382
+    unset(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
+    unset(FLG_DKFD_ANDONUT_B_APPEAR)	// 331
+    unset(FLG_DKFD_APPLE_A_APPEAR)	// 329
+    unset(FLG_DKFD_DOSEI_A_APPEAR)	// 330
+    unset(FLG_DKFD_ST2_APPEAR)	// 332
+    unset(FLG_DKFD_ST3_APPEAR)	// 327
+    unset(FLG_SUMS_STOIC_RESERVED)	// 337
+    unset(FLG_SYS_MONSTER_OFF)	// 11
+    unfreeze_char_movement(-1)	// FF
+    eob
 
 l_0xc9c262:
     title(1, Apple)
-    "@You must warp to the past and fight, but...{wait}{set(flag 285)}" eob
+    "@You must warp to the past and fight, but..." wait
+    set(FLG_DKFD_END_GET_READY)	// 285
+    eob
 
 l_0xc9c27e:
-    "{font_saturn}@We here too." next
-    "@Boing!{wait}{font_normal}" eob
+    font_saturn
+    "@We here too." next
+    "@Boing!" wait
+    font_normal
+    eob
 
 l_0xc9c293:
-    "[1F 07 03]{pause(180)}{music(72)}[1F 15 B7 01 63 01 01] {pause(1)}[1F EF B7 01][1F E8 FF][1F 15 6A 00 23 02 01][1F 61][1F 15 6A 00 23 02 01][1F 15 72 01 24 02 01][1F 61][1F 15 6A 00 23 02 01][1F 61][1F ED][1F E5 FF][1F 1F B7 01 06]{pause(120)}{sound(70)}[19 10 01][19 22 00 03 72 01][1F 14 00][1F 15 CA 01 25 02 05][1F 61]{pause(100)}{window_open(1)}" call(data_06.l_0xc57e1c) "{window_closeall}{pause(120)}" call(data_23.l_0xc68577) "[1B 03 {e(data_23.l_0xc683de)}]{set(flag 73)}{unset(flag 632)}{set(flag 633)}{set(flag 108)}{unset(flag 468)}{unset(flag 741)}{set(flag 742)}{set(flag 422)}{set(flag 517)}{unset(flag 372)}{set(flag 19)}{set(flag 304)}{set(flag 11)}[1F 41 05][1F 01 00]" call(data_24.l_0xc69082) call(data_49.l_0xc915f4) "[1F EB FF 06][1F 15 6A 00 2B 02 01][1F 61][1F 21 D7][1F E5 FF]{set(flag 510)}" call(data_24.l_0xc6893b) "[1F 12 04][1F 12 03]{pause(180)}[1F 04 03]{window_open(14)}@The battle against Giygas{pause(15)} is over...{wait}{pause(30)}{window_closeall}[1F 04 01]{pause(30)}[1F 15 02 01 27 02 01][1F 61][1F E7 02 01]{set(flag 661)}{music_resume}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}[1F 07 1B][1F EA 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 28 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 29 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 2A 02 01][1F 61][1F 07 1C][1F 61]{set(flag 538)}[1F 15 10 00 41 02 FF][1F 15 89 01 42 02 FF][1F 15 8A 01 43 02 FF][1F 15 8B 01 44 02 FF][1F 21 D8]{music(181)}[1F E5 FF]{pause(100)}{pause(100)}{pause(100)}{pause(100)}{pause(100)}[1F 07 1B][1F 15 02 01 2F 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8B 01 06][1F 15 04 00 33 02 01][1F 61][1F E7 04 00][1F 07 1B][1F 15 02 01 2E 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8A 01 06][1F F1 DE 02 32 02][1F 61][1F E6 DE 02][1F 07 1B][1F 15 02 01 2D 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 89 01 06][1F 15 02 00 31 02 01][1F 61][1F E7 02 00][1F 07 1B][1F 15 02 01 2C 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 10 00 06][1F 15 01 00 30 02 01][1F 61][1F E7 01 00]{pause(60)}{unset(flag 661)}" call(data_36.l_0xc7dd6b) "{music_resume}[1F EA 04 00][1F 61][1F E7 04 00][1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(40)}{pause(30)}" call(data_38.l_0xc7f949) "{pause(60)}{window_open(1)}{title_poo(1)}@I'll see you again someday!{wait}{window_closeall}{pause(30)}[1F EA 04 00][1F 61]{sound(99)}[1F 61][1F 15 F2 00 34 02 01]{pause(120)}{pause(60)}[1F 17 E8 02 3A 02 01]{pause(10)}[1F 15 58 01 3D 02 01][1F 61][1F 17 E9 02 3B 02 01]{pause(10)}[1F 15 58 01 3E 02 01][1F 61][1F 17 EA 02 3C 02 01]{pause(10)}[1F 15 58 01 3F 02 01][1F 61]{set(flag 628)}{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}" call(data_38.l_0xc7f9f8) "{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F F1 D8 02 35 02][1F 61][1F E6 D8 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00]{pause(60)}[1F F1 CF 02 36 02][1F 61][1F E6 CF 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 CF 02][1F 61][1F E6 CF 02]{pause(15)}[1F E9 D8 02][1F 61][1F E6 D8 02]{pause(80)}[1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(60)}" call(data_38.l_0xc7fb56) "[1F EA 02 00][1F 61][1F E7 02 00][1F F1 CF 02 0D 00][1F 67 01][1F 66 01 14 EC FB C7 00][1F 67 02][1F 66 02 16 22 FD C7 00][1F 1F 01 00 06][1F 1F 02 00 06][19 26 04][1F EC FF 01][1F E8 FF][1F 41 05]{unset(flag 498)}{isset(flag 99)}[1B 02 {e(data_55.l_0xc9992f)}]{set(flag 746)}" eob
+    "[1F 07 03]"
+    pause(180)music(72)
+    "[1F 15 B7 01 63 01 01] "
+    pause(1)
+    "[1F EF B7 01][1F E8 FF][1F 15 6A 00 23 02 01][1F 61][1F 15 6A 00 23 02 01][1F 15 72 01 24 02 01][1F 61][1F 15 6A 00 23 02 01][1F 61][1F ED][1F E5 FF][1F 1F B7 01 06]"
+    pause(120)
+    sound(SND_MISSILE)	// 70
+    "[19 10 01][19 22 00 03 72 01][1F 14 00][1F 15 CA 01 25 02 05]"
+    wait_for_movement
+    pause(100)
+    window_open(1)
+    call(data_06.l_0xc57e1c)
+    window_closeall
+    pause(120)
+    call(data_23.l_0xc68577)
+    goto_if_true(data_23.l_0xc683de)
+    set(FLG_WIN_GIEGU)		// 73
+    unset(FLG_ONET_DOOR_CLOSE)	// 632
+    set(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+    set(FLG_OPEN_TABIGOYA)	// 108
+    unset(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+    unset(FLG_FOUR_MONOTOLY_APPEAR)	// 741
+    set(FLG_ONET_LARDNA_APPEAR)	// 742
+    set(FLG_ONET_DAYBREAK)	// 422
+    set(FLG_MYHOME_LIGHT_ON)	// 517
+    unset(FLG_STEP_PAST)	// 372
+    set(FLG_DOG)		// 19
+    set(FLG_DOG_LATER_APPEAR)	// 304
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    OSS_on	// special_event(5)
+    "[1F 01 00]"
+    call(data_24.l_0xc69082)
+    call(data_49.l_0xc915f4) "[1F EB FF 06][1F 15 6A 00 2B 02 01][1F 61][1F 21 D7][1F E5 FF]{set(flag 510)}"
+    call(data_24.l_0xc6893b) "[1F 12 04][1F 12 03]{pause(180)}[1F 04 03]{window_open(14)}@The battle against Giygas{pause(15)} is over...{wait}{pause(30)}{window_closeall}[1F 04 01]{pause(30)}[1F 15 02 01 27 02 01][1F 61][1F E7 02 01]{set(flag 661)}{music_resume}{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}[1F 07 1B][1F EA 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 28 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 29 02 01][1F 61][1F 07 1C]{pause(120)}[1F 07 1B][1F 15 02 01 2A 02 01][1F 61][1F 07 1C][1F 61]{set(flag 538)}[1F 15 10 00 41 02 FF][1F 15 89 01 42 02 FF][1F 15 8A 01 43 02 FF][1F 15 8B 01 44 02 FF][1F 21 D8]{music(181)}[1F E5 FF]{pause(100)}{pause(100)}{pause(100)}{pause(100)}{pause(100)}[1F 07 1B][1F 15 02 01 2F 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8B 01 06][1F 15 04 00 33 02 01][1F 61][1F E7 04 00][1F 07 1B][1F 15 02 01 2E 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 8A 01 06][1F F1 DE 02 32 02][1F 61][1F E6 DE 02][1F 07 1B][1F 15 02 01 2D 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 89 01 06][1F 15 02 00 31 02 01][1F 61][1F E7 02 00][1F 07 1B][1F 15 02 01 2C 02 01][1F 61][1F 07 1C]{pause(120)}[1F 1F 10 00 06][1F 15 01 00 30 02 01][1F 61][1F E7 01 00]{pause(60)}{unset(flag 661)}"
+    call(data_36.l_0xc7dd6b) "{music_resume}[1F EA 04 00][1F 61][1F E7 04 00][1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(40)}{pause(30)}"
+    call(data_38.l_0xc7f949) "{pause(60)}{window_open(1)}{title_poo(1)}@I'll see you again someday!{wait}{window_closeall}{pause(30)}[1F EA 04 00][1F 61]{sound(99)}[1F 61][1F 15 F2 00 34 02 01]{pause(120)}{pause(60)}[1F 17 E8 02 3A 02 01]{pause(10)}[1F 15 58 01 3D 02 01][1F 61][1F 17 E9 02 3B 02 01]{pause(10)}[1F 15 58 01 3E 02 01][1F 61][1F 17 EA 02 3C 02 01]{pause(10)}[1F 15 58 01 3F 02 01][1F 61]{set(flag 628)}{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00][1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}"
+    call(data_38.l_0xc7f9f8) "{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02][1F F1 D8 02 35 02][1F 61][1F E6 D8 02][1F EA 01 00][1F 61][1F E7 01 00][1F EA 02 00][1F 61][1F E7 02 00]{pause(60)}[1F F1 CF 02 36 02][1F 61][1F E6 CF 02]{pause(30)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(60)}[1F E9 DE 02][1F 61][1F E6 DE 02]{pause(30)}[1F E9 CF 02][1F 61][1F E6 CF 02]{pause(15)}[1F E9 D8 02][1F 61][1F E6 D8 02]{pause(80)}[1F EA 02 00][1F 61][1F E7 02 00][1F EA 01 00][1F 61][1F E7 01 00]{pause(60)}"
+    call(data_38.l_0xc7fb56) "[1F EA 02 00][1F 61][1F E7 02 00][1F F1 CF 02 0D 00][1F 67 01][1F 66 01 14 EC FB C7 00][1F 67 02][1F 66 02 16 22 FD C7 00][1F 1F 01 00 06][1F 1F 02 00 06][19 26 04][1F EC FF 01][1F E8 FF]"
+    OSS_on	// special_event(5)
+    unset(FLG_PHOTO_RAMMA)	// 498
+    isset(FLG_GOT_CAPEESTATE)	// 99
+    goto_if_false(data_55.l_0xc9992f)
+    set(FLG_ONET_ESTATE_DOOR_OPEN)	// 746
+    eob
 
 l_0xc9c65b:
-    "{pause(20)}[1F 15 9B 00 FC 02 01][1F 61][1F E7 9B 00]{window_open(1)}{pause(10)}{counter(1)}[19 11 02]{rtoarg}@[1C 03 00]{pause(10)} [1C 03 00]{pause(10)} [1C 01 1E]!!{pause(20)}  Where are you?{pause(20)}  It's time for a yummy piece of pie!{pause(20)}[1F EA 9B 00][1F 61]{window_closeall}{set(flag 739)}" eob
+    pause(20)
+    generate_active_sprite(155, 764, 1)	// 009B, 02FC, 1
+    wait_for_movement
+    freeze_sprite_movement(155)	// 0x009B
+    window_open(1)
+    pause(10)
+    counter(1)
+    return_char_letter(2) rtoarg
+    "@{print_character(0)}{pause(10)} {print_character(0)}{pause(10)} {stat(30)}!!" pause(20) // 0x1E, 30
+    "  Where are you?" pause(20)
+    "  It's time for a yummy piece of pie!" pause(20)
+    unfreeze_sprite_movement(155)	// 0x009B
+    wait_for_movement
+    window_closeall
+    set(FLG_TWSN_PAUL_CRY)	// 739
+    eob
 
 l_0xc9c6b8:
-    "[1F 1A 03 05 03]{pause(60)}[1F 1B 03 05][1F E9 03 05][1F 61][1F E6 03 05]{window_open(1)}@You guys smell really good!{pause(15)} *sniff, sniff, sniff*" next
-    "@Who am I?{pause(20)}  I'm a Tenda!{wait}{window_closetop}{pause(10)}[1F F1 04 05 04 03][1F 61][1F E6 04 05]{window_open(1)}@Hey!{pause(20)}  What are you doing inside our dinosaur cage?" next
+    "[1F 1A 03 05 03]"
+    pause(60)
+    "[1F 1B 03 05][1F E9 03 05]"
+    wait_for_movement
+    "[1F E6 03 05]"
+    window_open(1)
+    "@You guys smell really good!{pause(15)} *sniff, sniff, sniff*" next
+    "@Who am I?{pause(20)}  I'm a Tenda!" wait
+    window_closetop
+    pause(10)
+    "[1F F1 04 05 04 03][1F 61][1F E6 04 05]"
+    window_open(1)
+    "@Hey!{pause(20)}  What are you doing inside our dinosaur cage?" next
     "@I'm going to open the door, and you get out of there right now!" next
-    "@I'm the boss,{pause(15)} so I will let you out.{wait}{window_closetop}[1F E9 04 05][1F 61][1F E6 04 05][1F 1E 13 05 06]{set(flag 651)}{window_open(1)}@Thank you for the Tendakraut." next
-    "{sound(118)}[1D 01 FF D3]{set(flag 616)}[19 10 01]{rtoarg}@([1C 02 00]'s Tendakraut was stolen.)" next
-    "@(The awful smell surrounding the group is now gone.)[03]{window_closeall}" eob
+    "@I'm the boss,{pause(15)} so I will let you out." wait
+    window_closetop
+    "[1F E9 04 05][1F 61][1F E6 04 05][1F 1E 13 05 06]"
+    set(FLG_DKFD_DOOR_DISAPPEAR)	// 651
+    window_open(1)
+    "@Thank you for the Tendakraut." next
+    sound(SND_CHICKEN2)	// 118
+    "[1D 01 FF D3]"
+    set(FLG_DKFD_GUMI_BOSS)	// 616
+    party_pos_check(1) rtoarg
+    "@({name(0)}'s Tendakraut was stolen.)" next
+    "@(The awful smell surrounding the group is now gone.)" promptw
+    window_closeall
+    eob
 
-l_0xc9c7fa:
-    "[1F 12 02][1F 41 0F][1F 41 05]{set(flag 763)}{set(flag 295)}{set(flag 468)}{set(flag 469)}{set(flag 472)}{set(flag 473)}{set(flag 476)}{set(flag 513)}{set(flag 530)}{set(flag 749)}{set(flag 750)}{set(flag 805)}[1F 15 6A 00 79 02 01][1F 61]{pause(1)}[1F EB FF 06][1F 21 51]{pause(180)}[1F 15 B5 01 0B 03 FF][1F 21 C4][1F E6 FF 00]{pause(1)}[1F 1F B5 01 06][1F EC FF 01]{pause(1)}{set(flag 775)}{set(flag 11)}" eob
+l_0xc9c7fa:	// At Home ending Door knock setup
+    "[1F 12 02][1F 41 0F]"
+    OSS_on	// special_event(5)
+    set(FLG_MYHOME_TO_BE)	// 763
+    set(FLG_MYHOME_KNOCK_APPEAR)	// 295
+    set(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+    set(FLG_YAZIUMA_DISAPPEAR)	// 469
+    set(FLG_YAZIUMA_POKEY)	// 472
+    set(FLG_KAIDAN_TRACY_APPEAR)	// 473
+    set(FLG_INSEKI_STOPPER_APPEAR)	// 476
+    set(FLG_MYHOME_2F_1F)	// 513
+    set(FLG_MYHOME_TRACY_DISAPPEAR)	// 530
+    set(FLG_MYHOME_NES_CHANGE)	// 749
+    set(FLG_STEP_ONET)	// 750
+    // Set the Cracked bat as obtained so the player doesn't get it during the post-credits
+    set(flag 805)	// 805
+    "[1F 15 6A 00 79 02 01]"
+    wait_for_movement
+    pause(1)
+    "[1F EB FF 06][1F 21 51]"
+    pause(180)
+    "[1F 15 B5 01 0B 03 FF][1F 21 C4][1F E6 FF 00]"
+    pause(1)
+    "[1F 1F B5 01 06][1F EC FF 01]"
+    pause(1)
+    set(FLG_SYS_DIS_2H_PAPA)	// 775
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    eob
 
-l_0xc9c85d:
-    "[1F 01 00]{sound(8)}[1F 15 6A 00 27 00 01]" call(data_57.l_0xc9b4b8) "[1F 15 2D 00 0B 00 01][1F 1E 16 00 06]{sound(9)}[1F ED][19 24 2D 00 01 01 00][1F E4 2D 00 00][19 22 01 03 2D 00][1F 13 01 00][1F E5 FF]{pause(1)}[1F E7 2D 00]{unset(flag 295)}{set(flag 467)}{set(flag 97)}{pause(30)}{music(177)}{pause(120)}{pause(120)}{window_open(1)}{pause(20)}"
+l_0xc9c85d:	// Ending Porky's letter
+    "[1F 01 00]"	// music_stop(0)
+    sound(SND_DOOROPEN)	// 8
+    "[1F 15 6A 00 27 00 01]"
+    call(data_57.l_0xc9b4b8)
+    "[1F 15 2D 00 0B 00 01][1F 1E 16 00 06]"
+    sound(9)
+    "[1F ED][19 24 2D 00 01 01 00][1F E4 2D 00 00][19 22 01 03 2D 00][1F 13 01 00][1F E5 FF]"
+    pause(1)
+    "[1F E7 2D 00]"
+    unset(FLG_MYHOME_KNOCK_APPEAR)	// 295
+    set(FLG_MYHOME_DOOR_CLOSE)	// 467
+    set(FLG_MYHOME_POKEY_ENTER)	// 97
+    pause(30)
+    music(177)
+    pause(120) pause(120)
+    window_open(1)
+    pause(20)
     title(1, Picky)
     "@A letter arrived from my brother, Porky...{pause(15)} it is addressed to [1C 02 01]." next
     "@There's no stamp,{pause(15)} and it's not time for the mailman to come..." next
     "@Anyway, I brought it over." next
     "@It says,{pause(15)} <come and get me, loser!" next
     "@Spankety, spankety, spankety.>" next
-    "@...I wonder where he is?{wait}{pause(20)}{window_closeall}{pause(1)}{set(flag 209)}[1F 15 6A 00 07 03 01][1F 61][1F EB FF 06][1F 21 51][1F 15 6A 00 08 03 01][1F 61]" goto(l_0xc9c98a)
+    "@...I wonder where he is?" wait
+    pause(20)
+    window_closeall
+    pause(1)
+    set(FLG_TLPT_ONET)	// 209
+    "[1F 15 6A 00 07 03 01]"
+    wait_for_movement
+    "[1F EB FF 06][1F 21 51][1F 15 6A 00 08 03 01]"
+    wait_for_movement
+    goto(l_0xc9c98a)
 
 l_0xc9c98a:
-    "{pause(1)}" goto(l_0xc9c98a)
+    pause(1)
+    goto(l_0xc9c98a)
 
 l_0xc9c991:
     title(1, Yisuchi)
-    "[06 49 00 {e(l_0xc9cbc4)}][06 10 00 {e(l_0xc9cb79)}][06 11 01 {e(l_0xc9c9e8)}][06 0A 00 {e(l_0xc9c9db)}]@I won't say anything." next
-    "@Go to <Mu,> the Place of Emptiness again.{wait}" call(data_50.l_0xc92458) eob
+    "[06 49 00 {e(l_0xc9cbc4)}][06 10 00 {e(l_0xc9cb79)}][06 11 01 {e(l_0xc9c9e8)}][06 0A 00 {e(l_0xc9c9db)}]"
+    "@I won't say anything." next
+    "@Go to <Mu,> the Place of Emptiness again." wait
+    call(data_50.l_0xc92458)
+    eob
 
 l_0xc9c9db:
     "@Go quickly!" end
@@ -114,20 +285,30 @@ l_0xc9c9db:
 l_0xc9c9e8:
     "@I am proud." next
     "@You have completed your Mu training." next
-    "@I, Yi-Su-Chi, have nothing left to teach you.{wait}{window_closetop}" call(data_36.l_0xc7dd6b) "{music(119)}{pause(60)}{window_open(1)}"
+    "@I, Yi-Su-Chi, have nothing left to teach you." wait
+    window_closetop
+    call(data_36.l_0xc7dd6b)
+    music(119)
+    pause(60)
+    window_open(1)
     title(1, Yisuchi)
-    "@Prince [1C 02 04]," next
+    "@Prince {name(4)}," next
     "@I shall relay a message to you from the heavens." next
     "@The evil entity that controls all wickedness is preparing" next
     "@for the greatest struggle of all time..." next
     "@The only ones who can challenge the entity are three boys and one girl." next
-    "@One named [1C 02 01] is the leader of the four." next
+    "@One named {name(1)} is the leader of the four." next
     "@One of the boys is you," linebreak 
-    "  Prince [1C 02 04]." next
-    "@Now that you've completed your training, search out [1C 02 01] at once." next
+    "  Prince {name(4)}." next
+    "@Now that you've completed your training, search out {name(1)} at once." next
     "@For all beings, for the Earth herself..." next
-    "@I pray for growth in the might of the four.{wait}{window_closeall}{pause(1)}{window_open(14)}[1E 09 04 70 17 00]" linebreak
-    "{prompt}{window_closeall}" goto(data_50.l_0xc9237e)
+    "@I pray for growth in the might of the four." wait
+    window_closeall
+    pause(1)
+    window_open(14)
+    "[1E 09 04 70 17 00]" linebreak prompt
+    window_closeall
+    goto(data_50.l_0xc9237e)
 
 l_0xc9cb77:
     eob
@@ -137,14 +318,20 @@ l_0xc9cb78:
 
 l_0xc9cb79:
     "@Ominous shadows grow ever darker over your upcoming battles." next
-    "@Always remain vigilant.[03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}[1F 21 33]" eob
+    "@Always remain vigilant." promptw
+    window_closeall
+    call(data_49.l_0xc915f4)
+    sound(SND_STATUSRECOVER)	// 37
+    pause(90)
+    "[1F 21 33]" eob
 
 l_0xc9cbc4:
     "@The prophecy came to pass in the best possible manner after all." next
     "@Please enjoy the life ahead of you as a regular boy." end
 
 l_0xc9cc13:
-    "[06 49 00 {e(l_0xc9cc9b)}][06 10 00 {e(l_0xc9cc49)}]@Use the treasures of Dalaam as you wish." next
+    "[06 49 00 {e(l_0xc9cc9b)}][06 10 00 {e(l_0xc9cc49)}]"
+    "@Use the treasures of Dalaam as you wish." next
     "@Go in peace." end
 
 l_0xc9cc49:
@@ -158,24 +345,39 @@ l_0xc9cc9b:
     "  We are happy." end
 
 l_0xc9ccf5:
-    "[06 10 00 {e(data_22.l_0xc68017)}]" goto(data_18.l_0xc63229)
+    "[06 10 00 {e(data_22.l_0xc68017)}]"
+    goto(data_18.l_0xc63229)
 
 l_0xc9cd01:
     eob
 
 l_0xc9cd02:
-    "[06 DD 00 {e(data_23.l_0xc685cb)}][19 10 01]{rtoarg}@[1C 02 00] opened the present." next
+    "[06 DD 00 {e(data_23.l_0xc685cb)}]"
+    party_pos_check(1) rtoarg
+    "@{name(0)} opened the present." next
     "@Inside was the [1C 05 64]." next
-    "[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 64][19 10 01]{rtoarg}@[1C 02 00] got it.{wait}{set(flag 221)}" eob
+    "[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 64]"
+    party_pos_check(1) rtoarg
+    "@{name(0)} got it." wait
+    set(FLG_BOX_RAMA_1)	// 221
+    eob
 
 l_0xc9cd4f:
-    "[06 49 00 {e(l_0xc9cdf7)}]{counter(1)}" goto(l_0xc9cd58)
+    "[06 49 00 {e(l_0xc9cdf7)}]"
+    counter(1)
+    goto(l_0xc9cd58)
 
 l_0xc9cd58:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc9cdaf)}][19 10 00]{result_is(4)}[1B 03 {e(l_0xc9cd74)}]{inc}" goto(l_0xc9cd58)
+    ctoarg
+    "[1D 19 00][1B 03 {e(l_0xc9cdaf)}][19 10 00]{result_is(4)}[1B 03 {e(l_0xc9cd74)}]"
+    inc
+    goto(l_0xc9cd58)
 
 l_0xc9cd74:
-    "{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9cdaf)}]@Prince [1C 02 04]." next
+    counter(4)
+    call(data_36.l_0xc7dc7f)
+    goto_if_true(l_0xc9cdaf)
+    "@Prince {name(4)}." next
     "@You're my favorite.  (blush)" linebreak
     "  tee hee hee." end
 
@@ -184,7 +386,7 @@ l_0xc9cdaf:
     "@the girls of Dalaam have had to endure their loneliness without you." end
 
 l_0xc9cdf7:
-    "@Prince [1C 02 04] has returned, so everyone is extremely happy." next
+    "@Prince {name(4)} has returned, so everyone is extremely happy." next
     "@Please stay and relax." end
 
 l_0xc9ce2c:
@@ -192,21 +394,29 @@ l_0xc9ce2c:
     "@Look around the house as much as you want." end
 
 l_0xc9ce4d:
-    "[06 DE 00 {e(data_23.l_0xc685cb)}][19 10 01]{rtoarg}@[1C 02 00] opened the present." next
+    "[06 DE 00 {e(data_23.l_0xc685cb)}]"
+    party_pos_check(1) rtoarg
+    "@{name(0)} opened the present." next
     "@Inside was a [1C 05 80]." next
-    "[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 80][19 10 01]{rtoarg}@[1C 02 00] got it.{wait}{set(flag 222)}" eob
+    "[1D 03 FF][1B 02 {e(data_23.l_0xc685bb)}]{sound(116)}[1D 00 FF 80]"
+    party_pos_check(1) rtoarg
+    "@{name(0)} got it." wait
+    set(FLG_BOX_RAMA_2)	// 222
+    eob
 
 l_0xc9ce9b:
-    "[06 10 00 {e(l_0xc9ced1)}]@I just roasted some garlic and ate it," next
+    "[06 10 00 {e(l_0xc9ced1)}]"
+    "@I just roasted some garlic and ate it," next
     "@so the room still stinks." end
 
 l_0xc9ced1:
     "@I didn't eat any garlic today, so the room doesn't stink." end
 
 l_0xc9cef7:
-    "[06 49 00 {e(l_0xc9cfd1)}]{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9cfac)}]@You know that you do do everything well, right?" next
+    "[06 49 00 {e(l_0xc9cfd1)}]{counter(4)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc9cfac)}]"
+    "@You know that you do do everything well, right?" next
     "@Do do?{pause(20)}  Ooops." next
-    "@Say, Prince [1C 02 04], are you still popular with the girls?" next
+    "@Say, Prince {name(4)}, are you still popular with the girls?" next
     "[19 02]Yes" eob
 
 l_0xc9cf5c:
@@ -236,7 +446,8 @@ l_0xc9d011:
     "  pooooot!..." end
 
 l_0xc9d02d:
-    "[06 49 00 {e(l_0xc9d0b1)}][06 10 00 {e(l_0xc9d073)}]@What is immortality.....?" next
+    "[06 49 00 {e(l_0xc9d0b1)}][06 10 00 {e(l_0xc9d073)}]"
+    "@What is immortality.....?" next
     "@Is it the unbearable lightness of being?" next
     "@Mmmmm mmmmm." end
 
@@ -252,11 +463,12 @@ l_0xc9d0b1:
     "@...What?{pause(20)}  It's not?" end
 
 l_0xc9d125:
-    "[06 10 00 {e(l_0xc9d163)}]@I heard that Prince [1C 02 04] is deeply into <Moo Training.>" next
+    "[06 10 00 {e(l_0xc9d163)}]"
+    "@I heard that Prince {name(4)} is deeply into <Moo Training.>" next
     "@...I want to help him, if I can." end
 
 l_0xc9d163:
-    "@I wonder if Prince [1C 02 04] succeeded in <Moo Training>?" next
+    "@I wonder if Prince {name(4)} succeeded in <Moo Training>?" next
     "@I wanted him to come by and show me his best barnyard impression." end
 
 l_0xc9d1b7:
@@ -266,7 +478,8 @@ l_0xc9d1b7:
     "@you'll pass through.{pause(20)}  Mu is Mu...)" end
 
 l_0xc9d23f:
-    "[06 8C 02 {e(l_0xc9d2a5)}]@Black rabbits... they're blocking your path to the cave." next
+    "[06 8C 02 {e(l_0xc9d2a5)}]"
+    "@Black rabbits... they're blocking your path to the cave." next
     "@If you think about them, you should feel kind of empty." next
     "@...But I can't seem to get them off of my mind." end
 
@@ -275,22 +488,35 @@ l_0xc9d2a5:
     "@I would've gone in and checked it out too." end
 
 l_0xc9d2ba:
-    "[06 C3 00 {e(data_35.l_0xc7c588)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next
+    "[06 C3 00 {e(data_35.l_0xc7c588)}]"
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_true(data_24.l_0xc690a6)
+    music(155)
+    "@You finally got here." next
     "@This is the sixth <Your Sanctuary> location.{pause(20)}" linebreak
     "  But it's mine now." next
-    "@Take it from me,{pause(30)} if you dare...[03]" call(data_23.l_0xc6842c) "[1B 03 {e(data_23.l_0xc683de)}][1F 1E 5E 04 08]{pause(120)}{set(flag 195)}" eob
+    "@Take it from me,{pause(30)} if you dare..." promptw
+    call(data_23.l_0xc6842c)
+    goto_if_true(data_23.l_0xc683de)
+    "[1F 1E 5E 04 08]"
+    pause(120)
+    set(FLG_WIN_PINK_BOSS)	// 195
+    eob
 
 l_0xc9d334:
-    "[06 10 00 {e(l_0xc9d3a9)}]@Oh!{pause(15)}  Prince [1C 01 4A]!{pause(20)}  I'm surprised you're not in training!" next
+    "[06 10 00 {e(l_0xc9d3a9)}]"
+    "@Oh!{pause(15)}  Prince [1C 01 4A]!{pause(20)}  I'm surprised you're not in training!" next
     "@It seems like that's all you do these days." next
     "@Why don't you take some time to play with me?{pause(30)}  I'm so lonely without you..." end
 
 l_0xc9d3a9:
-    "@Prince [1C 02 04] has good relationships with foreigners." next
+    "@Prince {name(4)} has good relationships with foreigners." next
     "@...What an international person!" end
 
 l_0xc9d3e0:
-    "[06 49 00 {e(l_0xc9d4b0)}][06 10 00 {e(l_0xc9d47c)}]@Oh, Prince [1C 02 04]." next
+    "[06 49 00 {e(l_0xc9d4b0)}][06 10 00 {e(l_0xc9d47c)}]"
+    "@Oh, Prince [1C 02 04]." next
     "@Will you make out with me again like you used to?" linebreak
     "[19 02]Yes" eob
 
@@ -313,38 +539,60 @@ l_0xc9d47c:
     "@(weep)" end
 
 l_0xc9d4b0:
-    "@Prince [1C 02 04] is so cool, but you're also young and tough." end
+    "@Prince {name(4)} is so cool, but you're also young and tough." end
 
 l_0xc9d4d3:
-    "[06 10 00 {e(l_0xc9d4fd)}]@Prince [1C 02 04]... (blush)." next
+    "[06 10 00 {e(l_0xc9d4fd)}]"
+    "@Prince {name(4)}... (blush)." next
     "@Lately,{pause(15)} you seem really stoic and handsome!" end
 
 l_0xc9d4fd:
-    "@I'm waiting for Prince [1C 02 04] to see me and say <I love you.>" end
+    "@I'm waiting for Prince {name(4)} to see me and say <I love you.>" end
 
 l_0xc9d523:
     title(1, Star)
     "@You have sharp eyes." next
-    "@...You must be Prince [1C 02 04]." next
+    "@...You must be Prince {name(4)}." next
     "@Long ago, I completed Mu Training." next
     "@I want to show you a higher level of intelligence..." next
     "@However, I'm still realizing and learning this high level..." next
-    "@I'll see you again.  So long!{wait}{sound(40)}{set(flag 595)}" eob
+    "@I'll see you again.  So long!" wait
+    sound(SND_STATSUP)	// 40
+    set(FLG_RAMA_258_DISAPPEAR)	// 595
+    eob
 
 l_0xc9d5c4:
     title_poo(1)
     "@You're here!" next
     "@We have little, but stay and rest for a while." next
-    call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}" linebreak
-    "@But I'm impressed!{pause(20)}  You did so well for one who hasn't had much training." end
+    call(data_49.l_0xc915f4)
+    sound(SND_STATUSRECOVER)	// 37
+    pause(90) linebreak
+    "@But I'm impressed!" pause(20)
+    "  You did so well for one who hasn't had much training." end
 
 l_0xc9d621:
-    "@(As strange as this may sound,{pause(15)} there are statues of rabbits blocking your way.)" end
+    "@(As strange as this may sound," pause(15)
+    " there are statues of rabbits blocking your way.)" end
 
 l_0xc9d656:
-    call(data_36.l_0xc7dd2c) "{result_is(253)}[1B 02 {e(l_0xc9d6b7)}]{load_registers}" call(data_36.l_0xc7dd37) "{sound(118)}[1B 06][1D 0F 00 00]" newline
-    "@(How strange!{pause(20)}" linebreak
-    "  The rabbits and carrots disappeared all at once!){wait}{sound(33)}[1F 1E 53 04 08][1F 1E 54 04 08][1F 1E 55 04 08]{set(flag 652)}" eob
+    call(data_36.l_0xc7dd2c)
+    result_is(CARROT_KEY)	// 253, Rabbit's carrot
+    goto_if_false(l_0xc9d6b7)
+    load_registers
+    call(data_36.l_0xc7dd37)
+    sound(118)
+    copy_active
+    take_slot(0, 0)
+    newline
+    "@(How strange!" pause(20) linebreak
+    "  The rabbits and carrots disappeared all at once!)" wait
+    sound(SND_ENEMYDEATH)	// 33
+    hide_sprite(1107, 8)	// 0453, 8
+    hide_sprite(1108, 8)	// 0454, 8
+    hide_sprite(1109, 8)	// 0455, 8
+    set(FLG_RAMA_RABBIT_DISAPPEAR)	// 652
+    eob
 
 l_0xc9d6b7:
     newline
@@ -355,13 +603,17 @@ l_0xc9d6ce:
     "@(We accept $ dollars.)" end
 
 l_0xc9d6f8:
-    "[19 19 00 00]{swap}{result_is(211)}[1B 03 {e(l_0xc9d70b)}]" goto(data_35.l_0xc7c6b6)
+    return_item_in_slot(0, 0) swap
+    result_is(TENDAKRAUT)	// Tendakraut, 211
+    goto_if_true(l_0xc9d70b)
+    goto(data_35.l_0xc7c6b6)
 
 l_0xc9d70b:
     "@The Tenda turned it down, but really seemed tempted..." end
 
 l_0xc9d72e:
-    "[06 9B 00 {e(l_0xc9d743)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9d743)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9d735:
     "@....." next
@@ -379,15 +631,26 @@ l_0xc9d779:
     call(data_48.l_0xc90dea) eob
 
 l_0xc9d77f:
-    "[06 49 00 {e(l_0xc9d875)}][06 5C 00 {e(l_0xc9d854)}][06 9B 00 {e(l_0xc9d7e2)}]@...We're all shy." next
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc9d875)	// 0x0049, 73
+    goto_if_flag(FLG_GUMI_OLDMAN_ITEM, l_0xc9d854)	// 0x005C, 92
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9d7e2)	// 0x009B
+    "@...We're all shy." next
     "@Rumor, I heard a book to fix shyness, there is." next
     "@Where?" next
     "@Don't know." next
-    "@Just a rumor.{wait}{set(flag 154)}" eob
+    "@Just a rumor." wait
+    set(FLG_GUMI_INFO_MUKUCHI)	// 154
+    eob
 
 l_0xc9d7e2:
     "@Since we overcame our shyness, I'll give you a [1C 05 A0]." next
-    "@Take it.[03][1D 03 FF][1B 02 {e(l_0xc9d81f)}][1D 0E 00 A0]" call(data_36.l_0xc7dccf) "{set(flag 92)}" end
+    "@Take it." promptw
+    char_inventory_vacancy(-1)	// FF
+    goto_if_false(l_0xc9d81f)
+    give_and_check(0, 160)	// 0, 0xA0 - Bag of dragonite
+    call(data_36.l_0xc7dccf)
+    set(FLG_GUMI_OLDMAN_ITEM)	// 92
+    end
 
 l_0xc9d81f:
     newline
@@ -396,29 +659,47 @@ l_0xc9d81f:
     "@Go and do whatever you have to and come back." end
 
 l_0xc9d854:
-    "@So long.{pause(20)}" linebreak
-    "  I say good-bye.{wait}{window_closeall}{pause(1)}[1F F1 E4 04 0C 00]" eob
+    "@So long." pause(20) linebreak
+    "  I say good-bye." wait
+    window_closeall
+    pause(1)
+    change_npc_movement(1252, 12)	// 04E4, 000C
+    eob
 
 l_0xc9d875:
-    "[06 09 03 {e(l_0xc9d8de)}]@The book <Overcoming Shyness> was very helpful to us!" next
+    goto_if_flag(FLG_GUMI_OLDMAN_END, l_0xc9d8de)	// 0x0309, 777
+    "@The book <Overcoming Shyness> was very helpful to us!" next
     "@We've kept it for a long time, but I'll return it now." next
     "@Thank you very much." next
-    "[1D 03 FF][1B 02 {e(l_0xc9d91b)}][1D 0E 00 A4]" call(data_36.l_0xc7dcb6) "{set(flag 777)}" next
+    char_inventory_vacancy(-1)	// FF
+    goto_if_false(l_0xc9d91b)
+    give_and_check(0, SHYNESS_BOOK)	// 0xA4, 164
+    call(data_36.l_0xc7dcb6)
+    set(FLG_GUMI_OLDMAN_END) next	// 777
     goto(l_0xc9d8de)
 
 l_0xc9d8de:
     "@We're living in peace now, in a wide variety of lifestyles." next
-    "@Thank you very much.{wait}[1F F1 E4 04 0C 00]" eob
+    "@Thank you very much." wait
+    change_npc_movement(1252, 12)	// 04E4, 000C
+    eob
 
 l_0xc9d91b:
     "@You have too much stuff to receive the book." next
     "@Get rid of something." end
 
 l_0xc9d940:
-    "{store_registers}[06 9B 00 {e(data_35.l_0xc7c6b6)}]{load_registers}[19 19 00 00]{swap}{result_is(164)}[1B 03 {e(l_0xc9d95e)}]" goto(data_35.l_0xc7c6b6)
+    store_registers
+    goto_if_flag(FLG_GUMI_USEBOOK, data_35.l_0xc7c6b6)	// 0x009B, 155
+    load_registers
+    return_item_in_slot(0, 0) swap
+    result_is(SHYNESS_BOOK)	// 0xA4, 164
+    goto_if_true(l_0xc9d95e)
+    goto(data_35.l_0xc7c6b6)
 
 l_0xc9d95e:
-    "[1F 41 05]@.....!" next
+    OSS_on	// special_event(5)
+    "@.....!" next
     "@Book!" next
     "@Can fix shyness." next
     "@Thanks." next
@@ -427,29 +708,62 @@ l_0xc9d95e:
     "@Oh!" next
     "@Just holding this book in my hands makes me feel like" next
     "@I'm overcoming my shyness already!" next
-    "@I'll really take time to read it to everyone!{sound(121)}[03]{window_closeall}[1F 15 6A 00 79 02 01][1F 61]{window_open(1)}@(The leader of the Tenda tribe read <Overcoming Shyness> to everyone.)[03]{window_closeall}" call(data_49.l_0xc91582) "[1F 21 E7][1F E5 FF]{pause(1)}{music_resume}{window_open(1)}" newline
+    "@I'll really take time to read it to everyone!"
+    sound(121) promptw
+    window_closeall
+    generate_active_sprite(106, 633, 1)	// 006A, 0279, 1
+    wait_for_movement
+    window_open(1)
+    "@(The leader of the Tenda tribe read <Overcoming Shyness> to everyone.)" promptw
+    window_closeall
+    call(data_49.l_0xc91582)
+    warp(231)	// E7
+    freeze_char_movement(-1)	// FF
+    pause(1)
+    music_resume
+    window_open(1)
+    newline
     "@Everyone talks much now." next
     "@I'd like to give you some" linebreak
-    "  <[1C 05 D3]> in return." next
-    "@<[1C 05 D3]> is a type of dish that all Tenda like." next
+    // Tendakraut, 0xD3, 211
+    "  <{itemname(TENDAKRAUT)}> in return." next
+    "@<{itemname(TENDAKRAUT)}> is a type of dish that all Tenda like." next
     "@It stinks, but it tastes wonderful." next
-    "[1D 01 FF A4][1D 0E 00 D3][1B 05]{sound(116)}{pause(60)}{window_open(1)}@[1C 02 01] lends the leader of the Tenda tribe the book <Overcoming Shyness.>" next
-    call(data_36.l_0xc7dcb6) "{wait}{window_closeall}{set(flag 155)}{pause(60)}{set(flag 509)}" call(data_24.l_0xc68931) call(data_50.l_0xc935b7) "[1F E8 FF][1F 41 06]" eob
+    take(-1, SHYNESS_BOOK)	// 0xA4, 164
+    give_and_check(0, TENDAKRAUT)	// 0xD3, 211
+    copy_wram
+    sound(SND_BOXTAKE)	// 116
+    pause(60)
+    window_open(1)
+    "@{name(1)} lends the leader of the Tenda tribe the book <Overcoming Shyness.>" next
+    call(data_36.l_0xc7dcb6) wait
+    window_closeall
+    set(FLG_GUMI_USEBOOK)	// 155
+    pause(60)
+    set(FLG_PHOTO_GUMI)	// 509
+    call(data_24.l_0xc68931)
+    call(data_50.l_0xc935b7)
+    unfreeze_char_movement(-1)
+    OSS_off	// special_event(6)
+    eob
 
 l_0xc9db12:
-    "[06 9B 00 {e(l_0xc9db1e)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9db1e)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9db1e:
     "@Hi!  (smile)" end
 
 l_0xc9db2c:
-    "[06 9B 00 {e(l_0xc9db38)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9db38)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9db38:
     call(data_20.l_0xc6505d) eob
 
 l_0xc9db3e:
-    "[06 9B 00 {e(l_0xc9db4a)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9db4a)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9db4a:
     "@Underground, very large area." next
@@ -463,27 +777,42 @@ l_0xc9db4a:
     "@Talks lots." end
 
 l_0xc9dbaf:
-    "[06 9B 00 {e(l_0xc9dbbb)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9dbbb)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9dbbb:
     "@I'm a woman." next
     "@Did you mistake me for a man?" end
 
 l_0xc9dbd6:
-    "[06 9B 00 {e(l_0xc9dbe2)}]" goto(l_0xc9d735)
+    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9dbe2)	// 0x009B
+    goto(l_0xc9d735)
 
 l_0xc9dbe2:
     "@Would you like some tea?" linebreak
-    "[19 02]Yes" eob
+    add_menu_string("Yes")
 
 l_0xc9dbf4:
-    "[19 02]No" eob
+    add_menu_string("No")
 
 l_0xc9dbf9:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9dc0e)} {e(l_0xc9dc08)}]" goto(l_0xc9dc08)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc9dc0e
+	long l_0xc9dc08
+    })
+    goto(l_0xc9dc08)
 
 l_0xc9dc08:
     "@OK." end
 
 l_0xc9dc0e:
-    "@Drink.{wait}{window_closeall}[06 DC 00 {e(data_55.l_0xc9992f)}]" call(data_36.l_0xc7dd74) "{music(92)}[1F 41 02]" eob
+    "@Drink." wait
+    window_closeall
+    goto_if_flag(FLG_TLPT_DKFD, data_55.l_0xc9992f)	// 0x00DC
+    call(data_36.l_0xc7dd74)
+    music(92)
+    special_event(2)	// Start Tenda Village Tea scene
+    eob

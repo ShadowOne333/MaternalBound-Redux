@@ -18,9 +18,9 @@ import "../essential/asm65816.ccs"
 // This table is for animation frames 3 and 4 for walking
 extra_animation_sprite_table: {
     ExtraSprites(0,     8, 1, 17, 5, 21, 34, 27)                       // Ness.
-    ExtraSprites(1,     9, 2, 18, 25, 22, 34, 28)                      // Paula.
-    ExtraSprites(2,     10, 3, 19, 25, 23, 34, 29)                     // Jeff.
-    ExtraSprites(3,     11, 4, 20, 25, 24, 34, 30)                     // Poo.
+    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                      // Paula.
+    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                     // Jeff.
+    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                     // Poo.
     ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)                    // Pokey.
     ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)                    // Picky.
     ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)                    // King.
@@ -48,9 +48,9 @@ define run_flag = flag 1000	// flag 1000
 
 extra_animation_sprite_table_running1: {
     ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                       // Ness.
-    ExtraSprites(1,     9, 2, 18, 25, 22, 34, 28)                      // Paula.
-    ExtraSprites(2,     10, 3, 19, 25, 23, 34, 29)                     // Jeff.
-    ExtraSprites(3,     11, 4, 20, 25, 24, 34, 30)                     // Poo.
+    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                      // Paula.
+    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                     // Jeff.
+    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                     // Poo.
     ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)                    // Pokey.
     ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)                    // Picky.
     ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)                    // King.
@@ -68,9 +68,9 @@ extra_animation_sprite_table_running1: {
 
 extra_animation_sprite_table_running2: {
     ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                       // Ness.
-    ExtraSprites(1,     9, 2, 18, 25, 22, 34, 28)                      // Paula.
-    ExtraSprites(2,     10, 3, 19, 25, 23, 34, 29)                     // Jeff.
-    ExtraSprites(3,     11, 4, 20, 25, 24, 34, 30)                     // Poo.
+    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                      // Paula.
+    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                     // Jeff.
+    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                     // Poo.
     ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)                    // Pokey.
     ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)                    // Picky.
     ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)                    // King.

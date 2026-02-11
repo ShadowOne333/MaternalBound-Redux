@@ -1,0 +1,43 @@
+// Import ASM files
+import "../essential/asm65816.ccs"
+
+// Optimize FindFreeMenuOption routine
+define Mul16x8r16		= 0xC08FF7
+
+// Refer to the two following links for another RAM address if 0x7E2894 ends up being used later on
+// Used RAM:
+//	https://github.com/pk-hack/CoilSnake/wiki/Used-RAM
+// Unused memory locations:
+//	https://gist.github.com/Supremekirb/33089ef23ef1e3677d80f38479e4cb2e
+define last_used_menu_option	= 0x7E2894	// 2 bytes of unused RAM
+
+// Optimized version of FindFreeMenuOption
+// "Pseudo" D code by JTolmar
+// ASM implementation by Catador
+ROM[0xC11354] = {
+	REP   (0x31)
+
+	LDA_a (last_used_menu_option)	// short i = lastUsedMenuOption
+
+					// do {
+	INC				//	 i++;
+	CMP_i (70)
+	BCC   (3)
+		LDA_i (0)		//	 if (i >= menuOptions.length) { i = 0; }
+	PHA				//	 [save `i` on the stack]
+	LDY_i (0x002D)
+	JSL   (Mul16x8r16)
+	TAX
+	LDA_x (0x89D4)
+	BNE   (5)			//	 if (menuOptions[i].type == MenuOptionType.available) {
+		PLA			//		 [pop `i` from the stack]
+		STA_a (last_used_menu_option)	//		 lastUsedMenuOption = i;
+		RTS			//		 return lastUsedMenuOption
+					//	 }
+	PLA				//	 [pop `i` from the stack]
+	CMP_a (last_used_menu_option)
+	BEQ   (-33)			// } while (i != lastUsedMenuOption);
+
+	LDA_i (-1)			// return -1;
+	RTS
+}

@@ -27,10 +27,7 @@ WindowDefinition(57, 15, 13, 16, 14) 	// Used for Resistances window on Equipmen
 WindowDefinition(58, 1, 19, 30, 8) 	// Out-of-battle text (Mother)
 WindowDefinition(59, 7, 1, 24, 18)	// Debug menu
 WindowDefinition(60, 2, 12, 28, 4)	// Warning for illegal name input
-WindowDefinition(61, 1, 1, 30, 26)	// "Full-screen" window
-WindowDefinition(62, 7, 1, 24, 16)	// Key Items window
-WindowDefinition(63, 1, 1, 6, 6)	// Submenu for Key items (Use/Help)
-WindowDefinition(64, 1, 1, 15, 8) // Main gameplay menu (1, 1, 13, 8)
+WindowDefinition(61, 1, 1, 6, 6)	// Submenu for Key items (Use/Help)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ////////// PUT YOUR WINDOWS ABOVE
@@ -313,7 +310,7 @@ GetExistenceAtA: {
 _asmptr(0xC105C9, NewWindowTable)
 NewWindowTable:
 	// 	      #,   X,	   Y, 	    W,	    H
-    WindowDefinition( 0, 1, 1, 13, 8) // Main gameplay menu (1, 1, 13, 8)
+    WindowDefinition( 0, 1, 1, 15, 8) // Main gameplay menu (1, 1, 13, 8)
     WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
     WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
     WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu (Use/Give/Drop/Help)
