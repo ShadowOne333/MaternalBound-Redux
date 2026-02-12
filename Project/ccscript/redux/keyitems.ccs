@@ -20,13 +20,19 @@ import "../redux/window_titles.ccs"
 //------------------------------------
 
 // Define routines
+define UNFREEZE_OBJECTS		= 0xC09451
 define PLAY_SOUND		= 0xC0ABE0
 
+define CLOSE_HPPP_WINDOWS	= 0xC10000
 define SET_WINDOW_FOCUS		= 0xC1007E
 define CLOSE_FOCUS_WINDOW	= 0xC10084
+define CLOSEALL_WINDOWS		= 0xC1008E
 define CREATE_WINDOW		= 0xC104EE
+define HIDE_HPPP_WINDOWS	= 0xC10A1D
 define PRINT_STRING		= 0xC10EFC
+define WINDOW_TICK		= 0xC12DD5
 define MAIN_PAUSE_MENU		= 0xC134CD
+define ENTITY_FADE_ENTITY	= 0xC1B4A8
 define CLOSE_INVENTORY_WHICH_WINDOWS	= 0xC135DE
 define CLOSE_INVENTORY_MENU	= 0xC13648
 define DISPLAY_TEXT		= 0xC186B1
@@ -35,6 +41,7 @@ define CLOSE_WHICH_WINDOW	= 0xC19437
 define CREATE_WINDOW_REDIRECT	= 0xC1DD47
 
 define SET_WINDOW_TITLE		= 0xC2032B
+define GET_EVENT_FLAG		= 0xC21628
 
 define CLEAR_INSTANT_PRINTING	= 0xC3E4CA
 define SET_INSTANT_PRINTING	= 0xC3E4D4
@@ -44,6 +51,7 @@ define CLOSE_WINDOW		= 0xC3E521
 define MAINMENU_WINDOW	= 0
 define DIALOGUE_WINDOW	= 1
 define INVENTORY_WINDOW	= 2
+define CASH_WINDOW	= 10
 define WHICH_WINDOW	= 40
 define USE_HELP_WINDOW	= 61
 
@@ -80,16 +88,18 @@ define BUBBLE_GUM	= 104	// 0x68
 //------------------------------------
 // Hijack the 'Check' routine
 ROM[0xC13BCF] = {
-	// Jump to our ccscript menu
 	MText	(Key_Items_Prep)
-	// Jump to our custom subroutine for closing our custom windows
-	JSL	(CC_Close_Custom_Windows)
-	// Jump back to the Main menu after closing our custom Key items menu
-	JMP	(MAIN_PAUSE_MENU)	// Jump back to the Main menu
 
+	LDA_i	(USED_ITEM_TEMP_FLAG)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x07)	// _exit_on_item_use
+	JSL	(CC_Close_Custom_Windows)	// Close our custom windows
+	JMP	(MAIN_PAUSE_MENU)	// Return to the Main menu
+
+_exit_on_item_use:
+	JMP	(0xC13C16)
 	// Limit for this section is up to 0xC13C01
-	// 0xC13BE4
-	BRA	(0x1B)
 }
 
 CC_Close_Custom_Windows: {
@@ -155,12 +165,13 @@ SetCount26: { counter(26) ctoarg eob }
 //------------------------------------
 KeyItems:
 _KeyItemsReturn:
+	unset(USED_ITEM_TEMP_FLAG)
+
 	copy_wram
 	save_text_window_state
 	window_open(INVENTORY_WINDOW)
 	title(0, KeyItems_Title)
 	copy_active
-
 	counter_zero
 	ctoarg
 
@@ -316,6 +327,7 @@ open_which_window: {
 command use_item(itemID) {
 	arg(itemID)
 	cc_asmcall(CCUseItem, RET_NONE)
+	eob
 }
 
 // Use/Help submenu command
@@ -336,9 +348,10 @@ command use_help_submenu( itemID, help_text ) {
 	goto(_KeyItemsReturn)
 _use:
 	window_closetop
+	set(USED_ITEM_TEMP_FLAG)
 	window_open(DIALOGUE_WINDOW)
 	use_item(itemID)
-	cc_asmcall(JUMP, RET_NONE)
+	window_closeall
 	eob
 _help:
 	window_switch(INVENTORY_WINDOW)
@@ -350,12 +363,6 @@ _help:
 	call(open_which_window)
 	window_switch(INVENTORY_WINDOW)
 	goto(_KeyItemsReturn)
-}
-
-JUMP:	{
-	LDA_i	(MAINMENU_WINDOW)	// Load main menu window
-	JSL	(CLOSE_WINDOW)		// Close window routine
-	RTL
 }
 
 // Set the flag for the corresponding Key Item

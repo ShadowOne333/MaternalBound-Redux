@@ -8,12 +8,12 @@ import "../essential/ccexpand.ccs"
 command cc_asmcall(routine, ret_type) "[1A 0C {adr24(routine)} {byte ret_type}]"
 
 // 'ret_type' definitions for 'cc_asmcall'
-define RET_NONE        = 0x00
-define RET_RESULT      = 0x01
-define RET_ARG         = 0x02
-define RET_COUNTER     = 0x03
-define RET_RESULT_LONG = 0x81
-define RET_ARG_LONG    = 0x82
+define RET_NONE		= 0x00
+define RET_RESULT	= 0x01
+define RET_ARG		= 0x02
+define RET_COUNTER	= 0x03
+define RET_RESULT_LONG	= 0x81
+define RET_ARG_LONG	= 0x82
 
 /*
  * Replaces an unused control code with:
@@ -22,13 +22,13 @@ define RET_ARG_LONG    = 0x82
  * Where:
  *  'routine' is the pointer to the JSL routine to run
  *  'ret_type' is tells the return type and in which register to store it:
- *     'ret_type' bits: "l00000rr"
- *       l = "long" return type flag (function returns a 32-bit number rather than a 16-bit number)
- *       r = which register to store the return value into:
- *         0: NONE
- *         1: RESULT
- *         2: ARGUMENT
- *         3: COUNTER
+ *	 'ret_type' bits: "l00000rr"
+ *	   l = "long" return type flag (function returns a 32-bit number rather than a 16-bit number)
+ *	   r = which register to store the return value into:
+ *		 0: NONE
+ *		 1: RESULT
+ *		 2: ARGUMENT
+ *		 3: COUNTER
  *
  * 'ret_type' cheatsheet in case the bitfield explanation was confusing:
  *   0x00 = NONE
@@ -42,51 +42,56 @@ define RET_ARG_LONG    = 0x82
 */
 
 
-define SetTBoxCounter = 0xC10443
-define SetTBoxResult  = 0xC1045D
-define SetTBoxArg     = 0xC10489
+define SetTBoxCounter	= 0xC10443
+define SetTBoxResult	= 0xC1045D
+define SetTBoxArg	= 0xC10489
 
-CC_code_AsmCall: M_EB_Function_Wrapper({
-            LDY_i (0x0004)
-            JSL   (R_Read_Parameter_Bytes)
+CC_code_AsmCall: M_EB_Function_Wrapper ({
+	LDY_i	(0x0004)
+	JSL  	(R_Read_Parameter_Bytes)
 
-            SEP   (0x10)
+	SEP  	(0x10)
 
-            LDA_a (D_cc_argv_2)   // D_cc_argv+2 (I could only wish CCScript accepted compile-time math expressions...)
-            STA_a (0x0A5C)
-            LDA_a (D_cc_argv)
-            STA_a (0x0A5A)
-            REP   (0x30)     // Call with 16-bit accumulator/indexes
-            JSL   (0xC09D9E) // Long ASM call from $0A5A
+	LDA_a	(D_cc_argv_2)	// D_cc_argv+2 (I could only wish CCScript accepted compile-time math expressions...)
+	STA_a	(0x0A5C)
+	LDA_a	(D_cc_argv)
+	STA_a	(0x0A5A)
+	REP  	(0x30)		// Call with 16-bit accumulator/indexes
+	JSL  	(0xC09D9E)	// Long ASM call from $0A5A
 
-            REP   (0x30)
-            STA_d (0x0E)     // Store return value into 0x0E (argument to SetTBoxResult/SetTBoxArg routines)
-            STZ_d (0x10)     // Clear high byte
+	REP  	(0x30)
+	STA_d	(0x0E)		// Store return value into 0x0E (argument to SetTBoxResult/SetTBoxArg routines)
+	STZ_d	(0x10)		// Clear high byte
 
-            SEP   (0x20)
-            LDA_a (D_cc_argv_3)// Load 'ret_type'
-            BPL_a (NotLong)  // Check the 'l' bit
-              LDX_d (0x06) // Low word of 32-bit return value
-              STX_d (0x0E)
-              LDX_d (0x08) // High word of 32-bit return value
-              STX_d (0x10)
-NotLong:    LDA_a (D_cc_argv_3)// Load 'ret_type'
-            AND_8 (0x03)     // mask only 'r' bits
-            BEQ_a (Exit)     // If register == 0, don't store the return value anywhere
-            DEC
-            BEQ_a (ToResult) // If register == 1, store to RESULT register
-            DEC
-            BEQ_a (ToArg)    // If register == 2, store to ARGUMENT register
+	SEP  	(0x20)
+	LDA_a	(D_cc_argv_3)	// Load 'ret_type'
+	BPL_a	(NotLong)	// Check the 'l' bit
+		LDX_d	(0x06)	// Low word of 32-bit return value
+		STX_d	(0x0E)
+		LDX_d	(0x08)	// High word of 32-bit return value
+		STX_d	(0x10)
+NotLong:
+	LDA_a	(D_cc_argv_3)	// Load 'ret_type'
+	AND_8	(0x03)		// mask only 'r' bits
+	BEQ_a	(Exit)		// If register == 0, don't store the return value anywhere
+	DEC
+	BEQ_a	(ToResult)	// If register == 1, store to RESULT register
+	DEC
+	BEQ_a	(ToArg)		// If register == 2, store to ARGUMENT register
 
-            // If we reached here, then register == 3 (store to COUNTER) register
-ToCounter:  LDA_d (0x0E)   // Load low word of return value into accumulator
-            M_JSL_RTS_C1(SetTBoxCounter) // Set COUNTER register to this value
-            BRA_a (Exit)
+	// If we reached here, then register == 3 (store to COUNTER) register
+ToCounter:
+	LDA_d	(0x0E)		// Load low word of return value into accumulator
+	M_JSL_RTS_C1(SetTBoxCounter)	// Set COUNTER register to this value
+	BRA_a	(Exit)
 
-ToArg:      M_JSL_RTS_C1(SetTBoxArg)
-            BRA_a (Exit)
+ToArg:
+	M_JSL_RTS_C1(SetTBoxArg)
+	BRA_a	(Exit)
 
-ToResult:   M_JSL_RTS_C1(SetTBoxResult)
+ToResult:
+	M_JSL_RTS_C1(SetTBoxResult)
 
-Exit:       REP   (0x30)
+Exit:
+	REP  	(0x30)
 })

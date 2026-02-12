@@ -825,6 +825,7 @@ define flg_InDeepDarkness		= flag 999
 // Jeff & Poo solo missions
 define flg_JeffSoloMission		= flag 1000	// 856
 define flg_PooSoloMission		= flag 1001	// 857
+define USED_ITEM_TEMP_FLAG		= flag 1002
 
 /* Original Game Flags */
 define flg_BuzzBuzz = flag 0x12
@@ -853,4 +854,4 @@ define flg_HawkEyeUsed = flag 0x120
 
 /* Key Items */
 // 0x6C = Traveling Entertainer's Shack unlocked
-define flg_KeyItem_CarrotKey		= flag 858
+define flg_KeyItem_CarrotKey		= flag 1003
