@@ -775,83 +775,79 @@ define FLG_GUMI_OLDMAN_END      	= flag 777
 define FLG_SYS_DIS_MOUSE        	= flag 778
 define FLG_SYS_DISTLPT_EVENT    	= flag 779
 define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
-// Flags 780-800 free to use
-
+// Flags 780-799 free to use
 // Flags 800-976 are taken by item box flags
 
 //------------------------------------
 // New flags for Key items
 //------------------------------------
-// Whether a party member is in the party (to prevent removing them all)
-define flg_Ness				= flag 977
-define flg_Paula			= flag 978
-define flg_Jeff				= flag 979
-define flg_Poo				= flag 980
-// Whether to continue with current operation (used for reopening mod menu after selection)
-define flg_Proceed			= flag 981
-// Whether menu should loop or not (used for skipping mainmenu reopen on bicycle use)
-define flg_EndLoop			= flag 982
-// Whether collisions are disabled or not
-define flg_DisableCollision		= flag 983
-// Whether bike is unrestricted or not
-define flg_UnrestrictBike		= flag 984	// Test
-// Whether Mod Menu Key Items window is open
-define flg_KeyItemsWnd			= flag 985
-// Whether Key Item Menu is enabled
-define flg_KeyItems			= flag 986
-// Whether Backstage Pass has been obtained or not
-define flg_KeyItem_BackstagePass	= flag 987
-// Whether Trout Yogurt Machine has been obtained or not
-define flg_KeyItem_YogurtMachine	= flag 988
-// Whether Show Ticket has been obtained or not
-define flg_KeyItem_ShowTicket		= flag 989
-
-// Whether followers are in your party or not
-define flg_King				= flag 990
-define flg_Tony				= flag 991
-define flg_FlyingMan			= flag 992
-define flg_TeddyBear			= flag 993
-define flg_PlushBear			= flag 994
-// Whether the Bicycle can't normally be used right now
-define flg_BikeCantNormallyBeUsed	= flag 995	// Test
-// Whether to close the main menu
-define flg_CloseMainMenu		= flag 996
-// Whether Ness has learned PSI yet
-define flg_LearnedPSI			= flag 997
-// Whether player is riding bike (with unrestricted bike enabled)
-define flg_RidingBike			= flag 998
-// Whether player is in Deep Darkness (to use hawk eye)
-define flg_InDeepDarkness		= flag 999
-// Jeff & Poo solo missions
-define flg_JeffSoloMission		= flag 1000	// 856
-define flg_PooSoloMission		= flag 1001	// 857
-define USED_ITEM_TEMP_FLAG		= flag 1002
-
-/* Original Game Flags */
-define flg_BuzzBuzz = flag 0x12
-define flg_DadCantCall_Original = flag 0x307
-define flg_PajamaNess = flag 0x2ED
-define flg_NoEnemies = flag 0x0B
-define flg_LightsOnAtHome = flag 0x205
-define flg_NoOnettNPCs = flag 0x20B
-define flg_UnshyTendas = flag 0x9B
-define flg_WintersDaytime = flag 0x1F1
-define flg_OnettDaytime = flag 0x1A6
-define flg_OnettDaytimeMusic = flag 0x68
-define flg_PaulaRescued = flag 0x00D
-define flg_OnettShackUnlocked = flag 0x6C
-define flg_RunawayFiveTwosonDebtPaid = flag 0x135
-define flg_ZombiePaperOnFloor = flag 0x07C
-define flg_ZombiePaperUsed = flag 0x07D
-define flg_Venus = flag 0x093
-define flg_FoursideSewerOpen = flag 0x03A
-define flg_CarrotKeyUsed = flag 0x28C
-define flg_PyramidOpen = flag 0x156
-define flg_UsedYogurtMachine = flag 0x08E // Trout Flavored Yogurt Machine given to Electra, activates elevator lady sprite 0×0365.
-define flg_ShynessBookReturned = flag 0x297
-define flg_DungeonManOpen = flag 0x25E
-define flg_HawkEyeUsed = flag 0x120
 
 /* Key Items */
 // 0x6C = Traveling Entertainer's Shack unlocked
-define flg_KeyItem_CarrotKey		= flag 1003
+define flg_KeyItem_CarrotKey		= flag 904
+
+// Flags up to 976 are item-related, don't touch!
+
+// Whether a party member is in the party (to prevent removing them all)
+define flg_Ness				= flag 781
+define flg_Paula			= flag 782
+define flg_Jeff				= flag 783
+define flg_Poo				= flag 784
+// Whether bike is unrestricted or not
+define flg_UnrestrictBike		= flag 785	// Test
+// Whether Key Item Menu is enabled
+define flg_KeyItems			= flag 786
+// Whether Backstage Pass has been obtained or not
+define flg_KeyItem_BackstagePass	= flag 787
+// Whether Trout Yogurt Machine has been obtained or not
+define flg_KeyItem_YogurtMachine	= flag 788
+// Whether Show Ticket has been obtained or not
+define flg_KeyItem_ShowTicket		= flag 789
+
+// Whether followers are in your party or not
+define flg_King				= flag 790
+define flg_Tony				= flag 791
+define flg_FlyingMan			= flag 792
+define flg_TeddyBear			= flag 793
+define flg_PlushBear			= flag 794
+// Whether the Bicycle can't normally be used right now
+define flg_BikeCantNormallyBeUsed	= flag 795
+// Whether Buzz Buzz has died
+define flg_BuzzBuzzDead			= flag 796
+// Whether Ness has learned PSI yet
+define flg_LearnedPSI			= flag 797
+// Whether player is riding bike (with unrestricted bike enabled)
+define flg_RidingBike			= flag 798
+// Whether player is in Deep Darkness (to use hawk eye)
+define flg_InDeepDarkness		= flag 799
+// Jeff & Poo solo missions
+define flg_JeffSoloMission		= flag 976	// 856
+define flg_PooSoloMission		= flag 977	// 857
+
+// Used for properly returning to the Main menu when selecting "Use" item from Key items
+define USED_ITEM_TEMP_FLAG		= flag 978
+
+/* Original Game Flags */
+define flg_BuzzBuzz			= flag 0x12
+define flg_DadCantCall_Original		= flag 0x307
+define flg_PajamaNess			= flag 0x2ED
+define flg_NoEnemies			= flag 0x0B
+define flg_LightsOnAtHome		= flag 0x205
+define flg_NoOnettNPCs			= flag 0x20B
+define flg_UnshyTendas			= flag 0x9B
+define flg_WintersDaytime		= flag 0x1F1
+define flg_OnettDaytime			= flag 0x1A6
+define flg_OnettDaytimeMusic		= flag 0x68
+define flg_PaulaRescued			= flag 0x00D
+define flg_OnettShackUnlocked		= flag 0x6C
+define flg_RunawayFiveTwosonDebtPaid	= flag 0x135
+define flg_ZombiePaperOnFloor		= flag 0x07C
+define flg_ZombiePaperUsed		= flag 0x07D
+define flg_Venus			= flag 0x093
+define flg_FoursideSewerOpen		= flag 0x03A
+define flg_CarrotKeyUsed		= flag 0x28C
+define flg_PyramidOpen			= flag 0x156
+define flg_UsedYogurtMachine		= flag 0x08E // Trout Flavored Yogurt Machine given to Electra, activates elevator lady sprite 0×0365.
+define flg_ShynessBookReturned		= flag 0x297
+define flg_DungeonManOpen		= flag 0x25E
+define flg_HawkEyeUsed			= flag 0x120

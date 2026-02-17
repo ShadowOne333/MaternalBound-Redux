@@ -53,18 +53,20 @@ compile_project:
 
 # Create the EBP patch based on the Project
 create_patch:
-	@echo
-	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
+# No more EBP patch. Only BPS will be used.
+#	@echo
+#	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
 
 # Create both additional BPS and IPS patches files
 create_both_patches:
 	@echo
-	@echo "Creating both BPS and IPS patches..."
+#	@echo "Creating both BPS and IPS patches..."
+	@echo "Creating BPS patch..."
 	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).bps"
 # IPS patches will no longer be made due to them not checking the base ROM for patching, causing glitches in wrong base ROMs
 #	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
 #	@echo; echo "BPS & IPS patches created successfully!"; echo
-	@echo; echo "BPS patch created successfully!"; echo
+	@echo
 
 # Finish the process
 finish:

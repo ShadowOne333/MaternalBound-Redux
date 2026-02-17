@@ -164,13 +164,14 @@ SetCount26: { counter(26) ctoarg eob }
 //   Main Key items ccscript code
 //------------------------------------
 KeyItems:
-_KeyItemsReturn:
 	unset(USED_ITEM_TEMP_FLAG)
 
 	copy_wram
 	save_text_window_state
 	window_open(INVENTORY_WINDOW)
 	title(0, KeyItems_Title)
+	pause(1)
+
 	copy_active
 	counter_zero
 	ctoarg
@@ -238,8 +239,10 @@ _KeyItemsReturn:
 			add_menu_option_with_callback("Bubble Gum Pak", SetCount26) }
 	}
 
+_Help_Backout:
 	print_vertical(2)
-	if not create_menu_in_window_cancellable(INVENTORY_WINDOW) {
+_UseHelp_Window_Backout:
+	if not create_menu_persist_cancellable {
 		// Exit
 		// Closing the windows is handled through ASM after returning from the Key items menu
 		eob
@@ -345,7 +348,7 @@ command use_help_submenu( itemID, help_text ) {
 	window_close(USE_HELP_WINDOW)
 	call(open_which_window)
 	window_switch(INVENTORY_WINDOW)
-	goto(_KeyItemsReturn)
+	goto(_UseHelp_Window_Backout)
 _use:
 	window_closetop
 	set(USED_ITEM_TEMP_FLAG)
@@ -362,7 +365,7 @@ _help:
 	window_close(USE_HELP_WINDOW)
 	call(open_which_window)
 	window_switch(INVENTORY_WINDOW)
-	goto(_KeyItemsReturn)
+	goto(_Help_Backout)
 }
 
 // Set the flag for the corresponding Key Item
@@ -371,7 +374,7 @@ command give_menu_key_item(itemID) {
 	call(keyitemcounter)
 
 	sound(SND_SPECIALITEM)
-	"@(The {itemname(itemID)} was added to your Key Items.)" next
+	"@(The {itemname(itemID)} was added to your Key items.)" next
 }
 
 keyitemcounter:

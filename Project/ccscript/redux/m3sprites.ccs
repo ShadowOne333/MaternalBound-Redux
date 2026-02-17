@@ -1,8 +1,8 @@
 import "../essential/asm65816.ccs"
-import "../redux/Bowspr.ccs"
-import "../redux/movscr_codes.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/jsl_rts.ccs"
+import "../redux/Bowspr.ccs"
+import "../redux/movscr_codes.ccs"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,69 +18,69 @@ import "../essential/jsl_rts.ccs"
 // Note that this resets Bowspr and could be not ideal.
 
 // We use two bytes of free RAM to access the action scripts (it's just a lot easier this way).
-define free_ram =            0x3260        // Since it's two bytes, 0x3251 would also be used, although it's always 0.
+define free_ram =	0x3260	// Since it's two bytes, 0x3251 would also be used, although it's always 0.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-define mc1_sprite =            1                    // Default sprite group to show for main character 1 (a.k.a. Ness).
-define mc1_altsprite1 =        6                    // Alternative sprites, these will show instead of the default one if the correct event flag is set.
-define mc1_altsprite2 =        5
-define mc1_altsprite3 =        1
+define mc1_sprite =	1	// Default sprite group to show for main character 1 (a.k.a. Ness).
+define mc1_altsprite1 =	6	// Alternative sprites, these will show instead of the default one if the correct event flag is set.
+define mc1_altsprite2 =	5
+define mc1_altsprite3 =	1
 
-define mc2_sprite =            2                    // Default sprite group to show for main character 2 (a.k.a. Paula).
-define mc2_altsprite1 =        343 //25
-define mc2_altsprite2 =        2
-define mc2_altsprite3 =        2
+define mc2_sprite =	2	// Default sprite group to show for main character 2 (a.k.a. Paula).
+define mc2_altsprite1 =	343 //25
+define mc2_altsprite2 =	2
+define mc2_altsprite3 =	2
 
-define mc3_sprite =            3                    // Default sprite group to show for main character 3 (a.k.a. Jeff).
-define mc3_altsprite1 =        355 // 25
-define mc3_altsprite2 =        3
-define mc3_altsprite3 =        3
+define mc3_sprite =	3	// Default sprite group to show for main character 3 (a.k.a. Jeff).
+define mc3_altsprite1 =	355 // 25
+define mc3_altsprite2 =	3
+define mc3_altsprite3 =	3
 
-define mc4_sprite =            4                    // Default sprite group to show for main character 4 (a.k.a. Poo).
-define mc4_altsprite1 =        457 // 25
-define mc4_altsprite2 =        4
-define mc4_altsprite3 =        4
+define mc4_sprite =	4	// Default sprite group to show for main character 4 (a.k.a. Poo).
+define mc4_altsprite1 =	457	// 25
+define mc4_altsprite2 =	4
+define mc4_altsprite3 =	4
 
 // Flags: priority is flag 1, then flag 2, then flag 3.
 // So, for example, if flag 1 is set, altsprite1 will be used, ignoring the states of flags 2 and 3.
 // All three flags must be unset for the default sprite to be used.
 
-define mc1_flag1 =            978                    // Ness in Magicant (custom event flag, see code below).
-define mc1_flag2 =            979                    // Party in Cave of the Past (custom event flag, see code below).
-define mc1_flag3 =            980
+define mc1_flag1 =	978	// Ness in Magicant (custom event flag, see code below).
+define mc1_flag2 =	979	// Party in Cave of the Past (custom event flag, see code below).
+define mc1_flag3 =	980
 
-define mc2_flag1 =            979
-define mc2_flag2 =            980
-define mc2_flag3 =            980
+define mc2_flag1 =	979
+define mc2_flag2 =	980
+define mc2_flag3 =	980
 
-define mc3_flag1 =            979
-define mc3_flag2 =            980
-define mc3_flag3 =            980
+define mc3_flag1 =	979
+define mc3_flag2 =	980
+define mc3_flag3 =	980
 
-define mc4_flag1 =            979
-define mc4_flag2 =            980
-define mc4_flag3 =            980
+define mc4_flag1 =	979
+define mc4_flag2 =	980
+define mc4_flag3 =	980
 
 // These ones control the y and x positions.
 // They are adjusted for 16x24 sprites.
-define y_pos =                168
+define y_pos =		168
 
-define x0_pos =                45
-define x1_pos =                78
-define x2_pos =                101
-define x3_pos =                133
-define x4_pos =                157
-define x5_pos =                189
-define x6_pos =                213
+define x0_pos =		45
+define x1_pos =		78
+define x2_pos =		101
+define x3_pos =		133
+define x4_pos =		157
+define x5_pos =		189
+define x6_pos =		213
 
 // Default direction and animation frame to use for the sprites.
-define direction =            4
-define anim_frame =            0
+define direction =	4
+define anim_frame =	0
 
 // Direction and animation frame to use for the sprites in the "YOU WON" screen.
-define yw_direction =        4
-define yw_anim_frame =        0
+define yw_direction =	4
+define yw_anim_frame =	0
 
 // Use cc_asmcall(m3sbs_reset,RET_NONE) to update sprites/party member configuration mid-battle. Note that this resets Bowspr.
 
@@ -102,21 +102,50 @@ ROM[0xC2C3A4] = JSL (giygas_fix_2)
 ROM[0xC2C75B] = JSL (giygas_fix_3)
 
 giygas_fix_1:
-    JSL (0xC1DC1C) JSL (ASM_BowsprEnd) JSL (m3sbs_reset) RTL
+    JSL (0xC1DC1C)
+    JSL (ASM_BowsprEnd)
+    JSL (m3sbs_reset)
+    RTL
+
 giygas_fix_2:
-    JSL (0xC1DD5F) PHD PHX PHA JSL (ASM_BowsprEnd) JSL (m3sbs_reset) PLA PLX PLD RTL
+    JSL (0xC1DD5F)
+    PHD
+    PHX
+    PHA
+    JSL (ASM_BowsprEnd)
+    JSL (m3sbs_reset)
+    PLA
+    PLX
+    PLD
+    RTL
+
 giygas_fix_3:
-    JSL (0xC1DD41) PHD PHX PHA JSL (ASM_BowsprEnd) JSL (m3sbs_reset) PLA PLX PLD RTL
+    JSL (0xC1DD41)
+    PHD
+    PHX
+    PHA
+    JSL (ASM_BowsprEnd)
+    JSL (m3sbs_reset)
+    PLA
+    PLX
+    PLD
+    RTL
 
 // Fix for the fight against Master Barf, when Poo comes back to the party.
 ROM[0xC29302] = JSL (barf_fix_1)
 ROM[0xC29388] = JSL (barf_fix_2)
 
 barf_fix_1:
-    PHD JSL (ASM_BowsprEnd) PLD JSL (0xC1DD41) RTL
+    PHD
+    JSL (ASM_BowsprEnd)
+    PLD
+    JSL (0xC1DD41)
+    RTL
 
 barf_fix_2:
-    JSL (0xC1DC1C) JSL (m3sbs_init) RTL
+    JSL (0xC1DC1C)
+    JSL (m3sbs_init)
+    RTL
 
 // Fixes related to temporal party members messing with Bowspr and crashing the game (teddy bears + flying men).
 ROM[0xC229FF] = JSL (tpm_hijack_1)
@@ -136,7 +165,7 @@ tpm_hijack_1: {
     JSL (0xC03903)            // Original JSL.
     JSL (m3sbs_init)
     RTL
-    _ow:
+_ow:
     PLA
     JSL (0xC03903)
     RTL
@@ -151,7 +180,12 @@ tpm_hijack_2: {
 
 // Avoid updating teddy bears immediately if the item is received as a battle reward.
 ROM[0xC18B80] = JML(special_fix_1)
-    special_fix_1: { LDA_a (0x9643) BNE( 4) JSL (0xC216DB) JML (0xC18B84) }
+special_fix_1: {
+    LDA_a (0x9643)
+    BNE( 4)
+    JSL (0xC216DB)
+    JML (0xC18B84)
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -247,7 +281,10 @@ ROM[0xC2026E] = LDY_i (0x80B2)
 ROM[0xC20295] = LDY_i (0x80B2)
 
 // We remove the blinking effect when a member is hit.
-ROM[0xC2DD9A] = {BRA(0) BRA(0)}        // Faster that 4 NOP's.
+ROM[0xC2DD9A] = {	// Faster that 4 NOP's.
+    BRA(0)
+    BRA(0)
+}
 
 // We hijack the JSL's at Battle_RaiseHPBox and Battle_LowerHPBox to call our new functions (this is necessary due to the way I'm controlling the action scripts).
 ROM[0xC1DDCE] = JSL (new_raise_routine)
@@ -307,11 +344,48 @@ you_won_hj: {
 }
 
 you_won_ram_set: {
-    LDA_a (free_ram) ORA_i (32) STA_a (free_ram)
-    LDA_a (RAM_BS_STATUS_0) CMP_i (0x0001) BEQ (17) LDA_a (RAM_BS_STATUS_0) CMP_i (0x0002) BEQ (9) LDA_a (free_ram) ORA_i (1) STA_a (free_ram)
-    LDA_a (RAM_BS_STATUS_1) CMP_i (0x0001) BEQ (17) LDA_a (RAM_BS_STATUS_1) CMP_i (0x0002) BEQ (9) LDA_a (free_ram) ORA_i (2) STA_a (free_ram)
-    LDA_a (RAM_BS_STATUS_2) CMP_i (0x0001) BEQ (17) LDA_a (RAM_BS_STATUS_2) CMP_i (0x0002) BEQ (9) LDA_a (free_ram) ORA_i (8) STA_a (free_ram)
-    LDA_a (RAM_BS_STATUS_3) CMP_i (0x0001) BEQ (17) LDA_a (RAM_BS_STATUS_3) CMP_i (0x0002) BEQ (9) LDA_a (free_ram) ORA_i (4) STA_a (free_ram)
+    LDA_a (free_ram)
+    ORA_i (32)
+    STA_a (free_ram)
+    LDA_a (RAM_BS_STATUS_0)
+    CMP_i (0x0001)
+    BEQ (17)
+    LDA_a (RAM_BS_STATUS_0)
+    CMP_i (0x0002)
+    BEQ (9)
+    LDA_a (free_ram)
+    ORA_i (1)
+    STA_a (free_ram)
+
+    LDA_a (RAM_BS_STATUS_1)
+    CMP_i (0x0001)
+    BEQ (17)
+    LDA_a (RAM_BS_STATUS_1)
+    CMP_i (0x0002)
+    BEQ (9)
+    LDA_a (free_ram)
+    ORA_i (2)
+    STA_a (free_ram)
+
+    LDA_a (RAM_BS_STATUS_2)
+    CMP_i (0x0001)
+    BEQ (17)
+    LDA_a (RAM_BS_STATUS_2)
+    CMP_i (0x0002)
+    BEQ (9)
+    LDA_a (free_ram)
+    ORA_i (8)
+    STA_a (free_ram)
+
+    LDA_a (RAM_BS_STATUS_3)
+    CMP_i (0x0001)
+    BEQ (17)
+    LDA_a (RAM_BS_STATUS_3)
+    CMP_i (0x0002)
+    BEQ (9)
+    LDA_a (free_ram)
+    ORA_i (4)
+    STA_a (free_ram)
     RTL
 }
 
@@ -340,38 +414,94 @@ m3sbs_3: {
 
 // Common action script subroutine.
 m3sbs_main: {
-    m_get_mem16(RAM_BGMODE_MIRROR) m_and_result(1) m_jeq(p_mode0)
-    p_mode1: m_onposition(0xA055) m_jmp(d_continue)
-    p_mode0: m_onposition(0xA023)
+    m_get_mem16(RAM_BGMODE_MIRROR)
+    m_and_result(1)
+    m_jeq(p_mode0)
 
-    d_continue:
+p_mode1:
+    m_onposition(0xA055)
+    m_jmp(d_continue)
+p_mode0:
+    m_onposition(0xA023)
+
+d_continue:
     m_get_var1
     
     m_multijmp(7)
-        short use_x0
-        short use_x1
-        short use_x2
-        short use_x3
-        short use_x4
-        short use_x5
-        short use_x6
+	short use_x0
+	short use_x1
+	short use_x2
+	short use_x3
+	short use_x4
+	short use_x5
+	short use_x6
         
-    use_x0: m_set_xpos(x0_pos) m_jmp(d_end)
-    use_x1: m_set_xpos(x1_pos) m_jmp(d_end)
-    use_x2: m_set_xpos(x2_pos) m_jmp(d_end)
-    use_x3: m_set_xpos(x3_pos) m_jmp(d_end)
-    use_x4: m_set_xpos(x4_pos) m_jmp(d_end)
-    use_x5: m_set_xpos(x5_pos) m_jmp(d_end)
-    use_x6: m_set_xpos(x6_pos) m_jmp(d_end)
+use_x0:
+    m_set_xpos(x0_pos)
+    m_jmp(d_end)
+use_x1:
+    m_set_xpos(x1_pos)
+    m_jmp(d_end)
+use_x2:
+    m_set_xpos(x2_pos)
+    m_jmp(d_end)
+use_x3:
+    m_set_xpos(x3_pos)
+    m_jmp(d_end)
+use_x4:
+    m_set_xpos(x4_pos)
+    m_jmp(d_end)
+use_x5:
+    m_set_xpos(x5_pos)
+    m_jmp(d_end)
+use_x6:
+    m_set_xpos(x6_pos)
+    m_jmp(d_end)
     
-    d_end:
-    m_priority(0) m_set_var0(1) m_set_facing_anim(direction,anim_frame) m_set_anim(-1)
+d_end:
+    m_priority(0)
+    m_set_var0(1)
+    m_set_facing_anim(direction,anim_frame)
+    m_set_anim(-1)
     
-    lower: m_set_yvel(512) m_pause(8) m_set_yvel(0) m_set_anim(-1)
-    loop1: m_pause(1) m_asmcall(var2_and_free_ram) m_jne(raise) m_jmp(loop1)
-    raise: m_set_anim(anim_frame) m_set_ypos(y_pos) m_set_yvel(-512) m_pause(4) m_loop(4) m_pause(1) m_asmcall(var2_and_free_ram) m_jeq(lower) m_endloop m_set_yvel(0)
-    loop2: m_pause(1) m_get_mem16(free_ram) m_and_result(32) m_jne(you_won) m_asmcall(var2_and_free_ram) m_jeq(lower) m_jmp(loop2)
-    you_won: m_set_facing_anim(yw_direction,yw_anim_frame) m_halt
+lower:
+    m_set_yvel(512)
+    m_pause(8)
+    m_set_yvel(0)
+    m_set_anim(-1)
+
+loop1: 
+    m_pause(1)
+    m_asmcall(var2_and_free_ram)
+    m_jne(raise)
+    m_jmp(loop1)
+
+raise: 
+    m_set_anim(anim_frame)
+    m_set_ypos(y_pos)
+    m_set_yvel(-512)
+    m_pause(4)
+
+    m_loop(4)
+	m_pause(1)
+	m_asmcall(var2_and_free_ram)
+	m_jeq(lower)
+    m_endloop
+
+    m_set_yvel(0)
+
+loop2: 
+    m_pause(1)
+    m_get_mem16(free_ram)
+    m_and_result(32)
+    m_jne(you_won)
+    m_asmcall(var2_and_free_ram)
+    m_jeq(lower)
+    m_jmp(loop2)
+
+you_won:
+    m_set_facing_anim(yw_direction,yw_anim_frame)
+    m_halt
 }
 
 // ASM subroutine for SCR_RESULT = VAR2 && free_ram.
@@ -391,7 +521,7 @@ m3sbs_create: {
     JSL (m3sbs_sprite_detect)
     BNE_a (c_continue) PLY RTL
 
-    c_continue:
+c_continue:
     JSL (ASM_BowsprCreateEntity)
     TYX
     
@@ -429,7 +559,7 @@ m3sbs_sprite_detect: {
     LDA_i (0)
     BRA_a (d_end)
 
-    mc1:
+mc1:
     LDA_a(0xA97A)
     BNE_a(mc1_use_robot_sprite)
 
@@ -439,15 +569,18 @@ m3sbs_sprite_detect: {
     CMP_i(5)
     BEQ_a(mc1_use_robot_sprite)
     // Use normal sprite.
-    LDA_i (mc1_sprite) BRA_a (d_end)
+    LDA_i (mc1_sprite)
+    BRA_a (d_end)
 
-    mc1_use_magicant_sprite:
-    LDA_i (mc1_altsprite1) BRA_a (d_end)
+mc1_use_magicant_sprite:
+    LDA_i (mc1_altsprite1)
+    BRA_a (d_end)
 
-    mc1_use_robot_sprite:
-    LDA_i (mc1_altsprite2) BRA_a (d_end)
+mc1_use_robot_sprite:
+    LDA_i (mc1_altsprite2)
+    BRA_a (d_end)
     
-    mc2:
+mc2:
     LDA_a(0xA97A)
     BNE_a(mc2_use_robot_sprite)
 
@@ -455,12 +588,14 @@ m3sbs_sprite_detect: {
     CMP_i(5)
     BEQ_a(mc2_use_robot_sprite)
     // Use normal sprite.
-    LDA_i (mc2_sprite) BRA_a (d_end)
+    LDA_i (mc2_sprite)
+    BRA_a (d_end)
 
-    mc2_use_robot_sprite:
-    LDA_i (mc2_altsprite1) BRA_a (d_end)
+mc2_use_robot_sprite:
+    LDA_i (mc2_altsprite1)
+    BRA_a (d_end)
 
-    mc3:
+mc3:
     LDA_a(0xA97A)
     BNE_a(mc3_use_robot_sprite)
 
@@ -468,12 +603,14 @@ m3sbs_sprite_detect: {
     CMP_i(5)
     BEQ_a(mc3_use_robot_sprite)
     // Use normal sprite.
-    LDA_i (mc3_sprite) BRA_a (d_end)
+    LDA_i (mc3_sprite)
+    BRA_a (d_end)
 
-    mc3_use_robot_sprite:
-    LDA_i (mc3_altsprite1) BRA_a (d_end)
+mc3_use_robot_sprite:
+    LDA_i (mc3_altsprite1)
+    BRA_a (d_end)
     
-    mc4:
+mc4:
     LDA_a(0xA97A)
     BNE_a(mc4_use_robot_sprite)
 
@@ -481,12 +618,14 @@ m3sbs_sprite_detect: {
     CMP_i(5)
     BEQ_a(mc4_use_robot_sprite)
     // Use normal sprite.
-    LDA_i (mc4_sprite) BRA_a (d_end)
+    LDA_i (mc4_sprite)
+    BRA_a (d_end)
 
-    mc4_use_robot_sprite:
-    LDA_i (mc4_altsprite1) BRA_a (d_end)
+mc4_use_robot_sprite:
+    LDA_i (mc4_altsprite1)
+    BRA_a (d_end)
     
-    d_end:
+d_end:
     RTL
 }
 
@@ -506,16 +645,36 @@ m3sbs_init: {
     JSL (ASM_BowsprBegin)
 
     // Load the correct value into Y, which will be used as the x_pos for the first character.
-    LDA_a (RAM_CONTROLLED_MEMBERS) CMP_i (1) BNE (6) LDY_i (3) BRA_a (i_start)
-    LDA_a (RAM_CONTROLLED_MEMBERS) CMP_i (2) BNE (6) LDY_i (2) BRA_a (i_start)
-    LDA_a (RAM_CONTROLLED_MEMBERS) CMP_i (3) BNE (6) LDY_i (1) BRA_a (i_start)
+    LDA_a (RAM_CONTROLLED_MEMBERS)
+    CMP_i (1)
+    BNE (6)
+    LDY_i (3)
+    BRA_a (i_start)
+    LDA_a (RAM_CONTROLLED_MEMBERS)
+    CMP_i (2)
+    BNE (6)
+    LDY_i (2)
+    BRA_a (i_start)
+    LDA_a (RAM_CONTROLLED_MEMBERS)
+    CMP_i (3)
+    BNE (6)
+    LDY_i (1)
+    BRA_a (i_start)
     LDY_i (0)
     
-    i_start:
-    LDX_a (RAM_BS_CHAR_0) ASMLoadAddress0E (m3sbs_0) JSL (m3sbs_create)
-    LDX_a (RAM_BS_CHAR_1) ASMLoadAddress0E (m3sbs_1) JSL (m3sbs_create)
-    LDX_a (RAM_BS_CHAR_2) ASMLoadAddress0E (m3sbs_2) JSL (m3sbs_create)
-    LDX_a (RAM_BS_CHAR_3) ASMLoadAddress0E (m3sbs_3) JSL (m3sbs_create)
+i_start:
+    LDX_a (RAM_BS_CHAR_0)
+    ASMLoadAddress0E (m3sbs_0)
+    JSL (m3sbs_create)
+    LDX_a (RAM_BS_CHAR_1)
+    ASMLoadAddress0E (m3sbs_1)
+    JSL (m3sbs_create)
+    LDX_a (RAM_BS_CHAR_2)
+    ASMLoadAddress0E (m3sbs_2)
+    JSL (m3sbs_create)
+    LDX_a (RAM_BS_CHAR_3)
+    ASMLoadAddress0E (m3sbs_3)
+    JSL (m3sbs_create)
     
     RTL
 }
