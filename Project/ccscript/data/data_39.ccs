@@ -9,17 +9,19 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
-import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
+import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc8125d:
-    "@I guess I was just too hopeful.{pause(20)}  Oh well, never mind." end
+    "@I guess I was just too hopeful." pause(20)
+    "  Oh well, never mind." end
 
 l_0xc81286:
-    "@Oh goody!{pause(20)}  Would it be okay to get $200 to buy materials?" linebreak
+    "@Oh goody!" pause(20)
+    "  Would it be okay to get $200 to buy materials?" linebreak
     "[19 02]Yes" eob
 
 l_0xc812b5:
@@ -34,37 +36,56 @@ l_0xc812d1:
 l_0xc812e6:
     "@Thank you very much!" next
     "@Your support should have a tremendous impact on all mankind." next
-    "{set(flag 117)}" goto(l_0xc81318)
+    set(FLG_TWSN_ORANGE_THANKS)	// 117
+    goto(l_0xc81318)
 
 l_0xc81318:
-    "[06 26 02 {e(l_0xc81418)}]@Let me give you my new <Super Orange Machine.>" next
-    "@I call it <[1C 05 CC]> for short." next
-    "[1D 03 FF][1B 02 {e(l_0xc81392)}][1D 0E 00 CC]" call(data_36.l_0xc7dccf) "{set(flag 550)}" next
+    "[06 26 02 {e(l_0xc81418)}]"
+    "@Let me give you my new <Super Orange Machine.>" next
+    // Suporma, item 0xCC, 204
+    "@I call it <{itemname(204)}> for short." next
+    char_inventory_vacancy(-1)
+    goto_if_false(l_0xc81392)
+    give_and_check(0, 204)	// 0xCC, 204, Suporma
+    call(data_36.l_0xc7dccf)
+    set(FLG_ITEM_GREATORANGE)	// 550
+    next
     "@Please use it for spreading peace and goodwill on Earth." end
 
 l_0xc81392:
-    "@Ah ha!{pause(20)}  You have too many items." next
-    "@I hope you'll accept the [1C 05 CC],{pause(15)} even if you have to toss some of your food..." end
+    "@Ah ha!" pause(20)
+    "  You have too many items." next
+    // Suporma, item 0xCC, 204
+    "@I hope you'll accept the {itemname(204)}," pause(15)" even if you have to toss some of your food..." end
 
 l_0xc813d4:
-    "@What?!{pause(15)}  You don't have that much money?" next
+    "@What?!" pause(15)
+    "  You don't have that much money?" next
     "@Well, perhaps you shouldn't be yappin' about having cash then,{pause(15)} buddy." end
 
 l_0xc81418:
     title(1, Orange)
-    "{isset(flag 550)}[1B 02 {e(l_0xc81318)}][06 74 00 {e(l_0xc81475)}]"
-    "@I'm hard at work... don't worry,{pause(15)} my brilliant invention will be ready soon." next
-    "@Okay, okay...{pause(20)}  I'll get back to work!{wait}{set(flag 116)}" eob
+    isset(FLG_ITEM_GREATORANGE)	// 550
+    goto_if_false(l_0xc81318)
+    goto_if_flag(FLG_TWSN_ORANGE_LATER, l_0xc81475)	// 0x74, 116
+    "@I'm hard at work... don't worry," pause(15) " my brilliant invention will be ready soon." next
+    "@Okay, okay..." pause(20)
+    "  I'll get back to work!" wait
+    set(FLG_TWSN_ORANGE_LATER)	// 116
+    eob
 
 l_0xc81475:
     "@I'm having more trouble than I expected." next
-    "@I found a problem in one of Einstein's theories...{wait}{unset(flag 116)}" eob
+    "@I found a problem in one of Einstein's theories..." wait
+    unset(FLG_TWSN_ORANGE_LATER)	// 116
+    eob
 
 l_0xc814b9:
     title(1, Orange)
     "@You didn't invest any money in my venture," next
     "@but someone else donated a few million bucks,{pause(15)} so everything is great." next
     "@So would you like to invest,{pause(10)} say,{pause(15)} 50 bucks?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc81528:
@@ -74,7 +95,7 @@ l_0xc8152e:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc81585)} {e(l_0xc8153d)}]" goto(l_0xc8153d)
 
 l_0xc8153d:
-    "@Oh,{pause(15)} I'm sorry to hear that." next
+    "@Oh," pause(15) " I'm sorry to hear that." next
     "@...And you never heard how much money I got, too.{pause(15)}  Right? *wink* *wink*..." end
 
 l_0xc81585:
@@ -82,53 +103,114 @@ l_0xc81585:
 
 l_0xc8159f:
     title(1, Orange)
-    "[06 75 00 {e(l_0xc815f9)}]@Well, you never invested in my genius,{pause(15)} did you?" next
+    goto_if_flag(FLG_TWSN_ORANGE_THANKS, l_0xc815f9)	// 0x75, 117
+    "@Well, you never invested in my genius," pause(15) " did you?" next
     "@You had no idea of what I could do..." next
     "@*chortle*" next
     "@You sorry loser." end
 
 l_0xc815f9:
     "@Did you come here to get your investment money back?" next
-    "@No?{pause(15)}  Can you wait a little longer?" next
+    "@No?" pause(15)
+    "  Can you wait a little longer?" next
     "@I promise I'll finish my brilliant invention." next
-    "@I rely on your support,{pause(15)} even though I am a super genius." end
+    "@I rely on your support," pause(15) " even though I am a super genius." end
 
 l_0xc81676:
-    "[06 52 00 {e(l_0xc818f1)}][06 70 00 {e(l_0xc818b9)}][06 27 02 {e(l_0xc81915)}]@Well,{pause(15)} I have sort of neglected doing my housework..." next
-    "@I know it's a bit of a pigsty,{pause(15)} but anyway..." next
+    goto_if_flag(FLG_ITEM_PHONE, l_0xc818f1)	// 0x52, 82
+    goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc818b9)	// 0x70, 112
+    goto_if_flag(FLG_TWSN_APPLE_FOOD, l_0xc81915)	// 0x0227, 551
+    "@Well," pause(15) " I have sort of neglected doing my housework..." next
+    "@I know it's a bit of a pigsty," pause(15) " but anyway..." next
     "@I'm Apple Kid." next
     title(1, Apple)
-    "@I haven't taken a bath in quite a while,{pause(15)} so I may be kind of stinky." next
-    "{pause(60)}@By the way,{pause(15)} I'm starving.{pause(20)}  Do you have something to eat?" next
+    "@I haven't taken a bath in quite a while," pause(15) " so I may be kind of stinky." next
+    pause(60)
+    "@By the way," pause(15) " I'm starving." pause(20)
+    "  Do you have something to eat?" next
     "@If you do,{pause(15)} can I have some?" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc81789)} {e(l_0xc81751)}]" goto(l_0xc81751)
+    call(data_36.l_0xc7dd4f)	// two_choice_menu
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc81789
+	long l_0xc81751
+    })
+    goto(l_0xc81751)
 
 l_0xc81751:
-    "@Well, go ahead and make yourself comfortable anyway.{pause(15)}  You can flop down anywhere." goto(l_0xc81913)
+    "@Well, go ahead and make yourself comfortable anyway." pause(15)
+    "  You can flop down anywhere."
+    goto(l_0xc81913)
 
 l_0xc81789:
-    "@What can you give me?[03]{open_hp}" call(data_15.l_0xc5e456) newline
-    "[1B 02 {e(l_0xc81751)}]{store_registers}[19 19 00 00][1D 02 03][1B 03 {e(l_0xc817dc)}]@Please choose something edible... I'm not a garbage can, you know." goto(l_0xc81913)
+    "@What can you give me?" promptw
+    open_hp
+    call(data_15.l_0xc5e456)
+    newline
+    goto_if_false(l_0xc81751)
+    store_registers
+    return_item_in_slot(0, 0)
+    item_type_check(3)	// Edible
+    goto_if_true(l_0xc817dc)
+    "@Please choose something edible... I'm not a garbage can, you know."
+    goto(l_0xc81913)
 
 l_0xc817dc:
-    "{load_registers}[1D 0F 00 00]{sound(118)}{pause(1)}@Thanks.{pause(20)}  You seem very nice.{pause(20)}  Uh,{pause(15)} I wonder if..." next
-    "{set(flag 551)}" goto(l_0xc8180c)
+    load_registers
+    take_slot(0, 0)
+    sound(SND_CHICKEN2)	// 118
+    pause(1)
+    "@Thanks." pause(20)
+    "  You seem very nice." pause(20)
+    "  Uh," pause(15) " I wonder if..." next
+    set(FLG_TWSN_APPLE_FOOD)	// 551
+    goto(l_0xc8180c)
 
 l_0xc8180c:
     "@Maybe you would like to invest some money in my inventions?" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc81848)} {e(l_0xc81751)}]" goto(l_0xc81751)
+    call(data_36.l_0xc7dd4f)	// two_choice_menu
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc81848
+	long l_0xc81751
+    })
+    goto(l_0xc81751)
 
 l_0xc81848:
-    "@Yes!{pause(15)}  Yes!{pause(15)}  Yes!  Oh.{pause(20)}  Excuse me.  I mean thank you!" next
+    "@Yes!" pause(15)
+    "  Yes!" pause(15)
+    "  Yes!  Oh." pause(20)
+    "  Excuse me.  I mean thank you!" next
     "@By the way, I could really use $200." next
-    call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc818a2)} {e(l_0xc81751)}]" goto(l_0xc81751)
+    call(data_36.l_0xc7dd4d)	// two_choice_menu
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc818a2
+	long l_0xc81751
+    })
+    goto(l_0xc81751)
 
 l_0xc818a2:
-    "[1D 14 C8 00 00 00][1B 03 {e(l_0xc818dd)}][1D 09 C8 00]{open_wallet}{sound(118)}{pause(1)}" goto(l_0xc818b9)
+    amount_costs_too_much(200)	// long 0xC8
+    goto_if_true(l_0xc818dd)
+    takemoney(200)	// 0xC8
+    open_wallet
+    sound(SND_CHICKEN2)	// 118
+    pause(1)
+    goto(l_0xc818b9)
 
 l_0xc818b9:
     title(1, Apple)
-    "@Thank you.{pause(20)}  I won't let you down.{wait}{window_closeall}{set(flag 112)}{set(flag 294)}[1F 41 05]" goto(data_33.l_0xc79028)
+    "@Thank you." pause(20)
+    "  I won't let you down." wait
+    window_closeall
+    set(FLG_TWSN_APPLE_THANKS)	// 112
+    set(FLG_WARP_APPLE_TWSN)	// 294
+    OSS_on	// special_event(5)
+    goto(data_33.l_0xc79028)
 
 l_0xc818dc:
     eob
@@ -139,7 +221,8 @@ l_0xc818dd:
 
 l_0xc818f1:
     title(1, Apple)
-    "@Maybe you shouldn't spend too much time wandering around Twoson." goto(l_0xc81913)
+    "@Maybe you shouldn't spend too much time wandering around Twoson."
+    goto(l_0xc81913)
 
 l_0xc81913:
     end
@@ -150,32 +233,64 @@ l_0xc81915:
     goto(l_0xc8180c)
 
 l_0xc81934:
-    "{unset(flag 294)}[06 52 00 {e(l_0xc81945)}][06 70 00 {e(l_0xc81970)}]" goto(l_0xc81945)
+    unset(FLG_WARP_APPLE_TWSN)	// 294
+    goto_if_flag(FLG_ITEM_PHONE, l_0xc81945)	// 0x52, 82
+    goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc81970)	// 0x70, 112
+    goto(l_0xc81945)
 
 l_0xc81945:
-    "@I am a mouse.{pause(20)}  As yet I have no name.[06 04 00 {e(l_0xc819f1)}]" end
+    "@I am a mouse." pause(20)
+    "  As yet I have no name."
+    goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
 
 l_0xc81970:
-    "[1F 41 06]@I am a mouse.{pause(20)}  As yet I have no name." next
+    OSS_off	// special_event(6)
+    "@I am a mouse." pause(20)
+    "  As yet I have no name." next
     "@You took care of my master." next
-    "@In return,{pause(15)} I want to give you this.{pause(20)}  Please take it and say nothing.[03][1D 03 FF][1B 02 {e(l_0xc81a26)}][1D 0E 00 B5]" call(data_36.l_0xc7dcb6) "{set(flag 82)}[06 04 00 {e(l_0xc819f1)}]" end
+    "@In return," pause(15) " I want to give you this." pause(20)
+    "  Please take it and say nothing." promptw
+    if flag flg_KeyItems {
+        give_menu_key_item(RECEIVER_PHONE) }
+    else {
+	char_inventory_vacancy(-1)	// 0xFF
+	goto_if_false(l_0xc81a26)
+	give_and_check(0, RECEIVER_PHONE)	// 0xB5, 181, Receiver phone
+	call(data_36.l_0xc7dcb6) }
+    set(FLG_ITEM_PHONE)	// 82, already set by give_menu_key_item?
+    goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
 
 l_0xc819f1:
     next
-    "@Oh! {pause(20)} I must be in your way!{pause(10)} *zziipp!*[03]{window_closeall}" call(l_0xc81a5d) call(data_33.l_0xc79034) "{unset(flag 294)}{unset(flag 4)}" eob
+    "@Oh!" pause(20) "  I must be in your way!" pause(10) " *zziipp!*" promptw
+    window_closeall
+    call(l_0xc81a5d)
+    call(data_33.l_0xc79034)
+    unset(FLG_WARP_APPLE_TWSN)	// 294
+    unset(FLG_TEMP_3)	// 4
+    eob
 
 l_0xc81a26:
-    "{pause(60)}" linebreak
-    "@Unfortunately,{pause(15)} you have too many items.{pause(20)}  Therefore, I can't give this to you.[06 04 00 {e(l_0xc819f1)}]" end
+    pause(60) linebreak
+    "@Unfortunately," pause(15) " you have too many items." pause(20)
+    "  Therefore, I can't give this to you."
+    goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
 
 l_0xc81a5d:
     "[19 22 FF 02 DE 00]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc81a84)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc81a84)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc81a84)}]" eob
 
 l_0xc81a84:
-    "{set(flag 522)}" eob
+    set(FLG_ANIM_PORT_0)	// 522
+    eob
 
 l_0xc81a88:
-    "[06 D3 00 {e(l_0xc81ac4)}][06 02 00 {e(l_0xc81b04)}][06 77 00 {e(l_0xc81ade)}][19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]@Hello,{pause(15)} please present your ticket." next //end
+    goto_if_flag(FLG_TLPT_THRK, l_0xc81ac4)	// 0xD3, 211
+    goto_if_flag(FLG_TEMP_1, l_0xc81b04)	// 0x02, 2
+    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81ade)	// 0x77, 119
+    return_direction_char_to_object(-1, 2, 226)	// 0xFF, 0x02, 0x00E2
+    call(data_36.l_0xc7dc9b)
+    goto_if_false(l_0xc81ade)
+    "@Hello," pause(15) " please present your ticket." next //end
     if flag flg_KeyItems and flag flg_KeyItem_BackstagePass
     {
         goto(chaostheaterticket)
@@ -183,13 +298,20 @@ l_0xc81a88:
     eob
 
 l_0xc81ac4:
-    "@Sorry,{pause(15)} the show is on hold for a while." end
+    "@Sorry," pause(15) " the show is on hold for a while." end
 
 l_0xc81ade:
-    "@Oh, pardon me.[03]{window_closeall}[06 77 00 {e(l_0xc81afb)}]" call(data_33.l_0xc7921a) "{set(flag 2)}" eob
+    "@Oh, pardon me." promptw
+    window_closeall
+    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81afb)	// 0x77, 119
+    call(data_33.l_0xc7921a)
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc81afb:
-    call(data_33.l_0xc79211) "{set(flag 2)}" eob
+    call(data_33.l_0xc79211)
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc81b04:
     "@See you." end
@@ -205,7 +327,9 @@ l_0xc81b50:
 
 chaostheaterticket:
     sound(SND_CHICKEN2)	// 118
-    "@Here you go.{pause(15)}  Hurry!{pause(20)}  You're just in time to see the Runaway Five show!" promptw
+    "@Here you go." pause(15)
+    "  Hurry!" pause(20)
+    "  You're just in time to see the Runaway Five show!" promptw
     call(data_33.l_0xc79211)
     set(FLG_TWSN_FIELD_TONZ_DISAPPEAR)	// 549
     set(FLG_TEMP_1)	// 2
@@ -218,16 +342,17 @@ l_0xc81baf:
     "@How do you do?" end
 
 l_0xc81bb8:
-    "@Oh, here you are!{pause(20)}  Hurry up, you're just in time to see the Runaway Brothers show." promptw
+    "@Oh, here you are!" pause(20)
+    "  Hurry up, you're just in time to see the Runaway Brothers show." promptw
     eob
 
 l_0xc81be2:
     goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81c2f)	// 0x77, 119
-    "@I guess I lost my ticket,{pause(15)} so now I can't get in." next
+    "@I guess I lost my ticket," pause(15) " so now I can't get in." next
     "@The ticket counter at the department store was even sold out." end
 
 l_0xc81c2f:
-    "@*Sniff*{pause(15)} I suppose I'll never see the Runaway Brothers' show again." end
+    "@*Sniff*" pause(15) " I suppose I'll never see the Runaway Brothers' show again." end
 
 l_0xc81c56:
     "@Didn't I see you at the Topollo Theater in Fourside?" next
@@ -243,10 +368,16 @@ l_0xc81cd6:
     goto_if_flag(FLG_TWSN_MICHIKO_THANKYOU, l_0xc81db5)	// 0x73, 115
     "@Lucky of the Runaway Brothers told me to come see him backstage," next
     "@but I don't have a pass." next
-    "@I'm sure security will stop me.{pause(20)}  Hey!{pause(20)}  Really?{pause(30)}  You have a pass?" next
-    "@I can't believe it!{pause(20)}  Can you take me with you, please{pause(5)} please{pause(10)} please?" next
-    "@I could pose as your sister.{pause(15)}  Yes?  This rocks.{pause(15)}  Let's go." next
-    "@Ooo.{pause(15)} My heart is pounding." promptw
+    "@I'm sure security will stop me." pause(20)
+    "  Hey!" pause(20)
+    "  Really?" pause(30)
+    "  You have a pass?" next
+    "@I can't believe it!" pause(20)
+    "  Can you take me with you, please" pause(5) " please" pause(10) " please?" next
+    "@I could pose as your sister." pause(15)
+    "  Yes?  This rocks." pause(15)
+    "  Let's go." next
+    "@Ooo." pause(15) " My heart is pounding." promptw
     window_closeall
     call(data_34.l_0xc79997)
     unset(FLG_TWSN_MICHIKO_APPEAR)	// 43
@@ -257,7 +388,8 @@ l_0xc81db5:
     "@Thank you for your kindness!" end
 
 l_0xc81dc3:
-    "@I'm gonna miss the Runaway Brothers when they finally leave.{pause(20)}  But that's life!" end
+    "@I'm gonna miss the Runaway Brothers when they finally leave." pause(20)
+    "  But that's life!" end
 
 l_0xc81df1:
     "@The Runaway Brothers are going to be a world-famous band someday." end
@@ -270,7 +402,8 @@ l_0xc81e23:
     " [19 02]No" eob
 
 l_0xc81e29:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc81e7a)} {e(l_0xc81e38)}]" goto(l_0xc81e38)
+    "[1C 07 02][11]{clearline}"
+    "[09 02 {e(l_0xc81e7a)} {e(l_0xc81e38)}]" goto(l_0xc81e38)
 
 l_0xc81e38:
     "@Ah... I see." next

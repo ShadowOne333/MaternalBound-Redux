@@ -304,8 +304,7 @@ _UseHelp_Window_Backout:
 	hieroglyph:	use_help_submenu(HIEROGLYPH, data_04.l_0xc557e7) eob
 	carrotkey:	use_help_submenu(CARROT_KEY, data_05.l_0xc5689f) eob
 	towerkey:	use_help_submenu(TOWER_KEY, data_04.l_0xc55943) eob
-	hawkeye:	if not flag flg_InDeepDarkness { call(data_04.l_0xc55602) eob }	// Hawk eye description
-			else { use_help_submenu(HAWK_EYE, data_04.l_0xc55602) eob }
+	hawkeye:	use_help_submenu(HAWK_EYE, data_04.l_0xc55602) eob
 	shynessbook:	use_help_submenu(SHYNESS_BOOK, data_04.l_0xc55409) eob
 	tendakraut:	use_help_submenu(TENDAKRAUT, data_04.l_0xc55e77) eob
 	meteoritepiece:	use_help_submenu(METEORITE, data_04.l_0xc55957) eob
@@ -373,12 +372,20 @@ command give_menu_key_item(itemID) {
 	counter(itemID)
 	call(keyitemcounter)
 
-	sound(SND_SPECIALITEM)
-	"@(The {itemname(itemID)} was added to your Key items.)" next
+	sound(SND_BOXTAKE)	// 116
+	pause(60)
+	window_closeall
+	sound(SND_SPECIALITEM)	// 102
+	pause(100)
+	window_open(1)
+
+	party_pos_check(1) swap
+	"@({name(0)} added the {itemname(itemID)}" linebreak
+	"  to the Key items.)" //eob
 }
 
 keyitemcounter:
-	if counter_is(SOUND_STONE) { toggle_with_sound(FLG_BUNBUN) }
+	if counter_is(SOUND_STONE) { toggle_with_sound(flg_BuzzBuzzDead) }
 	if counter_is(SHACK_KEY) { toggle_with_sound(FLG_KEY_TABIGOYA) }
 	if counter_is(BICYCLE) { toggle_with_sound(FLG_ITEM_CYCLE) }
 	if counter_is(TOWN_MAP) { toggle_with_sound(FLG_ITEM_MAP) }

@@ -79,22 +79,25 @@ l_0xc727cf:
 l_0xc72822:
     "@Some suspicious-looking kids are hanging out in the woods north of the library." next
     "@I wonder if they are members of the Sharks." next
-    "@To stop the spread of the gang,{pause(15)} someone should shut down their gathering places," next
+    "@To stop the spread of the gang," pause(15) " someone should shut down their gathering places," next
     "@don't you think?" next
     "@I've started a movement" next
     "@that will stop all of the bad influences on the children of Onett." next
-    "@I call it the <Fresh Breeze Movement.>{pause(15)}"
+    "@I call it the <Fresh Breeze Movement.>" pause(15)
     "  [AC] Hum de dum dum... [AC]" end
 
 l_0xc72910:
     "@I'm really in a foul mood." next
-    "@Why?{pause(20)}  Because the Mayor doesn't like me." next
+    "@Why?" pause(20)
+    "  Because the Mayor doesn't like me." next
     "@I think I'll just kick back for a while." next
     "@It just may take me a couple of hours to sign this paper. *snicker* *snort*" end
 
 l_0xc7298c:
-    "[19 10 01]{rtoarg}@Oh,{pause(15)} aren't you [1C 02 00]?" next
-    "@Is it a school holiday today?{pause(15)}  Have you done your homework?" next
+    party_pos_check(1) rtoarg
+    "@Oh," pause(15) " aren't you {name(0)}?" next
+    "@Is it a school holiday today?" pause(15)
+    "  Have you done your homework?" next
     "@Remember to brush your teeth before going to bed." next
     "@Have you been wetting your bed?" end
 
@@ -104,65 +107,92 @@ l_0xc729ff:
     "@I'm going to have to stop you if you try to see the Mayor." end
 
 l_0xc72a63:
-    "@Look.{pause(20)}  I told you so..." end
+    "@Look." pause(20)
+    "  I told you so..." end
 
 l_0xc72a76:
-    "[06 50 00 {e(l_0xc72ab6)}]@Since you beat up the Sharks,{pause(15)} you're the talk of the town." next
+    goto_if_flag(FLG_KEY_TABIGOYA, l_0xc72ab6)	// 0x50, 80
+    "@Since you beat up the Sharks," pause(15) " you're the talk of the town." next
     "@Mayor Pirkle is waiting for you." end
 
 l_0xc72ab6:
-    "@You look like someone who's going to do something big.[06 49 00 {e(l_0xc72ad6)}]" end
+    "@You look like someone who's going to do something big."
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc72ad6)	// 0x49, 73
+    end
 
 l_0xc72ad6:
     next
-    "@What was I thinking--{pause(15)} you did something really big!" end
+    "@What was I thinking--" pause(15) " you did something really big!" end
 
 l_0xc72af8:
-    "[06 49 00 {e(l_0xc72e08)}][06 50 00 {e(l_0xc72dd0)}]@Hey{pause(10)} hey{pause(10)} hey!{pause(15)}  I'm Mayor B.H. Pirkle.{pause(15)}  It's so nice to meet you." next
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc72e08)	// 0x49, 73
+    goto_if_flag(FLG_KEY_TABIGOYA, l_0xc72dd0)	// 0x50, 80
+    "@Hey" pause(10) " hey" pause(10) " hey!" pause(15) linebreak
+    "  I'm Mayor B.H. Pirkle." pause(15) linebreak
+    "  It's so nice to meet you." next
     title(1, Pirkle)
     "@You beat up the town bullies," next
-    "@punched them out big time,{pause(10)} kicked their butts,{pause(10)} bit their heads off," next
-    "@spit in their eyes,{pause(30)} and made them wet their pants." next
-    "@Then you forced them to promise not to make any more trouble.{pause(15)}  Thank you!" next
-    "@What?{pause(15)}" linebreak
+    "@punched them out big time," pause(10) " kicked their butts," pause(10) " bit their heads off," next
+    "@spit in their eyes," pause(30) " and made them wet their pants." next
+    "@Then you forced them to promise not to make any more trouble." pause(15)
+    "  Thank you!" next
+    "@What?" pause(15) linebreak
     "  You want a key to the touring entertainers' shack?" next
-    "@For someone as great as you,{pause(15)} giving you the key could help keep the town peaceful." next
-    "@However,{pause(15)} if you encounter a dangerous situation," next
+    "@For someone as great as you," pause(15) " giving you the key could help keep the town peaceful." next
+    "@However," pause(15) " if you encounter a dangerous situation," next
     "@please don't ask me to take any responsibility." next
     "@I'll be able to avoid any responsibility, right?" next
-    "[19 02]Yes" eob
+    // two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc72c98:
-    "[19 02]No" eob
+    add_menu_string("No")
 
 l_0xc72c9d:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc72d2f)} {e(l_0xc72cac)}]" goto(l_0xc72cac)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc72d2f
+	long l_0xc72cac
+    })
+    goto(l_0xc72cac)
 
 l_0xc72cac:
     "@I'm a very important man in these parts." next
     "@Do you think I'm important?" linebreak
-    "[19 02]Yes" eob
+    // two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc72cda:
-    "[19 02]No" eob
+    add_menu_string("No")
 
 l_0xc72cdf:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc72d2f)} {e(l_0xc72cee)}]" goto(l_0xc72cee)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc72d2f
+	long l_0xc72cee
+    })
+    goto(l_0xc72cee)
 
 l_0xc72cee:
-    "@Look,{pause(10)} I'm the big cheese around here," next
+    "@Look," pause(10) " I'm the big cheese around here," next
     "@and a brat like you should realize when someone is trying to be nice." end
 
 l_0xc72d2f:
-    "@You're such a smart kid...{pause(20)}  Here's the key to the shack." next
-    if flag flg_KeyItems { newline give_menu_key_item(SHACK_KEY) }
+    "@You're such a smart kid..." pause(20)
+    "  Here's the key to the shack." next
+    if flag flg_KeyItems { give_menu_key_item(SHACK_KEY) }
     else {
 	load_registers	// 
 	char_inventory_vacancy(-1)
 	goto_if_false(l_0xc72d6e)
 	give_and_check(0, SHACK_KEY)	// 170
 	copy_wram
-	call(data_36.l_0xc7dcb6) }
+	call(data_36.l_0xc7dcb6)
+    }
     set(FLG_KEY_TABIGOYA) end	// Flag 80
 
 l_0xc72d6e:
@@ -175,32 +205,41 @@ l_0xc72d6e:
 
 l_0xc72dd0:
     title(1, Pirkle)
-    "@Hey,{pause(30)} what's-your-name!" next
+    "@Hey," pause(30) " what's-your-name!" next
     "@I'm so busy with my election that I don't have time to meet with you." end
 
 l_0xc72e08:
     title(1, Pirkle)
-    "@Oh,{pause(15)} {stat(8)}" next
+    "@Oh," pause(15) " {stat(8)}." next
     "@I saw a picture in the international newspaper of someone who looks like you," next
     "@but there's no way it was you." next
     "@Maybe you'd like to study my city management techniques" next
     "@so that you could become Mayor someday?  Wa ha ha!" next
     "@Since I returned peace to the town of Onett I was re-elected Mayor." next
     "@Are you here to celebrate?" linebreak
+    // two_choice_menu
     "  [19 02]Yes" eob
 
 l_0xc72edb:
     "  [19 02]No" eob
 
 l_0xc72ee2:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc72f18)} {e(l_0xc72ef1)}]" goto(l_0xc72ef1)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc72f18
+	long l_0xc72ef1
+    })
+    goto(l_0xc72ef1)
 
 l_0xc72ef1:
-    "@Don't be so shy!{pause(20)}  A child shouldn't be so self conscious." end
+    "@Don't be so shy!" pause(20)
+    "  A child shouldn't be so self conscious." end
 
 l_0xc72f18:
     "@Thanks a lot." next
-    "@From this day forward...{pause(20)} until the day I die... *sniff*" next
+    "@From this day forward..." pause(20) " until the day I die... *sniff*" next
     "@I will dedicate my life *sniff* to peace in Onett... *boo hoo*" end
 
 l_0xc72f7b:
@@ -209,36 +248,52 @@ l_0xc72f7b:
     "@Hee hee hee." end
 
 l_0xc72fbe:
-    "@Since way,{pause(10)} way back,{pause(15)} you and I have been very tight." next
+    "@Since way," pause(10) " way back," pause(15) " you and I have been very tight." next
     "@Pals basically.  Ya ha ha ha ha." end
 
 l_0xc72ff8:
-    "@Thity Hall ith to the eatht.{pause(20)}  You know,{pause(10)}  where the thun ritheth!" end
+    "@Thity Hall ith to the eatht." pause(20)
+    "  You know," pause(10) " where the thun ritheth!" end
 
 l_0xc73024:
-    "[06 7E 02 {e(l_0xc73039)}][06 0C 00 {e(l_0xc730cf)}][06 0D 00 {e(l_0xc730cf)}]" goto(l_0xc73039)
+    goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc73039)	// 0x027E, 638
+    goto_if_flag(FLG_POLA, l_0xc730cf)	// 0x0C, 12
+    goto_if_flag(FLG_POLA_GRFD, l_0xc730cf)	// 0x0D, 13
+    goto(l_0xc73039)
 
 l_0xc73039:
-    "@I moved here from the way,{pause(15)} way,{pause(15)} way away next town." next
-    "@In the next town, there is the... what is the name?{pause(20)}..." next
+    "@I moved here from the way," pause(15) " way," pause(15) " way away next town." next
+    "@In the next town, there is the... what is the name?" pause(20) "..." next
     "@Uh... Polar Star preschool." next
     "@The preschool is at" linebreak
     "  {stat(30)}'s house." next
-    "@{stat(30)} uses... what is it called?{pause(15)}... uh... magic." end
+    "@{stat(30)} uses... what is it called?" pause(15) "... uh... magic." end
 
 l_0xc730cf:
-    "[06 08 03 {e(l_0xc73039)}]{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc73039)}]@I wanted to see you, [1C 01 1E]!" next
+    goto_if_flag(FLG_GLOBAL_POLA_KIDNAPPED, l_0xc73039)	// 0x0308, 776
+    counter(2)
+    call(data_36.l_0xc7dc7f)
+    goto_if_true(l_0xc73039)
+    "@I wanted to see you, {stat(30)}!" next	// Stat 0x1E, Paula's name
     eob
 
 l_0xc730f6:
-    "@When you're in trouble,{pause(15)} do you think you'd ever like to have a hint?" next
+    "@When you're in trouble," pause(15) " do you think you'd ever like to have a hint?" next
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc73124:
     "[19 02]No" eob
 
 l_0xc73129:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc73159)} {e(l_0xc73138)}]" goto(l_0xc73138)
+    print_horizontal(2)
+    create_menu_cancellable
+    clearline
+    switch_goto(2, {
+	long l_0xc73159
+	long l_0xc73138
+    })
+    goto(l_0xc73138)
 
 l_0xc73138:
     "@All righty then,{pause(15)} you're on your own.{pause(15)}  Good luck!" end
@@ -263,19 +318,27 @@ l_0xc73217:
 
 l_0xc73236:
     "@Hi!" next
-    "[06 97 02 {e(l_0xc733ee)}][06 FF 01 {e(l_0xc733ee)}][06 59 00 {e(l_0xc73420)}]@Kids can borrow only maps at this library." next
+    "[06 97 02 {e(l_0xc733ee)}]"
+    "[06 FF 01 {e(l_0xc733ee)}]"
+    "[06 59 00 {e(l_0xc73420)}]"
+    "@Kids can borrow only maps at this library." next
     "@Do you want to borrow one?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc73282:
     "[19 02]No" eob
 
 l_0xc73287:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc732e1)} {e(l_0xc73296)}]" goto(l_0xc73296)
+    "[1C 07 02][11]"
+    clearline
+    "[09 02 {e(l_0xc732e1)} {e(l_0xc73296)}]"
+    goto(l_0xc73296)
 
 l_0xc73296:
     "@A man without a map isn't popular with the girls." next
     "@Do you want one now?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc732c8:
@@ -285,14 +348,21 @@ l_0xc732cd:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc732e1)} {e(l_0xc73296)}]" goto(l_0xc73296)
 
 l_0xc732e1:
-    "[1D 03 FF][1B 02 {e(l_0xc733a7)}]@Here's a map." next
+    "[1D 03 FF]"
+    goto_if_false(l_0xc733a7)
+    "@Here's a map." next
     "@Onett isn't the only thing on the map." next
     "@All the info is there, except for the info that isn't there." next
     "@Pressing the Start Button allows you to view the map at any time." next
     "@How convenient!" next
-    "@You know, the Start Button... located near the center.{pause(15)}" linebreak
+    "@You know, the Start Button... located near the center." pause(15) linebreak
     "  Ha ha ha." next
-    "[1D 0E 00 CA]" call(data_36.l_0xc7dccf) "{set(flag 511)}" end
+    if flag flg_KeyItems { give_menu_key_item(TOWN_MAP) }
+    else {
+	give_and_check(0, TOWN_MAP)	// 0xCA, 202, Town map
+	call(data_36.l_0xc7dccf) }
+    set(FLG_ITEM_MAP)	// 511
+    end
 
 l_0xc733a7:
     "@I suggest you bring a map along, even if you have to give up something else." next
@@ -306,7 +376,12 @@ l_0xc73420:
     "@Please return our book <Overcoming Shyness> later!" end
 
 l_0xc7343f:
-    "[19 19 00 00]{swap}{result_is(164)}[1B 02 {e(data_35.l_0xc7c6b6)}][06 49 00 {e(l_0xc73470)}]@That book's great!{pause(20)}  Study it hard." end
+    "[19 19 00 00]{swap}"
+    result_is(164)
+    goto_if_false(data_35.l_0xc7c6b6)
+    "[06 49 00 {e(l_0xc73470)}]"
+    "@That book's great!" pause(20)
+    "  Study it hard." end
 
 l_0xc73470:
     "@...Finally,{pause(15)} you've come to return the book.{pause(20)}  Seems like you finished it." next

@@ -91,7 +91,7 @@ l_0xc99eb9:
 
 l_0xc99ec9:
     call(data_57.l_0xc9b10b)
-    "[06 47 00 {e(data_55.l_0xc9992f)}]"
+    goto_if_flag(FLG_WIN_GEPPU, data_55.l_0xc9992f)	// 0x47, 71
     set(FLG_TUNNEL_THRK_TWSN_WL)	// 315
     eob
 
@@ -103,9 +103,15 @@ l_0xc99edd:
     goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
     goto_if_flag(FLG_OPEN_TABIGOYA, data_55.l_0xc9992f)		// 0x006C, 108
     window_open(1)
-    hasitem(-1, SHACK_KEY)	// 0xAA, 170
-    goto_if_false(l_0xc99f2d)
-    take(-1, SHACK_KEY)		// 0xAA, 170
+    if flag flg_KeyItems {
+	    isset(FLG_KEY_TABIGOYA)
+	    goto_if_false(l_0xc99f2d)
+    }
+    else {
+	hasitem(-1, SHACK_KEY)	// 0xAA, 170
+	goto_if_false(l_0xc99f2d)
+	take(-1, SHACK_KEY)		// 0xAA, 170
+    }
     "@(" call(data_37.l_0xc7e6d7) " used the key to the traveling entertainers' shack.)" promptw
     sound(SND_PSI3)	// 119
     set(FLG_OPEN_TABIGOYA)	// 108

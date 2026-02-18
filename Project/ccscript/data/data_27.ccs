@@ -505,26 +505,46 @@ l_0xc6fa0c:
     eob
 
 l_0xc6fa2e:
-    "{ctoarg}@There was a [1C 05 00] in the locker." next
-    "[1D 03 FF][1B 02 {e(l_0xc6fab4)}]{store_registers}[1D 0E 00 00]{load_registers}{swap}@[1C 02 00]{swap} got it.{wait}{sound(116)}{pause(1)}" eob
+    ctoarg
+    "@There was a {itemname(0)} in the locker." next
+    "[1D 03 FF][1B 02 {e(l_0xc6fab4)}]"
+    store_registers
+    "[1D 0E 00 00]"
+    load_registers
+    swap
+    "@{name(0)}{swap} got it." wait
+    sound(SND_BOXTAKE)	// 116
+    pause(1)
+    eob
 
 l_0xc6fa68:
-    "{load_registers}" newline
-    "@(The key is bent and doesn't fit into the key hole!){wait}{set(flag 605)}" eob
+    load_registers
+    newline
+    "@(The key is bent and doesn't fit into the key hole!)" wait
+    set(FLG_WINS_LOCKER_FAILED)	// 605
+    eob
 
 l_0xc6fa93:
     "@(Unfortunately, there is nothing in this locker.)" end
 
 l_0xc6fab4:
     "@However, you already have too many things to carry." next
-    "[19 10 01]{swap}@[1C 02 00]{swap} left it in the locker." end
+    party_pos_check(1) swap
+    "@{name(0)}{swap} left it in the locker." end
 
 l_0xc6fae5:
-    "[06 1D 02 {e(data_55.l_0xc9992f)}]" call(l_0xc6fb20) "[06 0E 00 {e(data_55.l_0xc9992f)}]{window_closeall}{pause(1)}" call(data_34.l_0xc79e55) eob
+    goto_if_flag(FLG_THRK_PRISON_OPEN, data_55.l_0xc9992f)	// 0x021D, 541
+    call(l_0xc6fb20)
+    goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x0E, 14
+    window_closeall
+    pause(1)
+    call(data_34.l_0xc79e55)
+    eob
 
 l_0xc6fb02:
     store_registers
-    return_item_in_slot(0, 0) swap
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
     result_is(BAD_KEY_MACHINE)	// 172
     goto_if_false(l_0xc6fb5d)
     call(l_0xc6fb33)
@@ -540,7 +560,8 @@ l_0xc6fb20:
 
 l_0xc6fb33:
     load_registers
-    swap return_action_argument	//return_item_in_slot(0, 0) swap
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
     "@{name(0)}{swap} used" linebreak
     "  the {itemname(0)}." next
     "@The door opened." wait
