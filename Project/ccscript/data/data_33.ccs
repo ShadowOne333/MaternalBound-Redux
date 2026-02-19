@@ -9,6 +9,7 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -331,23 +332,61 @@ l_0xc79489:
     "@Oh,{pause(15)} that was almost too much!" end
 
 l_0xc7949e:
-    "{unset(flag 2)}{unset(flag 3)}[1F E9 B7 01][1F 61][1F E6 B7 01]{window_open(1)}" goto(l_0xc794b1)
+    unset(FLG_TEMP_1)	// 2
+    unset(FLG_TEMP_2)	// 3
+    "[1F E9 B7 01]"
+    wait_for_movement
+    "[1F E6 B7 01]"
+    window_open(1)
+    goto(l_0xc794b1)
 
 l_0xc794b1:
     title(1, Porky)
-    "@Hey [1C 02 01]!{pause(20)}  You're just here to bother me, aren't you?" next
+    "@Hey {name(1)}!" pause(20)
+    "  You're just here to bother me, aren't you?" next
     "@And I was just about to become an important person in Happy Happyism," next
     "@thanks to the great Mr. Carpainter..." next
-    "@You should join us,{pause(15)} but I know you won't...{pause(15)}" linebreak
+    "@You should join us,| but I know you won't..." pause(15) linebreak
     "  I'm glad I joined..." next
-    "@I'm not going to fight you,{pause(15)} but these guys will...{pause(15)}" linebreak
-    "  Later potater...[03]{window_closeall}{unset(flag 11)}{unset(flag 45)}[1F E9 B7 01][1F 61][1F F1 B8 01 12 01][1F F1 B9 01 13 01][1F F1 BA 01 14 01][1F 61][1F E6 B8 01][1F E6 B9 01][1F E6 BA 01]" call(data_23.l_0xc68531) "[1B 03 {e(l_0xc795bd)}]{pause(1)}[1F F1 B8 01 7B 02][1F F1 B9 01 7B 02][1F F1 BA 01 7B 02]{pause(60)}[1F 41 06]" eob
+    "@I'm not going to fight you,| but these guys will..." pause(15) linebreak
+    "  Later potater..." promptw
+    window_closeall
+    unset(flag 11)
+    unset(flag 45)
+    "[1F E9 B7 01]"
+    wait_for_movement
+    "[1F F1 B8 01 12 01]"
+    "[1F F1 B9 01 13 01]"
+    "[1F F1 BA 01 14 01]"
+    wait_for_movement
+    "[1F E6 B8 01]"
+    "[1F E6 B9 01]"
+    "[1F E6 BA 01]"
+    call(data_23.l_0xc68531) goto_if_true(l_0xc795bd)
+    pause(1)
+    "[1F F1 B8 01 7B 02]"
+    "[1F F1 B9 01 7B 02]"
+    "[1F F1 BA 01 7B 02]"
+    pause(60)
+    OSS_off	// special_event(6)
+    eob
 
 l_0xc795bd:
-    "[1F 41 06]" eob
+    OSS_off	// special_event(6)
+    eob
 
 l_0xc795c1:
-    "{store_registers}[19 19 00 00]{swap}{result_is(171)}[1B 02 {e(l_0xc796ee)}][1D 01 FF AB]@(" call(data_37.l_0xc7e74e) " used the [1C 05 AB].)" next
+    store_registers
+    if flag flg_KeyItems {
+	swap return_action_argument
+	result_is(CABIN_KEY) goto_if_false(l_0xc796ee)
+    }
+    else {
+	return_item_in_slot(0,0) swap
+	result_is(CABIN_KEY) goto_if_false(l_0xc796ee)
+	take(-1,CABIN_KEY)	// 0xAB, 171, Key to the cabin
+    }
+    "@(" call(data_37.l_0xc7e74e) " used the {itemname(CABIN_KEY)}.)" next
     goto(rescuepaula)
 
 rescuepaula:
@@ -366,46 +405,102 @@ rescuepaula:
     "@I'm able to use a little psychic power that is actually pretty deadly..." next
     "@Let's head back to Twoson!" promptw
     window_closeall
-    "[1F F1 B5 01 F1 00][1F 61][1F 1E B6 01 06][1F 61][1F 1E B5 01 06][1F 11 02]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@[1C 02 02] joined you.[03]{window_closeall}{set(flag 13)}{set(flag 198)}{unset(flag 118)}{set(flag 321)}{set(flag 689)}{set(flag 483)}" eob
+    change_npc_movement(437,241)	// 0x01B5, 0x00F1
+    wait_for_movement
+    hide_sprite(438,6)	// 0x01B6, 6
+    wait_for_movement
+    hide_sprite(437,6)	// 0x01B5, 6
+    add_party_member(2)
+    music(11)
+    pause(120) pause(120)
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@{name(2)} joined you." promptw
+    window_closeall
+    set(FLG_POLA_GRFD)		// 13
+    set(FLG_WARP_GRFD_YAMAGOYA)	// 198
+    unset(FLG_TWSN_PAUL_UPSET)	// 118
+    set(FLG_TWSN_INFO_TONCHIKI)	// 321
+    set(FLG_MYHOME_PHONE_PAULA)	// 689
+    set(FLG_PHOTO_CABIN)	// 483
+    eob
 
 l_0xc796ee:
-    "@(You must use the [1C 05 AB] to open this.){wait}{window_closeall}" eob
+    "@(You must use the {itemname(CABIN_KEY)} to open this.)" wait
+    window_closeall
+    eob
 
 l_0xc79707:
-    "[1F E6 D9 00]" goto(l_0xc7970b)
+    freeze_npc_movement(217)	// 0xD9, 217
+    goto(l_0xc7970b)
 
 l_0xc7970b:
-    "{counter(2)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc798fe)}]{window_open(1)}"
+    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc798fe)
+    window_open(1)
     title(1, MrJones)
-    "@Oh [1C 02 02]![03]{window_closeall}[19 22 01 02 D9 00][1F 13 01 00][19 22 02 02 D9 00][1F 13 02 00][1F E9 D9 00][1F 61][1F E6 D9 00][1F 16 D9 00 03]{window_open(1)}{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_34.l_0xc79942)}]"
+    "@Oh {name(2)}!" promptw
+    window_closeall
+    "[19 22 01 02 D9 00]"
+    "[1F 13 01 00]"
+    "[19 22 02 02 D9 00]"
+    "[1F 13 02 00]"
+    "[1F E9 D9 00]"
+    wait_for_movement
+    "[1F E6 D9 00]"
+    "[1F 16 D9 00 03]"
+    window_open(1)
+    counter(1) call(data_36.l_0xc7dc7f) goto_if_true(data_34.l_0xc79942)
     title(1, MrJones)
-    "@[1C 02 01],{pause(15)} thank you so much!" next
+    "@{name(1)},| thank you so much!" next
     "@You must be the boy who will save the world,{pause(15)} like in" linebreak
-    "  [1C 02 02]'s dream." next
+    "  {name(2)}'s dream." next
     goto(l_0xc79796)
 
 l_0xc79796:
-    "@[1C 02 02],{pause(15)} I'm sure you'd be a big help to [1C 02 01]." next
-    "@It's not every day a father lets his daughter embark on a journey to save the world![03]{window_closeall}{set(flag 12)}[19 22 02 02 D9 00][1F 13 02 00][1F 1C 02 01]{pause(60)}[1F 1D 02]{window_open(1)}"
+    "@{name(2)},| I'm sure you'd be a big help to {name(1)}." next
+    "@It's not every day a father lets his daughter embark on a journey to save the world!" promptw
+    window_closeall
+    set(FLG_POLA)	// 12
+    "[19 22 02 02 D9 00]"
+    "[1F 13 02 00]"
+    "[1F 1C 02 01]"
+    pause(60)
+    "[1F 1D 02]"
+    window_open(1)
     title_paula(1)
-    "@Dad,{pause(15)} don't worry about me." next
-    "@[1C 02 01] and I will be able to take care of ourselves." next
-    "@In Threek, the next town,{pause(15)} we'll meet another friend." next
-    "@If the three of us can combine our power,{pause(15)} no one can beat us." next
-    "@Now wipe your eyes,{pause(15)} blow your nose,{pause(15)} and smile before we take off.[03]{window_closeall}{set(flag 611)}[1F 41 05]{pause(10)}" goto(l_0xc798bf)
+    "@Dad,| don't worry about me." next
+    "@{name(1)} and I will be able to take care of ourselves." next
+    "@In Threek, the next town,| we'll meet another friend." next
+    "@If the three of us can combine our power,| no one can beat us." next
+    "@Now wipe your eyes,| blow your nose,| and smile before we take off.[03]{window_closeall}{set(flag 611)}[1F 41 05]{pause(10)}" goto(l_0xc798bf)
 
 l_0xc798bf:
-    "{window_open(1)}"
+    window_open(1)
     title(1, MrJones)
-    "@Goodbye, [1C 02 02].{pause(20)}" linebreak
-    "  Don't worry,{pause(15)} I won't cry anymore...{wait}{window_closeall}[06 01 00 {e(l_0xc798f7)}]{set(flag 1)}" eob
+    "@Goodbye, {name(2)}." pause(20) linebreak
+    "  Don't worry,| I won't cry anymore..." wait
+    window_closeall
+    goto_if_flag(FLG_TEMP_0, l_0xc798f7)	// 0x0001
+    set(FLG_TEMP_0)	// 1
+    eob
 
 l_0xc798f7:
-    "[1F F1 D9 00 2B 00]" eob
+    "[1F F1 D9 00 2B 00]"
+    eob
 
 l_0xc798fe:
-    "{window_open(1)}"
+    window_open(1)
      title(1, MrJones)
-    "@Oh, [1C 02 02]!" next
+    "@Oh, {name(2)}!" next
     "@....." next
-    "@Am I dreaming?{pause(20)}  I feel like she just came home...[1F 16 D9 00 03][03]{sound(8)}{window_closeall}{pause(20)}{sound(9)}[1F 1E D9 00 06]" eob
+    "@Am I dreaming?" pause(20)
+    "  I feel like she just came home..."
+    "[1F 16 D9 00 03]"
+    promptw
+    sound(SND_DOOROPEN)	// 8
+    window_closeall
+    pause(20)
+    sound(SND_DOORCLOSE)	// 9
+    "[1F 1E D9 00 06]"
+    eob

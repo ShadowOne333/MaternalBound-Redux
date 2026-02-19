@@ -9,131 +9,300 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
-import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
+import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc7c1f7:
-    call(data_57.l_0xc9b226) "[06 80 01 {e(l_0xc7c204)}]" eob
+    call(data_57.l_0xc9b226)
+    goto_if_flag(FLG_POWR_ALL, l_0xc7c204)	// 0x0180, 384
+    eob
 
 l_0xc7c204:
-    "{set(flag 546)}" eob
+    set(FLG_MGKT_BACK_MLKY)	// 546
+    eob
 
 l_0xc7c208:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(36)}" call(l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c258)}]{window_open(1)}@The power of Magnet Hill" call(l_0xc7c55d) goto(l_0xc7c258)
+    generate_active_sprite(106, 352, 1)	// 0x006A, 0x0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(36)
+    call(l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c258)
+    window_open(1)
+    "@The power of Magnet Hill" call(l_0xc7c55d)
+    goto(l_0xc7c258)
 
 l_0xc7c258:
-    call(l_0xc7c57d) "{set(flag 4)}{music_resume}[06 BA 00 {e(l_0xc7c2c5)}]{window_open(1)}@[1C 02 01] saw a baby's bottle, but just for an instant.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of Magnet Hill.{wait}{set(flag 186)}{set(flag 494)}{window_closetop}" goto(l_0xc7c2c5)
+    call(l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_MGNT, l_0xc7c2c5)	// 0xBA, 186
+    window_open(1)
+    "@{name(1)} saw a baby's bottle, but just for an instant." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of Magnet Hill." wait
+    set(FLG_POWR_MGNT)	// 186
+    set(FLG_PHOTO_DINO_MUSEUM)	// 494
+    window_closetop
+    goto(l_0xc7c2c5)
 
 l_0xc7c2c5:
     eob
 
 l_0xc7c2c6:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(37)}" call(l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c317)}]{window_open(1)}@The power of Pink Cloud" call(l_0xc7c55d) goto(l_0xc7c317)
+    generate_active_sprite(106, 352, 1)	// 0x006A, 0x0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(37)
+    call(l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c317)
+    window_open(1)
+    "@The power of Pink Cloud" call(l_0xc7c55d)
+    goto(l_0xc7c317)
 
 l_0xc7c317:
-    call(l_0xc7c57d) "{set(flag 4)}{music_resume}[06 BB 00 {e(l_0xc7c38a)}]{window_open(1)}@[1C 02 01] had a short vision of seeing his mother when she was young.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Pink Cloud.{wait}{set(flag 187)}{window_closetop}" goto(l_0xc7c38a)
+    call(l_0xc7c57d)
+    set(FLG_TEMP_3)	// 4
+    music_resume
+    goto_if_flag(FLG_POWR_PINK, l_0xc7c38a)	// 0xBB, 187
+    window_open(1)
+    "@{name(1)} had a short vision of seeing his mother when she was young." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Pink Cloud." wait
+    set(FLG_POWR_PINK)	// 187
+    window_closetop
+    goto(l_0xc7c38a)
 
 l_0xc7c38a:
-    call(data_57.l_0xc9b226) "[06 80 01 {e(l_0xc7c397)}]" eob
+    call(data_57.l_0xc9b226)
+    goto_if_flag(FLG_POWR_ALL, l_0xc7c397)	// 0x0180, 384
+    eob
 
 l_0xc7c397:
-    "{set(flag 547)}" eob
+    set(FLG_MGKT_BACK_MGNT)	// 547
+    eob
 
 l_0xc7c39b:
-    "[06 BC 00 {e(l_0xc7c3c2)}]" call(l_0xc7c57d) "{pause(1)}[1F E1 1A 02 3C][1F 14 01][1F 15 6A 00 61 01 01]       [1F 61]                                              " goto(l_0xc7c3c2)
+    goto_if_flag(FLG_POWR_LUMI, l_0xc7c3c2)	// 0xBC, 188
+    call(l_0xc7c57d)
+    pause(1)
+    transition_palette(26, 2, 60)	// Tileset 0x1A, palette 02, speed 0x3C
+    party_direction(1)
+    generate_active_sprite(106, 353, 1)	// 0x006A, 0x0161, 1
+    "       "
+    wait_for_movement
+    "                                              "
+    goto(l_0xc7c3c2)
 
 l_0xc7c3c2:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(38)}" call(l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c412)}]{window_open(1)}@The power of Lumine Hall" call(l_0xc7c55d) goto(l_0xc7c412)
+    generate_active_sprite(106, 352, 1)	// 0x006A, 0x0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(38)
+    call(l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c412)
+    window_open(1)
+    "@The power of Lumine Hall" call(l_0xc7c55d)
+    goto(l_0xc7c412)
 
 l_0xc7c412:
-    "{set(flag 4)}" call(l_0xc7c57d) "{music_resume}[06 BC 00 {e(l_0xc7c478)}]{window_open(1)}@[1C 02 01] saw a vision of his father holding him.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of Lumine Hall.{wait}{set(flag 188)}{window_closetop}" goto(l_0xc7c478)
+    set(FLG_TEMP_3)	// 4
+    call(l_0xc7c57d)
+    music_resume
+    goto_if_flag(FLG_POWR_LUMI, l_0xc7c478)	// 0xBC, 188
+    window_open(1)
+    "@{name(1)} saw a vision of his father holding him." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of Lumine Hall." wait
+    set(FLG_POWR_LUMI)	// 188
+    window_closetop
+    goto(l_0xc7c478)
 
 l_0xc7c478:
     eob
 
 l_0xc7c479:
-    "[1F 15 6A 00 60 01 01]    {unset(flag 2)}               " call(data_36.l_0xc7dd6b) "{music(39)}" call(l_0xc7c54b) "{set(flag 2)}               [1F 61]                      {counter(1)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc7c4c9)}]{window_open(1)}@The power of Fire Spring" call(l_0xc7c55d) goto(l_0xc7c4c9)
+    generate_active_sprite(106, 352, 1)	// 0x006A, 0x0160, 1
+    "    "
+    unset(FLG_TEMP_1)	// 2
+    "               "
+    call(data_36.l_0xc7dd6b)
+    music(39)
+    call(l_0xc7c54b)
+    set(FLG_TEMP_1)	// 2
+    "               "
+    wait_for_movement
+    "                      "
+    counter(1)
+    call(data_36.l_0xc7dc7f)
+    goto_if_false(l_0xc7c4c9)
+    window_open(1)
+    "@The power of Fire Spring" call(l_0xc7c55d)
+    goto(l_0xc7c4c9)
 
 l_0xc7c4c9:
-    "{set(flag 4)}" call(l_0xc7c57d) "{music_resume}[06 BD 00 {e(l_0xc7c53a)}]{window_open(1)}@[1C 02 01] had the feeling that he was being watched by himself as a baby.[03]{pause(60)}" linebreak
-    "@[1C 02 01]'s Sound Stone recorded the melody of the Fire Spring.{wait}{set(flag 189)}{window_closetop}" goto(l_0xc7c53a)
+    set(FLG_TEMP_3)	// 4
+    call(l_0xc7c57d)
+    music_resume
+    goto_if_flag(FLG_POWR_FIRE, l_0xc7c53a)	// 0xBD, 189
+    window_open(1)
+    "@{name(1)} had the feeling that he was being watched by himself as a baby." promptw
+    pause(60) linebreak
+    "@{name(1)}'s Sound Stone recorded the melody of the Fire Spring." wait
+    set(FLG_POWR_FIRE)	// 189
+    window_closetop
+    goto(l_0xc7c53a)
 
 l_0xc7c53a:
-    call(data_57.l_0xc9b226) "[06 80 01 {e(l_0xc7c547)}]" eob
+    call(data_57.l_0xc9b226)
+    goto_if_flag(FLG_POWR_ALL, l_0xc7c547)	// 0x0180, 384
+    eob
 
 l_0xc7c547:
-    "{set(flag 548)}" eob
+    set(FLG_MGKT_BACK_FIRE)	// 548
+    eob
 
 l_0xc7c54b:
-    "{pause(120)}{pause(120)}{pause(120)}{pause(120)}{pause(120)}" eob
+    pause(120) pause(120)
+    pause(120) pause(120)
+    pause(120)
+    eob
 
 l_0xc7c556:
-    "{set(flag 3)}{unset(flag 524)}" eob
+    set(FLG_TEMP_2)	// 3
+    unset(FLG_ANIM_PORT_2)	// 524
+    eob
 
 l_0xc7c55d:
-    " flowed into [1C 02 01]." next
-    "@[1C 02 01] was revived.[03]{window_closeall}" eob
+    " flowed into {name(1)}." next
+    "@{name(1)} was revived." promptw
+    window_closeall
+    eob
 
 l_0xc7c57d:
-    call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}" eob
+    call(data_49.l_0xc915f4)
+    sound(SND_STATUSRECOVER)	// 37
+    pause(90)
+    eob
 
 l_0xc7c588:
-    "[06 94 02 {e(data_25.l_0xc6bef9)}]@Who are you talking to?" end
+    goto_if_flag(FLG_HAPPY_SYSMSGCHG, data_25.l_0xc6bef9)	// 0x0294, 660
+    "@Who are you talking to?" end
 
 l_0xc7c59e:
-    "[06 B0 01 {e(data_09.l_0xc58ebb)}]@No problem here." end
+    // "Fill inventory with Skip Sandwich DX when checking nothing" debug flag
+    goto_if_flag(FLG_GUMI_9_BOOK, data_09.l_0xc58ebb)	// 0x01B0, 432
+    "@No problem here." end
 
 l_0xc7c5b0:
-    "[19 19 00 00]{store_registers}" call(data_36.l_0xc7dc85) "{load_registers}{swap}" eob
+    return_item_in_slot(0, 0)
+    store_registers
+    call(data_36.l_0xc7dc85)
+    load_registers
+    swap
+    eob
 
 l_0xc7c5c0:
-    "{load_registers}{swap}" eob
+    load_registers
+    swap
+    eob
 
 l_0xc7c5c5:
     "himself." end
 
 l_0xc7c5cd:
-    "{store_registers}" call(data_36.l_0xc7dc85) "[1B 03 {e(l_0xc7c5e4)}]{load_registers}{swap}[1C 02 00].[03]" eob
+    store_registers
+    call(data_36.l_0xc7dc85)
+    goto_if_true(l_0xc7c5e4)
+    load_registers
+    swap
+    "{name(0)}." promptw
+    eob
 
 l_0xc7c5e4:
-    "{load_registers}{swap}[1C 02 00]'s belongings.[03]" eob
+    load_registers
+    swap
+    "{name(0)}'s belongings." promptw
+    eob
 
 l_0xc7c5f7:
-    "{swap}[1C 02 00] ###failed.[03]" end
+    swap
+    "{name(0)} ###failed." end	// promptw end
 
 l_0xc7c609:
-    "{store_registers}[19 19 00 00]{swap}{result_is(104)}[1B 03 {e(l_0xc7c669)}]{load_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc7c655)}]{load_registers}[1D 0F 00 00]{store_registers}" call(data_36.l_0xc7dc85) "[1B 03 {e(l_0xc7c693)}]{load_registers}{swap}@[1C 02 00] got rid of" linebreak
-    "  the {swap}[1C 05 00]." end
+    store_registers
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
+    result_is(BUBBLE_GUM)	// 104, Bubble gum pak
+    goto_if_true(l_0xc7c669)
+    load_registers
+    return_item_in_slot(0, 0)
+    get_selling_price(0)
+    goto_if_false(l_0xc7c655)
+    load_registers
+    take_slot(0, 0)
+    store_registers
+    call(data_36.l_0xc7dc85)
+    goto_if_true(l_0xc7c693)
+    load_registers
+    swap
+    "@{name(0)} got rid of" linebreak
+    "  the {swap}{itemname(0)}." end
 
 l_0xc7c655:
-    "@You shouldn't throw the [1C 05 00] away." end
+    "@You shouldn't throw the {itemname(0)} away." end
 
 l_0xc7c669:
     "@Don't spit your gum out. " next
     "@Even if it has lost its flavor..." end
 
 l_0xc7c693:
-    "{load_registers}{swap}@" call(data_37.l_0xc7e74e) linebreak
+    load_registers
+    swap
+    "@" call(data_37.l_0xc7e74e) linebreak
     "  got rid of" linebreak
-    "  [1C 02 00]'s {swap}[1C 05 00]." end
+    "  {name(0)}'s {swap}{itemname(0)}." end
 
 l_0xc7c6b6:
-    "[19 1F]{swap}@You can't use" linebreak
-    "  the [1C 05 00]." end
+    return_action_argument swap
+    "@You can't use" linebreak
+    "  the {itemname(0)}." end
 
 l_0xc7c6c9:
-    "[19 19 00 00]{swap}@[1C 02 00] is the only one who should carry" linebreak
-    "  the {swap}[1C 05 00]." end
+    return_item_in_slot(0, 0) swap
+    "@{itemname(0)} is the only one who should carry" linebreak
+    "  the {swap}{itemname(0)}." end
 
 l_0xc7c6f1:
     /*return_action_argument swap
-    if result_is(176) {
+    if result_is(BICYCLE) {	// 176
     	set(flg_BikeCantNormallyBeUsed)
     	goto(keyitems.BicycleStart) }
     else {*/
@@ -163,9 +332,12 @@ l_0xc7c742:
     //"[19 19 00 00]@The [1C 05 00] is one of the items that can be equipped." end
 
 loadZero:
-    "{unset(flag 1008)}{isset(flag 1008)}" eob
+    unset(flag 1008)
+    isset(flag 1008)
+    eob
+
 failLines:
-    "@{user} can't equip the [19 1F]{swap}[1C 05 00]." end 
+    "@{user} can't equip the {return_action_argument}{swap}{itemname(0)}." end 
 
 l_0xc7c761:
     load_registers
@@ -186,7 +358,7 @@ l_0xc7c7af:
     "@Be careful!" end
 
 l_0xc7c802:
-    "@There is only one seat,{pause(15)} so you can't ride the bike now." end
+    "@There is only one seat,| so you can't ride the bike now." end
 
 l_0xc7c823:
     "@You cannot ride your bike here." end
@@ -198,8 +370,19 @@ l_0xc7c850:
     goto_if_flag(FLG_SYS_DISTLPT, l_0xc7c865)	// 0x02F2, 754
     "@You cannot teleport here." end
 
-l_0xc7c865:
-    "[06 F4 02 {e(l_0xc7c93f)}][06 B4 00 {e(l_0xc7c8c0)}][06 B5 00 {e(l_0xc7c912)}][06 85 02 {e(l_0xc7c912)}][06 BE 01 {e(l_0xc7c8e8)}][06 86 02 {e(l_0xc7c8e8)}][06 87 02 {e(l_0xc7c8e8)}][06 88 02 {e(l_0xc7c8e8)}][06 A3 02 {e(l_0xc7c912)}][06 B6 02 {e(l_0xc7c912)}][06 B7 02 {e(l_0xc7c912)}]@You cannot teleport now." end
+l_0xc7c865:	// Delivery flag checks to prevent teleportation
+    goto_if_flag(FLG_DUNGEONMAN, l_0xc7c93f)		// 0x02F4, 756
+    goto_if_flag(FLG_DELIVERY_PIZZA, l_0xc7c8c0)	// 0x00B4, 180
+    goto_if_flag(FLG_DELIVERY_UNSOU, l_0xc7c912)	// 0x00B5, 181
+    goto_if_flag(FLG_DELIVERY_UNSOU_B, l_0xc7c912)	// 0x0285, 645
+    goto_if_flag(FLG_DELIVERY_CUSTOMER, l_0xc7c8e8)	// 0x01BE, 446
+    goto_if_flag(FLG_DELIVERY_CUSTOMER_B, l_0xc7c8e8)	// 0x0286, 646
+    goto_if_flag(FLG_DELIVERY_CUSTOMER_C, l_0xc7c8e8)	// 0x0287, 647
+    goto_if_flag(FLG_DELIVERY_CUSTOMER_D, l_0xc7c8e8)	// 0x0288, 648
+    goto_if_flag(FLG_DELIVERY_HOIHOI, l_0xc7c912)	// 0x02A3, 675
+    goto_if_flag(FLG_DELIVERY_UNSOU_TAKOKESHI, l_0xc7c912)	// 0x02B6, 694
+    goto_if_flag(FLG_DELIVERY_UNSOU_TAKANOME, l_0xc7c912)	// 0x02B7, 695
+    "@You cannot teleport now." end
 
 l_0xc7c8c0:
     "@You should wait to teleport until after the pizza arrives." end
@@ -214,7 +397,8 @@ l_0xc7c93f:
     "@You cannot teleport while Dungeon Man is with you." end
 
 l_0xc7c95e:
-    "[19 10 01]{swap}@[1C 02 00] got off the bike." end
+    party_pos_check(1) swap
+    "@{name(0)} got off the bike." end
 
 l_0xc7c973:
     newline
@@ -223,14 +407,19 @@ l_0xc7c973:
     "@but the record for Adventure No. {delta} has been lost..." end
 
 l_0xc7c9a8:
-    "[06 49 00 {e(l_0xc7ca3c)}][19 10 01]{swap}"
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc7ca3c)	// 0x49, 73
+    party_pos_check(1) swap
     title(1, Stoic)
-    "@Hello,{pause(15)} this is the Stoic Club." next
-    "@Oh,{pause(15)} [1C 02 00], {swap}" call(data_37.l_0xc7e6b3) "!{pause(20)}" linebreak
+    "@Hello,| this is the Stoic Club." next
+    "@Oh,| {name(0)}, {swap}" call(data_37.l_0xc7e6b3) "!" pause(20) linebreak
     "  Would you like to make a reservation? " next
     "@Certainly." next
-    "@We are looking forward to having you here.{pause(15)}  Thank you." next
-    "@Click!  Beep-beep-beep... {wait}{sound(11)}{set(flag 337)}" eob
+    "@We are looking forward to having you here." pause(15)
+    "  Thank you." next
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." wait
+    set(FLG_SUMS_STOIC_RESERVED)	// 337
+    eob
 
 l_0xc7ca3c:
     title(1, Stoic)
@@ -243,67 +432,110 @@ l_0xc7ca3c:
     "@Listen, buddy, I'm too busy to talk to you right now! " next
     "@Just drop by anytime!" linebreak
     "  You come, you enjoy...  I promise! " next
-    "@Click!  Beep-beep-beep...{wait}{sound(11)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." wait
+    eob
 
 l_0xc7cb5f:
-    "[19 10 01]{rtoarg}{result_is(1)}[1B 02 {e(l_0xc7d1c1)}][06 49 00 {e(l_0xc7d226)}]{isset(flag 688)}[1B 02 {e(l_0xc7cc35)}][1D 0D 01 06 02][1B 03 {e(l_0xc7cdae)}][1D 0D 01 01 08][1B 03 {e(l_0xc7ccec)}][06 B1 02 {e(l_0xc7ce96)}][1D 21 07][09 07 {e(l_0xc7cbba)} {e(l_0xc7cbba)} {e(l_0xc7cf6c)} {e(l_0xc7cf6c)} {e(l_0xc7d05a)} {e(l_0xc7d05a)} {e(l_0xc7d102)}]" goto(l_0xc7cbba)
+    party_pos_check(1) rtoarg
+    result_is(1)
+    goto_if_false(l_0xc7d1c1)
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc7d226)	// 0x49, 73
+    isset(FLG_MYHOME_PHONE_TRACY)	// 688
+    goto_if_false(l_0xc7cc35)
+    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)	// 1, 6, 2
+    goto_if_true(l_0xc7cdae)
+    character_has_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)	// 1, 1, 8
+    goto_if_true(l_0xc7ccec)
+    goto_if_flag(FLG_MYHOME_PHONE_PAULA, l_0xc7ce96)	// 0x02B1, 689
+    random(7)
+    switch_goto(7, {
+	long l_0xc7cbba
+	long l_0xc7cbba
+	long l_0xc7cf6c
+	long l_0xc7cf6c
+	long l_0xc7d05a
+	long l_0xc7d05a
+	long l_0xc7d102
+    })
+    goto(l_0xc7cbba)
 
 l_0xc7cbba:
     title(1, Mom)
-    "@[1C 01 08]?" next
+    "@{stat(8)}?" next	// Ness' name = Stat 8
     "@....." next
     "@Don't say a word; I know exactly what you're thinking." next
     "@My son, who'd have thought he was such a brave kid?" next
     "@Oh, yeah... you're a hero, honey!..." next
-    "@Click!  Beep-beep-beep...{wait}{sound(11)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." wait
+    eob
 
 l_0xc7cc35:
     title(1, Mom)
-    "@Is that you, [1C 01 08]?" next
+    "@Is that you, {stat(8)}?" next	// Ness' name = Stat 8
     "@You called me back sooner than I thought..." next
     "@Everyone here is doing just fine." next
     "@Oh yes, Tracy started working part-time for Escargo Express." next
     "@Here, I'll let you talk to her." next
     "@And call me when you have some time.  ... Oh... you don't have any free time?" next
-    "@Well, here's Tracy.[03]{pause(20)}" linebreak
-    "{set(flag 201)}{set(flag 688)}" goto(data_19.l_0xc636e5)
+    "@Well, here's Tracy." promptw
+    pause(20) linebreak
+    set(FLG_SYS_PHONE_MYHOME2)	// 201
+    set(FLG_MYHOME_PHONE_TRACY)	// 688
+    goto(data_19.l_0xc636e5)
 
 l_0xc7ccec:
     title(1, Mom)
-    "@Hey, [1C 01 08]!" linebreak
+    "@Hey, {stat(8)}!" linebreak	// Ness' name = Stat 8
     "  You sound terrible!" next
     "@Do you have a cold or something?" next
     "@Whatever dangerous stuff you're doing, remember that good health is very important! " next
     "@Try to keep as healthy as possible, even if it kills you!" next
     "@Well, I'd better go, I think my omelette might be on fire!  Bye!" next
-    "@Click!  Beep-beep-beep... {wait}{sound(11)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." wait
+    eob
 
 l_0xc7cdae:
     title(1, Mom)
-    "@Hello, [1C 01 08]?" linebreak
+    "@Hello, {stat(8)}?" linebreak
     "  What's wrong?  You sound so sad..." next
     "@Are you homesick?...  Well, I knew there would be days like this. " next
     "@It must make you feel better, listening to your mom's sweet voice." next
     "@...So, do you feel any better?" next
     "@Well, I'd better get going.  I'm in the middle of my ironing.  Bye!" next
-    "{sound(11)}  Click!  Beep-beep-beep...[03]{window_closeall}" goto(l_0xc7ce73)
+    sound(SND_PHONEPICKUP)	// 11
+    "  Click!  Beep-beep-beep..." promptw
+    window_closeall
+    goto(l_0xc7ce73)
 
 l_0xc7ce73:
-    "{pause(30)}{window_open(1)}@[1C 01 08] got over being homesick.[19 05 01 06 01]{sound(37)}{wait}{window_closeall}" eob
+    pause(30)
+    window_open(1)
+    "@{stat(8)} got over being homesick."	// Ness' name = Stat 8
+    inflict_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 1, 6, 1
+    sound(37)
+    wait
+    window_closeall
+    eob
 
 l_0xc7ce96:
     title(1, Mom)
-    "@Hello, [1C 01 08]?" next
+    "@Hello, {stat(8)}?" next	// Ness' name = Stat 8
     "@So, I heard that you got a new girlfriend on your journey..." next
     "@Well, why don't you tell me about her later..." next
     "@You see, I have this feeling that she is right next to you, or something." next
     "@Well, if she is right there, say hello to her for me." next
     "@I have to go now... I'm right in the middle of cleaning the toilet... Bye!" next
-    "{sound(11)}  Click!  Beep-beep-beep...{wait}{unset(flag 689)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "  Click!  Beep-beep-beep..." wait
+    unset(FLG_MYHOME_PHONE_PAULA)	// 689
+    eob
 
 l_0xc7cf6c:
     title(1, Mom)
-    "@Hello, [1C 01 08]?" next
+    "@Hello, {stat(8)}?" next	// Ness' name = Stat 8
     "@So, how is your adventure going?" next
     "@...Hmmmm, I see..." linebreak
     "  It sounds like you're having some tough times, then." next
@@ -311,18 +543,22 @@ l_0xc7cf6c:
     "@Everything is fine here... you just keep on truckin'!" next
     "@Well, my soap opera is getting to a really steamy part, so I'd better let you go." next
     "@Bye!" next
-    "{sound(11)}@Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." wait
+    eob
 
 l_0xc7d05a:
     title(1, Mom)
     "@Hello?  Hello?!" linebreak
-    "  Is that you, [1C 01 08]?" next
+    "  Is that you, {stat(8)}?" next	// Ness' name = Stat 8
     "@I can hardly hear you..." next
     "@It sounds like you're calling from the moon or something." next
     "@...If you're doing okay, that's great. " next
-    "@Listen, I have to get going.  I'm trying to give [1C 01 03] a flea bath." next
+    // Stat 3 = Dog's name
+    "@Listen, I have to get going.  I'm trying to give {stat(3)} a flea bath." next
     "@Bye!" linebreak
-    "{sound(11)}  Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "  Click!  Beep-beep-beep..." end
 
 l_0xc7d102:
     title(1, Mom)
@@ -333,51 +569,72 @@ l_0xc7d102:
     "@Hope you're doing all right, too." next
     "@Well, I better go... I'm in the middle of my dance aerobics!" next
     "@Bye!" linebreak
-    "{sound(11)}  Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "  Click!  Beep-beep-beep..." end
 
 l_0xc7d1c1:
     title(1, Mom)
-    "[19 10 01]{swap}@Oh, is this that darling little [1C 02 00]?" next
-    "@Is my sweet child [1C 01 08] doing okay?" next
+    party_pos_check(1) swap
+    "@Oh, is this that darling little {name(0)}?" next
+    "@Is my sweet child {stat(8)} doing okay?" next	// Ness' name = Stat 8
     "@Please come visit us sometime." next
-    "{sound(11)}@Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." end
 
 l_0xc7d226:
-    "[06 83 02 {e(l_0xc7d2f6)}]"
+    goto_if_flag(FLG_ONET_MYHOME_END_MAMA, l_0xc7d2f6)	// 0x0283, 643
     title(1, Mom)
-    "@Hello, [1C 01 08]?" linebreak
+    "@Hello, {stat(8)}?" linebreak	// Ness' name = Stat 8
     "  You can finally come home?  ...So that means..." next
     "@Oh, thank heavens!" next
     "@You did it and you're safe!  I'm not exactly sure what you did, but..." next
-    "@Anyway, if you come home quick, I'll make some [1C 01 04]." next
+    // Stat 4 = Fav food
+    "@Anyway, if you come home quick, I'll make some {stat(4)}." next
     "@Get here as soon as you can." next
     "@I can't wait to see your bright and shining face!" next
-    "{sound(11)}@Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "@Click!  Beep-beep-beep..." end
 
 l_0xc7d2f6:
     title(1, Mom)
     "@I thought we would look at your album together..." next
     "@So what are you doing calling me?" linebreak
-    "{sound(11)}  Click!  Beep-beep-beep..." end
+    sound(SND_PHONEPICKUP)	// 11
+    "Click!  Beep-beep-beep..." end
 
 l_0xc7d33e:
-    eob		// Disable Dad from calling you after a while
-    //"[06 49 00 {e(data_55.l_0xc9992f)}]{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}[06 10 00 {e(l_0xc7d36e)}][06 95 00 {e(l_0xc7d4af)}][06 0E 00 {e(l_0xc7d36e)}][06 80 00 {e(l_0xc7d627)}]" goto(l_0xc7d36e)
+    //eob		// Disable Dad from calling you after a while
+    goto_if_flag(FLG_WIN_GIEGU, data_55.l_0xc9992f)	// 0x49, 73
+    music(115)
+    pause(60)
+    wait
+    "[1F 01 00]"	// music_stop(0)
+    sound(SND_PHONEPICKUP)	// 11
+    goto_if_flag(FLG_PU, l_0xc7d36e)	// 0x10, 16
+    goto_if_flag(FLG_SUMS_RAMMA_START, l_0xc7d4af)	// 0x95, 149
+    goto_if_flag(FLG_JEFF, l_0xc7d36e)	// 0x0E, 14
+    goto_if_flag(FLG_WINS_START, l_0xc7d627)	// 0x80, 128
+    goto(l_0xc7d36e)
 
 l_0xc7d36e:
-    "{window_open(1)}[19 10 01]{result_is(1)}[1B 02 {e(l_0xc7d630)}]"
+    window_open(1)
+    party_pos_check(1)
+    result_is(1)	// Ness
+    goto_if_false(l_0xc7d630)
     title(1, Dad)
     "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next
-    "[19 02]Yes" eob
+    // two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7d3de:
-    "  [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7d3e5:
-    " [1C 07 02][11]{clearline}[09 02 {e(l_0xc7d43b)} {e(l_0xc7d3f5)}]" goto(l_0xc7d3f5)
+    " [1C 07 02][11]{clearline}[09 02 {e(l_0xc7d43b)} {e(l_0xc7d3f5)}]"
+    goto(l_0xc7d3f5)
 
 l_0xc7d3f5:
     "@Ah, I see..." next
@@ -386,120 +643,197 @@ l_0xc7d3f5:
     call(data_36.l_0xc7de54) eob
 
 l_0xc7d43b:
-    "@All right.{pause(20)}  You should find a place to stay in the nearest town." next
-    "@When you get to the hotel,{pause(15)} be sure to give your dear ol' dad a call." next
-    "@And hey, keep an eye out for bad guys![03]" call(data_36.l_0xc7de54) eob
+    "@All right." pause(20)
+    "  You should find a place to stay in the nearest town." next
+    "@When you get to the hotel,| be sure to give your dear ol' dad a call." next
+    "@And hey, keep an eye out for bad guys!" promptw
+    call(data_36.l_0xc7de54)
+    eob
 
 l_0xc7d4af:
-    "{window_open(1)}"
+    window_open(1)
     title(1, Dad)
     "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next
-    "[19 02]Yes" eob
+    // two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7d510:
-    "  [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7d517:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7d585)} {e(l_0xc7d526)}]" goto(l_0xc7d526)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7d585)} {e(l_0xc7d526)}]"
+    goto(l_0xc7d526)
 
 l_0xc7d526:
-    "@Ahhh... and this would be...?  So, this isn't [1C 01 08]." next
+    "@Ahhh... and this would be...?  So, this isn't {stat(8)}." next	// Stat 8 = Ness' name
     "@Oh well, it's okay...  Anyway, don't strain yourself on your journey." next
-    "@Good luck... whoever you are.[03]" call(data_36.l_0xc7de54) eob
+    "@Good luck... whoever you are." promptw
+    call(data_36.l_0xc7de54)
+    eob
 
 l_0xc7d585:
-    "@Ahhh... and this would be...?  So, this isn't [1C 01 08]." next
+    "@Ahhh... and this would be...?  So, this isn't {stat(8)}." next	// Stat 8 = Ness' name
     "@I'm glad that you decided to take my advice." next
     "@All right, then.  Stay at a nearby town and get some rest." next
     "@Before you take a break, be sure to call me." next
-    "@Be on the lookout for any shady characters...[03]" call(data_36.l_0xc7de54) eob
+    "@Be on the lookout for any shady characters..." promptw
+    call(data_36.l_0xc7de54)
+    eob
 
 l_0xc7d627:
-    "{window_open(1)}" call(l_0xc7d4af) eob
+    window_open(1)
+    call(l_0xc7d4af)
+    eob
 
 l_0xc7d630:
-    "{window_open(1)}[19 10 01]"
+    window_open(1)
+    party_pos_check(1)
     title(1, Dad)
     "@Hello, it's your dad." next
     "@You've been out there for a long time now..." next
     "@It may be none of my business," next
     "@but don't you think it would be a good idea if you took a break?" next
-    "[19 02]Yes" eob
+    // two_choice_menu
+    add_menu_string("Yes")
 
 l_0xc7d694:
-    "  [19 02]No" eob
+    add_menu_string("No")
 
 l_0xc7d69b:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7d748)} {e(l_0xc7d6aa)}]" goto(l_0xc7d6aa)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7d748)} {e(l_0xc7d6aa)}]"
+    goto(l_0xc7d6aa)
 
 l_0xc7d6aa:
-    "@Ahhh... and this would be...?  So, this isn't [1C 01 08]." next
-    "@I don't know who you are, but thanks for taking care of my son, [1C 01 08]." next
+    "@Ahhh... and this would be...?  So, this isn't {stat(8)}." next	// Stat 8 = Ness' name
+    "@I don't know who you are, but thanks for taking care of my son, {stat(8)}." next	// Stat 8 = Ness' name
     "@Don't work too hard while you continue your journey." next
-    "@You must be a hard worker, if you are a friend of [1C 01 08]." next
-    "@Remember, I'm rooting for you guys![03]" call(data_36.l_0xc7de54) eob
+    "@You must be a hard worker, if you are a friend of {stat(8)}." next	// Stat 8 = Ness' name
+    "@Remember, I'm rooting for you guys!" promptw
+    call(data_36.l_0xc7de54)
+    eob
 
 l_0xc7d748:
-    "@Ahhh... and this would be...?  So, this isn't [1C 01 08]." next
-    "@Whoever you are, thank you for watching after my son, [1C 01 08]." next
+    "@Ahhh... and this would be...?  So, this isn't {stat(8)}." next	// Stat 8 = Ness' name
+    "@Whoever you are, thank you for watching after my son, {stat(8)}." next	// Stat 8 = Ness' name
     "@I just wish that you guys would take a break." next
     "@You'd feel so much more refreshed later on." next
     "@You'd also probably have much better luck on your adventure." next
     "@Stay in a nearby town and get some rest." next
-    "@If you see a phone, please call [1C 01 08]'s father... well, actually, that's me." next
-    "@And, be sure to be careful of the hoodlums.[03]" call(data_36.l_0xc7de54) eob
+    "@If you see a phone, please call {stat(8)}'s father... well, actually, that's me." next
+    "@And, be sure to be careful of the hoodlums." promptw
+    call(data_36.l_0xc7de54)
+    eob
 
-l_0xc7d84f:
-    "{set(flag 226)}" call(l_0xc7d87f) "{unset(flag 226)}" eob
+l_0xc7d84f:	// Shop flag 1
+    set(FLG_SHOP_01)	// 226
+    call(l_0xc7d87f)
+    unset(FLG_SHOP_01)	// 226
+    eob
 
-l_0xc7d85b:
-    "{set(flag 227)}" call(l_0xc7d87f) "{unset(flag 227)}" eob
+l_0xc7d85b:	// Shop flag 2
+    set(FLG_SHOP_02)	// 227
+    call(l_0xc7d87f)
+    unset(FLG_SHOP_02)	// 227
+    eob
 
-l_0xc7d867:
-    "{set(flag 228)}" call(l_0xc7d87f) "{unset(flag 228)}" eob
+l_0xc7d867:	// Shop flag 3
+    set(FLG_SHOP_03)	// 228
+    call(l_0xc7d87f)
+    unset(FLG_SHOP_03)	// 228
+    eob
 
-l_0xc7d873:
-    "{set(flag 229)}" call(l_0xc7d87f) "{unset(flag 229)}" eob
+l_0xc7d873:	// Shop flag 4
+    set(FLG_SHOP_04)	// 229
+    call(l_0xc7d87f)
+    unset(FLG_SHOP_04)	// 229
+    eob
 
 l_0xc7d87f:
-    "{store_registers}[1F A2][1B 05][19 10 01]{swap}" call(l_0xc7d90d) "{sound(16)}[1F A0]" next
-    "[1B 06][1B 03 {e(l_0xc7d907)}]" call(l_0xc7d92a) "{load_registers}[1B 02 {e(l_0xc7d8ee)}]{swap}" call(l_0xc7d947) "[1D 03 FF][1B 02 {e(l_0xc7d8e6)}]{store_registers}" call(data_36.l_0xc7dc85) "[1B 03 {e(l_0xc7d8d9)}]{load_registers}{swap}" call(l_0xc7d958) "[1D 0E 00 00]{sound(116)}" eob
+    store_registers
+    check_npc_flag
+    copy_wram
+    party_pos_check(1) swap
+    call(l_0xc7d90d)
+    sound(SND_GIFTOPEN)	// 16
+    open
+    next
+    copy_active
+    goto_if_true(l_0xc7d907)
+    call(l_0xc7d92a)
+    load_registers
+    goto_if_false(l_0xc7d8ee)
+    swap
+    call(l_0xc7d947)
+    char_inventory_vacancy(-1)
+    goto_if_false(l_0xc7d8e6)
+    store_registers
+    call(data_36.l_0xc7dc85)
+    goto_if_true(l_0xc7d8d9)
+    load_registers
+    swap
+    call(l_0xc7d958)
+    give_and_check(0, 0)
+    sound(SND_BOXTAKE)	// 116
+    eob
 
 l_0xc7d8d9:
-    call(l_0xc7d967) "[1D 0E 00 00]{sound(116)}" eob
+    call(l_0xc7d967)
+    give_and_check(0, 0)
+    sound(SND_BOXTAKE)	// 116
+    eob
 
 l_0xc7d8e6:
-    call(l_0xc7d991) "[1F A1]" eob
+    call(l_0xc7d991)
+    close
+    eob
 
 l_0xc7d8ee:
-    "{swap}[1B 02 {e(l_0xc7d907)}]{swap}[1D 08 00 00]{open_wallet}" call(data_36.l_0xc7d9ae) "{sound(116)}" eob
+    swap
+    goto_if_false(l_0xc7d907)
+    swap
+    givemoney(0)
+    open_wallet
+    call(data_36.l_0xc7d9ae)
+    sound(SND_BOXTAKE)	// 116
+    eob
 
 l_0xc7d907:
     call(data_36.l_0xc7d9cf) eob
 
-l_0xc7d90d:
-    "[06 E2 00 {e(data_36.l_0xc7d9ec)}][06 E3 00 {e(data_36.l_0xc7da0c)}][06 E4 00 {e(data_36.l_0xc7da58)}][06 E5 00 {e(data_36.l_0xc7da8f)}]" eob
+l_0xc7d90d:	// Check for shop flags 1
+    goto_if_flag(FLG_SHOP_01, data_36.l_0xc7d9ec)	// 0xE2, 226
+    goto_if_flag(FLG_SHOP_02, data_36.l_0xc7da0c)	// 0xE3, 227
+    goto_if_flag(FLG_SHOP_03, data_36.l_0xc7da58)	// 0xE4, 228
+    goto_if_flag(FLG_SHOP_04, data_36.l_0xc7da8f)	// 0xE5, 229
+    eob
 
-l_0xc7d92a:
-    "[06 E2 00 {e(data_36.l_0xc7d9fc)}][06 E3 00 {e(data_36.l_0xc7da23)}][06 E4 00 {e(data_36.l_0xc7da68)}][06 E5 00 {e(data_36.l_0xc7daa1)}]" eob
+l_0xc7d92a:	// Check for shop flags 2
+    goto_if_flag(FLG_SHOP_01, data_36.l_0xc7d9fc)	// 0xE2, 226
+    goto_if_flag(FLG_SHOP_02, data_36.l_0xc7da23)	// 0xE3, 227
+    goto_if_flag(FLG_SHOP_03, data_36.l_0xc7da68)	// 0xE4, 228
+    goto_if_flag(FLG_SHOP_04, data_36.l_0xc7daa1)	// 0xE5, 229
+    eob
 
 l_0xc7d947:
     newline
-    "@There is a [1C 05 00] inside![03]" eob
+    "@There is a {itemname(0)} inside!" promptw
+    eob
 
 l_0xc7d958:
     newline
-    "@[1C 02 00] takes it.{swap}" end
+    "@{name(0)} takes it." swap end
 
 l_0xc7d967:
-    "[19 10 01]{swap}" newline
-    "@[1C 02 00] added the{load_registers} [1C 05 00] " linebreak
-    " to {swap}[1C 02 00]'s stuff.{swap}" end
+    party_pos_check(1) swap
+    newline
+    "@{name(0)} added the {load_registers}{itemname(0)} " linebreak
+    " to {swap}{name(0)}'s stuff." swap end
 
 l_0xc7d991:
     newline
-    "[19 10 01]@But, " call(data_36.l_0xc7e5f3) " has got too much stuff already." end
+    party_pos_check(1)
+    "@But, " call(data_36.l_0xc7e5f3) " has got too much stuff already." end
 

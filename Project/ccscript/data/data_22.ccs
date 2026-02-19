@@ -6,6 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/flags.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -366,23 +370,43 @@ l_0xc68017:
     "{sound(11)}" call(data_18.l_0xc63029) eob
 
 l_0xc6803d:
-    "{open_wallet}[1D 14 01 00 00 00][1B 03 {e(l_0xc68077)}][19 10 01]{swap}@[1C 02 00] picked up the receiver." next
-    "[1D 09 01 00]{open_wallet}{sound(11)}" call(data_18.l_0xc63033) eob
+    open_wallet
+    amount_costs_too_much(1) goto_if_true(l_0xc68077)
+    party_pos_check(1) swap
+    "@{name(0)} picked up the receiver." next
+    takemoney(1) open_wallet
+    sound(SND_PHONEPICKUP)	// 11
+    call(data_18.l_0xc63033)
+    eob
 
 l_0xc68077:
     "@(The pay phone costs one dollar.)" end
 
 l_0xc68091:
-    "[06 0E 00 {e(l_0xc6809e)}]" call(data_18.l_0xc630ae) eob
+    goto_if_flag(FLG_JEFF, l_0xc6809e)	// 0x0E, 14
+    call(data_18.l_0xc630ae)
+    eob
 
 l_0xc6809e:
-    "{counter(6)}" call(l_0xc68017) eob
+    counter(6)
+    call(l_0xc68017)
+    eob
 
 l_0xc680a6:
-    "[1D 05 FF B1][1B 03 {e(data_18.l_0xc62d30)}]@Please insert your ATM card." end
+    if flag flg_KeyItems {
+	if flag flg_Ness { goto(data_18.l_0xc62d30) }
+    }
+    else {
+	hasitem(-1, ATM_CARD)	// 0xB1, 177, ATM card
+	goto_if_true(data_18.l_0xc62d30)
+    }
+    "@Please insert your ATM card." end
 
 l_0xc680c2:
-    "[19 19 00 00]{swap}{result_is(177)}[1B 03 {e(l_0xc680dc)}]@Nothing happened." end
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
+    result_is(ATM_CARD) goto_if_true(l_0xc680dc)
+    "@Nothing happened." end
 
 l_0xc680dc:
     call(data_18.l_0xc62d30) eob
