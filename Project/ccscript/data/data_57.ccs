@@ -221,13 +221,19 @@ l_0xc9b1b1:
     eob
 
 l_0xc9b20e:
-    "{isset(flag 632)}[1B 02 {e(data_55.l_0xc9992f)}]{sound(111)}{pause(40)}" eob
+    isset(FLG_ONET_DOOR_CLOSE)	// 632
+    goto_if_false(data_55.l_0xc9992f)
+    sound(SND_RAPIDKNOCK)	// 111
+    pause(40)
+    eob
 
 l_0xc9b21d:
-    "[1F 07 07]" eob
+    music_effect(7)	// Decrease volume slightly
+    eob
 
 l_0xc9b221:
-    "[1F 07 08]" eob
+    music_effect(8)	// Restore original volume
+    eob
 
 l_0xc9b225:
     eob
@@ -238,79 +244,88 @@ l_0xc9b226:
     eob
 
 l_0xc9b230:
-    "[06 B6 00 {e(l_0xc9b238)}]" eob
+    goto_if_flag(FLG_POWR_GIAN, l_0xc9b238)	// 0xB6, 182
+    eob
 
 l_0xc9b238:
-    "[06 B7 00 {e(l_0xc9b240)}]" eob
+    goto_if_flag(FLG_POWR_LLPT, l_0xc9b240)	// 0xB7, 183
+    eob
 
 l_0xc9b240:
-    "[06 B9 00 {e(l_0xc9b248)}]" eob
+    goto_if_flag(FLG_POWR_MLKY, l_0xc9b248)	// 0xB9, 185
+    eob
 
 l_0xc9b248:
-    "[06 BA 00 {e(l_0xc9b250)}]" eob
+    goto_if_flag(FLG_POWR_MGNT, l_0xc9b250)	// 0xBA, 186
+    eob
 
 l_0xc9b250:
-    "[06 BB 00 {e(l_0xc9b258)}]" eob
+    goto_if_flag(FLG_POWR_PINK, l_0xc9b258)	// 0xBB, 187
+    eob
 
 l_0xc9b258:
-    "[06 B8 00 {e(l_0xc9b260)}]" eob
+    goto_if_flag(FLG_POWR_RAIN, l_0xc9b260)	// 0xB8, 184
+    eob
 
 l_0xc9b260:
-    "[06 BC 00 {e(l_0xc9b268)}]" eob
+    goto_if_flag(FLG_POWR_LUMI, l_0xc9b268)	// 0xBC, 188
+    eob
 
 l_0xc9b268:
-    "[06 BD 00 {e(l_0xc9b270)}]" eob
+    goto_if_flag(FLG_POWR_FIRE, l_0xc9b270)	// 0xBD, 189
+    eob
 
-l_0xc9b270:	// Flashback scene
+l_0xc9b270:	// Flashback scene prep
     unset(flg_Paula)
     unset(flg_Jeff)
     unset(flg_Poo)
     set(FLG_POWR_ALL)	// 384, All Sound Stone melodies
-    "[1F 41 06]"
-    "[1F 12 02]"
-    "[1F 12 03]"
-    "[1F 12 04]"
+    OSS_off	// special_event(6)
+    party_remove(2)
+    party_remove(3)
+    party_remove(4)
     call(data_24.l_0xc69082)
     set(FLG_SYS_MONSTER_OFF)	// 11
     call(data_36.l_0xc7de60)
-    "[1F 41 05]"
-    "[1F 07 03]"
-    "[1F 15 6A 00 79 02 01]"
+    OSS_on	// special_event(5)
+    music_effect(3)	// Fade out
+    generate_active_sprite(106,633,1)	// 0x006A, 0x0279, 01
     wait_for_movement
-    "[1F EB FF 01]"
-    "[1F 21 51]"
+    // hide_party command does 1F EB FF 06 instead of 1F EB FF 01
+    hide_party_with_style(1)
+    warp(81)	// 0x51
     pause(30)
-    "[1F 41 10]"
+    special_event(16)	// 0x10, Final unskippable Sound stone screen
     pause(30)
-    "[1F 15 B3 01 B7 02 FF]"
-    "[1F 21 23]"
-    "[1F EF B3 01]"
-    "[1F E8 FF]"
+    generate_active_sprite(435,695,-1)	// 0x01B3, 0x02B7, 0xFF
+    warp(35)	// 0x23
+    focus_camera_sprite(435)	// 0x01B3
+    unfreeze_char_movement(-1)
     wait_for_movement
     reset_camera
-    "[1F E5 FF]"
-    "[1F 1F B3 01 0A]"
+    freeze_char_movement(-1)
+    delete_active_sprite(435,10)	// 0x01B3, 0x0A
     pause(180)
-    "[1F 21 24]"
-    "[1F 15 6A 00 B8 02 01]"
+    warp(36)	// 0x24
+    generate_active_sprite(106, 696, 1)	// 0x006A, 0x02B8, 01
     call(l_0xc9b4b8)
-    "[1F 21 25]"
-    "[1F 15 6A 00 B9 02 01]"
+    warp(37)	// 0x25
+    generate_active_sprite(106, 697, 1)	// 0x006A, 0x02B9, 01
     call(l_0xc9b4b8)
-    "[1F 21 26]"
-    "[1F 15 6A 00 BA 02 01]"
+    warp(38)	// 0x26
+    generate_active_sprite(106, 698, 1)	// 0x006A, 0x02BA, 01
     call(l_0xc9b4b8)
 
     pause(120)
     window_open(1)
     title(1, Dad)
-    "@{name(1)}..." pause(30) " Hmmm..." next
+    "@{name(1)}...|| Hmmm..." next
     "@I think {name(1)} is the right name for him." promptw
     window_closeall
     pause(60)
     window_open(1)
     title(1, Mom)
-    "@{name(1)}..." pause(30) " he smiled just from hearing his own name." next
+    "@{name(1)}...|| he smiled just from hearing his own name." next
     "@Do you think he likes his name?" promptw
     window_closeall
     pause(120)
@@ -342,7 +357,7 @@ l_0xc9b270:	// Flashback scene
     pause(60)
     window_open(1)
     title(1, Mom)
-    "@That's odd..." pause(20) " the baby bottle that he pointed at seemed to move a little bit..." next
+    "@That's odd.../| the baby bottle that he pointed at seemed to move a little bit..." next
     "@Hmmm..." wait
     pause(15)
     window_closeall
@@ -353,26 +368,26 @@ l_0xc9b270:	// Flashback scene
     pause(120)
     pause(120)
     pause(120)
-    "[1F E8 FF]"
-    "[1F 15 06 00 0C 03 FF]"
-    "[1F 21 A1]"
-    "[1F 1F 06 00 06]"
-    "[1F EC FF 01]"
+    unfreeze_char_movement(-1)
+    generate_active_sprite(6,780,-1)	// 0x0006, 0x030C, 0xFF
+    warp(161)	// 0xA1
+    delete_active_sprite(6,6)
+    show_party(1)	// 0xFF, 1
     set_respawn(1)
     call(data_36.l_0xc7dd6b)
     unset(FLG_BGM_MGKT_IN)	// 758
     music_resume
-    "[1F 41 06]"
+    OSS_off	// special_event(6)
     unset(FLG_SYS_MONSTER_OFF)	// 11
     eob
 
 l_0xc9b4b8:
     pause(1)
-    "[1F EF 6A 00]"
-    "[1F E8 FF]"
+    focus_camera_sprite(106)	// 0x006A
+    unfreeze_char_movement(-1)
     wait_for_movement
     reset_camera
-    "[1F E5 FF]"
+    freeze_char_movement(-1)
     eob
 
 l_0xc9b4c9:
@@ -390,106 +405,182 @@ l_0xc9b4c9:
     call(l_0xc9b8dd)
     call(data_24.l_0xc69082)
     music(143)
-    "[1F F2 01 00 5A 01]"
+    change_sprite_movement(1,346)	// 0x0001, 0x015A
     "     "
     pause(1)
-    "[1F EF 01 00]"
+    focus_camera_sprite(1)
     "                           "
-    "[1F E8 FF]"
+    unfreeze_char_movement(-1)
     wait_for_movement
-    "[1F 15 6A 00 5F 01 01]"
+    generate_active_sprite(106,351,1)	// 0x006A, 0x015F, 01
     "   "
     wait_for_movement
     reset_camera
-    "[1F E5 FF]"
+    freeze_char_movement(-1)
     set(FLG_FIRE_PARTY_APPEAR)	// 349
     call(data_36.l_0xc7dd6b)
-    "[06 24 02 {e(l_0xc9b799)}]"
-    "[06 23 02 {e(l_0xc9b6e3)}]"
-    "[06 22 02 {e(l_0xc9b62d)}]"
-    "[1F 21 C5]"
-    "[1F E5 FF]"
+    goto_if_flag(FLG_MGKT_BACK_FIRE, l_0xc9b799)	// 0x0224, 548
+    goto_if_flag(FLG_MGKT_BACK_MGNT, l_0xc9b6e3)	// 0x0223, 547
+    goto_if_flag(FLG_MGKT_BACK_MLKY, l_0xc9b62d)	// 0x0222, 546
+    warp(197)	// 0xC5
+    freeze_char_movement(-1)
     pause(60)
     call(data_32.l_0xc77dab)
     pause(60)
-    "[1F F1 C4 01 5B 01]"
+    change_npc_movement(452,347)	// 0x01C4, 0x015B
     pause(30)
-    "[1F 1A C5 01 03]"
-    "[1F 1A C6 01 03]"
-    "[1F 1A C7 01 03]"
+    show_sprite_float(453,3)	// 0x01C5, 3
+    show_sprite_float(454,3)	// 0x01C6, 3
+    show_sprite_float(455,3)	// 0x01C7, 3
     pause(90)
-    "[1F 1E C4 01 06]"
+    hide_sprite(452,6)
     "         "
-    "[1F EC 01 01]"
+    show_char(1,1)
     "                "
     pause(30)
-    "[1F 1B C5 01]"
-    "[1F 1B C6 01]"
-    "[1F 1B C7 01]"
+    hide_sprite_float(453)	// 0x01C5
+    hide_sprite_float(454)	// 0x01C6
+    hide_sprite_float(455)	// 0x01C7
     pause(90)
-    "[1F F1 C5 01 5C 01]"
+    change_npc_movement(453,348)	// 0x01C5, 0x015C
     call(l_0xc9b84f)
-    "[1F F1 C6 01 5D 01]"
+    change_npc_movement(454,349)	// 0x01C6, 0x015D
     call(l_0xc9b87f)
-    "[1F F1 C7 01 5E 01]"
+    change_npc_movement(455,350)	// 0x01C7, 0x015E
     call(l_0xc9b898)
-    "[1F 11 02]"
-    "[1F EB 02 06]"
-    "[1F F1 C5 01 2F 00]"
+
+    add_party_member(2)
+    hide_char(2)	// Hide Paula momentarily
+    change_npc_movement(453,47)	// 0x01C5, 0x002F
     wait_for_movement
-    "[1F 1E C5 01 06]"
-    "[1F EC 02 01]"
-    "[1F 11 03]"
-    "[1F EB 03 06]"
-    "[1F F1 C6 01 2F 00]"
+    hide_sprite(453,6)	// 0x01C5, 06
+    show_char(2,1)	// Show Paula
+    add_party_member(3)	// Add Jeff to party
+    hide_char(3)	// Hide Jeff momentarily
+    change_npc_movement(454,47)	// 0x01C6, 0x002F
     wait_for_movement
-    "[1F 1E C6 01 06]"
-    "[1F EC 03 01]"
-    "[1F 11 04]"
-    "[1F EB 04 06]"
-    "[1F F1 C7 01 2F 00]"
+    hide_sprite(454,6)	// 0x01C6, 06
+    show_char(3,1)	// Show Jeff
+    add_party_member(4)	// Add Poo to party
+    hide_char(4)	// Hide Poo momentarily
+    change_npc_movement(455,47)	// 0x01C7, 0x002F
     wait_for_movement
-    "[1F 1E C7 01 06]"
-    "[1F EC 04 01]"
+    hide_sprite(455,6)	// 0x01C7, 06
+    show_char(4,1)	// Show Poo
     goto(l_0xc9b60f)
 
 l_0xc9b60f:
     pause(120)
-    "[1F 20 06 04]"
+    teleport_animation(4)	// Use the 4th teleport, which is a faster Teleport Bs
     pause(120)
-    "[19 26 04]"
+    set_respawn(4)
     unset(FLG_FIRE_PARTY_APPEAR)	// 349
     set(FLG_DKFD_DOSEI_ST1_APPEAR)	// 382
     unset(FLG_INSEKI_STOPPER_APPEAR)	// 476
-    "[1F E8 FF]"
-    "[1F 41 06]"
+    unfreeze_char_movement(-1)
+    OSS_off	// special_event(6)
     unset(FLG_SYS_MONSTER_OFF)	// 11
     eob
 
 l_0xc9b62d:
-    "[1F 21 C6][1F E5 FF]"
+    warp(198)	// 0xC6
+    freeze_char_movement(-1)
     pause(60)
     call(data_32.l_0xc77dab)
-    "{pause(60)}[1F F1 BC 02 5B 01]{pause(30)}[1F 1A BD 02 03][1F 1A BE 02 03][1F 1A BF 02 03]{pause(90)}[1F 1E BC 02 06]         [1F EC 01 01]                {pause(30)}[1F 1B BD 02][1F 1B BE 02][1F 1B BF 02]{pause(90)}[1F F1 BD 02 5C 01]"
-    call(l_0xc9b84f) "[1F F1 BE 02 5D 01]"
-    call(l_0xc9b87f) "[1F F1 BF 02 5E 01]"
+    pause(60)
+    "[1F F1 BC 02 5B 01]"
+    pause(30)
+    "[1F 1A BD 02 03]"
+    "[1F 1A BE 02 03]"
+    "[1F 1A BF 02 03]"
+    pause(90)
+    "[1F 1E BC 02 06]"
+    "         "
+    "[1F EC 01 01]""                "
+    pause(30)
+    "[1F 1B BD 02]"
+    "[1F 1B BE 02]"
+    "[1F 1B BF 02]"
+    pause(90)
+    "[1F F1 BD 02 5C 01]"
+    call(l_0xc9b84f)
+    "[1F F1 BE 02 5D 01]"
+    call(l_0xc9b87f)
+    "[1F F1 BF 02 5E 01]"
     call(l_0xc9b898)
-    "[1F 11 02][1F EB 02 06][1F F1 BD 02 2F 00][1F 61][1F 1E BD 02 06][1F EC 02 01][1F 11 03][1F EB 03 06][1F F1 BE 02 2F 00][1F 61][1F 1E BE 02 06][1F EC 03 01][1F 11 04][1F EB 04 06][1F F1 BF 02 2F 00][1F 61][1F 1E BF 02 06][1F EC 04 01]"
+    "[1F 11 02]"
+    "[1F EB 02 06]"
+    "[1F F1 BD 02 2F 00]"
+    wait_for_movement
+    "[1F 1E BD 02 06]"
+    "[1F EC 02 01]"
+    "[1F 11 03]"
+    "[1F EB 03 06]"
+    "[1F F1 BE 02 2F 00]"
+    wait_for_movement
+    "[1F 1E BE 02 06]"
+    "[1F EC 03 01]"
+    "[1F 11 04]"
+    "[1F EB 04 06]"
+    "[1F F1 BF 02 2F 00]"
+    wait_for_movement
+    "[1F 1E BF 02 06]"
+    "[1F EC 04 01]"
     call(l_0xc9b60f)
     eob
 
 l_0xc9b6e3:
-    "[1F 21 C7][1F E5 FF]{pause(60)}"
+    "[1F 21 C7]"
+    "[1F E5 FF]"
+    pause(60)
     call(data_32.l_0xc77dab)
-    "{pause(60)}[1F F1 5F 04 5B 01]{pause(30)}[1F 1A 60 04 03][1F 1A 61 04 03][1F 1A 62 04 03]{pause(90)}[1F 1E 5F 04 06]         [1F EC 01 01]                {pause(30)}[1F 1B 60 04][1F 1B 61 04][1F 1B 62 04]{pause(90)}[1F F1 60 04 5C 01]"
-    call(l_0xc9b84f) "[1F F1 61 04 5D 01]"
-    call(l_0xc9b87f) "[1F F1 62 04 5E 01]"
-    call(l_0xc9b898) "[1F 11 02][1F EB 02 06][1F F1 60 04 2F 00][1F 61][1F 1E 60 04 06][1F EC 02 01][1F 11 03][1F EB 03 06][1F F1 61 04 2F 00][1F 61][1F 1E 61 04 06][1F EC 03 01][1F 11 04][1F EB 04 06][1F F1 62 04 2F 00][1F 61][1F 1E 62 04 06][1F EC 04 01]"
+    pause(60)
+    "[1F F1 5F 04 5B 01]"
+    pause(30)
+    "[1F 1A 60 04 03]"
+    "[1F 1A 61 04 03]"
+    "[1F 1A 62 04 03]"
+    pause(90)
+    "[1F 1E 5F 04 06]"
+    "         "
+    "[1F EC 01 01]"
+    "                "
+    pause(30)
+    "[1F 1B 60 04]"
+    "[1F 1B 61 04]"
+    "[1F 1B 62 04]"
+    pause(90)
+    "[1F F1 60 04 5C 01]"
+    call(l_0xc9b84f)
+    "[1F F1 61 04 5D 01]"
+    call(l_0xc9b87f)
+    "[1F F1 62 04 5E 01]"
+    call(l_0xc9b898)
+    "[1F 11 02]"
+    "[1F EB 02 06]"
+    "[1F F1 60 04 2F 00]"
+    wait_for_movement
+    "[1F 1E 60 04 06]"
+    "[1F EC 02 01]"
+    "[1F 11 03]"
+    "[1F EB 03 06]"
+    "[1F F1 61 04 2F 00]"
+    wait_for_movement
+    "[1F 1E 61 04 06]"
+    "[1F EC 03 01]"
+    "[1F 11 04]"
+    "[1F EB 04 06]"
+    "[1F F1 62 04 2F 00]"
+    wait_for_movement
+    "[1F 1E 62 04 06]"
+    "[1F EC 04 01]"
     call(l_0xc9b60f)
     eob
 
 l_0xc9b799:
-    "[1F 21 9E][1F E5 FF]{pause(60)}"
+    "[1F 21 9E]"
+    "[1F E5 FF]"
+    pause(60)
     call(data_32.l_0xc77dab)
     "{pause(60)}[1F F1 FD 04 5B 01]{pause(30)}[1F 1A FE 04 03][1F 1A FF 04 03][1F 1A 00 05 03]{pause(90)}[1F 1E FD 04 06]         [1F EC 01 01]                {pause(30)}[1F 1B FE 04][1F 1B FF 04][1F 1B 00 05]{pause(90)}[1F F1 FE 04 5C 01]"
     call(l_0xc9b84f) "[1F F1 FF 04 5D 01]"

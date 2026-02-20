@@ -3,7 +3,7 @@
 import "../essential/asm65816.ccs"
 //------------------------------------------------------------------
 /* Lower HP/PP windows by one tile */
-// REMOVED IN FAVOUR OF M3 SPRITES CODE BY VITTORIO
+// REMOVED IN FAVOUR OF MOTHER 3 SPRITES CODE BY VITTORIO
 //ROM[0xC2044C] = LDA_i(0x0013)
 //ROM[0xC20453] = LDA_i(0x0014)
 //ROM[0xC20856] = LDY_i(9)
@@ -40,6 +40,23 @@ ROM[0xC38753] = ASL_a(0x0300)
 ROM[0xC39F67] = ASL_a(0x0B00)
 ROM[0xC39F75] = COP(0xFF)
 //------------------------------------------------------------------
-/* Modify Speed variance in Battle from 50% to 25% similar to M3 */
+/* Modify Speed variance in Battle from 50% to 25% similar to Mother 3 */
 ROM[0xC24FFB] = JSR (0x6AFD)
+//------------------------------------------------------------------
+ROM[0xC4DE78] = {
+// Warp coordinates for each of the eight Sanctuary locations
+// Used in the final Sound Stone scene where all of them flash quickly on screen
+// (They appear in reverse order)
+
+/* Giant Step*/ 	short 151 short 48	// 0x0097, 0x0030
+/* Lilliput Steps */ 	short 387 short 1013	// 0x0183, 0x03F5
+// Swapped Milky Well for Rainy Circle to fix its appearance in the sequence
+/* Rainy Circle */ 	short 88  short 668	// 0x0058, 0x029C
+// Swapped Rainy Circle for Milky Well to fix its appearance in the sequence
+/* Milky Well */ 	short 35  short 484	// 0x0023, 0x01E4
+/* Magnet Hill */ 	short 479 short 520	// 0x01DF, 0x0208
+/* Pink Cloud */ 	short 445 short 779	// 0x01BD, 0x030B
+/* Lumine Hall */ 	short 843 short 600	// 0x034B, 0x0258
+/* Fire Spring */ 	short 766 short 1228	// 0x02FE, 0x04CC
+}
 //------------------------------------------------------------------

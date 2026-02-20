@@ -429,7 +429,7 @@ command clear "[18 06]" // Clears the contents of the current text window.
 // You'd be better off using the inbuilt menu functions, because manual menus are complicated. But I thought I'd include it here in case you think you can handle it. Uncomment the stuff below if you like.
 
 command add_menu_string(string) "[19 02 {string} 02]" // Loads a string into "menu storage."
-command add_menu_option_with_callback(string, callback) "[19 02 {string} 01 {long callback}]" // Menu option name ending with 01 refers to the address of a script that runs when the option is highlighted in a menu. 
+command add_menu_option_with_callback(string, callback) "[19 02 {string} 01 {long callback}]" // Menu option name ending with 01 refers to the address of a script that runs when the option is highlighted in a menu.
 command clear_menu_string "[19 04]" // Clears all strings loaded into "menu storage."
 command create_menu "[1A 04]" // Creates menu with strings stored with above command. Cannot back out with B.
 command create_menu_cancellable "[11]" // Same as above, but you can back out with B.
@@ -478,7 +478,7 @@ command return_queue_info(slot, delete) "[19 1D {byte slot} {byte delete}]" // R
 
 // Direct inventory manipulation
 command equip(char, slot) "[1F 83 {byte char} {byte slot}]" // Equips party member 'char' with the item in the slot number 'slot.'
-command repair(chance) "[1F D0 {short chance}] " // Looks at Jeff's inventory. If there is a broken item and his IQ is enough to repair it, it will remove the item and replace it with its repaired counterpart. The number of the broken item is loaded into the Argument Register, and the number of the fixed one is loaded into the Result Register. There is a 'chance'% that this will work, otherwise it will do nothing.
+command repair(chance) "[1F D0 {byte chance}]" // Looks at Jeff's inventory. If there is a broken item and his IQ is enough to repair it, it will remove the item and replace it with its repaired counterpart. The number of the broken item is loaded into the Argument Register, and the number of the fixed one is loaded into the Result Register. There is a 'chance'% that this will work, otherwise it will do nothing.
 command char_inventory_vacancy(char) "[1D 03 {byte char}]"	// Checks if a character has available space in his/her inventory
 command give_and_check(char, item) "[1D 0E {byte char} {byte item}]" // Like the built-in command give but if successful, the Argument Register will be changed to the amount of items in 'char''s inventory (including the new one) and the Result Register will be changed to the ID of who recieved the item.
 command take_slot(char, slot) "[1D 0F {byte char} {byte slot}]" // Removes the item in inventory space 'slot' of party member 'char.'
@@ -651,6 +651,12 @@ command clear_dad_deposit_money get_dad_deposit_money_base(2)
 
 command switch_call(n, labels) { "[1F C0 {byte n}]" labels }
 command switch_goto(n, labels) { "[09 {byte n}]" labels }
+
+// This one should always be used instead of 'music_stop', as that one sets the argument to 2
+// The vanilla game always uses an argument of 0 for this control code
+command stop_music(n) "[1F 01 {byte n}]"
+command hide_char_with_style(char, style) "[1F EB {byte char} {byte style}]"
+command hide_party_with_style(style) "[1F EB FF {byte style}]"
 
 /*
 Loader subroutines need to be put in the ROM at 0x40010, or $C3FE10.

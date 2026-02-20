@@ -4,3 +4,4 @@
 * Floating sprite implementation for when Ness receives a phone call, similar to Mother 3's Transceiver. It should be made similar to how Capt. Strong does it in Onett. (Some receiver calls from Orange kid are in data_34)
 * Fix the Last Sanctuary locations showing up in the wrong order, when getting all 8 melodies and all sanctuaries flash quickly
 * Check the Fly Honey softlock and fix it
+* Fix Magnet Hill hotspot so it can't be bypassed to get Carrot key without triggering it

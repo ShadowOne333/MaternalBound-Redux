@@ -393,9 +393,7 @@ l_0xc6809e:
     eob
 
 l_0xc680a6:
-    if flag flg_KeyItems {
-	if flag flg_Ness { goto(data_18.l_0xc62d30) }
-    }
+    if flag flg_KeyItems { goto_if_flag(flg_Ness, data_18.l_0xc62d30) }
     else {
 	hasitem(-1, ATM_CARD)	// 0xB1, 177, ATM card
 	goto_if_true(data_18.l_0xc62d30)

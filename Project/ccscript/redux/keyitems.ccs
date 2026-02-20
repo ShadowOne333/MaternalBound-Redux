@@ -197,7 +197,8 @@ KeyItems:
 			add_menu_option_with_callback("Pencil eraser", SetCount7) }
 		if flag FLG_ITEM_KOKESHI {
 			add_menu_option_with_callback("Eraser eraser", SetCount8) }
-		if flag FLG_HAPPY_CARPAINTER_ITEMFULL and not flag FLG_POLA_GRFD { // Paula rescued
+		// Check used FLG_HAPPY_CARPAINTER_ITEMFULL originally, but this was buggy when talking back to Carpainter again
+		if flag FLG_WIN_CARPAINTER and not flag FLG_POLA_GRFD { // Paula rescued
 			add_menu_option_with_callback("Key to the cabin", SetCount9) }
 		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURABUS_APPEAR {
 			add_menu_option_with_callback("Suitcase of bills", SetCount10) }
@@ -391,7 +392,7 @@ keyitemcounter:
 	if counter_is(TOWN_MAP) { toggle_with_sound(FLG_ITEM_MAP) }
 	if counter_is(RECEIVER_PHONE) { toggle_with_sound(FLG_ITEM_PHONE) }
 	if counter_is(PENCIL_ERASER) { toggle_with_sound(FLG_ITEM_TACO_ERASER) }
-	if counter_is(CABIN_KEY) { toggle_with_sound(FLG_HAPPY_CARPAINTER_ITEMFULL) }
+	if counter_is(CABIN_KEY) { toggle_with_sound(FLG_WIN_CARPAINTER) }
 	if counter_is(WAD_BILLS) { toggle_with_sound(FLG_TWSN_ITEM_TONCHIKI) }
 	if counter_is(ZOMBIE_PAPER) { toggle_with_sound(FLG_ITEM_HOIHOI) }
 	if counter_is(LOCKER_KEY) { toggle_with_sound(FLG_ITEM_KEY_LOCKER) }

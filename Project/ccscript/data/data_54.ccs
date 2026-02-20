@@ -6,23 +6,34 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc97823:
-    "[06 A5 00 {e(l_0xc978aa)}]@The Mani Mani Statue is up ahead,{pause(15)} but I'm going to stop you right here." next
+    goto_if_flag(FLG_MOON_INVISIBLEMAN, l_0xc978aa)	// 0xA5, 165
+    "@The Mani Mani Statue is up ahead,| but I'm going to stop you right here." next
     "@Don't even think about getting past me," next
     "@'cause you aren't with a guy" next
-    "@whose eyebrows are connected and who also has a gold tooth.{wait}{set(flag 774)}" eob
+    "@whose eyebrows are connected and who also has a gold tooth." wait
+    set(FLG_MOON_WARP_X)	// 774
+    eob
 
 l_0xc978aa:
     "@The Mani Mani Statue is up ahead, but I'm going to stop you right here." next
-    "@Huzzah!{pause(20)}" linebreak
+    "@Huzzah!" pause(20) linebreak
     "  You really surprised me!" next
     "@You're the man whose eyebrows are connected and who has a gold tooth!" next
-    "@Whadya say we dump these brats and go drink us some bourbon or something?![03][1F F1 74 05 62 01][1F 61]{set(flag 63)}" eob
+    "@Whadya say we dump these brats and go drink us some bourbon or something?!" promptw
+    "[1F F1 74 05 62 01]"
+    wait_for_movement
+    set(FLG_MOON_R_DISAPPEAR)	// 63
+    eob
 
 l_0xc9794b:
     "@(It is a golden statue that you have seen before.)[03]" call(data_23.l_0xc68583) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}" call(data_24.l_0xc69082) "[1F F1 7E 05 7B 02]{set(flag 59)}{set(flag 75)}[1F 21 9A][1F 41 05][1F E5 FF]{pause(20)}" goto(l_0xc97990)
@@ -84,53 +95,79 @@ l_0xc97b35:
 l_0xc97b6b:
     "[19 1F]{swap}[19 21 00]{result_is(2)}[1B 03 {e(l_0xc97c30)}][19 25 00][1B 03 {e(l_0xc97bc4)}][1D 20][1B 03 {e(l_0xc97bab)}]" newline
     "@{user} took" linebreak
-    "  the [1C 05 00] out and" next
+    "  the {itemname(0)} out and" next
     "@{target} ate it.{sound(68)}[03]" eob
 
 l_0xc97bab:
     newline
     "@{user}[19 1F]{swap} ate" linebreak
-    "  the [1C 05 00].{sound(68)}[03]{pause(1)}" eob
+    "  the {itemname(0)}.{sound(68)}[03]{pause(1)}" eob
 
 l_0xc97bc4:
-    "{swap}{store_registers}[1D 20][1B 03 {e(l_0xc97c06)}]" newline
+    swap store_registers
+    "[1D 20]" goto_if_true(l_0xc97c06)
+    newline
     "{store_registers}@{user} took" linebreak
-    "  the [1C 05 00]," next
-    "[19 1F]{swap}  used it on" linebreak
-    "  [1C 05 00] and" next
-    "@{target} ate it.{sound(68)}{pause(1)}[03]" eob
+    "  the {itemname(0)}," next
+    return_action_argument swap
+    "  used it on" linebreak
+    "  {itemname(0)} and" next
+    "@{target} ate it."
+    sound(SND_EAT)	// 68
+    pause(1)
+    promptw
+    eob
 
 l_0xc97c06:
     newline
     "@{user} took" linebreak
-    "  the [1C 05 00]" next
-    "[19 1F]{swap}@and used it on" linebreak
-    "  the [1C 05 00].{sound(68)}{pause(1)}[03]" eob
+    "  the {itemname(0)}" next
+    return_action_argument swap
+    "@and used it on" linebreak
+    "  the {itemname(0)}." 
+    sound(SND_EAT)	// 68
+    pause(1)
+    promptw
+    eob
 
 l_0xc97c30:
-    "[1D 20][1B 03 {e(l_0xc97c5f)}]" newline
-    "@{user}[19 1F]{swap} took" linebreak
-    "  the [1C 05 00]" next
-    "@and {target} drank it.{sound(68)}{pause(1)}[03]" eob
+    "[1D 20]" goto_if_true(l_0xc97c5f)
+    newline
+    "@{user}" return_action_argument swap " took" linebreak
+    "  the {itemname(0)}" next
+    "@and {target} drank it."
+    sound(SND_EAT)	// 68
+    pause(1)
+    promptw
+    eob
 
 l_0xc97c5f:
     newline
-    "@{user}[19 1F]{swap} drank" linebreak
-    "  the [1C 05 00].{sound(68)}{pause(1)}[03]" eob
+    "@{user}" return_action_argument swap " drank" linebreak
+    "  the {itemname(0)}.{sound(68)}{pause(1)}[03]" eob
 
 l_0xc97c7b:
     newline
-    "@" call(data_37.l_0xc7e6d7) "[19 1F]{swap} ate" linebreak
-    "  the [1C 05 00]" call(together) "{sound(68)}{pause(1)}[03]" eob
+    "@" call(data_37.l_0xc7e6d7) return_action_argument swap " ate" linebreak
+    "  the {itemname(0)}" call(together) "{sound(68)}{pause(1)}[03]" eob
 
 together:
-    "[19 10 01]{swap}{counter(1)}" goto(tog1)
+    party_pos_check(1) swap
+    counter(1)
+    goto(tog1)
 
 tog1:
-    "{inc}{ctoarg}[1D 19 00][1B 03 {e(tog2)}][19 10 00][1D 0D 00 01 02][1B 03 {e(tog2)}][19 10 00][1D 0D 00 01 03][1B 03 {e(tog2)}]" goto(tog1)
+    inc ctoarg
+    "[1D 19 00]" goto_if_true(tog2)
+    "[19 10 00]"
+    "[1D 0D 00 01 02]" goto_if_true(tog2)
+    "[19 10 00]"
+    "[1D 0D 00 01 03]" goto_if_true(tog2)
+    goto(tog1)
 
 tog2:
-    "{ctoarg}{swap}[09 05 {e(tog3)} {e(tog3)} {e(tog4)} {e(tog5)} {e(tog5)}]" eob
+    ctoarg swap
+    "[09 05 {e(tog3)} {e(tog3)} {e(tog4)} {e(tog5)} {e(tog5)}]" eob
 
 tog3:
     "." eob
@@ -142,98 +179,154 @@ tog5:
     " together." eob
 
 l_0xc97c9d:
-    "[1D 20][1B 02 {e(l_0xc97cb0)}]" newline
-    "@It was pretty good.[03]" goto(l_0xc97cb0)
+    "[1D 20]" goto_if_false(l_0xc97cb0)
+    newline
+    "@It was pretty good." promptw
+    goto(l_0xc97cb0)
 
 l_0xc97cb0:
     eob
 
 l_0xc97cb1:
     "[1D 20][1B 02 {e(l_0xc97cc9)}]" newline
-    "@It didn't taste very good.[03]" goto(l_0xc97cc9)
+    "@It didn't taste very good." promptw
+    goto(l_0xc97cc9)
 
 l_0xc97cc9:
     eob
 
 l_0xc97cca:
     newline
-    "@{user}[19 1F]{swap} sprinkled" linebreak
-    "  the [1C 05 00] over " call(data_37.l_0xc7e66e) " head." next
+    "@{user}" return_action_argument swap " sprinkled" linebreak
+    "  the {itemname(0)} over " call(data_37.l_0xc7e66e) " head." next
     "@Yoicks!! {user} turned" linebreak
-    "  into a gigantic, fire-breathing dragon![03]" eob
+    "  into a gigantic, fire-breathing dragon!" promptw
+    eob
 
 l_0xc97d21:
     newline
-    "@{user}[19 1F]{swap} sprayed a blast of" linebreak
-    "  [1C 05 00]!{sound(71)}[03]" eob
+    "@{user}" return_action_argument swap " sprayed a blast of" linebreak
+    "  {itemname(0)}!{sound(71)}" promptw
+    eob
 
 l_0xc97d43:
     newline
-    "@{user}[19 1F]{swap} used" linebreak
-    "  the [1C 05 00]!" next
-    "@Suddenly, something unknown burst from the box.[03]" eob
+    "@{user}" return_action_argument swap " used" linebreak
+    "  the {itemname(0)}!" next
+    "@Suddenly, something unknown burst from the box." promptw
+    eob
 
 l_0xc97d75:
     newline
-    "@{user}[19 1F]{swap} used" linebreak
-    "  the [1C 05 00]!" next
+    "@{user}" return_action_argument swap " used" linebreak
+    "  the {itemname(0)}!" next
     "@Then, something sticky" linebreak
-    "  stuck to the enemy![03]" eob
+    "  stuck to the enemy!" promptw
+    eob
 
 l_0xc97da3:
     newline
-    "@{user}[19 1F]{swap} used" linebreak
-    "  the [1C 05 00]!" next
+    "@{user}" return_action_argument swap " used" linebreak
+    "  the {itemname(0)}!" next
     "@Suddenly, some Strawberry tofu" linebreak
-    "  was produced![03]" eob
+    "  was produced!" promptw
+    eob
 
 l_0xc97ddc:
     newline
-    "@{user}[19 1F]{swap} fired" linebreak
-    "  the [1C 05 00]!{sound(70)}[03]" eob
+    "@{user}" return_action_argument swap " fired" linebreak
+    "  the {itemname(0)}!"
+    sound(SND_MISSILE)	// 70
+    promptw
+    eob
 
 l_0xc97df5:
     newline
-    "@{user}[19 1F]{swap} fired" linebreak
-    "  5 Pencil rockets!{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}{sound(70)}{pause(8)}[03]" eob
+    "@{user}" return_action_argument swap " fired" linebreak
+    "  5 Pencil rockets!"
+    // sound(SND_MISSILE)	// 70
+    sound(SND_MISSILE) pause(8)
+    sound(SND_MISSILE) pause(8)
+    sound(SND_MISSILE) pause(8)
+    sound(SND_MISSILE) pause(8)
+    sound(SND_MISSILE) pause(8)
+    promptw
+    eob
 
 l_0xc97e24:
     newline
-    "@{user}[19 1F]{swap} fired" linebreak
-    "  20 Pencil rockets!{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}{sound(70)}{pause(4)}[03]" eob
+    "@{user}" return_action_argument swap " fired" linebreak
+    "  20 Pencil rockets!"
+    // sound(SND_MISSILE)	// 70
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    sound(SND_MISSILE) pause(4)
+    promptw
+    eob
 
 l_0xc97e9e:
     newline
-    "@{user}[19 1F]{swap} fired" linebreak
-    "  the [1C 05 00]!{sound(70)}[03]" eob
+    "@{user}" return_action_argument swap " fired" linebreak
+    "  the {itemname(0)}!"
+    sound(SND_MISSILE)	// 70
+    promptw
+    eob
 
 l_0xc97eb7:
     newline
-    "@{user}[19 1F]{swap} threw" linebreak
-    "  the [1C 05 00]!{sound(70)}[03]" eob
+    "@{user}" return_action_argument swap " threw" linebreak
+    "  the {itemname(0)}!"
+    sound(SND_MISSILE)	// 70
+    promptw
+    eob
 
 l_0xc97ed1:
-    "[19 1F]{swap}" newline
+    return_action_argument swap
+    newline
     "@{user} took a snake" linebreak
-    "  out of the [1C 05 00]" next
-    "  and threw it![03]" eob
+    "  out of the {itemname(0)}" next
+    "  and threw it!" promptw
+    eob
 
 l_0xc97efa:
     newline
-    "@{user}[19 1F]{swap} used [1C 05 00] and " call(data_37.l_0xc7e66e) " teeth" next
+    "@{user}" return_action_argument swap " used {itemname(0)} and " call(data_37.l_0xc7e66e) " teeth" next
     "@were white and breath was fresh!" next
     "@The brightness of" linebreak
     "  {user}'s teeth" next
-    "@made the enemy scared![03]" eob
+    "@made the enemy scared!" promptw
+    eob
 
 l_0xc97f56:
     newline
-    "[19 1F]{swap}@{user} lashed out" linebreak
-    "  with the [1C 05 00]![03]" eob
+    return_action_argument swap
+    "@{user} lashed out" linebreak
+    "  with the {itemname(0)}!" promptw
+    eob
 
 l_0xc97f72:
     newline
-    "[19 10 02]{result_is(9)}[1B 02 {e(l_0xc97f84)}]" call(data_43.l_0xc88000) eob
+    party_pos_check(2)
+    result_is(9) goto_if_false(l_0xc97f84)
+    call(data_43.l_0xc88000)
+    eob
 
 l_0xc97f84:
     goto(data_43.l_0xc8807d)
@@ -244,73 +337,118 @@ l_0xc97f89:
 l_0xc97f8a:
     newline
     "@{user}[19 1F]{swap} threw" linebreak
-    "  the [1C 05 00]!" next
-    "@The [1C 05 00] is" linebreak
+    "  the {itemname(0)}!" next
+    "@The {itemname(0)} is" linebreak
     "  biting!" next
     eob
 
 l_0xc98000:
-    "@(The Mani Mani Statue is glowing strangely...){wait}{sound(113)}" eob
+    "@(The Mani Mani Statue is glowing strangely...)" wait
+    sound(SND_MANIMANI)	// 113
+    eob
 
 l_0xc98024:
     title(1, Carpainter)
-    "[06 7A 00 {e(l_0xc981c6)}][06 44 00 {e(l_0xc982b3)}]{set(flag 744)}@Thanks for coming!{pause(15)}  I've been waiting for you." next
+    goto_if_flag(FLG_HAPPY_CARPAINTER_ITEMFULL, l_0xc981c6)	// 0x7A, 122
+    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc982b3)	// 0x44, 68
+    set(FLG_HAPPY_THUNDER)	// 744
+    "@Thanks for coming!" pause(15)
+    "  I've been waiting for you." next
     "@I need your assistance to help make the world blue" next
     "@and change it into a happy and peaceful society." next
-    "@Will you and [1C 02 02] be my right-hand assistants?" linebreak
+    "@Will you and {name(2)} be my right-hand assistants?" linebreak
+    // two_choice_menu
     "  [19 02]Yes" eob
 
 l_0xc980ab:
     "  [19 02]No" eob
 
 l_0xc980b2:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc98148)} {e(l_0xc980c1)}]" goto(l_0xc980c1)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc98148)} {e(l_0xc980c1)}]"
+    goto(l_0xc980c1)
 
 l_0xc980c1:
-    "@If you don't want to be my right hand,{pause(15)} my left would be just fine..." next
-    "@Just kidding!{pause(20)}  Your existence is a problem for me and my religion." next
-    "@Defy me,{pause(15)} and I'll end your pitiful game![03]" call(data_23.l_0xc6847a) "[1B 03 {e(data_23.l_0xc683de)}][1D 05 FF 01][1B 03 {e(l_0xc9817a)}]" eob
+    "@If you don't want to be my right hand,| my left would be just fine..." next
+    "@Just kidding!" pause(20)
+    "  Your existence is a problem for me and my religion." next
+    "@Defy me,| and I'll end your pitiful game!" promptw
+    call(data_23.l_0xc6847a) goto_if_true(data_23.l_0xc683de)
+    "[1D 05 FF 01]" goto_if_true(l_0xc9817a)
+    eob
 
 l_0xc98148:
-    "@You fool,{pause(20)} I have drawn you into my trap.{wait}" call(data_23.l_0xc6847a) "[1B 03 {e(data_23.l_0xc683de)}][1D 05 FF 01][1B 03 {e(l_0xc9817a)}]" eob
+    "@You fool,/| I have drawn you into my trap." wait
+    call(data_23.l_0xc6847a) goto_if_true(data_23.l_0xc683de)
+    hasitem(-1,1)	// Check if we have the Franklin Badge
+    goto_if_true(l_0xc9817a)
+    eob
 
 l_0xc9817a:
-    "{window_open(1)}" newline
+    window_open(1)
+    newline
     title(1, Carpainter)
     "@Do you see the gold figure behind me..." next
-    "@Since I got the statue,{pause(15)} I have been doing peculiar things." next
-    "{set(flag 44)}" goto(l_0xc981c6)
+    "@Since I got the statue,| I have been doing peculiar things." next
+    set(FLG_HAPPY_POKEY_APPEAR)	// 44
+    goto(l_0xc981c6)
 
 l_0xc981c6:
-    "@Please forgive me, if you can...{pause(20)}  I just wanted to have a normal life." next
-    "@I apologize{pause(20)} to everyone." next
-    "@Here's the key to open the jail in the mountain cabin where [1C 02 02] is being held." next
+    "@Please forgive me, if you can..." pause(20)
+    "  I just wanted to have a normal life." next
+    "@I apologize/| to everyone." next
+    "@Here's the key to open the jail in the mountain cabin where {name(2)} is being held." next
     "@Take the key and go." next
-    "{set(flag 68)}{unset(flag 175)}{unset(flag 45)}{set(flag 351)}{set(flag 352)}{set(flag 353)}{set(flag 354)}{set(flag 355)}{set(flag 356)}[1D 03 FF][1B 02 {e(l_0xc9827c)}][1D 0E 00 AB]" call(data_36.l_0xc7dcb6) "{wait}{window_closeall}{unset(flag 122)}" eob
+    if flg_KeyItems { give_menu_key_item(CABIN_KEY) wait }
+    else {
+    	char_inventory_vacancy(-1) goto_if_false(l_0xc9827c)
+    	give_and_check(0, CABIN_KEY)	// 0xAB, 171, Cabin key
+    	call(data_36.l_0xc7dcb6) wait
+    }
+    // FLG_WIN_CARPAINTER is already set by give_menu_key_item, but we'll set again anyway
+    set(FLG_WIN_CARPAINTER)	// 68
+    unset(FLG_HAPPY_SWITCH)	// 175
+    unset(FLG_GRFD_POKEY_APPEAR)	// 45
+    set(FLG_HAPPY_UPRIGHT_1_DISAPPEAR)	// 351
+    set(FLG_HAPPY_UPRIGHT_2_DISAPPEAR)	// 352
+    set(FLG_HAPPY_UPRIGHT_3_DISAPPEAR)	// 353
+    set(FLG_HAPPY_UPRIGHT_4_DISAPPEAR)	// 354
+    set(FLG_HAPPY_UPRIGHT_5_DISAPPEAR)	// 355
+    set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
+    unset(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
+    window_closeall
+    eob
 
 l_0xc9827c:
-    "{set(flag 122)}@Your backpack is full..." next
+    set(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 
+    "@Your backpack is full..." next
     "@You should take this even if you need to throw away one of your items." end
 
 l_0xc982b3:
     title(1, Carpainter)
-    "@Please forgive me, if you can...{pause(20)}  I just wanted to have a normal life." next
+    "@Please forgive me, if you can..." pause(20)
+    "  I just wanted to have a normal life." next
     "@I apologize to everyone." end
 
 l_0xc982f2:
-    "[06 44 00 {e(l_0xc9833f)}]@<Intruder!>{pause(10)}" next
-    "@I yelled,{pause(10)} but I don't know what to do beyond that!" end
+    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc9833f)	// 0x44, 68
+    "@<Intruder!>" pause(10) next
+    "@I yelled,// but I don't know what to do beyond that!" end
 
 l_0xc9833f:
     "@So you're the boy that... that..." next
-    "@You went after Mr. Carpainter and...{pause(20)} you're awesome!" end
+    "@You went after Mr. Carpainter and.../| you're awesome!" end
 
 l_0xc98374:
-    "[06 02 00 {e(l_0xc983de)}]@Blue, blue." next
+    goto_if_flag(FLG_TEMP_1, l_0xc983de)	// 2
+    "@Blue, blue." next
     "@Oh, you'd like to be one of us?" next
     "@Then, give up what" linebreak
     "  you're doing" next
-    "@and go meet the great Mr. Carpainter as soon as possible.[03][1F F1 7A 01 15 01][1F 61]{set(flag 2)}" eob
+    "@and go meet the great Mr. Carpainter as soon as possible." promptw
+    "[1F F1 7A 01 15 01]"
+    wait_for_movement
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc983de:
     "@Blue, blue." next
@@ -319,86 +457,128 @@ l_0xc983de:
     "@go meet the great Mr. Carpainter as soon as possible." end
 
 l_0xc98424:
-    "[06 03 00 {e(l_0xc98465)}]@Blue, blue." next
-    "@...What?  I'm in your way?{pause(20)}  Well, then, I'll move aside for you.[03][1F F1 7B 01 15 01][1F 61]{set(flag 3)}" eob
+    goto_if_flag(FLG_TEMP_2, l_0xc98465)	// 3
+    "@Blue, blue." next
+    "@...What?  I'm in your way?" pause(20)
+    "  Well, then, I'll move aside for you." promptw
+    "[1F F1 7B 01 15 01]"
+    wait_for_movement
+    set(FLG_TEMP_2)	// 3
+    eob
 
 l_0xc98465:
     "@Blue, blue." next
     "@I moved out of your way." end
 
 l_0xc9847f:
-    "[06 04 00 {e(l_0xc984e3)}]@Blue, blue." next
+    goto_if_flag(FLG_TEMP_3, l_0xc984e3)	// 4
+    "@Blue, blue." next
     "@...Don't bother us.{pause(20)}  We're in the middle of prayer." next
-    "@Okay, I'll move out of your way.  Go quickly![03][1F F1 7C 01 15 01][1F 61][1F F1 7C 01 2A 00]{set(flag 4)}" eob
+    "@Okay, I'll move out of your way.  Go quickly!" promptw
+    "[1F F1 7C 01 15 01]"
+    wait_for_movement
+    "[1F F1 7C 01 2A 00]"
+    set(FLG_TEMP_3)	// 4
+    eob
 
 l_0xc984e3:
     "@Blue, blue." next
     "@...Is it your hobby or something to bother others while they pray?!" end
 
 l_0xc98517:
-    "[06 05 00 {e(l_0xc98571)}]@Blue, blue." next
+    goto_if_flag(FLG_TEMP_4, l_0xc98571)	// 5
+    "@Blue, blue." next
     "@...What?  Are you saying that I'm only capable of walking in place?" next
-    "@That's not true, see![03][1F F1 7D 01 16 01][1F 61][1F F1 7D 01 2A 00]{set(flag 5)}" eob
+    "@That's not true, see!" promptw
+    "[1F F1 7D 01 16 01]"
+    wait_for_movement
+    "[1F F1 7D 01 2A 00]"
+    set(FLG_TEMP_4)	// 5
+    eob
 
 l_0xc98571:
     "@Blue, blue." next
     "@You must need help, because you're just standing around!" end
 
 l_0xc98598:
-    "[06 06 00 {e(l_0xc985e0)}]@Green, green." next
-    "@Ooops, that's not it...{pause(20)}  I'm still new at this.[03][1F F1 7E 01 15 01][1F 61][1F F1 7E 01 2A 00]{set(flag 6)}" eob
+    goto_if_flag(FLG_TEMP_5, l_0xc985e0)	// 6
+    "@Green, green." next
+    "@Ooops, that's not it..." pause(20)
+    "  I'm still new at this." promptw
+    "[1F F1 7E 01 15 01]"
+    wait_for_movement
+    "[1F F1 7E 01 2A 00]"
+    set(FLG_TEMP_5)	// 6
+    eob
 
 l_0xc985e0:
     "@Blue, blue." next
-    "@Now I got it.{pause(20)}" linebreak
+    "@Now I got it." pause(20) linebreak
     "  Blue, blue." end
 
 l_0xc98602:
-    "[06 07 00 {e(l_0xc98631)}]@Blue, blue." next
-    "@I'll stand somewhere else.[03][1F F1 7F 01 16 01][1F 61]{set(flag 7)}" eob
+    goto_if_flag(FLG_TEMP_6, l_0xc98631)	// 7
+    "@Blue, blue." next
+    "@I'll stand somewhere else." promptw
+    "[1F F1 7F 01 16 01]"
+    wait_for_movement
+    set(FLG_TEMP_6)	// 7
+    eob
 
 l_0xc98631:
     "@Blue, blue" next
     "@Lagoon blue, blue." end
 
 l_0xc9864b:
-    "[06 08 00 {e(l_0xc986b0)}]@Burrr, burrr." next
+    goto_if_flag(FLG_TEMP_7, l_0xc986b0)	// 8
+    "@Burrr, burrr." next
     "@Don't glare at me with such a stern look!" next
-    "@Okay, fine.{pause(20)} I'll move out of your way.[03][1F F1 80 01 15 01][1F 61][1F F1 80 01 2A 00]{set(flag 8)}" eob
+    "@Okay, fine./| I'll move out of your way." promptw
+    "[1F F1 80 01 15 01]"
+    wait_for_movement
+    "[1F F1 80 01 2A 00]"
+    set(FLG_TEMP_7)	// 8
+    eob
 
 l_0xc986b0:
     "@Burrr, burrr." next
     "@Is scaring me that much fun for you?" end
 
 l_0xc986cc:
-    "[06 5F 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 5F 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@I say,{pause(15)} <Arm the torpedoes, full speed ahead!>..." next
     "@or something like that.{pause(20)}  So now I'll crush you![03]" call(data_23.l_0xc68500) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 81 01 7B 02]{set(flag 351)}" eob
 
 l_0xc9873b:
-    "[06 60 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 60 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@Don't disrupt our meeting!{pause(15)}  I'll stomp on you![03]" call(data_23.l_0xc68507) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 82 01 7B 02]{set(flag 352)}" eob
 
 l_0xc98785:
-    "[06 61 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 61 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@You strange, unmasked fellow.  Don't go to Heaven![03]" call(data_23.l_0xc6850e) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 83 01 7B 02]{set(flag 353)}" eob
 
 l_0xc987cf:
-    "[06 62 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 62 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@Hey you!  Anti-blue boy!{pause(15)}  You're getting on my nerves![03]" call(data_23.l_0xc68515) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 84 01 7B 02]{set(flag 354)}" eob
 
 l_0xc9881e:
-    "[06 63 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 63 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@There's no salvation for non-believers!{pause(15)}  Go to Hell![03]" call(data_23.l_0xc6851c) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 85 01 7B 02]{set(flag 355)}" eob
 
 l_0xc9886f:
-    "[06 64 01 {e(data_35.l_0xc7c588)}]@Blue, blue." next
+    "[06 64 01 {e(data_35.l_0xc7c588)}]"
+    "@Blue, blue." next
     "@This should wake you up!{pause(15)}" linebreak
     "  Aa{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}a{pause(5)}g{pause(5)}g{pause(5)}h{pause(5)}h{pause(5)}h!!![03]" call(data_23.l_0xc68523) "[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 86 01 7B 02]{set(flag 356)}" eob
 
 l_0xc988cb:
     "@Blue, blue." next
-    "@Your outfit...{pause(20)} the color is wicked." end
+    "@Your outfit.../| the color is wicked." end
 
 l_0xc988f1:
     "@Blue, blue." next
@@ -412,19 +592,27 @@ l_0xc98940:
     "@Thanks, ahead of time." end
 
 l_0xc9894e:
-    "[06 44 00 {e(l_0xc98b07)}]{window_open(1)}@Excuse me, tourist." next
+    "[06 44 00 {e(l_0xc98b07)}]"
+    window_open(1)
+    "@Excuse me, tourist." next
     "@I'm collecting donations to help protect the world from contaminants." next
     "@Donate whatever you can." linebreak
-    "{open_wallet}[19 02]Yes" eob
+    open_wallet
+    // two_choice_menu
+    "[19 02]Yes" eob
 
 l_0xc989af:
     "  [19 02]No" eob
 
 l_0xc989b6:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc98a27)} {e(l_0xc989c5)}]" goto(l_0xc989c5)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc98a27)} {e(l_0xc989c5)}]"
+    goto(l_0xc989c5)
 
 l_0xc989c5:
-    "[1D 14 01 00 00 00][1B 03 {e(l_0xc989ea)}]@I'll be your shadow, then.{wait}{window_closeall}" goto(data_33.l_0xc79081)
+    "[1D 14 01 00 00 00]" goto_if_true(l_0xc989ea)
+    "@I'll be your shadow, then." wait
+    window_closeall
+    goto(data_33.l_0xc79081)
 
 l_0xc989e9:
     eob
@@ -432,38 +620,70 @@ l_0xc989e9:
 l_0xc989ea:
     "@Incredible!" next
     "@I can't believe people exist who have no money at all..." next
-    "@Blue, blue!{wait}{window_closeall}" goto(data_33.l_0xc7907a)
+    "@Blue, blue!" wait
+    window_closeall
+    goto(data_33.l_0xc7907a)
 
 l_0xc98a27:
     "@How much would you like to donate?" linebreak
-    "    $[1F 52 02]{clearline}{swap}[18 07 01 00 00 00 01][1B 02 {e(l_0xc989c5)}][1D 14 00 00 00 00][1B 03 {e(l_0xc98ae8)}]{sound(118)}[1D 09 00 00]{open_wallet}@Your good deed will be rewarded.{pause(20)}  Here's a postcard for you." next
-    "[1D 03 FF][1B 02 {e(l_0xc98ab2)}][1D 0E 00 A5]" call(data_36.l_0xc7dccf) "[03]" newline
-    "@Go and be happy!{wait}{window_closeall}" goto(data_33.l_0xc7907a)
+    "    ${number_input(2)}" clearline
+    swap compare_register(1,0) goto_if_false(l_0xc989c5)
+    amount_costs_too_much(0) goto_if_true(l_0xc98ae8)
+    sound(SND_CHICKEN2)	// 118
+    takemoney(0)
+    open_wallet
+    "@Your good deed will be rewarded." pause(20)
+    "  Here's a postcard for you." next
+    "[1D 03 FF]" goto_if_false(l_0xc98ab2)
+    // 0xA5, 165, Picture postcard
+    "[1D 0E 00 A5]"
+    call(data_36.l_0xc7dccf) promptw
+    newline
+    "@Go and be happy!" wait
+    window_closeall
+    goto(data_33.l_0xc7907a)
 
 l_0xc98ab2:
-    "@I wanted to give you a postcard.{pause(20)}  But... you can't accept it." next
-    "@You have too many items.{wait}{window_closeall}" eob
+    "@I wanted to give you a postcard." pause(20)
+    "  But... you can't accept it." next
+    "@You have too many items." wait
+    window_closeall
+    eob
 
 l_0xc98ae8:
-    "[1D 14 01 00 00 00][1B 03 {e(l_0xc989ea)}]@...no jokes allowed.{wait}{window_closeall}" eob
+    amount_costs_too_much(1) goto_if_true(l_0xc989ea)
+    "@...No jokes allowed." wait
+    window_closeall
+    eob
 
 l_0xc98b07:
-    "@Finally, I have a chance to apologize.{wait}{window_closeall}" eob
+    "@Finally, I have a chance to apologize." wait
+    window_closeall
+    eob
 
 l_0xc98b24:
-    "{font_saturn}[06 44 00 {e(l_0xc98b5a)}]@I not know you." next
+    font_saturn
+    "[06 44 00 {e(l_0xc98b5a)}]"
+    "@I not know you." next
     "@My kind are in valley over there." next
-    "@Bye bye.{wait}{font_normal}" eob
+    "@Bye bye." wait
+    font_normal
+    eob
 
 l_0xc98b5a:
-    "{font_saturn}@Hi,{pause(15)} you." next
-    "{wait}{font_normal}" eob
+    font_saturn
+    "@Hi,| you." next
+    // wait	// Why is this double click here?
+    font_normal
+    eob
 
 l_0xc98b68:
     call(data_13.l_0xc5d30b) eob
 
 l_0xc98b6e:
-    "[06 49 00 {e(l_0xc98940)}][06 44 00 {e(l_0xc98be1)}]@Mr. Carpainter wants a girl." next
+    "[06 49 00 {e(l_0xc98940)}]"
+    "[06 44 00 {e(l_0xc98be1)}]"
+    "@Mr. Carpainter wants a girl." next
     "@No, I don't mean it like that." next
     "@I meant he's looking for a girl who can be the goddess of Happy Happyism." next
     "@I heard he's already got her." end
@@ -472,12 +692,22 @@ l_0xc98be1:
     "@I apologize." end
 
 l_0xc98bef:
-    "[06 49 00 {e(l_0xc98940)}][06 44 00 {e(l_0xc98cc1)}][06 02 00 {e(l_0xc98cb2)}]@Psss psss psss psss" next
-    "@That overweight kid helped me.{pause(20)}  We kidnapped [1C 02 02]." next
+    "[06 49 00 {e(l_0xc98940)}]"
+    "[06 44 00 {e(l_0xc98cc1)}]"
+    "[06 02 00 {e(l_0xc98cb2)}]"
+    "@Psss psss psss psss" next
+    "@That overweight kid helped me." pause(20)
+    "  We kidnapped {name(2)}." next
     "@You know, she's hidden in a mountain cabin." next
-    "@Oh, {pause(20)}oh!  {pause(20)}Now I've done it!" next
-    "@I thought you were one of us!{pause(20)}  You know I was joking!" next
-    "@Ha ha ha!... Just forget about this...{sound(114)}{wait}{set(flag 2)}" eob
+    "@Oh,/| oh!" pause(20)
+    "  Now I've done it!" next
+    "@I thought you were one of us!" pause(20)
+    "  You know I was joking!" next
+    "@Ha ha ha!... Just forget about this..."
+    sound(SND_CREEPY)	// 114
+    wait
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc98cb2:
     "@I won't tell you anything." end
@@ -486,16 +716,34 @@ l_0xc98cc1:
     "@You really think I was a bad boy?" end
 
 l_0xc98cd3:
-    "[1F F1 9B 01 6F 02] [1F 61][1F E6 9B 01]{window_open(1)}"
+    "[1F F1 9B 01 6F 02]"" "
+    wait_for_movement
+    "[1F E6 9B 01]"
+    window_open(1)
     title(1, Porky)
-    "@That was really something, [1C 02 01]!{pause(20)}  It looks like I somehow woke up, too.{pause(15)}" next
-    "@Let's be friends again!{pause(20)}" next
-    "@C'mon, reply to me, will ya? I promise I'll be a good guy.{pause(60)}" next
+    "@That was really something, {name(1)}!" pause(20)
+    "  It looks like I somehow woke up, too." pause(15) next
+    "@Let's be friends again!" pause(20) next
+    "@C'mon, reply to me, will ya? I promise I'll be a good guy." pause(60) next
     "@I guess that's a no, huh?" next
-    "{window_closeall}[1F E9 9B 01][1F 61][1F E6 9B 01]{window_open(1)}"
+    window_closeall
+    "[1F E9 9B 01]"
+    wait_for_movement
+    "[1F E6 9B 01]"
+    window_open(1)
     title(1, Porky)
-    "@Bleeehhh!{pause(20)}  See you, sucker![03]{window_closeall}[1F E9 9B 01]{unset(flag 44)}[1F 41 06]" eob
+    "@Bleeehhh!" pause(20)
+    "  See you, sucker!" promptw
+    window_closeall
+    "[1F E9 9B 01]"
+    unset(FLG_HAPPY_POKEY_APPEAR)	// 44
+    "[1F 41 06]"
+    eob
 
 l_0xc98d78:
-    "[06 49 00 {e(data_55.l_0xc98e5e)}][06 44 00 {e(data_55.l_0xc98e33)}][06 43 00 {e(data_55.l_0xc98df9)}]@I'm monitoring those who don't pay at the food stand.[06 78 00 {e(data_55.l_0xc98db4)}]" end
+    "[06 49 00 {e(data_55.l_0xc98e5e)}]"
+    "[06 44 00 {e(data_55.l_0xc98e33)}]"
+    "[06 43 00 {e(data_55.l_0xc98df9)}]"
+    "@I'm monitoring those who don't pay at the food stand."
+    "[06 78 00 {e(data_55.l_0xc98db4)}]" end
 

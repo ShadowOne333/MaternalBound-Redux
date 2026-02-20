@@ -6,68 +6,126 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc688af:
-    "{unset(flag 496)}[1F D2 12]{set(flag 715)}" eob
+    unset(FLG_PHOTO_BUILDING)	// 496
+    summon_photographer(18)	// 0x12
+    set(FLG_PHOTO_18)	// 715
+    eob
 
 l_0xc688b9:
-    "{unset(flag 497)}[1F D2 13]{set(flag 716)}" eob
+    unset(FLG_PHOTO_DEPT)	// 497
+    summon_photographer(19)	// 0x13
+    set(FLG_PHOTO_19)	// 716
+    eob
 
 l_0xc688c3:
-    "{unset(flag 498)}[1F D2 14]{set(flag 717)}" eob
+    unset(FLG_PHOTO_RAMMA)	// 498
+    summon_photographer(20)	// 0x14
+    set(FLG_PHOTO_20)	// 717
+    eob
 
 l_0xc688cd:
-    "{unset(flag 499)}[1F D2 15]{set(flag 718)}" eob
+    unset(FLG_PHOTO_RAMMA_FIELD)	// 499
+    summon_photographer(21)	// 0x15
+    set(FLG_PHOTO_21)	// 718
+    eob
 
 l_0xc688d7:
-    "{unset(flag 500)}[1F D2 16]{set(flag 719)}" eob
+    unset(FLG_PHOTO_STONEHENGE)	// 500
+    summon_photographer(22)	// 0x16
+    set(FLG_PHOTO_22)	// 719
+    eob
 
 l_0xc688e1:
-    "{unset(flag 501)}[1F D2 17]{set(flag 720)}" eob
+    unset(FLG_PHOTO_SUMS_HOTEL)	// 501
+    summon_photographer(23)	// 0x17
+    set(FLG_PHOTO_23)	// 720
+    eob
 
 l_0xc688eb:
-    "{unset(flag 502)}[1F D2 18]{set(flag 721)}" eob
+    unset(FLG_PHOTO_SUMS_REST)	// 502
+    summon_photographer(24)	// 0x18
+    set(FLG_PHOTO_24)	// 721
+    eob
 
 l_0xc688f5:
-    "{unset(flag 503)}[1F D2 19]{set(flag 722)}" eob
+    unset(FLG_PHOTO_SUMS_BEACH)	// 503
+    summon_photographer(25)	// 0x19
+    set(FLG_PHOTO_25)	// 722
+    eob
 
 l_0xc688ff:
-    "{unset(flag 504)}[1F D2 1A]{set(flag 723)}" eob
+    unset(FLG_PHOTO_TOTO)	// 504
+    summon_photographer(26)	// 0x1A
+    set(FLG_PHOTO_26)	// 723
+    eob
 
 l_0xc68909:
-    "{unset(flag 505)}[1F D2 1B]{set(flag 724)}" eob
+    unset(FLG_PHOTO_SKARABI)	// 505
+    summon_photographer(27)	// 0x1B
+    set(FLG_PHOTO_27)	// 724
+    eob
 
 l_0xc68913:
-    "{unset(flag 506)}[1F D2 1C]{set(flag 725)}" eob
+    unset(FLG_PHOTO_PYRAMID)	// 506
+    summon_photographer(28)	// 0x1C
+    set(FLG_PHOTO_28)	// 725
+    eob
 
 l_0xc6891d:
-    "{unset(flag 507)}[1F D2 1D]{set(flag 726)}" eob
+    unset(FLG_PHOTO_DUNGEONMAN)	// 507
+    summon_photographer(29)	// 0x1D
+    set(FLG_PHOTO_29)	// 726
+    eob
 
 l_0xc68927:
-    "{unset(flag 508)}[1F D2 1E]{set(flag 727)}" eob
+    unset(FLG_PHOTO_MAKYOU)	// 508
+    summon_photographer(30)	// 0x1E
+    set(FLG_PHOTO_30)	// 727
+    eob
 
 l_0xc68931:
-    "[1F D2 1F]{set(flag 728)}{unset(flag 509)}" eob
+    summon_photographer(31)	// 0x1F
+    set(FLG_PHOTO_31)	// 728
+    unset(FLG_PHOTO_GUMI)	// 509
+    eob
 
 l_0xc6893b:
-    "[1F D2 20]{unset(flag 510)}{set(flag 729)}" eob
+    summon_photographer(32)	// 0x20
+    unset(FLG_PHOTO_SATURN)	// 510
+    set(FLG_PHOTO_32)	// 729
+    eob
 
 l_0xc68945:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}@Hello, [1C 02 03]?" next
+    music(115)
+    pause(60)
+    wait
+    stop_music(0)
+    sound(SND_PHONEPICKUP)	// 11
+    window_open(1)
+    "@Hello, {name(3)}?" next
     "@Oh, happy day!" next
     "@I finally got a hold of you..." next
-    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc6899a)}]@Oh, [1C 01 34]!" next
+    // Check if Jeff's present
+    counter(3) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6899a)
+    // Stat 0x34 / 52 = Jeff's name
+    "@Oh, {stat(52)}!" next
     goto(l_0xc689fb)
 
 l_0xc6899a:
     "@Hey..." next
     "@Oh, no!" next
-    "@You're not [1C 02 03]!" next
-    "@I've got to contact [1C 02 03]!" next
+    "@You're not {name(3)}!" next
+    "@I've got to contact {name(3)}!" next
     "@I know... just put the receiver close to his ear, and he'll hear me..." next
     "@I know he will." next
     goto(l_0xc689fb)
@@ -79,19 +137,31 @@ l_0xc689fb:
     "@You know, players just like you!" next
     "@That's right, you--the one holding the controller." next
     "@Would you register your name, please?" next
-    "@Don't spell your name wrong![03]{window_closeall}[1F 07 02]{pause(30)}{music(2)}[1F 41 03]{window_open(1)}"
+    "@Don't spell your name wrong!" promptw
+    window_closeall
+    music_effect(2)	// Quick music fade
+    pause(30)
+    music(2)
+    special_event(3)	// Player's name input at Summers
+    window_open(1)
     title(1, Tony)
     "@Thanks, game player!" next
     "@Thank you very much!" next
-    "@Is this correct?[03]{window_closeall}[1F 41 03][1F 07 02]{pause(30)}{window_open(1)}"
+    "@Is this correct?" promptw
+    window_closeall
+    special_event(3)	// Player's name input at Summers
+    music_effect(2)	// Quick music fade
+    pause(30)
+    window_open(1)
     title(1, Tony)
     "@I apologize for any trouble this may have caused you." next
-    "@Don't put my friend [1C 02 03] in any dangerous situations, okay?" next
+    "@Don't put my friend {name(3)} in any dangerous situations, okay?" next
     "@I worry about him." next
     "@I really do..." next
     "@Well, talk to you later..." next
-    "@...[1C 02 03]..." next
-    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 02 {e(l_0xc68b7d)}]"
+    "@...{name(3)}..." next
+    // Check if Jeff's present
+    counter(3) call(data_36.l_0xc7dc7f) goto_if_false(l_0xc68b7d)
     title(1, Tony)
     "@It seems like you're not feeling well..." next
     "@Get better soon..." next
@@ -99,7 +169,7 @@ l_0xc689fb:
 
 l_0xc68b7d:
     "@I pray from the bottom of my heart that I'll get to see you again!" next
-    "@From{pause(15)} T-{pause(10)}O-{pause(10)}N-{pause(10)}Y..." next
+    "@From| T-//O-//N-//Y..." next
     "@You got that?" next
     "@Well I've been on the phone too long..." next
     "@Gotta go..." next
@@ -108,69 +178,98 @@ l_0xc68b7d:
     "@So long..." next
     "@This time, I'm really gonna hang up." next
     "@Goodbye." next
-    "@*Beeeeep*{wait}{window_closeall}{sound(11)}{set(flag 539)}{music_resume}[1F 41 06]" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@*Beeeeep*" wait
+    window_closeall
+    set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
+    music_resume
+    OSS_off	// special_event(6)
+    eob
 
 l_0xc68c3f:
-    "{window_open(1)}@....." next
-    "@[1C 02 01]?" next
+    window_open(1)
+    "@....." next
+    "@{name(1)}?" next
     "@..." next
-    "@[1C 02 01]" next
-    "{pause(60)}" linebreak
-    "{pause(60)}" linebreak
-    "@...[1C 02 01]..." next
+    "@{name(1)}" next
+    pause(60) linebreak
+    pause(60) linebreak
+    "@...{name(1)}..." next
     "@I'm a friend who you have never met before..." next
-    "@My name is [1C 02 02]." next
+    "@My name is {name(2)}." next
     title_paula(1)
     next
-    "{pause(60)}" linebreak
+    pause(60) linebreak
     "@Can you hear me calling you?" next
-    "@I am [1C 02 02]..." next
+    "@I am {name(2)}..." next
     "@..." next
-    "{pause(60)}" linebreak
-    "{pause(60)}" linebreak
-    "@.....{wait}{window_closeall}{pause(1)}{unset(flag 634)}" goto(data_48.l_0xc90f90)
+    pause(60) linebreak
+    pause(60) linebreak
+    "@....." wait
+    window_closeall
+    pause(1)
+    unset(FLG_ONET_POLA_TELEPATHY)	// 634
+    goto(data_48.l_0xc90f90)
 
 l_0xc68cc2:
     eob
 
 l_0xc68cc3:
-    "{window_open(1)}@....." next
-    "@[1C 02 01]!" next
-    "@I...[1C 02 02]..." next
+    window_open(1)
+    "@....." next
+    "@{name(1)}!" next
+    "@I... {name(2)}..." next
+    "@I am {name(2)}..." next
     title_paula(1)
-    "@I am [1C 02 02]..." next
     "@Can you hear me calling you?" next
     "@Help!" next
     "@Come and help me!" next
     "@Um, I don't know where I am..." next
     "@I can hear water running in the distance..." next
-    "{pause(20)}" linebreak
-    "{pause(60)}" linebreak
-    "@[1C 02 01], please help me!{wait}{window_closeall}{pause(1)}{unset(flag 635)}" goto(data_48.l_0xc90f90)
+    pause(20) linebreak
+    pause(60) linebreak
+    "@{name(1)}, please help me!" wait
+    window_closeall
+    pause(1)
+    unset(FLG_TWSN_POLA_TELEPATHY)	// 635
+    goto(data_48.l_0xc90f90)
 
 l_0xc68d59:
     eob
 
 l_0xc68d5a:
-    "{window_open(1)}"
+    window_open(1)
     title_paula(1)
     "@You are a friend who I have never met before..." next
-    "@[1C 02 03]..." next
+    "@{name(3)}..." next
     "@Head south..." next
-    "@I am [1C 01 1E]..." next
-    "@If you hear this message, go to the south...{wait}{window_closeall}{unset(flag 636)}" goto(data_48.l_0xc90f90)
+    // Stat 0x1E / 30 = Paula's name
+    "@I am {stat(30)}..." next
+    "@If you hear this message, go to the south..." wait
+    window_closeall
+    unset(FLG_WINS_POLA_TELEPATHY)	// 636
+    goto(data_48.l_0xc90f90)
 
 l_0xc68db4:
     eob
 
 l_0xc68db5:
-    "{window_open(1)}@Ahhhhh.[03]{window_closeall}" eob
+    window_open(1)
+    "@Ahhhhh." promptw
+    window_closeall
+    eob
 
 l_0xc68dc4:
-    "{window_open(1)}@Hummmmmm.[03]{window_closeall}" eob
+    window_open(1)
+    "@Hummmmmm." promptw
+    window_closeall
+    eob
 
 l_0xc68dd5:
-    "{window_open(1)}@He he heh.[03]{window_closeall}" eob
+    window_open(1)
+    "@He he heh." promptw
+    window_closeall
+    eob
 
 l_0xc68de4:
     "@(This dungeon has no entrance fee." next
@@ -180,7 +279,10 @@ l_0xc68e0c:
     "@(It looks like a doorway...)" end
 
 l_0xc68e1c:
-    "{sound(11)}{pause(20)}" call(data_57.l_0xc9b176) "@Hello!" next
+    sound(SND_PHONEPICKUP)	// 11
+    pause(20)
+    call(data_57.l_0xc9b176)
+    "@Hello!" next
     "@Is this Mr. Fork of the Scarabia Cultural Museum?..." next
     "@It doesn't sound like you..." next
     "@Well, I'll quickly tell you my story, 'cause I'm busy, busy, busy!" next
@@ -194,10 +296,21 @@ l_0xc68e1c:
     "@I'm telling you..." next
     "@It's fantastic!....." next
     "@It's outrageous!..." next
-    "@*Click*  Beeeeep{wait}{sound(11)}{unset(flag 687)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@*Click*  Beeeeep" wait
+    unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+    eob
 
 l_0xc68f74:
-    "[19 19 00 00]{swap}{store_registers}{result_is(210)}[1B 03 {e(l_0xc68fa6)}]{load_registers}{result_is(184)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Do you really think this looks like a pencil?" end
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
+    store_registers
+    // Check for Eraser eraser, item 0xD2, 210
+    result_is(ERASER_ERASER) goto_if_true(l_0xc68fa6)
+    load_registers
+    // Check for Pencil eraser, item 0xB8, 184
+    result_is(PENCIL_ERASER) goto_if_false(data_35.l_0xc7c6b6)
+    "@Do you really think this looks like a pencil?" end
 
 l_0xc68fa6:
     "@It looks sort of like some primitive human statue" next
@@ -205,18 +318,38 @@ l_0xc68fa6:
     "@But it definitely doesn't look like an eraser... does it?" end
 
 l_0xc69007:
-    "[19 19 00 00]{swap}{result_is(253)}[1B 02 {e(data_35.l_0xc7c6b6)}]@Cows and carrots?..." next
+    if flag flg_KeyItems { swap return_action_argument }
+    else { return_item_in_slot(0, 0) swap }
+    // Check for Rabbits' carrot, item 0xFD, 253
+    result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)
+    "@Cows and carrots?..." next
     "@That's a nutty combination!" end
 
 l_0xc69038:
-    "[19 19 00 00]{swap}{result_is(167)}[1B 02 {e(data_35.l_0xc7c6b6)}][19 23 DE 02 01 01 00][1F 16 DE 02 00]@Ah, [1C 02 01]... you've read it already." next
+    return_item_in_slot(0,0) swap
+    // Check for Letter from Tony, item 0xA7, 167
+    result_is(167) goto_if_false(data_35.l_0xc7c6b6)
+    return_direction_npc_to_object(734,1,1)	// 0x02DE, 0x01, 0x0001
+    sprite_direction(734,0)	// 0x02DE, 0x00
+    "@Ah, {name(1)}... you've read it already." next
     "@...That Tony has a heart of gold..." end
 
-l_0xc69082:
-    "{unset(flag 180)}{unset(flag 181)}{unset(flag 645)}{unset(flag 446)}{unset(flag 646)}{unset(flag 647)}{unset(flag 648)}{unset(flag 694)}{unset(flag 695)}" call(data_19.l_0xc64650) "{unset(flag 754)}" eob
+l_0xc69082:	// Unset all the delivery flags in preparation for Magicant fadeout event
+    unset(FLG_DELIVERY_PIZZA)	// 180
+    unset(FLG_DELIVERY_UNSOU)	// 181
+    unset(FLG_DELIVERY_UNSOU_B)	// 645
+    unset(FLG_DELIVERY_CUSTOMER)	// 446
+    unset(FLG_DELIVERY_CUSTOMER_B)	// 646
+    unset(FLG_DELIVERY_CUSTOMER_C)	// 647
+    unset(FLG_DELIVERY_CUSTOMER_D)	// 648
+    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+    call(data_19.l_0xc64650)
+    unset(FLG_SYS_DISTLPT)	// 754
+    eob
 
 l_0xc690a6:
-    "@Only [1C 02 01] can absorb the power of this place." end
+    "@Only {name(1)} can absorb the power of this place." end
 
 l_0xc690c5:
     "@Hey, hey!!" next
@@ -226,122 +359,241 @@ l_0xc690ff:
     "@Welcome to the rear-end of the world's longest traffic jam!" end
 
 l_0xc69121:
-    "[06 E2 02 {e(l_0xc692ea)}][06 E1 02 {e(l_0xc691e9)}][06 09 00 {e(l_0xc691c2)}][06 08 00 {e(l_0xc691b5)}][06 07 00 {e(l_0xc691a7)}][06 06 00 {e(l_0xc6919d)}][06 05 00 {e(l_0xc69191)}][06 04 00 {e(l_0xc69185)}][06 03 00 {e(l_0xc6917b)}][06 02 00 {e(l_0xc6916f)}]@What?{wait}{set(flag 2)}" eob
+    goto_if_flag(FLG_TWSN_HOTEL_A_END, l_0xc692ea)	// 0x02E2, 738
+    goto_if_flag(FLG_TWSN_HOTEL_A, l_0xc691e9)	// 0x02E1, 737
+    goto_if_flag(FLG_TEMP_8, l_0xc691c2)	// 9
+    goto_if_flag(FLG_TEMP_7, l_0xc691b5)	// 8
+    goto_if_flag(FLG_TEMP_6, l_0xc691a7)	// 7
+    goto_if_flag(FLG_TEMP_5, l_0xc6919d)	// 6
+    goto_if_flag(FLG_TEMP_4, l_0xc69191)	// 5
+    goto_if_flag(FLG_TEMP_3, l_0xc69185)	// 4
+    goto_if_flag(FLG_TEMP_2, l_0xc6917b)	// 3
+    goto_if_flag(FLG_TEMP_1, l_0xc6916f)	// 2
+    "@What?" wait
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc6916f:
-    "@So... what?{wait}{set(flag 3)}" eob
+    "@So... what?" wait
+    set(FLG_TEMP_2)	// 3
+    eob
 
 l_0xc6917b:
-    "@Huh?{wait}{set(flag 4)}" eob
+    "@Huh?" wait
+    set(FLG_TEMP_3)	// 4
+    eob
 
 l_0xc69185:
-    "@Pardon?{wait}{set(flag 5)}" eob
+    "@Pardon?" wait
+    set(FLG_TEMP_4)	// 5
+    eob
 
 l_0xc69191:
-    "@Geez...{wait}{set(flag 6)}" eob
+    "@Geez..." wait
+    set(FLG_TEMP_5)	// 6
+    eob
 
 l_0xc6919d:
-    "@Mmm?{wait}{set(flag 7)}" eob
+    "@Mmm?" wait
+    set(FLG_TEMP_6)	// 7
+    eob
 
 l_0xc691a7:
-    "@You're annoying!{wait}{set(flag 8)}" eob
+    "@You're annoying!" wait
+    set(FLG_TEMP_7)	// 8
+    eob
 
 l_0xc691b5:
-    "@Dang me!{wait}{set(flag 9)}" eob
+    "@Dang me!" wait
+    set(FLG_TEMP_8)	// 9
+    eob
 
 l_0xc691c2:
-    "@Yeah, yeah!{wait}{set(flag 737)}{unset(flag 2)}{unset(flag 3)}{unset(flag 4)}{unset(flag 5)}{unset(flag 6)}{unset(flag 7)}{unset(flag 8)}{unset(flag 9)}" eob
+    "@Yeah, yeah!" wait
+    set(FLG_TWSN_HOTEL_A)	// 737
+    unset(FLG_TEMP_1)	// 2
+    unset(FLG_TEMP_2)	// 3
+    unset(FLG_TEMP_3)	// 4
+    unset(FLG_TEMP_4)	// 5
+    unset(FLG_TEMP_5)	// 6
+    unset(FLG_TEMP_6)	// 7
+    unset(FLG_TEMP_7)	// 8
+    unset(FLG_TEMP_8)	// 9
+    eob
 
 l_0xc691e9:
-    "[06 08 00 {e(l_0xc692a0)}][06 07 00 {e(l_0xc6928a)}][06 06 00 {e(l_0xc69278)}][06 05 00 {e(l_0xc69258)}][06 04 00 {e(l_0xc69243)}][06 03 00 {e(l_0xc69230)}][06 02 00 {e(l_0xc69226)}]@Ah, ha ha!{wait}{set(flag 2)}" eob
+    goto_if_flag(FLG_TEMP_7, l_0xc692a0)	// 8
+    goto_if_flag(FLG_TEMP_6, l_0xc6928a)	// 7
+    goto_if_flag(FLG_TEMP_5, l_0xc69278)	// 6
+    goto_if_flag(FLG_TEMP_4, l_0xc69258)	// 5
+    goto_if_flag(FLG_TEMP_3, l_0xc69243)	// 4
+    goto_if_flag(FLG_TEMP_2, l_0xc69230)	// 3
+    goto_if_flag(FLG_TEMP_1, l_0xc69226)	// 2
+    "@Ah, ha ha!" wait
+    set(FLG_TEMP_1)	// 2
+    eob
 
 l_0xc69226:
-    "@Hey, you!{wait}{set(flag 3)}" eob
+    "@Hey, you!" wait
+    set(FLG_TEMP_2)	// 3
+    eob
 
 l_0xc69230:
-    "@Later days, pal!{wait}{set(flag 4)}" eob
+    "@Later days, pal!" wait
+    set(FLG_TEMP_3)	// 4
+    eob
 
 l_0xc69243:
-    "@Ah!  Hah Hahhhh...{wait}{set(flag 5)}" eob
+    "@Ah!  Hah Hahhhh..." wait
+    set(FLG_TEMP_4)	// 5
+    eob
 
 l_0xc69258:
-    "@It's so{pause(5)}o{pause(5)}o hot today." next
-    "@It rocks!{wait}{set(flag 6)}" eob
+    "@It's so/o/o hot today." next
+    "@It rocks!" wait
+    set(FLG_TEMP_5)	// 6
+    eob
 
 l_0xc69278:
-    "@Is it cold today?{wait}{set(flag 7)}" eob
+    "@Is it cold today?" wait
+    set(FLG_TEMP_6)	// 7
+    eob
 
 l_0xc6928a:
     "@Oh ho ho!" next
-    "@See ya!{wait}{set(flag 8)}" eob
+    "@See ya!" wait
+    set(FLG_TEMP_7)	// 8
+    eob
 
 l_0xc692a0:
     "@Here, get yourself a juice or something..." next
     "@*Ka-ching*" next
-    "[1D 08 32 00]{sound(116)}{open_wallet}{pause(60)}[19 10 01]{rtoarg}@([1C 02 01] got 50 dollars.){wait}{set(flag 738)}" eob
+    givemoney(50)	// 0x0032
+    sound(SND_BOXTAKE)	// 116
+    open_wallet
+    pause(60)
+    party_pos_check(1) rtoarg
+    "@({name(1)} got 50 dollars.)" wait
+    set(FLG_TWSN_HOTEL_A_END)	// 738
+    eob
 
 l_0xc692ea:
     "@Good luck, okay?" end
 
 l_0xc692f7:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{window_open(1)}"
+    music(115)
+    pause(60)
+    wait
+    stop_music(0)
+    sound(SND_PHONEPICKUP)	// 11
+    window_open(1)
     title(1, Tracy)
     "@Sorry to bother you, big bro..." next
     "@This is Escargo Express." next
     "@I had a phone call from a friend of yours recently." next
-    "[06 B3 02 {e(l_0xc69394)}]@She asked me to hold onto the Pencil eraser machine." next
-    "@I figured it's just some kind of prank,{pause(20)} but if it's legit," next
+    goto_if_flag(FLG_SKRB_PU_TAKANOME, l_0xc69394)	// 0x02B3, 691
+    "@She asked me to hold onto the Pencil eraser machine." next
+    "@I figured it's just some kind of prank,/| but if it's legit," next
     "@I can deliver it to you anytime." next
     "@Do you know anything about this?" next
-    "{set(flag 692)}" goto(l_0xc693be)
+    set(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
+    goto(l_0xc693be)
 
 l_0xc69394:
-    "@He asked me to hold onto the [1C 05 AF] for you." next
+    // Item 0xAF / 175 = Hawk eye
+    "@He asked me to hold onto the {itemname(HAWK_EYE)} for you." next
     "@Do you know anything about this?" next
-    "{set(flag 693)}" goto(l_0xc693be)
+    set(FLG_GLOBAL_LOST_TAKANOME)	// 693
+    goto(l_0xc693be)
 
 l_0xc693be:
     "@Well, since you know about the item, I'll hold onto it for you." next
     "@If you need it, I'll deliver it to you anytime you want." next
     "@Oh yeah, big bro..." next
     "@I'm glad that I could help out you and your friends." next
-    "@*Click*{wait}{window_closeall}{sound(11)}{music_resume}{unset(flag 690)}{unset(flag 691)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@*Click*" wait
+    window_closeall
+    music_resume
+    unset(FLG_FOUR_PAULA_TAKOKESHI)	// 690
+    unset(FLG_SKRB_PU_TAKANOME)	// 691
+    eob
 
 l_0xc6943a:
-    "{window_open(1)}"
+    window_open(1)
     title(1, Escargo)
     "@Escargo Express!" next
     "@<We treat your package like it was our only child>..." next
     "@I'm here with your Pencil eraser." next
-    "[1D 03 FF][1B 02 {e(l_0xc694b9)}][1D 0E 00 B8]{sound(118)}@Here you are." next
-    "@Thank you very much!{wait}{unset(flag 694)}{unset(flag 692)}{window_closeall}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+    char_inventory_vacancy(-1) goto_if_false(l_0xc694b9)
+    give_and_check(0, PENCIL_ERASER)	// 0xB8, 184
+    sound(SND_CHICKEN2)	// 118
+    "@Here you are." next
+    "@Thank you very much!" wait
+    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+    unset(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
+    window_closeall
+    call(data_36.l_0xc7dde8)
+    call(data_36.l_0xc7de72)
+    eob
 
 l_0xc694b9:
     "@You've really got too much stuff already." next
-    "@I hope I can deliver this to you soon![03]{window_closeall}{unset(flag 694)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+    "@I hope I can deliver this to you soon!" promptw
+    window_closeall
+    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+    call(data_36.l_0xc7dde8)
+    call(data_36.l_0xc7de72)
+    eob
 
 l_0xc694f4:
-    "{window_open(1)}"
+    window_open(1)
     title(1, Escargo)
     "@Escargo Express." next
     "@<We treat your package like it was our only child>..." next
     "@I'm here to deliver" linebreak
-    "  the [1C 05 AF]." next
-    "[1D 03 FF][1B 02 {e(l_0xc69571)}][1D 0E 00 AF]{sound(118)}@Here you are." next
-    "@Thank you very much!{wait}{window_closeall}{unset(flag 695)}{unset(flag 693)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+    "  the {itemname(HAWK_EYE)}." next
+    // Item 0xAF / 175 = Hawk eye
+    char_inventory_vacancy(-1) goto_if_false(l_0xc69571)
+    give_and_check(0, HAWK_EYE)	// 0xAF, 175
+    sound(SND_CHICKEN2)	// 118
+    "@Here you are." next
+    "@Thank you very much!" wait
+    window_closeall
+    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+    unset(FLG_GLOBAL_LOST_TAKANOME)	// 693
+    call(data_36.l_0xc7dde8)
+    call(data_36.l_0xc7de72)
+    eob
 
 l_0xc69571:
     "@You've really got too much stuff already." next
-    "@I hope I can deliver this to you soon![03]{window_closeall}{unset(flag 695)}" call(data_36.l_0xc7dde8) call(data_36.l_0xc7de72) eob
+    "@I hope I can deliver this to you soon!" promptw
+    window_closeall
+    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+    call(data_36.l_0xc7dde8)
+    call(data_36.l_0xc7de72)
+    eob
 
 l_0xc695ac:
-    "{unset(flag 694)}{unset(flag 754)}" eob
+    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+    unset(FLG_SYS_DISTLPT)	// 754
+    eob
 
 l_0xc695b3:
-    "{unset(flag 695)}{unset(flag 754)}" eob
+    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+    unset(FLG_SYS_DISTLPT)	// 754
+    eob
 
 l_0xc695ba:
-    "[19 10 01]{rtoarg}{result_is(1)}[1B 02 {e(data_55.l_0xc9992f)}][1D 0D 01 06 02][1B 02 {e(data_55.l_0xc9992f)}]" call(data_35.l_0xc7ce73) eob
+    party_pos_check(1) rtoarg
+    // Check if Ness is the party leader, if not, go to label
+    result_is(1) goto_if_false(data_55.l_0xc9992f)
+    // Check if Ness has asthma, if not, go to label
+    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)	// 1, 6, 2
+    goto_if_false(data_55.l_0xc9992f)
+    call(data_35.l_0xc7ce73)
+    eob
 
 l_0xc695d8:
     "@Yum yum... mmm... I'm eating a Skip sandwich." next
@@ -370,7 +622,9 @@ l_0xc697ba:
     "@I know, it seems pretty iffy, but you should give it a try!" end
 
 l_0xc69861:
-    "{font_saturn}@So Boing!" linebreak
+    // [52] = Saturn font quotation marks
+    font_saturn
+    "@So Boing!" linebreak
     "  You have" linebreak
     "  380 dollars," next
     "@we trade" linebreak
@@ -380,7 +634,10 @@ l_0xc69861:
     "@You have" linebreak
     "  1780 dollars," next
     "@we trade" linebreak
-    "  [52][1C 05 82].[52]{wait}{font_normal}" eob
+    // 0x82 / 130 = Horn of life
+    "  [52]{itemname(130)}.[52]" wait
+    font_normal
+    eob
 
 l_0xc698ca:
     "@That teddy bear they sell over there...I heard it helps in battle." next
@@ -388,10 +645,11 @@ l_0xc698ca:
     "@It looks like a plain ol' teddy bear to me..." end
 
 l_0xc69928:
-    "[06 49 00 {e(l_0xc69ac6)}]@Woof! Woof!" next
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc69ac6)	// 0x49, 73
+    "@Woof! Woof!" next
     "@(I'm Ruffini the dog." next
     title(1, Ruffini)
-    "@I'm being possessed by the spirit of the game designer...{pause(20)} Ruff!" next
+    "@I'm being possessed by the spirit of the game designer.../| Ruff!" next
     "@Do you see the window showing HP and PP at the bottom of the screen?" next
     "@When you go to a store that has equippable items," next
     "@this window will either flash, look normal or become black." next
@@ -410,7 +668,7 @@ l_0xc69ac6:
     "@Here comes the spirit of the game designer again..." next
     "@Ruff!" next
     "@(It looks like the game's finally almost over." next
-    "@If you want to tell me your comments on this game,{pause(20)}" linebreak
+    "@If you want to tell me your comments on this game," pause(20) linebreak
     "  you may write to me." next
     "@Address it to: MOTHER 2, Ruffini the dog," next
     "@and send it to the address listed on the game's packaging." next
@@ -466,13 +724,16 @@ l_0xc69fa9:
     "@(I am not your enemy." next
     "@I am simply your average run-of-the-mill mole." next
     "@Would you like some hints on fighting enemies?)" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc69ffe:
     "[19 02]No" eob
 
 l_0xc6a003:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6a048)} {e(l_0xc6a012)}]" goto(l_0xc6a012)
+    "[1C 07 02][11]{clearline}"
+    "[09 02 {e(l_0xc6a048)} {e(l_0xc6a012)}]"
+    goto(l_0xc6a012)
 
 l_0xc6a012:
     "@(Ah, I see..." next
@@ -546,16 +807,29 @@ l_0xc6a5e0:
     "@Man, a friend like that would be so handy..." end
 
 l_0xc6a666:
-    "{window_open(1)}@When you buy an item that should be equipped," next
+    window_open(1)
+    "@When you buy an item that should be equipped," next
     "@do you bother to actually equip it?" next
     "@Heh eh, I gave a hint to my own enemy..." next
     "@I'm such a rockin' dude!" next
     "@I obviously have total confidence in my own abilities." next
-    "@So... are you ready to get it on, Spanky?[03]{window_closeall}" call(data_23.l_0xc683df) "[1B 03 {e(data_23.l_0xc683de)}][1F 1E 07 00 06]{set(flag 697)}{window_closeall}" eob
+    "@So... are you ready to get it on, Spanky?" promptw
+    window_closeall
+    call(data_23.l_0xc683df) goto_if_true(data_23.l_0xc683de)
+    hide_sprite(7,6)	// 0x0007, 6
+    set(FLG_ONET_SHARK_2F_DISAPPEAR)	// 697
+    window_closeall
+    eob
 
 l_0xc6a725:
-    "[1F 15 B0 01 22 00 01][1F 61]{window_open(1)}" newline
-    "@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax.{wait}{window_closeall}[1F F2 B0 01 21 00]" eob
+    generate_active_sprite(432,34,1)	// 0x01B0, 0x0022, 01
+    wait_for_movement
+    window_open(1)
+    newline
+    "@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax." wait
+    window_closeall
+    change_sprite_movement(432,33)	// 0x01B0, 0x0021
+    eob
 
 l_0xc6a755:
     "@<Hotel Onett>" next
@@ -574,7 +848,8 @@ l_0xc6a7d2:
     "@150 dollars per night for a single room." end
 
 l_0xc6a800:
-    "[06 49 00 {e(l_0xc6a832)}]@<Monotoly Grand Hotel>" next
+    goto_if_flag(FLG_WIN_GIEGU, l_0xc6a832)	// 0x49, 73
+    "@<Monotoly Grand Hotel>" next
     "@75 dollars per night for a single room." end
 
 l_0xc6a832:

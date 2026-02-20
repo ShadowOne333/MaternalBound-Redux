@@ -1,0 +1,458 @@
+/*
+ * RFC: CCScript Standard Library draft
+ * Last modified date: 2026-01-14
+ */
+
+/* Simple commands */
+
+command linebreak "[00]"
+command newline "[01]"
+command eob "[02]"
+// w = "weak." Because the name prompt is used by [14]
+command promptw "[03]"
+command set(f) "[04 {short f}]"
+command unset(f) "[05 {short f}]"
+command goto_if_flag(f, target) "[06 {short f} {long target}]"
+command isset(f) "[07 {short f}]"
+command call(target) "[08 {long target}]"
+// CCScript has no concept of variadic commands. We're probably better off for it, but...
+command switch_goto(num) "[09 {byte num}]"
+    command switch_entry(target) long target
+command goto(target) "[0A {long target}]"
+command result_is(n) "[0B {byte n}]"
+command result_not(n) "[0C {byte n}]"
+command rtoarg "[0D 00]" command ctoarg "[0D 01]"
+command counter(n) "[0E {byte n}]"
+command inc "[0F]"
+command pause(len) "[10 {byte len}]"
+command do_menu "[11]"
+command clearline "[12]"
+command wait "[13]"
+command prompt "[14]"
+// Text compressor option for ccc.exe when
+command comp1(n) "[15 {byte n}]"
+command comp2(n) "[16 {byte n}]"
+command comp3(n) "[17 {byte n}]"
+
+command window_closetop "[18 00]"
+command window_open(n) "[18 01 {byte n}]"
+command back_up_text_rendering_state "[18 02]"
+command window_switch(n) "[18 03 {byte n}]"
+command window_closeall "[18 04]"
+// x = either pixels or tiles (changes based on $5E71 in the localized version), y = lines
+command text_pos(x, y) "[18 05 {byte x} {byte y}]"
+command window_clear "[18 06]"
+command compare_register(num, reg) "[18 07 {long num} {byte reg}]"
+    command compare_result(num) compare_register(num, 0)
+    command compare_argument(num) compare_register(num, 1)
+    command compare_counter(num) compare_register(num, 2)
+command do_menu_in_window_nocancel(win) "[18 08 {byte win}]"
+command do_menu_in_window(win) "[18 09 {byte win}]"
+command show_wallet "[18 0A]"
+    command open_wallet show_wallet
+// 18 0D XX 02 and other versions of 18 0D XX YY do nothing in the vanilla game
+command show_status(char) "[18 0D {byte char} 01]"
+
+command load_str(str) "[19 02 {str} 02]"
+command load_str_callonhover(str, target) "[19 02 {str} 01 {long target}]"
+command unload_strings "[19 04]"
+command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {byte status}]"
+    command inflict(char, status) inflict_status(char, byte[0] status, byte[1] status)
+command get_char_at_pos(pos) "[19 10 {byte pos}]"
+command get_name_letter(char) "[19 11 {byte char}]"
+command get_next_storage_item "[19 14]"
+command get_status(char, group) "[19 16 {byte char} {byte group}]"
+command get_levelup_exp(char) "[19 18 {byte char}]"
+command get_inventory_item(char, slot) "[19 19 {byte char} {byte slot}]"
+command get_storage_item(slot) "[19 1A {byte slot}]"
+command count_loaded_strings(win) "[19 1B {byte win}]"
+command queue_item(char, slot) "[19 1C {byte char} {byte slot}]"
+command get_queued_item(index) "[19 1D {byte index} 00]" command remove_queued_item(index) "[19 1D {byte index} 01]"
+command get_delta "[19 1E]"
+command get_action_arg "[19 1F]"
+command get_party_size "[19 20]"
+command get_food_type(item) "[19 21 {byte item}]"
+    define FOODTYPE_FOOD = 1
+    define FOODTYPE_DRINK = 2
+    define FOODTYPE_CONDIMENT = 3
+// Intended usage: get_dir_from_char(1, TO_CHAR, 2) to get the direction from Ness to Paula in the party
+// You can read it in English, "from character 1 TO_CHARACTER 2"
+command get_dir_from_char(char, to_type, obj) "[19 22 {byte char} {byte to_type} {short obj}]"
+command get_dir_from_npc(npc, to_type, obj) "[19 23 {short npc} {byte to_type} {short obj}]"
+command get_dir_from_sprite(sprite, to_type, obj) "[19 24 {short sprite} {byte to_type} {short obj}]"
+    define TO_CHAR = 1
+    define TO_NPC = 2
+    define TO_SPRITE2 = 3
+command find_condiment(base_food) "[19 25 {byte base_food}]"
+// The saved respawn location is the player's current position!
+// The PSI teleport location is only used by the mostly-unused "Teleport Box" code.
+command set_respawn_point(psi_teleport_location) "[19 26 {byte psi_teleport_location}]"
+command get_stat(s) "[19 27 {byte s}]"
+command get_stat_letter(s) "[19 28 {byte s}]"
+
+command select_char_nocancel(t1, t2, t3, t4, show) "[1A 00 {long t1} {long t2} {long t3} {long t4} {byte show}]"
+command select_char(t1, t2, t3, t4, show) "[1A 01 {long t1} {long t2} {long t3} {long t4} {byte show}]"
+command do_menu_nocancel "[1A 04]"
+command show_inventory(char, window) "[1A 05 {byte char} {byte window}]"
+command do_shop_menu(id) "[1A 06 {byte id}]"
+command show_storage_items "[1A 07]"
+command do_menu_nounload_nocancel "[1A 08]"
+command do_menu_nounload "[1A 09]"
+command phone_call "[1A 0A]"
+command do_teleport_locations_menu "[1A 0B]"
+
+command store_registers "[1B 00]"
+command load_registers "[1B 01]"
+command goto_if_false(target) "[1B 02 {long target}]"
+command goto_if_true(target) "[1B 03 {long target}]"
+command swap "[1B 04]"
+command store_registers_shared "[1B 05]"
+command load_registers_shared "[1B 06]"
+
+command text_color(n) "[1C 00 {byte n}]"
+command stat(n) "[1C 01 {byte n}]"
+command name(char) "[1C 02 {byte char}]"
+command letter(c) "[1C 03 {byte c}]"
+command open_hp "[1C 04]"
+command itemname(item) "[1C 05 {byte item}]"
+command teleportname(dest) "[1C 06 {byte dest}]"
+command print_strings_horizontal(n) "[1C 07 {byte n}]"
+command gfx_text(n) "[1C 08 {byte n}]"
+    // Why did they include the spaces at the end?
+    command smash "{gfx_text(1)}  "
+    command youwon "{gfx_text(2)}  "
+// Need more testing with this one, I don't know what the heck it does
+command set_num_padding(n) "[1C 09 {byte n}]"
+command number(n) "[1C 0A {long n}]"
+command money(n) "[1C 0B {long n}]"
+command print_strings_vertical(cols) "[1C 0C {byte cols}]"
+command user "[1C 0D]"
+command target "[1C 0E]"
+command delta "[1C 0F]"
+// Only in EarthBound
+command zwsp_before_letter(n) "[1C 11 {byte n}]"
+// Only in Mother 2
+command print_party_m2 "[1C 11]"
+command psiname(psi) "[1C 12 {byte psi}]"
+// enemypsi = used by the enemy, targetting the player
+// playerpsi = used by the player, targetting the enemy
+command battle_animation(enemypsi, playerpsi) "[1C 13 {byte enemypsi} {byte playerpsi}]"
+// Only in EarthBound
+command get_user_info(n) "[1C 14 {byte n}]"
+    command get_user_gender get_user_info(1)
+    command get_user_and_cohort_count get_user_info(2)
+// Only in EarthBound
+command get_target_info(n) "[1C 15 {byte n}]"
+    command get_target_gender get_target_info(1)
+    command get_target_and_cohort_count get_target_info(2)
+
+command give(char, item) "[1D 00 {byte char} {byte item}]"
+command take(char, item) "[1D 01 {byte char} {byte item}]"
+command arg_item_type_is_not(type) "[1D 02 {byte type}]"
+    command arg_item_type_is(type) not arg_item_type_is_not(type)
+command get_item_receiver(char) "[1D 03 {byte char}]"
+    command notfull(char) get_item_receiver(char)
+    command full(char) not get_item_receiver(char)
+command hasequipped(char, item) "[1D 04 {byte char} {byte item}]"
+command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
+command deposit(amt) "[1D 06 {long amt}]"
+command withdraw(amt) "[1D 07 {long amt}]"
+command givemoney(amt) "[1D 08 {short amt}]"
+command takemoney(amt) "[1D 09 {short amt}]"
+command get_buying_price(item) "[1D 0A {byte item}]"
+command get_selling_price(item) "[1D 0B {byte item}]"
+command check_impediment_for_storing(char, itemslot) "[1D 0C {byte char} {byte itemslot}]"
+command character_has_status(char, group, status) "[1D 0D {byte char} {byte group} {byte status}]"
+command give_and_return_location(ok_chars, item) "[1D 0E {byte ok_chars} {byte item}]"
+// A bit wordy... "take_slot" in Catador's dumper. As of writing I don't like those style of names
+// (adding "slot" to everywhere that deals with an item location). It may be starting to grow on me
+// though... "take_from_location" and "item_at_location_is_equipped" are awfully wordy
+command take_from_location(char, itemslot) "[1D 0F {byte char} {byte itemslot}]"
+command item_at_location_is_equipped(char, itemslot) "[1D 10 {byte char} {byte itemslot}]"
+command can_equip_item_at_location(char, itemslot) "[1D 11 {byte char} {byte itemslot}]"
+command take_from_location_and_store(char, itemslot) "[1D 12 {byte char} {byte itemslot}]"
+// Arguments unconfirmed
+command give_and_unstore_item(char, storageslot) "[1D 13 {byte char} {byte storageslot}]"
+command cannot_take_money(amt) "[1D 14 {long amt}]"
+    command hasmoney(amt) not cannot_take_money(amt)
+command get_party_size_times(n) "[1D 15 {short n}]"
+command cannot_withdraw(amt) "[1D 17 {long amt}]"
+command store_item(item) "[1D 18 {byte item}]"
+command party_size_smaller_than(n) "[1D 19 {byte n}]"
+command user_and_target_names_identical "[1D 20]"
+command random(inclusive_max) "[1D 21 {byte inclusive_max}]"
+// sector_is_exit_mouse_compatible? ...Nah
+command can_use_exit_mouse "[1D 22]"
+command get_equippable_item_type(item) "[1D 23 {byte item}]"
+    define EQUIPPABLETYPE_OFFENSIVE = 1
+    define EQUIPPABLETYPE_DEFENSIVE = 2
+command get_dad_deposit_money_base(n) "[1D 24 {byte n}]"
+    command get_dad_deposit_money get_dad_deposit_money_base(1)
+    command clear_dad_deposit_money get_dad_deposit_money_base(2)
+
+command heal_percent(char, n) "[1E 00 {byte char} {byte n}]"
+command hurt_percent(char, n) "[1E 01 {byte char} {byte n}]"
+command heal(char, n) "[1E 02 {byte char} {byte n}]"
+command hurt(char, n) "[1E 03 {byte char} {byte n}]"
+command recoverpp_percent(char, n) "[1E 04 {byte char} {byte n}]"
+command consumepp_percent(char, n) "[1E 05 {byte char} {byte n}]"
+command recoverpp(char, n) "[1E 06 {byte char} {byte n}]"
+command consumepp(char, n) "[1E 07 {byte char} {byte n}]"
+command change_level(char, n) "[1E 08 {byte char} {byte n}]"
+// If a script was using this command, change it to use the fixed version below
+// command boost_exp(char, n) "[1E 09 {byte char} {byte[0] n} {byte[1] n} {byte[2] n}]"
+command boost_experience(char, n) "[1E 09 {byte char} {long n}]"
+command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
+command boost_guts(char, n) "[1E 0B {byte char} {byte n}]"
+command boost_speed(char, n) "[1E 0C {byte char} {byte n}]"
+command boost_vitality(char, n) "[1E 0D {byte char} {byte n}]"
+command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"
+
+// The first argument byte is unused
+command music(n) "[1F 00 00 {byte n}]"
+// The argument is unused.
+// All 25 instances of this control code in the main script use an argument of 0.
+// Who the heck chose an argument of 02? Why? I'm intervening here.
+command music_stop "[1F 01 02]" command stop_music "[1F 01 00]"
+command sound(n) "[1F 02 {byte n}]"
+// For symmetry with the above change.
+command music_resume "[1F 03]" command resume_music music_resume
+command text_blips(n) "[1F 04 {byte n}]"
+    define TEXTBLIPS_DEFAULT = 1
+    define TEXTBLIPS_ON = 2
+    define TEXTBLIPS_OFF = 3
+    command text_blips_default text_blips(TEXTBLIPS_DEFAULT)
+    command text_blips_on text_blips(TEXTBLIPS_ON)
+    command text_blips_off text_blips(TEXTBLIPS_OFF)
+command music_switching_off "[1F 05]"
+command music_switching_on "[1F 06]"
+command music_effect(n) "[1F 07 {byte n}]"
+command party_add(char) "[1F 11 {byte char}]"
+command party_remove(char) "[1F 12 {byte char}]"
+command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"
+command party_direction(dir) "[1F 14 {byte dir}]"
+command sprite2_spawn(sprite, move, style) "[1F 15 {short sprite} {short move} {byte style}]"
+command npc_direction(tpt, dir) "[1F 16 {short tpt} {byte dir}]"
+    command sprite_direction(tpt, dir) npc_direction(tpt, dir)
+command npc_spawn(tpt, move, style) "[1F 17 {short tpt} {short move} {byte style}]"
+// 1F 18 and 1F 19 exist, but they're no-ops, so there's no good way to divide up their bytes.
+// Better not to define them.
+command show_npc_float(tpt, float) "[1F 1A {short tpt} {byte float}]"
+    command show_sprite_float(tpt, float) show_npc_float(tpt, float)
+command hide_npc_float(tpt) "[1F 1B {short tpt}]"
+    command hide_sprite_float(tpt) hide_npc_float(tpt)
+command show_char_float(char, float) "[1F 1C {byte char} {byte float}]"
+command hide_char_float(char) "[1F 1D {byte char}]"
+command npc_delete(tpt, style) "[1F 1E {short tpt} {byte style}]"
+    command hide_sprite(tpt, effect) npc_delete(tpt, effect)
+command sprite2_delete(sprite, style) "[1F 1F {short sprite} {byte style}]"
+command teleport(dest, style) "[1F 20 {byte dest} {byte style}]"
+command warp(dest) "[1F 21 {byte dest}]"
+command start_battle(group) "[1F 23 {short group}]"
+command font_normal "[1F 30]"
+command font_saturn "[1F 31]"
+command event(n) "[1F 41 {byte n}]"
+command disable_input "[1F 50]"
+command enable_input "[1F 51]"
+command number_input(digits) "[1F 52 {byte digits}]"
+// Not a fan of this name. Probably should be something that involves "pause"... "pause_debugskip"?
+// But then, [1F 60 00]'s code is used by [03] in battle...
+command wait_input_timeout(n) "[1F 60 {byte n}]"
+command wait_movement "[1F 61]"
+// This messes with more than the prompt/blinking triangle, so "set_prompt" isn't quite accurate.
+// Unfortunately I don't understand what the three values that are arguments do.
+command set_text_mode(n) "[1F 62 {byte n}]"
+command queue_text(a) "[1F 63 {long a}]"
+command backup_npc_members_and_money "[1F 64]"
+command restore_npc_members_and_money "[1F 65]"
+command hotspot_on(slot, hotspot, target) "[1F 66 {byte slot} {byte hotspot} {long target}]"
+command hotspot_off(hotspot) "[1F 67 {byte hotspot}]"
+    command hotspot_slot1_off hotspot_off(1)
+    command hotspot_slot2_off hotspot_off(2)
+    command hotspot_slot_arg_off hotspot_off(0)
+command anchor_set "[1F 68]"
+command anchor_warp "[1F 69]"
+// The "char" argument is not actually used for anything in the vanilla game.
+command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
+    define LEARN_TELEPORT_ALPHA = 1
+    define LEARN_STARSTORM_ALPHA = 2
+    define LEARN_STARSTORM_OMEGA = 3
+    define LEARN_TELEPORT_BETA = 4
+    command learn_teleport_alpha learnpsi(1, LEARN_TELEPORT_ALPHA)
+    command learn_starstorm_alpha learnpsi(4, LEARN_STARSTORM_ALPHA)
+    command learn_starstorm_omega learnpsi(4, LEARN_STARSTORM_OMEGA)
+    command learn_teleport_beta learnpsi(1, LEARN_TELEPORT_BETA)
+// This control code only checks the "Misc flags" portion of an item. It doesn't check specifically
+// for weapons or other equippable stuff.
+// Incidentally, the std.ccs name for this already included that connotation.
+command usable(char, item) "[1F 81 {byte char} {byte item}]"
+command equip(char, itemslot) "[1F 83 {byte char} {byte itemslot}]"
+command do_phone_menu "[1F 90]"
+command face_up_and_set_npc_flag "[1F A0]" command open_present face_up_and_set_npc_flag
+command face_down_and_clear_npc_flag "[1F A1]" command close_present face_down_and_clear_npc_flag
+command npc_flag_is_set "[1F A2]" command is_present_open npc_flag_is_set
+command save "[1F B0]"
+command switch_call(n) "[1F C0 {byte n}]" // switch_entry(a) switch_entry(b) ...
+command try_fixing_an_item(success_percent) "[1F D0 {byte success_percent}]"
+command find_direction_to_truffle "[1F D1]"
+command photo_time(id) "[1F D2 {byte id}]"
+command pathfinding_npc_time(id) "[1F D3 {byte id}]"
+command fade_map_palette(tileset, palette, duration) "[1F E1 {byte tileset} {byte palette} {byte duration}]"
+command sprite2_direction(sprite, dir) "[1F E4 {short sprite} {byte dir}]"
+command char_freeze(num) "[1F E5 {byte num}]"
+    command lock_movement(num) char_freeze(num)
+    command party_freeze char_freeze(0xFF)
+command npc_freeze(num) "[1F E6 {short num}]"
+command sprite2_freeze(num) "[1F E7 {short num}]"
+command char_unfreeze(num) "[1F E8 {byte num}]"
+    command party_unfreeze char_unfreeze(0xFF)
+command npc_unfreeze(num) "[1F E9 {short num}]"
+command sprite2_unfreeze(num) "[1F EA {short num}]"
+command hide_char_with_style(char, style) "[1F EB {byte char} {byte style}]"
+    // There's a single line in the vanilla game that uses a different style
+    // (8 melodies acquired cutscene, [1F EB FF 01]), so this command alone isn't good enough.
+    command hide_char(char) hide_char_with_style(char, 6)
+    command hide_party hide_char(0xFF)
+command show_char(char, style) "[1F EC {byte char} {byte style}]"
+    command show_party(style) show_char(0xFF, style)
+// So... this would just cause the camera to stay where it is? Or would it somehow jump back to the
+// party members? Has anyone tested this?
+// https://discord.com/channels/788839194197360654/809113956576264222/818547351194828840
+command restore_camera "[1F ED]"
+command focus_camera_on_npc(id) "[1F EE {short id}]"
+command focus_camera_on_sprite2(id) "[1F EF {short id}]"
+command bicycle "[1F F0]"
+command npc_do_mc(tpt, move) "[1F F1 {short tpt} {short move}]"
+command sprite2_do_mc(sprite, move) "[1F F2 {short sprite} {short move}]"
+command show_sprite2_float(sprite, float) "[1F F3 {short sprite} {byte float}]"
+command hide_sprite2_float(sprite) "[1F F4 {short sprite}]"
+
+/* Standard macros for multiple commands */
+
+command next {
+    promptw
+    linebreak
+}
+
+command end {
+    wait
+    eob
+}
+
+command toggle(num) {
+    if isset(num) unset(num) else set(num)
+}
+
+command longpause(len) {
+    pause(len)
+    pause(len)
+    pause(len)
+    pause(len)
+    pause(len)
+}
+
+command window_close(n)
+{
+    window_switch(n)
+    window_closetop
+}
+
+command input(n) {
+    number_input(n)
+    rtoarg
+}
+
+command arg(n) {
+    counter(n)
+    ctoarg
+}
+
+command arg_zero {
+    hasmoney(0xFFFFFFFF)
+    swap
+}
+
+command counter_zero {
+    arg_zero
+    counter(0)
+}
+
+command counter_is(n) {
+    ctoarg
+    swap
+    result_is(n)
+}
+
+command healall {
+    heal_percent(0xFF, 100)
+    recoverpp_percent(0xFF, 100)
+}
+
+command battle(num) {
+    window_closeall
+    if start_battle(num) eob
+}
+
+/* Standard ROM[] macros */
+
+// Meant to be used where there is a MOVE_INT* or LOADPTR in the assembly.
+// Probably obsolete because of ASMLoadAddress*... but it's in the standard library.
+command _asmptr(loc,target) {
+    ROMTBL[loc, 1, 1] = short [0] target
+    ROMTBL[loc, 6, 1] = short [1] target
+}
+
+// Links an NPC's text pointer to a label.
+// Don't use this with a CoilSnake project, it may or may not overwrite CCScript changes with its
+// own stuff, depending on compilation order.
+command sprite_link(tptnum, target) {
+    ROMTBL[0xCF898E, 0x11, tptnum] = target
+}
+
+// Sets the starting coordinates, in pixels
+// See FILE_MENU_LOOP (C1F805 in EarthBound)
+command newgame_location(x, y) {
+    ROM[0xC1FE9E] = short x
+    ROM[0xC1FE9B] = short y
+}
+
+// Sets the new game startup script pointer
+// See FILE_MENU_LOOP (C1F805 in EarthBound)
+command newgame_startup(target) {
+    _asmptr(0xC1FEA4, target)
+}
+
+// Sets a script pointer to be used whenever the screen refreshes.
+// The vanilla game apparently uses this to make Buzz Buzz appear based on appropriate flags at
+// every door without needing to manually spawn him using the door scripts.
+// See SPAWN_BUZZ_BUZZ (C06B21 in EarthBound).
+command on_refresh(target) {
+    _asmptr(0xC06B29, target)
+}
+
+// Sets the script to select when selecting "Check" from the A-button pause menu does not find a
+// nearby object to look at.
+// It doesn't replace the script in OPEN_MENU_BUTTON_CHECKTALK (C13C32), only OPEN_MENU_BUTTON (C134A7).
+command on_check(target) {
+    _asmptr(0xC13BE9, target)
+}
+
+// Sets the file select music
+// It doesn't replace the instance of the setup music in FILE_MENU_LOOP, only FILE_SELECT_MENU.
+// See FILE_SELECT_MENU (C1ED5B in EarthBound)
+command setup_music(music) {
+    ROM[0xC1F04A] = byte music
+}
+
+// Sets the naming screen music
+// See FILE_MENU_LOOP (C1F805 in EarthBound)
+command setup_music2(music) {
+	ROM[0xC1F8FC] = byte music
+}
+
+// Sets the setup background
+// See FILE_SELECT_INIT (C0B525 in EarthBound)
+command setup_background(bg) {
+	ROM[0xC0B5F1] = short bg
+}
+

@@ -9,8 +9,8 @@ import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
-import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
+import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
@@ -25,205 +25,399 @@ l_0xc6822a:
     eob
 
 l_0xc68253:
-    "[06 0A 00 {e(l_0xc68264)}]{window_open(1)}" call(data_27.l_0xc6eeb4) "{window_closeall}" goto(l_0xc68264)
+    goto_if_flag(FLG_TEMP_9, l_0xc68264)	// 0x0A, 10
+    window_open(1)
+    call(data_27.l_0xc6eeb4)
+    window_closeall
+    goto(l_0xc68264)
 
 l_0xc68264:
-    "[1F 11 02][1F EB 02 06][1F F1 69 03 2F 00][1F 61][1F 1E 69 03 06][1F EC 02 01]{music(11)}{pause(120)}{pause(120)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@([1C 02 02] joins you.)[03]{window_closeall}" eob
+    add_party_member(2)	// Add Paula
+    hide_char(2)
+    change_npc_movement(873,47)	// 0x0369, 0x002F
+    wait_for_movement
+    hide_sprite(873,6)		// 0x0369, 06
+    show_char(2,1)	// 0x02, 01
+    music(11)
+    pause(120) pause(120)
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@({name(2)} joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc6829f:
-    "{window_closeall}[1F 11 0B][1F EB 0B 06][1F F1 21 05 2F 00][1F 61][1F 1E 21 05 06][1F EC 0B 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+    window_closeall
+    add_party_member(11)	// Add Flying man 1
+    hide_char(11)	// 0x0B
+    change_npc_movement(1313,47)	// 0x0521, 0x002F
+    wait_for_movement
+    hide_sprite(1313,6)		// 0x0521, 06
+    show_char(11,1)	// 0x0B, 01
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Flying Man joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc682dd:
-    "{window_closeall}[1F 11 0C][1F EB 0C 06][1F F1 22 05 2F 00][1F 61][1F 1E 22 05 06][1F EC 0C 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+    window_closeall
+    add_party_member(12)	// Add Flying man 2
+    hide_char(12)	// 0x0C
+    change_npc_movement(1314,47)	// 0x0522, 0x002F
+    wait_for_movement
+    hide_sprite(1314,6)		// 0x0522, 06
+    show_char(12,1)	// 0x0C, 01
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Flying Man 2 joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc6831b:
-    "{window_closeall}[1F 11 0D][1F EB 0D 06][1F F1 23 05 2F 00][1F 61][1F 1E 23 05 06][1F EC 0D 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+    window_closeall
+    add_party_member(13)	// Add Flying man 3
+    hide_char(13)	// 0x0D
+    change_npc_movement(1315,47)	// 0x0523, 0x002F
+    wait_for_movement
+    hide_sprite(1315,6)		// 0x0523, 06
+    show_char(13,1)	// 0x0D, 01
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Flying Man 3 joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc68359:
-    "{window_closeall}[1F 11 0E][1F EB 0E 06][1F F1 24 05 2F 00][1F 61][1F 1E 24 05 06][1F EC 0E 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
+    window_closeall
+    add_party_member(14)	// Add Flying man 4
+    hide_char(14)	// 0x0E
+    change_npc_movement(1316,47)	// 0x0524, 0x002F
+    wait_for_movement
+    hide_sprite(1316,6)		// 0x0524, 06
+    show_char(14,1)	// 0x0E, 01
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Return of the Flying Man joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc68397:
-    "{window_closeall}[1F 11 0F][1F EB 0F 06][1F F1 25 05 2F 00][1F 61][1F 1E 25 05 06][1F EC 0F 01]{music(123)}{pause(120)}{pause(60)}{music_resume}{window_open(1)}@(The {call(flyingman)} joins you.)[03]{window_closeall}" eob
-
-flyingman:
- "[06 CF 00 {e(flyingman5)}][06 CE 00 {e(flyingman4)}][06 CD 00 {e(flyingman3)}][06 CC 00 {e(flyingman2)}]Flying Man" eob
-flyingman2:
- "Flying Man 2" eob
-flyingman3:
- "Flying Man 3" eob
-flyingman4:
- "Return of the Flying Man" eob
-flyingman5:
- "Final Flying Man" eob
+    window_closeall
+    add_party_member(15)	// Add Flying man 5
+    hide_char(15)	// 0x0F
+    change_npc_movement(1317,47)	// 0x0525, 0x002F
+    wait_for_movement
+    hide_sprite(1317,6)		// 0x0525, 06
+    show_char(15,1)	// 0x0F, 01
+    music(123)	// Party member joins music
+    pause(120) pause(60)
+    music_resume
+    window_open(1)
+    "@(The Final Flying Man joins you.)" promptw
+    window_closeall
+    eob
 
 l_0xc683d5:
-    "[1F 12 07]" eob
+    party_remove(7)	// King
+    eob
 
 l_0xc683d9:
     newline
-    "[1F 12 08]" eob
+    party_remove(8)	// Tony
+    eob
 
 l_0xc683de:
     eob
 
-l_0xc683df:
-    "{window_closeall}[1F 23 AF 01]" eob
+l_0xc683df:	// Skate Punk + Pogo Punk + Yes Man Junior
+    window_closeall
+    battle_no_handling(431)	// 0x01AF
+    eob
 
-l_0xc683e6:
-    "{window_closeall}[1F 23 B0 01]" eob
+l_0xc683e6:	// Pogo Punk
+    window_closeall
+    battle_no_handling(432)	// 0x01B0
+    eob
 
-l_0xc683ed:
-    "{window_closeall}[1F 23 B0 01]" eob
+l_0xc683ed:	// Pogo Punk
+    window_closeall
+    battle_no_handling(432)	// 0x01B0
+    eob
 
-l_0xc683f4:
-    "{window_closeall}[1F 23 B1 01]" eob
+l_0xc683f4:	// Yes Man Junior
+    window_closeall
+    battle_no_handling(433)	// 0x01B1
+    eob
 
-l_0xc683fb:
-    "{window_closeall}[1F 23 C0 01]" eob
+l_0xc683fb:	// Frank
+    window_closeall
+    battle_no_handling(448)	// 0x01C0
+    eob
 
-l_0xc68402:
-    "{window_closeall}[1F 23 C1 01]" eob
+l_0xc68402:	// Frankystein Mark II
+    window_closeall
+    battle_no_handling(449)	// 0x01C1
+    eob
 
-l_0xc68409:
-    "{window_closeall}[1F 23 C2 01]" eob
+l_0xc68409:	// Titanic Ant + Black Antoid
+    window_closeall
+    battle_no_handling(450)	// 0x01C2
+    eob
 
-l_0xc68410:
-    "{window_closeall}[1F 23 C7 01]" eob
+l_0xc68410:	// Mondo Mole
+    window_closeall
+    battle_no_handling(455)	// 0x01C7
+    eob
 
-l_0xc68417:
-    "{window_closeall}[1F 23 D1 01]" eob
+l_0xc68417:	// Shrooom!
+    window_closeall
+    battle_no_handling(465)	// 0x01D1
+    eob
 
-l_0xc6841e:
-    "{window_closeall}[1F 23 C9 01]" eob
+l_0xc6841e:	// Trillion Year Sprout + Tough Walking Sprout
+    window_closeall
+    battle_no_handling(457)	// 0x01C9
+    eob
 
-l_0xc68425:
-    "{window_closeall}[1F 23 CF 01]" eob
+l_0xc68425:	// Plague Rat of Doom
+    window_closeall
+    battle_no_handling(463)	// 0x01CF
+    eob
 
-l_0xc6842c:
-    "{window_closeall}[1F 23 D0 01]" eob
+l_0xc6842c:	// Thunder and Storm
+    window_closeall
+    battle_no_handling(464)	// 0x01D0
+    eob
 
-l_0xc68433:
-    "{window_closeall}[1F 23 D6 01]" eob
+l_0xc68433:	// Electro Specter
+    window_closeall
+    battle_no_handling(470)	// 0x01D6
+    eob
 
-l_0xc6843a:
-    "{window_closeall}[1F 23 D7 01]" eob
+l_0xc6843a:	// Carbon Dog -> Diamond Dog
+    window_closeall
+    battle_no_handling(471)	// 0x01D7
+    eob
 
-l_0xc68441:
-    "{window_closeall}[1F 23 C3 01]" eob
+l_0xc68441:	// Cop
+    window_closeall
+    battle_no_handling(451)	// 0x01C3
+    eob
 
-l_0xc68448:
-    "{window_closeall}[1F 23 C3 01]" eob
+l_0xc68448:	// Cop
+    window_closeall
+    battle_no_handling(451)	// 0x01C3
+    eob
 
-l_0xc6844f:
-    "{window_closeall}[1F 23 C3 01]" eob
+l_0xc6844f:	// Cop
+    window_closeall
+    battle_no_handling(451)	// 0x01C3
+    eob
 
-l_0xc68456:
-    "{window_closeall}[1F 23 C3 01]" eob
+l_0xc68456:	// Cop
+    window_closeall
+    battle_no_handling(451)	// 0x01C3
+    eob
 
-l_0xc6845d:
-    "{window_closeall}[1F 23 C3 01]" eob
+l_0xc6845d:	// Cop
+    window_closeall
+    battle_no_handling(451)	// 0x01C3
+    eob
 
-l_0xc68464:
-    "{window_closeall}[1F 23 C4 01]" eob
+l_0xc68464:	// Captain Strong
+    window_closeall
+    battle_no_handling(452)	// 0x01C4
+    eob
 
-l_0xc6846b:
-    "{window_closeall}[1F 23 C5 01]" eob
+l_0xc6846b:	// Everdred
+    window_closeall
+    battle_no_handling(453)	// 0x01C5
+    eob
 
 l_0xc68472:
     eob
 
-l_0xc68473:
-    "{window_closeall}[1F 23 B3 01]" eob
+l_0xc68473:	// Unassuming Local Guy
+    window_closeall
+    battle_no_handling(435)	// 0x01B3
+    eob
 
 l_0xc6847a:
-    "[1D 05 FF 01][1B 03 {e(l_0xc684a6)}]{window_closeall}{pause(1)}{music(124)}[1F 15 6A 00 C1 02 01]{pause(80)}[1F EB FF 06]{pause(70)}[1F 21 69][1F EC FF 02]{set(flag 10)}" eob
+    hasitem(-1,1) goto_if_true(l_0xc684a6)
+    window_closeall
+    pause(1)
+    music(124)
+    generate_active_sprite(106,705,1)	// 0x006A, 0x02C1, 01
+    pause(80)
+    hide_char(-1)
+    pause(70)
+    warp(105)	// 0x69
+    show_party(2)	// 1F EC FF 02
+    set(FLG_TEMP_9)	// 10
+    eob
 
 l_0xc684a6:
-    "{window_closeall}{pause(1)}{music(124)}[1F 15 6A 00 C2 02 01][1F 61][1F 07 02][1F 61]{window_open(1)}[1D 05 02 01][1B 03 {e(l_0xc684ce)}]" goto(l_0xc684ce)
+    window_closeall
+    pause(1)
+    music(124)
+    generate_active_sprite(106,706,1)	// 0x006A, 0x02C2, 01
+    wait_for_movement
+    music_effect(2)	// Quick music fade
+    wait_for_movement
+    window_open(1)
+    // Check if Paula has the Frankling badge
+    hasitem(2,1) goto_if_true(l_0xc684ce)
+    goto(l_0xc684ce)
 
-l_0xc684ce:
-    "@Carpainter's lightning was reflected by the Franklin Badge.[03]{window_closeall}[1F 23 C6 01]" eob
+l_0xc684ce:	// Mr. Carpainter
+    "@Carpainter's lightning was reflected by the Franklin Badge." promptw
+    window_closeall
+    battle_no_handling(454)	// 0x01C6
+    eob
 
-l_0xc68500:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc68500:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc68507:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc68507:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc6850e:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc6850e:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc68515:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc68515:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc6851c:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc6851c:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc68523:
-    "{window_closeall}[1F 23 B2 01]" eob
+l_0xc68523:	// Insane Cultist
+    window_closeall
+    battle_no_handling(434)	// 0x01B2
+    eob
 
-l_0xc6852a:
-    "{window_closeall}[1F 23 B3 01]" eob
+l_0xc6852a:	// Unassuming Local Guy
+    window_closeall
+    battle_no_handling(435)	// 0x01B3
+    eob
 
-l_0xc68531:
-    "{window_closeall}[1F 23 B4 01]" eob
+l_0xc68531:	// 2 Insane Cultists (+ 1 Spiteful crow?)
+    window_closeall
+    battle_no_handling(436)	// 0x01B4
+    eob
 
-l_0xc68538:
-    "{window_closeall}[1F 23 CA 01]" eob
+l_0xc68538:	// Boogey Tent
+    window_closeall
+    battle_no_handling(458)	// 0x01CA
+    eob
 
-l_0xc6853f:
-    "{window_closeall}[1F 23 B5 01]" eob
+l_0xc6853f:	// Slimy Little Pile
+    window_closeall
+    battle_no_handling(437)	// 0x01B5
+    eob
 
-l_0xc68546:
-    "{window_closeall}[1F 23 B5 01]" eob
+l_0xc68546:	// Slimy Little Pile
+    window_closeall
+    battle_no_handling(437)	// 0x01B5
+    eob
 
-l_0xc6854d:
-    "{window_closeall}[1F 23 B5 01]" eob
+l_0xc6854d:	// Slimy Little Pile
+    window_closeall
+    battle_no_handling(437)	// 0x01B5
+    eob
 
-l_0xc68554:
-    "{window_closeall}[1F 23 C8 01]" eob
+l_0xc68554:	// Master Belch + Slimy Little Pile
+    window_closeall
+    battle_no_handling(456)	// 0x01C8
+    eob
 
-l_0xc6855b:
-    "{window_closeall}[1F 23 CC 01]" eob
+l_0xc6855b:	// Dept. Store Spook (+ 0 Insane cultist?)
+    window_closeall
+    battle_no_handling(460)	// 0x01CC
+    eob
 
-l_0xc68562:
-    "{window_closeall}[1F 23 B9 01]" eob
+l_0xc68562:	// Sentry Robot
+    window_closeall
+    battle_no_handling(441)	// 0x01B9
+    eob
 
-l_0xc68569:
-    "{window_closeall}[1F 23 CE 01]" eob
+l_0xc68569:	// Clumsy Robot
+    window_closeall
+    battle_no_handling(462)	// 0x01CE
+    eob
 
-l_0xc68570:
-    "{window_closeall}[1F 23 D5 01]" eob
+l_0xc68570:	// Master Barf + Even Slimier Little Pile
+    window_closeall
+    battle_no_handling(469)	// 0x01D5
+    eob
 
-l_0xc68577:
-    "[1F 23 DB 01]" eob
+l_0xc68577:	// Giygas + Heavily Armored Porky
+    battle_no_handling(475)	// 0x01DB
+    eob
 
-l_0xc6857c:
-    "{window_closeall}[1F 23 D8 01]" eob
+l_0xc6857c:	// Ness' demon
+    window_closeall
+    battle_no_handling(472)	// 0x01D8
+    eob
 
-l_0xc68583:
-    "{window_closeall}[1F 23 CD 01]" eob
+l_0xc68583:	// Mani Mani Devil
+    window_closeall
+    battle_no_handling(461)	// 0x01CD
+    eob
 
-l_0xc6858a:
-    "{window_closeall}[1F 23 CB 01]" eob
+l_0xc6858a:	// Guardian Digger
+    window_closeall
+    battle_no_handling(459)	// 0x01CB
+    eob
 
-l_0xc68591:
-    "{window_closeall}[1F 23 CB 01]" eob
+l_0xc68591:	// Guardian Digger
+    window_closeall
+    battle_no_handling(459)	// 0x01CB
+    eob
 
-l_0xc68598:
-    "{window_closeall}[1F 23 CB 01]" eob
+l_0xc68598:	// Guardian Digger
+    window_closeall
+    battle_no_handling(459)	// 0x01CB
+    eob
 
-l_0xc6859f:
-    "{window_closeall}[1F 23 CB 01]" eob
+l_0xc6859f:	// Guardian Digger
+    window_closeall
+    battle_no_handling(459)	// 0x01CB
+    eob
 
-l_0xc685a6:
-    "{window_closeall}[1F 23 CB 01]" eob
+l_0xc685a6:	// Guardian Digger
+    window_closeall
+    battle_no_handling(459)	// 0x01CB
+    eob
 
-l_0xc685ad:
-    "{window_closeall}[1F 23 D3 01]" eob
+l_0xc685ad:	// Kraken
+    window_closeall
+    battle_no_handling(467)	// 0x01D3
+    eob
 
-l_0xc685b4:
-    "{window_closeall}[1F 23 DA 01]" eob
+l_0xc685b4:	// Starman Junior
+    window_closeall
+    battle_no_handling(474)	// 0x01DA
+    eob
 
 l_0xc685bb:
     newline
@@ -234,53 +428,83 @@ l_0xc685cb:
     "@But, it was empty." end
 
 l_0xc685da:
-    "[1D 0D 03 01 02][1B 03 {e(l_0xc68650)}][1D 0D 03 01 03][1B 03 {e(l_0xc68650)}][06 B8 02 {e(l_0xc68651)}][1F D0 64]" goto(l_0xc685fa)
+    character_has_status(3, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 3, 1, 2
+    goto_if_true(l_0xc68650)
+    character_has_status(3, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 3, 1, 3
+    goto_if_true(l_0xc68650)
+    goto_if_flag(FLG_WINS_JEFF_REPAIR, l_0xc68651)	// 0x02B8, 696
+    repair(100)	// 100% repair chance
+    goto(l_0xc685fa)
 
 l_0xc685fa:
-    "[1B 02 {e(l_0xc68650)}][1B 05]{window_open(1)}" newline
-    "[1B 06]@Working through the night," linebreak
-    "  [1C 02 03] fixed" linebreak
-    "  the [1C 05 00]." next
-    "@After being fixed, the [1C 05 00] became" linebreak
-    "  the {swap}[1C 05 00].[03]{set(flag 696)}{window_closeall}" goto(l_0xc68650)
+    goto_if_false(l_0xc68650)
+    copy_wram
+    window_open(1)
+    newline
+    copy_active
+    "@Working through the night," linebreak
+    "  {name(3)} fixed" linebreak
+    "  the {itemname(0)}." next
+    "@After being fixed, the {itemname(0)} became" linebreak
+    "  the {swap}{itemname(0)}." promptw
+    set(FLG_WINS_JEFF_REPAIR)	// 696
+    window_closeall
+    goto(l_0xc68650)
 
 l_0xc68650:
     eob
 
 l_0xc68651:
-    "[1F D0 19]" goto(l_0xc685fa)
+    // 25% change of repair
+    repair(25)	// 0x19
+    goto(l_0xc685fa)
 
 l_0xc68659:
-    "[19 26 03]" goto(l_0xc6866b)
+    set_respawn(3)
+    goto(l_0xc6866b)
 
 l_0xc68661:
     eob
 
 l_0xc68662:
-    "[19 26 08]" goto(l_0xc6866b)
+    set_respawn(8)
+    goto(l_0xc6866b)
 
 l_0xc6866a:
     eob
 
 l_0xc6866b:
-    "{save}{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}{music_resume}{window_open(1)}"
+    save
+    music(115)
+    pause(60)
+    wait
+    stop_music(0)
+    sound(SND_PHONEPICKUP)	// 11
+    music_resume
+    window_open(1)
     title(1, Dad)
     "@Hello, it's me... your dad." next
     "@I don't mean to butt in, but don't you think you should take a break?" next
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc686b4:
     "[19 02]No" eob
 
 l_0xc686b9:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc68726)} {e(l_0xc686c8)}]" goto(l_0xc686c8)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc68726)} {e(l_0xc686c8)}]"
+    goto(l_0xc686c8)
 
 l_0xc686c8:
-    "[19 10 01]{rtoarg}@Like mother, like son..." next
-    "@[1C 02 01], you are a hard worker." next
+    party_pos_check(1) rtoarg
+    "@Like mother, like son..." next
+    "@{name(1)}, you are a hard worker." next
     "@I've made a record of your adventure." next
     "@Don't work too hard, though..." next
-    "@*Click!*{wait}{window_closeall}{sound(11)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@*Click!*" wait
+    window_closeall
+    eob
 
 l_0xc68726:
     "@Okay." next
@@ -288,70 +512,132 @@ l_0xc68726:
     "@I made a record of your adventure." next
     "@Now I'm gonna hit the sack." next
     "@Be sure you get some rest." linebreak
+    // two_choice_menu
     "[19 02]Continue" eob
 
 l_0xc6878f:
     "[19 02]Quit" eob
 
 l_0xc68796:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc687a5)} {e(l_0xc687e4)}]" goto(l_0xc687a5)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc687a5)} {e(l_0xc687e4)}]"
+    goto(l_0xc687a5)
 
 l_0xc687a5:
-    "[19 10 01]{rtoarg}@[1C 02 00], you're a hard worker, just like your mom." next
+    party_pos_check(1) rtoarg
+    "@{name(0)}, you're a hard worker, just like your mom." next
     "@Don't work too hard, though..." next
-    "@*Click*{wait}{window_closeall}{sound(11)}" eob
+    sound(SND_PHONEPICKUP)	// 11
+    "@*Click*" wait
+    window_closeall
+    eob
 
 l_0xc687e4:
     "@What a great adventure we had together." next
-    "@Please turn off the power.[1F 50]" eob
+    "@Please turn off the power."
+    disable_input
+    eob
 
 l_0xc6880b:
+    unset(FLG_PHOTO_MYHOME)	// 479
+    summon_photographer(1)	// 0x01
+    set(FLG_PHOTO_1)	// 698
+    eob
     "{unset(flag 479)}[1F D2 01]{set(flag 698)}" eob
 
 l_0xc68815:
-    "{unset(flag 480)}[1F D2 02]{set(flag 699)}" eob
+    unset(FLG_PHOTO_ONETMISAKI)	// 480
+    summon_photographer(2)	// 0x02
+    set(FLG_PHOTO_2)	// 699
+    eob
 
 l_0xc6881f:
-    "{unset(flag 481)}[1F D2 03]{set(flag 700)}" eob
+    unset(FLG_PHOTO_CYCLESHOP)	// 481
+    summon_photographer(3)	// 0x03
+    set(FLG_PHOTO_3)	// 700
+    eob
 
 l_0xc68829:
-    "{unset(flag 482)}[1F D2 04]{set(flag 701)}" eob
+    unset(FLG_PHOTO_RIVER)	// 482
+    summon_photographer(4)	// 0x04
+    set(FLG_PHOTO_4)	// 701
+    eob
 
 l_0xc68833:
-    "{unset(flag 483)}[1F D2 05]{set(flag 702)}" eob
+    unset(FLG_PHOTO_CABIN)	// 483
+    summon_photographer(5)	// 0x05
+    set(FLG_PHOTO_5)	// 702
+    eob
 
 l_0xc6883d:
-    "{unset(flag 484)}[1F D2 06]{set(flag 703)}" eob
+    unset(FLG_PHOTO_CHAOS)	// 484
+    summon_photographer(6)	// 0x06
+    set(FLG_PHOTO_6)	// 703
+    eob
 
 l_0xc68847:
-    "{unset(flag 485)}[1F D2 07]{set(flag 704)}" eob
+    unset(FLG_PHOTO_TACY)	// 485
+    summon_photographer(7)	// 0x07
+    set(FLG_PHOTO_7)	// 704
+    eob
 
 l_0xc68851:
-    "[1F D2 08]{set(flag 705)}" eob
+    // FLG_PHOTO_MAZE is not unset in the vanilla game
+    //unset(FLG_PHOTO_MAZE)	// 486
+    summon_photographer(8)	// 0x08
+    set(FLG_PHOTO_8)	// 705
+    eob
 
 l_0xc68858:
-    "{unset(flag 487)}[1F D2 09]{set(flag 706)}" eob
+    unset(FLG_PHOTO_HAKABA)	// 487
+    summon_photographer(9)	// 0x09
+    set(FLG_PHOTO_9)	// 706
+    eob
 
 l_0xc68862:
-    "{unset(flag 488)}[1F D2 0A]{set(flag 707)}" eob
+    unset(FLG_PHOTO_WATERFALL)	// 488
+    summon_photographer(10)	// 0x0A
+    set(FLG_PHOTO_10)	// 707
+    eob
 
 l_0xc6886c:
-    "{unset(flag 489)}[1F D2 0B]{set(flag 708)}" eob
+    unset(FLG_PHOTO_ONSEN)	// 489
+    summon_photographer(11)	// 0x0B
+    set(FLG_PHOTO_11)	// 708
+    eob
 
 l_0xc68876:
-    "{unset(flag 490)}[1F D2 0C]{set(flag 709)}" eob
+    unset(FLG_PHOTO_TENTO)	// 490
+    summon_photographer(12)	// 0x0C
+    set(FLG_PHOTO_12)	// 709
+    eob
 
 l_0xc68880:
-    "[1F D2 0D]{set(flag 710)}" eob
+    // FLG_PHOTO_BONE is not unset in the vanilla game
+    //unset(FLG_PHOTO_BONE)	// 491
+    summon_photographer(13)	// 0x0D
+    set(FLG_PHOTO_13)	// 710
+    eob
 
 l_0xc68887:
-    "{unset(flag 492)}[1F D2 0E]{set(flag 711)}" eob
+    unset(FLG_PHOTO_EXCAVATION)	// 492
+    summon_photographer(14)	// 0x0E
+    set(FLG_PHOTO_14)	// 711
+    eob
 
 l_0xc68891:
-    "{unset(flag 493)}[1F D2 0F]{set(flag 712)}" eob
+    unset(FLG_PHOTO_BRIDGE)	// 493
+    summon_photographer(15)	// 0x0F
+    set(FLG_PHOTO_15)	// 712
+    eob
 
 l_0xc6889b:
-    "{unset(flag 494)}[1F D2 10]{set(flag 713)}" eob
+    unset(FLG_PHOTO_DINO_MUSEUM)	// 494
+    summon_photographer(16)	// 0x10
+    set(FLG_PHOTO_16)	// 713
+    eob
 
 l_0xc688a5:
-    "{unset(flag 495)}[1F D2 11]{set(flag 714)}" eob
+    unset(FLG_PHOTO_DINOSOR)	// 495
+    summon_photographer(17)	// 0x11
+    set(FLG_PHOTO_17)	// 714
+    eob
