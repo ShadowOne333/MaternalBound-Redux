@@ -1,10 +1,10 @@
 // Events debug menu option
 
+import "../../essential/asm65816.ccs"
 import "../../essential/ccscript_missing_commands.ccs"
 import "../../essential/commands.ccs"
 import "../../essential/flags.ccs"
 import "../../debug/diamond.ccs"
-import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 
@@ -49,7 +49,7 @@ l_0xc59a15:
     "{set(flag 182)}"
     "{set(flag 450)}"
     "{set(flag 449)}"
-    "{set(flag 39)}
+    "{set(flag 39)}"
     "[1F 21 75]" eob
 
 l_0xc59a40:
@@ -57,13 +57,13 @@ l_0xc59a40:
     window_closeall
     "{counter(14)}"
     call(l_0xc5a4ec)
-    "{set(flag 210)}
+    "{set(flag 210)}"
     "[1D 0E 01 B0]"
     "[1D 0E 01 A4]"
     "[1D 0E 01 A2]"
     "[1D 0E 01 C5]"
     "[1D 0E 01 CA]"
-    "{set(flag 512)}
+    "{set(flag 512)}"
     "[1F 21 1D]" eob
 
 l_0xc59a72:
@@ -74,7 +74,7 @@ l_0xc59a72:
     "{set(flag 85)}"
     "{set(flag 553)}"
     "{set(flag 549)}"
-    "{set(flag 43)}
+    "{set(flag 43)}"
     "[1F 21 76]" eob
 
 l_0xc59aa4:
@@ -82,7 +82,7 @@ l_0xc59aa4:
     window_closeall
     "{counter(20)}"
     call(l_0xc5a4ec)
-    "{set(flag 175)}
+    "{set(flag 175)}"
     "[1F 21 77]" eob
 
 l_0xc59ace:
@@ -91,7 +91,7 @@ l_0xc59ace:
     "{counter(21)}"
     call(l_0xc5a4ec)
     "{set(flag 68)}"
-    "{unset(flag 175)}
+    "{unset(flag 175)}"
     "[1D 0E 01 AB]"
     "[1F 21 78]" eob
 
@@ -102,7 +102,7 @@ l_0xc59af5:
     call(l_0xc5a4ec)
     add_party_member(2)
     "[1D 0E 01 B4]"
-    "{set(flag 319)}
+    "{set(flag 319)}"
     "[1F 21 79]" eob
 
 l_0xc59b25:
@@ -110,7 +110,7 @@ l_0xc59b25:
     window_closeall
     "{counter(23)}"
     call(l_0xc5a4ec)
-    "{set(flag 297)}
+    "{set(flag 297)}"
     add_party_member(2)
     "[1F 21 7A]" eob
 
@@ -121,7 +121,7 @@ l_0xc59b45:
     call(l_0xc5a4ec)
     add_party_member(3)
     "[1F 12 01]"
-    "{set(flag 323)}
+    "{set(flag 323)}"
     "[1D 0E 03 68]"
     "[1F 21 7B]" eob
 
@@ -135,7 +135,7 @@ l_0xc59b78:
     add_party_member(9)
     "[1D 0E 03 68]"
     "{set(flag 344)}"
-    "{set(flag 696)}
+    "{set(flag 696)}"
     "[1F 21 2E]"
     "[1F 66 01 27 0F AE C9 00]"
     "[1F 66 02 30 87 B0 C6 00]" eob
@@ -171,7 +171,7 @@ l_0xc59bfc:
     "{set(flag 72)}"
     "{unset(flag 54)}"
     "{set(flag 282)}"
-    "{set(flag 272)}
+    "{set(flag 272)}"
     add_party_member(2)
     add_party_member(3)
     "[1F 21 7F]" eob
@@ -182,7 +182,7 @@ l_0xc59c39:
     "{counter(41)}"
     call(l_0xc5a4ec)
     "{unset(flag 146)}"
-    "{unset(flag 147)}
+    "{unset(flag 147)}"
     add_party_member(2)
     add_party_member(3)
     "[1D 0E 01 B6]"
@@ -193,7 +193,7 @@ l_0xc59c67:
     window_closeall
     "{counter(43)}"
     call(l_0xc5a4ec)
-    "{set(flag 142)}
+    "{set(flag 142)}"
     add_party_member(3)
     "[1F 21 81]" eob
 
@@ -204,7 +204,7 @@ l_0xc59c84:
     call(l_0xc5a4ec)
     "{set(flag 317)}"
     "{set(flag 142)}"
-    "{set(flag 143)}
+    "{set(flag 143)}"
     add_party_member(3)
     add_party_member(2)
     "[1F 21 82]" eob
@@ -214,7 +214,7 @@ l_0xc59cb5:
     window_closeall
     "{counter(44)}"
     call(l_0xc5a4ec)
-    "{set(flag 48)}
+    "{set(flag 48)}"
     add_party_member(3)
     add_party_member(2)
     "[1F 21 83]" eob
@@ -226,7 +226,7 @@ l_0xc59cd9:
     call(l_0xc5a4ec)
     "{set(flag 203)}"
     "{set(flag 617)}"
-    "{set(flag 61)}
+    "{set(flag 61)}"
     add_party_member(3)
     add_party_member(2)
     "[1F 21 84]" eob
@@ -303,7 +303,7 @@ l_0xc59e01:
     call(l_0xc5a4ec)
     add_party_member(2)
     add_party_member(3)
-    "{set(flag 274)}
+    "{set(flag 274)}"
     "[1F 21 8C]" eob
 
 l_0xc59e21:
@@ -312,7 +312,7 @@ l_0xc59e21:
     "{counter(60)}"
     call(l_0xc5a4ec)
     call(l_0xc5a526)
-    "{set(flag 196)}
+    "{set(flag 196)}"
     "[1F 21 8D]" eob
 
 l_0xc59e40:
@@ -321,7 +321,7 @@ l_0xc59e40:
     "{counter(61)}"
     call(l_0xc5a4ec)
     call(l_0xc5a526)
-    "{set(flag 197)}
+    "{set(flag 197)}"
     "[1F 21 8E]" eob
 
 l_0xc59e62:
@@ -341,7 +341,7 @@ l_0xc59e84:
     "{set(flag 79)}"
     "{set(flag 134)}"
     "{set(flag 133)}"
-    "{set(flag 382)}
+    "{set(flag 382)}"
     "[1F 21 8F]" eob
 
 l_0xc59eb2:
@@ -364,7 +364,7 @@ l_0xc59eb2:
     "[1D 0E 01 8C]"
     "[1D 0E 01 B8]"
     "{set(flag 59)}"
-    "{set(flag 745)}
+    "{set(flag 745)}"
     "[1F 21 90]" eob
 
 l_0xc59f08:
@@ -375,7 +375,7 @@ l_0xc59f08:
     call(l_0xc5a4ec)
     call(l_0xc5a526)
     "{set(flag 132)}"
-    "{set(flag 382)}
+    "{set(flag 382)}"
     "[1F 66 01 07 3C BC C9 00]"
     "[1F 66 02 29 17 59 EF 00]"
     "[1F 21 91]" eob
@@ -386,7 +386,7 @@ l_0xc59f44:
     window_closeall
     "{counter(14)}"
     call(l_0xc5a4ec)
-    "{set(flag 210)}
+    "{set(flag 210)}"
     "[1F 21 92]" eob
 
 l_0xc59f60:
@@ -394,7 +394,7 @@ l_0xc59f60:
     window_closeall
     "{counter(14)}"
     call(l_0xc5a4ec)
-    "{set(flag 210)}
+    "{set(flag 210)}"
     "[1D 0E 01 5A]"
     "[1F 21 93]" eob
 
@@ -403,7 +403,7 @@ l_0xc59f80:
     window_closeall
     "{counter(12)}"
     call(l_0xc5a4ec)
-    "{set(flag 99)}
+    "{set(flag 99)}"
     "[1F 21 94]" eob
 
 l_0xc59fa0:
@@ -420,7 +420,7 @@ l_0xc59fbd:
     "{counter(52)}"
     call(l_0xc5a4ec)
     call(l_0xc5a526)
-    "{set(flag 217)}
+    "{set(flag 217)}"
     "[1F 66 01 10 58 32 C9 00]"
     "[1D 0E 04 AF]"
     "[1F 21 A6]" eob
@@ -430,7 +430,7 @@ l_0xc59ff1:
     window_closeall
     "{counter(62)}"
     call(l_0xc5a4ec)
-    "{set(flag 548)}
+    "{set(flag 548)}"
     "[1F 21 A7]" eob
 
 l_0xc5a00c:
@@ -447,7 +447,7 @@ l_0xc5a036:
     "{counter(41)}"
     call(l_0xc5a4ec)
     "{set(flag 139)}"
-    "{set(flag 60)}
+    "{set(flag 60)}"
     add_party_member(3)
     "[1D 0E 01 5A]"
     "[1F 21 A8]" eob
@@ -472,7 +472,7 @@ l_0xc5a07e:
     "{set(flag 273)}"
     "{set(flag 16)}"
     "{set(flag 140)}"
-    "{set(flag 91)}
+    "{set(flag 91)}"
     "[1F 21 AA]" eob
 
 l_0xc5a0b3:
@@ -483,7 +483,7 @@ l_0xc5a0b3:
     add_party_member(2)
     add_party_member(3)
     "[1D 0E 01 AF]"
-    "{set(flag 218)}
+    "{set(flag 218)}"
     "[1F 21 AB]" eob
 
 l_0xc5a0db:
@@ -491,7 +491,7 @@ l_0xc5a0db:
     window_closeall
     "{counter(42)}"
     call(l_0xc5a4ec)
-    "{set(flag 59)}
+    "{set(flag 59)}"
     add_party_member(3)
     "[1F 21 9A]" eob
 
@@ -502,7 +502,7 @@ l_0xc5a0fe:
     call(l_0xc5a4ec)
     "{set(flag 40)}"
     "{set(flag 64)}"
-    "{set(flag 2)}
+    "{set(flag 2)}"
     "[1F 66 02 11 15 88 C6 00]"
     "[1F 21 AD]" eob
 
@@ -517,7 +517,7 @@ l_0xc5a11a:
     "{set(flag 212)}"
     "{set(flag 23)}"
     "{set(flag 88)}"
-    "{set(flag 128)}
+    "{set(flag 128)}"
     "[1D 0E 03 AC]"
     "[1D 0E 03 24]"
     "[1D 0E 03 4B]"
@@ -545,7 +545,7 @@ l_0xc5a17d:
     "{set(flag 102)}"
     "{set(flag 89)}"
     "{set(flag 155)}"
-    "{set(flag 430)}
+    "{set(flag 430)}"
     "[1D 0E 01 A4]"
     "[1F 21 16]" eob
 
@@ -592,7 +592,7 @@ l_0xc5a232:
     add_party_member(3)
     "{set(flag 69)}"
     "{unset(flag 49)}"
-    "{set(flag 87)}
+    "{set(flag 87)}"
     "[1D 0E 01 AE]"
     "[1F 21 1C]" eob
 
@@ -621,7 +621,7 @@ l_0xc5a29c:
     add_party_member(3)
     "{set(flag 554)}"
     "{set(flag 613)}"
-    "{set(flag 614)}
+    "{set(flag 614)}"
     "[1F 21 90]" eob
 
 l_0xc5a2c2:
@@ -631,7 +631,7 @@ l_0xc5a2c2:
     call(l_0xc5a4ec)
     add_party_member(2)
     add_party_member(3)
-    "{set(flag 24)}
+    "{set(flag 24)}"
     "[1F 21 9F]"
     "[1F 66 01 09 81 33 C9 00]" eob
 
@@ -729,7 +729,7 @@ l_0xc5a43e:
     add_party_member(3)
     add_party_member(2)
     "{set(flag 184)}"
-    "{unset(flag 748)}
+    "{unset(flag 748)}"
     "[1F 21 7D]" eob
 
 l_0xc5a465:
@@ -740,7 +740,7 @@ l_0xc5a465:
     call(l_0xc5a526)
     "{set(flag 150)}"
     "{set(flag 273)}"
-    "{set(flag 16)}
+    "{set(flag 16)}"
     "[1F 21 1F]" eob
 
 l_0xc5a48b:
@@ -789,7 +789,7 @@ l_0xc5a4b4:
     "{set(flag 726)}"
     "{set(flag 727)}"
     "{set(flag 728)}"
-    "{set(flag 729)}
+    "{set(flag 729)}"
     add_party_member(2)
     "[1F 21 D8]" eob
 
@@ -817,17 +817,17 @@ l_0xc9c7fa:
     "{set(flag 530)}"
     "{set(flag 749)}"
     "{set(flag 750)}"
-    "{set(flag 805)}
+    "{set(flag 805)}"
     "[1F 15 6A 00 79 02 01]"
     "[1F 61]"
-    "{pause(1)}
+    "{pause(1)}"
     "[1F EB FF 06]"
     "[1F 21 51]"
-    "{pause(180)}
+    "{pause(180)}"
     "[1F 15 B5 01 0B 03 FF]"
     "[1F 21 C4]"
     "[1F E6 FF 00]"
-    "{pause(1)}
+    "{pause(1)}"
     "[1F 1F B5 01 06]"
     "[1F EC FF 01]"
     "{pause(1)}"
@@ -893,7 +893,7 @@ l_0xc5a526:
 l_0xc5a530:
     "[06 7C 00 {e(l_0xc5a578)}]"
     "{window_open(1)}"
-    "{set(flag 552)}
+    "{set(flag 552)}"
     "[1D 03 FF]"
     "[1B 02 {e(l_0xc5a54d)}]"
     "[1D 0E 00 AE]"
