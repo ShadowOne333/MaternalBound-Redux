@@ -67,15 +67,20 @@ l_0xc99e1b:
     "@He's got something for you.{wait}{window_closeall}[1F F1 43 01 82 02]{pause(60)}{unset(flag 611)}[1F 41 06]" eob
 
 l_0xc99e48:
-    "{pause(20)}@What's that?  You're not?!" next
-    "@Then, if you see [1C 01 08], repeat this message to him word for word..." next
+    pause(20)
+    "@What's that?  You're not?!" next
+    // Stat 8 = Ness' name
+    "@Then, if you see {stat(8)}, repeat this message to him word for word..." next
     goto(l_0xc99e1b)
 
 l_0xc99e8b:
-    "[06 4F 01 {e(data_55.l_0xc9992f)}][1F 66 01 05 BA A1 C7 00]" eob
+    "[06 4F 01 {e(data_55.l_0xc9992f)}]"
+    "[1F 66 01 05 BA A1 C7 00]" eob
 
 l_0xc99e9b:
-    "{unset(flag 383)}{set(flag 370)}[06 88 00 {e(data_55.l_0xc9992f)}][1F 66 01 06 B1 9E C9 00]" eob
+    "{unset(flag 383)}{set(flag 370)}"
+    "[06 88 00 {e(data_55.l_0xc9992f)}]"
+    "[1F 66 01 06 B1 9E C9 00]" eob
 
 l_0xc99eb1:
     "{set(flag 136)}[1F 67 01]" eob
@@ -103,7 +108,7 @@ l_0xc99edd:
     goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
     goto_if_flag(FLG_OPEN_TABIGOYA, data_55.l_0xc9992f)		// 0x006C, 108
     window_open(1)
-    if flag flg_KeyItems {
+    if flag FLG_KEY_ITEMS {
 	    isset(FLG_KEY_TABIGOYA)
 	    goto_if_false(l_0xc99f2d)
     }
@@ -169,8 +174,12 @@ l_0xc9a049:
     "[1F E1 14 01 00]{pause(20)}[1F E1 1F 00 00]{pause(20)}[1F E1 14 01 1E]{pause(1)}{unset(flag 555)}" eob
 
 l_0xc9a062:
-    "{window_open(1)}@(Temporarily closed." linebreak
-    "  ...Gwaargh!){wait}{sound(114)}{window_closeall}" eob
+    window_open(1)
+    "@(Temporarily closed." linebreak
+    "  ...Gwaargh!)" wait
+    sound(SND_CREEPY)	// 114
+    window_closeall
+    eob
 
 l_0xc9a08b:
     "[1F 21 9B]" call(data_34.l_0xc7a7dd) "{set(flag 376)}{set(flag 591)}[19 26 05]" eob

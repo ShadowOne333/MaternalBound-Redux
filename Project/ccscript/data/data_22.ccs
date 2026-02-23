@@ -6,9 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -393,7 +393,7 @@ l_0xc6809e:
     eob
 
 l_0xc680a6:
-    if flag flg_KeyItems { goto_if_flag(flg_Ness, data_18.l_0xc62d30) }
+    if flag FLG_KEY_ITEMS { goto_if_flag(FLG_NESS_KI, data_18.l_0xc62d30) }
     else {
 	hasitem(-1, ATM_CARD)	// 0xB1, 177, ATM card
 	goto_if_true(data_18.l_0xc62d30)
@@ -401,7 +401,7 @@ l_0xc680a6:
     "@Please insert your ATM card." end
 
 l_0xc680c2:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(ATM_CARD) goto_if_true(l_0xc680dc)
     "@Nothing happened." end

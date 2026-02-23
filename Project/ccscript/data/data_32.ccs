@@ -64,7 +64,7 @@ l_0xc76f96:
     eob
 
 l_0xc76fb2:
-    set(flg_FlyingMan)
+    set(FLG_FLYINGMAN_KI)	// Key items party flag
     goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_D, l_0xc770b0)	// 0xCF, 207
     goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_C, l_0xc7706a)	// 0xCE, 206
     goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_B, l_0xc7703f)	// 0xCD, 205
@@ -321,7 +321,7 @@ l_0xc7794c:
     wait_for_movement
     freeze_sprite_movement(106)	// 006A
 
-    unset(flg_FlyingMan)
+    unset(FLG_FLYINGMAN_KI)	// Key items party flag
     window_open(1)
     "@({name(1)} heard a familiar voice at the center of the Sea of Eden.)" next
     call(l_0xc77c50) "@Giygas' goal is" linebreak

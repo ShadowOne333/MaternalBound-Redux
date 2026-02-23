@@ -258,7 +258,7 @@ l_0xc7c5f7:
 
 l_0xc7c609:
     store_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(BUBBLE_GUM)	// 104, Bubble gum pak
     goto_if_true(l_0xc7c669)

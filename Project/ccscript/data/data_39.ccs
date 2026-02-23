@@ -22,16 +22,19 @@ l_0xc8125d:
 l_0xc81286:
     "@Oh goody!" pause(20)
     "  Would it be okay to get $200 to buy materials?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc812b5:
     " [19 02]No" eob
 
 l_0xc812bb:
-    "{open_wallet}[1C 07 02][11]{clearline}[09 02 {e(l_0xc812d1)} {e(l_0xc8125d)}]" goto(l_0xc8125d)
+    "{open_wallet}[1C 07 02][11]{clearline}[09 02 {e(l_0xc812d1)} {e(l_0xc8125d)}]"
+    goto(l_0xc8125d)
 
 l_0xc812d1:
-    "[1D 14 C8 00 00 00][1B 03 {e(l_0xc813d4)}]{sound(118)}[1D 09 C8 00]{open_wallet}" goto(l_0xc812e6)
+    "[1D 14 C8 00 00 00][1B 03 {e(l_0xc813d4)}]{sound(118)}[1D 09 C8 00]{open_wallet}"
+    goto(l_0xc812e6)
 
 l_0xc812e6:
     "@Thank you very much!" next
@@ -56,19 +59,19 @@ l_0xc81392:
     "@Ah ha!" pause(20)
     "  You have too many items." next
     // Suporma, item 0xCC, 204
-    "@I hope you'll accept the {itemname(204)}," pause(15)" even if you have to toss some of your food..." end
+    "@I hope you'll accept the {itemname(204)},| even if you have to toss some of your food..." end
 
 l_0xc813d4:
     "@What?!" pause(15)
     "  You don't have that much money?" next
-    "@Well, perhaps you shouldn't be yappin' about having cash then,{pause(15)} buddy." end
+    "@Well, perhaps you shouldn't be yappin' about having cash then,| buddy." end
 
 l_0xc81418:
     title(1, Orange)
     isset(FLG_ITEM_GREATORANGE)	// 550
     goto_if_false(l_0xc81318)
     goto_if_flag(FLG_TWSN_ORANGE_LATER, l_0xc81475)	// 0x74, 116
-    "@I'm hard at work... don't worry," pause(15) " my brilliant invention will be ready soon." next
+    "@I'm hard at work... don't worry,| my brilliant invention will be ready soon." next
     "@Okay, okay..." pause(20)
     "  I'll get back to work!" wait
     set(FLG_TWSN_ORANGE_LATER)	// 116
@@ -83,8 +86,8 @@ l_0xc81475:
 l_0xc814b9:
     title(1, Orange)
     "@You didn't invest any money in my venture," next
-    "@but someone else donated a few million bucks,{pause(15)} so everything is great." next
-    "@So would you like to invest,{pause(10)} say,{pause(15)} 50 bucks?" linebreak
+    "@but someone else donated a few million bucks,| so everything is great." next
+    "@So would you like to invest,// say,| 50 bucks?" linebreak
     // two_choice_menu
     "[19 02]Yes" eob
 
@@ -92,19 +95,25 @@ l_0xc81528:
     " [19 02]No" eob
 
 l_0xc8152e:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc81585)} {e(l_0xc8153d)}]" goto(l_0xc8153d)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc81585)} {e(l_0xc8153d)}]"
+    goto(l_0xc8153d)
 
 l_0xc8153d:
-    "@Oh," pause(15) " I'm sorry to hear that." next
-    "@...And you never heard how much money I got, too.{pause(15)}  Right? *wink* *wink*..." end
+    "@Oh,| I'm sorry to hear that." next
+    "@...And you never heard how much money I got, too." pause(15)
+    "  Right? *wink* *wink*..." end
 
 l_0xc81585:
-    "[1D 14 32 00 00 00][1B 03 {e(l_0xc813d4)}]{sound(118)}[1D 09 32 00]{open_wallet}" goto(l_0xc812e6)
+    "[1D 14 32 00 00 00]" goto_if_true(l_0xc813d4)
+    sound(SND_CHICKEN2)	// 118
+    "[1D 09 32 00]"
+    open_wallet
+    goto(l_0xc812e6)
 
 l_0xc8159f:
     title(1, Orange)
     goto_if_flag(FLG_TWSN_ORANGE_THANKS, l_0xc815f9)	// 0x75, 117
-    "@Well, you never invested in my genius," pause(15) " did you?" next
+    "@Well, you never invested in my genius,| did you?" next
     "@You had no idea of what I could do..." next
     "@*chortle*" next
     "@You sorry loser." end
@@ -114,27 +123,27 @@ l_0xc815f9:
     "@No?" pause(15)
     "  Can you wait a little longer?" next
     "@I promise I'll finish my brilliant invention." next
-    "@I rely on your support," pause(15) " even though I am a super genius." end
+    "@I rely on your support,| even though I am a super genius." end
 
 l_0xc81676:
     goto_if_flag(FLG_ITEM_PHONE, l_0xc818f1)	// 0x52, 82
     goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc818b9)	// 0x70, 112
     goto_if_flag(FLG_TWSN_APPLE_FOOD, l_0xc81915)	// 0x0227, 551
-    "@Well," pause(15) " I have sort of neglected doing my housework..." next
-    "@I know it's a bit of a pigsty," pause(15) " but anyway..." next
+    "@Well,| I have sort of neglected doing my housework..." next
+    "@I know it's a bit of a pigsty,| but anyway..." next
     "@I'm Apple Kid." next
     title(1, Apple)
-    "@I haven't taken a bath in quite a while," pause(15) " so I may be kind of stinky." next
+    "@I haven't taken a bath in quite a while,| so I may be kind of stinky." next
     pause(60)
-    "@By the way," pause(15) " I'm starving." pause(20)
+    "@By the way,| I'm starving." pause(20)
     "  Do you have something to eat?" next
-    "@If you do,{pause(15)} can I have some?" linebreak
+    "@If you do,| can I have some?" linebreak
     call(data_36.l_0xc7dd4f)	// two_choice_menu
     create_menu_cancellable
     clearline
     switch_goto(2, {
-	long l_0xc81789
-	long l_0xc81751
+	l_0xc81789
+	l_0xc81751
     })
     goto(l_0xc81751)
 
@@ -163,7 +172,7 @@ l_0xc817dc:
     pause(1)
     "@Thanks." pause(20)
     "  You seem very nice." pause(20)
-    "  Uh," pause(15) " I wonder if..." next
+    "  Uh,| I wonder if..." next
     set(FLG_TWSN_APPLE_FOOD)	// 551
     goto(l_0xc8180c)
 
@@ -173,8 +182,8 @@ l_0xc8180c:
     create_menu_cancellable
     clearline
     switch_goto(2, {
-	long l_0xc81848
-	long l_0xc81751
+	l_0xc81848
+	l_0xc81751
     })
     goto(l_0xc81751)
 
@@ -188,8 +197,8 @@ l_0xc81848:
     create_menu_cancellable
     clearline
     switch_goto(2, {
-	long l_0xc818a2
-	long l_0xc81751
+	l_0xc818a2
+	l_0xc81751
     })
     goto(l_0xc81751)
 
@@ -248,21 +257,21 @@ l_0xc81970:
     "@I am a mouse." pause(20)
     "  As yet I have no name." next
     "@You took care of my master." next
-    "@In return," pause(15) " I want to give you this." pause(20)
+    "@In return,| I want to give you this." pause(20)
     "  Please take it and say nothing." promptw
-    if flag flg_KeyItems {
-        give_menu_key_item(RECEIVER_PHONE) }
+    if flag FLG_KEY_ITEMS { give_menu_key_item(RECEIVER_PHONE) }
     else {
 	char_inventory_vacancy(-1)	// 0xFF
 	goto_if_false(l_0xc81a26)
 	give_and_check(0, RECEIVER_PHONE)	// 0xB5, 181, Receiver phone
 	call(data_36.l_0xc7dcb6) }
-    set(FLG_ITEM_PHONE)	// 82, already set by give_menu_key_item?
+    set(FLG_ITEM_PHONE)
     goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
 
 l_0xc819f1:
     next
-    "@Oh!" pause(20) "  I must be in your way!" pause(10) " *zziipp!*" promptw
+    "@Oh!" pause(20)
+    "  I must be in your way!// *zziipp!*" promptw
     window_closeall
     call(l_0xc81a5d)
     call(data_33.l_0xc79034)
@@ -272,12 +281,19 @@ l_0xc819f1:
 
 l_0xc81a26:
     pause(60) linebreak
-    "@Unfortunately," pause(15) " you have too many items." pause(20)
+    "@Unfortunately,| you have too many items." pause(20)
     "  Therefore, I can't give this to you."
     goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
 
 l_0xc81a5d:
-    "[19 22 FF 02 DE 00]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc81a84)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc81a84)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc81a84)}]" eob
+    "[19 22 FF 02 DE 00]" swap
+    store_registers
+    result_is(1) goto_if_true(l_0xc81a84)
+    load_registers
+    result_is(2) goto_if_true(l_0xc81a84)
+    load_registers
+    result_is(8) goto_if_true(l_0xc81a84)
+    eob
 
 l_0xc81a84:
     set(FLG_ANIM_PORT_0)	// 522
@@ -290,15 +306,15 @@ l_0xc81a88:
     return_direction_char_to_object(-1, 2, 226)	// 0xFF, 0x02, 0x00E2
     call(data_36.l_0xc7dc9b)
     goto_if_false(l_0xc81ade)
-    "@Hello," pause(15) " please present your ticket." next //end
-    if flag flg_KeyItems and flag flg_KeyItem_BackstagePass
+    "@Hello,| please present your ticket." next //end
+    if flag FLG_KEY_ITEMS and flag FLG_ITEM_TICKET
     {
         goto(chaostheaterticket)
     }
     eob
 
 l_0xc81ac4:
-    "@Sorry," pause(15) " the show is on hold for a while." end
+    "@Sorry,| the show is on hold for a while." end
 
 l_0xc81ade:
     "@Oh, pardon me." promptw
@@ -317,7 +333,16 @@ l_0xc81b04:
     "@See you." end
 
 l_0xc81b0c:
-    "{store_registers}[06 02 00 {e(l_0xc81baf)}][06 77 00 {e(l_0xc81b9b)}]{load_registers}[19 19 00 00]{swap}{store_registers}{result_is(125)}[1B 03 {e(l_0xc81b50)}][19 22 FF 02 E2 00]" call(data_36.l_0xc7dc9b) "[1B 02 {e(l_0xc81ade)}]@Please show me your ticket." end
+    store_registers
+    "[06 02 00 {e(l_0xc81baf)}]"
+    "[06 77 00 {e(l_0xc81b9b)}]"
+    load_registers
+    "[19 19 00 00]" swap
+    store_registers
+    result_is(125) goto_if_true(l_0xc81b50)
+    "[19 22 FF 02 E2 00]"
+    call(data_36.l_0xc7dc9b) goto_if_false(l_0xc81ade)
+    "@Please show me your ticket." end
 
 l_0xc81b50:
     return_direction_char_to_object(-1, 2, 226)	// FF, 02, 00E2
@@ -505,7 +530,7 @@ l_0xc82468:
     "@I don't care if the autograph is written on toilet paper..." wait
     set(FLG_FOUR_KOMORITA)	// 140
     unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
-    if flag flg_KeyItems and flag FLG_ITEM_BANANA
+    if flag FLG_KEY_ITEMS and flag FLG_ITEM_BANANA
     {
         next
         call(l_0xc8259f)

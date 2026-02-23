@@ -79,8 +79,8 @@ l_0xc5e70b:	// Game startup at Ness' bed in Onett
     unset(FLG_YAZIUMA_DISAPPEAR)	// 469
 
     // Added for Key items menu
-    set(flg_Ness)
-    set(flg_KeyItems)
+    set(FLG_NESS_KI)
+    set(FLG_KEY_ITEMS)
 	
     save
     eob
@@ -198,7 +198,7 @@ l_0xc5e9a8:
     "@(If I knew this was going to be such a scary place," next
     "@I wouldn't have come along..." pause(20)
     "  I'm outta here!)" wait
-    unset(flg_King)
+    unset(FLG_KING_KI)	// Key items King flag 
     call(data_23.l_0xc683d5)
     window_closeall
     generate_active_sprite(49, 46, 1)	// 0028, 002E, 1
@@ -515,14 +515,14 @@ l_0xc5f4e5:
 
 l_0xc5f4f4:
     "@Good!" next
-    if not flg_KeyItems {
+    if not flag FLG_KEY_ITEMS {
     	char_inventory_vacancy(-1)
     	goto_if_false(l_0xc5f575) } // Check if item has space to be carried
     "@It's already dawn outside..." next
     "@But it doesn't matter to me." pause(20)
     "  I'm fading fast..." next
     "@Argh!| *Gasp*" promptw
-    if flg_KeyItems { give_menu_key_item(SOUND_STONE) }
+    if flag FLG_KEY_ITEMS { give_menu_key_item(SOUND_STONE) }
     else {
     	give_and_check(0, SOUND_STONE)
     	call(data_36.l_0xc7dcb6)

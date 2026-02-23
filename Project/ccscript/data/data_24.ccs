@@ -302,7 +302,7 @@ l_0xc68e1c:
     eob
 
 l_0xc68f74:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     store_registers
     // Check for Eraser eraser, item 0xD2, 210
@@ -318,7 +318,7 @@ l_0xc68fa6:
     "@But it definitely doesn't look like an eraser... does it?" end
 
 l_0xc69007:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     // Check for Rabbits' carrot, item 0xFD, 253
     result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)

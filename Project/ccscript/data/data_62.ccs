@@ -128,204 +128,256 @@ l_0xef6e31:
 l_0xef6e4a:
     newline
     "@{target}'s body" linebreak
-    "  returned to normal!{sound(37)}[03]" eob
+    "  returned to normal!{sound(37)}" promptw
+    eob
 
 l_0xef6e67:
     newline
     "@{target}'s" linebreak
-    "  numbness is gone!{sound(37)}[03]" eob
+    "  numbness is gone!{sound(37)}" promptw
+    eob
 
 l_0xef6e81:
     newline
     "@{target} felt" linebreak
-    "  much better!{sound(37)}[03]" eob
+    "  much better!{sound(37)}" promptw
+    eob
 
 l_0xef6e97:
     newline
     "@The poison was removed" linebreak
-    "  from {target}'s body!{sound(37)}[03]" eob
+    "  from {target}'s body!{sound(37)}" promptw
+    eob
 
 l_0xef6ebc:
     newline
     "@{target} got over" linebreak
-    "  the cold!{sound(37)}[03]" eob
+    "  the cold!{sound(37)}" promptw
+    eob
 
 l_0xef6ed1:
     newline
     "@{target} finally" linebreak
-    "  stopped crying...{sound(37)}[03]" eob
+    "  stopped crying...{sound(37)}" promptw
+    eob
 
 l_0xef6eed:
     newline
     "@{target}'s body" linebreak
-    "  again moved freely!{sound(37)}[03]" eob
+    "  again moved freely!{sound(37)}" promptw
+    eob
 
 l_0xef6f0b:
     newline
     "@{target} was" linebreak
-    "  able to move!{sound(37)}[03]" eob
+    "  able to move!{sound(37)}" promptw
+    eob
 
 l_0xef6f1e:
     newline
     "@{target} went" linebreak
-    "  back to normal!{sound(37)}[03]" eob
+    "  back to normal!{sound(37)}" promptw
+    eob
 
 l_0xef6f38:
     newline
     "@{target}'s" linebreak
-    "  sunstroke was cured!{sound(37)}[03]" eob
+    "  sunstroke was cured!{sound(37)}" promptw
+    eob
 
 l_0xef6f54:
     newline
-    "@{target} woke up!{sound(37)}[03]" eob
+    "@{target} woke up!{sound(37)}[03]" promptw
+    eob
 
 l_0xef6f64:
     newline
     "@{target} was" linebreak
-    "  able to concentrate!{sound(37)}[03]" eob
+    "  able to concentrate!{sound(37)}" promptw
+    eob
 
 l_0xef6f7c:
     newline
-    "@{target} was revived!{sound(37)}[03]" eob
+    "@{target} was revived!{sound(37)}" promptw
+    eob
 
 l_0xef6f8e:
     newline
-    "@It didn't work...[03]" eob
+    "@It didn't work..." promptw
+    eob
 
 l_0xef6f9a:
     newline
-    "@{target}'s body was protected by the shield of light![03]" eob
+    "@{target}'s body was protected by the shield of light!" promptw
+    eob
 
 l_0xef6fbd:
     newline
-    "@{target}'s shield became stronger![03]" eob
+    "@{target}'s shield became stronger!" promptw
+    eob
 
 l_0xef6fd3:
     newline
-    "@{target}'s body was protected by the power shield![03]" eob
+    "@{target}'s body was protected by the power shield!" promptw
+    eob
 
 l_0xef6ff4:
     newline
-    "@{target}'s power shield became stronger![03]" eob
+    "@{target}'s power shield became stronger!" promptw
+    eob
 
 l_0xef700c:
     newline
-    "@{target}'s body was protected by the psychic shield![03]" eob
+    "@{target}'s body was protected by the psychic shield!" promptw
+    eob
 
 l_0xef7032:
     newline
-    "@{target}'s psychic shield became stronger![03]" eob
+    "@{target}'s psychic shield became stronger!" promptw
+    eob
 
 l_0xef7050:
     newline
     "@{target}'s body was protected by" next
-    "  the psychic power shield![03]" eob
+    "  the psychic power shield!" promptw
+    eob
 
 l_0xef707a:
     newline
-    "@{target}'s psychic power shield became stronger![03]" eob
+    "@{target}'s psychic power shield became stronger!" promptw
+    eob
 
 l_0xef7099:
     newline
     "@{target}'s shield" linebreak
-    "  disappeared![03]" eob
+    "  disappeared!" promptw
+    eob
 
 l_0xef70b1:
     newline
     "@The power shield" linebreak
-    "  deflected the attack!{sound(93)}{pause(30)}[03]" eob
+    "  deflected the attack!"
+    sound(SND_SHIELDREFLECT)	// 93
+    pause(30)
+    promptw
+    eob
 
 l_0xef70d2:
     newline
     "@The psychic power shield" linebreak
-    "[19 1F]{swap}  deflected [1C 12 00]!{sound(93)}[03]" eob
+    "[19 1F]{swap}  deflected [1C 12 00]!"
+    sound(SND_SHIELDREFLECT)	// 93
+    promptw
+    eob
 
 l_0xef70fa:
     newline
-    "@{target}'s psychic shield made[19 1F]{swap} [1C 12 00] disappear![03]" eob
+    "@{target}'s psychic shield made[19 1F]{swap} [1C 12 00] disappear!" promptw
+    eob
 
 l_0xef7123:
     newline
     "@The effects of PSI on" linebreak
-    "  {target} is gone!{sound(41)}[03]" eob
+    "  {target} is gone!{sound(41)}" promptw
+    eob
 
 l_0xef7142:
     newline
     "@[1C 01 4A] returned" linebreak
-    "  to his original form![03]" eob
+    "  to his original form!" promptw
+    eob
 
 l_0xef7160:
     newline
     "@The Franklin Badge deflected" linebreak
-    "  the lightning!{sound(93)}[03]" eob
+    "  the lightning!{sound(93)}" promptw
+    eob
 
 l_0xef7186:
     newline
-    "@{user} cannot move![03]" eob
+    "@{user} cannot move!" promptw
+    eob
 
 l_0xef7192:
     newline
     "@{user}'s body is" linebreak
-    "  numb and " call(data_36.l_0xc7e602) " can't move![03]" eob
+    "  numb and " call(data_36.l_0xc7e602) " can't move!" promptw
+    eob
 
 l_0xef71b4:
     newline
     "@{user} feels" linebreak
-    "  too sick to move...[03]" eob
+    "  too sick to move..." promptw
+    eob
 
 l_0xef71cc:
     newline
     "@{target} is" linebreak
-    "  poisoned![03]" eob
+    "  poisoned!" promptw
+    eob
 
 l_0xef71df:
     newline
     "@{user} has" linebreak
-    "  fallen asleep![03]" eob
+    "  fallen asleep!" promptw
+    eob
 
 l_0xef71f6:
     newline
     "@{user} cannot" linebreak
-    "  move around![03]" eob
+    "  move around!" promptw
+    eob
 
 l_0xef720c:
     newline
-    "[1F 41 08][1B 02 {e(l_0xef721e)}]{sound(55)}" goto(l_0xef7221)
+    "[1F 41 08][1B 02 {e(l_0xef721e)}]"
+    sound(SND_PSI2)	// 55
+    goto(l_0xef7221)
 
 l_0xef721e:
-    "{sound(29)}" goto(l_0xef7221)
+    sound(SND_PSI1)	// 29
+    goto(l_0xef7221)
 
 l_0xef7221:
     "@{user}[19 1F]{swap} tried" linebreak
-    "  [1C 12 00]!{sound(87)}" next
-    "@But it didn't work very well![03]" eob
+    "  [1C 12 00]!"
+    sound(87)	// No sound
+    next
+    "@But it didn't work very well!" promptw
+    eob
 
 l_0xef7249:
     newline
     "@{target} is" linebreak
-    "  on guard![03]" eob
+    "  on guard!" promptw
+    eob
 
 l_0xef725a:
     newline
     "@{user} lost" linebreak
-    "  his mind by wolfing down <Fly Honey>![03]" eob
+    "  his mind by wolfing down <Fly Honey>!" promptw
+    eob
 
 l_0xef727f:
     "[1D 21 03][09 03 {e(l_0xef72a0)} {e(l_0xef72b9)} {e(l_0xef72db)}]" newline
-    "@{user} misses home.[03]" eob
+    "@{user} misses home." promptw
+    eob
 
 l_0xef72a0:
     newline
-    "@{user} suddenly thought about his Mom.[03]" eob
+    "@{user} suddenly thought about his Mom." promptw
+    eob
 
 l_0xef72b9:
     newline
-    "@{user} thought about eating some [1C 01 04] and started craving it.[03]" eob
+    "@{user} thought about eating some [1C 01 04] and started craving it." promptw
+    eob
 
 l_0xef72db:
     newline
     "@{user} lost all motivation" linebreak
-    "  in battle.[03]" eob
+    "  in battle." promptw
+    eob
 
 l_0xef72f6:
     eob
@@ -335,17 +387,28 @@ l_0xef72f7:
     "@Black smoke poured from" linebreak
     "  {user}'s body!{prompt}" linebreak
     "@" call(data_37.l_0xc7e6d7) " " call(was) linebreak
-    "  overcome by the smoke!{prompt}" linebreak
-    "@You can't see a thing!{prompt}" eob
+    "  overcome by the smoke!" prompt
+    linebreak
+    "@You can't see a thing!" promptw
+    eob
 
 was:
-    "[19 10 01]{swap}{counter(1)}" goto(was1)
+    party_pos_check(1) swap
+    counter(1)
+    goto(was1)
 
 was1:
-    "{inc}{ctoarg}[1D 19 00][1B 03 {e(was2)}][19 10 00][1D 0D 00 01 02][1B 03 {e(was2)}][19 10 00][1D 0D 00 01 03][1B 03 {e(was2)}]" goto(was1)
+    inc ctoarg
+    "[1D 19 00]" goto_if_true(was2)
+    "[19 10 00]"
+    "[1D 0D 00 01 02]" goto_if_true(was2)
+    "[19 10 00]"
+    "[1D 0D 00 01 03]" goto_if_true(was2)
+    goto(was1)
 
 was2:
-    "{ctoarg}{swap}[09 05 {e(was3)} {e(was3)} {e(was4)} {e(was5)} {e(was5)}]" eob
+    ctoarg swap
+    "[09 05 {e(was3)} {e(was3)} {e(was4)} {e(was5)} {e(was5)}]" eob
 
 was3:
     "was" eob
@@ -359,52 +422,77 @@ was5:
 l_0xef733d:
     newline
     "@All of a sudden," linebreak
-    "  some guys rushed into the room!{prompt}{music(149)}{pause(60)}" newline
-    "@It was the Runaway Brothers!{prompt}{window_closetop}{pause(30)}{window_open(1)}" newline
-    "[1F 62 00]@Lucky quickly ducked behind the robot!{prompt}{sound(11)}{pause(60)}{window_clear}"
+    "  some guys rushed into the room!" prompt
+    music(149)
+    pause(60)
+    newline
+    "@It was the Runaway Brothers!" prompt
+    window_closetop
+    pause(30)
+    window_open(1)
+    newline
+    "[1F 62 00]"
+    "@Lucky quickly ducked behind the robot!" prompt
+    sound(SND_PHONEPICKUP)	// 11
+    pause(60)
+    window_clear
     title(1, Lucky)	// Skinny guy
     "@<I flipped the switch, and it stopped. >" next
     "@<Ha ha ha hah..." linebreak
-    "  Geez, what a loser robot.  It was so easy to stop!>{pause(20)}{prompt}{window_clear}"
+    "  Geez, what a loser robot.  It was so easy to stop!>" pause(20) prompt
+    window_clear
     //title(1, Lucky)	// Skinny guy
-    "@<That was quick thinking!>{prompt}{pause(60)}[1F 62 01]{window_closetop}{window_open(14)}{set(flag 318)}" eob
+    "@<That was quick thinking!>" prompt
+    pause(60)
+    "[1F 62 01]"
+    window_closetop
+    window_open(14)
+    set(FLG_FOUR_BLDG_TONZURA_APPEAR)	// 318
+    eob
 
 l_0xef7415:
-    set(flg_Poo)
+    set(FLG_POO_KI)
     learnpsi(4,2)	// Poo learns Starstorm
     newline
-    "@Suddenly, [1C 02 04] swooped down" linebreak
-    "  from the sky!{pause(50)}" eob
+    "@Suddenly, {name(4)} swooped down" linebreak
+    "  from the sky!" pause(50)
+    eob
 
 l_0xef743b:
     newline
-    "@[1C 02 04] used his new power,{prompt}" linebreak
-    "  PK Starstorm!{prompt}" linebreak
+    "@[1C 02 04] used his new power," prompt linebreak
+    "  PK Starstorm!" prompt linebreak
     eob
 
 l_0xef745f:
-    "[1D 21 08][09 08 {e(l_0xef749d)} {e(l_0xef74b0)} {e(l_0xef74c9)} {e(l_0xef74e6)} {e(l_0xef74fa)} {e(l_0xef7514)} {e(l_0xef7530)} {e(l_0xef7548)}]" newline
+    "[1D 21 08]"
+    "[09 08 {e(l_0xef749d)} {e(l_0xef74b0)} {e(l_0xef74c9)} {e(l_0xef74e6)} {e(l_0xef74fa)} {e(l_0xef7514)} {e(l_0xef7530)} {e(l_0xef7548)}]" newline
     "@Porky used [1C 01 08]" linebreak
-    "  as a shield![03]" eob
+    "  as a shield!" promptw
+    eob
 
 l_0xef749d:
     newline
-    "@Porky played dead![03]" eob
+    "@Porky played dead!" promptw
+    eob
 
 l_0xef74b0:
     newline
     "@Porky pretended" linebreak
-    "  to cry![03]" eob
+    "  to cry!" promptw
+    eob
 
 l_0xef74c9:
     newline
     "@Porky apologized" linebreak
-    "  profusely![03]" eob
+    "  profusely!" promptw
+    eob
 
 l_0xef74e6:
     newline
     "@Porky is profusely" linebreak
-    "  showing remorse![03]" eob
+    "  showing remorse!" promptw
+    eob
 
 l_0xef74fa:
     newline

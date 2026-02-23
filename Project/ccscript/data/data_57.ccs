@@ -276,9 +276,9 @@ l_0xc9b268:
     eob
 
 l_0xc9b270:	// Flashback scene prep
-    unset(flg_Paula)
-    unset(flg_Jeff)
-    unset(flg_Poo)
+    unset(FLG_PAULA_KI)
+    unset(FLG_JEFF_KI)
+    unset(FLG_POO_KI)
     set(FLG_POWR_ALL)	// 384, All Sound Stone melodies
     OSS_off	// special_event(6)
     party_remove(2)

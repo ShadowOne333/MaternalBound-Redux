@@ -377,7 +377,7 @@ l_0xc795bd:
 
 l_0xc795c1:
     store_registers
-    if flag flg_KeyItems {
+    if flag FLG_KEY_ITEMS {
 	swap return_action_argument
 	result_is(CABIN_KEY) goto_if_false(l_0xc796ee)
     }
@@ -390,7 +390,7 @@ l_0xc795c1:
     goto(rescuepaula)
 
 rescuepaula:
-    set(flg_Paula)
+    set(FLG_PAULA_KI)	// Key items party flag
     window_closeall
     sound(SND_PSI3)	// 119
     hide_sprite(436, 6)

@@ -6,9 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
 import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -235,11 +236,11 @@ l_0xc8b191:
     "@You came from far off just to eat my Magic cake?..." next
     "@I thought making cakes would be the best career for me." next
     "@Dig in!" next
-    unset(flg_Ness)
-    unset(flg_Jeff)
-    unset(flg_Paula)
-    set(flg_Poo)
-    set(flg_PooSoloMission)
+    unset(FLG_NESS_KI)
+    unset(FLG_JEFF_KI)
+    unset(FLG_PAULA_KI)
+    set(FLG_POO_KI)
+    set(FLG_POO_SOLO)
     "@I used up the last of my ingredients to make this special Magic cake!" promptw
     window_closeall
     unset(FLG_SUMS_MASSAGE_APPEAR)	// 61
@@ -254,7 +255,11 @@ l_0xc8b22f:
     "@If you want to try something tastier..." next
     "@I have a <[1C 05 CF].>" next
     "@Try it." next
-    "{wait}[1D 03 FF][1B 02 {e(l_0xc8b292)}][1D 0E FF CF]{sound(116)}@...I've made another tasty treat today!" end
+    wait
+    "[1D 03 FF]" goto_if_false(l_0xc8b292)
+    "[1D 0E FF CF]"
+    sound(SND_BOXTAKE)	// 116
+    "@...I've made another tasty treat today!" end
 
 l_0xc8b292:
     title(1, Jill)

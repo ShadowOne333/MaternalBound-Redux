@@ -101,7 +101,7 @@ l_0xc757cd:
 l_0xc757fb:
     "@(I guess I have no choice.{pause(20)}  Let's go.)" promptw
     sound(SND_GIFTOPEN)		// 16
-    set(flg_King)
+    set(FLG_KING_KI)
     call(data_22.l_0xc680f2)
     unset(FLG_DOG_LATER_APPEAR)	// 304
     set(FLG_MYHOME_DOG_MOVED)	// 444

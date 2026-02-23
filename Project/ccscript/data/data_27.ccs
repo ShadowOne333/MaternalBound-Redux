@@ -371,7 +371,7 @@ l_0xc6ea34:
     goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
-    set(flg_Paula)
+    set(FLG_PAULA_KI)
     title(1, Monotoly)
     "@....." next
     "@I'll tell you everything." next
@@ -806,7 +806,7 @@ l_0xc6fae5:
 
 l_0xc6fb02:
     store_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(BAD_KEY_MACHINE)	// 172
     goto_if_false(l_0xc6fb5d)
@@ -823,7 +823,7 @@ l_0xc6fb20:
 
 l_0xc6fb33:
     load_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     "@{name(0)}{swap} used" linebreak
     "  the {itemname(0)}." next

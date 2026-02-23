@@ -43,10 +43,11 @@ ROM[0xC39F75] = COP(0xFF)
 /* Modify Speed variance in Battle from 50% to 25% similar to Mother 3 */
 ROM[0xC24FFB] = JSR (0x6AFD)
 //------------------------------------------------------------------
+// Fix Sactuaries order in the final Sound Stone sequence
 ROM[0xC4DE78] = {
 // Warp coordinates for each of the eight Sanctuary locations
 // Used in the final Sound Stone scene where all of them flash quickly on screen
-// (They appear in reverse order)
+// (They appear in reverse order in the sequence)
 
 /* Giant Step*/ 	short 151 short 48	// 0x0097, 0x0030
 /* Lilliput Steps */ 	short 387 short 1013	// 0x0183, 0x03F5
@@ -59,4 +60,7 @@ ROM[0xC4DE78] = {
 /* Lumine Hall */ 	short 843 short 600	// 0x034B, 0x0258
 /* Fire Spring */ 	short 766 short 1228	// 0x02FE, 0x04CC
 }
+//------------------------------------------------------------------
+// Dad calls after 3 hours instead of 2
+ROM[0xC05284]	= CMP_i	(0x0003)
 //------------------------------------------------------------------

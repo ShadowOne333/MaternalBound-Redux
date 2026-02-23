@@ -264,7 +264,7 @@ l_0xc954b3:
     "  I wonder what he wants?" end
 
 l_0xc954e1:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// 180, Suitcase of bills
     goto_if_false(data_35.l_0xc7c6b6)
@@ -320,7 +320,7 @@ l_0xc9569a:
     "  How 'bout watchin'" pause(15) " one more show?" end
 
 l_0xc956d6:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// 180, Suitcase of bills
     goto_if_false(data_35.l_0xc7c6b6)
@@ -341,7 +341,7 @@ l_0xc9575e:
     "@We can't be this good all the time, can we? " end
 
 l_0xc95786:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// 180, Suitcase of bills
     goto_if_false(data_35.l_0xc7c6b6)
@@ -375,7 +375,7 @@ l_0xc95881:
     "@...hey, I just made up a new song." end
 
 l_0xc958d7:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// 180, Suitcase of bills
     goto_if_false(data_35.l_0xc7c6b6)
@@ -398,7 +398,7 @@ l_0xc95988:
     "@I didn't stand out and get much attention, did I?" end
 
 l_0xc959a5:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// 180, Suitcase of bills
     goto_if_false(data_35.l_0xc7c6b6)
@@ -416,20 +416,19 @@ l_0xc959e2:
     "@The Runaway Brothers owe me a lot of money." next
     "@They'll stay here until they pay me back." next
     "@They might be here for 100 years," next
-    "@unless you decide to pay off their debt...  Heh, heh, heh." next	//end
-    if flag flg_KeyItems and flag FLG_TWSN_ITEM_TONCHIKI // flg_KeyItem_WadofBills
+    "@unless you decide to pay off their debt...  Heh, heh, heh." wait	//end
+    if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI // flg_KeyItem_WadofBills
     {
-        unset(FLG_TWSN_ITEM_TONCHIKI)
-        unset(flg_KeyItem_BackstagePass)
         goto(chaostheatermanager_paid)
     }
+    eob
 
 l_0xc95a5f:
     "@The Runaway Brothers are free to leave." next
     "@I've got no complaints now that I have my money." end
 
 l_0xc95a8d:
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(WAD_BILLS)	// Suitcase/Wad of bills
     goto_if_true(l_0xc95aa0)
@@ -539,7 +538,7 @@ l_0xc95f0a:
     "@Now I plan on looking for the evil Mani Mani Statue or whatever" next
     "@that some petty bad guy named Lier X. Agerate or something dug up in Onett." next
     "@I'll see you at another time, in another space." promptw
-    if flg_KeyItems { give_menu_key_item(WAD_BILLS) }
+    if flag FLG_KEY_ITEMS { give_menu_key_item(WAD_BILLS) }
     else {
     	char_inventory_vacancy(-1)
 	goto_if_false(l_0xc9605d)
@@ -689,7 +688,7 @@ l_0xc965a4:
     })
     next
 
-    if flag flg_KeyItems {
+    if flag FLG_KEY_ITEMS {
 	    isset(FLG_ITEM_MAP)
 	    goto_if_false(l_0xc96625)
     }

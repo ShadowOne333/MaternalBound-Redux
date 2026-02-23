@@ -187,7 +187,7 @@ l_0xc7460b:
 
 l_0xc74646:
     load_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(SHACK_KEY)	// 170
     goto_if_false(data_35.l_0xc7c6b6)

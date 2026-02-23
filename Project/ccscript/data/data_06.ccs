@@ -6,7 +6,10 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/ccscript_missing_commands.ccs"
+import "../essential/commands.ccs"
 import "../essential/flags.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -14,7 +17,7 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc573dc:
-    "{window_open(1)}"
+    window_open(1)
     title(1, Star)
     "@The stars foretold that I would meet you here..." next
     "@Now is the time for me to pass on to you the <technique for making stars rain down.>" next
@@ -22,20 +25,29 @@ l_0xc573dc:
     "@Do you understand?" next
     "@...There's only one answer." next
     "@I must stop you here even if you don't want to." next
-    "@Stay with me for a while, do you understand?![03]{window_closeall}{pause(30)}" goto(data_50.l_0xc9329b)
+    "@Stay with me for a while, do you understand?!" promptw
+    window_closeall
+    pause(30)
+    goto(data_50.l_0xc9329b)
 
 l_0xc5749a:
-    unset(flg_Poo)
-    "{window_open(1)}"
+    unset(FLG_POO_KI)
+    window_open(1)
     title(1, Star)
-    "@It depends on [1C 02 04]'s efforts.  That will determine the reuniting of the group." next
-    "@Be faithful, and wait until the time comes!{wait}{window_closeall}" eob
+    "@It depends on {name(4)}'s efforts.  That will determine the reuniting of the group." next
+    "@Be faithful, and wait until the time comes!" wait
+    window_closeall
+    eob
 
 l_0xc574f6:
-    "[06 50 01 {e(l_0xc575f8)}]@I'm doing this as a hobby.{pause(20)}  Isn't it cool?" next
-    "@I recently made a friend.{pause(20)}  He used to be a Dungeon Maker." next
+    "[06 50 01 {e(l_0xc575f8)}]"
+    "@I'm doing this as a hobby." pause(20)
+    "  Isn't it cool?" next
+    "@I recently made a friend." pause(20)
+    "  He used to be a Dungeon Maker." next
     "@And now he's a <Dungeon Man.>" next
     "@Would you like to meet him?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc57570:
@@ -45,7 +57,7 @@ l_0xc57575:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5759d)} {e(l_0xc57584)}]" goto(l_0xc57584)
 
 l_0xc57584:
-    "@I understand,{pause(15)} he is a very strange fellow." end
+    "@I understand,| he is a very strange fellow." end
 
 l_0xc5759d:
     "@All righty then, I'll give you the key so that you can enter him." next
@@ -63,7 +75,13 @@ l_0xc5762c:
     "@I am not sure if it was the <Dungeon Man,> but..." next
     "@there is a strange looking tower to the northwest." next
     "@...This key I picked up a little while ago shall maybe open the tower." next
-    "@You may have it, I do not need it.[1D 03 FF][1B 02 {e(l_0xc57718)}][03][1D 0E 00 C0][1B 05]" call(data_36.l_0xc7dcb6) "{set(flag 336)}{wait}{window_closeall}{isset(flag 691)}[1B 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_24.l_0xc692f7) eob
+    "@You may have it, I do not need it."
+    "[1D 03 FF]" goto_if_false(l_0xc57718)
+    promptw
+    "[1D 0E 00 C0]"
+    "[1B 05]"
+    call(data_36.l_0xc7dcb6)
+    "{set(flag 336)}{wait}{window_closeall}{isset(flag 691)}[1B 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_24.l_0xc692f7) eob
 
 l_0xc576e0:
     title(1, Warrior)

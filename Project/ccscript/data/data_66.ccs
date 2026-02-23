@@ -385,14 +385,14 @@ l_0xefa2d5:
 
 l_0xefa2d6:
     store_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap }
     result_is(SHACK_KEY)
     goto_if_false(data_27.l_0xc6fb5d)
     call(data_27.l_0xc6fb33)
 
     load_registers
-    if flag flg_KeyItems { swap return_action_argument }
+    if flag FLG_KEY_ITEMS { swap return_action_argument }
     else { return_item_in_slot(0, 0) swap take_slot(0, 0) }
     hide_sprite(147, 6)	// 0093, 6
     set(FLG_OPEN_TABIGOYA)	// 108

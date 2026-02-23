@@ -90,7 +90,7 @@ define BUBBLE_GUM	= 104	// 0x68
 ROM[0xC13BCF] = {
 	MText	(Key_Items_Prep)
 
-	LDA_i	(USED_ITEM_TEMP_FLAG)
+	LDA_i	(FLG_TEMP_USEITEM)
 	JSL	(GET_EVENT_FLAG)
 	CMP_i	(0x0000)
 	BNE	(0x07)	// _exit_on_item_use
@@ -164,7 +164,7 @@ SetCount26: { counter(26) ctoarg eob }
 //   Main Key items ccscript code
 //------------------------------------
 KeyItems:
-	unset(USED_ITEM_TEMP_FLAG)
+	unset(FLG_TEMP_USEITEM)
 
 	copy_wram
 	save_text_window_state
@@ -179,7 +179,7 @@ KeyItems:
 	// Item flag checks
 	// Check if the player is not in Jeff nor Poo's sections
 	// (Main gameplay with all characters)
-	if not flag flg_PooSoloMission and not flag flg_JeffSoloMission {
+	if not flag FLG_POO_SOLO and not flag FLG_JEFF_SOLO {
 
 		add_menu_option_with_callback("ATM card", SetCount1)
 		if flag FLG_ONET_2FPICKEY_APPEAR and not flag FLG_WIN_OSCAR { // Buzz Buzz died and Defeated Nightmare
@@ -202,21 +202,21 @@ KeyItems:
 			add_menu_option_with_callback("Key to the cabin", SetCount9) }
 		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURABUS_APPEAR {
 			add_menu_option_with_callback("Suitcase of bills", SetCount10) }
-		if flag flg_KeyItem_BackstagePass {
+		if flag FLG_ITEM_TICKET {
 			add_menu_option_with_callback("Backstage pass", SetCount11) }
 		if flag FLG_ITEM_HOIHOI and not flag FLG_PUT_ZOMBI_HOIHOI and not flag FLG_THRK_ZOMBI_CAPTURED and not flag FLG_WIN_GEPPU {
 			add_menu_option_with_callback("Zombie paper", SetCount12) }
-		if flag flg_KeyItem_ShowTicket {
+		if flag FLG_ITEM_SHOW_TICKET {
 			add_menu_option_with_callback("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_MISSFAKE {
 			add_menu_option_with_callback("Diamond", SetCount14) }
-		if flag flg_KeyItem_YogurtMachine {	// Yogurt dispenser -> Tofu machine
+		if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
 			add_menu_option_with_callback("Tofu machine", SetCount15) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			add_menu_option_with_callback("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
 			add_menu_option_with_callback("Hieroglyph copy", SetCount17) }
-		if flag flg_KeyItem_CarrotKey {	// Rabbit's carrot ->
+		if flag FLG_ITEM_CARROT_KEY {	// Rabbit's carrot ->
 			add_menu_option_with_callback("Rabbits' carrot", SetCount18) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
 			add_menu_option_with_callback("Key to the tower", SetCount19) }
@@ -230,7 +230,7 @@ KeyItems:
 			add_menu_option_with_callback("Meteorite piece", SetCount23) }
 	}
 
-	if not flag flg_PooSoloMission {
+	if not flag FLG_POO_SOLO {
 
 		if flag FLG_ITEM_KEY_LOCKER {
 			add_menu_option_with_callback("Locker Key", SetCount24) }
@@ -351,7 +351,7 @@ command use_help_submenu( itemID, help_text ) {
 	goto(_UseHelp_Window_Backout)
 _use:
 	window_closetop
-	set(USED_ITEM_TEMP_FLAG)
+	set(FLG_TEMP_USEITEM)
 	window_open(DIALOGUE_WINDOW)
 	use_item(itemID)
 	window_closeall
@@ -386,7 +386,7 @@ command give_menu_key_item(itemID) {
 }
 
 keyitemcounter:
-	if counter_is(SOUND_STONE) { toggle_with_sound(flg_BuzzBuzzDead) }
+	/*if counter_is(SOUND_STONE) { toggle_with_sound(flg_BuzzBuzzDead) }
 	if counter_is(SHACK_KEY) { toggle_with_sound(FLG_KEY_TABIGOYA) }
 	if counter_is(BICYCLE) { toggle_with_sound(FLG_ITEM_CYCLE) }
 	if counter_is(TOWN_MAP) { toggle_with_sound(FLG_ITEM_MAP) }
@@ -400,17 +400,17 @@ keyitemcounter:
 	if counter_is(ERASER_ERASER) { toggle_with_sound(FLG_ITEM_KOKESHI) }
 	if counter_is(DIAMOND) { toggle_with_sound(FLG_DSRT_ITEM_DIA) }
 	if counter_is(SIGNED_BANANA) { toggle_with_sound(FLG_ITEM_BANANA) }
-	if counter_is(HIEROGLYPH) { toggle_with_sound(FLG_SUMS_HIEROGLYPH) }
-	if counter_is(CARROT_KEY) { toggle_with_sound(flg_KeyItem_CarrotKey) }
-	if counter_is(TOWER_KEY) { toggle_with_sound(FLG_ITEM_KEY_PUPUKA) }
+	if counter_is(HIEROGLYPH) { toggle_with_sound(FLG_SUMS_HIEROGLYPH) }*/
+	if counter_is(CARROT_KEY) { toggle_with_sound(FLG_ITEM_CARROT_KEY) }
+	/*if counter_is(TOWER_KEY) { toggle_with_sound(FLG_ITEM_KEY_PUPUKA) }
 	if counter_is(HAWK_EYE) { toggle_with_sound(FLG_ITEM_TAKANOME) }
 	if counter_is(SHYNESS_BOOK) { toggle_with_sound(FLG_ITEM_MUKUCHI) }
 	if counter_is(TENDAKRAUT) { toggle_with_sound(FLG_GUMI_OLDMAN_ITEM) }
 	if counter_is(METEORITE) { toggle_with_sound(FLG_ITEM_XYZ) }
 	if counter_is(BUBBLE_GUM) { toggle_with_sound(FLG_ITEM_BUBBLE_GUM) }
-	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(flg_KeyItem_BackstagePass) }
-	if counter_is(YOGURT_DISP) { toggle_with_sound(flg_KeyItem_YogurtMachine) }
-	if counter_is(SHOW_TICKET) { toggle_with_sound(flg_KeyItem_ShowTicket) }
+	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(FLG_ITEM_BACKSTAGE_PASS) }*/
+	if counter_is(YOGURT_DISP) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
+	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }
 eob
 
 // Turn active flag off or vice versa

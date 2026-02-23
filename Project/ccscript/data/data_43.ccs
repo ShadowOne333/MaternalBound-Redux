@@ -419,9 +419,9 @@ l_0xc882bd:
     eob
 
 l_0xc88332:
-    set(flg_Ness)
-    set(flg_Paula)
-    unset(flg_JeffSoloMission)
+    set(FLG_NESS_KI)
+    set(FLG_PAULA_KI)
+    unset(FLG_JEFF_SOLO)
     set(FLG_SYS_MONSTER_OFF)
     OSS_on	// special_event(5)
     

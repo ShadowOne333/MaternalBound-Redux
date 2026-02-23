@@ -184,7 +184,7 @@ l_0xc72cee:
 l_0xc72d2f:
     "@You're such a smart kid..." pause(20)
     "  Here's the key to the shack." next
-    if flag flg_KeyItems { give_menu_key_item(SHACK_KEY) }
+    if flag FLG_KEY_ITEMS { give_menu_key_item(SHACK_KEY) }
     else {
 	load_registers	// 
 	char_inventory_vacancy(-1)
@@ -357,7 +357,7 @@ l_0xc732e1:
     "@How convenient!" next
     "@You know, the Start Button... located near the center." pause(15) linebreak
     "  Ha ha ha." next
-    if flag flg_KeyItems { give_menu_key_item(TOWN_MAP) }
+    if flag FLG_KEY_ITEMS { give_menu_key_item(TOWN_MAP) }
     else {
 	give_and_check(0, TOWN_MAP)	// 0xCA, 202, Town map
 	call(data_36.l_0xc7dccf) }

@@ -398,13 +398,6 @@ l_0xc981c6:
     "@I apologize/| to everyone." next
     "@Here's the key to open the jail in the mountain cabin where {name(2)} is being held." next
     "@Take the key and go." next
-    if flg_KeyItems { give_menu_key_item(CABIN_KEY) wait }
-    else {
-    	char_inventory_vacancy(-1) goto_if_false(l_0xc9827c)
-    	give_and_check(0, CABIN_KEY)	// 0xAB, 171, Cabin key
-    	call(data_36.l_0xc7dcb6) wait
-    }
-    // FLG_WIN_CARPAINTER is already set by give_menu_key_item, but we'll set again anyway
     set(FLG_WIN_CARPAINTER)	// 68
     unset(FLG_HAPPY_SWITCH)	// 175
     unset(FLG_GRFD_POKEY_APPEAR)	// 45
@@ -414,8 +407,15 @@ l_0xc981c6:
     set(FLG_HAPPY_UPRIGHT_4_DISAPPEAR)	// 354
     set(FLG_HAPPY_UPRIGHT_5_DISAPPEAR)	// 355
     set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
-    unset(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
+    if flag FLG_KEY_ITEMS { give_menu_key_item(CABIN_KEY) }
+    else {
+    	char_inventory_vacancy(-1) goto_if_false(l_0xc9827c)
+    	give_and_check(0, CABIN_KEY)	// 0xAB, 171, Cabin key
+    	call(data_36.l_0xc7dcb6)
+    }
+    wait
     window_closeall
+    unset(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
     eob
 
 l_0xc9827c:
