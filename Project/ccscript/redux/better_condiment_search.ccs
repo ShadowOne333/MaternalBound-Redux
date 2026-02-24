@@ -1,0 +1,279 @@
+import "../essential/asm65816.ccs"
+
+// Better condiments
+// v1.2
+// Supremekirb
+
+// Vanilla function: Find first condiment-type item in inventory. If none, return 0.
+// New function: Find first good condiment item in inventory. If none, look for delisauce. If none, look for other condiments. If none, return 0
+// Additionally, hardcodes delisauce to be always a good condiment, so both possible good condiments can be used instead of delisauce taking up a slot always.
+// * if delisauce remains set as the second good condiment item in the condiment table entry, then it may take priority!
+
+define DELISAUCE = 126 // put delisauce item ID here 
+
+// Patch over the old "get condiment" function
+ROM[0xC1DB33] = { JML (find_condiment) }
+
+
+// Hardcode delisauce (frees up second condiment slot!)
+// Thanks to JTolmar for the code for this patch. 
+ROM[0xC2B1E2] = { JML(apply_sauce) }
+define UNKNOWN2 = 0xC2B1E6
+define UNKNOWN5 = 0xC2B249
+apply_sauce: {
+	// dp 0x02 being the item found from the condiment search
+	CMP_d (0x02)
+	// long BEQ
+	BNE (4) JML (UNKNOWN2)
+	LDA_i (DELISAUCE)
+	CMP_d (0x02)
+	// long BNE
+	BEQ (4) JML (UNKNOWN5)
+	JML   (UNKNOWN2) // return 
+}
+
+
+define d_Loop         = 0x10
+define d_ItemInSlot   = 0x0E
+define d_condimentA   = 0x16
+define d_condimentB   = 0x18
+
+define Mul16x8r16     = 0xC08FF7
+
+define CONDIMENTTABLE = 0xD5EA77 // TODO: if CoilSnake ever expands this table, then read the pointer from some patched code.
+define ITEMTABLE      = 0xD55000      // TODO: if CoilSnake ever expands this table, then read the pointer from some patched code.
+
+define CONDIMENTTABLE_SIZEOF = 7
+define CONDIMENTTABLE_item = 0
+define CONDIMENTTABLE_condiments = 1
+
+define ITEMTABLE_type = 0x19
+
+find_condiment: { // Arguments: A = item to check
+	// function intro
+	REP   (0x31)
+	PHD
+	PHA
+	TDC 
+	ADC_i (-0x30) // make some space 
+	TCD
+	PLA
+	STA_d (0x14) // store food item (for later)
+	//
+	
+	// Check if the item is edible. If it's not, then just return, there are no condiments for it
+	AND_i (0x00FF)
+	LDY_i (0x0027) // SIZEOF_
+	JSL   (Mul16x8r16) // Mul16x8r16
+	CLC
+	ADC_i (ITEMTABLE_type) // Item type table offset
+	TAX
+	LDA_xl (ITEMTABLE)	// Get item type
+	AND_i (0x00FF) 
+	AND_i (0x003C) // flag stuff
+	CMP_i (0x0020)
+	BNE_a (nothing) // if the item isn't edible, return 0
+
+
+	LDX_a (0xA970) // Current_User
+	LDA_x (0x0000)
+	TAY
+	DEY
+	STY_d (0x12)
+	LDX_i (0x0000) // initialise loop counter 
+	STX_d (d_Loop)
+	
+	STA_d (0x1A)
+	STX_d (0x1C)
+	STY_d (0x1E)
+
+	/*
+		First, check what condiments apply to this food item, if any
+	*/
+	
+	find_condiment_entry:
+	LDA_d (d_Loop) // load loop
+	LDY_i (CONDIMENTTABLE_SIZEOF) 
+	JSL   (Mul16x8r16)
+	CLC
+	// ADC_i (CONDIMENTTABLE_item)
+	TAX
+	LDA_xl (CONDIMENTTABLE) // Check item ID (first thing in condiment table entry)
+	AND_i (0x00FF)
+	CMP_i (0x0000) // if we hit a null value (end of table)
+	BEQ_a (no_condiment)
+	CMP_d (0x14) // see if it's the right entry
+	BNE_a (inc_loop_condiment_entry) // if not, try again
+
+	// Remember the condiments that apply to this before we search the inventory
+	LDA_d (d_Loop) // get condiment 2 of the correct entry
+	LDY_i (CONDIMENTTABLE_SIZEOF)
+	JSL   (Mul16x8r16)
+	CLC
+	ADC_i (CONDIMENTTABLE_condiments)
+	TAX
+	LDA_xl (CONDIMENTTABLE) // Check condiment 2 (third value in table)
+	// it's two one-byte values, so let's do this to save them
+	TAX
+	AND_i (0x00FF) 
+	STA_d (d_condimentA)
+	TXA
+	XBA
+	AND_i (0x00FF)
+	STA_d (d_condimentB)
+	BRA_a (after_condiment_entry)
+
+	inc_loop_condiment_entry:
+	LDA_d (d_Loop)
+	INC
+	STA_d (d_Loop)
+	BRA_a (find_condiment_entry)
+
+	no_condiment:
+	LDA_i (0)
+	STA_d (d_condimentA)
+	STA_d (d_condimentB) 
+
+	/*
+		FIRST PASS: Try to find the "good" condiments
+	*/
+
+	after_condiment_entry:
+	LDA_d (0x1A)
+	LDX_d (0x1C)
+	LDY_d (0x1E)
+	STX_d (d_Loop)
+	BRA_a (item_in_slot_goodcondiment)
+	
+	check_goodcondiment:
+	CMP_d (d_condimentA) // condiment 1
+	BEQ_a (found_goodcondiment) // if the item is a good condiment we can exit right away
+	CMP_d (d_condimentB) // condiment 2
+	BNE_a (inc_loop_goodcondiment) // if the item still isn't a good condiment, increment the loop and try again
+
+	found_goodcondiment:
+	LDA_d (d_ItemInSlot) // if we have found one, load the item and return
+	BRA_a (return)
+
+	inc_loop_goodcondiment:
+	LDX_d (d_Loop)
+	INX 
+	STX_d (d_Loop)
+	
+	item_in_slot_goodcondiment:
+	CPX_i (0x000E) 
+	BCS_a (no_goodcondiment) // move onto next stage if we haven't found a good condiment
+	STX_d (0x02)
+	LDY_d (0x12)
+	TYA
+	LDY_i (0x005F)
+	JSL   (Mul16x8r16) // Mul16x8r16
+	CLC
+	ADC_i (0x99F1)
+	CLC
+	ADC_d (0x02)
+	TAX
+	LDA_x (0x0000)
+	AND_i (0x00FF)
+	STA_d (d_ItemInSlot)
+	BNE_a (check_goodcondiment)
+
+	no_goodcondiment:
+	LDA_d (0x1A)
+	LDX_d (0x1C)
+	LDY_d (0x1E)
+	STX_d (d_Loop) // reset loop counter
+	BRA_a (item_in_slot_sauce)
+
+	/*
+		SECOND PASS: Try to find Delisauce
+	*/
+	
+	check_sauce: // check for Delisauce
+	CMP_i (DELISAUCE) // is it delisauce?
+	BNE_a (inc_loop_sauce) // if the item isn't the sauce, increment the loop 
+	
+	LDA_d (d_ItemInSlot) // load the item we found
+	BRA_a (return)
+	
+	inc_loop_sauce:
+	LDX_d (d_Loop)
+	INX 
+	STX_d (d_Loop)
+	
+	item_in_slot_sauce:
+	CPX_i (0x000E) 
+	BCS_a (no_sauce) // move onto next stage if we don't find delisauce
+	STX_d (0x02)
+	LDY_d (0x12)
+	TYA
+	LDY_i (0x005F)
+	JSL   (Mul16x8r16) // Mul16x8r16
+	CLC
+	ADC_i (0x99F1)
+	CLC
+	ADC_d (0x02)
+	TAX
+	LDA_x (0x0000)
+	AND_i (0x00FF)
+	STA_d (d_ItemInSlot)
+	BNE_a (check_sauce)
+	
+	no_sauce:
+	LDA_d (0x1A)
+	LDX_d (0x1C)
+	LDY_d (0x1E)
+	STX_d (d_Loop) // reset loop counter
+	BRA_a (item_in_slot_condiment)
+
+	/*
+		THIRD PASS: Try to find any condiment at all
+	*/
+	
+	check_condiment:
+	AND_i (0x00FF)
+	STA_d (d_ItemInSlot) // ID of item in slot
+	LDY_i (0x0027)
+	JSL   (Mul16x8r16)
+	CLC
+	ADC_i (ITEMTABLE_type) // item table offset for item type
+	TAX
+	LDA_xl (ITEMTABLE)	// Get item type
+	AND_i (0x00FF)
+	AND_i (0x003C)
+	CMP_i (0x0028) // condiment type 
+	BNE_a (inc_loop_condiment) // if the item isn't a condiment, increment the loop 
+	
+	LDA_d (d_ItemInSlot) // load the item we found
+	BRA_a (return)
+
+	inc_loop_condiment:
+	LDX_d (d_Loop)
+	INX 
+	STX_d (d_Loop)
+	
+	item_in_slot_condiment:
+	CPX_i (0x000E) 
+	BCS_a (nothing) // return 0 if we've reached the end of the inventory
+	STX_d (0x02)
+	LDY_d (0x12)
+	TYA
+	LDY_i (0x005F)
+	JSL   (Mul16x8r16)
+	CLC
+	ADC_i (0x99F1) 
+	CLC
+	ADC_d (0x02)
+	TAX
+	LDA_x (0x0000)
+	AND_i (0x00FF)
+	STA_d (d_ItemInSlot)
+	BNE_a (check_condiment)
+
+	nothing:
+	LDA_i (0) // return 0 if no match / item checking against isn't edible
+	
+	return:
+	PLD
+	RTL
+}

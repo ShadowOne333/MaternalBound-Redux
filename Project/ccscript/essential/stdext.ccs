@@ -5,51 +5,51 @@
 
 /* Simple commands */
 
-command linebreak "[00]"
+/*command linebreak "[00]"
 command newline "[01]"
-command eob "[02]"
+command eob "[02]"*/
 // w = "weak." Because the name prompt is used by [14]
 command promptw "[03]"
-command set(f) "[04 {short f}]"
-command unset(f) "[05 {short f}]"
+/*command set(f) "[04 {short f}]"
+command unset(f) "[05 {short f}]"*/
 command goto_if_flag(f, target) "[06 {short f} {long target}]"
-command isset(f) "[07 {short f}]"
-command call(target) "[08 {long target}]"
+/*command isset(f) "[07 {short f}]"
+command call(target) "[08 {long target}]"*/
 // CCScript has no concept of variadic commands. We're probably better off for it, but...
 command switch_goto(num) "[09 {byte num}]"
     command switch_entry(target) long target
-command goto(target) "[0A {long target}]"
+/*command goto(target) "[0A {long target}]"
 command result_is(n) "[0B {byte n}]"
 command result_not(n) "[0C {byte n}]"
 command rtoarg "[0D 00]" command ctoarg "[0D 01]"
 command counter(n) "[0E {byte n}]"
 command inc "[0F]"
-command pause(len) "[10 {byte len}]"
+command pause(len) "[10 {byte len}]"*/
 command do_menu "[11]"
-command clearline "[12]"
+/*command clearline "[12]"
 command wait "[13]"
-command prompt "[14]"
+command prompt "[14]"*/
 // Text compressor option for ccc.exe when
 command comp1(n) "[15 {byte n}]"
 command comp2(n) "[16 {byte n}]"
 command comp3(n) "[17 {byte n}]"
 
-command window_closetop "[18 00]"
-command window_open(n) "[18 01 {byte n}]"
+/*command window_closetop "[18 00]"
+command window_open(n) "[18 01 {byte n}]"*/
 command back_up_text_rendering_state "[18 02]"
-command window_switch(n) "[18 03 {byte n}]"
+/*command window_switch(n) "[18 03 {byte n}]"
 command window_closeall "[18 04]"
 // x = either pixels or tiles (changes based on $5E71 in the localized version), y = lines
 command text_pos(x, y) "[18 05 {byte x} {byte y}]"
 command window_clear "[18 06]"
-command compare_register(num, reg) "[18 07 {long num} {byte reg}]"
+command compare_register(num, reg) "[18 07 {long num} {byte reg}]"*/
     command compare_result(num) compare_register(num, 0)
     command compare_argument(num) compare_register(num, 1)
     command compare_counter(num) compare_register(num, 2)
 command do_menu_in_window_nocancel(win) "[18 08 {byte win}]"
 command do_menu_in_window(win) "[18 09 {byte win}]"
 command show_wallet "[18 0A]"
-    command open_wallet show_wallet
+/*    command open_wallet show_wallet*/
 // 18 0D XX 02 and other versions of 18 0D XX YY do nothing in the vanilla game
 command show_status(char) "[18 0D {byte char} 01]"
 
@@ -101,20 +101,20 @@ command do_menu_nounload "[1A 09]"
 command phone_call "[1A 0A]"
 command do_teleport_locations_menu "[1A 0B]"
 
-command store_registers "[1B 00]"
-command load_registers "[1B 01]"
+//command store_registers "[1B 00]"
+//command load_registers "[1B 01]"
 command goto_if_false(target) "[1B 02 {long target}]"
 command goto_if_true(target) "[1B 03 {long target}]"
-command swap "[1B 04]"
+//command swap "[1B 04]"
 command store_registers_shared "[1B 05]"
 command load_registers_shared "[1B 06]"
 
 command text_color(n) "[1C 00 {byte n}]"
-command stat(n) "[1C 01 {byte n}]"
-command name(char) "[1C 02 {byte char}]"
+//command stat(n) "[1C 01 {byte n}]"
+//command name(char) "[1C 02 {byte char}]"
 command letter(c) "[1C 03 {byte c}]"
-command open_hp "[1C 04]"
-command itemname(item) "[1C 05 {byte item}]"
+//command open_hp "[1C 04]"
+//command itemname(item) "[1C 05 {byte item}]"
 command teleportname(dest) "[1C 06 {byte dest}]"
 command print_strings_horizontal(n) "[1C 07 {byte n}]"
 command gfx_text(n) "[1C 08 {byte n}]"
@@ -123,17 +123,17 @@ command gfx_text(n) "[1C 08 {byte n}]"
     command youwon "{gfx_text(2)}  "
 // Need more testing with this one, I don't know what the heck it does
 command set_num_padding(n) "[1C 09 {byte n}]"
-command number(n) "[1C 0A {long n}]"
-command money(n) "[1C 0B {long n}]"
+/*command number(n) "[1C 0A {long n}]"
+command money(n) "[1C 0B {long n}]"*/
 command print_strings_vertical(cols) "[1C 0C {byte cols}]"
-command user "[1C 0D]"
+/*command user "[1C 0D]"
 command target "[1C 0E]"
-command delta "[1C 0F]"
+command delta "[1C 0F]"*/
 // Only in EarthBound
 command zwsp_before_letter(n) "[1C 11 {byte n}]"
 // Only in Mother 2
 command print_party_m2 "[1C 11]"
-command psiname(psi) "[1C 12 {byte psi}]"
+//command psiname(psi) "[1C 12 {byte psi}]"
 // enemypsi = used by the enemy, targetting the player
 // playerpsi = used by the player, targetting the enemy
 command battle_animation(enemypsi, playerpsi) "[1C 13 {byte enemypsi} {byte playerpsi}]"
@@ -146,19 +146,19 @@ command get_target_info(n) "[1C 15 {byte n}]"
     command get_target_gender get_target_info(1)
     command get_target_and_cohort_count get_target_info(2)
 
-command give(char, item) "[1D 00 {byte char} {byte item}]"
-command take(char, item) "[1D 01 {byte char} {byte item}]"
+/*command give(char, item) "[1D 00 {byte char} {byte item}]"
+command take(char, item) "[1D 01 {byte char} {byte item}]"*/
 command arg_item_type_is_not(type) "[1D 02 {byte type}]"
     command arg_item_type_is(type) not arg_item_type_is_not(type)
 command get_item_receiver(char) "[1D 03 {byte char}]"
     command notfull(char) get_item_receiver(char)
     command full(char) not get_item_receiver(char)
 command hasequipped(char, item) "[1D 04 {byte char} {byte item}]"
-command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
+/*command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
 command deposit(amt) "[1D 06 {long amt}]"
 command withdraw(amt) "[1D 07 {long amt}]"
 command givemoney(amt) "[1D 08 {short amt}]"
-command takemoney(amt) "[1D 09 {short amt}]"
+command takemoney(amt) "[1D 09 {short amt}]"*/
 command get_buying_price(item) "[1D 0A {byte item}]"
 command get_selling_price(item) "[1D 0B {byte item}]"
 command check_impediment_for_storing(char, itemslot) "[1D 0C {byte char} {byte itemslot}]"
@@ -190,7 +190,7 @@ command get_dad_deposit_money_base(n) "[1D 24 {byte n}]"
     command get_dad_deposit_money get_dad_deposit_money_base(1)
     command clear_dad_deposit_money get_dad_deposit_money_base(2)
 
-command heal_percent(char, n) "[1E 00 {byte char} {byte n}]"
+/*command heal_percent(char, n) "[1E 00 {byte char} {byte n}]"
 command hurt_percent(char, n) "[1E 01 {byte char} {byte n}]"
 command heal(char, n) "[1E 02 {byte char} {byte n}]"
 command hurt(char, n) "[1E 03 {byte char} {byte n}]"
@@ -206,17 +206,18 @@ command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
 command boost_guts(char, n) "[1E 0B {byte char} {byte n}]"
 command boost_speed(char, n) "[1E 0C {byte char} {byte n}]"
 command boost_vitality(char, n) "[1E 0D {byte char} {byte n}]"
-command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"
+command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"*/
 
 // The first argument byte is unused
-command music(n) "[1F 00 00 {byte n}]"
+//command music(n) "[1F 00 00 {byte n}]"
 // The argument is unused.
 // All 25 instances of this control code in the main script use an argument of 0.
 // Who the heck chose an argument of 02? Why? I'm intervening here.
-command music_stop "[1F 01 02]" command stop_music "[1F 01 00]"
-command sound(n) "[1F 02 {byte n}]"
+//command music_stop "[1F 01 02]"
+command stop_music "[1F 01 00]"
+//command sound(n) "[1F 02 {byte n}]"
 // For symmetry with the above change.
-command music_resume "[1F 03]" command resume_music music_resume
+//command music_resume "[1F 03]" command resume_music music_resume
 command text_blips(n) "[1F 04 {byte n}]"
     define TEXTBLIPS_DEFAULT = 1
     define TEXTBLIPS_ON = 2
@@ -226,32 +227,57 @@ command text_blips(n) "[1F 04 {byte n}]"
     command text_blips_off text_blips(TEXTBLIPS_OFF)
 command music_switching_off "[1F 05]"
 command music_switching_on "[1F 06]"
-command music_effect(n) "[1F 07 {byte n}]"
+/*command music_effect(n) "[1F 07 {byte n}]"
 command party_add(char) "[1F 11 {byte char}]"
 command party_remove(char) "[1F 12 {byte char}]"
-command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"
+command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"*/
 command party_direction(dir) "[1F 14 {byte dir}]"
 command sprite2_spawn(sprite, move, style) "[1F 15 {short sprite} {short move} {byte style}]"
 command npc_direction(tpt, dir) "[1F 16 {short tpt} {byte dir}]"
-    command sprite_direction(tpt, dir) npc_direction(tpt, dir)
+    //command sprite_direction(tpt, dir) npc_direction(tpt, dir)
 command npc_spawn(tpt, move, style) "[1F 17 {short tpt} {short move} {byte style}]"
 // 1F 18 and 1F 19 exist, but they're no-ops, so there's no good way to divide up their bytes.
 // Better not to define them.
 command show_npc_float(tpt, float) "[1F 1A {short tpt} {byte float}]"
-    command show_sprite_float(tpt, float) show_npc_float(tpt, float)
+    //command show_sprite_float(tpt, float) show_npc_float(tpt, float)
 command hide_npc_float(tpt) "[1F 1B {short tpt}]"
-    command hide_sprite_float(tpt) hide_npc_float(tpt)
-command show_char_float(char, float) "[1F 1C {byte char} {byte float}]"
-command hide_char_float(char) "[1F 1D {byte char}]"
+    //command hide_sprite_float(tpt) hide_npc_float(tpt)
+//command show_char_float(char, float) "[1F 1C {byte char} {byte float}]"
+//command hide_char_float(char) "[1F 1D {byte char}]"
 command npc_delete(tpt, style) "[1F 1E {short tpt} {byte style}]"
-    command hide_sprite(tpt, effect) npc_delete(tpt, effect)
+    //command hide_sprite(tpt, effect) npc_delete(tpt, effect)
 command sprite2_delete(sprite, style) "[1F 1F {short sprite} {byte style}]"
 command teleport(dest, style) "[1F 20 {byte dest} {byte style}]"
-command warp(dest) "[1F 21 {byte dest}]"
+//command warp(dest) "[1F 21 {byte dest}]"
 command start_battle(group) "[1F 23 {short group}]"
-command font_normal "[1F 30]"
-command font_saturn "[1F 31]"
-command event(n) "[1F 41 {byte n}]"
+//command font_normal "[1F 30]"
+//command font_saturn "[1F 31]"
+command event(n) "[1F 41 {byte n}]"  // Triggers a special event. There's a long list:
+/*
+	0x01: Plays the coffee scene from Saturn Valley.
+	0x02: Plays the tea scene from Tenda Village.
+	0x03: Opens the menu for entering the player's name in Summers and sets the Result Register.
+	0x04: Originally opened the menu for entering the player's name in Japanese in Tenda Village. This code was only used in Mother 2, not in EarthBound, but it remainds functional and uses an English keyboard.
+	0x05: Sets the "overworld status suppression" (OSS) flag, preventing the player from taking damage on the overworld even if they are underwater or have a status that deals damage over time.
+	0x06: Clears the "overworld status suppression" (OSS) flag, allowing the player to take damage on the overworld again. If flag 49 00 (in CCScript dumps, flag 73) is set, this instead sets the OSS flag as if 05 were used.
+	0x07: Opens a view of the town map for the current area, if a map exists. the Result Register is set to the ID of the town map that is displayed, or 0 if the current area does not have a town map.
+	0x08: Sets the Result Register to 1 if the current action user is an enemy, or 0 if the current action user is on the player's side.
+	0x09: Shows the normal sound stone screen that can be canceled by pressing a button.
+	0x0A: Shows a still image of the title screen that fades away when the player presses a button.
+	0x0B: Shows the "Cast" scene that plays during the first part of the ending.
+	0x0C: Shows the "Credits" scene with the names of the developers and the photos taken by the photo man.
+	0x0D: Causes all HP and PP meters to begin scrolling randomly, as when Ness powers up at the end of Magicant.
+	0x0E: Resets the effect caused by 0D.
+	0x0F: Clears all event flags in the game.
+	0x10: Shows the final sound stone screen that cannot be canceled early.
+	0x11: Attempts to inflict homesickness on Ness based on his level. Sets the Result Register to 1 if Ness became homesick, otherwise 0.
+	0x12: Kicks Ness out of bicycle mode if he is currently in it. Sets the Result Register to 1 if Ness was just on a bicycle, otherwise 0.
+	
+	(from DataCrystal)
+	Unless stated otherwise, this code sets the Result Register to 0. 
+	This code is already in CCScript but does not include all of the values listed here so I thought I'd include it.*/
+	command OSS_on event(5)
+	command OSS_off event(6)
 command disable_input "[1F 50]"
 command enable_input "[1F 51]"
 command number_input(digits) "[1F 52 {byte digits}]"
@@ -262,18 +288,18 @@ command wait_movement "[1F 61]"
 // This messes with more than the prompt/blinking triangle, so "set_prompt" isn't quite accurate.
 // Unfortunately I don't understand what the three values that are arguments do.
 command set_text_mode(n) "[1F 62 {byte n}]"
-command queue_text(a) "[1F 63 {long a}]"
+//command queue_text(a) "[1F 63 {long a}]"
 command backup_npc_members_and_money "[1F 64]"
 command restore_npc_members_and_money "[1F 65]"
-command hotspot_on(slot, hotspot, target) "[1F 66 {byte slot} {byte hotspot} {long target}]"
-command hotspot_off(hotspot) "[1F 67 {byte hotspot}]"
+//command hotspot_on(slot, hotspot, target) "[1F 66 {byte slot} {byte hotspot} {long target}]"
+//command hotspot_off(hotspot) "[1F 67 {byte hotspot}]"
     command hotspot_slot1_off hotspot_off(1)
     command hotspot_slot2_off hotspot_off(2)
     command hotspot_slot_arg_off hotspot_off(0)
 command anchor_set "[1F 68]"
 command anchor_warp "[1F 69]"
 // The "char" argument is not actually used for anything in the vanilla game.
-command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
+//command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
     define LEARN_TELEPORT_ALPHA = 1
     define LEARN_STARSTORM_ALPHA = 2
     define LEARN_STARSTORM_OMEGA = 3
@@ -285,13 +311,13 @@ command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
 // This control code only checks the "Misc flags" portion of an item. It doesn't check specifically
 // for weapons or other equippable stuff.
 // Incidentally, the std.ccs name for this already included that connotation.
-command usable(char, item) "[1F 81 {byte char} {byte item}]"
+//command usable(char, item) "[1F 81 {byte char} {byte item}]"
 command equip(char, itemslot) "[1F 83 {byte char} {byte itemslot}]"
 command do_phone_menu "[1F 90]"
 command face_up_and_set_npc_flag "[1F A0]" command open_present face_up_and_set_npc_flag
 command face_down_and_clear_npc_flag "[1F A1]" command close_present face_down_and_clear_npc_flag
 command npc_flag_is_set "[1F A2]" command is_present_open npc_flag_is_set
-command save "[1F B0]"
+//command save "[1F B0]"
 command switch_call(n) "[1F C0 {byte n}]" // switch_entry(a) switch_entry(b) ...
 command try_fixing_an_item(success_percent) "[1F D0 {byte success_percent}]"
 command find_direction_to_truffle "[1F D1]"
@@ -311,10 +337,10 @@ command sprite2_unfreeze(num) "[1F EA {short num}]"
 command hide_char_with_style(char, style) "[1F EB {byte char} {byte style}]"
     // There's a single line in the vanilla game that uses a different style
     // (8 melodies acquired cutscene, [1F EB FF 01]), so this command alone isn't good enough.
-    command hide_char(char) hide_char_with_style(char, 6)
-    command hide_party hide_char(0xFF)
-command show_char(char, style) "[1F EC {byte char} {byte style}]"
-    command show_party(style) show_char(0xFF, style)
+    /*command hide_char(char) hide_char_with_style(char, 6)
+    command hide_party hide_char(0xFF)*/
+/*command show_char(char, style) "[1F EC {byte char} {byte style}]"
+    command show_party(style) show_char(0xFF, style)*/
 // So... this would just cause the camera to stay where it is? Or would it somehow jump back to the
 // party members? Has anyone tested this?
 // https://discord.com/channels/788839194197360654/809113956576264222/818547351194828840
@@ -329,7 +355,7 @@ command hide_sprite2_float(sprite) "[1F F4 {short sprite}]"
 
 /* Standard macros for multiple commands */
 
-command next {
+/*command next {
     promptw
     linebreak
 }
@@ -381,7 +407,7 @@ command counter_is(n) {
     ctoarg
     swap
     result_is(n)
-}
+}*/
 
 command healall {
     heal_percent(0xFF, 100)

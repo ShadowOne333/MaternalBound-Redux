@@ -7,8 +7,8 @@
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
 
@@ -103,7 +103,7 @@ l_0xc770b0:
     "@But we warned you not to treat us like trash!" next
     "@Didn't you get it?!" next
     "@This isn't courage at all, it's temerity." next
-    "@If you don't understand <temerity,>{pause(15)} look it up in the dictionary." next
+    "@If you don't understand <temerity,>| look it up in the dictionary." next
     "@Okay?" next
     title(1, Final)
     "@My name's The Final Flying Man." promptw
@@ -111,10 +111,21 @@ l_0xc770b0:
 
 l_0xc77148:
     "@Did you want to talk to me?" next
-    "@I'm sorry,{pause(15)} there's really not much to say..." end
+    "@I'm sorry,| there's really not much to say..." end
 
 l_0xc7716d:
-    "[19 10 02]{store_registers}{result_is(11)}[1B 03 {e(l_0xc7719c)}]{load_registers}{result_is(12)}[1B 03 {e(l_0xc7719c)}]{load_registers}{result_is(13)}[1B 03 {e(l_0xc7719c)}]{load_registers}{result_is(14)}[1B 03 {e(l_0xc7719c)}]{load_registers}{result_is(15)}" goto(l_0xc7719c)
+    get_char_at_pos(2)
+    store_registers
+    result_is(11) goto_if_true(l_0xc7719c)
+    load_registers
+    result_is(12) goto_if_true(l_0xc7719c)
+    load_registers
+    result_is(13) goto_if_true(l_0xc7719c)
+    load_registers
+    result_is(14) goto_if_true(l_0xc7719c)
+    load_registers
+    result_is(15)
+    goto(l_0xc7719c)
 
 l_0xc7719c:
     eob
@@ -123,108 +134,141 @@ l_0xc7719d:
     eob
 
 l_0xc7719e:
-    "[06 7F 01 {e(l_0xc77236)}]@Please rest." next
+    goto_if_flag(FLG_HOTEL_PAPERBOY_APPEAR, l_0xc77236)	// 0x017F, 383
+    "@Please rest." next
     "@The dream you'll have here is a dream within a dream." next
     "@Your heart knows things you aren't aware of." next
     "@Do you want to sleep?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc771f4:
     "[19 02]No" eob
 
 l_0xc771f9:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7722d)} {e(l_0xc77208)}]" goto(l_0xc77208)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7722d)} {e(l_0xc77208)}]"
+    goto(l_0xc77208)
 
 l_0xc77208:
-    "@Okay.{pause(20)}  If you walk outside,{pause(15)} beware of the monsters." end
+    "@Okay." pause(20)
+    "  If you walk outside,| beware of the monsters." end
 
 l_0xc7722d:
-    call(data_49.l_0xc91693) "[1F 21 35]" eob
+    call(data_49.l_0xc91693)
+    warp(53)	// 0x35
+    eob
 
 l_0xc77236:
-    "@If you walk outside,{pause(15)} beware of the monsters." end
+    "@If you walk outside,| beware of the monsters." end
 
 l_0xc77251:
     title(1, Mom)
-    "@Oh [1C 02 01],{pause(15)} are you tired from traveling on your adventure?" next
+    "@Oh {name(1)},| are you tired from traveling on your adventure?" next
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc7727a:
     "[19 02]No" eob
 
 l_0xc7727f:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc772c8)} {e(l_0xc7728e)}]" goto(l_0xc7728e)
+    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc772c8)} {e(l_0xc7728e)}]"
+    goto(l_0xc7728e)
 
 l_0xc7728e:
     "@Yeah, that's right." next
     "@You can't even think about being tired at a time like this." next
-    "@Be strong![03][1F E1 1F 07 3C]" eob
+    "@Be strong!" promptw
+    fade_map_palette(31,7,60)	// Tileset 1F, palette 07, speed 3C
+    eob
 
 l_0xc772c8:
     "@If you wish, you can stay here forever." next
-    "@I'll make some [1C 01 04] for you.[03]" call(data_49.l_0xc915f4) call(data_49.l_0xc91693) "{unset(flag 383)}[1F 21 34][1F E1 1F 07 3C]" eob
+    // Stat 4 = Fav food
+    "@I'll make some {stat(4)} for you." promptw
+    call(data_49.l_0xc915f4)
+    call(data_49.l_0xc91693)
+    unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+    warp(52)	// 0x34
+    fade_map_palette(31,7,60)	// Tileset 1F, palette 07, speed 3C
+    eob
 
 l_0xc772ff:
     title(1, Tracy)
-    "@Brother [1C 02 01]!" next
+    "@Brother {name(1)}!" next
     "@The <Sea of Eden> is at the end of Magicant." next
-    "@Other people can't get close to it.{pause(20)}  It's a strange place." next
-    "[1F E1 05 00 3C]@Is there anything I can do for you?" linebreak
+    "@Other people can't get close to it." pause(20)
+    "  It's a strange place." next
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    "@Is there anything I can do for you?" linebreak
     goto(data_19.l_0xc64687)
 
 l_0xc7735d:
     title_dog(1)
     "@Whimper... whine." next
     "@(I lived in your house before you were born..." next
-    "@[1C 02 01] used to be small and weak.)" end
+    "@{name(1)} used to be small and weak.)" end
 
 l_0xc7739f:
     "@Pi pi pi pi pi" next
-    "@(I'm just a faint memory.{pause(20)}  You don't usually remember me." next
+    "@(I'm just a faint memory." pause(20)
+    "  You don't usually remember me." next
     "@But you've heard my song in the back of your mind.)" end
 
 l_0xc773f4:
     "@This is the realm of Magicant, which your mind created." next
-    "@Why don't you explore your mind.{pause(20)}  Take your time, [1C 02 01].{wait}[1F E1 1F 05 3C]" eob
+    "@Why don't you explore your mind." pause(20)
+    "  Take your time, {name(1)}." wait
+    fade_map_palette(31,5,60)	// Tileset 1F, palette 05, speed 3C
+    eob
 
 l_0xc7743d:
-    "@It's me...{pause(20)}  I'm you when you were younger." next
+    "@It's me..." pause(20)
+    "  I'm you when you were younger." next
     title_ness(1)
     "@Hey, let's play ball." next
     "@Do you prefer reading comics or playing games?" next
-    "@What?{pause(20)}  You're busy?...{wait}[1F E1 1F 03 3C]" eob
+    "@What?" pause(20)
+    "  You're busy?..." wait
+    fade_map_palette(31,3,60)	// Tileset 1F, palette 03, speed 3C
+    eob
 
 l_0xc7749d:
     "@You kicked my butt badly..." next
-    "@I won't forget!{wait}[1F E1 1F 02 3C]" eob
+    "@I won't forget!" wait
+    fade_map_palette(31,2,60)	// Tileset 1F, palette 02, speed 3C
+    eob
 
 l_0xc774c3:
-    "        " goto(l_0xc774c6)
+    "        "
+    goto(l_0xc774c6)
 
 l_0xc774c6:
     title(1, Belch)
     "@You destroyed my pride..." next
-    "@Aaaaaargh!{wait}[1F E1 1F 06 3C]" eob
+    "@Aaaaaargh!" wait
+    fade_map_palette(31,6,60)	// Tileset 1F, palette 06, speed 3C
+    eob
 
 l_0xc774ec:
-    "@[1C 02 01]..." next
-    "@I still feel pain where you wounded me.{wait}[1F E1 1F 06 3C]" eob
+    "@{name(1)}..." next
+    "@I still feel pain where you wounded me." wait
+    fade_map_palette(31,6,60)	// Tileset 1F, palette 06, speed 3C
 
 l_0xc77511:
-    "@Yay, [1C 02 01],{pause(20)} let's play!" end
+    "@Yay, {name(1)},/| let's play!" end
 
 l_0xc77529:
     "@Yackety-yak!" next
-    "@Long time no see, [1C 02 01]!" end
+    "@Long time no see, {name(1)}!" end
 
 l_0xc77544:
     "@[AC] La lalala! [AC]" next
     title(1, Nico)
-    "@My name's Nico...{pause(20)} Let's run and sing and dance!" end
+    "@My name's Nico.../| Let's run and sing and dance!" end
 
 l_0xc77572:
     title(1, Picky)
-    "@[1C 02 01]!" next
+    "@{name(1)}!" next
     "@Porky took my snack!" end
 
 l_0xc7758a:
@@ -239,39 +283,56 @@ l_0xc7759c:
 
 l_0xc775bf:
     "@I'd like you to take your time," next
-    "@'cause this land will disappear when you wake up.{wait}[1F E1 05 00 3C]" eob
+    "@'cause this land will disappear when you wake up." wait
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    eob
 
 l_0xc775fd:
-    "[06 5D 00 {e(l_0xc77683)}]"
+    goto_if_flag(FLG_MGKT_GETITEM_CAP, l_0xc77683)	// 0x5D, 93
     title_ness(1)
-    "@Hey me!{pause(20)}  I found my cap that you lost." next
-    "[1D 03 FF][1B 02 {e(l_0xc77639)}][1D 0E 00 4A]" call(data_36.l_0xc7dccf) "{wait}{set(flag 93)}[1F E1 1F 03 3C]" eob
+    "@Hey me!" pause(20)
+    "  I found my cap that you lost." next
+    get_item_receiver(-1) goto_if_false(l_0xc77639)
+    give_and_return_location(0,74)	// Item 0x4A, 74, Baseball cap
+    call(data_36.l_0xc7dccf)
+    wait
+    set(FLG_MGKT_GETITEM_CAP)	// 93
+    fade_map_palette(31,3,60)	// Tileset 1F, palette 03, speed 3C
+    eob
 
 l_0xc77639:
     newline
     "@I'm so stupid!" next
     "@There's lots of junk in my backpack at a time like this." next
-    "@Why don't I get rid of something I don't use.{wait}[1F E1 05 00 3C]" eob
+    "@Why don't I get rid of something I don't use." wait
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    eob
 
 l_0xc77683:
     title_ness(1)
-    "@Hey me!{wait}[1F E1 05 00 3C]" eob
+    "@Hey me!" wait
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    eob
 
 l_0xc7768f:
     "@Chi chi chi chi chi" next
-    "@(Onett was a quiet, small town, wasn't it?){wait}[1F E1 05 00 3C]" eob
+    "@(Onett was a quiet, small town, wasn't it?)" wait
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    eob
 
 l_0xc776c8:
-    "@[AC] Let's all look at Mr. Sun.{pause(25)}" linebreak
-    "@Let's all face Mr. Sun{pause(25)}" linebreak
-    "  and put smiles on our faces.[AC]{wait}[1F E1 05 00 3C]" eob
+    "@[AC] Let's all look at Mr. Sun." pause(25) linebreak
+    "@Let's all face Mr. Sun" pause(25) linebreak
+    "  and put smiles on our faces.[AC]" wait
+    fade_map_palette(5,0,60)	// Tileset 05, palette 0, speed 3C
+    eob
 
 l_0xc776ee:
-    "@[1C 02 01]'s courage is resting here." next
+    "@{name(1)}'s courage is resting here." next
     "@He fought well and died." end
 
 l_0xc77713:
-    "@Another one of [1C 02 01]'s courage is resting here." next
+    "@Another one of {name(1)}'s courage is resting here." next
     "@He damaged evil terribly, and finally died." end
 
 l_0xc7774b:
@@ -282,28 +343,34 @@ l_0xc7777e:
     "@Someone's tombstone." end
 
 l_0xc77790:
-    "@Tombstone.{wait}{set(flag 159)}" eob
+    "@Tombstone." wait
+    set(FLG_MGKT_TOMB6)	// 159
+    eob
 
 l_0xc7779e:
     "@This is Buzz Buzz's tombstone." next
     "@He appeared near the beginning of the game" next
-    "@and was tragically struck down,{pause(15)} making it partway to achieving his goal." end
+    "@and was tragically struck down,| making it partway to achieving his goal." end
 
 l_0xc777f2:
     title(1, Star)
     "@The Sea of Eden is a vortex of ultimate wisdom." next
     "@You can't go there unless you're truly ready." next
     "@It's a place where you can touch the truth of the universe for an instant." next
-    "@Going there may bring sorrow.{wait}[1F E1 1F 05 3C]" eob
+    "@Going there may bring sorrow." wait
+    fade_map_palette(31,5,60)	// Tileset 1F, palette 05, speed 3C
+    eob
 
 l_0xc7786e:
     title(1, Star)
-    "@[1C 02 01], you've stood on the eight power spots of the Earth." next
+    "@{name(1)}, you've stood on the eight power spots of the Earth." next
     "@That was the requirement for creating this realm in your mind known as Magicant." next
-    "@In Magicant,{pause(15)} there's beauty,{pause(15)} kindness,{pause(15)} sorrow,{pause(20)} and hatred." next
+    "@In Magicant,| there's beauty,| kindness,| sorrow,| and hatred." next
     "@Of course, there's an evil and violent side of you." next
     "@The Sea of Eden sits at the center of those feelings." next
-    "@It takes you to the truth about yourself.{wait}[1F E1 1F 06 3C]" eob
+    "@It takes you to the truth about yourself." wait
+    fade_map_palette(31,6,60)	// Tileset 1F, palette 06, speed 3C
+    eob
 
 l_0xc7794c:
     goto_if_flag(FLG_WIN_OSCAR, data_35.l_0xc7c588)	// 0x4A, 74
@@ -315,11 +382,11 @@ l_0xc7794c:
 
     set(FLG_WIN_OSCAR)	// 74
     pause(1)
-    change_npc_movement(1358, 635)	// 054E, 027B
+    npc_do_mc(1358, 635)	// 054E, 027B
     pause(40)
-    generate_active_sprite(106, 768, 1)	// 006A, 0300, 1
-    wait_for_movement
-    freeze_sprite_movement(106)	// 006A
+    sprite2_spawn(106, 768, 1)	// 006A, 0300, 1
+    wait_movement
+    sprite2_freeze(106)	// 006A
 
     unset(FLG_FLYINGMAN_KI)	// Key items party flag
     window_open(1)
@@ -331,20 +398,21 @@ l_0xc7794c:
     call(l_0xc77c50) "@But he and his followers are also in trouble." next
     call(l_0xc77c50) "@The Apple of Enlightenment has foretold" next
     call(l_0xc77c50) "@that Giygas' attempt will fail." next
-    call(l_0xc77c50) "@It is because of the existence of a boy named {name(1)}." next window_open(1)
-    call(l_0xc77c50) title_ness(1) "@...That's me!" next window_open(1)
+    call(l_0xc77c50) "@It is because of the existence of a boy named {name(1)}." next
+    call(l_0xc77c50) title_ness(1) "@...That's me!" next
     call(l_0xc77c50) "@Listen." next
     call(l_0xc77c50) "@Free your mind and KNOW what you must do!" next
     call(l_0xc77c50) "@Your destiny has already been decided." next
-    call(l_0xc77c50) "@You...{pause(20)} I...{pause(20)}" linebreak "  Where should we go?" next
+    call(l_0xc77c50) "@You.../| I.../|" linebreak
+    "  Where should we go?" next
     call(l_0xc77c50) "@You know deep within the reaches of your mind." next
-    call(l_0xc77c50) "@...S{pause(15)} ...Sat...{pause(20)}" linebreak
+    call(l_0xc77c50) "@...S| ...Sat.../|" linebreak
     "  ...Saturn" next
     "@....." next
-    call(l_0xc77c50) "@Saturn Valley...{pause(20)} yes..." next
+    call(l_0xc77c50) "@Saturn Valley.../| yes..." next
     call(l_0xc77c50) "@Go to the valley where the Mr. Saturn live." next
     call(l_0xc77c50) "@...You'll get something new there." next
-    call(l_0xc77c50) "@Soon, Magicant will be no more.{pause(20)}  We must be quick!" promptw
+    call(l_0xc77c50) "@Soon, Magicant will be no more." pause(20) "  We must be quick!" promptw
     call(l_0xc77c50)
     window_closetop
     pause(120)
@@ -363,9 +431,9 @@ l_0xc77c4f:
     eob
 
 l_0xc77c50:
-    unfreeze_sprite_movement(106)	// 006A
-    wait_for_movement
-    freeze_sprite_movement(106)		// 006A
+    sprite2_unfreeze(106)	// 006A
+    wait_movement
+    sprite2_freeze(106)		// 006A
     eob
 
 l_0xc77c5b:
@@ -388,10 +456,10 @@ l_0xc77cdf:
     "@I envy you." next
     "@....." next
     "@I have no luck." next
-    "{pause(60)}" linebreak
-    "@But, {name(1)}...{pause(15)} well, okay..." next
-    "{pause(60)}" linebreak
-    "@Let's be friends forever,{pause(15)} alright?" end
+    pause(60) linebreak
+    "@But, {name(1)}...| well, okay..." next
+    pause(60) linebreak
+    "@Let's be friends forever,| alright?" end
 
 l_0xc77d3a:
     title(1, Everdred)
@@ -402,129 +470,223 @@ l_0xc77d3a:
     "@Good luck, {name(1)}!" wait
     window_closeall
     pause(1)
-    transition_palette(29, 4, 60)	// Tileset 1F, palette 4, speed 3C
-    hide_sprite(1346, 9)	// 0542, 9
+    fade_map_palette(29,4,60)	// Tileset 1F, palette 4, speed 3C
+    hide_sprite(1346,9)	// 0542, 9
     set(FLG_MGKT_TONCHIKI_DISAPPEAR)	// 639
     eob
 
 l_0xc77d9f:
-    "{window_closeall}[1F 21 D6]" eob
+    window_closeall
+    warp(214)	// 0xD6
+    eob
 
 l_0xc77da5:
-    "{window_closeall}[1F 21 28]" eob
+    window_closeall
+    warp(40)	// 0x28
+    eob
 
 l_0xc77dab:
-    "{window_open(1)}@The [1C 05 C4] that [1C 02 01] used to have is now gone.{wait}{window_closeall}[1D 01 FF C4]" eob
+    window_open(1)
+    "@The {itemname(SOUND_STONE)} that {name(1)} used to have is now gone." wait
+    window_closeall
+    if not flag FLG_KEY_ITEMS { take(-1, SOUND_STONE) }	// 0xC4, 196, Sound stone
+    eob
 
 l_0xc77dce:
     newline
-    "@{user}[19 1F]{swap} used" linebreak
-    "  the [1C 05 00]." next
-    "@But nothing happened.[03]" eob
+    "@{user}{get_action_arg}{swap} used" linebreak
+    "  the {itemname(0)}." next
+    "@But nothing happened." promptw
+    eob
 
 l_0xc77df0:
-    "@{user}[19 1F]{swap} used" linebreak
-    "  the [1C 05 00]." next
-    "@But nothing happened.[03]" eob
+    "@{user}{get_action_arg}{swap} used" linebreak
+    "  the {itemname(0)}." next
+    "@But nothing happened." promptw
+    eob
 
 l_0xc77e11:
     newline
-    "[19 1F]{swap}" newline
+    get_action_arg swap newline
     "@{user} equipped" linebreak
-    "  the [1C 05 00] instead.{sound(115)}[03]" eob
+    "  the {itemname(0)} instead."
+    sound(SND_BOXOPEN1)	// 115
+    promptw
+    eob
 
 l_0xc77e33:
     newline
-    "[19 1F]{swap}@{user} could not" linebreak
-    "  equip the [1C 05 00]." next
+    get_action_arg swap
+    "@{user} could not" linebreak
+    "  equip the {itemname(0)}." next
     "@Since there was no alternative," linebreak
-    "  " call(data_36.l_0xc7e602) " fought with " call(data_37.l_0xc7e66e) " previous weapon.[03]" eob
+    "  " call(data_36.l_0xc7e602) " fought with " call(data_37.l_0xc7e66e) " previous weapon." promptw
+    eob
 
 l_0xc77e85:
     newline
-    "[19 1F]{swap}@{user} tried" linebreak
-    "  to equip the [1C 05 00]." next
-    "@ but [1C 05 00] wasn't meant for " linebreak
-    "  {user}.[03]" eob
+    get_action_arg swap
+    "@{user} tried" linebreak
+    "  to equip the {itemname(0)}." next
+    "@ but {itemname(0)} wasn't meant for " linebreak
+    "  {user}." promptw
+    eob
 
 l_0xc77eb6:
     newline
-    "[19 1F]{swap}@{user} tried" linebreak
-    "  to use the [1C 05 00]." next
+    get_action_arg swap
+    "@{user} tried" linebreak
+    "  to use the {itemname(0)}." next
     "@but {user} could not use" linebreak
-    "  the [1C 05 00] very well.[03]" eob
+    "  the {itemname(0)} very well." promptw
+    eob
 
 l_0xc77ee8:
-    "[19 1F]{swap}@{user} could not use" linebreak
-    "  the [1C 05 00] very well.[03]" eob
+    get_action_arg swap
+    "@{user} could not use" linebreak
+    "  the {itemname(0)} very well." promptw
+    eob
 
 l_0xc77eff:
     eob
 
 l_0xc78000:
-    "{set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01][1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61][1F F2 CD 00 42 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
+    set(FLG_SYS_MONSTER_OFF)	// 11
+    OSS_on	// event(5)
+    sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 01
+    sprite2_spawn(106,73,1)	// 0x6A, 0x49, 01
+    pause(1)
+    focus_camera_on_sprite2(106)
+    party_unfreeze
+    wait_movement
+    sprite2_do_mc(205,66)
+    hide_party
+    set(FLG_BGM_BUS)	// 534
+    music_resume
+    focus_camera_on_sprite2(205)
+    eob
 
 l_0xc78033:
-    "[1F 15 5F 01 C5 01 01] {window_open(1)}[06 47 00 {e(l_0xc78166)}][1D 15 02 00]{swap}@Yep, this is the bus to Threek," next
-    "@but, ...I'm not sure if we can get there or not.{pause(15)}  The fare is $[1C 0A 00 00 00 00]." next
+    sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 01
+    " "
+    window_open(1)
+    goto_if_flag(FLG_WIN_GEPPU, l_0xc78166)	// 0x47, 71
+    get_party_size_times(2) swap
+    "@Yep, this is the bus to Threek," next
+    "@but, ...I'm not sure if we can get there or not." pause(15)
+    "  The fare is ${number(0)}." next
     "@...do you want to go?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc7809c:
     "[19 02]No" eob
 
 l_0xc780a1:
-    "[1C 07 02]{open_wallet}[11]{clearline}[09 02 {e(l_0xc780f7)} {e(l_0xc780b2)}]" goto(l_0xc780b2)
+    "[1C 07 02]{open_wallet}[11]{clearline}[09 02 {e(l_0xc780f7)} {e(l_0xc780b2)}]"
+    goto(l_0xc780b2)
 
 l_0xc780b2:
     "@...Yep, I personally think it's better if you don't go." next
-    "@...I'm also not real confident about getting there.{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+    "@...I'm also not real confident about getting there." wait
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    eob
 
 l_0xc780f7:
-    "[1D 14 00 00 00 00][1B 03 {e(l_0xc7814b)}]{sound(118)}{pause(1)}[1D 09 00 00]{open_wallet}@Okay.{pause(20)}  Let's give it a shot." next
-    "@...I have a feeling this could get ugly, though.[03]{window_closeall}[1F 1F 5F 01 06]" goto(l_0xc78000)
+    cannot_take_money(0) goto_if_true(l_0xc7814b)
+    sound(SND_CHICKEN2)	// 118
+    pause(1)
+    takemoney(0)
+    show_wallet
+    "@Okay." pause(20)
+    "  Let's give it a shot." next
+    "@...I have a feeling this could get ugly, though." promptw
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    goto(l_0xc78000)
 
 l_0xc7814b:
-    "@...I can't let you on if you don't pay.{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+    "@...I can't let you on if you don't pay." wait
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    eob
 
 l_0xc78166:
-    "[1D 15 02 00]{swap}@...This bus goes to Fourside via Threek." next
-    "@If you don't pay $[1C 0A 00 00 00 00] for the fare, I can't take you there." next
+    get_party_size_times(2) swap
+    "@...This bus goes to Fourside via Threek." next
+    "@If you don't pay ${number(0)} for the fare, I can't take you there." next
     "@...Do you want to go?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc781b7:
     " [19 02]No" eob
 
 l_0xc781bd:
-    "[1C 07 02]{open_wallet}[11]{clearline}[09 02 {e(l_0xc78208)} {e(l_0xc781ce)}]" goto(l_0xc781ce)
+    "[1C 07 02]{open_wallet}[11]{clearline}[09 02 {e(l_0xc78208)} {e(l_0xc781ce)}]"
+    goto(l_0xc781ce)
 
 l_0xc781ce:
-    "@...If you don't have any money,{pause(15)} you should stroll around." next
-    "@Besides, walking is good for you...{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+    "@...If you don't have any money,| you should stroll around." next
+    "@Besides, walking is good for you..." wait
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    eob
 
 l_0xc78208:
-    "[1D 14 00 00 00 00][1B 03 {e(l_0xc78240)}]{sound(118)}[1D 09 00 00]{open_wallet}@...Well,{pause(15)} hop aboard then!{wait}{window_closeall}[1F 1F 5F 01 06]" goto(l_0xc78000)
+    cannot_take_money(0) goto_if_true(l_0xc78240)
+    sound(118)
+    takemoney(0)
+    show_wallet
+    "@...Well,| hop aboard then!" wait
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    goto(l_0xc78000)
 
 l_0xc7823f:
     eob
 
 l_0xc78240:
-    "@...If you don't have any money,{pause(15)} you should stroll around." next
-    "@Besides,{pause(15)} walking is good for you...{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+    "@...If you don't have any money,| you should stroll around." next
+    "@Besides,| walking is good for you..." wait
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    eob
 
 l_0xc7827c:
-    "{set(flag 313)}[1F ED][1F 15 CD 00 43 00 FF][1F 21 3C][1F EF CD 00]" eob
+    set(FLG_TUNNEL_TWSN_THRK_BR)	// 313
+    restore_camera
+    sprite2_spawn(205,67,-1)	// 0xCD, 0x43, 0xFF
+    warp(60)	// 0x3C
+    focus_camera_on_sprite2(205)	// 0xCD
+    eob
 
 l_0xc78290:
-    "[1F ED][1F 07 05]{pause(30)}[1F 15 CD 00 44 00 FF][1F 21 3D][1F EF CD 00]{unset(flag 313)}" eob
+    restore_camera
+    music_effect(5)
+    pause(30)
+    sprite2_spawn(205,68,-1)	// 0xCD, 0x44, 0xFF
+    warp(61)	// 0x3D
+    focus_camera_on_sprite2(205)	// 0xCD
+    unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
+    eob
 
 l_0xc782a9:
-    "[1F ED][1F 15 CD 00 46 00 FF][1F 21 3F][1F EF CD 00]{unset(flag 313)}" eob
+    restore_camera
+    sprite2_spawn(205,70,-1)	// 0xCD, 0x46, 0xFF
+    warp(63)	// 0x3F
+    focus_camera_on_sprite2(205)	// 0xCD
+    unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
+    eob
 
 l_0xc782bd:
-    "[1F 15 5F 01 C6 01 01] {window_open(1)}@...This bus continues on to Fourside." next
+    sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 01
+    " "
+    window_open(1)
+    "@...This bus continues on to Fourside." next
     "@Do you want to get off here?" linebreak
+    // two_choice_menu
     "[19 02]Yes" eob
 
 l_0xc782f1:
@@ -534,18 +696,66 @@ l_0xc782f7:
     "[1C 07 02][11]{clearline}[09 02 {e(l_0xc78323)} {e(l_0xc78306)}]" goto(l_0xc78306)
 
 l_0xc78306:
-    "{window_closeall}[1F 1F 5F 01 06]   [1F E7 CD 00]{unset(flag 71)}[1F F2 CD 00 CF 00]{pause(1)}[1F EF CD 00]" eob
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    "   "
+    sprite2_freeze(205)	// 0xCD
+    unset(flag 71)
+    sprite2_do_mc(205,207)	// 0xCD, 0xCF
+    pause(1)
+    focus_camera_on_sprite2(205)	// 0xCD
+    eob
 
 l_0xc78323:
-    "{window_closeall}[1F 1F 5F 01 06]   [1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+    window_closeall
+    sprite2_delete(351,6)	// 0x015F, 06
+    "   "
+    sprite2_spawn(106,72,1)	// 0x6A, 0x48, 01
+    pause(1)
+    focus_camera_on_sprite2(106)	// 0x6A
+    show_party(1)	// 0xFF, 01
+    party_unfreeze	// 0xFF
+    wait_movement
+    unset(flag 534)
+    music_resume
+    restore_camera
+    party_freeze	// 0xFF
+    sprite2_unfreeze(205)	// 0xCD
+    wait_movement
+    unset(flag 11)
+    OSS_off	// event(6)
+    sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 01
+    eob
 
 l_0xc78360:
-    "[1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+    sprite2_spawn(106,72,1)	// 0x6A, 0x48, 01
+    pause(1)
+    focus_camera_on_sprite2(106)	// 0x6A
+    show_party(1)	// 0xFF, 01
+    party_unfreeze
+    wait_movement
+    unset(flag 534)
+    music_resume
+    restore_camera
+    party_freeze
+    sprite2_unfreeze(205)	// 0xCD
+    wait_movement
+    unset(flag 11)
+    OSS_off	// event(6)
+    sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 01
+    eob
 
 l_0xc78394:
-    "{window_open(1)}@(For some reason,{pause(15)} the bus returned to Twoson.)[03]{window_closeall}{pause(30)}" newline
-    "[1F 15 5F 01 C5 01 01] {window_open(1)}@...Yep!{pause(20)}  Just like I thought..." next
-    "@...Okay,{pause(15)} I'm starting to get the creeps..." next
+    window_open(1)
+    "@(For some reason,| the bus returned to Twoson.)" promptw
+    window_closeall
+    pause(30) newline
+    sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 01
+    " "
+    window_open(1)
+    "@...Yep!" pause(20)
+    "  Just like I thought..." next
+    "@...Okay,| I'm starting to get the creeps..." next
     "@We're going back to the bus station." next
     "@Do you want to get off here?" linebreak
     goto(data_33.l_0xc7841e)

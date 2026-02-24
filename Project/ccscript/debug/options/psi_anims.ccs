@@ -9,7 +9,7 @@ import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 
-define debug_group = 0	// 100
+define debug_group = 473	// 100, 0
 
 // This happens right after the encounter text script finishes.
 ROM[0xC24FC5] = JML(debug_battle_check)
@@ -43,7 +43,7 @@ Enemy 161 is Pippi, so it loads a blank sprite with very low damage to Ninten if
 PSI_Anims:
     window_open(53) newline
     diam "Starting Debug battle for PSI testing..." wait
-    battle(0)
+    battle(debug_group)
     goto(new_debug_menu.debug_main)
     
 PSI_Test:

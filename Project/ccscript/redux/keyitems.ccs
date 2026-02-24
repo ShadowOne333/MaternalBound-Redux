@@ -10,9 +10,9 @@
 import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/ccexpand.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
 import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------
@@ -89,7 +89,7 @@ define BUBBLE_GUM	= 104	// 0x68
 // Hijack the 'Check' routine
 ROM[0xC13BCF] = {
 	MText	(Key_Items_Prep)
-
+	// 0xC13BDD
 	LDA_i	(FLG_TEMP_USEITEM)
 	JSL	(GET_EVENT_FLAG)
 	CMP_i	(0x0000)
@@ -97,7 +97,7 @@ ROM[0xC13BCF] = {
 	JSL	(CC_Close_Custom_Windows)	// Close our custom windows
 	JMP	(MAIN_PAUSE_MENU)	// Return to the Main menu
 
-_exit_on_item_use:
+_exit_on_item_use:	// 0xC13BF0
 	JMP	(0xC13C16)
 	// Limit for this section is up to 0xC13C01
 }
@@ -125,7 +125,7 @@ CC_Close_Custom_Windows: {
 Key_Items_Prep: {
 	call(open_which_window)
 	open_hp
-	open_wallet
+	show_wallet
 	goto(KeyItems)
 }
 
@@ -166,13 +166,13 @@ SetCount26: { counter(26) ctoarg eob }
 KeyItems:
 	unset(FLG_TEMP_USEITEM)
 
-	copy_wram
-	save_text_window_state
+	store_registers_shared
+	back_up_text_rendering_state
 	window_open(INVENTORY_WINDOW)
 	title(0, KeyItems_Title)
 	pause(1)
 
-	copy_active
+	load_registers_shared
 	counter_zero
 	ctoarg
 
@@ -181,69 +181,69 @@ KeyItems:
 	// (Main gameplay with all characters)
 	if not flag FLG_POO_SOLO and not flag FLG_JEFF_SOLO {
 
-		add_menu_option_with_callback("ATM card", SetCount1)
+		load_str_callonhover("ATM card", SetCount1)
 		if flag FLG_ONET_2FPICKEY_APPEAR and not flag FLG_WIN_OSCAR { // Buzz Buzz died and Defeated Nightmare
 		// Flag FLG_ONET_2FPICKEY_APPEAR is set after Buzz buzz is killed, but never unset
-			add_menu_option_with_callback("Sound stone", SetCount2) }
+			load_str_callonhover("Sound stone", SetCount2) }
 		if flag FLG_ITEM_MAP {
-			add_menu_option_with_callback("Town map", SetCount3) }
+			load_str_callonhover("Town map", SetCount3) }
 		if flag FLG_KEY_TABIGOYA and not flag FLG_OPEN_TABIGOYA	{ // Shack Key used
-			add_menu_option_with_callback("Key to the shack", SetCount4) }
+			load_str_callonhover("Key to the shack", SetCount4) }
 		if flag FLG_ITEM_CYCLE {
-			add_menu_option_with_callback("Bicycle", SetCount5) }
+			load_str_callonhover("Bicycle", SetCount5) }
 		if flag FLG_ITEM_PHONE {
-			add_menu_option_with_callback("Receiver phone", SetCount6) }
+			load_str_callonhover("Receiver phone", SetCount6) }
 		if flag FLG_ITEM_TACO_ERASER {
-			add_menu_option_with_callback("Pencil eraser", SetCount7) }
+			load_str_callonhover("Pencil eraser", SetCount7) }
 		if flag FLG_ITEM_KOKESHI {
-			add_menu_option_with_callback("Eraser eraser", SetCount8) }
+			load_str_callonhover("Eraser eraser", SetCount8) }
 		// Check used FLG_HAPPY_CARPAINTER_ITEMFULL originally, but this was buggy when talking back to Carpainter again
 		if flag FLG_WIN_CARPAINTER and not flag FLG_POLA_GRFD { // Paula rescued
-			add_menu_option_with_callback("Key to the cabin", SetCount9) }
+			load_str_callonhover("Key to the cabin", SetCount9) }
 		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURABUS_APPEAR {
-			add_menu_option_with_callback("Suitcase of bills", SetCount10) }
+			load_str_callonhover("Suitcase of bills", SetCount10) }
 		if flag FLG_ITEM_TICKET {
-			add_menu_option_with_callback("Backstage pass", SetCount11) }
+			load_str_callonhover("Backstage pass", SetCount11) }
 		if flag FLG_ITEM_HOIHOI and not flag FLG_PUT_ZOMBI_HOIHOI and not flag FLG_THRK_ZOMBI_CAPTURED and not flag FLG_WIN_GEPPU {
-			add_menu_option_with_callback("Zombie paper", SetCount12) }
+			load_str_callonhover("Zombie paper", SetCount12) }
 		if flag FLG_ITEM_SHOW_TICKET {
-			add_menu_option_with_callback("Show ticket", SetCount13) }
+			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_MISSFAKE {
-			add_menu_option_with_callback("Diamond", SetCount14) }
+			load_str_callonhover("Diamond", SetCount14) }
 		if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
-			add_menu_option_with_callback("Tofu machine", SetCount15) }
+			load_str_callonhover("Tofu machine", SetCount15) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
-			add_menu_option_with_callback("Signed banana", SetCount16) }
+			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
-			add_menu_option_with_callback("Hieroglyph copy", SetCount17) }
+			load_str_callonhover("Hieroglyph copy", SetCount17) }
 		if flag FLG_ITEM_CARROT_KEY {	// Rabbit's carrot ->
-			add_menu_option_with_callback("Rabbits' carrot", SetCount18) }
+			load_str_callonhover("Rabbits' carrot", SetCount18) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
-			add_menu_option_with_callback("Key to the tower", SetCount19) }
+			load_str_callonhover("Key to the tower", SetCount19) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
-			add_menu_option_with_callback("Hawk eye", SetCount20) }
+			load_str_callonhover("Hawk eye", SetCount20) }
 		if flag FLG_ITEM_MUKUCHI and not flag FLG_ONET_LUCY_CHU {	// Returned Shyness book
-			add_menu_option_with_callback("Shyness book", SetCount21) }
+			load_str_callonhover("Shyness book", SetCount21) }
 		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR {	// Open Underworld rock
-			add_menu_option_with_callback("Tendakraut", SetCount22) }
+			load_str_callonhover("Tendakraut", SetCount22) }
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
-			add_menu_option_with_callback("Meteorite piece", SetCount23) }
+			load_str_callonhover("Meteorite piece", SetCount23) }
 	}
 
 	if not flag FLG_POO_SOLO {
 
 		if flag FLG_ITEM_KEY_LOCKER {
-			add_menu_option_with_callback("Locker Key", SetCount24) }
+			load_str_callonhover("Locker Key", SetCount24) }
 		if flag FLG_ITEM_GAUS {
-			add_menu_option_with_callback("Bad Key Machine", SetCount25) }
+			load_str_callonhover("Bad Key Machine", SetCount25) }
 		if flag FLG_ITEM_BUBBLE_GUM {
-			add_menu_option_with_callback("Bubble Gum Pak", SetCount26) }
+			load_str_callonhover("Bubble Gum Pak", SetCount26) }
 	}
 
 _Help_Backout:
-	print_vertical(2)
+	print_strings_vertical(2)
 _UseHelp_Window_Backout:
-	if not create_menu_persist_cancellable {
+	if not do_menu_nounload {
 		// Exit
 		// Closing the windows is handled through ASM after returning from the Key items menu
 		eob
@@ -252,35 +252,34 @@ _UseHelp_Window_Backout:
 	ctoarg
 	swap
 
-	switch_goto(26, {
-		long atm
-		long soundstone
-		long townmap
-		long shackkey
-		long bike
-		long phone
-		long pencileraser
-		long erasereraser
-		long cabinkey
-		long wadofbills
-		long backstagepass
-		long zombiepaper
-		long showticket
-		long diamond
-		long yogurtdisp
-		long signedbanana
-		long hieroglyph
-		long carrotkey
-		long towerkey
-		long hawkeye
-		long shynessbook
-		long tendakraut
-		long meteoritepiece
-		long lockerkey
-		long badkeymachine
-		long gum
-	})
-
+	switch_goto(26)
+		switch_entry(atm)
+		switch_entry(soundstone)
+		switch_entry(townmap)
+		switch_entry(shackkey)
+		switch_entry(bike)
+		switch_entry(phone)
+		switch_entry(pencileraser)
+		switch_entry(erasereraser)
+		switch_entry(cabinkey)
+		switch_entry(wadofbills)
+		switch_entry(backstagepass)
+		switch_entry(zombiepaper)
+		switch_entry(showticket)
+		switch_entry(diamond)
+		switch_entry(yogurtdisp)
+		switch_entry(signedbanana)
+		switch_entry(hieroglyph)
+		switch_entry(carrotkey)
+		switch_entry(towerkey)
+		switch_entry(hawkeye)
+		switch_entry(shynessbook)
+		switch_entry(tendakraut)
+		switch_entry(meteoritepiece)
+		switch_entry(lockerkey)
+		switch_entry(badkeymachine)
+		switch_entry(gum)
+_Exit_KeyItems_Menu:
 	eob
 
 //------------------------------------
@@ -337,14 +336,13 @@ command use_item(itemID) {
 command use_help_submenu( itemID, help_text ) {
 	window_close(WHICH_WINDOW)
 	window_open(USE_HELP_WINDOW)
-	add_menu_string("Use")
-	add_menu_string("Help!")
-	print_vertical(1)
-	create_menu_cancellable
-	switch_goto(2, {
-		long _use
-		long _help
-	})
+	load_str("Use")
+	load_str("Help!")
+	print_strings_vertical(1)
+	do_menu
+	switch_goto(2)
+		switch_entry(_use)
+		switch_entry(_help)
 	window_close(USE_HELP_WINDOW)
 	call(open_which_window)
 	window_switch(INVENTORY_WINDOW)
@@ -380,7 +378,7 @@ command give_menu_key_item(itemID) {
 	pause(100)
 	window_open(1)
 
-	party_pos_check(1) swap
+	get_char_at_pos(1) swap
 	"@({name(0)} added the {itemname(itemID)}" linebreak
 	"  to the Key items.)" //eob
 }
@@ -415,9 +413,9 @@ eob
 
 // Turn active flag off or vice versa
 command toggle_with_sound(flg) {
-	copy_wram
+	store_registers_shared
 	toggle(flg)
 	if flag flg { sound(SND_GIFTOPEN) }
 	else { sound(SND_BOXTAKE) }
-	copy_active
+	load_registers_shared
 }

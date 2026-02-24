@@ -87,118 +87,164 @@ l_0xef6d4c:
 
 l_0xef6d71:
     newline
-    "@{target} was defeated!{sound(33)}" eob
+    "@{target} was defeated!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6d83:
     newline
-    "@{target} stopped moving!{sound(33)}" eob
+    "@{target} stopped moving!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6d96:
     newline
-    "@{target} became tame!{sound(33)}" eob
+    "@{target} became tame!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6da7:
     newline
-    "@{target} disappeared!{sound(33)}" eob
+    "@{target} disappeared!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6db8:
     newline
-    "@The figure of {target} melted into thin air!{sound(33)}" eob
+    "@The figure of {target} melted into thin air!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6dd8:
     newline
-    "@{target} was broken into pieces!{sound(33)}" eob
+    "@{target} was broken into pieces!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6df0:
     newline
-    "@{target} was destroyed!{sound(33)}" eob
+    "@{target} was destroyed!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6e03:
     newline
-    "@{target} was totally scrapped!{sound(33)}" eob
+    "@{target} was totally scrapped!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6e19:
     newline
-    "@{target} turned back to normal!{sound(33)}" eob
+    "@{target} turned back to normal!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6e31:
     newline
-    "@{target} returned to the dust of the earth!{sound(33)}" eob
+    "@{target} returned to the dust of the earth!"
+    sound(SND_ENEMYDEATH)	// 33
+    eob
 
 l_0xef6e4a:
     newline
     "@{target}'s body" linebreak
-    "  returned to normal!{sound(37)}" promptw
+    "  returned to normal!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6e67:
     newline
     "@{target}'s" linebreak
-    "  numbness is gone!{sound(37)}" promptw
+    "  numbness is gone!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6e81:
     newline
     "@{target} felt" linebreak
-    "  much better!{sound(37)}" promptw
+    "  much better!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6e97:
     newline
     "@The poison was removed" linebreak
-    "  from {target}'s body!{sound(37)}" promptw
+    "  from {target}'s body!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6ebc:
     newline
     "@{target} got over" linebreak
-    "  the cold!{sound(37)}" promptw
+    "  the cold!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6ed1:
     newline
     "@{target} finally" linebreak
-    "  stopped crying...{sound(37)}" promptw
+    "  stopped crying..."
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6eed:
     newline
     "@{target}'s body" linebreak
-    "  again moved freely!{sound(37)}" promptw
+    "  again moved freely!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f0b:
     newline
     "@{target} was" linebreak
-    "  able to move!{sound(37)}" promptw
+    "  able to move!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f1e:
     newline
     "@{target} went" linebreak
-    "  back to normal!{sound(37)}" promptw
+    "  back to normal!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f38:
     newline
     "@{target}'s" linebreak
-    "  sunstroke was cured!{sound(37)}" promptw
+    "  sunstroke was cured!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f54:
     newline
-    "@{target} woke up!{sound(37)}[03]" promptw
+    "@{target} woke up!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f64:
     newline
     "@{target} was" linebreak
-    "  able to concentrate!{sound(37)}" promptw
+    "  able to concentrate!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f7c:
     newline
-    "@{target} was revived!{sound(37)}" promptw
+    "@{target} was revived!"
+    sound(SND_STATUSRECOVER)	// 37
+    promptw
     eob
 
 l_0xef6f8e:
@@ -265,14 +311,14 @@ l_0xef70b1:
 l_0xef70d2:
     newline
     "@The psychic power shield" linebreak
-    "[19 1F]{swap}  deflected [1C 12 00]!"
+    "[19 1F]{swap}  deflected {psiname(0)}!"
     sound(SND_SHIELDREFLECT)	// 93
     promptw
     eob
 
 l_0xef70fa:
     newline
-    "@{target}'s psychic shield made[19 1F]{swap} [1C 12 00] disappear!" promptw
+    "@{target}'s psychic shield made[19 1F]{swap} {psiname(0)} disappear!" promptw
     eob
 
 l_0xef7123:
@@ -340,7 +386,7 @@ l_0xef721e:
 
 l_0xef7221:
     "@{user}[19 1F]{swap} tried" linebreak
-    "  [1C 12 00]!"
+    "  {psiname(0)}!"
     sound(87)	// No sound
     next
     "@But it didn't work very well!" promptw

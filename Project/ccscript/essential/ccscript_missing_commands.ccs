@@ -535,7 +535,7 @@ command unfreeze_sprite_movement(id) "[1F EA {short id}]" // Like above, but for
 command generate_active_sprite(id, movement, style) "[1F 15 {short(id)} {short(movement)} {byte(style)}]" // Generates an "active sprite." 'id' is the sprite number, 'movement' is the movement script, 'style' is how it should appear (see CCS command reference.) I am not sure of what this does exactly, or how an "active sprite" differs from an NPC or floating sprite.
 command generate_active_npc(id, movement, style) "[1F 17 {short(id)} {short(movement)} {byte(style)}]" 
 command delete_active_sprite(id, style) "[1F 1F {short(id)} {byte(style)}]" // Deletes a sprite 'id' made with the above command, dissapearing with the specified style.
-command show_active_float(id, float) "[1F F3 {short id} {short float}]" // Generates a floating sprite near a sprite made with the generate_active_sprite command.
+command show_active_float(id, float) "[1F F3 {short id} {byte float}]" // Generates a floating sprite near a sprite made with the generate_active_sprite command.
 command hide_active_float(id) "[1F F4 {short id}]" // Deletes a floating sprite made with the above command.
 
 
@@ -597,7 +597,6 @@ command timed_event(id)	"[1F D3 {byte id}]"	// Triggers a timed event
 
 command battle_no_handling(battle) "[1F 23 {short battle}]" // trigger a battle but don't automatically handle losing it. Returns 1 if you lose. Close windows beforehand.
 command get_status(char, group) "[19 16 {byte char} {byte group}]" // get the status of a specific character
-command has_status(char, status) "[1D 0D {byte char} {short status}]" // return true if char has this status
 command character_has_status(char, group, status) "[1D 0D {byte char} {byte group} {byte status}]" // Same as above, but splits status into group + value
 command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {byte status}]" // Like the standard `inflict` command, but splits status into group + value
     // Meant to be used with character_has_status and inflict_status.

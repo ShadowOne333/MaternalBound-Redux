@@ -1,0 +1,114 @@
+import "../essential/asm65816.ccs"
+// Speeds up screen transitions, door transitions, warps, etc.
+// by jtolmar, phoenixbound, and Catador
+
+// ---- Double screen transition animation speed
+// References:
+// https://github.com/Herringway/ebsrc/blob/master/src/overworld/screen_transition.asm
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c06662
+
+// Screen transition exit timer
+// $16 is the count up to the goal
+/*
+$c06876 UNKNOWN20:        LDA $16
+$c06878                   INC
+$c06879                   STA $16
+$c0687b UNKNOWN21:        SEP #%00100000
+$c0687d                   LDY #$0008
+$c06880                   LDA [$06],Y
+*/
+// Note how we don't need the LDA $16 if we INC $16 directly (The A is never read)
+// Which means this is just inefficient enough (byte-wise) that we can squeeze
+// another INC in there.
+ROM[0xc06876] = {
+  INC_d(0x16)
+  INC_d(0x16)
+  NOP
+}
+
+// Screen transition entrance timer
+// $16 is the timer again
+/*
+$c06779                   JSL $c08756
+$c0677d                   LDA $16
+$c0677f                   INC
+$c06780                   STA $16
+$c06782 UNKNOWN5:         CMP $02
+*/
+// Unfortunately that CMP means it immediately uses the A, so we can't use the same
+// trick again. We'll instead monkey patch over the JSL just before it.
+ROM[0xc06779] = {
+  JSL(MonkeyPatch)
+  INC
+  INC
+  NOP // I could fit 3x speed here with another INC, but it actually was jarringly fast
+  STA_d(0x16)
+}
+
+MonkeyPatch: {
+  JSL(0xc08756) // Do what we were supposed to do
+  LDA_d(0x16) // Squeeze the load in here
+  RTL
+}
+
+// There's a big chunk of code between the above, but only one non-trivial function.
+// UNKNOWN_C496E7 - loads text palette and JSRs to UNKNOWN_C4958E
+//   UNKNOWN_C4958E - very long loop with several JSRs, some sort of palette transition
+//   Pretty baroque looping construct in $1A from 0 to 0x100
+//   Looks like it's going in steps of about 0x10 but UNKNOWN6 is real weird
+//   ...Why is it calling arbitrary integer division in a loop?
+
+// https://earthbound-rom-explorerr.herokuapp.com/address/$c4958e
+// Optimizeable block:
+/*
+$c49648           LDY #$0400
+$c4964b           LDA $02
+$c4964d           AND #$7E00
+$c4964f           JMP ($5b22,X) // Div X/Y
+$c49652           STA ($c0),Y
+$c49654           TAX
+$c49655           LDY #$0400
+$c49658           LDA $14
+$c4965a           AND #$7E00
+$c4965c           JMP ($5b22,X) // Div X/Y
+$c4965f           STA ($c0),Y
+*/
+
+// Divides accumulator by 400
+FastDiv400: {
+  AND_i(0x7C00)
+  XBA
+  LSR
+  LSR
+  RTL
+}
+
+ROM[0xc4964d] = {
+  JSL(FastDiv400)
+  NOP
+}
+
+ROM[0xc4965a] = {
+  JSL(FastDiv400)
+  NOP
+}
+
+// The rest of screen transitions happen outside the screen transition function.
+// Profiling shows:
+// 0xC41A9E - Decompressor. 34%.
+//   It's at least a bit optimized already, but any gains here would be major.
+// 0xC08756 - Wait frame. 14%
+//   Intentional delay. 2x speed is already about the limit of sensible.
+// 0xC426ED - 6.4%
+// 0xC0914B - Division. 5.8%
+// 0xC00E16 - 4.2%
+// 0xC00CF3 - 2.9%
+// 0xC0255C - Load NPCs? 2.7%
+//   Note the profile was done at Tracy's room, so somewhere
+//   more NPC-heavy might use this more.
+// 0xC00AC5 - 2.2%
+// 0xC4958E - Palette transition, optimized above. 2.1%
+
+
+
+

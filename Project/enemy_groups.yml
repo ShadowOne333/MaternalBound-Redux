@@ -1,4 +1,4 @@
-0:
+0: # Debug fight
   Background 1: 0
   Background 2: 0
   Enemies:
@@ -4016,12 +4016,11 @@
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
-473:
+473: # PSI anim debug fight (Unused originally)
   Background 1: 0
   Background 2: 0
   Enemies:
-  - {Amount: 0, Enemy: 214}
-  - {Amount: 0, Enemy: 34}
+  - {Amount: 1, Enemy: 198}
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0

@@ -9304,51 +9304,51 @@
   Speed: 10
   Type: normal
   Unknown: 3
-198:
-  '"The" Flag': 'true'
-  Action 1: 0
-  Action 1 Argument: 0
-  Action 2: 0
+198: # Debug battle enemy
+  '"The" Flag': 'false'
+  Action 1: 245 #move extention
+  Action 1 Argument: 27
+  Action 2: 4 #Bash
   Action 2 Argument: 0
-  Action 3: 0
+  Action 3: 374 # attack
   Action 3 Argument: 0
-  Action 4: 0
+  Action 4: 216 #came out swinging
   Action 4 Argument: 0
-  Action Order: 0
+  Action Order: 1
   Boss Flag: 'false'
   Death Sound: normal
   Death Text Pointer: data_62.l_0xef6d71
   Defense: 192
-  Encounter Text Pointer: data_63.l_0xef789c
-  Experience points: 48311
+  Encounter Text Pointer: psi_anims.PSI_Test
+  Experience points: 168
   Final Action: 0
   Final Action Argument: 0
-  Fire vulnerability: 100%
+  Fire vulnerability: 40%
   Flash vulnerability: 70%
-  Freeze vulnerability: 5%
+  Freeze vulnerability: 40%
   Gender: neutral
-  Guts: 25
-  HP: 774
-  Hypnosis/Brainshock vulnerability: 10%
+  Guts: 99
+  HP: 9999
+  Hypnosis/Brainshock vulnerability: 0%
   Initial Status: normal
-  Item Dropped: 130
-  Item Rarity: 2/128
-  Level: 69
-  Luck: 32
+  Item Dropped: 0
+  Item Rarity: 1/128
+  Level: 10
+  Luck: 99
   Max Call: 0
-  Mirror Success Rate: 50
-  Miss Rate: 1
-  Money: 897
-  Movement pattern: 23
-  Music: 102
-  Name: Squatter Demon
-  Offense: 158
+  Mirror Success Rate: 0
+  Miss Rate: 0
+  Money: 0
+  Movement pattern: 0
+  Music: 0
+  Name: Debug	# Squatter demon
+  Offense: 16
   Overworld Sprite: 191
-  PP: 60
+  PP: 0
   Paralysis vulnerability: 0%
   Row: 0
   Run Flag: 'true'
-  Speed: 45
+  Speed: 5
   Type: normal
   Unknown: 3
 199:
