@@ -1,14 +1,14 @@
 import "../essential/asm65816.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/flags.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../essential/stdext.ccs"
 import "../redux/run_stamina_mechanic.ccs"
 
 command false_goto(target) "[1B 02 {long target}]"
 
 command true_goto(target) "[1B 03 {long target}]"
 
-command fullsave "copy_active[19 26 00][1F B0]"
+command fullsave { load_registers_shared set_respawn_point(0) save }
 
 command input_num (n) "[1F 52 {byte n}]"
 
@@ -21,11 +21,34 @@ command delete_tpt(entry, effect) "[1F 1E {short entry} {byte effect}]" // delet
 command inst_pack_loc (target) "[{byte[2] target} {byte[0] target} {byte[1] target}]"
 
 
-command fade_1 "[1f 15 6a 00 fe 02 01]" // Simple fade out. (106, 766)
+command fade_1 "[1F 15 6A 00 FE 02 01]" // Simple fade out. (106, 766)
 
-command fade_2 "[1f 15 6a 00 79 02 01][1f 61][10 78][1f 1f 6a 00 06]" // Fade out, but stays black until a warp is used. (106, 633)
+command fade_2 "[1F 15 6A 00 79 02 01][1F 61][10 78][1F 1F 6A 00 06]" // Fade out, but stays black until a warp is used. (106, 633)
 
-command fade_in "[1f ea 6a 00][1f 61]" // To be used at some point after fade_1 if you want the screen to fade back in.
+command fade_in "[1F EA 6A 00][1F 61]" // To be used at some point after fade_1 if you want the screen to fade back in.
+
+command two_choice_menu(opt1, label1, opt2, label2) {
+	load_str(opt1)
+	load_str(opt2)
+	print_strings_horizontal(2)
+	do_menu
+	clearline
+	switch_goto(2)
+		switch_entry(label1)
+		switch_entry(label2)
+}
+
+// Same as above, but you cannot cancel with B.
+command two_choice_menu_not_cancellable(opt1, label1, opt2, label2) {
+	load_str(opt1)
+	load_str(opt2)
+	print_strings_horizontal(2)
+	do_menu_nocancel
+	clearline
+	switch_goto(2)
+		switch_entry(label1)
+		switch_entry(label2)
+}
 
 // Defines certain people (npc type person) as being possible to check.
 // By JTolmar
@@ -68,20 +91,20 @@ CheckTalkHijack:
 
 
 Door_Open:
-set(flag 0x95)
-eob
+	set(flag 0x95)
+	eob
 
 Door_Closed:
-eob
+	eob
 
 Door_Locked:
-eob
+	eob
 
 command handle_item_give(item, failLabel)
 {
     notfull(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
-    give_and_check(0, item)
+    give_and_return_location(0, item)
     sound(SND_BOXTAKE)
     pause(60)
     call(0xc7dcda) //Print the "[character] got an item" message
@@ -108,7 +131,7 @@ command handle_item_give_special(item, failLabel)
     pause(90)
     window_open(53)
     notfull(-1)
-    give_and_check(0, item)
+    give_and_return_location(0, item)
     call(0xc7dcda) //Print the "[character] got an item" message
 }
 
@@ -116,7 +139,7 @@ command handle_item_give_shops(item, failLabel)
 {
     notfull(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
-    give_and_check(0, item)
+    give_and_return_location(0, item)
     pause(60)
     //call(0xc7dcda) //Print the "[character] got an item" message
 }
@@ -125,7 +148,7 @@ command handle_item_give_desert(item, failLabel)
 {
     notfull(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
-    give_and_check(0, item)
+    give_and_return_location(0, item)
     sound(SND_BOXTAKE)
     pause(20)
     swap
@@ -141,7 +164,7 @@ command errorbeep
 
 command inflict_cold
 {
-    inflict(1, 0x801)
+    inflict_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)	// 1, 1, 8
     eob
 }
 
@@ -166,7 +189,7 @@ _sub_Sleepover1: {
     pause(30) // Increase to 30 if that feels too tight
 
     // Begin fading the screen to black AND play the "good night" music at the same time
-    generate_active_sprite(106, 633, 1)
+    sprite2_spawn(106, 633, 1)
     pause(120) // Wait a bit more to play the new track
 
     // If the player has already slept, then stop the music so we can start it back again, else the music won't play
@@ -174,7 +197,7 @@ _sub_Sleepover1: {
 
     // Change track to "Good Night Sleep"
     music(27)
-    wait_for_movement
+    wait_movement
     // The fade will take 124 frames to run. The music is longer than that. Especially if we keep the original tempo and tweeting bird intro...
     pause(90)
 
@@ -190,7 +213,7 @@ _sub_Sleepover2: {
   // heal
   healall refill_stamina
   // Freeze the party in place until after we close the window
-  freeze_char_movement(0xFF)
+  party_freeze	// 0xFF
   // Open normal window to continue with whatever text follows
   window_open(53)
   eob
@@ -212,10 +235,10 @@ _sub_ShortSleepover1: {
     pause(30) // Increase to 30 if that feels too tight
 
     // Begin fading the screen to black AND play the "good night" music at the same time
-    generate_active_sprite(106, 633, 1)
+    sprite2_spawn(106, 633, 1)
     pause(120) // Wait a bit more to play the new track
     music(27)
-    wait_for_movement
+    wait_movement
 
     // The fade will take 124 frames to run. The music is longer than that. Especially if we keep the original tempo and tweeting bird intro...
     pause(250) pause(150)
@@ -232,7 +255,7 @@ _sub_ShortSleepover2: {
     healall refill_stamina
 
     // Freeze the party in place until after we close the window
-    freeze_char_movement(0xFF)
+    party_freeze
 
     // Open normal window to continue with whatever text follows
     window_open(53)
@@ -252,7 +275,7 @@ command sleepover_intro(dest,track)
 
 command goto_if_diamondized(char,label)
 {
-    party_pos_check(char)
+    get_char_at_pos(char)
     store_registers
     character_has_status(char, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
     goto_if_true(label)
@@ -260,7 +283,7 @@ command goto_if_diamondized(char,label)
 
 command goto_if_unconscious(char,label)
 {
-    party_pos_check(char)
+    get_char_at_pos(char)
     goto_if_false(label)
     store_registers
     compare_result(5)
@@ -274,20 +297,20 @@ command goto_if_unconscious(char,label)
 define DIAMOND_SPRITE = 12
 
 command spawn_fixed_sprite(char, ghost_sprite, mov, style) {
-    has_status(char, "[01 02]")
+    character_has_status(char, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
     goto_if_true(_ghost_sprite)
-    has_status(char, "[01 03]")
+    character_has_status(char, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
     goto_if_true(_diamond_sprite)
     
-    generate_active_sprite(char, mov, style)
+    sprite2_spawn(char, mov, style)
     goto(_end)
     
     _ghost_sprite:
-    generate_active_sprite(ghost_sprite, mov, style)
+    sprite2_spawn(ghost_sprite, mov, style)
     goto(_end)
     
     _diamond_sprite:
-    generate_active_sprite(DIAMOND_SPRITE, mov, style)
+    sprite2_spawn(DIAMOND_SPRITE, mov, style)
     
     _end:
 }
@@ -363,38 +386,38 @@ define PC_DUNGEON_MAN = 6
 
 // Leader's name
 command leader_name {
-    party_pos_check(1)
+    get_char_at_pos(1)
     swap
     name(0)
 }
 
 // Leader's pronoun (neutral)
 command leader_he_she {
-    party_pos_check(1)
+    get_char_at_pos(1)
     call(0xC7E5F3)
 }
 
 // Leader's pronoun (posessive)
 command leader_his_her {
-    party_pos_check(1)
+    get_char_at_pos(1)
     call(0xC7E660)
 }
 
 // Leader's pronoun (third person)
 command leader_him_her {
-    party_pos_check(1)
+    get_char_at_pos(1)
     call(0xC7E6A4)
 }
 
 // Leader's honorific
 command leader_sir_maam {
-    party_pos_check(1)
+    get_char_at_pos(1)
     call(0xC7E6B3)
 }
 
 // Leader's honorific (in uppercase)
 command leader_sir_maam_upper {
-    party_pos_check(1)
+    get_char_at_pos(1)
     call(0xC7E6C5)
 }
 
@@ -422,7 +445,7 @@ command your_ness {
     call(_sub_your_ness)
 }
 _sub_your_ness: {
-    party_pos_check(1)
+    get_char_at_pos(1)
     result_is(PC_NESS)
     goto_if_false(_ness)
     "your"
@@ -443,9 +466,9 @@ command youve_you_all_have {
     call(_sub_partydesc_youve)
 }
 _sub_partydesc_youve: {
-    party_size_check(3)
+    party_size_smaller_than(3)
     goto_if_false(_you_all)
-    party_size_check(2)
+    party_size_smaller_than(2)
     goto_if_false(_you_two)
     "you've"
     eob
@@ -463,7 +486,7 @@ command boy_girl {
     call(_sub_boy_girl)
 }
 _sub_boy_girl: {
-    party_pos_check(1)
+    get_char_at_pos(1)
     result_is(PC_PAULA)
     goto_if_true(_girl)
     _boy:
@@ -481,9 +504,9 @@ command you_you_all {
     call(_sub_you_you_all)
 }
 _sub_you_you_all: {
-    party_size_check(3)
+    party_size_smaller_than(3)
     goto_if_false(_you_all)
-    party_size_check(2)
+    party_size_smaller_than(2)
     goto_if_false(_you_two)
     "you"
     eob
@@ -502,9 +525,9 @@ command in_your_case_caps {
     call(_sub_in_your_case)
 }
 _sub_in_your_case: {
-    party_size_check(3)
+    party_size_smaller_than(3)
     goto_if_false(_you_all)
-    party_size_check(2)
+    party_size_smaller_than(2)
     goto_if_false(_you_two)
     "In your case"
     eob

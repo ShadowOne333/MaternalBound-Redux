@@ -210,8 +210,8 @@ KeyItems:
 			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_MISSFAKE {
 			load_str_callonhover("Diamond", SetCount14) }
-		if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
-			load_str_callonhover("Tofu machine", SetCount15) }
+		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
+			load_str_callonhover("Tofu machine", SetCount15) }*/
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
@@ -236,7 +236,7 @@ KeyItems:
 			load_str_callonhover("Locker Key", SetCount24) }
 		if flag FLG_ITEM_GAUS {
 			load_str_callonhover("Bad Key Machine", SetCount25) }
-		if flag FLG_ITEM_BUBBLE_GUM {
+		if flag FLG_ITEM_BUBBLE_GUM and not flag FLG_WINS_BMONKEY_DISAPPEAR {
 			load_str_callonhover("Bubble Gum Pak", SetCount26) }
 	}
 
@@ -398,9 +398,9 @@ keyitemcounter:
 	if counter_is(ERASER_ERASER) { toggle_with_sound(FLG_ITEM_KOKESHI) }
 	if counter_is(DIAMOND) { toggle_with_sound(FLG_DSRT_ITEM_DIA) }
 	if counter_is(SIGNED_BANANA) { toggle_with_sound(FLG_ITEM_BANANA) }
-	if counter_is(HIEROGLYPH) { toggle_with_sound(FLG_SUMS_HIEROGLYPH) }*/
+	if counter_is(HIEROGLYPH) { toggle_with_sound(FLG_SUMS_HIEROGLYPH) }
 	if counter_is(CARROT_KEY) { toggle_with_sound(FLG_ITEM_CARROT_KEY) }
-	/*if counter_is(TOWER_KEY) { toggle_with_sound(FLG_ITEM_KEY_PUPUKA) }
+	if counter_is(TOWER_KEY) { toggle_with_sound(FLG_ITEM_KEY_PUPUKA) }
 	if counter_is(HAWK_EYE) { toggle_with_sound(FLG_ITEM_TAKANOME) }
 	if counter_is(SHYNESS_BOOK) { toggle_with_sound(FLG_ITEM_MUKUCHI) }
 	if counter_is(TENDAKRAUT) { toggle_with_sound(FLG_GUMI_OLDMAN_ITEM) }

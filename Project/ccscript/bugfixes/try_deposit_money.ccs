@@ -1,0 +1,65 @@
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/ccexpand.ccs"
+
+// Checks if `amt` can be deposited without exceeding the bank balance maximum of 9,999,999.
+// Returns 0 if the amount is allowed to be deposited, or a truthy value (`amt - 9_999_999`) otherwise.
+// Does not modify the amount of money in the bank account.
+command check_deposit_money(amt) {
+    "[1A 1A {long amt}]"
+}
+
+CC_CanDepositMoney: M_EB_Function_Wrapper({
+	LDY_i (0x0004)
+	JSL (R_Read_Parameter_Bytes)
+
+	LDA_a (D_cc_argv)
+	STA_d (0x06)
+	LDA_a (D_cc_argv_2)
+	STA_d (0x08)
+	JSL (R_Set_06_To_Argument_If_Zero)
+
+	LDA_d (0x06)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x10)
+	JSL (Can_Deposit_Money)
+
+	LDA_d (0x06)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x10)
+	JSL (R_Set_Working_Memory)
+})
+
+Can_Deposit_Money: M_EB_Function_Wrapper_UserStack_Clobber(-4, {
+	// $00-$03 = amt + player's bank account (GAME_STATE+game_state::bank_balance)
+	LDA_d (0x12)
+	CLC
+	ADC_a (0x9835)
+	STA_d (0x00)
+	LDA_d (0x14)
+	ADC_a (0x9837)
+	STA_d (0x02)
+
+	// Subtract 9,999,999 from it
+	LDA_d (0x00)
+	SEC
+	SBC_i (short [0] 9999999)
+	STA_d (0x00)
+	LDA_d (0x02)
+	SBC_i (short [1] 9999999)
+	// STA_d (0x02)
+
+	// If the result was negative, return 0
+	// If the result was 0 or something positive, return that
+	BMI_a (_return_zero)
+	STA_d (0x0C)
+	LDA_d (0x00)
+	STA_d (0x0A)
+	BRA_a (_return)
+_return_zero:
+	STZ_d (0x0A)
+	STZ_d (0x0C)
+_return:
+})

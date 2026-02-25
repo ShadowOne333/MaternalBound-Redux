@@ -6,470 +6,893 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc605db:
-    "[06 5A 00 {e(l_0xc6060c)}]@I've been watching them dig for a while...{pause(20)}  I wonder what they'll find." end
+	goto_if_flag(FLG_DSRT_ITEM_DIA, l_0xc6060c)	// 0x5A
+	"@I've been watching them dig for a while..." pause(20)
+	"  I wonder what they'll find." end
 
 l_0xc6060c:
-    "@They only found a diamond...{pause(15)} well,{pause(15)} you take what you get..." end
+	"@They only found a diamond...| Well,| you take what you get..." end
 
 l_0xc60633:
-    "[06 5A 00 {e(l_0xc6060c)}]@If they have a live broadcast from the dig," next
-    "@I can check out the dig while relaxing on the floor." end
+	goto_if_flag(FLG_DSRT_ITEM_DIA, l_0xc6060c)	// 0x5A
+	"@If they have a live broadcast from the dig," next
+	"@I can check out the dig while relaxing on the floor." end
 
 l_0xc60678:
-    "[06 5A 00 {e(l_0xc6060c)}]@I think he should dig somewhere else." end
+	goto_if_flag(FLG_DSRT_ITEM_DIA, l_0xc6060c)	// 0x5A
+	"@I think he should dig somewhere else." end
 
 l_0xc60696:
-    "[06 5A 00 {e(l_0xc6060c)}]@I have lots of work to do, but I can't seem to move." next
-    "@I'm so curious about the dig.{pause(20)}  I can't help it." end
+	goto_if_flag(FLG_DSRT_ITEM_DIA, l_0xc6060c)	// 0x5A
+	"@I have lots of work to do, but I can't seem to move." next
+	"@I'm so curious about the dig." pause(20)
+	"  I can't help it." end
 
 l_0xc606d8:
-    call(l_0xc606de) eob
+	call(l_0xc606de)
+	eob
 
 l_0xc606de:
-    "[19 10 01][19 22 00 02 0B 03]{swap}{store_registers}{result_is(1)}[1B 03 {e(l_0xc6070c)}]{load_registers}{result_is(2)}[1B 03 {e(l_0xc6070c)}]{load_registers}{result_is(8)}[1B 03 {e(l_0xc6070c)}]" goto(l_0xc607b9)
+	get_char_at_pos(1)
+	get_dir_from_char(0,TO_NPC,779)	// 0x00, 0x02, 0x030B
+	swap
+	store_registers
+	result_is(1)
+	goto_if_true(l_0xc6070c)
+	load_registers
+	result_is(2)
+	goto_if_true(l_0xc6070c)
+	load_registers
+	result_is(8)
+	goto_if_true(l_0xc6070c)
+	goto(l_0xc607b9)
 
 l_0xc6070c:
-    "@(I'm a broken slot machine." next
-    "@But, the S[C0]nchez Brothers and their friend are a very cheerful trio..." next
-    "@they will make you happy.)" next
-    "@(Would you like to insert a buck?)" linebreak
-    call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc6078b)} {e(l_0xc607a5)}]" goto(l_0xc607a5)
+	"@(I'm a broken slot machine." next
+	"@But, the S[C0]nchez Brothers and their friend are a very cheerful trio..." next
+	"@they will make you happy.)" next
+	"@(Would you like to insert a buck?)" linebreak
+	// two_choice_menu
+	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc6078b)} {e(l_0xc607a5)}]"
+	goto(l_0xc607a5)
 
 l_0xc6078b:
-    "[1D 14 01 00 00 00][1B 03 {e(l_0xc607ae)}]{pause(1)}[1D 09 01 00]{open_wallet}" call(l_0xc607e4) eob
+	hasmoney(1)
+	goto_if_false(l_0xc607ae)
+	pause(1)
+	takemoney(1)
+	show_wallet
+	call(l_0xc607e4)
+	eob
 
 l_0xc607a5:
-    "@(Okay...)" end
+	"@(Okay...)" end
 
 l_0xc607ae:
-    "@(You have no money.)" end
+	"@(You have no money.)" end
 
 l_0xc607b9:
-    "@(I'm a slot machine.{pause(20)}  Can you talk to me from the front side?)" end
+	"@(I'm a slot machine." pause(20)
+	"  Can you talk to me from the front side?)" end
 
 l_0xc607e4:
-    "{window_closeall}{pause(2)}[1F F1 FD 02 AD 02]{pause(2)}[1F F1 FE 02 AE 02]{pause(2)}[1F F1 FF 02 AF 02]{pause(120)}{pause(120)}[1F F1 FD 02 B0 02][1F 61][06 0A 02 {e(l_0xc6081d)}][06 0B 02 {e(l_0xc60844)}]" goto(l_0xc60829)
+	window_closeall
+	pause(2)
+	npc_do_mc(765,685)	// 0x02FD, 0x02AD
+	pause(2)
+	npc_do_mc(766,686)	// 0x02FE, 0x02AE
+	pause(2)
+	npc_do_mc(767,687)	// 0x02FF, 0x02AF
+	pause(120) pause(120)
+	npc_do_mc(765,688)	// 0x02FD, 0x02B0
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc6081d)	// 0x020A, 522
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60844)	// 0x020B, 523
+	goto(l_0xc60829)
 
 l_0xc6081d:
-    "[06 0B 02 {e(l_0xc6087a)}]" goto(l_0xc6085f)
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc6087a)	// 0x020B, 523
+	goto(l_0xc6085f)
 
 l_0xc60829:
-    "[1F F1 FE 02 B1 02][1F 61][06 0A 02 {e(l_0xc60b69)}][06 0B 02 {e(l_0xc60b69)}]" goto(l_0xc6089a)
+	npc_do_mc(766,689)	// 0x02FE, 0x02B1
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc60b69)	// 0x020A, 522
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60b69)	// 0x020B, 523
+	goto(l_0xc6089a)
 
 l_0xc60844:
-    "[1F F1 FE 02 B1 02][1F 61][06 0A 02 {e(l_0xc60b69)}][06 0B 02 {e(l_0xc608b5)}]" goto(l_0xc60b69)
+	npc_do_mc(766,689)	// 0x02FE, 0x02B1
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc60b69)	// 0x020A, 522
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc608b5)	// 0x020B, 523
+	goto(l_0xc60b69)
 
 l_0xc6085f:
-    "[1F F1 FE 02 B1 02][1F 61][06 0B 02 {e(l_0xc60b69)}][06 0A 02 {e(l_0xc608d0)}]" goto(l_0xc60b69)
+	npc_do_mc(766,689)	// 0x02FE, 0x02B1
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60b69)	// 0x020B, 523
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc608d0)	// 0x020A, 522
+	goto(l_0xc60b69)
 
 l_0xc6087a:
-    "[1F F1 FE 02 B1 02][1F 61][06 0A 02 {e(l_0xc6088e)}]" goto(l_0xc60b69)
+	npc_do_mc(766,689)	// 0x02FE, 0x02B1
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc6088e)	// 0x020A, 522
+	goto(l_0xc60b69)
 
 l_0xc6088e:
-    "[06 0B 02 {e(l_0xc608eb)}]" goto(l_0xc60b69)
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc608eb)	// 0x020B, 523
+	goto(l_0xc60b69)
 
 l_0xc6089a:
-    "[1F F1 FF 02 B3 02][1F 61][06 0A 02 {e(l_0xc60b71)}][06 0B 02 {e(l_0xc60b71)}]" goto(l_0xc6090b)
+	npc_do_mc(767,691)	// 0x02FF, 0x02B3
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc60b71)	// 0x020A, 522
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60b71)	// 0x020B, 523
+	goto(l_0xc6090b)
 
 l_0xc608b5:
-    "[1F F1 FF 02 B3 02][1F 61][06 0A 02 {e(l_0xc60b71)}][06 0B 02 {e(l_0xc60985)}]" goto(l_0xc60b71)
+	npc_do_mc(767,691)	// 0x02FF, 0x02B3
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc60b71)	// 0x020A, 522
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60985)	// 0x020B, 523
+	goto(l_0xc60b71)
 
 l_0xc608d0:
-    "[1F F1 FF 02 B3 02][1F 61][06 0B 02 {e(l_0xc60b71)}][06 0A 02 {e(l_0xc60a0d)}]" goto(l_0xc60b71)
+	npc_do_mc(767,691)	// 0x02FF, 0x02B3
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60b71)	// 0x020B, 523
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc60a0d)	// 0x020A, 522
+	goto(l_0xc60b71)
 
 l_0xc608eb:
-    "[1F F1 FF 02 B3 02][1F 61][06 0A 02 {e(l_0xc608ff)}]" goto(l_0xc60b71)
+	npc_do_mc(767,691)	// 0x02FF, 0x02B3
+	wait_movement
+	goto_if_flag(FLG_ANIM_PORT_0, l_0xc608ff)	// 0x020A, 522
+	goto(l_0xc60b71)
 
 l_0xc608ff:
-    "[06 0B 02 {e(l_0xc60a97)}]" goto(l_0xc60b71)
+	goto_if_flag(FLG_ANIM_PORT_1, l_0xc60a97)	// 0x020B, 523
+	goto(l_0xc60b71)
 
 l_0xc6090b:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1, Tomas)
-    "@Amigo, you won a very big jackpot!" next
-    "@Here's a big prize for you, amigo!" next
-    "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 A8]@" call(data_37.l_0xc7e6d7) " won a [1C 05 A8] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
+	pause(120)
+	npc_do_mc(767,692)	// 0x02FF, 0x02B4
+	wait_movement
+	npc_freeze(767)	// 0x02FF
+	window_open(1)
+	title(1, Tomas)
+	"@Amigo, you won a very big jackpot!" next
+	"@Here's a big prize for you, amigo!" next
+	full(-1) goto_if_true(l_0xc60b13)
+	give_and_return_location(0,168)	// item 0xA8 / 168 = Chick
+	"@" call(data_37.l_0xc7e6d7) " won a {itemname(168)} as a prize." wait
+	sound(SND_BOXTAKE)	// 116
+	window_closeall
+	npc_unfreeze(767)	// 0x02FF
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60985:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1, Tomas)
-    "@Amigo, you won!{pause(20)}  A very big winning, I think!" next
-    "@Here's a very nice prize for the important amigo!" next
-    "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 E0]@" call(data_37.l_0xc7e6d7) " won a [1C 05 E0] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
+	pause(120)
+	npc_do_mc(767,692)	// 0x02FF, 0x02B4
+	wait_movement
+	npc_freeze(767)	// 0x02FF
+	window_open(1)
+	title(1, Tomas)
+	"@Amigo, you won!" pause(20)
+	"  A very big winning, I think!" next
+	"@Here's a very nice prize for the important amigo!" next
+	full(-1) goto_if_true(l_0xc60b13)
+	give_and_return_location(0,224)	// Item 0xE0 / 224 = Skip sandwich
+	"@" call(data_37.l_0xc7e6d7) " won a {itemname(224)} as a prize." wait
+	sound(116)
+	window_closeall
+	npc_unfreeze(767)	// 0x02FF
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60a0d:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1, Tomas)
-    "@Amigo, you won!{pause(20)}  A very big winning, and you hit it!" next
-    "@Here's the prize for the important amigo!" next
-    "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 62]@" call(data_37.l_0xc7e6d7) " won a [1C 05 62] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
+	pause(120)
+	npc_do_mc(767,692)	// 0x02FF, 0x02B4
+	wait_movement
+	npc_freeze(767)	// 0x02FF
+	window_open(1)
+	title(1, Tomas)
+	"@Amigo, you won!" pause(20)
+	"  A very big winning, and you hit it!" next
+	"@Here's the prize for the important amigo!" next
+	full(-1) goto_if_true(l_0xc60b13)
+	give_and_return_location(0,98)	// Item 0x62 / 98 = PSI caramel
+	"@" call(data_37.l_0xc7e6d7) " won a {itemname(98)} as a prize." wait
+	sound(116)
+	window_closeall
+	npc_unfreeze(767)	// 0x02FF
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60a97:
-    "{pause(120)}[1F F1 FF 02 B4 02][1F 61][1F E6 FF 02]{window_open(1)}"
-    title(1, Tomas)
-    "@Amigo, you won!{pause(20)}  A very big winning, my friend!" next
-    "@Here's the big prize for you!" next
-    "[1D 03 FF][1B 02 {e(l_0xc60b13)}][1D 0E 00 6A]@" call(data_37.l_0xc7e6d7) " won a [1C 05 6A] as a prize.{wait}{sound(116)}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
+	pause(120)
+	npc_do_mc(767,692)	// 0x02FF, 0x02B4
+	wait_movement
+	npc_freeze(767)	// 0x02FF
+	window_open(1)
+	title(1, Tomas)
+	"@Amigo, you won!" pause(20)
+	"  A very big winning, my friend!" next
+	"@Here's the big prize for you!" next
+	full(-1) goto_if_true(l_0xc60b13)
+	give_and_return_location(0,106)	// Item 0x6A / 106 = Can of fruit juice
+	"@" call(data_37.l_0xc7e6d7) " won a {itemname(106)} as a prize." wait
+	sound(SND_BOXTAKE)	// 116
+	window_closeall
+	npc_unfreeze(767)	// 0x02FF
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60b13:
-    newline
-    "@That's what I thought, but amigo, you have no more room." next
-    "@I'm sorry, but the deal's off." next
-    "@Your pay off took the day off, amigo.{wait}{window_closeall}[1F E9 FF 02][1F 61]" goto(l_0xc60b71)
+	newline
+	"@That's what I thought, but amigo, you have no more room." next
+	"@I'm sorry, but the deal's off." next
+	"@Your pay off took the day off, amigo." wait
+	window_closeall
+	npc_unfreeze(767)	// 0x02FF
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60b69:
-    "[1F F1 FF 02 B2 02][1F 61]" goto(l_0xc60b71)
+	npc_do_mc(767,690)	// 0x02FF, 0x02B2
+	wait_movement
+	goto(l_0xc60b71)
 
 l_0xc60b71:
-    "{pause(2)}[1F F1 FD 02 08 00]{pause(2)}[1F F1 FE 02 08 00]{pause(2)}[1F F1 FF 02 08 00]" eob
+	pause(2)
+	npc_do_mc(765,8)	// 0x02FD, 0x0008
+	pause(2)
+	npc_do_mc(766,8)	// 0x02FE, 0x0008
+	pause(2)
+	npc_do_mc(767,8)	// 0x02FF, 0x0008
+	eob
 
 l_0xc60b8a:
-    title(1, Pancho)
-    "@I'm big brother Pancho." end
+	title(1, Pancho)
+	"@I'm big brother Pancho." end
 
 l_0xc60b9b:
-    title(1, Pincho)
-    "@I'm kid brother Pincho." end
+	title(1, Pincho)
+	"@I'm kid brother Pincho." end
 
 l_0xc60bae:
-    title(1, Tomas)
-    "@I'm Tom[C0]s Jefferson." end
+	title(1, Tomas)
+	"@I'm Tom[C0]s Jefferson." end
 
 l_0xc60bbf:
-    "@(...I'm just some random no-boney,{pause(20)} so I can't speak.)" end
+	"@(...I'm just some random no-boney,/| so I can't speak.)" end
 
 l_0xc60be3:
-    "@(Even though I'm just a pile of bones," next
-    "@I can talk and I'm lonely out here in the desert.)" end
+	"@(Even though I'm just a pile of bones," next
+	"@I can talk and I'm lonely out here in the desert.)" end
 
 l_0xc60c1b:
-    "@(Why would you feel like talking to a tiny black sesame like me." next
-    "@I wanna apologize to the white sesame that I hurt before." next
-    "@If I could just see her.)[06 8A 00 {e(l_0xc60c95)}]{wait}{window_closeall}{set(flag 135)}[06 C6 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_23.l_0xc68880) eob
+	"@(Why would you feel like talking to a tiny black sesame like me." next
+	"@I wanna apologize to the white sesame that I hurt before." next
+	"@If I could just see her.)"
+	goto_if_flag(FLG_DSRT_WHITESESAME, l_0xc60c95)	// 0x8A, 138
+	wait
+	window_closeall
+	set(FLG_DSRT_BLACKSESAME)	// 135
+	goto_if_flag(FLG_PHOTO_13, data_55.l_0xc9992f)	// 0x02C6, 719
+	pause(60)
+	call(data_23.l_0xc68880)
+	eob
 
 l_0xc60c95:
-    next
-    "@(What?{pause(20)}  The white sesame still... loves me?!  Weep, weep...){wait}{window_closeall}{set(flag 135)}[06 C6 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_23.l_0xc68880) eob
+	next
+	"@(What?" pause(20)
+	"  The white sesame still... loves me?!  Weep, weep...)" wait
+	window_closeall
+	set(FLG_DSRT_BLACKSESAME)	// 135
+	goto_if_flag(FLG_PHOTO_13, data_55.l_0xc9992f)	// 0x02C6, 719
+	pause(60)
+	call(data_23.l_0xc68880)
+	eob
 
 l_0xc60cd8:
-    "@(I heard that the black sesame I used to love is somewhere in this desert." next
-    "@If you see him,{pause(15)} please tell him that I still love him.)[06 87 00 {e(l_0xc60d31)}]{set(flag 138)}" end
+	"@(I heard that the black sesame I used to love is somewhere in this desert." next
+	"@If you see him,| please tell him that I still love him.)"
+	goto_if_flag(FLG_DSRT_BLACKSESAME, l_0xc60d31)	// 0x87, 135
+	set(FLG_DSRT_WHITESESAME)	// 138
+	end
 
 l_0xc60d31:
-    next
-    "@(Really?{pause(20)}  You've seen him already?  Was he okay?{pause(20)}  ...Hmmm, I see.){wait}{set(flag 138)}" eob
+	next
+	"@(Really?" pause(20)
+	"  You've seen him already?  Was he okay?" pause(20)
+	"  ...Hmmm, I see.)" wait
+	set(FLG_DSRT_WHITESESAME)	// 138
+	eob
 
 l_0xc60d6c:
-    "[19 10 01]{rtoarg}@[1C 02 00] spotted something shiny." next
-    "@It was a set of contact lenses!" next
-    "[1D 03 FF][1B 02 {e(l_0xc60db8)}][1D 0E FF BB][1F 1E 1A 03 06]" call(data_36.l_0xc7dccf) "{set(flag 385)}" end
+	get_char_at_pos(1) rtoarg
+	"@{name(0)} spotted something shiny." next
+	"@It was a set of contact lenses!" next
+	full(-1) goto_if_true(l_0xc60db8)
+	// Item 0xBB, 187, Contact lens
+	give_and_return_location(-1,187)
+	npc_delete(794,6)	// 0x031A, 6
+	call(data_36.l_0xc7dccf)
+	set(FLG_ITEM_CONTACTLENS)	// 385
+	end
 
 l_0xc60db8:
-    "@You have no more room." end
+	"@You have no more room." end
 
 l_0xc60dc4:
-    "@As sea monkeys live in the sea...{pause(20)} desert monkeys live in the dessert." next
-    "@I mean desert, not dessert!" next
-    "@I am happy that there are animals in the desert, aren't you?" end
+	"@As sea monkeys live in the sea.../| desert monkeys live in the dessert." next
+	"@I mean desert, not dessert!" next
+	"@I am happy that there are animals in the desert, aren't you?" end
 
 l_0xc60e2a:
-    call(data_13.l_0xc5d3cb) eob
+	call(data_13.l_0xc5d3cb) eob
 
 l_0xc60e30:
-    "[06 49 00 {e(l_0xc611e2)}][06 FC 02 {e(l_0xc61139)}][06 2A 02 {e(l_0xc60ff3)}]{music(119)}"
-    title(1, Talah)
-    "@The truth of space and time moves through the universe like a wave..." next
-    "@Truth speaks through space and matter and makes itself known to human beings." next
-    "@Your coming here,{pause(15)} my waiting here...{pause(30)}" next
-    "@It was all predestined truth..." next
-    "@[1C 01 08],{counter(1)}" call(data_49.l_0xc91675) "{sound(37)}{pause(20)} [1C 01 1E]," linebreak
-    "{counter(2)}" call(data_49.l_0xc91675) "{pause(20)}  [1C 01 34]{counter(3)}" call(data_49.l_0xc91675) "{sound(37)}{pause(20)} and [1C 01 4A]..." next
-    "@When these four forces meet,{pause(20)} twisted space will breathe calmly once more." next
-    "@Do you understand?" next
-    "@It doesn't matter.{pause(20)}" linebreak
-    "  Proceed as you wish." next
-    "@Open the treasure box and take what is inside with you." next
-    "{pause(60)}" linebreak
-    "@...Did you come in search of this?" next
-    "@Someone left it behind in this hole." next
-    "[1D 03 FF][1B 02 {e(l_0xc610f1)}][1D 0E 00 8B]{set(flag 554)}" call(data_36.l_0xc7dcb6) next
-    goto(l_0xc60ff3)
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc611e2)	// 0x49, 73
+	goto_if_flag(FLG_DSRT_INFO_TLPT, l_0xc61139)	// 0x02FC, 764
+	goto_if_flag(FLG_ITEM_TOFU, l_0xc60ff3)	// 0x022A, 554
+	music(119)
+	title(1, Talah)
+	"@The truth of space and time moves through the universe like a wave..." next
+	"@Truth speaks through space and matter and makes itself known to human beings." next
+	"@Your coming here,| my waiting here..." pause(30) next
+	"@It was all predestined truth..." next
+	// Stat 8 = Ness' name
+ 	   "@{stat(8)},"
+	counter(1) call(data_49.l_0xc91675)
+	sound(SND_STATUSRECOVER)	// 37
+	pause(20)
+	// Stat 0x1E / 30 = Paula's name
+	" {stat(30)}," linebreak
+	counter(2) call(data_49.l_0xc91675)
+	pause(20)
+	// Stat 0x34 / 52 = Jeff's name
+	"  {stat(52)}" 
+	counter(3) call(data_49.l_0xc91675)
+	sound(37)
+	pause(20)
+	// Stat 0x4A / 74 = Poo's name
+	" and {stat(74)}..." next
+	"@When these four forces meet,/| twisted space will breathe calmly once more." next
+	"@Do you understand?" next
+	"@It doesn't matter." pause(20) linebreak
+	"  Proceed as you wish." next
+	"@Open the treasure box and take what is inside with you." next
+	pause(60) linebreak
+	"@...Did you come in search of this?" next
+	"@Someone left it behind in this hole." next
+	full(-1) goto_if_true(l_0xc610f1)
+	give_and_return_location(0, YOGURT_DISP)
+	call(data_36.l_0xc7dcb6) next
+	set(FLG_ITEM_TOFU)	// 554
+	goto(l_0xc60ff3)
 
 l_0xc60ff3:
-    "{window_open(1)}"
-    title(1, Talah)
-    "@The adventure that lies ahead won't be easy." next
-    "@I'll give you a special skill to help you move through space as you wish." next
-    "@Learn the skill from the monkey over there..." next
-    "@Would you like to learn this special power?" linebreak
-    "[19 02]Yes" eob
+	window_open(1)
+	title(1, Talah)
+	"@The adventure that lies ahead won't be easy." next
+	"@I'll give you a special skill to help you move through space as you wish." next
+	"@Learn the skill from the monkey over there..." next
+	"@Would you like to learn this special power?" linebreak
+	// two_choice_menu
+	"[19 02]Yes" eob
 
 l_0xc6106e:
-    "[19 02]No" eob
+	"[19 02]No" eob
 
 l_0xc61073:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc610c1)} {e(l_0xc61082)}]" goto(l_0xc61082)
+	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc610c1)} {e(l_0xc61082)}]"
+   	 goto(l_0xc61082)
 
 l_0xc61082:
-    "@Ha ha ha." linebreak
-    "  That's your prerogative." next
-    "@Be sure that you do not talk to the monkey, and go.{wait}{set(flag 2)}{window_closeall}[1F 07 03]{pause(20)}{music_resume}" eob
+	"@Ha ha ha." linebreak
+	"  That's your prerogative." next
+	"@Be sure that you do not talk to the monkey, and go." wait
+	set(FLG_TEMP_1)	// 2
+	window_closeall
+	music_effect(3)	// Fade out
+	pause(20)
+	music_resume
+	eob
 
 l_0xc610c1:
-    "@Ha ha ha." linebreak
-    "  That's wonderful!" next
-    "@Speak to the monkey over there.{wait}{set(flag 2)}{window_closeall}[1F 07 03]{pause(20)}{music_resume}" eob
+	"@Ha ha ha." linebreak
+	"  That's wonderful!" next
+	"@Speak to the monkey over there." wait
+	set(FLG_TEMP_1)	// 2
+	window_closeall
+	music_effect(3)	// Fade out
+	pause(20)
+	music_resume
+	eob
 
 l_0xc610f1:
-    "@You cannot carry anything else." next
-    "@Why don't you get rid of something you don't need." next
-    "@You will need this, the Gourmet Tofu Machine.{wait}[1F 07 03]{pause(20)}{music_resume}" eob
+	"@You cannot carry anything else." next
+	"@Why don't you get rid of something you don't need." next
+	"@You will need this, the Gourmet Tofu Machine." wait
+	music_effect(3)	// Fade out
+	pause(20)
+	music_resume
+	eob
 
 l_0xc61139:
-    title(1, Talah)
-    "@The truth of space and time moves through the universe like a wave..." next
-    "@Truth speaks through space and matter and makes itself known to human beings." next
-    "@Your coming here,{pause(15)} my waiting here...{pause(30)}" next
-    "@It was all predestined truth...." end
+	title(1, Talah)
+	"@The truth of space and time moves through the universe like a wave..." next
+	"@Truth speaks through space and matter and makes itself known to human beings." next
+	"@Your coming here,| my waiting here..." pause(30) next
+	"@It was all predestined truth...." end
 
 l_0xc611e2:
-    title(1, Talah)
-    "@You've been exceedingly patient." next
-    "@You've overcome many hardships." next
-    "@I praise all of you for your courage." end
+	title(1, Talah)
+	"@You've been exceedingly patient." next
+	"@You've overcome many hardships." next
+	"@I praise all of you for your courage." end
 
 l_0xc61228:
-    title(1, Gerardo)
-    "@I didn't have a problem digging until this...{pause(20)} I found a maze." next
-    "@Lots of monsters appeared, so I couldn't proceed." next
-    "@There's 5 big moles...!" next
-    "@If I beat the monsters, I can continue on." next
-    "@I think I have a bleeding ulcer from worrying too much." next
-    "@I'm helpless to really do anything." end
+	title(1, Gerardo)
+	"@I didn't have a problem digging until this.../| I found a maze." next
+	"@Lots of monsters appeared, so I couldn't proceed." next
+	"@There's 5 big moles...!" next
+	"@If I beat the monsters, I can continue on." next
+	"@I think I have a bleeding ulcer from worrying too much." next
+	"@I'm helpless to really do anything." end
 
 l_0xc612d2:
-    "[06 15 01 {e(data_35.l_0xc7c588)}]" call(l_0xc613b3) call(data_23.l_0xc6858a) "[1B 03 {e(data_23.l_0xc683de)}]" call(l_0xc615e9) "{pause(1)}[1F F1 3F 03 7B 02]{set(flag 277)}" call(l_0xc615a7) eob
+	goto_if_flag(FLG_WIN_DSRT_BOSS_A, data_35.l_0xc7c588)	// 0x0115, 277
+	call(l_0xc613b3)
+	call(data_23.l_0xc6858a)
+	goto_if_true(data_23.l_0xc683de)
+	call(l_0xc615e9)
+	pause(1)
+	npc_do_mc(831,635)	// 0x033F, 0x027B
+	set(FLG_WIN_DSRT_BOSS_A)	// 277
+	call(l_0xc615a7)
+	eob
 
 l_0xc612ff:
-    "[06 16 01 {e(data_35.l_0xc7c588)}]" call(l_0xc613b3) call(data_23.l_0xc68591) "[1B 03 {e(data_23.l_0xc683de)}]" call(l_0xc615e9) "{pause(1)}[1F F1 40 03 7B 02]{set(flag 278)}" call(l_0xc615a7) eob
+	goto_if_flag(FLG_WIN_DSRT_BOSS_B, data_35.l_0xc7c588)	// 0x0116, 278
+	call(l_0xc613b3)
+	call(data_23.l_0xc68591)
+	goto_if_true(data_23.l_0xc683de)
+	call(l_0xc615e9)
+	pause(1)
+	npc_do_mc(832,635)	// 0x0340, 0x027B
+	set(FLG_WIN_DSRT_BOSS_B)	// 278
+	call(l_0xc615a7)
+	eob
 
 l_0xc6132c:
-    "[06 17 01 {e(data_35.l_0xc7c588)}]" call(l_0xc613b3) call(data_23.l_0xc68598) "[1B 03 {e(data_23.l_0xc683de)}]" call(l_0xc615e9) "{pause(1)}[1F F1 41 03 7B 02]{set(flag 279)}" call(l_0xc615a7) eob
+	goto_if_flag(FLG_WIN_DSRT_BOSS_C, data_35.l_0xc7c588)	// 0x0117, 279
+	call(l_0xc613b3)
+	call(data_23.l_0xc68598)
+	goto_if_true(data_23.l_0xc683de)
+	call(l_0xc615e9)
+	pause(1)
+	npc_do_mc(833,635)	// 0x0341, 0x027B
+	set(FLG_WIN_DSRT_BOSS_C)	// 279
+	call(l_0xc615a7) eob
 
 l_0xc61359:
-    "[06 18 01 {e(data_35.l_0xc7c588)}]" call(l_0xc613b3) call(data_23.l_0xc6859f) "[1B 03 {e(data_23.l_0xc683de)}]" call(l_0xc615e9) "{pause(1)}[1F F1 45 03 7B 02]{set(flag 280)}" call(l_0xc615a7) eob
+	goto_if_flag(FLG_WIN_DSRT_BOSS_D, data_35.l_0xc7c588)	// 0x0118, 280
+	call(l_0xc613b3)
+	call(data_23.l_0xc6859f)
+	goto_if_true(data_23.l_0xc683de)
+	call(l_0xc615e9)
+	pause(1)
+	npc_do_mc(837,635)	// 0x0345, 0x027B
+	set(FLG_WIN_DSRT_BOSS_D)	// 280
+	call(l_0xc615a7)
+	eob
 
 l_0xc61386:
-    "[06 19 01 {e(data_35.l_0xc7c588)}]" call(l_0xc613b3) call(data_23.l_0xc685a6) "[1B 03 {e(data_23.l_0xc683de)}]" call(l_0xc615e9) "{pause(1)}[1F F1 46 03 7B 02]{set(flag 281)}" call(l_0xc615a7) eob
+	goto_if_flag(FLG_WIN_DSRT_BOSS_E, data_35.l_0xc7c588)	// 0x0119, 281
+	call(l_0xc613b3)
+	call(data_23.l_0xc685a6)
+	goto_if_true(data_23.l_0xc683de)
+	call(l_0xc615e9)
+	pause(1)
+	npc_do_mc(838,635)	// 0x0346, 0x027B
+	set(FLG_WIN_DSRT_BOSS_E)	// 281
+	call(l_0xc615a7)
+	eob
 
 l_0xc613b3:
-    "{music(155)}[06 09 02 {e(l_0xc614f2)}][06 08 02 {e(l_0xc614b1)}][06 07 02 {e(l_0xc6146d)}][06 06 02 {e(l_0xc61443)}]{window_open(1)}@I'm one of the masters of this hole." next
-    "@There are five masters in all.{pause(20)}  All being moles, of course." next
-    "@I believe I'm the third strongest amongst us." next
-    "@Take your best shot![03]{window_closeall}" eob
+	music(155)
+	goto_if_flag(FLG_DSRT_BOSS_4, l_0xc614f2)	// 0x0209, 521
+	goto_if_flag(FLG_DSRT_BOSS_3, l_0xc614b1)	// 0x0208, 520
+	goto_if_flag(FLG_DSRT_BOSS_2, l_0xc6146d)	// 0x0207, 519
+	goto_if_flag(FLG_DSRT_BOSS_1, l_0xc61443)	// 0x0206, 518
+	window_open(1)
+	"@I'm one of the masters of this hole." next
+	"@There are five masters in all." pause(20)
+	"  All being moles, of course." next
+	"@I believe I'm the third strongest amongst us." next
+	"@Take your best shot!" promptw
+	window_closeall
+	eob
 
 l_0xc61443:
-    "{window_open(1)}@I'm really the third strongest master." next
-    "@I'll destroy you now![03]{window_closeall}" eob
+	window_open(1)
+	"@I'm really the third strongest master." next
+	"@I'll destroy you now!" promptw
+	window_closeall
+	eob
 
 l_0xc6146d:
-    "{window_open(1)}@My strength falls between the second and fourth strongest masters." next
-    "@Do you wanna test me?" next
-    "{window_closeall}" eob
+	window_open(1)
+	"@My strength falls between the second and fourth strongest masters." next
+	"@Do you wanna test me?" next
+	window_closeall
+	eob
 
 l_0xc614b1:
-    "{window_open(1)}@I'm truly the third strongest master of this hole." next
-    "@I'll demonstrate the power of being n[C4]mero tres to you![03]{window_closeall}" eob
+	window_open(1)
+	"@I'm truly the third strongest master of this hole." next
+	"@I'll demonstrate the power of being n[C4]mero tres to you!" promptw
+	window_closeall
+	eob
 
 l_0xc614f2:
-    "{window_open(1)}@Ha ha ha." next
-    "@You've fought the strongest master of this hole," next
-    "@the second strongest master of this hole," next
-    "@the fourth strongest master of this hole," next
-    "@and the weakest master of this hole!" next
-    "@I'm truly the third strongest master of this hole." next
-    "@Now you see the true advantage of being third![03]{window_closeall}" eob
+	window_open(1)
+	"@Ha ha ha." next
+	"@You've fought the strongest master of this hole," next
+	"@the second strongest master of this hole," next
+	"@the fourth strongest master of this hole," next
+	"@and the weakest master of this hole!" next
+	"@I'm truly the third strongest master of this hole." next
+	"@Now you see the true advantage of being third!" promptw
+	window_closeall
+	eob
 
 l_0xc615a7:
-    "{isset(flag 277)}[1B 02 {e(l_0xc615e8)}]{isset(flag 278)}[1B 02 {e(l_0xc615e8)}]{isset(flag 279)}[1B 02 {e(l_0xc615e8)}]{isset(flag 280)}[1B 02 {e(l_0xc615e8)}]{isset(flag 281)}[1B 02 {e(l_0xc615e8)}]{set(flag 282)}{set(flag 72)}" call(data_36.l_0xc7dd85) "{unset(flag 54)}{unset(flag 55)}{set(flag 492)}" goto(l_0xc615e8)
+	isset(FLG_WIN_DSRT_BOSS_A)	// 277
+	goto_if_false(l_0xc615e8)
+	isset(FLG_WIN_DSRT_BOSS_B)	// 278
+	goto_if_false(l_0xc615e8)
+	isset(FLG_WIN_DSRT_BOSS_C)	// 279
+	goto_if_false(l_0xc615e8)
+	isset(FLG_WIN_DSRT_BOSS_D)	// 280
+	goto_if_false(l_0xc615e8)
+	isset(FLG_WIN_DSRT_BOSS_E)	// 281
+	goto_if_false(l_0xc615e8)
+	set(FLG_DSRT_DUNGEON_OK)	// 282
+	set(FLG_WIN_DSRT_BOSS)		// 72
+	call(data_36.l_0xc7dd85)
+	unset(FLG_DSRT_SYOZI_DUNGEON_APPEAR)	// 54
+	unset(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	set(FLG_PHOTO_EXCAVATION)	// 492
+	goto(l_0xc615e8)
 
 l_0xc615e8:
     eob
 
 l_0xc615e9:
-    "[06 09 02 {e(l_0xc61615)}][06 08 02 {e(l_0xc61611)}][06 07 02 {e(l_0xc6160d)}][06 06 02 {e(l_0xc61609)}]{set(flag 518)}" eob
+	goto_if_flag(FLG_DSRT_BOSS_4, l_0xc61615)	// 0x0209, 521
+	goto_if_flag(FLG_DSRT_BOSS_3, l_0xc61611)	// 0x0208, 520
+	goto_if_flag(FLG_DSRT_BOSS_2, l_0xc6160d)	// 0x0207, 519
+	goto_if_flag(FLG_DSRT_BOSS_1, l_0xc61609)	// 0x0206, 518
+	set(FLG_DSRT_BOSS_1)	// 518
+	eob
 
 l_0xc61609:
-    "{set(flag 519)}" eob
+	set(FLG_DSRT_BOSS_2)	// 519
+	eob
 
 l_0xc6160d:
-    "{set(flag 520)}" eob
+	set(FLG_DSRT_BOSS_3)	// 520
+	eob
 
 l_0xc61611:
-    "{set(flag 521)}" eob
+	set(FLG_DSRT_BOSS_4)	// 521
+	eob
 
 l_0xc61615:
-    eob
+	eob
 
+// Monkey caves script
 l_0xc61616:
-    "[06 C3 01 {e(l_0xc61702)}]@Ukippkyako Ukikiki?" next
-    "@(Do you have" linebreak
-    "  a [1C 05 E0]?)" next
-    "@Ukii Ukieki..." next
-    "@(I'll move away if you give me one...)" next
-    "@Ukiki?" next
-    "@(Can you give me one?)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc616b2)} {e(l_0xc61696)}]" goto(l_0xc61696)
+	goto_if_flag(FLG_SARUDUNGEON_A_OK, l_0xc61702)	// 0x01C3, 451
+	"@Ukippkyako Ukikiki?" next
+	"@(Do you have" linebreak
+	// Item 0xE0 / 224 = Skip sandwich
+	"  a {itemname(224)}?)" next
+	"@Ukii Ukieki..." next
+	"@(I'll move away if you give me one...)" next
+	"@Ukiki?" next
+	"@(Can you give me one?)" linebreak
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc616b2)} {e(l_0xc61696)}]"
+	goto(l_0xc61696)
 
 l_0xc61696:
-    "@Uki Ukyakikya" next
-    "@(I won't move.)" end
+	"@Uki Ukyakikya" next
+	"@(I won't move.)" end
 
 l_0xc616b2:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61696)}]{store_registers}" call(data_18.l_0xc623aa) "[1B 02 {e(l_0xc61696)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukippu Kyako!" next
-    "@(A [1C 05 E0]!){wait}{wait}{window_closeall}[1F 1E 20 03 06][1F 17 22 03 2B 00 01]{set(flag 451)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61696)
+	store_registers
+	call(data_18.l_0xc623aa)
+	goto_if_false(l_0xc61696)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Ukippu Kyako!" next
+	"@(A {itemname(224)}!){wait}" wait
+	window_closeall
+	npc_delete(800,6)	// 0x031F, 6
+	npc_spawn(802,43,1)	// 0x0321, 43, 1
+	set(flag 451)
+	eob
 
 l_0xc61702:
-    "@Ukki." next
-    "@(Lucky.){wait}" end
+	"@Ukki." next
+	"@(Lucky.){wait}" end
 
 l_0xc61715:
-    "[06 C4 01 {e(l_0xc61803)}]@Kikiki Kiki!" next
-    "@(I wanna eat a [1C 05 5D]!)" next
-    "@Kikiki, Kiki" next
-    "@(If you grant my wish,{pause(15)} I might open the entrance.)" next
-    "@Kikiki Kiki?" next
-    "@(Will you give me a [1C 05 5D]?)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc617bb)} {e(l_0xc6179b)}]" goto(l_0xc6179b)
+	goto_if_flag(FLG_SARUDUNGEON_B_OK, l_0xc61803)	// 0x01C4, 452
+	"@Kikiki Kiki!" next
+	// Item 0x5D / 93 = Picnic lunch
+	"@(I wanna eat a {itemname(93)}!)" next
+	"@Kikiki, Kiki" next
+	"@(If you grant my wish,| I might open the entrance.)" next
+	"@Kikiki Kiki?" next
+	"@(Will you give me a {itemname(93)}?)" linebreak
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc617bb)} {e(l_0xc6179b)}]"
+	goto(l_0xc6179b)
 
 l_0xc6179b:
-    "@Kikiki Kiki!" next
-    "@(I wanna eat a [1C 05 5D]!)" end
+	"@Kikiki Kiki!" next
+	"@(I wanna eat a {itemname(93)}!)" end
 
 l_0xc617bb:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc6179b)}]{store_registers}[19 19 00 00]{swap}{result_is(93)}[1B 02 {e(l_0xc6179b)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Kikie!" next
-    "@(Great!){wait}{window_closeall}[1F 1E 1F 03 06][1F 17 21 03 2B 00 01]{set(flag 452)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc6179b)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(93)	// Picnic lunch
+	goto_if_false(l_0xc6179b)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Kikie!" next
+	"@(Great!)" wait
+	window_closeall
+	npc_delete(799,6)	// 0x031F, 6
+	npc_spawn(801,43,1)	// 0x0321, 43, 1
+	set(FLG_SARUDUNGEON_B_OK)	// 452
+	eob
 
 l_0xc61803:
-    "@Kikki" next
-    "@(Hee he he)" end
+	"@Kikki" next
+	"@(Hee he he)" end
 
 l_0xc61817:
-    "[06 C5 01 {e(l_0xc61949)}]@Uki? Ukikie!" next
-    "@(Doesn't it feel hot in here?{pause(20)}  My fur's all sweaty!)" next
-    "@Ukie Kikukie," next
-    "@(Maybe you don't usually keep a [1C 05 7F],)" next
-    "@Ukke Ukiki Ukkikie?" next
-    "@(but if you have one,{pause(15)} will you share it with me?)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc618ed)} {e(l_0xc618c2)}]" goto(l_0xc618c2)
+	goto_if_flag(FLG_SARUDUNGEON_C_OK, l_0xc61949)	// 0x01C5, 453
+	"@Uki? Ukikie!" next
+	"@(Doesn't it feel hot in here?" pause(20)
+	"  My fur's all sweaty!)" next
+	"@Ukie Kikukie," next
+	// Item 0x7F / 127 = Wet towel
+	"@(Maybe you don't usually keep a {itemname(127)},)" next
+	"@Ukke Ukiki Ukkikie?" next
+	"@(but if you have one,| will you share it with me?)" next
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc618ed)} {e(l_0xc618c2)}]"
+	goto(l_0xc618c2)
 
 l_0xc618c2:
-    "@Ukie, Ukie Ukikie" next
-    "@(Anyway,{pause(15)} it is humid in here.)" end
+	"@Ukie, Ukie Ukikie" next
+	"@(Anyway,| it is humid in here.)" end
 
 l_0xc618ed:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc618c2)}]{store_registers}[19 19 00 00]{swap}{result_is(127)}[1B 02 {e(l_0xc618c2)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukokkie?  Ukike!" next
-    "@(Do you have one?{pause(20)}" linebreak
-    "  Thank you!){wait}{window_closeall}[1F 1E 24 03 06][1F 17 26 03 2B 00 01]{set(flag 453)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc618c2)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(127)	// Wet towel
+	goto_if_false(l_0xc618c2)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Ukokkie?  Ukike!" next
+	"@(Do you have one?" pause(20) linebreak
+	"  Thank you!)" wait
+	window_closeall
+	npc_delete(804,6)	// 0x0324, 6
+	npc_spawn(806,43,1)	// 0x0326, 43, 1
+	set(FLG_SARUDUNGEON_C_OK)	// 453
+	eob
 
 l_0xc61949:
-    "@Ukri Ukrikie" next
-    "@(It's humid here.)" end
+	"@Ukri Ukrikie" next
+	"@(It's humid here.)" end
 
 l_0xc61966:
-    "[06 C6 01 {e(l_0xc61a71)}]@Ukkkin... Uki Uki Ukkin" next
-    title(1, Monkonna)
-    "@(Oooooooo...{pause(15)} I'm Monkonna.{pause(20)}" linebreak
-    "  I wanna eat a tasty [1C 05 5F].)" next
-    "@Ukkyou, kikinkyou?" next
-    "@(If you have some,{pause(15)} will you give it to me?)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61a14)} {e(l_0xc619ef)}]" goto(l_0xc619ef)
+	goto_if_flag(FLG_SARUDUNGEON_D_OK, l_0xc61a71)	// 0x01C6, 454
+	"@Ukkkin... Uki Uki Ukkin" next
+	title(1, Monkonna)
+	"@(Oooooooo...| I'm Monkonna." pause(20) linebreak
+	// Item 0x5F / 95 = Pizza
+	"  I wanna eat a tasty {itemname(95)}.)" next
+	"@Ukkyou, kikinkyou?" next
+	"@(If you have some,| will you give it to me?)" next
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61a14)} {e(l_0xc619ef)}]"
+	goto(l_0xc619ef)
 
 l_0xc619ef:
-    "@Uki Ukiekkiki!" next
-    "@(You insimian monster!)" end
+	"@Uki Ukiekkiki!" next
+	"@(You insimian monster!)" end
 
 l_0xc61a14:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc619ef)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc619ef)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukkin, Ukkikeen" next
-    "@(Hah,{pause(15)} Monkonna's happy.){wait}{window_closeall}[1F 1E 23 03 06][1F 17 25 03 2B 00 01]{set(flag 454)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc619ef)
+	store_registers
+	call(data_18.l_0xc62395)
+	goto_if_false(l_0xc619ef)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Ukkin, Ukkikeen" next
+	"@(Hah,| Monkonna's happy.)" wait
+	window_closeall
+	npc_delete(803,6)	// 0x0323, 6
+	npc_spawn(805,43,1)	// 0x0325, 43, 1
+	set(FLG_SARUDUNGEON_D_OK)	// 454
+	eob
 
 l_0xc61a71:
-    title(1, Monkonna)
-    "@Ukkien..." next
-    "@(Oooooooo...)" end
+	title(1, Monkonna)
+	"@Ukkien..." next
+	"@(Oooooooo...)" end
 
 l_0xc61a88:
-    "[06 C7 01 {e(l_0xc61b70)}]@Ukyakki KyaKye" next
-    "@(I'd like to have a [1C 05 6C].)" next
-    "@Kya Kya?" next
-    "@(Can you give me one?)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61b03)} {e(l_0xc61add)}]" goto(l_0xc61add)
+	goto_if_flag(FLG_SARUDUNGEON_E_OK, l_0xc61b70)	// 0x01C7, 455
+	"@Ukyakki KyaKye" next
+	// Item 0x6C / 108 = Grownup drink
+	"@(I'd like to have a {itemname(108)}.)" next
+	"@Kya Kya?" next
+	"@(Can you give me one?)" linebreak
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61b03)} {e(l_0xc61add)}]"
+	goto(l_0xc61add)
 
 l_0xc61add:
-    "@Kyakya Kyokyokyo?" next
-    "@('Cause I'm still a kid?)" end
+	"@Kyakya Kyokyokyo?" next
+	"@('Cause I'm still a kid?)" end
 
 l_0xc61b03:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61add)}]{store_registers}[19 19 00 00]{swap}{result_is(108)}[1B 02 {e(l_0xc61add)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Gulp,{pause(15)} gulp...{pause(20)} Bliekki!" next
-    "@(Gulp,{pause(15)} gulp...{pause(20)} Bliekki!){wait}{window_closeall}[1F 1E 2E 03 06][1F 17 30 03 2B 00 01]{set(flag 455)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61add)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(108)	// Grownup drink
+	goto_if_false(l_0xc61add)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Gulp,| gulp.../| Bliekki!" next
+	"@(Gulp,| gulp.../| Bliekki!)" wait
+	window_closeall
+	npc_delete(814,6)	// 0x032E, 6
+	npc_spawn(816,43,1)	// 0x0330, 43, 1
+	set(FLG_SARUDUNGEON_E_OK)	// 455
+	eob
 
 l_0xc61b70:
-    "@Kya Kya" next
-    "@(Kya Kya)" end
+	"@Kya Kya" next
+	"@(Kya Kya)" end
 
 l_0xc61b85:
-    "[06 C8 01 {e(l_0xc61c76)}]@If you have a [1C 05 5F],{pause(15)} please give me one." next
-    "@...Ukiki, Ukkike" next
-    "@(...Woops,{pause(20)} I spoke to you in the human's language.)" next
-    "@Ukiki, Ukkike" next
-    "@(If you have a [1C 05 5F],{pause(15)} please give me one.)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61c20)} {e(l_0xc61c0f)}]" goto(l_0xc61c0f)
+	goto_if_flag(FLG_SARUDUNGEON_F_OK, l_0xc61c76)	// 0x01C8, 456
+	"@If you have a {itemname(95)},| please give me one." next
+	"@...Ukiki, Ukkike" next
+	"@(...Woops,/| I spoke to you in the human's language.)" next
+	"@Ukiki, Ukkike" next
+	"@(If you have a {itemname(95)},| please give me one.)" next
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61c20)} {e(l_0xc61c0f)}]"
+	goto(l_0xc61c0f)
 
 l_0xc61c0f:
-    "@Kye..." next
-    "@(Darn...)" end
+	"@Kye..." next
+	"@(Darn...)" end
 
 l_0xc61c20:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61c0f)}]{store_registers}" call(data_18.l_0xc62395) "[1B 02 {e(l_0xc61c0f)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukki, Ukikii!" next
-    "@(Great,{pause(15)} pizza time!){wait}{window_closeall}[1F 1E 2D 03 06][1F 17 2F 03 2B 00 01]{set(flag 456)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61c0f)
+	store_registers
+	call(data_18.l_0xc62395)
+	goto_if_false(l_0xc61c0f)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Ukki, Ukikii!" next
+	"@(Great,| pizza time!)" wait
+	window_closeall
+	npc_delete(813,6)	// 0x032D, 6
+	npc_spawn(815,43,1)	// 0x032F, 43, 1
+	set(FLG_SARUDUNGEON_F_OK)	// 456
+	eob
 
 l_0xc61c76:
-    "@Thank you." next
-    "@...Kie ukkya" next
-    "@(...Crap,{pause(15)} I used the human's language again.)" end
+	"@Thank you." next
+	"@...Kie ukkya" next
+	"@(...Crap,| I used the human's language again.)" end
 
 l_0xc61cac:
-    "[06 C9 01 {e(l_0xc61da4)}]@Unkikie!  Uukiuki!" next
-    "@(I love Hamburgers!)" next
-    "@Ukie Unkikie..." next
-    "@(The monkey next to me loves Hamburgers too...)" next
-    "@Uuu,{pause(20)} Unkikkie Uki?" next
-    "@(If you have a [1C 05 5A],{pause(15)} will you please give it to me?)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61d5d)} {e(l_0xc61d50)}]" goto(l_0xc61d50)
+	goto_if_flag(FLG_SARUDUNGEON_G_OK, l_0xc61da4)	// 0x01C9, 457
+	"@Unkikie!  Uukiuki!" next
+	"@(I love Hamburgers!)" next
+	"@Ukie Unkikie..." next
+	"@(The monkey next to me loves Hamburgers too...)" next
+	"@Uuu,/| Unkikkie Uki?" next
+	"@(If you have a {itemname(90)},| will you please give it to me?)" next
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61d5d)} {e(l_0xc61d50)}]"
+	goto(l_0xc61d50)
 
 l_0xc61d50:
-    "@....." next
-    "@(.....)" end
+	"@....." next
+	"@(.....)" end
 
 l_0xc61d5d:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61d50)}]{store_registers}" call(data_18.l_0xc62380) "[1B 02 {e(l_0xc61d50)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Unkikie!" next
-    "@([1C 05 5A]!){wait}{window_closeall}[1F 1E 28 03 06][1F 17 2A 03 2B 00 01]{set(flag 457)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61d50)
+	store_registers
+	call(data_18.l_0xc62380)
+	goto_if_false(l_0xc61d50)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Unkikie!" next
+	"@({itemname(90)}!)" wait
+	window_closeall
+	npc_delete(808,6)	// 0x0328, 6
+	npc_spawn(810,43,1)	// 0x032A, 43, 1
+	set(FLG_SARUDUNGEON_G_OK)	// 457
+	eob
 
 l_0xc61da4:
-    "@Uki, Unkinki Ukinkie" next
-    "@(Truth is, the monkey next to me is my twin brother.)" end
+	"@Uki, Unkinki Ukinkie" next
+	"@(Truth is, the monkey next to me is my twin brother.)" end
 
 l_0xc61ddb:
-    "[06 CA 01 {e(data_18.l_0xc61ed7)}]@Unkikkie Uuki Uki!" next
-    "@(I love Hamburgers!)" next
-    "@Ukie Unkikie..." next
-    "@(The monkey next to me loves Hamburgers too...)" next
-    "@Uuu,{pause(20)} Unkikkie Uki?" next
-    "@(If you have a [1C 05 5A],{pause(15)} will you please give it to me?)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(data_18.l_0xc61e8e)} {e(data_18.l_0xc61e81)}]" goto(data_18.l_0xc61e81)
+	goto_if_flag(FLG_SARUDUNGEON_H_OK, data_18.l_0xc61ed7)	// 0x01CA, 458
+	"@Unkikkie Uuki Uki!" next
+	"@(I love Hamburgers!)" next
+	"@Ukie Unkikie..." next
+	"@(The monkey next to me loves Hamburgers too...)" next
+	"@Uuu,/| Unkikkie Uki?" next
+	// Item 0x5A / 90 = Hamburger
+	"@(If you have a {itemname(90)},| will you please give it to me?)" next
+	// two_choice_menu
+	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(data_18.l_0xc61e8e)} {e(data_18.l_0xc61e81)}]"
+	goto(data_18.l_0xc61e81)

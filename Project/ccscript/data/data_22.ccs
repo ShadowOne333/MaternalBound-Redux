@@ -393,10 +393,10 @@ l_0xc6809e:
     eob
 
 l_0xc680a6:
-    if flag FLG_KEY_ITEMS { goto_if_flag(FLG_NESS_KI, data_18.l_0xc62d30) }
+    if flag FLG_KEY_ITEMS { goto_if_flag(FLG_NESS_KI, data_18.ATM_Start) }
     else {
 	hasitem(-1, ATM_CARD)	// 0xB1, 177, ATM card
-	goto_if_true(data_18.l_0xc62d30)
+	goto_if_true(data_18.ATM_Start)
     }
     "@Please insert your ATM card." end
 
@@ -407,7 +407,7 @@ l_0xc680c2:
     "@Nothing happened." end
 
 l_0xc680dc:
-    call(data_18.l_0xc62d30) eob
+    call(data_18.ATM_Start) eob
 
 l_0xc680e2:
     call(data_47.l_0xc90000) eob

@@ -8,486 +8,756 @@ import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/cc_effects.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
+import "../bugfixes/try_give_money.ccs"
+import "../bugfixes/try_deposit_money.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xc61e81:
-    "@....." next
-    "@(.....)" end
+	"@....." next
+	"@(.....)" end
 
 l_0xc61e8e:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61e81)}]{store_registers}" call(l_0xc62380) "[1B 02 {e(l_0xc61e81)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Unkikkie!" next
-    "@([1C 05 5A]!){wait}{window_closeall}[1F 1E 27 03 06][1F 17 29 03 2B 00 01]{set(flag 458)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61e81)
+	store_registers
+	call(l_0xc62380)
+	goto_if_false(l_0xc61e81)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Unkikkie!" next
+	"@({itemname(90)}!)" wait
+	window_closeall
+	npc_delete(807,6)	// 0x0327, 6
+	npc_spawn(809,43,1)	// 0x0329, 0x002B, 1
+	set(FLG_SARUDUNGEON_H_OK)	// 458
+	eob
 
 l_0xc61ed7:
-    "@Uki Ukkinki Ukinkie" next
-    "@(The monkey next to me is my twin brother.)" end
+	"@Uki Ukkinki Ukinkie" next
+	"@(The monkey next to me is my twin brother.)" end
 
 l_0xc61f07:
-    "[06 CB 01 {e(l_0xc62008)}]@Ukie Ukikikie" next
-    "@(I am Man K. Man.)" next
-    title(1, Mankman)
-    "@Ukie Ukikikie" next
-    "@(To me the most interesting thing is the [1C 05 A6].)" next
-    "@Ukie?  Ukikikie?" next
-    "@(What?{pause(20)}  Are you giving me a present?)" next
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61fab)} {e(l_0xc61f97)}]" goto(l_0xc61f97)
+	goto_if_flag(FLG_SARUDUNGEON_I_OK, l_0xc62008)	// 0x01CB, 459
+	"@Ukie Ukikikie" next
+	"@(I am Man K. Man.)" next
+	title(1, Mankman)
+	"@Ukie Ukikikie" next
+	"@(To me the most interesting thing is the {itemname(166)}.)" next
+	"@Ukie?  Ukikikie?" next
+	"@(What?" pause(20)
+	"  Are you giving me a present?)" next
+	two_choice_menu("Yes", l_0xc61fab, "No", l_0xc61f97)
+	goto(l_0xc61f97)
 
 l_0xc61f97:
-    "@Uki..." next
-    "@(Tight wad...)" end
+	"@Uki..." next
+	"@(Tight wad...)" end
 
 l_0xc61fab:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc61f97)}]{store_registers}[19 19 00 00]{swap}{result_is(166)}[1B 02 {e(l_0xc61f97)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Ukki, Ukie!" next
-    "@(Oh, I've died and gone to monkey heaven!){wait}{window_closeall}[1F 1E 37 03 06][1F 17 39 03 2B 00 01]{set(flag 459)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc61f97)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(166)	// King banana
+	goto_if_false(l_0xc61f97)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Ukki, Ukie!" next
+	"@(Oh, I've died and gone to monkey heaven!)" wait
+	window_closeall
+	npc_delete(823,6)	// 0x0337, 6
+	npc_spawn(825,43,1)	// 0x0339, 0x002B, 1
+	set(FLG_SARUDUNGEON_I_OK)	// 459
+	eob
 
 l_0xc62008:
-    "@Ukki Ukikie" next
+	"@Ukki Ukikie" next
     title(1, Mankman)
-    "@(I am Man K. Man.)" end
+	"@(I am Man K. Man.)" end
 
 l_0xc62026:
-    "[06 CC 01 {e(l_0xc620e3)}]@Uikkie, Uiki Uki" next
-    "@(Let's get to the point,{pause(20)} give me a [1C 05 5A].)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc62089)} {e(l_0xc6206b)}]" goto(l_0xc6206b)
+	goto_if_flag(FLG_SARUDUNGEON_J_OK, l_0xc620e3)	// 0x01CC, 460
+	"@Uikkie, Uiki Uki" next
+	// item 0x5A / 90 = Hamburger
+	"@(Let's get to the point,/| give me a {itemname(90)}.)" linebreak
+	two_choice_menu("Yes", l_0xc62089, "No", l_0xc6206b)
+	goto(l_0xc6206b)
 
 l_0xc6206b:
-    "@Uiki, Uikki" next
-    "@(Ok, shove off then.)" end
+	"@Uiki, Uikki" next
+	"@(Ok, shove off then.)" end
 
 l_0xc62089:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc6206b)}]{store_registers}" call(l_0xc62380) "[1B 02 {e(l_0xc6206b)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Uikki Uiki Uiki Uiki" next
-    "@(I'm very grateful to you.){wait}{window_closeall}[1F 1E 36 03 06][1F 17 38 03 2B 00 01]{set(flag 460)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc6206b)
+	store_registers
+	call(l_0xc62380)
+	goto_if_false(l_0xc6206b)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Uikki Uiki Uiki Uiki" next
+	"@(I'm very grateful to you.)" wait
+	window_closeall
+	npc_delete(822,6)	// 0x0336, 6
+	npc_spawn(824,43,1)	// 0x0338, 0x002B, 1
+	set(FLG_SARUDUNGEON_J_OK)	// 460
+	eob
 
 l_0xc620e3:
-    "@Uiki" next
-    "@(Please take care.)" end
+	"@Uiki" next
+	"@(Please take care.)" end
 
 l_0xc620f7:
-    "[06 CD 01 {e(l_0xc62236)}]@Meow Meow fss fss fssss?" next
-    "@(What strange chattering for a monkey.)" next
-    "@Coo coo, pepepe." next
-    "@(If I eat a [1C 05 5C],{pause(15)} it will cure my weird animal sounds.)" next
-    "@Croak croak, breeeeeep?" next
-    "@(If you have one, can I have one?)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc621d0)} {e(l_0xc6219a)}]" goto(l_0xc6219a)
+	goto_if_flag(FLG_SARUDUNGEON_K_OK, l_0xc62236)	// 0x01CD, 461
+	"@Meow Meow fss fss fssss?" next
+	"@(What strange chattering for a monkey.)" next
+	"@Coo coo, pepepe." next
+	"@(If I eat a {itemname(92)},| it will cure my weird animal sounds.)" next
+	"@Croak croak, breeeeeep?" next
+	"@(If you have one, can I have one?)" linebreak
+	two_choice_menu("Yes", l_0xc621d0, "No", l_0xc6219a)
+	goto(l_0xc6219a)
 
 l_0xc6219a:
-    "@Bow wow, ruff ruff bark!" next
-    "@(Fine,{pause(15)} I'll just be a weird monkey.)" end
+	"@Bow wow, ruff ruff bark!" next
+	"@(Fine,| I'll just be a weird monkey.)" end
 
 l_0xc621d0:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc6219a)}]{store_registers}[19 19 00 00]{swap}{result_is(92)}[1B 02 {e(l_0xc6219a)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Gulp,{pause(15)} gulp...{pause(20)} Ukiki!" next
-    "@(Gulp,{pause(15)} gulp...{pause(20)} See!){wait}{window_closeall}[1F 1E 32 03 06][1F 17 34 03 2B 00 01]{set(flag 461)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc6219a)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(92)	// Fresh egg
+	goto_if_false(l_0xc6219a)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Gulp,| gulp.../| Ukiki!" next
+	"@(Gulp,| gulp.../| See!)" wait
+	window_closeall
+	npc_delete(818,6)	// 0x0332, 6
+	npc_spawn(820,43,1)	// 0x0334, 0x002B, 1
+	set(flag 461)
+	eob
 
 l_0xc62236:
-    "@Ukiki!" next
-    "@(Monkey's true chattering!)" end
+	"@Ukiki!" next
+	"@(Monkey's true chattering!)" end
 
 l_0xc62257:
-    "[06 CE 01 {e(l_0xc6235d)}]@Kiki, kikkeki!" next
-    "@(Oh, I wanna measure something!)" next
-    "@Kiki kiku eki..." next
-    "@(But I don't have a [1C 05 8C]...)" next
-    "@Kuki keikuki?" next
-    "@(Do you have one I may borrow?)" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc622fc)} {e(l_0xc622dc)}]" goto(l_0xc622dc)
+	goto_if_flag(FLG_SARUDUNGEON_L_OK, l_0xc6235d)	// 0x01CE, 462
+	"@Kiki, kikkeki!" next
+	"@(Oh, I wanna measure something!)" next
+	"@Kiki kiku eki..." next
+	// Item 0x8C / 140 = Ruler
+	"@(But I don't have a {itemname(140)}...)" next
+	"@Kuki keikuki?" next
+	"@(Do you have one I may borrow?)" linebreak
+	two_choice_menu("Yes", l_0xc622fc, "No", l_0xc622dc)
+	goto(l_0xc622dc)
 
 l_0xc622dc:
-    "@Kiki Kikurek ki!" next
-    "@(No measuring!)" end
+	"@Kiki Kikurek ki!" next
+	"@(No measuring!)" end
 
 l_0xc622fc:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc622dc)}]{store_registers}[19 19 00 00]{swap}{result_is(140)}[1B 02 {e(l_0xc622dc)}]{load_registers}[1D 0F 00 00]{sound(118)}{pause(10)}@Kikki, ekruiki!" next
-    "@(Finally, I can measure my own tail!){wait}{window_closeall}[1F 1E 31 03 06][1F 17 33 03 2B 00 01]{set(flag 462)}" eob
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc622dc)
+	store_registers
+	get_inventory_item(0,0) swap
+	result_is(140)	// Ruler
+	goto_if_false(l_0xc622dc)
+	load_registers
+	take_from_location(0,0)
+	sound(SND_CHICKEN2)	// 118
+	pause(10)
+	"@Kikki, ekruiki!" next
+	"@(Finally, I can measure my own tail!)" wait
+	window_closeall
+	npc_delete(817,6)	// 0x0331, 6
+	npc_spawn(819,43,1)	// 0x0333, 0x002B, 1
+	set(FLG_SARUDUNGEON_L_OK)	// 462
+	eob
 
 l_0xc6235d:
-    "@Kikoke Ukike!" next
-    "@(I can measure his tail too!)" end
+	"@Kikoke Ukike!" next
+	"@(I can measure his tail too!)" end
 
 l_0xc62380:
-    "[19 19 00 00]{swap}{rtoarg}{result_is(90)}[1B 03 {e(l_0xc62394)}]{swap}{result_is(233)}" goto(l_0xc62394)
+	get_inventory_item(0,0)
+	swap
+	rtoarg
+	result_is(90)	// Hamburger
+	goto_if_true(l_0xc62394)
+	swap
+	result_is(233)	// Double burger
+	goto(l_0xc62394)
 
 l_0xc62394:
     eob
 
 l_0xc62395:
-    "[19 19 00 00]{swap}{rtoarg}{result_is(95)}[1B 03 {e(l_0xc623a9)}]{swap}{result_is(97)}" goto(l_0xc623a9)
+	get_inventory_item(0,0)
+	swap
+	rtoarg
+	result_is(95)	// Pizza
+	goto_if_true(l_0xc623a9)
+	swap
+	result_is(97)	// Large pizza
+	goto(l_0xc623a9)
 
 l_0xc623a9:
     eob
 
 l_0xc623aa:
-    "[19 19 00 00]{swap}{rtoarg}{result_is(224)}[1B 03 {e(l_0xc623be)}]{swap}{result_is(225)}" goto(l_0xc623be)
+	get_inventory_item(0,0)
+	swap
+	rtoarg
+	result_is(224)	// Skip sandwich
+	goto_if_true(l_0xc623be)
+	swap
+	result_is(225)	// Skip sandwich DX
+	goto(l_0xc623be)
 
 l_0xc623be:
     eob
 
 l_0xc623bf:
-    "[06 CF 01 {e(l_0xc624f5)}]@Kyakyako Kyakie..." next
-    "@(Somewhere amongst all these rooms...)" next
-    "@Ukkiki Kyako Kyakki" next
-    "@(you should be able to obtain Dragonite.)" next
-    "@Ukyakki Kikiyakoke?" next
-    "@(Do you think Dragonite is really made from dragons?)" next
-    "@Kyokekyoke, Ukyokie" next
-    "@(By the way, I'll give you a [1C 05 5C].)" next
-    "@Ukya, Kyokyo Kiekyo" next
-    "@(If you run out,{pause(15)} just come back and I'll give you as many eggs as you want.)[03][1D 03 FF][1B 02 {e(l_0xc624d6)}][1D 0E 00 5C]" call(data_36.l_0xc7dccf) "{set(flag 463)}" end
+	goto_if_flag(FLG_SARUDUNGEON_M_OK, l_0xc624f5)	// 0x01CF
+	"@Kyakyako Kyakie..." next
+	"@(Somewhere amongst all these rooms...)" next
+	"@Ukkiki Kyako Kyakki" next
+	"@(you should be able to obtain Dragonite.)" next
+	"@Ukyakki Kikiyakoke?" next
+	"@(Do you think Dragonite is really made from dragons?)" next
+	"@Kyokekyoke, Ukyokie" next
+	// Item 0x5C / 92 = Fresh egg
+	"@(By the way, I'll give you a {itemname(92)}.)" next
+	"@Ukya, Kyokyo Kiekyo" next
+	"@(If you run out,| just come back and I'll give you as many eggs as you want.)" promptw
+	full(-1)
+	goto_if_true(l_0xc624d6)
+	give_and_return_location(0,92)	// Give Fresh egg
+	call(data_36.l_0xc7dccf)
+	set(FLG_SARUDUNGEON_M_OK)	// 463
+	end
 
 l_0xc624d6:
     next
-    "@Kyokyukyo kyakie!" next
-    "@(You have too much stuff!)" end
+	"@Kyokyukyo kyakie!" next
+	"@(You have too much stuff!)" end
 
 l_0xc624f5:
-    "@Ukyako kyakki?" next
-    "@(Did you find a" linebreak
-    "  [1C 05 3A]?)" next
-    "@Ukyakki, Kokekyakya?" next
-    "@(Oh no,{pause(15)} you don't have to answer.)" next
-    "@Kyokekyoke Ukyokie..." next
-    "@(Here's another [1C 05 5C]...)[03][1D 03 FF][1B 02 {e(l_0xc624d6)}][1D 0E 00 5C]" call(data_36.l_0xc7dccf) end
+	"@Ukyako kyakki?" next
+	"@(Did you find a" linebreak
+	// Item 0x3A / 58 = Flame pendant
+	"  {itemname(58)}?)" next
+	"@Ukyakki, Kokekyakya?" next
+	"@(Oh no,| you don't have to answer.)" next
+	"@Kyokekyoke Ukyokie..." next
+	"@(Here's another {itemname(92)}...)" promptw
+	full(-1)
+	goto_if_true(l_0xc624d6)
+	give_and_return_location(0,92)	// Give Fresh egg
+	call(data_36.l_0xc7dccf)
+	end
 
 l_0xc62578:
-    "[06 D0 01 {e(l_0xc6266c)}]@Kyuie" next
-    "@(One of my friends can use the teleport.)" next
-    "@Kyu?{pause(15)}  Kyikki?" next
-    "@(What?{pause(20)}  You've never heard of it?)" next
-    "@Kyukyu, Kyui" next
-    "@(Then,{pause(15)} I'll give you [1C 05 A6].)" next
-    "[1D 03 FF][1B 02 {e(l_0xc62641)}][1D 0E 00 A6]@Kyu, Ukyakki?  Uki, Ukyukui?" next
-    "@(That didn't make sense, did it?{pause(20)}  But, anyway, I'm attractive, don't you think?)[03]" call(data_36.l_0xc7dcb6) "{set(flag 464)}" end
+	goto_if_flag(FLG_SARUDUNGEON_N_OK, l_0xc6266c)	// 0x01D0, 464
+	"@Kyuie" next
+	"@(One of my friends can use the teleport.)" next
+	"@Kyu?" pause(15)
+	"  Kyikki?" next
+	"@(What?" pause(20)
+	"  You've never heard of it?)" next
+	"@Kyukyu, Kyui" next
+	// item 0xA6 / 166 = King banana
+	"@(Then,| I'll give you {itemname(166)}.)" next
+	full(-1) goto_if_true(l_0xc62641)
+	give_and_return_location(0,166)	// Give King banana
+	"@Kyu, Ukyakki?  Uki, Ukyukui?" next
+	"@(That didn't make sense, did it?" pause(20)
+	"  But, anyway, I'm attractive, don't you think?)" promptw
+	call(data_36.l_0xc7dcb6)
+	set(FLG_SARUDUNGEON_N_OK)	// 464
+	end
 
 l_0xc62641:
-    "@Kiee. Kiee" next
-    "@(You can't carry any more items.{pause(20)}  You've got too much stuff.)" end
+	"@Kiee. Kiee" next
+	"@(You can't carry any more items." pause(20)
+	"  You've got too much stuff.)" end
 
 l_0xc6266c:
-    "@Kyu Kyuii" next
-    "@(We're born in the desert.)" next
-    "@Kyu?  Kyuikki?" next
-    "@(What?  You didn't ask me about that?)" next
-    "@Kyukyu Kyui kyukyu" next
-    "@(You guys must be hard workers.)" next
-    "@Kyuiki, Kyu?{pause(20)}  Ukyu, kyoi?" next
-    "@(I'm not making sense, am I?{pause(20)}  But I am attractive, don't you think?)" end
+	"@Kyu Kyuii" next
+	"@(We're born in the desert.)" next
+	"@Kyu?  Kyuikki?" next
+	"@(What?  You didn't ask me about that?)" next
+	"@Kyukyu Kyui kyukyu" next
+	"@(You guys must be hard workers.)" next
+	"@Kyuiki, Kyu?" pause(20)
+	"  Ukyu, kyoi?" next
+	"@(I'm not making sense, am I?" pause(20)
+	"  But I am attractive, don't you think?)" end
 
 l_0xc6271a:
-    "@[AC] Ukikki Rukikki [AC]" next
-    "@([AC] I love Talah Rama the most. [AC])" next
-    "@[AC] Waakikki Hoikikki [AC]" next
-    "@([AC] He's a friend of the monkeys. [AC])" next
-    "@...Uki Ukiukiukya!" next
-    "@(...That's a song I made up for Talah Rama!)" end
+	"@[AC] Ukikki Rukikki [AC]" next
+	"@([AC] I love Talah Rama the most. [AC])" next
+	"@[AC] Waakikki Hoikikki [AC]" next
+	"@([AC] He's a friend of the monkeys. [AC])" next
+	"@...Uki Ukiukiukya!" next
+	"@(...That's a song I made up for Talah Rama!)" end
 
 l_0xc6279f:
-    "[06 13 01 {e(l_0xc62819)}][06 2A 02 {e(l_0xc627ca)}]@Kyakyakyaa Kya" next
-    "@(I've been waiting for you.)" end
+	goto_if_flag(FLG_MASTER_TLPT, l_0xc62819)	// 0x0113, 275
+	goto_if_flag(FLG_ITEM_TOFU, l_0xc627ca)	// 0x022A, 554
+	"@Kyakyakyaa Kya" next
+	"@(I've been waiting for you.)" end
 
 l_0xc627ca:
-    "@Kyakyekyai kya" next
-    "@(I'll teach you how to teleport.)" next
-    "@Kyakyakya" next
-    "@(Let's go outside.){wait}{window_closeall}[1F F1 3C 03 9C 02][1F 61]{set(flag 764)}{set(flag 613)}{set(flag 614)}" eob
+	"@Kyakyekyai kya" next
+	"@(I'll teach you how to teleport.)" next
+	"@Kyakyakya" next
+	"@(Let's go outside.)" wait
+	window_closeall
+	npc_do_mc(828,668)	// 0x033C, 0x029C
+	wait_movement
+	set(FLG_DSRT_INFO_TLPT)	// 764
+	set(FLG_DSRT_TSARU_DISAPPEAR)	// 613
+	set(FLG_DSRT_TSARU_A_APPEAR)	// 614
+	eob
 
 l_0xc62819:
-    "@Kyakya... kyekyi?" next
-    "@(So... how've you been?)" end
+	"@Kyakya... kyekyi?" next
+	"@(So... how've you been?)" end
 
 l_0xc6283d:
-    "@Hik, ikki." next
-    "@(Follow me,{pause(15)} like this way.){wait}{window_closeall}[1F F1 04 03 9D 02]" eob
+	"@Hik, ikki." next
+	"@(Follow me,| like this way.)" wait
+	window_closeall
+	npc_do_mc(772,669)	// 0x0304, 0x029D
+	eob
 
 l_0xc62865:
-    "[1F 1E 04 03 06][1F 17 05 03 08 00 01]{unset(flag 614)}{set(flag 615)}{pause(1)}[19 23 05 03 01 FF 00][1F 16 05 03 00]" eob
+	npc_delete(772,6)	// 0x0304, 6
+	npc_spawn(773,8,1)	// 0x0305, 0x0008, 1
+	unset(FLG_DSRT_TSARU_A_APPEAR)	// 614
+	set(FLG_DSRT_TSARU_B_APPEAR)	// 615
+	pause(1)
+	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 01, 0x00FF
+	npc_direction(773,0)	// 0x0305, 0
+	eob
 
 l_0xc62886:
-    "[06 13 01 {e(l_0xc62b6f)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc62a9b)}][06 02 00 {e(l_0xc62a30)}]" goto(l_0xc628a1)
+	goto_if_flag(FLG_MASTER_TLPT, l_0xc62b6f)	// 0x0113, 275
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc62a9b)
+	goto_if_flag(FLG_TEMP_1, l_0xc62a30)	// 0x02
+	goto(l_0xc628a1)
 
 l_0xc628a1:
-    "@Kyakya, Kyokyo" next
-    "@(Ok,{pause(15)} I'll do a teacher's demonstration.)" next
-    "@Kyakyakya, Kyakkya" next
-    "@(If you can learn this,{pause(15)} you can go anywhere you've been previously.)" next
-    "@Kyakkyaki kiki" next
-    "@(You can go there instantly.)" next
-    "@Kyakki, Kyaki" next
-    "@(This skill can't be used in a room or underground, though.)[03]{window_closeall}[1F F1 05 03 9E 02][1F 61][1F E6 05 03]{music(13)}[1F E9 05 03][1F 61][1F E6 05 03]{music_resume}[1F E9 05 03][1F 61][1F F1 05 03 08 00][19 23 05 03 01 FF 00][1F 16 05 03 00]{pause(30)}{window_open(1)}@Ukkie" next
-    "@(I went to Fourside and returned.)" next
-    "@Kyaa, kyakkya" next
-    "@(Just now I used a basic, straight course," next
-    "@but you can also change direction during a teleport if there's room for it.)" next
-    "@Ukki! Ukkiekie!" next
-    "@(Ok!{pause(15)}  Why don't you try it, young man!){wait}{window_closeall}{set(flag 2)}" eob
+	"@Kyakya, Kyokyo" next
+	"@(Ok,| I'll do a teacher's demonstration.)" next
+	"@Kyakyakya, Kyakkya" next
+	"@(If you can learn this,| you can go anywhere you've been previously.)" next
+	"@Kyakkyaki kiki" next
+	"@(You can go there instantly.)" next
+	"@Kyakki, Kyaki" next
+	"@(This skill can't be used in a room or underground, though.)" promptw
+	window_closeall
+
+	npc_do_mc(773,670)	// 0x0305, 0x029E
+	wait_movement
+	npc_freeze(773)	// 0x0305
+	music(13)
+	npc_unfreeze(773)	// 0x0305
+	wait_movement
+	npc_freeze(773)	// 0x0305
+	music_resume
+	npc_unfreeze(773)	// 0x0305
+	wait_movement
+	npc_do_mc(773,8)	// 0x0305, 0x08 (To party)
+	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 01, 0x00FF
+	npc_direction(773,0)	// 0x0305, 0
+
+	pause(30)
+	window_open(1)
+	"@Ukkie" next
+	"@(I went to Fourside and returned.)" next
+	"@Kyaa, kyakkya" next
+	"@(Just now I used a basic, straight course," next
+	"@but you can also change direction during a teleport if there's room for it.)" next
+	"@Ukki! Ukkiekie!" next
+	"@(Ok!" pause(15)
+	"  Why don't you try it, young man!)" wait
+	window_closeall
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc62a30:
-    "{window_open(1)}@Kyakyakyakya" next
-    "@(Try again by believing in the monkey teacher.)" linebreak
-    "[19 02]Yes" eob
-
-l_0xc62a61:
-    "[19 02]No" eob
-
-l_0xc62a66:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc628a1)} {e(l_0xc62a75)}]" goto(l_0xc62a75)
+	window_open(1)
+	"@Kyakyakyakya" next
+	"@(Try again by believing in the monkey teacher.)" linebreak
+	two_choice_menu("Yes", l_0xc628a1, "No", l_0xc62a75)
+	goto(l_0xc62a75)
 
 l_0xc62a75:
-    "@Kyakyakya?..." next
-    "@(You don't like the monkey teacher?...){wait}{window_closeall}" eob
+	"@Kyakyakya?..." next
+	"@(You don't like the monkey teacher?...)" wait
+	window_closeall
+	eob
 
 l_0xc62a9b:
-    "@Uki? Kyakikie" next
-    "@(What happened to the boy with the red cap?" next
-    "@I was only going to teach him something.)" next
-    "@Kyakyo..." next
-    "@(He's not here...)" end
+	"@Uki? Kyakikie" next
+	"@(What happened to the boy with the red cap?" next
+	"@I was only going to teach him something.)" next
+	"@Kyakyo..." next
+	"@(He's not here...)" end
 
 l_0xc62ae7:
-    "{window_open(1)}@[1C 02 01] learned how to use PSI Teleport.{wait}{window_closeall}[1F 71 01 01]{set(flag 275)}[19 23 05 03 01 FF 00][1F 16 05 03 00][1F 1A 05 03 03]{pause(60)}[1F 1B 05 03][1F F1 05 03 80 02][1F 61]{window_open(1)}@Kyaho! Uki, Kyakkya" next
-    "@(Great!{pause(20)}  Okay,{pause(15)} the teacher is going home now.){wait}{window_closeall}[1F F1 05 03 9F 02]{unset(flag 2)}{unset(flag 615)}{unset(flag 613)}" eob
+	window_open(1)
+	"@{name(1)} learned how to use PSI Teleport." wait
+	window_closeall
+	learn_teleport_alpha
+	set(flag 275)
+	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 0x01, 0x00FF
+	npc_direction(773,0) 	// 0x0305, 0x00
+	show_npc_float(773,3)	// 0x0305, 0x03
+	pause(60)
+	hide_npc_float(773)	// 0x0305
+	npc_do_mc(773,640)	// 0x0305, 0x0280
+	wait_movement
+	window_open(1)
+	"@Kyaho! Uki, Kyakkya" next
+	"@(Great!" pause(20)
+	"  Okay,| the teacher is going home now.)" wait
+	window_closeall
+	npc_do_mc(773,671)	// 0x0305, 0x029F
+	unset(FLG_TEMP_1)	// 2
+	unset(FLG_DSRT_TSARU_B_APPEAR)	// 615
+	unset(FLG_DSRT_TSARU_DISAPPEAR)	// 613
+	eob
 
 l_0xc62b6f:
-    "@Kyai Kyai" next
-    "@(Bye bye.)" end
+	"@Kyai Kyai" next
+	"@(Bye bye.)" end
 
 l_0xc62b87:
-    "@Kukkukukku!" next
-    "@(Welcome!)" next
-    "@Kikikiykki" next
-    "@(Our paradise exists beneath that hole.)" next
-    "@Kuykku kikki..." next
-    "@(Talah Rama is great and kind...)" next
-    "@Kikki, Kuykku" next
-    "@(and he knows everything, Talah Rama does...)" next
-    "@Kikku Kuekki..." next
-    "@(He made us the underground rooms...)" end
+	"@Kukkukukku!" next
+	"@(Welcome!)" next
+	"@Kikikiykki" next
+	"@(Our paradise exists beneath that hole.)" next
+	"@Kuykku kikki..." next
+	"@(Talah Rama is great and kind...)" next
+	"@Kikki, Kuykku" next
+	"@(and he knows everything, Talah Rama does...)" next
+	"@Kikku Kuekki..." next
+	"@(He made us the underground rooms...)" end
 
 l_0xc62c50:
-    "@Kyakkyekyaekya Kyikkya" next
-    "@(Talah Rama is now fasting and practicing silent meditation.)" next
-    "@Kyakkya, kyekyakya" next
-    "@(He is also abstaining from speaking, drinking alcohol and smoking.)" next
-    "@Kyapi Kyapi" next
-    "@(Please don't bother him.)" end
+	"@Kyakkyekyaekya Kyikkya" next
+	"@(Talah Rama is now fasting and practicing silent meditation.)" next
+	"@Kyakkya, kyekyakya" next
+	"@(He is also abstaining from speaking, drinking alcohol and smoking.)" next
+	"@Kyapi Kyapi" next
+	"@(Please don't bother him.)" end
 
 l_0xc62cf5:
-    "@....." end
+	"@....." end
 
 l_0xc62cf9:
-    "@(Dusty Dunes Headquarters for finding buried gold.)" end
+	"@(Dusty Dunes Headquarters for finding buried gold.)" end
 
 l_0xc62d23:
-    "@(East to Fourside.)" end
+	"@(East to Fourside.)" end
 
-l_0xc62d30:
-    "{counter(0)}{ctoarg}@Welcome to the Automatic Teller Machine." next
-    "@Please select a transaction:" linebreak
-    "[19 02]Withdrawal" eob
+ATM_Start:
+	counter(0)
+	ctoarg
+	"@Welcome to the Automatic Teller Machine." next
+	"@Please select a transaction:" linebreak
+	two_choice_menu("Withdrawal", _withdraw, "Deposit", _deposit)
 
-l_0xc62d71:
-    "[19 02]Deposit" eob
+_cancel:	
+	"@Thank you very much." end
 
-l_0xc62d7b:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc62e6d)} {e(l_0xc62d93)}]" goto(l_0xc62d8a)
+_deposit:
+	cannot_withdraw(9999999)
+	goto_if_false(_deposit_above_max)
+	call(_enter_deposit_amount)
+	goto_if_false(_cancel)
 
-l_0xc62d8a:
-    "@Thank you very much." goto(l_0xc62d91)
+	rtoarg
+	// cannot_take_money(0)
+	// goto_if_true(_invalid_input)
+	hasmoney(0)
+	goto_if_false(_not_enough_to_deposit)
 
-l_0xc62d91:
-    end
+	check_deposit_money(0)
+	goto_if_true(_deposit_above_max)
 
-l_0xc62d93:
-    "[1D 17 7F 96 98 00][1B 02 {e(l_0xc62e3b)}]" call(l_0xc62fd6) "[1B 02 {e(l_0xc62d8a)}]{rtoarg}[1D 14 00 00 00 00][1B 03 {e(l_0xc62df3)}][1D 09 00 00][1D 06 00 00 00 00]{open_wallet}{sound(118)}{pause(10)}@Your account will be credited" linebreak
-    "  $[1C 0A 00 00 00 00]." next
-    "@Thank you very much." goto(l_0xc62d91)
+	takemoney(0)
+	deposit(0)
+	show_wallet
+	sound(SND_CHICKEN2) // 118
 
-l_0xc62df3:
-    "@Invalid instruction input.  Please try again." next
-    goto(l_0xc62d93)
+	pause(10)
+	"@Your account will be credited" linebreak
+	"  $" number(0) "." next
+	goto(_cancel)
 
-l_0xc62e1b:
-    "@You do not have that much money for a deposit." next
-    goto(l_0xc62d93)
+_invalid_input:
+	"@Invalid instruction input.  Please try again." next
+	goto(_deposit)
 
-l_0xc62e3b:
-    "@This machine cannot accept a deposit greater than" linebreak
-    "  $9,999,999." next
-    goto(l_0xc62d8a)
+_not_enough_to_deposit:
+	"@You do not have that much money for a deposit." next
+	goto(_deposit)
 
-l_0xc62e6d:
-    "[1D 17 01 00 00 00][1B 03 {e(l_0xc62f49)}][1D 14 9F 86 01 00][1B 02 {e(l_0xc62f72)}]" call(l_0xc62f99) "[1B 02 {e(l_0xc62d8a)}]{rtoarg}[1D 17 00 00 00 00][1B 03 {e(l_0xc62eef)}]{store_registers}[1D 07 00 00 00 00][1D 08 00 00][1D 14 A0 86 01 00][1B 02 {e(l_0xc62f1a)}]@Your account has been debited" linebreak
-    "  $[1C 0A 00 00 00 00]." next
-    "@Please take your cash.[03]{open_wallet}{sound(116)}{pause(20)}" eob
+_deposit_above_max:
+	"@This machine cannot accept a deposit greater than" linebreak
+	"  $9,999,999." next
+	goto(_cancel)
 
-l_0xc62eea:
-    goto(l_0xc62d91)
+_withdraw:
+	// Check if ATM balance is $0
+	cannot_withdraw(1)
+	goto_if_true(_zero_balance)
 
-l_0xc62eef:
-    "@The requested amount is in excess of your account balance." next
-    goto(l_0xc62e6d)
+	// Currently at max wallet cash
+	hasmoney(99999)
+	goto_if_true(_max_cash)
 
-l_0xc62f1a:
-    "{load_registers}[1D 06 00 00 00 00]@You are not allowed to carry more than" linebreak
-    "  $99,999." next
-    goto(l_0xc62e6d)
+	call(_enter_withdraw_amount)
+	goto_if_false(_cancel)
 
-l_0xc62f49:
-    "@Your account is currently showing a zero balance." next
-    goto(l_0xc62d8a)
+	rtoarg
+	cannot_withdraw(0)
+	goto_if_true(_amount_excess)
+	//store_registers
+	withdraw(0)
 
-l_0xc62f72:
-    "@You are not allowed to carry more than" linebreak
-    "  $99,999." next
-    goto(l_0xc62d8a)
+	// Use Phoenix's custom code to check for +100'000 withdrawal
+	//givemoney(0)
+	try_give_money(0)
+	goto_if_true(_maxed_out_cash)
 
-l_0xc62f99:
-    call(l_0xc63004) "@Please enter the amount of your withdrawal." next
-    "@Balance: $[1C 01 07]" linebreak
-    goto(l_0xc62fc5)
+	"@Your account has been debited" linebreak
+	"  $" number(0) "." next
+	"@Please take your cash." promptw
+	show_wallet
+	sound(SND_BOXTAKE) // 116
+	pause(20)
+	eob
 
-l_0xc62fc5:
-    "{open_wallet}[18 05 0A 02]&[18 05 04 02]$[1F 52 05]{clearline}" eob
+//l_0xc62eea:
+	end
 
-l_0xc62fd6:
-    call(l_0xc63004) "@Please enter the amount of your deposit." next
-    "@Balance: $[1C 01 07]" linebreak
-    goto(l_0xc62fc5)
+_amount_excess:
+	"@The requested amount is in excess of your account balance." next
+	goto(_withdraw)
 
-l_0xc63004:
-    "@Your account currently shows a balance of $[1C 01 07]." next
-    eob
+_maxed_out_cash:
+	deposit(0)
+	"@You are not allowed to carry more than" linebreak
+	"  $99,999." next
+	goto(_withdraw)
+
+_zero_balance:
+	"@Your account is currently showing a zero balance." next
+	goto(_cancel)
+
+_max_cash:
+	"@You are not allowed to carry more than" linebreak
+	"  $99,999." next
+	goto(_cancel)
+
+_enter_withdraw_amount: //l_0xc62f99
+	call(_show_balance)
+	"@Please enter the amount of your withdrawal." next
+	"@Balance: ${stat(7)}" linebreak
+	goto(_text_position)
+
+_text_position:
+	show_wallet
+	text_pos(10, 2) "&"
+	text_pos(4, 2) "$"
+	number_input(5)
+	clearline
+	eob
+
+_enter_deposit_amount:
+	call(_show_balance)
+	"@Please enter the amount of your deposit." next
+	"@Balance: ${stat(7)}" linebreak
+	goto(_text_position)
+
+_show_balance:
+	"@Your account currently shows a balance of ${stat(7)}." next
+	eob
 
 l_0xc63029:
-    "[1A 0A][1B 03 {e(l_0xc63032)}]" newline
-    goto(l_0xc63032)
+	phone_call goto_if_true(l_0xc63032) newline
+	goto(l_0xc63032)
 
 l_0xc63032:
-    eob
+	eob
 
 l_0xc63033:
-    "[1A 0A][1B 03 {e(l_0xc63042)}]" newline
-    "[1D 08 01 00]{open_wallet}" goto(l_0xc63042)
+	phone_call goto_if_true(l_0xc63042) newline
+	givemoney(1)
+	show_wallet
+	goto(l_0xc63042)
 
 l_0xc63042:
-    eob
+	eob
 
 l_0xc63043:
-    "@INPUT YOUR COMMAND." linebreak
-    "{open_hp}[06 74 01 {e(l_0xc63089)}][19 02]Life-up" eob
-
-l_0xc6306b:
-    "[19 02]Communicate" eob
-
-l_0xc63079:
-    "[1C 07 02]" goto(l_0xc6307c)
-
-l_0xc6307c:
-    "[11]{clearline}[09 02 {e(data_49.l_0xc915e1)} {e(l_0xc630a8)}]" eob
+	"@INPUT YOUR COMMAND." linebreak
+	open_hp
+	goto_if_flag(FLG_STEP_PAST, l_0xc63089) // 0x0174, 372
+	two_choice_menu("Life-up", data_49.l_0xc915e1, "Communicate", l_0xc630a8)
 
 l_0xc63089:
-    "[19 02]Repair" eob
-
-l_0xc63092:
-    "[19 02]Communicate" eob
-
-l_0xc630a0:
-    "[1C 07 02]" goto(l_0xc6307c)
+	two_choice_menu("Repair", data_49.l_0xc915e1, "Communicate", l_0xc630a8)
 
 l_0xc630a8:
-    call(l_0xc63229) eob
+	call(l_0xc63229) eob
 
 l_0xc630ae:
-    "[06 58 00 {e(l_0xc630c7)}]@(Beep-beep-beep...)" end
+	goto_if_flag(FLG_ITEM_GAUS, l_0xc630c7)	// 0x58, 88
+	"@(Beep-beep-beep...)" end
 
 l_0xc630c7:
-    "{ctoarg}[1B 05]@Hello!  Hello!" linebreak
-    "  Gauss Labs here." next
-    title(1, Gauss)
-    "@Oh, hello [1C 01 34]!" next
-    "@Would you like me to keep a record of your journey?" linebreak
-    call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc6314c)} {e(l_0xc6311e)}]" goto(l_0xc6311e)
+	ctoarg
+	store_registers_shared
+	"@Hello!  Hello!" linebreak
+	"  Gauss Labs here." next
+	title(1, Gauss)
+	// Stat 0x34 / 52 = Jeff's name
+	"@Oh, hello {stat(52)}!" next
+	"@Would you like me to keep a record of your journey?" linebreak
+	two_choice_menu("Yes", l_0xc6314c, "No", l_0xc6311e)
+	goto(l_0xc6311e)
 
 l_0xc6311e:
-    "@You just wanted to hear my voice?" linebreak
-    "  Gwahahahahahahah!" next
-    goto(l_0xc63146)
+	"@You just wanted to hear my voice?" linebreak
+	"  Gwahahahahahahah!" next
+	goto(l_0xc63146)
 
 l_0xc63146:
-    goto(data_19.l_0xc634ea)
+	goto(data_19.l_0xc634ea)
 
 l_0xc6314b:
-    eob
+	eob
 
 l_0xc6314c:
-    "[1B 06][19 26 00][06 0C 03 {e(l_0xc6315a)}]{save}" goto(l_0xc6315a)
+	load_registers_shared
+	set_respawn_point(0)
+	goto_if_flag(FLG_THRK_URBAN_ZOMBI_GONE, l_0xc6315a)	// 0x030C, 780
+	save
+	goto(l_0xc6315a)
 
 l_0xc6315a:
-    "@All right, I have everything written down." next
-    "@Do you want to take a break now?" linebreak
-    "[19 02]Continue" eob
-
-l_0xc6318c:
-    "[19 02]End" eob
-
-l_0xc63192:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc631a1)} {e(l_0xc631e3)}]" goto(l_0xc631a1)
+	"@All right, I have everything written down." next
+	"@Do you want to take a break now?" linebreak
+	two_choice_menu("Continue", l_0xc631a1, "End", l_0xc631e3)
+	goto(l_0xc631a1)
 
 l_0xc631a1:
-    "@You've become such a hard worker!" next
-    "@I've got to get back to work myself!" next
-    "@Go for it, bad boy!" next
-    goto(l_0xc63146)
+	"@You've become such a hard worker!" next
+	"@I've got to get back to work myself!" next
+	"@Go for it, bad boy!" next
+	goto(l_0xc63146)
 
 l_0xc631e3:
-    "@I don't know where you are planning on sleeping, but have a good rest!" next
-    "@Go ahead and turn the power OFF, and have a good night.[1F 50]" next
-    music_effect(3) cc_fade_out(3) pause(90)
-    cc_asmcall(reset_routine.Reset, RET_NONE)
+	"@I don't know where you are planning on sleeping, but have a good rest!" next
+	"@Go ahead and turn the power OFF, and have a good night."
+	disable_input next
+	music_effect(3)
+	cc_fade_out(3)
+	pause(90)
+	cc_asmcall(reset_routine.Reset, RET_NONE)
 
 l_0xc63229:
-    "[06 04 03 {e(data_31.l_0xc75929)}][06 49 00 {e(data_19.l_0xc635bd)}]{ctoarg}[1B 05]" newline
-    "[19 10 01]{result_is(1)}[1B 03 {e(l_0xc632c7)}]"
-    title(1, Dad)
-    "@Hello?" next
-    "@...Is that you, [1C 01 08]{pause(10)}?" next
-    "@Why are you disguising your voice like that?" next
-    "@Who are you pretending to be?" next
-    "@Oh, well.  It's not a big deal." next
-    "@I suppose you need to have a sense of humor at a time like this." next
-    goto(l_0xc632e2)
+	goto_if_flag(FLG_PHONE_PAPA_FINAL, data_31.l_0xc75929)	// 0x0304, 772
+	goto_if_flag(FLG_WIN_GIEGU, data_19.l_0xc635bd)	// 0x49, 73
+	ctoarg
+	store_registers_shared
+	newline
+	get_char_at_pos(1)
+	result_is(1)
+	goto_if_true(l_0xc632c7)
+	title(1, Dad)
+	"@Hello?" next
+	// Stat 8 = Ness' name
+	"@...Is that you, {stat(8)}//?" next
+	"@Why are you disguising your voice like that?" next
+	"@Who are you pretending to be?" next
+	"@Oh, well.  It's not a big deal." next
+	"@I suppose you need to have a sense of humor at a time like this." next
+	goto(l_0xc632e2)
 
 l_0xc632c7:
-    title(1, Dad)
-    "@[1C 02 01]?  It's your dad." next
-    "{isset(flag 372)}[1F C0 01 {e(data_19.l_0xc6354b)}]" goto(l_0xc632e2)
+	title(1, Dad)
+	"@{name(1)}?  It's your dad." next
+	isset(FLG_STEP_PAST)	// 372
+	switch_call(1)
+		switch_entry(data_19.l_0xc6354b)
+	goto(l_0xc632e2)
 
 l_0xc632e2:
-    "[1D 24 01][1B 02 {e(l_0xc6333c)}]{swap}@I deposited $[1C 0A 00 00 00 00]" linebreak
-    "  into your bank account." next
-    "@Taking away what you've spent, you should now have" next
-    "@$[1C 01 07] in the bank." next
-    "[1D 24 02]" goto(l_0xc6333c)
+	get_dad_deposit_money
+	goto_if_false(l_0xc6333c)
+	swap
+	"@I deposited $" number(0) "" linebreak
+	"  into your bank account." next
+	"@Taking away what you've spent, you should now have" next
+	"@${stat(7)} in the bank." next
+	clear_dad_deposit_money
+	goto(l_0xc6333c)
 
 l_0xc6333c:
-    "{counter(1)}@Well, exp to get to the next level,[03]" goto(l_0xc63352)
+	counter(1)
+	"@Well, exp to get to the next level," promptw
+	goto(l_0xc63352)
 
 l_0xc63352:
-    "{ctoarg}[1D 19 00][1B 03 {e(data_19.l_0xc633c9)}][19 10 00][1B 02 {e(data_19.l_0xc633c9)}]{rtoarg}[19 18 00][1B 02 {e(l_0xc63388)}]" newline
-    "@[1C 02 00]...{swap}[1C 0A 00 00 00 00].[03]" goto(l_0xc63382)
+	ctoarg
+	party_size_smaller_than(0)
+	goto_if_true(data_19.l_0xc633c9)
+	get_char_at_pos(0)
+	goto_if_false(data_19.l_0xc633c9)
+	rtoarg
+	get_levelup_exp(0)
+	goto_if_false(l_0xc63388)
+	newline
+	"@{name(0)}... " swap number(0) "." promptw
+	goto(l_0xc63382)
 
 l_0xc63382:
-    "{inc}" goto(l_0xc63352)
+	inc
+	goto(l_0xc63352)
 
 l_0xc63388:
-    newline
-    "@[1C 02 00]..." linebreak
-    "  has already reached {swap}" call(data_37.l_0xc7e660) " maximum level." next
-    "@That's just fine, but..." next
-    next
-    next
-    goto(l_0xc63382)
+	newline
+	"@{name(0)}..." linebreak
+	"  has already reached " swap call(data_37.l_0xc7e660) " maximum level." next
+	"@That's just fine, but..." next
+	next
+	next
+	goto(l_0xc63382)

@@ -1,0 +1,130 @@
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/ccexpand.ccs"
+
+// Inputs:
+//     amt: The amount of money to give to the player
+//          (0 means use the argument register)
+// Outputs:
+//     result register: 0 if the player fully received `amt`
+//                      dollars; otherwise, the player's current
+//                      cash on hand + `amt` - 99999 (i.e., the
+//                      remainder that would be lost if
+//                      `givemoney(amt)` were used instead).
+// Effects:
+//     If the player's cash on hand + `amt` > 99'999, does
+//     nothing; otherwise, gives the player `amt` more dollars
+//     of cash on hand.
+command try_give_money(amt) {
+	"[1A 18 {long amt}]"
+}
+
+// Inputs:
+//     amt: The amount of money to give to the player
+//          (0 means use the argument register)
+// Outputs:
+//     result register: 0 if the player has room for all
+//                      `amt` dollars in their wallet;
+//                      otherwise, the player's current cash on
+//                      hand + `amt` - 99999 (i.e., the
+//                      remainder that would be lost after
+//                      using `givemoney(amt)`).
+// Effects:
+//     Nothing
+command money_gift_is_too_big(amt) {
+	"[1A 19 {long amt}]"
+}
+
+CC_TryGiveMoney: M_EB_Function_Wrapper({
+	LDY_i (0x0004)
+	JSL (R_Read_Parameter_Bytes)
+
+	LDA_a (D_cc_argv)
+	STA_d (0x06)
+	LDA_a (D_cc_argv_2)
+	STA_d (0x08)
+	JSL (R_Set_06_To_Argument_If_Zero)
+
+	LDA_d (0x06)
+	STA_d (0x0A)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x0C)
+	STA_d (0x10)
+	JSL (Can_Give_Money)
+
+	LDA_d (0x06)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x10)
+	JSL (R_Set_Working_Memory)
+
+	LDA_d (0x06)
+	ORA_d (0x08)
+	BNE_a (_return)
+
+	// If there's nothing that'll vanish out of existence, then
+	// give the money for real
+	LDA_d (0x0A)
+	STA_d (0x0E)
+	LDA_d (0x0C)
+	STA_d (0x10)
+	JSL (0xC22214)
+
+_return:
+})
+
+CC_CanGiveMoney: M_EB_Function_Wrapper({
+	LDY_i (0x0004)
+	JSL (R_Read_Parameter_Bytes)
+
+	LDA_a (D_cc_argv)
+	STA_d (0x06)
+	LDA_a (D_cc_argv_2)
+	STA_d (0x08)
+	JSL (R_Set_06_To_Argument_If_Zero)
+
+	LDA_d (0x06)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x10)
+	JSL (Can_Give_Money)
+
+	LDA_d (0x06)
+	STA_d (0x0E)
+	LDA_d (0x08)
+	STA_d (0x10)
+	JSL (R_Set_Working_Memory)
+})
+
+Can_Give_Money: M_EB_Function_Wrapper_UserStack_Clobber(-4, {
+	// $00-$03 = amt + player's cash on hand (GAME_STATE+game_state::money_carried)
+	LDA_d (0x12)
+	CLC
+	ADC_a (0x9831)
+	STA_d (0x00)
+	LDA_d (0x14)
+	ADC_a (0x9833)
+	STA_d (0x02)
+
+	// Subtract 99999
+	LDA_d (0x00)
+	SEC
+	SBC_i (short [0] 99999)
+	STA_d (0x00)
+	LDA_d (0x02)
+	SBC_i (short [1] 99999)
+	// STA_d (0x02)
+
+	// If the result was negative, return 0
+	// If the result was 0 or something positive, return that
+	BMI_a (_return_zero)
+	STA_d (0x0C)
+	LDA_d (0x00)
+	STA_d (0x0A)
+	BRA_a (_return)
+_return_zero:
+	STZ_d (0x0A)
+	STZ_d (0x0C)
+_return:
+})

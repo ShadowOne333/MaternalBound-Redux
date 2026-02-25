@@ -41,8 +41,8 @@ command back_up_text_rendering_state "[18 02]"
 command window_closeall "[18 04]"
 // x = either pixels or tiles (changes based on $5E71 in the localized version), y = lines
 command text_pos(x, y) "[18 05 {byte x} {byte y}]"
-command window_clear "[18 06]"
-command compare_register(num, reg) "[18 07 {long num} {byte reg}]"*/
+command window_clear "[18 06]"*/
+command compare_register(num, reg) "[18 07 {long num} {byte reg}]"
     command compare_result(num) compare_register(num, 0)
     command compare_argument(num) compare_register(num, 1)
     command compare_counter(num) compare_register(num, 2)
@@ -58,6 +58,52 @@ command load_str_callonhover(str, target) "[19 02 {str} 01 {long target}]"
 command unload_strings "[19 04]"
 command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {byte status}]"
     command inflict(char, status) inflict_status(char, byte[0] status, byte[1] status)
+    // Like the standard `inflict` command, but splits status into group + value
+    // Meant to be used with character_has_status and inflict_status.
+    // DO NOT USE THESE IN ASSEMBLY CODE. Use the ones from battle/attack_script.ccs instead.
+    // I think I got all of the changes in this hack from EarthBound...
+    define SCR_STATUS_GROUP_0 = 1
+    define SCR_STATUS_0_NONE = 1
+    define SCR_STATUS_0_UNCONSCIOUS = 2
+    define SCR_STATUS_0_DIAMONDIZED = 3
+    define SCR_STATUS_0_NUMB = 4
+    define SCR_STATUS_0_NAUSEOUS = 5
+    define SCR_STATUS_0_POISONED = 6
+    define SCR_STATUS_0_SUNSTROKE = 7
+    define SCR_STATUS_0_COLD = 8
+
+    define SCR_STATUS_GROUP_1 = 2
+    define SCR_STATUS_1_NONE = 1
+    define SCR_STATUS_1_MUSHROOMIZED = 2
+    define SCR_STATUS_1_POSSESSED = 3
+
+    define SCR_STATUS_GROUP_2 = 3
+    define SCR_STATUS_2_NONE = 1
+    define SCR_STATUS_2_ASLEEP = 2
+    define SCR_STATUS_2_CRYING = 3
+    define SCR_STATUS_2_BOUND = 4
+    define SCR_STATUS_2_SOLIDIFIED = 5
+
+    define SCR_STATUS_GROUP_3 = 4
+    define SCR_STATUS_3_NONE = 1
+    define SCR_STATUS_3_FEELING_STRANGE = 2
+
+    define SCR_STATUS_GROUP_4 = 5
+    define SCR_STATUS_4_NONE = 1
+    define SCR_STATUS_4_CANT_CONCENTRATE = 2
+    define SCR_STATUS_4_CANT_CONCENTRATE_4 = 5
+
+    define SCR_STATUS_GROUP_5 = 6
+    define SCR_STATUS_5_NONE = 1
+    define SCR_STATUS_5_ASTHMA = 2
+
+    define SCR_STATUS_GROUP_6 = 7
+    define SCR_STATUS_6_NONE = 1
+    define SCR_STATUS_6_PSI_POWER_SHIELD = 2
+    define SCR_STATUS_6_PSI_SHIELD = 3
+    define SCR_STATUS_6_POWER_SHIELD = 4
+    define SCR_STATUS_6_SHIELD = 5
+
 command get_char_at_pos(pos) "[19 10 {byte pos}]"
 command get_name_letter(char) "[19 11 {byte char}]"
 command get_next_storage_item "[19 14]"
@@ -102,20 +148,20 @@ command phone_call "[1A 0A]"
 command do_teleport_locations_menu "[1A 0B]"
 
 //command store_registers "[1B 00]"
-//command load_registers "[1B 01]"
+//command load_registers "[1B 01]"*/
 command goto_if_false(target) "[1B 02 {long target}]"
 command goto_if_true(target) "[1B 03 {long target}]"
 //command swap "[1B 04]"
 command store_registers_shared "[1B 05]"
 command load_registers_shared "[1B 06]"
 
-command text_color(n) "[1C 00 {byte n}]"
-//command stat(n) "[1C 01 {byte n}]"
-//command name(char) "[1C 02 {byte char}]"
+/*command text_color(n) "[1C 00 {byte n}]"
+command stat(n) "[1C 01 {byte n}]"
+command name(char) "[1C 02 {byte char}]"*/
 command letter(c) "[1C 03 {byte c}]"
-//command open_hp "[1C 04]"
-//command itemname(item) "[1C 05 {byte item}]"
-command teleportname(dest) "[1C 06 {byte dest}]"
+/*command open_hp "[1C 04]"
+command itemname(item) "[1C 05 {byte item}]"
+command teleportname(dest) "[1C 06 {byte dest}]"*/
 command print_strings_horizontal(n) "[1C 07 {byte n}]"
 command gfx_text(n) "[1C 08 {byte n}]"
     // Why did they include the spaces at the end?
@@ -132,7 +178,7 @@ command delta "[1C 0F]"*/
 // Only in EarthBound
 command zwsp_before_letter(n) "[1C 11 {byte n}]"
 // Only in Mother 2
-command print_party_m2 "[1C 11]"
+//command print_party_m2 "[1C 11]"
 //command psiname(psi) "[1C 12 {byte psi}]"
 // enemypsi = used by the enemy, targetting the player
 // playerpsi = used by the player, targetting the enemy
@@ -151,8 +197,8 @@ command take(char, item) "[1D 01 {byte char} {byte item}]"*/
 command arg_item_type_is_not(type) "[1D 02 {byte type}]"
     command arg_item_type_is(type) not arg_item_type_is_not(type)
 command get_item_receiver(char) "[1D 03 {byte char}]"
-    command notfull(char) get_item_receiver(char)
-    command full(char) not get_item_receiver(char)
+    //command notfull(char) get_item_receiver(char)
+    //command full(char) not get_item_receiver(char)
 command hasequipped(char, item) "[1D 04 {byte char} {byte item}]"
 /*command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
 command deposit(amt) "[1D 06 {long amt}]"
@@ -174,7 +220,7 @@ command take_from_location_and_store(char, itemslot) "[1D 12 {byte char} {byte i
 // Arguments unconfirmed
 command give_and_unstore_item(char, storageslot) "[1D 13 {byte char} {byte storageslot}]"
 command cannot_take_money(amt) "[1D 14 {long amt}]"
-    command hasmoney(amt) not cannot_take_money(amt)
+    //command hasmoney(amt) not cannot_take_money(amt)
 command get_party_size_times(n) "[1D 15 {short n}]"
 command cannot_withdraw(amt) "[1D 17 {long amt}]"
 command store_item(item) "[1D 18 {byte item}]"
@@ -198,11 +244,11 @@ command recoverpp_percent(char, n) "[1E 04 {byte char} {byte n}]"
 command consumepp_percent(char, n) "[1E 05 {byte char} {byte n}]"
 command recoverpp(char, n) "[1E 06 {byte char} {byte n}]"
 command consumepp(char, n) "[1E 07 {byte char} {byte n}]"
-command change_level(char, n) "[1E 08 {byte char} {byte n}]"
+command change_level(char, n) "[1E 08 {byte char} {byte n}]"*/
 // If a script was using this command, change it to use the fixed version below
 // command boost_exp(char, n) "[1E 09 {byte char} {byte[0] n} {byte[1] n} {byte[2] n}]"
 command boost_experience(char, n) "[1E 09 {byte char} {long n}]"
-command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
+/*command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
 command boost_guts(char, n) "[1E 0B {byte char} {byte n}]"
 command boost_speed(char, n) "[1E 0C {byte char} {byte n}]"
 command boost_vitality(char, n) "[1E 0D {byte char} {byte n}]"
@@ -217,16 +263,17 @@ command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"*/
 command stop_music "[1F 01 00]"
 //command sound(n) "[1F 02 {byte n}]"
 // For symmetry with the above change.
-//command music_resume "[1F 03]" command resume_music music_resume
-command text_blips(n) "[1F 04 {byte n}]"
+//command music_resume "[1F 03]"
+command resume_music music_resume
+//command text_blips(n) "[1F 04 {byte n}]"
     define TEXTBLIPS_DEFAULT = 1
     define TEXTBLIPS_ON = 2
     define TEXTBLIPS_OFF = 3
     command text_blips_default text_blips(TEXTBLIPS_DEFAULT)
     command text_blips_on text_blips(TEXTBLIPS_ON)
     command text_blips_off text_blips(TEXTBLIPS_OFF)
-command music_switching_off "[1F 05]"
-command music_switching_on "[1F 06]"
+//command music_switching_off "[1F 05]"
+//command music_switching_on "[1F 06]"
 /*command music_effect(n) "[1F 07 {byte n}]"
 command party_add(char) "[1F 11 {byte char}]"
 command party_remove(char) "[1F 12 {byte char}]"
@@ -247,13 +294,12 @@ command hide_npc_float(tpt) "[1F 1B {short tpt}]"
 command npc_delete(tpt, style) "[1F 1E {short tpt} {byte style}]"
     //command hide_sprite(tpt, effect) npc_delete(tpt, effect)
 command sprite2_delete(sprite, style) "[1F 1F {short sprite} {byte style}]"
-command teleport(dest, style) "[1F 20 {byte dest} {byte style}]"
+//command teleport(dest, style) "[1F 20 {byte dest} {byte style}]"
 //command warp(dest) "[1F 21 {byte dest}]"
 command start_battle(group) "[1F 23 {short group}]"
 //command font_normal "[1F 30]"
 //command font_saturn "[1F 31]"
-command event(n) "[1F 41 {byte n}]"  // Triggers a special event. There's a long list:
-/*
+/*command event(n) "[1F 41 {byte n}]"  // Triggers a special event. There's a long list:
 	0x01: Plays the coffee scene from Saturn Valley.
 	0x02: Plays the tea scene from Tenda Village.
 	0x03: Opens the menu for entering the player's name in Summers and sets the Result Register.
@@ -296,8 +342,8 @@ command restore_npc_members_and_money "[1F 65]"
     command hotspot_slot1_off hotspot_off(1)
     command hotspot_slot2_off hotspot_off(2)
     command hotspot_slot_arg_off hotspot_off(0)
-command anchor_set "[1F 68]"
-command anchor_warp "[1F 69]"
+//command anchor_set "[1F 68]"
+//command anchor_warp "[1F 69]"
 // The "char" argument is not actually used for anything in the vanilla game.
 //command learnpsi(char, psi) "[1F 71 {byte char} {byte psi}]"
     define LEARN_TELEPORT_ALPHA = 1
@@ -407,7 +453,7 @@ command counter_is(n) {
     ctoarg
     swap
     result_is(n)
-}*/
+}
 
 command healall {
     heal_percent(0xFF, 100)
@@ -417,13 +463,13 @@ command healall {
 command battle(num) {
     window_closeall
     if start_battle(num) eob
-}
+}*/
 
 /* Standard ROM[] macros */
 
 // Meant to be used where there is a MOVE_INT* or LOADPTR in the assembly.
 // Probably obsolete because of ASMLoadAddress*... but it's in the standard library.
-command _asmptr(loc,target) {
+/*command _asmptr(loc,target) {
     ROMTBL[loc, 1, 1] = short [0] target
     ROMTBL[loc, 6, 1] = short [1] target
 }
@@ -480,5 +526,5 @@ command setup_music2(music) {
 // See FILE_SELECT_INIT (C0B525 in EarthBound)
 command setup_background(bg) {
 	ROM[0xC0B5F1] = short bg
-}
+}*/
 

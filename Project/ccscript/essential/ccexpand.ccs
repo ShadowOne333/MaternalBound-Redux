@@ -3,6 +3,8 @@ import "../essential/fade_tools.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/cc_char_in_party.ccs"
 import "../essential/jsl_rts.ccs"
+import "../bugfixes/try_deposit_money.ccs"
+import "../bugfixes/try_give_money.ccs"
 import "../redux/goods_menu_equip.ccs"
 import "../redux/movscr_codes.ccs"
 
@@ -60,9 +62,9 @@ CodeTable: {
   long DoNothing // [1A 15]
   long DoNothing // [1A 16]
   long DoNothing // [1A 17]
-  long DoNothing // [1A 18]
-  long DoNothing // [1A 19]
-  long DoNothing // [1A 1A]
+  long CC_TryGiveMoney // [1A 18]
+  long CC_CanGiveMoney // [1A 19]
+  long CC_CanDepositMoney // [1A 1A]
   long DoNothing // [1A 1B]
   long DoNothing // [1A 1C]
   long DoNothing // [1A 1D]

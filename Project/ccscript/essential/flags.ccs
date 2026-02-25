@@ -814,7 +814,7 @@ define flg_BikeCantNormallyBeUsed	= flag 794
 // Whether Buzz Buzz has died
 define flg_BuzzBuzzDead			= flag 795
 // Whether Ness has learned PSI yet
-define flg_LearnedPSI			= flag 796
+define FLG_LEARN_PSI			= flag 796
 // Whether player is riding bike (with unrestricted bike enabled)
 define flg_RidingBike			= flag 797
 // Whether player is in Deep Darkness (to use hawk eye)
