@@ -589,8 +589,8 @@ l_0xc695ba:
     party_pos_check(1) rtoarg
     // Check if Ness is the party leader, if not, go to label
     result_is(1) goto_if_false(data_55.l_0xc9992f)
-    // Check if Ness has asthma, if not, go to label
-    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)	// 1, 6, 2
+    // Check if Ness has homesickness, if not, go to label
+    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
     goto_if_false(data_55.l_0xc9992f)
     call(data_35.l_0xc7ce73)
     eob

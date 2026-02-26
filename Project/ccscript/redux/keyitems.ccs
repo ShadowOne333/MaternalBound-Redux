@@ -71,6 +71,7 @@ define SHOW_TICKET	= 178	// 0xB2
 define ZOMBIE_PAPER	= 174	// 0xAE
 define DIAMOND		= 182	// 0xB6
 define YOGURT_DISP	= 139	// 0x8B
+define TINY_RUBY	= 208	// 0xD0
 define SIGNED_BANANA	= 183	// 0xB7
 define HIEROGLYPH	= 185	// 0xB9
 define CARROT_KEY	= 253	// 0xFD
@@ -212,6 +213,8 @@ KeyItems:
 			load_str_callonhover("Diamond", SetCount14) }
 		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
+		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
+			load_str_callonhover("Tiny ruby", SetCount15) }*/
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open

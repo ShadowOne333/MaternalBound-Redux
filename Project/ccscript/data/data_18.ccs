@@ -249,8 +249,7 @@ l_0xc623bf:
 	"@(By the way, I'll give you a {itemname(92)}.)" next
 	"@Ukya, Kyokyo Kiekyo" next
 	"@(If you run out,| just come back and I'll give you as many eggs as you want.)" promptw
-	full(-1)
-	goto_if_true(l_0xc624d6)
+	get_item_receiver(-1) goto_if_false(l_0xc624d6)
 	give_and_return_location(0,92)	// Give Fresh egg
 	call(data_36.l_0xc7dccf)
 	set(FLG_SARUDUNGEON_M_OK)	// 463
@@ -270,8 +269,7 @@ l_0xc624f5:
 	"@(Oh no,| you don't have to answer.)" next
 	"@Kyokekyoke Ukyokie..." next
 	"@(Here's another {itemname(92)}...)" promptw
-	full(-1)
-	goto_if_true(l_0xc624d6)
+	get_item_receiver(-1) goto_if_false(l_0xc624d6)
 	give_and_return_location(0,92)	// Give Fresh egg
 	call(data_36.l_0xc7dccf)
 	end
@@ -287,7 +285,7 @@ l_0xc62578:
 	"@Kyukyu, Kyui" next
 	// item 0xA6 / 166 = King banana
 	"@(Then,| I'll give you {itemname(166)}.)" next
-	full(-1) goto_if_true(l_0xc62641)
+	get_item_receiver(-1) goto_if_false(l_0xc62641)
 	give_and_return_location(0,166)	// Give King banana
 	"@Kyu, Ukyakki?  Uki, Ukyukui?" next
 	"@(That didn't make sense, did it?" pause(20)

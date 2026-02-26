@@ -443,7 +443,7 @@ l_0xc7cb5f:
     goto_if_flag(FLG_WIN_GIEGU, l_0xc7d226)	// 0x49, 73
     isset(FLG_MYHOME_PHONE_TRACY)	// 688
     goto_if_false(l_0xc7cc35)
-    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)	// 1, 6, 2
+    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
     goto_if_true(l_0xc7cdae)
     character_has_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)	// 1, 1, 8
     goto_if_true(l_0xc7ccec)

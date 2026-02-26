@@ -1,21 +1,21 @@
 // Special Status debug menu option
 
-import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/asm65816.ccs"
 import "../../essential/commands.ccs"
 import "../../essential/flags.ccs"
+import "../../essential/stdext.ccs"
 import "../../debug/diamond.ccs"
-import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 
 Special_Status:
     clearline
     diam "To whom?" newline
-    char_select_menu_cancellable	// Current party member selection menu, lets you cancel with the B button
+    select_char(0,0,0,0,1)	// Current party member selection menu, lets you cancel with the B button
     goto_if_false(new_debug_menu.debug_main)
     store_registers
     window_clear
-    save_text_window_state
+    back_up_text_rendering_state
     window_open(12)
     menu 2 {
       "Heal": {
@@ -78,9 +78,9 @@ Special_Status:
         inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)
         goto(Special_Status)
       }
-      "Asthma": {
+      "Homesick": {
         special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)
+        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)
         goto(Special_Status)
       }
       "Decrease HP": {
@@ -102,10 +102,10 @@ Special_Status:
     goto(new_debug_menu.debug_main)
 
 command special_status_post_selection {
-    copy_wram
+    store_registers_shared
     window_closetop
     window_switch(53)
-    copy_active
+    load_registers_shared
     load_registers
 }
 

@@ -6,9 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
 import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -16,32 +16,27 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc8292c:
-	open_wallet
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-	" [19 02]No" eob
-
-l_0xc82931:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc82945)} {e(data_39.l_0xc828b3)}]" goto(data_39.l_0xc828b3)
+	show_wallet
+	two_choice_menu("Yes", l_0xc82945, "No", data_39.l_0xc828b3)
+	goto(data_39.l_0xc828b3)
 
 l_0xc82945:
 	if not flag FLG_KEY_ITEMS {
-	char_inventory_vacancy(-1)
-	goto_if_false(l_0xc829df)
+		get_item_receiver(-1) goto_if_false(l_0xc829df)
 	}
 	store_registers
-	amount_costs_too_much(30) goto_if_true(l_0xc82986)
+	hasmoney(30)
+	goto_if_false(l_0xc82986)
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	takemoney(30)
-	open_wallet
+	show_wallet
 	"@Thanks a lot." pause(20)
 	"  Enjoy the show." wait
 	sound(SND_BOXTAKE)	// 116
 	load_registers
 	if flag FLG_KEY_ITEMS { give_menu_key_item(SHOW_TICKET) }
-	else { give_and_check(0, SHOW_TICKET) }	// Item 0xB2 / 178, Show ticket
+	else { give_and_return_location(0, SHOW_TICKET) }	// Item 0xB2 / 178, Show ticket
 	eob
 
 l_0xc82986:
@@ -97,14 +92,7 @@ l_0xc82b59:
 	goto_if_flag(FLG_FOUR_DEPT_MSGCHG, l_0xc82beb)	// 0x022C, 556
 	"@When I grow up,| I wanna work for APE as a programmer..." next
 	"@Do you have any connections with those guys?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc82ba8:
-	"[19 02]No" eob
-
-l_0xc82bad:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc82bbc)} {e(l_0xc82bbc)}]"
+	two_choice_menu("Yes", l_0xc82bbc, "No", l_0xc82bbc)
 	goto(l_0xc82bbc)
 
 l_0xc82bbc:
@@ -133,12 +121,12 @@ l_0xc82c6b:
 	"@Die, and go to Hell-" next
 	"@No, to Heaven!" promptw
 	call(data_23.l_0xc6855b) goto_if_true(data_23.l_0xc683de)
-	stop_music(0)
+	stop_music
 	window_open(1)
 	title(1, Spook)
 	"@...Even though you could beat me..." next
 	"@Master Giygas will avenge me..." next
-	"{pause(60)}" linebreak
+	pause(60) linebreak
 	"@At this moment, {name(2)} should be...Monotoly..." next
 	"@Gwaaaaarrrrgh!!" promptw
 	window_closeall
@@ -147,9 +135,9 @@ l_0xc82c6b:
 	set(FLG_FOUR_DEPT_MSGCHG)	// 556
 	unset(FLG_FOUR_DEPT_BOSS_APPEAR)	// 57
 	pause(1)
-	"[1F F1 AD 03 7B 02]"
+	npc_do_mc(941,635)	// 0x03AD, 0x027B
 	set(FLG_PHOTO_DEPT)	// 497
-	"[1F 41 05]"
+	OSS_on	// event(5)
 	eob
 
 l_0xc82d6c:
@@ -271,7 +259,7 @@ l_0xc833b1:
 	"@You kids are sneaking around, looking for Mr. Monotoly, aren't you?" next
 	"@If I catch you kids doing anything,| I'll arrest you--no questions asked!" next
 	"@Be prepared!" next
-	party_pos_check(1) rtoarg
+	get_char_at_pos(1) rtoarg
 	"@Got it, {name(0)}..." next
 	"@Ha ha ha." next
 	"@I've already checked out your name..." end
@@ -279,7 +267,7 @@ l_0xc833b1:
 l_0xc83457:
 	"@Oh, that rude comment was a slip of the tongue." next
 	"@Now Monotoly can kiss my butt!" next
-	party_pos_check(1) rtoarg
+	get_char_at_pos(1) rtoarg
 	"@{name(0)}, " swap call(data_37.l_0xc7e6b3) "." end
 
 l_0xc834a8:
@@ -300,7 +288,7 @@ l_0xc83515:
 	// Item 0x8B / 139 = Yogurt machine / Strawberry tofu 
 	"  You have a <{itemname(YOGURT_DISP)}>?" next
 	"@May I have it?" next
-	sound(118)
+	sound(SND_CHICKEN2)	// 118
 	pause(10)
 	"@(Before you could answer, she took the" linebreak
 	"  <{itemname(YOGURT_DISP)}.>)" next
@@ -312,11 +300,11 @@ l_0xc83515:
 
 	take(-1, YOGURT_DISP)	// Item 0x8B / 139, Yogurt machine
 	set(FLG_FOUR_MAID_THANKS)	// 142
-	"[1F F1 B7 03 A8 02]"
-	wait_for_movement
-	"[1F E6 B7 03]"
-	"[19 23 B7 03 01 FF 00]"
-	"[1F 16 B7 03 00]"
+	npc_do_mc(951,680)	// 0x03B7, 0x02A8
+	wait_movement
+	npc_freeze(951)	// 0x03B7
+	get_dir_from_npc(951,TO_CHAR,-1)	// 0x03B7, 01, 0x00FF
+	npc_direction(951,0)	// 0x03B7, 0
 
 	pause(20)
 	window_open(1)
@@ -324,7 +312,7 @@ l_0xc83515:
 	"@My room's on the 48th floor." pause(20)
 	"  Don't forget to drop by!" wait
 	window_closeall
-	"[1F E9 B7 03]"
+	npc_unfreeze(951)
 	unset(FLG_FOUR_MAID_APPEAR)	// 59
 	eob
 
@@ -367,14 +355,7 @@ l_0xc8361c:
 	"@But if you insist, I'll tell you once more..." next
 	"@...*gasp, gasp*" next
 	"@D-/ d-/ do you wanna hear it again?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc838a0:
-	"[19 02]No" eob
-
-l_0xc838a5:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc8361c)} {e(l_0xc83957)}]"
+	two_choice_menu("Yes", l_0xc8361c, "No", l_0xc83957)
 	goto(l_0xc83957)
 
 l_0xc838b9:
@@ -382,14 +363,7 @@ l_0xc838b9:
 	"@But if you wanna hear one more time..." next
 	"@I'll tell you once more..." next
 	"@D...| D...| do... you wanna hear it again?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc83916:
-	"[19 02]No" eob
-
-l_0xc8391b:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc8392f)} {e(l_0xc83957)}]"
+	two_choice_menu("Yes", l_0xc8392f, "No", l_0xc83957)
 	goto(l_0xc83957)
 
 l_0xc8392f:
@@ -416,7 +390,7 @@ l_0xc839f7:
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc83a24)	// 0x91, 145
 	"@There's a person lying on the ground." next
 	"@I wonder if he's.../| he's...|" linebreak
-	"  d-/|dead?  ||Is he?!" end
+	"  d-/|dead?||  Is he?!" end
 
 l_0xc83a24:
 	"@Oh,/| I guess he wasn't dead after all." next
@@ -446,14 +420,7 @@ l_0xc83aee:
 	"@Don't cut in front of me!" next
 	"@If you give me somethin', I'll let you have my spot." next
 	"@Will you give me somethin'?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc83b46:
-	"[19 02]No" eob
-
-l_0xc83b4b:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc83b7b)} {e(l_0xc83b5a)}]"
+	two_choice_menu("Yes", l_0xc83b7b, "No", l_0xc83b5a)
 	goto(l_0xc83b5a)
 
 l_0xc83b5a:
@@ -462,23 +429,17 @@ l_0xc83b5a:
 
 l_0xc83b7b:
 	"@So, what do I get?"
-	delay_or_input(30)
+	wait_input_timeout(30)
 	call(data_15.l_0xc5e456)
 	pause(60)
 	newline
 	goto_if_false(l_0xc83b5a)
 	store_registers
-	return_item_in_slot(0,0)
-	get_selling_price(0) goto_if_false(l_0xc83c2d)
+	get_inventory_item(0,0)
+	get_selling_price(0)
+	goto_if_false(l_0xc83c2d)
 	"@Are you sure?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc83baf:
-	"[19 02]No" eob
-
-l_0xc83bb4:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc83bfc)} {e(l_0xc83bc3)}]"
+	two_choice_menu("Yes", l_0xc83bfc, "No", l_0xc83bc3)
 	goto(l_0xc83bc3)
 
 l_0xc83bc3:
@@ -488,7 +449,7 @@ l_0xc83bc3:
 
 l_0xc83bfc:
 	load_registers
-	take_slot(0,0)
+	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	"@All right, take my place." wait
@@ -629,32 +590,32 @@ l_0xc841b3:
 	"@I don't look like it, though." end
 
 l_0xc841de:
-	"[06 49 00 {e(data_41.l_0xc842f6)}]"
-	"[06 80 01 {e(data_41.l_0xc842f3)}]"
-	"[06 99 00 {e(data_41.l_0xc842f0)}]"
-	"[06 DA 00 {e(data_41.l_0xc842ed)}]"
-	"[06 5C 01 {e(data_41.l_0xc842ea)}]"
-	"[06 56 01 {e(data_41.l_0xc842e7)}]"
-	"[06 D9 00 {e(data_41.l_0xc842e4)}]"
-	"[06 10 00 {e(data_41.l_0xc842e1)}]"
-	"[06 8F 00 {e(data_41.l_0xc842de)}]"
-	"[06 4B 00 {e(data_41.l_0xc842db)}]"
-	"[06 8B 00 {e(data_41.l_0xc842d8)}]"
-	"[06 39 00 {e(data_41.l_0xc842d5)}]"
-	"[06 D6 00 {e(data_41.l_0xc842d2)}]"
-	"[06 47 00 {e(data_41.l_0xc842cf)}]"
-	"[06 45 00 {e(data_41.l_0xc842cc)}]"
-	"[06 80 00 {e(data_41.l_0xc842c9)}]"
-	"[06 2E 00 {e(data_41.l_0xc842c6)}]"
-	"[06 D3 00 {e(data_41.l_0xc842c3)}]"
-	"[06 55 00 {e(data_41.l_0xc842c0)}]"
-	"[06 0D 00 {e(data_41.l_0xc842bd)}]"
-	"[06 44 00 {e(data_41.l_0xc842ba)}]"
-	"[06 56 00 {e(data_41.l_0xc842b7)}]"
-	"[06 76 00 {e(data_41.l_0xc842b4)}]"
-	"[06 69 00 {e(data_41.l_0xc842b1)}]"
-	"[06 B6 00 {e(data_41.l_0xc842ae)}]"
-	"[06 50 00 {e(data_41.l_0xc842ab)}]"
+	goto_if_flag(FLG_WIN_GIEGU, data_41.l_0xc842f6)	// 0x49, 73
+	goto_if_flag(FLG_POWR_ALL, data_41.l_0xc842f3)	// 0x0180, 384
+	goto_if_flag(FLG_GUMI_CAVEOPEN, data_41.l_0xc842f0)	// 0x99, 153
+	goto_if_flag(FLG_TLPT_MAKY, data_41.l_0xc842ed)	// 0xDA, 218
+	goto_if_flag(FLG_ITEM_TAKANOME, data_41.l_0xc842ea)	// 0x015C, 348
+	goto_if_flag(FLG_SPHINX_OK, data_41.l_0xc842e7)	// 0x0156, 342
+	goto_if_flag(FLG_TLPT_SKRB, data_41.l_0xc842e4)	// 0xD9, 217
+	goto_if_flag(FLG_PU, data_41.l_0xc842e1)	// 0x10, 16
+	goto_if_flag(FLG_FOUR_OK, data_41.l_0xc842de)	// 0x8F, 143
+	goto_if_flag(FLG_WIN_MANIMANI, data_41.l_0xc842db)	// 0x4B, 75
+	goto_if_flag(FLG_FOUR_DEPT_OK, data_41.l_0xc842d8)	// 0x8B, 139
+	goto_if_flag(FLG_FOUR_DEPT_BOSS_APPEAR, data_41.l_0xc842d5)	// 0x39, 57
+	goto_if_flag(FLG_TLPT_FOUR, data_41.l_0xc842d2)	// 0xD6, 214
+	goto_if_flag(FLG_WIN_GEPPU, data_41.l_0xc842cf)	// 0x47, 71
+	goto_if_flag(FLG_WIN_MATENT, data_41.l_0xc842cc)	// 0x45, 69
+	goto_if_flag(FLG_WINS_START, data_41.l_0xc842c9)	// 0x80, 128
+	goto_if_flag(FLG_THRK_BIKINIZOMBI_APPEAR, data_41.l_0xc842c6)	// 0x2E, 46
+	goto_if_flag(FLG_TLPT_THRK, data_41.l_0xc842c3)	// 0xD3, 211
+	goto_if_flag(FLG_TWSN_ITEM_TONCHIKI, data_41.l_0xc842c0)	// 0x55, 85
+	goto_if_flag(FLG_POLA_GRFD, data_41.l_0xc842bd)	// 0x0D, 13
+	goto_if_flag(FLG_WIN_CARPAINTER, data_41.l_0xc842ba)	// 0x44, 68
+	goto_if_flag(FLG_ITEM_FRANKLINBADGE, data_41.l_0xc842b7)	// 0x56, 86
+	goto_if_flag(FLG_TWSN_PAUL_UPSET, data_41.l_0xc842b4)	// 0x76, 118
+	goto_if_flag(FLG_ONET_GATEOPEN, data_41.l_0xc842b1)	// 0x69, 105
+	goto_if_flag(FLG_POWR_GIAN, data_41.l_0xc842ae)	// 0xB6, 182
+	goto_if_flag(FLG_KEY_TABIGOYA, data_41.l_0xc842ab)	// 0x50, 80
 	goto_if_flag(FLG_WIN_FRANK, l_0xc842a8)	// 0x40, 64
 	goto_if_flag(FLG_ONET_GUARDSHARK_DISAPPEAR, l_0xc842a5)	// 0x28, 40
 	counter(1)

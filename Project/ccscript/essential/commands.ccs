@@ -102,7 +102,7 @@ Door_Locked:
 
 command handle_item_give(item, failLabel)
 {
-    notfull(-1)
+    get_item_receiver(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
     give_and_return_location(0, item)
     sound(SND_BOXTAKE)
@@ -122,7 +122,7 @@ command handle_item_give(item, failLabel)
 
 command handle_item_give_special(item, failLabel)
 {
-    notfull(-1)
+    get_item_receiver(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
     sound(SND_BOXTAKE)
     pause(60)
@@ -130,14 +130,14 @@ command handle_item_give_special(item, failLabel)
     sound(SND_SPECIALITEM)
     pause(90)
     window_open(53)
-    notfull(-1)
+    get_item_receiver(-1)
     give_and_return_location(0, item)
     call(0xc7dcda) //Print the "[character] got an item" message
 }
 
 command handle_item_give_shops(item, failLabel)
 {
-    notfull(-1)
+    get_item_receiver(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
     give_and_return_location(0, item)
     pause(60)
@@ -146,7 +146,7 @@ command handle_item_give_shops(item, failLabel)
 
 command handle_item_give_desert(item, failLabel)
 {
-    notfull(-1)
+    get_item_receiver(-1)
     goto_if_false(failLabel) //for consistency, you will need an errorbeep command at the start of this block...
     give_and_return_location(0, item)
     sound(SND_BOXTAKE)

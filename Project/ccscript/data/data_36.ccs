@@ -6,9 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -16,550 +16,714 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc7d9ae:
-    newline
-    store_registers
-    "@" call(data_37.l_0xc7e6d7) load_registers " got" linebreak
-    "  ${print_num_value(0)} dollars." end
+	newline
+	store_registers
+	"@" call(data_37.l_0xc7e6d7) load_registers " got" linebreak
+	"  $" number(0) " dollars." end
 
 l_0xc7d9cf:
-    goto_if_flag(FLG_SHOP_01, l_0xc7d9fd)	// 0xE2, 87
-    goto_if_flag(FLG_SHOP_02, l_0xc7da33)	// 0xE3, 87
-    goto_if_flag(FLG_SHOP_03, l_0xc7da7c)	// 0xE4, 87
-    goto_if_flag(FLG_SHOP_04, l_0xc7dab6)	// 0xE5, 87
-    eob
+	goto_if_flag(FLG_SHOP_01, l_0xc7d9fd)	// 0xE2, 87
+	goto_if_flag(FLG_SHOP_02, l_0xc7da33)	// 0xE3, 87
+	goto_if_flag(FLG_SHOP_03, l_0xc7da7c)	// 0xE4, 87
+	goto_if_flag(FLG_SHOP_04, l_0xc7dab6)	// 0xE5, 87
+	eob
 
 l_0xc7d9ec:
-    "@{name(0)} opened the present." eob
+	"@{name(0)} opened the present." eob
 
 l_0xc7d9fc:
-    eob
+	eob
 
 l_0xc7d9fd:
-    newline
-    "@But it was empty." end
+	newline
+	"@But it was empty." end
 
 l_0xc7da0c:
-    "@[1C 02 00] dug around in the trash can." eob
+	"@{name(0)} dug around in the trash can." eob
 
 l_0xc7da23:
-    newline
-    pause(20)
-    "@Well, let's see here..." promptw
-    eob
+	newline
+	pause(20)
+	"@Well, let's see here..." promptw
+	eob
 
 l_0xc7da33:
-    newline
-    "@There was just plain ol' garbage in the trash can." end
+	newline
+	"@There was just plain ol' garbage in the trash can." end
 
 l_0xc7da58:
-    "@{name(0)} opened the chest." eob
+	"@{name(0)} opened the chest." eob
 
 l_0xc7da68:
-    pause(20)
-    "@WHOAAAAAAAAAAH!" promptw
-    eob
+	pause(20)
+	"@WHOAAAAAAAAAAH!" promptw
+	eob
 
 l_0xc7da7c:
-    newline
-    "@But the chest was empty." end
+	newline
+	"@But the chest was empty." end
 
 l_0xc7da8f:
-    "@{name(0)} opened the casket." eob
+	"@{name(0)} opened the casket." eob
 
 l_0xc7daa1:
-    pause(20)
-    "@TAAAAAH-DAAAAAH!" promptw
-    eob
+	pause(20)
+	"@TAAAAAH-DAAAAAH!" promptw
+	eob
 
 l_0xc7dab6:
-    newline
-    "@But the casket was empty." end
+	newline
+	"@But the casket was empty." end
 
 l_0xc7dacb:
-    party_pos_check(1) swap
-    call(l_0xc7da0c)
-    sprite_direction(582, 1)	// 0x0246, 1
-    sound(SND_GIFTOPEN)	// 16
-    next
-    goto_if_flag(FLG_ITEM_HAEMITU, l_0xc7d9fd)	// 0x57, 87
-    call(l_0xc7da23)
-    counter(105)
-    ctoarg
-    call(data_35.l_0xc7d947)
-    char_inventory_vacancy(-1)
-    goto_if_false(l_0xc7db34)
-    store_registers
-    call(l_0xc7dc85)
-    goto_if_true(l_0xc7db22)
-    load_registers
-    swap
-    call(data_35.l_0xc7d958)
-    give_and_check(0, 0)
-    swap
-    sound(SND_BOXTAKE)	// 116
-    pause(30)
-    set(FLG_ITEM_HAEMITU)	// 87
-    eob
+	get_char_at_pos(1) swap
+	call(l_0xc7da0c)
+	sprite_direction(582, 1)	// 0x0246, 1
+	sound(SND_GIFTOPEN)	// 16
+	next
+	goto_if_flag(FLG_ITEM_HAEMITU, l_0xc7d9fd)	// 0x57, 87
+	call(l_0xc7da23)
+	counter(105)
+	ctoarg
+	call(data_35.l_0xc7d947)
+	get_item_receiver(-1) goto_if_false(l_0xc7db34)
+	store_registers
+	call(l_0xc7dc85)
+	goto_if_true(l_0xc7db22)
+	load_registers
+	swap
+	call(data_35.l_0xc7d958)
+	give_and_return_location(0,0)
+	swap
+	sound(SND_BOXTAKE)	// 116
+	pause(30)
+	set(FLG_ITEM_HAEMITU)	// 87
+	eob
 
 l_0xc7db22:
-    call(data_35.l_0xc7d967)
-    give_and_check(0, 0)
-    sound(SND_BOXTAKE)	// 116
-    pause(30)
-    set(FLG_ITEM_HAEMITU)	// 87
-    eob
+	call(data_35.l_0xc7d967)
+	give_and_return_location(0,0)
+	sound(SND_BOXTAKE)	// 116
+	pause(30)
+	set(FLG_ITEM_HAEMITU)	// 87
+	eob
 
 l_0xc7db34:
-    call(data_35.l_0xc7d991)
-    sprite_direction(582, 5)	// 0x0246, 5
-    eob
+	call(data_35.l_0xc7d991)
+	sprite_direction(582, 5)	// 0x0246, 5
+	eob
 
 l_0xc7db3f:
-    party_pos_check(1) swap
-    call(l_0xc7d9ec)
-    sound(SND_GIFTOPEN)	// 16
-    sprite_direction(744, 1)	// 0x02E8, 1
-    next
-    goto_if_flag(FLG_ITEM_LETTER_1, l_0xc7d9fd)	// 0x0299, 665
-    counter(158)	// Item check for Letter 1
-    ctoarg
-    call(data_35.l_0xc7d947)
-    char_inventory_vacancy(-1)
-    goto_if_false(l_0xc7db82)
-    swap
-    call(data_35.l_0xc7d958)
-    give_and_check(0, 0)
-    swap
-    sound(SND_BOXTAKE)	// 116
-    pause(30)
-    set(FLG_ITEM_LETTER_1)	// 665
-    eob
+	get_char_at_pos(1) swap
+	call(l_0xc7d9ec)
+	sound(SND_GIFTOPEN)	// 16
+	sprite_direction(744, 1)	// 0x02E8, 1
+	next
+	goto_if_flag(FLG_ITEM_LETTER_1, l_0xc7d9fd)	// 0x0299, 665
+	counter(158)	// Item check for Letter 1
+	ctoarg
+	call(data_35.l_0xc7d947)
+	get_item_receiver(-1) goto_if_false(l_0xc7db82)
+	swap
+	call(data_35.l_0xc7d958)
+	give_and_return_location(0,0)
+	swap
+	sound(SND_BOXTAKE)	// 116
+	pause(30)
+	set(FLG_ITEM_LETTER_1)	// 665
+	eob
 
 l_0xc7db82:
-    call(data_35.l_0xc7d991)
-    sprite_direction(744, 5)	// 0x02E8, 5
-    eob
+	call(data_35.l_0xc7d991)
+	sprite_direction(744, 5)	// 0x02E8, 5
+	eob
 
 l_0xc7db8d:
-    party_pos_check(1) swap
-    call(l_0xc7d9ec)
-    sound(SND_GIFTOPEN)	// 16
-    sprite_direction(745, 1)	// 0x02E9, 1
-    next
-    goto_if_flag(FLG_ITEM_LETTER_2, l_0xc7d9fd)	// 0x029A, 666
-    counter(167)	// Item check for Letter 2
-    ctoarg
-    call(data_35.l_0xc7d947)
-    char_inventory_vacancy(-1)
-    goto_if_false(l_0xc7dbd0)
-    swap
-    call(data_35.l_0xc7d958)
-    give_and_check(0, 0)
-    swap
-    sound(SND_BOXTAKE)	// 116
-    pause(30)
-    set(FLG_ITEM_LETTER_2)	// 666
-    eob
+	get_char_at_pos(1) swap
+	call(l_0xc7d9ec)
+	sound(SND_GIFTOPEN)	// 16
+	sprite_direction(745, 1)	// 0x02E9, 1
+	next
+	goto_if_flag(FLG_ITEM_LETTER_2, l_0xc7d9fd)	// 0x029A, 666
+	counter(167)	// Item check for Letter 2
+	ctoarg
+	call(data_35.l_0xc7d947)
+	get_item_receiver(-1) goto_if_false(l_0xc7dbd0)
+	swap
+	call(data_35.l_0xc7d958)
+	give_and_return_location(0,0)
+	swap
+	sound(SND_BOXTAKE)	// 116
+	pause(30)
+	set(FLG_ITEM_LETTER_2)	// 666
+	eob
 
 l_0xc7dbd0:
-    call(data_35.l_0xc7d991)
-    sprite_direction(745, 5)	// 0x02E9
-    eob
+	call(data_35.l_0xc7d991)
+	sprite_direction(745, 5)	// 0x02E9
+	eob
 
 l_0xc7dbdb:
-    party_pos_check(1) swap
-    call(l_0xc7d9ec)
-    sound(SND_GIFTOPEN)	// 16
-    // Changed [1F 16 EA 02 03] to [1F 16 EA 02 01], gift box for ending sequence Letter to kids
-    sprite_direction(746, 1)	// 0x02EA, 1, originally 0x2EA, 3
-    goto_if_flag(FLG_ITEM_LETTER_3, l_0xc7d9fd)	// 0x029B, 667
-    counter(179)
-    ctoarg
-    call(data_35.l_0xc7d947)
-    char_inventory_vacancy(-1)
-    goto_if_false(l_0xc7dc1e)
-    swap
-    call(data_35.l_0xc7d958)
-    give_and_check(0, 0)
-    swap
-    sound(SND_BOXTAKE)	// 116
-    pause(30)
-    set(FLG_ITEM_LETTER_3)	// 667
-    eob
+	get_char_at_pos(1) swap
+	call(l_0xc7d9ec)
+	sound(SND_GIFTOPEN)	// 16
+	// Changed [1F 16 EA 02 03] to [1F 16 EA 02 01], gift box for ending sequence Letter to kids
+	sprite_direction(746, 1)	// 0x02EA, 1, originally 0x2EA, 3
+	goto_if_flag(FLG_ITEM_LETTER_3, l_0xc7d9fd)	// 0x029B, 667
+	counter(179)
+	ctoarg
+	call(data_35.l_0xc7d947)
+	get_item_receiver(-1) goto_if_false(l_0xc7dc1e)
+	swap
+	call(data_35.l_0xc7d958)
+	give_and_return_location(0,0)
+	swap
+	sound(SND_BOXTAKE)	// 116
+	pause(30)
+	set(FLG_ITEM_LETTER_3)	// 667
+	eob
 
 l_0xc7dc1e:
-    call(data_35.l_0xc7d991)
-    sprite_direction(746, 7)	// 0x02EA, 7
-    eob
+	call(data_35.l_0xc7d991)
+	sprite_direction(746, 7)	// 0x02EA, 7
+	eob
 
 l_0xc7dc29:
-    switch_call(4, {
-	long l_0xc7dc3d
-	long l_0xc7dc3e
-	long l_0xc7dc3d
-	long l_0xc7dc3e
-    })
-    //"[1F C0 04 {e(l_0xc7dc3d)} {e(l_0xc7dc3e)} {e(l_0xc7dc3d)} {e(l_0xc7dc3e)}]"
-    eob
+	switch_call(4)
+		switch_entry(l_0xc7dc3d)
+		switch_entry(l_0xc7dc3e)
+		switch_entry(l_0xc7dc3d)
+		switch_entry(l_0xc7dc3e)
+	eob
 
 l_0xc7dc3d:
-    eob
+	eob
 
 l_0xc7dc3e:
-    eob
+	eob
 
 l_0xc7dc3f:
-    counter(1)
-    goto(l_0xc7dc41)
+	counter(1)
+	goto(l_0xc7dc41)
 
 l_0xc7dc41:
-    inc ctoarg
-    party_pos_check(0)
-    goto_if_false(l_0xc7dc76)
-    store_registers
-    compare_register(5, 0)	// long 0x00000005, 0
-    goto_if_true(l_0xc7dc76)
-    load_registers
-    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
-    goto_if_true(l_0xc7dc41)
-    load_registers
-    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
-    goto_if_true(l_0xc7dc41)
-    goto(l_0xc7dc76)
+	inc ctoarg
+	get_char_at_pos(0)
+	goto_if_false(l_0xc7dc76)
+	store_registers
+	compare_register(5, 0)	// long 0x00000005, 0
+	goto_if_true(l_0xc7dc76)
+	load_registers
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
+	goto_if_true(l_0xc7dc41)
+	load_registers
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
+	goto_if_true(l_0xc7dc41)
+	goto(l_0xc7dc76)
 
 l_0xc7dc76:
-    eob
+	eob
 
 l_0xc7dc77:
-    goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc7dc7e)	// 0x027E, 638
-    goto(l_0xc7dc7e)
+	goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc7dc7e)	// 0x027E, 638
 
 l_0xc7dc7e:
-    eob
+	eob
 
 l_0xc7dc7f:
-    ctoarg swap
-    store_registers
-    goto(l_0xc7dc85)
+	ctoarg swap
+	store_registers
+	goto(l_0xc7dc85)
 
 l_0xc7dc85:
-    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
-    goto_if_true(l_0xc7dc97)
-    load_registers
-    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
-    goto(l_0xc7dc97)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
+	goto_if_true(l_0xc7dc97)
+	load_registers
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 
 l_0xc7dc97:
-    eob
+	eob
 
 l_0xc7dc98:
-    ctoarg
-    eob
+	ctoarg
+	eob
 
 l_0xc7dc9b:
-    swap
-    store_registers
-    result_is(1)
-    goto_if_true(l_0xc7dcb5)
-    load_registers
-    result_is(2)
-    goto_if_true(l_0xc7dcb5)
-    load_registers
-    result_is(8)
-    goto(l_0xc7dcb5)
+	swap store_registers
+	result_is(1)
+	goto_if_true(l_0xc7dcb5)
+	load_registers
+	result_is(2)
+	goto_if_true(l_0xc7dcb5)
+	load_registers
+	result_is(8)
 
 l_0xc7dcb5:
-    eob
+	eob
 
 l_0xc7dcb6:
-    sound(SND_BOXTAKE)	// 116
-    pause(60)
-    copy_wram
-    window_closeall
-    sound(SND_SPECIALITEM)	// 102
-    pause(100)
-    window_open(1)
-    copy_active
-    call(l_0xc7dcda)
-    eob
+	sound(SND_BOXTAKE)	// 116
+	pause(60)
+	store_registers_shared
+	window_closeall
+	sound(SND_SPECIALITEM)	// 102
+	pause(100)
+	window_open(1)
+	load_registers_shared
+	call(l_0xc7dcda)
+	eob
 
 l_0xc7dccf:
-    sound(SND_BOXTAKE)	// 116
-    pause(60)
-    call(l_0xc7dcda)
-    eob
+	sound(SND_BOXTAKE)	// 116
+	pause(60)
+	call(l_0xc7dcda)
+	eob
 
 l_0xc7dcda:
-    store_registers
-    call(l_0xc7dc85)
-    goto_if_true(l_0xc7dd03)
-    load_registers
-    swap
-    newline
-    "@({name(0)} got" linebreak
-    "  the {swap}{return_item_in_slot(0, 0)}{itemname(0)}.)" eob
+	store_registers
+	call(l_0xc7dc85)
+	goto_if_true(l_0xc7dd03)
+	load_registers swap
+	newline
+	"@({name(0)} got" linebreak
+	"  the " swap get_inventory_item(0,0) "{itemname(0)}.)" eob
 
 l_0xc7dd03:
-    party_pos_check(1) swap
-    "@({name(0)} added the "
-    load_registers
-    return_item_in_slot(0, 0)
-    itemname(0)
-    linebreak
-    "  to {swap}{name(0)}'s stuff.)" eob
+	get_char_at_pos(1) swap
+	"@({name(0)} added the " load_registers get_inventory_item(0,0) "{itemname(0)}" linebreak
+	"  to {swap}{name(0)}'s stuff.)" eob
 
 l_0xc7dd2c:
-    copy_wram
-    return_item_in_slot(0, 0)
-    store_registers
-    swap
-    eob
+	store_registers_shared
+	get_inventory_item(0,0)
+	store_registers swap
+	eob
 
 l_0xc7dd37:
-    swap
-    "@{name(0)} used" linebreak
-    "  the {swap}{itemname(0)}." promptw
-    eob
+	swap
+	"@{name(0)} used" linebreak
+	"  the {swap}{itemname(0)}." promptw
+	eob
 
 l_0xc7dd4b:
-    open_hp
-    goto(l_0xc7dd4d)
+	open_hp
+	goto(l_0xc7dd4d)
 
 l_0xc7dd4d:
-    open_wallet
-    goto(l_0xc7dd4f)
+	open_wallet
+	goto(l_0xc7dd4f)
 
 l_0xc7dd4f:
-    add_menu_string("Yes")
+	load_str("Yes")
 
 l_0xc7dd55:
-    add_menu_string("No")
+	load_str("No")
 
 l_0xc7dd5a:
-    print_horizontal(2) eob
+	print_strings_horizontal(2)
+	eob
 
 l_0xc7dd5e:
-    create_menu_cancellable
-    clearline
-    goto_if_flag(FLG_SHOPTEMP_4, l_0xc7dd68)	// 0x0293, 659
-    eob
+	do_menu
+	clearline
+	goto_if_flag(FLG_SHOPTEMP_4, l_0xc7dd68)	// 0x0293, 659
+	eob
 
 l_0xc7dd68:
-    result_not(1)
-    eob
+	result_not(1)
+	eob
 
 l_0xc7dd6b:
-    music_effect(3)
-    pause(180)
-    "[1F 01 00]" eob
+	music_effect(3)
+	pause(180)
+	stop_music
+	eob
 
 l_0xc7dd74:
-    music_effect(2)
-    pause(30)
-    "[1F 01 00]" eob
+	music_effect(2)
+	pause(30)
+	stop_music
+	eob
 
 l_0xc7dd7d:
-    call(l_0xc7dd6b)
-    music_resume
-    eob
+	call(l_0xc7dd6b)
+	music_resume
+	eob
 
 l_0xc7dd85:
-    call(l_0xc7dd74)
-    music_resume
-    eob
+	call(l_0xc7dd74)
+	music_resume
+	eob
 
-l_0xc7dd8d:
-    "{isset(flag 180)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 181)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 645)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 446)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 646)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 647)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 648)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 675)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 694)}[1B 03 {e(l_0xc7dde7)}]{isset(flag 695)}[1B 03 {e(l_0xc7dde7)}]" goto(l_0xc7dde7)
+l_0xc7dd8d:	// Escargo and Pizza delivery flag checks
+	isset(FLG_DELIVERY_PIZZA)	// 180
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_UNSOU)	// 181
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_UNSOU_B)	// 645
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_CUSTOMER)	// 446
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_CUSTOMER_B)	// 646
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_CUSTOMER_C)	// 647
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_CUSTOMER_D)	// 648
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_HOIHOI)	// 675
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	goto_if_true(l_0xc7dde7)
+	isset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	goto_if_true(l_0xc7dde7)
+	goto(l_0xc7dde7)
 
 l_0xc7dde7:
-    eob
+	eob
 
 l_0xc7dde8:
-    "[1F E9 1F 05]"
-    wait_for_movement
-    eob
+	npc_unfreeze(1311)	// 0x051F
+	wait_movement
+	eob
 
 l_0xc7ddef:
-    "{unset(flag 180)}{unset(flag 181)}{unset(flag 645)}{unset(flag 446)}{unset(flag 646)}{unset(flag 647)}{unset(flag 648)}{unset(flag 675)}{unset(flag 694)}{unset(flag 695)}{unset(flag 754)}" eob
+	unset(FLG_DELIVERY_PIZZA)	// 180
+	unset(FLG_DELIVERY_UNSOU)	// 181
+	unset(FLG_DELIVERY_UNSOU_B)	// 645
+	unset(FLG_DELIVERY_CUSTOMER)	// 446
+	unset(FLG_DELIVERY_CUSTOMER_B)	// 646
+	unset(FLG_DELIVERY_CUSTOMER_C)	// 647
+	unset(FLG_DELIVERY_CUSTOMER_D)	// 648
+	unset(FLG_DELIVERY_HOIHOI)	// 675
+	unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	unset(flag 754)	// 754
+	eob
 
 l_0xc7de11:
-    "{unset(flag 383)}{unset(flag 542)}{unset(flag 543)}{set(flag 778)}[06 F4 02 {e(l_0xc7de2a)}]{unset(flag 754)}{unset(flag 779)}" goto(l_0xc7de2a)
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	unset(FLG_BGM_FUNE1)	// 542
+	unset(FLG_BGM_FUNE2)	// 543
+	set(FLG_SYS_DIS_MOUSE)	// 778
+	goto_if_flag(FLG_DUNGEONMAN, l_0xc7de2a)	// 0x02F4, 756
+	unset(FLG_SYS_DISTLPT)	// 754
+	unset(FLG_SYS_DISTLPT_EVENT)	// 779
+	goto(l_0xc7de2a)
 
 l_0xc7de2a:
-    eob
+	eob
 
 l_0xc7de2b:
-    "{unset(flag 383)}" eob
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc7de2f:
-    "{music(115)}{pause(60)}{wait}[1F 01 00]{sound(11)}" eob
+	music(115)
+	pause(60)
+	wait
+	stop_music
+	sound(SND_PHONEPICKUP)	// 11
+	eob
 
 l_0xc7de3d:
-    newline
-    "@Click!  Beeeeeeep...{wait}{sound(11)}" eob
+	newline
+	sound(SND_PHONEPICKUP)	// 11
+	"@Click!  Beeeeeeep..." wait
+	eob
 
 l_0xc7de54:
-    call(l_0xc7de3d) "{window_closeall}{pause(10)}{music_resume}" eob
+	call(l_0xc7de3d)
+	window_closeall
+	pause(10)
+	music_resume
+	eob
 
 l_0xc7de60:
-    "{unset(flag 779)}" call(l_0xc7dd8d) "[1B 03 {e(data_55.l_0xc9992f)}]{unset(flag 754)}" eob
+	unset(FLG_SYS_DISTLPT_EVENT)	// 779
+	call(l_0xc7dd8d)
+	goto_if_true(data_55.l_0xc9992f)
+	unset(FLG_GENKAN_MAMA_APPEAR)	// 754
+	eob
 
 l_0xc7de72:
-    "[06 0B 03 {e(data_55.l_0xc9992f)}]{unset(flag 754)}" eob
+	goto_if_flag(FLG_SYS_DISTLPT_EVENT, data_55.l_0xc9992f)	// 0x030B, 779
+	unset(FLG_GENKAN_MAMA_APPEAR)	// 754
+	eob
 
-l_0xc7de7d:
-    call(l_0xc7de11) call(data_24.l_0xc69082) "{window_open(1)}" call(l_0xc7dfa4) "@[1C 02 00]!" next
-    "@It looks like you got your head handed to you." next
-    "@So, how about giving it another shot?" linebreak
-    "[19 02]Yes" eob
-
-l_0xc7deca:
-    "  [19 02]No" eob
-
-l_0xc7ded1:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7df3c)} {e(l_0xc7dee0)}]" goto(l_0xc7dee0)
+l_0xc7de7d:	// Game over text
+	call(l_0xc7de11)
+	call(data_24.l_0xc69082)
+	window_open(1)
+	call(l_0xc7dfa4)
+	"@{name(0)}!" next
+	"@It looks like you got your head handed to you." next
+	"@So, how about giving it another shot?" linebreak
+	two_choice_menu("Yes", l_0xc7df3c, "No", l_0xc7dee0)
+	goto(l_0xc7dee0)
 
 l_0xc7dee0:
-    "@Are you sure?" next
-    "@The next time you start your adventure," next
-    "@you'll begin where you last saved." next
-    "@Is that okay?" linebreak
-    "[19 02]No" eob
-
-l_0xc7df25:
-    "  [19 02]Yes" eob
-
-l_0xc7df2d:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc7df3c)} {e(l_0xc7df78)}]" goto(l_0xc7df3c)
+	"@Are you sure?" next
+	"@The next time you start your adventure," next
+	"@you'll begin where you last saved." next
+	"@Is that okay?" linebreak
+	two_choice_menu("No", l_0xc7df3c, "Yes", l_0xc7df78)
+	goto(l_0xc7df3c)
 
 l_0xc7df3c:
-    "@[1C 02 00] decided to return after summoning all the courage and energy he had." next
-    "@Good luck!{wait}{window_closeall}{set(flag 475)}" eob
+	"@{name(0)} decided to return after summoning all the courage and energy he had." next
+	"@Good luck!" wait
+	window_closeall
+	set(FLG_SYS_COMEBACK)	// 475
+	eob
 
 l_0xc7df78:
-    "@It must have all just been a bad dream." next
-    "@See you, [1C 02 00]!{wait}{window_closeall}{unset(flag 475)}" eob
+	"@It must have all just been a bad dream." next
+	"@See you, {name(0)}!" wait
+	window_closeall
+	unset(FLG_SYS_COMEBACK)	// 475
+	eob
 
 l_0xc7dfa4:
-    "[06 0E 00 {e(l_0xc7dfb9)}]{isset(flag 128)}[1B 02 {e(l_0xc7dfb9)}]{counter(3)}{ctoarg}" eob
+	goto_if_flag(FLG_JEFF, l_0xc7dfb9)	// 0x0E, 14
+	isset(flag 128)
+	goto_if_false(l_0xc7dfb9)
+	counter(3)
+	ctoarg
+	eob
 
 l_0xc7dfb9:
-    "{counter(1)}{ctoarg}" eob
+	counter(1)
+	ctoarg
+	eob
 
-l_0xc7dfbe:
-    "[1F 13 01 02]{pause(16)}[1F 13 01 03]{pause(12)}[1F 13 01 04]{pause(8)}[1F 13 01 05]{pause(60)}{music(79)}[1F EA 6A 00][1F 61][1F E7 6A 00]{open_hp}[1F 41 0D]{window_open(1)}@[1C 01 08] was filled with the Power of the Giant Step!" next
-    "@[1C 01 08]'s Speed increased by 5!{sound(40)}[1E 0C 01 05]" next
-    "@[1C 01 08]'s Vitality increased by 5!{sound(40)}[1E 0D 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Lilliput Steps!" next
-    "@[1C 01 08]'s Guts increased by 5!{sound(40)}[1E 0B 01 05]" next
-    "@[1C 01 08]'s Luck increased by 5!{sound(40)}[1E 0E 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Milky Well!" next
-    "@[1C 01 08]'s Speed increased by 5!{sound(40)}[1E 0C 01 05]" next
-    "@[1C 01 08]'s IQ increased by 5!{sound(40)}[1E 0A 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Magnet Hill!" next
-    "@[1C 01 08]'s Vitality increased by 5!{sound(40)}[1E 0D 01 05]" next
-    "@[1C 01 08]'s Luck increased by 5!{sound(40)}[1E 0E 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Rainy Circle!" next
-    "@[1C 01 08]'s Guts increased by 5!{sound(40)}[1E 0B 01 05]" next
-    "@[1C 01 08]'s IQ increased by 5!{sound(40)}[1E 0A 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Pink Cloud!" next
-    "@[1C 01 08]'s Speed increased by 5!{sound(40)}[1E 0C 01 05]" next
-    "@[1C 01 08]'s Guts increased by 5!{sound(40)}[1E 0B 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Lumine Hall!" next
-    "@[1C 01 08]'s Luck increased by 5!{sound(40)}[1E 0E 01 05]" next
-    "@[1C 01 08]'s IQ increased by 5!{sound(40)}[1E 0A 01 05]" next
-    "@[1C 01 08] was filled with the Power of the Fire Spring!" next
-    "@[1C 01 08]'s Speed increased by 5!{sound(40)}[1E 0C 01 05]" next
-    "@[1C 01 08]'s Luck increased by 5!{sound(40)}[1E 0E 01 05][03]{window_closeall}[1F 41 0E]{pause(60)}{window_open(1)}@Instantly, [1C 01 08]'s mind cleared," next
-    "@and he realized that he had possessed great power!" next
-    "@At that moment, [1C 01 08]'s psychic powers radically expanded!{sound(40)}{set(flag 74)}[03]{window_closeall}{pause(30)}{window_open(14)}@[1C 01 08] gained 200,000 exp.[03][1E 09 01 40 0D 03]" linebreak
-    "[1F 04 03]" newline
-    "@And finally, he realized{sound(103)} he had the power of Teleport [8C].[1F 71 01 01][1F 71 01 04]{prompt}[1F 04 01]{window_closeall}{pause(120)}{pause(180)}{pause(10)}[1F EB 01 06][1F E5 FF][1F 15 01 00 05 03 01]{pause(10)}[1F EA 6A 00][1F 61]{window_open(1)}@[1C 01 08] made all of the hidden powers his own." next
-    "@[1C 01 08] absorbed the power of the land into his heart, and Magicant was no more.[03]{window_closeall}" goto(data_57.l_0xc9b4c9)
+l_0xc7dfbe:	// Ness' boosts after Magicant
+	char_direction(1,2)	// 1, 2
+	pause(16)
+	char_direction(1,3)	// 1, 3
+	pause(12)
+	char_direction(1,4)	// 1, 4
+	pause(8)
+	char_direction(1,5)	// 1, 5
+	pause(60)
+	music(79)
+	sprite2_unfreeze(106)	// 0x6A
+	wait_movement
+	sprite2_freeze(106)	// 0x6A
+	open_hp
+	event(13)	// 0x0D, scroll HP/PP meters randomly
+	window_open(1)
+	// Stat 8 = Ness' name
+	"@{stat(8)} was filled with the Power of the Giant Step!" next
+	"@{stat(8)}'s Speed increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_speed(1,5) next
+	"@{stat(8)}'s Vitality increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_vitality(1,5) next
+	"@{stat(8)} was filled with the Power of the Lilliput Steps!" next
+	"@{stat(8)}'s Guts increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_guts(1,5) next
+	"@{stat(8)}'s Luck increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_luck(1,5) next
+	"@{stat(8)} was filled with the Power of the Milky Well!" next
+	"@{stat(8)}'s Speed increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_speed(1,5) next
+	"@{stat(8)}'s IQ increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_iq(1,5) next
+	"@{stat(8)} was filled with the Power of the Magnet Hill!" next
+	"@{stat(8)}'s Vitality increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_vitality(1,5) next
+	"@{stat(8)}'s Luck increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_luck(1,5) next
+	"@{stat(8)} was filled with the Power of the Rainy Circle!" next
+	"@{stat(8)}'s Guts increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_guts(1,5) next
+	"@{stat(8)}'s IQ increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_iq(1,5) next
+	"@{stat(8)} was filled with the Power of the Pink Cloud!" next
+	"@{stat(8)}'s Speed increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_speed(1,5) next
+	"@{stat(8)}'s Guts increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_guts(1,5) next
+	"@{stat(8)} was filled with the Power of the Lumine Hall!" next
+	"@{stat(8)}'s Luck increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_luck(1,5) next
+	"@{stat(8)}'s IQ increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_iq(1,5) next
+	"@{stat(8)} was filled with the Power of the Fire Spring!" next
+	"@{stat(8)}'s Speed increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_speed(1,5) next
+	"@{stat(8)}'s Luck increased by 5!"
+	sound(SND_STATSUP)	// 40
+	boost_luck(1,5) promptw
+	window_closeall
+	event(14)	// 0x0E, stop HP/PP scrolling
+	pause(60)
+	window_open(1)
+	"@Instantly, {stat(8)}'s mind cleared," next
+	"@and he realized that he had possessed great power!" next
+	"@At that moment, {stat(8)}'s psychic powers radically expanded!"
+	sound(40)
+	set(flag 74)
+	promptw
+	window_closeall
+	pause(30)
+	window_open(14)
+	"@{stat(8)} gained 200,000 exp." promptw
+	boost_experience(1,200000) linebreak	// 0x030D40
+	text_blips_off newline
+	"@And finally, he realized" sound(SND_LEARNPSI) " he had the power of Teleport [8C]."
+	learn_teleport_alpha
+	learn_teleport_beta
+	prompt
+	text_blips_default
+	window_closeall
+	pause(120)
+	pause(180)
+	pause(10)
+	hide_char(1)	// 1, 6
+	party_freeze
+	sprite2_spawn(1,773,1)	// 0x01, 0x0305, 1
+	pause(10)
+	sprite2_unfreeze(106)	// 0x6A
+	wait_movement
+	window_open(1)
+	"@{stat(8)} made all of the hidden powers his own." next
+	"@{stat(8)} absorbed the power of the land into his heart, and Magicant was no more." promptw
+	window_closeall
+	goto(data_57.l_0xc9b4c9)
 
 l_0xc7e3f9:
-    eob
+	eob
 
 l_0xc7e3fa:
-    "[19 19 00 00]{swap}@[1C 02 00] rearranged {swap}" call(data_37.l_0xc7e660) "{swap} own items and the {swap}[1C 05 00] moved." end
+	get_inventory_item(0,0) swap
+	"@{name(0)} rearranged {swap}" call(data_37.l_0xc7e660) "{swap} own items and the {swap}{itemname(0)} moved." end
 
 l_0xc7e42c:
-    "[19 19 00 00]{swap}@[1C 02 00] tried to give" linebreak
-    "  the {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]," next
-    "{load_registers}@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
+	get_inventory_item(0,0) swap
+	"@{name(0)} tried to give" linebreak
+	"  the {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}," next
+	"{load_registers}@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
 
 l_0xc7e468:
-    "[19 19 00 00]{swap}@[1C 02 00] tried to add" linebreak
-    "  the {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]'s stuff," next
-    "@but there was no room for it." end
+	get_inventory_item(0,0) swap
+	"@{name(0)} tried to add" linebreak
+	"  the {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}'s stuff," next
+	"@but there was no room for it." end
 
 l_0xc7e4a4:
-    "[19 19 00 00]{swap}@[1C 02 00] gave the {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]." end
+	get_inventory_item(0,0) swap
+	"@{name(0)} gave the {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}." end
 
 l_0xc7e4c3:
-    "[19 19 00 00]{swap}@[1C 02 00] added" linebreak
-    "  the {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]'s stuff." end
+	get_inventory_item(0,0) swap
+	"@{name(0)} added" linebreak
+	"  the {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}'s stuff." end
 
 l_0xc7e4e9:
-    "[19 19 00 00]{swap}{store_registers}[19 10 01]{swap}@[1C 02 00]{load_registers} rearranged [1C 02 00]'s items and the {swap}[1C 05 00] moved." end
+	get_inventory_item(0,0) swap
+	store_registers
+	get_char_at_pos(1) swap
+	"@{name(0)}{load_registers} rearranged {name(0)}'s items and the {swap}{itemname(0)} moved." end
 
 l_0xc7e51c:
-    "[19 19 00 00]@[1C 02 FF] tried to take" linebreak
-    "  the [1C 05 00]" linebreak
-    "  from {swap}[1C 02 00]'s stuff," next
-    "{load_registers}@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
+	get_inventory_item(0,0)
+	"@{name(-1)} tried to take" linebreak
+	"  the {itemname(0)}" linebreak
+	"  from {swap}{name(0)}'s stuff," next
+	load_registers
+	"@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
 
 l_0xc7e559:
-    "[19 19 00 00]{swap}[1B 05][19 10 01]{swap}@[1C 02 00][1B 06] tried to add [1C 02 00]'s {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]'s stuff," next
-    "@but there was no room for it." end
+	get_inventory_item(0,0) swap
+	store_registers_shared
+	get_char_at_pos(1) swap
+	"@{name(0)}{load_registers_shared} tried to add {name(0)}'s {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}'s stuff," next
+	"@but there was no room for it." end
 
 l_0xc7e5a1:
-    "[19 19 00 00]@[1C 02 FF] took" linebreak
-    "  the [1C 05 00]" linebreak
-    "  from {swap}[1C 02 00]'s stuff." end
+	get_inventory_item(0,0)
+	"@{name(-1)} took" linebreak
+	"  the {itemname(0)}" linebreak
+	"  from {swap}{name(0)}'s stuff." end
 
 l_0xc7e5c2:
-    "[19 19 00 00]{swap}[1B 05][19 10 01]{swap}@[1C 02 00][1B 06] added [1C 02 00]'s {swap}[1C 05 00]" linebreak
-    "  to [1C 02 FF]'s stuff." end
+	get_inventory_item(0,0) swap
+	store_registers_shared
+	get_char_at_pos(1) swap
+	"@{name(0)}{load_registers_shared} added {name(0)}'s {swap}{itemname(0)}" linebreak
+	"  to {name(-1)}'s stuff." end
 
 l_0xc7e5f3:
-    "{result_is(2)}[1B 03 {e(l_0xc7e5fe)}]he" eob
+	result_is(2)
+	goto_if_true(l_0xc7e5fe)
+	"he" eob
 
 l_0xc7e5fe:
-    "she" eob
+	"she" eob
 
 l_0xc7e602:
-    "[1C 14 01][09 03 {e(l_0xc7e613)} {e(l_0xc7e616)} {e(l_0xc7e61a)}]" goto(l_0xc7e613)
+	get_user_gender
+	switch_goto(3)
+		switch_entry(l_0xc7e613)
+		switch_entry(l_0xc7e616)
+		switch_entry(l_0xc7e61a)
+	goto(l_0xc7e613)
 
 l_0xc7e613:
-    "he" eob
+	"he" eob
 
 l_0xc7e616:
-    "she" eob
+	"she" eob
 
 l_0xc7e61a:
-    "it" eob
+	"it" eob
 
 l_0xc7e61d:
-    "[1C 14 01][09 03 {e(l_0xc7e62e)} {e(l_0xc7e631)} {e(l_0xc7e635)}]" goto(l_0xc7e62e)
+	get_user_gender
+	switch_goto(3)
+		switch_entry(l_0xc7e62e)
+		switch_entry(l_0xc7e631)
+		switch_entry(l_0xc7e635)
+	goto(l_0xc7e62e)
 
 l_0xc7e62e:
-    "He" eob
+	"He" eob
 
 l_0xc7e631:
-    "She" eob
+	"She" eob
 
 l_0xc7e635:
-    "It" eob
+	"It" eob
 
 l_0xc7e638:
-    "[1C 15 01]{swap} [1C 0A 00 00 00 00] [1C 15 01][09 03 {e(l_0xc7e656)} {e(data_37.l_0xc7e659)} {e(data_37.l_0xc7e65d)}]" goto(l_0xc7e656)
+	get_target_gender swap
+	" " number(0) " " get_target_gender
+	switch_goto(3)
+		switch_entry(l_0xc7e656)
+		switch_entry(data_37.l_0xc7e659)
+		switch_entry(data_37.l_0xc7e65d)
+	goto(l_0xc7e656)
 
 l_0xc7e656:
-    "he" eob
+	"he" eob
 

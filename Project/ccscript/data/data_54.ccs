@@ -475,7 +475,7 @@ l_0xc981c6:
 	set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
 	if flag FLG_KEY_ITEMS { give_menu_key_item(CABIN_KEY) }
 	else {
-		full(-1) goto_if_true(l_0xc9827c)
+		get_item_receiver(-1) goto_if_false(l_0xc9827c)
 		give_and_return_location(0, CABIN_KEY)	// 0xAB, 171, Cabin key
 		call(data_36.l_0xc7dcb6)
 	}
@@ -736,7 +736,7 @@ l_0xc98a27:
 	open_wallet
 	"@Your good deed will be rewarded." pause(20)
 	"  Here's a postcard for you." next
-	full(-1) goto_if_true(l_0xc98ab2)
+	get_item_receiver(-1) goto_if_false(l_0xc98ab2)
 	// 0xA5, 165, Picture postcard
 	give_and_return_location(0,165)
 	call(data_36.l_0xc7dccf) promptw

@@ -635,7 +635,7 @@ command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {by
 
     define SCR_STATUS_GROUP_5 = 6
     define SCR_STATUS_5_NONE = 1
-    define SCR_STATUS_5_ASTHMA = 2
+    define SCR_STATUS_5_HOMESICK = 2
 
     define SCR_STATUS_GROUP_6 = 7
     define SCR_STATUS_6_NONE = 1

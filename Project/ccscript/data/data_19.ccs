@@ -90,7 +90,7 @@ l_0xc6354b:
 
 l_0xc63593:
     "@I hope you get over your cold soon." linebreak
-    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_ASTHMA)	// 1, 6, 2
+    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
     goto_if_true(l_0xc635b4)
     eob
 

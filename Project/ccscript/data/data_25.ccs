@@ -88,7 +88,7 @@ l_0xc6aa2f:
 	"@It's a little bent though." promptw
 	if flag FLG_KEY_ITEMS { give_menu_key_item(LOCKER_KEY) }
 	else {
-		full(-1) goto_if_true(l_0xc6acda)
+		get_item_receiver(-1) goto_if_false(l_0xc6acda)
 		give_and_return_location(0, LOCKER_KEY)	// 0xCD, 205
 		call(data_36.l_0xc7dcb6) }
 	next
@@ -110,7 +110,7 @@ l_0xc6abd5:
 	"  the inconvenience." promptw
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BAD_KEY_MACHINE) }
 	else {
-		full(-1) goto_if_true(l_0xc6acda)
+		get_item_receiver(-1) goto_if_false(l_0xc6acda)
 		give_and_return_location(0, BAD_KEY_MACHINE)	// 0xAC, 172
 		call(data_36.l_0xc7dcb6) }
 	next
@@ -158,7 +158,7 @@ l_0xc6ae07:
 
 l_0xc6ae36:
 	hasmoney(1) goto_if_false(l_0xc6ae77)
-	if not flag FLG_KEY_ITEMS { full(-1) goto_if_true(l_0xc6aee1) }
+	if not flag FLG_KEY_ITEMS { get_item_receiver(-1) goto_if_false(l_0xc6aee1) }
 	pause(1)
 	takemoney(1)
 	if not flag FLG_KEY_ITEMS { give_and_return_location(3, BUBBLE_GUM) }	// 0x68, 104
@@ -177,7 +177,7 @@ l_0xc6ae77:
 	"  You don't even have a buck?" next
 	"@Then, I'll let you have the monkey for free." next
 	if not flag FLG_KEY_ITEMS {
-		full(-1) goto_if_true(l_0xc6aee1)
+		get_item_receiver(-1) goto_if_false(l_0xc6aee1)
 		give_and_return_location(0, BUBBLE_GUM)	// 0x68, 104
 	}
 	"@Here's a pack of bubble gum." pause(20)
@@ -681,7 +681,7 @@ l_0xc6c059:
 	"@I give you" linebreak 
 	"  ribbon." next
 	font_normal
-	full(-1) goto_if_true(l_0xc6c081)
+	get_item_receiver(-1) goto_if_false(l_0xc6c081)
 	give_and_return_location(0,220)	// Item 0xDC, 220, Saturn ribbon
 	call(data_36.l_0xc7dccf)
 	wait

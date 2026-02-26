@@ -62,8 +62,7 @@ l_0xc6070c:
 	"@But, the S[C0]nchez Brothers and their friend are a very cheerful trio..." next
 	"@they will make you happy.)" next
 	"@(Would you like to insert a buck?)" linebreak
-	// two_choice_menu
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc6078b)} {e(l_0xc607a5)}]"
+	two_choice_menu("Yes", l_0xc6078b, "No", l_0xc607a5)
 	goto(l_0xc607a5)
 
 l_0xc6078b:
@@ -175,7 +174,7 @@ l_0xc6090b:
 	title(1, Tomas)
 	"@Amigo, you won a very big jackpot!" next
 	"@Here's a big prize for you, amigo!" next
-	full(-1) goto_if_true(l_0xc60b13)
+	get_item_receiver(-1) goto_if_false(l_0xc60b13)
 	give_and_return_location(0,168)	// item 0xA8 / 168 = Chick
 	"@" call(data_37.l_0xc7e6d7) " won a {itemname(168)} as a prize." wait
 	sound(SND_BOXTAKE)	// 116
@@ -194,7 +193,7 @@ l_0xc60985:
 	"@Amigo, you won!" pause(20)
 	"  A very big winning, I think!" next
 	"@Here's a very nice prize for the important amigo!" next
-	full(-1) goto_if_true(l_0xc60b13)
+	get_item_receiver(-1) goto_if_false(l_0xc60b13)
 	give_and_return_location(0,224)	// Item 0xE0 / 224 = Skip sandwich
 	"@" call(data_37.l_0xc7e6d7) " won a {itemname(224)} as a prize." wait
 	sound(116)
@@ -213,7 +212,7 @@ l_0xc60a0d:
 	"@Amigo, you won!" pause(20)
 	"  A very big winning, and you hit it!" next
 	"@Here's the prize for the important amigo!" next
-	full(-1) goto_if_true(l_0xc60b13)
+	get_item_receiver(-1) goto_if_false(l_0xc60b13)
 	give_and_return_location(0,98)	// Item 0x62 / 98 = PSI caramel
 	"@" call(data_37.l_0xc7e6d7) " won a {itemname(98)} as a prize." wait
 	sound(116)
@@ -232,7 +231,7 @@ l_0xc60a97:
 	"@Amigo, you won!" pause(20)
 	"  A very big winning, my friend!" next
 	"@Here's the big prize for you!" next
-	full(-1) goto_if_true(l_0xc60b13)
+	get_item_receiver(-1) goto_if_false(l_0xc60b13)
 	give_and_return_location(0,106)	// Item 0x6A / 106 = Can of fruit juice
 	"@" call(data_37.l_0xc7e6d7) " won a {itemname(106)} as a prize." wait
 	sound(SND_BOXTAKE)	// 116
@@ -327,7 +326,7 @@ l_0xc60d6c:
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} spotted something shiny." next
 	"@It was a set of contact lenses!" next
-	full(-1) goto_if_true(l_0xc60db8)
+	get_item_receiver(-1) goto_if_false(l_0xc60db8)
 	// Item 0xBB, 187, Contact lens
 	give_and_return_location(-1,187)
 	npc_delete(794,6)	// 0x031A, 6
@@ -357,7 +356,7 @@ l_0xc60e30:
 	"@Your coming here,| my waiting here..." pause(30) next
 	"@It was all predestined truth..." next
 	// Stat 8 = Ness' name
- 	   "@{stat(8)},"
+	"@{stat(8)},"
 	counter(1) call(data_49.l_0xc91675)
 	sound(SND_STATUSRECOVER)	// 37
 	pause(20)
@@ -380,7 +379,7 @@ l_0xc60e30:
 	pause(60) linebreak
 	"@...Did you come in search of this?" next
 	"@Someone left it behind in this hole." next
-	full(-1) goto_if_true(l_0xc610f1)
+	get_item_receiver(-1) goto_if_false(l_0xc610f1)
 	give_and_return_location(0, YOGURT_DISP)
 	call(data_36.l_0xc7dcb6) next
 	set(FLG_ITEM_TOFU)	// 554
@@ -393,14 +392,7 @@ l_0xc60ff3:
 	"@I'll give you a special skill to help you move through space as you wish." next
 	"@Learn the skill from the monkey over there..." next
 	"@Would you like to learn this special power?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6106e:
-	"[19 02]No" eob
-
-l_0xc61073:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc610c1)} {e(l_0xc61082)}]"
+	two_choice_menu("Yes", l_0xc610c1, "No", l_0xc61082)
    	 goto(l_0xc61082)
 
 l_0xc61082:
@@ -619,8 +611,7 @@ l_0xc61616:
 	"@(I'll move away if you give me one...)" next
 	"@Ukiki?" next
 	"@(Can you give me one?)" linebreak
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc616b2)} {e(l_0xc61696)}]"
+	two_choice_menu("Yes", l_0xc616b2, "No", l_0xc61696)
 	goto(l_0xc61696)
 
 l_0xc61696:
@@ -658,8 +649,7 @@ l_0xc61715:
 	"@(If you grant my wish,| I might open the entrance.)" next
 	"@Kikiki Kiki?" next
 	"@(Will you give me a {itemname(93)}?)" linebreak
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc617bb)} {e(l_0xc6179b)}]"
+	two_choice_menu("Yes", l_0xc617bb, "No", l_0xc6179b)
 	goto(l_0xc6179b)
 
 l_0xc6179b:
@@ -699,8 +689,7 @@ l_0xc61817:
 	"@(Maybe you don't usually keep a {itemname(127)},)" next
 	"@Ukke Ukiki Ukkikie?" next
 	"@(but if you have one,| will you share it with me?)" next
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc618ed)} {e(l_0xc618c2)}]"
+	two_choice_menu("Yes", l_0xc618ed, "No", l_0xc618c2)
 	goto(l_0xc618c2)
 
 l_0xc618c2:
@@ -740,8 +729,7 @@ l_0xc61966:
 	"  I wanna eat a tasty {itemname(95)}.)" next
 	"@Ukkyou, kikinkyou?" next
 	"@(If you have some,| will you give it to me?)" next
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61a14)} {e(l_0xc619ef)}]"
+	two_choice_menu("Yes", l_0xc61a14, "No", l_0xc619ef)
 	goto(l_0xc619ef)
 
 l_0xc619ef:
@@ -815,8 +803,7 @@ l_0xc61b85:
 	"@(...Woops,/| I spoke to you in the human's language.)" next
 	"@Ukiki, Ukkike" next
 	"@(If you have a {itemname(95)},| please give me one.)" next
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61c20)} {e(l_0xc61c0f)}]"
+	two_choice_menu("Yes", l_0xc61c20, "No", l_0xc61c0f)
 	goto(l_0xc61c0f)
 
 l_0xc61c0f:
@@ -854,8 +841,7 @@ l_0xc61cac:
 	"@(The monkey next to me loves Hamburgers too...)" next
 	"@Uuu,/| Unkikkie Uki?" next
 	"@(If you have a {itemname(90)},| will you please give it to me?)" next
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(l_0xc61d5d)} {e(l_0xc61d50)}]"
+	two_choice_menu("Yes", l_0xc61d5d, "No", l_0xc61d50)
 	goto(l_0xc61d50)
 
 l_0xc61d50:
@@ -893,6 +879,5 @@ l_0xc61ddb:
 	"@Uuu,/| Unkikkie Uki?" next
 	// Item 0x5A / 90 = Hamburger
 	"@(If you have a {itemname(90)},| will you please give it to me?)" next
-	// two_choice_menu
-	call(data_36.l_0xc7dd4f) "[11]{clearline}[09 02 {e(data_18.l_0xc61e8e)} {e(data_18.l_0xc61e81)}]"
+	two_choice_menu("Yes", data_18.l_0xc61e8e, "No", data_18.l_0xc61e81)
 	goto(data_18.l_0xc61e81)

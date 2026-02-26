@@ -95,7 +95,7 @@ command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {by
 
     define SCR_STATUS_GROUP_5 = 6
     define SCR_STATUS_5_NONE = 1
-    define SCR_STATUS_5_ASTHMA = 2
+    define SCR_STATUS_5_HOMESICK = 2
 
     define SCR_STATUS_GROUP_6 = 7
     define SCR_STATUS_6_NONE = 1
@@ -165,16 +165,16 @@ command teleportname(dest) "[1C 06 {byte dest}]"*/
 command print_strings_horizontal(n) "[1C 07 {byte n}]"
 command gfx_text(n) "[1C 08 {byte n}]"
     // Why did they include the spaces at the end?
-    command smash "{gfx_text(1)}  "
-    command youwon "{gfx_text(2)}  "
+    command smash_text "{gfx_text(1)}"	// two spaces at the end originally
+    command you_won "{gfx_text(2)}"	// two spaces at the end originally
 // Need more testing with this one, I don't know what the heck it does
 command set_num_padding(n) "[1C 09 {byte n}]"
-/*command number(n) "[1C 0A {long n}]"
-command money(n) "[1C 0B {long n}]"*/
+//command number(n) "[1C 0A {long n}]"
+//command money(n) "[1C 0B {long n}]"
 command print_strings_vertical(cols) "[1C 0C {byte cols}]"
-/*command user "[1C 0D]"
-command target "[1C 0E]"
-command delta "[1C 0F]"*/
+//command user "[1C 0D]"
+//command target "[1C 0E]"
+//command delta "[1C 0F]"*/
 // Only in EarthBound
 command zwsp_before_letter(n) "[1C 11 {byte n}]"
 // Only in Mother 2
@@ -200,11 +200,11 @@ command get_item_receiver(char) "[1D 03 {byte char}]"
     //command notfull(char) get_item_receiver(char)
     //command full(char) not get_item_receiver(char)
 command hasequipped(char, item) "[1D 04 {byte char} {byte item}]"
-/*command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
-command deposit(amt) "[1D 06 {long amt}]"
-command withdraw(amt) "[1D 07 {long amt}]"
-command givemoney(amt) "[1D 08 {short amt}]"
-command takemoney(amt) "[1D 09 {short amt}]"*/
+//command hasitem(char,item) "[1D 05 {byte char} {byte item}]"
+//command deposit(amt) "[1D 06 {long amt}]"
+//command withdraw(amt) "[1D 07 {long amt}]"
+//command givemoney(amt) "[1D 08 {short amt}]"
+//command takemoney(amt) "[1D 09 {short amt}]"
 command get_buying_price(item) "[1D 0A {byte item}]"
 command get_selling_price(item) "[1D 0B {byte item}]"
 command check_impediment_for_storing(char, itemslot) "[1D 0C {byte char} {byte itemslot}]"
@@ -274,10 +274,10 @@ command resume_music music_resume
     command text_blips_off text_blips(TEXTBLIPS_OFF)
 //command music_switching_off "[1F 05]"
 //command music_switching_on "[1F 06]"
-/*command music_effect(n) "[1F 07 {byte n}]"
-command party_add(char) "[1F 11 {byte char}]"
-command party_remove(char) "[1F 12 {byte char}]"
-command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"*/
+//command music_effect(n) "[1F 07 {byte n}]"
+//command party_add(char) "[1F 11 {byte char}]"
+//command party_remove(char) "[1F 12 {byte char}]"
+//command char_direction(char, dir) "[1F 13 {byte char} {byte dir}]"
 command party_direction(dir) "[1F 14 {byte dir}]"
 command sprite2_spawn(sprite, move, style) "[1F 15 {short sprite} {short move} {byte style}]"
 command npc_direction(tpt, dir) "[1F 16 {short tpt} {byte dir}]"

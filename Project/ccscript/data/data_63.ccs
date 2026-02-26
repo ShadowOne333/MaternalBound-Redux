@@ -113,7 +113,8 @@ l_0xef7830:
 	eob
 
 l_0xef7843:
-	"{music(98)}" newline
+	music(98)
+	newline
 	"@Time started again." prompt
 	eob
 
@@ -166,7 +167,10 @@ l_0xef78f7:
 
 l_0xef790b:
 	get_user_and_cohort_count
-	"[09 03 {e(l_0xef792b)} {e(l_0xef792e)} {e(l_0xef793c)}]"
+	switch_goto(3)
+		switch_entry(l_0xef792b)
+		switch_entry(l_0xef792e)
+		switch_entry(l_0xef793c)
 	"{user} and {call(data_37.l_0xc7e66e)} cohorts" eob
 
 l_0xef792b:
@@ -179,7 +183,12 @@ l_0xef793c:
 	"{user} and {call(data_37.l_0xc7e66e)} cohorts" eob
 
 l_0xef794b:
-	"[1C 14 02][09 03 {e(l_0xef796c)} {e(l_0xef7970)} {e(l_0xef797f)}]{user} and {call(data_37.l_0xc7e66e)} cohorts." eob
+	get_user_info(2)
+	switch_goto(3)
+		switch_entry(l_0xef796c)
+		switch_entry(l_0xef7970)
+		switch_entry(l_0xef797f)
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts." eob
 
 l_0xef796c:
 	"{user}." eob
@@ -191,7 +200,12 @@ l_0xef797f:
 	"{user} and {call(data_37.l_0xc7e66e)} cohorts." eob
 
 l_0xef798f:
-	"[1C 14 02][09 03 {e(l_0xef79b1)} {e(l_0xef79b6)} {e(l_0xef79c6)}]{user} and {call(data_37.l_0xc7e66e)} cohorts'" eob
+	get_user_info(2)
+	switch_goto(3)
+		switch_entry(l_0xef79b1)
+		switch_entry(l_0xef79b6)
+		switch_entry(l_0xef79c6)
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts'" eob
 
 l_0xef79b1:
 	"{user}'s" eob
@@ -203,36 +217,49 @@ l_0xef79c6:
 	"{user} and {call(data_37.l_0xc7e66e)} cohorts'" eob
 
 l_0xef79d7:
-	"{window_clear}{music(5)}" linebreak
-	"              [1C 08 02]" linebreak
-	"{pause(120)}" goto(l_0xef79e6)
+	window_clear
+	music(5)
+	linebreak
+	"              " you_won linebreak
+	pause(120)
+	goto(l_0xef79e6)
 
 l_0xef79e6:
-	"[1F 41 11][1B 03 {e(l_0xef7a0a)}]" goto(l_0xef79ef)
+	event(17)	// 0x11, Attempt to inflict homesickness
+	goto_if_true(l_0xef7a0a)
+	goto(l_0xef79ef)
 
 l_0xef79ef:
 	next
-	"@" call(data_37.l_0xc7e6d7) " gained {delta} exp" call(data_65.l_0xef8fad) "" prompt
+	"@" call(data_37.l_0xc7e6d7) " gained {delta} exp" call(data_65.l_0xef8fad) prompt
 	eob
 
 l_0xef7a0a:
-	"[19 05 01 06 02]" goto(l_0xef79ef)
+	inflict_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
+	goto(l_0xef79ef)
 
 l_0xef7a14:
-	"{window_clear}{music(184)}" linebreak
-	"              [1C 08 02]" linebreak
-	"{pause(120)}" goto(l_0xef79e6)
+	window_clear
+	music(184)
+	linebreak
+	"              " you_won linebreak
+	pause(120)
+	goto(l_0xef79e6)
 
 l_0xef7a28:
-	"{window_clear}" linebreak
-	"              [1C 08 02]" linebreak
-	"{pause(90)}" linebreak
-	"@" call(data_37.l_0xc7e6d7) " gained {delta} exp" call(data_65.l_0xef8fad) "" prompt
+	window_clear
+	linebreak
+	"              " you_won linebreak
+	pause(90)
+	linebreak
+	"@" call(data_37.l_0xc7e6d7) " gained {delta} exp" call(data_65.l_0xef8fad) prompt
 	eob
 
 l_0xef7a4d:
 	newline
-	"{pause(10)}{music(7)}@" call(data_37.l_0xc7e6d7) " lost the battle..." prompt
+	pause(10)
+	music(7)
+	"@" call(data_37.l_0xc7e6d7) " lost the battle..." prompt
 	eob
 
 l_0xef7a66:
@@ -342,17 +369,27 @@ l_0xef7bdf:
 	"@Inside the present," linebreak
 	get_action_arg swap
 	"  there was a {itemname(0)}!" next
-	"[1D 03 FF][1B 02 {e(l_0xef7c73)}]{store_registers}"
+	get_item_receiver(-1) goto_if_false(l_0xef7c73)
+	store_registers
 	call(data_36.l_0xc7dc85)
-	"[1B 03 {e(l_0xef7c42)}]{load_registers}{swap}"
-	"@{name(0)}{swap} took it.[1D 0E 00 00]{sound(116)}" prompt
+	goto_if_true(l_0xef7c42)
+	load_registers
+	swap
+	"@{name(0)}{swap} took it."
+	give_and_return_location(0,0)
+	sound(SND_BOXTAKE)	// 116
+	prompt
 	eob
 
 l_0xef7c42:
 	get_char_at_pos(1) swap
 	newline
-	"@{name(0)} added{load_registers} the {itemname(0)} to" linebreak
-	"  {swap}{name(0)}'s stuff.{swap}[1D 0E 00 00]{sound(116)}" prompt
+	"@{name(0)} added" load_registers " the {itemname(0)} to" linebreak
+	"  {swap}{name(0)}'s stuff."
+	swap
+	give_and_return_location(0,0)
+	sound(SND_BOXTAKE)	// 116
+	prompt
 	eob
 
 l_0xef7c73:
@@ -362,25 +399,15 @@ l_0xef7c73:
 l_0xef7c89:
 	"@Do you want to throw" linebreak
 	"  something away?" next
-	"[19 02]Yes" eob
-
-l_0xef7c9e:
-	"  [19 02]No" eob
-
-l_0xef7ca5:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xef7d0f)} {e(l_0xef7cb4)}]" goto(l_0xef7cb4)
+	two_choice_menu("Yes", l_0xef7d0f, "No", l_0xef7cb4)
+	goto(l_0xef7cb4)
 
 l_0xef7cb4:
 	get_action_arg swap
 	"@Then, will you leave" linebreak
 	"  the {itemname(0)} behind?" next
-	"[19 02]Yes" eob
-
-l_0xef7cd9:
-	"[19 02]No" eob
-
-l_0xef7cde:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xef7cf8)} {e(l_0xef7ced)}]" goto(l_0xef7ced)
+	two_choice_menu("Yes", l_0xef7cf8, "No", l_0xef7ced)
+	goto(l_0xef7ced)
 
 l_0xef7ced:
 	"@Then," next
@@ -393,20 +420,31 @@ l_0xef7cf8:
 
 l_0xef7d0f:
 	newline
-	"@What do you want to throw away?{prompt}" call(data_15.l_0xc5e4c3) newline
-	"[1B 02 {e(l_0xef7cb4)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xef7dbe)}]{load_registers}[19 19 00 00]@So you want to throw away" linebreak
+	"@What do you want to throw away?" prompt
+	call(data_15.l_0xc5e4c3) newline
+	goto_if_false(l_0xef7cb4)
+	store_registers
+	get_inventory_item(0,0)
+	get_selling_price(0)
+	goto_if_false(l_0xef7dbe)
+	load_registers
+	get_inventory_item(0,0)
+	"@So you want to throw away" linebreak
 	"  the {itemname(0)}?" next
-	"[19 02]Throw away" eob
-
-l_0xef7d61:
-	"[19 02]Don't do it" eob
-
-l_0xef7d6f:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xef7d83)} {e(l_0xef7cb4)}]" goto(l_0xef7cb4)
+	two_choice_menu("Throw away", l_0xef7cf8, "Don't do it", l_0xef7ced)
+	goto(l_0xef7cb4)
 
 l_0xef7d83:
-	"{load_registers}[1D 0F 00 00]{swap}@{name(0)}{swap} threw the {itemname(0)} away" next
-	"{swap}{get_action_arg}{swap}@and took the {itemname(0)}.[1D 0E 00 00]{sound(116)}{pause(1)}" prompt
+	load_registers
+	take_from_location(0,0)
+	swap
+	"@{name(0)}{swap} threw the {itemname(0)} away" next
+	swap get_action_arg swap
+	"@and took the {itemname(0)}."
+	give_and_return_location(0,0)
+	sound(SND_BOXTAKE)	// 116
+	pause(1)
+	prompt
 	eob
 
 l_0xef7dbe:
@@ -417,9 +455,14 @@ l_0xef7dd5:
 	newline
 	"@{user} saw" linebreak
 	"  a present behind the enemy." next
-	"{sound(16)}@Inside the present," linebreak
-	"{get_action_arg}{swap}  there was a {itemname(0)}." next
-	"@[1C 02 03] takes it.[1D 0E 03 00]{sound(116)}" prompt
+	sound(SND_GIFTOPEN)	// 16
+	"@Inside the present," linebreak
+	get_action_arg swap
+	"  there was a {itemname(0)}." next
+	"@{name(3)} takes it."
+	give_and_return_location(3,0)
+	sound(SND_BOXTAKE)	// 116
+	prompt
 	eob
 
 l_0xef7e25:
@@ -440,7 +483,9 @@ l_0xef7e55:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} said" linebreak
-	"  something nasty!{sound(84)}" prompt
+	"  something nasty!"
+	sound(SND_KERPOW)	//84
+	prompt
 	pause(1)
 	eob
 
@@ -454,7 +499,9 @@ l_0xef7e70:
 l_0xef7e88:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
-	"@{user} replenished a fuel supply!{sound(89)}" prompt
+	"@{user} replenished a fuel supply!"
+	sound(SND_REFUEL)	//89
+	prompt
 	pause(1)
 	eob
 
@@ -469,12 +516,19 @@ l_0xef7ed5:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} fired" linebreak
-	"  a missile, making {call(self_gender)} dizzy.{sound(70)}" prompt
+	"  a missile, making {call(self_gender)} dizzy."
+	sound(SND_MISSILE)	//70
+	prompt
 	pause(1)
 	eob
 
 self_gender:
-	"[1C 14 01][09 03 {e(himself)} {e(herself)} {e(itself)}]" goto(himself)
+	get_user_info(1)
+	switch_goto(3)
+		switch_entry(himself)
+		switch_entry(herself)
+		switch_entry(itself)
+	goto(himself)
 himself:
 	"himself" eob
 herself:
@@ -500,7 +554,9 @@ l_0xef7f32:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} spewed out" linebreak
-	"  a flaming fireball!{sound(75)}" prompt
+	"  a flaming fireball!"
+	sound(SND_MBR)	//75
+	prompt
 	pause(1)
 	eob
 

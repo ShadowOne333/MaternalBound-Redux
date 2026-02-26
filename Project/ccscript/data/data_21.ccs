@@ -52,7 +52,6 @@ l_0xc6530c:
 l_0xc6534a:
 	cannot_withdraw(9999999)
 	goto_if_false(l_0xc654c4)	// Deposit over max
-
 	call(l_0xc65566)		// Enter deposit amount
 	goto_if_false(l_0xc652f1)	// Cancel input
 
@@ -76,6 +75,7 @@ l_0xc6534a:
 	goto(l_0xc65496)
 
 l_0xc653a5:
+	// Check if ATM balance is $0
 	cannot_withdraw(1)
 	goto_if_true(l_0xc654f3)	// Zero balance
 
@@ -90,8 +90,8 @@ l_0xc653a5:
 	swap
 	cannot_withdraw(0)
 	goto_if_true(l_0xc65527)	// Amount excess
-
 	withdraw(0)
+
 	cannot_withdraw(0)
 	goto_if_true(l_0xc65544)	// No cash for fee
 
@@ -113,7 +113,7 @@ l_0xc65468:
 	// Use Phoenix's custom code to check for +100'000 withdrawal
 	//givemoney(0)
 	try_give_money(0)
-	goto_if_true(l_0xc6550e)	// Added
+	goto_if_true(_maxed_out_cash)	// Added
 
 	show_wallet
 	sound(SND_BOXTAKE)	// 116
@@ -140,6 +140,12 @@ l_0xc654de:
 l_0xc654f3:
 	"@I don't think you have any savings in the bank." promptw
 	goto(l_0xc652f1)
+
+_maxed_out_cash:
+	deposit(0)
+	deposit(0)
+	"@I don't think you can withdraw any more money." next
+	goto(l_0xc653a5)
 
 l_0xc6550e:
 	"@I don't think you can withdraw any more money." next
@@ -266,7 +272,7 @@ l_0xc65863:
 	// Use Phoenix's custom code to check for +100'000 withdrawal
 	//givemoney(0)
 	try_give_money(0)
-	goto_if_true(l_0xc65900)	// Added
+	goto_if_true(_maxed_out_cash2)	// Added
 
 	show_wallet
 	sound(SND_BOXTAKE) // 116
@@ -292,6 +298,12 @@ l_0xc658d4:
 l_0xc658e8:
 	"@You don't have any money in your account." next
 	goto(l_0xc65671)
+
+_maxed_out_cash2:
+	deposit(0)
+	deposit(0)
+	"@I think it's impossible for you to carry any more money." next
+	goto(l_0xc657ac)
 
 l_0xc65900:
 	"@I think it's impossible for you to carry any more money." next
