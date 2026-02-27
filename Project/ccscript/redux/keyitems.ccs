@@ -213,7 +213,7 @@ KeyItems:
 			load_str_callonhover("Diamond", SetCount14) }
 		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
-		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
+		/*if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
 			load_str_callonhover("Tiny ruby", SetCount15) }*/
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			load_str_callonhover("Signed banana", SetCount16) }
