@@ -1,5 +1,6 @@
 // Events debug menu option
 
+import "../../definitions/items.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/cc_asmcall.ccs"
 import "../../essential/commands.ccs"
@@ -1039,24 +1040,30 @@ l_0xc5a526:
 	party_add(4)	// Add Poo
 	eob
 
-/*
+// The following labels seem to go unused in-game
 l_0xc5a530:
-	"[06 7C 00 {e(l_0xc5a578)}]"
-	"{window_open(1)}"
-	set(flag 552)}"
-	"[1D 03 FF]"
-	"[1B 02 {e(l_0xc5a54d)}]"
-	"[1D 0E 00 AE]"
-	"{window_closetop}" eob
+	goto_if_flag(FLG_PUT_ZOMBI_HOIHOI, l_0xc5a578)	// 0x7C, 124
+	window_open(1)
+	set(FLG_ITEM_HOIHOI)	// 552
+	get_item_receiver(-1)
+	goto_if_false(l_0xc5a54d)
+	// Item 0xAE / 174 = Zombie paper
+	give_and_return_location(0, ZOMBIE_PAPER)
+	window_closetop
+	eob
 
 l_0xc5a54d:
 	call(data_15.l_0xc5e456)
-	"[1B 02 {e(l_0xc5a54d)}]"
-	"{store_registers}[19 19 00 00]"
-	"[1D 0B 00]"
-	"[1B 02 {e(l_0xc5a572)}]"
-	"{load_registers}[1D 0F 00 00]"
-	"[1D 0E 00 AE]" eob
+	goto_if_false(l_0xc5a54d)
+	store_registers
+	get_inventory_item(0,0)
+	get_selling_price(0)
+	goto_if_false(l_0xc5a572)
+	load_registers
+	take_from_location(0,0)
+	// Item 0xAE / 174 = Zombie paper
+	give_and_return_location(0, ZOMBIE_PAPER)
+	eob
 
 l_0xc5a572:
 	newline
@@ -1066,7 +1073,8 @@ l_0xc5a578:
 	eob
 
 l_0xc5a579:
-	"{window_open(1)}"
-	"{window_closetop}" eob*/
+	window_open(1)
+	window_closetop
+	eob
 
 //------------------------------------------------------------------

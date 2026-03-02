@@ -30,6 +30,9 @@ import "debug/new_debug_menu.ccs"
 import "debug/diamond.ccs"
 import "debug/debug_menu_enabler.ccs"
 //------------------------------------------------------------------
+// Dialogue
+import "dialogue/item_descriptions.ccs"
+//------------------------------------------------------------------
 // Essential
 import "essential/asm65816.ccs"
 import "essential/ASMRef.ccs"

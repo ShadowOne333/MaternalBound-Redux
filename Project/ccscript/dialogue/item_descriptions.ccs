@@ -1,0 +1,1529 @@
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/window_titles.ccs"
+
+// Begin item descriptions
+l_0xc53711:
+	newline
+	item_name_in_quotes(1)	// 0x01
+	//" <[1C 05 01]>" next
+	"@By keeping it as one of your items," next
+	"@it deflects a lightning attack back at the attacker." end
+
+l_0xc53750:
+	newline
+	item_name_in_quotes(2)	// 0x02
+	"@" call(data_05.l_0xc56b5d) end
+
+l_0xc53761:
+	newline
+	item_name_in_quotes(3)	// 0x03
+	"@" call(data_05.teddy) end
+
+l_0xc53772:
+	newline
+	item_name_in_quotes(4)	// 0x04
+	"@There's no way of knowing its original use." next
+	"@It's just some kind of broken gadget." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc537bc:
+	newline
+	item_name_in_quotes(5)	// 0x05
+	"@There's no way of knowing its original use." next
+	"@It's just some kind of broken mechanism." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53809:
+	newline
+	item_name_in_quotes(6)	// 0x06
+	"@A broken air gun." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc5382a:
+	newline
+	item_name_in_quotes(7)	// 0x07
+	"@A broken spray can." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc5384d:
+	newline
+	item_name_in_quotes(8)	// 0x08
+	"@A broken laser gun." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53870:
+	newline
+	item_name_in_quotes(9)	// 0x09
+	"@A contraption that looks like an iron." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53897:
+	newline
+	item_name_in_quotes(10)	// 0x0A
+	"@It looks like a busted water pipe." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc538bc:
+	newline
+	item_name_in_quotes(11)	// 0x0B
+	"@A broken beam cannon." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc538e0:
+	newline
+	item_name_in_quotes(12)	// 0x0C
+	"@A broken tube-shaped item." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53908:
+	newline
+	item_name_in_quotes(13)	// 0x0D
+	"@A broken bazooka." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53929:
+	newline
+	item_name_in_quotes(14)	// 0x0E
+	"@A broken apparatus that is shaped like a trumpet." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc53960:
+	newline
+	item_name_in_quotes(15)	// 0x0F
+	"@A broken device that looks like a harmonica." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc5398e:
+	newline
+	item_name_in_quotes(16)	// 0x10
+	"@A piece of broken equipment that looks like a satellite dish." next
+	call(data_05.l_0xc56b6f) end
+
+l_0xc539c4:
+	newline
+	item_name_in_quotes(17)	// 0x11
+	call(data_05.l_0xc56b8e) end
+
+l_0xc539d4:
+	newline
+	item_name_in_quotes(18)	// 0x12
+	call(data_05.l_0xc56b8e) end
+
+l_0xc539e4:
+	newline
+	item_name_in_quotes(19)	// 0x13
+	call(data_05.l_0xc56b8e) end
+
+l_0xc539f4:
+	newline
+	item_name_in_quotes(20)	// 0x14
+	call(data_05.l_0xc56b8e) end
+
+l_0xc53a04:
+	newline
+	item_name_in_quotes(21)	// 0x15
+	call(data_05.l_0xc56b8e) end
+
+l_0xc53a14:
+	newline
+	item_name_in_quotes(22)	// 0x16
+	call(data_05.l_0xc56b8e) next
+	"@This item looks like it could have had cork put into the core!" end
+
+l_0xc53a47:
+	newline
+	item_name_in_quotes(23)	// 0x17
+	call(data_05.l_0xc56b8e) end
+
+l_0xc53a57:
+	newline
+	item_name_in_quotes(24)	// 0x18
+	call(data_05.l_0xc56b8e) end
+
+l_0xc53a67:
+	newline
+	item_name_in_quotes(25)	// 0x19
+	call(data_05.l_0xc56b8e) end
+
+l_0xc53a77:
+	newline
+	item_name_in_quotes(26)	// 0x1A
+	call(data_05.l_0xc56b8e) next
+	"@When equipped, it increases your guts." end
+
+l_0xc53a9f:
+	newline
+	item_name_in_quotes(27)	// 0x1B
+	call(data_05.l_0xc56b8e) next
+	"@You can't help but swing this bat with all your might." next
+	"@There's a good chance that you may just whiff." end
+
+l_0xc53ae6:
+	newline
+	item_name_in_quotes(28)	// 0x1C
+	call(data_05.l_0xc56b97) end
+
+l_0xc53af6:
+	newline
+	item_name_in_quotes(29)	// 0x1D
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b06:
+	newline
+	item_name_in_quotes(30)	// 0x1E
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b16:
+	newline
+	item_name_in_quotes(31)	// 0x1F
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b26:
+	newline
+	item_name_in_quotes(32)	// 0x20
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b36:
+	newline
+	item_name_in_quotes(33)	// 0x21
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b46:
+	newline
+	item_name_in_quotes(34)	// 0x22
+	call(data_05.l_0xc56b97) end
+
+l_0xc53b56:
+	newline
+	item_name_in_quotes(35)	// 0x23
+	call(data_05.l_0xc56ba9) next
+	"@It increases your offense." end
+
+l_0xc53b76:
+	newline
+	item_name_in_quotes(36)
+	//item_name_in_quotes(36)	// 0x24
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53b86:
+	newline
+	item_name_in_quotes(37)	// 0x25
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53b96:
+	newline
+	item_name_in_quotes(38)	// 0x26
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53ba6:
+	newline
+	item_name_in_quotes(39)	// 0x27
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53bb6:
+	newline
+	item_name_in_quotes(40)	// 0x28
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53bc6:
+	newline
+	item_name_in_quotes(41)	// 0x29
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53bd6:
+	newline
+	item_name_in_quotes(42)	// 0x2A
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53be6:
+	newline
+	item_name_in_quotes(43)	// 0x2B
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53bf6:
+	newline
+	item_name_in_quotes(44)	// 0x2C
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53c06:
+	newline
+	item_name_in_quotes(45)	// 0x2D
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53c16:
+	newline
+	item_name_in_quotes(46)	// 0x2E
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53c26:
+	newline
+	item_name_in_quotes(47)	// 0x2F
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53c36:
+	newline
+	item_name_in_quotes(48)	// 0x30
+	call(data_05.l_0xc56ba0) end
+
+l_0xc53c46:
+	newline
+	item_name_in_quotes(49)	// 0x31
+	"@A so-so weapon." end
+
+l_0xc53c5f:
+	newline
+	item_name_in_quotes(50)	// 0x32
+	"@A decent little weapon." end
+
+l_0xc53c7a:
+	newline
+	item_name_in_quotes(51)	// 0x33
+	"@A pretty powerful weapon." end
+
+l_0xc53c95:
+	newline
+	item_name_in_quotes(52)	// 0x34
+	"@A tough, strong weapon!" end
+
+l_0xc53caf:
+	newline
+	item_name_in_quotes(53)	// 0x35
+	"@This one rocks, for sure." end
+
+l_0xc53cc8:
+	newline
+	item_name_in_quotes(54)	// 0x36
+	call(data_05.l_0xc56bc0) end
+
+l_0xc53cd8:
+	newline
+	item_name_in_quotes(55)	// 0x37
+	call(data_05.l_0xc56bc0) next
+	"@Also, it adds a bit of Speed." end
+
+l_0xc53d00:
+	newline
+	item_name_in_quotes(56)	// 0x38
+	call(data_05.l_0xc56bc0) next
+	"@It also increases your Speed." end
+
+l_0xc53d21:
+	newline
+	item_name_in_quotes(57)	// 0x39
+	call(data_05.l_0xc56bc0) next
+	"@It increases your Speed in a big way." end
+
+l_0xc53d46:
+	newline
+	item_name_in_quotes(58)	// 0x3A
+	call(data_05.l_0xc56bdf)
+	"@It protects you from fire attacks." end
+
+l_0xc53d6a:
+	newline
+	item_name_in_quotes(59)	// 0x3B
+	call(data_05.l_0xc56bdf)
+	"@It protects you from freeze attacks." end
+
+l_0xc53d8f:
+	newline
+	item_name_in_quotes(60)	// 0x3C
+	call(data_05.l_0xc56bdf)
+	"@It absorbs the light of a flash attack." end
+
+l_0xc53db8:
+	newline
+	item_name_in_quotes(61)	// 0x3D
+	call(data_05.l_0xc56bdf)
+	"@It protects you from fire, freeze and flash attacks." end
+
+l_0xc53de8:
+	newline
+	item_name_in_quotes(62)	// 0x3E
+	call(data_05.l_0xc56bdf)
+	"@It protects you from fire, freeze, flash and paralysis attacks." end
+
+l_0xc53e23:
+	newline
+	item_name_in_quotes(63)	// 0x3F
+	"@{name(4)}'s body equipment." next
+	"@It increases his Defense." end
+
+l_0xc53e4f:
+	newline
+	item_name_in_quotes(64)	// 0x40
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53e5f:
+	newline
+	item_name_in_quotes(65)	// 0x41
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53e6f:
+	newline
+	item_name_in_quotes(66)	// 0x42
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53e7f:
+	newline
+	item_name_in_quotes(67)	// 0x43
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53e8f:
+	newline
+	item_name_in_quotes(68)	// 0x44
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53e9f:
+	newline
+	item_name_in_quotes(69)	// 0x45
+	call(data_05.l_0xc56bf4) end
+
+l_0xc53eaf:
+	newline
+	item_name_in_quotes(70)	// 0x46
+	call(data_05.l_0xc56bf4) next
+	call(data_05.l_0xc56c16) end
+
+l_0xc53ec6:
+	newline
+	item_name_in_quotes(71)	// 0x47
+	call(data_05.l_0xc56bf4) next
+	call(data_05.l_0xc56c16) end
+
+l_0xc53edd:
+	newline
+	item_name_in_quotes(72)	// 0x48
+	call(data_05.l_0xc56bf4) next
+	call(data_05.l_0xc56c16) end
+
+l_0xc53ef4:
+	newline
+	item_name_in_quotes(73)	// 0x49
+	"@To be equipped on" linebreak
+	"  {name(4)}'s arm." next
+	"@Helps protect from being hypnotized, and Luck goes up." next
+	"@Of course, Defense also goes up." end
+
+l_0xc53f58:
+	newline
+	item_name_in_quotes(74)	// 0x4A
+	call(data_05.l_0xc56c40) next
+	"@It has the logo of your favorite baseball team." end
+
+l_0xc53f89:
+	newline
+	item_name_in_quotes(75)	// 0x4B
+	call(data_05.l_0xc56c40) next
+	"@It makes you feel like the great detective, Sherlock Holmes, when equipped." end
+
+l_0xc53fc9:
+	newline
+	item_name_in_quotes(76)	// 0x4C
+	call(data_05.l_0xc56c40) next
+	"@It is said to have been given to your friend by a famous player at the ballpark." end
+
+l_0xc5400a:
+	newline
+	item_name_in_quotes(77)	// 0x4D
+	call(data_05.l_0xc56c40) next
+	"@Should be worn when searching for buried treasure," next
+	"@or while you are at the construction site." end
+
+l_0xc54055:
+	newline
+	item_name_in_quotes(78)	// 0x4E
+	call(data_05.l_0xc56c6d) end
+
+l_0xc54065:
+	newline
+	item_name_in_quotes(79)	// 0x4F
+	call(data_05.l_0xc56c6d) end
+
+l_0xc54075:
+	newline
+	item_name_in_quotes(80)	// 0x50
+	call(data_05.l_0xc56c6d) end
+
+l_0xc54085:
+	newline
+	item_name_in_quotes(81)	// 0x51
+	call(data_05.l_0xc56c54) end
+
+l_0xc54095:
+	newline
+	item_name_in_quotes(82)	// 0x52
+	call(data_05.l_0xc56c54) end
+
+l_0xc540a5:
+	newline
+	item_name_in_quotes(83)	// 0x53
+	call(data_05.l_0xc56c54) end
+
+l_0xc540b5:
+	newline
+	item_name_in_quotes(84)	// 0x54
+	call(data_05.l_0xc56c54) end
+
+l_0xc540c5:
+	newline
+	item_name_in_quotes(85)	// 0x55
+	call(data_05.l_0xc56c54) end
+
+l_0xc540d5:
+	newline
+	item_name_in_quotes(86)	// 0x56
+	call(data_05.l_0xc56c54) end
+
+l_0xc540e5:
+	newline
+	item_name_in_quotes(87)	// 0x57
+	call(data_05.l_0xc56c91) next
+	"@It increases his Defense." end
+
+l_0xc54106:
+	newline
+	item_name_in_quotes(88)	// 0x58
+	call(data_05.l_0xc56cb5) "6" call(data_05.l_0xc56cd6) end
+
+l_0xc5411c:
+	newline
+	item_name_in_quotes(89)	// 0x59
+	call(data_05.l_0xc56cb5) "24" call(data_05.l_0xc56cd6) end
+
+l_0xc54133:
+	newline
+	item_name_in_quotes(90)	// 0x5A
+	call(data_05.l_0xc56cb5) "50" call(data_05.l_0xc56cd6) next
+	"@100% beef." end
+
+l_0xc54156:
+	newline
+	item_name_in_quotes(91)	// 0x5B
+	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+
+l_0xc5416d:
+	newline
+	item_name_in_quotes(92)	// 0x5C
+	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) next
+	"@So fresh, it's still warm!" end
+
+l_0xc54197:
+	newline
+	item_name_in_quotes(93)	// 0x5D
+	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) next
+	"@There's even a slice of your favorite cake!" end
+
+l_0xc541cb:
+	newline
+	item_name_in_quotes(94)	// 0x5E
+	"@This is a pasta dish which legend holds was a favorite of King Summers the Third" next
+	"@in the 16th century. Back then, there were many great chefs, confident of their" next
+	"@culinary skills, always going to and from Summer's Palace." next
+	"@Once day, King Summers wife, Anna Summers, said," next
+	"@<Oh what I wouldn't give for some really delicious pasta!> ... ... ..." next
+	"@...Well, let's just leave it at that. The story is too long to go through completely..." next
+	"@but it really is a beautiful, touching tale..." next
+	call(data_05.l_0xc56cb5) "110" call(data_05.l_0xc56cd6) end
+
+l_0xc54321:
+	newline
+	item_name_in_quotes(95)	// 0x5F
+	call(data_05.l_0xc56cb5) "120" call(data_05.l_0xc56cd6) end
+
+l_0xc54339:
+	newline
+	item_name_in_quotes(96)	// 0x60
+	"@This is today's special. It is highly recommended by our chef," next
+	"@who trained at a five-star restaurant in Paris." next
+	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+
+l_0xc543a4:
+	newline
+	item_name_in_quotes(97)	// 0x61
+	"@Since it's a really big pizza, everyone can recover about 240 HP when eaten." end
+
+l_0xc543da:
+	newline
+	item_name_in_quotes(98)	// 0x62
+	"@Replenishes 20 PP." end
+
+l_0xc543f5:
+	newline
+	item_name_in_quotes(99)	// 0x63
+	"@A dream-like delicacy" linebreak
+	"  that is said to grow at the base of trees" next
+	"@in wet, muddy places." next
+	"@It restores about 80 PP." end
+
+l_0xc54451:
+	newline
+	item_name_in_quotes(100)	// 0x64
+	call(data_05.l_0xc56cb5) "300 HP and about 50 PP." end
+
+l_0xc54471:
+	newline
+	item_name_in_quotes(101)	// 0x65
+	"@When you eat this, it will increase either Speed, Guts, Vitality, IQ or Luck." end
+
+l_0xc544af:
+	newline
+	item_name_in_quotes(102)	// 0x66
+	call(data_05.l_0xc56cb5) "60" call(data_05.l_0xc56cd6) end
+
+l_0xc544c6:
+	newline
+	item_name_in_quotes(103)	// 0x67
+	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+
+l_0xc544dd:
+	newline
+	item_name_in_quotes(104)	// 0x68
+	"@This is the Bubble Monkey's favorite." next
+	"@It will not help you recover, but" next
+	"@you'll also never run out, 'cause it's a super jumbo pack!" end
+
+l_0xc5453e:
+	newline
+	item_name_in_quotes(105)	// 0x69
+	"@Belch's most favorite food in the whole world." next
+	"@However... it smells REALLY, really nasty! We're talkin' major stinkage here!" end
+
+l_0xc545a1:
+	newline
+	item_name_in_quotes(106)	// 0x6A
+	call(data_05.l_0xc56cc5) "6" call(data_05.l_0xc56cd6) end
+
+l_0xc545b7:
+	newline
+	item_name_in_quotes(107)	// 0x6B
+	"@The highest quality tea, produced by tea expert Mr. Akihito Toda," next
+	"@who carefully selects only hand-picked tea leaves." next
+	"@Long ago, only aristocrats at a king's court were allowed to drink this tea." next
+	call(data_05.l_0xc56cc5) "60" call(data_05.l_0xc56cd6) end
+
+l_0xc54660:
+	newline
+	item_name_in_quotes(108)	// 0x6C
+	"@For building a stronger, healthier body." next
+	"@It gives you a blast of nourishment when you are fatigued." next
+	call(data_05.l_0xc56cc5) "80" call(data_05.l_0xc56cd6) end
+
+l_0xc546bc:
+	newline
+	item_name_in_quotes(109)	// 0x6D
+	"@Soup made from the fin of the sea monster known as Kraken." next
+	"@This beast lives in the ocean off the shore of Summers." next
+	"@Very expensive, but a sizable power boost is guaranteed." end
+
+l_0xc54733:
+	newline
+	item_name_in_quotes(110)	// 0x6E
+	"@When you drink it, your PP slightly increases." end
+
+l_0xc5475a:
+	newline
+	item_name_in_quotes(111)	// 0x6F
+	"@This is the most effective thing to take when you catch a cold." end
+
+l_0xc54789:
+	newline
+	item_name_in_quotes(112)	// 0x70
+	"@This is the best thing to take when you get poisoned." end
+
+l_0xc547b0:
+	newline
+	item_name_in_quotes(113)	// 0x71
+	"@It increases your IQ when taken." end
+
+l_0xc547cb:
+	newline
+	item_name_in_quotes(114)	// 0x72
+	"@It increases your Guts when taken." end
+
+l_0xc547e8:
+	newline
+	item_name_in_quotes(115)	// 0x73
+	"@It increases your Speed when taken." end
+
+l_0xc54806:
+	newline
+	item_name_in_quotes(116)	// 0x74
+	"@It increases your Vitality when taken." end
+
+l_0xc54826:
+	newline
+	item_name_in_quotes(117)	// 0x75
+	"@It increases your Luck when taken." end
+
+l_0xc54842:
+	newline
+	item_name_in_quotes(118)	// 0x76
+	call(data_05.l_0xc56d63) end
+
+l_0xc54852:
+	newline
+	item_name_in_quotes(119)	// 0x77
+	call(data_05.l_0xc56d63) end
+
+l_0xc54862:
+	newline
+	item_name_in_quotes(120)	// 0x78
+	call(data_05.l_0xc56d63) end
+
+l_0xc54872:
+	newline
+	item_name_in_quotes(121)	// 0x79
+	call(data_05.l_0xc56d63) end
+
+l_0xc54882:
+	newline
+	item_name_in_quotes(122)	// 0x7A
+	call(data_05.l_0xc56d63) end
+
+l_0xc54892:
+	newline
+	item_name_in_quotes(123)	// 0x7B
+	call(data_05.l_0xc56d63) end
+
+l_0xc548a2:
+	newline
+	item_name_in_quotes(124)	// 0x7C
+	call(data_05.l_0xc56d63) end
+
+l_0xc548b2:
+	newline
+	item_name_in_quotes(125)	// 0x7D
+	"@It allows you go back stage at the Chaos Theater." next
+	"@Of course, you can also watch the show using the pass." end
+
+l_0xc548fc:
+	newline
+	item_name_in_quotes(126)	// 0x7E
+	"@Use by sprinkling it over food." next
+	"@It tastes good with any kind of food, thereby" next
+	"@increasing the recovery power of the food." end
+
+l_0xc54952:
+	newline
+	item_name_in_quotes(127)	// 0x7F
+	"@It's great for those times that you get sunstroke." end
+
+l_0xc54979:
+	newline
+	item_name_in_quotes(128)	// 0x80
+	"@It helps when you have been poisoned, or you are feeling nauseous." next
+	"@It also has other uses..." next
+	call(data_05.l_0xc56d02)
+	call(data_05.l_0xc56d36) end
+
+l_0xc549c3:
+	newline
+	item_name_in_quotes(129)	// 0x81
+	"@May revive a friend who is unconscious." next
+	call(data_05.l_0xc56cdb)
+	call(data_05.l_0xc56d02) next
+	call(data_05.l_0xc56d36)
+	call(data_05.l_0xc56d38) end
+
+l_0xc549ff:
+	newline
+	item_name_in_quotes(130)	// 0x82
+	goto(l_0xc54a08)
+
+l_0xc54a08:
+	"@Revives a friend who is unconscious." next
+	call(data_05.l_0xc56cdb)
+	call(data_05.l_0xc56d02) next
+	call(data_05.l_0xc56d37)
+	call(data_05.l_0xc56d38) end
+
+l_0xc54a3a:
+	newline
+	item_name_in_quotes(131)	// 0x83
+	call(data_05.l_0xc56db7)
+	"@Contains the enemy's PSI during a battle." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54a6c:
+	newline
+	item_name_in_quotes(132)	// 0x84
+	call(data_05.l_0xc56db7)
+	"@Breaks through the enemy's shield during a battle." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54aa1:
+	newline
+	item_name_in_quotes(133)	// 0x85
+	call(data_05.l_0xc56db7)
+	call(data_05.l_0xc56dc5) next
+	"@Because of its explosive power," next
+	"@it may affect others besides the target creature." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54af5:
+	newline
+	item_name_in_quotes(134)	// 0x86
+	call(data_05.l_0xc56db7)
+	"@Really dishes out a lot of damage to the enemy during a battle." next
+	"@Because of its explosive power," next
+	"@it may affect others besides the target creature." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54b67:
+	newline
+	item_name_in_quotes(135)	// 0x87
+	call(data_05.l_0xc56db7)
+	"@Sucks up some HP from the target creature." next
+	"@The more HP an enemy has, the more you get." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54bb0:
+	newline
+	item_name_in_quotes(136)	// 0x88
+	call(data_05.l_0xc56db7)
+	"@Sucks up some HP from all the enemies." next
+	"@The more HP the enemies have, the more you get." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54bfa:
+	newline
+	item_name_in_quotes(137)	// 0x89
+	"@Deals 200 points of damage to any bug when used during combat." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54c32:
+	newline
+	item_name_in_quotes(138)	// 0x8A
+	call(data_05.l_0xc56db7)
+	"@Sprays a sticky substance that stops the enemy from moving." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54c6d:
+	newline
+	item_name_in_quotes(139)	// 0x8B
+	call(data_05.l_0xc56db7)
+	"@Invented by Apple Kid." next
+	"@If used during combat, some damage will be dealt to the enemy," next
+	"@though it's not understood why this happens... it's just tofu after all..." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54ceb:
+	newline
+	item_name_in_quotes(140)	// 0x8C
+	"@You can even use this during battle!" next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54d10:
+	newline
+	item_name_in_quotes(141)	// 0x8D
+	"@During battle, a snake pops out of the bag and bites the enemy." next
+	"@There are thousands of small snakes living in the bag," next
+	"@so you should be able to use it over and over again." next
+	"@It can possibly poison the enemy, too." end
+
+l_0xc54d99:
+	newline
+	item_name_in_quotes(142)	// 0x8E
+	"@If used as a whip during battle, the enemy will take some damage" next
+	"@and stop moving for a while." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54ddc:
+	newline
+	item_name_in_quotes(143)	// 0x8F
+	"@You can even use this during battle!" next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc54e01:
+	newline
+	item_name_in_quotes(144)	// 0x90
+	call(data_05.l_0xc56db7)
+	call(data_05.l_0xc56dc5) next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54e1d:
+	"akm" goto(l_0xc54e20)
+
+l_0xc54e20:
+	newline
+	item_name_in_quotes(145)	// 0x91
+	call(data_05.l_0xc56db7)
+	"@Fires 5 pencil rockets at once." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54e54:
+	newline
+	item_name_in_quotes(146)	// 0x92
+	call(data_05.l_0xc56db7)
+	"@Fires 20 pencil rockets at once." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54ea7:
+	newline
+	item_name_in_quotes(147)	// 0x93
+	call(data_05.l_0xc56dc5) next
+	"@Because of its explosive power," next
+	"@it may affect others besides the target creature. " next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54ef7:
+	newline
+	item_name_in_quotes(148)	// 0x94
+	"@Able to dish out some heavy-duty destruction in combat.  " next
+	"@Because of its explosive power," next
+	"@it may affect others besides the target creature." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54f6a:
+	newline
+	item_name_in_quotes(149)	// 0x95
+	"@Deals 100 points of damage to any bug when used during combat." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54fa2:
+	newline
+	item_name_in_quotes(150)	// 0x96
+	"@Quickly rusts metallic enemies when used during battle." next
+	"@The enemy will take about 200 points of damage." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc54ff0:
+	newline
+	item_name_in_quotes(151)	// 0x97
+	"@Causes almost instantaneous rusting" next
+	"@when used on metallic enemies during battle." next
+	"@The enemy takes about 400 points of damage." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc55057:
+	newline
+	item_name_in_quotes(152)	// 0x98
+	"@When used during battle, the enemy gets so nauseous from the ripe odor," next
+	"@they cannot fight." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc5509e:
+	newline
+	item_name_in_quotes(153)	// 0x99
+	"@By throwing this at the enemy during battle," next
+	"@the enemy is shocked and stops moving." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc550e3:
+	newline
+	item_name_in_quotes(154)	// 0x9A
+	"@Can be used during battle." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc55105:
+	newline
+	item_name_in_quotes(155)	// 0x9B
+	"@When used as a whip during battle," next
+	"@the enemy takes enough damage to stop moving for a short time." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc5514f:
+	newline
+	item_name_in_quotes(156)	// 0x9C
+	"@An ectoplasmic ooze is disgorged out of the dreadful box," next
+	"@and the enemy may be poisoned." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc5519f:
+	newline
+	item_name_in_quotes(157)	// 0x9D
+	"@Increases the Defense of all the friends." next
+	call(data_05.l_0xc56b0d) next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc551cd:
+	newline
+	item_name_in_quotes(158)	// 0x9E
+	"@A letter from Mom to {name(1)}." end
+
+l_0xc551ea:
+	newline
+	item_name_in_quotes(159)	// 0x9F
+	"@Doubles your guts during battle." next
+	"@However, after a battle, your guts return to normal. " next
+	call(data_05.l_0xc56dab) end
+
+l_0xc55230:
+	newline
+	item_name_in_quotes(160)	// 0xA0
+	"@If you sprinkle the powder on one of your friends during battle, " next
+	"@that friend turns into a dragon and attacks all enemies." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc5528d:
+	newline
+	item_name_in_quotes(161)	// 0xA1
+	"@Increase one of the friends Defense during battle." next
+	call(data_05.l_0xc56b0d) next
+	call(data_05.l_0xc56dab) end
+
+l_0xc552c4:
+	newline
+	item_name_in_quotes(162)	// 0xA2
+	"@If you wear this on your nose, you can find and root out magic truffles." next
+	call(data_05.l_0xc56d9b) next
+	"@...let me explain a bit about Magic Truffles." next
+	"@They are a kind of mushroom that grow in damp places, like at the base of big trees." next
+	"@They are almost always buried, " next
+	"@so they cannot be seen." next
+	"@If you find one and eat it, it is said to greatly recover a person's PP!" next
+	"@You can see more info about the wondrous Magic Truffle after you have obtained one." end
+
+l_0xc553d7:
+	newline
+	item_name_in_quotes(163)	// 0xA3
+	"@It invites people to come and buy your unnecessary goods." next
+	call(data_05.l_0xc56d9b) end
+
+l_0xc55409:
+	newline
+	item_name_in_quotes(164)	// 0xA4
+	"@As the title says, it helps one overcome shyness." end
+
+l_0xc55433:
+	newline
+	item_name_in_quotes(165)	// 0xA5
+	"@Not really horrible, but the scene on the front doesn't make you want to go there.  " end
+
+l_0xc5546c:
+	newline
+	item_name_in_quotes(166)	// 0xA6
+	"@A king-sized banana." linebreak
+	"  Not edible." end
+
+l_0xc55496:
+	newline
+	item_name_in_quotes(167)	// 0xA7
+	"@A letter from Tony to {name(3)}." end
+
+l_0xc554b3:
+	newline
+	item_name_in_quotes(168)	// 0xA8
+	"@A chick that just hatched." end
+
+l_0xc554cf:
+	newline
+	item_name_in_quotes(169)	// 0xA9
+	"@A real, live chicken." next
+	"@Don't eat it, please." end
+
+l_0xc554f6:
+	newline
+	item_name_in_quotes(170)	// 0xAA
+	"@A key to the traveling entertainers' shack." end
+
+l_0xc5551d:
+	newline
+	item_name_in_quotes(171)	// 0xAB
+	"@A key to a holding cell made specially for {name(2)}." end
+
+l_0xc55546:
+	newline
+	item_name_in_quotes(172)	// 0xAC
+	"@The <Machine that Opens Locks," next
+	"@especially when you have a slightly bad key> machine." end
+
+l_0xc5558a:
+	newline
+	item_name_in_quotes(173)	// 0xAD
+	"@A key given to you by a maid who works at the Monotoly building." end
+
+l_0xc555b8:
+	newline
+	item_name_in_quotes(174)	// 0xAE
+	"@Apple Kid's invention." next
+	"@Lay this out in the tent, and the next day, a lot of zombies may be stuck to it." end
+
+l_0xc55602:
+	newline
+	item_name_in_quotes(175)	// 0xAF
+	"@What a miracle! Now you can see in the dark!" end
+
+l_0xc55627:
+	newline
+	item_name_in_quotes(176)	// 0xB0
+	"@Riding this makes you feel like whistling!" next
+	"@You can even ring the bell by pressing the R button." end
+
+l_0xc5566b:
+	newline
+	item_name_in_quotes(177)	// 0xB1
+	"@You know, don't leave home without it..." next
+	"@It even works overseas!" end
+
+l_0xc5569c:
+	newline
+	item_name_in_quotes(178)	// 0xB2
+	"@It says, <Section B, seat 3D.>" end
+
+l_0xc556c1:
+	newline
+	item_name_in_quotes(179)	// 0xB3
+	"@A letter from the preschool kids to {name(2)}." end
+
+l_0xc556e3:
+	newline
+	item_name_in_quotes(180)	// 0xB4
+	"@A suitcase full of brand new, crisp bills." end
+
+l_0xc5570b:
+	newline
+	item_name_in_quotes(181)	// 0xB5
+	"@Apple Kid's invention." next
+	"@Now, you can receive important calls." end
+
+l_0xc55740:
+	newline
+	item_name_in_quotes(182)	// 0xB6
+	"@A big, beautiful, and expensive-looking gem." end
+
+l_0xc5576a:
+	newline
+	item_name_in_quotes(183)	// 0xB7
+	"@A banana skin with Venus's autograph." end
+
+l_0xc55794:
+	newline
+	item_name_in_quotes(184)	// 0xB8
+	"@Apple Kid's invention." next
+	"@It makes something blocking your way" next
+	"@that looks like a pencil disappear in just a second." end
+
+l_0xc557e7:
+	newline
+	item_name_in_quotes(185)	// 0xB9
+	"@A copy of a hieroglyph." next
+	"@Something important is recorded in the ancient characters." end
+
+l_0xc55831:
+	newline
+	item_name_in_quotes(186)	// 0xBA
+	"@It can be sold for a very high price." next
+	"@Nothing happens if you use it." next
+	"@A good explanation is kind of tough..." end
+
+l_0xc5587e:
+	newline
+	item_name_in_quotes(187)	// 0xBB
+	"@It must belong to someone." end
+
+l_0xc55897:
+	newline
+	item_name_in_quotes(188)	// 0xBC
+	"@A hand-made Band Aid." next
+	"@It heals your wounded body." next
+	call(data_05.l_0xc56dab) end
+
+l_0xc558ca:
+	newline
+	item_name_in_quotes(189)	// 0xBD
+	"@A fashionable dessert for haute cuisine people, popular in big cities." next
+	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+
+l_0xc55915:
+	newline
+	item_name_in_quotes(190)	// 0xBE
+	call(data_05.l_0xc56cb5) "25" call(data_05.l_0xc56cd6) end
+
+l_0xc5592c:
+	newline
+	item_name_in_quotes(191)	// 0xBF
+	call(data_05.l_0xc56cb5) "60" call(data_05.l_0xc56cd6) end
+
+l_0xc55943:
+	newline
+	item_name_in_quotes(192)	// 0xC0
+	"@An old key." end
+
+l_0xc55957:
+	newline
+	item_name_in_quotes(193)	// 0xC1
+	"@It looks like a plain old rock," next
+	"@but for someone who knows about it, it is actually a very precious, unusual element." end
+
+l_0xc559a8:
+	newline
+	item_name_in_quotes(194)	// 0xC2
+	call(data_05.l_0xc56bdf)
+	"@It protects you from fire, freeze and flash attacks." end
+
+l_0xc559d9:
+	newline
+	item_name_in_quotes(195)	// 0xC3
+	call(data_05.l_0xc56db7)
+	"@When used during battle," next
+	"@this item resets the abilities of all creatures (friend or enemy)" next
+	"@to their normal levels." next
+	"@Any changes that had taken place due to PSI and such is neutralized." next
+	"@It also neutralizes all shields (friend or enemy) that were in effect." next
+	"@(Remember, the abilities" next
+	"@that I am talking about are Offense, Defense, Guts, etc.)" end
+
+l_0xc55ad5:
+	newline
+	item_name_in_quotes(196)	// 0xC4
+	"@If you touch this to your forehead and concentrate on your thoughts," next
+	"@Your Sanctuary melodies can be heard." end
+
+l_0xc55b21:
+	newline
+	item_name_in_quotes(197)	// 0xC5
+	"@If you use this in a dungeon or some such place," next
+	"@the mouse brings you back to the place where you entered." next
+	"@It's a very smart mouse." end
+
+l_0xc55b79:
+	newline
+	item_name_in_quotes(198)	// 0xC6
+	"@Ice cream that is all the rage among fashionable, young women." next
+	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+
+l_0xc55bc1:
+	newline
+	item_name_in_quotes(199)	// 0xC7
+	"@When used during battle, it bites the enemy and disappears." next
+	"@It may also poison the enemy." end
+
+l_0xc55c03:
+	newline
+	item_name_in_quotes(200)	// 0xC8
+	"@When used during battle, it bites the enemy and disappears." next
+	"@It always poisons the enemy." end
+
+l_0xc55c46:
+	newline
+	item_name_in_quotes(201)	// 0xC9
+	"@A miraculous stone that enables you to <concentrate>" next
+	"@without using your own brain." next
+	"@This is accomplished just by your keeping this item." next
+	"@This is great because if you can't concentrate, you can't use PSI." end
+
+l_0xc55cce:
+	newline
+	item_name_in_quotes(202)	// 0xCA
+	"@A handy town map. It can be used in Onett, as well as other towns." next
+	"@You can view the map quickly, simply by pressing the Start button." end
+
+l_0xc55d2e:
+	newline
+	item_name_in_quotes(203)	// 0xCB
+	"@What the hey is this?" end
+
+l_0xc55d46:
+	newline
+	item_name_in_quotes(204)	// 0xCC
+	"@Orange Kid's invention." next
+	"@The full name is the <Super Orange Machine.>" end
+
+l_0xc55d82:
+	newline
+	item_name_in_quotes(205)	// 0xCD
+	"@A key to a regular locker." end
+
+l_0xc55da1:
+	newline
+	item_name_in_quotes(206)	// 0xCE
+	"@It doesn't look like it would do much of anything, but..." end
+
+l_0xc55dc8:
+	newline
+	item_name_in_quotes(207)	// 0xCF
+	"@Recovers about 20 PP." end
+
+l_0xc55de0:
+	newline
+	item_name_in_quotes(208)	// 0xD0
+	"@An old treasure from Dalaam." end
+
+l_0xc55dfe:
+	newline
+	item_name_in_quotes(209)	// 0xD1
+	"@A gift from a monkey." next
+	"@It can be used during battle." end
+
+l_0xc55e28:
+	newline
+	item_name_in_quotes(210)	// 0xD2
+	"@Apple Kid's invention." next
+	"@It erases something that looks like an eraser" next
+	"@that also might be blocking your way." end
+
+l_0xc55e77:
+	newline
+	item_name_in_quotes(211)	// 0xD3
+	"@A very strong-smelling dish." next
+	"@Those who like it go nuts for it..." end
+
+l_0xc55eab:
+	newline
+	item_name_in_quotes(212)	// 0xD4
+	call(data_05.l_0xc56b8e) end
+
+l_0xc55ebb:
+	newline
+	item_name_in_quotes(213)	// 0xD5
+	call(data_05.l_0xc56b8e) next
+	"@Wow! Look at the pine tar! It's almost all the way to the end!" end
+
+l_0xc55ef6:
+	newline
+	item_name_in_quotes(214)	// 0xD6
+	call(data_05.l_0xc56b8e) end
+
+l_0xc55f06:
+	newline
+	item_name_in_quotes(215)	// 0xD7
+	call(data_05.l_0xc56ba0) end
+
+l_0xc55f16:
+	newline
+	item_name_in_quotes(216)	// 0xD8
+	call(data_05.l_0xc56bf4) end
+
+l_0xc55f26:
+	newline
+	item_name_in_quotes(217)	// 0xD9
+	call(data_05.l_0xc56bf4) end
+
+l_0xc55f36:
+	newline
+	item_name_in_quotes(218)	// 0xDA
+	call(data_05.l_0xc56c6d) next
+	"@When equipped, Luck is increased." end
+
+l_0xc55f5d:
+	newline
+	item_name_in_quotes(219)	// 0xDB
+	call(data_05.l_0xc56c6d) next
+	"@When equipped, Luck is increased." end
+
+l_0xc55f84:
+	newline
+	item_name_in_quotes(220)	// 0xDC
+	call(data_05.l_0xc56c6d) next
+	"@When equipped, Luck is increased." next
+	"@Same as the one that Mr. Saturn wears on his head.{wait}" linebreak
+	eob
+
+l_0xc55fcc:
+	newline
+	item_name_in_quotes(221)	// 0xDD
+	call(data_05.l_0xc56c54) end
+
+l_0xc55fdc:
+	newline
+	item_name_in_quotes(222)	// 0xDE
+	call(data_05.l_0xc56c54) end
+
+l_0xc55fec:
+	newline
+	item_name_in_quotes(223)	// 0xDF
+	"@You know what this is..." next
+	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+
+l_0xc56011:
+	newline
+	item_name_in_quotes(224)	// 0xE0
+	"@Gives you a spring in health." next
+	"@You recover about 90 HP." end
+
+l_0xc56054:
+	newline
+	item_name_in_quotes(225)	// 0xE1
+	"@Gives you a spring in health." next
+	"@You recover about 200 HP." end
+
+l_0xc56097:
+	newline
+	item_name_in_quotes(226)	// 0xE2
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc560d3:
+	newline
+	item_name_in_quotes(227)	// 0xE3
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc5610f:
+	newline
+	item_name_in_quotes(228)	// 0xE4
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc5614b:
+	newline
+	item_name_in_quotes(229)	// 0xE5
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc56187:
+	newline
+	item_name_in_quotes(230)	// 0xE6
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc561c3:
+	newline
+	item_name_in_quotes(231)	// 0xE7
+	"@It helps you recover your power..." next
+	"@How much and what you exactly recover depends on your luck!" end
+
+l_0xc561ff:
+	newline
+	item_name_in_quotes(232)	// 0xE8
+	call(data_05.l_0xc56cc5) "12" call(data_05.l_0xc56cd6) next
+	"@I guess it tastes good to adults." end
+
+l_0xc56230:
+	newline
+	item_name_in_quotes(233)	// 0xE9
+	call(data_05.l_0xc56cb5) "90" call(data_05.l_0xc56cd6) next
+	"@100% beef." end
+
+l_0xc56253:
+	newline
+	item_name_in_quotes(234)	// 0xEA
+	//item_name_in_quotes(234)	// 0xEA
+	"@It's one of Mr Saturn's favorite foods." next
+	"@It tastes pretty yummy." next
+	call(data_05.l_0xc56cb5) "100" call(data_05.l_0xc56cd6) end
+
+l_0xc5629b:
+	newline
+	item_name_in_quotes(235)	// 0xEB
+	"@It's one of Mr. Saturn's favorite foods." next
+	"@It tastes all right." next
+	call(data_05.l_0xc56cb5) "300" call(data_05.l_0xc56cd6) end
+
+l_0xc562dd:
+	newline
+	item_name_in_quotes(236)	// 0xEC
+	"@An everyday dish in Dalaam." next
+	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+
+l_0xc5630a:
+	newline
+	item_name_in_quotes(237)	// 0xED
+	"@A croquette made from chickpeas native to Scarabia." next
+	"@The chickpeas are mashed, breaded and deep fried." next
+	"@Salt improves it and the olive oil gives it a wonderful" linebreak
+	"  flavor." next
+	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+
+l_0xc563a9:
+	newline
+	item_name_in_quotes(238)	// 0xEE
+	"@Molokheiya is a summer vegetable from Scarabia." next
+	"@It's high in nutrients, and it has a light flavor that Scarabians love." next
+	call(data_05.l_0xc56cc5) "80" call(data_05.l_0xc56cd6) end
+
+l_0xc56417:
+	newline
+	item_name_in_quotes(239)	// 0xEF
+	"@I don't have a lot to say about this." next
+	"@I guess there are some people who think it's good." next
+	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) end
+
+l_0xc5645d:
+	newline
+	item_name_in_quotes(240)	// 0xF0
+	"@Broiled lamb's liver, etc. all served on a skewer." next
+	"@Sometimes meat other than lamb is included..." next
+	"@that's what someone told me..." next
+	call(data_05.l_0xc56cb5) "120" call(data_05.l_0xc56cd6) end
+
+l_0xc564d1:
+	newline
+	item_name_in_quotes(241)	// 0xF1
+	"@Tastes okay in some respects." next
+	call(data_05.l_0xc56cb5) "160" call(data_05.l_0xc56cd6) end
+
+l_0xc564ff:
+	newline
+	item_name_in_quotes(242)	// 0xF2
+	"@Recipe for making jerky." next
+	"@Obtain some type of meat, slice it into pieces about a half of an inch thick." next
+	"@Hang the pieces on a laundry line or something like it" next
+	"@and leave out in the sun for maybe 6 months..." next
+	"@Well, that's what my recipe says." next
+	call(data_05.l_0xc56cb5) "150" call(data_05.l_0xc56cd6) end
+
+l_0xc565bc:
+	newline
+	item_name_in_quotes(243)	// 0xF3
+	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+
+l_0xc565d4:
+	newline
+	item_name_in_quotes(244)	// 0xF4
+	"@Recipe for making spicy" linebreak
+	"  jerky." next
+	"@Obtain some type of meat," next
+	"@slice it into pieces about a half of an inch thick." next
+	"@Season the pieces as much as possible," next
+	"@hang the pieces on a laundry line or something like it" next
+	"@and leave out in the sun for maybe 8 months..." next
+	"@Well, that's what my recipe says..." next
+	call(data_05.l_0xc56cb5) "250" call(data_05.l_0xc56cd6) end
+
+l_0xc566b7:
+	newline
+	item_name_in_quotes(245)	// 0xF5
+	"@A gourmet version of jerky that is considered a delicacy." next
+	"@It is created by a skillful artisan" next
+	"@who has been making jerky for over 60 years." next
+	"@Jerky fans consider this the caviar of all jerkys." next
+	"@I understand that they don't dry gourmet jerky on a laundry line..." next
+	call(data_05.l_0xc56cb5) "300" call(data_05.l_0xc56cd6) end
+
+l_0xc5678d:
+	newline
+	item_name_in_quotes(246)	// 0xF6
+	"@Very expensive water," next
+	"@but almost the same as the water you drink in town." next
+	"@It recovers PP a little bit." end
+
+l_0xc567dc:
+	newline
+	item_name_in_quotes(247)	// 0xF7
+	"@Recovers about 40 PP." end
+
+l_0xc567f4:
+	newline
+	item_name_in_quotes(248)	// 0xF8
+	call(data_05.l_0xc56b97) end
+
+l_0xc56804:
+	newline
+	item_name_in_quotes(249)	// 0xF9
+	call(data_05.l_0xc56c54) next
+	"@It's not money even though it's called a coin." end
+
+l_0xc5682e:
+	newline
+	item_name_in_quotes(250)	// 0xFA
+	"@It can be sold for a very high price." next
+	"@Nothing happens if you use it." next
+	"@A good explanation is kind of tough..." end
+
+l_0xc5687b:
+	newline
+	item_name_in_quotes(251)	// 0xFB
+	call(data_05.l_0xc56cb5) "18" call(data_05.l_0xc56cd6) end
+
+l_0xc56892:
+	item_name_in_quotes(252)	// 0xFC
+	goto(l_0xc54a08)
+
+l_0xc5689f:
+	newline
+	item_name_in_quotes(253)	// 0xFD
+	"@A special type of bunny's favorite carrot." end

@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
@@ -278,7 +279,7 @@ l_0xc834a8:
 l_0xc834e1:
 	title(1, Electra)
 	"@I kept asking around for Strawberry tofu, but..." wait
-	hasitem(-1, YOGURT_DISP)
+	hasitem(-1, TOFU_MACHINE)
 	goto_if_true(l_0xc83515)
 	eob
 
@@ -286,19 +287,19 @@ l_0xc83515:
 	next
 	"@What?" pause(20)
 	// Item 0x8B / 139 = Yogurt machine / Strawberry tofu 
-	"  You have a <{itemname(YOGURT_DISP)}>?" next
+	"  You have a <{itemname(TOFU_MACHINE)}>?" next
 	"@May I have it?" next
 	sound(SND_CHICKEN2)	// 118
 	pause(10)
 	"@(Before you could answer, she took the" linebreak
-	"  <{itemname(YOGURT_DISP)}.>)" next
+	"  <{itemname(TOFU_MACHINE)}.>)" next
 	"@Now I can make Strawberry tofu for my guests." next
 	"@...You are so kind, I'll make some for you." next
 	"@My room's on the 48th floor." pause(20)
 	"  Don't forget to drop by!" wait
 	window_closeall
 
-	take(-1, YOGURT_DISP)	// Item 0x8B / 139, Yogurt machine
+	take(-1, TOFU_MACHINE)	// Item 0x8B / 139, Yogurt machine
 	set(FLG_FOUR_MAID_THANKS)	// 142
 	npc_do_mc(951,680)	// 0x03B7, 0x02A8
 	wait_movement

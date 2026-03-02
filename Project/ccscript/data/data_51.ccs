@@ -4,11 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
 
@@ -16,559 +17,536 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc936ca:
-    "@Yeah, I thought that you had made up your mind..." wait
-    window_closeall
-    eob
+	"@Yeah, I thought that you had made up your mind..." wait
+	window_closeall
+	eob
 
 l_0xc936e6:
-    goto_if_flag(FLG_GUMI_CAVEOPEN, l_0xc9378a)	// 0x99, 153
-    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9370d)	// 0x9B, 155
-    "@....." pause(20) linebreak
-    "  Shy..." pause(15) linebreak
-    "  that we are..." end
+	goto_if_flag(FLG_GUMI_CAVEOPEN, l_0xc9378a)	// 0x99, 153
+	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9370d)	// 0x9B, 155
+	"@....." pause(20) linebreak
+	"  Shy..." pause(15) linebreak
+	"  that we are..." end
 
 l_0xc9370d:
-    "@Powerful.../| I..." next
-    "@so... show...|| everyone..." promptw
-    window_closeall
-    "[1F 16 EA 04 03][1F F1 EF 04 54 02]"
-    wait_for_movement
-    "[1F E6 EF 04]"
-    window_open(1)
-    "@Hu|u/u{pause(1)}up!" pause(15)
-    "  I got it!" pause(15)
-    "  I got it!  Eeeee yeah!!!" promptw
-    window_closeall
-    "[1F E9 EF 04][1F 61][1F 1E EF 04 06]"
-    sound(SND_BEEP2)	// 121
-    set(FLG_GUMI_CAVEOPEN)	// 153
-    eob
+	"@Powerful.../| I..." next
+	"@so... show...|| everyone..." promptw
+	window_closeall
+	"[1F 16 EA 04 03]"
+	"[1F F1 EF 04 54 02]"
+	wait_movement
+	"[1F E6 EF 04]"
+	window_open(1)
+	"@Hu|u/u{pause(1)}up!" pause(15)
+	"  I got it!" pause(15)
+	"  I got it!  Eeeee yeah!!!" promptw
+	window_closeall
+	"[1F E9 EF 04]"
+	wait_movement
+	"[1F 1E EF 04 06]"
+	sound(SND_BEEP2)	// 121
+	set(FLG_GUMI_CAVEOPEN)	// 153
+	eob
 
 l_0xc9378a:
-    "@My... power.../| awe-inspiring!" end
+	"@My... power.../| awe-inspiring!" end
 
 l_0xc937a3:
-    window_open(1)
-    "@Hey!" pause(15)
-    "  Hey!...  Talk to me!" pause(20) linebreak
-    "  Hey, hey, hey!" pause(5) linebreak
-    "  Heeeeeey!!" wait
-    window_closeall eob
+	window_open(1)
+	"@Hey!" pause(15)
+	"  Hey!...  Talk to me!" pause(20) linebreak
+	"  Hey, hey, hey!" pause(5) linebreak
+	"  Heeeeeey!!" wait
+	window_closeall
+	eob
 
 l_0xc937d9:	// Lumine Hall text
-    "@I'm {name(1)}..."
-    "@It's been a long road getting here..."
-    "@Soon, I'll be..."
-    "@Soon, I'll be..."
-    "@Soon, I'll be..."
-    "@What will happen to us?"
-    "@W...what's happening?"
-    "@My thoughts are being written out on the wall..."
-    "@or are they?" eob
+	"@I'm {name(1)}..."
+	"@It's been a long road getting here..."
+	"@Soon, I'll be..."
+	"@Soon, I'll be..."
+	"@Soon, I'll be..."
+	"@What will happen to us?"
+	"@W...what's happening?"
+	"@My thoughts are being written out on the wall..."
+	"@or are they?" eob
 
 l_0xc93853:
-    "@Welcome!" next
-    goto_if_flag(FLG_WIN_GIEGU, l_0xc939b9)	// 0x49, 73
-    "@Would you like me to tell you about Twoson?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc9387c:
-    " [19 02]No" eob
-
-l_0xc93882:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc938a6)} {e(l_0xc93891)}]"
-    goto(l_0xc93891)
+	"@Welcome!" next
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc939b9)	// 0x49, 73
+	"@Would you like me to tell you about Twoson?" linebreak
+	two_choice_menu("Yes", l_0xc938a6, "No", l_0xc93891)
 
 l_0xc93891:
-    "@It's too much trouble for me too." end
+	"@It's too much trouble for me too." end
 
 l_0xc938a6:
-    "@Twoson has a modern, clean hotel." next
-    "@There is a hospital and the wonderful Chaos Theater." next
-    "@There is the Polestar preschool,| and a nice bus station." next
-    "@If you're curious,| you might want to check out Burglin Park." pause(20)
-    "  It's exciting." next
-    "@East of the town,| you'll find the Grateful Dead Valley." next
-    "@On the other side of the valley is Happy Happy Village." next
-    "@There's also a pizza parlor." next
-    "@Do you want to know anything else?" next
-    pause(60) linebreak
-    "@Well, tee hee,| I don't know anything else." end
+	"@Twoson has a modern, clean hotel." next
+	"@There is a hospital and the wonderful Chaos Theater." next
+	"@There is the Polestar preschool,| and a nice bus station." next
+	"@If you're curious,| you might want to check out Burglin Park." pause(20)
+	"  It's exciting." next
+	"@East of the town,| you'll find the Grateful Dead Valley." next
+	"@On the other side of the valley is Happy Happy Village." next
+	"@There's also a pizza parlor." next
+	"@Do you want to know anything else?" next
+	pause(60) linebreak
+	"@Well, tee hee,| I don't know anything else." end
 
 l_0xc939b9:
-    "@I've been giving out info about Twoson for years now." next
-    "@I'll quit this job and I'll, tee hee,| get married." end
+	"@I've been giving out info about Twoson for years now." next
+	"@I'll quit this job and I'll, tee hee,| get married." end
 
 l_0xc93a00:
-    "@Burglin Park seems kind of dangerous,| but there's some great stuff there." end
+	"@Burglin Park seems kind of dangerous,| but there's some great stuff there." end
 
 l_0xc93a2e:
-    goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc93ac1)	// 0x029E, 638
-    goto_if_flag(FLG_GLOBAL_POLA_KIDNAPPED, l_0xc93ac1)	// 0x0308, 776
-    goto_if_flag(FLG_POLA, l_0xc93a82)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc93a82)	// 0x0D, 13
-    "@I hear that a girl named {name(2)} was kidnapped" next
-    "@while helping out at the Polestar preschool." end
+	goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc93ac1)	// 0x029E, 638
+	goto_if_flag(FLG_GLOBAL_POLA_KIDNAPPED, l_0xc93ac1)	// 0x0308, 776
+	goto_if_flag(FLG_POLA, l_0xc93a82)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc93a82)	// 0x0D, 13
+
+	"@I hear that a girl named {name(2)} was kidnapped" next
+	"@while helping out at the Polestar preschool." end
 
 l_0xc93a82:
-    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc93ac1)
-    "@{name(2)}!/ I heard you kicked the kidnapper's balls off!" pause(15) linebreak 
-    "  You're amazing!" end
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc93ac1)
+	"@{name(2)}!/ I heard you kicked the kidnapper's balls off!" pause(15) linebreak 
+	"  You're amazing!" end
 
 l_0xc93ac1:
-    "@I heard {name(2)} kicked the kidnapper's balls off!" pause(20) linebreak
-    "  She's amazing!" end
+	"@I heard {name(2)} kicked the kidnapper's balls off!" pause(20) linebreak
+	"  She's amazing!" end
 
 l_0xc93aed:
-    goto_if_flag(FLG_POLA, l_0xc93b33)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc93b33)	// 0x0D, 13
-    "@I saw some weird bad guy following {name(2)}." pause(20)
-    "  This guy gave me the creeps." end
+	goto_if_flag(FLG_POLA, l_0xc93b33)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc93b33)	// 0x0D, 13
+	"@I saw some weird bad guy following {name(2)}." pause(20)
+	"  This guy gave me the creeps." end
 
 l_0xc93b33:
-    "@Kidnapping is wrong!" next
-    "@I'll be careful not to kidnap anyone!" end
+	"@Kidnapping is wrong!" next
+	"@I'll be careful not to kidnap anyone!" end
 
 l_0xc93b60:	// Before rescuing Paula
-    goto_if_flag(FLG_POLA, l_0xc93ba4)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc93ba4)	// 0x0D, 13
-    "@I see that you're young but have had some adventures." next
-    "@I think that {name(2)} would be a good friend for you." end
+	goto_if_flag(FLG_POLA, l_0xc93ba4)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc93ba4)	// 0x0D, 13
+	"@I see that you're young but have had some adventures." next
+	"@I think that {name(2)} would be a good friend for you." end
 
 l_0xc93ba4:	// After rescuing Paula, both Ness and Paula in the party
-    counter(1) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc93be3)
-    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc93be3)
-    party_pos_check(1) result_is(2) goto_if_true(l_0xc93be3)
-    party_pos_check(2) result_is(2) goto_if_false(l_0xc93c38)	// Fix line calls
-    "@Just as I thought,{pause(15)} you two make such a nice couple!" end
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc93be3)
+
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc93be3)
+
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(l_0xc93be3)
+
+	get_char_at_pos(2)
+	result_is(2)
+	goto_if_false(l_0xc93c38)	// Fix line calls
+
+	"@Just as I thought,{pause(15)} you two make such a nice couple!" end
 
 l_0xc93be3:	// Ness unconscious or not in party, but Paula is alive and in-party
-    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc93c38)
-    "@Just as I thought,| you two make such a nice couple!" next
-    "@Well, I think you're cute..." next
-    "@But I'm near-sighted, too..." end
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc93c38)
+
+	"@Just as I thought,| you two make such a nice couple!" next
+	"@Well, I think you're cute..." next
+	"@But I'm near-sighted, too..." end
 
 l_0xc93c38:	// Paula unconscious/not-in party, but Ness and/or all the rest healed/present
-    party_pos_check(1) rtoarg
-    "@My grandson is playing a game called <MOTHER 2.>" next
-    "@He's now talking to a plain,| old lady in Twoson." next
-    "@I heard that the game has some messages that are just there for fun." end
+	get_char_at_pos(1) rtoarg
+	"@My grandson is playing a game called <MOTHER 2.>" next
+	"@He's now talking to a plain,| old lady in Twoson." next
+	"@I heard that the game has some messages that are just there for fun." end
 
 l_0xc93ca7:
-    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc93d19)	// 0x44, 68
-    "@If you go to the east,| you could run into trouble." next
-    "@Grateful Dead Valley and Happy Happy Village are waiting for you." next
-    "@I've also heard that there are UFO's in the Grateful Dead Valley." end
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc93d19)	// 0x44, 68
+	"@If you go to the east,| you could run into trouble." next
+	"@Grateful Dead Valley and Happy Happy Village are waiting for you." next
+	"@I've also heard that there are UFO's in the Grateful Dead Valley." end
 
 l_0xc93d19:
-    "@Well, my thoughts on happiness have changed..." end
+	"@Well, my thoughts on happiness have changed..." end
 
 l_0xc93d31:
-    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc93d91)	// 0x44, 68
-    "@People in Happy Happy Village are fanatical about a strange religion." next
-    "@Maybe they've got some sort of bad fever." pause(20)
-    "  Be careful." end
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc93d91)	// 0x44, 68
+	"@People in Happy Happy Village are fanatical about a strange religion." next
+	"@Maybe they've got some sort of bad fever." pause(20)
+	"  Be careful." end
 
 l_0xc93d91:
-    "@I'm glad to see you so healthy." end
+	"@I'm glad to see you so healthy." end
 
 l_0xc93da9:
-    goto_if_flag(FLG_POLA, l_0xc93dec)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc93dec)	// 0x0D, 13
-    "@(There was a kidnapping!" next
-    "@Believe me,| even though I'm just a dog." pause(20) linebreak
-    "  Woof!)" end
+	goto_if_flag(FLG_POLA, l_0xc93dec)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc93dec)	// 0x0D, 13
+	"@(There was a kidnapping!" next
+	"@Believe me,| even though I'm just a dog." pause(20) linebreak
+	"  Woof!)" end
 
 l_0xc93dec:
-    "@(You're fantastic...you even take time to talk to animals.)" end
+	"@(You're fantastic...you even take time to talk to animals.)" end
 
 l_0xc93e16:
-    call(data_13.l_0xc5d2b7) eob
+	call(data_13.l_0xc5d2b7) eob
 
 l_0xc93e1c:
-    goto_if_flag(FLG_ITEM_SIGNBOARD, l_0xc93f69)	// 0x029E, 670
-    "@I own an antique shop." next
-    "@No one is buying or selling anything," next
-    "@so I was thinking of selling the <For Sale> Sign that sits in front of me." next
-    "@It's only 98 dollars." pause(20)
-    "  Please buy it." linebreak
-    open_wallet
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc93ea4:
-    "  [19 02]No" eob
-
-l_0xc93eab:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc93ed2)} {e(l_0xc93eba)}]"
-    goto(l_0xc93eba)
+	goto_if_flag(FLG_ITEM_SIGNBOARD, l_0xc93f69)	// 0x029E, 670
+	"@I own an antique shop." next
+	"@No one is buying or selling anything," next
+	"@so I was thinking of selling the <For Sale> Sign that sits in front of me." next
+	"@It's only 98 dollars." pause(20)
+	"  Please buy it." linebreak
+	show_wallet
+	two_choice_menu("Yes", l_0xc93ed2, "No", l_0xc93eba)
 
 l_0xc93eba:
-    "@I bet you'll regret not buying it." end
+	"@I bet you'll regret not buying it." end
 
 l_0xc93ed2:
-    "[1D 14 62 00 00 00]" goto_if_true(l_0xc93f2e)
-    "[1D 03 FF]" goto_if_false(l_0xc93f51)
-    "[1D 0E 00 A3]"
-    store_registers
-    "[1D 09 62 00]"
-    open_wallet
-    sound(SND_GUITAR)	// 120
-    pause(1)
-    "@If you want to sell something,{pause(15)} use this <For Sale> Sign." next
-    "@Customers will flock to you.{wait}{set(flag 670)}" eob
+	"[1D 14 62 00 00 00]"
+	goto_if_true(l_0xc93f2e)
+	"[1D 03 FF]"
+	goto_if_false(l_0xc93f51)
+	"[1D 0E 00 A3]"
+	store_registers
+	"[1D 09 62 00]"
+	show_wallet
+	sound(SND_GUITAR)	// 120
+	pause(1)
+	"@If you want to sell something,| use this <For Sale> Sign." next
+	"@Customers will flock to you." wait
+	set(FLG_ITEM_SIGNBOARD)	// 670
+	eob
 
 l_0xc93f2e:
-    "@Oh, you can't buy it 'cause you're poor." pause(20)
-    "  That's too bad." end
+	"@Oh, you can't buy it 'cause you're poor." pause(20)
+	"  That's too bad." end
 
 l_0xc93f51:
-    "@I can't help you if you're carrying too many things..." end
+	"@I can't help you if you're carrying too many things..." end
 
 l_0xc93f69:
-    "@So, did the <For Sale> Sign help you?" next
-    "@Yeah,| I was the one that sold it to you." end
+	"@So, did the <For Sale> Sign help you?" next
+	"@Yeah,| I was the one that sold it to you." end
 
 l_0xc93fa0:
-    "@Hey,| why don't you buy the world's greatest Ruler." linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc93fc3:
-    " [19 02]No" eob
-
-l_0xc93fc9:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc93ffa)} {e(l_0xc93fd8)}]"
-    goto(l_0xc93fd8)
+	"@Hey,| why don't you buy the world's greatest Ruler." linebreak
+	two_choice_menu("Yes", l_0xc93ffa, "No", l_0xc93fd8)
 
 l_0xc93fd8:
-    "@Do you think it's hot?" pause(20)
-    "  Look,| I didn't steal it..." end
+	"@Do you think it's hot?" pause(20)
+	"  Look,| I didn't steal it..." end
 
 l_0xc93ffa:
-    // Item 0x8C / 140 = Ruler
-    return_item_price(140) swap
-    "@Thank you!" pause(20) linebreak
-    "  That's {print_num_value(0)} clams!" linebreak
-    store_registers
-    open_wallet open_hp
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc94024:
-    " [19 02]No" eob
-
-l_0xc9402a:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9403e)} {e(l_0xc93fd8)}]"
-    goto(l_0xc93fd8)
+	// Item 0x8C / 140 = Ruler
+	get_buying_price(140) swap
+	"@Thank you!" pause(20) linebreak
+	"  That's {number(0)} clams!" linebreak
+	store_registers
+	show_wallet open_hp
+	two_choice_menu("Yes", l_0xc9403e, "No", l_0xc93fd8)
+	goto(l_0xc93fd8)
 
 l_0xc9403e:
-    load_registers
-    "[1D 14 00 00 00 00]" goto_if_true(l_0xc94077)
-    "[1D 03 FF]" goto_if_false(l_0xc94096)
-    "[1D 0E 00 8C]"
-    load_registers
-    "[1D 09 00 00]"
-    open_wallet
-    sound(SND_GUITAR)	// 120
-    "@Here you go,{pause(15)} one Ruler!" end
+	load_registers
+	"[1D 14 00 00 00 00]"
+	goto_if_true(l_0xc94077)
+	"[1D 03 FF]"
+	goto_if_false(l_0xc94096)
+	"[1D 0E 00 8C]"
+	load_registers
+	"[1D 09 00 00]"
+	show_wallet
+	sound(SND_GUITAR)	// 120
+	"@Here you go,| one Ruler!" end
 
 l_0xc94077:
-    newline
-    "@You said yes,| even though you need a lot more money." end
+	newline
+	"@You said yes,| even though you need a lot more money." end
 
 l_0xc94096:
-    "@You said <yes> - that's short and to the point." pause(20)
-    "  But you don't have any more room..." next
-    "@Get rid of something and come back." pause(20)
-    "  I'll be here." end
+	"@You said <yes> - that's short and to the point." pause(20)
+	"  But you don't have any more room..." next
+	"@Get rid of something and come back." pause(20)
+	"  I'll be here." end
 
 l_0xc940e3:
-    "@I sell fresh eggs." pause(20) linebreak
-    "  They're nutritious!" next
-    "@Please buy this beautiful, beautiful egg!" pause(15)
-    "  Please?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc9412e:
-    " [19 02]No" eob
-
-l_0xc94134:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc941cd)} {e(l_0xc94143)}]"
-    goto(l_0xc94143)
+	"@I sell fresh eggs." pause(20) linebreak
+	"  They're nutritious!" next
+	"@Please buy this beautiful, beautiful egg!" pause(15)
+	"  Please?" linebreak
+	two_choice_menu("Yes", l_0xc941cd, "No", l_0xc94143)
 
 l_0xc94143:
-    "@You won't get through your teen years without at least one egg." next
-    "@Please buy this beautiful egg." pause(20)
-    "  Please!" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc9418a:
-    " [19 02]No" eob
-
-l_0xc94190:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc941cd)} {e(l_0xc9419f)}]"
-    goto(l_0xc9419f)
+	"@You won't get through your teen years without at least one egg." next
+	"@Please buy this beautiful egg." pause(20)
+	"  Please!" linebreak
+	two_choice_menu("Yes", l_0xc941cd, "No", l_0xc9419f)
 
 l_0xc9419f:
-    "@Ok,| but your teen years will be ruined just because you didn't buy an egg." end
+	"@Ok,| but your teen years will be ruined just because you didn't buy an egg." end
 
 l_0xc941cd:
-    return_item_price(92) swap	// item 0x5C / 92 = Fresh egg
-    "@You're concerned about your health, even though you're young." next
-    "@That'll be {print_num_value(0)} big ones." next
-    store_registers
-    open_wallet open_hp
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc94218:
-    "[19 02]No" eob
-
-l_0xc9421d:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc94231)} {e(l_0xc94143)}]"
-    goto(l_0xc94143)
+	get_buying_price(FRESH_EGG) swap	// item 0x5C / 92 = Fresh egg
+	"@You're concerned about your health, even though you're young." next
+	"@That'll be {number(0)} big ones." next
+	store_registers
+	show_wallet open_hp
+	two_choice_menu("Yes", l_0xc94231, "No", l_0xc94143)
+	goto(l_0xc94143)
 
 l_0xc94231:
-    load_registers
-    "[1D 14 00 00 00 00]" goto_if_true(l_0xc94270)
-    "[1D 03 FF]" goto_if_false(l_0xc94288)
-    "[1D 0E 00 5C]"
-    load_registers
-    "[1D 09 00 00]"
-    open_wallet
-    sound(SND_GUITAR)	// 120
-    "@Okay,| here you are... one egg to go!" promptw
-    eob
+	load_registers
+	"[1D 14 00 00 00 00]"
+	goto_if_true(l_0xc94270)
+	"[1D 03 FF]"
+	goto_if_false(l_0xc94288)
+	"[1D 0E 00 5C]"
+	load_registers
+	"[1D 09 00 00]"
+	show_wallet
+	sound(SND_GUITAR)	// 120
+	"@Okay,| here you are... one egg to go!" promptw
+	eob
 
 l_0xc94270:
-    newline
-    "@Hey,| I'm not just giving it away..." end
+	newline
+	"@Hey,| I'm not just giving it away..." end
 
 l_0xc94288:
-    newline
-    sound(SND_ERRORBEEP)	// 5
-    pause(30)
-    "@Eggs are easily broken." next
-    "@There's no way to stuff it in with your other things if you have no more room..." end
+	newline
+	sound(SND_ERRORBEEP)	// 5
+	pause(30)
+	"@Eggs are easily broken." next
+	"@There's no way to stuff it in with your other things if you have no more room..." end
 
 l_0xc942c7:
-    goto_if_flag(FLG_POLA, l_0xc94359)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc94359)	// 0x0D, 13
-    "@The boss of Burglin Park is Everdred." next
-    "@He's got ties to burglaries and kidnappings in this area." next
-    "@He's a scary guy." end
+	goto_if_flag(FLG_POLA, l_0xc94359)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc94359)	// 0x0D, 13
+	"@The boss of Burglin Park is Everdred." next
+	"@He's got ties to burglaries and kidnappings in this area." next
+	"@He's a scary guy." end
 
 l_0xc9432b:
-    "@Everdred is asking for you." pause(20)
-    "  He has a present to give you." pause(20)
-    "  Please..." end
+	"@Everdred is asking for you." pause(20)
+	"  He has a present to give you." pause(20)
+	"  Please..." end
 
 l_0xc94359:
-    isset(FLG_TWSN_ITEM_TONCHIKI)	// 85
-    goto_if_false(l_0xc9432b)
-    counter(1) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc943bd)
-    "@I heard that the kidnapped girl was saved." next
-    "@What?" pause(20)
-    "  You saved her?" next
-    "@That's hard to believe." pause(20)
-    "  You don't seem like the hero-type to me." end
+	isset(FLG_TWSN_ITEM_TONCHIKI)	// 85
+	goto_if_false(l_0xc9432b)
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc943bd)
+	"@I heard that the kidnapped girl was saved." next
+	"@What?" pause(20)
+	"  You saved her?" next
+	"@That's hard to believe." pause(20)
+	"  You don't seem like the hero-type to me." end
 
 l_0xc943bd:
-    "@Will you give me 1,000 dollars?" next
-    "@I'll give you all my support." linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc943ed:
-    " [19 02]No" eob
-
-l_0xc943f3:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9442c)} {e(l_0xc94402)}]"
-    goto(l_0xc94402)
+	"@Will you give me 1,000 dollars?" next
+	"@I'll give you all my support." linebreak
+	two_choice_menu("Yes", l_0xc9442c, "No", l_0xc94402)
 
 l_0xc94402:
-    "@I'm glad you turned me down." next
-    "@I just want to be an unknown little punk." end
+	"@I'm glad you turned me down." next
+	"@I just want to be an unknown little punk." end
 
 l_0xc9442c:
-    "@You shouldn't give away 1,000 dollars so easily." next
-    "@Let me give it back to you." next
-    "@Do you think I'm really an honest, reliable person?" end
+	"@You shouldn't give away 1,000 dollars so easily." next
+	"@Let me give it back to you." next
+	"@Do you think I'm really an honest, reliable person?" end
 
 l_0xc94479:
-    call(data_13.l_0xc5d2c9) eob
+	call(data_13.l_0xc5d2c9)
+	eob
 
 l_0xc9447f:
-    "@It makes me feel good to just sit and look at my pots..."
-    isset(FLG_ITEM_SIGNBOARD)	// 670
-    goto_if_false(l_0xc944ab)
-    end
+	"@It makes me feel good to just sit and look at my pots..."
+	isset(FLG_ITEM_SIGNBOARD)	// 670
+	goto_if_false(l_0xc944ab)
+	end
 
 l_0xc944ab:
-    next
-    "@...I like pots,| but what I really want is the tool shop <For Sale> Sign." next
-    "@It's right there." pause(20)
-    "  Should I steal it?" pause(15)
-    "  Hmmm..." end
+	next
+	"@...I like pots,| but what I really want is the tool shop <For Sale> Sign." next
+	"@It's right there." pause(20)
+	"  Should I steal it?" pause(15)
+	"  Hmmm..." end
 
 l_0xc94503:
-    call(data_13.l_0xc5d2ed) eob
+	call(data_13.l_0xc5d2ed)
+	eob
 
 l_0xc94509:
-    title(1, Orange)
-    "@Are you looking for that so-called genius, Apple Kid?" next
-    "@As a true genius,| I'll tell you that he's in Burglin Park, looking for you." end
+	title(1, Orange)
+	"@Are you looking for that so-called genius, Apple Kid?" next
+	"@As a true genius,| I'll tell you that he's in Burglin Park, looking for you." end
 
 l_0xc9455f:
-    eob
+	eob
 
 l_0xc94560:
-    "@Wo/o/o/o/o/o/o/o!" pause(20) linebreak
-    "  (Go back,| go back!)" promptw
-    window_closeall
-    pause(1)
-    warp(18)	// 0x12
-    eob
+	"@Wo/o/o/o/o/o/o/o!" pause(20) linebreak
+	"  (Go back,| go back!)" promptw
+	window_closeall
+	pause(1)
+	warp(18)	// 0x12
+	eob
 
 l_0xc94594:
-    "@(Happy Happy Village ahead.)" end
+	"@(Happy Happy Village ahead.)" end
 
 l_0xc945a9:
-    goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc945f4)	// 0x91, 145
-    "@Of course,| Everdred isn't a good person," next
-    "@but he's actually quite warm-hearted for a crime boss." end
+	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc945f4)	// 0x91, 145
+	"@Of course,| Everdred isn't a good person," next
+	"@but he's actually quite warm-hearted for a crime boss." end
 
 l_0xc945f4:
-    "@What?" pause(15)
-    "  Everdred is dead?" next
-    "@That's crap!" pause(15)
-    "  I refuse to believe that!" end
+	"@What?" pause(15)
+	"  Everdred is dead?" next
+	"@That's crap!" pause(15)
+	"  I refuse to believe that!" end
 
 l_0xc9461f:
-    goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc9466c)	// 0x91, 145
-    "@Everdred has always watched over Burglin Park." next
-    "@That's why we don't have to bribe any crooked cops." end
+	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc9466c)	// 0x91, 145
+	"@Everdred has always watched over Burglin Park." next
+	"@That's why we don't have to bribe any crooked cops." end
 
 l_0xc9466c:
-    "@Even if Everdred is dead,| he'll always be watching over us from hell." end
+	"@Even if Everdred is dead,| he'll always be watching over us from hell." end
 
 l_0xc946b1:
-    "@I'm starting a line here." pause(20)
-    "  I want a ticket for today's show,| but I may not get it." end
+	"@I'm starting a line here." pause(20)
+	"  I want a ticket for today's show,| but I may not get it." end
 
 l_0xc946e6:
-    "@I love standing in a queue." pause(20)
-    "  I also love words that start with <Q.>" next
-    "@Queen,| quiet,| quick..." end
+	"@I love standing in a queue." pause(20)
+	"  I also love words that start with <Q.>" next
+	"@Queen,| quiet,| quick..." end
 
 l_0xc94730:
-    "@If I had some connections,| I could waltz right in,| but I'm just an average Joe." end
+	"@If I had some connections,| I could waltz right in,| but I'm just an average Joe." end
 
 l_0xc94769:
-    "@(Runaway Brothers tour bus.)" end
+	"@(Runaway Brothers tour bus.)" end
 
 l_0xc9477d:
-    title(1, Nice)	// Fatty guy
-    goto_if_flag(FLG_POLA, l_0xc947e7)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc947e7)	// 0x0D, 13
-    "@We--that's right--|we are the Runaway Brothers." next
-    "@We're popular, but not rich." next
-    "@We're bein' cheated by this theater,| and we're really deep in debt!" end
+	title(1, Nice)	// Fatty guy
+	goto_if_flag(FLG_POLA, l_0xc947e7)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc947e7)	// 0x0D, 13
+	"@We--that's right--|we are the Runaway Brothers." next
+	"@We're popular, but not rich." next
+	"@We're bein' cheated by this theater,| and we're really deep in debt!" end
 
 l_0xc947e7:
-    counter(1) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc94870)
-    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc9484c)
-    title(1, Nice)	// Fatty guy
-    "@You're with a girl today." pause(20)
-    "  Ya must be pretty popular." next
-    "@How about introducin' her to my bandmate?  He's right there." end
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc94870)
+
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc9484c)
+
+	title(1, Nice)	// Fatty guy
+	"@You're with a girl today." pause(20)
+	"  Ya must be pretty popular." next
+	"@How about introducin' her to my bandmate?  He's right there." end
 
 l_0xc9484c:
-    title(1, Nice )	// Fatty guy
-    "@Thanks for talking to me." next
-    "@Didn't ya go off looking for some girls?" end
+	title(1, Nice )	// Fatty guy
+	"@Thanks for talking to me." next
+	"@Didn't ya go off looking for some girls?" end
 
 l_0xc94870:
-    title(1, Nice)	// Fatty guy
-    "@Hey,| someone was looking for ya." end
+	title(1, Nice)	// Fatty guy
+	"@Hey,| someone was looking for ya." end
 
 l_0xc94883:
-    title(1, Lucky)	// Skinny guy
-    goto_if_flag(FLG_POLA, l_0xc948dc)	// 0x0C, 12
-    goto_if_flag(FLG_POLA_GRFD, l_0xc948dc)	// 0x0D, 13
-    "@We may be popular," next
-    "@but that girl who lives at the house with the preschool is the talk of the town." next
-    "@I wanna see her someday." end
+	title(1, Lucky)	// Skinny guy
+	goto_if_flag(FLG_POLA, l_0xc948dc)	// 0x0C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc948dc)	// 0x0D, 13
+	"@We may be popular," next
+	"@but that girl who lives at the house with the preschool is the talk of the town." next
+	"@I wanna see her someday." end
 
 l_0xc948dc:
-    counter(1) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc949a2)
-    counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc949ce)
-    goto_if_flag(FLG_ITEM_TICKET, l_0xc94a1c)	// 0x0229, 553
-    title(1, Lucky)	// Skinny guy
-    "@Hey,| ya came with {name(2)}!" next
-    "@Then you deserve a present, playboy." next
-    "@Here's a {itemname(BACKSTAGE_PASS)}." pause(20)
-    "  You can get into our shows with this!" next
-    if flag FLG_KEY_ITEMS { give_menu_key_item(BACKSTAGE_PASS) }
-    else
-    {
-        char_inventory_vacancy(-1)
-        goto_if_false(l_0xc94966)
-        give_and_check(0, BACKSTAGE_PASS)	// Item 0x7D / 125, Backstage pass
-        call(data_36.l_0xc7dccf) next
-    }
-    wait
-    set(FLG_ITEM_TICKET)	// 553
-    set(FLG_PHOTO_CHAOS)	// 484
-    eob
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc949a2)
+
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc949ce)
+
+	goto_if_flag(FLG_ITEM_TICKET, l_0xc94a1c)	// 0x0229, 553
+
+	title(1, Lucky)	// Skinny guy
+	"@Hey,| ya came with {name(2)}!" next
+	"@Then you deserve a present, playboy." next
+	"@Here's a {itemname(BACKSTAGE_PASS)}." pause(20)
+	"  You can get into our shows with this!" next
+	if flag FLG_KEY_ITEMS { give_menu_key_item(BACKSTAGE_PASS) }
+	else
+	{
+	    get_item_receiver(-1)
+	    goto_if_false(l_0xc94966)
+	    give_and_return_location(0, BACKSTAGE_PASS)	// Item 0x7D / 125, Backstage pass
+	    call(data_36.l_0xc7dccf) next
+	}
+	wait
+	set(FLG_ITEM_TICKET)	// 553
+	set(FLG_PHOTO_CHAOS)	// 484
+	eob
 
 l_0xc94966:
-    title(1, Lucky)	// Skinny guy
-    "@It seems like you've got an awful lot of junk." next
-    "@Get rid of somethin' and come back for the pass." end
+	title(1, Lucky)	// Skinny guy
+	"@It seems like you've got an awful lot of junk." next
+	"@Get rid of somethin' and come back for the pass." end
 
 l_0xc949a2:
-    title(1, Lucky)	// Skinny guy
-    "@Hey,| you're {name(2)}!" next
-    "@A boy with a red cap seemed to be lookin' for ya." end
+	title(1, Lucky)	// Skinny guy
+	"@Hey,| you're {name(2)}!" next
+	"@A boy with a red cap seemed to be lookin' for ya." end
 
 l_0xc949ce:
-    title(1, Lucky)	// Skinny guy
-    "@I heard you're workin' hard tryin' to find the girl who lives at the preschool." next
-    "@If ya find her,| bring her to our concert." end
+	title(1, Lucky)	// Skinny guy
+	"@I heard you're workin' hard tryin' to find the girl who lives at the preschool." next
+	"@If ya find her,| bring her to our concert." end
 
 l_0xc94a1c:
-    title(1, Lucky)	// Skinny guy
-    // Item 0x7D / 125 = Backstage pass
-    "@With that {itemname(BACKSTAGE_PASS)},| you can even get into our dressing room." next
-    "@Come with your girlfriend...  We'll be waitin'." end
+	title(1, Lucky)	// Skinny guy
+	// Item 0x7D / 125 = Backstage pass
+	"@With that {itemname(BACKSTAGE_PASS)},| you can even get into our dressing room." next
+	"@Come with your girlfriend...  We'll be waitin'." end
 
 l_0xc94a63:
-    goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc94a95)	// 0x77, 119
-    "@You want to see Poochyfud, the manager?" next
-    "@Right through this door, please." end
+	goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc94a95)	// 0x77, 119
+	"@You want to see Poochyfud, the manager?" next
+	"@Right through this door, please." end
 
 l_0xc94a95:
-    "@I'm not sure what happened,| but it looked like it was good news." end
+	"@I'm not sure what happened,| but it looked like it was good news." end
 
 l_0xc94abc:
-    title(1, Nice)	// Fatty guy
-    "@Let's go to Threek!" next
-    "@Our tour bus is too loud for any ghosts to bother us." next
-    "@Do you want a ride?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc94b00:
-    " [19 02]No" eob
-
-l_0xc94b06:
-    "[1C 07 02][11]{clearline}[09 02 {e(data_52.l_0xc94b32)} {e(l_0xc94b15)}]"
-    goto(l_0xc94b15)
+	title(1, Nice)	// Fatty guy
+	"@Let's go to Threek!" next
+	"@Our tour bus is too loud for any ghosts to bother us." next
+	"@Do you want a ride?" linebreak
+	two_choice_menu("Yes", data_52.l_0xc94b32, "No", l_0xc94b15)
 
 l_0xc94b15:
-    "@If ya change your mind,| come back anytime." end
+	"@If ya change your mind,| come back anytime." end

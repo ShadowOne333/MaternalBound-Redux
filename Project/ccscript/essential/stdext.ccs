@@ -192,8 +192,8 @@ command get_target_info(n) "[1C 15 {byte n}]"
     command get_target_gender get_target_info(1)
     command get_target_and_cohort_count get_target_info(2)
 
-/*command give(char, item) "[1D 00 {byte char} {byte item}]"
-command take(char, item) "[1D 01 {byte char} {byte item}]"*/
+//command give(char, item) "[1D 00 {byte char} {byte item}]"
+//command take(char, item) "[1D 01 {byte char} {byte item}]"
 command arg_item_type_is_not(type) "[1D 02 {byte type}]"
     command arg_item_type_is(type) not arg_item_type_is_not(type)
 command get_item_receiver(char) "[1D 03 {byte char}]"

@@ -7,6 +7,7 @@
 //------------------------------------
 // 	File imports
 //------------------------------------
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/ccexpand.ccs"
@@ -54,35 +55,6 @@ define INVENTORY_WINDOW	= 2
 define CASH_WINDOW	= 10
 define WHICH_WINDOW	= 40
 define USE_HELP_WINDOW	= 61
-
-// Definitions for each Key item:
-define ATM_CARD		= 177	// 0xB1
-define SOUND_STONE	= 196	// 0xC4
-define TOWN_MAP		= 202	// 0xCA
-define SHACK_KEY	= 170	// 0xAA
-define BICYCLE		= 176	// 0xB0
-define RECEIVER_PHONE	= 181	// 0xB5
-define PENCIL_ERASER	= 184	// 0xB8
-define ERASER_ERASER	= 210	// 0xD2
-define CABIN_KEY	= 171	// 0xAB
-define WAD_BILLS	= 180	// 0xB4
-define BACKSTAGE_PASS	= 125	// 0x7D
-define SHOW_TICKET	= 178	// 0xB2
-define ZOMBIE_PAPER	= 174	// 0xAE
-define DIAMOND		= 182	// 0xB6
-define YOGURT_DISP	= 139	// 0x8B
-define TINY_RUBY	= 208	// 0xD0
-define SIGNED_BANANA	= 183	// 0xB7
-define HIEROGLYPH	= 185	// 0xB9
-define CARROT_KEY	= 253	// 0xFD
-define TOWER_KEY	= 192	// 0xC0
-define HAWK_EYE		= 175	// 0xAF
-define SHYNESS_BOOK	= 164	// 0xA4
-define TENDAKRAUT	= 211	// 0xD3
-define METEORITE	= 193	// 0xC1
-define LOCKER_KEY	= 205	// 0xCD
-define BAD_KEY_MACHINE	= 172	// 0xAC
-define BUBBLE_GUM	= 104	// 0x68
 
 //------------------------------------
 // 	Check code hijack
@@ -213,8 +185,8 @@ KeyItems:
 			load_str_callonhover("Diamond", SetCount14) }
 		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
-		/*if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
-			load_str_callonhover("Tiny ruby", SetCount15) }*/
+		if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
+			load_str_callonhover("Tiny ruby", SetCount15) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
@@ -288,32 +260,32 @@ _Exit_KeyItems_Menu:
 //------------------------------------
 // 	  Item scripts
 //------------------------------------
-	atm:		use_help_submenu(ATM_CARD, data_04.l_0xc5566b) eob
-	soundstone:	use_help_submenu(SOUND_STONE, data_04.l_0xc55ad5) eob
-	townmap:	use_help_submenu(TOWN_MAP, data_04.l_0xc55cce) eob
-	shackkey: 	use_help_submenu(SHACK_KEY, data_04.l_0xc554f6) eob
-	bike:		use_help_submenu(BICYCLE, data_04.l_0xc55627) eob
-	phone:		use_help_submenu(RECEIVER_PHONE, data_04.l_0xc5570b) eob
-	pencileraser:	use_help_submenu(PENCIL_ERASER, data_04.l_0xc55794) eob
-	erasereraser:	use_help_submenu(ERASER_ERASER, data_04.l_0xc55e28) eob
-	cabinkey:	use_help_submenu(CABIN_KEY, data_04.l_0xc5551d) eob
-	wadofbills:	use_help_submenu(WAD_BILLS, data_04.l_0xc556e3) eob
-	backstagepass:	use_help_submenu(BACKSTAGE_PASS, data_03.l_0xc548b2) eob
-	zombiepaper:	use_help_submenu(ZOMBIE_PAPER, data_04.l_0xc555b8) eob
-	showticket:	use_help_submenu(SHOW_TICKET, data_04.l_0xc5569c) eob
-	diamond:	use_help_submenu(DIAMOND, data_04.l_0xc55740) eob
-	yogurtdisp:	use_help_submenu(YOGURT_DISP, data_04.l_0xc54c6d) eob	// Tofu machine
-	signedbanana:	use_help_submenu(SIGNED_BANANA, data_04.l_0xc5576a) eob
-	hieroglyph:	use_help_submenu(HIEROGLYPH, data_04.l_0xc557e7) eob
-	carrotkey:	use_help_submenu(CARROT_KEY, data_05.l_0xc5689f) eob
-	towerkey:	use_help_submenu(TOWER_KEY, data_04.l_0xc55943) eob
-	hawkeye:	use_help_submenu(HAWK_EYE, data_04.l_0xc55602) eob
-	shynessbook:	use_help_submenu(SHYNESS_BOOK, data_04.l_0xc55409) eob
-	tendakraut:	use_help_submenu(TENDAKRAUT, data_04.l_0xc55e77) eob
-	meteoritepiece:	use_help_submenu(METEORITE, data_04.l_0xc55957) eob
-	lockerkey:	use_help_submenu(LOCKER_KEY, data_04.l_0xc55d82) eob
-	badkeymachine:	use_help_submenu(BAD_KEY_MACHINE, data_04.l_0xc55546) eob
-	gum:		use_help_submenu(BUBBLE_GUM, data_03.l_0xc544dd) eob
+	atm:		use_help_submenu(ATM_CARD, item_descriptions.l_0xc5566b) eob
+	soundstone:	use_help_submenu(SOUND_STONE, item_descriptions.l_0xc55ad5) eob
+	townmap:	use_help_submenu(TOWN_MAP, item_descriptions.l_0xc55cce) eob
+	shackkey: 	use_help_submenu(SHACK_KEY, item_descriptions.l_0xc554f6) eob
+	bike:		use_help_submenu(BICYCLE, item_descriptions.l_0xc55627) eob
+	phone:		use_help_submenu(RECEIVER_PHONE, item_descriptions.l_0xc5570b) eob
+	pencileraser:	use_help_submenu(PENCIL_ERASER, item_descriptions.l_0xc55794) eob
+	erasereraser:	use_help_submenu(ERASER_ERASER, item_descriptions.l_0xc55e28) eob
+	cabinkey:	use_help_submenu(CABIN_KEY, item_descriptions.l_0xc5551d) eob
+	wadofbills:	use_help_submenu(WAD_BILLS, item_descriptions.l_0xc556e3) eob
+	backstagepass:	use_help_submenu(BACKSTAGE_PASS, item_descriptions.l_0xc548b2) eob
+	zombiepaper:	use_help_submenu(ZOMBIE_PAPER, item_descriptions.l_0xc555b8) eob
+	showticket:	use_help_submenu(SHOW_TICKET, item_descriptions.l_0xc5569c) eob
+	diamond:	use_help_submenu(DIAMOND, item_descriptions.l_0xc55740) eob
+	yogurtdisp:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob	// Tofu machine
+	signedbanana:	use_help_submenu(SIGNED_BANANA, item_descriptions.l_0xc5576a) eob
+	hieroglyph:	use_help_submenu(HIEROGLYPH, item_descriptions.l_0xc557e7) eob
+	carrotkey:	use_help_submenu(CARROT_KEY, item_descriptions.l_0xc5689f) eob
+	towerkey:	use_help_submenu(TOWER_KEY, item_descriptions.l_0xc55943) eob
+	hawkeye:	use_help_submenu(HAWK_EYE, item_descriptions.l_0xc55602) eob
+	shynessbook:	use_help_submenu(SHYNESS_BOOK, item_descriptions.l_0xc55409) eob
+	tendakraut:	use_help_submenu(TENDAKRAUT, item_descriptions.l_0xc55e77) eob
+	meteoritepiece:	use_help_submenu(METEORITE, item_descriptions.l_0xc55957) eob
+	lockerkey:	use_help_submenu(LOCKER_KEY, item_descriptions.l_0xc55d82) eob
+	badkeymachine:	use_help_submenu(BAD_KEY_MACHINE, item_descriptions.l_0xc55546) eob
+	gum:		use_help_submenu(BUBBLE_GUM, item_descriptions.l_0xc544dd) eob
 
 // Opens up the small window with the "Which?" text
 open_which_window: {
@@ -410,7 +382,7 @@ keyitemcounter:
 	if counter_is(METEORITE) { toggle_with_sound(FLG_ITEM_XYZ) }
 	if counter_is(BUBBLE_GUM) { toggle_with_sound(FLG_ITEM_BUBBLE_GUM) }
 	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(FLG_ITEM_BACKSTAGE_PASS) }*/
-	if counter_is(YOGURT_DISP) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
+	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
 	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }
 eob
 

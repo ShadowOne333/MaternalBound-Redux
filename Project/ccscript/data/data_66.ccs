@@ -4,11 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
 
@@ -16,427 +17,427 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xef9a9e:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} burst" linebreak
-    "  into flames!"
-    sound(SND_MBR)	// 75
-    promptw
-    pause(30)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} burst" linebreak
+	"  into flames!"
+	sound(SND_MBR)	// 75
+	promptw
+	pause(30)
+	eob
 
 l_0xef9abb:
-    newline
-    "@{user}"
-    return_action_argument
-    goto_if_false(l_0xef9ae8)
-    swap
-    " stole a {itemname(0)}" next
-    "  in the confusion of the battle!" promptw
-    eob
+	newline
+	"@{user}"
+	get_action_arg
+	goto_if_false(l_0xef9ae8)
+	swap
+	" stole a {itemname(0)}" next
+	"  in the confusion of the battle!" promptw
+	eob
 
 l_0xef9ae8:
-    " tried to" linebreak
-    "  steal something, but failed!" promptw
-    eob
+	" tried to" linebreak
+	"  steal something, but failed!" promptw
+	eob
 
 l_0xef9b02:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} froze" linebreak
-    "  you in time!"
-    music(4)	// Stop music / No-music
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} froze" linebreak
+	"  you in time!"
+	music(4)	// Stop music / No-music
+	promptw
+	pause(1)
+	eob
 
 l_0xef9b20:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} glared" linebreak
-    "  with its eerie eyes!" promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} glared" linebreak
+	"  with its eerie eyes!" promptw
+	pause(1)
+	eob
 
 l_0xef9b43:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} generated" linebreak
-    "  a mysterious electric field!"
-    sound(SND_MAGNET3)	// 77
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} generated" linebreak
+	"  a mysterious electric field!"
+	sound(SND_MAGNET3)	// 77
+	promptw
+	pause(1)
+	eob
 
 l_0xef9b73:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} stumbled, but fired a strange beam."
-    sound(SND_MAGNET3)	// 77
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} stumbled, but fired a strange beam."
+	sound(SND_MAGNET3)	// 77
+	promptw
+	pause(1)
+	eob
 
 l_0xef9b96:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} burped" linebreak
-    "  and blew his nauseating breath at you!"
-    sound(SND_WHIRR)	// 78
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} burped" linebreak
+	"  and blew his nauseating breath at you!"
+	sound(SND_WHIRR)	// 78
+	promptw
+	pause(1)
+	eob
 
 l_0xef9bc3:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} stung" linebreak
-    "  with its poison stinger!" promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} stung" linebreak
+	"  with its poison stinger!" promptw
+	pause(1)
+	eob
 
 l_0xef9be6:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} gave" linebreak
-    "  the kiss of death!" promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} gave" linebreak
+	"  the kiss of death!" promptw
+	pause(1)
+	eob
 
 l_0xef9c02:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} exhaled" linebreak
-    "  " call(data_37.l_0xc7e66e) " arctic-cold breath!"
-    sound(SND_DRILL)	// 81
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} exhaled" linebreak
+	"  " call(data_37.l_0xc7e66e) " arctic-cold breath!"
+	sound(SND_DRILL)	// 81
+	promptw
+	pause(1)
+	eob
 
 l_0xef9c30:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} scattered" linebreak
-    "  some spores!"
-    sound(SND_SPORES)	// 82
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} scattered" linebreak
+	"  some spores!"
+	sound(SND_SPORES)	// 82
+	promptw
+	pause(1)
+	eob
 
 l_0xef9c51:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} tried to" linebreak
-    "  possess you in a frightening manner."
-    sound(SND_POSSESSED)	// 96
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} tried to" linebreak
+	"  possess you in a frightening manner."
+	sound(SND_POSSESSED)	// 96
+	promptw
+	pause(1)
+	eob
 
 l_0xef9c7e:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} sprinkled around some wonderful-smelling powder."
-    sound(SND_SPORES)	// 82
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} sprinkled around some wonderful-smelling powder."
+	sound(SND_SPORES)	// 82
+	promptw
+	pause(1)
+	eob
 
 l_0xef9cad:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} scattered" linebreak
-    "  some mold spores!"
-    sound(SND_SPORES)	// 82
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} scattered" linebreak
+	"  some mold spores!"
+	sound(SND_SPORES)	// 82
+	promptw
+	pause(1)
+	eob
 
 l_0xef9cd1:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} employed" linebreak
-    "  a binding attack!" promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} employed" linebreak
+	"  a binding attack!" promptw
+	pause(1)
+	eob
 
 l_0xef9cf1:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} spit out a sticky mucus!"
-    sound(SND_DRILL)	// 81
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} spit out a sticky mucus!"
+	sound(SND_DRILL)	// 81
+	promptw
+	pause(1)
+	eob
 
 l_0xef9d14:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} spewed" linebreak
-    "  <Fly Honey> out of his mouth!"
-    sound(SND_DRILL)	// 81
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} spewed" linebreak
+	"  <Fly Honey> out of his mouth!"
+	sound(SND_DRILL)	// 81
+	promptw
+	pause(1)
+	eob
 
 l_0xef9d3e:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} shot" linebreak
-    "  spider silk out of its body!" promptw
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shot" linebreak
+	"  spider silk out of its body!" promptw
+	eob
 
 l_0xef9d62:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} said" linebreak
-    "  something really scary!"
-    sound(SND_KERPOW)		// 84
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} said" linebreak
+	"  something really scary!"
+	sound(SND_KERPOW)		// 84
+	promptw
+	pause(1)
+	eob
 
 l_0xef9d81:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} did" linebreak
-    "  something very mysterious!"
-    sound(SND_MYSTERIOUS)	// 85
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} did" linebreak
+	"  something very mysterious!"
+	sound(SND_MYSTERIOUS)	// 85
+	promptw
+	pause(1)
+	eob
 
 l_0xef9da1:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} disrupted" linebreak
-    "  your senses!" promptw
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} disrupted" linebreak
+	"  your senses!" promptw
+	eob
 
 l_0xef9dbd:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} is" linebreak
-    "  sizing up the situation!" promptw
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} is" linebreak
+	"  sizing up the situation!" promptw
+	eob
 
 l_0xef9dda:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} exhaled" linebreak
-    "  a blast of stinky breath!"
-    sound(SND_MUFFLEDBUZZ2)		// 92
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} exhaled" linebreak
+	"  a blast of stinky breath!"
+	sound(SND_MUFFLEDBUZZ2)		// 92
+	promptw
+	pause(1)
+	eob
 
 l_0xef9e05:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} summoned" linebreak
-    "  a storm!"
-    sound(SND_WARBLING)		// 86
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} summoned" linebreak
+	"  a storm!"
+	sound(SND_WARBLING)		// 86
+	promptw
+	pause(1)
+	eob
 
 l_0xef9e22:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} spilled" linebreak
-    "  some scalding hot espresso!" promptw
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} spilled" linebreak
+	"  some scalding hot espresso!" promptw
+	eob
 
 l_0xef9e47:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} played" linebreak
-    "  a haunting melody!" promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} played" linebreak
+	"  a haunting melody!" promptw
+	pause(1)
+	eob
 
 l_0xef9e69:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} dispensed" linebreak
-    "  an extinguishing blast!"
-    sound(SND_SPROING)	// 88
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} dispensed" linebreak
+	"  an extinguishing blast!"
+	sound(SND_SPROING)	// 88
+	promptw
+	pause(1)
+	eob
 
 l_0xef9e92:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} used a" linebreak
-    "  Crashing Boom Bang attack!" promptw
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} used a" linebreak
+	"  Crashing Boom Bang attack!" promptw
+	eob
 
 l_0xef9eb4:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} shot out" linebreak
-    "  a spray of fire!"
-    sound(SND_MBR)	// 75
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shot out" linebreak
+	"  a spray of fire!"
+	sound(SND_MBR)	// 75
+	promptw
+	pause(1)
+	eob
 
 l_0xef9ed7:
-    newline
-    sound(SND_MONSTERATTACK)	// 25
-    "@{user} breathed" linebreak
-    "  fire!"
-    sound(SND_MBR)	// 75
-    promptw
-    pause(1)
-    eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} breathed" linebreak
+	"  fire!"
+	sound(SND_MBR)	// 75
+	promptw
+	pause(1)
+	eob
 
 l_0xef9ef4:
-    store_registers
-    newline
-    exit_mouse_check
-    goto_if_false(l_0xef9f9f)
-    goto_if_flag(FLG_SYS_DIS_MOUSE, l_0xef9fe2)	// 0x030A, 778
-    isset(FLG_DELIVERY_PIZZA)		// 180
-    goto_if_true(l_0xefa002)
-    isset(FLG_DELIVERY_UNSOU)		// 181
-    goto_if_true(l_0xefa07e)
-    isset(FLG_DELIVERY_UNSOU_B)		// 645
-    goto_if_true(l_0xefa07e)
-    isset(FLG_DELIVERY_CUSTOMER)	// 446
-    goto_if_true(l_0xefa029)
-    isset(FLG_DELIVERY_CUSTOMER_B)	// 646
-    goto_if_true(l_0xefa029)
-    isset(FLG_DELIVERY_CUSTOMER_C)	// 647
-    goto_if_true(l_0xefa029)
-    isset(FLG_DELIVERY_CUSTOMER_D)	// 648
-    goto_if_true(l_0xefa029)
-    isset(FLG_DELIVERY_HOIHOI)		// 675
-    goto_if_true(l_0xefa002)
-    isset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
-    goto_if_true(l_0xefa07e)
-    isset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
-    goto_if_true(l_0xefa07e)
-    goto_if_flag(FLG_WINS_ESCAPE_MOUSE_NG, l_0xefa0b7)	// 0x02FE, 766
-    OSS_on	// special_event(5)
-    "@(The mouse found the way out and waved for you to follow.)" promptw
-    anchor_warp
-    load_registers
-    take_slot(0, 0)
-    unset(FLG_ITEM_ESCAPE_MOUSE)	// 512
-    OSS_off	// special_event(6)
-    call(data_36.l_0xc7de60) eob
+	store_registers
+	newline
+	can_use_exit_mouse
+	goto_if_false(l_0xef9f9f)
+	goto_if_flag(FLG_SYS_DIS_MOUSE, l_0xef9fe2)	// 0x030A, 778
+	isset(FLG_DELIVERY_PIZZA)		// 180
+	goto_if_true(l_0xefa002)
+	isset(FLG_DELIVERY_UNSOU)		// 181
+	goto_if_true(l_0xefa07e)
+	isset(FLG_DELIVERY_UNSOU_B)		// 645
+	goto_if_true(l_0xefa07e)
+	isset(FLG_DELIVERY_CUSTOMER)	// 446
+	goto_if_true(l_0xefa029)
+	isset(FLG_DELIVERY_CUSTOMER_B)	// 646
+	goto_if_true(l_0xefa029)
+	isset(FLG_DELIVERY_CUSTOMER_C)	// 647
+	goto_if_true(l_0xefa029)
+	isset(FLG_DELIVERY_CUSTOMER_D)	// 648
+	goto_if_true(l_0xefa029)
+	isset(FLG_DELIVERY_HOIHOI)		// 675
+	goto_if_true(l_0xefa002)
+	isset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	goto_if_true(l_0xefa07e)
+	isset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	goto_if_true(l_0xefa07e)
+	goto_if_flag(FLG_WINS_ESCAPE_MOUSE_NG, l_0xefa0b7)	// 0x02FE, 766
+	OSS_on	// event(5)
+	"@(The mouse found the way out and waved for you to follow.)" promptw
+	anchor_warp
+	load_registers
+	take_from_location(0,0)
+	unset(FLG_ITEM_ESCAPE_MOUSE)	// 512
+	OSS_off	// event(6)
+	call(data_36.l_0xc7de60) eob
 
 l_0xef9f9f:
-    "@(The Exit Mouse cannot do its job" next
-    "@unless it is in a hole, cave, or some place with an exit!)" end
+	"@(The Exit Mouse cannot do its job" next
+	"@unless it is in a hole, cave, or some place with an exit!)" end
 
 l_0xef9fe2:
-    "@(At this point in time, the mouse is fast asleep.)" end
+	"@(At this point in time, the mouse is fast asleep.)" end
 
 l_0xefa002:
-    "@You shouldn't let the mouse go until the pizza has arrived." end
+	"@You shouldn't let the mouse go until the pizza has arrived." end
 
 l_0xefa029:
-    "@If you release the mouse now, it might be stepped on by the approaching customer." next
-    "@So... it's not a good idea to release the mouse now." end
+	"@If you release the mouse now, it might be stepped on by the approaching customer." next
+	"@So... it's not a good idea to release the mouse now." end
 
 l_0xefa07e:
-    "@Please stick around until Escargo Express arrives." next
-    "@So... do not use the Exit Mouse!" eob
+	"@Please stick around until Escargo Express arrives." next
+	"@So... do not use the Exit Mouse!" eob
 
 l_0xefa0b7:
-    "@For some reason, the exit mouse isn't being agreeable." end
+	"@For some reason, the exit mouse isn't being agreeable." end
 
 l_0xefa0dc:
-    swap
-    "@{name(0)} read the hieroglyphs." next
-    "@<To fight against the invaders, we built this pyramid fortress." next
-    "@However, our efforts were futile, and we lost." next
-    "@Nonetheless, our pyramid was protected by the gods of Scarabia." next
-    "@The invaders will be reborn every millennium and will attack again." next
-    "@Even now, the invaders hide beyond space and time and build their evil stronghold." next
-    "@A place out of time is beyond the Dark, and is even farther beyond the Lost Underworld." next
-    "@The Deep Darkness is shrouded, it is without light." next
-    "@Only one with the {itemname(HAWK_EYE)} can pierce the dark." next	// Item 0xAF
-    "@The Sphinx now watches over everything," next
-    "@waiting for the coming of a truly brave hero." next
-    "@   #" linebreak
-    "  4   3" linebreak
-    "   2 5" next
-    "@Dance in front of the Sphinx!>" end
+	swap
+	"@{name(0)} read the hieroglyphs." next
+	"@<To fight against the invaders, we built this pyramid fortress." next
+	"@However, our efforts were futile, and we lost." next
+	"@Nonetheless, our pyramid was protected by the gods of Scarabia." next
+	"@The invaders will be reborn every millennium and will attack again." next
+	"@Even now, the invaders hide beyond space and time and build their evil stronghold." next
+	"@A place out of time is beyond the Dark, and is even farther beyond the Lost Underworld." next
+	"@The Deep Darkness is shrouded, it is without light." next
+	"@Only one with the {itemname(HAWK_EYE)} can pierce the dark." next	// Item 0xAF
+	"@The Sphinx now watches over everything," next
+	"@waiting for the coming of a truly brave hero." next
+	"@   #" linebreak
+	"  4   3" linebreak
+	"   2 5" next
+	"@Dance in front of the Sphinx!>" end
 
 l_0xefa2ab:
-    special_event(7)
-    goto_if_false(l_0xefa2b5)
-    eob
+	event(7)
+	goto_if_false(l_0xefa2b5)
+	eob
 
 l_0xefa2b5:
-    "@This town is not shown on the map." end
+	"@This town is not shown on the map." end
 
 l_0xefa2c9:
-    goto_if_flag(FLG_OPEN_TABIGOYA, l_0xefa2d5)	// 0x6C, 108
-    call(data_27.l_0xc6fb20)
-    goto(l_0xefa2d5)
+	goto_if_flag(FLG_OPEN_TABIGOYA, l_0xefa2d5)	// 0x6C, 108
+	call(data_27.l_0xc6fb20)
+	goto(l_0xefa2d5)
 
 l_0xefa2d5:
-    eob
+	eob
 
 l_0xefa2d6:
-    store_registers
-    if flag FLG_KEY_ITEMS { swap return_action_argument }
-    else { return_item_in_slot(0, 0) swap }
-    result_is(SHACK_KEY)
-    goto_if_false(data_27.l_0xc6fb5d)
-    call(data_27.l_0xc6fb33)
+	store_registers
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	result_is(SHACK_KEY)
+	goto_if_false(data_27.l_0xc6fb5d)
+	call(data_27.l_0xc6fb33)
 
-    load_registers
-    if flag FLG_KEY_ITEMS { swap return_action_argument }
-    else { return_item_in_slot(0, 0) swap take_slot(0, 0) }
-    hide_sprite(147, 6)	// 0093, 6
-    set(FLG_OPEN_TABIGOYA)	// 108
-    eob
+	load_registers
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap take_from_location(0,0) }
+	hide_sprite(147,6)	// 0093, 6
+	set(FLG_OPEN_TABIGOYA)	// 108
+	eob
 
 l_0xefa2fa:
-    set(FLG_SYS_MONSTER_OFF)	// 11
-    generate_active_sprite(106, 145, 1)	// 006A, 0091, 1
-    focus_camera_sprite(106)	// 006A
-    unfreeze_char_movement(-1)	// FF
-    wait_for_movement
-    hide_char(-1)
-    music(83)
-    music_switching_off
-    reset_camera
-    freeze_char_movement(-1)	// FF
-    generate_active_sprite(162, 139, 1)	// 00A2, 008B, 1
-    wait_for_movement
-    unfreeze_npc_movement(623)	// 026F
-    wait_for_movement
-    warp(174)	// AE
-    generate_active_sprite(209, 146, 1)	// 00D1, 0092, 1
-    pause(1)
-    focus_camera_sprite(209)	// 00D1
-    unfreeze_char_movement(-1)	// FF
-    pause(1)
-    wait_for_movement
-    reset_camera
-    freeze_char_movement(-1)	// FF
-    add_party_member(1)
-    add_party_member(2)
-    party_remove(3)
-    warp(77)	// 4D
-    generate_active_sprite(13, 176, 1)	// 000D, 00B0, 1
-    pause(60)
-    delete_active_sprite(13, 6)		// 000D, 6
-    generate_active_sprite(3, 177, 1)	// 0003, 00B1, 1
-    pause(1)
-    freeze_sprite_movement(3)		// 0003
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	sprite2_spawn(106,145,1)	// 006A, 0091, 1
+	focus_camera_on_sprite2(106)	// 006A
+	party_unfreeze	// 0xFF
+	wait_movement
+	hide_party	// 0xFF, 6
+	music(83)
+	music_switching_off
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(162,139,1)	// 00A2, 008B, 1
+	wait_movement
+	npc_unfreeze(623)	// 026F
+	wait_movement
+	warp(174)	// AE
+	sprite2_spawn(209,146,1)	// 00D1, 0092, 1
+	pause(1)
+	focus_camera_on_sprite2(209)	// 00D1
+	party_unfreeze	// 0xFF
+	pause(1)
+	wait_movement
+	restore_camera
+	party_freeze	// 0xFF
+	party_add(1)	// Add Ness
+	party_add(2)	// Add Paula
+	party_remove(3)	// Remove Jeff
+	warp(77)	// 0x4D
+	sprite2_spawn(13,176,1)	// 000D, 00B0, 1
+	pause(60)
+	sprite2_delete(13,6)		// 000D, 6
+	sprite2_spawn(3,177,1)	// 0003, 00B1, 1
+	pause(1)
+	sprite2_freeze(3)		// 0003
 
-    window_open(1)
-    unset(FLG_SYS_MONSTER_OFF)	// 11
-    goto(data_43.l_0xc884d0)
+	window_open(1)
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	goto(data_43.l_0xc884d0)
 
 l_0xefa379:
-    eob
+	eob
 

@@ -4,12 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
 import "../essential/flags.ccs"
-import "../redux/keyitems.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -17,90 +17,90 @@ command e(label) "{long label}"
 // Text Data
 l_0xc688af:
     unset(FLG_PHOTO_BUILDING)	// 496
-    summon_photographer(18)	// 0x12
+    photo_time(18)	// 0x12
     set(FLG_PHOTO_18)	// 715
     eob
 
 l_0xc688b9:
     unset(FLG_PHOTO_DEPT)	// 497
-    summon_photographer(19)	// 0x13
+    photo_time(19)	// 0x13
     set(FLG_PHOTO_19)	// 716
     eob
 
 l_0xc688c3:
     unset(FLG_PHOTO_RAMMA)	// 498
-    summon_photographer(20)	// 0x14
+    photo_time(20)	// 0x14
     set(FLG_PHOTO_20)	// 717
     eob
 
 l_0xc688cd:
     unset(FLG_PHOTO_RAMMA_FIELD)	// 499
-    summon_photographer(21)	// 0x15
+    photo_time(21)	// 0x15
     set(FLG_PHOTO_21)	// 718
     eob
 
 l_0xc688d7:
     unset(FLG_PHOTO_STONEHENGE)	// 500
-    summon_photographer(22)	// 0x16
+    photo_time(22)	// 0x16
     set(FLG_PHOTO_22)	// 719
     eob
 
 l_0xc688e1:
     unset(FLG_PHOTO_SUMS_HOTEL)	// 501
-    summon_photographer(23)	// 0x17
+    photo_time(23)	// 0x17
     set(FLG_PHOTO_23)	// 720
     eob
 
 l_0xc688eb:
     unset(FLG_PHOTO_SUMS_REST)	// 502
-    summon_photographer(24)	// 0x18
+    photo_time(24)	// 0x18
     set(FLG_PHOTO_24)	// 721
     eob
 
 l_0xc688f5:
     unset(FLG_PHOTO_SUMS_BEACH)	// 503
-    summon_photographer(25)	// 0x19
+    photo_time(25)	// 0x19
     set(FLG_PHOTO_25)	// 722
     eob
 
 l_0xc688ff:
     unset(FLG_PHOTO_TOTO)	// 504
-    summon_photographer(26)	// 0x1A
+    photo_time(26)	// 0x1A
     set(FLG_PHOTO_26)	// 723
     eob
 
 l_0xc68909:
     unset(FLG_PHOTO_SKARABI)	// 505
-    summon_photographer(27)	// 0x1B
+    photo_time(27)	// 0x1B
     set(FLG_PHOTO_27)	// 724
     eob
 
 l_0xc68913:
     unset(FLG_PHOTO_PYRAMID)	// 506
-    summon_photographer(28)	// 0x1C
+    photo_time(28)	// 0x1C
     set(FLG_PHOTO_28)	// 725
     eob
 
 l_0xc6891d:
     unset(FLG_PHOTO_DUNGEONMAN)	// 507
-    summon_photographer(29)	// 0x1D
+    photo_time(29)	// 0x1D
     set(FLG_PHOTO_29)	// 726
     eob
 
 l_0xc68927:
     unset(FLG_PHOTO_MAKYOU)	// 508
-    summon_photographer(30)	// 0x1E
+    photo_time(30)	// 0x1E
     set(FLG_PHOTO_30)	// 727
     eob
 
 l_0xc68931:
-    summon_photographer(31)	// 0x1F
+    photo_time(31)	// 0x1F
     set(FLG_PHOTO_31)	// 728
     unset(FLG_PHOTO_GUMI)	// 509
     eob
 
 l_0xc6893b:
-    summon_photographer(32)	// 0x20
+    photo_time(32)	// 0x20
     unset(FLG_PHOTO_SATURN)	// 510
     set(FLG_PHOTO_32)	// 729
     eob
@@ -109,14 +109,15 @@ l_0xc68945:
     music(115)
     pause(60)
     wait
-    stop_music(0)
+    stop_music
     sound(SND_PHONEPICKUP)	// 11
     window_open(1)
     "@Hello, {name(3)}?" next
     "@Oh, happy day!" next
     "@I finally got a hold of you..." next
     // Check if Jeff's present
-    counter(3) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6899a)
+    counter(3)
+    call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6899a)
     // Stat 0x34 / 52 = Jeff's name
     "@Oh, {stat(52)}!" next
     goto(l_0xc689fb)
@@ -142,14 +143,14 @@ l_0xc689fb:
     music_effect(2)	// Quick music fade
     pause(30)
     music(2)
-    special_event(3)	// Player's name input at Summers
+    event(3)	// Player's name input at Summers
     window_open(1)
     title(1, Tony)
     "@Thanks, game player!" next
     "@Thank you very much!" next
     "@Is this correct?" promptw
     window_closeall
-    special_event(3)	// Player's name input at Summers
+    event(3)	// Player's name input at Summers
     music_effect(2)	// Quick music fade
     pause(30)
     window_open(1)
@@ -161,7 +162,8 @@ l_0xc689fb:
     "@Well, talk to you later..." next
     "@...{name(3)}..." next
     // Check if Jeff's present
-    counter(3) call(data_36.l_0xc7dc7f) goto_if_false(l_0xc68b7d)
+    counter(3)
+    call(data_36.l_0xc7dc7f) goto_if_false(l_0xc68b7d)
     title(1, Tony)
     "@It seems like you're not feeling well..." next
     "@Get better soon..." next
@@ -183,7 +185,7 @@ l_0xc68b7d:
     window_closeall
     set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
     music_resume
-    OSS_off	// special_event(6)
+    OSS_off	// event(6)
     eob
 
 l_0xc68c3f:
@@ -302,8 +304,8 @@ l_0xc68e1c:
     eob
 
 l_0xc68f74:
-    if flag FLG_KEY_ITEMS { swap return_action_argument }
-    else { return_item_in_slot(0, 0) swap }
+    if flag FLG_KEY_ITEMS { swap get_action_arg }
+    else { get_inventory_item(0,0) swap }
     store_registers
     // Check for Eraser eraser, item 0xD2, 210
     result_is(ERASER_ERASER) goto_if_true(l_0xc68fa6)
@@ -318,18 +320,18 @@ l_0xc68fa6:
     "@But it definitely doesn't look like an eraser... does it?" end
 
 l_0xc69007:
-    if flag FLG_KEY_ITEMS { swap return_action_argument }
-    else { return_item_in_slot(0, 0) swap }
+    if flag FLG_KEY_ITEMS { swap get_action_arg }
+    else { get_inventory_item(0,0) swap }
     // Check for Rabbits' carrot, item 0xFD, 253
     result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)
     "@Cows and carrots?..." next
     "@That's a nutty combination!" end
 
 l_0xc69038:
-    return_item_in_slot(0,0) swap
+    get_inventory_item(0,0) swap
     // Check for Letter from Tony, item 0xA7, 167
     result_is(167) goto_if_false(data_35.l_0xc7c6b6)
-    return_direction_npc_to_object(734,1,1)	// 0x02DE, 0x01, 0x0001
+    get_dir_from_npc(734,TO_CHAR,1)	// 0x02DE, 0x01, 0x0001
     sprite_direction(734,0)	// 0x02DE, 0x00
     "@Ah, {name(1)}... you've read it already." next
     "@...That Tony has a heart of gold..." end
@@ -470,9 +472,9 @@ l_0xc692a0:
     "@*Ka-ching*" next
     givemoney(50)	// 0x0032
     sound(SND_BOXTAKE)	// 116
-    open_wallet
+    show_wallet
     pause(60)
-    party_pos_check(1) rtoarg
+    get_char_at_pos(1) rtoarg
     "@({name(1)} got 50 dollars.)" wait
     set(FLG_TWSN_HOTEL_A_END)	// 738
     eob
@@ -484,7 +486,7 @@ l_0xc692f7:
     music(115)
     pause(60)
     wait
-    stop_music(0)
+    stop_music
     sound(SND_PHONEPICKUP)	// 11
     window_open(1)
     title(1, Tracy)
@@ -525,8 +527,9 @@ l_0xc6943a:
     "@Escargo Express!" next
     "@<We treat your package like it was our only child>..." next
     "@I'm here with your Pencil eraser." next
-    char_inventory_vacancy(-1) goto_if_false(l_0xc694b9)
-    give_and_check(0, PENCIL_ERASER)	// 0xB8, 184
+    get_item_receiver(-1)
+    goto_if_false(l_0xc694b9)
+    give_and_return_location(0, PENCIL_ERASER)	// 0xB8, 184
     sound(SND_CHICKEN2)	// 118
     "@Here you are." next
     "@Thank you very much!" wait
@@ -554,8 +557,8 @@ l_0xc694f4:
     "@I'm here to deliver" linebreak
     "  the {itemname(HAWK_EYE)}." next
     // Item 0xAF / 175 = Hawk eye
-    char_inventory_vacancy(-1) goto_if_false(l_0xc69571)
-    give_and_check(0, HAWK_EYE)	// 0xAF, 175
+    get_item_receiver(-1) goto_if_false(l_0xc69571)
+    give_and_return_location(0, HAWK_EYE)	// 0xAF, 175
     sound(SND_CHICKEN2)	// 118
     "@Here you are." next
     "@Thank you very much!" wait
@@ -586,7 +589,7 @@ l_0xc695b3:
     eob
 
 l_0xc695ba:
-    party_pos_check(1) rtoarg
+    get_char_at_pos(1) rtoarg
     // Check if Ness is the party leader, if not, go to label
     result_is(1) goto_if_false(data_55.l_0xc9992f)
     // Check if Ness has homesickness, if not, go to label
@@ -635,7 +638,7 @@ l_0xc69861:
     "  1780 dollars," next
     "@we trade" linebreak
     // 0x82 / 130 = Horn of life
-    "  [52]{itemname(130)}.[52]" wait
+    "  [52]{itemname(HORN_OF_LIFE)}.[52]" wait
     font_normal
     eob
 
@@ -724,16 +727,7 @@ l_0xc69fa9:
     "@(I am not your enemy." next
     "@I am simply your average run-of-the-mill mole." next
     "@Would you like some hints on fighting enemies?)" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc69ffe:
-    "[19 02]No" eob
-
-l_0xc6a003:
-    "[1C 07 02][11]{clearline}"
-    "[09 02 {e(l_0xc6a048)} {e(l_0xc6a012)}]"
-    goto(l_0xc6a012)
+    two_choice_menu("Yes", l_0xc6a048, "No", l_0xc6a012)
 
 l_0xc6a012:
     "@(Ah, I see..." next
@@ -822,13 +816,13 @@ l_0xc6a666:
     eob
 
 l_0xc6a725:
-    generate_active_sprite(432,34,1)	// 0x01B0, 0x0022, 01
-    wait_for_movement
+    sprite2_spawn(432,34,1)	// 0x01B0, 0x0022, 01
+    wait_movement
     window_open(1)
     newline
     "@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax." wait
     window_closeall
-    change_sprite_movement(432,33)	// 0x01B0, 0x0021
+    sprite2_do_mc(432,33)	// 0x01B0, 0x0021
     eob
 
 l_0xc6a755:
