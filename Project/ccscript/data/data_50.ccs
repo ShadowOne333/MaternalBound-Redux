@@ -52,14 +52,14 @@ l_0xc91c3a:
 l_0xc91cc1:
 	call(data_24.l_0xc69082)
 	set(FLG_SYS_MONSTER_OFF)	// 11
-	"[1F 41 05]"
-	"[1F EB 03 06]"
-	"[1F 15 03 00 0E 01 01]"
+	OSS_on	// event(5)
+	hide_char(3)	// Hide Jeff, 0x03, 6
+	sprite2_spawn(3,270,1)	// 0x03, 0x010E, 1
 	wait_movement
-	"[1F E7 03 00]"
-	"[1F F3 03 00 03]"
+	sprite2_freeze(3)	// 0x0003
+	show_sprite2_float(3,3)	// 0x03, 3
 	pause(60)
-	"[1F F4 03 00]"
+	hide_sprite2_float(3)	// 0x03
 
 	window_open(1)
 	title_jeff(1)
@@ -69,12 +69,12 @@ l_0xc91cc1:
 	window_closeall
 
 	pause(30)
-	"[1F EA 03 00]"
+	sprite2_unfreeze(3)	// 0x03
 	wait_movement
 	music(179)
-	"[1F F1 E2 01 10 01]"
+	npc_do_mc(482,272)	// 0x01E2, 0x0110
 	wait_movement
-	"[1F E6 E2 01]"
+	npc_freeze(482)	// 0x01E2
 	music_effect(2)	// Quick fade out
 	pause(60)
 	music_resume
@@ -93,88 +93,88 @@ l_0xc91cc1:
 	"  Go, machine,| go!" promptw
 	window_closeall
 
-	"[1F 15 6A 00 0F 01 01]"
+	sprite2_spawn(106,271,1)	// 0x6A, 0x010F, 1
 	pause(1)
-	"[1F EF 6A 00]"
-	"[1F E8 FF]"
+	focus_camera_on_sprite2(106)	// 0x6A
+	party_unfreeze	// 0xFF
 	wait_movement
 	hide_party	// 0xFF, 6
 	set(FLG_BGM_SW)	// 655
 	call(data_36.l_0xc7dd7d) restore_camera
-	"[1F E5 FF]"
-	"[1F E9 E2 01]"
+	party_freeze	// 0xFF
+	npc_unfreeze(482)	// 0x01E2
 	wait_movement
 	pause(15)
-	"[1F 1E E0 01 06]"
+	npc_delete(480,6)	// 0x01E0, 6
 	pause(90)
-	"[1F 15 D1 00 A2 00 FF]"
-	"[1F 15 E6 00 A5 00 FF]"
+	sprite2_spawn(210,162,-1)	// 0xD2, 0xA2, 0xFF
+	sprite2_spawn(230,165,-1)	// 0xE6, 0xA5, 0xFF
 	warp(194)	// 0xC2
-	"[1F EF E6 00]"
-	"[1F E8 FF]"
+	focus_camera_on_sprite2(230)	// 0xE6
+	party_unfreeze	// 0xFF
 	pause(1)
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 96 00 FF]"
+	sprite2_spawn(209,150,-1)	// 0xD1, 0x96, 0xFF
 	warp(187)	// 0xBB
-	"[1F EF D1 00]"
+	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 9E 00 FF]"
-	"[1F 15 E6 00 A0 00 FF]"
+	sprite2_spawn(209,158,-1)	// 0xD1, 0x9E, 0xFF
+	sprite2_spawn(230,160,-1)	// 0xE6, 0xA0, 0xFF
 	warp(192)	// 0xC0
-	"[1F EF E6 00]"
+	focus_camera_on_sprite2(230) 	// 0xE6
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 97 00 FF]"
+	sprite2_spawn(209,151,-1)	// 0xD1, 0x97, 0xFF
 	warp(187)	// 0xBB
-	"[1F EF D1 00]"
+	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 9A 00 FF]"
-	"[1F 15 E6 00 9C 00 FF]"
+	sprite2_spawn(209,154,-1)	// 0xD1, 0x9A, 0xFF
+	sprite2_spawn(230,156,-1)	// 0xE6, 0x9C, 0xFF
 	warp(190)	// 0xBE
-	"[1F EF E6 00]"
+	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 98 00 FF]"
+	sprite2_spawn(209,152,-1)	// 0xD1, 0x98, 0xFF
 	warp(187)	// 0xBB
-	"[1F EF D1 00]"
+	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 A6 00 FF]"
+	sprite2_spawn(209,166,-1)	// 0xD1, 0xA6, 0xFF
 	warp(186)	// 0xBA
-	"[1F EF D1 00]"
+	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 	restore_camera
 	set(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
 	warp(218)	// 0xDA
-	"[1F 17 6F 02 A7 00 01]"
+	npc_spawn(623,167,1)	// 0x026F, 0xA7, 1
 	pause(100)
-	"[1F 17 6D 02 A8 00 01]"
-	"[1F 61]"
+	npc_spawn(621,168,1)	// 0x026D, 0xA8, 1
+	wait_movement
 	unset(FLG_BGM_SW)	// 655
 	call(data_36.l_0xc7dd7d)
-	"[1F 15 6A 00 A9 00 01]"
+	sprite2_spawn(106,169,1)	// 0x6A, 0xA9, 1
 	pause(1)
-	"[1F EF 6A 00]"
-	"[1F EC FF 01]"
+	focus_camera_on_sprite2(106)	// 0x6A
+	show_party(1)	// 0xFF, 1
 	wait_movement
 	restore_camera
-	"[1F E5 FF]"
-	"[1F F1 69 02 8D 00]"
+	party_freeze	// 0xFF
+	npc_do_mc(617,141)	// 0x0269, 0x8D
 	wait_movement
-	"[1F E6 67 02]"
-	"[1F E6 69 02]"
-	"[1F E6 6A 02]"
+	npc_freeze(615)	// 0x0267
+	npc_freeze(617)	// 0x0269
+	npc_freeze(618)	// 0x026A
 	call(data_26.l_0xc6cb97)
-	"[1F F1 6A 02 8E 00]"
+	npc_do_mc(618,142)	// 0x026A, 0x8E
 	wait_movement
-	"[1F E6 6A 02]"
+	npc_freeze(618)	// 0x026A
 	call(data_26.l_0xc6cc31)
-	"[1F F1 6A 02 90 00]"
+	npc_do_mc(618,144)	// 0x026A, 0x90
 	wait_movement
-	"[1F F1 69 02 8F 00]"
+	npc_do_mc(617,143)	// 0x0269, 0x8F
 	wait_movement
 	set_respawn_point(6)
 	unset(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
@@ -184,7 +184,7 @@ l_0xc91cc1:
 	set(FLG_WINS_TASS_BMONKEY_APPEAR)	// 630
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
-	"[1F E8 FF]"
+	party_unfreeze	// 0xFF
 	eob
 
 l_0xc91f9c:
@@ -217,26 +217,26 @@ l_0xc91ffa:
 l_0xc91ffd:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// event(5)
-	"[1F 15 B9 01 09 03 01]"
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 1
 	call(data_24.l_0xc69082)
-	"[1F E9 6F 02]"
+	npc_unfreeze(623)	// 0x026F
 	wait_movement
 	pause(30)
-	"[1F 1E 6D 02 06]"
+	npc_delete(621,6)	// 0x026D, 6
 	wait_movement
-	"[1F 15 D1 00 92 00 FF]"
+	sprite2_spawn(209,146,-1)	// 0xD1, 0x92, 0xFF
 	warp(186)	// 0xBA
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 93 00 FF]"
+	sprite2_spawn(209,147,-1)	// 0xD1, 0x93, 0xFF
 	warp(188)	// 0xBC
-	"[1F EF D1 00]"
+	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 	restore_camera
-	"[1F 15 D1 00 AA 00 FF]"
-	"[1F 15 E6 00 AB 00 FF]"
+	sprite2_spawn(209,170,-1)	// 0xD1, 0xAA, 0xFF
+	sprite2_spawn(230,171,-1)	// 0xE6, 0xAB, 0xFF
 	warp(195)	// 0xC3
-	"[1F EF E6 00]"
+	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
 	unset(FLG_BGM_SW)	// 655
 	set(FLG_BGM_TBUS)	// 535
@@ -246,48 +246,61 @@ l_0xc91ffd:
 	wait_movement
 	show_party(1)	// 0xFF, 1
 	restore_camera
-	"[1F 15 F1 00 AC 00 FF]"
-	"[1F 15 F1 00 AD 00 FF]"
-	"[1F 15 F1 00 AE 00 FF]"
+	sprite2_spawn(241,172,-1)	// 0xF1, 0xAC, 0xFF
+	sprite2_spawn(241,173,-1)	// 0xF1, 0xAD, 0xFF
+	sprite2_spawn(241,174,-1)	// 0xF1, 0xAE, 0xFF
 	unset(FLG_BGM_TBUS)	// 535
 	warp(78)	// 0x4E
 	party_unfreeze	// 0xFF
 	pause(1)
 	set_respawn_point(7)
-	set(flag 748)
+	set(FLG_WINS_SKYW_DISAPPEAR)	// 748
 	set(FLG_TLPT_SUMS)	// 215
 	unset(FLG_SYS_MONSTER_OFF)	// 11
-	"[1F 41 06]"
-	"[1F 15 B9 01 0A 03 01]" eob
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 1
+	eob
 
 l_0xc920a2:
 	call(data_24.l_0xc69082)
 	music(111)
-	"[1F 15 6A 00 FB 02 01]"
+	sprite2_spawn(106,763,1)	// 0x6A, 0x02FB, 1
 	wait_movement
-	"[1F EB FF 06]"
-	"[1F 21 51]{pause(120)}{window_open(1)}[19 10 01]{rtoarg}@([1C 02 00] had a dream, it was a very clear,| and very strange,{pause(5)} dream.)[03]"
-	"[1F 15 6A 00 79 02 01]"
+	hide_party	// 0xFF, 6
+	warp(81)	// 0x51
+	pause(120)
+
+	window_open(1)
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} had a dream, it was a very clear,| and very strange,/ dream.)" promptw
+	sprite2_spawn(106,633,1)	// 0x6A, 0x0279, 1
 	wait_movement
 	window_closeall
-	"[1F 64]"
-	"[1F 11 04]"
-	"[1F 12 01]"
-	"[1F 12 02]"
-	"[1F 12 03]"
-	"[1F EB FF 06]{set(flag 11)}[1F 07 03]{pause(60)}[1F 21 CA]"
-	"[1F 15 6A 00 85 02 01]"
-	call(data_57.l_0xc9b4b8) "[1F 21 CB]"
-	"[1F 15 6A 00 86 02 01]"
-	call(data_57.l_0xc9b4b8) "[1F EC FF 01]"
-	"[1F 21 4F]"
-	"[1F E5 FF]"
-	"[1F E6 41 04]"
-	"[1F E6 42 04]"
+
+	backup_npc_members_and_money
+	party_add(4)	// Add Poo
+	party_remove(1)	// Remove Ness
+	party_remove(2)	// Remove Paula
+	party_remove(3)	// Remove Jeff
+	hide_party	// 0xFF, 6
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	music_effect(3)	// Fade out
+	pause(60)
+	warp(202)	// 0xCA
+	sprite2_spawn(106,645,1)	// 0x6A, 0x0285, 1
+	call(data_57.l_0xc9b4b8)
+	warp(203)	// 0xCB
+	sprite2_spawn(106,646,1)	// 0x6A, 0x0286, 1
+	call(data_57.l_0xc9b4b8)
+	show_party(1)	// 0xFF, 1
+	warp(79)	// 0x4F
+	party_freeze	// 0xFF
+	npc_freeze(1089)	// 0x0441
+	npc_freeze(1090)	// 0x0442
 	pause(120)
 	music_effect(3)	// Fade out
 	pause(120)
-	"[1F 16 41 04 03]"
+	npc_direction(1089,3)	// 0x0441, 3
 	music(119)
 	pause(120)
 	set(FLG_SUMS_RAMMA_START)	// 149
@@ -302,7 +315,6 @@ l_0xc920a2:
 	set(FLG_RAMA_MASTER)	// 150
 	set(FLG_TEMP_9)	// 10
 	hotspot_on(1,1, data_50.l_0xc92203)	// 1, 0x01, 0x00C92203
-	"[1F 66 01 01 03 22 C9 00]"
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	set(FLG_TLPT_RAMA)	// 216
@@ -314,43 +326,49 @@ l_0xc920a2:
 
 l_0xc92203:
 	set(FLG_SYS_MONSTER_OFF)	// 11
-	"[1F 15 6A 00 53 01 01]"
+	sprite2_spawn(106,339,1)	// 0x6A, 0x0153, 1
 	call(data_57.l_0xc9b4b8)
+
 	music_effect(2)	// Quick fade out
 	pause(60)
-	"[1F 13 04 03]"
+	char_direction(4,3)	// 0x04, 3
 	pause(4)
-	"[1F 13 04 04]"
+	char_direction(4,4)	// 0x04, 4
 	pause(4)
-	"[1F 13 04 05]"
+	char_direction(4,5)	// 0x04, 5
 	pause(4)
-	"[1F EB FF 06]"
-	"[1F 15 6A 01 54 01 01]"
+	hide_party	// 0xFF, 6
+	sprite2_spawn(362,340,1)	// 0x016A, 0x0154, 1
 	music(60)
-	unset(flag 2)
+	unset(FLG_TEMP_1)	// 2
 	wait_movement
+
 	goto_if_flag(FLG_TEMP_1, l_0xc92417)	// 2
-	"[1F E7 6A 01]"
-	"[1F 15 A3 00 55 01 01]"
+	sprite2_freeze(362)	// 0x016A
+	sprite2_spawn(163,341,1)	// 0xA3, 0x0155, 1
 	wait_movement
-	"[1F E7 A3 00]"
+
+	sprite2_freeze(163)	// 0xA3
 	call(l_0xc92461)
-	"[1F EA A3 00]"
+	sprite2_unfreeze(163)
 	wait_movement
-	"[1F EA 6A 01]"
+	sprite2_unfreeze(362)	// 0x016A
 	wait_movement
+
 	goto_if_flag(FLG_TEMP_1, l_0xc92417)	// 2
-	"[1F 15 6D 01 56 01 01]"
-	unset(flag 3)
-	set(flag 4)
+	sprite2_spawn(365,342,1)	// 0x016D, 0x0156, 1
+	unset(FLG_TEMP_2)	// 3
+	set(FLG_TEMP_3)	// 4
 	wait_movement
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
-	set(flag 3)
+	set(FLG_TEMP_2)	// 3
 	wait_movement
+
 	open_hp
-	"[1F F2 6D 01 57 01]"
+	sprite2_do_mc(365,343)	// 0x016D, 0x0157
 	unset(FLG_TEMP_2)	// 3
 	unset(FLG_TEMP_4)	// 5
+
 	call(l_0xc9254a)
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
 	call(l_0xc925e3)
@@ -365,27 +383,29 @@ l_0xc92203:
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
 	set(FLG_TEMP_2)	// 3
 	wait_movement
-	"[1F 1F 6D 01 06]"
+
+	sprite2_delete(365,6)	// 0x016D, 6
 	show_party(1)	// 0xFF, 1
 	pause(1)
 	music_resume
-	"[1F 15 58 00 55 01 01]"
+	sprite2_spawn(88,341,1)	// 0xA3, 0x0155, 1
 	wait_movement
-	"[1F E7 58 00]"
-	"[1F 13 04 07]"
+	sprite2_freeze(88)	// 0x58
+	char_direction(4,7)	// 0x04, 7
 	call(l_0xc92958)
-	"[1F EA 58 00]"
+	sprite2_unfreeze(88)	// 0x58
 	wait_movement
 	eob
 
 l_0xc9237e:
-	set(flag 593)
+	set(FLG_BGM_TELEPORT)	// 593
 	music_effect(3)	// Fade out
 	pause(120)
 	music(13)
-	"[1F 15 04 00 58 01 01]"
-	"[1F EB FF 06]"
+	sprite2_spawn(4,344,1)	// 0x04, 0x0158, 1
+	hide_party	// 0xFF, 6
 	wait_movement
+
 	party_add(1)	// Add Ness
 	party_add(2)	// Add Paula
 	party_add(3)	// Add Jeff
@@ -397,20 +417,20 @@ l_0xc9237e:
 	goto(l_0xc923b4)
 
 l_0xc923b4:
-	"[1F 15 04 00 59 01 01]"
+	sprite2_spawn(4,345,1)	// 0x0004, 0x0159, 1
 	wait_movement
 	unset(FLG_BGM_TELEPORT)	// 593
 	music(4)
-	"[1F E7 04 00]"
-	"[1F E6 1B 04]"
+	sprite2_freeze(4)	// 0x0004
+	npc_freeze(1051)	// 0x041B
 	call(l_0xc929ca)
 	window_closeall
 	party_add(4)	// Add Poo
-	"[1F EB 04 06]"
-	"[1F F2 04 00 2F 00]"
+	hide_char(4)	// Hide Poo
+	sprite2_do_mc(4,47)	// 0x04, 0x2F
 	wait_movement
-	"[1F 1F 04 00 06]"
-	"[1F EC 04 01]"
+	sprite2_delete(4,6)	// 0x04, 6
+	show_char(4,1)	// Show Poo, 0x04, 1
 	music(11)
 	pause(120) pause(120)
 	pause(120) pause(60)
@@ -835,7 +855,7 @@ l_0xc92d92:
 	music_resume
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
-	set(flag 217)
+	set(FLG_TLPT_SKRB)	// 217
 	eob
 
 l_0xc92dde:
@@ -1031,12 +1051,17 @@ l_0xc931b7:
 	"@(Wasn't it the whole reason you came here?)" end
 
 l_0xc931d3:
-	get_item_receiver(-1) goto_if_false(l_0xc931f1)
-	"[1D 0E 00 AF]"
-	call(data_36.l_0xc7dcb6) wait
+	if flag FLG_KEY_ITEMS { give_menu_key_item(HAWK_EYE) }
+	else {
+		get_item_receiver(-1) goto_if_false(l_0xc931f1)
+		give_and_return_location(0, HAWK_EYE)	// Item 0xAF / 175 = Hawk eye
+		call(data_36.l_0xc7dcb6)
+	}
+	wait
 	set(FLG_ITEM_TAKANOME)	// 348
 	pause(10)
-	"[1F 1E AB 04 06]" eob
+	npc_delete(1195,6)	// 0x04AB, 6
+	eob
 
 l_0xc931f1:
 	"@(It's unbelievable that you would get this far," next
@@ -1053,39 +1078,40 @@ l_0xc9323b:
 
 l_0xc93258:
 	sound(SND_STARMASTER)	// 99
-	"[1F 15 A9 00 3E 01 01]"
+	sprite2_spawn(169,318,1)	// 0xA9, 0x013E, 1
 	wait_movement
-	"[1F 1F A9 00 06]"
-	"[1F 15 62 00 08 00 01]"
-	"[19 24 62 00 01 04 00]"
-	"[1F E4 62 00 00]"
+	sprite2_delete(169,6)	// 0xA9, 6
+	sprite2_spawn(98,8,1)	// 0x62, 0x0008, 1
+	get_dir_from_sprite(98,TO_CHAR,4)	// 0x62, 1, 4
+	sprite2_direction(98,0)	// 0x62, 0
 	call(data_05.l_0xc5739f)
-	"[1F 12 04]"
-	"[1F 15 04 00 3F 01 01]"
+	party_remove(4)	// Remove Poo
+	sprite2_spawn(4,319,1)	// 0x04, 0x013F, 1
 	wait_movement
-	"[1F E7 04 00]"
+	sprite2_freeze(4)	// 0x0004
 	goto(data_06.l_0xc573dc)
 
 l_0xc9329b:
 	call(l_0xc932f6)
-	"[1F EA 04 00]"
+	sprite2_unfreeze(4)	// 0x0004
 	wait_movement
-	"[1F E7 04 00]"
-	"[1F E4 04 00 01]"
+	sprite2_freeze(4)	// 0x0004
+	sprite2_direction(4,1)	// 0x0004, 1
 	call(data_06.l_0xc5749a)
-	"[1F 1F 62 00 06]"
+	sprite2_delete(98,6)	// 0x62, 6
 	sound(SND_STARMASTER)	// 99
-	"[1F 15 A9 00 40 01 01]"
-	"[1F 1F 04 00 06]"
-	"[1F 15 A9 00 41 01 01]"
+	sprite2_spawn(169,320,1)	// 0xA9, 0x0140, 1
+	sprite2_delete(4,6)	// 0x04, 6
+	sprite2_spawn(169,321,1)	// 0xA9, 0x0141, 1
 	wait_movement
 	set_respawn_point(8)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	call(data_36.l_0xc7de60)
-	"[1D 05 04 AF]"
+	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_TAKANOME) }
+	else { hasitem(4, HAWK_EYE) }	// 0xAF / 175 = Hawk eye
 	goto_if_false(data_55.l_0xc9992f)
 	set(FLG_SKRB_PU_TAKANOME)	// 691
-	"[1D 01 04 AF]"
+	if not flag FLG_KEY_ITEMS { take(4, HAWK_EYE) }	// 0xAF / 175 = Hawk eye
 	eob
 
 l_0xc932f6:

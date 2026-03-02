@@ -383,8 +383,8 @@ command sprite2_unfreeze(num) "[1F EA {short num}]"
 command hide_char_with_style(char, style) "[1F EB {byte char} {byte style}]"
     // There's a single line in the vanilla game that uses a different style
     // (8 melodies acquired cutscene, [1F EB FF 01]), so this command alone isn't good enough.
-    /*command hide_char(char) hide_char_with_style(char, 6)
-    command hide_party hide_char(0xFF)*/
+    //command hide_char(char) hide_char_with_style(char, 6)
+    //command hide_party hide_char(0xFF)
 /*command show_char(char, style) "[1F EC {byte char} {byte style}]"
     command show_party(style) show_char(0xFF, style)*/
 // So... this would just cause the camera to stay where it is? Or would it somehow jump back to the
