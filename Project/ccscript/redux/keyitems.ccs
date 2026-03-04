@@ -183,7 +183,7 @@ KeyItems:
 			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_MISSFAKE {
 			load_str_callonhover("Diamond", SetCount14) }
-		/*if flag FLG_ITEM_YOGURT_MACHINE {	// Yogurt dispenser -> Tofu machine
+		/*if flag FLG_ITEM_YOGURT_MACHINE and not FLG_FOUR_MAID_THANKS {	// Yogurt dispenser -> Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
 		if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
 			load_str_callonhover("Tiny ruby", SetCount15) }
@@ -191,7 +191,7 @@ KeyItems:
 			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
 			load_str_callonhover("Hieroglyph copy", SetCount17) }
-		if flag FLG_ITEM_CARROT_KEY {	// Rabbit's carrot ->
+		if flag FLG_ITEM_CARROT_KEY and not FLG_RAMA_RABBIT_DISAPPEAR {	// Rabbit's carrot ->
 			load_str_callonhover("Rabbits' carrot", SetCount18) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
 			load_str_callonhover("Key to the tower", SetCount19) }

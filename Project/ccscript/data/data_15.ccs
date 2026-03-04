@@ -4,320 +4,727 @@
  * Generated using CCScriptWriter.
  */
 
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc5df3a:
-    call(l_0xc5e431) "[1B 02 {e(l_0xc5dfa7)}]" call(l_0xc5e1ef) "[06 E1 00 {e(l_0xc5df56)}]" goto(l_0xc5df61)
+	call(l_0xc5e431)
+	goto_if_false(l_0xc5dfa7)
+	call(l_0xc5e1ef)
+	goto_if_flag(FLG_SHOP_SOLD, l_0xc5df56)	// 0x00E1, 225
+	goto(l_0xc5df61)
 
 l_0xc5df56:
-    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" goto(l_0xc5df61)
+	call(data_00.l_0xc51568)
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+	goto(l_0xc5df61)
 
 l_0xc5df61:
-    call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5df7f)} {e(data_14.l_0xc5deef)}]" goto(data_14.l_0xc5deef)
+	call(data_00.l_0xc51700)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5df7f)
+		switch_entry(data_14.l_0xc5deef)
+	goto(data_14.l_0xc5deef)
 
 l_0xc5df7f:
-    call(data_00.l_0xc51898) goto(data_14.l_0xc5ded3)
+	call(data_00.l_0xc51898)
+	goto(data_14.l_0xc5ded3)
 
 l_0xc5df89:
-    call(data_00.l_0xc50f66) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5df3a)} {e(data_14.l_0xc5deef)}]" goto(data_14.l_0xc5deef)
+	call(data_00.l_0xc50f66)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5df3a)
+		switch_entry(data_14.l_0xc5deef)
+	goto(data_14.l_0xc5deef)
 
 l_0xc5dfa7:
-    call(data_00.l_0xc513a4) goto(l_0xc5df61)
+	call(data_00.l_0xc513a4)
+	goto(l_0xc5df61)
 
 l_0xc5dfb1:
-    "{unset(flag 657)}" newline
-    call(data_00.l_0xc50000) goto(l_0xc5dfba)
+	unset(FLG_SHOPTEMP_2)	// 657
+	newline
+	call(data_00.l_0xc50000)
+	goto(l_0xc5dfba)
 
 l_0xc5dfba:
-    call(data_00.l_0xc504c8) "{open_hp}" call(data_13.l_0xc5d5ab) "[1B 02 {e(l_0xc5e013)}]{store_registers}[1D 03 FF][1B 02 {e(l_0xc5e029)}]{load_registers}" call(l_0xc5e3bc) call(l_0xc5e0a9) "[06 E0 00 {e(l_0xc5dfef)}]" goto(l_0xc5dffa)
+	call(data_00.l_0xc504c8)
+	open_hp
+	call(data_13.l_0xc5d5ab)
+	goto_if_false(l_0xc5e013)
+	store_registers
+	get_item_receiver(255)	// 0xFF
+	goto_if_false(l_0xc5e029)
+	load_registers
+	call(l_0xc5e3bc)
+	call(l_0xc5e0a9)
+	goto_if_flag(FLG_SHOP_TOOK, l_0xc5dfef)	// 0x00E0, 224
+	goto(l_0xc5dffa)
 
 l_0xc5dfef:
-    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" goto(l_0xc5dffa)
+	call(data_00.l_0xc51568)
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+	goto(l_0xc5dffa)
 
 l_0xc5dffa:
-    call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5dfba)} {e(l_0xc5e013)}]" goto(l_0xc5e013)
+	call(data_00.l_0xc51700)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5dfba)
+		switch_entry(l_0xc5e013)
+	goto(l_0xc5e013)
 
 l_0xc5e013:
-    "[06 91 02 {e(l_0xc5e020)}]" call(data_00.l_0xc50330) eob
+	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e020)	// 0x0291, 657
+	call(data_00.l_0xc50330)
+	eob
 
 l_0xc5e020:
-    "{unset(flag 657)}" call(data_00.l_0xc50198) eob
+	unset(FLG_SHOPTEMP_2)	// 657
+	call(data_00.l_0xc50198)
+	eob
 
 l_0xc5e029:
-    call(data_00.l_0xc50f66) eob
+	call(data_00.l_0xc50f66)
+	eob
 
 l_0xc5e02f:
-    "{unset(flag 657)}" newline
-    call(data_00.l_0xc50000) goto(l_0xc5e038)
+	unset(FLG_SHOPTEMP_2)	// 657
+	newline
+	call(data_00.l_0xc50000)
+	goto(l_0xc5e038)
 
 l_0xc5e038:
-    call(data_00.l_0xc504c8) "{open_hp}" call(data_13.l_0xc5d5ab) "[1B 02 {e(l_0xc5e08d)}]{store_registers}[1D 03 FF][1B 02 {e(l_0xc5e0a3)}]{load_registers}" call(l_0xc5e3bc) call(l_0xc5e0a9) "[06 E0 00 {e(l_0xc5e069)}]" eob
+	call(data_00.l_0xc504c8)
+	open_hp
+	call(data_13.l_0xc5d5ab)
+	goto_if_false(l_0xc5e08d)
+	store_registers
+	get_item_receiver(255)	// 0xFF
+	goto_if_false(l_0xc5e0a3)
+	load_registers
+	call(l_0xc5e3bc)
+	call(l_0xc5e0a9)
+	goto_if_flag(FLG_SHOP_TOOK, l_0xc5e069)	// 0x00E0, 224
+	eob
 
 l_0xc5e069:
-    call(data_00.l_0xc51568) "{unset(flag 224)}{unset(flag 225)}" call(data_00.l_0xc51700) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e038)} {e(l_0xc5e08d)}]" goto(l_0xc5e08d)
+	call(data_00.l_0xc51568)
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+	call(data_00.l_0xc51700)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e038)
+		switch_entry(l_0xc5e08d)
+	goto(l_0xc5e08d)
 
 l_0xc5e08d:
-    "[06 91 02 {e(l_0xc5e09a)}]" call(data_00.l_0xc50330) eob
+	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e09a)	// 0x0291, 657
+	call(data_00.l_0xc50330)
+	eob
 
 l_0xc5e09a:
-    "{unset(flag 657)}" call(data_00.l_0xc50198) eob
+	unset(FLG_SHOPTEMP_2)	// 657
+	call(data_00.l_0xc50198)
+	eob
 
 l_0xc5e0a3:
-    call(data_00.l_0xc50f66) eob
+	call(data_00.l_0xc50f66)
+	eob
 
 l_0xc5e0a9:
-    call(l_0xc5e24b) "[1B 03 {e(l_0xc5e1d6)}]{load_registers}" call(data_00.l_0xc50660) "[1D 19 02][1B 02 {e(l_0xc5e0cc)}][19 10 01]" goto(l_0xc5e0de)
+	call(l_0xc5e24b)
+	goto_if_true(l_0xc5e1d6)
+	load_registers
+	call(data_00.l_0xc50660)
+	party_size_smaller_than(2)	// 0x02
+	goto_if_false(l_0xc5e0cc)
+	get_char_at_pos(1)	// 0x01
+	goto(l_0xc5e0de)
 
 l_0xc5e0cc:
-    "{load_registers}" call(data_00.l_0xc507f8) call(l_0xc5e52e) "[1B 02 {e(l_0xc5e1ad)}]" goto(l_0xc5e0de)
+	load_registers
+	call(data_00.l_0xc507f8)
+	call(l_0xc5e52e)
+	goto_if_false(l_0xc5e1ad)
+	goto(l_0xc5e0de)
 
 l_0xc5e0de:
-    "{store_registers}{swap}[1D 03 00][1B 02 {e(l_0xc5e1b7)}]{load_registers}[1D 02 02][1B 02 {e(l_0xc5e1e0)}]" call(l_0xc5e25b) call(l_0xc5e26a) "[1B 02 {e(l_0xc5e18f)}][1B 06][1D 0F 00 00]" call(l_0xc5e3a5) call(data_14.l_0xc5d835) "{store_registers}" call(data_00.l_0xc50990) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e136)} {e(l_0xc5e18b)}]" goto(l_0xc5e18b)
+	store_registers
+	swap
+	get_item_receiver(0)	// 0x00
+	goto_if_false(l_0xc5e1b7)
+	load_registers
+	arg_item_type_is_not(2)	// 0x02
+	goto_if_false(l_0xc5e1e0)
+	call(l_0xc5e25b)
+	call(l_0xc5e26a)
+	goto_if_false(l_0xc5e18f)
+	load_registers_shared
+	take_from_location(0,0)	// 0x00, 0x00
+	call(l_0xc5e3a5)
+	call(data_14.l_0xc5d835)
+	store_registers
+	call(data_00.l_0xc50990)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e136)
+		switch_entry(l_0xc5e18b)
+	goto(l_0xc5e18b)
 
 l_0xc5e136:
-    "{sound(115)}" call(l_0xc5e277) "{load_registers}[1F 83 00 00]{store_registers}" call(l_0xc5e2f7) "{load_registers}{swap}[1B 02 {e(l_0xc5e18b)}]" call(l_0xc5e36e) "[1B 02 {e(l_0xc5e18b)}]" call(data_00.l_0xc50a72) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e17e)} {e(l_0xc5e18b)}]" goto(l_0xc5e18b)
+	sound(SND_BOXOPEN1)	// 115
+	call(l_0xc5e277)
+	load_registers
+	equip(0,0)	// 0x00, 0x00
+	store_registers
+	call(l_0xc5e2f7)
+	load_registers
+	swap
+	goto_if_false(l_0xc5e18b)
+	call(l_0xc5e36e)
+	goto_if_false(l_0xc5e18b)
+	call(data_00.l_0xc50a72)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e17e)
+		switch_entry(l_0xc5e18b)
+	goto(l_0xc5e18b)
 
 l_0xc5e17e:
-    call(data_14.l_0xc5d835) call(l_0xc5e37a) goto(l_0xc5e188)
+	call(data_14.l_0xc5d835)
+	call(l_0xc5e37a)
+	goto(l_0xc5e188)
 
 l_0xc5e188:
-    "{set(flag 224)}" goto(l_0xc5e18b)
+	set(FLG_SHOP_TOOK)	// 224
+	goto(l_0xc5e18b)
 
 l_0xc5e18b:
-    "{unset(flag 658)}" eob
+	unset(FLG_SHOPTEMP_3)	// 658
+	eob
 
 l_0xc5e18f:
-    call(l_0xc5e387) call(data_00.l_0xc50b54) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e1e0)} {e(l_0xc5e1ad)}]" goto(l_0xc5e1ad)
+	call(l_0xc5e387)
+	call(data_00.l_0xc50b54)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e1e0)
+		switch_entry(l_0xc5e1ad)
+	goto(l_0xc5e1ad)
 
 l_0xc5e1ad:
-    call(data_00.l_0xc50c36) goto(l_0xc5e18b)
+	call(data_00.l_0xc50c36)
+	goto(l_0xc5e18b)
 
 l_0xc5e1b7:
-    newline
-    call(data_00.l_0xc5197a) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e0cc)} {e(l_0xc5e1ad)}]" goto(l_0xc5e1ad)
+	newline
+	call(data_00.l_0xc5197a)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e0cc)
+		switch_entry(l_0xc5e1ad)
+	goto(l_0xc5e1ad)
 
 l_0xc5e1d6:
-    call(data_00.l_0xc50dce) goto(l_0xc5e18b)
+	call(data_00.l_0xc50dce)
+	goto(l_0xc5e18b)
 
 l_0xc5e1e0:
-    call(l_0xc5e3a5) call(data_14.l_0xc5d835) goto(l_0xc5e188)
+	call(l_0xc5e3a5)
+	call(data_14.l_0xc5d835)
+	goto(l_0xc5e188)
 
 l_0xc5e1ef:
-    call(data_00.l_0xc510fe) call(l_0xc5e456) "[1B 02 {e(l_0xc5e236)}]{store_registers}[19 19 00 00][1D 0B 00][1B 02 {e(l_0xc5e241)}]" call(data_00.l_0xc511e0) call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc5e22c)} {e(l_0xc5e237)}]" goto(l_0xc5e237)
+	call(data_00.l_0xc510fe)
+	call(l_0xc5e456)
+	goto_if_false(l_0xc5e236)
+	store_registers
+	get_inventory_item(0,0)	// 0x00, 0x00
+	get_selling_price(0)	// 0x00
+	goto_if_false(l_0xc5e241)
+	call(data_00.l_0xc511e0)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5e22c)
+		switch_entry(l_0xc5e237)
+	goto(l_0xc5e237)
 
 l_0xc5e22c:
-    call(l_0xc5e392) call(data_14.l_0xc5d835) goto(l_0xc5e236)
+	call(l_0xc5e392)
+	call(data_14.l_0xc5d835)
+	goto(l_0xc5e236)
 
 l_0xc5e236:
-    eob
+	eob
 
 l_0xc5e237:
-    call(data_00.l_0xc512c2) goto(l_0xc5e236)
+	call(data_00.l_0xc512c2)
+	goto(l_0xc5e236)
 
 l_0xc5e241:
-    call(data_00.l_0xc51486) goto(l_0xc5e236)
+	call(data_00.l_0xc51486)
+	goto(l_0xc5e236)
 
 l_0xc5e24b:
-    "{swap}[1D 0A 00]{store_registers}{swap}[1D 14 00 00 00 00]" eob
+	swap
+	get_buying_price(0)	// 0x00
+	store_registers
+	swap
+	cannot_take_money(0)	// 0x00000000
+	eob
 
 l_0xc5e25b:
-    "[1D 23 00]{result_is(1)}[1B 02 {e(l_0xc5e269)}]{set(flag 658)}" goto(l_0xc5e269)
+	get_equippable_item_type(0)	// 0x00
+	result_is(1)
+	goto_if_false(l_0xc5e269)
+	set(FLG_SHOPTEMP_3)	// 658
+	goto(l_0xc5e269)
 
 l_0xc5e269:
-    eob
+	eob
 
 l_0xc5e26a:
-    "{load_registers}[1D 0E 00 00][1B 05][1D 11 00 00]" eob
+	load_registers
+	give_and_return_location(0,0)	// 0x00, 0x00
+	store_registers_shared
+	can_equip_item_at_location(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc5e277:
-    "{load_registers}{rtoarg}@([1C 02 00]'s[06 92 02 {e(l_0xc5e2c4)}][06 92 02 {e(l_0xc5e2c4)}] defense" linebreak
-    "  changed from [09 04 {e(l_0xc5e2b0)} {e(l_0xc5e2b5)} {e(l_0xc5e2ba)} {e(l_0xc5e2bf)}]" goto(l_0xc5e2b0)
+	load_registers
+	rtoarg
+	"@({name(0)}'s"
+	goto_if_flag(FLG_SHOPTEMP_3, l_0xc5e2c4)	// 0x0292, 658
+	goto_if_flag(FLG_SHOPTEMP_3, l_0xc5e2c4)	// 0x0292, 658
+	" defense" linebreak
+	"  changed from "
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc5e2b0)
+		switch_entry(l_0xc5e2b5)
+		switch_entry(l_0xc5e2ba)
+		switch_entry(l_0xc5e2bf)
+	goto(l_0xc5e2b0)
 
 l_0xc5e2b0:
-    "[1C 01 12]" eob
+	stat(18)	// 0x12
+	eob
 
 l_0xc5e2b5:
-    "[1C 01 28]" eob
+	stat(40)	// 0x28
+	eob
 
 l_0xc5e2ba:
-    "[1C 01 3E]" eob
+	stat(62)	// 0x3E
+	eob
 
 l_0xc5e2bf:
-    "[1C 01 54]" eob
+	stat(84)	// 0x54
+	eob
 
 l_0xc5e2c4:
-    " offense" linebreak
-    "  changed from [09 04 {e(l_0xc5e2e3)} {e(l_0xc5e2e8)} {e(l_0xc5e2ed)} {e(l_0xc5e2f2)}]" goto(l_0xc5e2e3)
+	" offense" linebreak
+	"  changed from "
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc5e2e3)
+		switch_entry(l_0xc5e2e8)
+		switch_entry(l_0xc5e2ed)
+		switch_entry(l_0xc5e2f2)
+	goto(l_0xc5e2e3)
 
 l_0xc5e2e3:
-    "[1C 01 11]" eob
+	stat(17)	// 0x11
+	eob
 
 l_0xc5e2e8:
-    "[1C 01 27]" eob
+	stat(39)	// 0x27
+	eob
 
 l_0xc5e2ed:
-    "[1C 01 3D]" eob
+	stat(61)	// 0x3D
+	eob
 
 l_0xc5e2f2:
-    "[1C 01 53]" eob
+	stat(83)	// 0x53
+	eob
 
 l_0xc5e2f7:
-    " to {rtoarg}[06 92 02 {e(l_0xc5e338)}][09 04 {e(l_0xc5e314)} {e(l_0xc5e31d)} {e(l_0xc5e326)} {e(l_0xc5e32f)}]" goto(l_0xc5e314)
+	" to "
+	rtoarg
+	goto_if_flag(FLG_SHOPTEMP_3, l_0xc5e338)	// 0x0292, 658
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc5e314)
+		switch_entry(l_0xc5e31d)
+		switch_entry(l_0xc5e326)
+		switch_entry(l_0xc5e32f)
+	goto(l_0xc5e314)
 
 l_0xc5e314:
-    "[1C 01 12])" next
-    eob
+	"{stat(18)})" next	// 0x12
+	eob
 
 l_0xc5e31d:
-    "[1C 01 28])" next
-    eob
+	"{stat(40)})" next	// 0x28
+	eob
 
 l_0xc5e326:
-    "[1C 01 3E])" next
-    eob
+	"{stat(62)})" next	// 0x3E
+	eob
 
 l_0xc5e32f:
-    "[1C 01 54])" next
-    eob
+	"{stat(84)})" next	// 0x54
+	eob
 
 l_0xc5e338:
-    "[09 04 {e(l_0xc5e34a)} {e(l_0xc5e353)} {e(l_0xc5e35c)} {e(l_0xc5e365)}]" goto(l_0xc5e34a)
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc5e34a)
+		switch_entry(l_0xc5e353)
+		switch_entry(l_0xc5e35c)
+		switch_entry(l_0xc5e365)
+	goto(l_0xc5e34a)
 
 l_0xc5e34a:
-    "[1C 01 11])" next
-    eob
+	"{stat(17)})" next	// 0x11
+	eob
 
 l_0xc5e353:
-    "[1C 01 27])" next
-    eob
+	"{stat(39)})" next	// 0x27
+	eob
 
 l_0xc5e35c:
-    "[1C 01 3D])" next
-    eob
+	"{stat(61)})" next	// 0x3D
+	eob
 
 l_0xc5e365:
-    "[1C 01 53])" next
-    eob
+	"{stat(83)})" next	// 0x53
+	eob
 
 l_0xc5e36e:
-    "{swap}{store_registers}{isset(flag 1008)}[1B 03 {e(data_35.loadZero)}]{load_registers}[19 19 00 00][1D 0B 00]" eob
-    //"{swap}{store_registers}[19 19 00 00][1D 0B 00]" eob
+	swap
+	store_registers
+	isset(flag 1008)
+	goto_if_true(data_35.loadZero)
+	load_registers
+	get_inventory_item(0,0)	// 0x00, 0x00
+	get_selling_price(0)	// 0x00
+	eob
+    //"{swap}{store_registers}{get_inventory_item(0,0)}{get_selling_price(0)}" eob
 
 l_0xc5e37a:
-    "[1D 08 00 00]{open_wallet}{load_registers}[1D 0F 00 00]" eob
+	givemoney(0)	// 0x0000
+	show_wallet
+	load_registers
+	take_from_location(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc5e387:
-    "[1B 06][1D 0F 00 00]{load_registers}{swap}" eob
+	load_registers_shared
+	take_from_location(0,0)	// 0x00, 0x00
+	load_registers
+	swap
+	eob
 
 l_0xc5e392:
-    "[1D 08 00 00]{load_registers}[1D 0F 00 00]{open_wallet}{set(flag 657)}{set(flag 225)}" eob
+	givemoney(0)	// 0x0000
+	load_registers
+	take_from_location(0,0)	// 0x00, 0x00
+	show_wallet
+	set(FLG_SHOPTEMP_2)	// 657
+	set(FLG_SHOP_SOLD)	// 225
+	eob
 
 l_0xc5e3a5:
-    "{load_registers}[1D 0A 00]{swap}[1D 09 00 00]{open_wallet}{load_registers}[1D 0E 00 00]{set(flag 657)}" eob
+	load_registers
+	get_buying_price(0)	// 0x00
+	swap
+	takemoney(0)	// 0x0000
+	show_wallet
+	load_registers
+	give_and_return_location(0,0)	// 0x00, 0x00
+	set(FLG_SHOPTEMP_2)	// 657
+	eob
 
 l_0xc5e3bc:
-    "{store_registers}{result_is(226)}[1B 03 {e(l_0xc5e3c9)}]{load_registers}" eob
+	store_registers
+	result_is(226)
+	goto_if_true(l_0xc5e3c9)
+	load_registers
+	eob
 
 l_0xc5e3c9:
-    "[1D 21 0F][18 07 07 00 00 00 00][1B 02 {e(l_0xc5e42e)}][1D 21 08][18 07 04 00 00 00 00][1B 02 {e(l_0xc5e427)}][1D 21 04][18 07 03 00 00 00 00][1B 02 {e(l_0xc5e420)}][1D 21 01][1B 02 {e(l_0xc5e419)}][1D 21 02][1B 03 {e(l_0xc5e412)}]{counter(231)}{ctoarg}{swap}" eob
+	random(15)	// 0x0F
+	compare_result(7)	// 0x00000007, 0x00
+	goto_if_false(l_0xc5e42e)
+	random(8)	// 0x08
+	compare_result(4)	// 0x00000004, 0x00
+	goto_if_false(l_0xc5e427)
+	random(4)	// 0x04
+	compare_result(3)	// 0x00000003, 0x00
+	goto_if_false(l_0xc5e420)
+	random(1)	// 0x01
+	goto_if_false(l_0xc5e419)
+	random(2)	// 0x02
+	goto_if_true(l_0xc5e412)
+	counter(231)
+	ctoarg
+	swap
+	eob
 
 l_0xc5e412:
-    "{counter(230)}{ctoarg}{swap}" eob
+	counter(230)
+	ctoarg
+	swap
+	eob
 
 l_0xc5e419:
-    "{counter(229)}{ctoarg}{swap}" eob
+	counter(229)
+	ctoarg
+	swap
+	eob
 
 l_0xc5e420:
-    "{counter(228)}{ctoarg}{swap}" eob
+	counter(228)
+	ctoarg
+	swap
+	eob
 
 l_0xc5e427:
-    "{counter(227)}{ctoarg}{swap}" eob
+	counter(227)
+	ctoarg
+	swap
+	eob
 
 l_0xc5e42e:
-    "{load_registers}" eob
+	load_registers
+	eob
 
 l_0xc5e431:
-    "{counter(1)}" goto(l_0xc5e433)
+	counter(1)
+	goto(l_0xc5e433)
 
 l_0xc5e433:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc5e453)}][19 10 00][19 19 00 01]{swap}[1B 03 {e(l_0xc5e455)}]{inc}" goto(l_0xc5e433)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc5e453)
+	get_char_at_pos(0)	// 0x00
+	get_inventory_item(0,1)	// 0x00, 0x01
+	swap
+	goto_if_true(l_0xc5e455)
+	inc
+	goto(l_0xc5e433)
 
 l_0xc5e453:
-    "{result_is(0)}" goto(l_0xc5e455)
+	result_is(0)
+	goto(l_0xc5e455)
 
 l_0xc5e455:
-    eob
+	eob
 
 l_0xc5e456:
-    "{open_hp}[1D 19 02][1B 03 {e(l_0xc5e499)}][1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 00]{rtoarg}[1B 02 {e(l_0xc5e48e)}][19 1B 02][1B 02 {e(l_0xc5e456)}][18 09 02][1B 02 {e(l_0xc5e456)}]" goto(l_0xc5e48e)
+	open_hp
+	party_size_smaller_than(2)	// 0x02
+	goto_if_true(l_0xc5e499)
+	select_char(l_0xc5e584, l_0xc5e58b, l_0xc5e592, l_0xc5e599, 0)	// 0x00
+	rtoarg
+	goto_if_false(l_0xc5e48e)
+	count_loaded_strings(2)	// 0x02
+	goto_if_false(l_0xc5e456)
+	do_menu_in_window(2)	// 0x02
+	goto_if_false(l_0xc5e456)
+	goto(l_0xc5e48e)
 
 l_0xc5e48e:
-    "{window_switch(2)}{window_closetop}{window_switch(1)}{swap}" eob
+	window_switch(2)
+	window_closetop
+	window_switch(1)
+	swap
+	eob
 
 l_0xc5e499:
-    "[19 10 01]{rtoarg}[1B 05][18 02][1B 06][1A 05 02 00][1B 06][18 09 02][1B 05]{window_switch(2)}{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc5e4c2)}]{swap}" eob
+	get_char_at_pos(1)	// 0x01
+	rtoarg
+	store_registers_shared
+	back_up_text_rendering_state
+	load_registers_shared
+	show_inventory(2,0)	// 0x02, 0x00
+	load_registers_shared
+	do_menu_in_window(2)	// 0x02
+	store_registers_shared
+	window_switch(2)
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	goto_if_false(l_0xc5e4c2)
+	swap
+	eob
 
 l_0xc5e4c2:
-    eob
+	eob
 
 l_0xc5e4c3:
-    "[1D 19 02][1B 03 {e(l_0xc5e504)}][1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 00]{rtoarg}[1B 02 {e(l_0xc5e4f9)}][19 1B 02][1B 02 {e(l_0xc5e4c3)}][18 09 02][1B 02 {e(l_0xc5e4c3)}]" goto(l_0xc5e4f9)
+	party_size_smaller_than(2)	// 0x02
+	goto_if_true(l_0xc5e504)
+	select_char(l_0xc5e584, l_0xc5e58b, l_0xc5e592, l_0xc5e599, 0)	// 0x00
+	rtoarg
+	goto_if_false(l_0xc5e4f9)
+	count_loaded_strings(2)	// 0x02
+	goto_if_false(l_0xc5e4c3)
+	do_menu_in_window(2)	// 0x02
+	goto_if_false(l_0xc5e4c3)
+	goto(l_0xc5e4f9)
 
 l_0xc5e4f9:
-    "{window_switch(2)}{window_closetop}{window_switch(14)}{swap}" eob
+	window_switch(2)
+	window_closetop
+	window_switch(14)
+	swap
+	eob
 
 l_0xc5e504:
-    "[19 10 01]{rtoarg}[1B 05][18 02][1B 06][1A 05 02 00][1B 06][18 09 02][1B 05]{window_switch(2)}{window_closetop}{window_switch(14)}[1B 06][1B 02 {e(l_0xc5e52d)}]{swap}" eob
+	get_char_at_pos(1)	// 0x01
+	rtoarg
+	store_registers_shared
+	back_up_text_rendering_state
+	load_registers_shared
+	show_inventory(2,0)	// 0x02, 0x00
+	load_registers_shared
+	do_menu_in_window(2)	// 0x02
+	store_registers_shared
+	window_switch(2)
+	window_closetop
+	window_switch(14)
+	load_registers_shared
+	goto_if_false(l_0xc5e52d)
+	swap
+	eob
 
 l_0xc5e52d:
-    eob
+	eob
 
 l_0xc5e52e:
-    "[1A 01 {e(l_0xc5e584)} {e(l_0xc5e58b)} {e(l_0xc5e592)} {e(l_0xc5e599)} 02]{window_switch(2)}{window_closetop}{window_switch(1)}" eob
+	select_char(l_0xc5e584, l_0xc5e58b, l_0xc5e592, l_0xc5e599, 2)	// 0x02
+	window_switch(2)
+	window_closetop
+	window_switch(1)
+	eob
 
 l_0xc5e54a:
-    "[1A 01 {e(l_0xc5e5a0)} {e(l_0xc5e5a7)} {e(l_0xc5e5ae)} {e(l_0xc5e5b5)} 02][1B 05][1B 02 {e(l_0xc5e579)}]{swap}[1D 03 00][1B 03 {e(l_0xc5e579)}][1B 06]{swap}" goto(l_0xc5e54a)
+	select_char(l_0xc5e5a0, l_0xc5e5a7, l_0xc5e5ae, l_0xc5e5b5, 2)	// 0x02
+	store_registers_shared
+	goto_if_false(l_0xc5e579)
+	swap
+	get_item_receiver(0)	// 0x00
+	goto_if_true(l_0xc5e579)
+	load_registers_shared
+	swap
+	goto(l_0xc5e54a)
 
 l_0xc5e579:
-    "[1B 06]{window_switch(44)}{window_closetop}{window_switch(1)}" eob
+	load_registers_shared
+	window_switch(44)
+	window_closetop
+	window_switch(1)
+	eob
 
 l_0xc5e584:
-    "[18 02][1A 05 02 01]" eob
+	back_up_text_rendering_state
+	show_inventory(2,1)	// 0x02, 0x01
+	eob
 
 l_0xc5e58b:
-    "[18 02][1A 05 02 02]" eob
+	back_up_text_rendering_state
+	show_inventory(2,2)	// 0x02, 0x02
+	eob
 
 l_0xc5e592:
-    "[18 02][1A 05 02 03]" eob
+	back_up_text_rendering_state
+	show_inventory(2,3)	// 0x02, 0x03
+	eob
 
 l_0xc5e599:
-    "[18 02][1A 05 02 04]" eob
+	back_up_text_rendering_state
+	show_inventory(2,4)	// 0x02, 0x04
+	eob
 
 l_0xc5e5a0:
-    "[18 02][1A 05 2C 01]" eob
+	back_up_text_rendering_state
+	show_inventory(44,1)	// 0x2C, 0x01
+	eob
 
 l_0xc5e5a7:
-    "[18 02][1A 05 2C 02]" eob
+	back_up_text_rendering_state
+	show_inventory(44,2)	// 0x2C, 0x02
+	eob
 
 l_0xc5e5ae:
-    "[18 02][1A 05 2C 03]" eob
+	back_up_text_rendering_state
+	show_inventory(44,3)	// 0x2C, 0x03
+	eob
 
 l_0xc5e5b5:
-    "[18 02][1A 05 2C 04]" eob
+	back_up_text_rendering_state
+	show_inventory(44,4)	// 0x2C, 0x04
+	eob
 
 l_0xc5e5bc:
-    "{set(flag 104)}{set(flag 288)}[1F 11 02][1F 11 03][1F E5 FF][1F 21 AE][1F 15 6A 00 17 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+	set(FLG_ONET_AMBRAMI)	// 104
+	set(FLG_MAKYO_USE_TAKANOME)	// 288
+	party_add(2)	// 0x02
+	party_add(3)	// 0x03
+	party_freeze	// 0xFF
+	warp(174)	// 0xAE
+	sprite2_spawn(106,535,1)	// 0x006A, 0x0217, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	eob
 
 l_0xc5e5df:
-    "[1F 16 29 04 03][1F F1 29 04 08 00]" eob
+	npc_direction(1065,3)	// 0x0429, 0x03
+	npc_do_mc(1065,8)	// 0x0429, 0x0008
+	eob
 
 l_0xc5e5eb:
-    "[1F 11 02][1F E5 FF][1F 21 AF][1F 15 6A 00 18 02 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+	party_add(2)	// 0x02
+	party_freeze	// 0xFF
+	warp(175)	// 0xAF
+	sprite2_spawn(106,536,1)	// 0x006A, 0x0218, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	eob
 
 l_0xc5e605:
-    "[1F 11 02][1F 11 03][1F 11 04][1F E5 FF][1F 21 B0][1F 15 6A 00 19 02 01][1F 15 22 01 2C 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF]" eob
+	party_add(2)	// 0x02
+	party_add(3)	// 0x03
+	party_add(4)	// 0x04
+	party_freeze	// 0xFF
+	warp(176)	// 0xB0
+	sprite2_spawn(106,537,1)	// 0x006A, 0x0219, 0x01
+	sprite2_spawn(290,44,1)	// 0x0122, 0x002C, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	eob
 
 l_0xc5e62c:
-    "[1F F2 22 01 1A 02]" eob
-
+	sprite2_do_mc(290,538)	// 0x0122, 0x021A
+	eob

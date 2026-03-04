@@ -5,43 +5,43 @@
 
 /* Simple commands */
 
-/*command linebreak "[00]"
-command newline "[01]"
-command eob "[02]"*/
+//command linebreak "[00]"
+//command newline "[01]"
+//command eob "[02]"
 // w = "weak." Because the name prompt is used by [14]
 command promptw "[03]"
-/*command set(f) "[04 {short f}]"
-command unset(f) "[05 {short f}]"*/
+//command set(f) "[04 {short f}]"
+//command unset(f) "[05 {short f}]"
 command goto_if_flag(f, target) "[06 {short f} {long target}]"
-/*command isset(f) "[07 {short f}]"
-command call(target) "[08 {long target}]"*/
+//command isset(f) "[07 {short f}]"
+//command call(target) "[08 {long target}]"
 // CCScript has no concept of variadic commands. We're probably better off for it, but...
 command switch_goto(num) "[09 {byte num}]"
     command switch_entry(target) long target
-/*command goto(target) "[0A {long target}]"
-command result_is(n) "[0B {byte n}]"
-command result_not(n) "[0C {byte n}]"
-command rtoarg "[0D 00]" command ctoarg "[0D 01]"
-command counter(n) "[0E {byte n}]"
-command inc "[0F]"
-command pause(len) "[10 {byte len}]"*/
+//command goto(target) "[0A {long target}]"
+//command result_is(n) "[0B {byte n}]"
+//command result_not(n) "[0C {byte n}]"
+//command rtoarg "[0D 00]" command ctoarg "[0D 01]"
+//command counter(n) "[0E {byte n}]"
+//command inc "[0F]"
+//command pause(len) "[10 {byte len}]"
 command do_menu "[11]"
-/*command clearline "[12]"
-command wait "[13]"
-command prompt "[14]"*/
+//command clearline "[12]"
+//command wait "[13]"
+//command prompt "[14]"
 // Text compressor option for ccc.exe when
 command comp1(n) "[15 {byte n}]"
 command comp2(n) "[16 {byte n}]"
 command comp3(n) "[17 {byte n}]"
 
-/*command window_closetop "[18 00]"
-command window_open(n) "[18 01 {byte n}]"*/
+//command window_closetop "[18 00]"
+//command window_open(n) "[18 01 {byte n}]"
 command back_up_text_rendering_state "[18 02]"
-/*command window_switch(n) "[18 03 {byte n}]"
-command window_closeall "[18 04]"
+//command window_switch(n) "[18 03 {byte n}]"
+//command window_closeall "[18 04]"
 // x = either pixels or tiles (changes based on $5E71 in the localized version), y = lines
-command text_pos(x, y) "[18 05 {byte x} {byte y}]"
-command window_clear "[18 06]"*/
+//command text_pos(x, y) "[18 05 {byte x} {byte y}]"
+//command window_clear "[18 06]"
 command compare_register(num, reg) "[18 07 {long num} {byte reg}]"
     command compare_result(num) compare_register(num, 0)
     command compare_argument(num) compare_register(num, 1)
@@ -57,7 +57,7 @@ command load_str(str) "[19 02 {str} 02]"
 command load_str_callonhover(str, target) "[19 02 {str} 01 {long target}]"
 command unload_strings "[19 04]"
 command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {byte status}]"
-    command inflict(char, status) inflict_status(char, byte[0] status, byte[1] status)
+    //command inflict(char, status) inflict_status(char, byte[0] status, byte[1] status)
     // Like the standard `inflict` command, but splits status into group + value
     // Meant to be used with character_has_status and inflict_status.
     // DO NOT USE THESE IN ASSEMBLY CODE. Use the ones from battle/attack_script.ccs instead.
@@ -148,20 +148,20 @@ command phone_call "[1A 0A]"
 command do_teleport_locations_menu "[1A 0B]"
 
 //command store_registers "[1B 00]"
-//command load_registers "[1B 01]"*/
+//command load_registers "[1B 01]"
 command goto_if_false(target) "[1B 02 {long target}]"
 command goto_if_true(target) "[1B 03 {long target}]"
 //command swap "[1B 04]"
 command store_registers_shared "[1B 05]"
 command load_registers_shared "[1B 06]"
 
-/*command text_color(n) "[1C 00 {byte n}]"
-command stat(n) "[1C 01 {byte n}]"
-command name(char) "[1C 02 {byte char}]"*/
+//command text_color(n) "[1C 00 {byte n}]"
+//command stat(n) "[1C 01 {byte n}]"
+//command name(char) "[1C 02 {byte char}]"
 command letter(c) "[1C 03 {byte c}]"
-/*command open_hp "[1C 04]"
-command itemname(item) "[1C 05 {byte item}]"
-command teleportname(dest) "[1C 06 {byte dest}]"*/
+//command open_hp "[1C 04]"
+//command itemname(item) "[1C 05 {byte item}]"
+//command teleportname(dest) "[1C 06 {byte dest}]"
 command print_strings_horizontal(n) "[1C 07 {byte n}]"
 command gfx_text(n) "[1C 08 {byte n}]"
     // Why did they include the spaces at the end?
@@ -174,7 +174,7 @@ command set_num_padding(n) "[1C 09 {byte n}]"
 command print_strings_vertical(cols) "[1C 0C {byte cols}]"
 //command user "[1C 0D]"
 //command target "[1C 0E]"
-//command delta "[1C 0F]"*/
+//command delta "[1C 0F]"
 // Only in EarthBound
 command zwsp_before_letter(n) "[1C 11 {byte n}]"
 // Only in Mother 2
@@ -236,23 +236,23 @@ command get_dad_deposit_money_base(n) "[1D 24 {byte n}]"
     command get_dad_deposit_money get_dad_deposit_money_base(1)
     command clear_dad_deposit_money get_dad_deposit_money_base(2)
 
-/*command heal_percent(char, n) "[1E 00 {byte char} {byte n}]"
-command hurt_percent(char, n) "[1E 01 {byte char} {byte n}]"
-command heal(char, n) "[1E 02 {byte char} {byte n}]"
-command hurt(char, n) "[1E 03 {byte char} {byte n}]"
-command recoverpp_percent(char, n) "[1E 04 {byte char} {byte n}]"
-command consumepp_percent(char, n) "[1E 05 {byte char} {byte n}]"
-command recoverpp(char, n) "[1E 06 {byte char} {byte n}]"
-command consumepp(char, n) "[1E 07 {byte char} {byte n}]"
-command change_level(char, n) "[1E 08 {byte char} {byte n}]"*/
+//command heal_percent(char, n) "[1E 00 {byte char} {byte n}]"
+//command hurt_percent(char, n) "[1E 01 {byte char} {byte n}]"
+//command heal(char, n) "[1E 02 {byte char} {byte n}]"
+//command hurt(char, n) "[1E 03 {byte char} {byte n}]"
+//command recoverpp_percent(char, n) "[1E 04 {byte char} {byte n}]"
+//command consumepp_percent(char, n) "[1E 05 {byte char} {byte n}]"
+//command recoverpp(char, n) "[1E 06 {byte char} {byte n}]"
+//command consumepp(char, n) "[1E 07 {byte char} {byte n}]"
+//command change_level(char, n) "[1E 08 {byte char} {byte n}]"
 // If a script was using this command, change it to use the fixed version below
 // command boost_exp(char, n) "[1E 09 {byte char} {byte[0] n} {byte[1] n} {byte[2] n}]"
 command boost_experience(char, n) "[1E 09 {byte char} {long n}]"
-/*command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
-command boost_guts(char, n) "[1E 0B {byte char} {byte n}]"
-command boost_speed(char, n) "[1E 0C {byte char} {byte n}]"
-command boost_vitality(char, n) "[1E 0D {byte char} {byte n}]"
-command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"*/
+//command boost_iq(char, n) "[1E 0A {byte char} {byte n}]"
+//command boost_guts(char, n) "[1E 0B {byte char} {byte n}]"
+//command boost_speed(char, n) "[1E 0C {byte char} {byte n}]"
+//command boost_vitality(char, n) "[1E 0D {byte char} {byte n}]"
+//command boost_luck(char, n) "[1E 0E {byte char} {byte n}]"
 
 // The first argument byte is unused
 //command music(n) "[1F 00 00 {byte n}]"
@@ -322,8 +322,8 @@ command start_battle(group) "[1F 23 {short group}]"
 	(from DataCrystal)
 	Unless stated otherwise, this code sets the Result Register to 0. 
 	This code is already in CCScript but does not include all of the values listed here so I thought I'd include it.*/
-	command OSS_on event(5)
-	command OSS_off event(6)
+    command OSS_on event(5)
+    command OSS_off event(6)
 command disable_input "[1F 50]"
 command enable_input "[1F 51]"
 command number_input(digits) "[1F 52 {byte digits}]"
