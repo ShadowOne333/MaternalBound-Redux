@@ -16,841 +16,847 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc688af:
-    unset(FLG_PHOTO_BUILDING)	// 496
-    photo_time(18)	// 0x12
-    set(FLG_PHOTO_18)	// 715
-    eob
+	unset(FLG_PHOTO_BUILDING)	// 496
+	photo_time(18)	// 0x12
+	set(FLG_PHOTO_18)	// 715
+	eob
 
 l_0xc688b9:
-    unset(FLG_PHOTO_DEPT)	// 497
-    photo_time(19)	// 0x13
-    set(FLG_PHOTO_19)	// 716
-    eob
+	unset(FLG_PHOTO_DEPT)	// 497
+	photo_time(19)	// 0x13
+	set(FLG_PHOTO_19)	// 716
+	eob
 
 l_0xc688c3:
-    unset(FLG_PHOTO_RAMMA)	// 498
-    photo_time(20)	// 0x14
-    set(FLG_PHOTO_20)	// 717
-    eob
+	unset(FLG_PHOTO_RAMMA)	// 498
+	photo_time(20)	// 0x14
+	set(FLG_PHOTO_20)	// 717
+	eob
 
 l_0xc688cd:
-    unset(FLG_PHOTO_RAMMA_FIELD)	// 499
-    photo_time(21)	// 0x15
-    set(FLG_PHOTO_21)	// 718
-    eob
+	unset(FLG_PHOTO_RAMMA_FIELD)	// 499
+	photo_time(21)	// 0x15
+	set(FLG_PHOTO_21)	// 718
+	eob
 
 l_0xc688d7:
-    unset(FLG_PHOTO_STONEHENGE)	// 500
-    photo_time(22)	// 0x16
-    set(FLG_PHOTO_22)	// 719
-    eob
+	unset(FLG_PHOTO_STONEHENGE)	// 500
+	photo_time(22)	// 0x16
+	set(FLG_PHOTO_22)	// 719
+	eob
 
 l_0xc688e1:
-    unset(FLG_PHOTO_SUMS_HOTEL)	// 501
-    photo_time(23)	// 0x17
-    set(FLG_PHOTO_23)	// 720
-    eob
+	unset(FLG_PHOTO_SUMS_HOTEL)	// 501
+	photo_time(23)	// 0x17
+	set(FLG_PHOTO_23)	// 720
+	eob
 
 l_0xc688eb:
-    unset(FLG_PHOTO_SUMS_REST)	// 502
-    photo_time(24)	// 0x18
-    set(FLG_PHOTO_24)	// 721
-    eob
+	unset(FLG_PHOTO_SUMS_REST)	// 502
+	photo_time(24)	// 0x18
+	set(FLG_PHOTO_24)	// 721
+	eob
 
 l_0xc688f5:
-    unset(FLG_PHOTO_SUMS_BEACH)	// 503
-    photo_time(25)	// 0x19
-    set(FLG_PHOTO_25)	// 722
-    eob
+	unset(FLG_PHOTO_SUMS_BEACH)	// 503
+	photo_time(25)	// 0x19
+	set(FLG_PHOTO_25)	// 722
+	eob
 
 l_0xc688ff:
-    unset(FLG_PHOTO_TOTO)	// 504
-    photo_time(26)	// 0x1A
-    set(FLG_PHOTO_26)	// 723
-    eob
+	unset(FLG_PHOTO_TOTO)	// 504
+	photo_time(26)	// 0x1A
+	set(FLG_PHOTO_26)	// 723
+	eob
 
 l_0xc68909:
-    unset(FLG_PHOTO_SKARABI)	// 505
-    photo_time(27)	// 0x1B
-    set(FLG_PHOTO_27)	// 724
-    eob
+	unset(FLG_PHOTO_SKARABI)	// 505
+	photo_time(27)	// 0x1B
+	set(FLG_PHOTO_27)	// 724
+	eob
 
 l_0xc68913:
-    unset(FLG_PHOTO_PYRAMID)	// 506
-    photo_time(28)	// 0x1C
-    set(FLG_PHOTO_28)	// 725
-    eob
+	unset(FLG_PHOTO_PYRAMID)	// 506
+	photo_time(28)	// 0x1C
+	set(FLG_PHOTO_28)	// 725
+	eob
 
 l_0xc6891d:
-    unset(FLG_PHOTO_DUNGEONMAN)	// 507
-    photo_time(29)	// 0x1D
-    set(FLG_PHOTO_29)	// 726
-    eob
+	unset(FLG_PHOTO_DUNGEONMAN)	// 507
+	photo_time(29)	// 0x1D
+	set(FLG_PHOTO_29)	// 726
+	eob
 
 l_0xc68927:
-    unset(FLG_PHOTO_MAKYOU)	// 508
-    photo_time(30)	// 0x1E
-    set(FLG_PHOTO_30)	// 727
-    eob
+	unset(FLG_PHOTO_MAKYOU)	// 508
+	photo_time(30)	// 0x1E
+	set(FLG_PHOTO_30)	// 727
+	eob
 
 l_0xc68931:
-    photo_time(31)	// 0x1F
-    set(FLG_PHOTO_31)	// 728
-    unset(FLG_PHOTO_GUMI)	// 509
-    eob
+	photo_time(31)	// 0x1F
+	set(FLG_PHOTO_31)	// 728
+	unset(FLG_PHOTO_GUMI)	// 509
+	eob
 
 l_0xc6893b:
-    photo_time(32)	// 0x20
-    unset(FLG_PHOTO_SATURN)	// 510
-    set(FLG_PHOTO_32)	// 729
-    eob
+	photo_time(32)	// 0x20
+	unset(FLG_PHOTO_SATURN)	// 510
+	set(FLG_PHOTO_32)	// 729
+	eob
 
 l_0xc68945:
-    music(115)
-    pause(60)
-    wait
-    stop_music
-    sound(SND_PHONEPICKUP)	// 11
-    window_open(1)
-    "@Hello, {name(3)}?" next
-    "@Oh, happy day!" next
-    "@I finally got a hold of you..." next
-    // Check if Jeff's present
-    counter(3)
-    call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6899a)
-    // Stat 0x34 / 52 = Jeff's name
-    "@Oh, {stat(52)}!" next
-    goto(l_0xc689fb)
+	music(115)
+	pause(60)
+	wait
+	stop_music
+	sound(SND_PHONEPICKUP)	// 11
+	window_open(1)
+	"@Hello, {name(3)}?" next
+	"@Oh, happy day!" next
+	"@I finally got a hold of you..." next
+	// Check if Jeff's present
+	counter(3)
+	call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6899a)
+	// Stat 0x34 / 52 = Jeff's name
+	"@Oh, {stat(52)}!" next
+	goto(l_0xc689fb)
 
 l_0xc6899a:
-    "@Hey..." next
-    "@Oh, no!" next
-    "@You're not {name(3)}!" next
-    "@I've got to contact {name(3)}!" next
-    "@I know... just put the receiver close to his ear, and he'll hear me..." next
-    "@I know he will." next
-    goto(l_0xc689fb)
+	"@Hey..." next
+	"@Oh, no!" next
+	"@You're not {name(3)}!" next
+	"@I've got to contact {name(3)}!" next
+	"@I know... just put the receiver close to his ear, and he'll hear me..." next
+	"@I know he will." next
+	goto(l_0xc689fb)
 
 l_0xc689fb:
-    "@Hi, it's me--Tony." next
-    title(1, Tony)
-    "@I'm collecting player's names for a school project." next
-    "@You know, players just like you!" next
-    "@That's right, you--the one holding the controller." next
-    "@Would you register your name, please?" next
-    "@Don't spell your name wrong!" promptw
-    window_closeall
-    music_effect(2)	// Quick music fade
-    pause(30)
-    music(2)
-    event(3)	// Player's name input at Summers
-    window_open(1)
-    title(1, Tony)
-    "@Thanks, game player!" next
-    "@Thank you very much!" next
-    "@Is this correct?" promptw
-    window_closeall
-    event(3)	// Player's name input at Summers
-    music_effect(2)	// Quick music fade
-    pause(30)
-    window_open(1)
-    title(1, Tony)
-    "@I apologize for any trouble this may have caused you." next
-    "@Don't put my friend {name(3)} in any dangerous situations, okay?" next
-    "@I worry about him." next
-    "@I really do..." next
-    "@Well, talk to you later..." next
-    "@...{name(3)}..." next
-    // Check if Jeff's present
-    counter(3)
-    call(data_36.l_0xc7dc7f) goto_if_false(l_0xc68b7d)
-    title(1, Tony)
-    "@It seems like you're not feeling well..." next
-    "@Get better soon..." next
-    goto(l_0xc68b7d)
+	"@Hi, it's me--Tony." next
+	title(1, Tony)
+	"@I'm collecting player's names for a school project." next
+	"@You know, players just like you!" next
+	"@That's right, you--the one holding the controller." next
+	"@Would you register your name, please?" next
+	"@Don't spell your name wrong!" promptw
+	window_closeall
+
+	music_effect(2)	// Quick music fade
+	pause(30)
+	music(2)
+	event(3)	// Player's name input at Summers
+
+	window_open(1)
+	title(1, Tony)
+	"@Thanks, game player!" next
+	"@Thank you very much!" next
+	"@Is this correct?" promptw
+	window_closeall
+
+	event(3)	// Player's name input at Summers
+	music_effect(2)	// Quick music fade
+	pause(30)
+
+	window_open(1)
+	title(1, Tony)
+	"@I apologize for any trouble this may have caused you." next
+	"@Don't put my friend {name(3)} in any dangerous situations, okay?" next
+	"@I worry about him." next
+	"@I really do..." next
+	"@Well, talk to you later..." next
+	"@...{name(3)}..." next
+
+	// Check if Jeff's present
+	counter(3)
+	call(data_36.l_0xc7dc7f) goto_if_false(l_0xc68b7d)
+
+	title(1, Tony)
+	"@It seems like you're not feeling well..." next
+	"@Get better soon..." next
+	goto(l_0xc68b7d)
 
 l_0xc68b7d:
-    "@I pray from the bottom of my heart that I'll get to see you again!" next
-    "@From| T-//O-//N-//Y..." next
-    "@You got that?" next
-    "@Well I've been on the phone too long..." next
-    "@Gotta go..." next
-    "@Good luck..." next
-    "@Take care..." next
-    "@So long..." next
-    "@This time, I'm really gonna hang up." next
-    "@Goodbye." next
-    sound(SND_PHONEPICKUP)	// 11
-    "@*Beeeeep*" wait
-    window_closeall
-    set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
-    music_resume
-    OSS_off	// event(6)
-    eob
+	"@I pray from the bottom of my heart that I'll get to see you again!" next
+	"@From| T-//O-//N-//Y..." next
+	"@You got that?" next
+	"@Well I've been on the phone too long..." next
+	"@Gotta go..." next
+	"@Good luck..." next
+	"@Take care..." next
+	"@So long..." next
+	"@This time, I'm really gonna hang up." next
+	"@Goodbye." next
+	sound(SND_PHONEPICKUP)	// 11
+	"@*Beeeeep*" wait
+	window_closeall
+	set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
+	music_resume
+	OSS_off	// event(6)
+	eob
 
 l_0xc68c3f:
-    window_open(1)
-    "@....." next
-    "@{name(1)}?" next
-    "@..." next
-    "@{name(1)}" next
-    pause(60) linebreak
-    pause(60) linebreak
-    "@...{name(1)}..." next
-    "@I'm a friend who you have never met before..." next
-    "@My name is {name(2)}." next
-    title_paula(1)
-    next
-    pause(60) linebreak
-    "@Can you hear me calling you?" next
-    "@I am {name(2)}..." next
-    "@..." next
-    pause(60) linebreak
-    pause(60) linebreak
-    "@....." wait
-    window_closeall
-    pause(1)
-    unset(FLG_ONET_POLA_TELEPATHY)	// 634
-    goto(data_48.l_0xc90f90)
+	window_open(1)
+	"@....." next
+	"@{name(1)}?" next
+	"@..." next
+	"@{name(1)}" next
+	pause(60) linebreak
+	pause(60) linebreak
+	"@...{name(1)}..." next
+	"@I'm a friend who you have never met before..." next
+	"@My name is {name(2)}." next
+	title_paula(1)
+	next
+	pause(60) linebreak
+	"@Can you hear me calling you?" next
+	"@I am {name(2)}..." next
+	"@..." next
+	pause(60) linebreak
+	pause(60) linebreak
+	"@....." wait
+	window_closeall
+	pause(1)
+	unset(FLG_ONET_POLA_TELEPATHY)	// 634
+	goto(data_48.l_0xc90f90)
 
 l_0xc68cc2:
-    eob
+	eob
 
 l_0xc68cc3:
-    window_open(1)
-    "@....." next
-    "@{name(1)}!" next
-    "@I... {name(2)}..." next
-    "@I am {name(2)}..." next
-    title_paula(1)
-    "@Can you hear me calling you?" next
-    "@Help!" next
-    "@Come and help me!" next
-    "@Um, I don't know where I am..." next
-    "@I can hear water running in the distance..." next
-    pause(20) linebreak
-    pause(60) linebreak
-    "@{name(1)}, please help me!" wait
-    window_closeall
-    pause(1)
-    unset(FLG_TWSN_POLA_TELEPATHY)	// 635
-    goto(data_48.l_0xc90f90)
+	window_open(1)
+	"@....." next
+	"@{name(1)}!" next
+	"@I... {name(2)}..." next
+	"@I am {name(2)}..." next
+	title_paula(1)
+	"@Can you hear me calling you?" next
+	"@Help!" next
+	"@Come and help me!" next
+	"@Um, I don't know where I am..." next
+	"@I can hear water running in the distance..." next
+	pause(20) linebreak
+	pause(60) linebreak
+	"@{name(1)}, please help me!" wait
+	window_closeall
+	pause(1)
+	unset(FLG_TWSN_POLA_TELEPATHY)	// 635
+	goto(data_48.l_0xc90f90)
 
 l_0xc68d59:
-    eob
+	eob
 
 l_0xc68d5a:
-    window_open(1)
-    title_paula(1)
-    "@You are a friend who I have never met before..." next
-    "@{name(3)}..." next
-    "@Head south..." next
-    // Stat 0x1E / 30 = Paula's name
-    "@I am {stat(30)}..." next
-    "@If you hear this message, go to the south..." wait
-    window_closeall
-    unset(FLG_WINS_POLA_TELEPATHY)	// 636
-    goto(data_48.l_0xc90f90)
+	window_open(1)
+	title_paula(1)
+	"@You are a friend who I have never met before..." next
+	"@{name(3)}..." next
+	"@Head south..." next
+	// Stat 0x1E / 30 = Paula's name
+	"@I am {stat(30)}..." next
+	"@If you hear this message, go to the south..." wait
+	window_closeall
+	unset(FLG_WINS_POLA_TELEPATHY)	// 636
+	goto(data_48.l_0xc90f90)
 
 l_0xc68db4:
-    eob
+	eob
 
 l_0xc68db5:
-    window_open(1)
-    "@Ahhhhh." promptw
-    window_closeall
-    eob
+	window_open(1)
+	"@Ahhhhh." promptw
+	window_closeall
+	eob
 
 l_0xc68dc4:
-    window_open(1)
-    "@Hummmmmm." promptw
-    window_closeall
-    eob
+	window_open(1)
+	"@Hummmmmm." promptw
+	window_closeall
+	eob
 
 l_0xc68dd5:
-    window_open(1)
-    "@He he heh." promptw
-    window_closeall
-    eob
+	window_open(1)
+	"@He he heh." promptw
+	window_closeall
+	eob
 
 l_0xc68de4:
-    "@(This dungeon has no entrance fee." next
-    "@Come on in!)" end
+	"@(This dungeon has no entrance fee." next
+	"@Come on in!)" end
 
 l_0xc68e0c:
-    "@(It looks like a doorway...)" end
+	"@(It looks like a doorway...)" end
 
 l_0xc68e1c:
-    sound(SND_PHONEPICKUP)	// 11
-    pause(20)
-    call(data_57.l_0xc9b176)
-    "@Hello!" next
-    "@Is this Mr. Fork of the Scarabia Cultural Museum?..." next
-    "@It doesn't sound like you..." next
-    "@Well, I'll quickly tell you my story, 'cause I'm busy, busy, busy!" next
-    "@I found something so extraordinary that mere words could not do it justice." next
-    "@What do you mean" linebreak
-    "  <who am I>?" next
-    "@Don't you recognize my voice?" next
-    "@It's me, Mr. Spoon from the Fourside Museum of Natural History!" next
-    title(1, Spoon)
-    "@Look Mr. Fork, I'm not exaggerating this find!" next
-    "@I'm telling you..." next
-    "@It's fantastic!....." next
-    "@It's outrageous!..." next
-    sound(SND_PHONEPICKUP)	// 11
-    "@*Click*  Beeeeep" wait
-    unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
-    eob
+	sound(SND_PHONEPICKUP)	// 11
+	pause(20)
+	call(data_57.l_0xc9b176)
+	"@Hello!" next
+	"@Is this Mr. Fork of the Scarabia Cultural Museum?..." next
+	"@It doesn't sound like you..." next
+	"@Well, I'll quickly tell you my story, 'cause I'm busy, busy, busy!" next
+	"@I found something so extraordinary that mere words could not do it justice." next
+	"@What do you mean" linebreak
+	"  <who am I>?" next
+	"@Don't you recognize my voice?" next
+	"@It's me, Mr. Spoon from the Fourside Museum of Natural History!" next
+	title(1, Spoon)
+	"@Look Mr. Fork, I'm not exaggerating this find!" next
+	"@I'm telling you..." next
+	"@It's fantastic!....." next
+	"@It's outrageous!..." next
+	sound(SND_PHONEPICKUP)	// 11
+	"@*Click*  Beeeeep" wait
+	unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	eob
 
 l_0xc68f74:
-    if flag FLG_KEY_ITEMS { swap get_action_arg }
-    else { get_inventory_item(0,0) swap }
-    store_registers
-    // Check for Eraser eraser, item 0xD2, 210
-    result_is(ERASER_ERASER) goto_if_true(l_0xc68fa6)
-    load_registers
-    // Check for Pencil eraser, item 0xB8, 184
-    result_is(PENCIL_ERASER) goto_if_false(data_35.l_0xc7c6b6)
-    "@Do you really think this looks like a pencil?" end
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	store_registers
+	// Check for Eraser eraser, item 0xD2, 210
+	result_is(ERASER_ERASER) goto_if_true(l_0xc68fa6)
+	load_registers
+	// Check for Pencil eraser, item 0xB8, 184
+	result_is(PENCIL_ERASER) goto_if_false(data_35.l_0xc7c6b6)
+	"@Do you really think this looks like a pencil?" end
 
 l_0xc68fa6:
-    "@It looks sort of like some primitive human statue" next
-    "@if you look at it from the right angle..." next
-    "@But it definitely doesn't look like an eraser... does it?" end
+	"@It looks sort of like some primitive human statue" next
+	"@if you look at it from the right angle..." next
+	"@But it definitely doesn't look like an eraser... does it?" end
 
 l_0xc69007:
-    if flag FLG_KEY_ITEMS { swap get_action_arg }
-    else { get_inventory_item(0,0) swap }
-    // Check for Rabbits' carrot, item 0xFD, 253
-    result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)
-    "@Cows and carrots?..." next
-    "@That's a nutty combination!" end
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	// Check for Rabbits' carrot, item 0xFD, 253
+	result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)
+	"@Cows and carrots?..." next
+	"@That's a nutty combination!" end
 
 l_0xc69038:
-    get_inventory_item(0,0) swap
-    // Check for Letter from Tony, item 0xA7, 167
-    result_is(167) goto_if_false(data_35.l_0xc7c6b6)
-    get_dir_from_npc(734,TO_CHAR,1)	// 0x02DE, 0x01, 0x0001
-    sprite_direction(734,0)	// 0x02DE, 0x00
-    "@Ah, {name(1)}... you've read it already." next
-    "@...That Tony has a heart of gold..." end
+	get_inventory_item(0,0) swap
+	// Check for Letter from Tony, item 0xA7, 167
+	result_is(167) goto_if_false(data_35.l_0xc7c6b6)
+	get_dir_from_npc(734,TO_CHAR,1)	// 0x02DE, 0x01, 0x0001
+	sprite_direction(734,0)	// 0x02DE, 0x00
+	"@Ah, {name(1)}... you've read it already." next
+	"@...That Tony has a heart of gold..." end
 
 l_0xc69082:	// Unset all the delivery flags in preparation for Magicant fadeout event
-    unset(FLG_DELIVERY_PIZZA)	// 180
-    unset(FLG_DELIVERY_UNSOU)	// 181
-    unset(FLG_DELIVERY_UNSOU_B)	// 645
-    unset(FLG_DELIVERY_CUSTOMER)	// 446
-    unset(FLG_DELIVERY_CUSTOMER_B)	// 646
-    unset(FLG_DELIVERY_CUSTOMER_C)	// 647
-    unset(FLG_DELIVERY_CUSTOMER_D)	// 648
-    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
-    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
-    call(data_19.l_0xc64650)
-    unset(FLG_SYS_DISTLPT)	// 754
-    eob
+	unset(FLG_DELIVERY_PIZZA)	// 180
+	unset(FLG_DELIVERY_UNSOU)	// 181
+	unset(FLG_DELIVERY_UNSOU_B)	// 645
+	unset(FLG_DELIVERY_CUSTOMER)	// 446
+	unset(FLG_DELIVERY_CUSTOMER_B)	// 646
+	unset(FLG_DELIVERY_CUSTOMER_C)	// 647
+	unset(FLG_DELIVERY_CUSTOMER_D)	// 648
+	unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	call(data_19.l_0xc64650)
+	unset(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc690a6:
-    "@Only {name(1)} can absorb the power of this place." end
+	"@Only {name(1)} can absorb the power of this place." end
 
 l_0xc690c5:
-    "@Hey, hey!!" next
-    "@Stop putting your grimy fingerprints all over my car, you little punk!" end
+	"@Hey, hey!!" next
+	"@Stop putting your grimy fingerprints all over my car, you little punk!" end
 
 l_0xc690ff:
-    "@Welcome to the rear-end of the world's longest traffic jam!" end
+	"@Welcome to the rear-end of the world's longest traffic jam!" end
 
 l_0xc69121:
-    goto_if_flag(FLG_TWSN_HOTEL_A_END, l_0xc692ea)	// 0x02E2, 738
-    goto_if_flag(FLG_TWSN_HOTEL_A, l_0xc691e9)	// 0x02E1, 737
-    goto_if_flag(FLG_TEMP_8, l_0xc691c2)	// 9
-    goto_if_flag(FLG_TEMP_7, l_0xc691b5)	// 8
-    goto_if_flag(FLG_TEMP_6, l_0xc691a7)	// 7
-    goto_if_flag(FLG_TEMP_5, l_0xc6919d)	// 6
-    goto_if_flag(FLG_TEMP_4, l_0xc69191)	// 5
-    goto_if_flag(FLG_TEMP_3, l_0xc69185)	// 4
-    goto_if_flag(FLG_TEMP_2, l_0xc6917b)	// 3
-    goto_if_flag(FLG_TEMP_1, l_0xc6916f)	// 2
-    "@What?" wait
-    set(FLG_TEMP_1)	// 2
-    eob
+	goto_if_flag(FLG_TWSN_HOTEL_A_END, l_0xc692ea)	// 0x02E2, 738
+	goto_if_flag(FLG_TWSN_HOTEL_A, l_0xc691e9)	// 0x02E1, 737
+	goto_if_flag(FLG_TEMP_8, l_0xc691c2)	// 9
+	goto_if_flag(FLG_TEMP_7, l_0xc691b5)	// 8
+	goto_if_flag(FLG_TEMP_6, l_0xc691a7)	// 7
+	goto_if_flag(FLG_TEMP_5, l_0xc6919d)	// 6
+	goto_if_flag(FLG_TEMP_4, l_0xc69191)	// 5
+	goto_if_flag(FLG_TEMP_3, l_0xc69185)	// 4
+	goto_if_flag(FLG_TEMP_2, l_0xc6917b)	// 3
+	goto_if_flag(FLG_TEMP_1, l_0xc6916f)	// 2
+	"@What?" wait
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc6916f:
-    "@So... what?" wait
-    set(FLG_TEMP_2)	// 3
-    eob
+	"@So... what?" wait
+	set(FLG_TEMP_2)	// 3
+	eob
 
 l_0xc6917b:
-    "@Huh?" wait
-    set(FLG_TEMP_3)	// 4
-    eob
+	"@Huh?" wait
+	set(FLG_TEMP_3)	// 4
+	eob
 
 l_0xc69185:
-    "@Pardon?" wait
-    set(FLG_TEMP_4)	// 5
-    eob
+	"@Pardon?" wait
+	set(FLG_TEMP_4)	// 5
+	eob
 
 l_0xc69191:
-    "@Geez..." wait
-    set(FLG_TEMP_5)	// 6
-    eob
+	"@Geez..." wait
+	set(FLG_TEMP_5)	// 6
+	eob
 
 l_0xc6919d:
-    "@Mmm?" wait
-    set(FLG_TEMP_6)	// 7
-    eob
+	"@Mmm?" wait
+	set(FLG_TEMP_6)	// 7
+	eob
 
 l_0xc691a7:
-    "@You're annoying!" wait
-    set(FLG_TEMP_7)	// 8
-    eob
+	"@You're annoying!" wait
+	set(FLG_TEMP_7)	// 8
+	eob
 
 l_0xc691b5:
-    "@Dang me!" wait
-    set(FLG_TEMP_8)	// 9
-    eob
+	"@Dang me!" wait
+	set(FLG_TEMP_8)	// 9
+	eob
 
 l_0xc691c2:
-    "@Yeah, yeah!" wait
-    set(FLG_TWSN_HOTEL_A)	// 737
-    unset(FLG_TEMP_1)	// 2
-    unset(FLG_TEMP_2)	// 3
-    unset(FLG_TEMP_3)	// 4
-    unset(FLG_TEMP_4)	// 5
-    unset(FLG_TEMP_5)	// 6
-    unset(FLG_TEMP_6)	// 7
-    unset(FLG_TEMP_7)	// 8
-    unset(FLG_TEMP_8)	// 9
-    eob
+	"@Yeah, yeah!" wait
+	set(FLG_TWSN_HOTEL_A)	// 737
+	unset(FLG_TEMP_1)	// 2
+	unset(FLG_TEMP_2)	// 3
+	unset(FLG_TEMP_3)	// 4
+	unset(FLG_TEMP_4)	// 5
+	unset(FLG_TEMP_5)	// 6
+	unset(FLG_TEMP_6)	// 7
+	unset(FLG_TEMP_7)	// 8
+	unset(FLG_TEMP_8)	// 9
+	eob
 
 l_0xc691e9:
-    goto_if_flag(FLG_TEMP_7, l_0xc692a0)	// 8
-    goto_if_flag(FLG_TEMP_6, l_0xc6928a)	// 7
-    goto_if_flag(FLG_TEMP_5, l_0xc69278)	// 6
-    goto_if_flag(FLG_TEMP_4, l_0xc69258)	// 5
-    goto_if_flag(FLG_TEMP_3, l_0xc69243)	// 4
-    goto_if_flag(FLG_TEMP_2, l_0xc69230)	// 3
-    goto_if_flag(FLG_TEMP_1, l_0xc69226)	// 2
-    "@Ah, ha ha!" wait
-    set(FLG_TEMP_1)	// 2
-    eob
+	goto_if_flag(FLG_TEMP_7, l_0xc692a0)	// 8
+	goto_if_flag(FLG_TEMP_6, l_0xc6928a)	// 7
+	goto_if_flag(FLG_TEMP_5, l_0xc69278)	// 6
+	goto_if_flag(FLG_TEMP_4, l_0xc69258)	// 5
+	goto_if_flag(FLG_TEMP_3, l_0xc69243)	// 4
+	goto_if_flag(FLG_TEMP_2, l_0xc69230)	// 3
+	goto_if_flag(FLG_TEMP_1, l_0xc69226)	// 2
+	"@Ah, ha ha!" wait
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc69226:
-    "@Hey, you!" wait
-    set(FLG_TEMP_2)	// 3
-    eob
+	"@Hey, you!" wait
+	set(FLG_TEMP_2)	// 3
+	eob
 
 l_0xc69230:
-    "@Later days, pal!" wait
-    set(FLG_TEMP_3)	// 4
-    eob
+	"@Later days, pal!" wait
+	set(FLG_TEMP_3)	// 4
+	eob
 
 l_0xc69243:
-    "@Ah!  Hah Hahhhh..." wait
-    set(FLG_TEMP_4)	// 5
-    eob
+	"@Ah!  Hah Hahhhh..." wait
+	set(FLG_TEMP_4)	// 5
+	eob
 
 l_0xc69258:
-    "@It's so/o/o hot today." next
-    "@It rocks!" wait
-    set(FLG_TEMP_5)	// 6
-    eob
+	"@It's so/o/o hot today." next
+	"@It rocks!" wait
+	set(FLG_TEMP_5)	// 6
+	eob
 
 l_0xc69278:
-    "@Is it cold today?" wait
-    set(FLG_TEMP_6)	// 7
-    eob
+	"@Is it cold today?" wait
+	set(FLG_TEMP_6)	// 7
+	eob
 
 l_0xc6928a:
-    "@Oh ho ho!" next
-    "@See ya!" wait
-    set(FLG_TEMP_7)	// 8
-    eob
+	"@Oh ho ho!" next
+	"@See ya!" wait
+	set(FLG_TEMP_7)	// 8
+	eob
 
 l_0xc692a0:
-    "@Here, get yourself a juice or something..." next
-    "@*Ka-ching*" next
-    givemoney(50)	// 0x0032
-    sound(SND_BOXTAKE)	// 116
-    show_wallet
-    pause(60)
-    get_char_at_pos(1) rtoarg
-    "@({name(1)} got 50 dollars.)" wait
-    set(FLG_TWSN_HOTEL_A_END)	// 738
-    eob
+	"@Here, get yourself a juice or something..." next
+	"@*Ka-ching*" next
+	givemoney(50)	// 0x0032
+	sound(SND_BOXTAKE)	// 116
+	show_wallet
+	pause(60)
+	get_char_at_pos(1) rtoarg
+	"@({name(1)} got 50 dollars.)" wait
+	set(FLG_TWSN_HOTEL_A_END)	// 738
+	eob
 
 l_0xc692ea:
-    "@Good luck, okay?" end
+	"@Good luck, okay?" end
 
 l_0xc692f7:
-    music(115)
-    pause(60)
-    wait
-    stop_music
-    sound(SND_PHONEPICKUP)	// 11
-    window_open(1)
-    title(1, Tracy)
-    "@Sorry to bother you, big bro..." next
-    "@This is Escargo Express." next
-    "@I had a phone call from a friend of yours recently." next
-    goto_if_flag(FLG_SKRB_PU_TAKANOME, l_0xc69394)	// 0x02B3, 691
-    "@She asked me to hold onto the Pencil eraser machine." next
-    "@I figured it's just some kind of prank,/| but if it's legit," next
-    "@I can deliver it to you anytime." next
-    "@Do you know anything about this?" next
-    set(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
-    goto(l_0xc693be)
+	music(115)
+	pause(60)
+	wait
+	stop_music
+	sound(SND_PHONEPICKUP)	// 11
+	window_open(1)
+	title(1, Tracy)
+	"@Sorry to bother you, big bro..." next
+	"@This is Escargo Express." next
+	"@I had a phone call from a friend of yours recently." next
+	goto_if_flag(FLG_SKRB_PU_TAKANOME, l_0xc69394)	// 0x02B3, 691
+	"@She asked me to hold onto the Pencil eraser machine." next
+	"@I figured it's just some kind of prank,/| but if it's legit," next
+	"@I can deliver it to you anytime." next
+	"@Do you know anything about this?" next
+	set(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
+	goto(l_0xc693be)
 
 l_0xc69394:
-    // Item 0xAF / 175 = Hawk eye
-    "@He asked me to hold onto the {itemname(HAWK_EYE)} for you." next
-    "@Do you know anything about this?" next
-    set(FLG_GLOBAL_LOST_TAKANOME)	// 693
-    goto(l_0xc693be)
+	// Item 0xAF / 175 = Hawk eye
+	"@He asked me to hold onto the {itemname(HAWK_EYE)} for you." next
+	"@Do you know anything about this?" next
+	set(FLG_GLOBAL_LOST_TAKANOME)	// 693
+	goto(l_0xc693be)
 
 l_0xc693be:
-    "@Well, since you know about the item, I'll hold onto it for you." next
-    "@If you need it, I'll deliver it to you anytime you want." next
-    "@Oh yeah, big bro..." next
-    "@I'm glad that I could help out you and your friends." next
-    sound(SND_PHONEPICKUP)	// 11
-    "@*Click*" wait
-    window_closeall
-    music_resume
-    unset(FLG_FOUR_PAULA_TAKOKESHI)	// 690
-    unset(FLG_SKRB_PU_TAKANOME)	// 691
-    eob
+	"@Well, since you know about the item, I'll hold onto it for you." next
+	"@If you need it, I'll deliver it to you anytime you want." next
+	"@Oh yeah, big bro..." next
+	"@I'm glad that I could help out you and your friends." next
+	sound(SND_PHONEPICKUP)	// 11
+	"@*Click*" wait
+	window_closeall
+	music_resume
+	unset(FLG_FOUR_PAULA_TAKOKESHI)	// 690
+	unset(FLG_SKRB_PU_TAKANOME)	// 691
+	eob
 
 l_0xc6943a:
-    window_open(1)
-    title(1, Escargo)
-    "@Escargo Express!" next
-    "@<We treat your package like it was our only child>..." next
-    "@I'm here with your Pencil eraser." next
-    get_item_receiver(-1)
-    goto_if_false(l_0xc694b9)
-    give_and_return_location(0, PENCIL_ERASER)	// 0xB8, 184
-    sound(SND_CHICKEN2)	// 118
-    "@Here you are." next
-    "@Thank you very much!" wait
-    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
-    unset(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
-    window_closeall
-    call(data_36.l_0xc7dde8)
-    call(data_36.l_0xc7de72)
-    eob
+	window_open(1)
+	title(1, Escargo)
+	"@Escargo Express!" next
+	"@<We treat your package like it was our only child>..." next
+	"@I'm here with your Pencil eraser." next
+	get_item_receiver(-1)
+	goto_if_false(l_0xc694b9)
+	give_and_return_location(0, PENCIL_ERASER)	// 0xB8, 184
+	sound(SND_CHICKEN2)	// 118
+	"@Here you are." next
+	"@Thank you very much!" wait
+	unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	unset(FLG_GLOBAL_LOST_TAKOKESHI)	// 692
+	window_closeall
+	call(data_36.l_0xc7dde8)
+	call(data_36.l_0xc7de72)
+	eob
 
 l_0xc694b9:
-    "@You've really got too much stuff already." next
-    "@I hope I can deliver this to you soon!" promptw
-    window_closeall
-    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
-    call(data_36.l_0xc7dde8)
-    call(data_36.l_0xc7de72)
-    eob
+	"@You've really got too much stuff already." next
+	"@I hope I can deliver this to you soon!" promptw
+	window_closeall
+	unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	call(data_36.l_0xc7dde8)
+	call(data_36.l_0xc7de72)
+	eob
 
 l_0xc694f4:
-    window_open(1)
-    title(1, Escargo)
-    "@Escargo Express." next
-    "@<We treat your package like it was our only child>..." next
-    "@I'm here to deliver" linebreak
-    "  the {itemname(HAWK_EYE)}." next
-    // Item 0xAF / 175 = Hawk eye
-    get_item_receiver(-1) goto_if_false(l_0xc69571)
-    give_and_return_location(0, HAWK_EYE)	// 0xAF, 175
-    sound(SND_CHICKEN2)	// 118
-    "@Here you are." next
-    "@Thank you very much!" wait
-    window_closeall
-    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
-    unset(FLG_GLOBAL_LOST_TAKANOME)	// 693
-    call(data_36.l_0xc7dde8)
-    call(data_36.l_0xc7de72)
-    eob
+	window_open(1)
+	title(1, Escargo)
+	"@Escargo Express." next
+	"@<We treat your package like it was our only child>..." next
+	"@I'm here to deliver" linebreak
+	"  the {itemname(HAWK_EYE)}." next
+	// Item 0xAF / 175 = Hawk eye
+	get_item_receiver(-1) goto_if_false(l_0xc69571)
+	give_and_return_location(0, HAWK_EYE)	// 0xAF, 175
+	sound(SND_CHICKEN2)	// 118
+	"@Here you are." next
+	"@Thank you very much!" wait
+	window_closeall
+	unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	unset(FLG_GLOBAL_LOST_TAKANOME)	// 693
+	call(data_36.l_0xc7dde8)
+	call(data_36.l_0xc7de72)
+	eob
 
 l_0xc69571:
-    "@You've really got too much stuff already." next
-    "@I hope I can deliver this to you soon!" promptw
-    window_closeall
-    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
-    call(data_36.l_0xc7dde8)
-    call(data_36.l_0xc7de72)
-    eob
+	"@You've really got too much stuff already." next
+	"@I hope I can deliver this to you soon!" promptw
+	window_closeall
+	unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	call(data_36.l_0xc7dde8)
+	call(data_36.l_0xc7de72)
+	eob
 
 l_0xc695ac:
-    unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
-    unset(FLG_SYS_DISTLPT)	// 754
-    eob
+	unset(FLG_DELIVERY_UNSOU_TAKOKESHI)	// 694
+	unset(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc695b3:
-    unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
-    unset(FLG_SYS_DISTLPT)	// 754
-    eob
+	unset(FLG_DELIVERY_UNSOU_TAKANOME)	// 695
+	unset(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc695ba:
-    get_char_at_pos(1) rtoarg
-    // Check if Ness is the party leader, if not, go to label
-    result_is(1) goto_if_false(data_55.l_0xc9992f)
-    // Check if Ness has homesickness, if not, go to label
-    character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
-    goto_if_false(data_55.l_0xc9992f)
-    call(data_35.l_0xc7ce73)
-    eob
+	get_char_at_pos(1) rtoarg
+	// Check if Ness is the party leader, if not, go to label
+	result_is(1) goto_if_false(data_55.l_0xc9992f)
+	// Check if Ness has homesickness, if not, go to label
+	character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
+	goto_if_false(data_55.l_0xc9992f)
+	call(data_35.l_0xc7ce73)
+	eob
 
 l_0xc695d8:
-    "@Yum yum... mmm... I'm eating a Skip sandwich." next
-    "@It makes you want to start skipping!" next
-    "@I saw it on a TV ad, and I just had to try one." next
-    "@I'll bet I can really move after eating this..." end
+	"@Yum yum... mmm... I'm eating a Skip sandwich." next
+	"@It makes you want to start skipping!" next
+	"@I saw it on a TV ad, and I just had to try one." next
+	"@I'll bet I can really move after eating this..." end
 
 l_0xc69651:
-    "@It seems like every bakery has been making Lucky sandwiches these days." next
-    "@They're kind of like fortune cookies, except you can win stuff." next
-    "@Oh yeah, and it's a sandwich." next
-    "@Okay, so maybe it's not like a fortune cookie." next
-    "@Anyway, the best thing that can happen is <recover PP.>" next
-    "@I just wish I knew what <PP> was..." end
+	"@It seems like every bakery has been making Lucky sandwiches these days." next
+	"@They're kind of like fortune cookies, except you can win stuff." next
+	"@Oh yeah, and it's a sandwich." next
+	"@Okay, so maybe it's not like a fortune cookie." next
+	"@Anyway, the best thing that can happen is <recover PP.>" next
+	"@I just wish I knew what <PP> was..." end
 
 l_0xc6971e:
-    "@Don't you think you get more food value out of 14 bucks worth of burgers" next
-    "@than 8 bucks worth of french fries?" next
-    "@You'll feel better and more energetic if you eat better foods." next
-    "@You know--you'll recover more health if you eat more expensive food." end
+	"@Don't you think you get more food value out of 14 bucks worth of burgers" next
+	"@than 8 bucks worth of french fries?" next
+	"@You'll feel better and more energetic if you eat better foods." next
+	"@You know--you'll recover more health if you eat more expensive food." end
 
 l_0xc697ba:
-    "@The information on the back of the <refreshing herb> reads as follows:" next
-    "@<If you catch a cold, if you're ill, or if you can't seem to heal," next
-    "@if you're poisoned, if you're depressed, a refreshing herb is the real deal.>" next
-    "@I know, it seems pretty iffy, but you should give it a try!" end
+	"@The information on the back of the <refreshing herb> reads as follows:" next
+	"@<If you catch a cold, if you're ill, or if you can't seem to heal," next
+	"@if you're poisoned, if you're depressed, a refreshing herb is the real deal.>" next
+	"@I know, it seems pretty iffy, but you should give it a try!" end
 
 l_0xc69861:
-    // [52] = Saturn font quotation marks
-    font_saturn
-    "@So Boing!" linebreak
-    "  You have" linebreak
-    "  380 dollars," next
-    "@we trade" linebreak
-    "  [52]Secret" linebreak
-    "  herb.[52]" next
-    "@So Boing!" next
-    "@You have" linebreak
-    "  1780 dollars," next
-    "@we trade" linebreak
-    // 0x82 / 130 = Horn of life
-    "  [52]{itemname(HORN_OF_LIFE)}.[52]" wait
-    font_normal
-    eob
+	// [52] = Saturn font quotation marks
+	font_saturn
+	"@So Boing!" linebreak
+	"  You have" linebreak
+	"  380 dollars," next
+	"@we trade" linebreak
+	"  [52]Secret" linebreak
+	"  herb.[52]" next
+	"@So Boing!" next
+	"@You have" linebreak
+	"  1780 dollars," next
+	"@we trade" linebreak
+	// 0x82 / 130 = Horn of life
+	"  [52]{itemname(HORN_OF_LIFE)}.[52]" wait
+	font_normal
+	eob
 
 l_0xc698ca:
-    "@That teddy bear they sell over there...I heard it helps in battle." next
-    "@I don't know what they're talking about." next
-    "@It looks like a plain ol' teddy bear to me..." end
+	"@That teddy bear they sell over there...I heard it helps in battle." next
+	"@I don't know what they're talking about." next
+	"@It looks like a plain ol' teddy bear to me..." end
 
 l_0xc69928:
-    goto_if_flag(FLG_WIN_GIEGU, l_0xc69ac6)	// 0x49, 73
-    "@Woof! Woof!" next
-    "@(I'm Ruffini the dog." next
-    title(1, Ruffini)
-    "@I'm being possessed by the spirit of the game designer.../| Ruff!" next
-    "@Do you see the window showing HP and PP at the bottom of the screen?" next
-    "@When you go to a store that has equippable items," next
-    "@this window will either flash, look normal or become black." next
-    "@If you are allowed to equip an item, and it is stronger than your current item," next
-    "@the window will flash." next
-    "@If the item's power is equal to, or less than your current equipped item," next
-    "@the window looks normal." next
-    "@If you can't equip an item, the window is black." next
-    "@Ruff!  I thought you'd like to know." next
-    "@Now it's time to become a regular dog again...)" end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc69ac6)	// 0x49, 73
+	"@Woof! Woof!" next
+	"@(I'm Ruffini the dog." next
+	title(1, Ruffini)
+	"@I'm being possessed by the spirit of the game designer.../| Ruff!" next
+	"@Do you see the window showing HP and PP at the bottom of the screen?" next
+	"@When you go to a store that has equippable items," next
+	"@this window will either flash, look normal or become black." next
+	"@If you are allowed to equip an item, and it is stronger than your current item," next
+	"@the window will flash." next
+	"@If the item's power is equal to, or less than your current equipped item," next
+	"@the window looks normal." next
+	"@If you can't equip an item, the window is black." next
+	"@Ruff!  I thought you'd like to know." next
+	"@Now it's time to become a regular dog again...)" end
 
 l_0xc69ac6:
-    title(1, Ruffini)
-    "@Woof! Woof!" next
-    "@I'm Ruffini the dog." next
-    "@Here comes the spirit of the game designer again..." next
-    "@Ruff!" next
-    "@(It looks like the game's finally almost over." next
-    "@If you want to tell me your comments on this game," pause(20) linebreak
-    "  you may write to me." next
-    "@Address it to: MOTHER 2, Ruffini the dog," next
-    "@and send it to the address listed on the game's packaging." next
-    "@Now, get ready for the ending!" next
-    "@It's all that's left... enjoy it!" next
-    "@Bow woow wow!" next
-    "@Well, I told you some strange info again..." next
-    "@I'll go back to being a normal dog now...)" next
-    "@Woof!" end
+	title(1, Ruffini)
+	"@Woof! Woof!" next
+	"@I'm Ruffini the dog." next
+	"@Here comes the spirit of the game designer again..." next
+	"@Ruff!" next
+	"@(It looks like the game's finally almost over." next
+	"@If you want to tell me your comments on this game," pause(20) linebreak
+	"  you may write to me." next
+	"@Address it to: MOTHER 2, Ruffini the dog," next
+	"@and send it to the address listed on the game's packaging." next
+	"@Now, get ready for the ending!" next
+	"@It's all that's left... enjoy it!" next
+	"@Bow woow wow!" next
+	"@Well, I told you some strange info again..." next
+	"@I'll go back to being a normal dog now...)" next
+	"@Woof!" end
 
 l_0xc69c03:
-    "@I'm cramming for the big test tomorrow." next
-    "@It's about games." next
-    "@<Hotel Rule> ...if you stay at a hotel, you'll wake up with full HP and PP." next
-    "@<Life Recovery Rule>" next
-    "@...recovering your life will give you full HP, but zero PP." next
-    "@...Hmmm... I bet this stuff will be on the test..." end
+	"@I'm cramming for the big test tomorrow." next
+	"@It's about games." next
+	"@<Hotel Rule> ...if you stay at a hotel, you'll wake up with full HP and PP." next
+	"@<Life Recovery Rule>" next
+	"@...recovering your life will give you full HP, but zero PP." next
+	"@...Hmmm... I bet this stuff will be on the test..." end
 
 l_0xc69cb5:
-    "@I recently read a book titled <Our Convenient Society.>" next
-    "@It said that our modern society demands" next
-    "@that there always be an ATM in hotels and drugstores." next
-    "@Just knowing that is convenient!" next
-    "@I'm glad I read the book..." next
-    "@I can't believe I didn't know this stuff." next
-    "@I'll check whether or not we have an ATM in our drugstore..." end
+	"@I recently read a book titled <Our Convenient Society.>" next
+	"@It said that our modern society demands" next
+	"@that there always be an ATM in hotels and drugstores." next
+	"@Just knowing that is convenient!" next
+	"@I'm glad I read the book..." next
+	"@I can't believe I didn't know this stuff." next
+	"@I'll check whether or not we have an ATM in our drugstore..." end
 
 l_0xc69d8e:
-    "@I read the book called <Our Society is Convenient.>" next
-    "@It said that these days, there are always telephones in hotels and drugstores." next
-    "@I also learned that to use a green pay phone costs a dollar," next
-    "@while the black phones are free." next
-    "@If you weren't aware of this," next
-    "@all your money could get eaten up by your phone calls." next
-    "@I'm glad I read that book..." end
+	"@I read the book called <Our Society is Convenient.>" next
+	"@It said that these days, there are always telephones in hotels and drugstores." next
+	"@I also learned that to use a green pay phone costs a dollar," next
+	"@while the black phones are free." next
+	"@If you weren't aware of this," next
+	"@all your money could get eaten up by your phone calls." next
+	"@I'm glad I read that book..." end
 
 l_0xc69e74:
-    "@I can't believe I saw it with my own eyes." next
-    "@I was staring out the window and there it was, just fluttering there..." next
-    "@I'd only seen it in the encyclopedia before." next
-    "@What was it?" next
-    "@A Magic butterfly!" next
-    "@If you get close to a Magic butterfly, all your cares fly away," next
-    "@just like a fluttering butterfly." next
-    "@Yep, yep!" next
-    "@That's the effect of the legendary Magic butterfly." next
-    "@I love talking about it!" next
-    "@Ooops!" next
-    "@Sorry about the outburst..." next
-    "@I got carried away with all the talk about lovely butterflies..." end
+	"@I can't believe I saw it with my own eyes." next
+	"@I was staring out the window and there it was, just fluttering there..." next
+	"@I'd only seen it in the encyclopedia before." next
+	"@What was it?" next
+	"@A Magic butterfly!" next
+	"@If you get close to a Magic butterfly, all your cares fly away," next
+	"@just like a fluttering butterfly." next
+	"@Yep, yep!" next
+	"@That's the effect of the legendary Magic butterfly." next
+	"@I love talking about it!" next
+	"@Ooops!" next
+	"@Sorry about the outburst..." next
+	"@I got carried away with all the talk about lovely butterflies..." end
 
 l_0xc69fa9:
-    "@(I am not your enemy." next
-    "@I am simply your average run-of-the-mill mole." next
-    "@Would you like some hints on fighting enemies?)" linebreak
-    two_choice_menu("Yes", l_0xc6a048, "No", l_0xc6a012)
+	"@(I am not your enemy." next
+	"@I am simply your average run-of-the-mill mole." next
+	"@Would you like some hints on fighting enemies?)" linebreak
+	two_choice_menu("Yes", l_0xc6a048, "No", l_0xc6a012)
 
 l_0xc6a012:
-    "@(Ah, I see..." next
-    "@You've already got a good grasp of how to fight effectively.)" end
+	"@(Ah, I see..." next
+	"@You've already got a good grasp of how to fight effectively.)" end
 
 l_0xc6a048:
-    "@(Listen carefully." next
-    "@My hint involves which way you are facing when a battle with an enemy occurs." next
-    "@If you allow enemies to approach you from your back or side," next
-    "@they may get a surprise opening attack." next
-    "@When they approach you this way, your TV screen, no... no..." next
-    "@I mean the world in front of you will show a red swirl for a second." next
-    "@On the other hand, if you approach an enemy from the back or side," next
-    "@you may get a surprise opening attack." next
-    "@In that case, your TV...  Oops again!" next
-    "@...The world in front of you shows a green swirl." next
-    "@The point is, try to fight so that you always have the advantage.)" end
+	"@(Listen carefully." next
+	"@My hint involves which way you are facing when a battle with an enemy occurs." next
+	"@If you allow enemies to approach you from your back or side," next
+	"@they may get a surprise opening attack." next
+	"@When they approach you this way, your TV screen, no... no..." next
+	"@I mean the world in front of you will show a red swirl for a second." next
+	"@On the other hand, if you approach an enemy from the back or side," next
+	"@you may get a surprise opening attack." next
+	"@In that case, your TV...  Oops again!" next
+	"@...The world in front of you shows a green swirl." next
+	"@The point is, try to fight so that you always have the advantage.)" end
 
 l_0xc6a1bc:
-    "@(I am not your enemy." next
-    "@I am just a plain ol' mole." next
-    "@You are certainly stronger than you were while wandering around Onett." next
-    "@Have you ever suddenly gotten the <You Won> message" next
-    "@when you met a weak enemy?" next
-    "@That's sure-fire proof that you've become stronger." next
-    "@You don't want to waste your time fighting wimpy enemies, do you?)" end
+	"@(I am not your enemy." next
+	"@I am just a plain ol' mole." next
+	"@You are certainly stronger than you were while wandering around Onett." next
+	"@Have you ever suddenly gotten the <You Won> message" next
+	"@when you met a weak enemy?" next
+	"@That's sure-fire proof that you've become stronger." next
+	"@You don't want to waste your time fighting wimpy enemies, do you?)" end
 
 l_0xc6a286:
-    "@Hello... and you are...?" next
-    "@Say, have you ever suffered from some type of sickness or condition" next
-    "@that you couldn't get cured at a hospital?" next
-    "@For example, being <Diamondized,>" next
-    "@where your head gets as hard as a diamond..." next
-    "@Or... <Mushroomized,> where you have a mushroom on your head..." next
-    "@If you're ever stuck with these types of embarrassing conditions," next
-    "@we of the magic healing shrine are here to ease your pain." next
-    "@We're ready and waiting..." next
-    "@in the lobby of hospitals all over the world." next
-    "@The person next to me is the great teacher of magic healing." end
+	"@Hello... and you are...?" next
+	"@Say, have you ever suffered from some type of sickness or condition" next
+	"@that you couldn't get cured at a hospital?" next
+	"@For example, being <Diamondized,>" next
+	"@where your head gets as hard as a diamond..." next
+	"@Or... <Mushroomized,> where you have a mushroom on your head..." next
+	"@If you're ever stuck with these types of embarrassing conditions," next
+	"@we of the magic healing shrine are here to ease your pain." next
+	"@We're ready and waiting..." next
+	"@in the lobby of hospitals all over the world." next
+	"@The person next to me is the great teacher of magic healing." end
 
 l_0xc6a3de:
-    "@I wish I could recover my PP just by drinking water..." next
-    "@Even though I have never seen him before, I heard that the prince can do that." next
-    "@I guess I need more training..." next
-    "@By the way, just what is PP anyway?..." end
+	"@I wish I could recover my PP just by drinking water..." next
+	"@Even though I have never seen him before, I heard that the prince can do that." next
+	"@I guess I need more training..." next
+	"@By the way, just what is PP anyway?..." end
 
 l_0xc6a458:
-    "@I came to buy condiments..." next
-    "@I wonder what would be good..." next
-    "@The right condiment makes a dish taste better," next
-    "@while the wrong one makes it taste worse." next
-    "@If the condiment matches the food," next
-    "@you will get more power than if you ate the food item plain." end
+	"@I came to buy condiments..." next
+	"@I wonder what would be good..." next
+	"@The right condiment makes a dish taste better," next
+	"@while the wrong one makes it taste worse." next
+	"@If the condiment matches the food," next
+	"@you will get more power than if you ate the food item plain." end
 
 l_0xc6a4f2:
-    "@I'm taking the liberty of living in the mice's home and mooching off of them." next
-    "@The mice are known as <Exit mice.>" next
-    "@They are very kind, and boy are they fast!" next
-    "@I really love these guys!" end
+	"@I'm taking the liberty of living in the mice's home and mooching off of them." next
+	"@The mice are known as <Exit mice.>" next
+	"@They are very kind, and boy are they fast!" next
+	"@I really love these guys!" end
 
 l_0xc6a551:
-    "@I always feel much better after hearing my mom's voice over the phone." next
-    "@I was really homesick recently, and my mom cheered me right up." next
-    "@You should call your mom sometime." next
-    "@Believe me, those melancholy feelings will be gone before you know it." end
+	"@I always feel much better after hearing my mom's voice over the phone." next
+	"@I was really homesick recently, and my mom cheered me right up." next
+	"@You should call your mom sometime." next
+	"@Believe me, those melancholy feelings will be gone before you know it." end
 
 l_0xc6a5e0:
-    "@I have a lot of old, broken junk, but I hate to throw anything away." next
-    "@If you have a friend who is knowledgeable about mechanics," next
-    "@that person might be able to fix something for you overnight..." next
-    "@Man, a friend like that would be so handy..." end
+	"@I have a lot of old, broken junk, but I hate to throw anything away." next
+	"@If you have a friend who is knowledgeable about mechanics," next
+	"@that person might be able to fix something for you overnight..." next
+	"@Man, a friend like that would be so handy..." end
 
 l_0xc6a666:
-    window_open(1)
-    "@When you buy an item that should be equipped," next
-    "@do you bother to actually equip it?" next
-    "@Heh eh, I gave a hint to my own enemy..." next
-    "@I'm such a rockin' dude!" next
-    "@I obviously have total confidence in my own abilities." next
-    "@So... are you ready to get it on, Spanky?" promptw
-    window_closeall
-    call(data_23.l_0xc683df) goto_if_true(data_23.l_0xc683de)
-    hide_sprite(7,6)	// 0x0007, 6
-    set(FLG_ONET_SHARK_2F_DISAPPEAR)	// 697
-    window_closeall
-    eob
+	window_open(1)
+	"@When you buy an item that should be equipped," next
+	"@do you bother to actually equip it?" next
+	"@Heh eh, I gave a hint to my own enemy..." next
+	"@I'm such a rockin' dude!" next
+	"@I obviously have total confidence in my own abilities." next
+	"@So... are you ready to get it on, Spanky?" promptw
+	window_closeall
+	call(data_23.l_0xc683df) goto_if_true(data_23.l_0xc683de)
+	hide_sprite(7,6)	// 0x0007, 6
+	set(FLG_ONET_SHARK_2F_DISAPPEAR)	// 697
+	window_closeall
+	eob
 
 l_0xc6a725:
-    sprite2_spawn(432,34,1)	// 0x01B0, 0x0022, 01
-    wait_movement
-    window_open(1)
-    newline
-    "@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax." wait
-    window_closeall
-    sprite2_do_mc(432,33)	// 0x01B0, 0x0021
-    eob
+	sprite2_spawn(432,34,1)	// 0x01B0, 0x0022, 01
+	wait_movement
+	window_open(1)
+	newline
+	"@The Magic butterfly made " call(data_37.l_0xc7e6d7) " relax." wait
+	window_closeall
+	sprite2_do_mc(432,33)	// 0x01B0, 0x0021
+	eob
 
 l_0xc6a755:
-    "@<Hotel Onett>" next
-    "@35 dollars per night for a single room." end
+	"@<Hotel Onett>" next
+	"@35 dollars per night for a single room." end
 
 l_0xc6a77b:
-    "@<Twoson Hotel>" next
-    "@50 dollars per night for a single room." end
+	"@<Twoson Hotel>" next
+	"@50 dollars per night for a single room." end
 
 l_0xc6a7a5:
-    "@<Threek Sunset Hotel>" next
-    "@60 dollars per night for a single room." end
+	"@<Threek Sunset Hotel>" next
+	"@60 dollars per night for a single room." end
 
 l_0xc6a7d2:
-    "@<Hotel Du Summers>" next
-    "@150 dollars per night for a single room." end
+	"@<Hotel Du Summers>" next
+	"@150 dollars per night for a single room." end
 
 l_0xc6a800:
-    goto_if_flag(FLG_WIN_GIEGU, l_0xc6a832)	// 0x49, 73
-    "@<Monotoly Grand Hotel>" next
-    "@75 dollars per night for a single room." end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc6a832)	// 0x49, 73
+	"@<Monotoly Grand Hotel>" next
+	"@75 dollars per night for a single room." end
 
 l_0xc6a832:
-    "@<Enrich Grand Hotel>" next
-    "@75 dollars per night for a single room." end
+	"@<Enrich Grand Hotel>" next
+	"@75 dollars per night for a single room." end
 
 l_0xc6a861:
-    "@<Hotel Dark Moon>" next
-    "@75 dollars for one sleep period for a single room." end
+	"@<Hotel Dark Moon>" next
+	"@75 dollars for one sleep period for a single room." end
 

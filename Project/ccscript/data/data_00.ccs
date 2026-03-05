@@ -5,6 +5,7 @@
  */
 
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 
 command e(label) "{long label}"
@@ -12,87 +13,1071 @@ command e(label) "{long label}"
 // Text Data
 l_0xc50000:
 	newline
-	"[06 E2 00 {e(l_0xc51ccb)}][06 E3 00 {e(l_0xc51b12)}][06 E4 00 {e(data_11.l_0xc5bb76)}][06 E5 00 {e(data_11.l_0xc5bb76)}][06 E6 00 {e(data_10.l_0xc5baa4)}][06 E7 00 {e(data_11.l_0xc5bb76)}][06 E8 00 {e(data_10.l_0xc5baa4)}][06 E9 00 {e(l_0xc51b12)}][06 EA 00 {e(l_0xc5211e)}][06 EB 00 {e(data_10.l_0xc5b625)}][06 EC 00 {e(data_11.l_0xc5bc70)}][06 ED 00 {e(data_11.l_0xc5bef9)}][06 EE 00 {e(data_12.l_0xc5cd18)}][06 EF 00 {e(l_0xc51b12)}][06 F0 00 {e(l_0xc51b12)}][06 F1 00 {e(l_0xc51b12)}][06 F2 00 {e(l_0xc51b12)}][06 F3 00 {e(data_01.l_0xc52d94)}][06 F4 00 {e(data_10.l_0xc5baa4)}][06 F5 00 {e(l_0xc51b12)}][06 F6 00 {e(data_13.l_0xc5d050)}][06 F7 00 {e(data_11.l_0xc5c32a)}][06 F8 00 {e(data_02.l_0xc530a2)}][06 F9 00 {e(data_02.l_0xc530a2)}][06 FA 00 {e(data_02.l_0xc530a2)}][06 FB 00 {e(l_0xc51b12)}][06 FC 00 {e(l_0xc51b12)}][06 FD 00 {e(data_12.l_0xc5c71f)}][06 FE 00 {e(data_01.l_0xc52d94)}][06 FF 00 {e(data_10.l_0xc5baa4)}][06 00 01 {e(l_0xc5211e)}][06 01 01 {e(l_0xc51b12)}][06 02 01 {e(data_10.l_0xc5baa4)}][06 03 01 {e(l_0xc51b12)}][06 04 01 {e(l_0xc51eea)}][06 05 01 {e(data_11.l_0xc5bb76)}][06 06 01 {e(data_12.l_0xc5ce22)}][06 07 01 {e(data_01.l_0xc52d94)}][06 08 01 {e(data_11.l_0xc5c1e5)}][06 09 01 {e(data_01.l_0xc522ef)}][06 0A 01 {e(data_11.l_0xc5bd92)}][06 0B 01 {e(data_01.l_0xc524f7)}][06 0C 01 {e(data_13.l_0xc5cf67)}][06 0D 01 {e(data_12.l_0xc5ca56)}][06 0E 01 {e(data_12.l_0xc5c845)}][06 0F 01 {e(data_01.l_0xc527c7)}][06 44 01 {e(data_11.l_0xc5c05f)}][06 45 01 {e(data_01.l_0xc52acc)}][06 46 01 {e(data_01.l_0xc52d94)}][06 DE 01 {e(data_11.l_0xc5bef9)}][06 55 02 {e(data_12.l_0xc5c59e)}][06 56 02 {e(data_12.l_0xc5cbc0)}][06 57 02 {e(data_10.l_0xc5b3ba)}][06 58 02 {e(l_0xc51b12)}][06 8D 02 {e(data_01.l_0xc52d94)}][06 DB 02 {e(data_02.l_0xc5341d)}][06 DC 02 {e(data_10.l_0xc5b896)}][06 DD 02 {e(data_12.l_0xc5c96a)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51ccb)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b12)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bb76)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bb76)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5baa4)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bb76)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5baa4)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b12)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc5211e)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b625)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bc70)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bef9)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd18)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b12)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b12)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b12)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b12)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_01.l_0xc52d94)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5baa4)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b12)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d050)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c32a)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc530a2)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc530a2)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc530a2)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b12)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b12)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c71f)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_01.l_0xc52d94)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5baa4)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc5211e)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b12)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5baa4)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51b12)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51eea)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bb76)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5ce22)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_01.l_0xc52d94)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c1e5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc522ef)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bd92)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc524f7)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf67)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5ca56)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c845)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc527c7)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c05f)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52acc)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_01.l_0xc52d94)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bef9)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c59e)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cbc0)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3ba)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b12)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_01.l_0xc52d94)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5341d)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b896)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c96a)	// 0x02DD, 733
+	eob
 
 l_0xc50198:
 	newline
-	"[06 E2 00 {e(l_0xc51cef)}][06 E3 00 {e(l_0xc51b28)}][06 E4 00 {e(data_11.l_0xc5bb9a)}][06 E5 00 {e(data_11.l_0xc5bb9a)}][06 E6 00 {e(data_10.l_0xc5bab4)}][06 E7 00 {e(data_11.l_0xc5bb9a)}][06 E8 00 {e(data_10.l_0xc5bab4)}][06 E9 00 {e(l_0xc51b28)}][06 EA 00 {e(l_0xc52130)}][06 EB 00 {e(data_10.l_0xc5b666)}][06 EC 00 {e(data_11.l_0xc5bcc2)}][06 ED 00 {e(data_11.l_0xc5bf87)}][06 EE 00 {e(data_12.l_0xc5cd29)}][06 EF 00 {e(l_0xc51b28)}][06 F0 00 {e(l_0xc51b28)}][06 F1 00 {e(l_0xc51b28)}][06 F2 00 {e(l_0xc51b28)}][06 F3 00 {e(data_02.l_0xc52dcc)}][06 F4 00 {e(data_10.l_0xc5bab4)}][06 F5 00 {e(l_0xc51b28)}][06 F6 00 {e(data_13.l_0xc5d06d)}][06 F7 00 {e(data_11.l_0xc5c39e)}][06 F8 00 {e(data_02.l_0xc530fc)}][06 F9 00 {e(data_02.l_0xc530fc)}][06 FA 00 {e(data_02.l_0xc530fc)}][06 FB 00 {e(l_0xc51b28)}][06 FC 00 {e(l_0xc51b28)}][06 FD 00 {e(data_12.l_0xc5c74c)}][06 FE 00 {e(data_02.l_0xc52dcc)}][06 FF 00 {e(data_10.l_0xc5bab4)}][06 00 01 {e(l_0xc52130)}][06 01 01 {e(l_0xc51b28)}][06 02 01 {e(data_10.l_0xc5bab4)}][06 03 01 {e(l_0xc51b28)}][06 04 01 {e(l_0xc51f2c)}][06 05 01 {e(data_11.l_0xc5bb9a)}][06 06 01 {e(data_12.l_0xc5cec0)}][06 07 01 {e(data_02.l_0xc52dcc)}][06 08 01 {e(data_11.l_0xc5c203)}][06 09 01 {e(data_01.l_0xc5230c)}][06 0A 01 {e(data_11.l_0xc5bde0)}][06 0B 01 {e(data_01.l_0xc52546)}][06 0C 01 {e(data_13.l_0xc5cf82)}][06 0D 01 {e(data_12.l_0xc5cab4)}][06 0E 01 {e(data_12.l_0xc5c86c)}][06 0F 01 {e(data_01.l_0xc52809)}][06 44 01 {e(data_11.l_0xc5c0ad)}][06 45 01 {e(data_01.l_0xc52b37)}][06 46 01 {e(data_02.l_0xc52dcc)}][06 DE 01 {e(data_11.l_0xc5bf87)}][06 55 02 {e(data_12.l_0xc5c5dd)}][06 56 02 {e(data_12.l_0xc5cbdc)}][06 57 02 {e(data_10.l_0xc5b3eb)}][06 58 02 {e(l_0xc51b28)}][06 8D 02 {e(data_02.l_0xc52dcc)}][06 DB 02 {e(data_02.l_0xc53454)}][06 DC 02 {e(data_10.l_0xc5b8d6)}][06 DD 02 {e(data_12.l_0xc5c99a)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51cef)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b28)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bb9a)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bb9a)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5bab4)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bb9a)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5bab4)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b28)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc52130)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b666)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcc2)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf87)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd29)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b28)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b28)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b28)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b28)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52dcc)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5bab4)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b28)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d06d)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c39e)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc530fc)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc530fc)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc530fc)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b28)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b28)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c74c)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52dcc)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5bab4)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc52130)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b28)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5bab4)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51b28)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f2c)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bb9a)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cec0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52dcc)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c203)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5230c)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bde0)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52546)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf82)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cab4)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c86c)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52809)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0ad)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b37)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52dcc)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf87)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c5dd)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cbdc)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3eb)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b28)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52dcc)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53454)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8d6)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c99a)	// 0x02DD, 733
+	eob
 
 l_0xc50330:
 	newline
-	"[06 E2 00 {e(l_0xc51cfa)}][06 E3 00 {e(l_0xc51b31)}][06 E4 00 {e(data_11.l_0xc5bbb2)}][06 E5 00 {e(data_11.l_0xc5bbb2)}][06 E6 00 {e(data_10.l_0xc5babd)}][06 E7 00 {e(data_11.l_0xc5bbb2)}][06 E8 00 {e(data_10.l_0xc5babd)}][06 E9 00 {e(l_0xc51b31)}][06 EA 00 {e(l_0xc52139)}][06 EB 00 {e(data_10.l_0xc5b674)}][06 EC 00 {e(data_11.l_0xc5bcca)}][06 ED 00 {e(data_11.l_0xc5bf8e)}][06 EE 00 {e(data_12.l_0xc5cd2f)}][06 EF 00 {e(l_0xc51b31)}][06 F0 00 {e(l_0xc51b31)}][06 F1 00 {e(l_0xc51b31)}][06 F2 00 {e(l_0xc51b31)}][06 F3 00 {e(data_02.l_0xc52de8)}][06 F4 00 {e(data_10.l_0xc5babd)}][06 F5 00 {e(l_0xc51b31)}][06 F6 00 {e(data_13.l_0xc5d08d)}][06 F7 00 {e(data_11.l_0xc5c456)}][06 F8 00 {e(data_02.l_0xc5310f)}][06 F9 00 {e(data_02.l_0xc5310f)}][06 FA 00 {e(data_02.l_0xc5310f)}][06 FB 00 {e(l_0xc51b31)}][06 FC 00 {e(l_0xc51b31)}][06 FD 00 {e(data_12.l_0xc5c755)}][06 FE 00 {e(data_02.l_0xc52de8)}][06 FF 00 {e(data_10.l_0xc5babd)}][06 00 01 {e(l_0xc52139)}][06 01 01 {e(l_0xc51b31)}][06 02 01 {e(data_10.l_0xc5babd)}][06 03 01 {e(data_01.l_0xc52d8c)}][06 04 01 {e(l_0xc51f45)}][06 05 01 {e(data_11.l_0xc5bbb2)}][06 06 01 {e(data_12.l_0xc5cec8)}][06 07 01 {e(data_02.l_0xc52de8)}][06 08 01 {e(data_11.l_0xc5c210)}][06 09 01 {e(data_01.l_0xc52312)}][06 0A 01 {e(data_11.l_0xc5be00)}][06 0B 01 {e(data_01.l_0xc5256c)}][06 0C 01 {e(data_13.l_0xc5cf8a)}][06 0D 01 {e(data_12.l_0xc5cad0)}][06 0E 01 {e(data_12.l_0xc5c876)}][06 0F 01 {e(data_01.l_0xc52836)}][06 44 01 {e(data_11.l_0xc5c0cb)}][06 45 01 {e(data_01.l_0xc52b67)}][06 46 01 {e(data_02.l_0xc52de8)}][06 DE 01 {e(data_11.l_0xc5bf8e)}][06 55 02 {e(data_12.l_0xc5c5f3)}][06 56 02 {e(data_12.l_0xc5cc35)}][06 57 02 {e(data_10.l_0xc5b3f6)}][06 58 02 {e(l_0xc51b31)}][06 8D 02 {e(data_02.l_0xc52de8)}][06 DB 02 {e(data_02.l_0xc5346f)}][06 DC 02 {e(data_10.l_0xc5b8df)}][06 DD 02 {e(data_12.l_0xc5c9a4)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51cfa)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b31)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbb2)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbb2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5babd)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbb2)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5babd)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b31)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc52139)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b674)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcca)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf8e)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd2f)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b31)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b31)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b31)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b31)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52de8)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5babd)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b31)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d08d)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c456)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5310f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5310f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5310f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b31)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b31)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c755)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52de8)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5babd)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc52139)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b31)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5babd)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_01.l_0xc52d8c)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f45)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbb2)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cec8)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52de8)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c210)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52312)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be00)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5256c)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf8a)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cad0)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c876)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52836)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0cb)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b67)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52de8)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf8e)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c5f3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc35)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3f6)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b31)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52de8)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5346f)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8df)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9a4)	// 0x02DD, 733
+	eob
 
 l_0xc504c8:
 	newline
-	"[06 E2 00 {e(l_0xc51d20)}][06 E3 00 {e(l_0xc51b39)}][06 E4 00 {e(data_11.l_0xc5bbce)}][06 E5 00 {e(data_11.l_0xc5bbce)}][06 E6 00 {e(data_11.l_0xc5bac5)}][06 E7 00 {e(data_11.l_0xc5bbce)}][06 E8 00 {e(data_11.l_0xc5bac5)}][06 E9 00 {e(l_0xc51b39)}][06 EA 00 {e(l_0xc52154)}][06 EB 00 {e(data_10.l_0xc5b69d)}][06 EC 00 {e(data_11.l_0xc5bcd2)}][06 ED 00 {e(data_11.l_0xc5bf95)}][06 EE 00 {e(data_12.l_0xc5cd51)}][06 EF 00 {e(l_0xc51b39)}][06 F0 00 {e(l_0xc51b39)}][06 F1 00 {e(l_0xc51b39)}][06 F2 00 {e(l_0xc51b39)}][06 F3 00 {e(data_02.l_0xc52e0d)}][06 F4 00 {e(data_11.l_0xc5bac5)}][06 F5 00 {e(l_0xc51b39)}][06 F6 00 {e(data_13.l_0xc5d0aa)}][06 F7 00 {e(data_11.l_0xc5c4e3)}][06 F8 00 {e(data_02.l_0xc5311f)}][06 F9 00 {e(data_02.l_0xc5311f)}][06 FA 00 {e(data_02.l_0xc5311f)}][06 FB 00 {e(l_0xc51b39)}][06 FC 00 {e(l_0xc51b39)}][06 FD 00 {e(data_12.l_0xc5c765)}][06 FE 00 {e(data_02.l_0xc52e0d)}][06 FF 00 {e(data_11.l_0xc5bac5)}][06 00 01 {e(l_0xc52154)}][06 01 01 {e(l_0xc51b39)}][06 02 01 {e(data_11.l_0xc5bac5)}][06 03 01 {e(l_0xc51b39)}][06 04 01 {e(l_0xc51f62)}][06 05 01 {e(data_11.l_0xc5bbce)}][06 06 01 {e(data_12.l_0xc5ced0)}][06 07 01 {e(data_02.l_0xc52e0d)}][06 08 01 {e(data_11.l_0xc5c22e)}][06 09 01 {e(data_01.l_0xc52339)}][06 0A 01 {e(data_11.l_0xc5be16)}][06 0B 01 {e(data_01.l_0xc52574)}][06 0C 01 {e(data_13.l_0xc5cf9b)}][06 0D 01 {e(data_12.l_0xc5caec)}][06 0E 01 {e(data_12.l_0xc5c88a)}][06 0F 01 {e(data_01.l_0xc52855)}][06 44 01 {e(data_11.l_0xc5c0e3)}][06 45 01 {e(data_01.l_0xc52b82)}][06 46 01 {e(data_02.l_0xc52e0d)}][06 DE 01 {e(data_11.l_0xc5bf95)}][06 55 02 {e(data_12.l_0xc5c61a)}][06 56 02 {e(data_12.l_0xc5cc53)}][06 57 02 {e(data_10.l_0xc5b405)}][06 58 02 {e(l_0xc51b39)}][06 8D 02 {e(data_02.l_0xc52e0d)}][06 DB 02 {e(data_02.l_0xc5348a)}][06 DC 02 {e(data_10.l_0xc5b8eb)}][06 DD 02 {e(data_12.l_0xc5c9ae)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d20)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b39)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbce)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbce)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bac5)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbce)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bac5)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b39)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc52154)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b69d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcd2)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf95)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd51)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b39)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b39)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b39)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b39)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e0d)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bac5)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b39)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0aa)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4e3)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5311f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5311f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5311f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b39)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b39)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c765)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e0d)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bac5)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc52154)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b39)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bac5)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51b39)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f62)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbce)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5ced0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e0d)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c22e)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52339)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be16)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52574)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf9b)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5caec)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c88a)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52855)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0e3)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b82)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e0d)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf95)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c61a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc53)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b405)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b39)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e0d)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5348a)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8eb)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9ae)	// 0x02DD, 733
+	eob
 
 l_0xc50660:
 	newline
-	"[06 E2 00 {e(l_0xc51d31)}][06 E3 00 {e(l_0xc51b49)}][06 E4 00 {e(data_11.l_0xc5bbdc)}][06 E5 00 {e(data_11.l_0xc5bbdc)}][06 E6 00 {e(data_11.l_0xc5bad3)}][06 E7 00 {e(data_11.l_0xc5bbdc)}][06 E8 00 {e(data_11.l_0xc5bad3)}][06 E9 00 {e(l_0xc51b49)}][06 EA 00 {e(l_0xc52163)}][06 EB 00 {e(data_10.l_0xc5b6af)}][06 EC 00 {e(data_11.l_0xc5bcdd)}][06 ED 00 {e(data_11.l_0xc5bfa1)}][06 EE 00 {e(data_12.l_0xc5cd64)}][06 EF 00 {e(l_0xc51b49)}][06 F0 00 {e(l_0xc51b49)}][06 F1 00 {e(l_0xc51b49)}][06 F2 00 {e(l_0xc51b49)}][06 F3 00 {e(data_02.l_0xc52e1c)}][06 F4 00 {e(data_11.l_0xc5bad3)}][06 F5 00 {e(l_0xc51b49)}][06 F6 00 {e(data_13.l_0xc5d0c9)}][06 F7 00 {e(data_11.l_0xc5c4ee)}][06 F8 00 {e(data_02.l_0xc53134)}][06 F9 00 {e(data_02.l_0xc53134)}][06 FA 00 {e(data_02.l_0xc53134)}][06 FB 00 {e(l_0xc51b49)}][06 FC 00 {e(l_0xc51b49)}][06 FD 00 {e(data_12.l_0xc5c76f)}][06 FE 00 {e(data_02.l_0xc52e1c)}][06 FF 00 {e(data_11.l_0xc5bad3)}][06 00 01 {e(l_0xc52163)}][06 01 01 {e(l_0xc51b49)}][06 02 01 {e(data_11.l_0xc5bad3)}][06 03 01 {e(l_0xc51b49)}][06 04 01 {e(l_0xc51f74)}][06 05 01 {e(data_11.l_0xc5bbdc)}][06 06 01 {e(data_12.l_0xc5cedc)}][06 07 01 {e(data_02.l_0xc52e1c)}][06 08 01 {e(data_11.l_0xc5c23b)}][06 09 01 {e(data_01.l_0xc5234d)}][06 0A 01 {e(data_11.l_0xc5be24)}][06 0B 01 {e(data_01.l_0xc52583)}][06 0C 01 {e(data_13.l_0xc5cfa6)}][06 0D 01 {e(data_12.l_0xc5cafe)}][06 0E 01 {e(data_12.l_0xc5c896)}][06 0F 01 {e(data_01.l_0xc52860)}][06 44 01 {e(data_11.l_0xc5c0f3)}][06 45 01 {e(data_01.l_0xc52b8d)}][06 46 01 {e(data_02.l_0xc52e1c)}][06 DE 01 {e(data_11.l_0xc5bfa1)}][06 55 02 {e(data_12.l_0xc5c63a)}][06 56 02 {e(data_12.l_0xc5cc63)}][06 57 02 {e(data_10.l_0xc5b426)}][06 58 02 {e(l_0xc51b49)}][06 8D 02 {e(data_02.l_0xc52e1c)}][06 DB 02 {e(data_02.l_0xc5349f)}][06 DC 02 {e(data_10.l_0xc5b8f8)}][06 DD 02 {e(data_12.l_0xc5c9b7)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d31)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b49)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbdc)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbdc)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bad3)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbdc)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bad3)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b49)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc52163)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6af)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcdd)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfa1)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd64)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b49)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b49)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b49)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b49)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e1c)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bad3)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b49)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0c9)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4ee)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53134)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53134)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53134)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b49)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b49)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c76f)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e1c)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bad3)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc52163)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b49)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bad3)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51b49)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f74)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbdc)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cedc)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e1c)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c23b)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5234d)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be24)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52583)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfa6)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cafe)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c896)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52860)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0f3)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b8d)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e1c)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfa1)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c63a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc63)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b426)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b49)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e1c)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5349f)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8f8)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9b7)	// 0x02DD, 733
+	eob
 
 l_0xc507f8:
 	newline
-	"[06 E2 00 {e(l_0xc51d39)}][06 E3 00 {e(l_0xc51b57)}][06 E4 00 {e(data_11.l_0xc5bbe4)}][06 E5 00 {e(data_11.l_0xc5bbe4)}][06 E6 00 {e(data_11.l_0xc5badb)}][06 E7 00 {e(data_11.l_0xc5bbe4)}][06 E8 00 {e(data_11.l_0xc5badb)}][06 E9 00 {e(l_0xc51b57)}][06 EA 00 {e(l_0xc5216b)}][06 EB 00 {e(data_10.l_0xc5b6b7)}][06 EC 00 {e(data_11.l_0xc5bce5)}][06 ED 00 {e(data_11.l_0xc5bfb0)}][06 EE 00 {e(data_12.l_0xc5cd73)}][06 EF 00 {e(l_0xc51b57)}][06 F0 00 {e(l_0xc51b57)}][06 F1 00 {e(l_0xc51b57)}][06 F2 00 {e(l_0xc51b57)}][06 F3 00 {e(data_02.l_0xc52e24)}][06 F4 00 {e(data_11.l_0xc5badb)}][06 F5 00 {e(l_0xc51b57)}][06 F6 00 {e(data_13.l_0xc5d0df)}][06 F7 00 {e(data_11.l_0xc5c4fd)}][06 F8 00 {e(data_02.l_0xc53144)}][06 F9 00 {e(data_02.l_0xc53144)}][06 FA 00 {e(data_02.l_0xc53144)}][06 FB 00 {e(l_0xc51b57)}][06 FC 00 {e(l_0xc51b57)}][06 FD 00 {e(data_12.l_0xc5c77e)}][06 FE 00 {e(data_02.l_0xc52e24)}][06 FF 00 {e(data_11.l_0xc5badb)}][06 00 01 {e(l_0xc5216b)}][06 01 01 {e(l_0xc51b57)}][06 02 01 {e(data_11.l_0xc5badb)}][06 03 01 {e(l_0xc51b57)}][06 04 01 {e(l_0xc51f7c)}][06 05 01 {e(data_11.l_0xc5bbe4)}][06 06 01 {e(data_12.l_0xc5cee4)}][06 07 01 {e(data_02.l_0xc52e24)}][06 08 01 {e(data_11.l_0xc5c252)}][06 09 01 {e(data_01.l_0xc52355)}][06 0A 01 {e(data_11.l_0xc5be34)}][06 0B 01 {e(data_01.l_0xc5258b)}][06 0C 01 {e(data_13.l_0xc5cfae)}][06 0D 01 {e(data_12.l_0xc5cb12)}][06 0E 01 {e(data_12.l_0xc5c89e)}][06 0F 01 {e(data_01.l_0xc52868)}][06 44 01 {e(data_11.l_0xc5c10f)}][06 45 01 {e(data_01.l_0xc52b9b)}][06 46 01 {e(data_02.l_0xc52e24)}][06 DE 01 {e(data_11.l_0xc5bfb0)}][06 55 02 {e(data_12.l_0xc5c64d)}][06 56 02 {e(data_12.l_0xc5cc83)}][06 57 02 {e(data_10.l_0xc5b42e)}][06 58 02 {e(l_0xc51b57)}][06 8D 02 {e(data_02.l_0xc52e24)}][06 DB 02 {e(data_02.l_0xc534a7)}][06 DC 02 {e(data_10.l_0xc5b900)}][06 DD 02 {e(data_12.l_0xc5c9c2)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d39)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b57)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbe4)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbe4)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5badb)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbe4)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5badb)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51b57)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc5216b)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6b7)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bce5)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfb0)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd73)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51b57)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b57)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b57)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b57)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e24)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5badb)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51b57)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0df)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4fd)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53144)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53144)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53144)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b57)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b57)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c77e)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e24)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5badb)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc5216b)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b57)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5badb)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51b57)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f7c)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbe4)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cee4)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e24)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c252)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52355)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be34)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5258b)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfae)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb12)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c89e)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52868)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c10f)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b9b)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e24)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfb0)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c64d)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc83)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b42e)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b57)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e24)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534a7)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b900)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9c2)	// 0x02DD, 733
+	eob
 
 l_0xc50990:
 	newline
-	"[06 E2 00 {e(l_0xc51d45)}][06 E3 00 {e(l_0xc51b6a)}][06 E9 00 {e(l_0xc51b6a)}][06 EA 00 {e(l_0xc5217a)}][06 EB 00 {e(data_10.l_0xc5b6ca)}][06 EF 00 {e(l_0xc51b6a)}][06 F0 00 {e(l_0xc51b6a)}][06 F1 00 {e(l_0xc51b6a)}][06 F2 00 {e(l_0xc51b6a)}][06 F3 00 {e(data_02.l_0xc52e3a)}][06 F5 00 {e(l_0xc51b6a)}][06 F8 00 {e(data_02.l_0xc53161)}][06 F9 00 {e(data_02.l_0xc53161)}][06 FA 00 {e(data_02.l_0xc53161)}][06 FB 00 {e(l_0xc51b6a)}][06 FC 00 {e(l_0xc51b6a)}][06 FE 00 {e(data_02.l_0xc52e3a)}][06 00 01 {e(l_0xc5217a)}][06 01 01 {e(l_0xc51b6a)}][06 03 01 {e(l_0xc51b6a)}][06 04 01 {e(l_0xc51f91)}][06 07 01 {e(data_02.l_0xc52e3a)}][06 09 01 {e(data_01.l_0xc52361)}][06 0B 01 {e(data_01.l_0xc525a4)}][06 0F 01 {e(data_01.l_0xc52885)}][06 45 01 {e(data_01.l_0xc52baa)}][06 46 01 {e(data_02.l_0xc52e3a)}][06 57 02 {e(data_10.l_0xc5b43c)}][06 58 02 {e(l_0xc51b6a)}][06 8D 02 {e(data_02.l_0xc52e3a)}][06 DB 02 {e(data_02.l_0xc534b6)}][06 DC 02 {e(data_10.l_0xc5b910)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d45)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b6a)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51b6a)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc5217a)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6ca)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51b6a)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b6a)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b6a)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b6a)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e3a)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51b6a)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53161)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53161)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53161)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b6a)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b6a)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e3a)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, l_0xc5217a)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b6a)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51b6a)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51f91)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e3a)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52361)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525a4)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52885)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52baa)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e3a)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b43c)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b6a)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e3a)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534b6)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b910)	// 0x02DC, 732
+	eob
 
 l_0xc50a72:
 	newline
-	"[06 E2 00 {e(l_0xc51d5b)}][06 E3 00 {e(l_0xc51b7e)}][06 E9 00 {e(l_0xc51b7e)}][06 EA 00 {e(l_0xc52189)}][06 EB 00 {e(data_10.l_0xc5b6e2)}][06 EF 00 {e(l_0xc51b7e)}][06 F0 00 {e(l_0xc51b7e)}][06 F1 00 {e(l_0xc51b7e)}][06 F2 00 {e(l_0xc51b7e)}][06 F3 00 {e(data_02.l_0xc52e59)}][06 F5 00 {e(l_0xc51b7e)}][06 F8 00 {e(data_02.l_0xc53172)}][06 F9 00 {e(data_02.l_0xc53172)}][06 FA 00 {e(data_02.l_0xc53172)}][06 FB 00 {e(l_0xc51b7e)}][06 FC 00 {e(l_0xc51b7e)}][06 FE 00 {e(data_02.l_0xc52e59)}][06 00 01 {e(l_0xc52189)}][06 01 01 {e(l_0xc51b7e)}][06 03 01 {e(l_0xc51b7e)}][06 04 01 {e(l_0xc51fa7)}][06 07 01 {e(data_02.l_0xc52e59)}][06 09 01 {e(data_01.l_0xc52371)}][06 0B 01 {e(data_01.l_0xc525bb)}][06 0F 01 {e(data_01.l_0xc52893)}][06 45 01 {e(data_01.l_0xc52bbd)}][06 46 01 {e(data_02.l_0xc52e59)}][06 57 02 {e(data_10.l_0xc5b447)}][06 58 02 {e(l_0xc51b7e)}][06 8D 02 {e(data_02.l_0xc52e59)}][06 DB 02 {e(data_02.l_0xc534c8)}][06 DC 02 {e(data_10.l_0xc5b92c)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d5b)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b7e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51b7e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc52189)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6e2)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51b7e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b7e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b7e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b7e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e59)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51b7e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53172)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53172)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53172)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b7e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b7e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e59)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, l_0xc52189)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b7e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51b7e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51fa7)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e59)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52371)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525bb)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52893)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52bbd)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e59)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b447)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b7e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e59)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534c8)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b92c)	// 0x02DC, 732
+	eob
 
 l_0xc50b54:
 	newline
-	"[06 E2 00 {e(l_0xc51d7b)}][06 E3 00 {e(l_0xc51b9d)}][06 E9 00 {e(l_0xc51b9d)}][06 EA 00 {e(l_0xc521aa)}][06 EB 00 {e(data_10.l_0xc5b70b)}][06 EF 00 {e(l_0xc51b9d)}][06 F0 00 {e(l_0xc51b9d)}][06 F1 00 {e(l_0xc51b9d)}][06 F2 00 {e(l_0xc51b9d)}][06 F3 00 {e(data_02.l_0xc52e85)}][06 F5 00 {e(l_0xc51b9d)}][06 F8 00 {e(data_02.l_0xc531ba)}][06 F9 00 {e(data_02.l_0xc531ba)}][06 FA 00 {e(data_02.l_0xc531ba)}][06 FB 00 {e(l_0xc51b9d)}][06 FC 00 {e(l_0xc51b9d)}][06 FE 00 {e(data_02.l_0xc52e85)}][06 00 01 {e(l_0xc521aa)}][06 01 01 {e(l_0xc51b9d)}][06 03 01 {e(l_0xc51b9d)}][06 04 01 {e(l_0xc51fc8)}][06 07 01 {e(data_02.l_0xc52e85)}][06 09 01 {e(data_01.l_0xc5238f)}][06 0B 01 {e(data_01.l_0xc525e6)}][06 0F 01 {e(data_01.l_0xc528bf)}][06 45 01 {e(data_01.l_0xc52bdd)}][06 46 01 {e(data_02.l_0xc52e85)}][06 57 02 {e(data_10.l_0xc5b468)}][06 58 02 {e(l_0xc51b9d)}][06 8D 02 {e(data_02.l_0xc52e85)}][06 DB 02 {e(data_02.l_0xc534e9)}][06 DC 02 {e(data_10.l_0xc5b94d)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d7b)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51b9d)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51b9d)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc521aa)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b70b)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51b9d)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51b9d)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51b9d)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51b9d)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e85)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51b9d)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc531ba)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc531ba)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc531ba)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51b9d)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51b9d)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e85)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, l_0xc521aa)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51b9d)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51b9d)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51fc8)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e85)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5238f)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525e6)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528bf)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52bdd)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e85)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b468)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51b9d)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e85)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534e9)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b94d)	// 0x02DC, 732
+	eob
 
 l_0xc50c36:
 	newline
-	"[06 E2 00 {e(l_0xc51d96)}][06 E3 00 {e(l_0xc51bb7)}][06 E4 00 {e(data_11.l_0xc5bbf2)}][06 E5 00 {e(data_11.l_0xc5bbf2)}][06 E6 00 {e(data_11.l_0xc5bae8)}][06 E7 00 {e(data_11.l_0xc5bbf2)}][06 E8 00 {e(data_11.l_0xc5bae8)}][06 E9 00 {e(l_0xc51bb7)}][06 EA 00 {e(l_0xc521d3)}][06 EB 00 {e(data_10.l_0xc5b72d)}][06 EC 00 {e(data_11.l_0xc5bcf4)}][06 ED 00 {e(data_11.l_0xc5bfbf)}][06 EE 00 {e(data_12.l_0xc5cd7f)}][06 EF 00 {e(l_0xc51bb7)}][06 F0 00 {e(l_0xc51bb7)}][06 F1 00 {e(l_0xc51bb7)}][06 F2 00 {e(l_0xc51bb7)}][06 F3 00 {e(data_02.l_0xc52eb2)}][06 F4 00 {e(data_11.l_0xc5bae8)}][06 F5 00 {e(l_0xc51bb7)}][06 F6 00 {e(data_13.l_0xc5d104)}][06 F7 00 {e(data_11.l_0xc5c50d)}][06 F8 00 {e(data_02.l_0xc531ea)}][06 F9 00 {e(data_02.l_0xc531ea)}][06 FA 00 {e(data_02.l_0xc531ea)}][06 FB 00 {e(l_0xc51bb7)}][06 FC 00 {e(l_0xc51bb7)}][06 FD 00 {e(data_12.l_0xc5c78a)}][06 FE 00 {e(data_02.l_0xc52eb2)}][06 FF 00 {e(data_11.l_0xc5bae8)}][06 00 01 {e(l_0xc521d3)}][06 01 01 {e(l_0xc51bb7)}][06 02 01 {e(data_11.l_0xc5bae8)}][06 03 01 {e(l_0xc51bb7)}][06 04 01 {e(l_0xc51fe7)}][06 05 01 {e(data_11.l_0xc5bbf2)}][06 06 01 {e(data_12.l_0xc5cef0)}][06 07 01 {e(data_02.l_0xc52eb2)}][06 08 01 {e(data_11.l_0xc5c268)}][06 09 01 {e(data_01.l_0xc523be)}][06 0A 01 {e(data_11.l_0xc5be45)}][06 0B 01 {e(data_01.l_0xc52603)}][06 0C 01 {e(data_13.l_0xc5cfba)}][06 0D 01 {e(data_12.l_0xc5cb1e)}][06 0E 01 {e(data_12.l_0xc5c8aa)}][06 0F 01 {e(data_01.l_0xc528eb)}][06 44 01 {e(data_11.l_0xc5c125)}][06 45 01 {e(data_01.l_0xc52c00)}][06 46 01 {e(data_02.l_0xc52eb2)}][06 DE 01 {e(data_11.l_0xc5bfbf)}][06 55 02 {e(data_12.l_0xc5c65c)}][06 56 02 {e(data_12.l_0xc5cc8f)}][06 57 02 {e(data_10.l_0xc5b48c)}][06 58 02 {e(l_0xc51bb7)}][06 8D 02 {e(data_02.l_0xc52eb2)}][06 DB 02 {e(data_02.l_0xc53515)}][06 DC 02 {e(data_10.l_0xc5b971)}][06 DD 02 {e(data_12.l_0xc5c9ce)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51d96)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51bb7)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbf2)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbf2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bae8)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbf2)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bae8)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51bb7)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc521d3)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b72d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcf4)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfbf)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd7f)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51bb7)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51bb7)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51bb7)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51bb7)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52eb2)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bae8)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51bb7)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d104)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c50d)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc531ea)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc531ea)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc531ea)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51bb7)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51bb7)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c78a)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52eb2)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bae8)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc521d3)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51bb7)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bae8)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51bb7)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51fe7)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbf2)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52eb2)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c268)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523be)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be45)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52603)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfba)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb1e)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8aa)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528eb)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c125)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c00)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52eb2)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfbf)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c65c)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc8f)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b48c)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51bb7)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52eb2)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53515)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b971)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9ce)	// 0x02DD, 733
+	eob
 
 l_0xc50dce:
 	newline
-	"[06 E2 00 {e(l_0xc51db0)}][06 E3 00 {e(l_0xc51bc0)}][06 E4 00 {e(data_11.l_0xc5bbfb)}][06 E5 00 {e(data_11.l_0xc5bbfb)}][06 E6 00 {e(data_11.l_0xc5baf1)}][06 E7 00 {e(data_11.l_0xc5bbfb)}][06 E8 00 {e(data_11.l_0xc5baf1)}][06 E9 00 {e(l_0xc51bc0)}][06 EA 00 {e(l_0xc521dc)}][06 EB 00 {e(data_10.l_0xc5b746)}][06 EC 00 {e(data_11.l_0xc5bcfd)}][06 ED 00 {e(data_11.l_0xc5bfc7)}][06 EE 00 {e(data_12.l_0xc5cd97)}][06 EF 00 {e(l_0xc51bc0)}][06 F0 00 {e(l_0xc51bc0)}][06 F1 00 {e(l_0xc51bc0)}][06 F2 00 {e(l_0xc51bc0)}][06 F3 00 {e(data_02.l_0xc52ed7)}][06 F4 00 {e(data_11.l_0xc5baf1)}][06 F5 00 {e(l_0xc51bc0)}][06 F6 00 {e(data_13.l_0xc5d120)}][06 F7 00 {e(data_11.l_0xc5c521)}][06 F8 00 {e(data_02.l_0xc53212)}][06 F9 00 {e(data_02.l_0xc53212)}][06 FA 00 {e(data_02.l_0xc53212)}][06 FB 00 {e(l_0xc51bc0)}][06 FC 00 {e(l_0xc51bc0)}][06 FD 00 {e(data_12.l_0xc5c7ae)}][06 FE 00 {e(data_02.l_0xc52ed7)}][06 FF 00 {e(data_11.l_0xc5baf1)}][06 00 01 {e(l_0xc521dc)}][06 01 01 {e(l_0xc51bc0)}][06 02 01 {e(data_11.l_0xc5baf1)}][06 03 01 {e(l_0xc51bc0)}][06 04 01 {e(l_0xc51ff8)}][06 05 01 {e(data_11.l_0xc5bbfb)}][06 06 01 {e(data_12.l_0xc5cef9)}][06 07 01 {e(data_02.l_0xc52ed7)}][06 08 01 {e(data_11.l_0xc5c27f)}][06 09 01 {e(data_01.l_0xc523cb)}][06 0A 01 {e(data_11.l_0xc5be4e)}][06 0B 01 {e(data_01.l_0xc52622)}][06 0C 01 {e(data_13.l_0xc5cfd5)}][06 0D 01 {e(data_12.l_0xc5cb29)}][06 0E 01 {e(data_12.l_0xc5c8c8)}][06 0F 01 {e(data_01.l_0xc528f9)}][06 44 01 {e(data_11.l_0xc5c13e)}][06 45 01 {e(data_01.l_0xc52c1c)}][06 46 01 {e(data_02.l_0xc52ed7)}][06 DE 01 {e(data_11.l_0xc5bfc7)}][06 55 02 {e(data_12.l_0xc5c67a)}][06 56 02 {e(data_12.l_0xc5ccae)}][06 57 02 {e(data_10.l_0xc5b4d7)}][06 58 02 {e(l_0xc51bc0)}][06 8D 02 {e(data_02.l_0xc52ed7)}][06 DB 02 {e(data_02.l_0xc5352c)}][06 DC 02 {e(data_10.l_0xc5b97e)}][06 DD 02 {e(data_12.l_0xc5c9e7)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51db0)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51bc0)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbfb)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbfb)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5baf1)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbfb)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5baf1)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51bc0)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc521dc)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b746)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcfd)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfc7)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd97)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51bc0)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51bc0)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51bc0)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51bc0)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ed7)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5baf1)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51bc0)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d120)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c521)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53212)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53212)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53212)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51bc0)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51bc0)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7ae)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ed7)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5baf1)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc521dc)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51bc0)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5baf1)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51bc0)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc51ff8)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbfb)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef9)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ed7)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c27f)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523cb)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be4e)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52622)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfd5)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb29)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8c8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528f9)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c13e)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c1c)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ed7)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfc7)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c67a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccae)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b4d7)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51bc0)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ed7)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5352c)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b97e)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9e7)	// 0x02DD, 733
+	eob
 
 l_0xc50f66:
 	newline
-	"[06 E2 00 {e(l_0xc51dcb)}][06 E3 00 {e(l_0xc51bde)}][06 E4 00 {e(data_11.l_0xc5bc0d)}][06 E5 00 {e(data_11.l_0xc5bc0d)}][06 E6 00 {e(data_11.l_0xc5bb02)}][06 E7 00 {e(data_11.l_0xc5bc0d)}][06 E8 00 {e(data_11.l_0xc5bb02)}][06 E9 00 {e(l_0xc51bde)}][06 EA 00 {e(l_0xc521ec)}][06 EB 00 {e(data_10.l_0xc5b76f)}][06 EC 00 {e(data_11.l_0xc5bd0c)}][06 ED 00 {e(data_11.l_0xc5bfd3)}][06 EE 00 {e(data_12.l_0xc5cdb3)}][06 EF 00 {e(l_0xc51bde)}][06 F0 00 {e(l_0xc51bde)}][06 F1 00 {e(l_0xc51bde)}][06 F2 00 {e(l_0xc51bde)}][06 F3 00 {e(data_02.l_0xc52ef5)}][06 F4 00 {e(data_11.l_0xc5bb02)}][06 F5 00 {e(l_0xc51bde)}][06 F6 00 {e(data_13.l_0xc5d148)}][06 F7 00 {e(data_11.l_0xc5c536)}][06 F8 00 {e(data_02.l_0xc53259)}][06 F9 00 {e(data_02.l_0xc53259)}][06 FA 00 {e(data_02.l_0xc53259)}][06 FB 00 {e(l_0xc51bde)}][06 FC 00 {e(l_0xc51bde)}][06 FD 00 {e(data_12.l_0xc5c7b9)}][06 FE 00 {e(data_02.l_0xc52ef5)}][06 FF 00 {e(data_11.l_0xc5bb02)}][06 00 01 {e(l_0xc521ec)}][06 01 01 {e(l_0xc51bde)}][06 02 01 {e(data_11.l_0xc5bb02)}][06 03 01 {e(l_0xc51bde)}][06 04 01 {e(l_0xc5201d)}][06 05 01 {e(data_11.l_0xc5bc0d)}][06 06 01 {e(data_13.l_0xc5cf0a)}][06 07 01 {e(data_02.l_0xc52ef5)}][06 08 01 {e(data_11.l_0xc5c2a5)}][06 09 01 {e(data_01.l_0xc523ef)}][06 0A 01 {e(data_11.l_0xc5be6f)}][06 0B 01 {e(data_01.l_0xc5264b)}][06 0C 01 {e(data_13.l_0xc5cfdf)}][06 0D 01 {e(data_12.l_0xc5cb33)}][06 0E 01 {e(data_12.l_0xc5c8d8)}][06 0F 01 {e(data_01.l_0xc52938)}][06 44 01 {e(data_11.l_0xc5c161)}][06 45 01 {e(data_01.l_0xc52c3d)}][06 46 01 {e(data_02.l_0xc52ef5)}][06 DE 01 {e(data_11.l_0xc5bfd3)}][06 55 02 {e(data_12.l_0xc5c68a)}][06 56 02 {e(data_12.l_0xc5ccbd)}][06 57 02 {e(data_10.l_0xc5b507)}][06 58 02 {e(l_0xc51bde)}][06 8D 02 {e(data_02.l_0xc52ef5)}][06 DB 02 {e(data_02.l_0xc53562)}][06 DC 02 {e(data_10.l_0xc5b994)}][06 DD 02 {e(data_12.l_0xc5c9f2)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51dcb)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51bde)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc0d)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc0d)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb02)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc0d)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb02)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51bde)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc521ec)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b76f)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd0c)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfd3)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdb3)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51bde)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51bde)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51bde)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51bde)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ef5)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb02)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51bde)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d148)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c536)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53259)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53259)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53259)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51bde)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51bde)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7b9)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ef5)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb02)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc521ec)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51bde)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb02)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51bde)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc5201d)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc0d)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf0a)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ef5)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2a5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523ef)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be6f)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5264b)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfdf)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb33)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8d8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52938)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c161)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c3d)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ef5)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfd3)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c68a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccbd)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b507)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51bde)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ef5)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53562)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b994)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9f2)	// 0x02DD, 733
+	eob
 
 l_0xc510fe:
 	newline
-	"[06 E2 00 {e(l_0xc51e14)}][06 E3 00 {e(l_0xc51c03)}][06 E9 00 {e(l_0xc51c03)}][06 EA 00 {e(l_0xc5222e)}][06 EB 00 {e(data_10.l_0xc5b799)}][06 EF 00 {e(l_0xc51c03)}][06 F0 00 {e(l_0xc51c03)}][06 F1 00 {e(l_0xc51c03)}][06 F2 00 {e(l_0xc51c03)}][06 F3 00 {e(data_02.l_0xc52f4a)}][06 F5 00 {e(l_0xc51c03)}][06 F8 00 {e(data_02.l_0xc5328f)}][06 F9 00 {e(data_02.l_0xc5328f)}][06 FA 00 {e(data_02.l_0xc5328f)}][06 FB 00 {e(l_0xc51c03)}][06 FC 00 {e(l_0xc51c03)}][06 FE 00 {e(data_02.l_0xc52f4a)}][06 00 01 {e(l_0xc5222e)}][06 01 01 {e(l_0xc51c03)}][06 03 01 {e(l_0xc51c03)}][06 04 01 {e(l_0xc52059)}][06 07 01 {e(data_02.l_0xc52f4a)}][06 09 01 {e(data_01.l_0xc5241d)}][06 0B 01 {e(data_01.l_0xc526a2)}][06 0F 01 {e(data_01.l_0xc52972)}][06 45 01 {e(data_01.l_0xc52c81)}][06 46 01 {e(data_02.l_0xc52f4a)}][06 57 02 {e(data_10.l_0xc5b541)}][06 58 02 {e(l_0xc51c03)}][06 8D 02 {e(data_02.l_0xc52f4a)}][06 DB 02 {e(data_02.l_0xc535d3)}][06 DC 02 {e(data_10.l_0xc5b9c1)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e14)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c03)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c03)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc5222e)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b799)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c03)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c03)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c03)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c03)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f4a)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c03)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5328f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5328f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5328f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c03)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c03)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f4a)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, l_0xc5222e)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c03)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c03)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc52059)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f4a)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5241d)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526a2)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52972)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c81)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f4a)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b541)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c03)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f4a)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc535d3)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9c1)	// 0x02DC, 732
+	eob
 
 l_0xc511e0:
 	newline
-	"[06 E2 00 {e(l_0xc51e1f)}][06 E3 00 {e(l_0xc51c0e)}][06 E9 00 {e(l_0xc51c0e)}][06 EA 00 {e(data_01.l_0xc5223c)}][06 EB 00 {e(data_10.l_0xc5b7a6)}][06 EF 00 {e(l_0xc51c0e)}][06 F0 00 {e(l_0xc51c0e)}][06 F1 00 {e(l_0xc51c0e)}][06 F2 00 {e(l_0xc51c0e)}][06 F3 00 {e(data_02.l_0xc52f5f)}][06 F5 00 {e(l_0xc51c0e)}][06 F8 00 {e(data_02.l_0xc532b3)}][06 F9 00 {e(data_02.l_0xc532b3)}][06 FA 00 {e(data_02.l_0xc532b3)}][06 FB 00 {e(l_0xc51c0e)}][06 FC 00 {e(l_0xc51c0e)}][06 FE 00 {e(data_02.l_0xc52f5f)}][06 00 01 {e(data_01.l_0xc5223c)}][06 01 01 {e(l_0xc51c0e)}][06 03 01 {e(l_0xc51c0e)}][06 04 01 {e(l_0xc5206d)}][06 07 01 {e(data_02.l_0xc52f5f)}][06 09 01 {e(data_01.l_0xc5242b)}][06 0B 01 {e(data_01.l_0xc526b8)}][06 0F 01 {e(data_01.l_0xc52989)}][06 45 01 {e(data_01.l_0xc52c9b)}][06 46 01 {e(data_02.l_0xc52f5f)}][06 57 02 {e(data_10.l_0xc5b551)}][06 58 02 {e(l_0xc51c0e)}][06 8D 02 {e(data_02.l_0xc52f5f)}][06 DB 02 {e(data_02.l_0xc535df)}][06 DC 02 {e(data_10.l_0xc5b9d1)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e1f)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c0e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c0e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc5223c)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7a6)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c0e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c0e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c0e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c0e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f5f)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c0e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc532b3)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc532b3)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc532b3)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c0e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c0e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f5f)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc5223c)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c0e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c0e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc5206d)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f5f)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5242b)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526b8)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52989)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c9b)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f5f)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b551)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c0e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f5f)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc535df)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9d1)	// 0x02DC, 732
+	eob
 
 l_0xc512c2:
 	newline
-	"[06 E2 00 {e(l_0xc51e4a)}][06 E3 00 {e(l_0xc51c38)}][06 E9 00 {e(l_0xc51c38)}][06 EA 00 {e(data_01.l_0xc52261)}][06 EB 00 {e(data_10.l_0xc5b7cd)}][06 EF 00 {e(l_0xc51c38)}][06 F0 00 {e(l_0xc51c38)}][06 F1 00 {e(l_0xc51c38)}][06 F2 00 {e(l_0xc51c38)}][06 F3 00 {e(data_02.l_0xc52f94)}][06 F5 00 {e(l_0xc51c38)}][06 F8 00 {e(data_02.l_0xc532fa)}][06 F9 00 {e(data_02.l_0xc532fa)}][06 FA 00 {e(data_02.l_0xc532fa)}][06 FB 00 {e(l_0xc51c38)}][06 FC 00 {e(l_0xc51c38)}][06 FE 00 {e(data_02.l_0xc52f94)}][06 00 01 {e(data_01.l_0xc52261)}][06 01 01 {e(l_0xc51c38)}][06 03 01 {e(l_0xc51c38)}][06 04 01 {e(l_0xc5209b)}][06 07 01 {e(data_02.l_0xc52f94)}][06 09 01 {e(data_01.l_0xc5244f)}][06 0B 01 {e(data_01.l_0xc526e5)}][06 0F 01 {e(data_01.l_0xc529d2)}][06 45 01 {e(data_01.l_0xc52cd4)}][06 46 01 {e(data_02.l_0xc52f94)}][06 57 02 {e(data_10.l_0xc5b572)}][06 58 02 {e(l_0xc51c38)}][06 8D 02 {e(data_02.l_0xc52f94)}][06 DB 02 {e(data_02.l_0xc53615)}][06 DC 02 {e(data_10.l_0xc5b9fe)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e4a)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c38)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c38)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52261)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7cd)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c38)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c38)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c38)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c38)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f94)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c38)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc532fa)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc532fa)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc532fa)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c38)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c38)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f94)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52261)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c38)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c38)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc5209b)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f94)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5244f)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526e5)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc529d2)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52cd4)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f94)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b572)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c38)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f94)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53615)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9fe)	// 0x02DC, 732
+	eob
 
 l_0xc513a4:
 	newline
-	"[06 E2 00 {e(l_0xc51e67)}][06 E3 00 {e(l_0xc51c41)}][06 E9 00 {e(l_0xc51c41)}][06 EA 00 {e(data_01.l_0xc52272)}][06 EB 00 {e(data_10.l_0xc5b7f2)}][06 EF 00 {e(l_0xc51c41)}][06 F0 00 {e(l_0xc51c41)}][06 F1 00 {e(l_0xc51c41)}][06 F2 00 {e(l_0xc51c41)}][06 F3 00 {e(data_02.l_0xc52fb6)}][06 F5 00 {e(l_0xc51c41)}][06 F8 00 {e(data_02.l_0xc53312)}][06 F9 00 {e(data_02.l_0xc53312)}][06 FA 00 {e(data_02.l_0xc53312)}][06 FB 00 {e(l_0xc51c41)}][06 FC 00 {e(l_0xc51c41)}][06 FE 00 {e(data_02.l_0xc52fb6)}][06 00 01 {e(data_01.l_0xc52272)}][06 01 01 {e(l_0xc51c41)}][06 03 01 {e(l_0xc51c41)}][06 04 01 {e(l_0xc520a2)}][06 07 01 {e(data_02.l_0xc52fb6)}][06 09 01 {e(data_01.l_0xc52469)}][06 0B 01 {e(data_01.l_0xc5270f)}][06 0F 01 {e(data_01.l_0xc529e0)}][06 45 01 {e(data_01.l_0xc52ced)}][06 46 01 {e(data_02.l_0xc52fb6)}][06 57 02 {e(data_10.l_0xc5b591)}][06 58 02 {e(l_0xc51c41)}][06 8D 02 {e(data_02.l_0xc52fb6)}][06 DB 02 {e(data_02.l_0xc53645)}][06 DC 02 {e(data_10.l_0xc5ba07)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e67)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c41)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c41)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52272)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7f2)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c41)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c41)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c41)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c41)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52fb6)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c41)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53312)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53312)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53312)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c41)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c41)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52fb6)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52272)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c41)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c41)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520a2)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52fb6)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52469)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5270f)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc529e0)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52ced)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52fb6)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b591)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c41)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52fb6)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53645)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba07)	// 0x02DC, 732
+	eob
 
 l_0xc51486:
 	newline
-	"[06 E2 00 {e(l_0xc51e81)}][06 E3 00 {e(l_0xc51c56)}][06 E9 00 {e(l_0xc51c56)}][06 EA 00 {e(data_01.l_0xc52288)}][06 EB 00 {e(data_10.l_0xc5b807)}][06 EF 00 {e(l_0xc51c56)}][06 F0 00 {e(l_0xc51c56)}][06 F1 00 {e(l_0xc51c56)}][06 F2 00 {e(l_0xc51c56)}][06 F3 00 {e(data_02.l_0xc52ffa)}][06 F5 00 {e(l_0xc51c56)}][06 F8 00 {e(data_02.l_0xc53363)}][06 F9 00 {e(data_02.l_0xc53363)}][06 FA 00 {e(data_02.l_0xc53363)}][06 FB 00 {e(l_0xc51c56)}][06 FC 00 {e(l_0xc51c56)}][06 FE 00 {e(data_02.l_0xc52ffa)}][06 00 01 {e(data_01.l_0xc52288)}][06 01 01 {e(l_0xc51c56)}][06 03 01 {e(l_0xc51c56)}][06 04 01 {e(l_0xc520b9)}][06 07 01 {e(data_02.l_0xc52ffa)}][06 09 01 {e(data_01.l_0xc52485)}][06 0B 01 {e(data_01.l_0xc52732)}][06 0F 01 {e(data_01.l_0xc52a09)}][06 45 01 {e(data_01.l_0xc52d03)}][06 46 01 {e(data_02.l_0xc52ffa)}][06 57 02 {e(data_10.l_0xc5b5b1)}][06 58 02 {e(l_0xc51c56)}][06 8D 02 {e(data_02.l_0xc52ffa)}][06 DB 02 {e(data_02.l_0xc5366d)}][06 DC 02 {e(data_10.l_0xc5ba28)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e81)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c56)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c56)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52288)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b807)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c56)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c56)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c56)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c56)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ffa)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c56)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53363)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53363)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53363)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c56)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c56)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ffa)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52288)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c56)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c56)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520b9)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ffa)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52485)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52732)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a09)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d03)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ffa)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5b1)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c56)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ffa)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5366d)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba28)	// 0x02DC, 732
+	eob
 
 l_0xc51568:
 	newline
-	"[06 E2 00 {e(l_0xc51e95)}][06 E3 00 {e(l_0xc51c6e)}][06 E4 00 {e(data_11.l_0xc5bc23)}][06 E5 00 {e(data_11.l_0xc5bc23)}][06 E6 00 {e(data_11.l_0xc5bb22)}][06 E7 00 {e(data_11.l_0xc5bc23)}][06 E8 00 {e(data_11.l_0xc5bb22)}][06 E9 00 {e(l_0xc51c6e)}][06 EA 00 {e(data_01.l_0xc52299)}][06 EB 00 {e(data_10.l_0xc5b826)}][06 EC 00 {e(data_11.l_0xc5bd49)}][06 ED 00 {e(data_11.l_0xc5c025)}][06 EE 00 {e(data_12.l_0xc5cdc0)}][06 EF 00 {e(l_0xc51c6e)}][06 F0 00 {e(l_0xc51c6e)}][06 F1 00 {e(l_0xc51c6e)}][06 F2 00 {e(l_0xc51c6e)}][06 F3 00 {e(data_02.l_0xc53018)}][06 F4 00 {e(data_11.l_0xc5bb22)}][06 F5 00 {e(l_0xc51c6e)}][06 F6 00 {e(data_13.l_0xc5d178)}][06 F7 00 {e(data_11.l_0xc5c564)}][06 F8 00 {e(data_02.l_0xc5338f)}][06 F9 00 {e(data_02.l_0xc5338f)}][06 FA 00 {e(data_02.l_0xc5338f)}][06 FB 00 {e(l_0xc51c6e)}][06 FC 00 {e(l_0xc51c6e)}][06 FD 00 {e(data_12.l_0xc5c7f1)}][06 FE 00 {e(data_02.l_0xc53018)}][06 FF 00 {e(data_11.l_0xc5bb22)}][06 00 01 {e(data_01.l_0xc52299)}][06 01 01 {e(l_0xc51c6e)}][06 02 01 {e(data_11.l_0xc5bb22)}][06 03 01 {e(l_0xc51c6e)}][06 04 01 {e(l_0xc520cf)}][06 05 01 {e(data_11.l_0xc5bc23)}][06 06 01 {e(data_13.l_0xc5cf1c)}][06 07 01 {e(data_02.l_0xc53018)}][06 08 01 {e(data_11.l_0xc5c2c6)}][06 09 01 {e(data_01.l_0xc5249a)}][06 0A 01 {e(data_11.l_0xc5beb3)}][06 0B 01 {e(data_01.l_0xc52750)}][06 0C 01 {e(data_13.l_0xc5d00c)}][06 0D 01 {e(data_12.l_0xc5cb67)}][06 0E 01 {e(data_12.l_0xc5c916)}][06 0F 01 {e(data_01.l_0xc52a2a)}][06 44 01 {e(data_11.l_0xc5c192)}][06 45 01 {e(data_01.l_0xc52d1e)}][06 46 01 {e(data_02.l_0xc53018)}][06 DE 01 {e(data_11.l_0xc5c025)}][06 55 02 {e(data_12.l_0xc5c6c3)}][06 56 02 {e(data_12.l_0xc5ccca)}][06 57 02 {e(data_10.l_0xc5b5ce)}][06 58 02 {e(l_0xc51c6e)}][06 8D 02 {e(data_02.l_0xc53018)}][06 DB 02 {e(data_02.l_0xc53687)}][06 DC 02 {e(data_10.l_0xc5ba5b)}][06 DD 02 {e(data_12.l_0xc5ca04)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51e95)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c6e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc23)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc23)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb22)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc23)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb22)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51c6e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52299)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b826)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd49)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c025)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdc0)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51c6e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c6e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c6e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c6e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53018)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb22)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51c6e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d178)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c564)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5338f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5338f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5338f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c6e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c6e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7f1)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53018)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb22)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52299)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c6e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb22)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51c6e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520cf)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc23)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf1c)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53018)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2c6)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5249a)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5beb3)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52750)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d00c)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb67)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c916)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a2a)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c192)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d1e)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53018)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c025)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6c3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccca)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5ce)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c6e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53018)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53687)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba5b)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca04)	// 0x02DD, 733
+	eob
 
 l_0xc51700:
 	newline
-	"[06 E2 00 {e(l_0xc51ea9)}][06 E3 00 {e(l_0xc51c87)}][06 E4 00 {e(data_11.l_0xc5bc3c)}][06 E5 00 {e(data_11.l_0xc5bc3c)}][06 E6 00 {e(data_11.l_0xc5bb36)}][06 E7 00 {e(data_11.l_0xc5bc3c)}][06 E8 00 {e(data_11.l_0xc5bb36)}][06 E9 00 {e(l_0xc51c87)}][06 EA 00 {e(data_01.l_0xc522aa)}][06 EB 00 {e(data_10.l_0xc5b84e)}][06 EC 00 {e(data_11.l_0xc5bd59)}][06 ED 00 {e(data_11.l_0xc5c033)}][06 EE 00 {e(data_12.l_0xc5cdd8)}][06 EF 00 {e(l_0xc51c87)}][06 F0 00 {e(l_0xc51c87)}][06 F1 00 {e(l_0xc51c87)}][06 F2 00 {e(l_0xc51c87)}][06 F3 00 {e(data_02.l_0xc53063)}][06 F4 00 {e(data_11.l_0xc5bb36)}][06 F5 00 {e(l_0xc51c87)}][06 F6 00 {e(data_13.l_0xc5d1c7)}][06 F7 00 {e(data_11.l_0xc5c572)}][06 F8 00 {e(data_02.l_0xc533b6)}][06 F9 00 {e(data_02.l_0xc533b6)}][06 FA 00 {e(data_02.l_0xc533b6)}][06 FB 00 {e(l_0xc51c87)}][06 FC 00 {e(l_0xc51c87)}][06 FD 00 {e(data_12.l_0xc5c804)}][06 FE 00 {e(data_02.l_0xc53063)}][06 FF 00 {e(data_11.l_0xc5bb36)}][06 00 01 {e(data_01.l_0xc522aa)}][06 01 01 {e(l_0xc51c87)}][06 02 01 {e(data_11.l_0xc5bb36)}][06 03 01 {e(l_0xc51c87)}][06 04 01 {e(l_0xc520e1)}][06 05 01 {e(data_11.l_0xc5bc3c)}][06 06 01 {e(data_13.l_0xc5cf30)}][06 07 01 {e(data_02.l_0xc53063)}][06 08 01 {e(data_11.l_0xc5c2de)}][06 09 01 {e(data_01.l_0xc524b8)}][06 0A 01 {e(data_11.l_0xc5bec1)}][06 0B 01 {e(data_01.l_0xc52776)}][06 0C 01 {e(data_13.l_0xc5d01e)}][06 0D 01 {e(data_12.l_0xc5cb7b)}][06 0E 01 {e(data_12.l_0xc5c92a)}][06 0F 01 {e(data_01.l_0xc52a5c)}][06 44 01 {e(data_11.l_0xc5c1a7)}][06 45 01 {e(data_01.l_0xc52d38)}][06 46 01 {e(data_02.l_0xc53063)}][06 DE 01 {e(data_11.l_0xc5c033)}][06 55 02 {e(data_12.l_0xc5c6e3)}][06 56 02 {e(data_12.l_0xc5ccea)}][06 57 02 {e(data_10.l_0xc5b5e2)}][06 58 02 {e(l_0xc51c87)}][06 8D 02 {e(data_02.l_0xc53063)}][06 DB 02 {e(data_02.l_0xc536c1)}][06 DC 02 {e(data_10.l_0xc5ba69)}][06 DD 02 {e(data_12.l_0xc5ca10)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51ea9)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c87)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc3c)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc3c)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb36)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc3c)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb36)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51c87)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522aa)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b84e)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd59)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c033)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdd8)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51c87)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c87)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c87)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c87)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53063)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb36)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51c87)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d1c7)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c572)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533b6)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533b6)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533b6)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c87)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c87)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c804)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53063)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb36)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522aa)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c87)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb36)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51c87)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520e1)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc3c)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf30)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53063)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2de)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524b8)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bec1)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52776)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d01e)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb7b)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c92a)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a5c)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c1a7)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d38)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53063)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c033)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6e3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccea)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5e2)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c87)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53063)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536c1)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba69)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca10)	// 0x02DD, 733
+	eob
 
 l_0xc51898:
 	newline
-	"[06 E2 00 {e(l_0xc51eb6)}][06 E3 00 {e(l_0xc51c95)}][06 E9 00 {e(l_0xc51c95)}][06 EA 00 {e(data_01.l_0xc522ba)}][06 EB 00 {e(data_10.l_0xc5b860)}][06 EF 00 {e(l_0xc51c95)}][06 F0 00 {e(l_0xc51c95)}][06 F1 00 {e(l_0xc51c95)}][06 F2 00 {e(l_0xc51c95)}][06 F3 00 {e(data_02.l_0xc53072)}][06 F5 00 {e(l_0xc51c95)}][06 F8 00 {e(data_02.l_0xc533d5)}][06 F9 00 {e(data_02.l_0xc533d5)}][06 FA 00 {e(data_02.l_0xc533d5)}][06 FB 00 {e(l_0xc51c95)}][06 FC 00 {e(l_0xc51c95)}][06 FE 00 {e(data_02.l_0xc53072)}][06 00 01 {e(data_01.l_0xc522ba)}][06 01 01 {e(l_0xc51c95)}][06 03 01 {e(l_0xc51c95)}][06 04 01 {e(l_0xc520f1)}][06 07 01 {e(data_02.l_0xc53072)}][06 09 01 {e(data_01.l_0xc524c5)}][06 0B 01 {e(data_01.l_0xc52788)}][06 0F 01 {e(data_01.l_0xc52a82)}][06 45 01 {e(data_01.l_0xc52d54)}][06 46 01 {e(data_02.l_0xc53072)}][06 57 02 {e(data_10.l_0xc5b5f0)}][06 58 02 {e(l_0xc51c95)}][06 8D 02 {e(data_02.l_0xc53072)}][06 DB 02 {e(data_02.l_0xc536d2)}][06 DC 02 {e(data_10.l_0xc5ba78)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51eb6)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51c95)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, l_0xc51c95)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522ba)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b860)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, l_0xc51c95)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51c95)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51c95)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51c95)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53072)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, l_0xc51c95)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533d5)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533d5)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533d5)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51c95)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51c95)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53072)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522ba)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51c95)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, l_0xc51c95)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520f1)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53072)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524c5)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52788)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a82)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d54)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53072)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5f0)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51c95)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53072)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536d2)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba78)	// 0x02DC, 732
+	eob
 
 l_0xc5197a:
 	newline
-	"[06 E2 00 {e(l_0xc51ec4)}][06 E3 00 {e(l_0xc51ca3)}][06 E4 00 {e(data_11.l_0xc5bc4c)}][06 E5 00 {e(data_11.l_0xc5bc4c)}][06 E6 00 {e(data_11.l_0xc5bb46)}][06 E7 00 {e(data_11.l_0xc5bc4c)}][06 E8 00 {e(data_11.l_0xc5bb46)}][06 E9 00 {e(l_0xc51ca3)}][06 EA 00 {e(data_01.l_0xc522ca)}][06 EB 00 {e(data_10.l_0xc5b86d)}][06 EC 00 {e(data_11.l_0xc5bd62)}][06 ED 00 {e(data_11.l_0xc5c03c)}][06 EE 00 {e(data_12.l_0xc5cdf2)}][06 EF 00 {e(l_0xc51ca3)}][06 F0 00 {e(l_0xc51ca3)}][06 F1 00 {e(l_0xc51ca3)}][06 F2 00 {e(l_0xc51ca3)}][06 F3 00 {e(data_02.l_0xc5307d)}][06 F4 00 {e(data_11.l_0xc5bb46)}][06 F5 00 {e(l_0xc51ca3)}][06 F6 00 {e(data_13.l_0xc5d1ed)}][06 F7 00 {e(data_12.l_0xc5c57b)}][06 F8 00 {e(data_02.l_0xc533e5)}][06 F9 00 {e(data_02.l_0xc533e5)}][06 FA 00 {e(data_02.l_0xc533e5)}][06 FB 00 {e(l_0xc51ca3)}][06 FC 00 {e(l_0xc51ca3)}][06 FD 00 {e(data_12.l_0xc5c80d)}][06 FE 00 {e(data_02.l_0xc5307d)}][06 FF 00 {e(data_11.l_0xc5bb46)}][06 00 01 {e(data_01.l_0xc522ca)}][06 01 01 {e(l_0xc51ca3)}][06 02 01 {e(data_11.l_0xc5bb46)}][06 03 01 {e(l_0xc51ca3)}][06 04 01 {e(l_0xc520fa)}][06 05 01 {e(data_11.l_0xc5bc4c)}][06 06 01 {e(data_13.l_0xc5cf3d)}][06 07 01 {e(data_02.l_0xc5307d)}][06 08 01 {e(data_11.l_0xc5c2e7)}][06 09 01 {e(data_01.l_0xc524d2)}][06 0A 01 {e(data_11.l_0xc5becd)}][06 0B 01 {e(data_01.l_0xc52796)}][06 0C 01 {e(data_13.l_0xc5d02d)}][06 0D 01 {e(data_12.l_0xc5cb88)}][06 0E 01 {e(data_12.l_0xc5c933)}][06 0F 01 {e(data_01.l_0xc52a92)}][06 44 01 {e(data_11.l_0xc5c1be)}][06 45 01 {e(data_01.l_0xc52d5f)}][06 46 01 {e(data_02.l_0xc5307d)}][06 DE 01 {e(data_11.l_0xc5c03c)}][06 55 02 {e(data_12.l_0xc5c6ec)}][06 56 02 {e(data_12.l_0xc5ccf5)}][06 57 02 {e(data_10.l_0xc5b5fe)}][06 58 02 {e(l_0xc51ca3)}][06 8D 02 {e(data_02.l_0xc5307d)}][06 DB 02 {e(data_02.l_0xc536e1)}][06 DC 02 {e(data_10.l_0xc5ba86)}][06 DD 02 {e(data_12.l_0xc5ca1e)}]" eob
+	goto_if_flag(FLG_SHOP_01, l_0xc51ec4)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc51ca3)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc4c)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc4c)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb46)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc4c)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb46)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc51ca3)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522ca)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b86d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd62)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c03c)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdf2)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc51ca3)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc51ca3)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc51ca3)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc51ca3)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc5307d)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb46)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc51ca3)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d1ed)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_12.l_0xc5c57b)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533e5)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533e5)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533e5)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc51ca3)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc51ca3)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c80d)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc5307d)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb46)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522ca)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc51ca3)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb46)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc51ca3)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc520fa)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc4c)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf3d)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc5307d)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2e7)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524d2)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5becd)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52796)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d02d)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb88)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c933)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a92)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c1be)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d5f)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc5307d)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c03c)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6ec)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccf5)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5fe)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc51ca3)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc5307d)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536e1)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba86)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca1e)	// 0x02DD, 733
+	eob
 
 l_0xc51b12:
 	"@Hello there!" linebreak
@@ -444,4 +1429,3 @@ l_0xc521ec:
 l_0xc5222e:
 	"@What can you sell me?" promptw
 	eob
-

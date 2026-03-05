@@ -25,7 +25,6 @@ l_0xc66bc0:
 	title(1, Tracy)
 	"@Hey bro... you're here for the {itemname(PENCIL_ERASER)},| aren't you?" linebreak
 	two_choice_menu("Yes", l_0xc66c15, "No", l_0xc66bf6)
-	goto(l_0xc66bf6)
 
 l_0xc66bf6:
 	"@Oh,| you aren't?" pause(20)
@@ -101,7 +100,6 @@ l_0xc66e40:
 	"@It's not necessary to talk about it tonight." next
 	"@It's late,/| scoot off to bed now." linebreak
 	two_choice_menu("Yes", l_0xc66eca, "No", l_0xc66e9f)
-	goto(l_0xc66e9f)
 
 l_0xc66e9f:
 	"@Oh,| {name(1)}." pause(20)
@@ -197,7 +195,6 @@ l_0xc67237:
 	"@He's driving me nuts." pause(20)
 	"  Are you two friends?" linebreak
 	two_choice_menu("Yes", l_0xc672cc, "No", l_0xc6729b)
-	goto(l_0xc6729b)
 
 l_0xc6729b:
 	"@You're not friends,| but aren't you neighbors?" next
@@ -267,8 +264,9 @@ l_0xc67501:	// Starman Jr. spawns
 	"@YOU'RE NO LONGER A HERO,| BUT JUST A USELESS INSECT." next
 	"@I'LL STOMP YOU HARD!" next
 	window_closeall
-	
-	call(data_23.l_0xc685b4) goto_if_true(data_23.l_0xc683de)
+
+	call(data_23.l_0xc685b4)
+	goto_if_true(data_23.l_0xc683de)
 	pause(1)
 	sprite2_do_mc(43,635)	// 0x2B, 0x027B
 	pause(60)
@@ -302,7 +300,8 @@ l_0xc67763:
 	"@(You understand that you don't need any money for this...)" end
 
 l_0xc6777f:
-	get_item_receiver(-1) goto_if_false(l_0xc67804)
+	get_item_receiver(-1)
+	goto_if_false(l_0xc67804)
 	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy." pause(20)
 	"  You can treat him as one of your items.)" next
@@ -316,7 +315,8 @@ l_0xc6777f:
 
 l_0xc677cc:
 	// Item 0xC5 / 197, Exit mouse
-	hasitem(-1,197) goto_if_false(l_0xc677eb)
+	hasitem(-1,197)
+	goto_if_false(l_0xc677eb)
 	"@(Oh,| you have him already.)" end
 
 l_0xc677eb:
@@ -343,7 +343,8 @@ l_0xc67859:
 	goto(l_0xc67763)
 
 l_0xc678ed:
-	get_item_receiver(-1) goto_if_false(l_0xc67804)
+	get_item_receiver(-1)
+	goto_if_false(l_0xc67804)
 	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy.  You can treat him as one of your items.)" next
 	call(data_36.l_0xc7dccf) wait
@@ -364,7 +365,8 @@ l_0xc67938:
 	goto(l_0xc67763)
 
 l_0xc679cd:
-	get_item_receiver(-1) goto_if_false(l_0xc67804)
+	get_item_receiver(-1)
+	goto_if_false(l_0xc67804)
 	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy. | You can treat him as one of your items.)" next
 	call(data_36.l_0xc7dccf) wait
@@ -487,14 +489,17 @@ l_0xc68017:
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} picked up the receiver." next
 	sound(SND_PHONEPICKUP)	// 11
-	call(data_18.l_0xc63029) eob
+	call(data_18.l_0xc63029)
+	eob
 
 l_0xc6803d:
-	open_wallet
-	hasmoney(1) goto_if_false(l_0xc68077)
+	show_wallet
+	hasmoney(1)
+	goto_if_false(l_0xc68077)
 	get_char_at_pos(1) swap
 	"@{name(0)} picked up the receiver." next
-	takemoney(1) open_wallet
+	takemoney(1)
+	show_wallet
 	sound(SND_PHONEPICKUP)	// 11
 	call(data_18.l_0xc63033)
 	eob
@@ -523,17 +528,21 @@ l_0xc680a6:
 l_0xc680c2:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
 	else { get_inventory_item(0,0) swap }
-	result_is(ATM_CARD) goto_if_true(l_0xc680dc)
+	result_is(ATM_CARD)
+	goto_if_true(l_0xc680dc)
 	"@Nothing happened." end
 
 l_0xc680dc:
-	call(data_18.ATM_Start) eob
+	call(data_18.ATM_Start)
+	eob
 
 l_0xc680e2:
-	call(data_47.l_0xc90000) eob
+	call(data_47.l_0xc90000)
+	eob
 
 l_0xc680e8:
-	call(data_47.l_0xc9008d) eob
+	call(data_47.l_0xc9008d)
+	eob
 
 l_0xc680ee:
 	newline
@@ -545,14 +554,14 @@ l_0xc680f0:
 
 l_0xc680f2:
 	window_closeall
-	"[06 30 01 {e(l_0xc68139)}]"
-	"[1F 1E 10 00 06]"
-	"[1F 15 28 00 2F 00 01]"
-	"[1F 11 07]"
-	"[1F EB 07 06]"
+	goto_if_flag(FLG_DOG_LATER_APPEAR, l_0xc68139)	// 0x0130, 304
+	npc_delete(16,6)	// 0x0010, 0x06
+	sprite2_spawn(40,47,1)	// 0x0028, 0x002F, 0x01
+	party_add(7)	// 0x07
+	hide_char_with_style(7,6)	// 0x07, 0x06
 	wait_movement
-	"[1F 1F 28 00 06]"
-	"[1F EC 07 01]"
+	sprite2_delete(40,6)	// 0x0028, 0x06
+	show_char(7,1)	// 0x07, 0x01
 	music(123)
 	pause(120)
 	pause(60)
@@ -565,13 +574,13 @@ l_0xc680f2:
 	eob
 
 l_0xc68139:
-	"[1F 1E 12 00 06]"
-	"[1F 15 28 00 2F 00 01]"
+	npc_delete(18,6)	// 0x0012, 0x06
+	sprite2_spawn(40,47,1)	// 0x0028, 0x002F, 0x01
 	party_add(7)
-	"[1F EB 07 06]"
+	hide_char_with_style(7,6)	// 0x07, 0x06
 	wait_movement
-	"[1F 1F 28 00 06]"
-	"[1F EC 07 01]"
+	sprite2_delete(40,6)	// 0x0028, 0x06
+	show_char(7,1)	// 0x07, 0x01
 	music(123)
 	pause(120)
 	pause(60)
@@ -584,13 +593,13 @@ l_0xc68139:
 
 l_0xc68174:
 	window_closeall
-	party_add(5)
-	"[1F EB 05 06]"
-	"[06 2D 01 {e(l_0xc681b5)}]"
-	"[1F F1 13 00 2F 00]"
+	party_add(5)	// Add Porky
+	hide_char_with_style(5,6)	// 0x05, 0x06
+	goto_if_flag(FLG_MYHOME_POKEY_APPEAR, l_0xc681b5)	// 0x012D, 301
+	npc_do_mc(19,47)	// 0x0013, 0x002F
 	wait_movement
-	"[1F 1E 13 00 06]"
-	"[1F EC 05 01]"
+	npc_delete(19,6)	// 0x0013, 0x06
+	show_char(5,1)	// 0x05, 0x01
 	music(123)
 	pause(120)
 	pause(60)
@@ -601,10 +610,10 @@ l_0xc68174:
 	eob
 
 l_0xc681b5:
-	"[1F F1 11 00 2F 00]"
+	npc_do_mc(17,47)	// 0x0011, 0x002F
 	wait_movement
-	"[1F 1E 11 00 06]"
-	"[1F EC 05 01]"
+	npc_delete(17,6)	// 0x0011, 0x06
+	show_char(5,1)	// 0x05, 0x01
 	music(123)
 	pause(120)
 	pause(60)
@@ -621,17 +630,17 @@ l_0xc681e6:
 
 l_0xc681eb:
 	newline
-	party_remove(6)	// Remove Pickyy
+	party_remove(6)	// Remove Picky
 	eob
 
 l_0xc681f0:
 	window_closeall
-	party_add(6)
-	"[1F EB 06 06]"
-	"[1F F2 2D 00 30 00]"
+	party_add(6)	// Add Picky
+	hide_char_with_style(6,6)	// 0x06, 0x06
+	sprite2_do_mc(45,48)	// 0x002D, 0x0030
 	wait_movement
-	"[1F 1F 2D 00 06]"
-	"[1F EC 06 01]"
+	sprite2_delete(45,6)	// 0x002D, 0x06
+	show_char(6,1)	// 0x06, 0x01
 	music(123)
 	pause(120)
 	pause(60)
@@ -640,4 +649,3 @@ l_0xc681f0:
 	"@(Picky joins you.)" promptw
 	window_closeall
 	eob
-

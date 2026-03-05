@@ -147,7 +147,7 @@ l_0xc72af8:
 	title(1, Pirkle)
 	"@You beat up the town bullies," next
 	"@punched them out big time,// kicked their butts,// bit their heads off," next
-	"@spit in their eyes," pause(30) " and made them wet their pants." next
+	"@spit in their eyes,|| and made them wet their pants." next
 	"@Then you forced them to promise not to make any more trouble." pause(15)
 	"  Thank you!" next
 	"@What?" pause(15) linebreak
@@ -192,7 +192,7 @@ l_0xc72d6e:
 
 l_0xc72dd0:
 	title(1, Pirkle)
-	"@Hey," pause(30) " what's-your-name!" next
+	"@Hey,|| what's-your-name!" next
 	"@I'm so busy with my election that I don't have time to meet with you." end
 
 l_0xc72e08:
@@ -281,9 +281,9 @@ l_0xc73217:
 
 l_0xc73236:
 	"@Hi!" next
-	"[06 97 02 {e(l_0xc733ee)}]"
-	"[06 FF 01 {e(l_0xc733ee)}]"
-	"[06 59 00 {e(l_0xc73420)}]"
+	goto_if_flag(FLG_ONET_LUCY_CHU, l_0xc733ee)	// 0x0297, 663
+	goto_if_flag(FLG_ITEM_MAP, l_0xc733ee)	// 0x01FF, 511
+	goto_if_flag(FLG_ITEM_MUKUCHI, l_0xc73420)	// 0x0059, 89
 	"@Kids can borrow only maps at this library." next
 	"@Do you want to borrow one?" linebreak
 	two_choice_menu("Yes", l_0xc732e1, "No", l_0xc73296)
@@ -408,12 +408,14 @@ l_0xc736a6:
 	eob
 
 l_0xc736c0:
-	"[19 19 00 00]{swap}{result_is(164)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+	get_inventory_item(0,0)	swap
+	result_is(SHYNESS_BOOK)
+	goto_if_false(data_35.l_0xc7c6b6)
 	"@The truth is,| I like to talk!" next
 	"@Since I'm in a library,| I'm trying to be quiet.  Oh man!" end
 
 l_0xc7370e:
-	"[06 49 00 {e(l_0xc73750)}]"
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc73750)	// 0x0049, 73
 	"@Recently,| I sensed the presence of UFO's flying around..." next
 	"@Or am I just dreaming?" end
 
@@ -422,21 +424,27 @@ l_0xc73750:
 	"@I miss the UFO's and monsters,| 'cause they haven't been around recently." end
 
 l_0xc73796:
-	"[06 03 00 {e(l_0xc737a4)}]"
-	"@.....{wait}{set(flag 3)}" eob
+	goto_if_flag(FLG_TEMP_2, l_0xc737a4)	// 0x0003, 3
+	"@....." wait
+	set(FLG_TEMP_2)	// 3
+	eob
 
 l_0xc737a4:
-	"@Quiet!{wait}{unset(flag 3)}" eob
+	"@Quiet!" wait
+	unset(FLG_TEMP_2)	// 3
+	eob
 
 l_0xc737b0:
-	"[19 19 00 00]{swap}{result_is(164)}[1B 02 {e(data_35.l_0xc7c6b6)}]"
+	get_inventory_item(0,0)	swap
+	result_is(SHYNESS_BOOK)
+	goto_if_false(data_35.l_0xc7c6b6)
 	"@Shh!" pause(15)
 	"  Shh!" next
 	"@You're too loud!" pause(20)
 	"  Try to move around quietly,| Mr. Noisy pants." end
 
 l_0xc737fc:
-	"[06 49 00 {e(l_0xc73849)}]"
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc73849)	// 0x0049, 73
 	"@I'm researching <Giant Step.>" next
 	"@It's located north and west of Onett." next
 	"@I heard it possesses a special power!" end
@@ -462,8 +470,8 @@ l_0xc738b6:
 	"  Well, maybe not...!" end
 
 l_0xc73940:
-	"[06 49 00 {e(l_0xc73ab9)}]"
-	"[06 D2 00 {e(l_0xc73a03)}]"
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc73ab9)	// 0x0049, 73
+	goto_if_flag(FLG_TLPT_TWSN, l_0xc73a03)	// 0x00D2, 210
 	title(1, Lier)
 	"@I'm doing this because I trust you." next
 	"@First,| let's go to the basement." promptw
@@ -478,11 +486,14 @@ l_0xc73940:
 	"@I know you think I'm a big liar but maybe I'll surprise you!" wait
 	window_closeall
 	call(data_16.l_0xc5f639)
-	"{unset(flag 31)}{set(flag 32)}" eob
+	unset(FLG_1FMIZUNO_APPEAR)	// 31
+	set(FLG_B1MIZUNO_APPEAR)	// 32
+	eob
 
 l_0xc73a03:
-	"{counter(1)}"
-	call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc73bcc)}]"
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc73bcc)
 	title(1, Lier)
 	"@I'm doing this because I trust you." next
 	"@First,| let's go to the basement." next
@@ -494,7 +505,7 @@ l_0xc73a03:
 
 l_0xc73ab9:
 	title(1, Lier)
-	"@You're being vain, [1C 01 08]." next
+	"@You're being vain, {stat(8)}." next
 	"@Life is..." pause(20)
 	"  Not that easy." next
 	"@You just saved the Earth from a crisis..." pause(15)
@@ -503,16 +514,10 @@ l_0xc73ab9:
 	"@I live a modest life." pause(20)
 	"  That's the way it should be." next
 	"@Don't you think a real hero is someone like me?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc73b73:
-	"[19 02]No" eob
-
-l_0xc73b78:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc73b9d)} {e(l_0xc73b87)}]" goto(l_0xc73b87)
+	two_choice_menu("Yes", l_0xc73b9d, "No", l_0xc73b87)
 
 l_0xc73b87:
-	"@[1C 01 08]," linebreak
+	"@{stat(8)}," linebreak
 	"@Don't be such a snob!" end
 
 l_0xc73b9d:
@@ -525,36 +530,34 @@ l_0xc73bcc:
 	"@Ignore me for now if you want..." end
 
 l_0xc73c28:
-	"[06 49 00 {e(l_0xc73cfa)}]"
-	"[06 02 00 {e(l_0xc73ca6)}]{counter(1)}"
-	call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc73cb3)}]"
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc73cfa)	// 0x0049, 73
+	goto_if_flag(FLG_TEMP_1, l_0xc73ca6)	// 0x0002, 2
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc73cb3)
 	"@You've grown since I last saw you." pause(20)
 	"  You're beginning to look like a man." next
 	"@You're so cool!" next
 	"@I...| I think I really like you." next
-	"@Well,| you know what I mean.{wait}{set(flag 2)}" eob
+	"@Well,| you know what I mean." wait
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc73ca6:
 	"@You know what I mean." end
 
 l_0xc73cb3:
-	"@Aren't you [1C 01 08]'s new friend?" next
+	"@Aren't you {stat(8)}'s new friend?" next
 	"@How could I tell?" pause(20)
 	"  It's just a feeling!" next
-	"@You might have the feeling that [1C 01 08] is around." end
+	"@You might have the feeling that {stat(8)} is around." end
 
 l_0xc73cfa:
-	"@Hi, [1C 01 08]!" pause(20)
+	"@Hi, {stat(8)}!" pause(20)
 	"  It's starting to get crowded in this hide out." next
 	"@I was considering moving to Beak's Point." next
 	"@What do you think?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc73d4a:
-	"[19 02]No" eob
-
-l_0xc73d4f:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc73d85)} {e(l_0xc73d5e)}]" goto(l_0xc73d5e)
+	two_choice_menu("Yes", l_0xc73d85, "No", l_0xc73d5e)
 
 l_0xc73d5e:
 	"@You're right." pause(30)
@@ -565,9 +568,9 @@ l_0xc73d85:
 	"  Let's build a strong,| sturdy shack." end
 
 l_0xc73db0:
-	"[06 49 00 {e(data_30.l_0xc73e7d)}]"
-	"[06 0D 00 {e(data_30.l_0xc73e2a)}]"
-	"[06 0C 00 {e(data_30.l_0xc73e2a)}]"
+	goto_if_flag(FLG_WIN_GIEGU, data_30.l_0xc73e7d)	// 0x0049, 73
+	goto_if_flag(FLG_POLA_GRFD, data_30.l_0xc73e2a)	// 0x000D, 13
+	goto_if_flag(FLG_POLA, data_30.l_0xc73e2a)	// 0x000C, 12
 	"@I had a dream about you,/| and you were traveling with a cute girl." next
 	"@If the dream comes true,| say hi to her for me." next
 	"@After all,| I'm single..." end

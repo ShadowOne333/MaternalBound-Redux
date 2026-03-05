@@ -97,8 +97,30 @@ def split_ccs_text(text: str) -> str:
                 i = j
                 continue
             j = i
-            while j < n and not line[j].isspace() and line[j] not in '"[{/':
-                j += 1
+            paren_depth = 0
+            while j < n:
+                ch = line[j]
+                if ch == '(':
+                    paren_depth += 1
+                    j += 1
+                elif ch == ')':
+                    paren_depth -= 1
+                    j += 1
+                    if paren_depth <= 0:
+                        break
+                elif ch == '"' and paren_depth > 0:
+                    # quoted string inside parens — consume it whole
+                    j += 1
+                    while j < n:
+                        if line[j] == '\\': j += 2; continue
+                        if line[j] == '"': j += 1; break
+                        j += 1
+                elif ch.isspace() and paren_depth == 0:
+                    break
+                elif ch in '"[{/' and paren_depth == 0:
+                    break
+                else:
+                    j += 1
             tokens.append(line[i:j])
             i = j
         return tokens
@@ -239,6 +261,91 @@ def split_ccs_text(text: str) -> str:
             outputs.append('"' + bg + '"')
         return outputs
 
+
+    def _is_pause(s):
+        """True if s is an unwrapped pause(N) call or {pause(N)}."""
+        return bool(re.match(r'^\{?pause\(\d+\)\}?$', s))
+    
+    def _rebuild_inner_parts(merged_parts):
+        """Convert merged inner segments into output parts.
+
+        - Leading [hex] brackets (before any text): split out as separate quoted items.
+        - Mid-text [hex] brackets (after text has started): keep embedded as {hex}
+          so dehex converts them inline; collect their hex values for a trailing comment.
+        - {pause(N)} followed by two-space text: split point.
+        - {pause(N)} followed by single-space/glued text: keep embedded as {pause(N)}.
+        - {pause(N)} at end / before bracket: stash as separate trailing part.
+        """
+        result = []
+        acc_text   = None   # plain text for current quoted segment
+        acc_pause  = None   # pending pause(N) — not yet committed
+
+        def flush_text():
+            if acc_text is not None:
+                result.append(f'"{acc_text}"')
+
+        def flush_pause():
+            if acc_pause is not None:
+                result.append(acc_pause)
+
+        for idx, ip in enumerate(merged_parts):
+            if ip.startswith('{') and ip.endswith('}'):
+                inner_s = ip[1:-1].strip()
+                u = re.match(r'^[A-Za-z_][A-Za-z0-9_.]*\s*(\([^)]*\))?$', inner_s)
+                unwrapped = inner_s if u else None
+
+                if _is_pause(ip):
+                    next_ip = merged_parts[idx+1] if idx+1 < len(merged_parts) else None
+                    if next_ip is not None and not next_ip.startswith('[') and not next_ip.startswith('{'):
+                        if next_ip.startswith('  '):
+                            # Two-space: split point — stash pause
+                            if acc_pause is not None and acc_text is None:
+                                flush_pause(); acc_pause = None
+                            acc_pause = unwrapped or ip
+                        else:
+                            # Single-space or glued: embed as literal {pause(N)}
+                            if acc_text is None: acc_text = ip
+                            else: acc_text += ip
+                    else:
+                        # End of sequence or followed by bracket: stash as trailing part
+                        if acc_pause is not None and acc_text is None:
+                            flush_pause(); acc_pause = None
+                        acc_pause = unwrapped or ip
+                else:
+                    # Non-pause brace: flush and emit standalone
+                    flush_text(); flush_pause()
+                    acc_text = None; acc_pause = None
+                    result.append(unwrapped if unwrapped else ip)
+
+            elif not ip.startswith('[') and not ip.startswith('{'):
+                if ip.startswith('  ') and acc_pause is not None:
+                    # Two-space continuation: close prev segment
+                    flush_text(); flush_pause()
+                    acc_text = None; acc_pause = None
+                    acc_text = ip
+                else:
+                    if acc_text is None: acc_text = ip
+                    else: acc_text += ip
+            else:
+                # [hex] bracket
+                # Single bytes in [AB]-[CF] are character codes — keep embedded in text
+                single_byte_m = re.match(r'^\[([0-9A-Fa-f]{2})\]$', ip)
+                is_char_code = bool(single_byte_m and
+                    0xAB <= int(single_byte_m.group(1), 16) <= 0xCF)
+                if acc_text is not None or is_char_code:
+                    # Mid-text or character code: keep embedded
+                    if acc_text is None: acc_text = ip
+                    else: acc_text += ip
+                else:
+                    # Leading bracket: split out as separate item
+                    flush_pause()
+                    acc_pause = None
+                    result.append('"' + ip + '"')
+
+        # Flush remainders
+        flush_text(); flush_pause()
+        return result
+
     lines = text.splitlines()
     out_lines = []
     i = 0
@@ -281,6 +388,29 @@ def split_ccs_text(text: str) -> str:
         stripped = line.strip()
         if stripped.endswith(":") and len(stripped.split()) == 1:
             out_lines.append(stripped)
+            i += 1
+            continue
+
+        # Preserve if/else/{/} control-flow lines and their inner content as-is.
+        # Track brace depth: when inside a block, preserve original indentation.
+        if re.match(r'^(if|else)(\s|$)', stripped) or stripped in ('{', '}'):
+            leading = re.match(r'^(\s*)', line).group(1)
+            if not leading: leading = '\t'
+            out_lines.append(leading + stripped)
+            # If this line opens a block, consume all lines until matching }
+            if stripped.endswith('{'):
+                depth = 1
+                i += 1
+                while i < len(lines) and depth > 0:
+                    inner_line = lines[i]
+                    inner_stripped = inner_line.strip()
+                    if inner_stripped.endswith('{'):
+                        depth += 1
+                    elif inner_stripped == '}':
+                        depth -= 1
+                    out_lines.append(inner_line.rstrip())
+                    i += 1
+                continue
             i += 1
             continue
 
@@ -329,12 +459,11 @@ def split_ccs_text(text: str) -> str:
                             merged[-1] = prev + ip
                             continue
                     merged.append(ip)
-                for ip in merged:
-                    if ip.startswith('{') and ip.endswith('}'):
-                        u = unwrap_brace_if_simple(ip)
-                        out_lines.append('\t' + (u if u is not None else ip))
+                for rp in _rebuild_inner_parts(merged):
+                    if rp.startswith('"') and rp.endswith('"'):
+                        out_lines.append('\t' + rp)
                     else:
-                        out_lines.append('\t"' + ip + '"')
+                        out_lines.append('\t' + rp)
                 i += 1
                 continue
             # No special split — emit as-is
@@ -417,7 +546,10 @@ def split_ccs_text(text: str) -> str:
                         parts.append(u)
                         continue
                 consec_pattern = re.compile(r'(?:\{[^\}]*\}|\[[^\]]*\])(?:\s*(?:\{[^\}]*\}|\[[^\]]*\]))+')
-                if consec_pattern.search(inner):
+                starts_bracket_then_text = bool(re.match(r'^\[', inner)) and bool(
+                    re.search(r'\]@', inner))
+                starts_brace_then_text = bool(re.match(r'^\{[^}]+\}@', inner))
+                if consec_pattern.search(inner) or starts_bracket_then_text or starts_brace_then_text:
                     inner_parts = split_consecutive_brackets_and_braces(inner)
                     # Merge any [..] segment back onto the preceding segment when that
                     # preceding segment ends with a plain character (not ] or }).
@@ -445,24 +577,35 @@ def split_ccs_text(text: str) -> str:
                                 merged_parts[-1] = prev + ip
                                 continue
                         merged_parts.append(ip)
-                    rebuilt_parts = []
-                    for ip in merged_parts:
-                        if ip.startswith('{') and ip.endswith('}'):
-                            u = unwrap_brace_if_simple(ip)
-                            rebuilt_parts.append(u if u is not None else ip)
-                        elif ip.startswith('[') and ip.endswith(']'):
-                            rebuilt_parts.append('"' + ip + '"')
-                        else:
-                            rebuilt_parts.append('"' + ip + '"')
-                    parts.extend(rebuilt_parts)
+                    parts.extend(_rebuild_inner_parts(merged_parts))
                     continue
                 else:
-                    # NEW: split trailing hex byte bracket(s) from quoted token when present
+                    inner_parts = split_consecutive_brackets_and_braces(inner)
+                    # Split if: ends with pause(N), OR contains pause(N) before two-space text
+                    needs_split = False
+                    if len(inner_parts) >= 2 and _is_pause(inner_parts[-1]):
+                        needs_split = True
+                    else:
+                        for ki, kp in enumerate(inner_parts):
+                            if (_is_pause(kp) and ki+1 < len(inner_parts)
+                                    and not inner_parts[ki+1].startswith('[')
+                                    and not inner_parts[ki+1].startswith('{')
+                                    and inner_parts[ki+1].startswith('  ')):
+                                needs_split = True; break
+                    # Also split (via _rebuild_inner_parts) if inner contains
+                    # char-code brackets [AB]-[CF] — they must stay embedded.
+                    has_char_code = any(
+                        re.match(r'^\[([0-9A-Fa-f]{2})\]$', kp) and
+                        0xAB <= int(re.match(r'^\[([0-9A-Fa-f]{2})\]$', kp).group(1), 16) <= 0xCF
+                        for kp in inner_parts)
+                    if needs_split or has_char_code:
+                        parts.extend(_rebuild_inner_parts(inner_parts))
+                        continue
+                    # Split trailing single-byte hex brackets
                     split_qs = split_trailing_hex_bytes_from_quoted(tok)
                     if len(split_qs) == 1:
                         parts.append(tok)
                     else:
-                        # keep the first quoted text as one part, append bracket tokens as a single combined part
                         first = split_qs[0]
                         rest = " ".join(split_qs[1:])
                         parts.append(first + " " + rest)
@@ -490,6 +633,13 @@ def split_ccs_text(text: str) -> str:
                 parts.extend(brace_parts)
                 continue
 
+            # If tok is a paren-balanced call containing quoted strings,
+            # emit it as-is — e.g. two_choice_menu("x", ref, "y", ref)
+            if (re.match(r'^[A-Za-z_][A-Za-z0-9_.]*\(', tok)
+                    and tok.endswith(')')
+                    and '"' in tok):
+                parts.append(tok)
+                continue
             split_parts = split_consecutive_brackets_and_braces(tok)
             for sp in split_parts:
                 if sp.startswith('{') and sp.endswith('}'):
@@ -501,13 +651,51 @@ def split_ccs_text(text: str) -> str:
         j = 0
         while j < len(parts):
             p = parts[j]
+
+            # A quoted string may be followed by call(...) + more quoted text:
+            # keep the whole run on one line, e.g. "@(" call(...) " used..." next
             if p.startswith('"') and p.endswith('"') and j + 1 < len(parts):
                 inner = p[1:-1]
                 nxt = parts[j+1]
-
-                if inner and not inner[-1] in (']', '}') \
-                  and re.match(r'^(next|linebreak|newline|swap|\.|@)$', nxt):
-                    combined = '\t' + p + " " + nxt
+                # call(...) between quoted strings — only when arg is a label ref
+                # (contains '.' or 'l_0x'), not plain commands like pause(20)
+                if re.match(r'^[A-Za-z_][A-Za-z0-9_.]*\(', nxt) and re.search(r'[.(](?:data_|l_0x|[A-Za-z_][A-Za-z0-9_]*\.)', nxt):
+                    # peek ahead: is there a quoted string after the call?
+                    k = j + 2
+                    if k < len(parts) and parts[k].startswith('"') and parts[k].endswith('"'):
+                        # accumulate: quoted call quoted [keyword...]
+                        run = [p, nxt, parts[k]]
+                        k += 1
+                        while k < len(parts) and re.match(
+                                r'^(next|linebreak|newline|swap|wait|promptw|end|\.|@)$', parts[k]):
+                            run.append(parts[k])
+                            k += 1
+                        out_lines.append('\t' + ' '.join(run))
+                        j = k
+                        continue
+                # quoted + pause(N) + linebreak-keyword → all on one line
+                if re.match(r'^pause\(\d+\)$', nxt) and j + 2 < len(parts) \
+                  and re.match(r'^(next|linebreak|newline|swap|wait|promptw|end|\.|@)$', parts[j+2]):
+                    out_lines.append('\t' + p + ' ' + nxt + ' ' + parts[j+2])
+                    j += 3
+                    continue
+                # quoted + pause(N) + two-space quoted string (text continuation)
+                # → join pause onto first quoted line only
+                if re.match(r'^pause\(\d+\)$', nxt) and j + 2 < len(parts) \
+                  and parts[j+2].startswith('"  '):
+                    out_lines.append('\t' + p + ' ' + nxt)
+                    j += 2
+                    continue
+                # plain trailing keyword
+                # Allow join even if inner ends with ']' when it's a char-code [AB]-[CF]
+                ends_with_char_code = bool(
+                    inner and re.search(r'\[([A-Ca-c][0-9A-Fa-f]|[A-Fa-f][Bb-fF])\]$', inner)
+                    and re.search(r'\[([0-9A-Fa-f]{2})\]$', inner)
+                    and 0xAB <= int(re.search(r'\[([0-9A-Fa-f]{2})\]$', inner).group(1), 16) <= 0xCF
+                )
+                if inner and (inner[-1] not in (']', '}') or ends_with_char_code) \
+                  and re.match(r'^(next|linebreak|newline|swap|wait|promptw|end|\.|@)$', nxt):
+                    combined = '\t' + p + ' ' + nxt
                     out_lines.append(combined)
                     j += 2
                     continue
@@ -970,9 +1158,10 @@ def _build_call_str(pattern, arg_values, raw_ints, params):
             args_out.append(format_arg(v, typ_hint))
 
     # hotspot_on: 3rd arg (target) is a long address -> format as l_0xNNNNNN
+    # Space before the label arg only, first two args stay comma-only separated.
     if name == 'hotspot_on' and len(raw_ints) == 3 and raw_ints[2] is not None:
         target_val = raw_ints[2] & 0xFFFFFF  # strip the 0x00 high byte
-        args_out[2] = f'l_0x{target_val:x}'
+        return f'hotspot_on({args_out[0]},{args_out[1]}, l_0x{target_val:x})'
 
     # --- Alias / define substitution rules (hardcoded per spec) ---
 
@@ -1083,6 +1272,9 @@ def build_call_text(pattern, arg_values: Dict[str,Any]):
 
     call_str = _build_call_str(pattern, arg_values, raw_ints, params)
     comment  = _hex_comment(pattern, raw_ints)
+    # OSS_on/off: replace byte comment with the full original command form
+    if call_str == 'OSS_on':  comment = '// event(5)'
+    if call_str == 'OSS_off': comment = '// event(6)'
     return call_str, comment
 
 def reconstruct_leftover(bytes_list: List[int], labels: List[Tuple[int,str]], start: int, end: int) -> str:
@@ -1122,24 +1314,44 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
 
         # Check if bracket was inside a quoted token with suffix chars before closing quote.
         # e.g. "[1C 01 12])" next  ->  "{stat(18)})" next
+        # Also handles leading whitespace after the quote: '" [19 02]No"' -> strip the space.
+        before_rstripped = before.rstrip()
         opening_quote_before = (
-            before and before[-1] in ('"', "'") and (len(before) < 2 or before[-2] != '\\')
+            before_rstripped and before_rstripped[-1] in ('"', "'")
+            and (len(before_rstripped) < 2 or before_rstripped[-2] != '\\')
         )
         quoted_suffix = None  # suffix chars between m.end() and closing quote, e.g. ")"
         if opening_quote_before and m.group(1) == '':
-            mqs = re.match(r'^([^"\'\[\]\n]*)["\']', text[m.end():])
+            mqs = re.match(r'^([^"\'\'\[\]\n]*)["\']', text[m.end():])
             if mqs:
                 quoted_suffix = mqs.group(1)
 
-        # Strip the opening quote from before; we re-add quotes around the result below.
+        # Strip the opening quote (and any trailing whitespace before bracket) from before.
         if opening_quote_before:
-            before = before[:-1]
+            before = before_rstripped[:-1]
 
         out_lines.append(before)
 
         inner = m.group(2)
         bytes_list, labels = bytes_from_block_text(inner)
         L = len(bytes_list)
+
+        # Special-character bytes [AB]-[CF] inside text strings must not be
+        # converted to commands — they are font/display character codes.
+        if L == 1 and not labels and 0xAB <= bytes_list[0] <= 0xCF:
+            bracket_str = '[' + format(bytes_list[0], '02X') + ']'
+            if opening_quote_before:
+                # Re-close the quote: before already had its quote stripped;
+                # grab suffix up to next closing quote and re-wrap everything.
+                suffix_m = re.match(r'^([^"\n]*)["]\'?', text[m.end():])
+                suf = suffix_m.group(1) if suffix_m else ''
+                end_skip = suffix_m.end() if suffix_m else 0
+                out_lines.append('"' + before.lstrip('\t') + bracket_str + suf + '"')
+                i = m.end() + end_skip
+            else:
+                out_lines.append(bracket_str)
+                i = m.end()
+            continue
 
         # detect load_str pattern and capture possible tail
         replaced = None
@@ -1365,7 +1577,35 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
     # Only applies when what follows the comment is a plain keyword (e.g. 'next'),
     # not more hex values. e.g. '"{stat(18)})"\t// 0x12 next' -> '"{stat(18)})" next\t// 0x12'
     result = re.sub(r'(\t// 0x[0-9A-Fa-f]+)( [A-Za-z][A-Za-z0-9_]*)(?=\n|$)',
-                    lambda m: m.group(2) + m.group(1), result)
+                    lambda m: m.group(2) + m.group(1)
+                        if not re.match(r'^(pause|sound|wait|eob|end)$', m.group(2).strip())
+                        else m.group(0), result)
+
+
+    # Pause symbol substitution inside quoted strings.
+    # Only replace when the pause is NOT followed by two spaces.
+    # Mapping: pause(30)->||, pause(20)->/|, pause(15)->|, pause(5)->/
+    _PAUSE_SYMBOLS = [
+        (30, '||'),
+        (20, '/|'),
+        (15, '|'),
+        (5,  '/'),
+    ]
+
+    def _subst_pauses_in_quoted(m):
+        content = m.group(0)
+        for val, sym in _PAUSE_SYMBOLS:
+            pat = '{pause(' + str(val) + ')}'
+            # Only replace when NOT followed by two spaces
+            content = re.sub(
+                re.escape(pat) + r'(?!  )',
+                sym,
+                content
+            )
+        return content
+
+    # Apply only inside quoted strings (between double quotes on the same line)
+    result = re.sub(r'"[^"\n]*"', _subst_pauses_in_quoted, result)
 
     # Final cleanup: remove any "eob" line immediately following a load_str line (safety-net)
     result = re.sub(r'(?m)^[ \t]*load_str\(".*?"\)[ \t]*\r?\n[ \t]*eob[ \t]*\r?\n', lambda m: m.group(0).splitlines()[0] + '\n', result, count=0)

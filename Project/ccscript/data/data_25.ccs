@@ -46,15 +46,7 @@ l_0xc6a950:
 	"@I'm just enjoying being with my grandchildren." next
 	"@I'll be better soon." next
 	"@Do you have grandchildren?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6a995:
-	"[19 02]No" eob
-
-l_0xc6a99a:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6a9c8)} {e(l_0xc6a9a9)}]"
-	goto(l_0xc6a9a9)
+	two_choice_menu("Yes", l_0xc6a9c8, "No", l_0xc6a9a9)
 
 l_0xc6a9a9:
 	"@Yes, yes... you seem a little young for that..." end
@@ -143,33 +135,32 @@ l_0xc6ad6e:
 	"@If you buy a pack of bubble gum, you can have the monkey for free." next
 	"@Otherwise,| he will cost you a buck.  So, do you want him?" next
 	show_wallet
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6adf2:
-	" [19 02]No" eob
-
-l_0xc6adf8:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6ae36)} {e(l_0xc6ae07)}]"
-	goto(l_0xc6ae07)
+	two_choice_menu("Yes", l_0xc6ae36, "No", l_0xc6ae07)
 
 l_0xc6ae07:
 	"@You absolutely,| positively should buy him." pause(20)
 	"  You know what I mean?" end
 
 l_0xc6ae36:
-	hasmoney(1) goto_if_false(l_0xc6ae77)
+	hasmoney(1)
+	goto_if_false(l_0xc6ae77)
+
 	if not flag FLG_KEY_ITEMS { get_item_receiver(-1) goto_if_false(l_0xc6aee1) }
+
 	pause(1)
 	takemoney(1)
+
 	if not flag FLG_KEY_ITEMS { give_and_return_location(3, BUBBLE_GUM) }	// 0x68, 104
+
 	store_registers
 	sound(SND_CHICKEN2)	// 118
 	show_wallet
 	"@Thanks!" pause(15)
 	"  The monkey's yours."
+
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BUBBLE_GUM) }
 	else { call(data_36.l_0xc7dcb6) }
+
 	set(FLG_ITEM_BUBBLE_GUM)	// 323
 	end
 
@@ -221,6 +212,7 @@ l_0xc6af8a:
 	"  (Gimme some gum.)" next
 	"@(The monkey got a piece of bubble gum from {name(3)} and blew a bubble!)" promptw
 	window_closeall
+
 	set(FLG_WINS_BMONKEY_DISAPPEAR)	// 334
 	set(FLG_BALLOONMONKEY)	// 22
 	call(data_43.l_0xc880b9)
@@ -230,15 +222,7 @@ l_0xc6af8a:
 l_0xc6afe1:
 	"@I'm the cook for the Tessie-Watching club." next
 	"@How about some stew?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6b012:
-	" [19 02]No" eob
-
-l_0xc6b018:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6b037)} {e(l_0xc6b027)}]"
-	goto(l_0xc6b027)
+	two_choice_menu("Yes", l_0xc6b037, "No", l_0xc6b027)
 
 l_0xc6b027:
 	newline
@@ -256,7 +240,7 @@ l_0xc6b037:
 l_0xc6b063:
 	goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x0E, 14
 	set(FLG_WINS_TASSI_ENTER)	// 344
-	hotspot_on(1, 39, data_57.l_0xc9ae0f)	// 0x01, 0x27, 0x00C9AE0F
+	hotspot_on(1,39, data_57.l_0xc9ae0f)	// 0x01, 0x27, 0x00C9AE0F
 	isset(FLG_BALLOONMONKEY)	// 22
 	goto_if_false(data_55.l_0xc9992f)
 	hotspot_on(2,48, l_0xc6b087)	// 0x02, 0x30, 0x00C6B087
@@ -308,15 +292,7 @@ l_0xc6b18d:
 	"@I'm so glad you're such a healthy boy." next
 	"@Uh, those glasses look good on you." next
 	"@How about a donut?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6b277:
-	" [19 02]No" eob
-
-l_0xc6b27d:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6b2a3)} {e(l_0xc6b28c)}]"
-	goto(l_0xc6b28c)
+	two_choice_menu("Yes", l_0xc6b2a3, "No", l_0xc6b28c)
 
 l_0xc6b28c:
 	"@Ah... fine,| fine." next
@@ -324,19 +300,10 @@ l_0xc6b28c:
 
 l_0xc6b2a3:
 	"@Well, I was only offering...  I'd also like a donut right about now." next
-	goto(l_0xc6b2ca)
 
 l_0xc6b2ca:
 	"@Have you already checked out Stonehenge?" next
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6b2eb:
-	" [19 02]No" eob
-
-l_0xc6b2f1:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6b317)} {e(l_0xc6b300)}]"
-	goto(l_0xc6b300)
+	two_choice_menu("Yes", l_0xc6b317, "No", l_0xc6b300)
 
 l_0xc6b300:
 	"@Well, at least I asked..." next
@@ -344,7 +311,6 @@ l_0xc6b300:
 
 l_0xc6b317:
 	"@Well, at least I asked..." next
-	goto(l_0xc6b329)
 
 l_0xc6b329:
 	"@Mmmm... mmhmm okay." next
@@ -361,7 +327,6 @@ l_0xc6b329:
 	"@The round machine over there is the Sky Walker." next
 	"@What do you think?  Isn't it neat?" pause(20)
 	"  Get in!" next
-	goto(l_0xc6b492)
 
 l_0xc6b492:
 	"@Let's get together again in 10 years or so." wait
@@ -372,7 +337,8 @@ l_0xc6b492:
 l_0xc6b4bb:
 	title(1, Andonuts)
 	get_char_at_pos(1) rtoarg
-	result_is(3) goto_if_true(l_0xc6b4fe)
+	result_is(3)
+	goto_if_true(l_0xc6b4fe)
 	goto_if_flag(FLG_DOSEI_ANDONUT, l_0xc6b516)	// 0x82, 130
 	"@Oh!  You surprised me!" next
 	get_char_at_pos(1) rtoarg
@@ -440,11 +406,13 @@ l_0xc6b75b:
 	"@It shouldn't  break this time..." pause(20)
 	"  Well, maybe..." wait
 	npc_do_mc(623,138)	// 0X026F, 0x008A
-	"[1F F1 6F 02 8A 00]"
 	eob
 
 l_0xc6b7d0:
-	counter(3) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6b871)
+	counter(3)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc6b871)
+
 	title(1, Gauss)
 	"@{name(3)}!" pause(15)
 	"  Long time no see." pause(20)
@@ -561,15 +529,7 @@ l_0xc6bc9b:
 	"@Let's meet again once I have become dungeon man." next
 	set(FLG_WINS_BRICK_BARKER_DISAPPEAR)	// 53
 	"@...Would you like to get a good night's rest?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6bd88:
-	" [19 02]No" eob
-
-l_0xc6bd8e:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6bdab)} {e(l_0xc6bd9d)}]"
-	goto(l_0xc6bd9d)
+	two_choice_menu("Yes", l_0xc6bdab, "No", l_0xc6bd9d)
 
 l_0xc6bd9d:
 	"@You don't want to rest?" end
@@ -602,6 +562,7 @@ kid:
 	get_char_at_pos(1) swap
 	counter(1)
 	goto(kid1)
+
 kid1:
 	inc ctoarg
 	party_size_smaller_than(0) goto_if_true(kid2)
@@ -612,6 +573,7 @@ kid1:
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(kid2)
 	goto(kid1)
+
 kid2:
 	ctoarg swap
 	switch_goto(5)
@@ -621,14 +583,18 @@ kid2:
 		switch_entry(kid5)
 		switch_entry(kid5)
 	eob
+
 kid3:
 	get_char_at_pos(1)
 	result_is(2) goto_if_true(kid_paula)
 	eob //kid
+
 kid_paula:
 	eob //girl
+
 kid4:
 	" kids" eob
+
 kid5:
 	" kids" eob
 
@@ -683,7 +649,7 @@ l_0xc6c059:
 	"  ribbon." next
 	font_normal
 	get_item_receiver(-1) goto_if_false(l_0xc6c081)
-	give_and_return_location(0,220)	// Item 0xDC, 220, Saturn ribbon
+	give_and_return_location(0, SATURN_RIBBON)	// Item 0xDC, 220, Saturn ribbon
 	call(data_36.l_0xc7dccf)
 	wait
 	set(FLG_ITEM_DOSEI_RIBBON)	// 644

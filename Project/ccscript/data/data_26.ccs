@@ -17,728 +17,715 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc6c377:
-    "@I wonder what Tessie thinks of me?" end
+	"@I wonder what Tessie thinks of me?" end
 
 l_0xc6c38c:
-    "@Sebastian, chum,| was abducted!" end
+	"@Sebastian, chum,| was abducted!" end
 
 l_0xc6c3a9:
-    goto_if_flag(FLG_SEBASTIAN_DISAPPEAR, l_0xc6c40b)	// 0x34, 52
-    goto_if_flag(FLG_MASTER_TLPT, l_0xc6c3ea)	// 0x0113, 275
-    "@Tessie may unexpectedly be living in the woods." next
-    "@I personally think so." end
+	goto_if_flag(FLG_SEBASTIAN_DISAPPEAR, l_0xc6c40b)	// 0x34, 52
+	goto_if_flag(FLG_MASTER_TLPT, l_0xc6c3ea)	// 0x0113, 275
+	"@Tessie may unexpectedly be living in the woods." next
+	"@I personally think so." end
 
 l_0xc6c3ea:
-    "@Tessie appeared again today and smiled at me." end
+	"@Tessie appeared again today and smiled at me." end
 
 l_0xc6c40b:
-    "@...It's so shocking..." pause(20)
-    "  He was such a great guy..." end
+	"@...It's so shocking..." pause(20)
+	"  He was such a great guy..." end
 
 l_0xc6c42c:
-    "@I heard a creature called Tessie lives in the southern lake..." next
-    "@I don't believe it!" pause(20)
-    "  I think someone made a model and placed it in the lake." end
+	"@I heard a creature called Tessie lives in the southern lake..." next
+	"@I don't believe it!" pause(20)
+	"  I think someone made a model and placed it in the lake." end
 
 l_0xc6c479:
-    "@I heard a more interesting story than the rumor about Tessie." next
-    "@It's about the Bigfoot at Stonehenge." next
-    "@Many claim to have actually seen them." end
+	"@I heard a more interesting story than the rumor about Tessie." next
+	"@It's about the Bigfoot at Stonehenge." next
+	"@Many claim to have actually seen them." end
 
 l_0xc6c4d5:
-    "@I wonder if the rumor is true" next
-    "@that the center of Stonehenge has an entrance leading someplace." next
-    "@Some day, we should check it out." end
+	"@I wonder if the rumor is true" next
+	"@that the center of Stonehenge has an entrance leading someplace." next
+	"@Some day, we should check it out." end
 
 l_0xc6c52e:
-    "@I'm sleepy." next
-    "@I'll wash my face, brush my teeth, pee and go to bed." end
+	"@I'm sleepy." next
+	"@I'll wash my face, brush my teeth, pee and go to bed." end
 
 l_0xc6c565:
-    "@If you're going outside,| stop by and say hi to Gauss before you leave." next
-    "@He always looks out for the younger students." next
-    "@Gauss is still working hard in the lab downstairs." next
-    "@Anyway, these days there are many dangerous animals wandering around outside." end
+	"@If you're going outside,| stop by and say hi to Gauss before you leave." next
+	"@He always looks out for the younger students." next
+	"@Gauss is still working hard in the lab downstairs." next
+	"@Anyway, these days there are many dangerous animals wandering around outside." end
 
 l_0xc6c606:
-    goto_if_flag(FLG_POLA_1, l_0xc6c63c)	// 0x0F, 15
-    "@The tame animals have become wild." pause(20) linebreak 
-    "  Something evil is going on." end
+	goto_if_flag(FLG_POLA_1, l_0xc6c63c)	// 0x0F, 15
+	"@The tame animals have become wild." pause(20) linebreak 
+	"  Something evil is going on." end
 
 l_0xc6c63c:
-    "@Outside there are many monsters I've never seen before..." next
-    "@I wonder what's happening." next
-    "@You should stay here where it's safe." pause(15)
-    "  We don't mind if you stay." end
+	"@Outside there are many monsters I've never seen before..." next
+	"@I wonder what's happening." next
+	"@You should stay here where it's safe." pause(15)
+	"  We don't mind if you stay." end
 
 l_0xc6c68f:
-    goto_if_flag(FLG_HOTEL_PAPERBOY_APPEAR, l_0xc6c729)	// 0x017F, 383
-    "@So, why don't you rest here for a short while..." pause(15)
-    "  Have something to drink," next
-    "@perhaps some tea?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc6c6d6:
-    " [19 02]No" eob
-
-l_0xc6c6dc:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6c6ec)} {e(l_0xc6c6eb)}]"
-    goto(l_0xc6c6eb)
+	goto_if_flag(FLG_HOTEL_PAPERBOY_APPEAR, l_0xc6c729)	// 0x017F, 383
+	"@So, why don't you rest here for a short while..." pause(15)
+	"  Have something to drink," next
+	"@perhaps some tea?" linebreak
+	two_choice_menu("Yes", l_0xc6c6ec, "No", l_0xc6c6eb)
 
 l_0xc6c6eb:
-    eob
+	eob
 
 l_0xc6c6ec:
-    goto_if_flag(FLG_WINS_DAYBREAK, l_0xc6c720)
-    set(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
-    call(data_49.l_0xc915d6)
-    call(data_49.l_0xc91582)
-    window_open(1)
-    "@Are you feeling much better now?" pause(20)
-    "  Good luck." wait
-    window_closeall
-    eob
+	goto_if_flag(FLG_WINS_DAYBREAK, l_0xc6c720)
+	set(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	window_open(1)
+	"@Are you feeling much better now?" pause(20)
+	"  Good luck." wait
+	window_closeall
+	eob
 
 l_0xc6c720:
-    call(data_49.l_0xc91693)
-    warp(45)	// 0x2D
-    eob
+	call(data_49.l_0xc91693)
+	warp(45)	// 0x2D
+	eob
 
 l_0xc6c729:
-    "@Are you feeling much better now?" pause(20)
-    "  Good luck." end
+	"@Are you feeling much better now?" pause(20)
+	"  Good luck." end
 
 l_0xc6c744:
-    goto_if_flag(FLG_TLPT_FOUR, l_0xc6c77b)	// 0xD6, 214
-    "@There's something..." next
-    "@south of the lake..." next
-    "@it looks like a research building." end
+	goto_if_flag(FLG_TLPT_FOUR, l_0xc6c77b)	// 0xD6, 214
+	"@There's something..." next
+	"@south of the lake..." next
+	"@it looks like a research building." end
 
 l_0xc6c77b:
-    "@It is of course, some sort of lab where they do some high-level scientific research." next
-    "@I get the feeling that it is a very important lab." end
+	"@It is of course, some sort of lab where they do some high-level scientific research." next
+	"@I get the feeling that it is a very important lab." end
 
 l_0xc6c7d9:
-    goto_if_flag(FLG_WIN_GANSEKIMAN, l_0xc6c8dd)	// 0x46, 70
-    goto_if_flag(FLG_ITEM_KOKESHI, l_0xc6c8d3)	// 0x026A, 618
-    "@I've been waiting for you." next
-    "@My master, Apple Kid completed this <Eraser eraser machine.>" next
-    "@While he was calling you, he was kidnapped." pause(20)
-    "  He felt like this...!/!/!/!/!" next
-    "@I was there, but was helpless." pause(15)
-    "  Sorry about that." next
-    "@Anyway, take this machine." next
-    if flag FLG_KEY_ITEMS { give_menu_key_item(ERASER_ERASER) }
-    else {
-    	get_item_receiver(-1) goto_if_false(l_0xc6c8a3)
-    	give_and_return_location(0, ERASER_ERASER)	// Item 0xD2, 210, Eraser eraser
-    	call(data_36.l_0xc7dcb6)
-    }
-    set(FLG_ITEM_KOKESHI)	// 618
-    eob
+	goto_if_flag(FLG_WIN_GANSEKIMAN, l_0xc6c8dd)	// 0x46, 70
+	goto_if_flag(FLG_ITEM_KOKESHI, l_0xc6c8d3)	// 0x026A, 618
+	"@I've been waiting for you." next
+	"@My master, Apple Kid completed this <Eraser eraser machine.>" next
+	"@While he was calling you, he was kidnapped." pause(20)
+	"  He felt like this...!/!/!/!/!" next
+	"@I was there, but was helpless." pause(15)
+	"  Sorry about that." next
+	"@Anyway, take this machine." next
+	if flag FLG_KEY_ITEMS { give_menu_key_item(ERASER_ERASER) }
+	else {
+		get_item_receiver(-1) goto_if_false(l_0xc6c8a3)
+		give_and_return_location(0, ERASER_ERASER)	// Item 0xD2, 210, Eraser eraser
+		call(data_36.l_0xc7dcb6)
+	}
+	set(FLG_ITEM_KOKESHI)	// 618
+	eob
 
 l_0xc6c8a3:
-    "@I think this is an important item." next
-    "@Get rid of something you don't need, and come back for it." end
+	"@I think this is an important item." next
+	"@Get rid of something you don't need, and come back for it." end
 
 l_0xc6c8d3:
-    "@Way to go." end
+	"@Way to go." end
 
 l_0xc6c8dd:
-    "@I've been taking care of this place while waiting for you." next
-    "@I no longer need to stay, since you have arrived..." next
-    "@I'll leave for Saturn Valley as quiet as a mouse." wait
-    unset(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
-    eob
+	"@I've been taking care of this place while waiting for you." next
+	"@I no longer need to stay, since you have arrived..." next
+	"@I'll leave for Saturn Valley as quiet as a mouse." wait
+	unset(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
+	eob
 
 l_0xc6c942:
-    "@It was in Winters that we last met?" next
-    "@I just got here.  Tee tee tee." end
+	"@It was in Winters that we last met?" next
+	"@I just got here.  Tee tee tee." end
 
 l_0xc6c970:
-    goto_if_flag(FLG_WIN_GIEGU, l_0xc6cb14)	// 0x49, 73
-    goto_if_flag(FLG_WINS_TASS_BMONKEY_APPEAR, l_0xc6ca9a)	// 0x0276, 630
-    "@Kyi kya kiko kree." next
-    "@(I saw you once before just for a second..." next
-    "@I'm Monyeki.// You know my fianc[C1].)" next
-    title(1, Monyeki)
-    "@Koo kya keke" linebreak
-    "  (My fianc[C1] loves to chew gum." next
-    "@He went to visit Dr. Andonuts' lab...| but he hasn't returned yet.)" next
-    "@Kye koko kikkya kekra," linebreak
-    "  (I want to go there so I can get him home," next
-    "@but without him, I can't cross Lake Tess.)" next
-    "@Kri kekko kya ko" next
-    "@(I'm really worried that the mad doctor will use him in a crash test.)" end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc6cb14)	// 0x49, 73
+	goto_if_flag(FLG_WINS_TASS_BMONKEY_APPEAR, l_0xc6ca9a)	// 0x0276, 630
+	"@Kyi kya kiko kree." next
+	"@(I saw you once before just for a second..." next
+	"@I'm Monyeki.// You know my fianc[C1].)" next
+	title(1, Monyeki)
+	"@Koo kya keke" linebreak
+	"  (My fianc[C1] loves to chew gum." next
+	"@He went to visit Dr. Andonuts' lab...| but he hasn't returned yet.)" next
+	"@Kye koko kikkya kekra," linebreak
+	"  (I want to go there so I can get him home," next
+	"@but without him, I can't cross Lake Tess.)" next
+	"@Kri kekko kya ko" next
+	"@(I'm really worried that the mad doctor will use him in a crash test.)" end
 
 l_0xc6ca9a:
-    title(1, Monyeki)
-    "@Ku kyo kika." next
-    "@(It's me again, that chewing gum monkey's wife.)" next
-    "@Kako kyuka kre." next
-    "@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next
-    "@Sheesh, what nerve!)" end
+	title(1, Monyeki)
+	"@Ku kyo kika." next
+	"@(It's me again, that chewing gum monkey's wife.)" next
+	"@Kako kyuka kre." next
+	"@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next
+	"@Sheesh, what nerve!)" end
 
 l_0xc6cb14:
-    title(1, Monyeki)
-    "@Kyakkro ki kyokke" linebreak
-    "  (Ah, {name(1)}," next
-    "@my husband has been returning home late these days." pause(20)
-    "  He says he's busy.)" next
-    "@Kya." next
-    "@(I know he's out saving the Earth, but a marriage is also important.)" end
+	title(1, Monyeki)
+	"@Kyakkro ki kyokke" linebreak
+	"  (Ah, {name(1)}," next
+	"@my husband has been returning home late these days." pause(20)
+	"  He says he's busy.)" next
+	"@Kya." next
+	"@(I know he's out saving the Earth, but a marriage is also important.)" end
 
 l_0xc6cb97:
-    window_open(1)
-    title(1, Monyeki)
-    "@Kekye koo kikkro" linebreak
-    "  (Thanks for taking care of my husband the other day...)" next
-    "@(Oh yes, we finally tied the knot...)" next
-    window_closeall
-    pause(30)
-    npc_direction(617,5)	// 0x0269, 5
-    pause(30)
-    window_open(1)
-    title(1, Monyeki)
-    "@Kooki kekye ki!" next
-    "@(Honey, don't just stand there with your mouth open, say hello!)" promptw
-    window_closeall
-    eob
+	window_open(1)
+	title(1, Monyeki)
+	"@Kekye koo kikkro" linebreak
+	"  (Thanks for taking care of my husband the other day...)" next
+	"@(Oh yes, we finally tied the knot...)" next
+	window_closeall
+
+	pause(30)
+	npc_direction(617,5)	// 0x0269, 5
+	pause(30)
+
+	window_open(1)
+	title(1, Monyeki)
+	"@Kooki kekye ki!" next
+	"@(Honey, don't just stand there with your mouth open, say hello!)" promptw
+	window_closeall
+	eob
 
 l_0xc6cc31:
-    npc_direction(617,1)	// 0x0269, 1
-    window_open(1)
-    title(1, Bubble)
-    "@Krikko kyakya" linebreak
-    "  (So...)" next
-    "@Kekroo kyaki" linebreak
-    "  (You passed by a cave north of Stonehenge." next
-    "@Don't you ever wonder what's inside?)" next
-    "@Kikkyo kukru ki" linebreak
-    "  (Can't seem to stop thinking about it!)" next
-    "@Keke kike" linebreak
-    "  (Go and see what's there!)" next
-    "@Kyoke kyakroo koo" linebreak
-    "  (We're going to get out of here." next
-    "@We're still newlyweds, you know..." pause(20)
-    "  Bye-bye!)" wait
-    window_closeall
-    unset(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
-    eob
+	npc_direction(617,1)	// 0x0269, 
+
+	window_open(1)
+	title(1, Bubble)
+	"@Krikko kyakya" linebreak
+	"  (So...)" next
+	"@Kekroo kyaki" linebreak
+	"  (You passed by a cave north of Stonehenge." next
+	"@Don't you ever wonder what's inside?)" next
+	"@Kikkyo kukru ki" linebreak
+	"  (Can't seem to stop thinking about it!)" next
+	"@Keke kike" linebreak
+	"  (Go and see what's there!)" next
+	"@Kyoke kyakroo koo" linebreak
+	"  (We're going to get out of here." next
+	"@We're still newlyweds, you know..." pause(20)
+	"  Bye-bye!)" wait
+	window_closeall
+
+	unset(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
+	eob
 
 l_0xc6cd2a:
-    // Check if Jeff opened any of the gifts/items meant for Tony
-    goto_if_flag(829, l_0xc6cdaf)	// 0x033D, 829
-    goto_if_flag(830, l_0xc6cdaf)	// 0x033E, 830
-    goto_if_flag(831, l_0xc6cdaf)	// 0x033F, 831
-    goto_if_flag(832, l_0xc6cdaf)	// 0x0340, 832
-    goto_if_flag(833, l_0xc6cdaf)	// 0x0341, 833
-    goto_if_flag(834, l_0xc6cdaf)	// 0x0342, 834
-    goto_if_flag(835, l_0xc6cdaf)	// 0x0343, 835
-    "@I'm so sleepy." pause(20)
-    "  Tony's birthday party is tomorrow." next
-    "@I hand decorated and wrapped each cookie to pass out at the party tomorrow." end
+	// Check if Jeff opened any of the gifts/items meant for Tony
+	goto_if_flag(829, l_0xc6cdaf)	// 0x033D, 829
+	goto_if_flag(830, l_0xc6cdaf)	// 0x033E, 830
+	goto_if_flag(831, l_0xc6cdaf)	// 0x033F, 831
+	goto_if_flag(832, l_0xc6cdaf)	// 0x0340, 832
+	goto_if_flag(833, l_0xc6cdaf)	// 0x0341, 833
+	goto_if_flag(834, l_0xc6cdaf)	// 0x0342, 834
+	goto_if_flag(835, l_0xc6cdaf)	// 0x0343, 835
+	"@I'm so sleepy." pause(20)
+	"  Tony's birthday party is tomorrow." next
+	"@I hand decorated and wrapped each cookie to pass out at the party tomorrow." end
 
 l_0xc6cdaf:
-    "@{name(3)},| I can't believe you could do something so nasty..." end
+	"@{name(3)},| I can't believe you could do something so nasty..." end
 
 l_0xc6cdcd:
-    "@Instant Revitalizing Device" next
-    "@(In only a few seconds, this machine fully revitalizes you," next
-    "@just like a good night's sleep.)" promptw
-    call(data_49.l_0xc915f4)
-    music(12)
-    pause(200)
-    music_resume
-    eob
+	"@Instant Revitalizing Device" next
+	"@(In only a few seconds, this machine fully revitalizes you," next
+	"@just like a good night's sleep.)" promptw
+	call(data_49.l_0xc915f4)
+	music(12)
+	pause(200)
+	music_resume
+	eob
 
 l_0xc6ce34:
-    title(1, Andonuts)
-    "@Since our imprisonment is now over," next
-    "@I want to start on the Phase Distorter as soon as possible." next
-    "@...Oh, I should at least thank you, huh?" next
-    "@Thank you." next
-    "@Now, then. Leave everything here to us and hurry forth." wait
-    unset(FLG_WINS_ESCAPE_MOUSE_NG)	// 766
-    eob
+	title(1, Andonuts)
+	"@Since our imprisonment is now over," next
+	"@I want to start on the Phase Distorter as soon as possible." next
+	"@...Oh, I should at least thank you, huh?" next
+	"@Thank you." next
+	"@Now, then. Leave everything here to us and hurry forth." wait
+	unset(FLG_WINS_ESCAPE_MOUSE_NG)	// 766
+	eob
 
 l_0xc6cebc:
-    title(1, Gauss)
-    "@{name(3)} just called." pause(20)
-    "  He's with Dr. Andonuts." next
-    "@The two of them may be able to develop some new scientific theories." next
-    "@You've helped make a beautiful life for everyone..." end
+	title(1, Gauss)
+	"@{name(3)} just called." pause(20)
+	"  He's with Dr. Andonuts." next
+	"@The two of them may be able to develop some new scientific theories." next
+	"@You've helped make a beautiful life for everyone..." end
 
 l_0xc6cf2d:
-    title(1, Tony)
-    "@...{name(3)} doesn't call me." next
-    "@Maybe he thinks I'm too annoying..." next
-    "@But I don't think so." next
-    "@{name(1)}, did you tell him not to call me?" next
-    "@...No, I know you wouldn't do that." next
-    "@If you see {name(3)},| please,| please ask him to call Tony.  Thanks!" end
+	title(1, Tony)
+	"@...{name(3)} doesn't call me." next
+	"@Maybe he thinks I'm too annoying..." next
+	"@But I don't think so." next
+	"@{name(1)}, did you tell him not to call me?" next
+	"@...No, I know you wouldn't do that." next
+	"@If you see {name(3)},| please,| please ask him to call Tony.  Thanks!" end
 
 l_0xc6cfc5:
-    window_open(1)
-    title(1, StarmanDX)
-    "@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
-    "@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
-    "@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
-    "@BUT YOU MUST NOT UNDERESTIMATE US.[03]{window_closeall}" eob
+	window_open(1)
+	title(1, StarmanDX)
+	"@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
+	"@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
+	"@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
+	"@BUT YOU MUST NOT UNDERESTIMATE US.[03]{window_closeall}" eob
 
 l_0xc6d067:
-    "@(Drug Store <Best Friend>)" end
+	"@(Drug Store <Best Friend>)" end
 
 l_0xc6d082:
-    "@*Bloop* *Glub*" linebreak
-    "  Can't...| last...| much...| longer..." end
+	"@*Bloop* *Glub*" linebreak
+	"  Can't...| last...| much...| longer..." end
 
 l_0xc6d0b1:
-    title(1, Apple)
-    "@Next *Bloop*" pause(20) linebreak
-    "  Next *Bloop*|  Room..." end
+	title(1, Apple)
+	"@Next *Bloop*" pause(20) linebreak
+	"  Next *Bloop*|  Room..." end
 
 l_0xc6d0db:
-    "@*Glub*" linebreak
-    "  ...Can't breathe..." end
+	"@*Glub*" linebreak
+	"  ...Can't breathe..." end
 
 l_0xc6d0f0:
-    font_saturn
-    "@Kay-o.| Can" linebreak  
-    "  breathe..." next
-    "@*Bloop*|" linebreak 
-    "  *Bloop*|" linebreak 
-    "  *Bloop*||" linebreak
-    "  Oh, no!" font_normal
-    end
+	font_saturn
+	"@Kay-o.| Can" linebreak  
+	"  breathe..." next
+	"@*Bloop*|" linebreak 
+	"  *Bloop*|" linebreak 
+	"  *Bloop*||" linebreak
+	"  Oh, no!" font_normal
+	end
 
 l_0xc6d133:
-    title(1, Tony)
-    "@Oh, no... *Bloop* *Glub*" pause(20) linebreak
-    "  Can't see anything..." next
-    "@*Bloop* *Glub*" linebreak
-    "  {name(3)}!...| *Bloop*..." next
-    "@Where...| is...| {name(3)}... | *Bloop*" end
+	title(1, Tony)
+	"@Oh, no... *Bloop* *Glub*" pause(20) linebreak
+	"  Can't see anything..." next
+	"@*Bloop* *Glub*" linebreak
+	"  {name(3)}!...| *Bloop*..." next
+	"@Where...| is...| {name(3)}... | *Bloop*" end
 
 l_0xc6d19c:
-    title(1, Fake)
-    goto_if_flag(FLG_TLPT_SUMS, l_0xc6d325)	// 0xD7, 215
-    goto_if_flag(FLG_BOX_RAMA_2, l_0xc6d2e8)	// 0x92, 215
-    "@So, you're a Runaway Brothers fan, huh?" next
-    "@What?" next
-    "@Excuse me?" next
-    "@No, no!" next
-    "@This band owes me a million bucks." next
-    "@If they break their contract,| they'll be in deep doodoo with the police." next
-    "@The police would probably say,| <Hey, you guys!> or something like that..." next
-    "@Unless you're able to pay a million dollars on their behalf?" next
-    "@You'd have to find buried gold," next
-    "@or you would never be able to pay such a huge sum of money." next
-    "@Ho ho ho..." next
-    "@Ho ho ho ho ho ho ho!" wait
-    set(FLG_FOUR_MISSFAKE)	// 607
-    goto_if_flag(FLG_DSRT_SYOZI_1, l_0xc6d2e4)	// 0x89, 137
-    eob
+	title(1, Fake)
+	goto_if_flag(FLG_TLPT_SUMS, l_0xc6d325)	// 0xD7, 215
+	goto_if_flag(FLG_BOX_RAMA_2, l_0xc6d2e8)	// 0x92, 215
+	"@So, you're a Runaway Brothers fan, huh?" next
+	"@What?" next
+	"@Excuse me?" next
+	"@No, no!" next
+	"@This band owes me a million bucks." next
+	"@If they break their contract,| they'll be in deep doodoo with the police." next
+	"@The police would probably say,| <Hey, you guys!> or something like that..." next
+	"@Unless you're able to pay a million dollars on their behalf?" next
+	"@You'd have to find buried gold," next
+	"@or you would never be able to pay such a huge sum of money." next
+	"@Ho ho ho..." next
+	"@Ho ho ho ho ho ho ho!" wait
+	set(FLG_FOUR_MISSFAKE)	// 607
+	goto_if_flag(FLG_DSRT_SYOZI_1, l_0xc6d2e4)	// 0x89, 137
+	eob
 
 l_0xc6d2e4:
-    set(FLG_DSRT_SWITCH)	// 174
-    eob
+	set(FLG_DSRT_SWITCH)	// 174
+	eob
 
 l_0xc6d2e8:
-    "@(Thump, thump!..." linebreak
-    "  thump, thump!" next
-    "@I made so much money, I can hear my heartbeat!)" end
+	"@(Thump, thump!..." linebreak
+	"  thump, thump!" next
+	"@I made so much money, I can hear my heartbeat!)" end
 
 l_0xc6d325:
-    "@Ok?" pause(20)
-    "  Don't forget." next
-    "@Life is money." next
-    "@I've lived that life." next
-    "@You can buy everything but <love,> <friendship> and <exp points.>" end
+	"@Ok?" pause(20)
+	"  Don't forget." next
+	"@Life is money." next
+	"@I've lived that life." next
+	"@You can buy everything but <love,> <friendship> and <exp points.>" end
 
 l_0xc6d37e:
-    get_inventory_item(0,0) swap
-    // Item 0xB6, 182, Diamond
-    result_is(DIAMOND) goto_if_true(l_0xc6d391)
-    goto(data_35.l_0xc7c6b6)
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	// Item 0xB6, 182, Diamond
+	result_is(DIAMOND)
+	goto_if_true(l_0xc6d391)
+	goto(data_35.l_0xc7c6b6)
 
 l_0xc6d391:
-    title(1, Fake)
-    get_char_at_pos(1)
-    get_dir_from_char(0,2,839)	// 0, 2, 0x0347
-    swap store_registers
-    result_is(1) goto_if_true(l_0xc6d4d6)
-    load_registers
-    result_is(2) goto_if_true(l_0xc6d4d6)
-    load_registers
-    result_is(8) goto_if_true(l_0xc6d4d6)
-    take(-1, DIAMOND)	// Item 0xB6, 182, Diamond
-    OSS_on	// special_event(5)
-    sound(SND_CHICKEN2)	// 118
-    get_dir_from_char(839,1,1)	// 0x0347, 1, 0x0001
-    sprite_direction(839,0)	// 0x0347, 0
-    "@Yaaaieeee!!" next
-    // Item 0xB6 / 182 = Diamond
-    "@That that that {itemname(DIAMOND)}... you're going to pay with that {itemname(DIAMOND)}?!" next
-    "@O... o... okay, th... that's fine." pause(20)
-    "  I'll rip up this contract." next
-    "@*rrrrrip!*" next
-    "@Don't tell anyone about the {itemname(DIAMOND)}..." next
-    "@Now the Runaway Brothers are free!" next
-    "@...You should thank me." next
-    "@That {itemname(DIAMOND)} is worth maybe...  MAYBE... $50." next
-    "@So I gave you a bargain." next
-    "@(Thump, thump..." linebreak
-    "  Thump, thump!" next
-    "@I made lots of money...)" wait
-    set(FLG_FOUR_TONZURA_FREE)	// 146
-    set(FLG_FOUR_INFO_D_APPEAR)	// 594
-    goto(data_44.l_0xc88b6d)
+	title(1, Fake)
+	get_char_at_pos(1)
+	get_dir_from_char(0,2,839)	// 0, 2, 0x0347
+
+	swap store_registers
+	result_is(1)
+	goto_if_true(l_0xc6d4d6)
+	load_registers
+	result_is(2)
+	goto_if_true(l_0xc6d4d6)
+	load_registers
+	result_is(8)
+	goto_if_true(l_0xc6d4d6)
+
+	if not FLG_KEY_ITEMS { take(-1, DIAMOND) }	// Item 0xB6, 182, Diamond
+	OSS_on	// special_event(5)
+	sound(SND_CHICKEN2)	// 118
+	get_dir_from_char(839,1,1)	// 0x0347, 1, 0x0001
+	sprite_direction(839,0)	// 0x0347, 0
+	"@Yaaaieeee!!" next
+	// Item 0xB6 / 182 = Diamond
+	"@That that that {itemname(DIAMOND)}... you're going to pay with that {itemname(DIAMOND)}?!" next
+	"@O... o... okay, th... that's fine." pause(20)
+	"  I'll rip up this contract." next
+	"@*rrrrrip!*" next
+	"@Don't tell anyone about the {itemname(DIAMOND)}..." next
+	"@Now the Runaway Brothers are free!" next
+	"@...You should thank me." next
+	"@That {itemname(DIAMOND)} is worth maybe...  MAYBE... $50." next
+	"@So I gave you a bargain." next
+	"@(Thump, thump..." linebreak
+	"  Thump, thump!" next
+	"@I made lots of money...)" wait
+	set(FLG_FOUR_TONZURA_FREE)	// 146
+	set(FLG_FOUR_INFO_D_APPEAR)	// 594
+	goto(data_44.l_0xc88b6d)
 
 l_0xc6d4d5:
-    eob
+	eob
 
 l_0xc6d4d6:
-    "@What, what, what?" next
-    "@I can't tell what it is from this distance." next
-    "@Bring it closer!" end
+	"@What, what, what?" next
+	"@I can't tell what it is from this distance." next
+	"@Bring it closer!" end
 
 l_0xc6d50a:
-    goto_if_flag(FLG_TEMP_8, l_0xc6d642)	// 0x09
-    goto_if_flag(FLG_TEMP_9, l_0xc6d61e)	// 0x0A, 10
-    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6d5ae)	// 0x93, 147
-    get_char_at_pos(1) rtoarg
-    result_is(1) goto_if_true(l_0xc6d561)
-    "@Hey, kid..." next
-    "@This is a restricted area." next
-    "@Back stage is right behind this door." end
+	goto_if_flag(FLG_TEMP_8, l_0xc6d642)	// 0x09
+	goto_if_flag(FLG_TEMP_9, l_0xc6d61e)	// 0x0A, 10
+	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6d5ae)	// 0x93, 147
+
+	get_char_at_pos(1) rtoarg
+	result_is(1)
+	goto_if_true(l_0xc6d561)
+	"@Hey, kid..." next
+	"@This is a restricted area." next
+	"@Back stage is right behind this door." end
 
 l_0xc6d561:
-    "@When {name(1)} arrives,| the Runaway Brothers told me to let him in." next
-    "@So please come in." promptw
-    window_closeall
-    npc_do_mc(840,242)	// 0x0348, 0x00F2
-    wait_movement
-    hide_sprite(840,6)	// 0x0348, 06
-    npc_spawn(841,8,1)	// 0x0349, 0x0008, 01
-    set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
-    set(FLG_TEMP_9)	// 10
-    eob
+	"@When {name(1)} arrives,| the Runaway Brothers told me to let him in." next
+	"@So please come in." promptw
+	window_closeall
+
+	npc_do_mc(840,242)	// 0x0348, 0x00F2
+	wait_movement
+
+	hide_sprite(840,6)	// 0x0348, 06
+	npc_spawn(841,8,1)	// 0x0349, 0x0008, 01
+
+	set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc6d5ae:
-    "@Ah, you're a friend of the Runaway Brothers.." next
-    "@Did you come to see Miss Venus?" pause(20)
-    "  Come inside quickly." next
-    "@Don't let the other fans see you enter." promptw
-    window_closeall
-    npc_do_mc(840,242)	// 0x0348, 0x00F2
-    wait_movement
-    hide_sprite(840,6)	// 0x0348, 06
-    npc_spawn(841,8,1)	// 0x0349, 0x0008, 01
-    set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
-    set(FLG_TEMP_8)	// 9
-    eob
+	"@Ah, you're a friend of the Runaway Brothers.." next
+	"@Did you come to see Miss Venus?" pause(20)
+	"  Come inside quickly." next
+	"@Don't let the other fans see you enter." promptw
+	window_closeall
+
+	npc_do_mc(840,242)	// 0x0348, 0x00F2
+	wait_movement
+
+	hide_sprite(840,6)	// 0x0348, 06
+	npc_spawn(841,8,1)	// 0x0349, 0x0008, 01
+
+	set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
+	set(FLG_TEMP_8)	// 9
+	eob
 
 l_0xc6d61e:
-    "@If {name(1)} arrives,| the Runaway Brothers told me to let him in." promptw
-    eob
+	"@If {name(1)} arrives,| the Runaway Brothers told me to let him in." promptw
+	eob
 
 l_0xc6d642:
-    "@Ah, you're a friend of the Runaway Brothers?" next
-    "@Did you come to see Miss Venus?" pause(20)
-    "  Come inside quickly." next
-    "@Don't let the other fans see you enter." promptw
-    eob
+	"@Ah, you're a friend of the Runaway Brothers?" next
+	"@Did you come to see Miss Venus?" pause(20)
+	"  Come inside quickly." next
+	"@Don't let the other fans see you enter." promptw
+	eob
 
 l_0xc6d695:
-    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6d642)	// 0x93, 147
-    goto(l_0xc6d61e)
+	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6d642)	// 0x93, 147
+	goto(l_0xc6d61e)
 
 l_0xc6d6a1:
-    title(1, Venus)
-    goto_if_flag(FLG_TEMP_9, l_0xc6d822)	// 0x0A, 10
-    goto_if_flag(FLG_ITEM_BANANA, l_0xc6d7b3)	// 0x5B, 91
-    goto_if_flag(FLG_FOUR_KOMORITA, l_0xc6d707)	// 0x8C, 140
-    "@Oh, you're just a little kid." next
-    "@I'm kinda busy right now to give you my autograph." next
-    "@Maybe next time, little " get_char_at_pos(1) result_is(2) goto_if_true(l_0xc6d702) "man." end
+	title(1, Venus)
+	goto_if_flag(FLG_TEMP_9, l_0xc6d822)	// 0x0A, 10
+	goto_if_flag(FLG_ITEM_BANANA, l_0xc6d7b3)	// 0x5B, 91
+	goto_if_flag(FLG_FOUR_KOMORITA, l_0xc6d707)	// 0x8C, 140
+	"@Oh, you're just a little kid." next
+	"@I'm kinda busy right now to give you my autograph." next
+	"@Maybe next time, little " get_char_at_pos(1) result_is(2) goto_if_true(l_0xc6d702) "man." end
 
 l_0xc6d702:
-    "girl." end
+	"girl." end
 
 l_0xc6d707:
-    "@Oh, you want an autograph?" next
-    "@Okay,| I'll give you my autograph on this banana peel..." next
-    pause(20)
-    "@Here you go." next
-    if flag FLG_KEY_ITEMS { give_menu_key_item(SIGNED_BANANA) }
-    else {
-    	get_item_receiver(-1) goto_if_false(l_0xc6d786)
-    	give_and_return_location(0, SIGNED_BANANA)	// Item 0xB7, 183, Signed Banana
-    	call(data_36.l_0xc7dcb6)
-    }
-    next
-    "@Oh, and this is a bonus..." next
-    "@Smooch!" wait
-    window_closeall
-    set(FLG_ITEM_BANANA)	// 91
-    set(FLG_TEMP_9)	// 10
-    eob
+	"@Oh, you want an autograph?" next
+	"@Okay,| I'll give you my autograph on this banana peel..." next
+	pause(20)
+	"@Here you go." next
+	if flag FLG_KEY_ITEMS { give_menu_key_item(SIGNED_BANANA) }
+	else {
+		get_item_receiver(-1) goto_if_false(l_0xc6d786)
+		give_and_return_location(0, SIGNED_BANANA)	// Item 0xB7, 183, Signed Banana
+		call(data_36.l_0xc7dcb6)
+	}
+	next
+	"@Oh, and this is a bonus..." next
+	"@Smooch!" wait
+	window_closeall
+	set(FLG_ITEM_BANANA)	// 91
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc6d786:
-    "@Oh, uh huh..." next
-    "@I can't give you the banana 'cause you have too much stuff." end
+	"@Oh, uh huh..." next
+	"@I can't give you the banana 'cause you have too much stuff." end
 
 l_0xc6d7b3:
-    goto_if_flag(FLG_FOUR_VENUS_ENCORE, l_0xc6d852)	// 0x02A8, 680
-    "@Oh, you again..." next
-    "@Look, I'm a little busy right now." next
-    "@I'll give you an autograph next time." next
-    "@Are you here to see my show?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc6d803:
-    "[19 02]No" eob
-
-l_0xc6d808:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6d84b)} {e(l_0xc6d817)}]"
-    goto(l_0xc6d817)
+	goto_if_flag(FLG_FOUR_VENUS_ENCORE, l_0xc6d852)	// 0x02A8, 680
+	"@Oh, you again..." next
+	"@Look, I'm a little busy right now." next
+	"@I'll give you an autograph next time." next
+	"@Are you here to see my show?" linebreak
+	two_choice_menu("Yes", l_0xc6d84b, "No", l_0xc6d817)
 
 l_0xc6d817:
-    "@...Oh, I see." next
-    goto(l_0xc6d822)
+	"@...Oh, I see." next
 
 l_0xc6d822:
-    "@Looks like you aren't too busy." pause(20)
-    "  Make yourself at home for a while." end
+	"@Looks like you aren't too busy." pause(20)
+	"  Make yourself at home for a while." end
 
 l_0xc6d84b:
-    "@Okay." next
-    goto(l_0xc6d852)
+	"@Okay." next
 
 l_0xc6d852:
-    "@...Then, you should give me a big hand." wait
-    set(FLG_FOUR_VENUS_ENCORE)	// 680
-    eob
+	"@...Then, you should give me a big hand." wait
+	set(FLG_FOUR_VENUS_ENCORE)	// 680
+	eob
 
 l_0xc6d86d:
-    title(1, Nice)	// Fatty guy
-    "@Again, we've been cheated by the theater owner." next
-    "@We're stuck here with a phony contract.  Oh yeah!" end
+	title(1, Nice)	// Fatty guy
+	"@Again, we've been cheated by the theater owner." next
+	"@We're stuck here with a phony contract.  Oh yeah!" end
 
 l_0xc6d8af:
-    title(1, Nice)	// Fatty guy
-    "@Once again, I've made trouble for you." next
-    "@This is it... we'll stop being so naive..." next
-    "@But right now,| our fans are waiting for us." next
-    "@We'll sing one more song before we go." next
-    "@Ready?" next
-    "@Okay, let's go!" pause(15) linebreak
-    "  Thanks, boogie boy!" promptw
-    eob
+	title(1, Nice)	// Fatty guy
+	"@Once again, I've made trouble for you." next
+	"@This is it... we'll stop being so naive..." next
+	"@But right now,| our fans are waiting for us." next
+	"@We'll sing one more song before we go." next
+	"@Ready?" next
+	"@Okay, let's go!" pause(15) linebreak
+	"  Thanks, boogie boy!" promptw
+	eob
 
 l_0xc6d93f:
-    title(1, Groovy)	// Bass guy
-    "@We know how to sing but we don't know how to handle money or women." next
-    "@[AC] Do-wap, do do wop. [AC]" end
+	title(1, Groovy)	// Bass guy
+	"@We know how to sing but we don't know how to handle money or women." next
+	"@[AC] Do-wap, do do wop. [AC]" end
 
 l_0xc6d97a:
-    title(1, Okay)	// Drum guy
-    "@We owe you guys so much." next
-    "@Sorry." end
+	title(1, Okay)	// Drum guy
+	"@We owe you guys so much." next
+	"@Sorry." end
 
 l_0xc6d993:
-    title(1, Lucky)	// Skinny guy
-    "@We're so helpless." next
-    "@Really helpless, and hopeless..." linebreak
-    "  Hyuk hyuk hyuk." end
+	title(1, Lucky)	// Skinny guy
+	"@We're so helpless." next
+	"@Really helpless, and hopeless..." linebreak
+	"  Hyuk hyuk hyuk." end
 
 l_0xc6d9ca:
-    title(1, Gorgeous)	// Sax guy
-    "@To meet Geldegarde Monotoly," next
-    "@you'll need our help." next
-    "@I don't exactly know why... it's just a musician's hunch." end
+	title(1, Gorgeous)	// Sax guy
+	"@To meet Geldegarde Monotoly," next
+	"@you'll need our help." next
+	"@I don't exactly know why... it's just a musician's hunch." end
 
 l_0xc6da0b:
-    "@Do you wanna buy a ticket?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc6da23:
-    "[19 02]No" eob
-
-l_0xc6da28:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6da3f)} {e(l_0xc6da37)}]"
-    goto(l_0xc6da37)
+	"@Do you wanna buy a ticket?" linebreak
+	two_choice_menu("Yes", l_0xc6da3f, "No", l_0xc6da37)
 
 l_0xc6da37:
-    "@Please come again." end
+	"@Please come again." end
 
 l_0xc6da3f:
-    "@30 bucks, please." linebreak
-    open_wallet
-    // two_choice_menu
-    "[19 02]Yes" eob
-
-l_0xc6da54:
-    "[19 02]No" eob
-
-l_0xc6da59:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc6da6d)} {e(l_0xc6da37)}]"
-    goto(l_0xc6da37)
+	"@30 bucks, please." linebreak
+	open_wallet
+	two_choice_menu("Yes", l_0xc6da6d, "No", l_0xc6da37)
+	goto(l_0xc6da37)
 
 l_0xc6da6d:
-    if not flag FLG_KEY_ITEMS {
-	get_item_receiver(-1)
-	goto_if_false(l_0xc6daa0)
-    }
-    store_registers
-    cannot_take_money(30)	// 0x0000001E
-    goto_if_true(l_0xc6dac0)
-    sound(SND_CHICKEN2) pause(1)	// Sound 118
-    takemoney(30)	// 001E
-    open_wallet
-    "@Thanks a lot." wait
-    sound(SND_BOXTAKE)	// 116
-    load_registers
-    if flag FLG_KEY_ITEMS { give_menu_key_item(SOUND_STONE) }
-    else { give_and_return_location(0, SHOW_TICKET) }	// 178, 0xB2
-    eob
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6daa0)
+	}
+	store_registers
+	hasmoney(30)	// 0x0000001E
+	goto_if_false(l_0xc6dac0)
+	sound(SND_CHICKEN2)	// 118
+	pause(1)
+	takemoney(30)	// 0x1E
+	open_wallet
+	"@Thanks a lot." wait
+	sound(SND_BOXTAKE)	// 116
+	load_registers
+	if flag FLG_KEY_ITEMS { give_menu_key_item(SHOW_TICKET) }
+	else { give_and_return_location(0, SHOW_TICKET) }	// 178, 0xB2
+	eob
 
 l_0xc6daa0:
-    "@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." end
+	"@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." end
 
 l_0xc6dac0:
-    "@I'm sorry sir..." next
-    sprite_direction(921,7)	// 0399, 7
-    "@We don't just give away the tickets... you must pay 30 dollars." end
+	"@I'm sorry sir..." next
+	sprite_direction(921,7)	// 0399, 7
+	"@We don't just give away the tickets... you must pay 30 dollars." end
 
 l_0xc6daf5:
-    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
-    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6db0a)	// 0x93, 147
-    goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
-    goto(l_0xc6db0a)
+	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6db0a)	// 0x93, 147
+	goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
+	goto(l_0xc6db0a)
 
 l_0xc6db0a:
-    if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET
-    {
-        goto(l_0xc6dc0c)
-    }
-    else
-    {
-        get_dir_from_char(-1,2,849)	// FF, 2, 0351
-        call(data_36.l_0xc7dc9b)
-        goto_if_false(l_0xc6dbae)
-        "@Please have your tickets ready..." end
-        goto(l_0xc6db2e)
-    }
-    eob
+	if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET
+	{
+	    goto(l_0xc6dc0c)
+	}
+	else
+	{
+	    get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	    call(data_36.l_0xc7dc9b)
+	    goto_if_false(l_0xc6dbae)
+	    "@Please have your tickets ready..." end
+	    goto(l_0xc6db2e)
+	}
+	eob
 
 l_0xc6db2e:
-    goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6dbd5)	// 0x93, 147
-    "@Boys and girls, ladies and gents... this is a very special show," next
-    "@the final Runaway Brothers show here at the Topollo!" next
-    "@Please, please, please don't miss this once in a lifetime chance to see their show." end
+	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6dbd5)	// 0x93, 147
+	"@Boys and girls, ladies and gents... this is a very special show," next
+	"@the final Runaway Brothers show here at the Topollo!" next
+	"@Please, please, please don't miss this once in a lifetime chance to see their show." end
 
 l_0xc6dbae:
-    "@Oh, hi." wait
-    window_closeall
-    call(data_44.l_0xc88988)
-    set(FLG_TEMP_1)	// 2
-    eob
+	"@Oh, hi." wait
+	window_closeall
+	call(data_44.l_0xc88988)
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc6dbbf:
-    "@Are you enjoying yourself?" end
+	"@Are you enjoying yourself?" end
 
 l_0xc6dbce:
-    goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
-    goto(l_0xc6dbd5)
+	goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
 
 l_0xc6dbd5:
-    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
-    store_registers
-    load_registers
-    if flag FLG_KEY_ITEMS { swap get_action_arg }
-    else { get_inventory_item(0,0) swap }
-    store_registers
-    result_is(SHOW_TICKET)	// 178
-    goto_if_true(l_0xc6dc0c)
-    get_dir_from_char(-1,2,849)	// FF, 2, 0351
-    call(data_36.l_0xc7dc9b)
-    goto_if_false(l_0xc6dbae)
-    "@No kidding..." end
+	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+	store_registers
+	load_registers
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	store_registers
+	result_is(SHOW_TICKET)	// 178
+	goto_if_true(l_0xc6dc0c)
+	get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	call(data_36.l_0xc7dc9b)
+	goto_if_false(l_0xc6dbae)
+	"@No kidding..." end
 
 l_0xc6dc0c:
-    get_dir_from_char(-1,2,849)	// FF, 2, 0351
-    call(data_36.l_0xc7dc9b)
-    goto_if_false(l_0xc6dbae)
-    goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
-    if not flag FLG_KEY_ITEMS { take(-1, SHOW_TICKET) }	// 178
-    goto(useshowticket)
+	get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	call(data_36.l_0xc7dc9b)
+	goto_if_false(l_0xc6dbae)
+	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
+	if not flag FLG_KEY_ITEMS { take(-1, SHOW_TICKET) }	// 178
+	goto(useshowticket)
 
 useshowticket:
-    sound(SND_CHICKEN2)	// 118
-    pause(1)
-    "@Thanks a lot." next
-    "@Please hurry." pause(20)
-    "  The show will be starting at any moment." wait
-    window_closeall
-    call(data_44.l_0xc8897f)
-    set(FLG_TEMP_1)	// 2
-    eob
+	sound(SND_CHICKEN2)	// 118
+	pause(1)
+	"@Thanks a lot." next
+	"@Please hurry." pause(20)
+	"  The show will be starting at any moment." wait
+	window_closeall
+	call(data_44.l_0xc8897f)
+	set(FLG_TEMP_1)	// 2
+	set(FLG_SHOW_TICKET_TAKEN)	// Flag set for Key items
+	eob
 
 l_0xc6dc62:
-    "@Thanks a lot." next
-    "@Please hurry." pause(20)
-    "  The show will be starting at any moment." end
+	"@Thanks a lot." next
+	"@Please hurry." pause(20)
+	"  The show will be starting at any moment." end
 
 l_0xc6dc8d:
-    call(data_13.l_0xc5d3dd) eob
+	call(data_13.l_0xc5d3dd) eob
 
 l_0xc6dc93:
-    "@This city's baked goods have an exquisite, metropolitan delectableness." next
-    "@To tell you the truth,/| I'm the owner of this bakery." end
+	"@This city's baked goods have an exquisite, metropolitan delectableness." next
+	"@To tell you the truth,/| I'm the owner of this bakery." end
 
 l_0xc6dce7:
-    title(1, Pettenella)
-    "@I was thinking <There's a tight wad born every minute...>" end
+	title(1, Pettenella)
+	"@I was thinking <There's a tight wad born every minute...>" end
 
 l_0xc6dd0a:
-    get_inventory_item(0,0) swap
-    result_is(187)	// Contact lens
-    goto_if_true(l_0xc6dd1d)
-    goto(data_35.l_0xc7c6b6)
+	get_inventory_item(0,0) swap
+	result_is(CONTACT_LENS)	// Contact lens
+	goto_if_true(l_0xc6dd1d)
+	goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
-    title(1, Pettenella)
-    "@What?" next
-    // Item 0xBB / 187, Contact lens
-    "@You came to deliver my grandma's memento, the {itemname(187)}?!" next
-    "@Thank you." next
-    "@Thank you so/o/o{pause(1)}o{pause(1)}o much!" next
-    "@It's our family tradition to keep things forever." next
-    "@...Okay, I'll give you something as a reward." next
-    "@Here's my socks that I use only for special occasions." next
-    "@I've worn these socks for just five years." next
-    "@There are no holes, and they've only been worn once since the last washing." next
-    "@They stink a little... but they're still good." next
-    "@Hey, don't refuse me here... I'm being generous!" next
-    sound(SND_BOXTAKE)	// 116
-    take(-1,187)	// FF, Item 0xBB / 187, Contact lens
-    get_item_receiver(-1)
-    give_and_return_location(-1,152)	// item 0x98, 152, Pettenella's socks
-    call(data_36.l_0xc7dccf) next
-    "@Please take good care of my socks... *sniff!*" wait
-    set(FLG_FOUR_PETENERA)	// 736
-    eob
+	title(1, Pettenella)
+	"@What?" next
+	// Item 0xBB / 187, Contact lens
+	"@You came to deliver my grandma's memento, the {itemname(CONTACT_LENS)}?!" next
+	"@Thank you." next
+	"@Thank you so/o/o{pause(1)}o{pause(1)}o much!" next
+	"@It's our family tradition to keep things forever." next
+	"@...Okay, I'll give you something as a reward." next
+	"@Here's my socks that I use only for special occasions." next
+	"@I've worn these socks for just five years." next
+	"@There are no holes, and they've only been worn once since the last washing." next
+	"@They stink a little... but they're still good." next
+	"@Hey, don't refuse me here... I'm being generous!" next
+	sound(SND_BOXTAKE)	// 116
+	take(-1,CONTACT_LENS)	// FF, Item 0xBB / 187, Contact lens
+	get_item_receiver(-1)
+	give_and_return_location(-1,PETTENELLAS_SOCKS)	// item 0x98, 152, Pettenella's socks
+	call(data_36.l_0xc7dccf) next
+	"@Please take good care of my socks... *sniff!*" wait
+	set(FLG_FOUR_PETENERA)	// 736
+	eob
 
 l_0xc6de7b:
-    goto_if_flag(FLG_TEMP_9, data_27.l_0xc6df35)	// Flag 10, 0x0A
-    goto_if_flag(FLG_FOUR_OK, data_27.l_0xc6df43)	// 0x8F, 143
-    "@This elevator is only for Master Porky's use." next
-    "@It goes directly to the 47th floor." next
-    "@Quit staring at my butt..." next
-    "@Why don't you stand somewhere else instead of behind me?" promptw
-    goto(data_27.l_0xc6defa)
+	goto_if_flag(FLG_TEMP_9, data_27.l_0xc6df35)	// Flag 10, 0x0A
+	goto_if_flag(FLG_FOUR_OK, data_27.l_0xc6df43)	// 0x8F, 143
+	"@This elevator is only for Master Porky's use." next
+	"@It goes directly to the 47th floor." next
+	"@Quit staring at my butt..." next
+	"@Why don't you stand somewhere else instead of behind me?" promptw
+	goto(data_27.l_0xc6defa)

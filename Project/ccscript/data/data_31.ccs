@@ -56,7 +56,6 @@ l_0xc755c4:
 	title(1, Mom)
 	"@Did you finish doing everything that you wanted to?" next
 	two_choice_menu("Yes", l_0xc7562f, "No", l_0xc755fb)
-	goto(l_0xc755fb)
 
 l_0xc755fb:
 	"@You'd better do everything,| because once you start looking at the album," next
@@ -76,7 +75,6 @@ l_0xc7562f:
 	sprite2_spawn(2,781,1)	// 0002, 030D, 1
 	pause(1)
 	sprite2_do_mc(2,10)	// 0002, 000A
-	goto(l_0xc75695)
 
 l_0xc75695:	// Ending trigger
 	hide_char(1)	// 1, 6
@@ -129,7 +127,6 @@ l_0xc7579e:
 	title_dog(1)
 	"@(Do you want me to go with you?)" linebreak
 	two_choice_menu("Yes", l_0xc757fb, "No", l_0xc757cd)
-	goto(l_0xc757cd)
 
 l_0xc757cd:
 	"@(Oh,// I get it." pause(20)
@@ -169,7 +166,6 @@ l_0xc758cc:
 
 l_0xc75909:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc75b0f)	// 0x49, 7
-	goto(l_0xc75910)
 
 l_0xc75910:
 	unset(FLG_SYS_PHONE_MYHOME)	// 200
@@ -178,11 +174,10 @@ l_0xc75910:
 	goto_if_flag(FLG_MYHOME_PHONE, l_0xc75936)	// 0x5F, 95
 	sound(SND_PHONEPICKUP)	// 11
 	pause(20)
-	goto(l_0xc75929)
 
 l_0xc75929:
-	sound(SND_PHONEPICKUP)	// 11
 	"@Beeeep..." wait
+	sound(SND_PHONEPICKUP)	// 11
 	eob
 
 l_0xc75936:
@@ -284,13 +279,11 @@ l_0xc75c33:
 	"@You're my bestest friend." pause(20)
 	"  Won't YOU help me find Picky?" next
 	two_choice_menu("Yes", l_0xc75ebc, "No", l_0xc75e1c)
-	goto(l_0xc75e1c)
 
 l_0xc75e1c:
 	"@If you refuse me,| I'll say something that'll cut you like a knife." next
 	"@Will you come with me?" linebreak
 	two_choice_menu("Yes", l_0xc75ebc, "No", l_0xc75e6d)
-	goto(l_0xc75e6d)
 
 l_0xc75e6d:
 	"@Okay, okay... I won't say anything to hurt you." next
@@ -329,7 +322,7 @@ l_0xc75f73:
 	goto_if_true(l_0xc760b7)
 	goto_if_flag(805, l_0xc75fb6)	// 0x0325, 805, Cracked bat taken
 	"@You're not taking anything on our big adventure?" next
-	"@Why don't you look around for your {itemname(17)} or something?" end
+	"@Why don't you look around for your {itemname(CRACKED_BAT)} or something?" end
 
 l_0xc75fb6:
 	title(1, Porky)
@@ -339,7 +332,6 @@ l_0xc75fb6:
 	" but you should equip your weapon!" next
 	"@Do you know what <equip> means?" linebreak
 	two_choice_menu("Yes", l_0xc76080, "No", l_0xc7601a)
-	goto(l_0xc7601a)
 
 l_0xc7601a:
 	"@It means <use> or <wear.>" next
@@ -351,7 +343,6 @@ l_0xc7601a:
 l_0xc76080:
 	"@Okay,| that's good." pause(20)
 	"  Be sure to pay attention to details like that." next
-	goto(l_0xc760b7)
 
 l_0xc760b7:
 	title(1, Porky)
@@ -378,15 +369,14 @@ l_0xc76112:
 	"@I'll do everything I can to help you!" pause(20)
 	"  Good luck on your adventure." next
 	// Item 0x58 / 88 = Cookie
-	"@You might get hungry along the way,| so here is a {itemname(88)}." next
+	"@You might get hungry along the way,| so here is a {itemname(COOKIE)}." next
 	get_item_receiver(-1) goto_if_false(l_0xc761dd)
-	give_and_return_location(0,88)
+	give_and_return_location(0, COOKIE)
 	set(FLG_ITEM_TRACY)	// 76
 	call(data_36.l_0xc7dccf) next
 	"@You can also leave anything you don't need with me." next
 	"@Do you want me to hang on to something?" linebreak
 	two_choice_menu("Yes", l_0xc761d7, "No", l_0xc761cc)
-	goto(l_0xc761cc)
 
 l_0xc761cc:
 	"@Be careful!" end
@@ -432,12 +422,10 @@ l_0xc7625e:
 	"@I've saved some money,| so we'll do the lunch thing sometime." next
 	"@You also got a new girlfriend?" next
 	"@Your adventure must have been pretty good!" next
-	goto(l_0xc76357)
 
 l_0xc76357:
 	"@Do you need help with anything other than your schoolwork?" next
 	two_choice_menu("Yes", data_19.l_0xc646ae, "No", l_0xc76391)
-	goto(l_0xc76391)
 
 l_0xc76391:
 	"@Okay,| you relax now." end
@@ -594,7 +582,6 @@ l_0xc76a1f:
 	"@At times like this,| kids like you should be playing Nintendo games." next
 	"@Anyway,| are you sure you want to go to Twoson?" linebreak
 	two_choice_menu("Yes", l_0xc76ad6, "No", l_0xc76aa7)
-	goto(l_0xc76aa7)
 
 l_0xc76aa7:
 	"@Well then,| perhaps you should just crawl back to your shack,| little mister." end

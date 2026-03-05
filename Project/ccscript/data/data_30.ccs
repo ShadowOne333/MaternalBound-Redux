@@ -47,12 +47,11 @@ l_0xc73f0f:
 	"@I'll give you my {itemname(MR_BASEBALL_CAP)}," next
 	"@I know you've wanted it for a long time." next
 	"@It's the best cap for someone really brave like you." next
-	goto(l_0xc73f6c)
 
 l_0xc73f6c:
-	"[1D 03 FF]"
-	"[1B 02 {e(l_0xc73f83)}]"
-	"[1D 0E 00 4C]"
+	get_item_receiver(-1)	// 0xFF
+	goto_if_false(l_0xc73f83)
+	give_and_return_location(0, MR_BASEBALL_CAP)	// 0x4C
 	call(data_36.l_0xc7dccf)
 	set(FLG_ITEM_KAKUREGA_C)	// 77
 	end
@@ -148,7 +147,7 @@ l_0xc743b0:
 	set(FLG_POLICE_KANBANCOP_APPEAR)	// 39
 	window_open(1)
 	"@Hey you,| the board says:" pause(15) linebreak
-	"  <DON'T ENTER.>{pause(20)}" linebreak
+	"  <DON'T ENTER.>" pause(20) linebreak
 	"@Couldn't you read it?" next
 	two_choice_menu("Yes", l_0xc74431, "No", l_0xc74403)
 
@@ -279,7 +278,7 @@ l_0xc74874:
 	"@It's a good idea to talk to lots of people." end
 
 l_0xc7488d:
-	"[06 97 02 {e(l_0xc748be)}]"
+	goto_if_flag(FLG_ONET_LUCY_CHU, l_0xc748be)	// 0x0297, 663
 	"@If she's in a good mood,| a lady in the library will kiss you." end
 
 l_0xc748be:
@@ -312,9 +311,8 @@ l_0xc749ef:
 	"@Except I don't have any money to play the games..." end
 
 l_0xc74a3d:
-	"[06 0C 00 {e(l_0xc74ad6)}]"
-	"[06 0D 00 {e(l_0xc74ad6)}]"
-	goto(l_0xc74a4b)
+	goto_if_flag(FLG_POLA, l_0xc74ad6)	// 0x000C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc74ad6)	// 0x000D, 13
 
 l_0xc74a4b:
 	// Stat 0x1E / 30 = Paula's name
@@ -327,8 +325,8 @@ l_0xc74a4b:
 	"  Oh, well..." end
 
 l_0xc74ad6:
-	"[06 7E 02 {e(l_0xc74a4b)}]"
-	"[06 08 03 {e(l_0xc74a4b)}]"
+	goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc74a4b)	// 0x027E, 638
+	goto_if_flag(FLG_GLOBAL_POLA_KIDNAPPED, l_0xc74a4b)	// 0x0308, 776
 	counter(2)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc74a4b)
@@ -352,8 +350,8 @@ l_0xc74ba9:
 	"@You might want to visit him." end
 
 l_0xc74c07:
-	"[06 28 00 {e(data_35.l_0xc7c588)}]"
-	"[06 40 00 {e(l_0xc74c85)}]"
+	goto_if_flag(FLG_ONET_GUARDSHARK_DISAPPEAR, data_35.l_0xc7c588)	// 0x0028, 40
+	goto_if_flag(FLG_WIN_FRANK, l_0xc74c85)	// 0x0040, 64
 	"@Hey kid!" pause(20)
 	"  Do you wanna become a member?" linebreak
 	two_choice_menu("Yes", l_0xc74c6c, "No", l_0xc74c49)
@@ -373,7 +371,7 @@ l_0xc74c85:
 	"@Hello!" end
 
 l_0xc74c8a:
-	"[06 6D 01 {e(data_35.l_0xc7c588)}]"
+	goto_if_flag(FLG_ONET_SHARK_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x016D, 365
 	window_open(1)
 	goto_if_flag(FLG_WIN_FRANK, l_0xc74ce8)	// 0x40, 64
 	"@It was you!" pause(20)
@@ -445,11 +443,11 @@ l_0xc74ef1:
 
 l_0xc74f56:
 	title(1, Mom)
-	"[06 5F 00 {e(l_0xc74fde)}]"
-	"[06 5E 00 {e(l_0xc750e3)}]"
-	"[06 60 00 {e(l_0xc74fec)}]"
-	"[06 62 00 {e(l_0xc74fb6)}]"
-	"[06 61 00 {e(l_0xc74fb6)}]"
+	goto_if_flag(FLG_MYHOME_PHONE, l_0xc74fde)	// 0x005F, 95
+	goto_if_flag(FLG_MYHOME_MAMA_YEAH, l_0xc750e3)	// 0x005E, 94
+	goto_if_flag(FLG_MYHOME_POKEY, l_0xc74fec)	// 0x0060, 96
+	goto_if_flag(FLG_PAPA_MYHOME, l_0xc74fb6)	// 0x0062, 98
+	goto_if_flag(FLG_MYHOME_POKEY_ENTER, l_0xc74fb6)	// 0x0061, 97
 	"@My land!" pause(20)
 	"  Who could be knocking at the door at this time of night?" next
 	"@Would you answer it?" end
@@ -472,7 +470,7 @@ l_0xc74fec:
 	"@You're my very own natural born fighter...You'll go far..." next
 	"@Remember to| <Go for it!>"
 	set(FLG_MYHOME_MAMA_YEAH)	// 94
-	"[06 ED 02 {e(l_0xc750b3)}]"
+	goto_if_flag(FLG_MYHOME_NES_CHANGE, l_0xc750b3)	// 0x02ED, 749
 	wait
 	window_closeall
 	pause(1)
@@ -480,16 +478,21 @@ l_0xc74fec:
 
 l_0xc750b3:
 	next
-	"@But,| I think you should change out of your jammies before you leave.{wait}{window_closeall}{pause(1)}{unset(flag 749)}[1F 21 C4]" eob
+	"@But,| I think you should change out of your jammies before you leave." wait
+	window_closeall
+	pause(1)
+	unset(FLG_MYHOME_NES_CHANGE)	// 749
+	warp(196)	// 0xC4
+	eob
 
 l_0xc750e3:
 	title(1, Mom)
-	"[06 49 00 {e(data_31.l_0xc7547d)}]"
-	"[06 78 02 {e(l_0xc7533c)}]"
+	goto_if_flag(FLG_WIN_GIEGU, data_31.l_0xc7547d)	// 0x0049, 73
+	goto_if_flag(FLG_ONET_DOOR_CLOSE, l_0xc7533c)	// 0x0278, 632
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc75124)
-	"[06 D1 00 {e(l_0xc75124)}]"
+	goto_if_flag(FLG_TLPT_ONET, l_0xc75124)	// 0x00D1, 209
 	"@Yep,| looking good,| {stat(8)}!" end
 
 l_0xc75124:
@@ -503,7 +506,7 @@ l_0xc75124:
 
 l_0xc75176:
 	title(1, Mom)
-	"[06 02 02 {e(l_0xc75262)}]"
+	goto_if_flag(FLG_MYHOME_SLEEP, l_0xc75262)	// 0x0202, 514
 	isset(FLG_ONET_AMBRAMI)	// 104
 	goto_if_false(l_0xc751f1)
 	"@You're back!" pause(20)
@@ -525,59 +528,80 @@ l_0xc751f1:
 	"  {stat(4)}?" next
 	"@Porky,| you don't like" linebreak
 	"  {stat(4)},// do you?" next
-	"[1F 04 03]"
-	"@[1F 04 01]T[1F 04 03]#{pause(15)}[1F 04 01]O[1F 04 03]#{pause(15)}[1F 04 01]O[1F 04 03]#{pause(15)}[1F 04 01]BAD!" wait
+	text_blips_off	// 0x03
+	"@"
+	text_blips_default
+	"T"
+	text_blips_off
+	"#|"
+	text_blips_default
+	"O"
+	text_blips_off
+	"#|"
+	text_blips_default
+	"O"
+	text_blips_off
+	"#|"
+	text_blips_default
+	"BAD!" wait
 	call(data_49.l_0xc915d6)
 	call(data_49.l_0xc91582)
 	eob
 
 l_0xc75262:
 	title(1, Mom)
-	"[1D 19 02][1B 02 {e(l_0xc752ce)}][06 02 00 {e(l_0xc752a3)}]@Good morning,| sleepy bones!" pause(20)
+	party_size_smaller_than(2)	// 0x02
+	goto_if_false(l_0xc752ce)
+	goto_if_flag(FLG_TEMP_1, l_0xc752a3)	// 0x0002, 2
+	"@Good morning,| sleepy bones!" pause(20)
 	"  Are you ready to start your adventure?" next
-	goto(l_0xc752a3)
 
 l_0xc752a3:
 	title(1, Mom)
 	"@I'm so proud of you!" pause(20)
-	"  My little man is growing up too fast...{wait}{set(flag 2)}" eob
+	"  My little man is growing up too fast..." wait
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc752ce:
-	"[06 02 00 {e(l_0xc7531d)}]@Good morning everyone!" pause(20)
+	goto_if_flag(FLG_TEMP_1, l_0xc7531d)	// 0x0002, 2
+	"@Good morning everyone!" pause(20)
 	"  Are you ready for your adventure?" next
 	"@I think all of you are the bee's knees." pause(20)
 	"  Yes,// I do!" next
-	goto(l_0xc7531d)
 
 l_0xc7531d:
 	"@You are all so... cool!" pause(20)
 	"  Yes,// you're hip!" end
 
 l_0xc7533c:
-	"[06 0A 00 {e(data_31.l_0xc7546f)}]"
+	goto_if_flag(FLG_TEMP_9, data_31.l_0xc7546f)	// 0x000A, 10
 	title(1, Mom)
-	"@Oh,// [1C 02 01]!{pause(20)}" linebreak "  You finally showed up..." next
+	"@Oh,// {name(1)}!" pause(20) linebreak
+	"  You finally showed up..." next
 	"@There are plenty of creepy monsters running around Onett now." next
 	"@The townspeople are barricaded in their homes,| afraid to go out." next
-	"@I'm fine...{pause(20)}" linebreak "  But I am a bit scared." next
+	"@I'm fine..." pause(20) linebreak
+	"  But I am a bit scared." next
 	"@Everything will be okay if we just sit here quietly in the dark." next
 	"@Are you hungry?" next
 	"@Do you want to eat some" linebreak
-	"  [1C 01 04]?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc75418:
-	"[19 02]No" eob
-
-l_0xc7541d:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc7544a)} {e(l_0xc7542c)}]" goto(l_0xc7542c)
+	"{stat(4)}?" linebreak	// 0x04
+	two_choice_menu("Yes", l_0xc7544a, "No", l_0xc7542c)
 
 l_0xc7542c:
 	"@I agree." pause(20)
-	"  It's not good for you to eat too much...{wait}{set(flag 10)}" eob
+	"  It's not good for you to eat too much..." wait
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc7544a:
-	"{window_closeall}[1F 01 00]" call(data_23.l_0xc685da) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "{window_open(1)}"
+	window_closeall
+	stop_music
+	call(data_23.l_0xc685da)
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	window_open(1)
 	title(1, Mom)
 	"@Are you more relaxed?" next
 	goto(data_31.l_0xc7546f)

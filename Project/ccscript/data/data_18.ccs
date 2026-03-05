@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/cc_asmcall.ccs"
@@ -26,16 +27,20 @@ l_0xc61e81:
 l_0xc61e8e:
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc61e81)
+
 	store_registers
 	call(l_0xc62380)
 	goto_if_false(l_0xc61e81)
+
 	load_registers
 	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
+
 	pause(10)
 	"@Unkikkie!" next
-	"@({itemname(90)}!)" wait
+	"@({itemname(HAMBURGER)}!)" wait
 	window_closeall
+
 	npc_delete(807,6)	// 0x0327, 6
 	npc_spawn(809,43,1)	// 0x0329, 0x002B, 1
 	set(FLG_SARUDUNGEON_H_OK)	// 458
@@ -51,12 +56,11 @@ l_0xc61f07:
 	"@(I am Man K. Man.)" next
 	title(1, Mankman)
 	"@Ukie Ukikikie" next
-	"@(To me the most interesting thing is the {itemname(166)}.)" next
+	"@(To me the most interesting thing is the {itemname(KING_BANANA)}.)" next
 	"@Ukie?  Ukikikie?" next
 	"@(What?" pause(20)
 	"  Are you giving me a present?)" next
 	two_choice_menu("Yes", l_0xc61fab, "No", l_0xc61f97)
-	goto(l_0xc61f97)
 
 l_0xc61f97:
 	"@Uki..." next
@@ -65,17 +69,21 @@ l_0xc61f97:
 l_0xc61fab:
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc61f97)
+
 	store_registers
 	get_inventory_item(0,0) swap
-	result_is(166)	// King banana
+	result_is(KING_BANANA)	// King banana
 	goto_if_false(l_0xc61f97)
+
 	load_registers
 	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
+
 	pause(10)
 	"@Ukki, Ukie!" next
 	"@(Oh, I've died and gone to monkey heaven!)" wait
 	window_closeall
+
 	npc_delete(823,6)	// 0x0337, 6
 	npc_spawn(825,43,1)	// 0x0339, 0x002B, 1
 	set(FLG_SARUDUNGEON_I_OK)	// 459
@@ -83,16 +91,15 @@ l_0xc61fab:
 
 l_0xc62008:
 	"@Ukki Ukikie" next
-    title(1, Mankman)
+	title(1, Mankman)
 	"@(I am Man K. Man.)" end
 
 l_0xc62026:
 	goto_if_flag(FLG_SARUDUNGEON_J_OK, l_0xc620e3)	// 0x01CC, 460
 	"@Uikkie, Uiki Uki" next
 	// item 0x5A / 90 = Hamburger
-	"@(Let's get to the point,/| give me a {itemname(90)}.)" linebreak
+	"@(Let's get to the point,/| give me a {itemname(HAMBURGER)}.)" linebreak
 	two_choice_menu("Yes", l_0xc62089, "No", l_0xc6206b)
-	goto(l_0xc6206b)
 
 l_0xc6206b:
 	"@Uiki, Uikki" next
@@ -101,16 +108,20 @@ l_0xc6206b:
 l_0xc62089:
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc6206b)
+
 	store_registers
 	call(l_0xc62380)
 	goto_if_false(l_0xc6206b)
+
 	load_registers
 	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
+
 	pause(10)
 	"@Uikki Uiki Uiki Uiki" next
 	"@(I'm very grateful to you.)" wait
 	window_closeall
+
 	npc_delete(822,6)	// 0x0336, 6
 	npc_spawn(824,43,1)	// 0x0338, 0x002B, 1
 	set(FLG_SARUDUNGEON_J_OK)	// 460
@@ -125,11 +136,10 @@ l_0xc620f7:
 	"@Meow Meow fss fss fssss?" next
 	"@(What strange chattering for a monkey.)" next
 	"@Coo coo, pepepe." next
-	"@(If I eat a {itemname(92)},| it will cure my weird animal sounds.)" next
+	"@(If I eat a {itemname(FRESH_EGG)},| it will cure my weird animal sounds.)" next
 	"@Croak croak, breeeeeep?" next
 	"@(If you have one, can I have one?)" linebreak
 	two_choice_menu("Yes", l_0xc621d0, "No", l_0xc6219a)
-	goto(l_0xc6219a)
 
 l_0xc6219a:
 	"@Bow wow, ruff ruff bark!" next
@@ -138,20 +148,24 @@ l_0xc6219a:
 l_0xc621d0:
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc6219a)
+
 	store_registers
-	get_inventory_item(0,0) swap
-	result_is(92)	// Fresh egg
+	get_inventory_item(0,0)	swap
+	result_is(FRESH_EGG)	// Fresh egg
 	goto_if_false(l_0xc6219a)
+
 	load_registers
 	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
+
 	pause(10)
 	"@Gulp,| gulp.../| Ukiki!" next
 	"@(Gulp,| gulp.../| See!)" wait
 	window_closeall
+	
 	npc_delete(818,6)	// 0x0332, 6
 	npc_spawn(820,43,1)	// 0x0334, 0x002B, 1
-	set(flag 461)
+	set(FLG_SARUDUNGEON_K_OK)	// 461
 	eob
 
 l_0xc62236:
@@ -164,11 +178,10 @@ l_0xc62257:
 	"@(Oh, I wanna measure something!)" next
 	"@Kiki kiku eki..." next
 	// Item 0x8C / 140 = Ruler
-	"@(But I don't have a {itemname(140)}...)" next
+	"@(But I don't have a {itemname(RULER)}...)" next
 	"@Kuki keikuki?" next
 	"@(Do you have one I may borrow?)" linebreak
 	two_choice_menu("Yes", l_0xc622fc, "No", l_0xc622dc)
-	goto(l_0xc622dc)
 
 l_0xc622dc:
 	"@Kiki Kikurek ki!" next
@@ -177,17 +190,21 @@ l_0xc622dc:
 l_0xc622fc:
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc622dc)
+
 	store_registers
-	get_inventory_item(0,0) swap
-	result_is(140)	// Ruler
+	get_inventory_item(0,0)	swap
+	result_is(RULER)	// Ruler
 	goto_if_false(l_0xc622dc)
+
 	load_registers
 	take_from_location(0,0)
 	sound(SND_CHICKEN2)	// 118
+
 	pause(10)
 	"@Kikki, ekruiki!" next
 	"@(Finally, I can measure my own tail!)" wait
 	window_closeall
+
 	npc_delete(817,6)	// 0x0331, 6
 	npc_spawn(819,43,1)	// 0x0333, 0x002B, 1
 	set(FLG_SARUDUNGEON_L_OK)	// 462
@@ -198,43 +215,43 @@ l_0xc6235d:
 	"@(I can measure his tail too!)" end
 
 l_0xc62380:
-	get_inventory_item(0,0)
-	swap
+	get_inventory_item(0,0) swap
 	rtoarg
-	result_is(90)	// Hamburger
+	result_is(HAMBURGER)	// Hamburger
 	goto_if_true(l_0xc62394)
+
 	swap
-	result_is(233)	// Double burger
+	result_is(DOUBLE_BURGER)	// Double burger
 	goto(l_0xc62394)
 
 l_0xc62394:
-    eob
+	eob
 
 l_0xc62395:
-	get_inventory_item(0,0)
-	swap
+	get_inventory_item(0,0)	swap
 	rtoarg
-	result_is(95)	// Pizza
+	result_is(PIZZA)	// Pizza
 	goto_if_true(l_0xc623a9)
+
 	swap
-	result_is(97)	// Large pizza
+	result_is(LARGE_PIZZA)	// Large pizza
 	goto(l_0xc623a9)
 
 l_0xc623a9:
-    eob
+	eob
 
 l_0xc623aa:
-	get_inventory_item(0,0)
-	swap
+	get_inventory_item(0,0) swap
 	rtoarg
-	result_is(224)	// Skip sandwich
+	result_is(SKIP_SANDWICH)	// Skip sandwich
 	goto_if_true(l_0xc623be)
+
 	swap
-	result_is(225)	// Skip sandwich DX
+	result_is(SKIP_SANDWICH_DX)	// Skip sandwich DX
 	goto(l_0xc623be)
 
 l_0xc623be:
-    eob
+	eob
 
 l_0xc623bf:
 	goto_if_flag(FLG_SARUDUNGEON_M_OK, l_0xc624f5)	// 0x01CF
@@ -246,17 +263,20 @@ l_0xc623bf:
 	"@(Do you think Dragonite is really made from dragons?)" next
 	"@Kyokekyoke, Ukyokie" next
 	// Item 0x5C / 92 = Fresh egg
-	"@(By the way, I'll give you a {itemname(92)}.)" next
+	"@(By the way, I'll give you a {itemname(FRESH_EGG)}.)" next
 	"@Ukya, Kyokyo Kiekyo" next
 	"@(If you run out,| just come back and I'll give you as many eggs as you want.)" promptw
-	get_item_receiver(-1) goto_if_false(l_0xc624d6)
-	give_and_return_location(0,92)	// Give Fresh egg
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xc624d6)
+	give_and_return_location(0, FRESH_EGG)	// Give Fresh egg
 	call(data_36.l_0xc7dccf)
 	set(FLG_SARUDUNGEON_M_OK)	// 463
+
 	end
 
 l_0xc624d6:
-    next
+	next
 	"@Kyokyukyo kyakie!" next
 	"@(You have too much stuff!)" end
 
@@ -264,14 +284,17 @@ l_0xc624f5:
 	"@Ukyako kyakki?" next
 	"@(Did you find a" linebreak
 	// Item 0x3A / 58 = Flame pendant
-	"  {itemname(58)}?)" next
+	"  {itemname(FLAME_PENDANT)}?)" next
 	"@Ukyakki, Kokekyakya?" next
 	"@(Oh no,| you don't have to answer.)" next
 	"@Kyokekyoke Ukyokie..." next
-	"@(Here's another {itemname(92)}...)" promptw
-	get_item_receiver(-1) goto_if_false(l_0xc624d6)
-	give_and_return_location(0,92)	// Give Fresh egg
+	"@(Here's another {itemname(FRESH_EGG)}...)" promptw
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xc624d6)
+	give_and_return_location(0, FRESH_EGG)	// Give Fresh egg
 	call(data_36.l_0xc7dccf)
+
 	end
 
 l_0xc62578:
@@ -284,14 +307,19 @@ l_0xc62578:
 	"  You've never heard of it?)" next
 	"@Kyukyu, Kyui" next
 	// item 0xA6 / 166 = King banana
-	"@(Then,| I'll give you {itemname(166)}.)" next
-	get_item_receiver(-1) goto_if_false(l_0xc62641)
-	give_and_return_location(0,166)	// Give King banana
+	"@(Then,| I'll give you {itemname(KING_BANANA)}.)" next
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xc62641)
+	give_and_return_location(0, KING_BANANA)	// Give King banana
+
 	"@Kyu, Ukyakki?  Uki, Ukyukui?" next
 	"@(That didn't make sense, did it?" pause(20)
 	"  But, anyway, I'm attractive, don't you think?)" promptw
+
 	call(data_36.l_0xc7dcb6)
 	set(FLG_SARUDUNGEON_N_OK)	// 464
+
 	end
 
 l_0xc62641:
@@ -331,6 +359,7 @@ l_0xc627ca:
 	"@Kyakyakya" next
 	"@(Let's go outside.)" wait
 	window_closeall
+
 	npc_do_mc(828,668)	// 0x033C, 0x029C
 	wait_movement
 	set(FLG_DSRT_INFO_TLPT)	// 764
@@ -355,7 +384,7 @@ l_0xc62865:
 	unset(FLG_DSRT_TSARU_A_APPEAR)	// 614
 	set(FLG_DSRT_TSARU_B_APPEAR)	// 615
 	pause(1)
-	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 01, 0x00FF
+	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 1, 0x00FF
 	npc_direction(773,0)	// 0x0305, 0
 	eob
 
@@ -411,7 +440,6 @@ l_0xc62a30:
 	"@Kyakyakyakya" next
 	"@(Try again by believing in the monkey teacher.)" linebreak
 	two_choice_menu("Yes", l_0xc628a1, "No", l_0xc62a75)
-	goto(l_0xc62a75)
 
 l_0xc62a75:
 	"@Kyakyakya?..." next
@@ -430,20 +458,23 @@ l_0xc62ae7:
 	window_open(1)
 	"@{name(1)} learned how to use PSI Teleport." wait
 	window_closeall
+
 	learn_teleport_alpha
-	set(flag 275)
+	set(FLG_MASTER_TLPT)	// 275
 	get_dir_from_npc(773,TO_CHAR,-1)	// 0x0305, 0x01, 0x00FF
-	npc_direction(773,0) 	// 0x0305, 0x00
+	npc_direction(773,0)	// 0x0305, 0x00
 	show_npc_float(773,3)	// 0x0305, 0x03
 	pause(60)
 	hide_npc_float(773)	// 0x0305
 	npc_do_mc(773,640)	// 0x0305, 0x0280
 	wait_movement
+
 	window_open(1)
 	"@Kyaho! Uki, Kyakkya" next
 	"@(Great!" pause(20)
 	"  Okay,| the teacher is going home now.)" wait
 	window_closeall
+
 	npc_do_mc(773,671)	// 0x0305, 0x029F
 	unset(FLG_TEMP_1)	// 2
 	unset(FLG_DSRT_TSARU_B_APPEAR)	// 615
@@ -484,13 +515,12 @@ l_0xc62d23:
 	"@(East to Fourside.)" end
 
 ATM_Start:
-	counter(0)
-	ctoarg
+	counter(0) ctoarg
 	"@Welcome to the Automatic Teller Machine." next
 	"@Please select a transaction:" linebreak
 	two_choice_menu("Withdrawal", _withdraw, "Deposit", _deposit)
 
-_cancel:	
+_cancel:
 	"@Thank you very much." end
 
 _deposit:
@@ -511,7 +541,7 @@ _deposit:
 	takemoney(0)
 	deposit(0)
 	show_wallet
-	sound(SND_CHICKEN2) // 118
+	sound(SND_CHICKEN2)	// 118
 
 	pause(10)
 	"@Your account will be credited" linebreak
@@ -558,7 +588,7 @@ _withdraw:
 	"  $" number(0) "." next
 	"@Please take your cash." promptw
 	show_wallet
-	sound(SND_BOXTAKE) // 116
+	sound(SND_BOXTAKE)	// 116
 	pause(20)
 	eob
 
@@ -584,7 +614,7 @@ _max_cash:
 	"  $99,999." next
 	goto(_cancel)
 
-_enter_withdraw_amount: //l_0xc62f99
+_enter_withdraw_amount:	//l_0xc62f99
 	call(_show_balance)
 	"@Please enter the amount of your withdrawal." next
 	"@Balance: ${stat(7)}" linebreak
@@ -592,8 +622,8 @@ _enter_withdraw_amount: //l_0xc62f99
 
 _text_position:
 	show_wallet
-	text_pos(10, 2) "&"
-	text_pos(4, 2) "$"
+	text_pos(10,2) "&"
+	text_pos(4,2) "$"
 	number_input(5)
 	clearline
 	eob
@@ -609,14 +639,18 @@ _show_balance:
 	eob
 
 l_0xc63029:
-	phone_call goto_if_true(l_0xc63032) newline
+	phone_call
+	goto_if_true(l_0xc63032)
+	newline
 	goto(l_0xc63032)
 
 l_0xc63032:
 	eob
 
 l_0xc63033:
-	phone_call goto_if_true(l_0xc63042) newline
+	phone_call
+	goto_if_true(l_0xc63042)
+	newline
 	givemoney(1)
 	show_wallet
 	goto(l_0xc63042)
@@ -627,14 +661,15 @@ l_0xc63042:
 l_0xc63043:
 	"@INPUT YOUR COMMAND." linebreak
 	open_hp
-	goto_if_flag(FLG_STEP_PAST, l_0xc63089) // 0x0174, 372
+	goto_if_flag(FLG_STEP_PAST, l_0xc63089)	// 0x0174, 372
 	two_choice_menu("Life-up", data_49.l_0xc915e1, "Communicate", l_0xc630a8)
 
 l_0xc63089:
 	two_choice_menu("Repair", data_49.l_0xc915e1, "Communicate", l_0xc630a8)
 
 l_0xc630a8:
-	call(l_0xc63229) eob
+	call(l_0xc63229)
+	eob
 
 l_0xc630ae:
 	goto_if_flag(FLG_ITEM_GAUS, l_0xc630c7)	// 0x58, 88
@@ -650,12 +685,10 @@ l_0xc630c7:
 	"@Oh, hello {stat(52)}!" next
 	"@Would you like me to keep a record of your journey?" linebreak
 	two_choice_menu("Yes", l_0xc6314c, "No", l_0xc6311e)
-	goto(l_0xc6311e)
 
 l_0xc6311e:
 	"@You just wanted to hear my voice?" linebreak
 	"  Gwahahahahahahah!" next
-	goto(l_0xc63146)
 
 l_0xc63146:
 	goto(data_19.l_0xc634ea)
@@ -668,13 +701,11 @@ l_0xc6314c:
 	set_respawn_point(0)
 	goto_if_flag(FLG_THRK_URBAN_ZOMBI_GONE, l_0xc6315a)	// 0x030C, 780
 	save
-	goto(l_0xc6315a)
 
 l_0xc6315a:
 	"@All right, I have everything written down." next
 	"@Do you want to take a break now?" linebreak
 	two_choice_menu("Continue", l_0xc631a1, "End", l_0xc631e3)
-	goto(l_0xc631a1)
 
 l_0xc631a1:
 	"@You've become such a hard worker!" next
@@ -685,7 +716,8 @@ l_0xc631a1:
 l_0xc631e3:
 	"@I don't know where you are planning on sleeping, but have a good rest!" next
 	"@Go ahead and turn the power OFF, and have a good night."
-	disable_input next
+	disable_input
+	next
 	music_effect(3)
 	cc_fade_out(3)
 	pause(90)
@@ -694,12 +726,14 @@ l_0xc631e3:
 l_0xc63229:
 	goto_if_flag(FLG_PHONE_PAPA_FINAL, data_31.l_0xc75929)	// 0x0304, 772
 	goto_if_flag(FLG_WIN_GIEGU, data_19.l_0xc635bd)	// 0x49, 73
+
 	ctoarg
 	store_registers_shared
 	newline
 	get_char_at_pos(1)
 	result_is(1)
 	goto_if_true(l_0xc632c7)
+
 	title(1, Dad)
 	"@Hello?" next
 	// Stat 8 = Ness' name
@@ -715,37 +749,36 @@ l_0xc632c7:
 	"@{name(1)}?  It's your dad." next
 	isset(FLG_STEP_PAST)	// 372
 	switch_call(1)
-		switch_entry(data_19.l_0xc6354b)
-	goto(l_0xc632e2)
+	switch_entry(data_19.l_0xc6354b)
 
 l_0xc632e2:
 	get_dad_deposit_money
 	goto_if_false(l_0xc6333c)
 	swap
-	"@I deposited $" number(0) "" linebreak
+	"@I deposited $" number(0) linebreak
 	"  into your bank account." next
 	"@Taking away what you've spent, you should now have" next
 	"@${stat(7)} in the bank." next
 	clear_dad_deposit_money
-	goto(l_0xc6333c)
 
 l_0xc6333c:
 	counter(1)
 	"@Well, exp to get to the next level," promptw
-	goto(l_0xc63352)
 
 l_0xc63352:
 	ctoarg
 	party_size_smaller_than(0)
 	goto_if_true(data_19.l_0xc633c9)
+
 	get_char_at_pos(0)
 	goto_if_false(data_19.l_0xc633c9)
+
 	rtoarg
 	get_levelup_exp(0)
 	goto_if_false(l_0xc63388)
+
 	newline
 	"@{name(0)}... " swap number(0) "." promptw
-	goto(l_0xc63382)
 
 l_0xc63382:
 	inc
@@ -754,7 +787,9 @@ l_0xc63382:
 l_0xc63388:
 	newline
 	"@{name(0)}..." linebreak
-	"  has already reached " swap call(data_37.l_0xc7e660) " maximum level." next
+	"  has already reached " swap
+	call(data_37.l_0xc7e660)
+	" maximum level." next
 	"@That's just fine, but..." next
 	next
 	next

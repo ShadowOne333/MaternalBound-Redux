@@ -17,19 +17,19 @@ command e(label) "{long label}"
 // Text Data
 l_0xc6defa:
 	window_closeall
-	"[1F 16 58 03 01]"
+	npc_direction(856,1)	// 0x0358, 0x01
 	music(137)
-	"[1F 15 B7 01 63 01 01]"
+	sprite2_spawn(439,355,1)	// 0x01B7, 0x0163, 0x01
 	pause(1)
-	"[1F EF B7 01]"
-	"[1F E8 FF]"
-	"[1F 15 6A 00 46 02 01]"
+	focus_camera_on_sprite2(439)	// 0x01B7
+	party_unfreeze	// 0xFF
+	sprite2_spawn(106,582,1)	// 0x006A, 0x0246, 0x01
 	wait_movement
 	music(139)
 	pause(90)
 	restore_camera
-	"[1F E5 FF]"
-	"[1F 1F B7 01 06]"
+	party_freeze	// 0xFF
+	sprite2_delete(439,6)	// 0x01B7, 0x06
 	set(FLG_FOUR_ELEV)	// 350
 	set(FLG_TEMP_9)	// 10
 	eob
@@ -97,19 +97,19 @@ l_0xc6e220:
 	"@This elevator is going down." next
 	"@Look, don't stand behind me and stare at my butt!" wait
 	window_closeall
-	"[1F 16 58 03 01]"
+	npc_direction(856,1)	// 0x0358, 0x01
 	music(138)
-	"[1F 15 B7 01 63 01 01]"
+	sprite2_spawn(439,355,1)	// 0x01B7, 0x0163, 0x01
 	pause(1)
-	"[1F EF B7 01]"
-	"[1F E8 FF]"
-	"[1F 15 6A 00 47 02 01]"
+	focus_camera_on_sprite2(439)	// 0x01B7
+	party_unfreeze	// 0xFF
+	sprite2_spawn(106,583,1)	// 0x006A, 0x0247, 0x01
 	wait_movement
 	music(139)
 	pause(90)
 	restore_camera
-	"[1F E5 FF]"
-	"[1F 1F B7 01 06]"
+	party_freeze	// 0xFF
+	sprite2_delete(439,6)	// 0x01B7, 0x06
 	set(FLG_FOUR_ELEV)	// 350
 	set(FLG_TEMP_9)	// 10
 	eob
@@ -119,7 +119,6 @@ l_0xc6e298:
 
 l_0xc6e2a4:
 	goto_if_flag(FLG_WIN_MANIMANI, l_0xc6e45a)	// 0x4B, 75
-	goto(l_0xc6e2ab)
 
 l_0xc6e2ab:
 	title(1, Porky)
@@ -137,7 +136,6 @@ l_0xc6e2ab:
 l_0xc6e33a:
 	"@Pig's Butt... no no, {name(1)}!" next
 	"@Didn't you come here to beg me for some money?" next
-	goto(l_0xc6e36d)
 
 l_0xc6e36d:
 	"@Oooo la la." next
@@ -152,7 +150,6 @@ l_0xc6e36d:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc6e426)
 	"@Was that you {name(1)}?" next
-	goto(l_0xc6e426)
 
 l_0xc6e426:
 	"@This isn't a place for the likes of you!" next
@@ -168,15 +165,15 @@ l_0xc6e45a:
 	// Stat 4 = Fav food
 	"@You shouldn't be satisfied with eating just some more {stat(4)}." next
 	"@You're so out of it." next
-	"@I've ordered <Strawberry tofu.>" next
+	"@I've ordered <{itemname(STRAWBERRY_TOFU)}.>" next
 	"@It's very popular among gourmets." next
 	"@Aren't you jealous that I get to eat such a tongue-tickling treat?" next
 	"@Ha ha ha!" next
-	"@<Strawberry tofu>..." pause(20)
+	"@<{itemname(STRAWBERRY_TOFU)}>..." pause(20)
 	"  Oooo, I can't wait!" next
 	"@I'm starting to drool all over myself just thinking about it." end
 
-l_0xc6e557:    
+l_0xc6e557:
 	title(1, Aloysius)
 	counter(1)
 	call(data_36.l_0xc7dc7f)
@@ -187,7 +184,6 @@ l_0xc6e557:
 l_0xc6e57d:
 	"@Have I met you before?" next
 	"@You're just annoying kids to me..." next
-	goto(l_0xc6e5a1)
 
 l_0xc6e5a1:
 	"@I'm Aloysius Minch, Porky's dad." next
@@ -210,23 +206,22 @@ l_0xc6e69c:
 	"@I'll take you to Mr. Monotoly's office on the 48th floor." next
 	"@You may go." promptw
 	get_char_at_pos(1) rtoarg
-	goto(l_0xc6e71e)
 
 l_0xc6e71e:
 	window_closeall
-	"[1F 16 65 03 01]"
+	npc_direction(869,1)	// 0x0365, 0x01
 	music(137)
-	"[1F 15 B7 01 63 01 01]"
+	sprite2_spawn(439,355,1)	// 0x01B7, 0x0163, 0x01
 	pause(1)
-	"[1F EF B7 01]"
-	"[1F E8 FF]"
-	"[1F 15 6A 00 46 02 01]"
+	focus_camera_on_sprite2(439)	// 0x01B7
+	party_unfreeze	// 0xFF
+	sprite2_spawn(106,582,1)	// 0x006A, 0x0246, 0x01
 	wait_movement
 	music(139)
 	pause(90)
 	restore_camera
-	"[1F E5 FF]"
-	"[1F 1F B7 01 06]"
+	party_freeze	// 0xFF
+	sprite2_delete(439,6)	// 0x01B7, 0x06
 	set(FLG_FOUR_ELEV)	// 350
 	set(FLG_TEMP_9)	// 10
 	eob
@@ -258,23 +253,22 @@ l_0xc6e81a:
 	"@You might run into the maid, Electra." next
 	"@I wonder what your relationship is...(smile)." next
 	"@This elevator takes you to the 47th floor." promptw
-	goto(l_0xc6e884)
 
 l_0xc6e884:
 	window_closeall
-	"[1F 16 66 03 01]"
+	npc_direction(870,1)	// 0x0366, 0x01
 	music(138)
-	"[1F 15 B7 01 63 01 01]"
+	sprite2_spawn(439,355,1)	// 0x01B7, 0x0163, 0x01
 	pause(1)
-	"[1F EF B7 01]"
-	"[1F E8 FF]"
-	"[1F 15 6A 00 47 02 01]"
+	focus_camera_on_sprite2(439)	// 0x01B7
+	party_unfreeze	// 0xFF
+	sprite2_spawn(106,583,1)	// 0x006A, 0x0247, 0x01
 	wait_movement
 	music(139)
 	pause(90)
 	restore_camera
-	"[1F E5 FF]"
-	"[1F 1F B7 01 06]"
+	party_freeze	// 0xFF
+	sprite2_delete(439,6)	// 0x01B7, 0x06
 	set(FLG_FOUR_ELEV)	// 350
 	set(FLG_TEMP_9)	// 10
 	eob
@@ -285,32 +279,24 @@ l_0xc6e8bf:
 l_0xc6e8cc:
 	"@Are you a friend of the Runaway Brothers?" next
 	"@Would an autograph be asking for too much?" linebreak
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc6e8fb:
-	"[19 02]No" eob
-
-l_0xc6e900:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6e90f)} {e(l_0xc6e90f)}]"
-	goto(l_0xc6e90f)
+	two_choice_menu("Yes", l_0xc6e90f, "No", l_0xc6e90f)
 
 l_0xc6e90f:
 	"@I don't mean your autograph, silly." wait
 	window_closeall
-	"[1F 16 66 03 01]"
+	npc_direction(870,1)	// 0x0366, 0x01
 	music(138)
-	"[1F 15 B7 01 63 01 01]"
+	sprite2_spawn(439,355,1)	// 0x01B7, 0x0163, 0x01
 	pause(1)
-	"[1F EF B7 01]"
-	"[1F E8 FF]"
-	"[1F 15 6A 00 47 02 01]"
+	focus_camera_on_sprite2(439)	// 0x01B7
+	party_unfreeze	// 0xFF
+	sprite2_spawn(106,583,1)	// 0x006A, 0x0247, 0x01
 	wait_movement
 	music(139)
 	pause(90)
 	restore_camera
-	"[1F E5 FF]"
-	"[1F 1F B7 01 06]"
+	party_freeze	// 0xFF
+	sprite2_delete(439,6)	// 0x01B7, 0x06
 	set(FLG_FOUR_ELEV)	// 350
 	set(FLG_TEMP_9)	// 10
 	eob
@@ -325,9 +311,13 @@ l_0xc6e982:
 	goto_if_flag(FLG_FOUR_MAID_48, l_0xc6ea0f)	// 0x8D, 141
 	get_item_receiver(-1)
 	goto_if_false(l_0xc6e9d6)
-	give_and_return_location(0,189)	// 0xBD, 189, Strawberry tofu
+	give_and_return_location(0,STRAWBERRY_TOFU)	// 0xBD, 189, Strawberry tofu
 	title(1, Electra)
-	"@Your Strawberry tofu, " store_registers get_char_at_pos(1) call(data_37.l_0xc7e6b3) "." promptw
+	"@Your {itemname(STRAWBERRY_TOFU)}, "
+	store_registers
+	get_char_at_pos(1)
+	call(data_37.l_0xc7e6b3)
+	"." promptw
 	load_registers
 	set(FLG_FOUR_MAID_48)	// 141
 	set(FLG_TEMP_1)	// 2
@@ -346,33 +336,35 @@ l_0xc6ea0f:
 
 l_0xc6ea34:
 	title(1, Monotoly)
-	"[06 A0 02 {e(l_0xc6ee6f)}]"
-	"[06 0F 00 {e(l_0xc6ee2e)}]"
+	goto_if_flag(FLG_FOUR_HELI_DISAPPEAR, l_0xc6ee6f)	// 0x02A0, 672
+	goto_if_flag(FLG_POLA_1, l_0xc6ee2e)	// 0x000F, 15
 	"@Look at my skinny arms,/| thin body,/| and gray hair..." next
 	"@I've become so weak since I lost the Mani Mani statue." next
 	"@I'm sorry I kidnapped {name(2)}." next
 	"@I haven't done anything to her." next
 	"@...{name(2)} is a nice girl." promptw
 	window_closeall
+
 	pause(60)
-	"[1F 16 68 03 03]"
+	npc_direction(872,3)	// 0x0368, 0x03
 	pause(10)
+
 	window_open(1)
 	title(1, Monotoly)
 	"@{name(2)}." next
 	"@Return to {name(1)}." next
 	"@I'm sorry I've created so much trouble for you." promptw
 	window_closeall
+
 	pause(60)
 	call(data_23.l_0xc68253)
 	set(FLG_POLA_1)	// 15
 	unset(FLG_GLOBAL_POLA_KIDNAPPED)	// 776
-	"[19 23 68 03 01 FF 00]"
-	"[1F 16 68 03 00]"
+	get_dir_from_npc(872,1,255)	// 0x0368, 0x01, 0x00FF
+	npc_direction(872,0)	// 0x0368, 0x00
 	music_resume
 	pause(120)
 	window_open(1)
-	goto(l_0xc6eb2c)
 
 l_0xc6eb2c:
 	set(FLG_PAULA_KI)
@@ -400,40 +392,36 @@ l_0xc6eb2c:
 	"@especially because they don't want you to make it there." next
 	"@....." next
 	"@...Would you like to hear the whole story again?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc6ed60:
-	"[19 02]No" eob
-
-l_0xc6ed65:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc6eb2c)} {e(l_0xc6ed74)}]" goto(l_0xc6ed74)
+	two_choice_menu("Yes", l_0xc6eb2c, "No", l_0xc6ed74)
 
 l_0xc6ed74:
 	"@Summers is located across the ocean." pause(20)
 	"  Take my helicopter." next
 	"@I'll open the door to my heliport." promptw
 	window_closeall
+
 	pause(1)
-	"[1F F1 68 03 BD 02]"
+	npc_do_mc(872,701)	// 0x0368, 0x02BD
 	wait_movement
-	"[1F F1 6C 03 BE 02]"
+	npc_do_mc(876,702)	// 0x036C, 0x02BE
 	wait_movement
-	"[1F F1 6C 03 2C 00]"
-	"[1F E6 68 03]"
-	"[1F 07 03]"
+	npc_do_mc(876,44)	// 0x036C, 0x002C
+	npc_freeze(872)	// 0x0368
+	music_effect(3)	// 0x03
 	pause(180)
 	music(85)
-	"[1F F1 6D 03 BF 02]"
+	npc_do_mc(877,703)	// 0x036D, 0x02BF
 	wait_movement
-	"[1F F1 6D 03 08 00]"
-	"[1F 07 02]"
+	npc_do_mc(877,8)	// 0x036D, 0x0008
+	music_effect(2)	// 0x02
 	pause(30)
 	sound(SND_PRAYING)	// 28
 	pause(60)
 	music_resume
-	"[1F E9 68 03]"
+	npc_unfreeze(872)	// 0x0368
 	wait_movement
-	"[1F F1 68 03 08 00]"
+	npc_do_mc(872,8)	// 0x0368, 0x0008
+
 	window_open(1)
 	title(1, Monotoly)
 	"@You must go on!" next
@@ -441,7 +429,6 @@ l_0xc6ed74:
 	"@This is your destiny." next
 	set(FLG_FOUR_STAIRWAY_APPEAR)	// 664
 	set(FLG_FOUR_MONOTOLY_APPEAR)	// 741
-	goto(l_0xc6ee2e)
 
 l_0xc6ee2e:
 	title(1, Monotoly)
@@ -449,6 +436,7 @@ l_0xc6ee2e:
 	"@{stat(30)}, it's time we said goodbye." next
 	"@Take care." wait
 	window_closeall
+
 	set(FLG_FOUR_MIHARI_1_DISAPPEAR)	// 357
 	set(FLG_FOUR_MIHARI_2_DISAPPEAR)	// 358
 	set(FLG_FOUR_MIHARI_3_DISAPPEAR)	// 359
@@ -484,44 +472,65 @@ l_0xc6eeb4:
 	eob
 
 l_0xc6ef24:
-	"[06 65 01 {e(data_35.l_0xc7c588)}]"
+	goto_if_flag(FLG_FOUR_MIHARI_1_DISAPPEAR, data_35.l_0xc7c588)	// 0x0165, 357
 	call(l_0xc6f054)
 	call(data_23.l_0xc68562)
 	goto_if_true(data_23.l_0xc683de)
 	pause(1)
-	"[1F F1 6F 03 7B 02]"
+	npc_do_mc(879,635)	// 0x036F, 0x027B
 	set(FLG_FOUR_MIHARI_1_DISAPPEAR)	// 357
 	eob
 
 l_0xc6ef47:
-	"[06 66 01 {e(data_35.l_0xc7c588)}]"
+	goto_if_flag(FLG_FOUR_MIHARI_2_DISAPPEAR, data_35.l_0xc7c588)	// 0x0166, 358
 	call(l_0xc6f054)
 	call(data_23.l_0xc68562)
 	goto_if_true(data_23.l_0xc683de)
 	pause(1)
-	"[1F F1 70 03 7B 02]"
+	npc_do_mc(880,635)	// 0x0370, 0x027B
 	set(FLG_FOUR_MIHARI_2_DISAPPEAR)	// 358
 	eob
 
 l_0xc6ef6a:
-	"[06 67 01 {e(data_35.l_0xc7c588)}]"
-	call(l_0xc6f054) call(data_23.l_0xc68562)
-	"[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 71 03 7B 02]{set(flag 359)}" eob
+	goto_if_flag(FLG_FOUR_MIHARI_3_DISAPPEAR, data_35.l_0xc7c588)	// 0x0167, 359
+	call(l_0xc6f054)
+	call(data_23.l_0xc68562)
+	goto_if_true(data_23.l_0xc683de)
+	pause(1)
+	npc_do_mc(881,635)	// 0x0371, 0x027B
+	set(FLG_FOUR_MIHARI_3_DISAPPEAR)	// 359
+	eob
 
 l_0xc6ef8d:
-	"[06 68 01 {e(data_35.l_0xc7c588)}]"
-	call(l_0xc6f054) call(data_23.l_0xc68562)
-	"[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 72 03 7B 02]{set(flag 360)}" eob
+	goto_if_flag(FLG_FOUR_MIHARI_4_DISAPPEAR, data_35.l_0xc7c588)	// 0x0168, 360
+	call(l_0xc6f054)
+	call(data_23.l_0xc68562)
+	goto_if_true(data_23.l_0xc683de)
+	pause(1)
+	npc_do_mc(882,635)	// 0x0372, 0x027B
+	set(FLG_FOUR_MIHARI_4_DISAPPEAR)	// 360
+	eob
 
 l_0xc6efb0:
-	"[06 69 01 {e(data_35.l_0xc7c588)}]"
-	call(l_0xc6f054) call(data_23.l_0xc68562)
-	"[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 79 03 7B 02]{set(flag 361)}" eob
+	goto_if_flag(FLG_FOUR_MIHARI_5_DISAPPEAR, data_35.l_0xc7c588)	// 0x0169, 361
+	call(l_0xc6f054)
+	call(data_23.l_0xc68562)
+	goto_if_true(data_23.l_0xc683de)
+	pause(1)
+	npc_do_mc(889,635)	// 0x0379, 0x027B
+	set(FLG_FOUR_MIHARI_5_DISAPPEAR)	// 361
+	eob
 
 l_0xc6efd3:
-	"[06 6A 01 {e(data_35.l_0xc7c588)}]"
-	call(l_0xc6eff9) call(data_23.l_0xc68569)
-	"[1B 03 {e(data_23.l_0xc683de)}]{pause(1)}[1F F1 73 03 7B 02]{set(flag 362)}{set(flag 318)}" eob
+	goto_if_flag(FLG_FOUR_YUDANROBO_DISAPPEAR, data_35.l_0xc7c588)	// 0x016A, 362
+	call(l_0xc6eff9)
+	call(data_23.l_0xc68569)
+	goto_if_true(data_23.l_0xc683de)
+	pause(1)
+	npc_do_mc(883,635)	// 0x0373, 0x027B
+	set(FLG_FOUR_YUDANROBO_DISAPPEAR)	// 362
+	set(FLG_FOUR_BLDG_TONZURA_APPEAR)	// 318
+	eob
 
 l_0xc6eff9:
 	window_open(1)
@@ -537,12 +546,15 @@ l_0xc6f054:
 	window_open(1)
 	"@SECRET CODE, PLEASE." next
 	"@SAY YOUR CODE IN 10 SECONDS." next
-	"@10/|||, 9|||, 8//||, 7/||, 6||, 5//|, 4/|, 3|, 2//, 1//." window_closeall
+	"@10/|||, 9|||, 8//||, 7/||, 6||, 5//|, 4/|, 3|, 2//, 1//."
+	window_closeall
 	eob
 
 l_0xc6f0b5:
 	get_char_at_pos(1) rtoarg
-	"@{name(0)}, " swap call(data_37.l_0xc7e6b3) "..." next
+	"@{name(0)}, " swap
+	call(data_37.l_0xc7e6b3)
+	"..." next
 	"@Are you staying here tonight?" next
 	"@Thanks for being so generous with your tips..." next
 	"@...You never gave me a tip?... never mind..." end
@@ -557,7 +569,8 @@ l_0xc6f175:
 	title(1, Borges)
 	"@What?" next
 	"@Does Mr. Geldegarde Monotoly come here often?" next
-	"@Hello!{pause(20)}  Time to get up!!" next
+	"@Hello!" pause(20)
+	"  Time to get up!!" next
 	"@It could never happen!...  Well, actually that's not true." end
 
 l_0xc6f1d6:
@@ -579,7 +592,9 @@ l_0xc6f27c:
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc6f2e7)	// 0x91, 145
 	"@There's a loud noise outside." next
 	"@Must be the seventh inning stretch," next
-	"@and the fans are singing <Take me out to the ballgame> at the stadium.{wait}{set(flag 60)}" eob
+	"@and the fans are singing <Take me out to the ballgame> at the stadium." wait
+	set(FLG_FOUR_TONCHIKI_APPEAR)	// 60
+	eob
 
 l_0xc6f2e7:
 	"@Kids shouldn't drink alcohol.  It'll stunt your brain, stubby!" next
@@ -781,12 +796,14 @@ l_0xc6f9fd:
 	eob
 
 l_0xc6fa05:
-	load_registers swap
+	load_registers
+	swap
 	result_is(BAD_KEY_MACHINE)
 	eob
 
 l_0xc6fa0c:
-	load_registers swap
+	load_registers
+	swap
 	"@{name(0)} opened the locker using the {itemname(BAD_KEY_MACHINE)}."
 	sound(SND_PSI3)	// 119
 	promptw

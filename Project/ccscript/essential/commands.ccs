@@ -50,6 +50,18 @@ command two_choice_menu_not_cancellable(opt1, label1, opt2, label2) {
 		switch_entry(label2)
 }
 
+command two_choice_wallet_menu(opt1, label1, opt2, label2) {
+	load_str(opt1)
+	load_str(opt2)
+	show_wallet
+	print_strings_horizontal(2)
+	do_menu
+	clearline
+	switch_goto(2)
+		switch_entry(label1)
+		switch_entry(label2)
+}
+
 // Defines certain people (npc type person) as being possible to check.
 // By JTolmar
 

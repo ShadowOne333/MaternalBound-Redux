@@ -21,281 +21,751 @@ l_0xc7841e:
 
 l_0xc78433:
 	window_closeall
-	"[1F 1F 5F 01 06]"
-	"[1F F2 CD 00 45 00]"
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	sprite2_do_mc(205,69)	// 0x00CD, 0x0045
 	eob
 
 l_0xc78442:
 	window_closeall
-	"[1F 1F 5F 01 06]"
-	"[1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF]"
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	sprite2_spawn(106,72,1)	// 0x006A, 0x0048, 0x01
+
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	show_party(1)	// 0xFF, 0x01
+	party_unfreeze	// 0xFF
 	wait_movement
+
 	unset(FLG_BGM_BUS)	// 534
 	music_resume
 	restore_camera
-	"[1F E5 FF][1F EA CD 00]"
+	party_freeze	// 0xFF
+	sprite2_unfreeze(205)	// 0x00CD
 	wait_movement
+
 	unset(FLG_SYS_MONSTER_OFF)	// 11
-	"[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	eob
 
 l_0xc7847e:
-	"[1F 15 5F 01 C5 01 01]"
+	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
 	window_open(1)
-	"[06 D7 00 {e(l_0xc784ac)}]"
+	goto_if_flag(FLG_TLPT_SUMS, l_0xc784ac)	// 0x00D7, 215
 	"@Finally,| the bus can make its full run." next
-	goto(l_0xc784ac)
 
 l_0xc784ac:
 	get_party_size_times(2) swap
-	"@To Twoson,| it's going to cost $" number(0) call(l_0xc78569) "." next
+	"@To Twoson,| it's going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
 	two_choice_menu("Yes", l_0xc784ee, "No", l_0xc78926)
 	goto(l_0xc78926)
 
 l_0xc784ee:
-	"[1D 14 00 00 00 00][1B 03 {e(l_0xc7854a)}][1D 09 00 00]{open_wallet}{sound(118)}{set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01]@Ok, we're off![03]{window_closeall}[1F 1F 5F 01 06][1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF]"
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc7854a)
+	takemoney(0)	// 0x0000
+	show_wallet
+	sound(SND_CHICKEN2)	// 118
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
+	"@Ok, we're off!" promptw
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	sprite2_spawn(106,73,1)	// 0x006A, 0x0049, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
 	wait_movement
-	goto(l_0xc78536)
 
 l_0xc78536:
-	"[1F F2 CD 00 CB 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
+	sprite2_do_mc(205,203)	// 0x00CD, 0x00CB
+	hide_party	// 0xFF, 0x06
+	set(FLG_BGM_BUS)	// 534
+	music_resume
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc7854a:
-	"@I can't do much for you if you don't have any money...{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+	"@I can't do much for you if you don't have any money..." wait
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	eob
 
 l_0xc78569:
-	"{store_registers}[19 10 02][1D 0D 00 01 02][1B 03 {e(l_0xc78592)}][19 10 02][1D 0D 00 01 03][1B 03 {e(l_0xc78592)}] for the lot of you{load_registers}" eob
+	store_registers
+	get_char_at_pos(2)	// 0x02
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x00, 0x01, 0x02
+	goto_if_true(l_0xc78592)
+	get_char_at_pos(2)	// 0x02
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0x00, 0x01, 0x03
+	goto_if_true(l_0xc78592)
+	" for the lot of you"
+	load_registers
+	eob
 
 l_0xc78592:
-	"{load_registers}" eob
+	load_registers
+	eob
 
 l_0xc78595:
-	"{set(flag 316)}[1F ED][1F 15 CD 00 CC 00 FF][1F 21 3E][1F EF CD 00]" eob
+	set(FLG_TUNNEL_THRK_TWSN_BL)	// 316
+	restore_camera
+	sprite2_spawn(205,204,255)	// 0x00CD, 0x00CC, 0xFF
+	warp(62)	// 0x3E
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc785a9:
-	"[1F ED][1F 15 CD 00 CD 00 FF][1F 21 3D][1F EF CD 00]{unset(flag 316)}" eob
+	restore_camera
+	sprite2_spawn(205,205,255)	// 0x00CD, 0x00CD, 0xFF
+	warp(61)	// 0x3D
+	focus_camera_on_sprite2(205)	// 0x00CD
+	unset(FLG_TUNNEL_THRK_TWSN_BL)	// 316
+	eob
 
 l_0xc785bd:
-	"[1F 15 6A 00 48 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+	sprite2_spawn(106,72,1)	// 0x006A, 0x0048, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	show_party(1)	// 0xFF, 0x01
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	unset(FLG_BGM_BUS)	// 534
+	music_resume
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_unfreeze(205)	// 0x00CD
+	wait_movement
+
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	eob
 
 l_0xc785f1:
 	"@(Due to traffic jams,| bus service has been temporarily suspended." next
 	"@<Gray Hand Bus>)" end
 
 l_0xc78628:
-	"{isset(flag 136)}[1B 02 {e(l_0xc785f1)}]" call(data_16.l_0xc5ff21) "[1B 03 {e(data_16.l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule." next
-	"[06 0A 00 {e(data_16.l_0xc5fdca)}]@It looks like the next bus will come pretty soon.)[03]{window_closeall}[1F 15 CD 00 D9 00 01][1F 61]  {set(flag 10)}" eob
+	isset(FLG_DSRT_CLEAR)	// 136
+	goto_if_false(l_0xc785f1)
+	call(data_16.l_0xc5ff21) goto_if_true(data_16.l_0xc5ff4e)
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} checked the bus schedule." next
+	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
+	"@It looks like the next bus will come pretty soon.)" promptw
+	window_closeall
+
+	sprite2_spawn(205,217,1)	// 0x00CD, 0x00D9, 0x01
+	wait_movement
+
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc78689:
-	"[1F 15 5F 01 C5 01 01] {window_open(1)}[1D 15 02 00]{swap}@To Threek, it's going to cost $[1C 0A 00 00 00 00]" call(l_0xc78569) "." next
+	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+	window_open(1)
+	get_party_size_times(2)	swap
+	"@To Threek, it's going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc786c5:
-	" [19 02]No" eob
-
-l_0xc786cb:
-	"[1D 15 02 00]{swap}" call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc786e7)} {e(l_0xc78926)}]"
+	two_choice_menu("Yes", l_0xc786e7, "No", l_0xc78926)
 	goto(l_0xc78926)
 
 l_0xc786e7:
-	"[1D 14 00 00 00 00][1B 03 {e(l_0xc7854a)}][1D 09 00 00]{sound(118)}{open_wallet}{set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01]@Okay,| we're off![03]{window_closeall}[1F 1F 5F 01 06]   [1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61]"
-	goto(l_0xc78734)
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc7854a)
+	takemoney(0)	// 0x0000
+	sound(SND_CHICKEN2)	// 118
+	show_wallet
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
+	"@Okay,| we're off!" promptw
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	sprite2_spawn(106,73,1)	// 0x006A, 0x0049, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	wait_movement
 
 l_0xc78734:
-	"[1F F2 CD 00 DA 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
+	sprite2_do_mc(205,218)	// 0x00CD, 0x00DA
+	hide_party	// 0xFF, 0x06
+	set(FLG_BGM_BUS)	// 534
+	music_resume
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78748:
-	"{isset(flag 136)}[1B 02 {e(l_0xc785f1)}]" call(data_16.l_0xc5ff30) "[1B 03 {e(data_16.l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule." next
-	"[06 0A 00 {e(data_16.l_0xc5fdca)}]@It looks like the next bus will come pretty soon.)[03]{window_closeall}[1F 15 CD 00 DB 00 01][1F 61]  {set(flag 10)}" eob
+	isset(FLG_DSRT_CLEAR)	// 136
+	goto_if_false(l_0xc785f1)
+	call(data_16.l_0xc5ff30)
+	goto_if_true(data_16.l_0xc5ff4e)
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} checked the bus schedule." next
+	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
+	"@It looks like the next bus will come pretty soon.)" promptw
+	window_closeall
+
+	sprite2_spawn(205,219,1)	// 0x00CD, 0x00DB, 0x01
+	wait_movement
+
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc787a9:
-	"[1F 15 5F 01 C6 01 01] {window_open(1)}[1D 15 02 00]{swap}@This bus goes to Fourside." next
-	"@I can't let you on if you don't pay $[1C 0A 00 00 00 00] for the fare." next
+	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
+	window_open(1)
+	get_party_size_times(2)	swap
+	"@This bus goes to Fourside." next
+	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc78806)} {e(data_32.l_0xc781ce)}]"
+	two_choice_menu("Yes", l_0xc78806, "No", data_32.l_0xc781ce)
 	goto(data_32.l_0xc781ce)
 
 l_0xc78806:
-	"[1D 14 00 00 00 00][1B 03 {e(data_32.l_0xc78240)}][1D 09 00 00]{open_wallet}{sound(118)}{set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01]@Ok,| we're off![03]{window_closeall}[1F 1F 5F 01 06]   [1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61]"
-	goto(l_0xc78852)
+	hasmoney(0)	// 0x00000000
+	goto_if_false(data_32.l_0xc78240)
+	takemoney(0)	// 0x0000
+	show_wallet
+	sound(SND_CHICKEN2)	// 118
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
+	"@Ok,| we're off!" promptw
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	sprite2_spawn(106,73,1)	// 0x006A, 0x0049, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	wait_movement
 
 l_0xc78852:
-	"[1F F2 CD 00 DC 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
+	sprite2_do_mc(205,220)	// 0x00CD, 0x00DC
+	hide_party	// 0xFF, 0x06
+	set(FLG_BGM_BUS)	// 534
+	music_resume
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78866:
-	"[1F 15 5F 01 C6 01 01] {window_open(1)}[1D 15 02 00]{swap}@This bus goes to Fourside." next
-	"@I can't let you on if you don't pay $[1C 0A 00 00 00 00] for the fare." next
+	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
+	window_open(1)
+	get_party_size_times(2)	swap
+	"@This bus goes to Fourside." next
+	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc788c3)} {e(data_32.l_0xc781ce)}]"
+	two_choice_menu("Yes", l_0xc788c3, "No", data_32.l_0xc781ce)
 	goto(data_32.l_0xc781ce)
 
 l_0xc788c3:
-	"[1D 14 00 00 00 00][1B 03 {e(data_32.l_0xc78240)}][1D 09 00 00]{open_wallet}{sound(118)}@Ok,| we're off![03]{window_closeall}[1F 1F 5F 01 06]   {set(flag 11)}[1F 41 05][1F 15 B9 01 09 03 01][1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61]{unset(flag 71)}[1F F2 CD 00 CF 00][1F EB FF 06]{set(flag 534)}{music_resume}[1F EF CD 00]" eob
+	hasmoney(0)	// 0x00000000
+	goto_if_false(data_32.l_0xc78240)
+	takemoney(0)	// 0x0000
+	show_wallet
+	sound(SND_CHICKEN2)	// 118
+	"@Ok,| we're off!" promptw
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
+	sprite2_spawn(106,73,1)	// 0x006A, 0x0049, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	unset(FLG_WIN_GEPPU)	// 71
+	sprite2_do_mc(205,207)	// 0x00CD, 0x00CF
+	hide_party	// 0xFF, 0x06
+	set(FLG_BGM_BUS)	// 534
+	music_resume
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78926:
-	"@Oh...{pause(5)} okay...| see you!{wait}{window_closeall}[1F 1F 5F 01 06]   " eob
+	"@Oh.../ okay...| see you!" wait
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	eob
 
 l_0xc78943:
-	"{set(flag 71)}[1F ED][1F 15 CD 00 D0 00 FF][1F 21 46][1F EF CD 00]" eob
+	set(FLG_WIN_GEPPU)	// 71
+	restore_camera
+	sprite2_spawn(205,208,255)	// 0x00CD, 0x00D0, 0xFF
+	warp(70)	// 0x46
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78957:
-	"[1F ED][1F 15 CD 00 D1 00 FF][1F 21 CE][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,209,255)	// 0x00CD, 0x00D1, 0xFF
+	warp(206)	// 0xCE
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78968:
-	"[1F ED][1F 15 CD 00 D2 00 FF][1F 21 CF][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,210,255)	// 0x00CD, 0x00D2, 0xFF
+	warp(207)	// 0xCF
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78979:
-	"[1F ED][1F 15 CD 00 D3 00 FF][1F 21 48][1F EF CD 00][1F 61][1F E7 CD 00] [1F 15 5F 01 C6 01 01] {window_open(1)}@This bus goes to Fourside." next
+	restore_camera
+	sprite2_spawn(205,211,255)	// 0x00CD, 0x00D3, 0xFF
+	warp(72)	// 0x48
+	focus_camera_on_sprite2(205)	// 0x00CD
+	wait_movement
+
+	sprite2_freeze(205)	// 0x00CD
+	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
+
+	window_open(1)
+	"@This bus goes to Fourside." next
 	"@Do you want to get off here?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc789bb:
-	" [19 02]No" eob
-
-l_0xc789c1:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc789de)} {e(l_0xc789d0)}]"
-	goto(l_0xc789d0)
+	two_choice_menu("Yes", l_0xc789de, "No", l_0xc789d0)
 
 l_0xc789d0:
-	"{window_closeall}[1F 1F 5F 01 06]   "
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
 	goto(l_0xc78852)
 
 l_0xc789de:
-	"{window_closeall}[1F 1F 5F 01 06]   {unset(flag 534)}{music_resume}[1F 15 6A 00 47 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F EC FF 01][1F 61][1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]" eob
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	unset(FLG_BGM_BUS)	// 534
+	music_resume
+	sprite2_spawn(106,71,1)	// 0x006A, 0x0047, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	show_party(1)	// 0xFF, 0x01
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_unfreeze(205)	// 0x00CD
+	wait_movement
+
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	eob
 
 l_0xc78a1b:
-	"[1F ED][1F 15 CD 00 D4 00 FF][1F 21 4A][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,212,255)	// 0x00CD, 0x00D4, 0xFF
+	warp(74)	// 0x4A
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78a2c:
-	"[1F ED][1F 15 CD 00 D5 00 FF][1F 21 D0][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,213,255)	// 0x00CD, 0x00D5, 0xFF
+	warp(208)	// 0xD0
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78a3d:
-	"[1F ED][1F 15 CD 00 D6 00 FF][1F 21 D1][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,214,255)	// 0x00CD, 0x00D6, 0xFF
+	warp(209)	// 0xD1
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78a4e:
-	"[1F ED][1F 15 CD 00 D7 00 FF][1F 21 4C][1F EF CD 00]" eob
+	restore_camera
+	sprite2_spawn(205,215,255)	// 0x00CD, 0x00D7, 0xFF
+	warp(76)	// 0x4C
+	focus_camera_on_sprite2(205)	// 0x00CD
+	eob
 
 l_0xc78a5f:
-	"[1F 15 6A 00 47 00 01]{pause(1)}[1F EF 6A 00][1F EC FF 01][1F E8 FF][1F 61]{unset(flag 534)}{music_resume}[1F ED][1F E5 FF][1F EA CD 00][1F 61]" call(data_55.l_0xc99c53) "{unset(flag 11)}[1F 41 06][1F 15 B9 01 0A 03 01]{set(flag 214)}{unset(flag 590)}" eob
+	sprite2_spawn(106,71,1)	// 0x006A, 0x0047, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	show_party(1)	// 0xFF, 0x01
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	unset(FLG_BGM_BUS)	// 534
+	music_resume
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_unfreeze(205)	// 0x00CD
+	wait_movement
+
+	call(data_55.l_0xc99c53)
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	set(FLG_TLPT_FOUR)	// 214
+	unset(FLG_THRK_PEOPLE_APPEAR)	// 590
+	eob
 
 l_0xc78a9e:
-	call(data_16.l_0xc5ff3f) "[1B 03 {e(data_16.l_0xc5ff4e)}][19 10 01]{rtoarg}@([1C 02 00] checked the bus schedule." next
-	"[06 0A 00 {e(data_16.l_0xc5fdca)}]@It looks like the next bus will come soon.)[03]{window_closeall}[1F 15 CD 00 C7 01 01][1F 61]  {set(flag 10)}" eob
+	call(data_16.l_0xc5ff3f)
+	goto_if_true(data_16.l_0xc5ff4e)
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} checked the bus schedule." next
+	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
+	"@It looks like the next bus will come soon.)" promptw
+	window_closeall
+
+	sprite2_spawn(205,455,1)	// 0x00CD, 0x01C7, 0x01
+	wait_movement
+
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc78af3:
-	"[1F 15 5F 01 C5 01 01] {window_open(1)}@This bus goes to Twoson via Threek." next
-	"[1D 15 02 00]{swap}@It is going to cost $[1C 0A 00 00 00 00]" call(l_0xc78569) "." next
+	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+	window_open(1)
+	"@This bus goes to Twoson via Threek." next
+	get_party_size_times(2)	swap
+	"@It is going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc78b4e)} {e(l_0xc78926)}]"
+	two_choice_menu("Yes", l_0xc78b4e, "No", l_0xc78926)
 	goto(l_0xc78926)
 
 l_0xc78b4e:
-	"[1D 14 00 00 00 00][1B 03 {e(l_0xc7854a)}][1D 09 00 00]{open_wallet}{sound(118)}@Ok,| we're off![03]{window_closeall}[1F 1F 5F 01 06]   {set(flag 11)}  [1F 41 05][1F 15 B9 01 09 03 01][1F 15 6A 00 49 00 01]{pause(1)}[1F EF 6A 00][1F E8 FF][1F 61]  {set(flag 534)}{music_resume}[1F F2 CD 00 C8 01] [1F EB FF 06][1F EF CD 00][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 C9 01 FF] [1F 21 4B] [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 CA 01 FF] [1F 21 D2] [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 CB 01 FF] [1F 21 D3] [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 CC 01 FF] [1F 21 49]   [1F EF CD 00][1F E8 FF][1F 61]  [1F E7 CD 00][1F 15 5F 01 C5 01 01] {window_open(1)}@This bus continues on to Twoson." next
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc7854a)
+	takemoney(0)	// 0x0000
+	show_wallet
+	sound(SND_CHICKEN2)	// 118
+	"@Ok,| we're off!" promptw
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 1
+	sprite2_spawn(106,73,1)	// 0x006A, 0x0049, 1
+	pause(1)
+	focus_camera_on_sprite2(106)
+	party_unfreeze
+	wait_movement
+
+	set(FLG_BGM_BUS)	// 534
+	music_resume
+
+	sprite2_do_mc(205,456)	// 0x00CD, 0x01C8
+	hide_party	// 0xFF, 0x06
+	focus_camera_on_sprite2(205)	// 0x00CD
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,457,-1)	// 0x00CD, 0x01C9, 0xFF
+	warp(75)	// 0x4B
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,458,-1)	// 0x00CD, 0x01CA, 0xFF
+	warp(210)	// 0xD2
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,459,-1)	// 0x00CD, 0x01CB, 0xFF
+	warp(211)	// 0xD3
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,460,-1)	// 0x00CD, 0x01CC, 0xFF
+	warp(73)	// 0x49
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	sprite2_freeze(205)	// 0x00CD
+	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+
+	window_open(1)
+	"@This bus continues on to Twoson." next
 	"@Do you want to get off here?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc78c5c:
-	" [19 02]No" eob
-
-l_0xc78c62:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc78c7f)} {e(l_0xc78c71)}]"
-	goto(l_0xc78c71)
+	two_choice_menu("Yes", l_0xc78c7f, "No", l_0xc78c71)
 
 l_0xc78c71:
-	"{window_closeall}[1F 1F 5F 01 06]   "
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
 	goto(l_0xc78734)
 
 l_0xc78c7f:
-	"{window_closeall}[1F 1F 5F 01 06]   {unset(flag 534)}{music_resume}[1F 15 6A 00 47 00 01]  {pause(1)}[1F EF 6A 00][1F E8 FF][1F EC FF 01][1F 61][1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}  [1F 41 06][1F 15 B9 01 0A 03 01]" eob
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	unset(FLG_BGM_BUS)	// 534
+	music_resume
+	sprite2_spawn(106,71,1)	// 0x006A, 0x0047, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	show_party(1)	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_unfreeze(205)	// 0x00CD
+	wait_movement
+
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x0309, 1
+	eob
 
 l_0xc78cc0:
-	"[1F ED][1F 15 CD 00 CD 01 FF] [1F 21 47]   [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 CE 01 FF] [1F 21 D4]   [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 CF 01 FF] [1F 21 D5]   [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F 15 CD 00 D0 01 FF] [1F 21 45]   [1F EF CD 00][1F E8 FF][1F 61]  [1F ED][1F E5 FF][1F E7 CD 00] [1F 15 5F 01 C5 01 01] {window_open(1)}@This bus continues on to Twoson." next
+	restore_camera
+	sprite2_spawn(205,461,255)	// 0x00CD, 0x01CD, 0xFF
+	warp(71)	// 0x47
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,462,255)	// 0x00CD, 0x01CE, 0xFF
+	warp(212)	// 0xD4
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,463,255)	// 0x00CD, 0x01CF, 0xFF
+	warp(213)	// 0xD5
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_spawn(205,464,255)	// 0x00CD, 0x01D0, 0xFF
+	warp(69)	// 0x45
+	focus_camera_on_sprite2(205)	// 0x00CD
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	party_freeze	// 0xFF
+	sprite2_freeze(205)	// 0x00CD
+	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+
+	window_open(1)
+	"@This bus continues on to Twoson." next
 	"@Do you want to get off here?" linebreak
-	"[19 02]Yes" eob
-
-l_0xc78d6c:
-	" [19 02]No" eob
-
-l_0xc78d72:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc78d8f)} {e(l_0xc78d81)}]"
-	goto(l_0xc78d81)
+	two_choice_menu("Yes", l_0xc78d8f, "No", l_0xc78d81)
 
 l_0xc78d81:
-	"{window_closeall}[1F 1F 5F 01 06]   "
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
 	goto(l_0xc78536)
 
 l_0xc78d8f:
-	"{window_closeall}[1F 1F 5F 01 06]   {unset(flag 534)}{music_resume}[1F 15 6A 00 47 00 01]  {pause(1)}[1F EF 6A 00][1F E8 FF][1F EC FF 01][1F 61][1F ED][1F E5 FF][1F EA CD 00][1F 61]{unset(flag 11)}  [1F 41 06][1F 15 B9 01 0A 03 01]" eob
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	unset(FLG_BGM_BUS)	// 534
+	music_resume
+	sprite2_spawn(106,71,1)	// 0x006A, 0x0047, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)
+	party_unfreeze
+	show_party(1)
+	wait_movement
+
+	restore_camera
+	party_freeze
+	sprite2_unfreeze(205)
+	wait_movement
+
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_off	// event(6)
+	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 1
+	eob
 
 l_0xc78dd0:
-	"@It is going to cost $[1C 0A 00 00 00 00]" call(l_0xc78569) "." next
+	"@It is going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc78e20)} {e(l_0xc78dff)}]"
-	goto(l_0xc78dff)
+	two_choice_menu("Yes", l_0xc78e20, "No", l_0xc78dff)
 
 l_0xc78dff:
 	"@Oh...| okay...| see you!"
-	goto(l_0xc78e11)
 
 l_0xc78e11:
-	"{wait}{counter(1)}{ctoarg}{swap}{window_closeall}[1F 1F 5F 01 06]" eob
+	wait
+	counter(1)
+	ctoarg
+	swap
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	eob
 
 l_0xc78e20:
-	"[1D 14 00 00 00 00][1B 03 {e(l_0xc78e49)}][1D 09 00 00]{open_wallet}@Ok,| we're off!{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc78e49)
+	takemoney(0)	// 0x0000
+	show_wallet
+	"@Ok,| we're off!" wait
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	eob
 
 l_0xc78e49:
 	"@I can't let you on if you don't pay."
 	goto(l_0xc78e11)
 
 l_0xc78e60:
-	"@I can't let you on if you don't pay $[1C 0A 00 00 00 00] for the fare." next
+	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
-	call(data_36.l_0xc7dd4d) "[11]{clearline}[09 02 {e(l_0xc78ed8)} {e(l_0xc78e98)}]"
-	goto(l_0xc78e98)
+	two_choice_menu("Yes", l_0xc78ed8, "No", l_0xc78e98)
 
 l_0xc78e98:
 	"@If you don't have any money, you should just stroll around." next
-	"@Besides,| walking is good for you.{counter(1)}{ctoarg}{swap}{wait}{window_closeall}[1F 1F 5F 01 06]" eob
+	"@Besides,| walking is good for you."
+	counter(1)
+	ctoarg
+	swap
+	wait
+	window_closeall
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	eob
 
 l_0xc78ed8:
-	"[1D 14 00 00 00 00][1B 03 {e(l_0xc78e98)}][1D 09 00 00]{open_wallet}{sound(118)}@Okay,| let's give it a shot!{wait}{window_closeall}[1F 1F 5F 01 06]{counter(0)}{ctoarg}{swap}" eob
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc78e98)
+	takemoney(0)	// 0x0000
+	show_wallet
+	sound(SND_CHICKEN2)	// 118
+	"@Okay,| let's give it a shot!" wait
+	window_closeall
+
+	sprite2_delete(351,6)	// 0x015F, 0x06
+	counter(0)
+	ctoarg
+	swap
+	eob
 
 l_0xc78f12:
-	"{window_open(1)}{sound(96)}@Woooo!" pause(20)
+	window_open(1)
+	sound(SND_POSSESSED)	// 96
+	"@Woooo!" pause(20)
 	"  Wooo!" pause(15)
 	"  Wooooooo!" next
 	"@(Go back!" pause(15)
-	"  Go back!)[03]{window_closeall}" eob
+	"  Go back!)" promptw
+	window_closeall
+	eob
 
 l_0xc78f4a:
-	"{window_open(1)}{sound(96)}@Woooo!" pause(20)
+	window_open(1)
+	sound(SND_POSSESSED)	// 96
+	"@Woooo!" pause(20)
 	"  Wooo!" pause(15)
 	"  Wooooooo!" next
 	"@(Go back!" pause(15)
-	"  Go back!)[03]{window_closeall}[1F 15 31 01 5B 00 01][1F 15 31 01 5C 00 01][1F 61][06 38 01 {e(l_0xc78fb1)}][1F 21 0F][1F 15 6A 00 5D 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F ED]{unset(flag 315)}" eob
+	"  Go back!)" promptw
+	window_closeall
+
+	sprite2_spawn(305,91,1)	// 0x0131, 0x005B, 0x01
+	sprite2_spawn(305,92,1)	// 0x0131, 0x005C, 0x01
+	wait_movement
+
+	goto_if_flag(FLG_TUNNEL_TWSN_THRK_WR, l_0xc78fb1)	// 0x0138, 312
+	warp(15)	// 0x0F
+	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	unset(FLG_TUNNEL_THRK_TWSN_WL)	// 315
+	eob
 
 l_0xc78fb1:
-	"[1F 21 12][1F 15 6A 00 5D 00 01][1F EF 6A 00][1F E8 FF][1F 61][1F ED]{unset(flag 312)}" eob
+	warp(18)	// 0x12
+	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
+	focus_camera_on_sprite2(106)	// 0x006A
+	party_unfreeze	// 0xFF
+	wait_movement
+
+	restore_camera
+	unset(FLG_TUNNEL_TWSN_THRK_WR)	// 312
+	eob
 
 l_0xc78fca:
-	"{window_open(1)}{sound(96)}@Woooo!" pause(20)
+	window_open(1)
+	sound(SND_POSSESSED)	// 96
+	"@Woooo!" pause(20)
 	"  Wooo!" pause(15)
 	"  Wooooooo!" next
 	"@(Go back!" pause(15)
-	"  Go back!)[03]{window_closeall}[1F 15 31 01 63 00 01][1F 15 31 01 64 00 01][1F 61][1F 21 10][1F 15 6A 00 5D 00 01][1F EF 6A 00][1F E9 FF 00][1F 61][1F ED]" eob
+	"  Go back!)" promptw
+	window_closeall
+
+	sprite2_spawn(305,99,1)	// 0x0131, 0x0063, 0x01
+	sprite2_spawn(305,100,1)	// 0x0131, 0x0064, 0x01
+	wait_movement
+
+	warp(16)	// 0x10
+	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
+	focus_camera_on_sprite2(106)	// 0x006A
+	npc_unfreeze(-1)	// 0x00FF
+	wait_movement
+
+	restore_camera
+	eob
 
 l_0xc79028:
-	"[1F F1 DE 00 65 00][1F 61]{set(flag 4)}" eob
+	npc_do_mc(222,101)	// 0x00DE, 0x0065
+	wait_movement
+	set(FLG_TEMP_3)	// 4
+	eob
 
 l_0xc79034:
-	"[1F F1 DE 00 5C 02]" eob
+	npc_do_mc(222,604)	// 0x00DE, 0x025C
+	eob
 
 l_0xc7903b:
-	"{window_closeall}[1F F1 D9 00 88 00][1F 61][1F E6 D9 00][19 10 01][19 22 00 02 D9 00][1F 13 00 00]{window_open(1)}" eob
+	window_closeall
+	npc_do_mc(217,136)	// 0x00D9, 0x0088
+	wait_movement
+
+	npc_freeze(217)	// 0x00D9
+	get_char_at_pos(1)	// 0x01
+	get_dir_from_char(0,TO_NPC,217)	// 0x00, 0x02, 0x00D9
+	char_direction(0,0)	// 0x00, 0x00
+	window_open(1)
+	eob
 
 l_0xc7905a:
-	"[1F 1A A4 01 03]{pause(60)}[1F 1B A4 01][1F E9 A4 01][1F 61][1F E6 A4 01]{window_open(1)}"
+	show_npc_float(420,3)	// 0x01A4, 0x03
+	pause(60)
+	hide_npc_float(420)	// 0x01A4
+	npc_unfreeze(420)	// 0x01A4
+	wait_movement
+
+	npc_freeze(420)	// 0x01A4
+	window_open(1)
 	goto(data_54.l_0xc9894e)
 
 l_0xc79077:
@@ -303,30 +773,72 @@ l_0xc79077:
 	eob
 
 l_0xc7907a:
-	"[1F F1 A4 01 0C 00]"
+	npc_do_mc(420,12)	// 0x01A4, 0x000C
 	eob
 
 l_0xc79081:
-	"[1F F1 A4 01 87 00]"
+	npc_do_mc(420,135)	// 0x01A4, 0x0087
 	eob
 
 l_0xc79088:
 	"@(For some weird reason," next
 	"@a pencil-shaped iron statue is blocking the path.)" end
 
+_pencil_check:
+	if flag FLG_KEY_ITEMS {
+		store_registers_shared
+		swap
+		store_registers
+		get_action_arg
+	}
+	else {
+		store_registers_shared
+		get_inventory_item(0,0)
+		store_registers swap
+	}
+	eob
+
 l_0xc790c4:
-	call(data_36.l_0xc7dd2c) "{result_is(184)}[1B 02 {e(data_35.l_0xc7c6f1)}]" call(l_0xc7911e) "[1F 1E C2 01 0A]{window_closeall}{set(flag 284)}{set(flag 482)}" eob
+	call(_pencil_check)
+	result_is(PENCIL_ERASER)
+	goto_if_false(data_35.l_0xc7c6f1)
+
+	call(l_0xc7911e)
+	npc_delete(450,10)	// 0x01C2, 0x0A
+	window_closeall
+	set(FLG_GRFD_LLPT_TACO_DISAPPEAR)	// 284
+	set(FLG_PHOTO_RIVER)	// 482
+	eob
 
 l_0xc790e4:
-	call(data_36.l_0xc7dd2c) "{result_is(184)}[1B 02 {e(data_35.l_0xc7c6f1)}]" call(l_0xc7911e) "[1F 1E 3B 03 0A]{window_closeall}{set(flag 516)}" eob
+	call(_pencil_check)
+	result_is(PENCIL_ERASER)
+	goto_if_false(data_35.l_0xc7c6f1)
+
+	call(l_0xc7911e)
+	npc_delete(827,10)	// 0x033B, 0x0A
+	window_closeall
+	set(FLG_DSRT_SARU_TACO_DISAPPEAR)	// 516
+	eob
 
 l_0xc79101:
-	call(data_36.l_0xc7dd2c) "{result_is(184)}[1B 02 {e(data_35.l_0xc7c6f1)}]" call(l_0xc7911e) "[1F 1E 85 02 0A]{window_closeall}{set(flag 609)}" eob
+	call(_pencil_check)
+	result_is(PENCIL_ERASER)
+	goto_if_false(data_35.l_0xc7c6f1)
+
+	call(l_0xc7911e)
+	npc_delete(645,10)	// 0x0285, 0x0A
+	window_closeall
+	set(FLG_WINS_TACO_DISAPPEAR)	// 609
+	eob
 
 l_0xc7911e:
-	"[19 10 01]{rtoarg}@[1C 02 00] used the Pencil eraser." next
+	get_char_at_pos(1) rtoarg
+	"@{name(0)} used the Pencil eraser." next
 	"@For some weird reason, the iron pencil statue" linebreak
-	"  was erased![03]{sound(33)}" eob
+	"  was erased!" promptw
+	sound(SND_ENEMYDEATH)	// 33
+	eob
 
 l_0xc7916c:
 	music(115)
@@ -334,7 +846,7 @@ l_0xc7916c:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
-	
+
 	window_open(1)
 	"@Hello... this is the Apple Kid." next
 	title(1, Apple)
@@ -354,40 +866,94 @@ l_0xc7916c:
 	eob
 
 l_0xc79211:
-	"[1F F1 E2 00 78 00]"
+	npc_do_mc(226,120)	// 0x00E2, 0x0078
 	wait_movement
 	eob
 
 l_0xc7921a:
-	"[1F F1 E2 00 79 00]"
+	npc_do_mc(226,121)	// 0x00E2, 0x0079
 	wait_movement
 	eob
 
 l_0xc79223:
-	"[1F E5 FF][1F 07 03]{window_closeall}[1F 15 6A 00 64 01 01][1F 61]" call(l_0xc7930c) "[1F 15 3C 01 65 01 01][1F 15 6A 00 63 01 01] [1F E4 6A 00 02][1F 15 11 01 69 01 01][1F 15 11 01 6A 01 01][1F 15 5A 01 66 01 01] [1F 15 BA 00 67 01 01]       [1F 15 B9 00 6B 01 01]   [1F 15 BB 00 6C 01 01]       {pause(1)}[1F EF 6A 00]{pause(1)}" eob
+	party_freeze	// 0xFF
+	music_effect(3)	// 0x03
+	window_closeall
+
+	sprite2_spawn(106,356,1)	// 0x006A, 0x0164, 0x01
+	wait_movement
+
+	call(l_0xc7930c)
+	sprite2_spawn(316,357,1)	// 0x013C, 0x0165, 0x01
+	sprite2_spawn(106,355,1)	// 0x006A, 0x0163, 0x01
+	sprite2_direction(106,2)	// 0x006A, 0x02
+	sprite2_spawn(273,361,1)	// 0x0111, 0x0169, 0x01
+	sprite2_spawn(273,362,1)	// 0x0111, 0x016A, 0x01
+	sprite2_spawn(346,358,1)	// 0x015A, 0x0166, 0x01
+	sprite2_spawn(186,359,1)	// 0x00BA, 0x0167, 0x01
+	sprite2_spawn(185,363,1)	// 0x00B9, 0x016B, 0x01
+	sprite2_spawn(187,364,1)	// 0x00BB, 0x016C, 0x01
+	pause(1)
+	focus_camera_on_sprite2(106)	// 0x006A
+	pause(1)
+	eob
 
 l_0xc79287:
-	"{music(76)}[1F E8 FF][1F F2 5A 01 72 01][1F F2 BA 00 72 01][1F F2 B9 00 72 01][1F F2 BB 00 73 01]{pause(80)}[1F 15 95 00 6D 01 01]   [1F 15 96 00 70 01 01] [1F 61][1F 15 B8 00 6F 01 01] [1F 15 B2 01 6E 01 01] [1F 61]                                              [1F F2 3C 01 71 01]{music_resume}" eob
+	music(76)
+	party_unfreeze	// 0xFF
+	sprite2_do_mc(346,370)	// 0x015A, 0x0172
+	sprite2_do_mc(186,370)	// 0x00BA, 0x0172
+	sprite2_do_mc(185,370)	// 0x00B9, 0x0172
+	sprite2_do_mc(187,371)	// 0x00BB, 0x0173
+	pause(80)
+	sprite2_spawn(149,365,1)	// 0x0095, 0x016D, 0x01
+	sprite2_spawn(150,368,1)	// 0x0096, 0x0170, 0x01
+	wait_movement
+
+	sprite2_spawn(184,367,1)	// 0x00B8, 0x016F, 0x01
+	sprite2_spawn(434,366,1)	// 0x01B2, 0x016E, 0x01
+	wait_movement
+
+	sprite2_do_mc(316,369)	// 0x013C, 0x0171
+	music_resume
+	eob
 
 l_0xc792dc:
-	"[1F ED][1F 1F 6A 00 06][1F 1F 5A 01 06][1F 1F BA 00 06][1F 1F B9 00 06][1F 1F BB 00 06][1F 1F 11 01 06]{pause(1)}[1F 1F 11 01 06]{unset(flag 751)}[1F 21 E6]{pause(1)}" eob
+	restore_camera
+	sprite2_delete(106,6)	// 0x006A, 0x06
+	sprite2_delete(346,6)	// 0x015A, 0x06
+	sprite2_delete(186,6)	// 0x00BA, 0x06
+	sprite2_delete(185,6)	// 0x00B9, 0x06
+	sprite2_delete(187,6)	// 0x00BB, 0x06
+	sprite2_delete(273,6)	// 0x0111, 0x06
+	pause(1)
+	sprite2_delete(273,6)	// 0x0111, 0x06
+	unset(FLG_TWSN_CHAOS_ONSTAGE)	// 751
+	warp(230)	// 0xE6
+	pause(1)
+	eob
 
 l_0xc7930c:
-	"{window_open(1)}@Yeah!" pause(20)
+	window_open(1)
+	"@Yeah!" pause(20)
 	"  That's right!" next
 	"@Tonight,| you got the Chaos Theater's Soul Men comin' at ya!" next
 	"@Rockin' and rollin' live on this here stage for a limited time only!" next
 	"@The world's greatest Bluesmen," next
 	"@the Runaway Brothers!" pause(20)
 	"  And here they come!" pause(15)
-	"  Oh yeah!{pause(10)}  Baby![03]{window_closeall}" eob
+	"  Oh yeah!" pause(10)
+	"  Baby!" promptw
+	window_closeall
+	eob
 
 l_0xc793be:
 	"@A young fan like you really gets into the Runaway Brothers' music?" next
 	"@Wow,| I'm impressed!" end
 
 l_0xc793f3:
-	"[06 3F 01 {e(l_0xc79413)}]@Seeing the Runaway Brothers on stage is my life..." end
+	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc79413)	// 0x013F, 319
+	"@Seeing the Runaway Brothers on stage is my life..." end
 
 l_0xc79413:
 	"@The Runaway Brothers are so sexy!" pause(20)
@@ -395,7 +961,8 @@ l_0xc79413:
 	"@in need of some help in that area!" end
 
 l_0xc7944e:
-	"[06 3F 01 {e(l_0xc79489)}]@When I sit close to the stage," next
+	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc79489)	// 0x013F, 319
+	"@When I sit close to the stage," next
 	"@sometimes I get sweat or spit on me from the Runaway Brothers." end
 
 l_0xc79489:
@@ -404,11 +971,11 @@ l_0xc79489:
 l_0xc7949e:
 	unset(FLG_TEMP_1)	// 2
 	unset(FLG_TEMP_2)	// 3
-	"[1F E9 B7 01]"
+	npc_unfreeze(439)	// 0x01B7
 	wait_movement
-	"[1F E6 B7 01]"
+
+	npc_freeze(439)	// 0x01B7
 	window_open(1)
-	goto(l_0xc794b1)
 
 l_0xc794b1:
 	title(1, Porky)
@@ -421,22 +988,26 @@ l_0xc794b1:
 	"@I'm not going to fight you,| but these guys will..." pause(15) linebreak
 	"  Later potater..." promptw
 	window_closeall
-	unset(flag 11)
-	unset(flag 45)
-	"[1F E9 B7 01]"
+
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	unset(FLG_GRFD_POKEY_APPEAR)	// 45
+	npc_unfreeze(439)	// 0x01B7
 	wait_movement
-	"[1F F1 B8 01 12 01]"
-	"[1F F1 B9 01 13 01]"
-	"[1F F1 BA 01 14 01]"
+
+	npc_do_mc(440,274)	// 0x01B8, 0x0112
+	npc_do_mc(441,275)	// 0x01B9, 0x0113
+	npc_do_mc(442,276)	// 0x01BA, 0x0114
 	wait_movement
-	"[1F E6 B8 01]"
-	"[1F E6 B9 01]"
-	"[1F E6 BA 01]"
-	call(data_23.l_0xc68531) goto_if_true(l_0xc795bd)
+
+	npc_freeze(440)	// 0x01B8
+	npc_freeze(441)	// 0x01B9
+	npc_freeze(442)	// 0x01BA
+	call(data_23.l_0xc68531)
+	goto_if_true(l_0xc795bd)
 	pause(1)
-	"[1F F1 B8 01 7B 02]"
-	"[1F F1 B9 01 7B 02]"
-	"[1F F1 BA 01 7B 02]"
+	npc_do_mc(440,635)	// 0x01B8, 0x027B
+	npc_do_mc(441,635)	// 0x01B9, 0x027B
+	npc_do_mc(442,635)	// 0x01BA, 0x027B
 	pause(60)
 	OSS_off	// event(6)
 	eob
@@ -466,7 +1037,7 @@ rescuepaula:
 	window_closeall
 
 	sound(SND_PSI3)	// 119
-	hide_sprite(436, 6)
+	hide_sprite(436,6)
 	pause(60)
 
 	window_open(1)
@@ -494,7 +1065,8 @@ rescuepaula:
 	window_open(1)
 	"@{name(2)} joined you." promptw
 	window_closeall
-	set(FLG_POLA_GRFD)		// 13
+
+	set(FLG_POLA_GRFD)	// 13
 	set(FLG_WARP_GRFD_YAMAGOYA)	// 198
 	unset(FLG_TWSN_PAUL_UPSET)	// 118
 	set(FLG_TWSN_INFO_TONCHIKI)	// 321
@@ -509,24 +1081,28 @@ l_0xc796ee:
 
 l_0xc79707:
 	npc_freeze(217)	// 0xD9, 217
-	goto(l_0xc7970b)
 
 l_0xc7970b:
-	counter(2) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc798fe)
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc798fe)
+
 	window_open(1)
 	title(1, MrJones)
 	"@Oh {name(2)}!" promptw
 	window_closeall
-	"[19 22 01 02 D9 00]"
-	"[1F 13 01 00]"
-	"[19 22 02 02 D9 00]"
-	"[1F 13 02 00]"
-	"[1F E9 D9 00]"
-	wait_movement
-	"[1F E6 D9 00]"
-	"[1F 16 D9 00 03]"
-	window_open(1)
 
+	get_dir_from_char(1,TO_NPC,217)	// 0x01, 0x02, 0x00D9
+	char_direction(1,0)	// 0x01, 0x00
+	get_dir_from_char(2,TO_NPC,217)	// 0x02, 0x02, 0x00D9
+	char_direction(2,0)	// 0x02, 0x00
+	npc_unfreeze(217)	// 0x00D9
+	wait_movement
+
+	npc_freeze(217)	// 0x00D9
+	npc_direction(217,3)	// 0x00D9, 0x03
+
+	window_open(1)
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_34.l_0xc79942)
@@ -535,7 +1111,6 @@ l_0xc7970b:
 	"@{name(1)},| thank you so much!" next
 	"@You must be the boy who will save the world,| like in" linebreak
 	"  {name(2)}'s dream." next
-	goto(l_0xc79796)
 
 l_0xc79796:
 	"@{name(2)},| I'm sure you'd be a big help to {name(1)}." next
@@ -543,11 +1118,11 @@ l_0xc79796:
 	window_closeall
 
 	set(FLG_POLA)	// 12
-	"[19 22 02 02 D9 00]"
-	"[1F 13 02 00]"
-	"[1F 1C 02 01]"
+	get_dir_from_char(2,TO_NPC,217)	// 0x02, 0x02, 0x00D9
+	char_direction(2,0)	// 0x02, 0x00
+	show_char_float(2,1)	// 0x02, 0x01
 	pause(60)
-	"[1F 1D 02]"
+	hide_char_float(2)	// 0x02
 
 	window_open(1)
 	title_paula(1)
@@ -555,8 +1130,12 @@ l_0xc79796:
 	"@{name(1)} and I will be able to take care of ourselves." next
 	"@In Threek, the next town,| we'll meet another friend." next
 	"@If the three of us can combine our power,| no one can beat us." next
-	"@Now wipe your eyes,| blow your nose,| and smile before we take off.[03]{window_closeall}{set(flag 611)}[1F 41 05]{pause(10)}"
-	goto(l_0xc798bf)
+	"@Now wipe your eyes,| blow your nose,| and smile before we take off." promptw
+	window_closeall
+
+	set(FLG_TWSN_MESSENGER_APPEAR)	// 611
+	OSS_on	// event(5)
+	pause(10)
 
 l_0xc798bf:
 	window_open(1)
@@ -564,26 +1143,27 @@ l_0xc798bf:
 	"@Goodbye, {name(2)}." pause(20) linebreak
 	"  Don't worry,| I won't cry anymore..." wait
 	window_closeall
+
 	goto_if_flag(FLG_TEMP_0, l_0xc798f7)	// 0x0001
 	set(FLG_TEMP_0)	// 1
 	eob
 
 l_0xc798f7:
-	"[1F F1 D9 00 2B 00]"
+	npc_do_mc(217,43)	// 0x00D9, 0x002B
 	eob
 
 l_0xc798fe:
 	window_open(1)
-	 title(1, MrJones)
+	title(1, MrJones)
 	"@Oh, {name(2)}!" next
 	"@....." next
 	"@Am I dreaming?" pause(20)
 	"  I feel like she just came home..."
-	"[1F 16 D9 00 03]"
+	npc_direction(217,3)	// 0x00D9, 0x03
 	promptw
 	sound(SND_DOOROPEN)	// 8
 	window_closeall
 	pause(20)
 	sound(SND_DOORCLOSE)	// 9
-	"[1F 1E D9 00 06]"
+	npc_delete(217,6)	// 0x00D9, 0x06
 	eob

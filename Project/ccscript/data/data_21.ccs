@@ -4,6 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
@@ -37,7 +38,6 @@ l_0xc65243:
 	"@which is the same amount as your withdrawal." next
 	"@So, do you want a withdrawal?" linebreak
 	two_choice_menu("Yes", l_0xc6530c, "No", l_0xc652f1)
-	goto(l_0xc652f1)
 
 l_0xc652f1:
 	newline
@@ -52,7 +52,7 @@ l_0xc6530c:
 l_0xc6534a:
 	cannot_withdraw(9999999)
 	goto_if_false(l_0xc654c4)	// Deposit over max
-	call(l_0xc65566)		// Enter deposit amount
+	call(l_0xc65566)	// Enter deposit amount
 	goto_if_false(l_0xc652f1)	// Cancel input
 
 	swap
@@ -67,7 +67,7 @@ l_0xc6534a:
 	takemoney(0)
 	deposit(0)
 	show_wallet
-	sound(SND_CHICKEN2) // 118
+	sound(SND_CHICKEN2)	// 118
 
 	pause(10)
 	"@I have registered your deposit" linebreak
@@ -84,7 +84,7 @@ l_0xc653a5:
 	hasmoney(99999)
 	goto_if_true(l_0xc6550e)	// Max cash
 
-	call(l_0xc6558c)		// Enter withdraw amount
+	call(l_0xc6558c)	// Enter withdraw amount
 	goto_if_false(l_0xc652f1)	// Cancel input
 
 	swap
@@ -102,7 +102,6 @@ l_0xc653a5:
 	"@I will subtract this amount from your account." next
 	"@Is that okay with you?" linebreak
 	two_choice_menu("Yes", l_0xc65468, "No", l_0xc6545d)
-	goto(l_0xc6545d)
 
 l_0xc6545d:
 	deposit(0)
@@ -164,13 +163,15 @@ l_0xc65566:
 	newline
 	"@How much will you deposit?" next
 	"@Balance: ${stat(7)}" linebreak
-	call(data_18._text_position) eob
+	call(data_18._text_position)
+	eob
 
 l_0xc6558c:
 	newline
 	"@How much do you want to withdraw?" next
 	"@Balance: ${stat(7)}" linebreak
-	call(data_18._text_position) eob
+	call(data_18._text_position)
+	eob
 
 l_0xc655b1:
 	goto_if_flag(FLG_TEMP_2, l_0xc65962)	// 0x03
@@ -182,12 +183,10 @@ l_0xc655b1:
 	"@My name is Angrez Van der Pol." next
 	title(1, Angrez)
 	"@Let me know if I can do anything for you." next
-	goto(l_0xc6564d)
 
 l_0xc6564d:
 	"@Shall I loan you some money?" linebreak
 	two_choice_menu("Yes", l_0xc65694, "No", l_0xc65671)
-	goto(l_0xc65671)
 
 l_0xc65671:
 	"@I don't feel strange about it at all." linebreak
@@ -199,7 +198,6 @@ l_0xc65694:
 	"@that is equal to the amount of your withdrawal." next
 	"@Is that okay with you?" linebreak
 	two_choice_menu("Yes", l_0xc65713, "No", l_0xc656f5)
-	goto(l_0xc656f5)
 
 l_0xc656f5:
 	"@I would never do anything to displease you." end
@@ -213,7 +211,7 @@ l_0xc65751:	// _deposit
 	cannot_withdraw(9999999)
 	goto_if_false(l_0xc658bb)	// Deposit over max
 
-	call(l_0xc65975)		// Enter deposit amount
+	call(l_0xc65975)	// Enter deposit amount
 	goto_if_false(l_0xc65671)	// Cancel input
 
 	swap
@@ -228,7 +226,7 @@ l_0xc65751:	// _deposit
 	takemoney(0)
 	deposit(0)
 	show_wallet
-	sound(SND_CHICKEN2) // 118
+	sound(SND_CHICKEN2)	// 118
 
 	pause(10)
 	"@I have registered your deposit" linebreak
@@ -244,7 +242,7 @@ l_0xc657ac:	// _withdraw
 	hasmoney(99999)
 	goto_if_true(l_0xc65900)	// Max cash
 
-	call(l_0xc6599a)		// Enter withdraw amount
+	call(l_0xc6599a)	// Enter withdraw amount
 	goto_if_false(l_0xc65671)	// Cancel input
 
 	swap
@@ -254,14 +252,13 @@ l_0xc657ac:	// _withdraw
 	withdraw(0)
 	cannot_withdraw(0)
 	goto_if_true(l_0xc6593e)	// No cash for fee
-	
+
 	"@Your withdrawal" linebreak
 	"  is $" number(0) "," next
 	"@and the handling fee" linebreak
 	"  is $" number(0) "." next
 	"@Is it okay if I subtract this amount from your account?" linebreak
 	two_choice_menu("Yes", l_0xc65863, "No", l_0xc65858)
-	goto(l_0xc65858)
 
 l_0xc65858:
 	deposit(0)
@@ -275,12 +272,11 @@ l_0xc65863:
 	goto_if_true(_maxed_out_cash2)	// Added
 
 	show_wallet
-	sound(SND_BOXTAKE) // 116
+	sound(SND_BOXTAKE)	// 116
 	pause(10)
-	
+
 	"@Your withdrawal" linebreak
 	"  is $" number(0) "." next
-	goto(l_0xc65892)
 
 l_0xc65892:
 	newline
@@ -327,13 +323,15 @@ l_0xc65975:
 	newline
 	"@How much do you want to deposit?" next
 	"  (Account: ${stat(7)})" linebreak
-	call(data_18._text_position) eob
+	call(data_18._text_position)
+	eob
 
 l_0xc6599a:
 	newline
 	"@How much do you want to withdraw?" next
 	"  (Account: ${stat(7)})" linebreak
-	call(data_18._text_position) eob
+	call(data_18._text_position)
+	eob
 
 l_0xc659bf:
 	call(data_36.l_0xc7de72)
@@ -411,7 +409,6 @@ l_0xc65cec:
 	"@Folks should have a place of their own." next
 	"@Do you want to buy it?" linebreak
 	two_choice_menu("Yes", l_0xc65da6, "No", l_0xc65d81)
-	goto(l_0xc65d81)
 
 l_0xc65d81:
 	"@You can't afford $7500?" pause(20)
@@ -423,6 +420,7 @@ l_0xc65da6:
 	sound(SND_CHICKEN2)	// 118
 	takemoney(7500)	// 0x1D4C
 	show_wallet
+
 	"@Thank you." next
 	"@It's all yours now." pause(20)
 	"  Take some time and relax." wait
@@ -577,7 +575,9 @@ l_0xc66392:
 	"  Your adventure is just beginning..." end
 
 l_0xc663c5:
-	call(data_49.l_0xc915d6) call(data_49.l_0xc91582) newline
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	newline
 	title(1, Frank)
 	"@{name(1)},| you're now stronger than I!" pause(20)
 	"  Your adventure is just beginning." end
@@ -595,12 +595,10 @@ l_0xc66469:
 	"@It's you again..." next
 	"@Do you really think you can beat Franky's <Frankystein Mark II>?" next
 	two_choice_menu("Yes", l_0xc66523, "No", l_0xc664ba)
-	goto(l_0xc664ba)
 
 l_0xc664ba:
 	"@Did you come here feeling not-so-fit?" next
 	"@Don't even think of looking beyond me,| chump." next
-	goto(l_0xc664f2)
 
 l_0xc664f2:
 	"@Go!" pause(20)
@@ -624,7 +622,6 @@ l_0xc6653b:
 	"@I've even been doing some training for...| for..." next
 	"@Well,| a little bit of pro wrasslin'." pause(20)
 	"  It's the ring for me,| baby..." next
-	goto(l_0xc665e7)
 
 l_0xc665e7:
 	title(1, Frank)
@@ -643,7 +640,7 @@ l_0xc66670:
 	goto_if_true(data_24.l_0xc690a6)
 	music(155)
 	"@You finally got here." next
-	"@This is the first <Your Sanctuary> location." pause(20) linebreak 
+	"@This is the first <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
 	call(data_23.l_0xc68409)
