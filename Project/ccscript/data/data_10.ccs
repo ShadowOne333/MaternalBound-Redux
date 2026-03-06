@@ -15,307 +15,306 @@ command e(label) "{long label}"
 
 // Text Data
 // (Continue) Event debug menu moved to "debug/options/events.ccs"
-
 // Item Descriptions selector moved to "debug/options/item_desc.ccs"
 
 l_0xc5b3ba:
-    "@Since I'm dealing in some pretty rough stuff," next
-    "@I can't run my business in town." next
-    eob
+	"@Since I'm dealing in some pretty rough stuff," next
+	"@I can't run my business in town." next
+	eob
 
 l_0xc5b3eb:
-    "@See you later." end
+	"@See you later." end
 
 l_0xc5b3f6:
-    "@See you... later." end
+	"@See you... later." end
 
 l_0xc5b405:
-    "@I've got a wide selection.  What are you looking for?" promptw
+	"@I've got a wide selection.  What are you looking for?" promptw
 	eob
 
 l_0xc5b426:
-    "@{itemname(0)}?" next
-    eob
+	"@{itemname(0)}?" next
+	eob
 
 l_0xc5b42e:
-    "@Who's going to get this?" promptw
+	"@Who's going to get this?" promptw
 	eob
 
 l_0xc5b43c:
-    "@Do you want to equip it here?" linebreak
-    eob
+	"@Do you want to equip it here?" linebreak
+	eob
 
 l_0xc5b447:
-    "@Would you like me to buy" linebreak
-    "  your {itemname(0)}" next
-    "@for {swap}$" number(0) "?" linebreak
-    eob
+	"@Would you like me to buy" linebreak
+	"  your {itemname(0)}" next
+	"@for {swap}$" number(0) "?" linebreak
+	eob
 
 l_0xc5b468:
-    "@{name(0)}  can't equip this." next
-    "@Are you still interested in buying it?" linebreak
-    eob
+	"@{name(0)}  can't equip this." next
+	"@Are you still interested in buying it?" linebreak
+	eob
 
 l_0xc5b48c:
-    "@Ain't that the pits..." next
-    "@I'm actually gonna have to wait for another customer in this crazy heat?" next
-    "@That's harsh..." next
-    eob
+	"@Ain't that the pits..." next
+	"@I'm actually gonna have to wait for another customer in this crazy heat?" next
+	"@That's harsh..." next
+	eob
 
 l_0xc5b4d7:
-    "@If you don't have enough money," next
-    "@it's a waste of my time to even talk about dealing with you." next
-    eob
+	"@If you don't have enough money," next
+	"@it's a waste of my time to even talk about dealing with you." next
+	eob
 
 l_0xc5b507:
-    "@You guys are completely overloaded." next
-    "@However, I can buy the stuff you don't need." next
-    "@What do you want to do?" linebreak
-    eob
+	"@You guys are completely overloaded." next
+	"@However, I can buy the stuff you don't need." next
+	"@What do you want to do?" linebreak
+	eob
 
 l_0xc5b541:
-    "@What are you going to sell me?" linebreak
-    eob
+	"@What are you going to sell me?" linebreak
+	eob
 
 l_0xc5b551:
-    "@{itemname(0)}?" linebreak
-    "  Let's see..." next
-    "@How about {swap}$" number(0) "?" linebreak
-    eob
+	"@{itemname(0)}?" linebreak
+	"  Let's see..." next
+	"@How about {swap}$" number(0) "?" linebreak
+	eob
 
 l_0xc5b572:
-    "@OK.  I thought my offer was more than fair." next
-    eob
+	"@OK.  I thought my offer was more than fair." next
+	eob
 
 l_0xc5b591:
-    "@Are you trying to con me?  You've got nothing to sell!!" next
-    eob
+	"@Are you trying to con me?  You've got nothing to sell!!" next
+	eob
 
 l_0xc5b5b1:
-    "@Sorry, that is an item I just don't deal in." next
-    eob
+	"@Sorry, that is an item I just don't deal in." next
+	eob
 
 l_0xc5b5ce:
-    "@Hey, thanks!" next
-    eob
+	"@Hey, thanks!" next
+	eob
 
 l_0xc5b5d8:
-    "@Hey, thanks!" next
-    eob
+	"@Hey, thanks!" next
+	eob
 
 l_0xc5b5e2:
-    "@Is there anything else you need?" linebreak
-    eob
+	"@Is there anything else you need?" linebreak
+	eob
 
 l_0xc5b5f0:
-    "@So what's the deal?" linebreak
-    eob
+	"@So what's the deal?" linebreak
+	eob
 
 l_0xc5b5fe:
-    "@{name(0)} has way too much stuff and can't carry anything else." next
-    "@Can someone else carry it?" linebreak
-    eob
+	"@{name(0)} has way too much stuff and can't carry anything else." next
+	"@Can someone else carry it?" linebreak
+	eob
 
 l_0xc5b625:
-    "@Hey mon!  You got to expand your mind an' use this stuff creatively." next
-    "@C'mon, buy some of my junk!" linebreak
-    eob
+	"@Hey mon!  You got to expand your mind an' use this stuff creatively." next
+	"@C'mon, buy some of my junk!" linebreak
+	eob
 
 l_0xc5b666:
-    "@Take care, mon!" end
+	"@Take care, mon!" end
 
 l_0xc5b674:
-    "@Ah scientific mon mig be able to mek gud use of dis ting here..." end
+	"@Ah scientific mon mig be able to mek gud use of dis ting here..." end
 
 l_0xc5b69d:
-    "@So, what would you like, mon?" promptw
+	"@So, what would you like, mon?" promptw
 	eob
 
 l_0xc5b6af:
-    "@{itemname(0)}?" next
-    eob
+	"@{itemname(0)}?" next
+	eob
 
 l_0xc5b6b7:
-    "@Who's goin' to take it?" promptw
+	"@Who's goin' to take it?" promptw
 	eob
 
 l_0xc5b6ca:
-    "@Thank you, mon." next
-    "@Do you want to equip that here then?" linebreak
-    eob
+	"@Thank you, mon." next
+	"@Do you want to equip that here then?" linebreak
+	eob
 
 l_0xc5b6e2:
-    "@Would you be liking me to buy" linebreak
-    "  your {itemname(0)}" linebreak
-    "  for {swap}$" number(0) "?" next
-    eob
+	"@Would you be liking me to buy" linebreak
+	"  your {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" next
+	eob
 
 l_0xc5b70b:
-    "@{name(0)} cannot equip this here thing." next
-    "@Are you still willing to buy it?" linebreak
-    eob
+	"@{name(0)} cannot equip this here thing." next
+	"@Are you still willing to buy it?" linebreak
+	eob
 
 l_0xc5b72d:
-    "@Ah, I see mon.  That's too bad." next
-    eob
+	"@Ah, I see mon.  That's too bad." next
+	eob
 
 l_0xc5b746:
-    "@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
-    eob
+	"@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
+	eob
 
 l_0xc5b76f:
-    "@Well, you're straining with too many things now." next
-    "@I'll buy the things you don't need, mon." linebreak
-    eob
+	"@Well, you're straining with too many things now." next
+	"@I'll buy the things you don't need, mon." linebreak
+	eob
 
 l_0xc5b799:
-    "@What is it you want to sell?" promptw
+	"@What is it you want to sell?" promptw
 	eob
 
 l_0xc5b7a6:
-    "@{itemname(0)}?" linebreak
-    "  Oh, I can give you" linebreak
-    "  about {swap}$" number(0) ", OK?" next
-    eob
+	"@{itemname(0)}?" linebreak
+	"  Oh, I can give you" linebreak
+	"  about {swap}$" number(0) ", OK?" next
+	eob
 
 l_0xc5b7cd:
-    "@Not goin' to go for it, eh mon?  No problem." next
-    eob
+	"@Not goin' to go for it, eh mon?  No problem." next
+	eob
 
 l_0xc5b7f2:
-    "@But look, you don't have any things to sell!" next
-    eob
+	"@But look, you don't have any things to sell!" next
+	eob
 
 l_0xc5b807:
-    "@Hold on, mon.  We don't carry that kind of stuff." next
-    eob
+	"@Hold on, mon.  We don't carry that kind of stuff." next
+	eob
 
 l_0xc5b826:
-    "@Thanks a lot, mon." next
-    eob
+	"@Thanks a lot, mon." next
+	eob
 
 l_0xc5b833:
-    "@There you go." linebreak
-    "  Thanks a lot, mon." next
-    eob
+	"@There you go." linebreak
+	"  Thanks a lot, mon." next
+	eob
 
 l_0xc5b84e:
-    "@Is there anything else you need, mon?" linebreak
-    eob
+	"@Is there anything else you need, mon?" linebreak
+	eob
 
 l_0xc5b860:
-    "@Lay it on me." linebreak
-    eob
+	"@Lay it on me." linebreak
+	eob
 
 l_0xc5b86d:
-    "@Oh, {name(0)} has too many things already." next
-    "@Won't one of your friends carry it for you?" linebreak
-    eob
+	"@Oh, {name(0)} has too many things already." next
+	"@Won't one of your friends carry it for you?" linebreak
+	eob
 
 l_0xc5b896:
-    "@Hi!  This shop specializes in puddings and pendants!" next
-    "@You'd like to buy some, wouldn't you?" linebreak
-    eob
+	"@Hi!  This shop specializes in puddings and pendants!" next
+	"@You'd like to buy some, wouldn't you?" linebreak
+	eob
 
 l_0xc5b8d6:
-    "@Thank you so much!" end
+	"@Thank you so much!" end
 
 l_0xc5b8df:
-    "@Please come back soon!" end
+	"@Please come back soon!" end
 
 l_0xc5b8eb:
-    "@What do you want to buy?!" next
-    eob
+	"@What do you want to buy?!" next
+	eob
 
 l_0xc5b8f8:
-    "@{itemname(0)}?" next
-    eob
+	"@{itemname(0)}?" next
+	eob
 
 l_0xc5b900:
-    "@OK, who's going to carry it?!" promptw
+	"@OK, who's going to carry it?!" promptw
 	eob
 
 l_0xc5b910:
-    "@Oh, thank you!  Do you want to equip it in the store?!" linebreak
-    eob
+	"@Oh, thank you!  Do you want to equip it in the store?!" linebreak
+	eob
 
 l_0xc5b92c:
-    "@Shall I buy" linebreak
-    "  your {itemname(0)}" next
-    "  for {swap}$" number(0) "?" linebreak
-    eob
+	"@Shall I buy" linebreak
+	"  your {itemname(0)}" next
+	"  for {swap}$" number(0) "?" linebreak
+	eob
 
 l_0xc5b94d:
-    "@But {name(0)} will not be able to equip this?!" next
-    "@Do you still want to buy it?!" linebreak
-    eob
+	"@But {name(0)} will not be able to equip this?!" next
+	"@Do you still want to buy it?!" linebreak
+	eob
 
 l_0xc5b971:
-    "@Please hurry back!" next
-    eob
+	"@Please hurry back!" next
+	eob
 
 l_0xc5b97e:
-    "@Shame on you!  You don't have enough money!" next
-    eob
+	"@Shame on you!  You don't have enough money!" next
+	eob
 
 l_0xc5b994:
-    "@You've got too much stuff already!" next
-    "@How about selling me some of the things you don't need?!" linebreak
-    eob
+	"@You've got too much stuff already!" next
+	"@How about selling me some of the things you don't need?!" linebreak
+	eob
 
 l_0xc5b9c1:
-    "@OK, what do you want to sell?!" promptw
+	"@OK, what do you want to sell?!" promptw
 	eob
 
 l_0xc5b9d1:
-    "@{itemname(0)}?" next
-    "@I can buy that" linebreak
-    "  for {swap}$" number(0) "." linebreak
-    "  Is it a deal?!" next
-    eob
+	"@{itemname(0)}?" next
+	"@I can buy that" linebreak
+	"  for {swap}$" number(0) "." linebreak
+	"  Is it a deal?!" next
+	eob
 
 l_0xc5b9fe:
-    "@Please come again!" next
-    eob
+	"@Please come again!" next
+	eob
 
 l_0xc5ba07:
-    "@Uhhh, what's the deal?!  You don't have anything to sell!" next
-    eob
+	"@Uhhh, what's the deal?!  You don't have anything to sell!" next
+	eob
 
 l_0xc5ba28:
-    "@Don't mean to rain on your parade," next
-    "@but there's no possible way I can buy" linebreak
-    "  your {itemname(0)}!" next
-    eob
+	"@Don't mean to rain on your parade," next
+	"@but there's no possible way I can buy" linebreak
+	"  your {itemname(0)}!" next
+	eob
 
 l_0xc5ba5b:
-    "@Thank you!" next
-    eob
+	"@Thank you!" next
+	eob
 
 l_0xc5ba62:
-    "@Thank you!" next
-    eob
+	"@Thank you!" next
+	eob
 
 l_0xc5ba69:
-    "@Can I do anything else for you?" linebreak
-    eob
+	"@Can I do anything else for you?" linebreak
+	eob
 
 l_0xc5ba78:
-    "@What do you want to do now?!" linebreak
-    eob
+	"@What do you want to do now?!" linebreak
+	eob
 
 l_0xc5ba86:
-    "@{name(0)}  has too much stuff!" next
-    "@Can someone else carry it?" linebreak
-    eob
+	"@{name(0)}  has too much stuff!" next
+	"@Can someone else carry it?" linebreak
+	eob
 
 l_0xc5baa4:
-    "@Hello. May I help you?" next
-    eob
+	"@Hello. May I help you?" next
+	eob
 
 l_0xc5bab4:
-    "@Thank you very much." end
+	"@Thank you very much." end
 
 l_0xc5babd:
-    "@Please come again." end
+	"@Please come again." end
 

@@ -4,11 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
 import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
@@ -17,434 +18,633 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc573dc:
-    window_open(1)
-    title(1, Star)
-    "@The stars foretold that I would meet you here..." next
-    "@Now is the time for me to pass on to you the <technique for making stars rain down.>" next
-    "@For a while, you must live far away from your friends and live with me." next
-    "@Do you understand?" next
-    "@...There's only one answer." next
-    "@I must stop you here even if you don't want to." next
-    "@Stay with me for a while, do you understand?!" promptw
-    window_closeall
-    pause(30)
-    goto(data_50.l_0xc9329b)
+	window_open(1)
+	title(1, Star)
+	"@The stars foretold that I would meet you here..." next
+	"@Now is the time for me to pass on to you the <technique for making stars rain down.>" next
+	"@For a while, you must live far away from your friends and live with me." next
+	"@Do you understand?" next
+	"@...There's only one answer." next
+	"@I must stop you here even if you don't want to." next
+	"@Stay with me for a while, do you understand?!" promptw
+	window_closeall
+	pause(30)
+	goto(data_50.l_0xc9329b)
 
 l_0xc5749a:
-    unset(FLG_POO_KI)
-    window_open(1)
-    title(1, Star)
-    "@It depends on {name(4)}'s efforts.  That will determine the reuniting of the group." next
-    "@Be faithful, and wait until the time comes!" wait
-    window_closeall
-    eob
+	unset(FLG_POO_KI)
+	window_open(1)
+	title(1, Star)
+	"@It depends on {name(4)}'s efforts.  That will determine the reuniting of the group." next
+	"@Be faithful, and wait until the time comes!" wait
+	window_closeall
+	eob
 
 l_0xc574f6:
-    "[06 50 01 {e(l_0xc575f8)}]"
-    "@I'm doing this as a hobby." pause(20)
-    "  Isn't it cool?" next
-    "@I recently made a friend." pause(20)
-    "  He used to be a Dungeon Maker." next
-    "@And now he's a <Dungeon Man.>" next
-    "@Would you like to meet him?" linebreak
-    // two_choice_menu
-    "[19 02]Yes" eob
+	goto_if_flag(FLG_ITEM_KEY_PUPUKA, l_0xc575f8)	// 0x0150, 336
+	"@I'm doing this as a hobby."
+	pause(20)
+	"  Isn't it cool?" next
+	"@I recently made a friend."
+	pause(20)
+	"  He used to be a Dungeon Maker." next
+	"@And now he's a <Dungeon Man.>" next
+	"@Would you like to meet him?" linebreak
+	// two_choice_menu
+	load_str("Yes")
 
 l_0xc57570:
-    "[19 02]No" eob
+	load_str("No")
 
 l_0xc57575:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5759d)} {e(l_0xc57584)}]" goto(l_0xc57584)
+	print_strings_horizontal(2)	// 0x02
+	do_menu
+	clearline
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5759d)
+		switch_entry(l_0xc57584)
+	goto(l_0xc57584)
 
 l_0xc57584:
-    "@I understand,| he is a very strange fellow." end
+	"@I understand,| he is a very strange fellow." end
 
 l_0xc5759d:
-    "@All righty then, I'll give you the key so that you can enter him." next
-    "@Oh no... I don't have it!" next
-    "@I must have lost it somewhere." next
-    "@I'm sorry, I don't worry about small things." end
+	"@All righty then, I'll give you the key so that you can enter him." next
+	"@Oh no... I don't have it!" next
+	"@I must have lost it somewhere." next
+	"@I'm sorry, I don't worry about small things." end
 
 l_0xc575f8:
-    "@I stayed here the whole time you were gone." next
-    "@But now I don't know why I did." end
+	"@I stayed here the whole time you were gone." next
+	"@But now I don't know why I did." end
 
 l_0xc5762c:
-    "[06 50 01 {e(l_0xc576e0)}]"
-    title(1, Warrior)
-    "@I am not sure if it was the <Dungeon Man,> but..." next
-    "@there is a strange looking tower to the northwest." next
-    "@...This key I picked up a little while ago shall maybe open the tower." next
-    "@You may have it, I do not need it."
-    "[1D 03 FF]" goto_if_false(l_0xc57718)
-    promptw
-    "[1D 0E 00 C0]"
-    "[1B 05]"
-    call(data_36.l_0xc7dcb6)
-    "{set(flag 336)}{wait}{window_closeall}{isset(flag 691)}[1B 02 {e(data_55.l_0xc9992f)}]{pause(60)}" call(data_24.l_0xc692f7) eob
+	goto_if_flag(FLG_ITEM_KEY_PUPUKA, l_0xc576e0)	// 0x0150, 336
+	title(1, Warrior)
+	"@I am not sure if it was the <Dungeon Man,> but..." next
+	"@there is a strange looking tower to the northwest." next
+	"@...This key I picked up a little while ago shall maybe open the tower." next
+	"@You may have it, I do not need it."
+
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)	// 0xFF
+		goto_if_false(l_0xc57718)
+	}
+	promptw
+
+	if flag FLG_KEY_ITEMS { store_registers_shared give_menu_key_item(TOWER_KEY) }
+	else {
+		give_and_return_location(0, TOWER_KEY)	// 0x00, 0xC0, 192
+		store_registers_shared
+		call(data_36.l_0xc7dcb6)
+	}
+	set(FLG_ITEM_KEY_PUPUKA)	// 336
+	wait
+	window_closeall
+
+	isset(FLG_SKRB_PU_TAKANOME)	// 691
+	goto_if_false(data_55.l_0xc9992f)
+
+	pause(60)
+	call(data_24.l_0xc692f7)
+	eob
 
 l_0xc576e0:
-    title(1, Warrior)
-    "@I'm not sure if it was the <Dungeon Man>..." next
-    "@There's a strange looking tower to the northwest." end
+	title(1, Warrior)
+	"@I'm not sure if it was the <Dungeon Man>..." next
+	"@There's a strange looking tower to the northwest." end
 
 l_0xc57718:
-    next
-    "@...But it seems that you have too many things." end
+	next
+	"@...But it seems that you have too many things." end
 
 l_0xc57730:
-    "[06 5E 02 {e(l_0xc57753)}]@(Looks like you could enter, but it's locked.)" end
+	goto_if_flag(FLG_SKRB_DUNGEONMAN_OPEN, l_0xc57753)	// 0x025E, 606
+	"@(Looks like you could enter, but it's locked.)" end
 
 l_0xc57753:
-    "{window_closeall}{pause(1)}[1F 21 9F]" call(data_57.l_0xc9b112) eob
+	window_closeall
+	pause(1)
+	warp(159)	// 0x9F
+	call(data_57.l_0xc9b112)
+	eob
 
 l_0xc57760:
-    "{store_registers}[06 5E 02 {e(l_0xc577c5)}]{load_registers}" call(data_36.l_0xc7dd2c) "{result_is(192)}[1B 02 {e(l_0xc577b2)}]{load_registers}" call(data_36.l_0xc7dd37) newline
-    "@(The key worked to open the door.{pause(20)} You may enter.){wait}{wait}{set(flag 606)}{sound(119)}{window_closeall}[1F 21 9F]" call(data_57.l_0xc9b112) eob
+	store_registers
+	goto_if_flag(FLG_SKRB_DUNGEONMAN_OPEN, l_0xc577c5)	// 0x025E, 606
+
+	load_registers
+	if flag FLG_KEY_ITEMS {
+		store_registers_shared
+		swap store_registers
+		get_action_arg
+	}
+	else { call(data_36.l_0xc7dd2c) }
+	result_is(TOWER_KEY)	// 192
+	goto_if_false(l_0xc577b2)
+
+	load_registers
+	call(data_36.l_0xc7dd37)
+
+	newline
+	"@(The key worked to open the door./| You may enter.)" wait
+
+	set(FLG_SKRB_DUNGEONMAN_OPEN)	// 606
+	sound(SND_PSI3)	// 119
+	window_closeall
+	warp(159)	// 0x9F
+	call(data_57.l_0xc9b112)
+	eob
 
 l_0xc577b2:
-    "@(The key doesn't fit!)" end
+	"@(The key doesn't fit!)" end
 
 l_0xc577c5:
-    "@(The door's already opened.)" end
+	"@(The door's already opened.)" end
 
 l_0xc577d8:
-    "[06 DA 00 {e(l_0xc57911)}]"
-    title(1, Warrior)
-    "@A scary place called Deep Darkness is on the other side of the river." next
-    "@The monsters are very strong..." next 
-    "@And you can lose your health just by wandering in the swamp." next
-    "@Do you want to cross the river,{pause(15)} even though you know it's a stupid idea?" next
-    "[19 02]Yes" eob
-
-l_0xc57864:
-    "[19 02]No" eob
-
-l_0xc57869:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc578b3)} {e(l_0xc57878)}]" goto(l_0xc57878)
+	goto_if_flag(FLG_TLPT_MAKY, l_0xc57911)	// 0x00DA, 218
+	title(1, Warrior)
+	"@A scary place called Deep Darkness is on the other side of the river." next
+	"@The monsters are very strong..." next
+	"@And you can lose your health just by wandering in the swamp." next
+	"@Do you want to cross the river,| even though you know it's a stupid idea?" next
+	two_choice_menu("Yes", l_0xc578b3, "No", l_0xc57878)
 
 l_0xc57878:
-    "@It was stupid of me to ask." next
-    "@Let's watch the sunset over Deep Darkness together from here." end
+	"@It was stupid of me to ask." next
+	"@Let's watch the sunset over Deep Darkness together from here." end
 
 l_0xc578b3:
-    "@The swamp is bottomless." next
-    "@Even if you're swimming, you'll be dragged in." next
-    "@It is a different story if you have a submarine.{wait}{set(flag 151)}{set(flag 762)}" eob
+	"@The swamp is bottomless." next
+	"@Even if you're swimming, you'll be dragged in." next
+	"@It is a different story if you have a submarine." wait
+	set(FLG_SKRB_YARIMAN)	// 151
+	set(FLG_DSRT_KANBAN_44_MOVE)	// 762
+	eob
 
 l_0xc57911:
-    title(1, Warrior)
-    "@You returned from exploring the Deep Darkness?" next
-    "@I cannot believe you made it back alive." end
+	title(1, Warrior)
+	"@You returned from exploring the Deep Darkness?" next
+	"@I cannot believe you made it back alive." end
 
 l_0xc57947:
-    "[06 DA 00 {e(l_0xc57955)}][06 97 00 {e(l_0xc57a26)}]" goto(l_0xc57955)
+	goto_if_flag(FLG_TLPT_MAKY, l_0xc57955)	// 0x00DA, 218
+	goto_if_flag(FLG_SKRB_YARIMAN, l_0xc57a26)	// 0x0097, 151
 
 l_0xc57955:
-    title(1, Brickroad)
-    "@Welcome![03]{window_closeall}" call(data_49.l_0xc915f4) "{sound(37)}{pause(90)}{window_open(1)}"
-    title(1, Brickroad)
-    "[06 DA 00 {e(l_0xc57ad9)}]@Long time no see." next
-    "@Mr. [1C 02 03], we met in Winters a long time ago." next
-    "@I'm Brickroad." next
-    "@Dr. Andonuts finally made me Dungeon Man." next
-    title(1, Dungeon)
-    "@If you want, I'll come with you guys for a while." next
-    "@The <Return Hole> is over there." next
-    "@Jump in that hole and then walk out.{wait}{set(flag 24)}{set(flag 445)}[1F 66 01 09 81 33 C9 00]{set(flag 507)}" eob
+	title(1, Brickroad)
+	"@Welcome!" promptw
+	window_closeall
+
+	call(data_49.l_0xc915f4)
+	sound(SND_STATUSRECOVER)	// 37
+	pause(90)
+
+	window_open(1)
+	title(1, Brickroad)
+	goto_if_flag(FLG_TLPT_MAKY, l_0xc57ad9)	// 0x00DA, 218
+	"@Long time no see." next
+	"@Mr. {name(3)}, we met in Winters a long time ago." next
+	"@I'm Brickroad." next
+	"@Dr. Andonuts finally made me Dungeon Man." next
+	title(1, Dungeon)
+	"@If you want, I'll come with you guys for a while." next
+	"@The <Return Hole> is over there." next
+	"@Jump in that hole and then walk out." wait
+	set(FLG_BRICKROAD)	// 24
+	set(FLG_SKRB_YARIMAN_B_APPEAR)	// 445
+	hotspot_on(1,9, data_50.l_0xc93381)	// 0x01, 0x09, 0x00C93381
+	set(FLG_PHOTO_DUNGEONMAN)	// 507
+	eob
 
 l_0xc57a26:
-    title(1, Dungeon)
-    "@There's an old submarine at the back of the dungeon." next
-    "@It can be used to cross the river." next
-    "@There's a <Goodbye Exit> ...over there." next
-    "@It will take you to the submarine." next
-    "@Don't make a mistake on which exit you take." next
-    "@You need to take the <Goodbye Exit!>" next
-    "@Hope to see you again!" end
+	title(1, Dungeon)
+	"@There's an old submarine at the back of the dungeon." next
+	"@It can be used to cross the river." next
+	"@There's a <Goodbye Exit> ...over there." next
+	"@It will take you to the submarine." next
+	"@Don't make a mistake on which exit you take." next
+	"@You need to take the <Goodbye Exit!>" next
+	"@Hope to see you again!" end
 
 l_0xc57ad9:
-    title(1, Dungeon)
-    "@I don't know how, but my homemade dungeon helped you out." next
-    "@I'm glad.{wait}{window_closeall}" eob
+	title(1, Dungeon)
+	"@I don't know how, but my homemade dungeon helped you out." next
+	"@I'm glad." wait
+	window_closeall
+	eob
 
 l_0xc57b04:
-    "[06 DA 00 {e(l_0xc57b3e)}]@<Goodbye Exit>" next
-    "@Some day, you should enter with courage." next
-    "@                      ...Brickroad." end
+	goto_if_flag(FLG_TLPT_MAKY, l_0xc57b3e)	// 0x00DA, 218
+	"@<Goodbye Exit>" next
+	"@Some day, you should enter with courage." next
+	"@                      ...Brickroad." end
 
 l_0xc57b3e:
-    "@This path is closed." next
-    "@                      ...Brickroad.{wait}" linebreak
-    eob
+	"@This path is closed." next
+	"@                      ...Brickroad." wait
+	linebreak
+	eob
 
 l_0xc57b5c:
-    call(l_0xc57bdc) call(data_48.l_0xc90f7d) call(l_0xc57c10) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 38]{unset(flag 383)}" eob
+	call(l_0xc57bdc)
+	call(data_48.l_0xc90f7d)
+	call(l_0xc57c10)
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	warp(56)	// 0x38
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc57b7c:
-    call(l_0xc57bdc) call(data_48.l_0xc90f7d) call(l_0xc57c10) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 37]{unset(flag 383)}" eob
+	call(l_0xc57bdc)
+	call(data_48.l_0xc90f7d)
+	call(l_0xc57c10)
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	warp(55)	// 0x37
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc57b9c:
-    call(l_0xc57bdc) call(data_48.l_0xc90f7d) call(l_0xc57c10) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 39]{unset(flag 383)}" eob
+	call(l_0xc57bdc)
+	call(data_48.l_0xc90f7d)
+	call(l_0xc57c10)
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	warp(57)	// 0x39
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc57bbc:
-    call(l_0xc57bdc) call(data_48.l_0xc90f7d) call(l_0xc57c10) call(data_49.l_0xc915d6) call(data_49.l_0xc91582) "[1F 21 3A]{unset(flag 383)}" eob
+	call(l_0xc57bdc)
+	call(data_48.l_0xc90f7d)
+	call(l_0xc57c10)
+	call(data_49.l_0xc915d6)
+	call(data_49.l_0xc91582)
+	warp(58)	// 0x3A
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc57bdc:
-    "@<Good Night Bench.>" next
-    "@May you relax and recover your health and spirits.{wait}" end
+	"@<Good Night Bench.>" next
+	"@May you relax and recover your health and spirits." end
 
 l_0xc57c10:
-    "{window_open(1)}@" call(data_37.l_0xc7e6d7) "'s health is restored.{wait}{window_closeall}" eob
+	window_open(1)
+	"@" call(data_37.l_0xc7e6d7) "'s health is restored." wait
+	window_closeall
+	eob
 
 l_0xc57c2c:
-    "{counter(3)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(l_0xc57c6f)}]@([1C 02 03] checked the broken submarine.)" next
-    "@Yes!{pause(20)}  It can still work.{wait}{window_closeall}" goto(data_50.l_0xc934ed)
+	counter(3)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc57c6f)
+	"@({name(3)} checked the broken submarine.)" next
+	"@Yes!" pause(20)
+	"  It can still work." wait
+	window_closeall
+	goto(data_50.l_0xc934ed)
 
 l_0xc57c6f:
-    "@(No one can repair the submarine except [1C 02 03].)" end
+	"@(No one can repair the submarine except {name(3)}.)" end
 
 l_0xc57c96:
-    "@Oh,{pause(20)} if you walk around out here you'll find something gross." next
-    "@Some fat kid who said he's from another country crapped on the ground." end
+	"@Oh,/| if you walk around out here you'll find something gross." next
+	"@Some fat kid who said he's from another country crapped on the ground." end
 
 l_0xc57cd4:
-    "@(Porky's stink still hangs in the air...)" end
+	"@(Porky's stink still hangs in the air...)" end
 
 l_0xc57cf3:
-    "@You need to be able to read hieroglyphs to solve the mystery of the Pyramid." next
-    "@...I couldn't solve it, although I read it." next
-    "@Didn't you read the hieroglyphs at the museum in Summers?" next
-    "[19 02]Yes" eob
-
-l_0xc57d71:
-    "[19 02]No" eob
-
-l_0xc57d76:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc57da9)} {e(l_0xc57d85)}]" goto(l_0xc57d85)
+	"@You need to be able to read hieroglyphs to solve the mystery of the Pyramid." next
+	"@...I couldn't solve it, although I read it." next
+	"@Didn't you read the hieroglyphs at the museum in Summers?" next
+	two_choice_menu("Yes", l_0xc57da9, "No", l_0xc57d85)
 
 l_0xc57d85:
-    "@Well, that means that you must go back, read it and then come back here." end
+	"@Well, that means that you must go back, read it and then come back here." end
 
 l_0xc57da9:
-    "@Then, you should be able to solve the mystery somehow." end
+	"@Then, you should be able to solve the mystery somehow." end
 
 l_0xc57dc6:
-    "@Hassan's Shop" next
-    "@($ dollars acceptable.)" end
+	"@Hassan's Shop" next
+	"@($ dollars acceptable.)" end
 
 l_0xc57dea:
-    "@That face is mine.{pause(20)}" linebreak
-    "  (Feel free to talk to it.)" next
-    "@                      ...Brickroad." end
+	"@That face is mine." pause(20) linebreak
+	"  (Feel free to talk to it.)" next
+	"@                      ...Brickroad." end
 
 l_0xc57e1c:
-    title(1, Porky)
-    "@[1C 02 01]!{pause(20)}  Are you surprised?" next
-    "@It's me, Porky." next
-    "@I assist only the strong and able!" next
-    "@That's Porky." next
-    "@You guys really look pathetic!" next
-    "@The Apple of Enlightenment predicted that you guys would make it here." next
-    "@...But I won't let what the Apple of Enlightenment predicted take place." next
-    "@You guys will be defeated by Giygas." next
-    "@Giygas will become more powerful and even more terrifying!" next
-    "@Why?" next
-    "@'Cause of me." next
-    "@I was led by Giygas, and now I'm here." next
-    "@The Apple of Enlightenment never predicted this." next
-    "@Master Giygas-{pause(20)}" next
-    "  No,{pause(15)} Giygas is no longer the wielder of evil." next
-    "@He has become the embodiment of evil..." next
-    "@Which he cannot control on his own." next
-    "@He is evil itself.[03]" eob
+	title(1, Porky)
+	"@{name(1)}!" pause(20)
+	"  Are you surprised?" next
+	"@It's me, Porky." next
+	"@I assist only the strong and able!" next
+	"@That's Porky." next
+	"@You guys really look pathetic!" next
+	"@The Apple of Enlightenment predicted that you guys would make it here." next
+	"@...But I won't let what the Apple of Enlightenment predicted take place." next
+	"@You guys will be defeated by Giygas." next
+	"@Giygas will become more powerful and even more terrifying!" next
+	"@Why?" next
+	"@'Cause of me." next
+	"@I was led by Giygas, and now I'm here." next
+	"@The Apple of Enlightenment never predicted this." next
+	"@Master Giygas-" pause(20) next
+	"  No,| Giygas is no longer the wielder of evil." next
+	"@He has become the embodiment of evil..." next
+	"@Which he cannot control on his own." next
+	"@He is evil itself." promptw
+	eob
 
 l_0xc58000:
-    "{window_open(1)}" newline
-    "{diam}Debug menu on." next
-    goto(debug_main)
+	window_open(1)
+	newline
+	diam "Debug menu on." next
+	goto(debug_main)
 
 debug_main:
-    "{window_open(1)}" newline
-    "{diam}What shall you do?{wait}[18 02]{open_hp}{open_wallet}{window_open(2)}[19 02]Party Edit" eob
+	window_open(1)
+	newline
+	diam "What shall you do?" wait
+	back_up_text_rendering_state
+	open_hp
+	show_wallet
+	window_open(2)
+	load_str("Party Edit")
 
 l_0xc58023:
-    "[19 02]Goods Edit" eob
+	load_str("Goods Edit")
 
 l_0xc5802d:
-    "[19 02]Special Status" eob
+	load_str("Special Status")
 
 l_0xc58039:
-    "[19 02]Move to area" eob
+	load_str("Move to area")
 
 l_0xc5803f:
-    "[19 02]Money Edit" eob
+	load_str("Money Edit")
 
 l_0xc5804a:
-    "[19 02]Level Up" eob
+	load_str("Level Up")
 
 l_0xc58053:
-    "[19 02]Unused Script" eob //Unused Script
+	load_str("Unused Script")
 
 l_0xc58060:
-    "[19 02]Event" eob
+	load_str("Event")
 
 l_0xc58067:
-    "[19 02]Hint shop" eob
+	load_str("Hint shop")
 
 l_0xc5806e:
-    "[19 02]Sound" eob
+	load_str("Sound")
 
 l_0xc58075:
-    "[19 02]Item descriptions" eob
+	load_str("Item descriptions")
 
 l_0xc5807c:
-    "[19 02]Teleport" eob
+	load_str("Teleport")
 
 l_0xc58084:
-    "[19 02]Hint map" eob
+	load_str("Hint map")
 
 enemy_spawn:
-    "[19 02]Enemy spawn" eob
+	load_str("Enemy spawn")
 
 l_0xc5808c:
-    "[1C 0C 02][11][1B 05]{window_closetop}{window_switch(1)}{window_clear}" newline
-    "[1B 06][09 0E {e(l_0xc58103)} {e(l_0xc58262)} {e(data_07.l_0xc58718)} {e(data_08.l_0xc588cd)} {e(data_08.l_0xc58afb)} {e(data_08.l_0xc58a36)} {e(data_08.l_0xc58c88)} {e(events.Events)} {e(data_08.l_0xc58e13)} {e(data_08.l_0xc58d09)} {e(item_desc.Item_Desc)} {e(data_09.l_0xc58e73)} {e(l_0xc580da)} {e(data_08.l_0xc58dbf)} ]{diam}Debug mode off." end
+	print_strings_vertical(2)	// 0x02
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	window_clear
+	newline
+
+	load_registers_shared
+	switch_goto(14)	// 0x0E
+		switch_entry(l_0xc58103)
+		switch_entry(l_0xc58262)
+		switch_entry(data_07.l_0xc58718)
+		switch_entry(data_08.l_0xc588cd)
+		switch_entry(data_08.l_0xc58afb)
+		switch_entry(data_08.l_0xc58a36)
+		switch_entry(data_08.l_0xc58c88)
+		switch_entry(events.Events)
+		switch_entry(data_08.l_0xc58e13)
+		switch_entry(data_08.l_0xc58d09)
+		switch_entry(item_desc.Item_Desc)
+		switch_entry(data_09.l_0xc58e73)
+		switch_entry(l_0xc580da)
+		switch_entry(data_08.l_0xc58dbf)
+	diam "Debug mode off." end
 
 l_0xc580da:
-    newline
-    "{diam}The hint shop has been marked in your map." next
-    "{set(flag 681)}{set(flag 682)}{set(flag 683)}{set(flag 684)}{set(flag 685)}{set(flag 686)}" goto(debug_main)
+	newline
+	diam "The hint shop has been marked in your map." next
+	set(FLG_GM_ONET_HINT)	// 681
+	set(FLG_GM_TWOSON_HINT)	// 682
+	set(FLG_GM_THREEK_HINT)	// 683
+	set(FLG_GM_FOURSIDE_HINT)	// 684
+	set(FLG_GM_SUMMERS_HINT)	// 685
+	set(FLG_GM_SCARABI_HINT)	// 686
+	goto(debug_main)
 
 l_0xc58103:
-    newline
-    "{diam}What do you want to do?" linebreak
-    "[19 02]Add" eob
+	newline
+	diam "What do you want to do?" linebreak
+	load_str("Add")
 
 l_0xc58115:
-    "[19 02]Remove" eob
+	load_str("Remove")
 
 l_0xc5811b:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc5812f)} {e(l_0xc581ee)}]" goto(debug_main)
+	print_strings_horizontal(2)	// 0x02
+	do_menu
+	clearline
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc5812f)
+		switch_entry(l_0xc581ee)
+	goto(debug_main)
 
 l_0xc5812f:
-    newline
-    "{open_hp}{diam}Select your party member.{wait}" linebreak
-    goto(l_0xc58148)
+	newline
+	open_hp
+	diam "Select your party member." wait
+	linebreak
 
 l_0xc58148:
-    "{window_open(8)}[19 02]Ness" eob
+	window_open(8)
+	load_str("Ness")
 
 l_0xc58150:
-    "[19 02]Paula" eob
+	load_str("Paula")
 
 l_0xc58156:
-    "[19 02]Jeff" eob
+	load_str("Jeff")
 
 l_0xc5815c:
-    "[19 02]Poo" eob
+	load_str("Poo")
 
 l_0xc58161:
-    "[19 02]Porky" eob
+	load_str("Porky")
 
 l_0xc58168:
-    "[19 02]Picky" eob
+	load_str("Picky")
 
 l_0xc5816f:
-    "[19 02]King" eob
+	load_str("King")
 
 l_0xc58174:
-    "[19 02]Tony" eob
+	load_str("Tony")
 
 l_0xc5817a:
-    "[19 02]Bubble Monkey" eob
+	load_str("Bubble Monkey")
 
 l_0xc58185:
-    "[19 02]Dungeon Man" eob
+	load_str("Dungeon Man")
 
 l_0xc5818f:
-    "[19 02]Flying Man 1" eob
+	load_str("Flying Man 1")
 
 l_0xc5819a:
-    "[19 02]Flying Man 2" eob
+	load_str("Flying Man 2")
 
 l_0xc581a5:
-    "[19 02]Flying Man 3" eob
+	load_str("Flying Man 3")
 
 l_0xc581b0:
-    "[19 02]Flying Man 4" eob
+	load_str("Flying Man 4")
 
 l_0xc581bb:
-    "[19 02]Flying Man 5" eob
+	load_str("Flying Man 5")
 
 l_0xc581c6:
-    "[1C 0C 03][11][1B 05][19 04]{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc581e7)}]{swap}[1F 11 00]{open_hp}" goto(l_0xc58148)
+	print_strings_vertical(3)	// 0x03
+	do_menu
+	store_registers_shared
+	unload_strings
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	goto_if_false(l_0xc581e7)
+	swap
+	party_add(0)	// 0x00
+	open_hp
+	goto(l_0xc58148)
 
 l_0xc581e7:
-    "{window_closetop}" goto(debug_main)
+	window_closetop
+	goto(debug_main)
 
 l_0xc581ee:
-    "[19 10 02][1B 02 {e(l_0xc58250)}]{diam}Which party member do you want to remove?{wait}" linebreak
-    goto(l_0xc58214)
+	get_char_at_pos(2)	// 0x02
+	goto_if_false(l_0xc58250)
+	diam "Which party member do you want to remove?" wait
+	linebreak
 
 l_0xc58214:
-    "[19 10 02][1B 02 {e(l_0xc5824b)}]  [1F 52 01][1B 02 {e(l_0xc5824b)}]{clearline}{swap}[19 10 00][1B 02 {e(l_0xc58214)}]{swap}[1F 12 00]{diam}[1C 02 00] was removed.{wait}" linebreak
-    goto(l_0xc58214)
+	get_char_at_pos(2)	// 0x02
+	goto_if_false(l_0xc5824b)
+	"  " number_input(1)	// 0x01
+	goto_if_false(l_0xc5824b)
+
+	clearline
+	swap
+	get_char_at_pos(0)	// 0x00
+	goto_if_false(l_0xc58214)
+
+	swap
+	party_remove(0)	// 0x00
+	diam "{name(0)} was removed." wait
+	linebreak
+	goto(l_0xc58214)
 
 l_0xc5824b:
-    goto(debug_main)
+	goto(debug_main)
 
 l_0xc58250:
-    "{diam}You can't have a party of zero!" next
-    "{diam}The game will freeze if you do so.{wait}" goto(l_0xc58103)
+	diam "You can't have a party of zero!" next
+	diam "The game will freeze if you do so.{wait}"
+	goto(l_0xc58103)
 
 l_0xc58262:
-    newline //For Inventory debug
-    "{diam}Select your option.{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Add goods" eob
+	newline	//For Inventory debug
+	diam "Select your option." wait
+	back_up_text_rendering_state
+	open_hp
+	show_wallet
+	window_open(7)
+	load_str("Add goods")
 
 l_0xc58284:
-    "[19 02]Important goods" eob
+	load_str("Important goods")
 
 l_0xc5828f:
-    "[19 02]Max sandwiches" eob
+	load_str("Max sandwiches")
 
 l_0xc58299:
-    "[19 02]Clear inventory" eob
+	load_str("Clear inventory")
 
 l_0xc582a3:
-    "[19 02]Maxed storage" eob
+	load_str("Maxed storage")
 
 l_0xc582b0:
-    "[19 02]Clear storage" eob
+	load_str("Clear storage")
 
 l_0xc582bb:
-    "[19 02]Ultimate weapons" eob
+	load_str("Ultimate weapons")
 
 l_0xc582c5:
-    "[1C 0C 01][11][1B 05]{window_closetop}[19 04]{window_switch(1)}" newline
-    "[1B 06][09 07 {e(l_0xc582f8)} {e(data_07.l_0xc58369)} {e(data_07.l_0xc58539)} {e(data_07.l_0xc58568)} {e(data_07.l_0xc585dc)} {e(data_07.l_0xc58614)} {e(data_07.l_0xc5863c)}]" goto(debug_main)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+	unload_strings
+	window_switch(1)
+	newline
+	load_registers_shared
+	switch_goto(7)	// 0x07
+		switch_entry(l_0xc582f8)
+		switch_entry(data_07.l_0xc58369)
+		switch_entry(data_07.l_0xc58539)
+		switch_entry(data_07.l_0xc58568)
+		switch_entry(data_07.l_0xc585dc)
+		switch_entry(data_07.l_0xc58614)
+		switch_entry(data_07.l_0xc5863c)
+	goto(debug_main)
 
 l_0xc582f8:
-    "{diam}Input goods ID:" linebreak
-    "   [1F 52 03]{clearline}[1B 02 {e(l_0xc58364)}]{swap}[1D 03 FF][1B 02 {e(l_0xc58358)}]{store_registers}{diam}[1C 05 00]?" linebreak
-    "  To whom?{wait}" call(data_15.l_0xc5e52e) linebreak
-    "[1B 02 {e(l_0xc582f8)}][1D 0E 00 00]" newline
-    //"@GtZRNN KWEMST." next
-    "{diam}Item added to inventory." next
-    goto(l_0xc582f8)
+	diam "Input goods ID:" linebreak
+	"   " number_input(3)	// 0x03
+	clearline
+	goto_if_false(l_0xc58364)
+
+	swap
+	get_item_receiver(255)	// 0xFF
+	goto_if_false(l_0xc58358)
+
+	store_registers
+	diam "{itemname(0)}?" linebreak
+	"  To whom?" wait
+	call(data_15.l_0xc5e52e)
+	linebreak
+	goto_if_false(l_0xc582f8)
+
+	give_and_return_location(0,0)	// 0x00, 0x00
+	newline
+	//"@GtZRNN KWEMST." next
+	diam "Item added to inventory." next
+	goto(l_0xc582f8)
 
 l_0xc58358:
-    "{diam}Inventory full." linebreak
-    "{diam}Can't add more items.{wait}" goto(l_0xc58364)
+	diam "Inventory full." linebreak
+	diam "Can't add more items.{wait}"
+	goto(l_0xc58364)
 
 l_0xc58364:
-    goto(debug_main)
-
-l_0xc58369:
-    "[18 02]{window_open(12)}[19 02]Key to the shack" eob
-
-l_0xc58378:
-    "[19 02]Receiver phone" eob
-
-l_0xc58382:
-    "[19 02]Pencil eraser" eob
+	goto(debug_main)

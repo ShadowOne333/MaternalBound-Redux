@@ -40,7 +40,6 @@ l_0xc7c208:
 
 	window_open(1)
 	"@The power of Magnet Hill" call(l_0xc7c55d)
-	goto(l_0xc7c258)
 
 l_0xc7c258:
 	call(l_0xc7c57d)
@@ -55,7 +54,6 @@ l_0xc7c258:
 	set(FLG_POWR_MGNT)	// 186
 	set(FLG_PHOTO_DINO_MUSEUM)	// 494
 	window_closetop
-	goto(l_0xc7c2c5)
 
 l_0xc7c2c5:
 	eob
@@ -75,7 +73,6 @@ l_0xc7c2c6:
 
 	window_open(1)
 	"@The power of Pink Cloud" call(l_0xc7c55d)
-	goto(l_0xc7c317)
 
 l_0xc7c317:
 	call(l_0xc7c57d)
@@ -89,7 +86,6 @@ l_0xc7c317:
 	"@{name(1)}'s Sound Stone recorded the melody of the Pink Cloud." wait
 	set(FLG_POWR_PINK)	// 187
 	window_closetop
-	goto(l_0xc7c38a)
 
 l_0xc7c38a:
 	call(data_57.l_0xc9b226)
@@ -108,7 +104,6 @@ l_0xc7c39b:
 	party_direction(1)
 	sprite2_spawn(106,353,1)	// 0x006A, 0x0161, 1
 	wait_movement
-	goto(l_0xc7c3c2)
 
 l_0xc7c3c2:
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
@@ -125,7 +120,6 @@ l_0xc7c3c2:
 
 	window_open(1)
 	"@The power of Lumine Hall" call(l_0xc7c55d)
-	goto(l_0xc7c412)
 
 l_0xc7c412:
 	set(FLG_TEMP_3)	// 4
@@ -139,7 +133,6 @@ l_0xc7c412:
 	"@{name(1)}'s Sound Stone recorded the melody of Lumine Hall." wait
 	set(FLG_POWR_LUMI)	// 188
 	window_closetop
-	goto(l_0xc7c478)
 
 l_0xc7c478:
 	eob
@@ -159,7 +152,6 @@ l_0xc7c479:
 
 	window_open(1)
 	"@The power of Fire Spring" call(l_0xc7c55d)
-	goto(l_0xc7c4c9)
 
 l_0xc7c4c9:
 	set(FLG_TEMP_3)	// 4
@@ -173,7 +165,6 @@ l_0xc7c4c9:
 	"@{name(1)}'s Sound Stone recorded the melody of the Fire Spring." wait
 	set(FLG_POWR_FIRE)	// 189
 	window_closetop
-	goto(l_0xc7c53a)
 
 l_0xc7c53a:
 	call(data_57.l_0xc9b226)
@@ -240,8 +231,7 @@ l_0xc7c5cd:
 	eob
 
 l_0xc7c5e4:
-	load_registers
-	swap
+	load_registers swap
 	"{name(0)}'s belongings." promptw
 	eob
 
@@ -280,8 +270,7 @@ l_0xc7c669:
 	"@Even if it has lost its flavor..." end
 
 l_0xc7c693:
-	load_registers
-	swap
+	load_registers swap
 	"@" call(data_37.l_0xc7e74e) linebreak
 	"  got rid of" linebreak
 	"  {name(0)}'s {swap}{itemname(0)}." end
@@ -302,13 +291,15 @@ l_0xc7c6f1:
 		set(flg_BikeCantNormallyBeUsed)
 		goto(keyitems.BicycleStart) }
 	else {*/
-		get_action_arg swap
-		"@The {itemname(0)} can't be used here." wait
-		eob //}
+	get_action_arg swap
+	"@The {itemname(0)} can't be used here." wait
+	eob
+	//}
 
 l_0xc7c705:
 	store_registers
-	get_inventory_item(0,0) swap
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
 	result_is(BUBBLE_GUM)	// Bubble gum check
 	goto_if_true(l_0xc7c761)
 
@@ -350,7 +341,7 @@ l_0xc7c77e:
 l_0xc7c78f:
 	"@{name(0)} was horribly poisoned and collapsed." end
 
-l_0xc7c7af:
+l_0xc7c7af:	// Critical condition message, check for stairs fix
 	"@Alert!" next
 	"@{user}'s condition is critical." next
 	"@" call(data_36.l_0xc7e61d) " will collapse if " call(data_37.l_0xc7e66e) " condition isn't treated." next
@@ -461,7 +452,6 @@ l_0xc7cb5f:
 		switch_entry(l_0xc7d05a)
 		switch_entry(l_0xc7d05a)
 		switch_entry(l_0xc7d102)
-	goto(l_0xc7cbba)
 
 l_0xc7cbba:
 	title(1, Mom)
@@ -511,14 +501,13 @@ l_0xc7cdae:
 	sound(SND_PHONEPICKUP)	// 11
 	"  Click!  Beep-beep-beep..." promptw
 	window_closeall
-	goto(l_0xc7ce73)
 
 l_0xc7ce73:
 	pause(30)
 	window_open(1)
 	"@{stat(8)} got over being homesick."	// Ness' name = Stat 8
 	inflict_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 1, 6, 1
-	sound(37)
+	sound(SND_STATUSRECOVER)	// 37
 	wait
 	window_closeall
 	eob
@@ -617,13 +606,14 @@ l_0xc7d33e:
 	goto_if_flag(FLG_SUMS_RAMMA_START, l_0xc7d4af)	// 0x95, 149
 	goto_if_flag(FLG_JEFF, l_0xc7d36e)	// 0x0E, 14
 	goto_if_flag(FLG_WINS_START, l_0xc7d627)	// 0x80, 128
-	goto(l_0xc7d36e)
 
 l_0xc7d36e:
 	window_open(1)
+
 	get_char_at_pos(1)
 	result_is(1)	// Ness
 	goto_if_false(l_0xc7d630)
+
 	title(1, Dad)
 	"@Hello, it's your dad." next
 	"@You've been out there for a long time now..." next

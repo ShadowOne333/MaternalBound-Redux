@@ -22,7 +22,6 @@ l_0xc5df56:
 	call(data_00.l_0xc51568)
 	unset(FLG_SHOP_TOOK)	// 224
 	unset(FLG_SHOP_SOLD)	// 225
-	goto(l_0xc5df61)
 
 l_0xc5df61:
 	call(data_00.l_0xc51700)
@@ -54,7 +53,6 @@ l_0xc5dfb1:
 	unset(FLG_SHOPTEMP_2)	// 657
 	newline
 	call(data_00.l_0xc50000)
-	goto(l_0xc5dfba)
 
 l_0xc5dfba:
 	call(data_00.l_0xc504c8)
@@ -426,7 +424,7 @@ l_0xc5e36e:
 	get_inventory_item(0,0)	// 0x00, 0x00
 	get_selling_price(0)	// 0x00
 	eob
-    //"{swap}{store_registers}{get_inventory_item(0,0)}{get_selling_price(0)}" eob
+	//"{swap}{store_registers}{get_inventory_item(0,0)}{get_selling_price(0)}" eob
 
 l_0xc5e37a:
 	givemoney(0)	// 0x0000

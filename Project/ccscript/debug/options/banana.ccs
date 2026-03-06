@@ -14,13 +14,13 @@ Banana:
 	/* ORIGINAL TEXT
 	"@Can't do anything." end
 	//"@NNMDKMSN." end //Debug option for Kirby Debug Menu - Option Banana */
-	"{diam}How far do you want to advance?" linebreak
+	diam "How far do you want to advance?" linebreak
 	goto(l_0xc58edd)
 
 l_0xc58edd:
 	back_up_text_rendering_state
 	window_open(50)
-	"{diam}Area:" linebreak
+	diam "Area:" linebreak
 	load_str("Onett")
 	load_str("Twoson")
 	load_str("Threek")
@@ -39,11 +39,11 @@ l_0xc58edd:
 	window_closetop
 	window_switch(1)
 	newline
-	"{diam}Finished." end
+	diam "Finished." end
 
 l_0xc58f07: // Onett
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Porky joined")
 	load_str("2. Buzz buzz appeared")
 	load_str("3. Buzz buzz died")
@@ -67,7 +67,7 @@ l_0xc58f35: // Shared "end early" path
 
 l_0xc58f37: // Twoson
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Paula kidnapped")
 	load_str("2. Got Franklin badge")
 	load_str("3. Rescued Paula")
@@ -85,7 +85,7 @@ l_0xc58f37: // Twoson
 
 l_0xc58f61: // Threek
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Caught by zombies")
 	load_str("2. Tessie appears")
 	load_str("3. Dr. Andonuts")
@@ -107,7 +107,7 @@ l_0xc58f61: // Threek
 
 l_0xc58f93: // Fourside
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Montague's big hole")
 	load_str("2. Runaway Brothers freed")
 	load_str("3. Everdred died")
@@ -127,7 +127,7 @@ l_0xc58f93: // Fourside
 
 l_0xc58fc1: // Summers/Scaraba
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Massage at Dalaam")
 	load_str("2. Pink and Magnet")
 	load_str("3. Sail to Scarabia")
@@ -145,7 +145,7 @@ l_0xc58fc1: // Summers/Scaraba
 
 l_0xc58feb: // The rest
 	window_open(13)
-	"{diam}Scene:" linebreak
+	diam "Scene:" linebreak
 	load_str("1. Barf and Poo")
 	load_str("2. Lumine Hall")
 	load_str("3. Finished Sound Stone")

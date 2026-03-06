@@ -4,417 +4,938 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
 l_0xef8b2f:
-    newline
-    "{sound(25)}@{user} fired" linebreak
-    "  a beam!{sound(77)}[03]{pause(1)}" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} fired" linebreak
+	"  a beam!"
+	sound(SND_MAGNET3)	// 77
+	promptw
+	pause(1)
+	eob
 
 l_0xef8b4a:
-    newline
-    "{sound(25)}@{user} jabbed" linebreak
-    "  with a spear![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} jabbed" linebreak
+	"  with a spear!" promptw
+	eob
 
 l_0xef8b65:
-    newline
-    "{sound(25)}@{user} stomped" linebreak
-    "  with " call(data_37.l_0xc7e66e) " huge foot![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} stomped" linebreak
+	"  with " call(data_37.l_0xc7e66e) " huge foot!" promptw
+	eob
 
 l_0xef8b89:
-    newline
-    "{sound(25)}@{user} swung" linebreak
-    "  his hula hoop.{sound(26)}[03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} swung" linebreak
+	"  his hula hoop."
+	sound(SND_BASH)	// 26
+	promptw
+	eob
 
 l_0xef8ba8:
-    newline
-    "{sound(25)}@{user} charged" linebreak
-    "  forward![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} charged" linebreak
+	"  forward!" promptw
+	eob
 
 l_0xef8bc0:
-    newline
-    "{sound(25)}@{user} shredded" linebreak
-    "  fiercely on a skateboard![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shredded" linebreak
+	"  fiercely on a skateboard!" promptw
+	eob
 
 l_0xef8be8:
-    newline
-    "{sound(25)}@{user} bit you" linebreak
-    "  hard![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} bit you" linebreak
+	"  hard!" promptw
+	eob
 
 l_0xef8bfb:
-    newline
-    "{sound(25)}@{user} grumbled" linebreak
-    "  drunkenly about today's youth!{sound(84)}[03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} grumbled" linebreak
+	"  drunkenly about today's youth!"
+	sound(SND_KERPOW)	// 84
+	promptw
+	eob
 
 l_0xef8c1d:
-    newline
-    "{sound(25)}@{user} started" linebreak
-    "  lecturing you!{sound(84)}[03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} started" linebreak
+	"  lecturing you!"
+	sound(SND_KERPOW)	// 84
+	promptw
+	eob
 
 l_0xef8c3a:
-    newline
-    "{sound(25)}@{user} scowled" linebreak
-    "  sharply!{sound(84)}[03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} scowled" linebreak
+	"  sharply!"
+	sound(SND_KERPOW)	// 84
+	promptw
+	eob
 
 l_0xef8c58:
-    newline
-    "{sound(25)}@{user} vented" linebreak
-    "  a terrible odor![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} vented" linebreak
+	"  a terrible odor!" promptw
+	eob
 
 l_0xef8c75:
-    newline
-    "{sound(25)}@{user} shouted" linebreak
-    "  in a loud voice![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shouted" linebreak
+	"  in a loud voice!" promptw
+	eob
 
 l_0xef8c92:
-    newline
-    "{sound(25)}@{user} shrieked a war cry![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shrieked a war cry!" promptw
+	eob
 
 l_0xef8cac:
-    newline
-    "{sound(25)}@{user} knitted" linebreak
-    "  {call(data_37.l_0xc7e66e)} brow![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} knitted" linebreak
+	"  " call(data_37.l_0xc7e66e) " brow!" promptw
+	eob
 
 l_0xef8cc7:
-    "[1D 21 03][09 03 {e(l_0xef8cfb)} {e(l_0xef8d17)} {e(l_0xef8d2f)}]" goto(l_0xef8cdd)
+	random(3)	// 0x03
+	switch_goto(3)	// 0x03
+		switch_entry(l_0xef8cfb)
+		switch_entry(l_0xef8d17)
+		switch_entry(l_0xef8d2f)
 
 l_0xef8cdd:
-    newline
-    "{sound(25)}@{user} lost" linebreak
-    "  a gear and some bolts![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} lost" linebreak
+	"  a gear and some bolts!" promptw
+	eob
 
 l_0xef8cfb:
-    newline
-    "{sound(25)}@{user} re-applied" linebreak
-    "  a bandage![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} re-applied" linebreak
+	"  a bandage!" promptw
+	eob
 
 l_0xef8d17:
-    newline
-    "{sound(25)}@{user} cleaned" linebreak
-    "  the area![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} cleaned" linebreak
+	"  the area!" promptw
+	eob
 
 l_0xef8d2f:
-    newline
-    "{sound(25)}@{user} wanted to go" linebreak
-    "  and get a battery![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} wanted to go" linebreak
+	"  and get a battery!" promptw
+	eob
 
 l_0xef8d4c:
-    newline
-    "@{user} ate a" linebreak
-    "  bologna sandwich!{sound(68)}" next
-    call(data_61.l_0xef69a1) eob
+	newline
+	"@{user} ate a" linebreak
+	"  bologna sandwich!"
+	sound(SND_EAT)	// 68
+	next
+	call(data_61.l_0xef69a1)
+	eob
 
 l_0xef8d72:
-    newline
-    "{sound(25)}@{user} shot a" linebreak
-    "  beam that causes night-time stuffiness![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} shot a" linebreak
+	"  beam that causes night-time stuffiness!" promptw
+	eob
 
 l_0xef8d9f:
-    newline
-    "{sound(25)}@{user} emitted" linebreak
-    "  a pale green light![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} emitted" linebreak
+	"  a pale green light!" promptw
+	eob
 
 l_0xef8dc1:
-    newline
-    "{sound(25)}@{user} coiled" linebreak
-    "  around you and attacked![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} coiled" linebreak
+	"  around you and attacked!" promptw
+	eob
 
 l_0xef8dde:
-    newline
-    "@All of a sudden," next
-    "@{user} gave off" linebreak
-    "  a rainbow of colors!{sound(65)}[1C 13 28 00]{pause(30)}{sound(65)}[1C 13 28 00]{pause(30)}{sound(65)}[1C 13 28 00]{pause(30)}" eob
+	newline
+	"@All of a sudden," next
+	"@{user} gave off" linebreak
+	"  a rainbow of colors!"
+	sound(SND_FLASH1)	// 65
+	battle_animation(40,0)	// 0x28, 0x00
+	pause(30)
+	sound(SND_FLASH1)	// 65
+	battle_animation(40,0)	// 0x28, 0x00
+	pause(30)
+	sound(SND_FLASH1)	// 65
+	battle_animation(40,0)	// 0x28, 0x00
+	pause(30)
+	eob
 
 l_0xef8e27:
-    newline
-    "@{user}[19 1F]{swap} used the" linebreak
-    "  [1C 05 00]![03]" eob
+	newline
+	"@{user}"
+	get_action_arg swap
+	" used the" linebreak
+	"  {itemname(0)}!" promptw	// 0x00
+	eob
 
 l_0xef8e3c:
-    newline
-    "@{user}[19 1F]{swap} used the" linebreak
-    "  [1C 05 00]!{pause(30)}{sound(54)}{pause(30)}[1C 13 00 01]{pause(60)}[03]" eob
+	newline
+	"@{user}"
+	get_action_arg swap
+	" used the" linebreak
+	"  {itemname(0)}!"	// 0x00
+	pause(30)
+	sound(SND_BRAINSHOCK2)	// 54
+	pause(30)
+	battle_animation(0,1)	// 0x00, 0x01
+	pause(60)
+	promptw
+	eob
 
 l_0xef8e5e:
-    newline
-    "@{user}[19 1F]{swap} used the" linebreak
-    "  [1C 05 00]!{pause(30)}{sound(59)}[1C 13 00 04]{pause(60)}[03]" eob
+	newline
+	"@{user}"
+	get_action_arg swap
+	" used the" linebreak
+	"  {itemname(0)}!"	// 0x00
+	pause(30)
+	sound(SND_DEFENSEDOWN2)	// 59
+	battle_animation(0,4)	// 0x00, 0x04
+	pause(60)
+	promptw
+	eob
 
 l_0xef8e7e:
-    newline
-    "@{user}[19 1F]{swap} used the" linebreak
-    "  [1C 05 00]!{pause(30)}{sound(59)}[1C 13 00 1E]{pause(60)}[03]" eob
+	newline
+	"@{user}"
+	get_action_arg swap
+	" used the" linebreak
+	"  {itemname(0)}!"	// 0x00
+	pause(30)
+	sound(SND_DEFENSEDOWN2)	// 59
+	battle_animation(0,30)	// 0x00, 0x1E
+	pause(60)
+	promptw
+	eob
 
 l_0xef8e9e:
-    newline
-    "@{user}[19 1F]{swap} used the" linebreak
-    "  [1C 05 00]!{pause(30)}{sound(99)}[1C 13 00 1B]{pause(60)}[03]" eob
+	newline
+	"@{user}"
+	get_action_arg swap
+	" used the" linebreak
+	"  {itemname(0)}!"	// 0x00
+	pause(30)
+	sound(SND_STARMASTER)	// 99
+	battle_animation(0,27)	// 0x00, 0x1B
+	pause(60)
+	promptw
+	eob
 
 l_0xef8ebe:
-    newline
-    "{sound(25)}@{user} discharged" linebreak
-    "  a very stinky gas![03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} discharged" linebreak
+	"  a very stinky gas!" promptw
+	eob
 
 l_0xef8ee2:
-    call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}@You cannot grasp the true form" linebreak
-    "  of {user}' attack![1C 13 31 00][1C 13 36 00]{sound(81)}{pause(40)}{sound(81)}" eob
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	"@You cannot grasp the true form" linebreak
+	"  of {user}' attack!"
+	battle_animation(49,0)	// 0x31, 0x00
+	battle_animation(54,0)	// 0x36, 0x00
+	sound(SND_DRILL)	// 81
+	pause(40)
+	sound(SND_DRILL)	// 81
+	eob
 
 l_0xef8f17:
-    call(data_59.l_0xc9ee68) "{window_clear}@You cannot grasp the true form" linebreak
-    "  of {user}' attack![1C 13 31 00][1C 13 36 00]{sound(81)}{pause(40)}{sound(81)}" eob
+	call(data_59.l_0xc9ee68)
+	window_clear
+	"@You cannot grasp the true form" linebreak
+	"  of {user}' attack!"
+	battle_animation(49,0)	// 0x31, 0x00
+	battle_animation(54,0)	// 0x36, 0x00
+	sound(SND_DRILL)	// 81
+	pause(40)
+	sound(SND_DRILL)	// 81
+	eob
 
 l_0xef8f4a:
-    call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}" call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}" call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}@You cannot grasp the true form" linebreak
-    "  of {user}' attack![1C 13 31 00][1C 13 36 00]{sound(81)}{pause(40)}{sound(81)}" eob
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	"@You cannot grasp the true form" linebreak
+	"  of {user}' attack!"
+	battle_animation(49,0)	// 0x31, 0x00
+	battle_animation(54,0)	// 0x36, 0x00
+	sound(SND_DRILL)	// 81
+	pause(40)
+	sound(SND_DRILL)	// 81
+	eob
 
 l_0xef8f91:
-    call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}" call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}" call(data_59.l_0xc9ee2f) "{pause(40)}{window_clear}" eob
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	call(data_59.l_0xc9ee2f)
+	pause(40)
+	window_clear
+	eob
 
 l_0xef8fad:
-    "[1D 19 02][1B 03 {e(l_0xef8fc9)}][19 10 02][1D 0D 00 01 02][1B 03 {e(l_0xef8fc9)}] each." eob
+	party_size_smaller_than(2)	// 0x02
+	goto_if_true(l_0xef8fc9)
+	get_char_at_pos(2)	// 0x02
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x00, 0x01, 0x02
+	goto_if_true(l_0xef8fc9)
+	" each."
+	eob
 
 l_0xef8fc9:
-    "." eob
+	"."
+	eob
 
+// Moonside NPC enemies
 l_0xef8fcb:
-    "[06 82 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 B6 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 386)}{pause(1)}" eob
+	goto_if_flag(FLG_FMON_MOON_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0182, 386
+	window_closeall
+	start_battle(438)	// 0x01B6
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_MOON_A_DISAPPEAR)	// 386
+	pause(1)
+	eob
 
 l_0xef8fe4:
-    "[06 83 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 B7 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 387)}{pause(1)}[1F F1 53 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_MOON_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0183, 387
+	window_closeall
+	start_battle(439)	// 0x01B7
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_MOON_B_DISAPPEAR)	// 387
+	pause(1)
+	npc_do_mc(1363,635)	// 0x0553, 0x027B
+	eob
 
 l_0xef9003:
-    "[06 84 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 B7 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 388)}{pause(1)}[1F F1 5B 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_MOON_B_2_DISAPPEAR, data_35.l_0xc7c588)	// 0x0184, 388
+	window_closeall
+	start_battle(439)	// 0x01B7
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_MOON_B_2_DISAPPEAR)	// 388
+	pause(1)
+	npc_do_mc(1371,635)	// 0x055B, 0x027B
+	eob
 
 l_0xef9022:
-    "[06 85 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 B8 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 389)}{pause(1)}[1F F1 56 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_MOON_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0185, 389
+	window_closeall
+	start_battle(440)	// 0x01B8
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_MOON_C_DISAPPEAR)	// 389
+	pause(1)
+	npc_do_mc(1366,635)	// 0x0556, 0x027B
+	eob
 
+// Pyramid NPC enemies
 l_0xef9041:
-    "[06 86 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 390)}{pause(1)}[1F F1 8E 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0186, 390
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_A_DISAPPEAR)	// 390
+	pause(1)
+	npc_do_mc(1166,635)	// 0x048E, 0x027B
+	eob
 
 l_0xef9060:
-    "[06 87 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 391)}{pause(1)}[1F F1 8F 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0187, 391
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_B_DISAPPEAR)	// 391
+	pause(1)
+	npc_do_mc(1167,635)	// 0x048F, 0x027B
+	eob
 
 l_0xef907f:
-    "[06 88 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 392)}{pause(1)}[1F F1 90 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0188, 392
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_C_DISAPPEAR)	// 392
+	pause(1)
+	npc_do_mc(1168,635)	// 0x0490, 0x027B
+	eob
 
 l_0xef909e:
-    "[06 89 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 393)}{pause(1)}[1F F1 91 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x0189, 393
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_D_DISAPPEAR)	// 393
+	pause(1)
+	npc_do_mc(1169,635)	// 0x0491, 0x027B
+	eob
 
 l_0xef90bd:
-    "[06 8A 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 394)}{pause(1)}[1F F1 94 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x018A, 394
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_E_DISAPPEAR)	// 394
+	pause(1)
+	npc_do_mc(1172,635)	// 0x0494, 0x027B
+	eob
 
 l_0xef90dc:
-    "[06 8B 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 395)}{pause(1)}[1F F1 95 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_F_DISAPPEAR, data_35.l_0xc7c588)	// 0x018B, 395
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_F_DISAPPEAR)	// 395
+	pause(1)
+	npc_do_mc(1173,635)	// 0x0495, 0x027B
+	eob
 
 l_0xef90f9:
-    "[06 8C 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 396)}{pause(1)}[1F F1 96 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_G_DISAPPEAR, data_35.l_0xc7c588)	// 0x018C, 396
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_G_DISAPPEAR)	// 396
+	pause(1)
+	npc_do_mc(1174,635)	// 0x0496, 0x027B
+	eob
 
 l_0xef9118:
-    "[06 8D 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 397)}{pause(1)}[1F F1 98 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_H_DISAPPEAR, data_35.l_0xc7c588)	// 0x018D, 397
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_H_DISAPPEAR)	// 397
+	pause(1)
+	npc_do_mc(1176,635)	// 0x0498, 0x027B
+	eob
 
 l_0xef9137:
-    "[06 8E 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 398)}{pause(1)}[1F F1 9A 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_I_DISAPPEAR, data_35.l_0xc7c588)	// 0x018E, 398
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_I_DISAPPEAR)	// 398
+	pause(1)
+	npc_do_mc(1178,635)	// 0x049A, 0x027B
+	eob
 
 l_0xef9156:
-    "[06 8F 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 399)}{pause(1)}[1F F1 9D 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_J_DISAPPEAR, data_35.l_0xc7c588)	// 0x018F, 399
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_J_DISAPPEAR)	// 399
+	pause(1)
+	npc_do_mc(1181,635)	// 0x049D, 0x027B
+	eob
 
 l_0xef9175:
-    "[06 90 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 400)}{pause(1)}[1F F1 9E 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_K_DISAPPEAR, data_35.l_0xc7c588)	// 0x0190, 400
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_K_DISAPPEAR)	// 400
+	pause(1)
+	npc_do_mc(1182,635)	// 0x049E, 0x027B
+	eob
 
 l_0xef9194:
-    "[06 91 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 401)}{pause(1)}[1F F1 9F 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_L_DISAPPEAR, data_35.l_0xc7c588)	// 0x0191, 401
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_L_DISAPPEAR)	// 401
+	pause(1)
+	npc_do_mc(1183,635)	// 0x049F, 0x027B
+	eob
 
 l_0xef91b3:
-    "[06 92 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 402)}{pause(1)}[1F F1 A1 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_M_DISAPPEAR, data_35.l_0xc7c588)	// 0x0192, 402
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_M_DISAPPEAR)	// 402
+	pause(1)
+	npc_do_mc(1185,635)	// 0x04A1, 0x027B
+	eob
 
 l_0xef91d2:
-    "[06 93 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 403)}{pause(1)}[1F F1 A2 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_N_DISAPPEAR, data_35.l_0xc7c588)	// 0x0193, 403
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_N_DISAPPEAR)	// 403
+	pause(1)
+	npc_do_mc(1186,635)	// 0x04A2, 0x027B
+	eob
 
 l_0xef91f1:
-    "[06 94 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 404)}{pause(1)}[1F F1 A4 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_O_DISAPPEAR, data_35.l_0xc7c588)	// 0x0194, 404
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_O_DISAPPEAR)	// 404
+	pause(1)
+	npc_do_mc(1188,635)	// 0x04A4, 0x027B
+	eob
 
 l_0xef9210:
-    "[06 95 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 405)}{pause(1)}[1F F1 A5 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_P_DISAPPEAR, data_35.l_0xc7c588)	// 0x0195, 405
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_P_DISAPPEAR)	// 405
+	pause(1)
+	npc_do_mc(1189,635)	// 0x04A5, 0x027B
+	eob
 
 l_0xef922f:
-    "[06 96 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BB 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 406)}{pause(1)}[1F F1 A6 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_A_Q_DISAPPEAR, data_35.l_0xc7c588)	// 0x0196, 406
+	window_closeall
+	start_battle(443)	// 0x01BB
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_A_Q_DISAPPEAR)	// 406
+	pause(1)
+	npc_do_mc(1190,635)	// 0x04A6, 0x027B
+	eob
 
 l_0xef924e:
-    "[06 97 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 407)}{pause(1)}[1F F1 92 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0197, 407
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_A_DISAPPEAR)	// 407
+	pause(1)
+	npc_do_mc(1170,635)	// 0x0492, 0x027B
+	eob
 
 l_0xef926d:
-    "[06 98 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 408)}{pause(1)}[1F F1 93 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0198, 408
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_B_DISAPPEAR)	// 408
+	pause(1)
+	npc_do_mc(1171,635)	// 0x0493, 0x027B
+	eob
 
 l_0xef928c:
-    "[06 99 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 409)}{pause(1)}[1F F1 97 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0199, 409
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_C_DISAPPEAR)	// 409
+	pause(1)
+	npc_do_mc(1175,635)	// 0x0497, 0x027B
+	eob
 
 l_0xef92ab:
-    "[06 9A 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 410)}{pause(1)}[1F F1 99 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x019A, 410
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_D_DISAPPEAR)	// 410
+	pause(1)
+	npc_do_mc(1177,635)	// 0x0499, 0x027B
+	eob
 
 l_0xef92ca:
-    "[06 9B 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 411)}{pause(1)}[1F F1 9B 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x019B, 411
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_E_DISAPPEAR)	// 411
+	pause(1)
+	npc_do_mc(1179,635)	// 0x049B, 0x027B
+	eob
 
 l_0xef92e9:
-    "[06 9C 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 412)}{pause(1)}[1F F1 A0 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_F_DISAPPEAR, data_35.l_0xc7c588)	// 0x019C, 412
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_F_DISAPPEAR)	// 412
+	pause(1)
+	npc_do_mc(1184,635)	// 0x04A0, 0x027B
+	eob
 
 l_0xef9308:
-    "[06 9D 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 413)}{pause(1)}[1F F1 A3 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_G_DISAPPEAR, data_35.l_0xc7c588)	// 0x019D, 413
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_G_DISAPPEAR)	// 413
+	pause(1)
+	npc_do_mc(1187,635)	// 0x04A3, 0x027B
+	eob
 
 l_0xef9327:
-    "[06 9E 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 414)}{pause(1)}[1F F1 A7 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_H_DISAPPEAR, data_35.l_0xc7c588)	// 0x019E, 414
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_H_DISAPPEAR)	// 414
+	pause(1)
+	npc_do_mc(1191,635)	// 0x04A7, 0x027B
+	eob
 
 l_0xef9346:
-    "[06 9F 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BC 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 415)}{pause(1)}[1F F1 A8 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_B_I_DISAPPEAR, data_35.l_0xc7c588)	// 0x019F, 415
+	window_closeall
+	start_battle(444)	// 0x01BC
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_B_I_DISAPPEAR)	// 415
+	pause(1)
+	npc_do_mc(1192,635)	// 0x04A8, 0x027B
+	eob
 
+// Dungeonman NPC enemies
 l_0xef9365:
-    "[06 A0 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BD 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 416)}{pause(1)}[1F F1 A6 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_A_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A0, 416
+	window_closeall
+	start_battle(445)	// 0x01BD
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_A_A_DISAPPEAR)	// 416
+	pause(1)
+	npc_do_mc(678,635)	// 0x02A6, 0x027B
+	eob
 
 l_0xef9384:
-    "[06 A1 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BD 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 417)}{pause(1)}[1F F1 A7 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_A_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A1, 417
+	window_closeall
+	start_battle(445)	// 0x01BD
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_A_B_DISAPPEAR)	// 417
+	pause(1)
+	npc_do_mc(679,635)	// 0x02A7, 0x027B
+	eob
 
 l_0xef93a3:
-    "[06 A2 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BE 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 418)}{pause(1)}[1F F1 A8 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_B_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A2, 418
+	window_closeall
+	start_battle(446)	// 0x01BE
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_B_A_DISAPPEAR)	// 418
+	pause(1)
+	npc_do_mc(680,635)	// 0x02A8, 0x027B
+	eob
 
 l_0xef93c2:
-    "[06 A3 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BE 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 419)}{pause(1)}[1F F1 A9 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_B_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A3, 419
+	window_closeall
+	start_battle(446)	// 0x01BE
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_B_B_DISAPPEAR)	// 419
+	pause(1)
+	npc_do_mc(681,635)	// 0x02A9, 0x027B
+	eob
 
 l_0xef93e1:
-    "[06 A4 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BF 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 420)}{pause(1)}[1F F1 AA 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_C_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A4, 420
+	window_closeall
+	start_battle(447)	// 0x01BF
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_C_A_DISAPPEAR)	// 420
+	pause(1)
+	npc_do_mc(682,635)	// 0x02AA, 0x027B
+	eob
 
 l_0xef9400:
-    "[06 A5 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BF 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 421)}{pause(1)}[1F F1 AB 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BRICK_C_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A5, 421
+	window_closeall
+	start_battle(447)	// 0x01BF
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_BRICK_C_B_DISAPPEAR)	// 421
+	pause(1)
+	npc_do_mc(683,635)	// 0x02AB, 0x027B
+	eob
 
+// Moonside Boss NPC
 l_0xef941f:
-    "[06 B2 01 {e(data_35.l_0xc7c588)}]" call(data_26.l_0xc6cfc5) "{window_closeall}[1F 23 D2 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 434)}{pause(1)}[1F F1 A0 02 7B 02]" call(data_50.l_0xc92be3) eob
+	goto_if_flag(FLG_FMON_STONE_BOSS_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B2, 434
+	call(data_26.l_0xc6cfc5)
+	window_closeall
+	start_battle(466)	// 0x01D2
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_STONE_BOSS_DISAPPEAR)	// 434
+	pause(1)
+	npc_do_mc(672,635)	// 0x02A0, 0x027B
+	call(data_50.l_0xc92be3)
+	eob
 
+// Pyramid Boss NPC
 l_0xef9448:
-    "[06 B3 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 D4 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 435)}{pause(1)}[1F F1 9C 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_PYRA_BOSS_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B3, 435
+	window_closeall
+	start_battle(468)	// 0x01D4
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_PYRA_BOSS_DISAPPEAR)	// 435
+	pause(1)
+	npc_do_mc(1180,635)	// 0x049C, 0x027B
+	eob
 
+// Kraken Boss NPCs
 l_0xef9467:
-    "[06 B4 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 D3 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 436)}{pause(1)}[1F F1 4A 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_KRAKEN2_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B4, 436
+	window_closeall
+	start_battle(467)	// 0x01D3
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_KRAKEN2_A_DISAPPEAR)	// 436
+	pause(1)
+	npc_do_mc(1354,635)	// 0x054A, 0x027B
+	eob
 
 l_0xef9486:
-    "[06 B5 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 D3 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 437)}{pause(1)}[1F F1 4B 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_KRAKEN2_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B5, 437
+	window_closeall
+	start_battle(467)	// 0x01D3
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_KRAKEN2_B_DISAPPEAR)	// 437
+	pause(1)
+	npc_do_mc(1355,635)	// 0x054B, 0x027B
+	eob
 
 l_0xef94a5:
-    "[06 B6 01 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 D3 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 438)}{pause(1)}[1F F1 4C 05 7B 02]" eob
+	goto_if_flag(FLG_FMON_KRAKEN2_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B6, 438
+	window_closeall
+	start_battle(467)	// 0x01D3
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_KRAKEN2_C_DISAPPEAR)	// 438
+	pause(1)
+	npc_do_mc(1356,635)	// 0x054C, 0x027B
+	eob
 
 l_0xef94c4:
-    "[06 59 02 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BA 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 601)}{pause(1)}[1F F1 0F 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_HIEROGLYPH_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0259, 601
+	window_closeall
+	start_battle(442)	// 0x01BA
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_HIEROGLYPH_A_DISAPPEAR)	// 601
+	pause(1)
+	npc_do_mc(1039,635)	// 0x040F, 0x027B
+	eob
 
 l_0xef94e3:
-    "[06 5A 02 {e(data_35.l_0xc7c588)}]{window_closeall}[1F 23 BA 01][1B 03 {e(data_32.l_0xc77eff)}]{set(flag 602)}{pause(1)}[1F F1 10 04 7B 02]" eob
+	goto_if_flag(FLG_FMON_HIEROGLYPH_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x025A, 602
+	window_closeall
+	start_battle(442)	// 0x01BA
+	goto_if_true(data_32.l_0xc77eff)
+	set(FLG_FMON_HIEROGLYPH_B_DISAPPEAR)	// 602
+	pause(1)
+	npc_do_mc(1040,635)	// 0x0410, 0x027B
+	eob
 
 l_0xef9502:
-    "[06 5B 02 {e(data_35.l_0xc7c588)}]{window_open(1)}" call(data_61.l_0xef681a) "{window_closeall}[1F 23 E2 01][1B 03 {e(data_32.l_0xc77eff)}]" call(data_61.l_0xef68d7) "{set(flag 603)}{pause(1)}[1F F1 4E 02 7B 02]" eob
+	goto_if_flag(FLG_FMON_BOSS_GRAVE_DISAPPEAR, data_35.l_0xc7c588)	// 0x025B, 603
+	window_open(1)
+	call(data_61.l_0xef681a)
+	window_closeall
+	start_battle(482)	// 0x01E2
+	goto_if_true(data_32.l_0xc77eff)
+	call(data_61.l_0xef68d7)
+	set(FLG_FMON_BOSS_GRAVE_DISAPPEAR)	// 603
+	pause(1)
+	npc_do_mc(590,635)	// 0x024E, 0x027B
+	eob
 
 l_0xef952e:
-    title_paula(1)
-    "[06 44 00 {e(l_0xef9737)}][06 56 00 {e(l_0xef970f)}][06 0A 00 {e(l_0xef95a3)}]@...Who?..." next
-    "@...Are you [1C 02 01]?" next
-    "@[1C 02 01]!  I'm so glad it's you." next
-    "@I had a dream that a boy named [1C 02 01] was my destiny." next
-    "@I know it's hard to believe." next
-    goto(l_0xef95a3)
+	title_paula(1)
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xef9737)	// 0x0044, 68
+	goto_if_flag(FLG_ITEM_FRANKLINBADGE, l_0xef970f)	// 0x0056, 86
+	goto_if_flag(FLG_TEMP_9, l_0xef95a3)	// 0x000A, 10
+
+	"@...Who?..." next
+	"@...Are you {name(1)}?" next
+	"@{name(1)}!  I'm so glad it's you." next
+	"@I had a dream that a boy named {name(1)} was my destiny." next
+	"@I know it's hard to believe." next
 
 l_0xef95a3:
-    "@Therefore,{pause(15)} I knew you would rescue me." next
-    "@If you hadn't come,{pause(15)} I... would have started crying." next
-    "@You can't open the door." next
-    "@You'll have to get the key from Carpainter.  He's got it hidden away." next
-    "@I heard Carpainter can control lightning." next
-    "@In that case,{pause(15)} you should wear this [1C 05 01], okay?[1D 03 FF][1B 02 {e(l_0xef96d3)}][1D 0E 00 01]" call(data_36.l_0xc7dcb6) next
-    "{set(flag 86)}{set(flag 45)}{unset(flag 634)}{unset(flag 635)}"
-    title_paula(1)
-    "@I'll wait here until you return." next
-    "@Come back here and get me out once you defeat Carpainter." next
-    "@Don't worry about me, just kick butt like I know you can!{wait}{set(flag 11)}[1F 41 05]" eob
+	"@Therefore,| I knew you would rescue me." next
+	"@If you hadn't come,| I... would have started crying." next
+	"@You can't open the door." next
+	"@You'll have to get the key from Carpainter.  He's got it hidden away." next
+	"@I heard Carpainter can control lightning." next
+	"@In that case,| you should wear this {itemname(FRANKLIN_BADGE)}, okay?"
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xef96d3)
+	give_and_return_location(0, FRANKLIN_BADGE)	// 0x00, 0x01
+	call(data_36.l_0xc7dcb6)
+	next
+
+	set(FLG_ITEM_FRANKLINBADGE)	// 86
+	set(FLG_GRFD_POKEY_APPEAR)	// 45
+	unset(FLG_ONET_POLA_TELEPATHY)	// 634
+	unset(FLG_TWSN_POLA_TELEPATHY)	// 635
+
+	title_paula(1)
+	"@I'll wait here until you return." next
+	"@Come back here and get me out once you defeat Carpainter." next
+	"@Don't worry about me, just kick butt like I know you can!" wait
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	OSS_on	// event(5)
+	eob
 
 l_0xef96d3:
-    "{sound(5)}{pause(30)}@What--{pause(15)}do you want to get fried by lightning?" next
-    "@Get rid of something so I can give you the [1C 05 01].{wait}" linebreak
-    "{set(flag 10)}" eob
+	sound(SND_ERRORBEEP)	// 5
+	"||@What--|do you want to get fried by lightning?" next
+	"@Get rid of something so I can give you the {itemname(1)}." wait
+	linebreak
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xef970f:
-    "@If you hadn't come,{pause(15)} I... would have started crying." next
-    eob
+	"@If you hadn't come,| I... would have started crying." next
+	eob
 
 l_0xef9737:
-    title_paula(1)
-    "@[1C 02 01]!  You got the key!" next
-    "@Are you hurt?" linebreak
-    "[19 02]Yes" eob
-
-l_0xef9756:
-    " [19 02]No" eob
-
-l_0xef975c:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xef976b)} {e(noreply)}]" goto(noreply)
-
-l_0xef976b:
-    "@I'm sorry for all the trouble I've caused you." end
+	title_paula(1)
+	"@{name(1)}!  You got the key!" next
+	"@Are you hurt?" linebreak
+	two_choice_menu("Yes", l_0xef976b, "No", noreply)
 
 noreply:
-    "@I'm glad you're okay." end
+	"@I'm glad you're okay." end
+
+l_0xef976b:
+	"@I'm sorry for all the trouble I've caused you." end
 
 l_0xef9785:
-    "@(Cross bridge to Happy Happy Village)" end
+	"@(Cross bridge to Happy Happy Village)" end
 
 l_0xef97a2:
-    "[06 BF 00 {e(data_35.l_0xc7c588)}]{counter(1)}" call(data_36.l_0xc7dc7f) "[1B 03 {e(data_24.l_0xc690a6)}]{music(155)}@You finally got here." next
-    "@This is the second <Your Sanctuary> location.{pause(20)}" linebreak 
-    "  But it's mine now." next
-    "@Take it from me,{pause(30)} if you dare...[03]" call(data_23.l_0xc68410) "[1B 03 {e(data_23.l_0xc683de)}][1F 1E C3 01 08]{pause(120)}{set(flag 191)}" eob
+	goto_if_flag(FLG_WIN_LLPT_BOSS, data_35.l_0xc7c588)	// 0x00BF, 191
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(data_24.l_0xc690a6)
+
+	music(155)
+	"@You finally got here." next
+	"@This is the second <Your Sanctuary> location." pause(20) linebreak
+	"  But it's mine now." next
+	"@Take it from me,|| if you dare..." promptw
+
+	call(data_23.l_0xc68410)
+	goto_if_true(data_23.l_0xc683de)
+	npc_delete(451,8)	// 0x01C3, 0x08
+	pause(120)
+	set(FLG_WIN_LLPT_BOSS)	// 191
+	eob
 
 l_0xef981c:
-    call(data_47.l_0xc900f9) eob
+	call(data_47.l_0xc900f9)
+	eob
 
 l_0xef9822:
-    "@I wonder who made the bridge impassable?" next
-    "@Why would someone do this?{pause(15)}  Crud..." end
+	"@I wonder who made the bridge impassable?" next
+	"@Why would someone do this?" pause(15)
+	"  Crud..." end
 
 l_0xef9857:
-    "@(I'm not an enemy." next
-    "@I'm just a regular mole." next
-    "@Would you like to know about how to survive battles?)" next
-    "[19 02]Yes" eob
-
-l_0xef9898:
-    " [19 02]No" eob
-
-l_0xef989e:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xef98d3)} {e(l_0xef98ad)}]" goto(l_0xef98ad)
+	"@(I'm not an enemy." next
+	"@I'm just a regular mole." next
+	"@Would you like to know about how to survive battles?)" next
+	two_choice_menu("Yes", l_0xef98d3, "No", l_0xef98ad)
 
 l_0xef98ad:
-    "@(Well, you seem to know a lot already, even if you don't look like it.)" end
+	"@(Well, you seem to know a lot already, even if you don't look like it.)" end
 
 l_0xef98d3:
-    "@(You may have noticed that,{pause(15)} when you have been badly hurt in battle," next
-    "@you may survive a mortal attack and still have 1 HP.{pause(20)}  If this has happened," next
-    "@it was because of your Guts.{pause(20)}  Your survival may depend on your Guts level." next
-    "@Also,{pause(15)} more Guts helps you get more SMAAAAASHing hits." next
-    "@Beyond Guts,{pause(15)} you should have noticed that it takes some time" next
-    "@for damage to be taken from you." next
-    "@This is because of the rolling action of your HP meter.{pause(15)}  Oops!{pause(20)}  I mean your life." next
-    "@If an enemy deals mortal damage to you,{pause(15)} but you defeat all enemies" next
-    "@before your life is gone,{pause(15)} you survive.{pause(30)}  This is all I know.)" end
+	"@(You may have noticed that,| when you have been badly hurt in battle," next
+	"@you may survive a mortal attack and still have 1 HP." pause(20)
+	"  If this has happened," next
+	"@it was because of your Guts." pause(20)
+	"  Your survival may depend on your Guts level." next
+	"@Also,| more Guts helps you get more SMAAAAASHing hits." next
+	"@Beyond Guts,| you should have noticed that it takes some time" next
+	"@for damage to be taken from you." next
+	"@This is because of the rolling action of your HP meter." pause(15)
+	"  Oops!" pause(20)
+	"  I mean your life." next
+	"@If an enemy deals mortal damage to you,| but you defeat all enemies" next
+	"@before your life is gone,| you survive." pause(30)
+	"  This is all I know.)" end
 
+// Battle texts begin here
 l_0xef9a47:
-    newline
-    "{sound(25)}@{user} called" linebreak
-    "  for help!{sound(72)}[03]" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} called" linebreak
+	"  for help!"
+	sound(SND_STATUSCHANGE)	// 72
+	promptw
+	eob
 
 l_0xef9a5e:
-    "{sound(25)}" newline
-    "@{user} sowed" linebreak
-    "  some seeds around {call(data_63.self_gender)}!{sound(72)}[03]" eob
+	sound(SND_MONSTERATTACK)	// 25
+	newline
+	"@{user} sowed" linebreak
+	"  some seeds around " call(data_63.self_gender) "!"
+	sound(SND_STATUSCHANGE)	// 72
+	promptw
+	eob
 
 l_0xef9a7e:
-    newline
-    "{sound(25)}@{user} exploded" linebreak
-    "  into bits!{sound(91)}[03]{pause(30)}" eob
+	newline
+	sound(SND_MONSTERATTACK)	// 25
+	"@{user} exploded" linebreak
+	"  into bits!"
+	sound(SND_FIRE4)	// 91
+	promptw
+	pause(30)
+	eob

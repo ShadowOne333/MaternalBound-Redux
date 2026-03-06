@@ -6,6 +6,9 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -13,204 +16,983 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc58e31:
-    "     [1F 52 02]{clearline}[1B 03 {e(l_0xc58e4a)}]{diam}Hint system off." next //Hints closing
-    goto(data_06.debug_main)
+	"   {number_input(2)}"	// 0x02{clearline}
+	goto_if_true(l_0xc58e4a)
+	diam "Hint system off." next	//Hints closing
+	goto(data_06.debug_main)
 
 l_0xc58e4a:
-    "{rtoarg}{diam}Hint #[1C 0A 00 00 00 00]{wait}" linebreak
-    next
-    call(data_28.l_0xc70000) linebreak
-    goto(l_0xc58e31)
+	rtoarg
+	diam "Hint #{number(0)}" wait
+	linebreak
+	next
+	call(data_28.l_0xc70000)
+	linebreak
+	goto(l_0xc58e31)
 
 l_0xc58e73:
-    "{diam}Select your teleportation." linebreak
-    "  [1F 52 01]{clearline}[09 04 {e(l_0xc58e9f)} {e(l_0xc58ea6)} {e(l_0xc58ead)} {e(l_0xc58eb4)}]" goto(data_06.debug_main)
+	diam "Select your teleportation." linebreak
+	"   {number_input(1)}"	// 0x01
+	clearline
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc58e9f)
+		switch_entry(l_0xc58ea6)
+		switch_entry(l_0xc58ead)
+		switch_entry(l_0xc58eb4)
+	goto(data_06.debug_main)
 
 l_0xc58e9f:
-    "{window_closeall}[1F 20 04 01]" eob
+	window_closeall
+	teleport(4,1)	// 0x04, 0x01
+	eob
 
 l_0xc58ea6:
-    "{window_closeall}[1F 20 04 02]" eob
+	window_closeall
+	teleport(4,2)	// 0x04, 0x02
+	eob
 
 l_0xc58ead:
-    "{window_closeall}[1F 20 04 03]" eob
+	window_closeall
+	teleport(4,3)	// 0x04, 0x03
+	eob
 
 l_0xc58eb4:
-    "{window_closeall}[1F 20 04 04]" eob
+	window_closeall
+	teleport(4,4)	// 0x04, 0x04
+	eob
 
 l_0xc58ebb:
-    "{diam}Add a Skip Sandwich.{wait}" call(data_07.l_0xc58555) eob
-    //"@SKtPSNDWKWEMS.{wait}"
+	diam "Add a Skip Sandwich." wait
+	call(data_07.l_0xc58555)
+	eob
+	//"@SKtPSNDWKWEMS.{wait}"
 
 l_0xc58ed1:
-    /* ORIGINAL TEXT
-    "@Can't do anything." end
-    //"@NNMDKMSN." end //Debug option for Kirby Debug Menu - Option Banana */
-    "{diam}How far do you want to advance?" linebreak
-    goto(l_0xc58edd)
+/* ORIGINAL TEXT
+	"@Can't do anything." end
+	//"@NNMDKMSN." end //Debug option for Kirby Debug Menu - Option Banana */
+	diam "How far do you want to advance?" linebreak
+	goto(l_0xc58edd)
 
 l_0xc58edd:
-    "[18 02]{window_open(50)}{diam}Area:" linebreak
-    "[19 02]Onett" eob
-    "[19 02]Twoson" eob
-    "[19 02]Threek" eob
-    "[19 02]Fourside" eob
-    "[19 02]Summers [5F] Scarabia" eob
-    "[19 02]The Rest" eob
-    "[1C 0C 01][11][09 06 {e(l_0xc58f07)} {e(l_0xc58f37)} {e(l_0xc58f61)} {e(l_0xc58f93)} {e(l_0xc58fc1)} {e(l_0xc58feb)}]{window_closetop}{window_switch(1)}" newline
-    "{diam}Finished." end
+	back_up_text_rendering_state
+	window_open(50)
+	diam "Area:" linebreak
+	load_str("Onett")
+	load_str("Twoson")
+	load_str("Threek")
+	load_str("Fourside")
+	load_str("Summers [5F] Scarabia")
+	load_str("The Rest")
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	switch_goto(6)
+		switch_entry(l_0xc58f07)
+		switch_entry(l_0xc58f37)
+		switch_entry(l_0xc58f61)
+		switch_entry(l_0xc58f93)
+		switch_entry(l_0xc58fc1)
+		switch_entry(l_0xc58feb)
+	window_closetop
+	window_switch(1)
+	newline
+	diam "Finished." end
 
-l_0xc58f07: // Onett
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Porky joined" eob
-    "[19 02]2. Buzz buzz appeared" eob
-    "[19 02]3. Buzz buzz died" eob
-    "[19 02]4. Defeated Frank" eob
-    "[19 02]5. Cleared Onett" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59019)} {e(l_0xc5901c)} {e(l_0xc5901f)} {e(l_0xc59022)} {e(l_0xc59025)}]" call(l_0xc59082) eob
+l_0xc58f07:	// Onett
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Porky joined")
+	load_str("2. Buzz buzz appeared")
+	load_str("3. Buzz buzz died")
+	load_str("4. Defeated Frank")
+	load_str("5. Cleared Onett")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(5)	// 0x05
+		switch_entry(l_0xc59019)
+		switch_entry(l_0xc5901c)
+		switch_entry(l_0xc5901f)
+		switch_entry(l_0xc59022)
+		switch_entry(l_0xc59025)
+	call(l_0xc59082)
+	eob
 
-l_0xc58f35: // Shared "end early" path
-    //newline "@Finished." end
-    eob
+l_0xc58f35:	// Shared "end early" path
+	//newline "@Finished." end
+	eob
 
-l_0xc58f37: // Twoson
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Paula kidnapped" eob
-    "[19 02]2. Got Franklin badge" eob
-    "[19 02]3. Rescued Paula" eob
-    "[19 02]4. Cleared Twoson" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59028)} {e(l_0xc5902b)} {e(l_0xc5902e)} {e(l_0xc59031)}]" call(l_0xc59082) eob
+l_0xc58f37:	// Twoson
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Paula kidnapped")
+	load_str("2. Got Franklin badge")
+	load_str("3. Rescued Paula")
+	load_str("4. Cleared Twoson")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(4)	// 0x04
+		switch_entry(l_0xc59028)
+		switch_entry(l_0xc5902b)
+		switch_entry(l_0xc5902e)
+		switch_entry(l_0xc59031)
+	call(l_0xc59082)
+	eob
 
-l_0xc58f61: // Threek
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Caught by zombies" eob
-    "[19 02]2. Tessie appears" eob
-    "[19 02]3. Dr. Andonuts" eob
-    "[19 02]4. Jeff joined" eob
-    "[19 02]5. Defeated zombies" eob
-    "[19 02]6. Cleared Threek" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 06 {e(l_0xc59034)} {e(l_0xc59037)} {e(l_0xc5903a)} {e(l_0xc5903d)} {e(l_0xc59040)} {e(l_0xc59043)}]" call(l_0xc59082) eob
+l_0xc58f61:	// Threek
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Caught by zombies")
+	load_str("2. Tessie appears")
+	load_str("3. Dr. Andonuts")
+	load_str("4. Jeff joined")
+	load_str("5. Defeated zombies")
+	load_str("6. Cleared Threek")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(6)	// 0x06
+		switch_entry(l_0xc59034)
+		switch_entry(l_0xc59037)
+		switch_entry(l_0xc5903a)
+		switch_entry(l_0xc5903d)
+		switch_entry(l_0xc59040)
+		switch_entry(l_0xc59043)
+	call(l_0xc59082)
+	eob
 
-l_0xc58f93: // Fourside
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Montague's big hole" eob
-    "[19 02]2. Runaway Brothers freed" eob
-    "[19 02]3. Everdred died" eob
-    "[19 02]4. Beat Mani Mani" eob
-    "[19 02]5. Cleared Fourside" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59046)} {e(l_0xc59049)} {e(l_0xc5904c)} {e(l_0xc5904f)} {e(l_0xc59052)}]" call(l_0xc59082) eob
+l_0xc58f93:	// Fourside
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Montague's big hole")
+	load_str("2. Runaway Brothers freed")
+	load_str("3. Everdred died")
+	load_str("4. Beat Mani Mani")
+	load_str("5. Cleared Fourside")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(5)	// 0x05
+		switch_entry(l_0xc59046)
+		switch_entry(l_0xc59049)
+		switch_entry(l_0xc5904c)
+		switch_entry(l_0xc5904f)
+		switch_entry(l_0xc59052)
+	call(l_0xc59082)
+	eob
 
-l_0xc58fc1: // Summers/Scaraba
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Massage at Dalaam" eob
-    "[19 02]2. Pink and Magnet" eob
-    "[19 02]3. Sail to Scarabia" eob
-    "[19 02]4. Dungeon Man" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 04 {e(l_0xc59055)} {e(l_0xc59058)} {e(l_0xc5905b)} {e(l_0xc5905e)}]" call(l_0xc59082) eob
+l_0xc58fc1:	// Summers/Scaraba
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Massage at Dalaam")
+	load_str("2. Pink and Magnet")
+	load_str("3. Sail to Scarabia")
+	load_str("4. Dungeon Man")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(4)	// 0x04
+		switch_entry(l_0xc59055)
+		switch_entry(l_0xc59058)
+		switch_entry(l_0xc5905b)
+		switch_entry(l_0xc5905e)
+	call(l_0xc59082)
+	eob
 
-l_0xc58feb: // The rest
-    "{window_open(13)}{diam}Scene:" linebreak
-    "[19 02]1. Barf and Poo" eob
-    "[19 02]2. Lumine Hall" eob
-    "[19 02]3. Finished Sound Stone" eob
-    "[19 02]4. Magicant" eob
-    "[19 02]5. The End" eob
-    "[1C 0C 01]" call(l_0xc59070) "[1B 02 {e(l_0xc58f35)}][1F C0 05 {e(l_0xc59061)} {e(l_0xc59064)} {e(l_0xc59067)} {e(l_0xc5906a)} {e(l_0xc5906d)}]" call(l_0xc59082) eob
+l_0xc58feb:	// The rest
+	window_open(13)
+	diam "Scene:" linebreak
+	load_str("1. Barf and Poo")
+	load_str("2. Lumine Hall")
+	load_str("3. Finished Sound Stone")
+	load_str("4. Magicant")
+	load_str("5. The End")
+	print_strings_vertical(1)	// 0x01
+	call(l_0xc59070)
+	goto_if_false(l_0xc58f35)
+	switch_call(5)	// 0x05
+		switch_entry(l_0xc59061)
+		switch_entry(l_0xc59064)
+		switch_entry(l_0xc59067)
+		switch_entry(l_0xc5906a)
+		switch_entry(l_0xc5906d)
+	call(l_0xc59082)
+	eob
 
 l_0xc59019:
-    "{counter(10)}" eob
+	counter(10)
+	eob
 
 l_0xc5901c:
-    "{counter(11)}" eob
+	counter(11)
+	eob
 
 l_0xc5901f:
-    "{counter(12)}" eob
+	counter(12)
+	eob
 
 l_0xc59022:
-    "{counter(13)}" eob
+	counter(13)
+	eob
 
 l_0xc59025:
-    "{counter(14)}" eob
+	counter(14)
+	eob
 
 l_0xc59028:
-    "{counter(20)}" eob
+	counter(20)
+	eob
 
 l_0xc5902b:
-    "{counter(21)}" eob
+	counter(21)
+	eob
 
 l_0xc5902e:
-    "{counter(22)}" eob
+	counter(22)
+	eob
 
 l_0xc59031:
-    "{counter(23)}" eob
+	counter(23)
+	eob
 
 l_0xc59034:
-    "{counter(30)}" eob
+	counter(30)
+	eob
 
 l_0xc59037:
-    "{counter(31)}" eob
+	counter(31)
+	eob
 
 l_0xc5903a:
-    "{counter(32)}" eob
+	counter(32)
+	eob
 
 l_0xc5903d:
-    "{counter(33)}" eob
+	counter(33)
+	eob
 
 l_0xc59040:
-    "{counter(34)}" eob
+	counter(34)
+	eob
 
 l_0xc59043:
-    "{counter(35)}" eob
+	counter(35)
+	eob
 
 l_0xc59046:
-    "{counter(40)}" eob
+	counter(40)
+	eob
 
 l_0xc59049:
-    "{counter(41)}" eob
+	counter(41)
+	eob
 
 l_0xc5904c:
-    "{counter(42)}" eob
+	counter(42)
+	eob
 
 l_0xc5904f:
-    "{counter(43)}" eob
+	counter(43)
+	eob
 
 l_0xc59052:
-    "{counter(44)}" eob
+	counter(44)
+	eob
 
 l_0xc59055:
-    "{counter(50)}" eob
+	counter(50)
+	eob
 
 l_0xc59058:
-    "{counter(51)}" eob
+	counter(51)
+	eob
 
 l_0xc5905b:
-    "{counter(52)}" eob
+	counter(52)
+	eob
 
 l_0xc5905e:
-    "{counter(53)}" eob
+	counter(53)
+	eob
 
 l_0xc59061:
-    "{counter(60)}" eob
+	counter(60)
+	eob
 
 l_0xc59064:
-    "{counter(61)}" eob
+	counter(61)
+	eob
 
 l_0xc59067:
-    "{counter(62)}" eob
+	counter(62)
+	eob
 
 l_0xc5906a:
-    "{counter(63)}" eob
+	counter(63)
+	eob
 
 l_0xc5906d:
-    "{counter(64)}" eob
+	counter(64)
+	eob
 
 l_0xc59070:
-    "[11]{counter(1)}[1B 05]{window_closetop}{window_switch(50)}{window_closetop}{window_switch(1)}[1B 06]" goto(l_0xc58edd)// eob
+	do_menu
+	counter(1)
+	store_registers_shared
+	window_closetop
+	window_switch(50)
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	goto(l_0xc58edd)// eob
 
 l_0xc59082:
-    "[1F 41 0F][18 07 0A 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 532)}{set(flag 375)}{unset(flag 532)}{set(flag 476)}{set(flag 477)}{unset(flag 477)}{set(flag 513)}{set(flag 533)}{set(flag 517)}{set(flag 470)}{set(flag 471)}{set(flag 472)}{unset(flag 533)}{set(flag 474)}{unset(flag 474)}{set(flag 530)}{set(flag 749)}{unset(flag 749)}{set(flag 295)}{set(flag 469)}{set(flag 473)}{set(flag 468)}{set(flag 477)}{unset(flag 477)}{unset(flag 295)}{unset(flag 473)}{set(flag 97)}{set(flag 467)}{set(flag 301)}{set(flag 531)}{set(flag 96)}{set(flag 94)}{set(flag 19)}{set(flag 76)}{set(flag 310)}{unset(flag 301)}{unset(flag 310)}{set(flag 466)}{set(flag 21)}{unset(flag 530)}{unset(flag 531)}{set(flag 30)}{set(flag 95)}{set(flag 98)}{unset(flag 95)}{unset(flag 467)}{set(flag 199)}{set(flag 200)}{set(flag 201)}{set(flag 209)}{set(flag 750)}[18 07 0B 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 304)}{set(flag 100)}{set(flag 20)}{unset(flag 466)}{unset(flag 468)}{set(flag 742)}{set(flag 302)}{unset(flag 302)}{set(flag 18)}{set(flag 37)}[18 07 0C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 35)}{set(flag 34)}{unset(flag 21)}{unset(flag 20)}{set(flag 104)}{unset(flag 18)}{set(flag 303)}{unset(flag 303)}{set(flag 107)}{set(flag 633)}{set(flag 31)}{set(flag 422)}{unset(flag 107)}[18 07 0D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 688)}{set(flag 511)}{set(flag 40)}{set(flag 64)}{set(flag 80)}{set(flag 108)}{set(flag 697)}{set(flag 363)}{set(flag 364)}{set(flag 365)}[18 07 0E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 190)}{set(flag 182)}{set(flag 634)}{unset(flag 634)}{set(flag 450)}{set(flag 449)}{set(flag 36)}{unset(flag 36)}{set(flag 109)}{set(flag 39)}{unset(flag 449)}{set(flag 38)}{set(flag 289)}{set(flag 290)}{set(flag 291)}{set(flag 292)}{set(flag 293)}{unset(flag 38)}{unset(flag 39)}{set(flag 105)}{unset(flag 450)}{unset(flag 35)}{unset(flag 37)}{unset(flag 742)}[18 07 14 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 210)}{set(flag 322)}{set(flag 635)}{unset(flag 635)}{set(flag 118)}{set(flag 321)}{set(flag 612)}{set(flag 624)}{set(flag 66)}{set(flag 112)}{set(flag 294)}{set(flag 117)}{set(flag 82)}{unset(flag 294)}[18 07 15 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 111)}{set(flag 341)}{set(flag 42)}{set(flag 175)}{set(flag 83)}{set(flag 339)}{unset(flag 42)}{set(flag 284)}{set(flag 743)}{set(flag 86)}{set(flag 45)}{unset(flag 45)}[18 07 16 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 68)}{set(flag 351)}{set(flag 352)}{set(flag 353)}{set(flag 354)}{set(flag 355)}{set(flag 356)}{unset(flag 175)}{set(flag 44)}{unset(flag 44)}{set(flag 198)}{set(flag 13)}{unset(flag 118)}{set(flag 191)}{set(flag 183)}{set(flag 12)}{set(flag 611)}{unset(flag 611)}[18 07 17 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 85)}{set(flag 553)}{set(flag 549)}{set(flag 43)}{unset(flag 43)}{set(flag 319)}{set(flag 115)}{set(flag 119)}{unset(flag 624)}{set(flag 309)}{set(flag 535)}{set(flag 314)}{unset(flag 314)}{unset(flag 535)}{unset(flag 309)}[18 07 1E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 211)}{set(flag 46)}{set(flag 433)}{set(flag 588)}{unset(flag 46)}{set(flag 296)}{unset(flag 296)}{set(flag 297)}{unset(flag 297)}{set(flag 298)}{unset(flag 298)}{unset(flag 433)}{set(flag 636)}{unset(flag 636)}{set(flag 212)}{set(flag 128)}[18 07 1F 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 23)}{set(flag 604)}{set(flag 605)}{set(flag 88)}{set(flag 335)}{unset(flag 335)}{set(flag 544)}{set(flag 323)}{set(flag 334)}{set(flag 22)}{set(flag 287)}{set(flag 696)}[18 07 20 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 129)}{set(flag 53)}{set(flag 416)}{set(flag 417)}{set(flag 418)}{set(flag 419)}{set(flag 420)}{set(flag 421)}{set(flag 50)}{unset(flag 50)}{set(flag 311)}{unset(flag 22)}[18 07 21 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 127)}{set(flag 748)}{set(flag 14)}{set(flag 626)}{unset(flag 626)}{set(flag 47)}{set(flag 622)}{set(flag 589)}{set(flag 49)}{set(flag 541)}[18 07 22 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 69)}{unset(flag 49)}{set(flag 669)}{set(flag 552)}{set(flag 669)}{set(flag 87)}{set(flag 124)}{unset(flag 124)}{set(flag 125)}{set(flag 773)}{set(flag 300)}[18 07 23 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 603)}{set(flag 213)}{set(flag 131)}{set(flag 369)}{set(flag 71)}{unset(flag 773)}{set(flag 629)}{set(flag 590)}{set(flag 623)}{unset(flag 623)}{set(flag 422)}{unset(flag 125)}{unset(flag 629)}{set(flag 193)}{set(flag 185)}[18 07 28 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 370)}{set(flag 596)}{set(flag 137)}{set(flag 55)}{set(flag 54)}{set(flag 136)}{set(flag 214)}{unset(flag 589)}{unset(flag 590)}{set(flag 607)}{set(flag 608)}{set(flag 174)}[18 07 29 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 277)}{set(flag 278)}{set(flag 279)}{set(flag 280)}{set(flag 281)}{set(flag 518)}{set(flag 519)}{set(flag 520)}{set(flag 521)}{set(flag 72)}{unset(flag 54)}{unset(flag 55)}{set(flag 333)}{set(flag 55)}{set(flag 282)}{set(flag 272)}{unset(flag 272)}{unset(flag 55)}{set(flag 90)}{set(flag 146)}{set(flag 147)}[18 07 2A 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 594)}{set(flag 776)}{set(flag 57)}{unset(flag 594)}{set(flag 555)}{set(flag 139)}{unset(flag 555)}{set(flag 556)}{unset(flag 57)}{set(flag 60)}{set(flag 145)}{unset(flag 60)}[18 07 2B 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 63)}{set(flag 774)}{set(flag 165)}{set(flag 160)}{set(flag 161)}{set(flag 162)}{set(flag 163)}{unset(flag 164)}{unset(flag 160)}{unset(flag 161)}{unset(flag 162)}{unset(flag 163)}{unset(flag 164)}{set(flag 63)}{set(flag 631)}{set(flag 75)}{set(flag 376)}{set(flag 591)}{unset(flag 591)}{set(flag 59)}{set(flag 745)}[18 07 2C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 451)}{set(flag 452)}{set(flag 453)}{set(flag 454)}{set(flag 455)}{set(flag 456)}{set(flag 457)}{set(flag 458)}{set(flag 459)}{set(flag 460)}{set(flag 462)}{set(flag 463)}{set(flag 464)}{set(flag 465)}{set(flag 516)}{set(flag 554)}{set(flag 613)}{set(flag 614)}{unset(flag 614)}{set(flag 615)}{unset(flag 615)}{unset(flag 613)}{set(flag 275)}{unset(flag 59)}{set(flag 142)}{set(flag 286)}{set(flag 357)}{set(flag 358)}{set(flag 359)}{set(flag 360)}{set(flag 361)}{set(flag 362)}{set(flag 318)}{unset(flag 318)}{unset(flag 776)}{set(flag 15)}{set(flag 664)}{set(flag 741)}{set(flag 672)}{set(flag 143)}{set(flag 377)}{set(flag 378)}{set(flag 317)}{unset(flag 317)}{unset(flag 47)}{set(flag 48)}{set(flag 773)}{unset(flag 48)}{unset(flag 773)}[18 07 2D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 621)}{unset(flag 621)}{unset(flag 748)}{set(flag 630)}{set(flag 609)}{set(flag 192)}{set(flag 184)}{set(flag 748)}{set(flag 215)}[18 07 32 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 203)}{set(flag 539)}{set(flag 337)}{set(flag 617)}{set(flag 61)}{unset(flag 61)}{set(flag 149)}{set(flag 216)}{set(flag 595)}[18 07 33 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 150)}{set(flag 273)}{set(flag 16)}{set(flag 346)}{set(flag 601)}{set(flag 602)}{set(flag 148)}{set(flag 343)}{set(flag 687)}{unset(flag 687)}{set(flag 140)}{set(flag 91)}{set(flag 58)}{set(flag 194)}{set(flag 186)}{set(flag 652)}{set(flag 195)}{set(flag 187)}[18 07 34 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 55)}[18 07 35 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 557)}{set(flag 217)}{set(flag 152)}{set(flag 342)}{set(flag 435)}{set(flag 347)}{set(flag 348)}{set(flag 283)}{set(flag 390)}{set(flag 391)}{set(flag 392)}{set(flag 393)}{set(flag 394)}{set(flag 395)}{set(flag 396)}{set(flag 397)}{set(flag 398)}{set(flag 399)}{set(flag 400)}{set(flag 401)}{set(flag 402)}{set(flag 403)}{set(flag 404)}{set(flag 405)}{set(flag 406)}{set(flag 407)}{set(flag 408)}{set(flag 409)}{set(flag 410)}{set(flag 411)}{set(flag 412)}{set(flag 413)}{set(flag 414)}{set(flag 415)}{set(flag 17)}[18 07 36 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 336)}{set(flag 606)}{set(flag 24)}{set(flag 62)}{set(flag 274)}{set(flag 445)}{set(flag 151)}{set(flag 762)}[18 07 3C 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 218)}{set(flag 288)}{set(flag 276)}[18 07 3D 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 219)}{set(flag 154)}{set(flag 379)}{set(flag 380)}{set(flag 52)}{set(flag 620)}{set(flag 618)}{unset(flag 620)}{set(flag 299)}{set(flag 619)}{set(flag 434)}{set(flag 70)}{set(flag 126)}{set(flag 51)}{unset(flag 51)}{set(flag 102)}{set(flag 89)}{set(flag 155)}{set(flag 540)}{set(flag 153)}{set(flag 649)}{set(flag 130)}{set(flag 538)}{set(flag 156)}{set(flag 157)}{set(flag 158)}{set(flag 196)}{set(flag 188)}[18 07 3E 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 220)}{unset(flag 52)}{set(flag 651)}{set(flag 423)}{set(flag 616)}{set(flag 197)}{set(flag 189)}{unset(flag 182)}{unset(flag 183)}{unset(flag 184)}{unset(flag 185)}{unset(flag 186)}{unset(flag 187)}{unset(flag 188)}{unset(flag 189)}{set(flag 384)}[18 07 3F 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 371)}{set(flag 159)}{set(flag 436)}{set(flag 437)}{set(flag 438)}{set(flag 74)}{set(flag 382)}{unset(flag 476)}{set(flag 349)}{unset(flag 349)}[18 07 40 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 132)}{unset(flag 422)}{set(flag 632)}{unset(flag 633)}{unset(flag 517)}{set(flag 79)}{set(flag 134)}[18 07 41 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 133)}{set(flag 332)}{set(flag 328)}{set(flag 329)}{set(flag 330)}{unset(flag 328)}{set(flag 331)}{set(flag 327)}{set(flag 285)}{unset(flag 382)}{set(flag 337)}{set(flag 372)}[18 07 42 00 00 00 02][1B 02 {e(l_0xc59894)}]{unset(flag 372)}{set(flag 73)}{set(flag 742)}{set(flag 741)}{set(flag 422)}{unset(flag 632)}{set(flag 628)}{set(flag 633)}{set(flag 517)}{set(flag 637)}[18 07 43 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 638)}{set(flag 665)}{set(flag 666)}{set(flag 667)}{set(flag 777)}{set(flag 769)}{set(flag 643)}{set(flag 772)}{set(flag 771)}{set(flag 770)}{set(flag 769)}[18 07 44 00 00 00 02][1B 02 {e(l_0xc59894)}]{set(flag 763)}" goto(l_0xc59894)
+	event(15)	// 0x0F
+
+	compare_counter(10)	// 0x0000000A, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_BGM_INSEKI_FALL_A)	// 532
+	set(FLG_MYHOME_START)	// 375
+	unset(FLG_BGM_INSEKI_FALL_A)	// 532
+	set(FLG_INSEKI_STOPPER_APPEAR)	// 476
+	set(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+	unset(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+	set(FLG_MYHOME_2F_1F)	// 513
+	set(FLG_BGM_INSEKI_FALL_B)	// 533
+	set(FLG_MYHOME_LIGHT_ON)	// 517
+	set(FLG_YAZIUMA_TRACY)	// 470
+	set(FLG_YAZIUMA_MAMA)	// 471
+	set(FLG_YAZIUMA_POKEY)	// 472
+	unset(FLG_BGM_INSEKI_FALL_B)	// 533
+	set(FLG_GENKAN_MAMA_APPEAR)	// 474
+	unset(FLG_GENKAN_MAMA_APPEAR)	// 474
+	set(FLG_MYHOME_TRACY_DISAPPEAR)	// 530
+	set(FLG_MYHOME_NES_CHANGE)	// 749
+	unset(FLG_MYHOME_NES_CHANGE)	// 749
+	set(FLG_MYHOME_KNOCK_APPEAR)	// 295
+	set(FLG_YAZIUMA_DISAPPEAR)	// 469
+	set(FLG_KAIDAN_TRACY_APPEAR)	// 473
+	set(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+	set(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+	unset(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
+	unset(FLG_MYHOME_KNOCK_APPEAR)	// 295
+	unset(FLG_KAIDAN_TRACY_APPEAR)	// 473
+	set(FLG_MYHOME_POKEY_ENTER)	// 97
+	set(FLG_MYHOME_DOOR_CLOSE)	// 467
+	set(FLG_MYHOME_POKEY_APPEAR)	// 301
+	set(FLG_MYHOME_1F_TRACY_APPEAR)	// 531
+	set(FLG_MYHOME_POKEY)	// 96
+	set(FLG_MYHOME_MAMA_YEAH)	// 94
+	set(FLG_DOG)	// 19
+	set(FLG_ITEM_TRACY)	// 76
+	set(FLG_MYHOME_POKEY2_APPEAR)	// 310
+	unset(FLG_MYHOME_POKEY_APPEAR)	// 301
+	unset(FLG_MYHOME_POKEY2_APPEAR)	// 310
+	set(FLG_INSEKI_PICKEY_APPEAR)	// 466
+	set(FLG_POKEY)	// 21
+	unset(FLG_MYHOME_TRACY_DISAPPEAR)	// 530
+	unset(FLG_MYHOME_1F_TRACY_APPEAR)	// 531
+	set(FLG_MYHOME_POKEY_DISAPPEAR)	// 30
+	set(FLG_MYHOME_PHONE)	// 95
+	set(FLG_PAPA_MYHOME)	// 98
+	unset(FLG_MYHOME_PHONE)	// 95
+	unset(FLG_MYHOME_DOOR_CLOSE)	// 467
+	set(FLG_SYS_PHONE_PAPA)	// 199
+	set(FLG_SYS_PHONE_MYHOME)	// 200
+	set(FLG_SYS_PHONE_MYHOME2)	// 201
+	set(FLG_TLPT_ONET)	// 209
+	set(FLG_STEP_ONET)	// 750
+
+	compare_counter(11)	// 0x0000000B, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_DOG_LATER_APPEAR)	// 304
+	set(FLG_INSEKI)	// 100
+	set(FLG_PICKEY)	// 20
+	unset(FLG_INSEKI_PICKEY_APPEAR)	// 466
+	unset(FLG_ONET_POKEY_DOOR_CLOSE)	// 468
+	set(FLG_ONET_LARDNA_APPEAR)	// 742
+	set(FLG_INSEKI_HITMAN_APPEAR)	// 302
+	unset(FLG_INSEKI_HITMAN_APPEAR)	// 302
+	set(FLG_BUNBUN)	// 18
+	set(FLG_ONET_MINCES_APPEAR)	// 37
+
+	compare_counter(12)	// 0x0000000C, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_ONET_2FPOKEY_APPEAR)	// 35
+	set(FLG_ONET_2FPICKEY_APPEAR)	// 34
+	unset(FLG_POKEY)	// 21
+	unset(FLG_PICKEY)	// 20
+	set(FLG_ONET_AMBRAMI)	// 104
+	unset(FLG_BUNBUN)	// 18
+	set(FLG_ONET_MYHOME_BUNBUN_APPEAR)	// 303
+	unset(FLG_ONET_MYHOME_BUNBUN_APPEAR)	// 303
+	set(FLG_ONET_LARDNA)	// 107
+	set(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+	set(FLG_1FMIZUNO_APPEAR)	// 31
+	set(FLG_ONET_DAYBREAK)	// 422
+	unset(FLG_ONET_LARDNA)	// 107
+
+	compare_counter(13)	// 0x0000000D, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_MYHOME_PHONE_TRACY)	// 688
+	set(FLG_ITEM_MAP)	// 511
+	set(FLG_ONET_GUARDSHARK_DISAPPEAR)	// 40
+	set(FLG_WIN_FRANK)	// 64
+	set(FLG_KEY_TABIGOYA)	// 80
+	set(FLG_OPEN_TABIGOYA)	// 108
+	set(FLG_ONET_SHARK_2F_DISAPPEAR)	// 697
+	set(FLG_ONET_SHARK_A_DISAPPEAR)	// 363
+	set(FLG_ONET_SHARK_B_DISAPPEAR)	// 364
+	set(FLG_ONET_SHARK_C_DISAPPEAR)	// 365
+
+	compare_counter(14)	// 0x0000000E, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WIN_GIAN_BOSS)	// 190
+	set(FLG_POWR_GIAN)	// 182
+	set(FLG_ONET_POLA_TELEPATHY)	// 634
+	unset(FLG_ONET_POLA_TELEPATHY)	// 634
+	set(FLG_POLICE_STRONG_DISAPPEAR)	// 450
+	set(FLG_POLICE_STRONG_B_APPEAR)	// 449
+	set(FLG_ONET_KANBANCOP_APPEAR)	// 36
+	unset(FLG_ONET_KANBANCOP_APPEAR)	// 36
+	set(FLG_POLICE_KANBANCOP_HEAR)	// 109
+	set(FLG_POLICE_KANBANCOP_APPEAR)	// 39
+	unset(FLG_POLICE_STRONG_B_APPEAR)	// 449
+	set(FLG_POLICE_5COP_APPEAR)	// 38
+	set(FLG_ONET_COPA_DISAPPEAR)	// 289
+	set(FLG_ONET_COPB_DISAPPEAR)	// 290
+	set(FLG_ONET_COPC_DISAPPEAR)	// 291
+	set(FLG_ONET_COPD_DISAPPEAR)	// 292
+	set(FLG_ONET_COPE_DISAPPEAR)	// 293
+	unset(FLG_POLICE_5COP_APPEAR)	// 38
+	unset(FLG_POLICE_KANBANCOP_APPEAR)	// 39
+	set(FLG_ONET_GATEOPEN)	// 105
+	unset(FLG_POLICE_STRONG_DISAPPEAR)	// 450
+	unset(FLG_ONET_2FPOKEY_APPEAR)	// 35
+	unset(FLG_ONET_MINCES_APPEAR)	// 37
+	unset(FLG_ONET_LARDNA_APPEAR)	// 742
+
+	compare_counter(20)	// 0x00000014, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TLPT_TWSN)	// 210
+	set(FLG_TWSN_PAUL)	// 322
+	set(FLG_TWSN_POLA_TELEPATHY)	// 635
+	unset(FLG_TWSN_POLA_TELEPATHY)	// 635
+	set(FLG_TWSN_PAUL_UPSET)	// 118
+	set(FLG_TWSN_INFO_TONCHIKI)	// 321
+	set(FLG_TWSN_TONCHIKI_R_DISAPPEAR)	// 612
+	set(FLG_TWSN_TONCHIKI_APPEAR)	// 624
+	set(FLG_TWSN_WIN_TONCHIKI)	// 66
+	set(FLG_TWSN_APPLE_THANKS)	// 112
+	set(FLG_WARP_APPLE_TWSN)	// 294
+	set(FLG_TWSN_ORANGE_THANKS)	// 117
+	set(FLG_ITEM_PHONE)	// 82
+	unset(FLG_WARP_APPLE_TWSN)	// 294
+
+	compare_counter(21)	// 0x00000015, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TWSN_TACO_DISCOVER)	// 111
+	set(FLG_TWSN_INFO_TACO)	// 341
+	set(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
+	set(FLG_HAPPY_SWITCH)	// 175
+	set(FLG_ITEM_TACO_ERASER)	// 83
+	set(FLG_TWSN_APPLE_DISAPPEAR)	// 339
+	unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
+	set(FLG_GRFD_LLPT_TACO_DISAPPEAR)	// 284
+	set(FLG_STEP_HAPPY)	// 743
+	set(FLG_ITEM_FRANKLINBADGE)	// 86
+	set(FLG_GRFD_POKEY_APPEAR)	// 45
+	unset(FLG_GRFD_POKEY_APPEAR)	// 45
+
+	compare_counter(22)	// 0x00000016, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WIN_CARPAINTER)	// 68
+	set(FLG_HAPPY_UPRIGHT_1_DISAPPEAR)	// 351
+	set(FLG_HAPPY_UPRIGHT_2_DISAPPEAR)	// 352
+	set(FLG_HAPPY_UPRIGHT_3_DISAPPEAR)	// 353
+	set(FLG_HAPPY_UPRIGHT_4_DISAPPEAR)	// 354
+	set(FLG_HAPPY_UPRIGHT_5_DISAPPEAR)	// 355
+	set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
+	unset(FLG_HAPPY_SWITCH)	// 175
+	set(FLG_HAPPY_POKEY_APPEAR)	// 44
+	unset(FLG_HAPPY_POKEY_APPEAR)	// 44
+	set(FLG_WARP_GRFD_YAMAGOYA)	// 198
+	set(FLG_POLA_GRFD)	// 13
+	unset(FLG_TWSN_PAUL_UPSET)	// 118
+	set(FLG_WIN_LLPT_BOSS)	// 191
+	set(FLG_POWR_LLPT)	// 183
+	set(FLG_POLA)	// 12
+	set(FLG_TWSN_MESSENGER_APPEAR)	// 611
+	unset(FLG_TWSN_MESSENGER_APPEAR)	// 611
+
+	compare_counter(23)	// 0x00000017, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TWSN_ITEM_TONCHIKI)	// 85
+	set(FLG_ITEM_TICKET)	// 553
+	set(FLG_TWSN_FIELD_TONZ_DISAPPEAR)	// 549
+	set(FLG_TWSN_MICHIKO_APPEAR)	// 43
+	unset(FLG_TWSN_MICHIKO_APPEAR)	// 43
+	set(FLG_TWSN_CHAOS_STAGE_START)	// 319
+	set(FLG_TWSN_MICHIKO_THANKYOU)	// 115
+	set(FLG_TWSN_TONZURA_FREE)	// 119
+	unset(FLG_TWSN_TONCHIKI_APPEAR)	// 624
+	set(FLG_TWSN_TONZURABUS_APPEAR)	// 309
+	set(FLG_BGM_TBUS)	// 535
+	set(FLG_TUNNEL_TWSN_THRK_TR)	// 314
+	unset(FLG_TUNNEL_TWSN_THRK_TR)	// 314
+	unset(FLG_BGM_TBUS)	// 535
+	unset(FLG_TWSN_TONZURABUS_APPEAR)	// 309
+
+	compare_counter(30)	// 0x0000001E, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TLPT_THRK)	// 211
+	set(FLG_THRK_BIKINIZOMBI_APPEAR)	// 46
+	set(FLG_THRK_HOTELMAN_DISAPPEAR)	// 433
+	set(FLG_THRK_INFO_D_DISAPPEAR)	// 588
+	unset(FLG_THRK_BIKINIZOMBI_APPEAR)	// 46
+	set(FLG_THRK_BIKINIZOMBI_F_APPEAR)	// 296
+	unset(FLG_THRK_BIKINIZOMBI_F_APPEAR)	// 296
+	set(FLG_THRK_BIKINIZOMBI_P_APPEAR)	// 297
+	unset(FLG_THRK_BIKINIZOMBI_P_APPEAR)	// 297
+	set(FLG_THRK_HOTELZOMBI_APPEAR)	// 298
+	unset(FLG_THRK_HOTELZOMBI_APPEAR)	// 298
+	unset(FLG_THRK_HOTELMAN_DISAPPEAR)	// 433
+	set(FLG_WINS_POLA_TELEPATHY)	// 636
+	unset(FLG_WINS_POLA_TELEPATHY)	// 636
+	set(FLG_TLPT_WINS)	// 212
+	set(FLG_WINS_START)	// 128
+
+	compare_counter(31)	// 0x0000001F, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WINS_TONY)	// 23
+	set(FLG_ITEM_KEY_LOCKER)	// 604
+	set(FLG_WINS_LOCKER_FAILED)	// 605
+	set(FLG_ITEM_GAUS)	// 88
+	set(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
+	unset(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
+	set(FLG_BGM_WINT1)	// 544
+	set(FLG_ITEM_BUBBLE_GUM)	// 323
+	set(FLG_WINS_BMONKEY_DISAPPEAR)	// 334
+	set(FLG_BALLOONMONKEY)	// 22
+	set(FLG_WINS_DAYBREAK)	// 287
+	set(FLG_WINS_JEFF_REPAIR)	// 696
+
+	compare_counter(32)	// 0x00000020, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WINS_TASCO_ACROSS)	// 129
+	set(FLG_WINS_BRICK_BARKER_DISAPPEAR)	// 53
+	set(FLG_FMON_BRICK_A_A_DISAPPEAR)	// 416
+	set(FLG_FMON_BRICK_A_B_DISAPPEAR)	// 417
+	set(FLG_FMON_BRICK_B_A_DISAPPEAR)	// 418
+	set(FLG_FMON_BRICK_B_B_DISAPPEAR)	// 419
+	set(FLG_FMON_BRICK_C_A_DISAPPEAR)	// 420
+	set(FLG_FMON_BRICK_C_B_DISAPPEAR)	// 421
+	set(FLG_WINS_BRICK_THANKS_APPEAR)	// 50
+	unset(FLG_WINS_BRICK_THANKS_APPEAR)	// 50
+	set(FLG_WINS_ROPE_SWITCH)	// 311
+	unset(FLG_BALLOONMONKEY)	// 22
+
+	compare_counter(33)	// 0x00000021, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WINS_ANDONUT)	// 127
+	set(FLG_WINS_SKYW_DISAPPEAR)	// 748
+	set(FLG_JEFF)	// 14
+	set(FLG_THRK_ESCAPER_APPEAR)	// 626
+	unset(FLG_THRK_ESCAPER_APPEAR)	// 626
+	set(FLG_THRK_BROKEN_SKYW_APPEAR)	// 47
+	set(FLG_WINS_KANAI_APPEAR)	// 622
+	set(FLG_THRK_HOTEL_BOY_APPEAR)	// 589
+	set(FLG_THRK_MATENT_APPEAR)	// 49
+	set(FLG_THRK_PRISON_OPEN)	// 541
+
+	compare_counter(34)	// 0x00000022, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WIN_MATENT)	// 69
+	unset(FLG_THRK_MATENT_APPEAR)	// 49
+	set(FLG_BOX_THRK_MATENT)	// 669
+	set(FLG_ITEM_HOIHOI)	// 552
+	set(FLG_BOX_THRK_MATENT)	// 669
+	set(FLG_ITEM_HAEMITU)	// 87
+	set(FLG_PUT_ZOMBI_HOIHOI)	// 124
+	unset(FLG_PUT_ZOMBI_HOIHOI)	// 124
+	set(FLG_THRK_ZOMBI_CAPTURED)	// 125
+	set(FLG_THRK_OZISAN_D_DISAPPEAR)	// 773
+	set(FLG_THRK_GRAVEZOMBI_DISAPPEAR)	// 300
+
+	compare_counter(35)	// 0x00000023, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_FMON_BOSS_GRAVE_DISAPPEAR)	// 603
+	set(FLG_TLPT_BAKA)	// 213
+	set(FLG_DOSEI_SECRETCODE)	// 131
+	set(FLG_GPFT_PASSWORD_OK)	// 369
+	set(FLG_WIN_GEPPU)	// 71
+	unset(FLG_THRK_OZISAN_D_DISAPPEAR)	// 773
+	set(FLG_DOSEI_ONSEN_GERO)	// 629
+	set(FLG_THRK_PEOPLE_APPEAR)	// 590
+	set(FLG_THRK_BUIL_B_MAN_APPEAR)	// 623
+	unset(FLG_THRK_BUIL_B_MAN_APPEAR)	// 623
+	set(FLG_ONET_DAYBREAK)	// 422
+	unset(FLG_THRK_ZOMBI_CAPTURED)	// 125
+	unset(FLG_DOSEI_ONSEN_GERO)	// 629
+	set(FLG_WIN_MLKY_BOSS)	// 193
+	set(FLG_POWR_MLKY)	// 185
+
+	compare_counter(40)	// 0x00000028, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_STEP_DSRT)	// 370
+	set(FLG_TLPT_DSRT)	// 596
+	set(FLG_DSRT_SYOZI_1)	// 137
+	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	set(FLG_DSRT_SYOZI_DUNGEON_APPEAR)	// 54
+	set(FLG_DSRT_CLEAR)	// 136
+	set(FLG_TLPT_FOUR)	// 214
+	unset(FLG_THRK_HOTEL_BOY_APPEAR)	// 589
+	unset(FLG_THRK_PEOPLE_APPEAR)	// 590
+	set(FLG_FOUR_MISSFAKE)	// 607
+	set(FLG_DSRT_SWITCH_BEFORE)	// 608
+	set(FLG_DSRT_SWITCH)	// 174
+
+	compare_counter(41)	// 0x00000029, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WIN_DSRT_BOSS_A)	// 277
+	set(FLG_WIN_DSRT_BOSS_B)	// 278
+	set(FLG_WIN_DSRT_BOSS_C)	// 279
+	set(FLG_WIN_DSRT_BOSS_D)	// 280
+	set(FLG_WIN_DSRT_BOSS_E)	// 281
+	set(FLG_DSRT_BOSS_1)	// 518
+	set(FLG_DSRT_BOSS_2)	// 519
+	set(FLG_DSRT_BOSS_3)	// 520
+	set(FLG_DSRT_BOSS_4)	// 521
+	set(FLG_WIN_DSRT_BOSS)	// 72
+	unset(FLG_DSRT_SYOZI_DUNGEON_APPEAR)	// 54
+	unset(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	set(FLG_DSRT_YUMBO_B_APPEAR)	// 333
+	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	set(FLG_DSRT_DUNGEON_OK)	// 282
+	set(FLG_DSRT_YUMBO_SHIGE_APPEAR)	// 272
+	unset(FLG_DSRT_YUMBO_SHIGE_APPEAR)	// 272
+	unset(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	set(FLG_DSRT_ITEM_DIA)	// 90
+	set(FLG_FOUR_TONZURA_FREE)	// 146
+	set(FLG_FOUR_TONZURA_THANKS)	// 147
+
+	compare_counter(42)	// 0x0000002A, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_FOUR_INFO_D_APPEAR)	// 594
+	set(FLG_GLOBAL_POLA_KIDNAPPED)	// 776
+	set(FLG_FOUR_DEPT_BOSS_APPEAR)	// 57
+	unset(FLG_FOUR_INFO_D_APPEAR)	// 594
+	set(FLG_FOUR_DEPT_SWITCH)	// 555
+	set(FLG_FOUR_DEPT_OK)	// 139
+	unset(FLG_FOUR_DEPT_SWITCH)	// 555
+	set(FLG_FOUR_DEPT_MSGCHG)	// 556
+	unset(FLG_FOUR_DEPT_BOSS_APPEAR)	// 57
+	set(FLG_FOUR_TONCHIKI_APPEAR)	// 60
+	set(FLG_FOUR_TONCHIKI)	// 145
+	unset(FLG_FOUR_TONCHIKI_APPEAR)	// 60
+
+	compare_counter(43)	// 0x0000002B, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_MOON_R_DISAPPEAR)	// 63
+	set(FLG_MOON_WARP_X)	// 774
+	set(FLG_MOON_INVISIBLEMAN)	// 165
+	set(FLG_MOON_INVISIBLE_1)	// 160
+	set(FLG_MOON_INVISIBLE_2)	// 161
+	set(FLG_MOON_INVISIBLE_3)	// 162
+	set(FLG_MOON_INVISIBLE_4)	// 163
+	unset(FLG_MOON_INVISIBLE_5)	// 164
+	unset(FLG_MOON_INVISIBLE_1)	// 160
+	unset(FLG_MOON_INVISIBLE_2)	// 161
+	unset(FLG_MOON_INVISIBLE_3)	// 162
+	unset(FLG_MOON_INVISIBLE_4)	// 163
+	unset(FLG_MOON_INVISIBLE_5)	// 164
+	set(FLG_MOON_R_DISAPPEAR)	// 63
+	set(FLG_MOON_MONOTOLY_DISAPPEAR)	// 631
+	set(FLG_WIN_MANIMANI)	// 75
+	set(FLG_PHONE_FOUR_APPLE_ICHIGO)	// 376
+	set(FLG_FOUR_SARU_B_APPEAR)	// 591
+	unset(FLG_FOUR_SARU_B_APPEAR)	// 591
+	set(FLG_FOUR_MAID_APPEAR)	// 59
+	set(FLG_DSRT_TJAB_MOVE)	// 745
+
+	compare_counter(44)	// 0x0000002C, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_SARUDUNGEON_A_OK)	// 451
+	set(FLG_SARUDUNGEON_B_OK)	// 452
+	set(FLG_SARUDUNGEON_C_OK)	// 453
+	set(FLG_SARUDUNGEON_D_OK)	// 454
+	set(FLG_SARUDUNGEON_E_OK)	// 455
+	set(FLG_SARUDUNGEON_F_OK)	// 456
+	set(FLG_SARUDUNGEON_G_OK)	// 457
+	set(FLG_SARUDUNGEON_H_OK)	// 458
+	set(FLG_SARUDUNGEON_I_OK)	// 459
+	set(FLG_SARUDUNGEON_J_OK)	// 460
+	set(FLG_SARUDUNGEON_L_OK)	// 462
+	set(FLG_SARUDUNGEON_M_OK)	// 463
+	set(FLG_SARUDUNGEON_N_OK)	// 464
+	set(FLG_SARUDUNGEON_O_OK)	// 465
+	set(FLG_DSRT_SARU_TACO_DISAPPEAR)	// 516
+	set(FLG_ITEM_TOFU)	// 554
+	set(FLG_DSRT_TSARU_DISAPPEAR)	// 613
+	set(FLG_DSRT_TSARU_A_APPEAR)	// 614
+	unset(FLG_DSRT_TSARU_A_APPEAR)	// 614
+	set(FLG_DSRT_TSARU_B_APPEAR)	// 615
+	unset(FLG_DSRT_TSARU_B_APPEAR)	// 615
+	unset(FLG_DSRT_TSARU_DISAPPEAR)	// 613
+	set(FLG_MASTER_TLPT)	// 275
+	unset(FLG_FOUR_MAID_APPEAR)	// 59
+	set(FLG_FOUR_MAID_THANKS)	// 142
+	set(FLG_FOUR_GUARDROBOT_A_DISAPPEAR)	// 286
+	set(FLG_FOUR_MIHARI_1_DISAPPEAR)	// 357
+	set(FLG_FOUR_MIHARI_2_DISAPPEAR)	// 358
+	set(FLG_FOUR_MIHARI_3_DISAPPEAR)	// 359
+	set(FLG_FOUR_MIHARI_4_DISAPPEAR)	// 360
+	set(FLG_FOUR_MIHARI_5_DISAPPEAR)	// 361
+	set(FLG_FOUR_YUDANROBO_DISAPPEAR)	// 362
+	set(FLG_FOUR_BLDG_TONZURA_APPEAR)	// 318
+	unset(FLG_FOUR_BLDG_TONZURA_APPEAR)	// 318
+	unset(FLG_GLOBAL_POLA_KIDNAPPED)	// 776
+	set(FLG_POLA_1)	// 15
+	set(FLG_FOUR_STAIRWAY_APPEAR)	// 664
+	set(FLG_FOUR_MONOTOLY_APPEAR)	// 741
+	set(FLG_FOUR_HELI_DISAPPEAR)	// 672
+	set(FLG_FOUR_OK)	// 143
+	set(FLG_PHONE_FOUR_APPLE_MONO)	// 377
+	set(FLG_PHONE_FOUR_ORANGE_MONO)	// 378
+	set(FLG_FOUR_TONZURABUS_APPEAR)	// 317
+	unset(FLG_FOUR_TONZURABUS_APPEAR)	// 317
+	unset(FLG_THRK_BROKEN_SKYW_APPEAR)	// 47
+	set(FLG_THRK_FIXED_SKYW_APPEAR)	// 48
+	set(FLG_THRK_OZISAN_D_DISAPPEAR)	// 773
+	unset(FLG_THRK_FIXED_SKYW_APPEAR)	// 48
+	unset(FLG_THRK_OZISAN_D_DISAPPEAR)	// 773
+
+	compare_counter(45)	// 0x0000002D, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
+	unset(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
+	unset(FLG_WINS_SKYW_DISAPPEAR)	// 748
+	set(FLG_WINS_TASS_BMONKEY_APPEAR)	// 630
+	set(FLG_WINS_TACO_DISAPPEAR)	// 609
+	set(FLG_WIN_RAIN_BOSS)	// 192
+	set(FLG_POWR_RAIN)	// 184
+	set(FLG_WINS_SKYW_DISAPPEAR)	// 748
+	set(FLG_TLPT_SUMS)	// 215
+
+	compare_counter(50)	// 0x00000032, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_SYS_PHONE_STOIC)	// 203
+	set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
+	set(FLG_SUMS_STOIC_RESERVED)	// 337
+	set(FLG_SUMS_STOIC_WIFE_DISAPPEAR)	// 617
+	set(FLG_SUMS_MASSAGE_APPEAR)	// 61
+	unset(FLG_SUMS_MASSAGE_APPEAR)	// 61
+	set(FLG_SUMS_RAMMA_START)	// 149
+	set(FLG_TLPT_RAMA)	// 216
+	set(FLG_RAMA_258_DISAPPEAR)	// 595
+
+	compare_counter(51)	// 0x00000033, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_RAMA_MASTER)	// 150
+	set(FLG_RAMA_OK)	// 273
+	set(FLG_PU)	// 16
+	set(FLG_SUMS_OMAR_B_APPEAR)	// 346
+	set(FLG_FMON_HIEROGLYPH_A_DISAPPEAR)	// 601
+	set(FLG_FMON_HIEROGLYPH_B_DISAPPEAR)	// 602
+	set(FLG_SUMS_HIEROGLYPH)	// 148
+	set(FLG_ITEM_HIEROGLYPH)	// 343
+	set(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	set(FLG_FOUR_KOMORITA)	// 140
+	set(FLG_ITEM_BANANA)	// 91
+	set(FLG_FOUR_KOMORITA_APPEAR)	// 58
+	set(FLG_WIN_MGNT_BOSS)	// 194
+	set(FLG_POWR_MGNT)	// 186
+	set(FLG_RAMA_RABBIT_DISAPPEAR)	// 652
+	set(FLG_WIN_PINK_BOSS)	// 195
+	set(FLG_POWR_PINK)	// 187
+
+	compare_counter(52)	// 0x00000034, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+
+	compare_counter(53)	// 0x00000035, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TOTO_SAILOR_MSGCHG)	// 557
+	set(FLG_TLPT_SKRB)	// 217
+	set(FLG_SPHINX)	// 152
+	set(FLG_SPHINX_OK)	// 342
+	set(FLG_FMON_PYRA_BOSS_DISAPPEAR)	// 435
+	set(FLG_SKRB_PYRAMID_OK)	// 347
+	set(FLG_ITEM_TAKANOME)	// 348
+	set(FLG_WIN_PYRAMID_BOSS)	// 283
+	set(FLG_FMON_PYRA_A_A_DISAPPEAR)	// 390
+	set(FLG_FMON_PYRA_A_B_DISAPPEAR)	// 391
+	set(FLG_FMON_PYRA_A_C_DISAPPEAR)	// 392
+	set(FLG_FMON_PYRA_A_D_DISAPPEAR)	// 393
+	set(FLG_FMON_PYRA_A_E_DISAPPEAR)	// 394
+	set(FLG_FMON_PYRA_A_F_DISAPPEAR)	// 395
+	set(FLG_FMON_PYRA_A_G_DISAPPEAR)	// 396
+	set(FLG_FMON_PYRA_A_H_DISAPPEAR)	// 397
+	set(FLG_FMON_PYRA_A_I_DISAPPEAR)	// 398
+	set(FLG_FMON_PYRA_A_J_DISAPPEAR)	// 399
+	set(FLG_FMON_PYRA_A_K_DISAPPEAR)	// 400
+	set(FLG_FMON_PYRA_A_L_DISAPPEAR)	// 401
+	set(FLG_FMON_PYRA_A_M_DISAPPEAR)	// 402
+	set(FLG_FMON_PYRA_A_N_DISAPPEAR)	// 403
+	set(FLG_FMON_PYRA_A_O_DISAPPEAR)	// 404
+	set(FLG_FMON_PYRA_A_P_DISAPPEAR)	// 405
+	set(FLG_FMON_PYRA_A_Q_DISAPPEAR)	// 406
+	set(FLG_FMON_PYRA_B_A_DISAPPEAR)	// 407
+	set(FLG_FMON_PYRA_B_B_DISAPPEAR)	// 408
+	set(FLG_FMON_PYRA_B_C_DISAPPEAR)	// 409
+	set(FLG_FMON_PYRA_B_D_DISAPPEAR)	// 410
+	set(FLG_FMON_PYRA_B_E_DISAPPEAR)	// 411
+	set(FLG_FMON_PYRA_B_F_DISAPPEAR)	// 412
+	set(FLG_FMON_PYRA_B_G_DISAPPEAR)	// 413
+	set(FLG_FMON_PYRA_B_H_DISAPPEAR)	// 414
+	set(FLG_FMON_PYRA_B_I_DISAPPEAR)	// 415
+	set(FLG_PU_0)	// 17
+
+	compare_counter(54)	// 0x00000036, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_ITEM_KEY_PUPUKA)	// 336
+	set(FLG_SKRB_DUNGEONMAN_OPEN)	// 606
+	set(FLG_BRICKROAD)	// 24
+	set(FLG_SKRB_BRICKROAD_DISAPPEAR)	// 62
+	set(FLG_SKRB_BRICKROAD_MAKYO_APPEAR)	// 274
+	set(FLG_SKRB_YARIMAN_B_APPEAR)	// 445
+	set(FLG_SKRB_YARIMAN)	// 151
+	set(FLG_DSRT_KANBAN_44_MOVE)	// 762
+
+	compare_counter(60)	// 0x0000003C, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TLPT_MAKY)	// 218
+	set(FLG_MAKYO_USE_TAKANOME)	// 288
+	set(FLG_WIN_GEROPP)	// 276
+
+	compare_counter(61)	// 0x0000003D, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TLPT_GUMI)	// 219
+	set(FLG_GUMI_INFO_MUKUCHI)	// 154
+	set(FLG_PHONE_GUMI_APPLE)	// 379
+	set(FLG_PHONE_GUMI_ORANGE)	// 380
+	set(FLG_SEBASTIAN_DISAPPEAR)	// 52
+	set(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
+	set(FLG_ITEM_KOKESHI)	// 618
+	unset(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
+	set(FLG_WINS_STONE_TACO_DISAPPEAR)	// 299
+	set(FLG_WINS_KOKESHI_DISAPPEAR)	// 619
+	set(FLG_FMON_STONE_BOSS_DISAPPEAR)	// 434
+	set(FLG_WIN_GANSEKIMAN)	// 70
+	set(FLG_CAPSULE_OK)	// 126
+	set(FLG_WINS_CAPSULE_PEOPLE_APPEAR)	// 51
+	unset(FLG_WINS_CAPSULE_PEOPLE_APPEAR)	// 51
+	set(FLG_LIBRARY_INFO_MUKUCHI)	// 102
+	set(FLG_ITEM_MUKUCHI)	// 89
+	set(FLG_GUMI_USEBOOK)	// 155
+	set(FLG_SYS_INPUT_NAME_KANA)	// 540
+	set(FLG_GUMI_CAVEOPEN)	// 153
+	set(FLG_GUMI_TALKERSTONE)	// 649
+	set(FLG_DOSEI_ANDONUT)	// 130
+	set(FLG_DOSEI_APPLE_APPEAR)	// 538
+	set(FLG_DKFD_ROCK_A)	// 156
+	set(FLG_DKFD_ROCK_B)	// 157
+	set(FLG_DKFD_ROCK_C)	// 158
+	set(FLG_WIN_LUMI_BOSS)	// 196
+	set(FLG_POWR_LUMI)	// 188
+
+	compare_counter(62)	// 0x0000003E, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TLPT_DKFD)	// 220
+	unset(FLG_SEBASTIAN_DISAPPEAR)	// 52
+	set(FLG_DKFD_DOOR_DISAPPEAR)	// 651
+	set(FLG_INFO_POWR)	// 423
+	set(FLG_DKFD_GUMI_BOSS)	// 616
+	set(FLG_WIN_FIRE_BOSS)	// 197
+	set(FLG_POWR_FIRE)	// 189
+	unset(FLG_POWR_GIAN)	// 182
+	unset(FLG_POWR_LLPT)	// 183
+	unset(FLG_POWR_RAIN)	// 184
+	unset(FLG_POWR_MLKY)	// 185
+	unset(FLG_POWR_MGNT)	// 186
+	unset(FLG_POWR_PINK)	// 187
+	unset(FLG_POWR_LUMI)	// 188
+	unset(FLG_POWR_FIRE)	// 189
+	set(FLG_POWR_ALL)	// 384
+
+	compare_counter(63)	// 0x0000003F, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_STEP_MGKT)	// 371
+	set(FLG_MGKT_TOMB6)	// 159
+	set(FLG_FMON_KRAKEN2_A_DISAPPEAR)	// 436
+	set(FLG_FMON_KRAKEN2_B_DISAPPEAR)	// 437
+	set(FLG_FMON_KRAKEN2_C_DISAPPEAR)	// 438
+	set(FLG_WIN_OSCAR)	// 74
+	set(FLG_DKFD_DOSEI_ST1_APPEAR)	// 382
+	unset(FLG_INSEKI_STOPPER_APPEAR)	// 476
+	set(FLG_FIRE_PARTY_APPEAR)	// 349
+	unset(FLG_FIRE_PARTY_APPEAR)	// 349
+
+	compare_counter(64)	// 0x00000040, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_INFO_XYZ)	// 132
+	unset(FLG_ONET_DAYBREAK)	// 422
+	set(FLG_ONET_DOOR_CLOSE)	// 632
+	unset(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+	unset(FLG_MYHOME_LIGHT_ON)	// 517
+	set(FLG_ITEM_XYZ)	// 79
+	set(FLG_XYZ_OK)	// 134
+
+	compare_counter(65)	// 0x00000041, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_SPACETUNNEL2_START)	// 133
+	set(FLG_DKFD_ST2_APPEAR)	// 332
+	set(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
+	set(FLG_DKFD_APPLE_A_APPEAR)	// 329
+	set(FLG_DKFD_DOSEI_A_APPEAR)	// 330
+	unset(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
+	set(FLG_DKFD_ANDONUT_B_APPEAR)	// 331
+	set(FLG_DKFD_ST3_APPEAR)	// 327
+	set(FLG_DKFD_END_GET_READY)	// 285
+	unset(FLG_DKFD_DOSEI_ST1_APPEAR)	// 382
+	set(FLG_SUMS_STOIC_RESERVED)	// 337
+	set(FLG_STEP_PAST)	// 372
+
+	compare_counter(66)	// 0x00000042, 0x02
+	goto_if_false(l_0xc59894)
+	unset(FLG_STEP_PAST)	// 372
+	set(FLG_WIN_GIEGU)	// 73
+	set(FLG_ONET_LARDNA_APPEAR)	// 742
+	set(FLG_FOUR_MONOTOLY_APPEAR)	// 741
+	set(FLG_ONET_DAYBREAK)	// 422
+	unset(FLG_ONET_DOOR_CLOSE)	// 632
+	set(FLG_DOSEI_PU_BOX_APPEAR)	// 628
+	set(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
+	set(FLG_MYHOME_LIGHT_ON)	// 517
+	set(FLG_RAMA_PU_APPEAR)	// 637
+
+	compare_counter(67)	// 0x00000043, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_TWSN_POLA_APPEAR)	// 638
+	set(FLG_ITEM_LETTER_1)	// 665
+	set(FLG_ITEM_LETTER_2)	// 666
+	set(FLG_ITEM_LETTER_3)	// 667
+	set(FLG_GUMI_OLDMAN_END)	// 777
+	set(FLG_MYHOME_TRACY_FINAL)	// 769
+	set(FLG_ONET_MYHOME_END_MAMA)	// 643
+	set(FLG_PHONE_PAPA_FINAL)	// 772
+	set(FLG_PHONE_PIZZA_FINAL)	// 771
+	set(FLG_PHONE_ESCARGO_FINAL)	// 770
+	set(FLG_MYHOME_TRACY_FINAL)	// 769
+
+	compare_counter(68)	// 0x00000044, 0x02
+	goto_if_false(l_0xc59894)
+	set(FLG_MYHOME_TO_BE)	// 763
 
 l_0xc59894:
-    eob
+	eob
 
 // Event debug menu moved to "debug/options/events.ccs"
+

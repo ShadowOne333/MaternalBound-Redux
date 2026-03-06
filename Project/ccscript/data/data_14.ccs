@@ -522,7 +522,6 @@ l_0xc5ddf1:
 l_0xc5decb:
 	unset(FLG_SHOPTEMP_2)	// 657
 	call(data_00.l_0xc50000)
-	goto(l_0xc5ded3)
 
 l_0xc5ded3:
 	load_str("Buy")
@@ -537,7 +536,6 @@ l_0xc5dee0:
 	switch_goto(2)	// 0x02
 		switch_entry(l_0xc5df05)
 		switch_entry(data_15.l_0xc5df3a)
-	goto(l_0xc5deef)
 
 l_0xc5deef:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5defc)	// 0x0291, 657

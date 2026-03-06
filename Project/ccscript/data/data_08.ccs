@@ -4,8 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -13,331 +17,529 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc5889c:
-    "{load_registers}[19 05 00 06 02]" goto(data_07.l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 0x00, 0x06, 0x02
+	goto(data_07.l_0xc58718)
 
 l_0xc588a8:
-    eob
+	eob
 
 l_0xc588a9:
-    "{load_registers}{swap}[1E 00 00 64][1E 01 00 5E]" goto(data_07.l_0xc58718)
+	load_registers
+	swap
+	heal_percent(0,100)	// 0x00, 0x64
+	hurt_percent(0,94)	// 0x00, 0x5E
+	goto(data_07.l_0xc58718)
 
 l_0xc588ba:
-    eob
+	eob
 
 l_0xc588bb:
-    "{load_registers}{swap}[1E 04 00 64][1E 05 00 63]" goto(data_07.l_0xc58718)
+	load_registers
+	swap
+	recoverpp_percent(0,100)	// 0x00, 0x64
+	consumepp_percent(0,99)	// 0x00, 0x63
+	goto(data_07.l_0xc58718)
 
 l_0xc588cc:
-    eob
+	eob
 
 l_0xc588cd:
-    "{diam}To where?{wait}{window_open(8)}[19 02]Onett" eob
+	diam "To where?" wait
+	window_open(8)
+	load_str("Onett")
 
 l_0xc588e4:
-    "[19 02]Twoson" eob
+	load_str("Twoson")
 
 l_0xc588eb:
-    "[19 02]H. H. Village" eob
+	load_str("H. H. Village")
 
 l_0xc588f2:
-    "[19 02]G. D. Valley" eob
+	load_str("G. D. Valley")
 
 l_0xc588fb:
-    "[19 02]Threek" eob
+	load_str("Threek")
 
 l_0xc58902:
-    "[19 02]Winters" eob
+	load_str("Winters")
 
 l_0xc5890b:
-    "[19 02]Saturn Valley" eob
+	load_str("Saturn Valley")
 
 l_0xc58915:
-    "[19 02]Belch's Base" eob
+	load_str("Belch's Base")
 
 l_0xc5891d:
-    "[19 02]D. D. Desert" eob
+	load_str("D. D. Desert")
 
 l_0xc58927:
-    "[19 02]Fourside" eob
+	load_str("Fourside")
 
 l_0xc58930:
-    "[19 02]Moonside" eob
+	load_str("Moonside")
 
 l_0xc58939:
-    "[19 02]Summers" eob
+	load_str("Summers")
 
 l_0xc58940:
-    "[19 02]Dalaam" eob
+	load_str("Dalaam")
 
 l_0xc58946:
-    "[19 02]Scarabia" eob
+	load_str("Scarabia")
 
 l_0xc5894d:
-    "[19 02]Deep Darkness" eob
+	load_str("Deep Darkness")
 
 l_0xc58954:
-    "[19 02]Tenda Village" eob
+	load_str("Tenda Village")
 
 l_0xc58959:
-    "[19 02]L. Underworld" eob
+	load_str("L. Underworld")
 
 l_0xc58963:
-    "[19 02]Magicant" eob
+	load_str("Magicant")
 
 l_0xc5896b:
-    "[19 02]Present Cave" eob
+	load_str("Present Cave")
 
 l_0xc58976:
-    "[19 02]Cave of Past" eob
+	load_str("Cave of Past")
 
 l_0xc58981:
-    "[1C 0C 03][11][1B 05]{window_closetop}{window_switch(1)}" newline
-    "[1B 06][09 14 {e(l_0xc589e6)} {e(l_0xc589ea)} {e(l_0xc589ee)} {e(l_0xc589f2)} {e(l_0xc589f6)} {e(l_0xc589fa)} {e(l_0xc589fe)} {e(l_0xc58a02)} {e(l_0xc58a06)} {e(l_0xc58a0a)} {e(l_0xc58a0e)} {e(l_0xc58a12)} {e(l_0xc58a16)} {e(l_0xc58a1a)} {e(l_0xc58a1e)} {e(l_0xc58a22)} {e(l_0xc58a2e)} {e(l_0xc58a32)} {e(l_0xc58a26)} {e(l_0xc58a2a)}]" goto(data_06.debug_main)
+	print_strings_vertical(3)	// 0x03
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	newline
+	load_registers_shared
+	switch_goto(20)	// 0x14
+		switch_entry(l_0xc589e6)
+		switch_entry(l_0xc589ea)
+		switch_entry(l_0xc589ee)
+		switch_entry(l_0xc589f2)
+		switch_entry(l_0xc589f6)
+		switch_entry(l_0xc589fa)
+		switch_entry(l_0xc589fe)
+		switch_entry(l_0xc58a02)
+		switch_entry(l_0xc58a06)
+		switch_entry(l_0xc58a0a)
+		switch_entry(l_0xc58a0e)
+		switch_entry(l_0xc58a12)
+		switch_entry(l_0xc58a16)
+		switch_entry(l_0xc58a1a)
+		switch_entry(l_0xc58a1e)
+		switch_entry(l_0xc58a22)
+		switch_entry(l_0xc58a2e)
+		switch_entry(l_0xc58a32)
+		switch_entry(l_0xc58a26)
+		switch_entry(l_0xc58a2a)
+	goto(data_06.debug_main)
 
 l_0xc589e6:
-    "[1F 21 19]" eob
+	warp(25)	// 0x19
+	eob
 
 l_0xc589ea:
-    "[1F 21 1D]" eob
+	warp(29)	// 0x1D
+	eob
 
 l_0xc589ee:
-    "[1F 21 B9]" eob
+	warp(185)	// 0xB9
+	eob
 
 l_0xc589f2:
-    "[1F 21 15]" eob
+	warp(21)	// 0x15
+	eob
 
 l_0xc589f6:
-    "[1F 21 1C]" eob
+	warp(28)	// 0x1C
+	eob
 
 l_0xc589fa:
-    "[1F 21 1E]" eob
+	warp(30)	// 0x1E
+	eob
 
 l_0xc589fe:
-    "[1F 21 8F]" eob
+	warp(143)	// 0x8F
+	eob
 
 l_0xc58a02:
-    "[1F 21 64]" eob
+	warp(100)	// 0x64
+	eob
 
 l_0xc58a06:
-    "[1F 21 90]" eob
+	warp(144)	// 0x90
+	eob
 
 l_0xc58a0a:
-    "[1F 21 14]" eob
+	warp(20)	// 0x14
+	eob
 
 l_0xc58a0e:
-    "[1F 21 18]" eob
+	warp(24)	// 0x18
+	eob
 
 l_0xc58a12:
-    "[1F 21 1F]" eob
+	warp(31)	// 0x1F
+	eob
 
 l_0xc58a16:
-    "[1F 21 1B]" eob
+	warp(27)	// 0x1B
+	eob
 
 l_0xc58a1a:
-    "[1F 21 20]" eob
+	warp(32)	// 0x20
+	eob
 
 l_0xc58a1e:
-    "[1F 21 AC]" eob
+	warp(172)	// 0xAC
+	eob
 
 l_0xc58a22:
-    "[1F 21 16]" eob
+	warp(22)	// 0x16
+	eob
 
 l_0xc58a26:
-    "[1F 21 91]" eob
+	warp(145)	// 0x91
+	eob
 
 l_0xc58a2a:
-    "[1F 21 1A]" eob
+	warp(26)	// 0x1A
+	eob
 
 l_0xc58a2e:
-    "[1F 21 21]" eob
+	warp(33)	// 0x21
+	eob
 
 l_0xc58a32:
-    "[1F 21 17]" eob
+	warp(23)	// 0x17
+	eob
 
 l_0xc58a36:
-    "{diam}Who will be leveled up?" linebreak
-    "[19 02]Whole team" eob
+	diam "Who will be leveled up?" linebreak
+	load_str("Whole team")
 
 l_0xc58a47:
-    "[19 02]One member" eob
+	load_str("One member")
 
 l_0xc58a4d:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58a61)} {e(l_0xc58a93)}]" goto(data_06.debug_main)
+	print_strings_horizontal(2)	// 0x02
+	do_menu
+	clearline
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc58a61)
+		switch_entry(l_0xc58a93)
+	goto(data_06.debug_main)
 
 l_0xc58a61:
-    call(l_0xc58add) "[1B 02 {e(l_0xc58a8d)}]{swap}[1E 08 01 00][1E 08 02 00][1E 08 03 00][1E 08 04 00]{diam}Team leveled up.{wait}" goto(l_0xc58a8d)
+	call(l_0xc58add)
+	goto_if_false(l_0xc58a8d)
+	swap
+	change_level(1,0)	// 0x01, 0x00
+	change_level(2,0)	// 0x02, 0x00
+	change_level(3,0)	// 0x03, 0x00
+	change_level(4,0)	// 0x04, 0x00
+	diam "Team leveled up." wait
+	goto(l_0xc58a8d)
 
 l_0xc58a8d:
-    goto(data_06.debug_main)
+	goto(data_06.debug_main)
 
 l_0xc58a92:
-    eob
+	eob
 
 l_0xc58a93:
-    newline
-    "{diam}Which party member will be leveled up?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc58ad7)}]{swap}" call(l_0xc58add) "[1B 02 {e(l_0xc58ad7)}]{swap}[1E 08 00 00]" goto(l_0xc58a8d)
+	newline
+	diam "Which party member will be leveled up?" wait
+	select_char(0,0,0,0,1)	// 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x01
+	goto_if_false(l_0xc58ad7)
+
+	swap
+	call(l_0xc58add)
+	goto_if_false(l_0xc58ad7)
+
+	swap
+	change_level(0,0)	// 0x00, 0x00
+	goto(l_0xc58a8d)
 
 l_0xc58ad7:
-    goto(data_06.debug_main)
+	goto(data_06.debug_main)
 
 l_0xc58adc:
-    eob
+	eob
 
 l_0xc58add:
-    newline
-    "{diam}Select your level." linebreak
-    "   [1F 52 02]{clearline}" eob
+	newline
+	diam "Select your level." linebreak
+	"   {number_input(2)}"	// 0x02
+	clearline
+	eob
 
 l_0xc58afb:
-    newline
-    "{diam}Choose your operation.{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Max bank account" eob
+	newline
+	diam "Choose your operation." wait
+	back_up_text_rendering_state
+	open_hp
+	show_wallet
+	window_open(7)
+	load_str("Max bank account")
 
 l_0xc58b21:
-    "[19 02]Max cash" eob
+	load_str("Max cash")
 
 l_0xc58b2e:
-    "[19 02]Cash edit" eob
+	load_str("Cash edit")
 
 l_0xc58b3b:
-    "[19 02]Zero cash" eob
+	load_str("Zero cash")
 
 l_0xc58b47:
-    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06]" newline
-    "[09 04 {e(l_0xc58b6c)} {e(l_0xc58bac)} {e(l_0xc58bd2)} {e(l_0xc58c30)}]" goto(data_06.debug_main)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	newline
+	switch_goto(4)	// 0x04
+		switch_entry(l_0xc58b6c)
+		switch_entry(l_0xc58bac)
+		switch_entry(l_0xc58bd2)
+		switch_entry(l_0xc58c30)
+	goto(data_06.debug_main)
 
 l_0xc58b6c:
-    "{diam}You now have $9999999" linebreak
-    "  in the bank.{wait}{counter(1)}" goto(l_0xc58b88)
+	diam "You now have $9999999" linebreak
+	"  in the bank." wait
+	counter(1)
+	goto(l_0xc58b88)
 
 l_0xc58b88:
-    "{ctoarg}{swap}{result_is(200)}[1B 03 {e(l_0xc58ba0)}][1D 06 50 C3 00 00]{inc}" goto(l_0xc58b88)
+	ctoarg
+	swap
+	result_is(200)
+	goto_if_true(l_0xc58ba0)
+
+	deposit(50000)	// 0x0000C350
+	inc
+	goto(l_0xc58b88)
 
 l_0xc58ba0:
-    "[1D 06 4F C3 00 00]" goto(data_06.debug_main)
+	deposit(49999)	// 0x0000C34F
+	goto(data_06.debug_main)
 
 l_0xc58bab:
-    eob
+	eob
 
 l_0xc58bac:
-    "{diam}You now have $99999" linebreak
-    "  in your wallet.{wait}[1D 08 60 EA][1D 08 40 9C]{open_wallet}" goto(data_06.debug_main)
+	diam "You now have $99999" linebreak
+	"  in your wallet." wait
+	givemoney(60000)	// 0xEA60
+	givemoney(40000)	// 0x9C40
+	show_wallet
+	goto(data_06.debug_main)
 
 l_0xc58bd1:
-    eob
+	eob
 
 l_0xc58bd2:
-    "{diam}Input your amount:" linebreak
-    "[18 05 04 0A]&[18 05 04 02]$[1F 52 05]{clearline}[1B 02 {e(l_0xc58c2a)}]{store_registers}" call(l_0xc58c55) "{load_registers}{swap}[1D 08 00 00]{open_wallet}{diam}You now have" linebreak
-    "  [1C 0A 00 00 00 00] in your wallet.{wait}" goto(l_0xc58c2a)
+	diam "Input your amount:" linebreak
+	text_pos(4,10) "&"	// 0x04, 0x0A
+	text_pos(4,2) "$"	// 0x04, 0x02
+	"   {number_input(5)}"	// 0x05
+	clearline
+	goto_if_false(l_0xc58c2a)
+	store_registers
+	call(l_0xc58c55)
+	load_registers
+	swap
+	givemoney(0)	// 0x0000
+	show_wallet
+	diam "You now have" linebreak
+	"{number(0)} in your wallet." wait	// 0x00000000
+	goto(l_0xc58c2a)
 
 l_0xc58c2a:
-    goto(data_06.debug_main)
+	goto(data_06.debug_main)
 
 l_0xc58c2f:
-    eob
+	eob
 
 l_0xc58c30:
-    call(l_0xc58c55) "{diam}You are now broke!" linebreak
-    "  Your wallet is empty!{wait}" goto(data_06.debug_main)
+	call(l_0xc58c55)
+	diam "You are now broke!" linebreak
+	"  Your wallet is empty!" wait
+	goto(data_06.debug_main)
 
 l_0xc58c54:
-    eob
+	eob
 
 l_0xc58c55:
-    "[1D 09 10 27][1B 02 {e(l_0xc58c55)}]" goto(l_0xc58c5f)
+	takemoney(10000)	// 0x2710
+	goto_if_false(l_0xc58c55)
+	goto(l_0xc58c5f)
 
 l_0xc58c5f:
-    "[1D 09 E8 03][1B 02 {e(l_0xc58c5f)}]" goto(l_0xc58c69)
+	takemoney(1000)	// 0x03E8
+	goto_if_false(l_0xc58c5f)
+	goto(l_0xc58c69)
 
 l_0xc58c69:
-    "[1D 09 64 00][1B 02 {e(l_0xc58c69)}]" goto(l_0xc58c73)
+	takemoney(100)	// 0x0064
+	goto_if_false(l_0xc58c69)
+	goto(l_0xc58c73)
 
 l_0xc58c73:
-    "[1D 09 0A 00][1B 02 {e(l_0xc58c73)}]" goto(l_0xc58c7d)
+	takemoney(10)	// 0x000A
+	goto_if_false(l_0xc58c73)
+	goto(l_0xc58c7d)
 
 l_0xc58c7d:
-    "[1D 09 01 00][1B 02 {e(l_0xc58c7d)}]" eob
+	takemoney(1)	// 0x0001
+	goto_if_false(l_0xc58c7d)
+	eob
 
 l_0xc58c88:
-    "{diam}Which script do you want to access?{wait}[18 02]{open_hp}{open_wallet}{window_open(7)}[19 02]Escargo delivery" eob
+	diam "Which script do you want to access?" wait
+	back_up_text_rendering_state
+	open_hp
+	show_wallet
+	window_open(7)
+	load_str("Escargo delivery")
 
 l_0xc58cb6:
-    "[19 02]Escargo pickup" eob
+	load_str("Escargo pickup")
 
 l_0xc58cc3:
-    "[19 02]M. Pizza delivery" eob
+	load_str("M. Pizza delivery")
 
 l_0xc58cd0:
-    "[19 02]Cash dispenser" eob
+	load_str("Cash dispenser")
 
 l_0xc58cd8:
-    "[19 02]Angrez Van" eob
+	load_str("Angrez Van")
 
 l_0xc58ce3:
-    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}" newline
-    "[1B 06][1F C0 05 {e(data_19.l_0xc642a3)} {e(data_19.l_0xc63eb0)} {e(data_20.l_0xc64bbf)} {e(data_21.l_0xc65243)} {e(data_21.l_0xc655b1)}]" goto(data_06.debug_main)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	newline
+	load_registers_shared
+	switch_call(5)	// 0x05
+		switch_entry(data_19.l_0xc642a3)
+		switch_entry(data_19.l_0xc63eb0)
+		switch_entry(data_20.l_0xc64bbf)
+		switch_entry(data_21.l_0xc65243)
+		switch_entry(data_21.l_0xc655b1)
+	goto(data_06.debug_main)
 
 l_0xc58d09:
-    "{diam}Select your option.{wait}[18 02]{open_hp}{open_wallet}{window_open(37)}[19 02]BGM" eob
+	diam "Select your option." wait
+	back_up_text_rendering_state
+	open_hp
+	show_wallet
+	window_open(37)
+	load_str("BGM")
 
 l_0xc58d18:
-    "[19 02]Sound Effects" eob
+	load_str("Sound Effects")
 
 l_0xc58d1d:
-    "[19 02]SPC Effects" eob
+	load_str("SPC Effects")
 
 l_0xc58d26:
-    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][09 03 {e(l_0xc58d46)} {e(l_0xc58d70)} {e(l_0xc58d96)}]" goto(data_06.debug_main)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	switch_goto(3)	// 0x03
+		switch_entry(l_0xc58d46)
+		switch_entry(l_0xc58d70)
+		switch_entry(l_0xc58d96)
+	goto(data_06.debug_main)
 
 l_0xc58d46:
-    newline
-    "{diam}Which song would you like to hear?" linebreak
-    goto(l_0xc58d58)
+	newline
+	diam "Which song would you like to hear?" linebreak
+	goto(l_0xc58d58)
 
 l_0xc58d58:
-    "    [1F 52 03]{clearline}"
-    store_registers
-    if ("[18 07 C0 00 00 00 00]") {
-    "@Option 192 and above crash the game." next
-    goto(l_0xc58d58)    
-    }
-    load_registers
-    "[1B 02 {e(data_06.debug_main)}]{swap}{music(0)}" goto(l_0xc58d58)
+	"   {number_input(3)}"	// 0x03
+	clearline
+	store_registers
+	if ( compare_result(192) )	{ // 0x000000C0, 0x00
+		"@Option 192 and above crash the game." next
+		goto(l_0xc58d58)
+	}
+	load_registers
+	goto_if_false(data_06.debug_main)
+	swap
+	music(0)
+	goto(l_0xc58d58)
 
 
 l_0xc58d70:
-    newline
-    "{diam}Which sound effect would you like to hear?" linebreak
-    goto(l_0xc58d80)
+	newline
+	diam "Which sound effect would you like to hear?" linebreak
+	goto(l_0xc58d80)
 
 l_0xc58d80:
-    "     [1F 52 03]{clearline}[1B 02 {e(data_06.debug_main)}]{swap}{sound(0)}" goto(l_0xc58d80)
+	"   {number_input(3)}"	// 0x03
+	clearline
+	goto_if_false(data_06.debug_main)
+	swap
+	sound(0)
+	goto(l_0xc58d80)
 
 l_0xc58d96:
-    newline
-    "{diam}Which SPC effect would you like to hear?{wait}" linebreak
-    goto(l_0xc58da9)
+	newline
+	diam "Which SPC effect would you like to hear?" wait
+	linebreak
+	goto(l_0xc58da9)
 
 l_0xc58da9:
-    "     [1F 52 02]{clearline}[1B 02 {e(data_06.debug_main)}]{swap}[1F 07 00]" goto(l_0xc58da9)
+	"   {number_input(2)}"	// 0x02
+	clearline
+	goto_if_false(data_06.debug_main)
+	swap
+	music_effect(0)	// 0x00
+	goto(l_0xc58da9)
 
 l_0xc58dbf:
-    newline
-    "{diam}Toggle enemy spawn." linebreak
-    "[19 02]Enable" eob
+	newline
+	diam "Toggle enemy spawn." linebreak
+	load_str("Enable")
 
 l_0xc58dd3:
-    "[19 02]Disable" eob
+	load_str("Disable")
 
 l_0xc58dd8:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58df1)} {e(l_0xc58e02)}]{diam}Enemies unchanged.{wait}" eob
+	print_strings_horizontal(2)	// 0x02
+	do_menu
+	clearline
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc58df1)
+		switch_entry(l_0xc58e02)
+	diam "Enemies unchanged." wait
+	eob
 
 l_0xc58df1:
-    "{diam}Enemies enabled.{wait}{unset(flag 11)}" eob
+	diam "Enemies enabled." wait
+	unset(FLG_SYS_MONSTER_OFF)	// 11
+	eob
 
 l_0xc58e02:
-    "{diam}Enemies disabled.{wait}{set(flag 11)}" eob
+	diam "Enemies disabled." wait
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	eob
 
 l_0xc58e13:
-    "{diam}Select hint.{wait}" linebreak
-    goto(data_09.l_0xc58e31)
+	diam "Select hint." wait
+	linebreak
+	goto(data_09.l_0xc58e31)

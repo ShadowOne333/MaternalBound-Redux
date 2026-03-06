@@ -1,128 +1,128 @@
 // Money Edit debug menu option
 
-import "../../essential/ccscript_missing_commands.ccs"
+import "../../essential/asm65816.ccs"
 import "../../essential/commands.ccs"
 import "../../essential/flags.ccs"
+import "../../essential/stdext.ccs"
 import "../../debug/diamond.ccs"
-import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 
 Money_Edit:
-    open_wallet
-    window_open(53)
-    diam "Choose your operation." newline
-    save_text_window_state
-    window_open(7)
-    menu 1 {
-      "Max bank account": {
-        call(Money_Select)
-        diam "You now have $9999999" linebreak
-        "   in the bank." wait
-        counter(1)
-        goto(Work_A_Shift)
-      }
-      "Max cash": {
-        call(Money_Select)
-        diam "You now have $99999" linebreak
-        "   in your wallet." wait
-        // 0x01869F for 99'999
-        givemoney(60000)
-        givemoney(40000)
-        window_closetop
-        goto(new_debug_menu.debug_main)
-      }
-      "Cash edit": {
-        call(Money_Select)
-        diam "Input your amount:" linebreak
-        text_pos(4, 10)"&"
-        text_pos(4, 2)"$"
-        number_input(5)
-        clearline
-        goto_if_false(new_debug_menu.debug_main)
-        store_registers
-        call(Take_All_Money)
-        load_registers
-        swap
-        givemoney(0)
-        diam "You now have" linebreak
-        "   ${print_num_value(0)} in your wallet." wait
-        window_closetop
-        goto(new_debug_menu.debug_main)
-      }
-      "Empty cash": {
-        goto(Money_Broke)
-      }
-    }
-    window_closetop
-    goto(new_debug_menu.debug_main)
+	show_wallet
+	window_open(53)
+	diam "Choose your operation." newline
+	back_up_text_rendering_state
+	window_open(7)
+	menu 1 {
+		"Max bank account": {
+			call(Money_Select)
+			diam "You now have $9999999" linebreak
+			"   in the bank." wait
+			counter(1)
+			goto(Work_A_Shift)
+		}
+		"Max cash": {
+			call(Money_Select)
+			diam "You now have $99999" linebreak
+			"   in your wallet." wait
+			// 0x01869F for 99'999
+			givemoney(60000)
+			givemoney(40000)
+			window_closetop
+			goto(new_debug_menu.debug_main)
+		}
+		"Cash edit": {
+			call(Money_Select)
+			diam "Input your amount:" linebreak
+			text_pos(4,10)"&"
+			text_pos(4,2)"$"
+			number_input(5)
+			clearline
+			goto_if_false(new_debug_menu.debug_main)
+			store_registers
+			call(Take_All_Money)
+			load_registers
+			swap
+			givemoney(0)
+			diam "You now have" linebreak
+			"   ${number(0)} in your wallet." wait
+			window_closetop
+			goto(new_debug_menu.debug_main)
+		}
+		"Empty cash": {
+			goto(Money_Broke)
+		}
+	}
+	window_closetop
+	goto(new_debug_menu.debug_main)
 
 Money_Select:
-    copy_wram
-    window_closetop
-    window_switch(53)
-    copy_active
-    newline
-    eob
+	store_registers_shared
+	window_closetop
+	window_switch(53)
+	load_registers_shared
+	newline
+	eob
 
 //------------------------------------------------------------------
 
 // Helper methods
 Take_All_Money:
-    takemoney(10000)
-    goto_if_false(Take_All_Money)
-    goto(Take_All_Money_2)
+	takemoney(10000)
+	goto_if_false(Take_All_Money)
+	goto(Take_All_Money_2)
 
 Take_All_Money_2:
-    takemoney(1000)
-    goto_if_false(Take_All_Money_2)
-    goto(Take_All_Money_3)
+	takemoney(1000)
+	goto_if_false(Take_All_Money_2)
+	goto(Take_All_Money_3)
 
 Take_All_Money_3:
-    takemoney(100)
-    goto_if_false(Take_All_Money_3)
-    goto(Take_All_Money_4)
+	takemoney(100)
+	goto_if_false(Take_All_Money_3)
+	goto(Take_All_Money_4)
 
 Take_All_Money_4:
-    takemoney(10)
-    goto_if_false(Take_All_Money_4)
-    goto(Take_All_Money_5)
+	takemoney(10)
+	goto_if_false(Take_All_Money_4)
+	goto(Take_All_Money_5)
 
 Take_All_Money_5:
-    takemoney(1)
-    goto_if_false(Take_All_Money_5)
-    eob		//goto(Take_All_Money_End)
+	takemoney(1)
+	goto_if_false(Take_All_Money_5)
+	eob		//goto(Take_All_Money_End)
 
 Money_Broke:
-    call(Take_All_Money)
-    window_closetop
-    window_switch(53)
-    diam "You are now broke!" linebreak
-    "   Your wallet is empty!" wait
-    window_closetop
-    goto(new_debug_menu.debug_main)
+	call(Take_All_Money)
+	window_closetop
+	window_switch(53)
+	diam "You are now broke!" linebreak
+	"   Your wallet is empty!" wait
+	window_closetop
+	goto(new_debug_menu.debug_main)
 
 Work_A_Shift:	// This loop adds money to the ATM until it hits a certain amount
-    ctoarg
-    swap
-    if result_is(200) {
-      goto(Vacation_Time)
-    }
-    deposit(50000)
-    inc
-    goto(Work_A_Shift)
+	ctoarg
+	swap
+	if result_is(200) {
+		goto(Vacation_Time)
+	}
+	deposit(50000)
+	inc
+	goto(Work_A_Shift)
 
 Vacation_Time:
-    deposit(49999)
-    window_closetop
-    goto(new_debug_menu.debug_main)
+	deposit(49999)
+	window_closetop
+	goto(new_debug_menu.debug_main)
 
 command money_edit_post_selection {
-    copy_wram
-    window_closetop
-    window_switch(53)
-    copy_active
-    newline
+	store_registers_shared
+	window_closetop
+	window_switch(53)
+	load_registers_shared
+	newline
 }
 
 //------------------------------------

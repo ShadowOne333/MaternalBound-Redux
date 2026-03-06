@@ -4,8 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -13,318 +17,537 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc58369:
-    "[18 02]{window_open(12)}[19 02]Key to the shack" eob
+	back_up_text_rendering_state
+	window_open(12)
+	load_str("Key to the shack")
 
 l_0xc58378:
-    "[19 02]Receiver phone" eob
+	load_str("Receiver phone")
 
 l_0xc58382:
-    "[19 02]Pencil eraser" eob
+	load_str("Pencil eraser")
 
 l_0xc5838c:
-    "[19 02]Franklin badge" eob
+	load_str("Franklin badge")
 
 l_0xc58398:
-    "[19 02]Key to the cabin" eob
+	load_str("Key to the cabin")
 
 l_0xc583a1:
-    "[19 02]Suitcase of bills" eob
+	load_str("Suitcase of bills")
 
 l_0xc583a8:
-    "[19 02]Bad key machine" eob
+	load_str("Bad key machine")
 
 l_0xc583b4:
-    "[19 02]Zombie paper" eob
+	load_str("Zombie paper")
 
 l_0xc583be:
-    "[19 02]Diamond" eob
+	load_str("Diamond")
 
 l_0xc583c7:
-    "[19 02]Tofu machine" eob
+	load_str("Tofu machine")
 
 l_0xc583d3:
-    "[19 02]Hieroglyph copy" eob
+	load_str("Hieroglyph copy")
 
 l_0xc583e0:
-    "[19 02]Hawk eye" eob
+	load_str("Hawk eye")
 
 l_0xc583e7:
-    "[19 02]Pack of bubble gum" eob
+	load_str("Pack of bubble gum")
 
 l_0xc583f0:
-    "[19 02]Shyness book" eob
+	load_str("Shyness book")
 
 l_0xc583fc:
-    "[19 02]Meteorite piece" eob
+	load_str("Meteorite piece")
 
 l_0xc58406:
-    "[19 02]Signed banana" eob
+	load_str("Signed banana")
 
 l_0xc58411:
-    "[19 02]Eraser eraser" eob
+	load_str("Eraser eraser")
 
 l_0xc5841c:
-    "[19 02]Tendakraut" eob
+	load_str("Tendakraut")
 
 l_0xc58425:
-    "[19 02]Rabbits' carrot" eob
+	load_str("Rabbits' carrot")
 
 l_0xc58432:
-    "[1C 0C 01][11][1B 05]{window_closetop}[19 04]{window_switch(1)}" newline
-    "[1B 06][1B 02 {e(data_06.l_0xc58364)}]{swap}{diam}To whom?{wait}" call(data_15.l_0xc5e52e) "[1B 02 {e(l_0xc58369)}]{swap}[1F C0 13 {e(l_0xc584b4)} {e(l_0xc584bb)} {e(l_0xc584c2)} {e(l_0xc584c9)} {e(l_0xc584d0)} {e(l_0xc584d7)} {e(l_0xc584de)} {e(l_0xc584e5)} {e(l_0xc584ec)} {e(l_0xc584f3)} {e(l_0xc584fa)} {e(l_0xc58501)} {e(l_0xc58508)} {e(l_0xc5850f)} {e(l_0xc58516)} {e(l_0xc5851d)} {e(l_0xc58524)} {e(l_0xc5852b)} {e(l_0xc58532)}]" goto(l_0xc58369)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+	unload_strings
+	window_switch(1)
+	newline
+	load_registers_shared
+	goto_if_false(data_06.l_0xc58364)
+	swap
+	diam "To whom?" wait
+	call(data_15.l_0xc5e52e)
+	goto_if_false(l_0xc58369)
+
+	swap
+	switch_call(19)	// 0x13
+		switch_entry(l_0xc584b4)
+		switch_entry(l_0xc584bb)
+		switch_entry(l_0xc584c2)
+		switch_entry(l_0xc584c9)
+		switch_entry(l_0xc584d0)
+		switch_entry(l_0xc584d7)
+		switch_entry(l_0xc584de)
+		switch_entry(l_0xc584e5)
+		switch_entry(l_0xc584ec)
+		switch_entry(l_0xc584f3)
+		switch_entry(l_0xc584fa)
+		switch_entry(l_0xc58501)
+		switch_entry(l_0xc58508)
+		switch_entry(l_0xc5850f)
+		switch_entry(l_0xc58516)
+		switch_entry(l_0xc5851d)
+		switch_entry(l_0xc58524)
+		switch_entry(l_0xc5852b)
+		switch_entry(l_0xc58532)
+	goto(l_0xc58369)
 
 l_0xc584b4:
-    "{swap}[1D 0E 00 AA]" eob
+	swap
+	give_and_return_location(0, SHACK_KEY)	// 0x00, 0xAA, 170
+	eob
 
 l_0xc584bb:
-    "{swap}[1D 0E 00 B5]" eob
+	swap
+	give_and_return_location(0, RECEIVER_PHONE)	// 0x00, 0xB5, 181
+	eob
 
 l_0xc584c2:
-    "{swap}[1D 0E 00 B8]" eob
+	swap
+	give_and_return_location(0, PENCIL_ERASER)	// 0x00, 0xB8, 184
+	eob
 
 l_0xc584c9:
-    "{swap}[1D 0E 00 01]" eob
+	swap
+	give_and_return_location(0, FRANKLIN_BADGE)	// 0x00, 0x01
+	eob
 
 l_0xc584d0:
-    "{swap}[1D 0E 00 AB]" eob
+	swap
+	give_and_return_location(0, CABIN_KEY)	// 0x00, 0xAB, 171
+	eob
 
 l_0xc584d7:
-    "{swap}[1D 0E 00 B4]" eob
+	swap
+	give_and_return_location(0, WAD_BILLS)	// 0x00, 0xB4, 180
+	eob
 
 l_0xc584de:
-    "{swap}[1D 0E 00 AC]" eob
+	swap
+	give_and_return_location(0, BAD_KEY_MACHINE)	// 0x00, 0xAC, 172
+	eob
 
 l_0xc584e5:
-    "{swap}[1D 0E 00 AE]" eob
+	swap
+	give_and_return_location(0, ZOMBIE_PAPER)	// 0x00, 0xAE, 174
+	eob
 
 l_0xc584ec:
-    "{swap}[1D 0E 00 B6]" eob
+	swap
+	give_and_return_location(0, DIAMOND)	// 0x00, 0xB6, 182
+	eob
 
 l_0xc584f3:
-    "{swap}[1D 0E 00 8B]" eob
+	swap
+	give_and_return_location(0, TOFU_MACHINE)	// 0x00, 0x8B, 139
+	eob
 
 l_0xc584fa:
-    "{swap}[1D 0E 00 B9]" eob
+	swap
+	give_and_return_location(0, HIEROGLYPH)	// 0x00, 0xB9, 185
+	eob
 
 l_0xc58501:
-    "{swap}[1D 0E 00 AF]" eob
+	swap
+	give_and_return_location(0, HAWK_EYE)	// 0x00, 0xAF, 175
+	eob
 
 l_0xc58508:
-    "{swap}[1D 0E 00 68]" eob
+	swap
+	give_and_return_location(0, BUBBLE_GUM)	// 0x00, 0x68, 104
+	eob
 
 l_0xc5850f:
-    "{swap}[1D 0E 00 A4]" eob
+	swap
+	give_and_return_location(0, SHYNESS_BOOK)	// 0x00, 0xA4, 164
+	eob
 
 l_0xc58516:
-    "{swap}[1D 0E 00 C1]" eob
+	swap
+	give_and_return_location(0, METEORITE_PIECE)	// 0x00, 0xC1, 193
+	eob
 
 l_0xc5851d:
-    "{swap}[1D 0E 00 B7]" eob
+	swap
+	give_and_return_location(0, SIGNED_BANANA)	// 0x00, 0xB7, 183
+	eob
 
 l_0xc58524:
-    "{swap}[1D 0E 00 D2]" eob
+	swap
+	give_and_return_location(0, ERASER_ERASER)	// 0x00, 0xD2, 210
+	eob
 
 l_0xc5852b:
-    "{swap}[1D 0E 00 D3]" eob
+	swap
+	give_and_return_location(0, TENDAKRAUT)	// 0x00, 0xD3, 211
+	eob
 
 l_0xc58532:
-    "{swap}[1D 0E 00 FD]" eob
+	swap
+	give_and_return_location(0, CARROT_KEY)	// 0x00, 0xFD, 253
+	eob
 
 l_0xc58539:
-    "{diam}Inventory maxed out with Skip Sandwiches DX." next
-    call(l_0xc58555) goto(data_06.debug_main)
+	diam "Inventory maxed out with Skip Sandwiches DX." next
+	call(l_0xc58555)
+	goto(data_06.debug_main)
 
 l_0xc58555:
-    "[1D 03 FF][1B 02 {e(l_0xc58567)}][1D 0E 00 E1]" goto(l_0xc58555)
+	get_item_receiver(-1)	// 0xFF
+	goto_if_false(l_0xc58567)
+	give_and_return_location(0, SKIP_SANDWICH_DX)	// 0x00, 0xE1, 225
+	goto(l_0xc58555)
 
 l_0xc58567:
-    eob
+	eob
 
 l_0xc58568:
-    "{diam}What items do you want to remove?" linebreak
-    "[19 02]All" eob
+	diam "What items do you want to remove?" linebreak
+	load_str("All")
 
 l_0xc5857c:
-    "[19 02]By choice" eob
+	load_str("By choice")
 
 l_0xc58583:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc58597)} {e(l_0xc585c5)}]" goto(data_06.l_0xc58364)
+	print_strings_horizontal(2)	// 0x02
+	do_menu
+	clearline
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc58597)
+		switch_entry(l_0xc585c5)
+	goto(data_06.l_0xc58364)
 
 l_0xc58597:
-    "{counter(1)}" goto(l_0xc58599)
+	counter(1)
 
 l_0xc58599:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc585c4)}][19 10 00]" goto(l_0xc585a7)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc585c4)
+	get_char_at_pos(0)	// 0x00
 
 l_0xc585a7:
-    "[19 19 00 01]{swap}[1B 02 {e(l_0xc585be)}]{swap}[1D 0F 00 01]" goto(l_0xc585a7)
+	get_inventory_item(0,1)	// 0x00, 0x01
+	swap
+	goto_if_false(l_0xc585be)
+	swap
+	take_from_location(0,1)	// 0x00, 0x01
+	goto(l_0xc585a7)
 
 l_0xc585be:
-    "{inc}" goto(l_0xc58599)
+	inc
+	goto(l_0xc58599)
 
 l_0xc585c4:
-    eob
+	eob
 
 l_0xc585c5:
-    "{open_hp}" goto(l_0xc585c7)
+	open_hp
+	goto(l_0xc585c7)
 
 l_0xc585c7:
-    call(data_15.l_0xc5e456) "[1B 02 {e(l_0xc585db)}][1D 0F 00 00]" goto(l_0xc585c7)
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc585db)
+	take_from_location(0,0)	// 0x00, 0x00
+	goto(l_0xc585c7)
 
 l_0xc585db:
-    eob
+	eob
 
 l_0xc585dc:
-    "{diam}Storage filled with" linebreak
-    "  upper tier weapons.{counter(20)}" goto(l_0xc585f2)
+	diam "Storage filled with" linebreak
+	"  upper tier weapons."
+	counter(20)
+	goto(l_0xc585f2)
 
 l_0xc585f2:
-    "{ctoarg}[1D 0C 01 01][18 07 02 00 00 00 00][1B 03 {e(l_0xc5860e)}][1D 18 00]{inc}" goto(l_0xc585f2)
+	ctoarg
+	check_impediment_for_storing(1,1)	// 0x01, 0x01
+	compare_result(2)	// 0x00000002, 0x00
+	goto_if_true(l_0xc5860e)
+	store_item(0)	// 0x00
+	inc
+	goto(l_0xc585f2)
 
 l_0xc5860e:
-    "{wait}" goto(data_06.debug_main)
+	wait
+	goto(data_06.debug_main)
 
 l_0xc58614:
-    "{diam}Storage cleared." goto(l_0xc58624)
+	diam "Storage cleared."
+	goto(l_0xc58624)
 
 l_0xc58624:
-    "[19 1A 01][1B 02 {e(l_0xc58636)}][19 1C FF 01]" goto(l_0xc58624)
+	get_storage_item(1)	// 0x01
+	goto_if_false(l_0xc58636)
+	queue_item(-1,1)	// 0xFF, 0x01
+	goto(l_0xc58624)
 
 l_0xc58636:
-    "{wait}" goto(data_06.debug_main)
+	wait
+	goto(data_06.debug_main)
 
 l_0xc5863c:
-    "{diam}You now have been equipped" linebreak
-    "  with the ultimate weapons.[03]" call(l_0xc58659) goto(data_06.debug_main)
+	diam "You now have been equipped" linebreak
+	"  with the ultimate weapons." promptw
+	call(l_0xc58659)
+	goto(data_06.debug_main)
 
 l_0xc58659:
-    "{counter(1)}" goto(l_0xc5865b)
+	counter(1)
 
 l_0xc5865b:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc5869b)}][19 10 00]" goto(l_0xc58669)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc5869b)
+
+	get_char_at_pos(0)	// 0x00
+	goto(l_0xc58669)
 
 l_0xc58669:
-    "[19 19 00 07]{swap}[1B 02 {e(l_0xc58680)}]{swap}[1D 0F 00 07]" goto(l_0xc58669)
+	get_inventory_item(0,7)	// 0x00, 0x07
+	swap
+	goto_if_false(l_0xc58680)
+	swap
+	take_from_location(0,7)	// 0x00, 0x07
+	goto(l_0xc58669)
 
 l_0xc58680:
-    "{swap}[1F C0 04 {e(l_0xc5869c)} {e(l_0xc586bd)} {e(l_0xc586de)} {e(l_0xc586ff)}]{inc}" goto(l_0xc5865b)
+	swap
+	switch_call(4)	// 0x04
+		switch_entry(l_0xc5869c)
+		switch_entry(l_0xc586bd)
+		switch_entry(l_0xc586de)
+		switch_entry(l_0xc586ff)
+	inc
+	goto(l_0xc5865b)
 
 l_0xc5869b:
-    eob
+	eob
 
 l_0xc5869c:
-    "[1D 0E 01 1A][1F 83 00 00][1D 0E 01 3D][1F 83 00 00][1D 0E 01 48][1F 83 00 00][1D 0E 01 56][1F 83 00 00]" eob
+	give_and_return_location(1, GUTSY_BAT)	// 0x01, 0x1A, 26
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(1, SEA_PENDANT)	// 0x01, 0x3D, 61
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(1, GODDESS_BAND)	// 0x01, 0x48, 72
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(1, SOUVENIR_COIN)	// 0x01, 0x56, 86
+	equip(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc586bd:
-    "[1D 0E 02 22][1F 83 00 00][1D 0E 02 C2][1F 83 00 00][1D 0E 02 47][1F 83 00 00][1D 0E 02 DC][1F 83 00 00]" eob
+	give_and_return_location(2, HOLY_FRY_PAN)	// 0x02, 0x22, 34
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(2, EARTH_PENDANT)	// 0x02, 0xC2, 194
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(2, ANGEL_BAND)	// 0x02, 0x47, 71
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(2, SATURN_RIBBON)	// 0x02, 0xDC, 220
+	equip(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc586de:
-    "[1D 0E 03 30][1F 83 00 00][1D 0E 03 3C][1F 83 00 00][1D 0E 03 46][1F 83 00 00][1D 0E 03 55][1F 83 00 00]" eob
+	give_and_return_location(3, GAIA_BEAM)	// 0x03, 0x30, 48
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(3, NIGHT_PENDANT)	// 0x03, 0x3C, 60
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(3, PIXIES_BRACELET)	// 0x03, 0x46, 70
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(3, SHINY_COIN)	// 0x03, 0x55, 85
+	equip(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc586ff:
-    "[1D 0E 04 23][1F 83 00 00][1D 0E 04 3F][1F 83 00 00][1D 0E 04 49][1F 83 00 00][1D 0E 04 57][1F 83 00 00]" eob
+	give_and_return_location(4, SWORD_OF_KINGS)	// 0x04, 0x23, 35
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(4, CLOAK_OF_KINGS)	// 0x04, 0x3F, 63
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(4, BRACER_OF_KINGS)	// 0x04, 0x49, 73
+	equip(0,0)	// 0x00, 0x00
+	give_and_return_location(4, DIADEM_OF_KINGS)	// 0x04, 0x57, 87
+	equip(0,0)	// 0x00, 0x00
+	eob
 
 l_0xc58718:
-    newline
-    "{diam}To whom?{wait}[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc587ee)}]{store_registers}" linebreak
-    "{diam}Which?{wait}" linebreak
-    "[18 02]{window_open(12)}[19 02]Heal" eob
+	newline
+	diam "To whom?" wait
+	select_char(0,0,0,0,1)	// 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x01
+	goto_if_false(l_0xc587ee)
+	store_registers
+	linebreak
+	diam "Which?" wait
+	linebreak
+	back_up_text_rendering_state
+	window_open(12)
+	load_str("Heal")
 
 l_0xc58752:
-    "[19 02]Unconscious" eob
+	load_str("Unconscious")
 
 l_0xc58758:
-    "[19 02]Diamondized" eob
+	load_str("Diamondized")
 
 l_0xc5875e:
-    "[19 02]Paralyzed" eob
+	load_str("Paralyzed")
 
 l_0xc58764:
-    "[19 02]Nauseated" eob
+	load_str("Nauseated")
 
 l_0xc5876a:
-    "[19 02]Poisoned" eob
+	load_str("Poisoned")
 
 l_0xc58771:
-    "[19 02]Sunstroke" eob
+	load_str("Sunstroke")
 
 l_0xc5877b:
-    "[19 02]Cold" eob
+	load_str("Cold")
 
 l_0xc58780:
-    "[19 02]Mushroomized" eob
+	load_str("Mushroomized")
 
 l_0xc58786:
-    "[19 02]Possessed" eob
+	load_str("Possessed")
 
 l_0xc5878d:
-    "[19 02]Homesick" eob
+	load_str("Homesick")
 
 l_0xc58796:
-    "[19 02]Decrease HP" eob
+	load_str("Decrease HP")
 
 l_0xc5879e:
-    "[19 02]Decrease PP" eob
+	load_str("Decrease PP")
 
 l_0xc587a6:
-    "[1C 0C 02][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][09 0D {e(l_0xc587f3)} {e(l_0xc58813)} {e(l_0xc5882f)} {e(l_0xc58841)} {e(l_0xc5884e)} {e(l_0xc5885b)} {e(l_0xc58868)} {e(l_0xc58875)} {e(l_0xc58882)} {e(l_0xc5888f)} {e(data_08.l_0xc5889c)} {e(data_08.l_0xc588a9)} {e(data_08.l_0xc588bb)}]" goto(l_0xc58718)
+	print_strings_vertical(2)	// 0x02
+	do_menu
+	store_registers_shared
+	window_closetop
+	window_switch(1)
+	load_registers_shared
+	switch_goto(13)	// 0x0D
+		switch_entry(l_0xc587f3)
+		switch_entry(l_0xc58813)
+		switch_entry(l_0xc5882f)
+		switch_entry(l_0xc58841)
+		switch_entry(l_0xc5884e)
+		switch_entry(l_0xc5885b)
+		switch_entry(l_0xc58868)
+		switch_entry(l_0xc58875)
+		switch_entry(l_0xc58882)
+		switch_entry(l_0xc5888f)
+		switch_entry(data_08.l_0xc5889c)
+		switch_entry(data_08.l_0xc588a9)
+		switch_entry(data_08.l_0xc588bb)
+	goto(l_0xc58718)
 
 l_0xc587ee:
-    goto(data_06.debug_main)
+	goto(data_06.debug_main)
 
 l_0xc587f3:
-    "{load_registers}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 0x00, 0x06, 0x01
+	swap
+	heal_percent(0,100)	// 0x00, 0x64
+	recoverpp_percent(0,100)	// 0x00, 0x64
+	goto(l_0xc58718)
 
 l_0xc58813:
-    "{load_registers}[19 05 00 01 01][19 05 00 01 02]{swap}[1E 01 00 64][1E 05 00 64]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x00, 0x01, 0x02
+	swap
+	hurt_percent(0,100)	// 0x00, 0x64
+	consumepp_percent(0,100)	// 0x00, 0x64
+	goto(l_0xc58718)
 
 l_0xc5882e:
-    eob
+	eob
 
 l_0xc5882f:
-    "{load_registers}[19 05 00 01 01][19 05 00 01 03]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0x00, 0x01, 0x03
+	goto(l_0xc58718)
 
 l_0xc58840:
-    eob
+	eob
 
 l_0xc58841:
-    "{load_registers}[19 05 00 01 04]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NUMB)	// 0x00, 0x01, 0x04
+	goto(l_0xc58718)
 
 l_0xc5884d:
-    eob
+	eob
 
 l_0xc5884e:
-    "{load_registers}[19 05 00 01 05]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NAUSEOUS)	// 0x00, 0x01, 0x05
+	goto(l_0xc58718)
 
 l_0xc5885a:
-    eob
+	eob
 
 l_0xc5885b:
-    "{load_registers}[19 05 00 01 06]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_POISONED)	// 0x00, 0x01, 0x06
+	goto(l_0xc58718)
 
 l_0xc58867:
-    eob
+	eob
 
 l_0xc58868:
-    "{load_registers}[19 05 00 01 07]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_SUNSTROKE)	// 0x00, 0x01, 0x07
+	goto(l_0xc58718)
 
 l_0xc58874:
-    eob
+	eob
 
 l_0xc58875:
-    "{load_registers}[19 05 00 01 08]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)	// 0x00, 0x01, 0x08
+	goto(l_0xc58718)
 
 l_0xc58881:
-    eob
+	eob
 
 l_0xc58882:
-    "{load_registers}[19 05 00 02 02]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00, 0x02, 0x02
+	goto(l_0xc58718)
 
 l_0xc5888e:
-    eob
+	eob
 
 l_0xc5888f:
-    "{load_registers}[19 05 00 02 03]" goto(l_0xc58718)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)	// 0x00, 0x02, 0x03
+	goto(l_0xc58718)
 
 l_0xc5889b:
-    eob
+	eob

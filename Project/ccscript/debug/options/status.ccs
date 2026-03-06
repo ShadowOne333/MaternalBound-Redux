@@ -9,104 +9,104 @@ import "../../debug/diamond.ccs"
 //------------------------------------------------------------------
 
 Special_Status:
-    clearline
-    diam "To whom?" newline
-    select_char(0,0,0,0,1)	// Current party member selection menu, lets you cancel with the B button
-    goto_if_false(new_debug_menu.debug_main)
-    store_registers
-    window_clear
-    back_up_text_rendering_state
-    window_open(12)
-    menu 2 {
-      "Heal": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
-        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)
-        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)
-        swap
-        heal_percent(0, 100)
-        recoverpp_percent(0, 100)
-        goto(Special_Status)
-      }
-      "Unconscious": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
-        swap
-        hurt_percent(0, 100)
-        consumepp_percent(0, 100)
-        goto(Special_Status)
-      }
-      "Petrified": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
-        goto(Special_Status)
-      }
-      "Paralyzed": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NUMB)
-        goto(Special_Status)
-      }
-      "Nauseated": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NAUSEOUS)
-        goto(Special_Status)
-      }
-      "Poisoned": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_POISONED)
-        goto(Special_Status)
-      }
-      "Sunstroke": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_SUNSTROKE)
-        goto(Special_Status)
-      }
-      "Cold": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)
-        goto(Special_Status)
-      }
-      "Mushroomized": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)
-        goto(Special_Status)
-      }
-      "Possessed": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)
-        goto(Special_Status)
-      }
-      "Homesick": {
-        special_status_post_selection
-        inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)
-        goto(Special_Status)
-      }
-      "Decrease HP": {
-        special_status_post_selection
-        swap
-        heal_percent(0, 100)
-        hurt_percent(0, 94) // $5E
-        goto(Special_Status)
-      }
-      "Decrease PP": {
-        special_status_post_selection
-        swap
-        recoverpp_percent(0, 100)
-        consumepp_percent(0, 99)
-        goto(Special_Status)
-      }
-    }
-    window_closetop
-    goto(new_debug_menu.debug_main)
+	clearline
+	diam "To whom?" newline
+	select_char(0,0,0,0,1)	// Current party member selection menu, lets you cancel with the B button
+	goto_if_false(new_debug_menu.debug_main)
+	store_registers
+	window_clear
+	back_up_text_rendering_state
+	window_open(12)
+	menu 2 {
+		"Heal": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+			inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)
+			inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)
+			swap
+			heal_percent(0,100)
+			recoverpp_percent(0,100)
+			goto(Special_Status)
+		}
+		"Unconscious": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
+			swap
+			hurt_percent(0,100)
+			consumepp_percent(0,100)
+			goto(Special_Status)
+		}
+		"Petrified": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
+			goto(Special_Status)
+		}
+		"Paralyzed": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NUMB)
+			goto(Special_Status)
+		}
+		"Nauseated": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NAUSEOUS)
+			goto(Special_Status)
+		}
+		"Poisoned": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_POISONED)
+			goto(Special_Status)
+		}
+		"Sunstroke": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_SUNSTROKE)
+			goto(Special_Status)
+		}
+		"Cold": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_COLD)
+			goto(Special_Status)
+		}
+		"Mushroomized": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)
+			goto(Special_Status)
+		}
+		"Possessed": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)
+			goto(Special_Status)
+		}
+		"Homesick": {
+			special_status_post_selection
+			inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)
+			goto(Special_Status)
+		}
+		"Decrease HP": {
+			special_status_post_selection
+			swap
+			heal_percent(0,100)
+			hurt_percent(0,94) // $5E
+			goto(Special_Status)
+		}
+		"Decrease PP": {
+			special_status_post_selection
+			swap
+			recoverpp_percent(0,100)
+			consumepp_percent(0,99)
+			goto(Special_Status)
+		}
+	}
+	window_closetop
+	goto(new_debug_menu.debug_main)
 
 command special_status_post_selection {
-    store_registers_shared
-    window_closetop
-    window_switch(53)
-    load_registers_shared
-    load_registers
+	store_registers_shared
+	window_closetop
+	window_switch(53)
+	load_registers_shared
+	load_registers
 }
 
 //------------------------------------------------------------------

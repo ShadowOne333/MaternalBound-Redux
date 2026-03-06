@@ -23,11 +23,14 @@ l_0xc8292c:
 
 l_0xc82945:
 	if not flag FLG_KEY_ITEMS {
-		get_item_receiver(-1) goto_if_false(l_0xc829df)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc829df)
 	}
+	
 	store_registers
 	hasmoney(30)
 	goto_if_false(l_0xc82986)
+
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	takemoney(30)
@@ -94,7 +97,6 @@ l_0xc82b59:
 	"@When I grow up,| I wanna work for APE as a programmer..." next
 	"@Do you have any connections with those guys?" linebreak
 	two_choice_menu("Yes", l_0xc82bbc, "No", l_0xc82bbc)
-	goto(l_0xc82bbc)
 
 l_0xc82bbc:
 	"@Oh, you didn't have to answer." next
@@ -114,6 +116,7 @@ l_0xc82c48:
 l_0xc82c6b:
 	goto_if_flag(FLG_FOUR_DEPT_OK, data_35.l_0xc7c588)	// 0x8B, 139
 	music(155)
+
 	title(1, Spook)
 	"@Gwaaagh, gwarrrgh!" next
 	"@You finally made it." next
@@ -121,8 +124,11 @@ l_0xc82c6b:
 	"  Gwaaagh." next
 	"@Die, and go to Hell-" next
 	"@No, to Heaven!" promptw
-	call(data_23.l_0xc6855b) goto_if_true(data_23.l_0xc683de)
+
+	call(data_23.l_0xc6855b)
+	goto_if_true(data_23.l_0xc683de)
 	stop_music
+
 	window_open(1)
 	title(1, Spook)
 	"@...Even though you could beat me..." next
@@ -131,6 +137,7 @@ l_0xc82c6b:
 	"@At this moment, {name(2)} should be...Monotoly..." next
 	"@Gwaaaaarrrrgh!!" promptw
 	window_closeall
+
 	pause(60)
 	set(FLG_FOUR_DEPT_OK)	// 139
 	set(FLG_FOUR_DEPT_MSGCHG)	// 556
@@ -313,6 +320,7 @@ l_0xc83515:
 	"@My room's on the 48th floor." pause(20)
 	"  Don't forget to drop by!" wait
 	window_closeall
+
 	npc_unfreeze(951)
 	unset(FLG_FOUR_MAID_APPEAR)	// 59
 	eob
@@ -350,8 +358,10 @@ l_0xc8361c:
 	"@I'll tell you only once." next
 	"@At the bar,| check...| behind...| the counter..." next
 	"@...*Gasp*..." next
+
 	goto_if_flag(FLG_TEMP_8, l_0xc838b9)	// 0x09
 	set(FLG_TEMP_8)	// 9
+
 	"@I said I'd tell you only once..." next
 	"@But if you insist, I'll tell you once more..." next
 	"@...*gasp, gasp*" next
@@ -370,7 +380,6 @@ l_0xc838b9:
 l_0xc8392f:
 	"@I'm not that nice of a guy." pause(20) next
 	"@I really am close to dying here." next
-	goto(l_0xc83957)
 
 l_0xc83957:
 	"@...Before I die, here's my last haiku poem:" next
@@ -383,9 +392,11 @@ l_0xc83957:
 	"@I must be on my way..." next
 	"@Whoa..." next
 	"@So...| long!" wait
+
 	set(FLG_FOUR_TONCHIKI)	// 145
 	unset(FLG_FOUR_TONCHIKI_APPEAR)	// 60
-	call(data_44.l_0xc8983b) eob
+	call(data_44.l_0xc8983b)
+	eob
 
 l_0xc839f7:
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc83a24)	// 0x91, 145
@@ -422,7 +433,6 @@ l_0xc83aee:
 	"@If you give me somethin', I'll let you have my spot." next
 	"@Will you give me somethin'?" linebreak
 	two_choice_menu("Yes", l_0xc83b7b, "No", l_0xc83b5a)
-	goto(l_0xc83b5a)
 
 l_0xc83b5a:
 	newline
@@ -430,18 +440,21 @@ l_0xc83b5a:
 
 l_0xc83b7b:
 	"@So, what do I get?"
+
 	wait_input_timeout(30)
 	call(data_15.l_0xc5e456)
+
 	pause(60)
 	newline
 	goto_if_false(l_0xc83b5a)
+
 	store_registers
 	get_inventory_item(0,0)
 	get_selling_price(0)
 	goto_if_false(l_0xc83c2d)
+
 	"@Are you sure?" linebreak
 	two_choice_menu("Yes", l_0xc83bfc, "No", l_0xc83bc3)
-	goto(l_0xc83bc3)
 
 l_0xc83bc3:
 	"@If you don't want to give me somethin'," next
@@ -494,13 +507,20 @@ l_0xc83d1e:
 
 l_0xc83d24:
 	goto_if_flag(FLG_WIN_MGNT_BOSS, data_35.l_0xc7c588)	// 0xC2, 194
-	counter(1) call(data_36.l_0xc7dc7f) goto_if_true(data_24.l_0xc690a6)
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(data_24.l_0xc690a6)
+
 	music(155)
 	"@You finally got here." next
 	"@This is the fifth <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
-	call(data_23.l_0xc68425) goto_if_true(data_23.l_0xc683de)
+
+	call(data_23.l_0xc68425)
+	goto_if_true(data_23.l_0xc683de)
+
 	hide_sprite(995,8)	// 0x03E3, 08
 	pause(120)
 	set(FLG_WIN_MGNT_BOSS)	// 194

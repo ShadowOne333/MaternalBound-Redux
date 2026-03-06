@@ -87,13 +87,13 @@ Events:
 		switch_entry(l_0xc5a4b4)
 		switch_entry(l_0xc5a4cd)
 	newline newline
-	"{diam}Events menu off." wait
+	diam "Events menu off." wait
 	goto(new_debug_menu.debug_main)
 
 //------------------------------------------------------------------
 
 l_0xc599d0:
-	"{diam}{name(7)} runs away." wait linebreak
+	diam "{name(7)} runs away." wait linebreak
 	window_closeall
 	counter(10)
 	call(l_0xc5a4ec)
@@ -103,7 +103,7 @@ l_0xc599d0:
 	eob
 
 l_0xc599f4:
-	"{diam}Get the Minchs to their house." wait linebreak
+	diam "Get the Minchs to their house." wait linebreak
 	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
@@ -113,7 +113,7 @@ l_0xc599f4:
 	eob
 
 l_0xc59a15:
-	"{diam}Beat Captain Strong." wait linebreak
+	diam "Beat Captain Strong." wait linebreak
 	window_closeall
 	counter(13)
 	call(l_0xc5a4ec)
@@ -126,7 +126,7 @@ l_0xc59a15:
 	eob
 
 l_0xc59a40:
-	"{diam}Arriving to Twoson." wait linebreak
+	diam "Arriving to Twoson." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
@@ -141,7 +141,7 @@ l_0xc59a40:
 	eob
 
 l_0xc59a72:
-	"{diam}First Runaway Show." wait linebreak
+	diam "First Runaway Show." wait linebreak
 	window_closeall
 	counter(22)
 	call(l_0xc5a4ec)
@@ -153,7 +153,7 @@ l_0xc59a72:
 	eob
 
 l_0xc59aa4:
-	"{diam}First encounter with Carpainter." wait linebreak
+	diam "First encounter with Carpainter." wait linebreak
 	window_closeall
 	counter(20)
 	call(l_0xc5a4ec)
@@ -162,7 +162,7 @@ l_0xc59aa4:
 	eob
 
 l_0xc59ace:
-	"{diam}Freeing {name(2)}." wait linebreak
+	diam "Freeing {name(2)}." wait linebreak
 	window_closeall
 	counter(21)
 	call(l_0xc5a4ec)
@@ -173,7 +173,7 @@ l_0xc59ace:
 	eob
 
 l_0xc59af5:
-	"{diam}Freeing the Runaway Bros. from their debt." wait linebreak
+	diam "Freeing the Runaway Bros. from their debt." wait linebreak
 	window_closeall
 	counter(22)
 	call(l_0xc5a4ec)
@@ -184,7 +184,7 @@ l_0xc59af5:
 	eob
 
 l_0xc59b25:
-	"{diam}Be captured by zombies." wait linebreak
+	diam "Be captured by zombies." wait linebreak
 	window_closeall
 	counter(23)
 	call(l_0xc5a4ec)
@@ -194,7 +194,7 @@ l_0xc59b25:
 	eob
 
 l_0xc59b45:
-	"{diam}Join with Bubble Monkey." wait linebreak
+	diam "Join with Bubble Monkey." wait linebreak
 	window_closeall
 	counter(30)
 	call(l_0xc5a4ec)
@@ -206,7 +206,7 @@ l_0xc59b45:
 	eob
 
 l_0xc59b78:
-	"{diam}Encounter with Tessie." wait linebreak
+	diam "Encounter with Tessie." wait linebreak
 	window_closeall
 	counter(31)
 	call(l_0xc5a4ec)
@@ -222,7 +222,7 @@ l_0xc59b78:
 	eob
 
 l_0xc59bb5:
-	"{diam}Ride the Sky Walker." wait linebreak
+	diam "Ride the Sky Walker." wait linebreak
 	window_closeall
 	counter(32)
 	call(l_0xc5a4ec)
@@ -232,7 +232,7 @@ l_0xc59bb5:
 	eob
 
 l_0xc59bd7:
-	"{diam}Runaway show at Topollo Theater." wait linebreak
+	diam "Runaway show at Topollo Theater." wait linebreak
 	window_closeall
 	counter(40)
 	call(l_0xc5a4ec)
@@ -242,7 +242,7 @@ l_0xc59bd7:
 	eob
 
 l_0xc59bfc:
-	"{diam}George Montague gives you the Diamond." wait linebreak
+	diam "George Montague gives you the Diamond." wait linebreak
 	window_closeall
 	counter(40)
 	call(l_0xc5a4ec)
@@ -261,7 +261,7 @@ l_0xc59bfc:
 	eob
 
 l_0xc59c39:
-	"{diam}Freeing the Runaway again." wait linebreak
+	diam "Freeing the Runaway again." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
@@ -274,7 +274,7 @@ l_0xc59c39:
 	eob
 
 l_0xc59c67:
-	"{diam}Fight the Clumsy Robot." wait linebreak
+	diam "Fight the Clumsy Robot." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -284,7 +284,7 @@ l_0xc59c67:
 	eob
 
 l_0xc59c84:
-	"{diam}Inside the Monotoly building." wait linebreak
+	diam "Inside the Monotoly building." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -297,7 +297,7 @@ l_0xc59c84:
 	eob
 
 l_0xc59cb5:
-	"{diam}Ride the Sky Walker again." wait linebreak
+	diam "Ride the Sky Walker again." wait linebreak
 	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
@@ -308,7 +308,7 @@ l_0xc59cb5:
 	eob
 
 l_0xc59cd9:
-	"{diam}Eat the Magic cake." wait linebreak
+	diam "Eat the Magic cake." wait linebreak
 	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
@@ -321,7 +321,7 @@ l_0xc59cd9:
 	eob
 
 l_0xc59d06:
-	"{diam}Start your Mu training." wait linebreak
+	diam "Start your Mu training." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -332,7 +332,7 @@ l_0xc59d06:
 	eob
 
 l_0xc59d30:
-	"{diam}See Venus performing." wait linebreak
+	diam "See Venus performing." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -346,7 +346,7 @@ l_0xc59d30:
 	eob
 
 l_0xc59d61:
-	"{diam}Second encounter with Tessie." wait linebreak
+	diam "Second encounter with Tessie." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
@@ -355,7 +355,7 @@ l_0xc59d61:
 	eob
 
 l_0xc59d7f:
-	"{diam}Confront Starman Deluxe." wait linebreak
+	diam "Confront Starman Deluxe." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
@@ -365,7 +365,7 @@ l_0xc59d7f:
 	eob
 
 l_0xc59da0:
-	"{diam}Sail to Scarabia." wait linebreak
+	diam "Sail to Scarabia." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -374,7 +374,7 @@ l_0xc59da0:
 	eob
 
 l_0xc59dbd:
-	"{diam}Arriving to the Lost Underworld." wait linebreak
+	diam "Arriving to the Lost Underworld." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -384,7 +384,7 @@ l_0xc59dbd:
 	eob
 
 l_0xc59de1:
-	"{diam}Solve the Sphinx's puzzle." wait linebreak
+	diam "Solve the Sphinx's puzzle." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -393,7 +393,7 @@ l_0xc59de1:
 	eob
 
 l_0xc59e01:
-	"{diam}Get the Yellow submarine." wait linebreak
+	diam "Get the Yellow submarine." wait linebreak
 	window_closeall
 	counter(54)
 	call(l_0xc5a4ec)
@@ -404,7 +404,7 @@ l_0xc59e01:
 	eob
 
 l_0xc59e21:
-	"{diam}Going to Lumine Hall." wait linebreak
+	diam "Going to Lumine Hall." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
@@ -414,7 +414,7 @@ l_0xc59e21:
 	eob
 
 l_0xc59e40:
-	"{diam}Get the final melody." wait linebreak
+	diam "Get the final melody." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -424,7 +424,7 @@ l_0xc59e40:
 	eob
 
 l_0xc59e62:
-	"{diam}Riding the Phase Distorter." wait linebreak
+	diam "Riding the Phase Distorter." wait linebreak
 	window_closeall
 	counter(63)
 	call(l_0xc5a4ec)
@@ -433,7 +433,7 @@ l_0xc59e62:
 	eob
 
 l_0xc59e84:
-	"{diam}Riding the Phase Distorter 2." wait linebreak
+	diam "Riding the Phase Distorter 2." wait linebreak
 	window_closeall
 	counter(63)
 	call(l_0xc5a4ec)
@@ -446,7 +446,7 @@ l_0xc59e84:
 	eob
 
 l_0xc59eb2:
-	"{diam}Going through the Monkey Caves." wait linebreak
+	diam "Going through the Monkey Caves." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -471,7 +471,7 @@ l_0xc59eb2:
 	eob
 
 l_0xc59f08:
-	"{diam}{name(4)} obtains PK Starstorm." wait linebreak
+	diam "{name(4)} obtains PK Starstorm." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -484,7 +484,7 @@ l_0xc59f08:
 	eob
 
 l_0xc59f44:
-	"{diam}{name(2)}'s kidnap." wait linebreak
+	diam "{name(2)}'s kidnap." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
@@ -493,7 +493,7 @@ l_0xc59f44:
 	eob
 
 l_0xc59f60:
-	"{diam}Meeting the Apple Kid." wait linebreak
+	diam "Meeting the Apple Kid." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
@@ -503,7 +503,7 @@ l_0xc59f60:
 	eob
 
 l_0xc59f80:
-	"{diam}The Bought House." wait linebreak
+	diam "The Bought House." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -512,7 +512,7 @@ l_0xc59f80:
 	eob
 
 l_0xc59fa0:
-	"{diam}Onett Library." wait linebreak
+	diam "Onett Library." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -520,7 +520,7 @@ l_0xc59fa0:
 	eob
 
 l_0xc59fbd:
-	"{diam}{name(4)} leaves the party." wait linebreak
+	diam "{name(4)} leaves the party." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -533,7 +533,7 @@ l_0xc59fbd:
 	eob
 
 l_0xc59ff1:
-	"{diam}Fight {name(1)}'s Demon." wait linebreak
+	diam "Fight {name(1)}'s Demon." wait linebreak
 	window_closeall
 	counter(62)
 	call(l_0xc5a4ec)
@@ -542,7 +542,7 @@ l_0xc59ff1:
 	eob
 
 l_0xc5a00c:
-	"{diam}Face Carpainter with the Fraklin badge." wait linebreak
+	diam "Face Carpainter with the Fraklin badge." wait linebreak
 	window_closeall
 	counter(21)
 	call(l_0xc5a4ec)
@@ -551,7 +551,7 @@ l_0xc5a00c:
 	eob
 
 l_0xc5a036:
-	"{diam}Everdred's speech." wait linebreak
+	diam "Everdred's speech." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
@@ -563,7 +563,7 @@ l_0xc5a036:
 	eob
 
 l_0xc5a05b:
-	"{diam}Give the Strawberry tofu to Electra." wait linebreak
+	diam "Give the Strawberry tofu to Electra." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -573,7 +573,7 @@ l_0xc5a05b:
 	eob
 
 l_0xc5a07e:
-	"{diam}Give the banana to Mr. Spoon." wait linebreak
+	diam "Give the banana to Mr. Spoon." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -588,7 +588,7 @@ l_0xc5a07e:
 	eob
 
 l_0xc5a0b3:
-	"{diam}Deep Darkness with Hawk eye." wait linebreak
+	diam "Deep Darkness with Hawk eye." wait linebreak
 	window_closeall
 	counter(53)
 	call(l_0xc5a4ec)
@@ -601,7 +601,7 @@ l_0xc5a0b3:
 	eob
 
 l_0xc5a0db:
-	"{diam}Mani Mani defeated, inside Borges' bar storage." wait linebreak
+	diam "Mani Mani defeated, inside Borges' bar storage." wait linebreak
 	window_closeall
 	counter(42)
 	call(l_0xc5a4ec)
@@ -611,7 +611,7 @@ l_0xc5a0db:
 	eob
 
 l_0xc5a0fe:
-	"{diam}Get the Shack key from Pirkle." wait linebreak
+	diam "Get the Shack key from Pirkle." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -623,7 +623,7 @@ l_0xc5a0fe:
 	eob
 
 l_0xc5a11a:
-	"{diam}Leave Snow Wood." wait linebreak
+	diam "Leave Snow Wood." wait linebreak
 	window_closeall
 	counter(30)
 	call(l_0xc5a4ec)
@@ -641,7 +641,7 @@ l_0xc5a11a:
 	eob
 
 l_0xc5a154:
-	"{diam}Threek Hotel." wait linebreak
+	diam "Threek Hotel." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
@@ -653,7 +653,7 @@ l_0xc5a154:
 	eob
 
 l_0xc5a17d:
-	"{diam}Tenda Village and Apple Kid's abduction." wait linebreak
+	diam "Tenda Village and Apple Kid's abduction." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
@@ -669,7 +669,7 @@ l_0xc5a17d:
 	eob
 
 l_0xc5a1ae:
-	"{diam}Saturn Village after Belch's base." wait linebreak
+	diam "Saturn Village after Belch's base." wait linebreak
 	window_closeall
 	counter(35)
 	call(l_0xc5a4ec)
@@ -679,7 +679,7 @@ l_0xc5a1ae:
 	eob
 
 l_0xc5a1cd:
-	"{diam}Scaraba Hotel." wait linebreak
+	diam "Scaraba Hotel." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
@@ -693,7 +693,7 @@ l_0xc5a1cd:
 	eob
 
 l_0xc5a1ff:
-	"{diam}Final encounter with Porky and Giygas." wait linebreak
+	diam "Final encounter with Porky and Giygas." wait linebreak
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -706,7 +706,7 @@ l_0xc5a1ff:
 	eob
 
 l_0xc5a232:
-	"{diam}Use the Zombie paper." wait linebreak
+	diam "Use the Zombie paper." wait linebreak
 	window_closeall
 	counter(33)
 	call(l_0xc5a4ec)
@@ -721,7 +721,7 @@ l_0xc5a232:
 	eob
 
 l_0xc5a25e:
-	"{diam}Get the Zombie paper." wait linebreak
+	diam "Get the Zombie paper." wait linebreak
 	window_closeall
 	counter(33)
 	call(l_0xc5a4ec)
@@ -731,7 +731,7 @@ l_0xc5a25e:
 	eob
 
 l_0xc5a27a:
-	"{diam}Go to the Lost Underworld." wait linebreak
+	diam "Go to the Lost Underworld." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -740,7 +740,7 @@ l_0xc5a27a:
 	eob
 
 l_0xc5a29c:
-	"{diam}Learn Teleport." wait linebreak
+	diam "Learn Teleport." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -752,7 +752,7 @@ l_0xc5a29c:
 	eob
 
 l_0xc5a2c2:
-	"{diam}First trip to Dungeon man." wait linebreak
+	diam "First trip to Dungeon man." wait linebreak
 	window_closeall
 	counter(53)
 	call(l_0xc5a4ec)
@@ -764,7 +764,7 @@ l_0xc5a2c2:
 	eob
 
 l_0xc5a2ec:
-	"{diam}Reach Monotoly." wait linebreak
+	diam "Reach Monotoly." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
@@ -779,7 +779,7 @@ l_0xc5a2ec:
 // Prayer events from the original EarthBound
 // Commented out the calls to avoid compilation issues, this won't make it into the Remake either way.
 l_0xc5a318:
-	"{diam}{name(1)}'s family prayer.{wait}" end 	// linebreak
+	diam "{name(1)}'s family prayer.{wait}" end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -790,7 +790,7 @@ l_0xc5a318:
 	eob
 
 l_0xc5a342:
-	"{diam}Runaway Bros.' prayer." wait end 	// linebreak
+	diam "Runaway Bros.' prayer." wait end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -801,7 +801,7 @@ l_0xc5a342:
 	eob
 
 l_0xc5a36c:
-	"{diam}{name(2)}'s family prayer." wait end 	// linebreak
+	diam "{name(2)}'s family prayer." wait end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -812,7 +812,7 @@ l_0xc5a36c:
 	eob
 
 l_0xc5a396:
-	"{diam}{name(8)}'s prayer." wait end 	// linebreak
+	diam "{name(8)}'s prayer." wait end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -823,7 +823,7 @@ l_0xc5a396:
 	eob
 
 l_0xc5a3c0:
-	"{diam}Dalaam prayer." wait end 	// linebreak
+	diam "Dalaam prayer." wait end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -834,7 +834,7 @@ l_0xc5a3c0:
 	eob
 
 l_0xc5a3ea:
-	"{diam}Frank's prayer." wait end 	// linebreak
+	diam "Frank's prayer." wait end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -845,7 +845,7 @@ l_0xc5a3ea:
 	eob
 
 l_0xc5a414:
-	"{diam}Saturn Valley prayer.{wait}" end 	// linebreak
+	diam "Saturn Valley prayer.{wait}" end 	// linebreak
 	//window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
@@ -856,7 +856,7 @@ l_0xc5a414:
 	eob
 
 l_0xc5a43e:
-	"{diam}Ride the Sky Walker to Summers." wait end 	// linebreak
+	diam "Ride the Sky Walker to Summers." wait end 	// linebreak
 	//window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
@@ -868,7 +868,7 @@ l_0xc5a43e:
 	eob
 
 l_0xc5a465:
-	"{diam}Leave Summers." wait end 	// linebreak
+	diam "Leave Summers." wait end 	// linebreak
 	//window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -880,7 +880,7 @@ l_0xc5a465:
 	eob
 
 l_0xc5a48b:
-	"{diam}Meeting with Buzz Buzz." wait end 	// linebreak
+	diam "Meeting with Buzz Buzz." wait end 	// linebreak
 	//window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
@@ -891,7 +891,7 @@ l_0xc5a48b:
 	eob
 
 l_0xc5a4b4:
-	"{diam}The battle against Giygas is over..." wait linebreak
+	diam "The battle against Giygas is over..." wait linebreak
 	window_closeall
 	counter(66)
 	call(l_0xc5a4ec)
@@ -932,7 +932,7 @@ l_0xc5a4b4:
 	eob
 
 l_0xc5a4cd:
-	"{diam}The End... ?" wait linebreak
+	diam "The End... ?" wait linebreak
 	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)

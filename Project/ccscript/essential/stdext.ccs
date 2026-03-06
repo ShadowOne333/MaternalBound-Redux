@@ -5,6 +5,8 @@
 
 /* Simple commands */
 
+import "cc_asmcall.ccs"
+
 //command linebreak "[00]"
 //command newline "[01]"
 //command eob "[02]"
@@ -21,7 +23,8 @@ command switch_goto(num) "[09 {byte num}]"
 //command goto(target) "[0A {long target}]"
 //command result_is(n) "[0B {byte n}]"
 //command result_not(n) "[0C {byte n}]"
-//command rtoarg "[0D 00]" command ctoarg "[0D 01]"
+//command rtoarg "[0D 00]"
+//command ctoarg "[0D 01]"
 //command counter(n) "[0E {byte n}]"
 //command inc "[0F]"
 //command pause(len) "[10 {byte len}]"
@@ -161,6 +164,11 @@ command load_registers_shared "[1B 06]"
 //command name(char) "[1C 02 {byte char}]"
 command letter(c) "[1C 03 {byte c}]"
 //command open_hp "[1C 04]"
+command show_goods_menu	 cc_asmcall(0xC13599, RET_NONE)
+command show_equip_menu	cc_asmcall(0xC13BAD, RET_NONE)
+command show_psi_menu cc_asmcall(0xC13B62, RET_NONE)
+command show_status_menu cc_asmcall(0xC13C01, RET_NONE)
+command close_hp cc_asmcall(0xC10000, RET_NONE)
 //command itemname(item) "[1C 05 {byte item}]"
 //command teleportname(dest) "[1C 06 {byte dest}]"
 command print_strings_horizontal(n) "[1C 07 {byte n}]"
@@ -361,9 +369,12 @@ command restore_npc_members_and_money "[1F 65]"
 //command usable(char, item) "[1F 81 {byte char} {byte item}]"
 command equip(char, itemslot) "[1F 83 {byte char} {byte itemslot}]"
 command do_phone_menu "[1F 90]"
-command face_up_and_set_npc_flag "[1F A0]" command open_present face_up_and_set_npc_flag
-command face_down_and_clear_npc_flag "[1F A1]" command close_present face_down_and_clear_npc_flag
-command npc_flag_is_set "[1F A2]" command is_present_open npc_flag_is_set
+command face_up_and_set_npc_flag "[1F A0]"
+    command open_present face_up_and_set_npc_flag
+command face_down_and_clear_npc_flag "[1F A1]"
+    command close_present face_down_and_clear_npc_flag
+command npc_flag_is_set "[1F A2]"
+    command is_present_open npc_flag_is_set
 //command save "[1F B0]"
 command switch_call(n) "[1F C0 {byte n}]" // switch_entry(a) switch_entry(b) ...
 command try_fixing_an_item(success_percent) "[1F D0 {byte success_percent}]"

@@ -305,7 +305,7 @@ l_0xc79d81:
 	npc_unfreeze(494)	// 0x01EE
 	npc_unfreeze(495)	// 0x01EF
 	npc_unfreeze(496)	// 0x01F0
-	music_effect(2)	// 0x02
+	music_effect(2)	// Quick fade out
 	pause(10)
 	music(111)
 	sprite2_spawn(106,651,1)	// 0x006A, 0x028B, 0x01
@@ -348,7 +348,7 @@ l_0xc79e55:
 	pause(60)
 	char_direction(2,5)	// 0x02, 0x05
 	pause(60)
-	music_effect(3)	// 0x03
+	music_effect(3)	// Fade out
 	sprite2_spawn(106,766,1)	// 0x006A, 0x02FE, 0x01
 	wait_movement
 	sprite2_freeze(106)	// 0x006A
@@ -370,7 +370,9 @@ l_0xc79e55:
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	hide_party	// 0xFF, 0x06
 	warp(200)	// 0xC8
-	sprite2_spawn(106,643,1)	// 0x006A, 0x0283, 0x01 call(data_57.l_0xc9b4b8) warp(201)	// 0xC9
+	sprite2_spawn(106,643,1)	// 0x006A, 0x0283, 0x01
+	call(data_57.l_0xc9b4b8)
+	warp(201)	// 0xC9
 	sprite2_spawn(106,644,1)	// 0x006A, 0x0284, 0x01
 	call(data_57.l_0xc9b4b8)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
@@ -414,9 +416,8 @@ l_0xc79f33:
 	"@But you are our one and only hope!..." promptw
 	window_closeall
 
-	music_effect(3)
-	pause(120)
-	pause(180)
+	music_effect(3)	// Fade out
+	pause(120) pause(180)
 	npc_delete(592, 6)
 	show_party(1)
 	party_unfreeze	// 0xFF
@@ -473,8 +474,7 @@ l_0xc7a04a:
 	sprite2_delete(182,6)	// 0x00B6, 0x06
 	show_char(8,1)	// 0x08, 0x01
 	music(123)
-	pause(120)
-	pause(60)
+	pause(120) pause(60)
 
 	window_open(1)
 	"@(Tony joined you.)" promptw
@@ -537,12 +537,12 @@ l_0xc7a22a:
 
 	restore_camera
 	show_party(1)
-	npc_delete(634, 6)	// 027A, 6
-	sprite2_spawn(182, 269, 1)	// 00B6, 010D, 1
+	npc_delete(634,6)	// 027A, 6
+	sprite2_spawn(182,269,1)	// 00B6, 010D, 1
 	hotspot_off(1)
 	set_respawn_point(6)
 	unset(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
-	music_effect(3)	// Music fadeout
+	music_effect(3)	// Fade out
 	pause(120)
 	set(FLG_BGM_WINT1)	// Change music to Winters
 	music_resume
@@ -783,7 +783,7 @@ l_0xc7ac42:
 	sprite2_delete(344,6)	// 0x0158, 0x06
 	wait_movement
 
-	music_effect(3)	// 0x03
+	music_effect(3)	// Fade out
 	pause(60)
 	music_resume
 	eob
@@ -1127,7 +1127,7 @@ l_0xc7b576:
 	"  (Bye!)" next
 	window_closeall
 
-	npc_do_mc(967, 637)	// 03C7, 027D
+	npc_do_mc(967,637)	// 03C7, 027D
 	wait_movement
 
 	pause(1)
@@ -1141,7 +1141,7 @@ l_0xc7b576:
 	music_effect(3)	// Music fadeout
 	pause(60)
 	unset(FLG_FOUR_SARU_K_APPEAR)	// 592
-	sprite2_spawn(64, 638, 1)	// 0040, 027E, 1
+	sprite2_spawn(64,638,1)	// 0040, 027E, 1
 	wait_movement
 
 	music_resume
@@ -1151,12 +1151,12 @@ l_0xc7b576:
 	show_sprite2_float(64,3)	// 0040, 3
 	pause(60)
 	hide_sprite2_float(64)	// 0040
-	sprite2_do_mc(64, 640)	// 0040, 0280
+	sprite2_do_mc(64,640)	// 0040, 0280
 	wait_movement
 
 	pause(10)
 	call(l_0xc7a959)
-	sprite2_do_mc(64, 639)	// 0040, 027F
+	sprite2_do_mc(64,639)	// 0040, 027F
 	wait_movement
 
 	set(FLG_DSRT_TJAB_MOVE)	// 745
@@ -1623,7 +1623,7 @@ l_0xc7bd89:
 	sprite2_spawn(106,712,1)	// 0x006A, 0x02C8, 0x01
 	wait_movement
 	sprite2_freeze(106)	// 0x006A
-	music_effect(3)	// 0x03
+	music_effect(3)	// Fade out
 	pause(120)
 	music(172)
 	npc_do_mc(990,713)	// 0x03DE, 0x02C9

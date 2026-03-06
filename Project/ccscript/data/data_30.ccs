@@ -586,7 +586,7 @@ l_0xc7533c:
 	"@Everything will be okay if we just sit here quietly in the dark." next
 	"@Are you hungry?" next
 	"@Do you want to eat some" linebreak
-	"{stat(4)}?" linebreak	// 0x04
+	"  {stat(4)}?" linebreak	// 0x04
 	two_choice_menu("Yes", l_0xc7544a, "No", l_0xc7542c)
 
 l_0xc7542c:
