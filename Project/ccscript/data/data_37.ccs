@@ -261,7 +261,7 @@ l_0xc7e8ae:
 l_0xc7e91b:
 	"@Delicious." linebreak
 	get_char_at_pos(1) swap
-	"{name(0)}!" next	// 0x00
+	"  {name(0)}!" next	// 0x00
 	"@You" linebreak
 	"  good name." next
 	"@We no name!" linebreak

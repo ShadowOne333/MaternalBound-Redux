@@ -29,8 +29,8 @@ l_0xc79997:
 	npc_do_mc(231,109)	// 0x00E7, 0x006D
 	sprite2_spawn(106,111,1)	// 0x006A, 0x006F, 0x01
 	call(data_57.l_0xc9b4b8)
-	sprite2_spawn(120,110,255)	// 0x0078, 0x006E, 0xFF
-	sprite2_spawn(106,112,255)	// 0x006A, 0x0070, 0xFF
+	sprite2_spawn(120,110,-1)	// 0x0078, 0x006E, 0xFF
+	sprite2_spawn(106,112,-1)	// 0x006A, 0x0070, 0xFF
 	warp(65)	// 0x41
 	call(data_57.l_0xc9b4b8)
 	sprite2_delete(106,6)	// 0x006A, 0x06
@@ -197,7 +197,7 @@ l_0xc79bff:
 l_0xc79c1e:
 	restore_camera
 	set(FLG_TUNNEL_TWSN_THRK_TR)	// 314
-	sprite2_spawn(243,185,255)	// 0x00F3, 0x00B9, 0xFF
+	sprite2_spawn(243,185,-1)	// 0x00F3, 0x00B9, 0xFF
 	warp(60)	// 0x3C
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -205,7 +205,7 @@ l_0xc79c1e:
 l_0xc79c32:
 	restore_camera
 	unset(FLG_TUNNEL_TWSN_THRK_TR)	// 314
-	sprite2_spawn(243,186,255)	// 0x00F3, 0x00BA, 0xFF
+	sprite2_spawn(243,186,-1)	// 0x00F3, 0x00BA, 0xFF
 	warp(63)	// 0x3F
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -321,8 +321,8 @@ l_0xc79d81:
 	call(data_24.l_0xc69082)
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
-	sprite2_spawn(16,662,255)	// 0x0010, 0x0296, 0xFF
-	sprite2_spawn(393,663,255)	// 0x0189, 0x0297, 0xFF
+	sprite2_spawn(16,662,-1)	// 0x0010, 0x0296, 0xFF
+	sprite2_spawn(393,663,-1)	// 0x0189, 0x0297, 0xFF
 	warp(77)	// 0x4D
 	party_freeze	// 0xFF
 	pause(240)
@@ -945,7 +945,7 @@ l_0xc7b1d8:
 	restore_camera
 	npc_freeze(906)	// 0x038A
 	get_char_at_pos(1) swap
-	get_dir_from_npc(906,1,0)	// 0x038A, 0x01, 0x0000
+	get_dir_from_npc(906,TO_CHAR,0)	// 0x038A, 0x01, 0x0000
 	npc_direction(906,0)	// 0x038A, 0x00
 
 	window_open(1)
@@ -997,7 +997,7 @@ l_0xc7b318:
 
 	npc_freeze(1033)	// 0x0409
 	get_char_at_pos(1) swap
-	get_dir_from_npc(1033,1,0)	// 0x0409, 0x01, 0x0000
+	get_dir_from_npc(1033,TO_CHAR,0)	// 0x0409, 0x01, 0x0000
 	npc_direction(1033,0)	// 0x0409, 0x00
 
 	window_open(1)
@@ -1025,7 +1025,7 @@ l_0xc7b3c0:
 	restore_camera
 	npc_freeze(1033)	// 0x0409
 	get_char_at_pos(1) swap
-	get_dir_from_npc(1033,1,0)	// 0x0409, 0x01, 0x0000
+	get_dir_from_npc(1033,TO_CHAR,0)	// 0x0409, 0x01, 0x0000
 	npc_direction(1033,0)	// 0x0409, 0x00
 
 	window_open(1)
@@ -1063,7 +1063,7 @@ l_0xc7b4a2:
 	eob
 
 l_0xc7b4fb:
-	get_dir_from_npc(334,1,1)	// 0x014E, 0x01, 0x0001
+	get_dir_from_npc(334,TO_CHAR,1)	// 0x014E, 0x01, 0x0001
 	npc_direction(334,0)	// 0x014E, 0x00
 	show_npc_float(334,3)	// 0x014E, 0x03
 	pause(60)
@@ -1104,7 +1104,7 @@ l_0xc7b550:
 l_0xc7b576:
 	npc_delete(968,6)	// 0x03C8, 6
 	npc_spawn(967,8,1)	// 0x03C7, 0x0008, 1
-	get_dir_from_npc(967,1,-1)	// 0x03C7, 0x01, 0x00FF
+	get_dir_from_npc(967,TO_CHAR,-1)	// 0x03C7, 0x01, 0x00FF
 	npc_direction(967,0)	// 0x03C7, 0
 
 	window_open(1)
@@ -1316,7 +1316,7 @@ l_0xc7b9a1:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(221)	// 0xDD
 	pause(120)
 	party_freeze	// 0xFF
@@ -1364,7 +1364,7 @@ l_0xc7ba2c:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(222)	// 0xDE
 	party_freeze	// 0xFF
 	pause(120) pause(60)
@@ -1411,7 +1411,7 @@ l_0xc7bac7:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(223)	// 0xDF
 	party_freeze	// 0xFF
 	pause(120)
@@ -1448,7 +1448,7 @@ l_0xc7bb38:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(224)	// 0xE0
 	party_freeze	// 0xFF
 	pause(120)
@@ -1501,7 +1501,7 @@ l_0xc7bbf3:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(226)	// 0xE2
 	party_freeze	// 0xFF
 	pause(120)
@@ -1535,7 +1535,7 @@ l_0xc7bc56:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
-	sprite2_spawn(440,757,255)	// 0x01B8, 0x02F5, 0xFF
+	sprite2_spawn(440,757,-1)	// 0x01B8, 0x02F5, 0xFF
 	warp(227)	// 0xE3
 	party_freeze	// 0xFF
 	pause(120)
@@ -1671,6 +1671,10 @@ l_0xc7bd89:
 	eob
 
 l_0xc7beb9:
+// This label ":---------------------" at the start, but the real code start at the following label
+// "":---------------------" was part of the leftover comments from the original development team
+// Same thing for the multiple long spaces in between control codes in several labels
+l_0xc7becf:	// Added 
 	sprite2_spawn(106,352,1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)

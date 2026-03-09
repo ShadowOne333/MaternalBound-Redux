@@ -113,14 +113,14 @@ l_0xc78592:
 l_0xc78595:
 	set(FLG_TUNNEL_THRK_TWSN_BL)	// 316
 	restore_camera
-	sprite2_spawn(205,204,255)	// 0x00CD, 0x00CC, 0xFF
+	sprite2_spawn(205,204,-1)	// 0x00CD, 0x00CC, 0xFF
 	warp(62)	// 0x3E
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc785a9:
 	restore_camera
-	sprite2_spawn(205,205,255)	// 0x00CD, 0x00CD, 0xFF
+	sprite2_spawn(205,205,-1)	// 0x00CD, 0x00CD, 0xFF
 	warp(61)	// 0x3D
 	focus_camera_on_sprite2(205)	// 0x00CD
 	unset(FLG_TUNNEL_THRK_TWSN_BL)	// 316
@@ -302,28 +302,28 @@ l_0xc78926:
 l_0xc78943:
 	set(FLG_WIN_GEPPU)	// 71
 	restore_camera
-	sprite2_spawn(205,208,255)	// 0x00CD, 0x00D0, 0xFF
+	sprite2_spawn(205,208,-1)	// 0x00CD, 0x00D0, 0xFF
 	warp(70)	// 0x46
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78957:
 	restore_camera
-	sprite2_spawn(205,209,255)	// 0x00CD, 0x00D1, 0xFF
+	sprite2_spawn(205,209,-1)	// 0x00CD, 0x00D1, 0xFF
 	warp(206)	// 0xCE
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78968:
 	restore_camera
-	sprite2_spawn(205,210,255)	// 0x00CD, 0x00D2, 0xFF
+	sprite2_spawn(205,210,-1)	// 0x00CD, 0x00D2, 0xFF
 	warp(207)	// 0xCF
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78979:
 	restore_camera
-	sprite2_spawn(205,211,255)	// 0x00CD, 0x00D3, 0xFF
+	sprite2_spawn(205,211,-1)	// 0x00CD, 0x00D3, 0xFF
 	warp(72)	// 0x48
 	focus_camera_on_sprite2(205)	// 0x00CD
 	wait_movement
@@ -365,28 +365,28 @@ l_0xc789de:
 
 l_0xc78a1b:
 	restore_camera
-	sprite2_spawn(205,212,255)	// 0x00CD, 0x00D4, 0xFF
+	sprite2_spawn(205,212,-1)	// 0x00CD, 0x00D4, 0xFF
 	warp(74)	// 0x4A
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78a2c:
 	restore_camera
-	sprite2_spawn(205,213,255)	// 0x00CD, 0x00D5, 0xFF
+	sprite2_spawn(205,213,-1)	// 0x00CD, 0x00D5, 0xFF
 	warp(208)	// 0xD0
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78a3d:
 	restore_camera
-	sprite2_spawn(205,214,255)	// 0x00CD, 0x00D6, 0xFF
+	sprite2_spawn(205,214,-1)	// 0x00CD, 0x00D6, 0xFF
 	warp(209)	// 0xD1
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78a4e:
 	restore_camera
-	sprite2_spawn(205,215,255)	// 0x00CD, 0x00D7, 0xFF
+	sprite2_spawn(205,215,-1)	// 0x00CD, 0x00D7, 0xFF
 	warp(76)	// 0x4C
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
@@ -535,7 +535,7 @@ l_0xc78c7f:
 
 l_0xc78cc0:
 	restore_camera
-	sprite2_spawn(205,461,255)	// 0x00CD, 0x01CD, 0xFF
+	sprite2_spawn(205,461,-1)	// 0x00CD, 0x01CD, 0xFF
 	warp(71)	// 0x47
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -543,7 +543,7 @@ l_0xc78cc0:
 
 	restore_camera
 	party_freeze	// 0xFF
-	sprite2_spawn(205,462,255)	// 0x00CD, 0x01CE, 0xFF
+	sprite2_spawn(205,462,-1)	// 0x00CD, 0x01CE, 0xFF
 	warp(212)	// 0xD4
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -551,7 +551,7 @@ l_0xc78cc0:
 
 	restore_camera
 	party_freeze	// 0xFF
-	sprite2_spawn(205,463,255)	// 0x00CD, 0x01CF, 0xFF
+	sprite2_spawn(205,463,-1)	// 0x00CD, 0x01CF, 0xFF
 	warp(213)	// 0xD5
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -559,7 +559,7 @@ l_0xc78cc0:
 
 	restore_camera
 	party_freeze	// 0xFF
-	sprite2_spawn(205,464,255)	// 0x00CD, 0x01D0, 0xFF
+	sprite2_spawn(205,464,-1)	// 0x00CD, 0x01D0, 0xFF
 	warp(69)	// 0x45
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF

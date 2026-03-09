@@ -60,7 +60,7 @@ l_0xc5dfba:
 	call(data_13.l_0xc5d5ab)
 	goto_if_false(l_0xc5e013)
 	store_registers
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc5e029)
 	load_registers
 	call(l_0xc5e3bc)
@@ -109,7 +109,7 @@ l_0xc5e038:
 	call(data_13.l_0xc5d5ab)
 	goto_if_false(l_0xc5e08d)
 	store_registers
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc5e0a3)
 	load_registers
 	call(l_0xc5e3bc)

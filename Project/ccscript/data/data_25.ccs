@@ -250,7 +250,7 @@ l_0xc6b087:
 	hide_char(9)	// 0x09, Hide Tony
 	sprite2_spawn(46,251,1)	// 0x02E, 0xFB, 01
 	wait_movement
-	get_dir_from_char(3,3,46)	// 0x03, 0x03, 0x2E
+	get_dir_from_char(3,TO_SPRITE2,46)	// 0x03, 0x03, 0x2E
 	char_direction(3,0)	// 0x03, 0x00
 	show_sprite2_float(46,3)	// 0x2E, 3
 	pause(60)

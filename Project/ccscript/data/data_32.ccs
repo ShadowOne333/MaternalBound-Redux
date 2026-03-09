@@ -666,7 +666,7 @@ l_0xc78306:
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
 	sprite2_freeze(205)	// 0xCD
-	unset(flag 71)
+	unset(FLG_WIN_GEPPU)	// 71
 	sprite2_do_mc(205,207)	// 0xCD, 0xCF
 	pause(1)
 	focus_camera_on_sprite2(205)	// 0xCD
@@ -681,13 +681,13 @@ l_0xc78323:
 	show_party(1)	// 0xFF, 01
 	party_unfreeze	// 0xFF
 	wait_movement
-	unset(flag 534)
+	unset(FLG_BGM_BUS)	// 534
 	music_resume
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_unfreeze(205)	// 0xCD
 	wait_movement
-	unset(flag 11)
+	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 01
 	eob
@@ -699,13 +699,13 @@ l_0xc78360:
 	show_party(1)	// 0xFF, 01
 	party_unfreeze
 	wait_movement
-	unset(flag 534)
+	unset(FLG_BGM_BUS)	// 534
 	music_resume
 	restore_camera
 	party_freeze
 	sprite2_unfreeze(205)	// 0xCD
 	wait_movement
-	unset(flag 11)
+	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 01
 	eob

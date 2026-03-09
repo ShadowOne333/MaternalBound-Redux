@@ -43,8 +43,8 @@ l_0xc9794b:
 	pause(1)
 	call(data_24.l_0xc69082)
 	npc_do_mc(1406,635)	// 0x057E, 0x027B
-	set(flag 59)
-	set(flag 75)
+	set(FLG_FOUR_MAID_APPEAR)	// 59
+	set(FLG_WIN_MANIMANI)	// 75
 	warp(154)	// 0x9A
 	OSS_on	// event(5)
 	party_freeze	// 0xFF
@@ -63,14 +63,7 @@ l_0xc97990:
 l_0xc979e5:
 	"@Bones are great!" pause(20) linebreak
 	"  Do you like bones, too?" next
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc97a09:
-	"[19 02]No" eob
-
-l_0xc97a0e:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc97a35)} {e(l_0xc97a1d)}]" goto(l_0xc97a1d)
+	two_choice_menu("Yes", l_0xc97a35, "No", l_0xc97a1d)
 
 l_0xc97a1d:
 	"@You like bones?" pause(20) linebreak
@@ -123,8 +116,10 @@ l_0xc97b6b:
 	get_food_type(0)
 	result_is(FOODTYPE_DRINK)
 	goto_if_true(l_0xc97c30)
+
 	find_condiment(0)
 	goto_if_true(l_0xc97bc4)
+
 	user_and_target_names_identical
 	goto_if_true(l_0xc97bab)
 
@@ -196,7 +191,7 @@ l_0xc97c5f:
 
 l_0xc97c7b:
 	newline
-	"@" call(data_37.l_0xc7e6d7) "{get_action_arg}{swap} ate" linebreak
+	"@" call(data_37.l_0xc7e6d7) get_action_arg swap " ate" linebreak
 	"  the {itemname(0)}" call(together)
 	sound(SND_EAT)	// 68
 	pause(1)
@@ -242,6 +237,7 @@ tog5:
 l_0xc97c9d:
 	user_and_target_names_identical
 	goto_if_false(l_0xc97cb0)
+
 	newline
 	"@It was pretty good." promptw
 	goto(l_0xc97cb0)
@@ -252,6 +248,7 @@ l_0xc97cb0:
 l_0xc97cb1:
 	user_and_target_names_identical
 	goto_if_false(l_0xc97cc9)
+
 	newline
 	"@It didn't taste very good." promptw
 	goto(l_0xc97cc9)
@@ -418,35 +415,32 @@ l_0xc98024:
 	goto_if_flag(FLG_HAPPY_CARPAINTER_ITEMFULL, l_0xc981c6)	// 0x7A, 122
 	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc982b3)	// 0x44, 68
 	set(FLG_HAPPY_THUNDER)	// 744
+
 	"@Thanks for coming!" pause(15)
 	"  I've been waiting for you." next
 	"@I need your assistance to help make the world blue" next
 	"@and change it into a happy and peaceful society." next
 	"@Will you and {name(2)} be my right-hand assistants?" linebreak
-	// two_choice_menu
-	"  [19 02]Yes" eob
-
-l_0xc980ab:
-	"  [19 02]No" eob
-
-l_0xc980b2:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc98148)} {e(l_0xc980c1)}]"
-	goto(l_0xc980c1)
+	two_choice_menu("Yes", l_0xc98148, "No", l_0xc980c1)
 
 l_0xc980c1:
 	"@If you don't want to be my right hand,| my left would be just fine..." next
 	"@Just kidding!" pause(20)
 	"  Your existence is a problem for me and my religion." next
 	"@Defy me,| and I'll end your pitiful game!" promptw
-	call(data_23.l_0xc6847a) goto_if_true(data_23.l_0xc683de)
+
+	call(data_23.l_0xc6847a)
+	goto_if_true(data_23.l_0xc683de)
 	// Check if party has Franklin badge
-	hasitem(-1,1) goto_if_true(l_0xc9817a)
+	hasitem(-1, FRANKLIN_BADGE)	// 0xFF, 0x01
+	goto_if_true(l_0xc9817a)
 	eob
 
 l_0xc98148:
 	"@You fool,/| I have drawn you into my trap." wait
-	call(data_23.l_0xc6847a) goto_if_true(data_23.l_0xc683de)
-	hasitem(-1,1)	// Check if we have the Franklin Badge
+	call(data_23.l_0xc6847a)
+	goto_if_true(data_23.l_0xc683de)
+	hasitem(-1, FRANKLIN_BADGE)	// 0xFF, 0x01
 	goto_if_true(l_0xc9817a)
 	eob
 
@@ -457,7 +451,6 @@ l_0xc9817a:
 	"@Do you see the gold figure behind me..." next
 	"@Since I got the statue,| I have been doing peculiar things." next
 	set(FLG_HAPPY_POKEY_APPEAR)	// 44
-	goto(l_0xc981c6)
 
 l_0xc981c6:
 	"@Please forgive me, if you can..." pause(20)
@@ -465,6 +458,7 @@ l_0xc981c6:
 	"@I apologize/| to everyone." next
 	"@Here's the key to open the jail in the mountain cabin where {name(2)} is being held." next
 	"@Take the key and go." next
+
 	set(FLG_WIN_CARPAINTER)	// 68
 	unset(FLG_HAPPY_SWITCH)	// 175
 	unset(FLG_GRFD_POKEY_APPEAR)	// 45
@@ -474,12 +468,15 @@ l_0xc981c6:
 	set(FLG_HAPPY_UPRIGHT_4_DISAPPEAR)	// 354
 	set(FLG_HAPPY_UPRIGHT_5_DISAPPEAR)	// 355
 	set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
+
 	if flag FLG_KEY_ITEMS { give_menu_key_item(CABIN_KEY) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc9827c)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc9827c)
 		give_and_return_location(0, CABIN_KEY)	// 0xAB, 171, Cabin key
 		call(data_36.l_0xc7dcb6)
 	}
+
 	wait
 	window_closeall
 	unset(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
@@ -642,7 +639,7 @@ l_0xc98785:
 	call(data_23.l_0xc6850e) goto_if_true(data_23.l_0xc683de)
 	pause(1)
 	npc_do_mc(387,635)	// 0x0183, 0x027B
-	set(flag 353)
+	set(FLG_HAPPY_UPRIGHT_3_DISAPPEAR)	// 353
 	eob
 
 l_0xc987cf:
@@ -653,7 +650,7 @@ l_0xc987cf:
 	call(data_23.l_0xc68515) goto_if_true(data_23.l_0xc683de)
 	pause(1)
 	npc_do_mc(388,635)	// 0x0184, 0x027B
-	set(flag 354)
+	set(FLG_HAPPY_UPRIGHT_4_DISAPPEAR)	// 354
 	eob
 
 l_0xc9881e:
@@ -664,7 +661,7 @@ l_0xc9881e:
 	call(data_23.l_0xc6851c) goto_if_true(data_23.l_0xc683de)
 	pause(1)
 	npc_do_mc(389,635)	// 0x0185, 0x027B
-	set(flag 355)
+	set(FLG_HAPPY_UPRIGHT_5_DISAPPEAR)	// 355
 	eob
 
 l_0xc9886f:
@@ -675,7 +672,7 @@ l_0xc9886f:
 	call(data_23.l_0xc68523) goto_if_true(data_23.l_0xc683de)
 	pause(1)
 	npc_do_mc(390,635)	// 0x0186, 0x027B
-	set(flag 356)
+	set(FLG_HAPPY_UPRIGHT_6_DISAPPEAR)	// 356
 	eob
 
 l_0xc988cb:
@@ -699,19 +696,12 @@ l_0xc9894e:
 	"@Excuse me, tourist." next
 	"@I'm collecting donations to help protect the world from contaminants." next
 	"@Donate whatever you can." linebreak
-	open_wallet
-	// two_choice_menu
-	"[19 02]Yes" eob
-
-l_0xc989af:
-	"  [19 02]No" eob
-
-l_0xc989b6:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc98a27)} {e(l_0xc989c5)}]"
-	goto(l_0xc989c5)
+	show_wallet
+	two_choice_menu("Yes", l_0xc98a27, "No", l_0xc989c5)
 
 l_0xc989c5:
-	hasmoney(1) goto_if_false(l_0xc989ea)
+	hasmoney(1)
+	goto_if_false(l_0xc989ea)
 	"@I'll be your shadow, then." wait
 	window_closeall
 	goto(data_33.l_0xc79081)
@@ -728,18 +718,23 @@ l_0xc989ea:
 
 l_0xc98a27:
 	"@How much would you like to donate?" linebreak
-	"    $" number_input(2)
+	"    ${number_input(2)}" 
 	clearline
-	swap compare_register(1,0) goto_if_false(l_0xc989c5)
-	hasmoney(0) goto_if_false(l_0xc98ae8)
+	swap
+	compare_register(1,0)
+	goto_if_false(l_0xc989c5)
+	hasmoney(0)
+	goto_if_false(l_0xc98ae8)
+
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)
-	open_wallet
+	show_wallet
 	"@Your good deed will be rewarded." pause(20)
 	"  Here's a postcard for you." next
-	get_item_receiver(-1) goto_if_false(l_0xc98ab2)
+	get_item_receiver(-1)
+	goto_if_false(l_0xc98ab2)
 	// 0xA5, 165, Picture postcard
-	give_and_return_location(0,165)
+	give_and_return_location(0, PICTURE_POSTCARD)	// 0xA5 / 165
 	call(data_36.l_0xc7dccf) promptw
 	newline
 	"@Go and be happy!" wait
@@ -754,7 +749,8 @@ l_0xc98ab2:
 	eob
 
 l_0xc98ae8:
-	hasmoney(1) goto_if_false(l_0xc989ea)
+	hasmoney(1)
+	goto_if_false(l_0xc989ea)
 	"@...No jokes allowed." wait
 	window_closeall
 	eob
@@ -820,9 +816,10 @@ l_0xc98cc1:
 
 l_0xc98cd3:
 	npc_do_mc(411,623)	// 0x019B, 0x026F
-	" "
 	wait_movement
+
 	npc_freeze(411)	// 0x019B
+
 	window_open(1)
 	title(1, Porky)
 	"@That was really something, {name(1)}!" pause(20)
@@ -831,14 +828,18 @@ l_0xc98cd3:
 	"@C'mon, reply to me, will ya? I promise I'll be a good guy." pause(60) next
 	"@I guess that's a no, huh?" next
 	window_closeall
+
 	npc_unfreeze(411)	// 0x019B
 	wait_movement
+
 	npc_freeze(411)	// 0x019B
+
 	window_open(1)
 	title(1, Porky)
 	"@Bleeehhh!" pause(20)
 	"  See you, sucker!" promptw
 	window_closeall
+
 	npc_unfreeze(411)	// 0x019B
 	unset(FLG_HAPPY_POKEY_APPEAR)	// 44
 	OSS_off	// event(6)

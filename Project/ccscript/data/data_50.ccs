@@ -24,18 +24,22 @@ l_0xc91c2e:
 l_0xc91c3a:
 	counter(3) call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc91f9c)
+
 	window_closeall
 	get_char_at_pos(1)
 	get_dir_from_char(0,TO_NPC,482)	// 0, 2, 0x01E2
 	swap store_registers
 	result_is(1)
 	goto_if_true(l_0xc91cc1)
+
 	load_registers
 	result_is(2)
 	goto_if_true(l_0xc91cc1)
+
 	load_registers
 	result_is(8)
 	goto_if_true(l_0xc91cc1)
+
 	get_dir_from_char(3,TO_NPC,482)	// 3, 2, 0x01E2
 	char_direction(3,0)	// 3, 0
 	show_char_float(3,1)	// 3, 1
@@ -57,6 +61,7 @@ l_0xc91cc1:
 	hide_char(3)	// Hide Jeff, 0x03, 6
 	sprite2_spawn(3,270,1)	// 0x03, 0x010E, 1
 	wait_movement
+
 	sprite2_freeze(3)	// 0x0003
 	show_sprite2_float(3,3)	// 0x03, 3
 	pause(60)
@@ -72,9 +77,11 @@ l_0xc91cc1:
 	pause(30)
 	sprite2_unfreeze(3)	// 0x03
 	wait_movement
+
 	music(179)
 	npc_do_mc(482,272)	// 0x01E2, 0x0110
 	wait_movement
+
 	npc_freeze(482)	// 0x01E2
 	music_effect(2)	// Quick fade out
 	pause(60)
@@ -99,12 +106,14 @@ l_0xc91cc1:
 	focus_camera_on_sprite2(106)	// 0x6A
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	hide_party	// 0xFF, 6
 	set(FLG_BGM_SW)	// 655
 	call(data_36.l_0xc7dd7d) restore_camera
 	party_freeze	// 0xFF
 	npc_unfreeze(482)	// 0x01E2
 	wait_movement
+
 	pause(15)
 	npc_delete(480,6)	// 0x01E0, 6
 	pause(90)
@@ -115,38 +124,45 @@ l_0xc91cc1:
 	party_unfreeze	// 0xFF
 	pause(1)
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,150,-1)	// 0xD1, 0x96, 0xFF
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,158,-1)	// 0xD1, 0x9E, 0xFF
 	sprite2_spawn(230,160,-1)	// 0xE6, 0xA0, 0xFF
 	warp(192)	// 0xC0
 	focus_camera_on_sprite2(230) 	// 0xE6
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,151,-1)	// 0xD1, 0x97, 0xFF
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,154,-1)	// 0xD1, 0x9A, 0xFF
 	sprite2_spawn(230,156,-1)	// 0xE6, 0x9C, 0xFF
 	warp(190)	// 0xBE
 	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,152,-1)	// 0xD1, 0x98, 0xFF
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,166,-1)	// 0xD1, 0xA6, 0xFF
 	warp(186)	// 0xBA
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
+
 	restore_camera
 	set(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
 	warp(218)	// 0xDA
@@ -154,6 +170,7 @@ l_0xc91cc1:
 	pause(100)
 	npc_spawn(621,168,1)	// 0x026D, 0xA8, 1
 	wait_movement
+
 	unset(FLG_BGM_SW)	// 655
 	call(data_36.l_0xc7dd7d)
 	sprite2_spawn(106,169,1)	// 0x6A, 0xA9, 1
@@ -161,22 +178,27 @@ l_0xc91cc1:
 	focus_camera_on_sprite2(106)	// 0x6A
 	show_party(1)	// 0xFF, 1
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	npc_do_mc(617,141)	// 0x0269, 0x8D
 	wait_movement
+
 	npc_freeze(615)	// 0x0267
 	npc_freeze(617)	// 0x0269
 	npc_freeze(618)	// 0x026A
 	call(data_26.l_0xc6cb97)
 	npc_do_mc(618,142)	// 0x026A, 0x8E
 	wait_movement
+
 	npc_freeze(618)	// 0x026A
 	call(data_26.l_0xc6cc31)
 	npc_do_mc(618,144)	// 0x026A, 0x90
 	wait_movement
+
 	npc_do_mc(617,143)	// 0x0269, 0x8F
 	wait_movement
+
 	set_respawn_point(6)
 	unset(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
 	unset(FLG_WINS_SKYW_DISAPPEAR)	// 748
@@ -195,9 +217,11 @@ l_0xc91fba:
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(l_0xc91fd9)
+
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(l_0xc91fd9)
+
 	"we" eob
 
 l_0xc91fd9:
@@ -207,9 +231,11 @@ l_0xc91fdb:
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(l_0xc91ffa)
+
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(l_0xc91ffa)
+
 	"us" eob
 
 l_0xc91ffa:
@@ -222,29 +248,36 @@ l_0xc91ffd:
 	call(data_24.l_0xc69082)
 	npc_unfreeze(623)	// 0x026F
 	wait_movement
+
 	pause(30)
 	npc_delete(621,6)	// 0x026D, 6
 	wait_movement
+
 	sprite2_spawn(209,146,-1)	// 0xD1, 0x92, 0xFF
 	warp(186)	// 0xBA
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,147,-1)	// 0xD1, 0x93, 0xFF
 	warp(188)	// 0xBC
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
+
 	restore_camera
 	sprite2_spawn(209,170,-1)	// 0xD1, 0xAA, 0xFF
 	sprite2_spawn(230,171,-1)	// 0xE6, 0xAB, 0xFF
 	warp(195)	// 0xC3
 	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
+
 	unset(FLG_BGM_SW)	// 655
 	set(FLG_BGM_TBUS)	// 535
 	music_resume
 	wait_movement
+
 	music(110)
 	wait_movement
+
 	show_party(1)	// 0xFF, 1
 	restore_camera
 	sprite2_spawn(241,172,-1)	// 0xF1, 0xAC, 0xFF
@@ -267,6 +300,7 @@ l_0xc920a2:
 	music(111)
 	sprite2_spawn(106,763,1)	// 0x6A, 0x02FB, 1
 	wait_movement
+
 	hide_party	// 0xFF, 6
 	warp(81)	// 0x51
 	pause(120)
@@ -380,6 +414,7 @@ l_0xc92203:
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
 	set(FLG_TEMP_4)	// 5
 	wait_movement
+
 	call(l_0xc927ea)
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
 	set(FLG_TEMP_2)	// 3
@@ -415,7 +450,6 @@ l_0xc9237e:
 	party_freeze	// 0xFF
 	set_respawn_point(7)
 	show_party(1)	// 0xFF, 1
-	goto(l_0xc923b4)
 
 l_0xc923b4:
 	sprite2_spawn(4,345,1)	// 0x0004, 0x0159, 1
@@ -440,6 +474,7 @@ l_0xc923b4:
 	window_open(1)
 	"@{name(4)} joined you." promptw
 	window_closeall
+
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	set(FLG_PHOTO_RAMMA)	// 498
 	restore_npc_members_and_money
@@ -491,7 +526,6 @@ l_0xc9254a:
 	"@You will lose the use of them." next
 	"@Do you accept this?" linebreak
 	two_choice_menu("Yes", l_0xc925db, "No", l_0xc925d0)
-	goto(l_0xc925d0)
 
 l_0xc925d0:
 	set(FLG_TEMP_1)	// 2
@@ -570,6 +604,7 @@ l_0xc927ea:
 	"@I will take your mind, Prince {name(4)},/| know that I will possess it...)" promptw
 	pause(20)
 	window_closeall
+
 	set(FLG_RAMA_OK)	// 273
 	heal_percent(4,100)
 	text_blips_default
@@ -630,6 +665,7 @@ l_0xc929ae:
 	window_open(1)
 	call(data_58.l_0xc9d523)
 	window_closeall
+
 	npc_delete(1103,6)	// 0x044F, 6
 	sound(SND_STARMASTER)	// 99
 	sprite2_spawn(169,667,6)	// 0xA9, 0x029B, 6
@@ -652,8 +688,10 @@ l_0xc929ca:
 	"@{name(1)}!" pause(20) linebreak
 	"  My life is in your hands." promptw
 	counter(1)
-	call(data_36.l_0xc7dc7f) goto_if_true(l_0xc92a48)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc92a48)
 	window_closeall
+
 	set(FLG_PU)	// 16
 	set(FLG_PHOTO_TOTO)	// 504
 	set(FLG_PHOTO_RAMMA_FIELD)	// 499
@@ -667,6 +705,7 @@ l_0xc92a48:
 	"  with {name(1)}'s soul." pause(20)
 	"  Do not mind me..." promptw
 	window_closeall
+
 	set(FLG_PU)	// 16
 	set(FLG_PHOTO_RAMMA)	// 498
 	set(FLG_PHOTO_RAMMA_FIELD)	// 499
@@ -682,7 +721,6 @@ l_0xc92a82:
 	npc_spawn(643,488,1)	// 0x0283, 0x01E8, 1
 	npc_spawn(644,489,1)	// 0x0284, 0x01E9, 1
 	npc_spawn(654,490,1)	// 0x028E, 0x01EA, 1
-	goto(l_0xc92ab9)
 
 l_0xc92ab9:
 	sprite2_spawn(367,495,1)	// 0x016F, 0x01EF, 1
@@ -696,15 +734,18 @@ l_0xc92ab9:
 	npc_delete(630,6)	// 0x0276, 6
 	sprite2_spawn(49,252,1)	// 0x31, 0xFC, 1
 	wait_movement
+
 	sprite2_delete(49,6)	// 0x31, 6
 	sprite2_spawn(50,479,1)	// 0x32, 0x01DF, 1
 	wait_movement
 	sprite2_spawn(252,480,1)	// 0xFC, 0x01E0, 1
 	wait_movement
+
 	unset(FLG_TEMP_1)	// 2
 	sprite2_delete(50,6)	// 0x32, 6
 	sprite2_spawn(46,481,1)	// 0x2E, 0x01E1, 1
 	wait_movement
+
 	sprite2_freeze(252)	// 0xFC
 	sprite2_freeze(46)	// 0x2E
 	unset(FLG_WINS_TASSI_ENTER)	// 344
@@ -718,6 +759,7 @@ l_0xc92ab9:
 	sprite2_unfreeze(46)	// 0x2E
 	sprite2_unfreeze(252)	// 0xFC
 	wait_movement
+
 	sprite2_freeze(252)	// 0xFC
 	set(FLG_BGM_TASSY)	// 537
 	call(data_36.l_0xc7dd6b)
@@ -727,19 +769,23 @@ l_0xc92ab9:
 	focus_camera_on_sprite2(106)	// 0x6A
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	set(FLG_TEMP_1)	// 2
 	pause(60)
 	sprite2_unfreeze(252)	// 0xFC
 	wait_movement
+
 	sprite2_freeze(252)	// 0xFC
 	sprite2_do_mc(106,484)	// 0x6A, 0x01E4
 	unset(FLG_TEMP_1)	// 2
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	pause(60)
 	sprite2_unfreeze(252)	// 0xFC
 	wait_movement
+
 	sprite2_delete(252,6)	// 0xFC, 6
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	unset(FLG_BGM_TASSY)	// 537
@@ -758,12 +804,13 @@ l_0xc92be3:
 	party_unfreeze	// 0xFF
 	sprite2_spawn(106,675,1)	// 0x6A, 0x02A3, 1
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_delete(439,6)	// 0x01B7, 6
 	fade_map_palette(27,4,180)	// Tilser 1B, palette 4, speed B4
-	get_char_at_pos(1) rtoarg
 
+	get_char_at_pos(1) rtoarg
 	window_open(1)
 	"@When you defeated the Starman DX, the Stonehenge base ceased functioning." promptw
 	window_closeall
@@ -793,6 +840,7 @@ l_0xc92c70:
 	focus_camera_on_npc(1088)	// 0x0440
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	warp(89)	// 0x59
@@ -801,12 +849,15 @@ l_0xc92c70:
 	focus_camera_on_sprite2(261)	// 0x0105
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	sprite2_freeze(261)	// 0x0105
 	call(l_0xc92dee)
 	sprite2_unfreeze(261)	// 0x0105
 	wait_movement
+
 	sprite2_spawn(295,295,1)	// 0x0127, 0x0127, 1
 	wait_movement
+
 	sprite2_freeze(261)	// 0x0105
 	goto_if_flag(FLG_TLPT_SKRB, l_0xc92d92)	// 0xD9, 217
 	set(FLG_BGM_FUNE2)	// 543
@@ -830,11 +881,11 @@ l_0xc92c70:
 	"  Maybe you didn't notice." wait
 	window_closeall
 	pause(1)
-	goto(l_0xc92d92)
 
 l_0xc92d92:
 	sprite2_unfreeze(261)	// 0x0105
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	warp(90)	// 0x5A
@@ -843,11 +894,13 @@ l_0xc92d92:
 	focus_camera_on_sprite2(212)	// 0xD4
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	sprite2_spawn(106,297,1)	// 0x6A, 0x0129, 1
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x6A
 	show_party(1)	// 0xFF, 1
 	wait_movement
+
 	restore_camera
 	unset(FLG_BGM_FUNE1)	// 542
 	unset(FLG_BGM_FUNE2)	// 543
@@ -875,12 +928,12 @@ l_0xc92dee:
 	"@It's been a long time since I was out on the open sea,/| so I feel seasick..." next
 	"@Oh, man, what am I going to do?" pause(15)
 	"  A sailor who gets seasick?" next
-	next
+	// next	// Why the double next?
 	pause(60) linebreak
 	"@So how come you guys are all right?" next
+
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc92f88)	// 0x49, 73
 	goto_if_flag(FLG_PU_0, l_0xc92fb4)	// 0x11, 17
-	goto(l_0xc92e9e)
 
 l_0xc92e9e:
 	"@So... that bald guy over there..." next
@@ -896,7 +949,6 @@ l_0xc92e9e:
 	goto_if_false(l_0xc92f88)
 	"@Hey, that's an awfully strange carrot." pause(20)
 	"  What kind of bunny would eat that?" next
-	goto(l_0xc92f88)
 
 l_0xc92f88:
 	"@Hahaha!" pause(20)
@@ -913,11 +965,9 @@ l_0xc92fc0:
 	goto_if_flag(FLG_SPHINX_OK, l_0xc9310c)	// 0x0156, 342
 	goto_if_flag(FLG_TEMP_6, l_0xc92fd3)	// 7
 	call(data_43.l_0xc87202)
-	goto(l_0xc92fd3)
 
 l_0xc92fd3:
 	goto_if_flag(FLG_SPHINX, l_0xc92fdb)	// 0x98, 152
-	goto(l_0xc92fda)
 
 l_0xc92fda:
 	eob
@@ -935,10 +985,12 @@ l_0xc92fdb:
 l_0xc93005:
 	sound(SND_PYRAMIDOPEN)	// 110
 	pause(180)
+	
 	window_open(1)
 	set(FLG_SPHINX_OK)	// 342
 	call(data_43.l_0xc87280)
 	window_closetop
+
 	pause(1)
 	sound(SND_BEEP2)	// 121
 	npc_do_mc(1143,635)	// 0x0477, 0x027B
@@ -1029,11 +1081,13 @@ l_0xc9310d:
 
 l_0xc9312e:
 	goto_if_flag(FLG_SKRB_PYRAMID_OK, l_0xc93180)	// 0x015B, 347
+
 	window_open(1)
 	"@(You seem to have stepped on a switch of some sort.)" next
 	sound(117)	// 117, Unknown
 	"@(It sounds like something up above is moving.)" wait
 	window_closeall
+
 	sound(SND_CREEPY)	// 114
 	set(FLG_SKRB_PYRAMID_OK)	// 347
 	eob
@@ -1046,7 +1100,6 @@ l_0xc93181:
 	"@(There is something on the platform." next
 	"@Do you want to get it?)" linebreak
 	two_choice_menu("Yes", l_0xc931d3, "No", l_0xc931b7)
-	goto(l_0xc931b7)
 
 l_0xc931b7:
 	"@(Wasn't it the whole reason you came here?)" end
@@ -1054,7 +1107,8 @@ l_0xc931b7:
 l_0xc931d3:
 	if flag FLG_KEY_ITEMS { give_menu_key_item(HAWK_EYE) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc931f1)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc931f1)
 		give_and_return_location(0, HAWK_EYE)	// Item 0xAF / 175 = Hawk eye
 		call(data_36.l_0xc7dcb6)
 	}
@@ -1081,6 +1135,7 @@ l_0xc93258:
 	sound(SND_STARMASTER)	// 99
 	sprite2_spawn(169,318,1)	// 0xA9, 0x013E, 1
 	wait_movement
+
 	sprite2_delete(169,6)	// 0xA9, 6
 	sprite2_spawn(98,8,1)	// 0x62, 0x0008, 1
 	get_dir_from_sprite(98,TO_CHAR,4)	// 0x62, 1, 4
@@ -1089,6 +1144,7 @@ l_0xc93258:
 	party_remove(4)	// Remove Poo
 	sprite2_spawn(4,319,1)	// 0x04, 0x013F, 1
 	wait_movement
+
 	sprite2_freeze(4)	// 0x0004
 	goto(data_06.l_0xc573dc)
 
@@ -1096,6 +1152,7 @@ l_0xc9329b:
 	call(l_0xc932f6)
 	sprite2_unfreeze(4)	// 0x0004
 	wait_movement
+
 	sprite2_freeze(4)	// 0x0004
 	sprite2_direction(4,1)	// 0x0004, 1
 	call(data_06.l_0xc5749a)
@@ -1105,6 +1162,7 @@ l_0xc9329b:
 	sprite2_delete(4,6)	// 0x04, 6
 	sprite2_spawn(169,321,1)	// 0xA9, 0x0141, 1
 	wait_movement
+
 	set_respawn_point(8)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	call(data_36.l_0xc7de60)
@@ -1147,6 +1205,7 @@ l_0xc93381:
 	"@{name(0)}!" next
 	"@It makes me sad,/| but we must part here!" promptw
 	window_closeall
+
 	pause(20)
 	party_remove(10)		// Remove Dungeon man from party
 	npc_spawn(1152,8,1)	// Generate Dungeon man?
@@ -1180,7 +1239,6 @@ l_0xc934a4:
 	"@Please enter..." wait
 	window_closeall
 	pause(1)
-	goto(l_0xc934e4)
 
 l_0xc934e4:
 	warp(159)	// 9F
@@ -1194,16 +1252,16 @@ l_0xc934ed:
 	music_effect(3)	// Fade out
 	sprite2_spawn(106, 633, 1)
 	wait_movement
+
 	pause(60)
 	window_open(1)
 	"@({name(1)} and his friends carried out the submarine that {name(3)} fixed.)" promptw
-	set(flg_InDeepDarkness)
+	set(FLG_IN_DEEP_DARKNESS)
 	window_closeall
 	
-	hide_char(-1)
-	sprite2_spawn(245, 298, -1)	// F5, 12A, FF
+	hide_party	// 0xFF
+	sprite2_spawn(245,298,-1)	// F5, 12A, FF
 	warp(91)	// 5B
-	
 	sprite2_freeze(245)	// F5
 	call(data_36.l_0xc7dd6b)
 	set(FLG_BGM_FUNE1)	// 542
@@ -1215,7 +1273,7 @@ l_0xc934ed:
 	restore_camera
 	
 	party_freeze	// 0xFF
-	sprite2_spawn(245, 299, -1)	// F5, 12B, FF
+	sprite2_spawn(245,299,-1)	// F5, 12B, FF
 	warp(92)	// 5C
 	focus_camera_on_sprite2(245)	// F5
 	party_unfreeze
@@ -1225,7 +1283,7 @@ l_0xc934ed:
 	call(data_36.l_0xc7dd6b)
 	unset(FLG_BGM_FUNE1)	// 542
 	music_resume
-	show_char(-1, 1)
+	show_party(1)	// 0xFF, 0x01
 	sprite2_spawn(106, 300, 1)	// 6A, 12C, 1
 	call(data_57.l_0xc9b4b8)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
@@ -1249,7 +1307,6 @@ l_0xc935b7:
 	"@are you sure this is the correct player's name?" next
 	"@If it's not right,| you can change it..." promptw
 	window_closeall
-	goto(l_0xc93625)
 
 l_0xc93625:
 	music_effect(2)	// Quick fade out
@@ -1259,12 +1316,12 @@ l_0xc93625:
 	music_effect(2)	// Quick fade out
 	pause(30)
 	music_resume
+
 	window_open(1)
 	"@" call(data_37.l_0xc7e77d) "," next
 	"@Are you sure it's what you want?" next
 	"@Are you happy with the name?" linebreak
 	two_choice_menu("Yes", l_0xc93696, "No", l_0xc93679)
-	goto(l_0xc93679)
 
 l_0xc93679:
 	"@Here's your chance to change it..." promptw

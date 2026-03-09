@@ -327,7 +327,7 @@ l_0xc75f73:
 l_0xc75fb6:
 	title(1, Porky)
 	"@Sorry about giving you this game-type advice," pause(15)
-	get_dir_from_char(1,3,44)	// 01, 03, 002C
+	get_dir_from_char(1,TO_SPRITE2,44)	// 01, 03, 002C
 	char_direction(1,0)
 	" but you should equip your weapon!" next
 	"@Do you know what <equip> means?" linebreak

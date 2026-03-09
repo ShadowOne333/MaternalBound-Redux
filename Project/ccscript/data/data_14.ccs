@@ -554,7 +554,7 @@ l_0xc5df05:
 	goto_if_false(data_15.l_0xc5df61)
 	call(data_15.l_0xc5e3bc)
 	store_registers
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(data_15.l_0xc5df89)
 	load_registers
 	call(data_15.l_0xc5e0a9)

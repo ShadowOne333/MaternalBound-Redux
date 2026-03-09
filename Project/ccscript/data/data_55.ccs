@@ -4,11 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -16,407 +17,561 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc98db4:
-    "[03][06 79 00 {e(l_0xc98dd9)}]" newline
-    "@Have you already paid?{pause(20)}  Okay, okay.{wait}{unset(flag 120)}" eob
+	promptw
+	goto_if_flag(FLG_HAPPY_AUTOSHOP_FOUL, l_0xc98dd9)	// 0x0079, 121
+	newline
+	"@Have you already paid?" pause(20)
+	"  Okay, okay." wait
+	unset(FLG_HAPPY_AUTOSHOP)	// 120
+	eob
 
 l_0xc98dd9:
-    newline
-    "@I noticed you didn't pay![03]" call(data_23.l_0xc6852a) "[1B 03 {e(data_23.l_0xc683de)}]{window_open(1)}" newline
-    goto(l_0xc98df9)
+	newline
+	"@I noticed you didn't pay!" promptw
+	call(data_23.l_0xc6852a)
+	goto_if_true(data_23.l_0xc683de)
+	window_open(1)
+	newline
+	goto(l_0xc98df9)
 
 l_0xc98df9:
-    "@You won this confrontation." next
-    "@But the good side of you must ache with regret.  Ha ha ha.{wait}{set(flag 67)}" eob
+	"@You won this confrontation." next
+	"@But the good side of you must ache with regret.  Ha ha ha." wait
+	set(FLG_HAPPY_WIN_GUARD)	// 67
+	eob
 
 l_0xc98e33:
-    "@They said someone named Porky stole all the food from the food stand." end
+	"@They said someone named Porky stole all the food from the food stand." end
 
 l_0xc98e5e:
-    "@In a different way than before, Mr. Carpainter has become a very good man." end
+	"@In a different way than before, Mr. Carpainter has become a very good man." end
 
 l_0xc98e8d:
-    "[06 44 00 {e(l_0xc98e9a)}]" call(data_20.l_0xc64eca) eob
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc98e9a)	// 0x0044, 68
+	call(data_20.l_0xc64eca)
+	eob
 
 l_0xc98e9a:
-    "@(Thanks for your support over the years." next
-    "@The food stand is going out of business due to personal reasons.)" end
+	"@(Thanks for your support over the years." next
+	"@The food stand is going out of business due to personal reasons.)" end
 
 l_0xc98ede:
-    "[06 49 00 {e(data_54.l_0xc98940)}][06 44 00 {e(l_0xc98f27)}]@The great Mr. Carpainter received a divine revelation from the gods one day." end
+	goto_if_flag(FLG_WIN_GIEGU, data_54.l_0xc98940)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc98f27)	// 0x0044, 68
+	"@The great Mr. Carpainter received a divine revelation from the gods one day." end
 
 l_0xc98f27:
-    "@I woke up from the dream." end
+	"@I woke up from the dream." end
 
 l_0xc98f37:
-    "[06 49 00 {e(data_54.l_0xc98940)}][06 44 00 {e(l_0xc99002)}]@You don't seem to understand,{pause(15)} so I'll explain it to you." next
-    "@When the world is changed to blue,{pause(15)} happiness can be established to the country." next
-    "@Do you understand now?" linebreak
-    "  [19 02]Yes" eob
-
-l_0xc98fa3:
-    "  [19 02]No" eob
-
-l_0xc98faa:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc98fd3)} {e(l_0xc98fb9)}]" goto(l_0xc98fb9)
+	goto_if_flag(FLG_WIN_GIEGU, data_54.l_0xc98940)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99002)	// 0x0044, 68
+	"@You don't seem to understand,| so I'll explain it to you." next
+	"@When the world is changed to blue,| happiness can be established to the country." next
+	"@Do you understand now?" linebreak
+	two_choice_menu("Yes", l_0xc98fd3, "No", l_0xc98fb9)
 
 l_0xc98fb9:
-    "@Although you don't understand now, some day you will." end
+	"@Although you don't understand now, some day you will." end
 
 l_0xc98fd3:
-    "@I can tell by your face that you're only pretending to understand." next
-    "@You just want something!" end
+	"@I can tell by your face that you're only pretending to understand." next
+	"@You just want something!" end
 
 l_0xc99002:
-    "@I, too, was wrong in many ways." end
+	"@I, too, was wrong in many ways." end
 
 l_0xc99018:
-    "[06 49 00 {e(l_0xc99088)}][06 44 00 {e(l_0xc99061)}]@The great Mr. Carpainter can communicate with all sorts of gods." next
-    "@He then passes down their divine messages." end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc99088)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99061)	// 0x0044, 68
+	"@The great Mr. Carpainter can communicate with all sorts of gods." next
+	"@He then passes down their divine messages." end
 
 l_0xc99061:
-    "@We might have been listening to messages from the Devil rather than God..." end
+	"@We might have been listening to messages from the Devil rather than God..." end
 
 l_0xc99088:
-    "@Don't you think the mental health of everyone in the village is improved?" end
+	"@Don't you think the mental health of everyone in the village is improved?" end
 
 l_0xc990b3:
-    "[06 49 00 {e(data_54.l_0xc98940)}][06 44 00 {e(l_0xc99104)}]@You might misunderstand what I have to say," next
-    "@But Carpainter's voice affects one's minds, like a hypnotist." end
+	goto_if_flag(FLG_WIN_GIEGU, data_54.l_0xc98940)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99104)	// 0x0044, 68
+	"@You might misunderstand what I have to say," next
+	"@But Carpainter's voice affects one's minds, like a hypnotist." end
 
 l_0xc99104:
-    "@Seems like I'm no longer hypnotized." end
+	"@Seems like I'm no longer hypnotized." end
 
 l_0xc99120:
-    "[06 49 00 {e(l_0xc9919b)}][06 44 00 {e(l_0xc99171)}]@When I painted everything blue, as Mr. Carpainter said," next
-    "@my wife who had run out on me returned home!" end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc9919b)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99171)	// 0x0044, 68
+	"@When I painted everything blue, as Mr. Carpainter said," next
+	"@my wife who had run out on me returned home!" end
 
 l_0xc99171:
-    "@My wife who had returned ran away again.{pause(20)}  Man, I have no luck..." end
+	"@My wife who had returned ran away again." pause(20)
+	"  Man, I have no luck..." end
 
 l_0xc9919b:
-    "@Wow, it's been a long time.{pause(20)}  Your cap...  Do you ever wash it?" end
+	"@Wow, it's been a long time." pause(20)
+	"  Your cap...  Do you ever wash it?" end
 
 l_0xc991c7:
-    "[06 D3 00 {e(l_0xc99260)}][06 44 00 {e(l_0xc9922d)}]@I think that those who won't paint everything blue are opposed to happiness." next
-    "@I want them all to listen,{pause(15)} even if it requires kicking their butts." end
+	goto_if_flag(FLG_TLPT_THRK, l_0xc99260)	// 0x00D3, 211
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc9922d)	// 0x0044, 68
+	"@I think that those who won't paint everything blue are opposed to happiness." next
+	"@I want them all to listen,| even if it requires kicking their butts." end
 
 l_0xc9922d:
-    "@We need to return the town to its original colors.{pause(20)}  I'll be very busy." end
+	"@We need to return the town to its original colors." pause(20)
+	"  I'll be very busy." end
 
 l_0xc99260:
-    "@I shouldn't be so desperate to chase after happiness." end
+	"@I shouldn't be so desperate to chase after happiness." end
 
 l_0xc99282:
-    "[06 49 00 {e(l_0xc992d1)}][06 44 00 {e(l_0xc992b6)}]@Blue, blue!" next
-    "@I wish for everything in this world to become blue." end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc992d1)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc992b6)	// 0x0044, 68
+	"@Blue, blue!" next
+	"@I wish for everything in this world to become blue." end
 
 l_0xc992b6:
-    "@It was hard on the eyes to have everything blue." end
+	"@It was hard on the eyes to have everything blue." end
 
 l_0xc992d1:
-    "@Hey!{pause(15)}  Long time no see." next
-    "@I had no idea you were a friend of the famous Runaway Brothers." next
-    "@I'm so jealous." end
+	"@Hey!" pause(15)
+	"  Long time no see." next
+	"@I had no idea you were a friend of the famous Runaway Brothers." next
+	"@I'm so jealous." end
 
 l_0xc992fa:
-    "[06 49 00 {e(l_0xc99389)}][06 44 00 {e(l_0xc99362)}]@You want to talk to Mr. Carpainter directly?" next
-    "@You must think you're pretty important, and boy do you have a lot of nerve!" next
-    "@A kid like you deserves to be killed by a bolt of lightning." end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc99389)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99362)	// 0x0044, 68
+	"@You want to talk to Mr. Carpainter directly?" next
+	"@You must think you're pretty important, and boy do you have a lot of nerve!" next
+	"@A kid like you deserves to be killed by a bolt of lightning." end
 
 l_0xc99362:
-    "@Mr. Carpainter was pretty strange.{pause(20)}  But so was everyone else." end
+	"@Mr. Carpainter was pretty strange." pause(20)
+	"  But so was everyone else." end
 
 l_0xc99389:
-    "@Hi!{pause(20)}  I'm fine.{pause(30)}  You look fine also." end
+	"@Hi!" pause(20)
+	"  I'm fine." pause(30)
+	"  You look fine also." end
 
 l_0xc993a5:
-    "[06 49 00 {e(l_0xc9946f)}][06 44 00 {e(l_0xc99411)}][06 0A 00 {e(l_0xc99438)}][06 7B 00 {e(l_0xc99405)}]@(I'm just a plain ol' cow,{pause(15)}  but Mr. Carpainter's messages always mo{pause(5)}o{pause(5)}o{pause(5)}ve me.){wait}{set(flag 123)}" eob
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc9946f)	// 0x0049, 73
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc99411)	// 0x0044, 68
+	goto_if_flag(FLG_TEMP_9, l_0xc99438)	// 0x000A, 10
+	goto_if_flag(FLG_HAPPY_USHI, l_0xc99405)	// 0x007B, 123
+
+	"@(I'm just a plain ol' cow," pause(15)
+	"  but Mr. Carpainter's messages always mo/o/o/ve me.)" wait
+	set(FLG_HAPPY_USHI)	// 123
+	eob
 
 l_0xc99405:
-    "@(Moo!){wait}{unset(flag 123)}" eob
+	"@(Moo!)" wait
+	unset(FLG_HAPPY_USHI)	// 123
+	eob
 
 l_0xc99411:
-    "@(The blue cow thing wasn't such a great idea after all, huh.)" end
+	"@(The blue cow thing wasn't such a great idea after all, huh.)" end
 
 l_0xc99438:
-    "@(You got mo{pause(5)}o{pause(5)}o{pause(5)}o{pause(5)}ved here because you gave Mr. Carpainter some lip.)" end
+	"@(You got mo/o/o/o/ved here because you gave Mr. Carpainter some lip.)" end
 
 l_0xc9946f:
-    "@(I have mo{pause(5)}o{pause(5)}o{pause(5)}o{pause(5)}re respect for Mr. Carpainter than others." next
-    "@Even if I become someone's steak dinner,{pause(15)} I'll still respect him.)" end
+	"@(I have mo/o/o/o/re respect for Mr. Carpainter than others." next
+	"@Even if I become someone's steak dinner,| I'll still respect him.)" end
 
 l_0xc994cb:
-    "@(Grateful Dead Valley ahead.{pause(20)}  Proceed through cave.)" end
+	"@(Grateful Dead Valley ahead." pause(20)
+	"  Proceed through cave.)" end
 
 l_0xc994f5:
-    call(data_48.l_0xc903ed) eob
+	call(data_48.l_0xc903ed)
+	eob
 
 l_0xc994fb:
-    "[06 49 00 {e(l_0xc99555)}]@Blue, blue..." next
-    "@Oops!  I won't say it again." next
-    "@I fixed the bridge as a sign of apology.{pause(20)}  I'm just trying to help." end
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc99555)	// 0x0049, 73
+	"@Blue, blue..." next
+	"@Oops!  I won't say it again." next
+	"@I fixed the bridge as a sign of apology." pause(20)
+	"  I'm just trying to help." end
 
 l_0xc99555:
-    "@[1C 01 08], was it?{pause(15)}  You're always so cheerful!" next
-    "@Thanks for the help the other day." end
+	"@{stat(8)}, was it?" pause(15)
+	"  You're always so cheerful!" next
+	"@Thanks for the help the other day." end
 
 l_0xc99582:
-    "[06 BF 00 {e(l_0xc99635)}][06 44 00 {e(l_0xc995e4)}]@There's a place ahead that can't be painted blue." next
-    "@It's a strange and anti-blue place." next
-    "@I can't stop thinking about it... and I can't even go near that place." end
+	goto_if_flag(FLG_WIN_LLPT_BOSS, l_0xc99635)	// 0x00BF, 191
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc995e4)	// 0x0044, 68
+	"@There's a place ahead that can't be painted blue." next
+	"@It's a strange and anti-blue place." next
+	"@I can't stop thinking about it... and I can't even go near that place." end
 
 l_0xc995e4:
-    "@I'm a changed person.{pause(20)}  I'm no longer a believer in Happy Happyism." next
-    "@Anyway, I'm very curious about the place that lies ahead of here." end
+	"@I'm a changed person." pause(20)
+	"  I'm no longer a believer in Happy Happyism." next
+	"@Anyway, I'm very curious about the place that lies ahead of here." end
 
 l_0xc99635:
-    "@What was the anti-blue place like?" next
-    "@Was it scary?" linebreak
-    "[19 02]Yes" eob
-
-l_0xc9965a:
-    "[19 02]No" eob
-
-l_0xc9965f:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc99686)} {e(l_0xc9966e)}]"
-    goto(l_0xc9966e)
+	"@What was the anti-blue place like?" next
+	"@Was it scary?" linebreak
+	two_choice_menu("Yes", l_0xc99686, "No", l_0xc9966e)
 
 l_0xc9966e:
-    "@You seem to thrive in places like that." end
+	"@You seem to thrive in places like that." end
 
 l_0xc99686:
-    "@Did you see a huge mole, like I've heard lives there?" end
+	"@Did you see a huge mole, like I've heard lives there?" end
 
 l_0xc996aa:
-    "@I heard many footprints exist deep down in the east cave." next
-    "@People call that place Lilliput Steps, and it makes them feel uneasy." end
+	"@I heard many footprints exist deep down in the east cave." next
+	"@People call that place Lilliput Steps, and it makes them feel uneasy." end
 
 l_0xc99703:
-    "@It looks like almost everyone woke up and left..." end
+	"@It looks like almost everyone woke up and left..." end
 
 l_0xc99720:
-    "@There are only three people remaining..." next
-    "@I don't want to stay." pause(20)
-    "  I'll get out of here..." end
+	"@There are only three people remaining..." next
+	"@I don't want to stay." pause(20)
+	"  I'll get out of here..." end
 
 l_0xc99757:
-    "@Sorry about everything!" pause(15)
-    "  Let's be buddies." end
+	"@Sorry about everything!" pause(15)
+	"  Let's be buddies." end
 
 l_0xc99776:
-    "@We wanted to join the Happy Happy religious group." next
-    "@We're a married couple from Twoson." end
+	"@We wanted to join the Happy Happy religious group." next
+	"@We're a married couple from Twoson." end
 
 l_0xc997ae:
-    "@Our child is waiting for us in Twoson." next
-    "@As a souvenir we'd like to bring him some happiness." end
+	"@Our child is waiting for us in Twoson." next
+	"@As a souvenir we'd like to bring him some happiness." end
 
 l_0xc997ee:
-    "@This is the famous Happy Happyism counseling office." next
-    "@When you obtain happiness" next
-    "@you should visit the Happy Happyism headquarters." next
-    "@It's located at the center of the village." end
+	"@This is the famous Happy Happyism counseling office." next
+	"@When you obtain happiness" next
+	"@you should visit the Happy Happyism headquarters." next
+	"@It's located at the center of the village." end
 
 l_0xc9985a:
-    title(1, Carpainter)
-    "@Hey {stat(8)}, it's been a long time." next
-    "@Since we last met, the whole town has woken up." next
-    "@The best happiness comes from being free... you kids made me realize that." end
+	title(1, Carpainter)
+	"@Hey {stat(8)}, it's been a long time." next
+	"@Since we last met, the whole town has woken up." next
+	"@The best happiness comes from being free... you kids made me realize that." end
 
 l_0xc998c1:
-    goto_if_flag(FLG_WIN_CARPAINTER, l_0xc998fd)	// 0x0044, 68
-    "@(All of our products are blessed." pause(20) linebreak
-    "             --Blue-Blue Drugstore)" end
+	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc998fd)	// 0x0044, 68
+	"@(All of our products are blessed." pause(20) linebreak
+	"             --Blue-Blue Drugstore)" end
 
 l_0xc998fd:
-    "@(Not all of our products are blessed." linebreak
-    "     --Nothing Blue Drugstore)" end
+	"@(Not all of our products are blessed." linebreak
+	"     --Nothing Blue Drugstore)" end
 
 l_0xc9992f:
-    eob
+	eob
 
 l_0xc99930:
-    goto_if_flag(FLG_TLPT_ONET, l_0xc9992f)	// 0x00D1, 209
-    goto_if_flag(FLG_MYHOME_LIGHT_ON, l_0xc9992f)	// 0x0205, 517
-    queue_text(l_0xc99945)
-    eob
+	goto_if_flag(FLG_TLPT_ONET, l_0xc9992f)	// 0x00D1, 209
+	goto_if_flag(FLG_MYHOME_LIGHT_ON, l_0xc9992f)	// 0x0205, 517
+	queue_text(l_0xc99945)
+	eob
 
 l_0xc99945:
-    pause(30)
-    set(FLG_MYHOME_LIGHT_ON)	// 517
-    transition_palette(16, 3, 30)	// 0x10 Tileset, 0x03 palette, 0x1E speed
-    goto_if_flag(FLG_YAZIUMA_DISAPPEAR, l_0xc9992f)	// 0x01D5, 469
-    set(FLG_INSEKI_STOPPER_APPEAR)	// 476
-    set(FLG_SYS_MONSTER_OFF)	// 11
-    eob
+	pause(30)
+	set(FLG_MYHOME_LIGHT_ON)	// 517
+	fade_map_palette(16,3,30)	// 0x10 Tileset, 0x03 palette, 0x1E speed
+	goto_if_flag(FLG_YAZIUMA_DISAPPEAR, l_0xc9992f)	// 0x01D5, 469
+	set(FLG_INSEKI_STOPPER_APPEAR)	// 476
+	set(FLG_SYS_MONSTER_OFF)	// 11
+	eob
 
 l_0xc9995d:
-    set(FLG_MYHOME_2F_1F)	// 513
-    isset(FLG_YAZIUMA_DISAPPEAR)	// 469
-    goto_if_false(l_0xc9992f)
-    goto_if_flag(FLG_MYHOME_POKEY_DISAPPEAR, l_0xc99991)	// 0x001E, 30
-    isset(FLG_MYHOME_POKEY_ENTER)	// 97
-    goto_if_false(l_0xc9992f)
-    goto_if_flag(805, l_0xc99981)	// 0x0325, 805, Cracked bat taken
-    eob
+	set(FLG_MYHOME_2F_1F)	// 513
+	isset(FLG_YAZIUMA_DISAPPEAR)	// 469
+	goto_if_false(l_0xc9992f)
+	goto_if_flag(FLG_MYHOME_POKEY_DISAPPEAR, l_0xc99991)	// 0x001E, 30
+	isset(FLG_MYHOME_POKEY_ENTER)	// 97
+	goto_if_false(l_0xc9992f)
+	goto_if_flag(805, l_0xc99981)	// 0x0325, 805, Cracked bat taken
+	eob
 
 l_0xc99981:
-    isset(FLG_MYHOME_MAMA_YEAH)	// 94
-    goto_if_false(l_0xc9992f)
-    set(FLG_MYHOME_POKEY2_APPEAR)	// 310
-    unset(FLG_MYHOME_POKEY_APPEAR)	// 301
-    eob
+	isset(FLG_MYHOME_MAMA_YEAH)	// 94
+	goto_if_false(l_0xc9992f)
+	set(FLG_MYHOME_POKEY2_APPEAR)	// 310
+	unset(FLG_MYHOME_POKEY_APPEAR)	// 301
+	eob
 
 l_0xc99991:
-    isset(flag 95)
-    goto_if_false(l_0xc9992f)
-    queue_text(data_16.l_0xc5e819)
-    eob
+	isset(FLG_MYHOME_PHONE)	// 95
+	goto_if_false(l_0xc9992f)
+	queue_text(data_16.l_0xc5e819)
+	eob
 
 l_0xc999a1:
-    goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
-    isset(flag 469)
-    goto_if_false(l_0xc9992f)
-    goto_if_flag(FLG_ONET_AMBRAMI, l_0xc9992f)	// 0x0068, 104
-    goto_if_flag(FLG_BUNBUN, l_0xc9992f)	// 0x0012, 18
-    window_open(1)
-    goto_if_flag(FLG_TEMP_1, l_0xc99a3c)	// 0x0002, 2
-    title(1, Porky)
-    "@Hey {stat(8)}!" linebreak
-    "[19 22 01 01 05 00][1F 13 01 00]"
-    "  Like I said, my dad isn't home yet!" next
-    "@You've got to bring Picky back before he comes home!" next
-    "@I'll try to help you a little."
-    "[19 22 01 01 05 00][1F 13 01 00]"
-    wait
-    window_closeall
-    set(FLG_TEMP_1)	// 2
-    eob
+	goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
+	isset(FLG_YAZIUMA_DISAPPEAR)	// 469
+	goto_if_false(l_0xc9992f)
+	goto_if_flag(FLG_ONET_AMBRAMI, l_0xc9992f)	// 0x0068, 104
+	goto_if_flag(FLG_BUNBUN, l_0xc9992f)	// 0x0012, 18
+
+	window_open(1)
+	goto_if_flag(FLG_TEMP_1, l_0xc99a3c)	// 0x0002, 2
+	title(1, Porky)
+	"@Hey {stat(8)}!" linebreak
+	get_dir_from_char(1,TO_CHAR,5)	// 0x01, 0x01, 0x0005
+	char_direction(1,0)	// 0x01, 0x00
+	"  Like I said, my dad isn't home yet!" next
+	"@You've got to bring Picky back before he comes home!" next
+	"@I'll try to help you a little."
+	get_dir_from_char(1,TO_CHAR,5)	// 0x01, 0x01, 0x0005
+	char_direction(1,0)	// 0x01, 0x00
+	wait
+	window_closeall
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc99a3c:
-    title(1, Porky)
-    "@{stat(8)}!" next
-    "[19 22 01 01 05 00][1F 13 01 00]"
-    "@You haven't got a clue about what to do." wait
-    window_closeall
-    unset(FLG_TEMP_1)	// 2
-    eob
+	title(1, Porky)
+	"@{stat(8)}!" next
+	get_dir_from_char(1,TO_CHAR,5)	// 0x01, 0x01, 0x0005
+	char_direction(1,0)	// 0x01, 0x00
+	"@You haven't got a clue about what to do." wait
+	window_closeall
+	unset(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc99a6b:
-    isset(FLG_ONET_LARDNA)	// 107
-    goto_if_false(l_0xc9992f)
-    queue_text(l_0xc99a7b)
-    eob
+	isset(FLG_ONET_LARDNA)	// 107
+	goto_if_false(l_0xc9992f)
+	queue_text(l_0xc99a7b)
+	eob
 
 l_0xc99a7b:
-    music(122)
-    pause(155)
-    transition_palette(1, 0, 255)	// 0x01 Tileset, 0x00 palette, 0xFF speed
-    set(FLG_ONET_DAYBREAK)	// 422
-    unset(FLG_ONET_LARDNA)	// 107
-    music_resume
-    eob
+	music(122)
+	pause(155)
+	fade_map_palette(1,0,255)	// 0x01 Tileset, 0x00 palette, 0xFF speed
+	set(FLG_ONET_DAYBREAK)	// 422
+	unset(FLG_ONET_LARDNA)	// 107
+	music_resume
+	eob
 
 l_0xc99a8f:
-    unset(FLG_LIBRARY_TOILET)	// 103
-    eob
+	unset(FLG_LIBRARY_TOILET)	// 103
+	eob
 
 l_0xc99a93:
-    "[06 78 02 {e(data_57.l_0xc9b20e)}][06 69 00 {e(l_0xc9992f)}]{unset(flag 38)}{set(flag 289)}{set(flag 290)}{set(flag 291)}{set(flag 292)}{set(flag 293)}[06 B6 00 {e(l_0xc99abb)}]" eob
+	goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
+	goto_if_flag(FLG_ONET_GATEOPEN, l_0xc9992f)	// 0x0069, 105
+	unset(FLG_POLICE_5COP_APPEAR)	// 38
+	set(FLG_ONET_COPA_DISAPPEAR)	// 289
+	set(FLG_ONET_COPB_DISAPPEAR)	// 290
+	set(FLG_ONET_COPC_DISAPPEAR)	// 291
+	set(FLG_ONET_COPD_DISAPPEAR)	// 292
+	set(FLG_ONET_COPE_DISAPPEAR)	// 293
+	goto_if_flag(FLG_POWR_GIAN, l_0xc99abb)	// 0x00B6, 182
+	eob
 
 l_0xc99abb:
-    "{set(flag 39)}{unset(flag 36)}[06 69 00 {e(l_0xc9992f)}]{set(flag 449)}" eob
+	set(FLG_POLICE_KANBANCOP_APPEAR)	// 39
+	unset(FLG_ONET_KANBANCOP_APPEAR)	// 36
+	goto_if_flag(FLG_ONET_GATEOPEN, l_0xc9992f)	// 0x0069, 105
+	set(FLG_POLICE_STRONG_B_APPEAR)	// 449
+	eob
 
 l_0xc99acc:
-    "[06 D3 00 {e(l_0xc99ae3)}]{set(flag 43)}{isset(flag 309)}[1B 02 {e(l_0xc9992f)}][1F 67 01]" eob
+	goto_if_flag(FLG_TLPT_THRK, l_0xc99ae3)	// 0x00D3, 211
+	set(FLG_TWSN_MICHIKO_APPEAR)	// 43
+	isset(FLG_TWSN_TONZURABUS_APPEAR)	// 309
+	goto_if_false(l_0xc9992f)
+	hotspot_off(1)	// 0x01
+	eob
 
 l_0xc99ae3:
-    "{window_open(1)}@(We will be closed for a short period." next
-    "@Thank you for your many years of support." next
-    "@Mr. Poochyfud, Manager, Chaos Theater.){wait}{window_closeall}" eob
+	window_open(1)
+	"@(We will be closed for a short period." next
+	"@Thank you for your many years of support." next
+	"@Mr. Poochyfud, Manager, Chaos Theater.)" wait
+	window_closeall
+	eob
 
 l_0xc99b3f:
-    "{set(flag 416)}{set(flag 417)}{set(flag 418)}{set(flag 419)}{set(flag 420)}{set(flag 421)}[06 0E 00 {e(l_0xc9992f)}]{set(flag 50)}" eob
+	set(FLG_FMON_BRICK_A_A_DISAPPEAR)	// 416
+	set(FLG_FMON_BRICK_A_B_DISAPPEAR)	// 417
+	set(FLG_FMON_BRICK_B_A_DISAPPEAR)	// 418
+	set(FLG_FMON_BRICK_B_B_DISAPPEAR)	// 419
+	set(FLG_FMON_BRICK_C_A_DISAPPEAR)	// 420
+	set(FLG_FMON_BRICK_C_B_DISAPPEAR)	// 421
+	goto_if_flag(FLG_JEFF, l_0xc9992f)	// 0x000E, 14
+	set(FLG_WINS_BRICK_THANKS_APPEAR)	// 50
+	eob
 
 l_0xc99b5c:
-    "{unset(flag 51)}" eob
+	unset(FLG_WINS_CAPSULE_PEOPLE_APPEAR)	// 51
+	eob
 
 l_0xc99b60:
-    call(data_57.l_0xc9b10b) eob
+	call(data_57.l_0xc9b10b)
+	eob
 
 l_0xc99b66:
-    "{set(flag 106)}" eob
+	set(flag 106)	// Unreferenced flag
+	eob
 
 l_0xc99b6a:
-    "[06 78 02 {e(data_57.l_0xc9b20e)}]{set(flag 110)}" eob
+	goto_if_flag(FLG_ONET_DOOR_CLOSE, data_57.l_0xc9b20e)	// 0x0278, 632
+	set(FLG_STEP_CAPEESTATE)	// 110
+	eob
 
 l_0xc99b75:
-    "{set(flag 750)}{unset(flag 383)}{isset(flag 533)}" call(l_0xc99bb2) "{isset(flag 469)}[1B 02 {e(l_0xc9992f)}][06 62 00 {e(l_0xc99c15)}][06 5F 00 {e(l_0xc99bb6)}]{isset(flag 30)}[1B 02 {e(l_0xc9992f)}][1F F1 15 00 29 00]{set(flag 95)}{set(flag 753)}{pause(120)}" eob
+	set(FLG_STEP_ONET)	// 750
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	isset(FLG_BGM_INSEKI_FALL_B)	// 533
+	call(l_0xc99bb2)
+	isset(FLG_YAZIUMA_DISAPPEAR)	// 469
+	goto_if_false(l_0xc9992f)
+	goto_if_flag(FLG_PAPA_MYHOME, l_0xc99c15)	// 0x0062, 98
+	goto_if_flag(FLG_MYHOME_PHONE, l_0xc99bb6)	// 0x005F, 95
+	isset(FLG_MYHOME_POKEY_DISAPPEAR)	// 30
+	goto_if_false(l_0xc9992f)
+	npc_do_mc(21,41)	// 0x0015, 0x0029
+	set(FLG_MYHOME_PHONE)	// 95
+	set(FLG_MYHOME_PHONE_RING)	// 753
+	pause(120)
+	eob
 
 l_0xc99bb2:
-    "{unset(flag 533)}" eob
+	unset(FLG_BGM_INSEKI_FALL_B)	// 533
+	eob
 
 l_0xc99bb6:
-    "{window_open(1)}"
-    title(1, Porky)
-    "@The phone is ringing!{pause(15)}" linebreak "  Answer it!" next
-    "@At my house, my dad gets bent if I don't get the phone..." next
-    "@within the first three rings!{wait}{window_closeall}" eob
+	window_open(1)
+	title(1, Porky)
+	"@The phone is ringing!" pause(15) linebreak
+	"  Answer it!" next
+	"@At my house, my dad gets bent if I don't get the phone..." next
+	"@within the first three rings!" wait
+	window_closeall
+	eob
 
 l_0xc99c15:
-    "{set(flag 209)}{set(flag 200)}" call(l_0xc99c24) "{unset(flag 514)}" eob
+	set(FLG_TLPT_ONET)	// 209
+	set(FLG_SYS_PHONE_MYHOME)	// 200
+	call(l_0xc99c24)
+	unset(FLG_MYHOME_SLEEP)	// 514
+	eob
 
 l_0xc99c24:
-    "{isset(flag 688)}[1B 02 {e(l_0xc9992f)}]{set(flag 201)}" eob
+	isset(FLG_MYHOME_PHONE_TRACY)	// 688
+	goto_if_false(l_0xc9992f)
+	set(FLG_SYS_PHONE_MYHOME2)	// 201
+	eob
 
 l_0xc99c31:
-    "{set(flag 210)}[06 34 01 {e(l_0xc9992f)}]{set(flag 31)}{unset(flag 32)}{unset(flag 33)}{unset(flag 306)}{unset(flag 307)}" eob
+	set(FLG_TLPT_TWSN)	// 210
+	goto_if_flag(FLG_B4MIZUNO_APPEAR, l_0xc9992f)	// 0x0134, 308
+	set(FLG_1FMIZUNO_APPEAR)	// 31
+	unset(FLG_B1MIZUNO_APPEAR)	// 32
+	unset(FLG_B2MIZUNO_APPEAR)	// 33
+	unset(FLG_B3MIZUNO_A_APPEAR)	// 306
+	unset(FLG_B3MIZUNO_B_APPEAR)	// 307
+	eob
 
 l_0xc99c4b:
-    "{unset(flag 315)}" eob
+	unset(FLG_TUNNEL_THRK_TWSN_WL)	// 315
+	eob
 
 l_0xc99c4f:
-    "{set(flag 213)}" eob
+	set(FLG_TLPT_BAKA)	// 213
+	eob
 
 l_0xc99c53:
-    "{set(flag 214)}{unset(flag 590)}[06 60 02 {e(l_0xc99c61)}]" eob
+	set(FLG_TLPT_FOUR)	// 214
+	unset(FLG_THRK_PEOPLE_APPEAR)	// 590
+	goto_if_flag(FLG_DSRT_SWITCH_BEFORE, l_0xc99c61)	// 0x0260, 608
+	eob
 
 l_0xc99c61:
-    "{unset(flag 608)}{set(flag 174)}" eob
+	unset(FLG_DSRT_SWITCH_BEFORE)	// 608
+	set(FLG_DSRT_SWITCH)	// 174
+	eob
 
 l_0xc99c68:
-    "{isset(flag 214)}[1B 02 {e(l_0xc9992f)}]" goto(l_0xc99c53)
+	isset(FLG_TLPT_FOUR)	// 214
+	goto_if_false(l_0xc9992f)
+	goto(l_0xc99c53)
 
 l_0xc99c76:
-    call(data_57.l_0xc9b10b) "[06 60 02 {e(l_0xc99c61)}]" eob
+	call(data_57.l_0xc9b10b)
+	goto_if_flag(FLG_DSRT_SWITCH_BEFORE, l_0xc99c61)	// 0x0260, 608
+	eob
 
 l_0xc99c83:
-    "{set(flag 219)}" call(data_57.l_0xc9b10b) "{isset(flag 126)}[1B 02 {e(l_0xc9992f)}]{set(flag 538)}" eob
+	set(FLG_TLPT_GUMI)	// 219
+	call(data_57.l_0xc9b10b)
+	isset(FLG_CAPSULE_OK)	// 126
+	goto_if_false(l_0xc9992f)
+	set(FLG_DOSEI_APPLE_APPEAR)	// 538
+	eob
 
 l_0xc99c98:
-    "{unset(flag 383)}[06 7B 01 {e(l_0xc9992f)}][1F 63 {e(l_0xc99ca9)}]" eob
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	goto_if_flag(FLG_PHONE_GUMI_APPLE, l_0xc9992f)	// 0x017B, 379
+	queue_text(l_0xc99ca9)
+	eob
 
 l_0xc99ca9:
-    call(data_34.l_0xc7ae41) "{pause(15)}" call(data_34.l_0xc7acb8) "{set(flag 379)}{set(flag 52)}" eob
+	call(data_34.l_0xc7ae41)
+	pause(15)
+	call(data_34.l_0xc7acb8)
+	set(FLG_PHONE_GUMI_APPLE)	// 379
+	set(FLG_SEBASTIAN_DISAPPEAR)	// 52
+	eob
 
 l_0xc99cbc:
-    "[06 89 02 {e(l_0xc99cc9)}]" call(data_51.l_0xc937a3) eob
+	goto_if_flag(FLG_GUMI_TALKERSTONE, l_0xc99cc9)	// 0x0289, 649
+	call(data_51.l_0xc937a3)
+	eob
 
 l_0xc99cc9:
-    "{unset(flag 383)}" eob
+	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
+	eob
 
 l_0xc99ccd:
-    "[1F EB FF 06][1F 63 {e(l_0xc99cd8)}]" eob
+	hide_party	// 0xFF, 0x06
+	queue_text(l_0xc99cd8)
+	eob
 
 l_0xc99cd8:
-    "{music(15)}{pause(240)}{pause(100)}" call(data_24.l_0xc69082) "{set(flag 220)}{set(flag 55)}{unset(flag 52)}[1F 21 3B][1F EC FF 01]" eob
+	music(15)
+	pause(240)
+	pause(100)
+	call(data_24.l_0xc69082)
+	set(FLG_TLPT_DKFD)	// 220
+	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	unset(FLG_SEBASTIAN_DISAPPEAR)	// 52
+	warp(59)	// 0x3B
+	show_party(1)	// 0xFF, 0x01
+	eob
 
 l_0xc99cf6:
-    "[06 24 00 {e(l_0xc99cfe)}]" eob
+	goto_if_flag(FLG_ONET_KANBANCOP_APPEAR, l_0xc99cfe)	// 0x0024, 36
+	eob
 
 l_0xc99cfe:
-    "[1F 63 {e(data_16.l_0xc5f83b)}]" eob
+	queue_text(data_16.l_0xc5f83b)
+	eob
 
 l_0xc99d05:
-    "[06 55 01 {e(l_0xc9992f)}]{isset(flag 82)}[1B 02 {e(l_0xc9992f)}][1F 63 {e(data_56.l_0xc99d1c)}]" eob
-
+	goto_if_flag(FLG_TWSN_INFO_TACO, l_0xc9992f)	// 0x0155, 341
+	isset(FLG_ITEM_PHONE)	// 82
+	goto_if_false(l_0xc9992f)
+	queue_text(data_56.l_0xc99d1c)
+	eob

@@ -27,6 +27,7 @@ l_0xc94b57:
 	goto_if_flag(FLG_TLPT_THRK, l_0xc94bad)	// 0x00D3, 211
 	goto_if_flag(FLG_POLA_GRFD, l_0xc94b8e)	// 0x0D, 13
 	goto_if_flag(FLG_POLA, l_0xc94b8e)	// 0x0C, 12
+
 	"@I heard {name(2)} was kidnapped, but it's still unconfirmed." end
 
 l_0xc94b8e:
@@ -58,7 +59,7 @@ l_0xc94d0c:
 	goto_if_flag(FLG_TWSN_INFO_TACO, l_0xc94d5b)	// 0x0155, 341
 	"@A while ago,| I saw an inventor, the something-or-other kid," next
 	// Pencil eraser = 184 / 0xB8
-	"@buying junk for a {itemname(184)}, or something-or-other." end
+	"@buying junk for a {itemname(PENCIL_ERASER)}, or something-or-other." end
 
 l_0xc94d5b:
 	"@Even though it's junk,| someone could use it for something." end
@@ -75,17 +76,19 @@ l_0xc94df6:
 	"@*cough* *hack, hack* *cough*" end
 
 l_0xc94e44:
-	get_inventory_item(0, 0) swap
-	result_is(206)	// Insignificant item
+	get_inventory_item(0,0) swap
+	result_is(INSIGNIFICANT_ITEM)	// 206
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	"@Thank you!" pause(15)
 	"  You've made me so happy!" next
 	"@After my life,| this is the second most important thing to me!" next
 	// Magic truffle = 99, 0x63
-	"@Because you're so kind,| I want to give you this {itemname(99)}." next
+	"@Because you're so kind,| I want to give you this {itemname(MAGIC_TRUFFLE)}." next
 	"@It's a souvenir from Scarabia." next
-	take(-1, 206)	// Take Insignificant item
-	give_and_return_location(0, 99)	// Give Magic truffle
+
+	take(-1, INSIGNIFICANT_ITEM)	// 0xFF, 206
+	give_and_return_location(0, MAGIC_TRUFFLE)	// 99
 	call(data_36.l_0xc7dccf)
 	end
 
@@ -99,7 +102,6 @@ l_0xc94f01:
 
 l_0xc94f42:
 	goto_if_flag(FLG_WIN_GEPPU, l_0xc94f88)	// 0x47, 71
-	goto(l_0xc94f49)
 
 l_0xc94f49:
 	"@I wanted to see the circus in Threek, the next town over," next
@@ -138,19 +140,21 @@ l_0xc950e8:
 kid:
 	get_char_at_pos(1) swap
 	counter(1)
-	goto(kid1)
 
 kid1:
 	inc ctoarg
 	party_size_smaller_than(0)
 	goto_if_true(kid2)
+
 	get_char_at_pos(0)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(kid2)
+
 	get_char_at_pos(0)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(kid2)
-	goto(kid1)
+
+	goto(kid1)	// Loop
 
 kid2:
 	ctoarg swap
@@ -166,6 +170,7 @@ kid3:	// Paula check
 	get_char_at_pos(1)
 	result_is(2)
 	goto_if_true(kid_paula)
+
 	" kid" eob
 
 kid_paula:
@@ -181,9 +186,11 @@ l_0xc95124:
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(l_0xc95147)
+
 	get_char_at_pos(2)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(l_0xc95147)
+
 	"tickets" eob
 
 l_0xc95147:
@@ -205,7 +212,6 @@ l_0xc9522b:
 	result_is(2)
 	goto_if_true(l_0xc95257)
 	"he's "
-	goto(l_0xc95257)
 
 l_0xc95257:
 	"an adult." next
@@ -243,6 +249,7 @@ l_0xc953bf:
 l_0xc953f7:
 	goto_if_flag(FLG_TEMP_2, l_0xc954b3)	// 0x03
 	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc954b3)	// 0x013F, 319
+
 	title(1, Nice)	// Fatty guy
 	"@[AC] Shaba do wap, diddly dee da." pause(20)
 	"  Shaba di doo bee, bop wah." next
@@ -262,6 +269,7 @@ l_0xc954e1:
 	else { get_inventory_item(0, 0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	title(1, Nice)	// Fatty guy
 	"@Don't try to use your play money here, kid." next
 	"@Oh... my... gosh...!" pause(20)
@@ -271,6 +279,7 @@ l_0xc954e1:
 l_0xc95532:
 	goto_if_flag(FLG_TEMP_2, l_0xc9569a)	// 0x03
 	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc9560b)	// 0x013F, 319
+
 	title(1, Lucky)	// Skinny guy
 	"@Well,| yeah, in the old days," next
 	"@there was lots o' cute girl dancers and acts at this theater." next
@@ -304,6 +313,7 @@ l_0xc956d6:
 	else { get_inventory_item(0,0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	title(1, Lucky)	// Skinny guy
 	"@Well, hello!  Ya got cash!" pause(20) linebreak
 	"  And some nice stuff ta boot!  Hyuk, hyuk, hyuk." end
@@ -311,6 +321,7 @@ l_0xc956d6:
 l_0xc9571e:
 	goto_if_flag(FLG_TEMP_2, l_0xc9575e)	// 0x03
 	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc9575e)	// 0x013F, 319
+
 	title(1, Okay)	// Drum guy
 	"@Hey,| ya get to see our show, you lucky kid!" pause(20) linebreak
 	"  I hope ya pay attention." end
@@ -325,6 +336,7 @@ l_0xc95786:
 	else { get_inventory_item(0,0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	title(1, Okay)	// Drum guy
 	"@If you give him a chance,| the theater manager will cheat you out of your money," next
 	"@he he he." end
@@ -335,7 +347,6 @@ l_0xc957cb:
 	goto_if_flag(FLG_TEMP_1, l_0xc957ff)	// 0x02
 	title(1, Gorgeous)	// Sax guy
 	"@I wrote the lyrics to most of the Runaway Brothers songs." next
-	goto(l_0xc957ff)
 
 l_0xc957ff:
 	title(1, Gorgeous)	// Sax guy
@@ -359,6 +370,7 @@ l_0xc958d7:
 	else { get_inventory_item(0,0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	title(1, Gorgeous)	// Sax guy
 	"@Wow!  10,000 dollars!" pause(20) linebreak
 	"  I can make another song now." next
@@ -370,6 +382,7 @@ l_0xc9594d:
 	title(1, Groovy)	// Bass guy
 	goto_if_flag(FLG_TEMP_2, l_0xc95988)	// 0x03
 	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc95988)	// 0x013F, 319
+
 	"@I want some bread." next
 	"@I need the coinage." next
 	"@I want more dough all the time." end
@@ -382,6 +395,7 @@ l_0xc959a5:
 	else { get_inventory_item(0,0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	title(1, Groovy)	// Bass guy
 	"@That is exactly what I want." next
 	"@I can't believe that you have that much..." end
@@ -397,10 +411,8 @@ l_0xc959e2:
 	"@They'll stay here until they pay me back." next
 	"@They might be here for 100 years," next
 	"@unless you decide to pay off their debt...  Heh, heh, heh." wait	//end
-	if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI // flg_KeyItem_WadofBills
-	{
-		goto(chaostheatermanager_paid)
-	}
+	if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI { // flg_KeyItem_WadofBills
+		goto(chaostheatermanager_paid) }
 	eob
 
 l_0xc95a5f:
@@ -436,8 +448,9 @@ l_0xc95aa0:
 
 chaostheatermanager_paid:
 	sound(SND_CHICKEN2)	// 118
-	get_dir_from_char(253,1,1)		// 0x00FD, 1, 1
-	sprite_direction(253, 0)	// 00FD
+	get_dir_from_char(253,TO_CHAR,1)		// 0x00FD, 1, 1
+	sprite_direction(253,0)	// 00FD
+
 	title(1, Poochyfud)
 	"@Yipes!" pause(60)
 	"  You surprised me." pause(20)
@@ -445,6 +458,7 @@ chaostheatermanager_paid:
 	take(-1, WAD_BILLS)	// Take the Suitecase/Wad of bills from inventory
 	"@I got the money, of course,| and now the Runaway Brothers are free to leave." next
 	"@I've got no complaints now that I have my money." promptw
+
 	set(FLG_TWSN_TONZURA_FREE)	// 119
 	set(FLG_TWSN_TONZURABUS_APPEAR)	// 309
 	unset(FLG_TWSN_TONCHIKI_APPEAR)	// 624
@@ -461,21 +475,24 @@ l_0xc95b64:
 
 l_0xc95ba0:
 	title(1, Poochyfud)
-	"[06 3F 01 {e(l_0xc959e2)}]"
+	goto_if_flag(FLG_TWSN_CHAOS_STAGE_START, l_0xc959e2)	// 0x013F, 319
 	"@Pardon?" pause(30)
 	"  You want to talk about money?" next
 	"@How about later, after the show, even if we're talking big bucks." next
 	"@I've got definite rules about how I handle my money matters..." end
 
 l_0xc95c0e:
-	"[06 55 00 {e(l_0xc960d7)}]"
-	"[06 0C 00 {e(l_0xc95f0a)}]"
-	"[06 0D 00 {e(l_0xc95df9)}]"
-	"[06 42 00 {e(l_0xc95dc6)}]"
+	goto_if_flag(FLG_TWSN_ITEM_TONCHIKI, l_0xc960d7)	// 0x0055, 85
+	goto_if_flag(FLG_POLA, l_0xc95f0a)	// 0x000C, 12
+	goto_if_flag(FLG_POLA_GRFD, l_0xc95df9)	// 0x000D, 13
+	goto_if_flag(FLG_TWSN_WIN_TONCHIKI, l_0xc95dc6)	// 0x0042, 66
+
 	"@Wah ha ha ha ha!" pause(20) linebreak
 	"  Why don't we chat later-after we've locked horns!" promptw
+
 	call(data_23.l_0xc6846b)
 	goto_if_true(data_23.l_0xc683de)
+
 	window_open(1)
 	"@Yes, I'm Everdred, boss of Burglin Park." next
 	title(1, Everdred)
@@ -487,9 +504,8 @@ l_0xc95c0e:
 	"@A chubby boy and a weird guy in a blue outfit have kidnapped her, though." next
 	"@They said that they were going to make {name(2)} some sort of human sacrifice." next
 	"@They were definitely hard-core strange." next
-	"@You know, she might have been killed already,{pause(20)}" linebreak
+	"@You know, she might have been killed already," pause(20) linebreak
 	"  so hurry and go there." next
-	goto(l_0xc95dc6)
 
 l_0xc95dc6:
 	"@If you save {name(2)},| be sure to come back here, okay?" pause(15)
@@ -531,6 +547,7 @@ l_0xc95f0a:
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc960ab)
+
 	title(1, Everdred)
 	"@I was going to ask you to join me,| but I know you'll refuse." next
 	"@It's written all over your face." next
@@ -545,6 +562,7 @@ l_0xc95f0a:
 	"@Now I plan on looking for the evil Mani Mani Statue or whatever" next
 	"@that some petty bad guy named Lier X. Agerate or something dug up in Onett." next
 	"@I'll see you at another time, in another space." promptw
+
 	if flag FLG_KEY_ITEMS { give_menu_key_item(WAD_BILLS) }
 	else {
 		get_item_receiver(-1)
@@ -552,6 +570,7 @@ l_0xc95f0a:
 		give_and_return_location(0, WAD_BILLS)
 		call(data_36.l_0xc7dcb6)
 	}
+
 	set(FLG_TWSN_ITEM_TONCHIKI)	// 85
 	end
 
@@ -560,6 +579,7 @@ l_0xc9605d:
 	title(1, Everdred)
 	sound(SND_ERRORBEEP)	// 5
 	pause(30)
+
 	"@Your backpack is filled with junk." pause(20)
 	"  Get rid of something!" next
 	"@I'll put the money in a safe place until you get back." end
@@ -580,8 +600,8 @@ l_0xc960d7:
 	"  Just give it up and take it!" end
 
 l_0xc96124:
-	"[06 49 00 {e(l_0xc96267)}]"
-	"[06 CA 00 {e(l_0xc961d1)}]"
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc96267)	// 0x0049, 73
+	goto_if_flag(FLG_SYS_PHONE_PIZZA, l_0xc961d1)	// 0x00CA, 202
 	"@Welcome to Mach Pizza!" next
 	title(1, Mach)
 	"@We don't sell pizza here." pause(20)
@@ -595,7 +615,7 @@ l_0xc96124:
 	eob
 
 l_0xc961d1:
-	"[06 0A 00 {e(l_0xc9623f)}]"
+	goto_if_flag(FLG_TEMP_9, l_0xc9623f)	// 0x000A, 10
 	"@*Munch*||munch*||gulp*" next
 	"@Uh... no,| I didn't take a piece of pizza." pause(20)
 	"  I would never think of doing that!" next
@@ -621,17 +641,9 @@ l_0xc962c8:
 	"@You must be quite a rich boy to stay at such a nice,| first class hotel like this one." end
 
 l_0xc96304:
-	"[06 01 00 {e(l_0xc963ce)}]"
+	goto_if_flag(FLG_TEMP_0, l_0xc963ce)	// 0x0001, 1
 	"@Do I have a mushroom on my head?" linebreak
-	// two_choice_menu
-	"  [19 02]Yes" eob
-
-l_0xc96328:
-	"  [19 02]No" eob
-
-l_0xc9632f:
-	"[1C 07 02][11]{clearline}[09 02 {e(l_0xc9633e)} {e(l_0xc9639f)}]"
-	goto(l_0xc9633e)
+	two_choice_menu("Yes", l_0xc9633e, "No", l_0xc9639f)
 
 l_0xc9633e:
 	newline
@@ -689,6 +701,7 @@ l_0xc965a4:
 	"@That's right,| I'm a bus driver." pause(20)
 	"  For now,| I'm resting." next
 	"@Life is long... take it easy," pause(15)
+
 	get_char_at_pos(1)
 	switch_call(4)
 		switch_entry(l_0xc96650)

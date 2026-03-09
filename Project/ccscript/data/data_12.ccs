@@ -373,7 +373,8 @@ l_0xc5cd7f:
 	"@You don't want any?  Whatever you say." end
 
 l_0xc5cd97:
-	"{load_registers}@You can't buy the bananas if you don't have enough money." end
+	load_registers
+	"@You can't buy the bananas if you don't have enough money." end
 
 l_0xc5cdb3:
 	"@You cannot carry any more." end

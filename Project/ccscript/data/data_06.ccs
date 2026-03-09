@@ -625,7 +625,7 @@ l_0xc582f8:
 	goto_if_false(l_0xc58364)
 
 	swap
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc58358)
 
 	store_registers

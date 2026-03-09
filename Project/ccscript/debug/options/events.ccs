@@ -966,7 +966,7 @@ l_0xc9c7fa:
 	pause(180)
 	sprite2_spawn(437,779,-1)	// 0x01B5, 0x030B, 0xFF
 	warp(196)	// 0xC4
-	npc_freeze(255)
+	npc_freeze(-1)
 	pause(1)
 	sprite2_delete(437,6)	// 0x01B5, 6
 	show_party(1)	// 0xFF, 1

@@ -40,7 +40,6 @@ l_0xc8a737:
 	"@Right now, part of the Scarabia Cultural Museum is being remodeled." next
 	"@Do you still want to enter?" linebreak
 	two_choice_menu("Yes", l_0xc8a7c5, "No", l_0xc8a792)
-	goto(l_0xc8a792)
 
 l_0xc8a792:
 	"@Since the Hieroglyph display is closed,| people haven't wanted to visit." end
@@ -53,10 +52,10 @@ l_0xc8a7c5:
 	goto(l_0xc8a792)
 
 l_0xc8a805:
-	get_party_size_times(3)
-	swap
+	get_party_size_times(3) swap
 	hasmoney(0)
 	goto_if_false(l_0xc8a82e)
+
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)
 	show_wallet
@@ -77,7 +76,6 @@ l_0xc8a88c:
 l_0xc8a8bf:
 	"@This room is being remodeled, so I can't show it to you..." next
 	goto_if_flag(FLG_PU, l_0xc8a997)	// 0x10, 16
-	goto(l_0xc8a8e7)
 
 l_0xc8a8e7:
 	"@I can't... well, I usually don't.../| show this room..." next
@@ -86,15 +84,14 @@ l_0xc8a8e7:
 	"@Perhaps a little, shall we say, <under the table deal> would be in order..." end
 
 l_0xc8a976:
-	if flag FLG_KEY_ITEMS {
-		isset(FLG_PU)
-		goto_if_false(data_35.l_0xc7c6b6) }
+	if flag FLG_KEY_ITEMS { isset(FLG_PU) }
 	else {
 		get_inventory_item(0,0) swap
 		result_is(TINY_RUBY)	// 0xD0, 208, Tiny ruby
-		goto_if_false(data_35.l_0xc7c6b6)
 	}
-	counter(4) call(data_36.l_0xc7dc7f)
+	goto_if_false(data_35.l_0xc7c6b6)
+	counter(4)
+	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_35.l_0xc7c6b6)
 	goto(l_0xc8a997)
 
@@ -102,12 +99,13 @@ l_0xc8a996:
 	eob
 
 l_0xc8a997:
-	counter(4) call(data_36.l_0xc7dc7f)
+	counter(4)
+	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc8a8e7)
+
 	"@Oh, the samurai kid is here." next
 	"@Will " call(l_0xc8aabe) " be giving me that gem?" next
 	two_choice_menu("Yes", l_0xc8aa7f, "No", l_0xc8a9ec)
-	goto(l_0xc8a9ec)
 
 l_0xc8a9ec:
 	sound(SND_CHICKEN2)	// 118
@@ -136,8 +134,7 @@ l_0xc8aabe:
 	get_char_at_pos(1)
 	result_is(4)
 	goto_if_true(l_0xc8aacc)
-	"he"
-	eob
+	"he" eob
 
 l_0xc8aacc:
 	"you" eob
@@ -147,7 +144,7 @@ l_0xc8aacf:
 	pause(30)
 	sound(SND_DOOROPEN)	// 8
 	npc_delete(1037,6)	// 0x040D, 6
-	take(-1, TINY_RUBY)	// 0xD0, 208
+	if not flag FLG_KEY_ITEMS { take(-1, TINY_RUBY) }	// 0xD0, 208
 	set(FLG_SUMS_OMAR_B_APPEAR)	// 346
 	eob
 
@@ -194,14 +191,17 @@ l_0xc8ac6f:
 	hide_npc_float(1038)	// 0x040E
 	npc_do_mc(1038,770)	// 0x040E, 0x0302
 	wait_movement
+
 	npc_freeze(1038)	// 0x040E
+
 	window_open(1)
 	"@Wait one second." next
 	"@Here's a picture of the hieroglyphs just for you." next
 	"@It's a reward for studying so hard." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(HIEROGLYPH) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc8ad22)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc8ad22)
 		give_and_return_location(0, HIEROGLYPH)	// 0xB9, 185, Hieroglyph copy
 		call(data_36.l_0xc7dcb6)
 	}
@@ -209,8 +209,10 @@ l_0xc8ac6f:
 	"@Use it in your Human Civilization class." next
 	"@Ha ha ha!" wait
 	window_closeall
+
 	npc_unfreeze(1038)	// 0x040E
 	wait_movement
+
 	set(FLG_ITEM_HIEROGLYPH)	// 343
 	goto_if_flag(FLG_FOUR_KOMORITA, data_55.l_0xc9992f)	// 0x8C, 140
 	set(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
@@ -224,8 +226,10 @@ l_0xc8ad22:
 	"  You're such a hard worker." next
 	"@Ha ha ha!" wait
 	window_closeall
+
 	npc_unfreeze(1038)	// 0x040E
 	wait_movement
+
 	set(FLG_TEMP_9)	// 10
 	eob
 
@@ -303,7 +307,6 @@ l_0xc8b0d4:
 
 l_0xc8b130:
 	goto_if_flag(FLG_PU, l_0xc8b158)	// 0x10, 16
-	goto(l_0xc8b137)
 
 l_0xc8b137:
 	"@Could you please not talk to me?" next
@@ -311,9 +314,11 @@ l_0xc8b137:
 
 l_0xc8b158:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc8b137)	// 0x49, 73
+
 	counter(4)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc8b137)
+
 	"@Oriental boy, you're so cool..." next
 	"@Don't look at me like that..." next    
 	"@You're too charming! [AC]" end
@@ -321,19 +326,23 @@ l_0xc8b158:
 l_0xc8b191:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc8b22f)	// 0x49, 73
 	goto_if_flag(FLG_PU, data_20.l_0xc65015)	// 0x10, 16
-	OSS_on	// special_event(5)
+	OSS_on	// event(5)
+
 	title(1, Jill)
 	"@I don't know who told you." next
 	"@You came from far off just to eat my Magic cake?..." next
 	"@I thought making cakes would be the best career for me." next
 	"@Dig in!" next
+
 	unset(FLG_NESS_KI)
 	unset(FLG_JEFF_KI)
 	unset(FLG_PAULA_KI)
 	set(FLG_POO_KI)
 	set(FLG_POO_SOLO)
+
 	"@I used up the last of my ingredients to make this special Magic cake!" promptw
 	window_closeall
+
 	unset(FLG_SUMS_MASSAGE_APPEAR)	// 61
 	goto(data_50.l_0xc920a2)
 
@@ -347,10 +356,10 @@ l_0xc8b22f:
 	// Item 0xCF / 207 = Magic tart
 	"@I have a <{itemname(207)}.>" next
 	"@Try it." next
-	wait
+	//wait	// Remove extra button press
 	get_item_receiver(-1)
 	goto_if_false(l_0xc8b292)
-	give_and_return_location(-1,207)	// 0xCF, 207, Magic tart
+	give_and_return_location(-1, MAGIC_TART)	// 0xCF, 207, Magic tart
 	sound(SND_BOXTAKE)	// 116
 	"@...I've made another tasty treat today!" end
 
@@ -407,6 +416,7 @@ l_0xc8b460:
 	"@A mountain man I'm not" next
 	"@The open sea is home for me" next
 	"@And mountains aren't worth snot [AC]" next
+	newline
 	"@...I'm writing a song for sailors." end
 
 l_0xc8b4c9:
@@ -422,7 +432,6 @@ l_0xc8b52a:
 	goto_if_flag(FLG_TEMP_9, l_0xc8b64e)	// 0x0A, 10
 	"@Would you like a boat ride?" linebreak
 	two_choice_menu("Yes", l_0xc8b57e, "No", l_0xc8b568)
-	goto(l_0xc8b568)
 
 l_0xc8b568:
 	"@Ok, I understand."
@@ -432,7 +441,6 @@ l_0xc8b568:
 
 l_0xc8b57c:
 	next
-	goto(l_0xc8b57e)
 
 l_0xc8b57e:
 	"@I don't feel like sending a ship out." next
@@ -461,7 +469,6 @@ l_0xc8b680:
 	"@Yeah!" pause(20)
 	"  Let's work hard!" next
 	set(FLG_TOTO_SAILOR_MSGCHG)	// 557
-	goto(l_0xc8b6d5)
 
 l_0xc8b6d5:
 	"@If you're courageous, get on this boat." next
@@ -469,13 +476,11 @@ l_0xc8b6d5:
 	"@After all, it could only cost you your life, and you got that for free!" next
 	"@Luck will determine the outcome of this voyage." next
 	"@So, do you want to sail the seas to Scarabia?" next
-	goto(l_0xc8b77b)
 
 l_0xc8b77b:
 	"@Twenty bucks per person is fine with me." linebreak
 	show_wallet
 	two_choice_menu("Yes", l_0xc8b7e4, "No", l_0xc8b7b4)
-	goto(l_0xc8b7b4)
 
 l_0xc8b7b4:
 	"@I understand." next
@@ -484,7 +489,8 @@ l_0xc8b7b4:
 
 l_0xc8b7e4:
 	get_party_size_times(20) swap	// 0x14
-	hasmoney(0) goto_if_false(l_0xc8b82e)
+	hasmoney(0)
+	goto_if_false(l_0xc8b82e)
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)
 	show_wallet
@@ -532,7 +538,6 @@ l_0xc8b9c4:
 	"  Magic cake?" next
 	"@You came all this way just to eat my Magic cake?" linebreak
 	two_choice_menu("Yes", l_0xc8ba45, "No", l_0xc8ba12)
-	goto(l_0xc8ba12)
 
 l_0xc8ba12:
 	"@Okay then,/| don't get in my way while I search for the little girl within me..." end
@@ -542,8 +547,10 @@ l_0xc8ba45:
 	"@Why don't you stop by a little cart out on the beach later?" wait
 	pause(60) linebreak
 	window_closeall
+
 	npc_do_mc(1002,682)	// 0x03EA, 0x02AA
 	wait_movement
+
 	set(FLG_SUMS_STOIC_WIFE_DISAPPEAR)	// 617
 	eob
 
@@ -584,6 +591,7 @@ l_0xc8d9ed:
 	goto_if_flag(FLG_WIN_GEPPU, data_46.l_0xc8dad5)	// 0x47, 71
 	goto_if_flag(FLG_PUT_ZOMBI_HOIHOI, l_0xc8da5d)	// 0x7C, 124
 	goto_if_flag(FLG_ITEM_HOIHOI, l_0xc8da31)	// 0x0228, 552
+
 	"@How can we defeat the zombies?" pause(20)
 	"  ...Oh... Uh... I just don't know!" end
 

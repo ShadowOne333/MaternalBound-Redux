@@ -102,7 +102,7 @@ l_0xc5e6f4:
 l_0xc5e70b:	// Game startup at Ness' bed in Onett
 	set(FLG_YAZIUMA_DISAPPEAR)	// 469
 	set(FLG_SYS_MONSTER_OFF)	// 11
-	hide_char(-1)
+	hide_party	// 0xFF
 	sprite2_spawn(106,476,1)
 	call(data_57.l_0xc9b4b8)
 	warp(150)	// 0x96
@@ -128,7 +128,7 @@ l_0xc5e70b:	// Game startup at Ness' bed in Onett
 	music_resume
 	wait_movement
 	hide_sprite(26,6)	// 0x1A, 6
-	show_char(-1,1)
+	show_party(1)	// 0xFF, 0x01
 	sprite2_do_mc(106,626)	// 0x6A, 0x0272
 	focus_camera_on_sprite2(106)	// 0x6A
 	char_unfreeze(-1)
@@ -281,10 +281,10 @@ l_0xc5ea3d:
 
 l_0xc5ea45:
 	hotspot_off(1)	// 0x01
-	get_dir_from_char(5,1,1)	// 0x05, 0x01, 0x0001
+	get_dir_from_char(5,TO_CHAR,1)	// 0x05, 0x01, 0x0001
 	char_direction(5,0)	// 0x05, 0x00
 	window_open(1)
-	get_dir_from_char(1,1,5)	// 0x01, 0x01, 0x0005
+	get_dir_from_char(1,TO_CHAR,5)	// 0x01, 0x01, 0x0005
 	char_direction(1,0)	// 0x01, 0x00
 	title(1,Porky)
 	"@{name(1)}!" next
@@ -304,11 +304,11 @@ l_0xc5eacf:
 	window_closeall
 	music(118)
 	pause(60)
-	get_dir_from_char(1,2,198)	// 0x01, 0x02, 0x00C6
+	get_dir_from_char(1,TO_NPC,198)	// 0x01, 0x02, 0x00C6
 	char_direction(1,0)	// 0x01, 0x00
-	get_dir_from_char(5,2,198)	// 0x05, 0x02, 0x00C6
+	get_dir_from_char(5,TO_NPC,198)	// 0x05, 0x02, 0x00C6
 	char_direction(5,0)	// 0x05, 0x00
-	get_dir_from_char(6,2,198)	// 0x06, 0x02, 0x00C6
+	get_dir_from_char(6,TO_NPC,198)	// 0x06, 0x02, 0x00C6
 	char_direction(6,0)	// 0x06, 0x00
 	sprite2_unfreeze(197)	// 0x00C5
 	sprite2_spawn(106,54,1)	// 0x006A, 0x0036, 0x01
@@ -954,37 +954,37 @@ l_0xc5feac:
 
 l_0xc5fef4:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,570)	// 0x00, 0x02, 0x023A
+	get_dir_from_char(0,TO_NPC,570)	// 0x00, 0x02, 0x023A
 	call(l_0xc5ffb7)
 	eob
 
 l_0xc5ff03:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,580)	// 0x00, 0x02, 0x0244
+	get_dir_from_char(0,TO_NPC,580)	// 0x00, 0x02, 0x0244
 	call(l_0xc5ff82)
 	eob
 
 l_0xc5ff12:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,352)	// 0x00, 0x02, 0x0160
+	get_dir_from_char(0,TO_NPC,352)	// 0x00, 0x02, 0x0160
 	call(l_0xc5ff82)
 	eob
 
 l_0xc5ff21:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,790)	// 0x00, 0x02, 0x0316
+	get_dir_from_char(0,TO_NPC,790)	// 0x00, 0x02, 0x0316
 	call(l_0xc5ffb7)
 	eob
 
 l_0xc5ff30:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,791)	// 0x00, 0x02, 0x0317
+	get_dir_from_char(0,TO_NPC,791)	// 0x00, 0x02, 0x0317
 	call(l_0xc5ff82)
 	eob
 
 l_0xc5ff3f:
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,972)	// 0x00, 0x02, 0x03CC
+	get_dir_from_char(0,TO_NPC,972)	// 0x00, 0x02, 0x03CC
 	call(l_0xc5ffb7)
 	eob
 

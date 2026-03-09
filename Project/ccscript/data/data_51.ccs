@@ -32,18 +32,18 @@ l_0xc9370d:
 	"@Powerful.../| I..." next
 	"@so... show...|| everyone..." promptw
 	window_closeall
-	"[1F 16 EA 04 03]"
-	"[1F F1 EF 04 54 02]"
+	npc_direction(1258,3)	// 0x04EA, 0x03
+	npc_do_mc(1263,596)	// 0x04EF, 0x0254
 	wait_movement
-	"[1F E6 EF 04]"
+	npc_freeze(1263)	// 0x04EF
 	window_open(1)
 	"@Hu|u/u{pause(1)}up!" pause(15)
 	"  I got it!" pause(15)
 	"  I got it!  Eeeee yeah!!!" promptw
 	window_closeall
-	"[1F E9 EF 04]"
+	npc_unfreeze(1263)	// 0x04EF
 	wait_movement
-	"[1F 1E EF 04 06]"
+	npc_delete(1263,6)	// 0x04EF, 0x06
 	sound(SND_BEEP2)	// 121
 	set(FLG_GUMI_CAVEOPEN)	// 153
 	eob
@@ -215,13 +215,14 @@ l_0xc93eba:
 	"@I bet you'll regret not buying it." end
 
 l_0xc93ed2:
-	"[1D 14 62 00 00 00]"
-	goto_if_true(l_0xc93f2e)
-	"[1D 03 FF]"
+	hasmoney(98)	// 0x00000062
+	goto_if_false(l_0xc93f2e)
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc93f51)
-	"[1D 0E 00 A3]"
+
+	give_and_return_location(0, FOR_SALE_SIGN)	// 0x00, 0xA3 / 163
 	store_registers
-	"[1D 09 62 00]"
+	takemoney(98)	// 0x0062
 	show_wallet
 	sound(SND_GUITAR)	// 120
 	pause(1)
@@ -251,7 +252,7 @@ l_0xc93fd8:
 
 l_0xc93ffa:
 	// Item 0x8C / 140 = Ruler
-	get_buying_price(140) swap
+	get_buying_price(RULER) swap
 	"@Thank you!" pause(20) linebreak
 	"  That's {number(0)} clams!" linebreak
 	store_registers
@@ -261,13 +262,14 @@ l_0xc93ffa:
 
 l_0xc9403e:
 	load_registers
-	"[1D 14 00 00 00 00]"
-	goto_if_true(l_0xc94077)
-	"[1D 03 FF]"
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc94077)
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc94096)
-	"[1D 0E 00 8C]"
+
+	give_and_return_location(0, RULER)	// 0x00, 0x8C / 140
 	load_registers
-	"[1D 09 00 00]"
+	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_GUITAR)	// 120
 	"@Here you go,| one Ruler!" end
@@ -309,13 +311,15 @@ l_0xc941cd:
 
 l_0xc94231:
 	load_registers
-	"[1D 14 00 00 00 00]"
+	cannot_take_money(0)	// 0x00000000
 	goto_if_true(l_0xc94270)
-	"[1D 03 FF]"
+
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc94288)
-	"[1D 0E 00 5C]"
+
+	give_and_return_location(0, FRESH_EGG)	// 0x00, 0x5C / 92
 	load_registers
-	"[1D 09 00 00]"
+	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_GUITAR)	// 120
 	"@Okay,| here you are... one egg to go!" promptw
@@ -347,9 +351,11 @@ l_0xc9432b:
 l_0xc94359:
 	isset(FLG_TWSN_ITEM_TONCHIKI)	// 85
 	goto_if_false(l_0xc9432b)
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc943bd)
+
 	"@I heard that the kidnapped girl was saved." next
 	"@What?" pause(20)
 	"  You saved her?" next

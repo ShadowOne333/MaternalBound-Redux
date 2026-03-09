@@ -4,11 +4,12 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -17,820 +18,959 @@ command e(label) "{long label}"
 // Text Data
 
 l_0xc9dc2c:
-    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9dd87)	// 0x9B, 155
-    goto_if_flag(FLG_TEMP_1, l_0xc9dd78)
-    "@There's only one Tenda who's not shy." next
-    "@It's me, bubby!" next
-    "@You know what?" next
-    "@There's something scary that comes from the underground." next
-    "@So, we covered up the hole." next
-    "@There are lots of dinosaurs there." next
-    "@I went there once, but I came right back, 'cause I was so surprised!" next
-    "@There was a talking stone that talks a lot." next
-    "@Do you wanna go and see?" next
-    "@I understand." next
-    "@But I'm not as strong as I look." next
-    "@I'm sorry, I guess I can't help you." next
-    "@The guy next to me is strong, but he lacks conversation skills." next
-    "@He needs to overcome his shyness first." wait
-    set(FLG_TEMP_1)	// 2
-    eob
+	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9dd87)	// 0x9B, 155
+	goto_if_flag(FLG_TEMP_1, l_0xc9dd78)
+	"@There's only one Tenda who's not shy." next
+	"@It's me, bubby!" next
+	"@You know what?" next
+	"@There's something scary that comes from the underground." next
+	"@So, we covered up the hole." next
+	"@There are lots of dinosaurs there." next
+	"@I went there once, but I came right back, 'cause I was so surprised!" next
+	"@There was a talking stone that talks a lot." next
+	"@Do you wanna go and see?" next
+	"@I understand." next
+	"@But I'm not as strong as I look." next
+	"@I'm sorry, I guess I can't help you." next
+	"@The guy next to me is strong, but he lacks conversation skills." next
+	"@He needs to overcome his shyness first." wait
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc9dd78:
-    "@Oh, I wanna talk..." end
+	"@Oh, I wanna talk..." end
 
 l_0xc9dd87:
-    "@Recently,{pause(15)} everyone is able to talk a lot,{pause(15)} so I've lost my identity." end
+	"@Recently,| everyone is able to talk a lot,| so I've lost my identity." end
 
 l_0xc9ddb4:
-    goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9ddc0)	// 0x9B, 155
-    goto(data_58.l_0xc9d735)
+	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9ddc0)	// 0x9B, 155
+	goto(data_58.l_0xc9d735)
 
 l_0xc9ddc0:
-    call(data_47.l_0xc902f2) eob
+	call(data_47.l_0xc902f2)
+	eob
 
 l_0xc9ddc6:
-    "@Thanks for talking to me." end
+	"@Thanks for talking to me." end
 
 l_0xc9ddd1:
-    "@The underground talking rock seems to want to talk a lot more than I do." end
+	"@The underground talking rock seems to want to talk a lot more than I do." end
 
 l_0xc9ddf8:
-    "@This is the Earth's belly button!" end
+	"@This is the Earth's belly button!" end
 
 l_0xc9de0e:
-    title(1, Rock)
-    "[06 A7 01 {e(data_35.l_0xc7c588)}][06 80 01 {e(l_0xc9e252)}]{music(119)}[06 02 00 {e(l_0xc9e041)}]@You finally came, {stat(8)}." next
-    "[19 05 01 01 01][19 05 01 02 01][19 05 01 06 01][1E 00 01 64][1E 04 01 64]{sound(37)}{pause(10)}@At last, you speak to me." next
-    "@Listen {stat(8)}." next
-    "@I'm going to tell you something very important." next
-    "@You may want to take notes." next
-    "@Ready?" next
-    "{pause(60)}" linebreak
-    "@You're the chosen one." next
-    "@Your destiny is not only yours..." next
-    "@It's the destiny of the whole universe." next
-    "@There will be a time in which every part of you will become one with the universe." next
-    "@...It's not necessary to understand now." next
-    "@Do you remember <Giant Step> in Onett?" next
-    "@That is one of <Your Sanctuary.>" next
-    "@It is a spot which gives you power" next
-    "@and allows you to realize all your skills." next
-    "@There was a monster that protected it." next
-    "@The monster was influenced by the power of the place." next
-    "@You must have beaten those monsters." next
-    "@You must reach all of the eight power spots in the world..." next
-    "@When the Sound Stone records the melodies of all eight power spots," next
-    "@you can finally see <Your World.>" next
-    goto(l_0xc9e041)
+	title(1, Rock)
+	goto_if_flag(FLG_INFO_POWR, data_35.l_0xc7c588)	// 0x01A7, 423
+	goto_if_flag(FLG_POWR_ALL, l_0xc9e252)	// 0x0180, 384
+	music(119)
+	goto_if_flag(FLG_TEMP_1, l_0xc9e041)	// 0x0002, 2
+	"@You finally came, {stat(8)}." next
+	inflict_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x01, 0x01, 0x01
+	inflict_status(1, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x01, 0x02, 0x01
+	inflict_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 0x01, 0x06, 0x01
+	heal_percent(1,100)	// 0x01, 0x64
+	recoverpp_percent(1,100)	// 0x01, 0x64
+	sound(SND_STATUSRECOVER)	// 37
+	pause(10)
+	"@At last, you speak to me." next
+	"@Listen {stat(8)}." next
+	"@I'm going to tell you something very important." next
+	"@You may want to take notes." next
+	"@Ready?" next
+	pause(60) linebreak
+	"@You're the chosen one." next
+	"@Your destiny is not only yours..." next
+	"@It's the destiny of the whole universe." next
+	"@There will be a time in which every part of you will become one with the universe." next
+	"@...It's not necessary to understand now." next
+	"@Do you remember <Giant Step> in Onett?" next
+	"@That is one of <Your Sanctuary.>" next
+	"@It is a spot which gives you power" next
+	"@and allows you to realize all your skills." next
+	"@There was a monster that protected it." next
+	"@The monster was influenced by the power of the place." next
+	"@You must have beaten those monsters." next
+	"@You must reach all of the eight power spots in the world..." next
+	"@When the Sound Stone records the melodies of all eight power spots," next
+	"@you can finally see <Your World.>" next
 
 l_0xc9e041:
-    "@I'll tell you all of the power spots." next
-    pause(60) linebreak
-    "@1. <Giant Step> in Onett." next
-    pause(30) linebreak
-    "@2. <Lilliput Steps> in Grateful Dead Valley near Twoson." next
-    pause(30) linebreak
-    "@3. <Milky Well> in Grapefruit Falls in Saturn Valley." next
-    pause(30) linebreak
-    "@4. <Rainy Circle> found by {name(3)} in Winters." next
-    pause(30) linebreak
-    "@5. <Magnet Hill> at the edge of the city of Fourside." next
-    pause(30) linebreak
-    "@6. <Pink Cloud> which {name(4)} knows." next
-    pause(30) linebreak
-    "@7. and... <Lumine Hall> where the shining lichen lives in the cave." next
-    pause(30) linebreak
-    "@8. A new place is now going to be opened up to you." next
-    "@<Fire Spring,> located southwest of here." next
-    pause(60) linebreak
-    "@Listen to the melodies of all eight power spots." next
-    "@If you do not fail, you may upset Giygas' plans..." next
-    "@Understand, {name(1)}?" next
-    "@The time will come." next
-    "@The moment when your destiny becomes one with the destiny of the universe..." next
-    "@Is close at hand." wait
-    music_resume
-    set(FLG_TEMP_1)	// 2
-    eob
+	"@I'll tell you all of the power spots." next
+	pause(60) linebreak
+	"@1. <Giant Step> in Onett." next
+	pause(30) linebreak
+	"@2. <Lilliput Steps> in Grateful Dead Valley near Twoson." next
+	pause(30) linebreak
+	"@3. <Milky Well> in Grapefruit Falls in Saturn Valley." next
+	pause(30) linebreak
+	"@4. <Rainy Circle> found by {name(3)} in Winters." next
+	pause(30) linebreak
+	"@5. <Magnet Hill> at the edge of the city of Fourside." next
+	pause(30) linebreak
+	"@6. <Pink Cloud> which {name(4)} knows." next
+	pause(30) linebreak
+	"@7. and... <Lumine Hall> where the shining lichen lives in the cave." next
+	pause(30) linebreak
+	"@8. A new place is now going to be opened up to you." next
+	"@<Fire Spring,> located southwest of here." next
+	pause(60) linebreak
+	"@Listen to the melodies of all eight power spots." next
+	"@If you do not fail, you may upset Giygas' plans..." next
+	"@Understand, {name(1)}?" next
+	"@The time will come." next
+	"@The moment when your destiny becomes one with the destiny of the universe..." next
+	"@Is close at hand." wait
+	music_resume
+	set(FLG_TEMP_1)	// 2
+	eob
 
 l_0xc9e252:
-    "@I don't need words anymore." next
-    "@I'll turn back into a simple rock." wait
-    set(FLG_INFO_POWR)	// 423
-    eob
+	"@I don't need words anymore." next
+	"@I'll turn back into a simple rock." wait
+	set(FLG_INFO_POWR)	// 423
+	eob
 
 l_0xc9e27b:
-    goto_if_flag(FLG_WIN_LUMI_BOSS, data_35.l_0xc7c588)	// 0xC4, 196
-    counter(1)
-    call(data_36.l_0xc7dc7f)
-    goto_if_true(data_24.l_0xc690a6)
-    music(155)
-    "@You finally got here." next
-    "@This is the seventh <Your Sanctuary> location."
-    pause(20) linebreak
-    "  But it's mine now." next
-    "@Take it from me,{pause(30)} if you dare..."
-    promptw
-    call(data_23.l_0xc68433)
-    goto_if_true(data_23.l_0xc683de)
-    hide_sprite(1246, 8)	// 04DE, 8
-    pause(120)
-    set(FLG_WIN_LUMI_BOSS)	// 196
-    eob
+	goto_if_flag(FLG_WIN_LUMI_BOSS, data_35.l_0xc7c588)	// 0xC4, 196
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(data_24.l_0xc690a6)
+	music(155)
+	"@You finally got here." next
+	"@This is the seventh <Your Sanctuary> location." pause(20) linebreak
+	"  But it's mine now." next
+	"@Take it from me,|| if you dare..." promptw
+	call(data_23.l_0xc68433)
+	goto_if_true(data_23.l_0xc683de)
+	hide_sprite(1246, 8)	// 04DE, 8
+	pause(120)
+	set(FLG_WIN_LUMI_BOSS)	// 196
+	eob
 
 l_0xc9e2f5:
-    "@Good evening." next
-    "@I'm a talking rock." next
-    "@But the rocks around here don't talk too much." next
-    "@The rock that talks the most is deep down in the labyrinth way ahead..." next
-    "@in the <Lost Underworld.>" next
-    "@Don't forget to talk to the rock!{pause(20)}  It's important!" wait
-    set(FLG_GUMI_TALKERSTONE)	// 649
-    eob
+	"@Good evening." next
+	"@I'm a talking rock." next
+	"@But the rocks around here don't talk too much." next
+	"@The rock that talks the most is deep down in the labyrinth way ahead..." next
+	"@in the <Lost Underworld.>" next
+	"@Don't forget to talk to the rock!" pause(20)
+	"  It's important!" wait
+	set(FLG_GUMI_TALKERSTONE)	// 649
+	eob
 
 l_0xc9e37e:
-    goto_if_flag(FLG_ITEM_MONKY_MIND, l_0xc9e567)	// 0x028A, 650
-    goto_if_flag(FLG_TEMP_9, l_0xc9e4eb)	// 0x0A, 10
-    "@I heard monkeys living in some desert can teleport." next
-    "@Oh, you learned how to teleport from the monkeys?" next
-    pause(60) linebreak
-    "@...I wanna try!" next
-    "@Will you tell me how to do it?!" linebreak
-    "[19 02]Yes" eob
-
-l_0xc9e3f2:
-    "[19 02]No" eob
-
-l_0xc9e3f7:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9e421)} {e(l_0xc9e406)}]" goto(l_0xc9e406)
+	goto_if_flag(FLG_ITEM_MONKY_MIND, l_0xc9e567)	// 0x028A, 650
+	goto_if_flag(FLG_TEMP_9, l_0xc9e4eb)	// 0x0A, 10
+	"@I heard monkeys living in some desert can teleport." next
+	"@Oh, you learned how to teleport from the monkeys?" next
+	pause(60) linebreak
+	"@...I wanna try!" next
+	"@Will you tell me how to do it?!" linebreak
+	two_choice_menu("Yes", l_0xc9e421, "No", l_0xc9e406)
 
 l_0xc9e406:
-    "@You don't want to have a monkey for a student, do you?" end
+	"@You don't want to have a monkey for a student, do you?" end
 
 l_0xc9e421:
-    window_closeall
-    pause(30)
-    window_open(1)
-    "@Okay...{pause(20)}  I'll try it." promptw
-    window_closeall
-    "[1F F1 CA 04 D1 01][1F 61][1F E6 CA 04]{pause(60)}[1F E9 CA 04]{music(13)}[1F 61][1F 1E CA 04 06][1F 15 0D 00 08 00 01]{music(14)}{pause(120)}{music_resume}[1F 1F 0D 00 06][1F 17 CA 04 D2 01 01][1F 61][1F E6 CA 04][19 10 01]{rtoarg}[19 23 CA 04 01 00 00][1F 16 CA 04 00]"
-    window_open(1)
-    "@I'll never give up!{pause(20)}" linebreak
-    "  I wanna try again." promptw
-    window_closeall
-    "[1F E9 CA 04][1F 61]{music(13)}[1F 61]{music_resume}[19 10 01]{rtoarg}[19 23 CA 04 01 00 00][1F 16 CA 04 00]"
-    window_open(1)
-    "@I did it!" next
-    "@Did you see me?"
-    pause(20) linebreak
-    "  That's awesome!" next
-    goto(l_0xc9e4eb)
+	window_closeall
+	pause(30)
+
+	window_open(1)
+	"@Okay..." pause(20)
+	"  I'll try it." promptw
+	window_closeall
+
+	npc_do_mc(1226,465)	// 0x04CA, 0x01D1
+	wait_movement
+
+	npc_freeze(1226)	// 0x04CA
+	pause(60)
+	npc_unfreeze(1226)	// 0x04CA
+	music(13)
+	wait_movement
+
+	npc_delete(1226,6)	// 0x04CA, 0x06
+	sprite2_spawn(13,8,1)	// 0x000D, 0x0008, 0x01
+	music(14)
+	pause(120)
+	music_resume
+	sprite2_delete(13,6)	// 0x000D, 0x06
+	npc_spawn(1226,466,1)	// 0x04CA, 0x01D2, 0x01
+	wait_movement
+
+	npc_freeze(1226)	// 0x04CA
+	get_char_at_pos(1) rtoarg	// 0x01
+	get_dir_from_npc(1226,TO_CHAR,0)	// 0x04CA, 0x01, 0x0000
+	npc_direction(1226,0)	// 0x04CA, 0x00
+
+	window_open(1)
+	"@I'll never give up!" pause(20) linebreak
+	"  I wanna try again." promptw
+	window_closeall
+
+	npc_unfreeze(1226)	// 0x04CA
+	wait_movement
+	music(13)
+	wait_movement
+	music_resume
+	get_char_at_pos(1)	// 0x01
+	rtoarg
+	get_dir_from_npc(1226,TO_CHAR,0)	// 0x04CA, 0x01, 0x0000
+	npc_direction(1226,0)	// 0x04CA, 0x00
+	window_open(1)
+	"@I did it!" next
+	"@Did you see me?" pause(20) linebreak
+	"  That's awesome!" next
 
 l_0xc9e4eb:
-    "@Here's a small gift to thank you." next
-    "[1D 03 FF][1B 02 {e(l_0xc9e51f)}][1D 0E 00 D1][1B 05]" call(data_36.l_0xc7dccf) "{set(flag 650)}{unset(flag 10)}" end
+	"@Here's a small gift to thank you." next
+	get_item_receiver(-1)	// 0xFF
+	goto_if_false(l_0xc9e51f)
+
+	give_and_return_location(0, MONKEYS_LOVE)	// 0x00, 0xD1 / 209
+	store_registers_shared
+	call(data_36.l_0xc7dccf)
+
+	set(FLG_ITEM_MONKY_MIND)	// 650
+	unset(FLG_TEMP_9)	// 10
+	end
 
 l_0xc9e51f:
-    "@Are you sure you can't accept this?" next
-    "@...I know you have no room, so you can't carry it,{pause(15)} but..." next
-    "@...I wanted to give you" linebreak
-    "  the <[1C 05 D1].>" wait
-    set(FLG_TEMP_9)	// 10
-    eob
+	"@Are you sure you can't accept this?" next
+	"@...I know you have no room, so you can't carry it,| but..." next
+	"@...I wanted to give you" linebreak
+	"  the <{itemname(MONKEYS_LOVE)}.>" wait
+	set(FLG_TEMP_9)	// 10
+	eob
 
 l_0xc9e567:
-    "@Do you have the" linebreak
-    "  <[1C 05 D1]>?" end
+	"@Do you have the" linebreak
+	"  <{itemname(MONKEYS_LOVE)}>?" end
 
 l_0xc9e578:
-    goto_if_flag(FLG_MAKYO_USE_TAKANOME, l_0xc9e5c9)	// 0x0120, 288
-    "@It's really dark here in the Deep Darkness, isn't it?" next
-    "@It's pretty creepy, don't you think?" next
-    "@If you don't have the [1C 05 AF] here, you're helpless." end
+	goto_if_flag(FLG_MAKYO_USE_TAKANOME, l_0xc9e5c9)	// 0x0120, 288
+	"@It's really dark here in the Deep Darkness, isn't it?" next
+	"@It's pretty creepy, don't you think?" next
+	"@If you don't have the {itemname(HAWK_EYE)} here, you're helpless." end
 
 l_0xc9e5c9:
-    "@I was born in this dark, creepy area." next
-    "@I live, grow up... and die here." next
-    "@That's my entire life as a monkey!..." end
+	"@I was born in this dark, creepy area." next
+	"@I live, grow up... and die here." next
+	"@That's my entire life as a monkey!..." end
 
 l_0xc9e613:
-    call(data_48.l_0xc90d23) eob
+	call(data_48.l_0xc90d23)
+	eob
 
 l_0xc9e619:
-    title(1, Belch)
-    goto_if_flag(FLG_WIN_GEROPP, data_35.l_0xc7c588)	// 0x0114, 276
-    music(134)
-    "@You may have forgotten, but *Buuuuurp!*..." next
-    "@I'm the return of Belch!{sound(78)}{pause(1)}" next
-    title(1, Belch2)
-    "@I've fought you before." next
-    "{sound(78)}{pause(1)}@Peeeeyouuu!" next
-    "@Don't you remember my ripe odor?" next
-    "@Belch has trained more and has returned much stronger." next
-    "@Buuuurp!"
-    pause(20)
-    sound(SND_WHIRR)	// 78
-    pause(1)
-    "  Belch has also changed his name to Barf!..." next
-    title(1, Barf)
-    "@Puke!  Vomit!  Barf, barf!  Chuck!  Chuck!" next
-    "@Drown in puke and die!" next
-    "@Don't you think that's an incredibly masculine taunt to throw at you?" promptw
-    call(data_23.l_0xc68570)
-    goto_if_true(data_23.l_0xc683de)
-    add_party_member(4)	// Add Poo
-    learnpsi(4, 2)	// Make Poo learn Starstorm
-    set(flag 276)
-    pause(1)
-    change_npc_movement(1229, 635)	// 04CD, 027B
-    eob
+	title(1, Belch)
+	goto_if_flag(FLG_WIN_GEROPP, data_35.l_0xc7c588)	// 0x0114, 276
+	music(134)
+
+	"@You may have forgotten, but *Buuuuurp!*..." next
+	"@I'm the return of Belch!"
+	sound(SND_WHIRR)	// 78
+	pause(1)
+
+	next
+	title(1, Belch2)
+	"@I've fought you before." next
+	sound(SND_WHIRR)	// 78
+	pause(1)
+	"@Peeeeyouuu!" next
+	"@Don't you remember my ripe odor?" next
+	"@Belch has trained more and has returned much stronger." next
+	"@Buuuurp!" pause(20)
+	sound(SND_WHIRR)	// 78
+	pause(1)
+	"  Belch has also changed his name to Barf!..." next
+
+	title(1, Barf)
+	"@Puke!  Vomit!  Barf, barf!  Chuck!  Chuck!" next
+	"@Drown in puke and die!" next
+	"@Don't you think that's an incredibly masculine taunt to throw at you?" promptw
+
+	call(data_23.l_0xc68570)
+	goto_if_true(data_23.l_0xc683de)
+
+	party_add(4)	// Add Poo
+	learn_starstorm_alpha	// Make Poo learn Starstorm, 0x04, 0x02
+	set(FLG_WIN_GEROPP)	// 276
+	pause(1)
+	npc_do_mc(1229,635)	// 04CD, 027B
+	eob
 
 l_0xc9e763:
-    "@Kaweeeek!" next
-    "@Village Tenda's Comes Nobody" next
-    "@Far It's Because.  Kweek." end
+	"@Kaweeeek!" next
+	"@Village Tenda's Comes Nobody" next
+	"@Far It's Because.  Kweek." end
 
 l_0xc9e79f:
-    call(l_0xc9e81c)
-    goto_if_false(l_0xc9e843)
-    call(l_0xc9e838)
-    set(FLG_MAKYO_MTRUFFLE_1_DISAPPEAR)	// 439
-    hide_sprite(1240, 6)	// 04D8, 6
-    eob
+	call(l_0xc9e81c)
+	goto_if_false(l_0xc9e843)
+	call(l_0xc9e838)
+	set(FLG_MAKYO_MTRUFFLE_1_DISAPPEAR)	// 439
+	hide_sprite(1240,6)	// 04D8, 6
+	eob
 
 l_0xc9e7b8:
-    call(l_0xc9e81c)
-    goto_if_false(l_0xc9e843)
-    call(l_0xc9e838)
-    set(FLG_MAKYO_MTRUFFLE_2_DISAPPEAR)	// 440
-    hide_sprite(1241, 6)	// 04D9, 6
-    eob
+	call(l_0xc9e81c)
+	goto_if_false(l_0xc9e843)
+	call(l_0xc9e838)
+	set(FLG_MAKYO_MTRUFFLE_2_DISAPPEAR)	// 440
+	hide_sprite(1241,6)	// 04D9, 6
+	eob
 
 l_0xc9e7d1:
-    call(l_0xc9e81c)
-    goto_if_false(l_0xc9e843)
-    call(l_0xc9e838)
-    set(FLG_MAKYO_MTRUFFLE_3_DISAPPEAR)	// 441
-    hide_sprite(1242, 6)	// 04DA, 6
-    eob
+	call(l_0xc9e81c)
+	goto_if_false(l_0xc9e843)
+	call(l_0xc9e838)
+	set(FLG_MAKYO_MTRUFFLE_3_DISAPPEAR)	// 441
+	hide_sprite(1242,6)	// 04DA, 6
+	eob
 
 l_0xc9e7ea:
-    call(l_0xc9e81c)
-    goto_if_false(l_0xc9e843)
-    call(l_0xc9e838)
-    set(FLG_MAKYO_MTRUFFLE_4_DISAPPEAR)	// 442
-    hide_sprite(1243, 6)	// 04DB, 6
-    eob
+	call(l_0xc9e81c)
+	goto_if_false(l_0xc9e843)
+	call(l_0xc9e838)
+	set(FLG_MAKYO_MTRUFFLE_4_DISAPPEAR)	// 442
+	hide_sprite(1243,6)	// 04DB, 6
+	eob
 
 l_0xc9e803:
-    call(l_0xc9e81c)
-    goto_if_false(l_0xc9e843)
-    call(l_0xc9e838)
-    set(FLG_MAKYO_MTRUFFLE_5_DISAPPEAR)	// 443
-    hide_sprite(1244, 6)	// 04DC, 6
-    eob
+	call(l_0xc9e81c)
+	goto_if_false(l_0xc9e843)
+	call(l_0xc9e838)
+	set(FLG_MAKYO_MTRUFFLE_5_DISAPPEAR)	// 443
+	hide_sprite(1244,6)	// 04DC, 6
+	eob
 
 l_0xc9e81c:
-    "@Hey!" next
-    // Magic truffle, 0x63, 99
-    "@There's a {itemname(99)} at your feet." next
-    char_inventory_vacancy(-1)	// FF
-    eob
+	"@Hey!" next
+	// Magic truffle, 0x63, 99
+	"@There's a {itemname(MAGIC_TRUFFLE)} at your feet." next
+	get_item_receiver(-1)	// FF
+	eob
 
 l_0xc9e838:
-    give_and_check(0, 99)	// Give Magic truffle
-    call(data_36.l_0xc7dccf) end
+	give_and_return_location(0, MAGIC_TRUFFLE)	// Give Magic truffle
+	call(data_36.l_0xc7dccf)
+	end
 
 l_0xc9e843:
-    "@But you have no room." next
-    // Magic truffle, 0x63, 99
-    "@" call(data_37.l_0xc7e6d7) " gives up the {itemname(99)}." end
+	"@But you have no room." next
+	// Magic truffle, 0x63, 99
+	"@" call(data_37.l_0xc7e6d7) " gives up the {itemname(MAGIC_TRUFFLE)}." end
 
 l_0xc9e865:
-    "@I don't feel it's necessary for us to talk." end
+	"@I don't feel it's necessary for us to talk." end
 
 l_0xc9e87d:
-    "@Hi, how are you?{pause(20)}" linebreak
-    "  I'm not a bad guy." next
-    "@I came from one of the world's largest economic powers" next
-    "@to this small rural village." next
-    "@A businessman that is truly tough has to travel this far" next
-    "@for the best opportunities." next
-    "@...And I'm a tough businessman, yessir!" next
-    "@I am also a representative of the doctor over there." next
-    "@A: Do you want to buy...?" next
-    "@B: Do you want to heal...?" next
-    "[19 02]A" eob
-
-l_0xc9e96d:
-    "[19 02]B" eob
-
-l_0xc9e971:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9e985)} {e(l_0xc9e9c6)}]" goto(l_0xc9ea20)
+	"@Hi, how are you?" pause(20) linebreak
+	"  I'm not a bad guy." next
+	"@I came from one of the world's largest economic powers" next
+	"@to this small rural village." next
+	"@A businessman that is truly tough has to travel this far" next
+	"@for the best opportunities." next
+	"@...And I'm a tough businessman, yessir!" next
+	"@I am also a representative of the doctor over there." next
+	"@A: Do you want to buy...?" next
+	"@B: Do you want to heal...?" next
+	two_choice_menu("A", l_0xc9e985, "B", l_0xc9e9c6)
+	goto(l_0xc9ea20)
 
 l_0xc9e985:
-    "@...Needless to say, this is a rural village." next
-    "@...Heh heh,{pause(15)} we have poor items." next
-    call(data_13.l_0xc5d54b) eob
+	"@...Needless to say, this is a rural village." next
+	"@...Heh heh,| we have poor items." next
+	call(data_13.l_0xc5d54b)
+	eob
 
 l_0xc9e9c6:
-    "@If you must talk to the doctor,{pause(15)} please,{pause(15)} PLEASE talk to me first." next
-    "@Do you have business with the doctor?" next
-    "[19 02]Yes" eob
-
-l_0xc9ea0c:
-    "[19 02]No" eob
-
-l_0xc9ea11:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9ea6f)} {e(l_0xc9ea20)}]" goto(l_0xc9ea20)
+	"@If you must talk to the doctor,| please,| PLEASE talk to me first." next
+	"@Do you have business with the doctor?" next
+	two_choice_menu("Yes", l_0xc9ea6f, "No", l_0xc9ea20)
 
 l_0xc9ea20:
-    "@Okay." next
-    "@If you attempt to talk with the doctor without first going through me," next
-    "@it violates the law.{pause(20)}  Please be careful." end
+	"@Okay." next
+	"@If you attempt to talk with the doctor without first going through me," next
+	"@it violates the law." pause(20)
+	"  Please be careful." end
 
 l_0xc9ea6f:
-    "@It's a special treatment." next
-    "@You'll be in perfect health with just one treament." next
-    "@The fee for one treatment is $500." next
-    "@Do you agree to the fee?" linebreak
-    call(data_36.l_0xc7dd4b) "[11]{clearline}[09 02 {e(l_0xc9eadb)} {e(l_0xc9ea20)}]" goto(l_0xc9ea20)
+	"@It's a special treatment." next
+	"@You'll be in perfect health with just one treament." next
+	"@The fee for one treatment is $500." next
+	"@Do you agree to the fee?" linebreak
+	open_hp
+	show_wallet
+	two_choice_menu("Yes", l_0xc9eadb, "No", l_0xc9ea20)
+	goto(l_0xc9ea20)
 
 l_0xc9eadb:
-    "@I can pick up the fee for you now, if you want." next
-    "@What would you like to do?" linebreak
-    "[19 02]Let him pay" eob
-
-l_0xc9eb0d:
-    "[19 02]Cash" eob
-
-l_0xc9eb14:
-    "[1C 07 02][11]{clearline}[09 02 {e(l_0xc9eb5d)} {e(l_0xc9eb28)}]" goto(l_0xc9ea20)
+	"@I can pick up the fee for you now, if you want." next
+	"@What would you like to do?" linebreak
+	two_choice_menu("Let him pay", l_0xc9eb5d, "Cash", l_0xc9eb28)
+	goto(l_0xc9ea20)
 
 l_0xc9eb28:
-    "[1D 14 F4 01 00 00][1B 03 {e(l_0xc9eb41)}][1D 09 F4 01]{sound(118)}" call(l_0xc9eb76) eob
+	hasmoney(500)	// 0x000001F4
+	goto_if_false(l_0xc9eb41)
+	takemoney(500)	// 0x01F4
+	sound(SND_CHICKEN2)	// 118
+	call(l_0xc9eb76)
+	eob
 
 l_0xc9eb41:
-    "@Oh,{pause(10)} Oh...{pause(20)}  You don't seem to have enough money." next
-    goto(l_0xc9eb5d)
+	"@Oh,// Oh..." pause(20)
+	"  You don't seem to have enough money." next
 
 l_0xc9eb5d:
-    "{set(flag 654)}@I can pay for you now." next
-    "{sound(118)}" call(l_0xc9eb76) eob
+	set(FLG_MAKYO_TRADER_DEBT)	// 654
+	"@I can pay for you now." next
+	sound(SND_CHICKEN2)	// 118
+	call(l_0xc9eb76)
+	eob
 
 l_0xc9eb76:
-    "[19 23 D1 04 02 D2 04][1F 16 D1 04 00]"
-    pause(10)
-    "@Doc,{pause(15)} please treat the next patient!" next
-    "@...Treat " call(l_0xc9ec62) " right, okay!?{wait}{window_closeall}[1F F1 D2 04 A9 02][1F 61][1F E6 D2 04][19 10 01]{rtoarg}{window_open(1)}@(The great doctor whispered in each ear,{pause(15)} first right then left,{pause(15)} <be healthy.>){wait}" call(data_49.l_0xc9162c) "{window_closeall}[1F E9 D2 04][1F 61][1F F1 D2 04 5D 02]{pause(1)}[1F 16 D2 04 03]{pause(30)}[19 23 D1 04 01 FF 00][1F 16 D1 04 00]"
-    pause(10)
-    window_open(1)
-    "@I'm happy to do business with men outside of the monkey realm." next
-    "@Please come back again." wait
-    window_closeall
-    eob
+	get_dir_from_npc(1233,TO_NPC,1234)	// 0x04D1, 0x02, 0x04D2
+	npc_direction(1233,0)	// 0x04D1, 0x00
+
+	pause(10)
+	"@Doc,| please treat the next patient!" next
+	"@...Treat " call(l_0xc9ec62) " right, okay!?" wait
+	window_closeall
+
+	npc_do_mc(1234,681)	// 0x04D2, 0x02A9
+	wait_movement
+
+	npc_freeze(1234)	// 0x04D2
+
+	get_char_at_pos(1) rtoarg	// 0x01
+	window_open(1)
+	"@(The great doctor whispered in each ear,| first right then left,| <be healthy.>)" wait
+	call(data_49.l_0xc9162c)
+	window_closeall
+
+	npc_unfreeze(1234)	// 0x04D2
+	wait_movement
+
+	npc_do_mc(1234,605)	// 0x04D2, 0x025D
+	pause(1)
+	npc_direction(1234,3)	// 0x04D2, 0x03
+	pause(30)
+	get_dir_from_npc(1233,TO_CHAR,-1)	// 0x04D1, 0x01, 0x00FF
+	npc_direction(1233,0)	// 0x04D1, 0x00
+
+	pause(10)
+	window_open(1)
+	"@I'm happy to do business with men outside of the monkey realm." next
+	"@Please come back again." wait
+	window_closeall
+	eob
 
 l_0xc9ec62:
-    party_pos_check(1)
-    result_is(2)
-    goto_if_true(l_0xc9ec71)
-    "him" eob
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(l_0xc9ec71)
+
+	"him" eob
 
 l_0xc9ec71:
-    "her" eob
+	"her" eob
 
 l_0xc9ec74:
-    call(data_21.l_0xc65243) eob
+	call(data_21.l_0xc65243)
+	eob
 
 l_0xc9ec7a:
-    goto_if_flag(FLG_WIN_GIEGU, l_0xc9ecfe)	// 0x49, 73
-    counter(3)
-    call(data_36.l_0xc7dc7f)
-    goto_if_true(l_0xc9ecfe)
-    "[19 22 01 01 03 00][1F 13 01 00]"
-    "[19 22 02 01 03 00][1F 13 02 00]"
-    window_open(1)
-    pause(20)
-    title_jeff(1)
-    "@It's completely broken." next
-    "@I thought I could fix it,{pause(15)} but on re-examination..." next
-    "@...I noticed that there's no engine.{pause(20)}  Mmmm." wait
-    window_closeall
-    eob
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc9ecfe)	// 0x49, 73
+
+	counter(3)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc9ecfe)
+
+	get_dir_from_char(1,TO_CHAR,3)	// 0x01, 0x01, 0x0003
+	char_direction(1,0)	// 0x01, 0x00
+	get_dir_from_char(2,TO_CHAR,3)	// 0x02, 0x01, 0x0003
+	char_direction(2,0)	// 0x02, 0x00
+
+	window_open(1)
+	pause(20)
+	title_jeff(1)
+	"@It's completely broken." next
+	"@I thought I could fix it,| but on re-examination..." next
+	"@...I noticed that there's no engine." pause(20)
+	"  Mmmm." wait
+	window_closeall
+	eob
 
 l_0xc9ecfe:
-    "@(It's useless broken." next
-    "@Nobody's in the pilot's seat.)" end
+	"@(It's useless broken." next
+	"@Nobody's in the pilot's seat.)" end
 
 l_0xc9ed29:
-    "@*Ring* *ring*" next
-    call(data_18.l_0xc63029) eob
+	"@*Ring* *ring*" next
+	call(data_18.l_0xc63029)
+	eob
 
 l_0xc9ed3c:
-    "@This is the Deep Darkness." next
-    "@When you walk through the swamp,{pause(15)} you endanger your health." next
-    "@You can't help it.{pause(20)}" linebreak
-    "  That's why it's called Deep Darkness." end
+	"@This is the Deep Darkness." next
+	"@When you walk through the swamp,| you endanger your health." next
+	"@You can't help it." pause(20) linebreak
+	"  That's why it's called Deep Darkness." end
 
 l_0xc9ed95:
-    "@I wanna become a pig." next
-    "@If I become a pig, I can find the mushrooms called Magic truffles." next
-    "@They're located in the swamp and can be found by scent." next
-    "@You know, a Pig's nose would be enough to find those great truffles by scent alone." end
+	"@I wanna become a pig." next
+	"@If I become a pig, I can find the mushrooms called Magic truffles." next
+	"@They're located in the swamp and can be found by scent." next
+	"@You know, a Pig's nose would be enough to find those great truffles by scent alone." end
 
 l_0xc9ee2f:
-    "[1D 21 0D][09 0D {e(l_0xc9ee7f)} {e(l_0xc9ee9f)} {e(l_0xc9eec7)} {e(l_0xc9eede)} {e(l_0xc9ef00)} {e(l_0xc9efb9)} {e(l_0xc9efe1)} {e(l_0xc9eff6)} {e(l_0xc9f020)} {e(l_0xc9f042)} {e(l_0xc9f052)} {e(l_0xc9f074)} {e(l_0xc9f090)}]" goto(l_0xc9ee68)
+	random(13)	// 0x0D
+	switch_goto(13)	// 0x0D
+		switch_entry(l_0xc9ee7f)
+		switch_entry(l_0xc9ee9f)
+		switch_entry(l_0xc9eec7)
+		switch_entry(l_0xc9eede)
+		switch_entry(l_0xc9ef00)
+		switch_entry(l_0xc9efb9)
+		switch_entry(l_0xc9efe1)
+		switch_entry(l_0xc9eff6)
+		switch_entry(l_0xc9f020)
+		switch_entry(l_0xc9f042)
+		switch_entry(l_0xc9f052)
+		switch_entry(l_0xc9f074)
+		switch_entry(l_0xc9f090)
+	goto(l_0xc9ee68)
 
 l_0xc9ee68:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<.....{stat(8)}{pause(1)}...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<.....{stat(8)}{pause(1)}...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9ee7f:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<It hurts,{pause(30)}" linebreak
-    "  {stat(8)}{pause(1)}...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<It hurts," pause(30) linebreak
+	"  {stat(8)}{pause(1)}...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9ee9f:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...I'm h...{pause(10)} a...{pause(10)} p...{pause(10)} p...{pause(10)} y...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<...I'm h...// a...// p...// p...// y...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9eec7:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...{pause(20)}friends...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<.../|friends...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9eede:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...It hurts,{pause(20)} ...it hurts...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<...It hurts,/| ...it hurts...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9ef00:
-    text_blips(2)
-    newline
-    title(14, Giygas)
-    "@<{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}{pause(5)} {pause(15)}.....>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	text_blips(2)
+	newline
+	title(14, Giygas)
+	"@<{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}, {pause(1)}{stat(8)}/ |.....>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9efb9:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...{pause(1)}go... {pause(1)}b... {pause(1)}a... {pause(1)}c...{pause(1)}k...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<...{pause(1)}go... {pause(1)}b... {pause(1)}a... {pause(1)}c...{pause(1)}k...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9efe1:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...{stat(8)}{pause(1)}...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<...{stat(8)}{pause(1)}...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9eff6:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<I {pause(15)}feel...{pause(15)} g...{pause(15)} o...{pause(15)} o...{pause(15)} d...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<I| feel...| g...| o...| o...| d...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f020:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<...I'm so sad..." linebreak
-    "  .....{stat(8)}{pause(1)}.>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<...I'm so sad..." linebreak
+	"  .....{stat(8)}{pause(1)}.>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f042:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<{stat(8)}!>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<{stat(8)}!>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f052:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<Ah, {pause(20)} Grrr, {pause(15)} Ohhh...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<Ah, /| Grrr, | Ohhh...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f074:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<Argh...  Yaaagh!...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<Argh...  Yaaagh!...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f090:
-    newline
-    title(14, Giygas)
-    text_blips(2)
-    "@<It's not right...{pause(20)} not right...{pause(20)} not right...>"
-    text_blips(1)
-    promptw
-    window_open(14)
-    eob
+	newline
+	title(14, Giygas)
+	text_blips(2)
+	"@<It's not right.../| not right.../| not right...>"
+	text_blips(1)
+	promptw
+	window_open(14)
+	eob
 
 l_0xc9f0b8:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    newline
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please give us strength," prompt linebreak
-    "@if it is possible..." linebreak
-    "  Please, God, if you're there...>" prompt linebreak
-    "@<................" linebreak
-    "  Somebody... Help us...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	newline
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please give us strength," prompt
+	linebreak
+	"@if it is possible..." linebreak
+	"  Please, God, if you're there...>" prompt
+	linebreak
+	"@<................" linebreak
+	"  Somebody... Help us...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f134:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please give us strength!" prompt linebreak
-    "@Anyone who can hear our plea...." linebreak
-    "  Help us...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please give us strength!" prompt
+	linebreak
+	"@Anyone who can hear our plea...." linebreak
+	"  Help us...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f196:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please give us strength!" prompt linebreak
-    "@Speed this prayer" linebreak
-    "  to all the people of the Earth.>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please give us strength!" prompt
+	linebreak
+	"@Speed this prayer" linebreak
+	"  to all the people of the Earth.>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f1fd:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please give us strength!{prompt}" linebreak
-    "@Anyone who can hear our plea..." linebreak
-    "  Help us...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please give us strength!" prompt
+	linebreak
+	"@Anyone who can hear our plea..." linebreak
+	"  Help us...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f25e:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please grant us power!{prompt}" linebreak
-    "@Anyone who can hear our plea..." linebreak
-    "  Help us...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please grant us power!" prompt
+	linebreak
+	"@Anyone who can hear our plea..." linebreak
+	"  Help us...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f2bc:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please grant us strength!{prompt}" linebreak
-    "@Anyone who can hear our plea..." linebreak
-    "  We ask for this...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please grant us strength!" prompt
+	linebreak
+	"@Anyone who can hear our plea..." linebreak
+	"  We ask for this...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f325:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<...Please grant us power!{prompt}" linebreak
-    "@Speed this prayer" linebreak
-    "  to all the people of the Earth...>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<...Please grant us power!" prompt
+	linebreak
+	"@Speed this prayer" linebreak
+	"  to all the people of the Earth...>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f389:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<I can't think of" linebreak
-    "  anyone else...{prompt}" linebreak
-    "@...Someone, anyone..." linebreak
-    "  ...please help us.>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<I can't think of" linebreak
+	"  anyone else..." prompt
+	linebreak
+	"@...Someone, anyone..." linebreak
+	"  ...please help us.>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f3ec:
-    newline
-    sound(SND_PRAYING)	// 28
-    "@{user} prayed" linebreak
-    "  from the bottom of her heart!" promptw
-    pause(60)
-    window_open(14)
-    title_paula(14)
-    text_blips(2)
-    "@<Someone... can you hear me?!{prompt}" linebreak
-    "@Please, give us strength!>"
-    text_blips(1)
-    pause(150)
-    eob
+	newline
+	sound(SND_PRAYING)	// 28
+	"@{user} prayed" linebreak
+	"  from the bottom of her heart!" promptw
+	pause(60)
+	window_open(14)
+	title_paula(14)
+	text_blips(2)
+	"@<Someone... can you hear me?!" prompt
+	linebreak
+	"@Please, give us strength!>"
+	text_blips(1)
+	pause(150)
+	eob
 
 l_0xc9f442:
-    window_open(1)
-    "@(Suddenly," linebreak
-    "  {stat(8)}'s mother" linebreak
-    "  felt terribly uneasy," promptw linebreak
-    "@and she began to pray for the safety of her son and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	"@(Suddenly," linebreak
+	"  {stat(8)}'s mother" linebreak
+	"  felt terribly uneasy," promptw
+	linebreak
+	"@and she began to pray for the safety of her son and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f4a2:
-    window_open(1)
-    "@(Suddenly,{pause(10)}" linebreak
-    "  Nice{pause(20)} of the Runaway Brothers,{pause(20)}{prompt}" linebreak
-    "@felt something stop him,{prompt}" linebreak
-    "@and he prayed fervently for the safety of {stat(8)} and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	"@(Suddenly," pause(10) linebreak
+	"  Nice/| of the Runaway Brothers," pause(20) prompt
+	linebreak
+	"@felt something stop him," prompt
+	linebreak
+	"@and he prayed fervently for the safety of {stat(8)} and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f4f6:
-    window_open(1)
-    // 0x1E, 30
-    "@({stat(30)}'s father" linebreak
-    "  thought he somehow heard" linebreak
-    "  his daughter's voice,{prompt}" linebreak
-    "@and prayed sincerely for the" linebreak
-    "  safety of {stat(30)} and" linebreak
-    "  her friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	// 0x1E, 30
+	"@({stat(30)}'s father" linebreak
+	"  thought he somehow heard" linebreak
+	"  his daughter's voice," prompt
+	linebreak
+	"@and prayed sincerely for the" linebreak
+	"  safety of {stat(30)} and" linebreak
+	"  her friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f557:
-    window_open(1)
-    "@(Suddenly," linebreak
-    "  Tony felt anxious about {stat(52)}," prompt linebreak	// 0x34, 52
-    "@and he prayed strongly for the safety of {stat(52)} and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	"@(Suddenly," linebreak
+	"  Tony felt anxious about {stat(52)}," prompt linebreak	// 0x34, 52
+	"@and he prayed strongly for the safety of {stat(52)} and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f5a8:
-    window_open(1)
-    // 0x4A, 74
-    "@(A young woman in Dalaam woke from a dream in which Prince {stat(74)} died,{prompt}" linebreak
-    "@and she began to pray for the well-being of {stat(74)} and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	// 0x4A, 74
+	"@(A young woman in Dalaam woke from a dream in which Prince {stat(74)} died," prompt
+	linebreak
+	"@and she began to pray for the well-being of {stat(74)} and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f60d:
-    window_open(1)
-    "@(Suddenly," linebreak
-    "  Frank recalled {stat(8)}'s shining young face,{prompt}" linebreak
-    "@and began to pray diligently for the safety of {stat(8)} and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	"@(Suddenly," linebreak
+	"  Frank recalled {stat(8)}'s shining young face," prompt
+	linebreak
+	"@and began to pray diligently for the safety of {stat(8)} and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f66f:
-    window_open(1)
-    "@(All of the Mr. Saturns felt a new, startling feeling" prompt linebreak
-    "@they had never experienced before,{prompt}" linebreak
-    "@and they all started praying for the safety of {stat(8)} and his friends.)"
-    pause(150)
-    window_closeall
-    eob
+	window_open(1)
+	"@(All of the Mr. Saturns felt a new, startling feeling" prompt
+	linebreak
+	"@they had never experienced before," prompt
+	linebreak
+	"@and they all started praying for the safety of {stat(8)} and his friends.)"
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f6de:
-    pause(60)
-    window_open(1)
-    "@{stat(30)}'s call{pause(30)}" linebreak
-    "  was absorbed{pause(30)}" linebreak
-    "  by the darkness."
-    pause(150)
-    window_closeall
-    eob
+	pause(60)
+	window_open(1)
+	"@{stat(30)}'s call" pause(30) linebreak
+	"  was absorbed" pause(30) linebreak
+	"  by the darkness."
+	pause(150)
+	window_closeall
+	eob
 
 l_0xc9f70c:
-    pause(60)
-    window_open(1)
-    "@{stat(30)} and her friends' calls touched the heart of {counter(1)}" goto(l_0xc9f72f)
+	pause(60)
+	window_open(1)
+	"@{stat(30)} and her friends' calls touched the heart of {counter(1)}"
 
 l_0xc9f72f:
-    "[19 28 02][1B 02 {e(l_0xc9f756)}]{swap}[1D 21 63][18 07 3C 00 00 00 00][1B 02 {e(data_60.l_0xc9f7af)}][1C 11 00][1C 03 00]" goto(l_0xc9f750)
+	get_stat_letter(2)	// 0x02
+	goto_if_false(l_0xc9f756)
+
+	swap
+	random(99)	// 0x63
+	compare_result(60)	// 0x0000003C, 0x00
+	goto_if_false(data_60.l_0xc9f7af)
+
+	zwsp_before_letter(0)	// 0x00
+	letter(0)	// 0x00
 
 l_0xc9f750:
-    inc
-    goto(l_0xc9f72f)
+	inc
+	goto(l_0xc9f72f)
 
 l_0xc9f756:
-    "." prompt
-    pause(120)
-    window_clear
-    "@{counter(1)}" goto(l_0xc9f75f)
+	"."
+	prompt
+	pause(120)
+	window_clear
+	"@" counter(1)
 
 l_0xc9f75f:
-    "[19 28 02][1B 02 {e(data_60.l_0xc9f786)}]{swap}[1D 21 63][18 07 3C 00 00 00 00][1B 02 {e(data_60.l_0xc9f7b5)}][1C 11 00][1C 03 00]" goto(l_0xc9f780)
+	get_stat_letter(2)	// 0x02
+	goto_if_false(data_60.l_0xc9f786)
+
+	swap
+	random(99)	// 0x63
+	compare_result(60)	// 0x0000003C, 0x00
+	goto_if_false(data_60.l_0xc9f7b5)
+
+	zwsp_before_letter(0)	// 0x00
+	letter(0)	// 0x00
 
 l_0xc9f780:
-    inc
-    goto(l_0xc9f75f)
+	inc
+	goto(l_0xc9f75f)

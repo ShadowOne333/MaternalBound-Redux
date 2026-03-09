@@ -4,339 +4,625 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
+import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
+
 command e(label) "{long label}"
 
 // Text Data
 l_0xc913dd:
-    "[06 0A 00 {e(l_0xc91401)}]@If you are the patient, come into the back room." end
+	goto_if_flag(FLG_TEMP_9, l_0xc91401)	// 0x000A, 10
+	"@If you are the patient, come into the back room." end
 
 l_0xc91401:
-    "@You need to be examined?" linebreak
-    "  Then, you need to see the doctor... not me." end
+	"@You need to be examined?" linebreak
+	"  Then, you need to see the doctor... not me." end
 
 l_0xc9142c:
-    "@I'm not busy right now." next
-    "@Shall I explain about the hospital system?" linebreak
-    call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc91486)} {e(l_0xc9146d)}]" goto(l_0xc9146d)
+	"@I'm not busy right now." next
+	"@Shall I explain about the hospital system?" linebreak
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc91486)
+		switch_entry(l_0xc9146d)
 
 l_0xc9146d:
-    "@Yeah, well, I am actually pretty busy." end
+	"@Yeah, well, I am actually pretty busy." end
 
 l_0xc91486:
-    "@If a good friend of yours becomes unconscious," next
-    "@come to the hospital right away." next
-    "@As long as you have money for the doctor's fee," next
-    "@you'll be able to see your friend completely recovered in no time." next
-    "@Besides being unconscious, whenever" next
-    "@you don't feel so well, come and talk to a doctor." next
-    "@Everything I just told you applies to hospitals all over the world." end
+	"@If a good friend of yours becomes unconscious," next
+	"@come to the hospital right away." next
+	"@As long as you have money for the doctor's fee," next
+	"@you'll be able to see your friend completely recovered in no time." next
+	"@Besides being unconscious, whenever" next
+	"@you don't feel so well, come and talk to a doctor." next
+	"@Everything I just told you applies to hospitals all over the world." end
 
 l_0xc9155b:
-    "[1D 0D 01 01 02][1B 03 {e(l_0xc91581)}][1D 0D 02 01 02][1B 03 {e(l_0xc91581)}][1D 0D 03 01 02][1B 03 {e(l_0xc91581)}][1D 0D 04 01 02]" goto(l_0xc91581)
+	character_has_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x01, 0x01, 0x02
+	goto_if_true(l_0xc91581)
+	character_has_status(2, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x02, 0x01, 0x02
+	goto_if_true(l_0xc91581)
+	character_has_status(3, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x03, 0x01, 0x02
+	goto_if_true(l_0xc91581)
+	character_has_status(4, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x04, 0x01, 0x02
 
 l_0xc91581:
-    eob
+	eob
 
 l_0xc91582:
-    "{counter(1)}" goto(l_0xc91584)
+	counter(1)
 
 l_0xc91584:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc915be)}][19 10 00]{store_registers}[1D 0D 00 01 02][1B 03 {e(l_0xc915b8)}]{load_registers}[1D 0D 00 01 03][1B 03 {e(l_0xc915b8)}]{load_registers}{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc915b8)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc915be)
+
+	get_char_at_pos(0)	// 0x00
+	store_registers
+	character_has_status(0,1,2)	// 0x00, 0x01, 0x02
+	goto_if_true(l_0xc915b8)
+
+	load_registers
+	character_has_status(0,1,3)	// 0x00, 0x01, 0x03
+	goto_if_true(l_0xc915b8)
+
+	load_registers swap
+	heal_percent(0,100)	// 0x00, 0x64
+	recoverpp_percent(0,100)	// 0x00, 0x64
 
 l_0xc915b8:
-    "{inc}" goto(l_0xc91584)
+	inc
+	goto(l_0xc91584)	// Loop
 
 l_0xc915be:
-    call(l_0xc915c7) "{unset(flag 169)}" eob
+	call(l_0xc915c7)
+	unset(FLG_DAY_AFTER)	// 169
+	eob
 
 l_0xc915c7:
-    "[06 60 02 {e(l_0xc915cf)}]" eob
+	goto_if_flag(FLG_DSRT_SWITCH_BEFORE, l_0xc915cf)	// 0x0260, 608
+	eob
 
 l_0xc915cf:
-    "{set(flag 174)}{unset(flag 608)}" eob
+	set(FLG_DSRT_SWITCH)	// 174
+	unset(FLG_DSRT_SWITCH_BEFORE)	// 608
+	eob
 
 l_0xc915d6:
-    "{music(12)}{pause(200)}{music_resume}{pause(1)}" eob
+	music(12)
+	pause(200)
+	music_resume
+	pause(1)
+	eob
 
 l_0xc915e1:
-    call(l_0xc915f4) call(l_0xc915d6) call(l_0xc915c7) "{unset(flag 169)}" eob
+	call(l_0xc915f4)
+	call(l_0xc915d6)
+	call(l_0xc915c7)
+	unset(FLG_DAY_AFTER)	// 169
+	eob
 
 l_0xc915f4:
-    "{counter(1)}" goto(l_0xc915f6)
+	counter(1)
 
 l_0xc915f6:
-    "{ctoarg}{swap}{store_registers}{result_is(5)}[1B 03 {e(l_0xc9162b)}]{load_registers}[19 05 00 01 01][1B 02 {e(l_0xc91625)}][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc91625)
+	ctoarg swap
+	store_registers
+	result_is(5)
+	goto_if_true(l_0xc9162b)
+
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	goto_if_false(l_0xc91625)
+
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 0x00, 0x06, 0x01
+
+	swap
+	heal_percent(0,100)	// 0x00, 0x64
+	recoverpp_percent(0,100)	// 0x00, 0x64
+	goto(l_0xc91625)
 
 l_0xc91625:
-    "{inc}" goto(l_0xc915f6)
+	inc
+	goto(l_0xc915f6)	// Floop
 
 l_0xc9162b:
-    eob
+	eob
 
 l_0xc9162c:
-    "{counter(1)}" goto(l_0xc9162e)
+	counter(1)
 
 l_0xc9162e:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91674)}][19 10 00]{store_registers}[1D 0D 00 01 02][1B 02 {e(l_0xc9165a)}]{load_registers}[19 05 00 01 01]{swap}[1E 00 00 64][1E 04 00 64]" goto(l_0xc9165a)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc91674)
+
+	get_char_at_pos(0)	// 0x00
+	store_registers
+	character_has_status(0,1,2)	// 0x00, 0x01, 0x02
+	goto_if_false(l_0xc9165a)
+
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+
+	swap
+	heal_percent(0,100)	// 0x00, 0x64
+	recoverpp_percent(0,100)	// 0x00, 0x64
+	goto(l_0xc9165a)
 
 l_0xc9165a:
-    "{load_registers}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{sound(37)}{inc}" goto(l_0xc9162e)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 0x00, 0x06, 0x01
+	sound(SND_STATUSRECOVER)	// 37
+	inc
+	goto(l_0xc9162e)	// Loop
 
 l_0xc91674:
-    eob
+	eob
 
 l_0xc91675:
-    "{ctoarg}{swap}[19 05 00 01 01][19 05 00 02 01][19 05 00 06 01]{swap}[1E 00 00 64][1E 04 00 64]" eob
+	ctoarg swap
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	inflict_status(0, SCR_STATUS_GROUP_5, SCR_STATUS_5_NONE)	// 0x00, 0x06, 0x01
+
+	swap
+	heal_percent(0,100)	// 0x00, 0x64
+	recoverpp_percent(0,100)	// 0x00, 0x64
+	eob
 
 l_0xc91693:
-    call(data_48.l_0xc90f7d) call(l_0xc915d6) call(l_0xc91582) eob
+	call(data_48.l_0xc90f7d)
+	call(l_0xc915d6)
+	call(l_0xc91582)
+	eob
 
 l_0xc916a3:
-    "{set(flag 226)}" call(l_0xc91805) "{unset(flag 226)}" eob
+	set(FLG_SHOP_01)	// 226
+	call(l_0xc91805)
+	unset(FLG_SHOP_01)	// 226
+	eob
 
 l_0xc916af:
-    "{set(flag 227)}" call(l_0xc91805) "{unset(flag 227)}" eob
+	set(FLG_SHOP_02)	// 227
+	call(l_0xc91805)
+	unset(FLG_SHOP_02)	// 227
+	eob
 
 l_0xc916bb:
-    "{set(flag 228)}" call(l_0xc91805) "{unset(flag 228)}" eob
+	set(FLG_SHOP_03)	// 228
+	call(l_0xc91805)
+	unset(FLG_SHOP_03)	// 228
+	eob
 
 l_0xc916c7:
-    "{set(flag 229)}" call(l_0xc91805) "{unset(flag 229)}" eob
+	set(FLG_SHOP_04)	// 229
+	call(l_0xc91805)
+	unset(FLG_SHOP_04)	// 229
+	eob
 
 l_0xc916d3:
-    "{set(flag 230)}" call(l_0xc91805) "{unset(flag 230)}" eob
+	set(FLG_SHOP_05)	// 230
+	call(l_0xc91805)
+	unset(FLG_SHOP_05)	// 230
+	eob
 
 l_0xc916df:
-    "{set(flag 231)}" call(l_0xc91805) "{unset(flag 231)}" eob
+	set(FLG_SHOP_06)	// 231
+	call(l_0xc91805)
+	unset(FLG_SHOP_06)	// 231
+	eob
 
 l_0xc916eb:
-    "{set(flag 232)}" call(l_0xc91805) "{unset(flag 232)}" eob
+	set(FLG_SHOP_07)	// 232
+	call(l_0xc91805)
+	unset(FLG_SHOP_07)	// 232
+	eob
 
 l_0xc916f7:
-    "{set(flag 233)}{set(flag 659)}" call(l_0xc91805) "{unset(flag 233)}{unset(flag 659)}" eob
+	set(FLG_SHOP_08)	// 233
+	set(FLG_SHOPTEMP_4)	// 659
+	call(l_0xc91805)
+	unset(FLG_SHOP_08)	// 233
+	unset(FLG_SHOPTEMP_4)	// 659
+	eob
 
 l_0xc91709:
-    "{set(flag 176)}[06 E2 00 {e(l_0xc91745)}][06 E3 00 {e(l_0xc91748)}][06 E4 00 {e(l_0xc9174b)}][06 E5 00 {e(l_0xc9174e)}][06 E6 00 {e(l_0xc91751)}][06 E7 00 {e(l_0xc91754)}][06 E8 00 {e(l_0xc91757)}][06 E9 00 {e(l_0xc9175a)}]" eob
+	set(FLG_HEAL_DIA)	// 176
+	goto_if_flag(FLG_SHOP_01, l_0xc91745)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc91748)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, l_0xc9174b)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, l_0xc9174e)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, l_0xc91751)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, l_0xc91754)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, l_0xc91757)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc9175a)	// 0x00E9, 233
+	eob
 
 l_0xc91745:
-    "{counter(70)}" eob
+	counter(70)
+	eob
 
 l_0xc91748:
-    "{counter(80)}" eob
+	counter(80)
+	eob
 
 l_0xc9174b:
-    "{counter(90)}" eob
+	counter(90)
+	eob
 
 l_0xc9174e:
-    "{counter(100)}" eob
+	counter(100)
+	eob
 
 l_0xc91751:
-    "{counter(100)}" eob
+	counter(100)
+	eob
 
 l_0xc91754:
-    "{counter(120)}" eob
+	counter(120)
+	eob
 
 l_0xc91757:
-    "{counter(150)}" eob
+	counter(150)
+	eob
 
 l_0xc9175a:
-    "{counter(100)}" eob
+	counter(100)
+	eob
 
 l_0xc9175d:
-    "{set(flag 178)}[06 E2 00 {e(l_0xc91799)}][06 E3 00 {e(l_0xc9179c)}][06 E4 00 {e(l_0xc9179f)}][06 E5 00 {e(l_0xc917a2)}][06 E6 00 {e(l_0xc917a5)}][06 E7 00 {e(l_0xc917a8)}][06 E8 00 {e(l_0xc917ab)}][06 E9 00 {e(l_0xc917ae)}]" eob
+	set(FLG_HEAL_SIBIRE)	// 178
+	goto_if_flag(FLG_SHOP_01, l_0xc91799)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc9179c)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, l_0xc9179f)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, l_0xc917a2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, l_0xc917a5)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, l_0xc917a8)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, l_0xc917ab)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc917ae)	// 0x00E9, 233
+	eob
 
 l_0xc91799:
-    "{counter(60)}" eob
+	counter(60)
+	eob
 
 l_0xc9179c:
-    "{counter(70)}" eob
+	counter(70)
+	eob
 
 l_0xc9179f:
-    "{counter(80)}" eob
+	counter(80)
+	eob
 
 l_0xc917a2:
-    "{counter(90)}" eob
+	counter(90)
+	eob
 
 l_0xc917a5:
-    "{counter(90)}" eob
+	counter(90)
+	eob
 
 l_0xc917a8:
-    "{counter(110)}" eob
+	counter(110)
+	eob
 
 l_0xc917ab:
-    "{counter(140)}" eob
+	counter(140)
+	eob
 
 l_0xc917ae:
-    "{counter(90)}" eob
+	counter(90)
+	eob
 
 l_0xc917b1:
-    "{set(flag 177)}[06 E2 00 {e(l_0xc917ed)}][06 E3 00 {e(l_0xc917f0)}][06 E4 00 {e(l_0xc917f3)}][06 E5 00 {e(l_0xc917f6)}][06 E6 00 {e(l_0xc917f9)}][06 E7 00 {e(l_0xc917fc)}][06 E8 00 {e(l_0xc917ff)}][06 E9 00 {e(l_0xc91802)}]" eob
+	set(FLG_HEAL_OHARAI)	// 177
+	goto_if_flag(FLG_SHOP_01, l_0xc917ed)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc917f0)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, l_0xc917f3)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, l_0xc917f6)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, l_0xc917f9)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, l_0xc917fc)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, l_0xc917ff)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc91802)	// 0x00E9, 233
+	eob
 
 l_0xc917ed:
-    "{counter(50)}" eob
+	counter(50)
+	eob
 
 l_0xc917f0:
-    "{counter(60)}" eob
+	counter(60)
+	eob
 
 l_0xc917f3:
-    "{counter(70)}" eob
+	counter(70)
+	eob
 
 l_0xc917f6:
-    "{counter(80)}" eob
+	counter(80)
+	eob
 
 l_0xc917f9:
-    "{counter(80)}" eob
+	counter(80)
+	eob
 
 l_0xc917fc:
-    "{counter(100)}" eob
+	counter(100)
+	eob
 
 l_0xc917ff:
-    "{counter(130)}" eob
+	counter(130)
+	eob
 
 l_0xc91802:
-    "{counter(80)}" eob
+	counter(80)
+	eob
 
 l_0xc91805:
-    call(l_0xc91bb8) call(l_0xc91a91) "[1B 02 {e(l_0xc91a47)}]" call(l_0xc91abe) call(l_0xc91c1b) goto(l_0xc9181f)
+	call(l_0xc91bb8)
+	call(l_0xc91a91)
+	goto_if_false(l_0xc91a47)
+	call(l_0xc91abe)
+	call(l_0xc91c1b)
+	goto(l_0xc9181f)
 
 l_0xc9181f:
-    call(data_36.l_0xc7dd4f) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc91838)} {e(l_0xc919f6)}]" goto(l_0xc919f6)
+	call(data_36.l_0xc7dd4f)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc91838)
+		switch_entry(l_0xc919f6)
+	goto(l_0xc919f6)
 
 l_0xc91838:
-    "@What do you want me to do?" linebreak
-    "[18 02]{open_hp}{window_open(37)}[19 02]Soften" eob
+	"@What do you want me to do?" linebreak
+	back_up_text_rendering_state
+	open_hp
+	window_open(37)
+	load_str("Soften")
 
 l_0xc91855:
-    "[19 02]Restore feeling" eob
+	load_str("Restore feeling")
 
 l_0xc91867:
-    "[19 02]Purify" eob
+	load_str("Purify")
 
 l_0xc91870:
-    "[1C 0C 01][11][1B 05]{window_closetop}{window_switch(1)}[1B 06][1B 02 {e(l_0xc919f6)}][1F C0 03 {e(l_0xc91709)} {e(l_0xc9175d)} {e(l_0xc917b1)}]{ctoarg}@I need to charge you $[1C 0A 00 00 00 00]." linebreak
-    call(data_36.l_0xc7dd4d) call(data_36.l_0xc7dd5e) "[09 02 {e(l_0xc918da)} {e(l_0xc918be)}]" goto(l_0xc918be)
+	print_strings_vertical(1)	// 0x01
+	do_menu
+	store_registers_shared
+	window_closetop
+
+	window_switch(1)
+	load_registers_shared
+	goto_if_false(l_0xc919f6)
+
+	switch_call(3)	// 0x03
+		switch_entry(l_0xc9175d)
+		switch_entry(l_0xc917b1)
+
+	ctoarg
+	"@I need to charge you ${number(0)}." linebreak
+	call(data_36.l_0xc7dd4d)
+	call(data_36.l_0xc7dd5e)
+	switch_goto(2)	// 0x02
+		switch_entry(l_0xc918da)
+		switch_entry(l_0xc918be)
+	goto(l_0xc918be)
 
 l_0xc918be:
-    newline
-    "@Mmm, come back when necessary.{wait}" call(l_0xc91bae) eob
+	newline
+	"@Mmm, come back when necessary." wait
+	call(l_0xc91bae)
+	eob
 
 l_0xc918da:
-    "[1D 14 00 00 00 00][1B 03 {e(l_0xc91a11)}][1D 19 02][1B 02 {e(l_0xc918f7)}][19 10 01]" goto(l_0xc9191e)
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc91a11)
+	party_size_smaller_than(2)	// 0x02
+	goto_if_false(l_0xc918f7)
+
+	get_char_at_pos(1)	// 0x01
+	goto(l_0xc9191e)
 
 l_0xc918f7:
-    "@Who needs healing?" goto(l_0xc91905)
+	"@Who needs healing?"
 
 l_0xc91905:
-    "[1A 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01][1B 02 {e(l_0xc918be)}]" goto(l_0xc9191e)
+	select_char(0,0,0,0,1)	// 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x01
+	goto_if_false(l_0xc918be)
 
 l_0xc9191e:
-    "{store_registers}[06 B1 00 {e(l_0xc91966)}][06 B2 00 {e(l_0xc9194e)}][06 B0 00 {e(l_0xc91936)}]" eob
+	store_registers
+	goto_if_flag(FLG_HEAL_OHARAI, l_0xc91966)	// 0x00B1, 177
+	goto_if_flag(FLG_HEAL_SIBIRE, l_0xc9194e)	// 0x00B2, 178
+	goto_if_flag(FLG_HEAL_DIA, l_0xc91936)	// 0x00B0, 176
+	eob
 
 l_0xc91936:
-    "[1D 0D 00 01 03][1B 02 {e(l_0xc9197e)}]{load_registers}[19 05 00 01 01]" call(l_0xc91a51) eob
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0x00, 0x01, 0x03
+	goto_if_false(l_0xc9197e)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	call(l_0xc91a51)
+	eob
 
 l_0xc9194e:
-    "[1D 0D 00 01 04][1B 02 {e(l_0xc9199e)}]{load_registers}[19 05 00 01 01]" call(l_0xc91a51) eob
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NUMB)	// 0x00, 0x01, 0x04
+	goto_if_false(l_0xc9199e)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)	// 0x00, 0x01, 0x01
+	call(l_0xc91a51)
+	eob
 
 l_0xc91966:
-    "[1D 0D 00 02 03][1B 02 {e(l_0xc919b5)}]{load_registers}[19 05 00 02 01]" call(l_0xc91a51) eob
+	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_POSSESSED)	// 0x00, 0x02, 0x03
+	goto_if_false(l_0xc919b5)
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	call(l_0xc91a51)
+	eob
 
 l_0xc9197e:
-    "{load_registers}{swap}" newline
-    "@[1C 02 00] isn't hard like a diamond." goto(l_0xc919ce)
+	load_registers swap
+	newline
+	"@{name(0)} isn't hard like a diamond."
+	goto(l_0xc919ce)
 
 l_0xc9199e:
-    "{load_registers}{swap}" newline
-    "@[1C 02 00] isn't numb." goto(l_0xc919ce)
+	load_registers swap
+	newline
+	"@{name(0)} isn't numb."
+	goto(l_0xc919ce)
 
 l_0xc919b5:
-    "{load_registers}{swap}" newline
-    "@[1C 02 00] isn't possessed." goto(l_0xc919ce)
+	load_registers swap
+	newline
+	"@{name(0)} isn't possessed."
+	goto(l_0xc919ce)
 
 l_0xc919ce:
-    "{swap}[1D 19 02][1B 03 {e(l_0xc919ef)}]" newline
-    "  Who needs to be healed?" goto(l_0xc91905)
+	swap
+	party_size_smaller_than(2)	// 0x02
+	goto_if_true(l_0xc919ef)
+
+	newline
+	"  Who needs to be healed?"
+	goto(l_0xc91905)
 
 l_0xc919ef:
-    "{wait}" call(l_0xc91bae) eob
+	wait
+	call(l_0xc91bae)
+	eob
 
 l_0xc919f6:
-    "@Mmm, come back when necessary.{wait}" call(l_0xc91bae) eob
+	"@Mmm, come back when necessary." wait
+	call(l_0xc91bae)
+	eob
 
 l_0xc91a11:
-    newline
-    "@If you don't have any money, you'll just have to keep on going in your current state.{wait}" call(l_0xc91bae) eob
+	newline
+	"@If you don't have any money, you'll just have to keep on going in your current state." wait
+	call(l_0xc91bae)
+	eob
 
 l_0xc91a47:
-    call(data_50.l_0xc91c2e) goto(l_0xc9181f)
+	call(data_50.l_0xc91c2e)
+	goto(l_0xc9181f)
 
 l_0xc91a51:
-    "[1D 09 00 00]{open_wallet}{load_registers}{sound(37)}{pause(30)}{swap}" newline
-    "@There!  You're already healed!" linebreak
-    "  Can I do my job well, or what!{wait}" call(l_0xc91bae) eob
+	takemoney(0)	// 0x0000
+	show_wallet
+	load_registers
+	sound(SND_STATUSRECOVER)	// 37
+	pause(30)
+	swap
+	newline
+	"@There!  You're already healed!" linebreak
+	"  Can I do my job well, or what!" wait
+	call(l_0xc91bae)
+	eob
 
 l_0xc91a91:
-    "[19 20]{counter(1)}" goto(l_0xc91a95)
+	get_party_size
+	counter(1)
 
 l_0xc91a95:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91abb)}][19 10 00][1B 02 {e(l_0xc91aba)}][1D 0D 00 02 02][1B 03 {e(l_0xc91aba)}]{inc}" goto(l_0xc91a95)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc91abb)
+
+	get_char_at_pos(0)	// 0x00
+	goto_if_false(l_0xc91aba)
+
+	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00, 0x02, 0x02
+	goto_if_true(l_0xc91aba)
+	inc
+	goto(l_0xc91a95)	// Loop
 
 l_0xc91aba:
-    eob
+	eob
 
 l_0xc91abb:
-    "{result_is(0)}" eob
+	result_is(0)
+	eob
 
 l_0xc91abe:
-    "@Hey, now that I notice," next
-    "@could you sell me the mushroom growing on top of your head?" next
-    "@Come on, let's make a deal." next
-    "[19 02]Sell" eob
-
-l_0xc91b0e:
-    "[19 02]No" eob
-
-l_0xc91b13:
-    "{open_wallet}[1C 07 02][11]{clearline}[09 02 {e(l_0xc91b3d)} {e(l_0xc91b24)}]" goto(l_0xc91b24)
+	"@Hey, now that I notice," next
+	"@could you sell me the mushroom growing on top of your head?" next
+	"@Come on, let's make a deal." next
+	show_wallet
+	two_choice_menu("Sell", l_0xc91b3d, "No", l_0xc91b24)
 
 l_0xc91b24:
-    "@Hmmmmm....." linebreak
-    "  That's too bad.[03]" eob
+	"@Hmmmmm....." linebreak
+	"  That's too bad." promptw
+	eob
 
 l_0xc91b3d:
-    "@Thanks." linebreak
-    "  I'll pay you $50 for each mushroom." next
-    "@All right, let's do it![03]" call(l_0xc91b6f) eob
+	"@Thanks." linebreak
+	"  I'll pay you $50 for each mushroom." next
+	"@All right, let's do it!" promptw
+	call(l_0xc91b6f)
+	eob
 
 l_0xc91b6f:
-    "{counter(1)}" goto(l_0xc91b71)
+	counter(1)
 
 l_0xc91b71:
-    "{ctoarg}[1D 19 00][1B 03 {e(l_0xc91bac)}][19 10 00]{store_registers}[1B 02 {e(l_0xc91bac)}][1D 0D 00 02 02][1B 02 {e(l_0xc91ba6)}]{load_registers}[19 05 00 02 01]{rtoarg}[1D 08 32 00]{open_wallet}{sound(37)}{pause(30)}" goto(l_0xc91ba6)
+	ctoarg
+	party_size_smaller_than(0)	// 0x00
+	goto_if_true(l_0xc91bac)
+
+	get_char_at_pos(0)	// 0x00
+	store_registers
+	goto_if_false(l_0xc91bac)
+
+	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00, 0x02, 0x02
+	goto_if_false(l_0xc91ba6)
+
+	load_registers
+	inflict_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_NONE)	// 0x00, 0x02, 0x01
+	rtoarg
+	givemoney(50)	// 0x0032
+	show_wallet
+	sound(SND_STATUSRECOVER)	// 37
+	pause(30)
 
 l_0xc91ba6:
-    "{inc}" goto(l_0xc91b71)
+	inc
+	goto(l_0xc91b71)	// Loop
 
 l_0xc91bac:
-    newline
-    eob
+	newline
+	eob
 
 l_0xc91bae:
-    "{unset(flag 176)}{unset(flag 178)}{unset(flag 177)}" eob
+	unset(FLG_HEAL_DIA)	// 176
+	unset(FLG_HEAL_SIBIRE)	// 178
+	unset(FLG_HEAL_OHARAI)	// 177
+	eob
 
 l_0xc91bb8:
-    "@Though you may not believe it, I'm a healer." next
-    "@If you have some illness that can not be treated at the hospital," next
-    "@it's my job to cure you." next
-    eob
+	"@Though you may not believe it, I'm a healer." next
+	"@If you have some illness that can not be treated at the hospital," next
+	"@it's my job to cure you." next
+	eob
 
 l_0xc91c0f:
-    newline
-    "@Do you need any help?" linebreak
-    eob
+	newline
+	"@Do you need any help?" linebreak
+	eob
 
 l_0xc91c1b:
-    newline
-    "@By the way, do you need any help?" linebreak
-    eob
-
+	newline
+	"@By the way, do you need any help?" linebreak
+	eob

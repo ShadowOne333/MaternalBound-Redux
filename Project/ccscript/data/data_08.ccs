@@ -358,7 +358,7 @@ l_0xc58bd2:
 	givemoney(0)	// 0x0000
 	show_wallet
 	diam "You now have" linebreak
-	"{number(0)} in your wallet." wait	// 0x00000000
+	"  {number(0)} in your wallet." wait	// 0x00000000
 	goto(l_0xc58c2a)
 
 l_0xc58c2a:

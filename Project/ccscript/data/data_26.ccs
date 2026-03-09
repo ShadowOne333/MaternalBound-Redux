@@ -364,7 +364,7 @@ l_0xc6d37e:
 l_0xc6d391:
 	title(1, Fake)
 	get_char_at_pos(1)
-	get_dir_from_char(0,2,839)	// 0, 2, 0x0347
+	get_dir_from_char(0,TO_NPC,839)	// 0, 2, 0x0347
 
 	swap store_registers
 	result_is(1)
@@ -379,7 +379,7 @@ l_0xc6d391:
 	if not FLG_KEY_ITEMS { take(-1, DIAMOND) }	// Item 0xB6, 182, Diamond
 	OSS_on	// special_event(5)
 	sound(SND_CHICKEN2)	// 118
-	get_dir_from_char(839,1,1)	// 0x0347, 1, 0x0001
+	get_dir_from_char(839,TO_CHAR,1)	// 0x0347, 1, 0x0001
 	sprite_direction(839,0)	// 0x0347, 0
 	"@Yaaaieeee!!" next
 	// Item 0xB6 / 182 = Diamond
@@ -615,7 +615,7 @@ l_0xc6db0a:
 	}
 	else
 	{
-	    get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	    get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
 	    call(data_36.l_0xc7dc9b)
 	    goto_if_false(l_0xc6dbae)
 	    "@Please have your tickets ready..." end
@@ -651,13 +651,13 @@ l_0xc6dbd5:
 	store_registers
 	result_is(SHOW_TICKET)	// 178
 	goto_if_true(l_0xc6dc0c)
-	get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc6dbae)
 	"@No kidding..." end
 
 l_0xc6dc0c:
-	get_dir_from_char(-1,2,849)	// FF, 2, 0351
+	get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc6dbae)
 	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2

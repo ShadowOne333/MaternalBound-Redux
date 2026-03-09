@@ -75,7 +75,7 @@ l_0xc99d92:
 	eob
 
 l_0xc99da6:
-	music_effect(8)	// 0x08
+	music_effect(8)	// Restore original volume
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
 	call(l_0xc99d92)
 	goto_if_flag(FLG_TWSN_PAUL_UPSET, l_0xc99db9)	// 0x0076, 118
@@ -97,7 +97,7 @@ l_0xc99dce:
 l_0xc99de1:
 	show_npc_float(323,3)	// 0x0143, 0x03
 	pause(10)
-	get_dir_from_char(-1,2,323)	// 0xFF, 0x02, 0x0143
+	get_dir_from_char(-1,TO_NPC,323)	// 0xFF, 0x02, 0x0143
 	char_direction(-1,0)	// 0xFF, 0x00
 	pause(50)
 	hide_npc_float(323)	// 0x0143
@@ -111,13 +111,12 @@ l_0xc99de1:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc99e48)
 
-	goto(l_0xc99e1b)
-
 l_0xc99e1b:
 	"@I'm a messenger for Everdred, one of his lackeys." next
 	"@Everdred is looking for you." next
 	"@He's got something for you." wait
 	window_closeall
+
 	npc_do_mc(323,642)	// 0x0143, 0x0282
 	pause(60)
 	unset(FLG_TWSN_MESSENGER_APPEAR)	// 611
@@ -333,11 +332,11 @@ l_0xc9a123:
 l_0xc9a139:
 	isset(FLG_TLPT_THRK)	// 211
 	goto_if_false(l_0xc9a193)
-	goto(l_0xc9a142)
 
 l_0xc9a142:
 	isset(FLG_WIN_CARPAINTER)	// 68
 	goto_if_false(data_55.l_0xc9992f)
+
 	window_open(1)
 	"@(The Happy Happy Religious Group has broken up." next
 	"@This building is temporarily closed.)" wait
@@ -375,8 +374,7 @@ l_0xc9a1b6:
 	"@<Shhhhh, what if someone overhears us...?>" next
 	"@<Right." pause(20)
 	"  Whisper.>" next
-	"@<Psst. Pss.  Wa Ha ha!>" pause(30) linebreak
-	next
+	"@<Psst. Pss.  Wa Ha ha!>" pause(30) linebreak next
 	"  <You jerk.>" next
 	"@<Because...>" next
 	"@<Heh heh he>" next
@@ -456,19 +454,7 @@ l_0xc9a432:
 	window_open(1)
 	"@OK,| pop quiz!|| <A Beatles song,| XXXterday.>" next
 	"@Can you fill in the blanks?" linebreak
-	load_str("Yes")
-
-l_0xc9a488:
-	load_str("No")
-
-l_0xc9a48d:
-	print_strings_horizontal(2)	// 0x02
-	do_menu
-	clearline
-	switch_goto(2)	// 0x02
-		switch_entry(l_0xc9a4ce)
-		switch_entry(l_0xc9a49c)
-	goto(l_0xc9a49c)
+	two_choice_menu("Yes", l_0xc9a4ce, "No", l_0xc9a49c)
 
 l_0xc9a49c:
 	"@Buzzzzt!" pause(20) linebreak
@@ -534,19 +520,7 @@ l_0xc9a69f:
 	"@Pumpkin Seeds..." linebreak
 	"  Pistachios..." next
 	"@...Which one do you like?" linebreak
-	load_str("Yes")
-
-l_0xc9a752:
-	load_str("No")
-
-l_0xc9a757:
-	print_strings_horizontal(2)	// 0x02
-	do_menu
-	clearline
-	switch_goto(2)	// 0x02
-		switch_entry(l_0xc9a766)
-		switch_entry(l_0xc9a766)
-	goto(l_0xc9a766)
+	two_choice_menu("Yes", l_0xc9a766, "No", l_0xc9a766)
 
 l_0xc9a766:
 	"@I asked you" linebreak
@@ -575,7 +549,8 @@ l_0xc9a7e4:
 	window_open(1)
 	"@Aaaa/ye/e/e/e/e/e!" pause(20)
 	"  A zombie!" next
-	"@{pause(120)}...I'm watching a zombie movie." pause(20)
+	pause(120)
+	"@...I'm watching a zombie movie." pause(20)
 	"  Can you come by later?!" wait
 	window_closetop
 	eob

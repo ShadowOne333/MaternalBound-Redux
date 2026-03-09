@@ -199,7 +199,7 @@ KeyItems:
 			load_str_callonhover("Hawk eye", SetCount20) }
 		if flag FLG_ITEM_MUKUCHI and not flag FLG_ONET_LUCY_CHU {	// Returned Shyness book
 			load_str_callonhover("Shyness book", SetCount21) }
-		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR {	// Open Underworld rock
+		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not FLG_DKFD_GUMI_BOSS {	// Open Underworld rock or Tenda boss takes the Tendakraut
 			load_str_callonhover("Tendakraut", SetCount22) }
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
 			load_str_callonhover("Meteorite piece", SetCount23) }

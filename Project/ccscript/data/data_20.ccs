@@ -81,7 +81,7 @@ l_0xc6483c:
 	counter(1)
 	get_next_storage_item
 	goto_if_false(l_0xc648e3)
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc648fc)
 	newline
 	"@What would you like" linebreak
@@ -228,7 +228,8 @@ l_0xc64acf:
 	set(FLG_PIZZA_SIZE)	// 179
 
 l_0xc64ae6:
-	"{rtoarg}  We'll deliver it within 3 minutes." next
+	rtoarg
+	"  We'll deliver it within 3 minutes." next
 	set(FLG_DELIVERY_PIZZA)	// 180
 	pathfinding_npc_time(1)	// 0x01
 	set(FLG_SYS_DISTLPT)	// 754
@@ -396,7 +397,7 @@ l_0xc64eca:
 	goto_if_false(l_0xc64fb3)
 
 	swap
-	get_item_receiver(255)	// 0xFF
+	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc64fde)
 	store_registers
 
@@ -557,7 +558,7 @@ l_0xc6512f:
 	window_switch(1)
 	newline
 	"@Will you give" linebreak
-	"{itemname(HORN_OF_LIFE)}?" promptw
+	"  {itemname(HORN_OF_LIFE)}?" promptw
 
 	call(data_15.l_0xc5e456)
 	goto_if_false(l_0xc651a6)

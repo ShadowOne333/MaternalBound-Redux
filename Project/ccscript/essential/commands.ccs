@@ -103,7 +103,7 @@ CheckTalkHijack:
 
 
 Door_Open:
-	set(flag 0x95)
+	set(FLG_SUMS_RAMMA_START)	// 0x95, 149
 	eob
 
 Door_Closed:

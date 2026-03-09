@@ -107,6 +107,12 @@ command inflict_status(char, group, status) "[19 05 {byte char} {byte group} {by
     define SCR_STATUS_6_POWER_SHIELD = 4
     define SCR_STATUS_6_SHIELD = 5
 
+    define SCR_STATUS_GROUP_7 = 8
+    define SCR_STATUS_7_PARTY_NORMAL = 1
+    define SCR_STATUS_7_PARTY_BURNT = 2
+    define SCR_STATUS_7_PARTY_UNKNOWN2 = 3
+    define SCR_STATUS_7_PARTY_SPEED_BOOST = 4
+
 command get_char_at_pos(pos) "[19 10 {byte pos}]"
 command get_name_letter(char) "[19 11 {byte char}]"
 command get_next_storage_item "[19 14]"
@@ -393,6 +399,7 @@ command char_unfreeze(num) "[1F E8 {byte num}]"
 command npc_unfreeze(num) "[1F E9 {short num}]"
 command sprite2_unfreeze(num) "[1F EA {short num}]"
 command hide_char_with_style(char, style) "[1F EB {byte char} {byte style}]"
+    command hide_party_with_style(style) hide_char_with_style(0xFF, style)
     // There's a single line in the vanilla game that uses a different style
     // (8 melodies acquired cutscene, [1F EB FF 01]), so this command alone isn't good enough.
     //command hide_char(char) hide_char_with_style(char, 6)
