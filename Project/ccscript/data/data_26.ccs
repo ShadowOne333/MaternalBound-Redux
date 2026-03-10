@@ -376,7 +376,7 @@ l_0xc6d391:
 	result_is(8)
 	goto_if_true(l_0xc6d4d6)
 
-	if not FLG_KEY_ITEMS { take(-1, DIAMOND) }	// Item 0xB6, 182, Diamond
+	if not flag FLG_KEY_ITEMS { take(-1, DIAMOND) }	// Item 0xB6, 182, Diamond
 	OSS_on	// special_event(5)
 	sound(SND_CHICKEN2)	// 118
 	get_dir_from_char(839,TO_CHAR,1)	// 0x0347, 1, 0x0001
@@ -571,7 +571,7 @@ l_0xc6da37:
 
 l_0xc6da3f:
 	"@30 bucks, please." linebreak
-	open_wallet
+	show_wallet
 	two_choice_menu("Yes", l_0xc6da6d, "No", l_0xc6da37)
 	goto(l_0xc6da37)
 
@@ -586,7 +586,7 @@ l_0xc6da6d:
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	takemoney(30)	// 0x1E
-	open_wallet
+	show_wallet
 	"@Thanks a lot." wait
 	sound(SND_BOXTAKE)	// 116
 	load_registers

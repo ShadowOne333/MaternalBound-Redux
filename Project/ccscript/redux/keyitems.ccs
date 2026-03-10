@@ -183,7 +183,7 @@ KeyItems:
 			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_TONZURA_FREE {	// not FLG_FOUR_MISSFAKE?
 			load_str_callonhover("Diamond", SetCount14) }
-		/*if flag FLG_ITEM_YOGURT_MACHINE and not FLG_FOUR_MAID_THANKS {	// Yogurt dispenser -> Tofu machine
+		/*if flag FLG_ITEM_YOGURT_MACHINE and not FLG_FOUR_MAID_THANKS {	// Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
 		if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
 			load_str_callonhover("Tiny ruby", SetCount15) }

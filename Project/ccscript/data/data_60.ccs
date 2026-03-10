@@ -198,7 +198,7 @@ l_0xc9fc48:
 	pause(1)
 	next
 	set(FLG_PUT_ZOMBI_HOIHOI)	// 124
-	if not FLG_KEY_ITEMS { take(-1, ZOMBIE_PAPER) }	// 0xFF,0xAE / 174
+	if not flag FLG_KEY_ITEMS { take(-1, ZOMBIE_PAPER) }	// 0xFF,0xAE / 174
 	eob
 
 l_0xc9fc6f:
@@ -208,7 +208,7 @@ l_0xc9fc6f:
 	pause(1)
 	wait
 	window_closeall
-	if not FLG_KEY_ITEMS { take(-1, HAWK_EYE) }	// 0xFF,0xAF / 175
+	if not flag FLG_KEY_ITEMS { take(-1, HAWK_EYE) }	// 0xFF,0xAF / 175
 	set(FLG_MAKYO_USE_TAKANOME)	// 288
 	npc_delete(1231,6)	// 0x04CF,0x06
 	call(data_50.l_0xc935b1) ")"

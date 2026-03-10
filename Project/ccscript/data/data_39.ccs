@@ -186,7 +186,7 @@ l_0xc818a2:
 	hasmoney(200)	// 0xC8
 	goto_if_false(l_0xc818dd)
 	takemoney(200)	// 0xC8
-	open_wallet
+	show_wallet
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 

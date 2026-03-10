@@ -365,7 +365,7 @@ l_0xc802b9:
 
 l_0xc802e6:
 	newline
-	if not flag FLG_KEY_ITEMS { take(-1,176) }	// 0xFF, 0xB0, 176
+	if not flag FLG_KEY_ITEMS { take(-1, BICYCLE) }	// 0xFF, 0xB0 / 176
 	"@You're here to return your bike?" next
 	set(FLG_TWSN_ASHI)	// 113
 	unset(FLG_ITEM_CYCLE)	// 81
