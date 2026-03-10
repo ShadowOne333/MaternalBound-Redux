@@ -242,7 +242,8 @@ _UseHelp_Window_Backout:
 		switch_entry(zombiepaper)
 		switch_entry(showticket)
 		switch_entry(diamond)
-		switch_entry(yogurtdisp)
+		//switch_entry(tofumachine)
+		switch_entry(tinyruby)
 		switch_entry(signedbanana)
 		switch_entry(hieroglyph)
 		switch_entry(carrotkey)
@@ -274,7 +275,8 @@ _Exit_KeyItems_Menu:
 	zombiepaper:	use_help_submenu(ZOMBIE_PAPER, item_descriptions.l_0xc555b8) eob
 	showticket:	use_help_submenu(SHOW_TICKET, item_descriptions.l_0xc5569c) eob
 	diamond:	use_help_submenu(DIAMOND, item_descriptions.l_0xc55740) eob
-	yogurtdisp:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob	// Tofu machine
+	//tofumachine:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
+	tinyruby:	use_help_submenu(TINY_RUBY, item_descriptions.l_0xc55de0) eob
 	signedbanana:	use_help_submenu(SIGNED_BANANA, item_descriptions.l_0xc5576a) eob
 	hieroglyph:	use_help_submenu(HIEROGLYPH, item_descriptions.l_0xc557e7) eob
 	carrotkey:	use_help_submenu(CARROT_KEY, item_descriptions.l_0xc5689f) eob
