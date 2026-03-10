@@ -201,6 +201,7 @@ l_0xc70198:
 	ctoarg
 	goto_if_flag(FLG_TEMP_7, data_29.l_0xc726da)	// 0x0008, 8
 	"@You'd like a hint, wouldn't you?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc7030f, "No", l_0xc701f6)
 
 l_0xc701f6:

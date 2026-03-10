@@ -923,7 +923,8 @@ l_0xc7b146:
 	window_open(1)
 	"@The admission fee is $5.00 per person." next
 	"@Is that okay with you?" linebreak
-	two_choice_wallet_menu("Yes", l_0xc7b2bd, "No", l_0xc7b1d8)
+	show_wallet
+	two_choice_menu("Yes", l_0xc7b2bd, "No", l_0xc7b1d8)
 
 l_0xc7b1d8:
 	get_party_size_times(5)	swap

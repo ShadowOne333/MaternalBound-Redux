@@ -178,6 +178,7 @@ l_0xc81848:
 	"  Yes!  Oh." pause(20)
 	"  Excuse me.  I mean thank you!" next
 	"@By the way, I could really use $200." next
+	show_wallet
 	two_choice_menu("Yes", l_0xc818a2, "No", l_0xc81751)
 	goto(l_0xc81751)
 
@@ -188,7 +189,6 @@ l_0xc818a2:
 	open_wallet
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
-	goto(l_0xc818b9)
 
 l_0xc818b9:
 	title(1, Apple)
@@ -210,7 +210,6 @@ l_0xc818dd:
 l_0xc818f1:
 	title(1, Apple)
 	"@Maybe you shouldn't spend too much time wandering around Twoson."
-	goto(l_0xc81913)
 
 l_0xc81913:
 	end
@@ -224,7 +223,6 @@ l_0xc81934:
 	unset(FLG_WARP_APPLE_TWSN)	// 294
 	goto_if_flag(FLG_ITEM_PHONE, l_0xc81945)	// 0x52, 82
 	goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc81970)	// 0x70, 112
-	goto(l_0xc81945)
 
 l_0xc81945:
 	"@I am a mouse." pause(20)
@@ -345,7 +343,6 @@ l_0xc81b50:
 	get_dir_from_char(-1,TO_NPC,226)	// 0xFF, 2, 0xE2
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc81ade)
-	goto(chaostheaterticket)
 
 chaostheaterticket:
 	sound(SND_CHICKEN2)	// 118

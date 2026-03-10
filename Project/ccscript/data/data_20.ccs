@@ -275,6 +275,7 @@ l_0xc64c0a:
 	get_buying_price(0) swap
 	"@That'll be ${number(0)}.  You have the money, don't you?" linebreak
 	store_registers
+	show_wallet
 	two_choice_menu("Yes", l_0xc64c6a, "No", l_0xc64c42)
 
 l_0xc64c42:

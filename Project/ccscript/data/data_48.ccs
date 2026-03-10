@@ -243,7 +243,7 @@ l_0xc908bc:
 	"  that we do not have any reservation under your name." next
 	"@However, we can offer you a room at ${number(0)} a night." next
 	"@Would you be interested in a room?" linebreak
-	call(l_0xc90f61)
+	show_wallet
 	two_choice_menu("Yes", l_0xc909d3, "No", l_0xc90999)
 
 l_0xc90999:
@@ -280,7 +280,7 @@ l_0xc90a9b:
 	"  a night." next
 	"@Right now, though, we only have our super deluxe suite available." next
 	"@Would you like to stay?" linebreak
-	call(l_0xc90f61)
+	show_wallet
 	two_choice_menu("Yes", l_0xc90b90, "No", l_0xc90b53)
 
 l_0xc90b53:
@@ -317,7 +317,7 @@ l_0xc90c38:
 	"@This is the Dark Moon Hotel." next
 	"@One sleep period is ${number(0)}." next
 	"@Do you want to sleep?" linebreak
-	call(l_0xc90f61)
+	show_wallet
 	two_choice_menu("Yes", l_0xc90c90, "No", l_0xc90cb4)
 
 l_0xc90cb4:
@@ -395,7 +395,7 @@ l_0xc90e4a:
 	"  To stay," linebreak
 	"  it'll run you ${number(0)}." next
 	"@You are going to stay, aren't you?" linebreak
-	call(l_0xc90f61)
+	show_wallet
 	two_choice_menu("Yes", l_0xc90ed4, "No", l_0xc90ebf)
 
 l_0xc90ebf:
@@ -424,7 +424,7 @@ l_0xc90f3b:
 	"@Would you like to stay?" linebreak
 
 l_0xc90f61:
-	show_wallet
+	//show_wallet
 	eob
 
 l_0xc90f67:

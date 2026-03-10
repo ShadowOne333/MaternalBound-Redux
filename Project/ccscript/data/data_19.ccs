@@ -434,6 +434,7 @@ l_0xc63eb0:
 	"@Hello, this is Escargo Express!" next
 	"@Your delivery charge is $18." next
 	"@You can cover the bill, right?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc63f74, "No", l_0xc63f1f)
 
 l_0xc63f1f:
@@ -633,6 +634,7 @@ l_0xc642fc:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc643de)	// 0x49, 73
 	"@Your charge is $18." linebreak
 	"  You can pay for this, right?" next
+	show_wallet
 	two_choice_menu("Yes", l_0xc643ce, "No", l_0xc64339)
 
 l_0xc64339:

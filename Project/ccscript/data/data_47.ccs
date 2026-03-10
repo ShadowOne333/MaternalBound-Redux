@@ -250,6 +250,7 @@ l_0xc900f9:
 	call(data_49.l_0xc91a91)
 	goto_if_false(l_0xc901a8)
 	"@Hey!  Would you be willing to sell that mushroom on your head for $50?" next
+	open_hp
 	show_wallet
 	two_choice_menu("Yes", l_0xc9017f, "No", l_0xc90165)
 

@@ -372,7 +372,6 @@ l_0xc91805:
 	goto_if_false(l_0xc91a47)
 	call(l_0xc91abe)
 	call(l_0xc91c1b)
-	goto(l_0xc9181f)
 
 l_0xc9181f:
 	call(data_36.l_0xc7dd4f)
@@ -416,7 +415,6 @@ l_0xc91870:
 	switch_goto(2)	// 0x02
 		switch_entry(l_0xc918da)
 		switch_entry(l_0xc918be)
-	goto(l_0xc918be)
 
 l_0xc918be:
 	newline

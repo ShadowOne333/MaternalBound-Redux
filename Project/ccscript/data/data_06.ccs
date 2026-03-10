@@ -50,20 +50,7 @@ l_0xc574f6:
 	"  He used to be a Dungeon Maker." next
 	"@And now he's a <Dungeon Man.>" next
 	"@Would you like to meet him?" linebreak
-	// two_choice_menu
-	load_str("Yes")
-
-l_0xc57570:
-	load_str("No")
-
-l_0xc57575:
-	print_strings_horizontal(2)	// 0x02
-	do_menu
-	clearline
-	switch_goto(2)	// 0x02
-		switch_entry(l_0xc5759d)
-		switch_entry(l_0xc57584)
-	goto(l_0xc57584)
+	two_choice_menu("Yes", l_0xc5759d, "No", l_0xc57584)
 
 l_0xc57584:
 	"@I understand,| he is a very strange fellow." end

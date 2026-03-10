@@ -58,6 +58,7 @@ l_0xc784ac:
 	get_party_size_times(2) swap
 	"@To Twoson,| it's going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc784ee, "No", l_0xc78926)
 	goto(l_0xc78926)
 
@@ -172,6 +173,7 @@ l_0xc78689:
 	get_party_size_times(2)	swap
 	"@To Threek, it's going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc786e7, "No", l_0xc78926)
 	goto(l_0xc78926)
 
@@ -226,6 +228,7 @@ l_0xc787a9:
 	"@This bus goes to Fourside." next
 	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc78806, "No", data_32.l_0xc781ce)
 	goto(data_32.l_0xc781ce)
 
@@ -263,6 +266,7 @@ l_0xc78866:
 	"@This bus goes to Fourside." next
 	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc788c3, "No", data_32.l_0xc781ce)
 	goto(data_32.l_0xc781ce)
 
@@ -436,6 +440,7 @@ l_0xc78af3:
 	get_party_size_times(2)	swap
 	"@It is going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc78b4e, "No", l_0xc78926)
 	goto(l_0xc78926)
 
@@ -605,6 +610,7 @@ l_0xc78d8f:
 l_0xc78dd0:
 	"@It is going to cost ${number(0)}" call(l_0xc78569) "." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc78e20, "No", l_0xc78dff)
 
 l_0xc78dff:
@@ -637,6 +643,7 @@ l_0xc78e49:
 l_0xc78e60:
 	"@I can't let you on if you don't pay ${number(0)} for the fare." next
 	"@Do you want to go?" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc78ed8, "No", l_0xc78e98)
 
 l_0xc78e98:

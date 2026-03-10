@@ -49,12 +49,15 @@ l_0xc606de:
 	store_registers
 	result_is(1)
 	goto_if_true(l_0xc6070c)
+
 	load_registers
 	result_is(2)
 	goto_if_true(l_0xc6070c)
+
 	load_registers
 	result_is(8)
 	goto_if_true(l_0xc6070c)
+
 	goto(l_0xc607b9)
 
 l_0xc6070c:
@@ -62,6 +65,7 @@ l_0xc6070c:
 	"@But, the S[C0]nchez Brothers and their friend are a very cheerful trio..." next
 	"@they will make you happy.)" next
 	"@(Would you like to insert a buck?)" linebreak
+	show_wallet
 	two_choice_menu("Yes", l_0xc6078b, "No", l_0xc607a5)
 
 l_0xc607a5:
