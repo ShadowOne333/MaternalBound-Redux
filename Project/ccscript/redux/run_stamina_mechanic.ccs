@@ -1,4 +1,4 @@
-// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+// <---------------------------------------------------------------->
 
 import "../essential/asm65816.ccs"
 
@@ -14,7 +14,7 @@ define stamina_max = 15
 // Time in seconds that you have to wait to be able to run again (cooldown).
 define stamina_cooldown = 8
 
-// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+// <---------------------------------------------------------------->
 
 // RAM_primary_timer:
 	// MSB (O x x x x x x x) is used for a cooldown after running and stopping (useful to avoid spam-pressing Y being op).
@@ -25,7 +25,7 @@ define stamina_cooldown = 8
 	// The rest (bits 0-6) are the timer itself in seconds. Running decreases the timer, not running increases it.
 	// Running out of stamina & recovering from being tired both set the timer based on the values defined above.
 
-// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+// <---------------------------------------------------------------->
 
 // Initialize RAM during attract mode.
 ROM[0xC4D995] = JSL(ASM_InitObjects_ResetStamina)
@@ -35,7 +35,7 @@ ASM_InitObjects_ResetStamina: {
     JML(0xC0927C) // InitObjects
 }
 
-// <-------------------------------------------------------------------------------------------------------------------------------------------------------->
+// <---------------------------------------------------------------->
 
 // Code for stamina timers (Vittorio).
 

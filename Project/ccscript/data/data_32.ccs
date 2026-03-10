@@ -4,10 +4,10 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -281,7 +281,7 @@ l_0xc775fd:
 	"  I found my cap that you lost." next
 	get_item_receiver(-1)
 	goto_if_false(l_0xc77639)
-	give_and_return_location(0,74)	// Item 0x4A, 74, Baseball cap
+	give_and_return_location(0, BASEBALL_CAP)	// Item 0x4A / 74 = Baseball cap
 	call(data_36.l_0xc7dccf)
 	wait
 	set(FLG_MGKT_GETITEM_CAP)	// 93

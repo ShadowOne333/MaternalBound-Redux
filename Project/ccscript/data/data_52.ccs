@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
@@ -266,7 +266,7 @@ l_0xc954b3:
 
 l_0xc954e1:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
-	else { get_inventory_item(0, 0) swap }
+	else { get_inventory_item(0,0) swap }
 	result_is(WAD_BILLS)	// 180, Suitcase of bills
 	goto_if_false(data_35.l_0xc7c6b6)
 

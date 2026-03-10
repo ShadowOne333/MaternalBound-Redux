@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
@@ -248,9 +248,9 @@ l_0xc58599:
 	get_char_at_pos(0)	// 0x00
 
 l_0xc585a7:
-	get_inventory_item(0,1)	// 0x00, 0x01
-	swap
+	get_inventory_item(0,1) swap	// 0x00, 0x01
 	goto_if_false(l_0xc585be)
+
 	swap
 	take_from_location(0,1)	// 0x00, 0x01
 	goto(l_0xc585a7)
@@ -264,7 +264,6 @@ l_0xc585c4:
 
 l_0xc585c5:
 	open_hp
-	goto(l_0xc585c7)
 
 l_0xc585c7:
 	call(data_15.l_0xc5e456)
@@ -326,9 +325,9 @@ l_0xc5865b:
 	goto(l_0xc58669)
 
 l_0xc58669:
-	get_inventory_item(0,7)	// 0x00, 0x07
-	swap
+	get_inventory_item(0,7) swap	// 0x00, 0x07
 	goto_if_false(l_0xc58680)
+
 	swap
 	take_from_location(0,7)	// 0x00, 0x07
 	goto(l_0xc58669)

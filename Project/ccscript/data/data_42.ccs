@@ -4,7 +4,7 @@
  * Generated using CCScriptWriter.
  */
 
-import "../essential/flags.ccs"
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
@@ -262,7 +262,7 @@ l_0xc86088:
 
 l_0xc860b9:
 	call(l_0xc85ff7)
-	"@<{itemname(175)} stolen from the pyramid in the desert!>" next
+	"@<{itemname(HAWK_EYE)} stolen from the pyramid in the desert!>" next
 	call(l_0xc8603c)
 	eob
 

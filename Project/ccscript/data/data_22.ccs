@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
@@ -302,7 +302,7 @@ l_0xc67763:
 l_0xc6777f:
 	get_item_receiver(-1)
 	goto_if_false(l_0xc67804)
-	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
+	give_and_return_location(0, EXIT_MOUSE)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy." pause(20)
 	"  You can treat him as one of your items.)" next
 	call(data_36.l_0xc7dccf) wait
@@ -315,7 +315,7 @@ l_0xc6777f:
 
 l_0xc677cc:
 	// Item 0xC5 / 197, Exit mouse
-	hasitem(-1,197)
+	hasitem(-1, EXIT_MOUSE)
 	goto_if_false(l_0xc677eb)
 	"@(Oh,| you have him already.)" end
 
@@ -345,7 +345,7 @@ l_0xc67859:
 l_0xc678ed:
 	get_item_receiver(-1)
 	goto_if_false(l_0xc67804)
-	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
+	give_and_return_location(0, EXIT_MOUSE)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy.  You can treat him as one of your items.)" next
 	call(data_36.l_0xc7dccf) wait
 	window_closeall
@@ -367,7 +367,7 @@ l_0xc67938:
 l_0xc679cd:
 	get_item_receiver(-1)
 	goto_if_false(l_0xc67804)
-	give_and_return_location(0,197)	// 0xC5 / 197, Exit mouse
+	give_and_return_location(0, EXIT_MOUSE)	// 0xC5 / 197, Exit mouse
 	"@(He's a tough boy. | You can treat him as one of your items.)" next
 	call(data_36.l_0xc7dccf) wait
 	window_closeall

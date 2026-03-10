@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
@@ -311,8 +311,8 @@ l_0xc941cd:
 
 l_0xc94231:
 	load_registers
-	cannot_take_money(0)	// 0x00000000
-	goto_if_true(l_0xc94270)
+	hasmoney(0)	// 0x00000000
+	goto_if_false(l_0xc94270)
 
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc94288)

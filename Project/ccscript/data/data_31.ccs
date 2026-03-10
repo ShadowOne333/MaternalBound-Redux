@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
@@ -318,7 +318,7 @@ l_0xc75f3b:
 
 l_0xc75f73:
 	title(1, Porky)
-	hasequipped(1,17)	// 0x11, 17, Cracked bat
+	hasequipped(1, CRACKED_BAT)	// 0x11 / 17, Cracked bat
 	goto_if_true(l_0xc760b7)
 	goto_if_flag(805, l_0xc75fb6)	// 0x0325, 805, Cracked bat taken
 	"@You're not taking anything on our big adventure?" next

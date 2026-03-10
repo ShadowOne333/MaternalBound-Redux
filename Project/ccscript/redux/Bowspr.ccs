@@ -34,9 +34,9 @@
 // time and can cause lag.
 
 import "../essential/asm65816.ccs"
-import "../redux/movscr_codes.ccs"
 import "../essential/ccexpand.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../redux/movscr_codes.ccs"
 
 define SPRITE_GROUPING_PTR_TABLE = 0xEF133F
 define SPRITE_GROUPING_PTR_TABLE_p2 = 0xEF1341

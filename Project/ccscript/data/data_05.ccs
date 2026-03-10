@@ -4,10 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
@@ -222,13 +223,12 @@ l_0xc56f7b:
 
 l_0xc56f80:
 	// Item 0x8D / 141 = Snake bag
-	"@The {itemname(141)} can hold live snakes!" pause(20)
+	"@The {itemname(SNAKE_BAG)} can hold live snakes!" pause(20)
 	"  There are snakes in the sack!" next
 	"@Please, it is a very useful item!" next
 	"@Shall you buy one?" pause(20)
 	"  I am humbly offering it to you..." next
 	two_choice_menu("Yes", l_0xc5701f, "No", l_0xc56ffb)
-	goto(l_0xc56ffb)
 
 l_0xc56ffb:
 	"@You are afraid of snakes,| are you not?  Heh heh heh." end
@@ -242,10 +242,10 @@ l_0xc5701f:
 	goto(l_0xc56ffb)
 
 l_0xc57067:
-	cannot_take_money(290)	// 0x0122
-	goto_if_true(l_0xc570db)
+	hasmoney(290)	// 0x0122
+	goto_if_false(l_0xc570db)
 	get_item_receiver(-1)
-	give_and_return_location(0,141)	// Item 0x8D, 141 = Snake bag
+	give_and_return_location(0, SNAKE_BAG)	// Item 0x8D / 141 = Snake bag
 	sound(SND_CHICKEN2)	// 118
 	takemoney(98)
 	show_wallet
@@ -258,7 +258,7 @@ l_0xc570db:
 	"@Without any money, I cannot sell to you.." end
 
 l_0xc570f2:
-	"@Since you have too many items,| I humbly keep this important {itemname(141)}." end
+	"@Since you have too many items,| I humbly keep this important {itemname(SNAKE_BAG)}." end
 
 l_0xc5711a:
 	call(data_13.l_0xc5d4cd) eob
@@ -268,10 +268,10 @@ l_0xc57120:
 
 l_0xc57126:
 	// Item 0xA2 / 162 = Piggy nose
-	"@I bought a <{itemname(162)}.>" next
+	"@I bought a <{itemname(PIGGY_NOSE)}.>" next
 	"@This will help out a large amount" next
 	"@while I am humbly searching for the Magic truffles in the Deep Darkness." next
-	"@You too can learn how to use a {itemname(162)} with the <Use> command under <Goods.>" next
+	"@You too can learn how to use a {itemname(PIGGY_NOSE)} with the <Use> command under <Goods.>" next
 	"@So please rest easy." end
 
 l_0xc571b9:

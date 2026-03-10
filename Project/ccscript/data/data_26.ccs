@@ -4,10 +4,10 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -715,7 +715,7 @@ l_0xc6dd1d:
 	sound(SND_BOXTAKE)	// 116
 	take(-1,CONTACT_LENS)	// FF, Item 0xBB / 187, Contact lens
 	get_item_receiver(-1)
-	give_and_return_location(-1,PETTENELLAS_SOCKS)	// item 0x98, 152, Pettenella's socks
+	give_and_return_location(-1, PETTENELLAS_SOCKS)	// item 0x98, 152, Pettenella's socks
 	call(data_36.l_0xc7dccf) next
 	"@Please take good care of my socks... *sniff!*" wait
 	set(FLG_FOUR_PETENERA)	// 736

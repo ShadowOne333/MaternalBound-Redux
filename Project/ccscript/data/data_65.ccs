@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
@@ -833,7 +833,7 @@ l_0xef95a3:
 l_0xef96d3:
 	sound(SND_ERRORBEEP)	// 5
 	"||@What--|do you want to get fried by lightning?" next
-	"@Get rid of something so I can give you the {itemname(1)}." wait
+	"@Get rid of something so I can give you the {itemname(FRANKLIN_BADGE)}." wait
 	linebreak
 	set(FLG_TEMP_9)	// 10
 	eob

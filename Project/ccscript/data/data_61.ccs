@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
@@ -134,7 +134,7 @@ l_0xef58c7:
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} checked the broken Phase Distorter." next
 	// Item 0x82 / 130 = Horn of life
-	"@There was a {itemname(130)}." next
+	"@There was a {itemname(HORN_OF_LIFE)}." next
 
 	get_item_receiver(-1)
 	goto_if_false(data_23.l_0xc685bb)

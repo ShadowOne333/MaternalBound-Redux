@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
@@ -485,7 +485,7 @@ l_0xc7a04a:
 	eob
 
 l_0xc7a1ba:
-	hasitem(-1,36)	// 0xFF, 0x24
+	hasitem(-1, POP_GUN)	// 0xFF, 0x24 / 36
 	goto_if_true(l_0xc7a20c)
 	char_direction(8,5)	// 0x08, 0x05
 	get_dir_from_char(3,TO_CHAR,8)	// 0x03, 0x01, 0x0008

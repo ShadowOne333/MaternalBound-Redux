@@ -4,10 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
@@ -252,7 +253,7 @@ l_0xc68473:	// Unassuming Local Guy
 	eob
 
 l_0xc6847a:
-	hasitem(-1,1)
+	hasitem(-1, FRANKLIN_BADGE)
 	goto_if_true(l_0xc684a6)
 	window_closeall
 	pause(1)
@@ -276,7 +277,7 @@ l_0xc684a6:
 	wait_movement
 	window_open(1)
 	// Check if Paula has the Frankling badge
-	hasitem(2,1)
+	hasitem(2, FRANKLIN_BADGE)
 	goto_if_true(l_0xc684ce)
 
 l_0xc684ce:	// Mr. Carpainter

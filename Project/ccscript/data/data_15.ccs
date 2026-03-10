@@ -4,8 +4,8 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 
 command e(label) "{long label}"
@@ -72,7 +72,6 @@ l_0xc5dfef:
 	call(data_00.l_0xc51568)
 	unset(FLG_SHOP_TOOK)	// 224
 	unset(FLG_SHOP_SOLD)	// 225
-	goto(l_0xc5dffa)
 
 l_0xc5dffa:
 	call(data_00.l_0xc51700)
@@ -81,7 +80,6 @@ l_0xc5dffa:
 	switch_goto(2)	// 0x02
 		switch_entry(l_0xc5dfba)
 		switch_entry(l_0xc5e013)
-	goto(l_0xc5e013)
 
 l_0xc5e013:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e020)	// 0x0291, 657
@@ -101,7 +99,6 @@ l_0xc5e02f:
 	unset(FLG_SHOPTEMP_2)	// 657
 	newline
 	call(data_00.l_0xc50000)
-	goto(l_0xc5e038)
 
 l_0xc5e038:
 	call(data_00.l_0xc504c8)
@@ -127,7 +124,6 @@ l_0xc5e069:
 	switch_goto(2)	// 0x02
 		switch_entry(l_0xc5e038)
 		switch_entry(l_0xc5e08d)
-	goto(l_0xc5e08d)
 
 l_0xc5e08d:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e09a)	// 0x0291, 657
@@ -145,7 +141,7 @@ l_0xc5e0a3:
 
 l_0xc5e0a9:
 	call(l_0xc5e24b)
-	goto_if_true(l_0xc5e1d6)
+	goto_if_false(l_0xc5e1d6)
 	load_registers
 	call(data_00.l_0xc50660)
 	party_size_smaller_than(2)	// 0x02
@@ -158,7 +154,6 @@ l_0xc5e0cc:
 	call(data_00.l_0xc507f8)
 	call(l_0xc5e52e)
 	goto_if_false(l_0xc5e1ad)
-	goto(l_0xc5e0de)
 
 l_0xc5e0de:
 	store_registers
@@ -207,11 +202,9 @@ l_0xc5e136:
 l_0xc5e17e:
 	call(data_14.l_0xc5d835)
 	call(l_0xc5e37a)
-	goto(l_0xc5e188)
 
 l_0xc5e188:
 	set(FLG_SHOP_TOOK)	// 224
-	goto(l_0xc5e18b)
 
 l_0xc5e18b:
 	unset(FLG_SHOPTEMP_3)	// 658
@@ -225,7 +218,6 @@ l_0xc5e18f:
 	switch_goto(2)	// 0x02
 		switch_entry(l_0xc5e1e0)
 		switch_entry(l_0xc5e1ad)
-	goto(l_0xc5e1ad)
 
 l_0xc5e1ad:
 	call(data_00.l_0xc50c36)
@@ -269,7 +261,6 @@ l_0xc5e1ef:
 l_0xc5e22c:
 	call(l_0xc5e392)
 	call(data_14.l_0xc5d835)
-	goto(l_0xc5e236)
 
 l_0xc5e236:
 	eob
@@ -287,7 +278,7 @@ l_0xc5e24b:
 	get_buying_price(0)	// 0x00
 	store_registers
 	swap
-	cannot_take_money(0)	// 0x00000000
+	hasmoney(0)	// 0x00000000
 	eob
 
 l_0xc5e25b:
@@ -320,7 +311,6 @@ l_0xc5e277:
 		switch_entry(l_0xc5e2b5)
 		switch_entry(l_0xc5e2ba)
 		switch_entry(l_0xc5e2bf)
-	goto(l_0xc5e2b0)
 
 l_0xc5e2b0:
 	stat(18)	// 0x12
@@ -346,7 +336,6 @@ l_0xc5e2c4:
 		switch_entry(l_0xc5e2e8)
 		switch_entry(l_0xc5e2ed)
 		switch_entry(l_0xc5e2f2)
-	goto(l_0xc5e2e3)
 
 l_0xc5e2e3:
 	stat(17)	// 0x11
@@ -373,7 +362,6 @@ l_0xc5e2f7:
 		switch_entry(l_0xc5e31d)
 		switch_entry(l_0xc5e326)
 		switch_entry(l_0xc5e32f)
-	goto(l_0xc5e314)
 
 l_0xc5e314:
 	"{stat(18)})" next	// 0x12
@@ -397,7 +385,6 @@ l_0xc5e338:
 		switch_entry(l_0xc5e353)
 		switch_entry(l_0xc5e35c)
 		switch_entry(l_0xc5e365)
-	goto(l_0xc5e34a)
 
 l_0xc5e34a:
 	"{stat(17)})" next	// 0x11
@@ -516,22 +503,21 @@ l_0xc5e42e:
 
 l_0xc5e431:
 	counter(1)
-	goto(l_0xc5e433)
 
 l_0xc5e433:
 	ctoarg
 	party_size_smaller_than(0)	// 0x00
 	goto_if_true(l_0xc5e453)
+
 	get_char_at_pos(0)	// 0x00
-	get_inventory_item(0,1)	// 0x00, 0x01
-	swap
+	get_inventory_item(0,1) swap	// 0x00, 0x01
 	goto_if_true(l_0xc5e455)
+
 	inc
 	goto(l_0xc5e433)
 
 l_0xc5e453:
 	result_is(0)
-	goto(l_0xc5e455)
 
 l_0xc5e455:
 	eob
@@ -547,7 +533,6 @@ l_0xc5e456:
 	goto_if_false(l_0xc5e456)
 	do_menu_in_window(2)	// 0x02
 	goto_if_false(l_0xc5e456)
-	goto(l_0xc5e48e)
 
 l_0xc5e48e:
 	window_switch(2)
@@ -587,7 +572,6 @@ l_0xc5e4c3:
 	goto_if_false(l_0xc5e4c3)
 	do_menu_in_window(2)	// 0x02
 	goto_if_false(l_0xc5e4c3)
-	goto(l_0xc5e4f9)
 
 l_0xc5e4f9:
 	window_switch(2)

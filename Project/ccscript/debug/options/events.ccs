@@ -1,10 +1,10 @@
 // Events debug menu option
 
+import "../../definitions/flags.ccs"
 import "../../definitions/items.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/cc_asmcall.ccs"
 import "../../essential/commands.ccs"
-import "../../essential/flags.ccs"
 import "../../essential/stdext.ccs"
 import "../../redux/keyitems.ccs"
 import "../../debug/diamond.ccs"
@@ -133,8 +133,8 @@ l_0xc59a40:
 	set(FLG_TLPT_TWSN)	// 210
 	give_and_return_location(1, BICYCLE)	// 0xB0, 176, Bicycle
 	give_and_return_location(1, SHYNESS_BOOK)	// 0xA4, 164, Shyness book
-	give_and_return_location(1,162)	// 0xA2, 162, Piggy nose
-	give_and_return_location(1,197)	// 0xC5, 197, Exit mouse
+	give_and_return_location(1, PIGGY_NOSE)	// 0xA2, 162, Piggy nose
+	give_and_return_location(1, EXIT_MOUSE)	// 0xC5, 197, Exit mouse
 	give_and_return_location(1, TOWN_MAP)	// 0xCA, 202, Town map
 	set(FLG_ITEM_ESCAPE_MOUSE)	// 512
 	warp(29)	// 0x1D
@@ -451,18 +451,18 @@ l_0xc59eb2:
 	counter(43)
 	call(l_0xc5a4ec)
 	party_add(3)
-	give_and_return_location(1,224)	// 0xE0, 224, Skip sandwich
-	give_and_return_location(1,93)	// 0x5D, 93, Picnic lunch
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
-	give_and_return_location(1,233)	// 0xE9, 233, Double burger
-	give_and_return_location(1,95)	// 0x5F, 95, Pizza
-	give_and_return_location(1,95)	// 0x5F, 95, Pizza
-	give_and_return_location(1,97)	// 0x61, 97, Large pizza
-	give_and_return_location(1,127)	// 0x7F, 127, Wet towel
-	give_and_return_location(1,108)	// 0x6C, 108, Grownup drink
-	give_and_return_location(1,92)	// 0x5C, 92, Fresh Egg
-	give_and_return_location(1,140)	// 0x8C, 140, Ruler
+	give_and_return_location(1, SKIP_SANDWICH)	// 0xE0, 224, Skip sandwich
+	give_and_return_location(1, PICNIC_LUNCH)	// 0x5D, 93, Picnic lunch
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, DOUBLE_BURGER)	// 0xE9, 233, Double burger
+	give_and_return_location(1, PIZZA)	// 0x5F, 95, Pizza
+	give_and_return_location(1, PIZZA)	// 0x5F, 95, Pizza
+	give_and_return_location(1, LARGE_PIZZA)	// 0x61, 97, Large pizza
+	give_and_return_location(1, WET_TOWEL)	// 0x7F, 127, Wet towel
+	give_and_return_location(1, GROWNUP_DRINK)	// 0x6C, 108, Grownup drink
+	give_and_return_location(1, FRESH_EGG)	// 0x5C, 92, Fresh Egg
+	give_and_return_location(1, RULER)	// 0x8C, 140, Ruler
 	if flag FLG_KEY_ITEMS { set(FLG_ITEM_TACO_ERASER) }
 	else { give_and_return_location(1, PENCIL_ERASER) }	// 0xB8, 184, Pencil eraser
 	set(FLG_FOUR_MAID_APPEAR)	// 59
@@ -498,7 +498,7 @@ l_0xc59f60:
 	counter(14)
 	call(l_0xc5a4ec)
 	set(FLG_TLPT_TWSN)	// 210
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
 	warp(147)	// 0x93
 	eob
 
@@ -546,7 +546,7 @@ l_0xc5a00c:
 	window_closeall
 	counter(21)
 	call(l_0xc5a4ec)
-	give_and_return_location(1,1)	// Franklin badge
+	give_and_return_location(1, FRANKLIN_BADGE)	// Franklin badge
 	warp(119)	// 0x77
 	eob
 
@@ -558,7 +558,7 @@ l_0xc5a036:
 	set(FLG_FOUR_DEPT_OK)	// 139
 	set(FLG_FOUR_TONCHIKI_APPEAR)	// 60
 	party_add(3)	// Add Jeff
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
 	warp(168)	// 0xA8
 	eob
 
@@ -568,7 +568,7 @@ l_0xc5a05b:
 	counter(43)
 	call(l_0xc5a4ec)
 	party_add(3)
-	give_and_return_location(1,139)	// 0x8B, 139, Tofu machine
+	give_and_return_location(1, TOFU_MACHINE)	// 0x8B, 139, Tofu machine
 	warp(169)	// 0xA9
 	eob
 
@@ -635,8 +635,8 @@ l_0xc5a11a:
 	set(FLG_ITEM_GAUS)	// 88
 	set(FLG_WINS_START)	// 128
 	if not flag FLG_KEY_ITEMS { give_and_return_location(3, BAD_KEY_MACHINE) }	// 0xAC, 172, Bad key machine
-	give_and_return_location(3,36)	// 0x24, 36, Pop gun
-	give_and_return_location(3,75)	// 0x4B, 75, Holmes hat
+	give_and_return_location(3, POP_GUN)	// 0x24, 36, Pop gun
+	give_and_return_location(3, HOLMES_HAT)	// 0x4B, 75, Holmes hat
 	warp(184)	// 0xB8
 	eob
 
@@ -648,7 +648,7 @@ l_0xc5a154:
 	set(FLG_SYS_PHONE_MYHOME2)	// 210
 	set(FLG_SYS_PHONE_PIZZA)	// 202
 	call(l_0xc5a526)
-	give_and_return_location(1,163)	// 0xA3, 163, For sale sign
+	give_and_return_location(1, FOR_SALE_SIGN)	// 0xA3, 163, For sale sign
 	warp(122)	// 0x7A
 	eob
 
@@ -684,11 +684,11 @@ l_0xc5a1cd:
 	counter(60)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
-	give_and_return_location(3,4)	// 4, Broken machine
-	give_and_return_location(3,5)	// 5, Broken gadget
-	give_and_return_location(3,6)	// 6, Broken air gun
-	give_and_return_location(3,7)	// 7, Broken spray can
-	give_and_return_location(3,161)	// 0xA1, 161, Defense spray
+	give_and_return_location(3, BROKEN_MACHINE)	// 4, Broken machine
+	give_and_return_location(3, BROKEN_GADGET)	// 5, Broken gadget
+	give_and_return_location(3, BROKEN_AIR_GUN)	// 6, Broken air gun
+	give_and_return_location(3, BROKEN_SPRAY_CAN)	// 7, Broken spray can
+	give_and_return_location(3, DEFENSE_SPRAY)	// 0xA1, 161, Defense spray
 	warp(138)	// 0x8A
 	eob
 

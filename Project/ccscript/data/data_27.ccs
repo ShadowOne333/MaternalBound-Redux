@@ -4,11 +4,11 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
-import "../essential/flags.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
@@ -311,7 +311,7 @@ l_0xc6e982:
 	goto_if_flag(FLG_FOUR_MAID_48, l_0xc6ea0f)	// 0x8D, 141
 	get_item_receiver(-1)
 	goto_if_false(l_0xc6e9d6)
-	give_and_return_location(0,STRAWBERRY_TOFU)	// 0xBD, 189, Strawberry tofu
+	give_and_return_location(0, STRAWBERRY_TOFU)	// 0xBD, 189, Strawberry tofu
 	title(1, Electra)
 	"@Your {itemname(STRAWBERRY_TOFU)}, "
 	store_registers
