@@ -4,109 +4,48 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/flags.ccs"
-import "../essential/ccscript_missing_commands.ccs"
 import "../essential/commands.ccs"
+import "../essential/flags.ccs"
+import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 import "../redux/keyitems.ccs"
 
 command e(label) "{long label}"
 
 // Text Data
-l_0xc9f786:
-	pause(30)
-	" prayed for the kids, having never even met them before."
-	pause(150)
-	window_closeall
-	eob
-
-l_0xc9f7af:
-	"#" goto(data_59.l_0xc9f750)
-
-l_0xc9f7b5:
-	"#" goto(data_59.l_0xc9f780)
-
-l_0xc9f7bb:
-	newline
-	pause(60)
-	window_open(1)
-	"@{counter(1)}"
-	goto(l_0xc9f7c4)
-
-l_0xc9f7c4:
-	"[19 28 02][1B 02 {e(l_0xc9f7eb)}]{swap}[1D 21 63][18 07 28 00 00 00 00][1B 02 {e(l_0xc9f7fe)}][1C 11 00][1C 03 00]" goto(l_0xc9f7e5)
-
-l_0xc9f7e5:
-	inc
-	goto(l_0xc9f7c4)
-
-l_0xc9f7eb:
-	pause(30)
-	" kept praying."
-	pause(150)
-	window_closeall
-	eob
-
-l_0xc9f7fe:
-	"#" goto(l_0xc9f7e5)
-
-l_0xc9f804:
-	newline
-	pause(60)
-	window_open(1)
-	"@{counter(1)}"
-	goto(l_0xc9f80d)
-
-l_0xc9f80d:
-	"[19 28 02][1B 02 {e(l_0xc9f834)}]{swap}[1D 21 63][18 07 14 00 00 00 00][1B 02 {e(l_0xc9f847)}][1C 11 00][1C 03 00]" goto(l_0xc9f82e)
-
-l_0xc9f82e:
-	inc
-	goto(l_0xc9f80d)
-
-l_0xc9f834:
-	pause(30)
-	" kept praying."
-	pause(150)
-	window_closeall
-	eob
-
-l_0xc9f847:
-	"#" goto(l_0xc9f82e)
-
-l_0xc9f84d:
-	newline
-	pause(60)
-	window_open(1)
-	"@" call(data_37.l_0xc7e77d) " kept praying."
-	pause(150)
-	window_closeall
-	eob
-
-l_0xc9f86a:
-	newline
-	"@Giygas' defenses became" linebreak
-	"  unstable."
-	sound(SND_GIYGASWEAK)	// 90
-	pause(70)
-	sound(SND_GIYGASWEAK)	// 90
-	pause(65)
-	sound(SND_GIYGASWEAK)	// 90
-	pause(74)
-	sound(SND_GIYGASWEAK)	// 90
-	eob
-
 l_0xc9f897:
 	newline
-	"@{user}{return_action_argument}{swap} put" linebreak
+	"@{user}{get_action_arg}{swap} put" linebreak
 	"  the {itemname(0)} on " call(data_37.l_0xc7e66e) " nose!"
 	sound(SND_BOXOPEN1) next	// 115
 	"@{user} searched for the" linebreak
-	"  smell of the magic truffle." next
-	"[1F D1][1B 02 {e(l_0xc9f970)}]{store_registers}{result_is(1)}[1B 03 {e(l_0xc9f946)}]{load_registers}{result_is(10)}[1B 03 {e(l_0xc9f936)}]{load_registers}" newline
-	"@(It must be a little further [1F C0 09 {e(data_32.l_0xc77eff)} {e(l_0xc9f990)} {e(l_0xc9f995)} {e(l_0xc9f99e)} {e(l_0xc9f9a4)} {e(l_0xc9f9ad)} {e(l_0xc9f9b2)} {e(l_0xc9f9bd)} {e(l_0xc9f9c4)}]" end
+	"  smell of the {itemname(MAGIC_TRUFFLE)}." next
+
+	find_direction_to_truffle
+	goto_if_false(l_0xc9f970)
+	store_registers
+	result_is(1)
+	goto_if_true(l_0xc9f946)
+	load_registers
+	result_is(10)
+	goto_if_true(l_0xc9f936)
+	load_registers
+	newline
+
+	"@(It must be a little further "
+	switch_call(9)	// 0x09
+		switch_entry(l_0xc9f990)
+		switch_entry(l_0xc9f995)
+		switch_entry(l_0xc9f99e)
+		switch_entry(l_0xc9f9a4)
+		switch_entry(l_0xc9f9ad)
+		switch_entry(l_0xc9f9b2)
+		switch_entry(l_0xc9f9bd)
+		switch_entry(l_0xc9f9c4)
+	end
 
 l_0xc9f936:
 	newline
@@ -121,43 +60,73 @@ l_0xc9f970:
 	"@(The Truffle doesn't seem to be around here.)" end
 
 l_0xc9f990:
-	"up.)" eob
+	"up.)"
+	eob
 
 l_0xc9f995:
-	"up and right.)" eob
+	"up and right.)"
+	eob
 
 l_0xc9f99e:
-	"right.)" eob
+	"right.)"
+	eob
 
 l_0xc9f9a4:
-	"down and right.)" eob
+	"down and right.)"
+	eob
 
 l_0xc9f9ad:
-	"down.)" eob
+	"down.)"
+	eob
 
 l_0xc9f9b2:
-	"down and left.)" eob
+	"down and left.)"
+	eob
 
 l_0xc9f9bd:
-	"left.)" eob
+	"left.)"
+	eob
 
 l_0xc9f9c4:
-	"up and left.)" eob
+	"up and left.)"
+	eob
 
 l_0xc9f9cf:
 	newline
-	"@Thanks to the Magic butterfly, you were able to totally relax.{wait}{window_closeall}" eob
+	"@Thanks to the Magic butterfly, you were able to totally relax." wait
+	window_closeall
+	eob
 
 l_0xc9f9f3:
-	"[06 FB 02 {e(l_0xc9fab9)}][06 49 00 {e(l_0xc9fab9)}][06 74 01 {e(data_35.l_0xc7c6f1)}]" call(data_36.l_0xc7dd8d) "[1B 03 {e(l_0xc9fa74)}][06 BE 01 {e(l_0xc9fa74)}][06 86 02 {e(l_0xc9fa74)}][06 87 02 {e(l_0xc9fa74)}][06 88 02 {e(l_0xc9fa74)}]" newline
-	"@{user}{return_action_argument}{swap} used" linebreak
-	"  the [1C 05 00]!" next
-	"@A customer is heading this way.{wait}{window_closeall}[1D 21 03][09 03 {e(l_0xc9fb43)} {e(l_0xc9fb4d)} {e(l_0xc9fb57)}][1F D3 04]{set(flag 446)}{set(flag 754)}" eob
+	goto_if_flag(FLG_MYHOME_TO_BE, l_0xc9fab9)	// 0x02FB, 763
+	goto_if_flag(FLG_WIN_GIEGU, l_0xc9fab9)	// 0x0049, 73
+	goto_if_flag(FLG_STEP_PAST, data_35.l_0xc7c6f1)	// 0x0174, 372
+	call(data_36.l_0xc7dd8d)
+	goto_if_true(l_0xc9fa74)
+	goto_if_flag(FLG_DELIVERY_CUSTOMER, l_0xc9fa74)	// 0x01BE, 446
+	goto_if_flag(FLG_DELIVERY_CUSTOMER_B, l_0xc9fa74)	// 0x0286, 646
+	goto_if_flag(FLG_DELIVERY_CUSTOMER_C, l_0xc9fa74)	// 0x0287, 647
+	goto_if_flag(FLG_DELIVERY_CUSTOMER_D, l_0xc9fa74)	// 0x0288, 648
+	newline
+	"@{user}{get_action_arg}{swap} used" linebreak
+	"  the {itemname(0)}!" next
+	"@A customer is heading this way." wait
+	window_closeall
+	random(3)	// 0x03
+	switch_goto(3)	// 0x03
+		switch_entry(l_0xc9fb43)
+		switch_entry(l_0xc9fb4d)
+		switch_entry(l_0xc9fb57)
+
+	pathfinding_npc_time(4)	// 0x04
+	set(FLG_DELIVERY_CUSTOMER)	// 446
+	set(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc9fa74:
 	newline
-	"@{user}{return_action_argument}{swap} used" linebreak
-	"  the [1C 05 00]!" next
+	"@{user}{get_action_arg}{swap} used" linebreak
+	"  the {itemname(0)}!" next
 	"@Wait!  Someone is already heading this way.  Wait for them to get here first." end
 
 l_0xc9fab9:
@@ -168,80 +137,140 @@ l_0xc9fab9:
 	"  Good bye, sign." end
 
 l_0xc9fb43:
-	"[1F D3 05]{set(flag 646)}{set(flag 754)}" eob
+	pathfinding_npc_time(5)	// 0x05
+	set(FLG_DELIVERY_CUSTOMER_B)	// 646
+	set(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc9fb4d:
-	"[1F D3 06]{set(flag 647)}{set(flag 754)}" eob
+	pathfinding_npc_time(6)	// 0x06
+	set(FLG_DELIVERY_CUSTOMER_C)	// 647
+	set(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc9fb57:
-	"[1F D3 07]{set(flag 648)}{set(flag 754)}" eob
+	pathfinding_npc_time(7)	// 0x07
+	set(FLG_DELIVERY_CUSTOMER_D)	// 648
+	set(FLG_SYS_DISTLPT)	// 754
+	eob
 
 l_0xc9fb61:
 	newline
-	"@This book should be required reading for any quiet, shy person.[03]" eob
+	"@This book should be required reading for any quiet, shy person." promptw
+	eob
 
 l_0xc9fb8b:
 	newline
-	"@You felt sad and empty.[03]" eob
+	"@You felt sad and empty." promptw
+	eob
 
 l_0xc9fb9f:
 	newline
-	"@(If you get this message, it means that something is wrong.)[03]" eob
+	"@(If you get this message, it means that something is wrong.)" promptw
+	eob
 
 l_0xc9fbc4:
 	newline
-	"@{user}{return_action_argument}{swap} opened" linebreak
-	"  the [1C 05 00]." next
-	"@The enemy may not notice that you are present.[03]" eob
+	"@{user}{get_action_arg}{swap} opened" linebreak
+	"  the {itemname(0)}." next
+	"@The enemy may not notice that you are present." promptw
+	eob
 
 l_0xc9fbf2:
 	newline
-	"@To use this, go to a cash machine and insert the card.[03]" eob
+	"@To use this, go to a cash machine and insert the card." promptw
+	eob
 
 l_0xc9fc16:
 	newline
-	"@This is a kind of trap that gathers zombies together.[03]" eob
+	"@This is a kind of trap that gathers zombies together." promptw
+	eob
 
 l_0xc9fc32:
 	newline
-	"@It might be useful in a dark place.[03]" eob
+	"@It might be useful in a dark place." promptw
+	eob
 
 l_0xc9fc48:
 	newline
-	"@{user}{return_action_argument}{swap} placed the [1C 05 00] on the floor.{sound(115)}{pause(1)}" next
-	"{set(flag 124)}[1D 01 FF AE]" eob
+	"@{user}{get_action_arg}{swap} placed the {itemname(0)} on the floor."
+	sound(SND_BOXOPEN1)	// 115
+	pause(1)
+	next
+	set(FLG_PUT_ZOMBI_HOIHOI)	// 124
+	if not FLG_KEY_ITEMS { take(-1, ZOMBIE_PAPER) }	// 0xFF,0xAE / 174
+	eob
 
 l_0xc9fc6f:
 	newline
-	"@{user}{return_action_argument}{swap} used the [1C 05 00]!{sound(95)}{pause(1)}{wait}{window_closeall}[1D 01 FF AF]{set(flag 288)}[1F 1E CF 04 06]" call(data_50.l_0xc935b1) "){set(flag 508)}" eob
+	"@{user}{get_action_arg}{swap} used the {itemname(0)}!"
+	sound(SND_BUTTERFLY)	// 95
+	pause(1)
+	wait
+	window_closeall
+	if not FLG_KEY_ITEMS { take(-1, HAWK_EYE) }	// 0xFF,0xAF / 175
+	set(FLG_MAKYO_USE_TAKANOME)	// 288
+	npc_delete(1231,6)	// 0x04CF,0x06
+	call(data_50.l_0xc935b1) ")"
+	set(FLG_PHOTO_MAKYOU)	// 508}"
+	eob
 
 l_0xc9fc9e:
 	"@(For some reason," next
 	"@something that looks like a very large iron eraser is in the way.)" end
 
 l_0xc9fcd5:
-	call(data_36.l_0xc7dd2c) "{result_is(210)}[1B 02 {e(data_35.l_0xc7c6f1)}]{load_registers}" call(data_36.l_0xc7dd37) newline
-	"@(For some reason,{pause(15)} the iron eraser statue disappeared in an instant!){wait}{window_closeall}{pause(1)}{sound(33)}[1F 1E 9F 02 0A]{set(flag 299)}" eob
+	if flag FLG_KEY_ITEMS {
+		store_registers_shared
+		get_inventory_item(0,0)
+		store_registers swap
+	}
+	else { call(data_36.l_0xc7dd2c) }
+	result_is(ERASER_ERASER)
+	goto_if_false(data_35.l_0xc7c6f1)
+
+	load_registers
+	call(data_36.l_0xc7dd37)
+
+	newline
+	"@(For some reason,| the iron eraser statue disappeared in an instant!)" wait
+	window_closeall
+
+	pause(1)
+	sound(SND_ENEMYDEATH)	// 33
+	npc_delete(671,10)	// 0x029F,0x0A
+	set(FLG_WINS_STONE_TACO_DISAPPEAR)	// 299
+	eob
 
 l_0xc9fd2e:
 	newline
-	"[19 10 02][1B 03 {e(l_0xc9fd5a)}][19 10 01][1D 0D 00 02 02][1B 03 {e(l_0xc9fd60)}]@{user} rode a bicycle.[1F F0]" eob
+	get_char_at_pos(2)	// 0x02
+	goto_if_true(l_0xc9fd5a)
+
+	get_char_at_pos(1)	// 0x01
+	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00,0x02,0x02
+	goto_if_true(l_0xc9fd60)
+
+	"@{user} rode a bicycle."
+	bicycle
+	eob
 
 l_0xc9fd5a:
-	call(data_35.l_0xc7c802) eob
+	call(data_35.l_0xc7c802)
+	eob
 
 l_0xc9fd60:
 	"@If you are not feeling well, you should not ride a bicycle." end
 
 l_0xc9fd82:
 	newline
-	"@{user}{return_action_argument}{swap} used the {itemname(0)}!" next
+	"@{user}{get_action_arg}{swap} used the {itemname(0)}!" next
 	"@Now, " call(data_36.l_0xc7e602) " can figure out the length of things easily." promptw
 	eob
 
 l_0xc9fdbb:
 	newline
-	"@{user}{return_action_argument}{swap} used the [1C 05 00]!" next
+	"@{user}{get_action_arg}{swap} used the {itemname(0)}!" next
 	"@Now, " call(data_36.l_0xc7e602) " can fairly easily figure out the angle of various things." promptw
 	eob
 
@@ -265,17 +294,17 @@ l_0xc9fe41:
 	newline
 	" The Teleport Box started to groan."
 	sound(SND_STARMASTER) next	// 99
-	psi_animation(48, 0)	// 30, 00
+	battle_animation(48,0)	// 0x30, 0x00
 	"@The Teleport Box shattered into pieces with a loud explosion."
 	sound(SND_ERRORBEEP)	// 5
-	psi_animation(35, 0)	// 23, 00
+	battle_animation(35,0)	// 0x23, 0x00
 	end
 
 l_0xc9fe9d:
 	newline
 	"@The Teleport Box began to groan."
 	sound(SND_STARMASTER) next	// 99
-	psi_animation(48, 0)	// 30, 00
+	battle_animation(48,0)	// 0x30, 0x00
 	"@The Teleport Box didn't work quite right..."
 	sound(SND_ERRORBEEP)	// 5
 	pause(30)
@@ -287,352 +316,170 @@ l_0xc9fee3:
 
 l_0xc9fefd:
 	newline
-	return_item_in_slot(0, 0) swap
+	get_inventory_item(0,0) swap
 	"@{user}{swap} touched the {itemname(0)} to his forehead and gathered his thoughts." promptw
-	special_event(9)	// Open Sound Stone screen
+	event(9)	// Open Sound Stone screen
 	eob
 
-l_0xe10000:
-	"[ 09 ][ 09 ][ 01 0C ]You've traveled very far from[ 09 ][ 01 0C ]home...[ 09 ][ 09 ][ 09 ][ 01 0C ]Do you remember how your long[ 09 ][ 01 0C ]and winding journey began with[ 09 ][ 01 0C ]someone pounding at your door?[ 09 ][ 01 0C ]It was Porky, the worst person in[ 09 ][ 01 0C ]your neighborhood, who knocked[ 09 ][ 01 0C ]on the door that fateful night.[ 09 ][ 09 ][ 09 ][ 01 0C ]On your way, you have walked,[ 09 ][ 01 0C ]thought and fought.  Yet through[ 09 ][ 01 0C ]all this, you have never lost your[ 09 ][ 01 0C ]courage. You have grown steadily[ 09 ][ 01 0C ]stronger, though you have[ 09 ][ 01 0C ]experienced the pain of battle[ 09 ][ 01 0C ]many times.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]You are no longer alone in your[ 09 ][ 01 0C ]adventure, [ 08 02 ] who is[ 09 ][ 01 0C ]steadfast, kind and even pretty,[ 09 ][ 01 0C ]is always at your side.[ 09 ][ 01 0C ][ 08 03 ] is with you as well.[ 09 ][ 01 0C ]Though he is timid, he came from[ 09 ][ 01 0C ]a distant land to help you.[ 09 ][ 01 0C ][ 08 01 ], as you certainly[ 09 ][ 01 0C ]know by now, you are not a[ 09 ][ 01 0C ]regular young man...  You have[ 09 ][ 01 0C ]an awesome destiny to fulfill.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]The journey from this point will[ 09 ][ 01 0C ]be long, and it will be more[ 09 ][ 01 0C ]difficult than anything you have[ 09 ][ 01 0C ]undergone to this point.  Yet, I[ 09 ][ 01 0C ]know you will be all right.  When[ 09 ][ 01 0C ]good battles evil, which side do[ 09 ][ 01 0C ]you believe wins?  Do you have[ 09 ][ 01 0C ]faith that good is triumphant?[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]One thing you must never lose is[ 09 ][ 01 0C ]courage.  If you believe in the[ 09 ][ 01 0C ]goal you are striving for, you will[ 09 ][ 01 0C ]be courageous.  There are many[ 09 ][ 01 0C ]difficult times ahead, but you[ 09 ][ 01 0C ]must keep your sense of humor,[ 09 ][ 01 0C ]work through the tough[ 09 ][ 01 0C ]situations and enjoy yourself.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]When you have finished this cup[ 09 ][ 01 0C ]of coffee, your adventure will[ 09 ][ 01 0C ]begin again.  Next, you must pass[ 09 ][ 01 0C ]through a vast desert and[ 09 ][ 01 0C ]proceed to the big city of[ 09 ][ 01 0C ]Fourside.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ][ 08 01 ]...[ 09 ][ 01 0C ]           [ 08 02 ]...[ 09 ][ 01 0C ]                      [ 08 03 ]...[ 09 ][ 09 ][ 09 ][ 01 0C ]             May the goddess[ 09 ][ 01 0C ]              of good fortune[ 09 ][ 01 0C ]         smile upon you always...[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 00 ]"
-
-l_0xe10652:
-	"[ 09 ][ 09 ][ 01 0C ]Like a great tapestry, vertical and[ 09 ][ 01 0C ]horizontal threads have met and[ 09 ][ 01 0C ]become intertwined, creating a[ 09 ][ 01 0C ]huge, beautiful image.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]You may have cursed this never-[ 09 ][ 01 0C ]ending journey.  You have known[ 09 ][ 01 0C ]injury and defeat, but you have[ 09 ][ 01 0C ]struggled on to reach this place.[ 09 ][ 01 0C ]Your in-born wisdom and[ 09 ][ 01 0C ]courage have helped bring you[ 09 ][ 01 0C ]here.  You have believed in your[ 09 ][ 01 0C ]friends, and as a group, you have[ 09 ][ 01 0C ]supported each other.  Have you[ 09 ][ 01 0C ]ever stopped to consider how[ 09 ][ 01 0C ]much your power has grown?[ 09 ][ 01 0C ]Now, you could fell enemies in[ 09 ][ 01 0C ]Onett and Twoson with one[ 09 ][ 01 0C ]blow.  As you certainly know,[ 09 ][ 01 0C ]you cannot turn back.  Giygas,[ 09 ][ 01 0C ]the arch fiend of the universe, is[ 09 ][ 01 0C ]growing frightened of you and[ 09 ][ 01 0C ]your power.  He is searching for[ 09 ][ 01 0C ]ways to end your journey.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]From here, the challenge grows[ 09 ][ 01 0C ]and your adventure will take you[ 09 ][ 01 0C ]beyond anything you ever[ 09 ][ 01 0C ]imagined.  You are drawing near[ 09 ][ 01 0C ]to Giygas.  Remember, when you[ 09 ][ 01 0C ]are suffering hardships, your[ 09 ][ 01 0C ]enemy is also struggling.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 0C ]Still, where DID Porky go,[ 09 ][ 01 0C ]anyway?  When this cup of[ 09 ][ 01 0C ]tea is finished, your adventure will[ 09 ][ 01 0C ]continue.  Your destiny pulls you[ 09 ][ 01 0C ]in the right direction.  Believe in[ 09 ][ 01 0C ]yourself and press forward.[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 01 02 ][ 08 01 ]![ 09 ][ 01 02 ]           [ 08 02 ]![ 09 ][ 01 02 ]                      [ 08 03 ]![ 09 ][ 01 02 ]                                 [ 08 04 ]![ 09 ][ 09 ][ 09 ][ 01 0C ]             May the goddess[ 09 ][ 01 0C ]              of good fortune[ 09 ][ 01 0C ]         smile upon you always...[ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 09 ][ 00 ]"
-
-l_0xe10b86:
-	"[ 02 0C ][ 01 32 ]The year is 199X[ 09 ][ 00 ]"
-
-l_0xe10b9c:
-	"[ 02 0C ][ 01 0C ]Onett, a small town in Eagleland[ 09 ][ 00 ]"
-
-l_0xe10bc2:
-	"[ 02 0C ][ 01 3D ][ 08 01 ]'s house[ 09 ][ 00 ]"
-
-l_0xe10bd2:
-	"[ 02 0C ][ 01 00 ]Winters, a small country to the north[ 09 ][ 00 ]"
-
-l_0xe10bfd:
-	"[ 02 0C ][ 01 15 ]Snow Wood Boarding House[ 09 ][ 00 ]"
-
-l_0xe10c1b:
-	"[ 02 0C ][ 01 23 ]Dalaam, in the Far East[ 09 ][ 00 ]"
-
-l_0xe10c38:
-	"[ 02 0B ][ 01 25 ]The palace of [ 08 04 ][ 09 ][ 01 30 ]The Crown Prince[ 09 ][ 00 ]"
-
-l_0xe10c61:
-	"[ 02 0C ][ 01 30 ]Later that night...[ 09 ][ 00 ]"
-
-l_0xe1413f:
-	"[ 03 02 ][ 02 ][ A3 A4 81 86 86 ][ 00 ]"
-	"[ 02 ][ 80 80 80 80 80 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5B 7A 4B 54 6C 44 45 54 40 42 5A 54 40 54 48 7A 45 44 7B 45 54 40 52 6E ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 A3 81 A4 8F 40 89 A4 8F 89 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6D 7A 48 7B 7B 45 5A 40 52 6E ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 A3 81 A4 8F 40 89 A4 8F 89 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 4A 6C 6B 48 44 40 52 6E ][ 00 ]"
-	"[ 02 ][ 8B 85 89 89 83 88 89 40 A3 A5 AA A5 8B 89 ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8B 81 AA A5 40 A4 81 8E 81 8B 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 46 42 4A 45 40 54 45 6B 48 46 5A 45 7A ][ 00 ]"
-	"[ 02 ][ 81 8B 89 88 89 8B 8F 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 42 7A 7B 40 54 48 7A 45 44 7B 4B 7A ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 89 83 88 89 40 8F 8F A9 81 8D 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6B 4B 6C 5A 54 40 54 48 7A 45 44 7B 4B 7A ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8B 81 AA A5 40 A4 81 8E 81 8B 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 5B 7A 4B 46 7A 42 4A 40 54 48 7A 45 44 7B 4B 7A ][ 00 ]"
-	"[ 02 ][ A3 81 A4 8F A2 A5 40 89 A7 81 A4 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6C AD 6B AD 40 44 4B 5A 7C 45 7A 6B 48 4B 5A 40 54 48 7A 45 44 7B 4B 7A ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 8A 89 40 8D 81 8C A4 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 7B 7A 42 5A 6B 59 42 7B 48 4B 5A 40 54 48 7A 45 44 7B 4B 7A 6B ][ 00 ]"
-	"[ 02 ][ 8D 81 A2 83 A5 A3 40 8C 89 8E 84 82 8C 8F 8D ][ 00 ]"
-	"[ 02 ][ 8D 81 A3 81 A9 A5 8B 89 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5B 7A 4B 46 7A 42 4A 4A 45 7A 6B ][ 00 ]"
-	"[ 02 ][ A3 81 A4 8F A2 A5 40 89 A7 81 A4 81 ][ 00 ]"
-	"[ 02 ][ A3 81 A4 8F A3 88 89 40 8D 89 A4 A3 A5 88 81 A2 81 ][ 00 ]"
-	"[ 02 ][ A9 8F A3 88 89 8D 89 40 A4 81 8B 81 88 81 A3 88 89 ][ 00 ]"
-	"[ 02 ][ A3 85 89 8A 89 40 8F A4 8F 87 A5 A2 8F ][ 00 ]"
-	"[ 02 ][ 82 8F A5 40 8E 81 8B 81 8A 89 8D 81 ][ 00 ]"
-	"[ 02 ][ A3 85 89 8B 81 40 81 82 85 ][ 00 ]"
-	"[ 02 ][ A9 8F A3 88 89 8B 89 40 A3 A5 AA A5 8B 89 ][ 00 ]"
-	"[ 02 ][ 8A A5 8E 40 A9 81 8D 81 AA 81 8B 89 ][ 00 ]"
-	"[ 02 ][ A4 8F A3 88 89 A9 A5 8B 89 40 A5 85 8E 8F ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 A3 81 A3 81 8B 89 ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 A3 81 8B A5 8D 81 ][ 00 ]"
-	"[ 02 ][ 8B 81 AA A5 8F 40 A3 81 A4 8F ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 8A 89 40 8D 81 8C A4 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6B 4B 6C 5A 54 40 5B 7A 4B 46 7A 42 4A 4A 45 7A ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8B 81 AA A5 40 A4 81 8E 81 8B 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6B 6E 6B 7B 45 4A 40 45 5A 46 48 5A 45 45 7A 48 5A 46 ][ 00 ]"
-	"[ 02 ][ 8D 81 8B 8F A4 8F 40 8B 81 8E 81 89 ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 A3 81 8B A5 8D 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 46 7A 42 5B 56 48 44 6B 40 42 7A 7B 48 6B 7B 6B ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 89 83 88 89 40 8F 8F A9 81 8D 81 ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F A9 A5 8B 89 40 A3 81 8B 89 A9 81 8D 81 ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 89 83 88 89 40 A9 81 8D 81 84 81 ][ 00 ]"
-	"[ 02 ][ 8D 81 8B 89 8F 40 8B 81 A4 81 8F 8B 81 ][ 00 ]"
-	"[ 02 ][ A4 85 A4 A3 A5 A9 81 40 8E 8F A4 8F A9 81 ][ 00 ]"
-	"[ 02 ][ A9 81 A3 A5 8E 8F A2 89 40 A9 81 8E 81 87 89 A3 81 A7 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6B 5B 45 44 48 42 59 40 45 55 55 45 44 7B 6B 40 42 7A 7B 48 6B 7B ][ 00 ]"
-	"[ 02 ][ A4 A3 A5 8E 85 8B 81 AA 40 89 A3 88 89 88 81 A2 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 55 4B 5A 7B 40 54 45 6B 48 46 5A 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 81 8B 89 88 89 8B 8F 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 89 83 88 89 40 8F 8F A9 81 8D 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 44 4B 5A 44 45 5B 7B 40 4B 55 40 6B 42 7B 6C 7A 5A 40 55 4B 5A 7B 40 52 6E ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 A3 81 A4 8F 40 89 A4 8F 89 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 46 7A 42 5B 56 48 44 6B 40 54 42 7B 42 40 4A 42 5A 42 46 45 7A ][ 00 ]"
-	"[ 02 ][ A9 81 A3 A5 8E 8F A2 89 40 A9 81 8E 81 87 89 A3 81 A7 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 4A 45 6B 6B 42 46 45 40 54 42 7B 42 40 4A 42 5A 42 46 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 8D 81 A3 81 A9 A5 8B 89 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 02 ][ 88 89 A4 8F A3 88 89 40 8D 81 A4 A3 A5 89 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 42 54 54 48 7B 48 4B 5A 42 59 40 4A 6C 6B 48 44 40 44 4B 4A 5B 4B 6B 45 54 40 52 6E ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F A3 88 89 40 8B 81 8E 81 AA A5 ][ 00 ]"
-	"[ 02 ][ A4 8F A3 88 89 A9 A5 8B 89 40 A5 85 8E 8F ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 6B 4B 6C 5A 54 40 6B 7B 42 55 55 ][ 00 ]"
-	"[ 02 ][ A4 8F A3 88 89 A9 A5 8B 89 40 A5 85 8E 8F ][ 00 ]"
-	"[ 02 ][ 8B 8F AA A5 85 40 89 A3 88 89 8B 81 A7 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 42 6B 6B 48 6B 7B 42 5A 7B 40 5B 7A 4B 46 7A 42 4A 4A 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 89 8B A5 88 8F 40 88 81 87 89 A9 81 ][ 00 ]"
-	"[ 02 ][ 8B 81 A4 A3 A5 A9 8F A3 88 89 40 89 A2 89 85 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 42 6B 6B 48 6B 7B 42 5A 7B 40 46 42 4A 45 40 54 45 6B 48 46 5A 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 8B 8F A5 89 83 88 89 40 8F 8F A9 81 8D 81 ][ 00 ]"
-	"[ 02 ][ A4 81 8B 85 88 89 8B 8F 40 8D 81 A3 A5 84 81 ][ 00 ]"
-	"[ 02 ][ 83 88 89 81 8B 89 40 A9 8F A3 88 89 AA 81 A7 81 ][ 00 ]"
-	"[ 02 ][ 8D 81 A3 81 A9 A5 8B 89 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 02 ][ 81 8B 89 88 89 A4 8F 40 A4 8F 84 81 ][ 00 ]"
-	"[ 02 ][ 88 89 A4 8F A3 88 89 40 8D 81 A4 A3 A5 89 ][ 00 ]"
-	"[ 02 ][ 8B 81 A4 A3 A5 A9 8F A3 88 89 40 89 A2 89 85 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 42 6B 6B 48 6B 7B 42 5A 7B 40 6B 44 45 5A 42 7A 48 4B 40 6D 7A 48 7B 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 8D 81 A3 81 A9 A5 8B 89 40 8D 89 A5 A2 81 ][ 00 ]"
-	"[ 02 ][ 81 8B 89 88 89 A4 8F 40 A4 8F 84 81 ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F A9 A5 8B 89 40 8A 89 8E 8E 81 89 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 45 5A 46 59 48 6B 56 40 7B 45 7D 7B 40 6D 7A 48 7B 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 8D 81 A2 83 A5 A3 40 8C 89 8E 84 82 8C 8F 8D ][ 00 ]"
-	"[ 02 ][ 84 81 8E 40 8F A7 A3 85 8E ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 7B 7A 42 5A 6B 59 42 7B 4B 7A 6B ][ 00 ]"
-	"[ 02 ][ 8B 85 89 8B 8F 40 A4 81 8D A5 A2 81 ][ 00 ]"
-	"[ 02 ][ A9 A5 8B 81 40 8E 81 8B 81 A4 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 44 56 48 45 55 40 54 45 52 6C 46 46 45 7A 6B ][ 00 ]"
-	"[ 02 ][ A4 81 8B A5 8D 89 40 81 8B 81 82 81 8E 85 ][ 00 ]"
-	"[ 02 ][ 88 89 A4 8F A3 88 89 40 8D 81 A4 A3 A5 89 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5A 4B 42 40 54 45 52 6C 46 40 44 4B 4B 7A 54 48 5A 42 7B 4B 7A 6B ][ 00 ]"
-	"[ 02 ][ A3 85 81 8E 40 8F 47 83 8F 8E 8E 8F A2 ][ 00 ]"
-	"[ 02 ][ 8D 89 83 88 81 85 8C 40 8B 85 8C 82 81 A5 87 88 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 42 5B 45 40 54 45 52 6C 46 46 48 5A 46 40 7B 45 42 4A ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 88 89 A2 8F 40 8E 81 87 81 89 ][ 00 ]"
-	"[ 02 ][ 8A A5 8E 89 83 88 89 40 81 8B 81 8D 81 ][ 00 ]"
-	"[ 02 ][ 81 8B 89 A2 81 40 8D 81 A4 A3 A5 8D 8F A4 8F ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5A 48 5A 7B 45 5A 54 4B 40 54 45 52 6C 46 40 44 4B 4B 7A 54 48 5A 42 7B 4B 7A 6B ][ 00 ]"
-	"[ 02 ][ A4 8F 88 A2 A5 40 88 81 A3 88 89 8D 8F A4 8F ][ 00 ]"
-	"[ 02 ][ A4 81 A4 A3 A5 A9 81 40 88 89 A3 88 89 84 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 5A 48 5A 7B 45 5A 54 4B 40 54 45 52 6C 46 46 48 5A 46 40 7B 45 42 4A ][ 00 ]"
-	"[ 02 ][ 8B 81 AA A5 88 89 84 85 40 8F 88 87 8F 85 ][ 00 ]"
-	"[ 02 ][ 81 A4 A3 A5 A3 88 89 40 8D 89 A9 81 8B 85 ][ 00 ]"
-	"[ 02 ][ 88 81 8A 89 8D 85 40 8E 81 8B 81 8D A5 A2 81 ][ 00 ]"
-	"[ 02 ][ 8D 81 8F 40 88 81 8D 81 8D 8F A4 8F ][ 00 ]"
-	"[ 02 ][ 8D 81 A9 A5 8D 89 40 A4 81 84 81 ][ 00 ]"
-	"[ 02 ][ 8D 81 8B 8F A4 8F 40 8B 85 84 8F A5 89 8E ][ 00 ]"
-	"[ 02 ][ 8B 89 8D 89 8B 8F 40 A4 A3 A5 83 88 89 84 81 ][ 00 ]"
-	"[ 02 ][ A3 81 A9 81 8B 81 40 8B 8F 8D A5 A2 81 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 4A 42 5B 40 44 56 45 44 49 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 8D 81 A0 A0 85 A2 40 8B 8F 8A 89 8D 81 ][ 00 ]"
-	"[ 02 ][ 8B 81 A4 A3 A5 A9 8F A3 88 89 40 89 A2 89 85 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 6B 42 4A 5B 59 48 5A 46 40 7C 4B 48 44 45 6B ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 A3 81 A4 8F 40 8F 8B 6F 40 89 A4 8F 89 ][ 00 ]"
-	"[ 02 ][ A9 A5 8B 81 A2 89 40 A7 88 89 A3 A4 8C 85 40 A3 81 89 A4 8F ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8B 81 AA A5 40 82 85 8C 83 88 40 8B 8F A9 81 8E 8F ][ 00 ]"
-	"[ 02 ][ 85 A4 A3 A5 8B 8F 40 A6 85 8E A5 A3 40 8B 81 A7 81 8E 8F ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 8D A5 40 A7 81 A4 81 8E 81 82 85 ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 4B 5B 45 5A 48 5A 46 40 7A 4B 44 49 40 46 6C 48 7B 42 7A ][ 00 ]"
-	"[ 02 ][ 8D 4E 84 4E A3 85 85 87 85 A2 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 56 42 7A 54 6D 42 7A 45 40 6B 6C 5B 5B 4B 7A 7B ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8E 8F 82 A5 40 8B 81 8B A5 89 ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 8B 89 40 A9 81 8D 81 A3 88 89 A2 8F ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5B 7A 4B 54 6C 44 7B 48 4B 5A 40 4A 42 5A 42 46 45 7A 6B ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 8B 81 A7 81 87 A5 83 88 89 ][ 00 ]"
-	"[ 02 ][ 8B 85 89 AA 8F 40 8B 81 A4 8F ][ 00 ]"
-	"[ 02 ][ 89 8B A5 8F 40 88 A9 81 8B A5 A4 81 ][ 00 ]"
-	"[ 02 ][ A9 A5 8B 81 A2 89 40 A3 81 89 A4 8F ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 44 4B 4B 7A 54 48 5A 42 7B 4B 7A 6B ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A3 88 89 40 A7 81 A4 81 8E 81 82 85 ][ 00 ]"
-	"[ 02 ][ A2 A9 8F 40 8B 81 87 81 A7 81 ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F A9 A5 8B 89 40 8A 89 8E 8E 81 89 ][ 00 ]"
-	"[ 02 ][ 85 A4 A3 A5 8B 8F 40 8B 81 A7 81 8E 8F ][ 00 ]"
-	"[ 02 ][ 8B 81 AA A5 A9 A5 8B 89 40 A9 81 8D 81 8D 8F A4 8F ][ 00 ]"
-	"[ 02 ][ 81 A4 A3 A5 8B 8F 40 8B 81 A7 81 88 81 A2 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 6B 4B 6C 5A 54 40 5B 7A 4B 54 6C 44 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 81 8B 89 8F 40 8F 88 8D 8F A2 89 ][ 00 ]"
-	"[ 02 ][ A2 89 A4 A3 A5 8F 40 8B 81 8D 89 8D A5 A2 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 6B 5B 45 44 48 42 59 40 7B 56 42 5A 49 6B 40 7B 4B ][ 00 ]"
-	"[ 02 ][ 8B 85 8E 8A 89 40 81 8E 84 8F ][ 00 ]"
-	"[ 02 ][ 8D 89 A9 A5 8B 89 40 8B A5 A2 85 ][ 00 ]"
-	"[ 02 ][ A4 81 8B 81 A9 A5 8B 89 40 8F 8E 8F 84 85 A2 81 ][ 00 ]"
-	"[ 02 ][ 86 A5 8B 81 A3 88 89 40 8F 8D 8F A2 89 A4 81 ][ 00 ]"
-	"[ 02 ][ A9 A5 8B 89 8F 40 A4 81 8B 81 88 81 A3 88 89 ][ 00 ]"
-	"[ 02 ][ 8B 81 AA A5 88 89 8B 8F 40 81 8D 85 8D 89 A9 81 ][ 00 ]"
-	"[ 02 ][ A9 81 A3 A5 88 89 A2 8F 40 8B A5 8D 81 87 81 89 ][ 00 ]"
-	"[ 02 ][ A9 8F A3 88 89 8F 40 88 8F 8E 87 8F ][ 00 ]"
-	"[ 02 ][ 8E 81 8F 8B 8F 40 8B 81 8E 81 AA 81 A7 81 ][ 00 ]"
-	"[ 02 ][ 82 85 8E 89 8D 81 A2 A5 40 89 A4 8F 88 ][ 00 ]"
-	"[ 02 ][ 8D 8F A4 8F 88 89 A2 8F 40 89 A3 88 89 89 ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8B 81 AA A5 40 8B 8F A9 81 8E 8F ][ 00 ]"
-	"[ 02 ][ 8D 81 A3 81 8F 40 A4 8F A4 A4 8F A2 89 ][ 00 ]"
-	"[ 02 ][ 8E 8F 82 A5 A9 81 A3 A5 40 8D 81 8B 89 8E 8F ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F 8D 89 40 A4 81 8D 81 87 81 A7 81 ][ 00 ]"
-	"[ 02 ][ 8E 81 8E 83 A9 40 A9 8F A3 88 89 A4 81 8B 85 ][ 00 ]"
-	"[ 03 02 ][ 02 ][ 81 8E 84 40 8D 81 8E A9 40 8F A4 88 85 A2 A3 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 7B 56 45 40 5B 7A 4B 54 6C 44 45 7A 6B 40 6D 48 6B 56 40 7B 4B 40 7B 56 42 5A 49 ][ 00 ]"
-	"[ 02 ][ 89 A3 88 85 8C 40 81 A2 A4 A6 89 A3 89 8F 8E ][ 00 ]"
-	"[ 02 ][ 8D 8F 8F 8E A2 89 84 85 A2 A3 40 8F 86 86 89 83 85 ][ 00 ]"
-	"[ 02 ][ A3 85 84 89 83 40 89 8E 83 4E ][ 00 ]"
-	"[ 02 ][ A3 85 A4 81 40 83 8F 4E 4C 8C A4 84 4E ][ 00 ]"
-	"[ 02 ][ 8C A5 83 8B A9 40 8E 89 83 85 ][ 00 ]"
-	"[ 02 ][ 8F 8B A5 82 8F 40 84 85 A3 89 87 8E 40 A3 A4 A5 84 89 8F ][ 00 ]"
-	"[ 02 ][ 8F 8E 40 81 A3 A3 8F 83 89 81 A4 85 A3 ][ 00 ]"
-	"[ 02 ][ A3 81 89 40 8B 8F A5 82 8F A5 ][ 00 ]"
-	"[ 02 ][ 81 A3 88 A5 A2 81 40 8F 86 86 89 83 85 ][ 00 ]"
-	"[ 02 ][ A3 88 8F 87 81 8B A5 8B 81 8E ][ 00 ]"
-	"[ 02 ][ A3 88 89 8E 83 88 8F 40 A3 88 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 44 56 48 45 55 40 44 4B 4B 7A 54 48 5A 42 7B 4B 7A ][ 00 ]"
-	"[ 02 ][ 8D 81 A2 83 A5 A3 40 8C 89 8E 84 82 8C 8F 8D ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 59 48 5A 45 40 5B 7A 4B 54 6C 44 45 7A ][ 00 ]"
-	"[ 02 ][ A4 A3 A5 8E 85 8B 81 AA 40 89 A3 88 89 88 81 A2 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 44 4B 5B 7A 4B 54 6C 44 45 7A ][ 00 ]"
-	"[ 02 ][ A3 81 A4 8F A2 A5 40 89 A7 81 A4 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5A 4B 42 40 5B 7A 4B 54 6C 44 45 7A ][ 00 ]"
-	"[ 02 ][ 8D 89 8B 85 40 86 A5 8B A5 84 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 6B 6C 5B 45 7A 7C 48 6B 4B 7A ][ 00 ]"
-	"[ 02 ][ A3 88 89 87 85 A2 A5 40 8D 89 A9 81 8D 8F A4 8F ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 45 7D 45 44 6C 7B 48 7C 45 40 5B 7A 4B 54 6C 44 45 7A 6B ][ 00 ]"
-	"[ 02 ][ 88 89 A2 8F A3 88 89 40 A9 81 8D 81 A5 83 88 89 ][ 00 ]"
-	"[ 02 ][ 8D 89 8E 8F A2 A5 40 81 A2 81 8B 81 A7 81 ][ 00 ]"
-	"[ 03 06 ][ 01 ][ 5B 7A 45 6B 45 5A 7B 45 54 40 52 6E ][ 00 ]"
-	"[ 02 ][ 8E 89 8E A4 85 8E 84 8F ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 48 5A 40 42 6B 6B 4B 44 48 42 7B 48 4B 5A 40 6D 48 7B 56 ][ 00 ]"
-	"[ 02 ][ 81 A0 85 40 89 8E 83 4E ][ 00 ]"
-	"[ 03 02 ][ 01 ][ 42 5A 54 ][ 00 ]"
-	"[ 02 ][ 88 81 8C 40 8C 81 82 8F A2 81 A4 8F A2 A9 4C 89 8E 83 4E ][ 00 ]"
-	"[ 03 0C ][ 01 ][ 42 5A 54 AD AD AD ][ 00 ]"
-	"[ 01 ][ 40 ][ 00 ]"
-	"[ 03 0E ][ 01 ][ 5B 59 42 6E 45 7A ][ 00 ]"
-	"[ 04 ][ 03 0D ][ FF ]"
-
 l_0xef4e20:
-	call(data_05.l_0xc568c9) " each enemy about 50 points of damage." eob
+	call(data_05.l_0xc568c9) " each enemy about 50 points of damage."
+	eob
 
 l_0xef4e38:
-	call(data_05.l_0xc568c9) " each enemy about 180 points of damage." eob
+	call(data_05.l_0xc568c9) " each enemy about 180 points of damage."
+	eob
 
 l_0xef4e51:
-	call(data_05.l_0xc568c9) " each enemy about 320 points of damage." eob
+	call(data_05.l_0xc568c9) " each enemy about 320 points of damage."
+	eob
 
 l_0xef4e6a:
-	call(data_05.l_0xc568c9) " each enemy about 640 points of damage." eob
+	call(data_05.l_0xc568c9) " each enemy about 640 points of damage."
+	eob
 
 l_0xef4e83:
-	call(data_05.l_0xc56913) " about 80 points of damage each." eob
+	call(data_05.l_0xc56913) " about 80 points of damage each."
+	eob
 
 l_0xef4e99:
-	call(data_05.l_0xc56913) " about 160 points of damage each." eob
+	call(data_05.l_0xc56913) " about 160 points of damage each."
+	eob
 
 l_0xef4eb0:
-	call(data_05.l_0xc56913) " about 240 points of damage each." eob
+	call(data_05.l_0xc56913) " about 240 points of damage each."
+	eob
 
 l_0xef4ec7:
-	call(data_05.l_0xc56913) " about 320 points of damage each." eob
+	call(data_05.l_0xc56913) " about 320 points of damage each."
+	eob
 
 l_0xef4ede:
 	call(data_05.l_0xc56935) " inflicting about 180 points of damage." linebreak
-	call(data_05.l_0xc56955) newline
-	call(data_05.l_0xc56b3e) eob
+	call(data_05.l_0xc56955)
+	newline
+	call(data_05.l_0xc56b3e)
+	eob
 
 l_0xef4f06:
 	call(data_05.l_0xc56935) " inflicting about 360 points of damage." linebreak
-	call(data_05.l_0xc56955) newline
-	call(data_05.l_0xc56b3e) eob
+	call(data_05.l_0xc56955)
+	newline
+	call(data_05.l_0xc56b3e)
+	eob
 
 l_0xef4f2e:
 	call(data_05.l_0xc56935) " inflicting about 540 points of damage." linebreak
-	call(data_05.l_0xc56955) newline
-	call(data_05.l_0xc56b3e) eob
+	call(data_05.l_0xc56955)
+	newline
+	call(data_05.l_0xc56b3e)
+	eob
 
 l_0xef4f56:
 	call(data_05.l_0xc56935) " inflicting about 720 points of damage." linebreak
-	call(data_05.l_0xc56955) linebreak
-	call(data_05.l_0xc56b3e) eob
+	call(data_05.l_0xc56955)
+	linebreak
+	call(data_05.l_0xc56b3e)
+	eob
 
 l_0xef4f7e:
 	"@The enemy is thunder struck for about 120 points of damage." linebreak
-	call(data_05.l_0xc5696c) eob
+	call(data_05.l_0xc5696c)
+	eob
 
 l_0xef4fa6:
 	"@The enemy is thunder struck for about 120 points of damage two separate times." linebreak
-	call(data_05.l_0xc5696c) eob
+	call(data_05.l_0xc5696c)
+	eob
 
 l_0xef4fdc:
 	"@The enemy is thunder struck for about 200 points of damage three separate times." linebreak
-	call(data_05.l_0xc5696c) eob
+	call(data_05.l_0xc5696c)
+	eob
 
 l_0xef5013:
 	"@The enemy is thunder struck for about 200 points of damage four separate times." linebreak
-	call(data_05.l_0xc5696c) eob
+	call(data_05.l_0xc5696c)
+	eob
 
 l_0xef5049:
-	call(data_05.l_0xc569a9) call(data_05.l_0xc569ca) ", and in some circumstances, feel strange." eob
+	call(data_05.l_0xc569a9)
+	call(data_05.l_0xc569ca) ", and in some circumstances, feel strange."
+	eob
 
 l_0xef506b:
-	call(data_05.l_0xc569a9) call(data_05.l_0xc569ca) ", and in some circumstances, can make the enemy feel strange, become numb, or even be destroyed." eob
+	call(data_05.l_0xc569a9)
+	call(data_05.l_0xc569ca) ", and in some circumstances, can make the enemy feel strange, become numb, or even be destroyed."
+	eob
 
 l_0xef50af:
-	call(data_05.l_0xc569a9) call(data_05.l_0xc569ca) "." linebreak
-	"@Often, it will destroy an enemy in a single strike." eob
+	call(data_05.l_0xc569a9)
+	call(data_05.l_0xc569ca) "." linebreak
+	"@Often, it will destroy an enemy in a single strike."
+	eob
 
 l_0xef50e1:
-	"@It generates glorious rays that have a high probability of destroying all the enemies on the scene in a single strike." eob
+	"@It generates glorious rays that have a high probability of destroying all the enemies on the scene in a single strike."
+	eob
 
 l_0xef5131:
-	call(data_05.l_0xc569df) newline
-	"@It deals about 360 points of damage to each enemy." eob
+	call(data_05.l_0xc569df)
+	newline
+	"@It deals about 360 points of damage to each enemy."
+	eob
 
 l_0xef5152:
-	call(data_05.l_0xc569df) newline
-	"@It deals about 720 points of damage to each enemy." eob
+	call(data_05.l_0xc569df)
+	newline
+	"@It deals about 720 points of damage to each enemy."
+	eob
 
 l_0xef5173:
-	"@Restores 100 HP to one person." eob
+	"@Restores 100 HP to one person."
+	eob
 
 l_0xef5189:
-	"@Restores 300 HP to one person." eob
+	"@Restores 300 HP to one person."
+	eob
 
 l_0xef519f:
-	"@Completely restores the HP of one person." eob
+	"@Completely restores the HP of one person."
+	eob
 
 l_0xef51bb:
-	"@Restores 400 HP to everyone." eob
+	"@Restores 400 HP to everyone."
+	eob
 
 l_0xef51cf:
-	"@Cures a cold, sunstroke or sleep conditions." eob
+	"@Cures a cold, sunstroke or sleep conditions."
+	eob
 
 l_0xef51f0:
-	"@In addition to the effects of Healing [8B], this cures poisonings, nausea, feeling strange and uncontrollable crying." eob
+	"@In addition to the effects of Healing [8B], this cures poisonings, nausea, feeling strange and uncontrollable crying."
+	eob
 
 l_0xef5239:
 	"@In addition to the effects of Healing [8C], this cures being diamondized and paralysis." linebreak
-	"@It also revives a friend who has become unconscious, though HP is not maxed out." eob
+	"@It also revives a friend who has become unconscious, though HP is not maxed out."
+	eob
 
 l_0xef52a5:
-	"@In addition to the effects of Healing [8D], this revives a friend who has become unconscious, and it completely maxes out that person's HP when revived." eob
+	"@In addition to the effects of Healing [8D], this revives a friend who has become unconscious, and it completely maxes out that person's HP when revived."
+	eob
 
 l_0xef5301:
 	"@Protect one person with the shield of light." linebreak
 	"@It reduces the damage caused by an enemy's attack by 50%." linebreak
-	"@Using a different shield will cancel these effects." eob
+	"@Using a different shield will cancel these effects."
+	eob
 
 l_0xef5361:
 	"@Protect everyone with the shield of light." linebreak
 	"@It reduces the damage caused by an enemy's attack by 50%." linebreak
-	"@Using a different shield will cancel these effects." eob
+	"@Using a different shield will cancel these effects."
+	eob
 
 l_0xef53c0:
 	"@Protects one person with a power shield." linebreak
 	"@Cuts damage in half and some of the blocked damage is dealt back to the enemy." linebreak
-	"@Using a different shield will cancel these effects." eob
-
+	"@Using a different shield will cancel these effects."
+	eob

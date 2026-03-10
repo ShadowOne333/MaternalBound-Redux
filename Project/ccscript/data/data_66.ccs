@@ -16,283 +16,6 @@ import "../redux/keyitems.ccs"
 command e(label) "{long label}"
 
 // Text Data
-l_0xef9a9e:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} burst" linebreak
-	"  into flames!"
-	sound(SND_MBR)	// 75
-	promptw
-	pause(30)
-	eob
-
-l_0xef9abb:
-	newline
-	"@{user}"
-	get_action_arg
-	goto_if_false(l_0xef9ae8)
-	swap
-	" stole a {itemname(0)}" next
-	"  in the confusion of the battle!" promptw
-	eob
-
-l_0xef9ae8:
-	" tried to" linebreak
-	"  steal something, but failed!" promptw
-	eob
-
-l_0xef9b02:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} froze" linebreak
-	"  you in time!"
-	music(4)	// Stop music / No-music
-	promptw
-	pause(1)
-	eob
-
-l_0xef9b20:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} glared" linebreak
-	"  with its eerie eyes!" promptw
-	pause(1)
-	eob
-
-l_0xef9b43:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} generated" linebreak
-	"  a mysterious electric field!"
-	sound(SND_MAGNET3)	// 77
-	promptw
-	pause(1)
-	eob
-
-l_0xef9b73:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} stumbled, but fired a strange beam."
-	sound(SND_MAGNET3)	// 77
-	promptw
-	pause(1)
-	eob
-
-l_0xef9b96:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} burped" linebreak
-	"  and blew his nauseating breath at you!"
-	sound(SND_WHIRR)	// 78
-	promptw
-	pause(1)
-	eob
-
-l_0xef9bc3:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} stung" linebreak
-	"  with its poison stinger!" promptw
-	pause(1)
-	eob
-
-l_0xef9be6:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} gave" linebreak
-	"  the kiss of death!" promptw
-	pause(1)
-	eob
-
-l_0xef9c02:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} exhaled" linebreak
-	"  " call(data_37.l_0xc7e66e) " arctic-cold breath!"
-	sound(SND_DRILL)	// 81
-	promptw
-	pause(1)
-	eob
-
-l_0xef9c30:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} scattered" linebreak
-	"  some spores!"
-	sound(SND_SPORES)	// 82
-	promptw
-	pause(1)
-	eob
-
-l_0xef9c51:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} tried to" linebreak
-	"  possess you in a frightening manner."
-	sound(SND_POSSESSED)	// 96
-	promptw
-	pause(1)
-	eob
-
-l_0xef9c7e:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} sprinkled around some wonderful-smelling powder."
-	sound(SND_SPORES)	// 82
-	promptw
-	pause(1)
-	eob
-
-l_0xef9cad:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} scattered" linebreak
-	"  some mold spores!"
-	sound(SND_SPORES)	// 82
-	promptw
-	pause(1)
-	eob
-
-l_0xef9cd1:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} employed" linebreak
-	"  a binding attack!" promptw
-	pause(1)
-	eob
-
-l_0xef9cf1:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} spit out a sticky mucus!"
-	sound(SND_DRILL)	// 81
-	promptw
-	pause(1)
-	eob
-
-l_0xef9d14:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} spewed" linebreak
-	"  <Fly Honey> out of his mouth!"
-	sound(SND_DRILL)	// 81
-	promptw
-	pause(1)
-	eob
-
-l_0xef9d3e:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} shot" linebreak
-	"  spider silk out of its body!" promptw
-	eob
-
-l_0xef9d62:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} said" linebreak
-	"  something really scary!"
-	sound(SND_KERPOW)		// 84
-	promptw
-	pause(1)
-	eob
-
-l_0xef9d81:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} did" linebreak
-	"  something very mysterious!"
-	sound(SND_MYSTERIOUS)	// 85
-	promptw
-	pause(1)
-	eob
-
-l_0xef9da1:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} disrupted" linebreak
-	"  your senses!" promptw
-	eob
-
-l_0xef9dbd:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} is" linebreak
-	"  sizing up the situation!" promptw
-	eob
-
-l_0xef9dda:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} exhaled" linebreak
-	"  a blast of stinky breath!"
-	sound(SND_MUFFLEDBUZZ2)		// 92
-	promptw
-	pause(1)
-	eob
-
-l_0xef9e05:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} summoned" linebreak
-	"  a storm!"
-	sound(SND_WARBLING)		// 86
-	promptw
-	pause(1)
-	eob
-
-l_0xef9e22:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} spilled" linebreak
-	"  some scalding hot espresso!" promptw
-	eob
-
-l_0xef9e47:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} played" linebreak
-	"  a haunting melody!" promptw
-	pause(1)
-	eob
-
-l_0xef9e69:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} dispensed" linebreak
-	"  an extinguishing blast!"
-	sound(SND_SPROING)	// 88
-	promptw
-	pause(1)
-	eob
-
-l_0xef9e92:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} used a" linebreak
-	"  Crashing Boom Bang attack!" promptw
-	eob
-
-l_0xef9eb4:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} shot out" linebreak
-	"  a spray of fire!"
-	sound(SND_MBR)	// 75
-	promptw
-	pause(1)
-	eob
-
-l_0xef9ed7:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} breathed" linebreak
-	"  fire!"
-	sound(SND_MBR)	// 75
-	promptw
-	pause(1)
-	eob
-
 l_0xef9ef4:
 	store_registers
 	newline
@@ -405,6 +128,7 @@ l_0xefa2fa:
 	focus_camera_on_sprite2(106)	// 006A
 	party_unfreeze	// 0xFF
 	wait_movement
+
 	hide_party	// 0xFF, 6
 	music(83)
 	music_switching_off
@@ -412,8 +136,10 @@ l_0xefa2fa:
 	party_freeze	// 0xFF
 	sprite2_spawn(162,139,1)	// 00A2, 008B, 1
 	wait_movement
+
 	npc_unfreeze(623)	// 026F
 	wait_movement
+
 	warp(174)	// AE
 	sprite2_spawn(209,146,1)	// 00D1, 0092, 1
 	pause(1)
@@ -421,6 +147,7 @@ l_0xefa2fa:
 	party_unfreeze	// 0xFF
 	pause(1)
 	wait_movement
+
 	restore_camera
 	party_freeze	// 0xFF
 	party_add(1)	// Add Ness

@@ -94,16 +94,20 @@ l_0xef57ae:
 
 l_0xef57eb:
 	goto_if_flag(FLG_WIN_FIRE_BOSS, data_35.l_0xc7c588)	// 0xC5, 197
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
+
 	music(155)
 	"@You finally got here." next
 	"@This is the eighth <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
+
 	call(data_23.l_0xc6843a)
 	goto_if_true(data_23.l_0xc683de)
+
 	npc_delete(1276,8)	// 0x04FC, 8
 	pause(120)
 	set(FLG_WIN_FIRE_BOSS)	// 197
@@ -126,12 +130,15 @@ l_0xef5864:
 
 l_0xef58c7:
 	goto_if_flag(FLG_BOX_DKFD_1, data_23.l_0xc685cb)	// 0xDF, 223
+
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} checked the broken Phase Distorter." next
 	// Item 0x82 / 130 = Horn of life
 	"@There was a {itemname(130)}." next
-	get_item_receiver(-1) goto_if_false(data_23.l_0xc685bb)
-	give_and_return_location(0,130)
+
+	get_item_receiver(-1)
+	goto_if_false(data_23.l_0xc685bb)
+	give_and_return_location(0, HORN_OF_LIFE)	// 130
 	call(data_36.l_0xc7dccf)
 	set(FLG_BOX_DKFD_1)	// 223
 	end
@@ -163,14 +170,17 @@ l_0xef5917:	// Starmaster appears to teach Starstorm
 	sprite2_direction(98,5)	// 0x62, 5
 	pause(8)
 	sprite2_direction(98,7)	// 0x62, 7
+
 	window_open(1)
 	title(1, Star)
 	"@Greetings!" pause(20) linebreak
 	"  So, you are finally here!" promptw
 	window_closeall
+
 	call(data_49.l_0xc915f4)
 	sound(SND_STATUSRECOVER)	// 37
 	pause(90)
+
 	window_open(1)
 	title(1, Star)
 	"@Excellent!" pause(20) linebreak
@@ -252,6 +262,7 @@ l_0xef5ce4:
 l_0xef5d16:
 	goto_if_flag(FLG_DKFD_GUMI_E_READED, l_0xef5df8)	// 0x02FF, 73
 	set(FLG_DKFD_GUMI_E_READED)	// 767
+
 	"@You're strange, but you smell good." pause(20)
 	"  So I'll tell you a secret." next
 	"@Did you feel the earthquake a little while ago?" next
@@ -333,7 +344,6 @@ l_0xef617b:
 	"@Did you bring some <Fly Honey>?" next
 	"@It's Master Belch's favorite." linebreak
 	two_choice_menu("Yes", l_0xef61f3, "No", l_0xef61cb)
-	goto(l_0xef61cb)
 
 l_0xef61cb:
 	"@Then, why are you here?!" promptw
@@ -346,14 +356,17 @@ l_0xef61cb:
 	eob
 
 l_0xef61f3:
-	hasitem(-1,105)	// Jar of fly honey
+	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6247)
+
 	"@You didn't bring it?" pause(20)
 	"  You seem kind of suspicious to me..." next
 	"@You cannot pass through here!" promptw
 	window_closeall
+
 	call(data_23.l_0xc6853f)
 	goto_if_true(data_23.l_0xc683de)
+
 	pause(1)
 	npc_do_mc(688,635)	// 0x02B0, 0x027B
 	set(FLG_GPFT_MINIGEPPU_A_DISAPPEAR)	// 366
@@ -378,6 +391,7 @@ l_0xef62b1:
 
 l_0xef62f5:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x016F, 367
+
 	window_open(1)
 	"@Aren't you the Fly Honey delivery boy?" pause(15)
 	"  What's the password!" next
@@ -387,8 +401,10 @@ l_0xef62f5:
 	"@Someone so quiet is either extremely shy or extremely dangerous..." next
 	"@What a suspicious fellow!" promptw
 	window_closeall
+
 	call(data_23.l_0xc68546)
 	goto_if_true(data_23.l_0xc683de)
+
 	pause(1)
 	npc_do_mc(691,635)	// 0x02B3, 0x027B
 	set(FLG_GPFT_MINIGEPPU_D_DISAPPEAR)	// 367
@@ -396,11 +412,14 @@ l_0xef62f5:
 
 l_0xef63b5:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x0170, 368
+
 	window_open(1)
 	"@So, you're the ones who destroyed the zombies that I assigned to Threek!!" promptw
 	window_closeall
+
 	call(data_23.l_0xc6854d)
 	goto_if_true(data_23.l_0xc683de)
+
 	pause(1)
 	npc_do_mc(692,635)	// 0x02B4, 0x027B
 	set(FLG_GPFT_MINIGEPPU_E_DISAPPEAR)	// 368
@@ -424,11 +443,15 @@ l_0xef6446:
 	goto_if_flag(FLG_WIN_GEPPU, data_35.l_0xc7c588)	// 0x47, 71
 	music(134)
 	sound(SND_WHIRR)	// 78
+
 	title(1, Belch)
 	"@Buuurp!" next
 	"@So you are {name(1)}?" next
-	counter(1) call(data_36.l_0xc7dc7f)
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xef66ca)
+
 	"@...I see...  Gyork!" pause(15)
 	"  Gyork!" pause(15)
 	"  Gyork!" next
@@ -443,17 +466,20 @@ l_0xef6446:
 	sound(SND_WHIRR)	// 78
 	pause(40)
 	linebreak
-	goto(l_0xef6569)
 
 l_0xef6569:
 	"@Gha Gha Gha!" linebreak
 	"  Get ready to feel the pain of true nausea!" next
+
 	sound(SND_WHIRR)	// 78
 	pause(40)
+
 	"@Ghe Ghe!" linebreak
 	"  Come on, let's go!" promptw
+
 	call(data_23.l_0xc68554)
 	goto_if_true(data_23.l_0xc683de)
+
 	window_open(1)
 	music(134)
 	title(1, Belch)
@@ -509,8 +535,11 @@ l_0xef66ca:
 
 l_0xef679a:
 	goto_if_flag(FLG_WIN_MLKY_BOSS, data_35.l_0xc7c588)	// 0xC1, 193
-	counter(1) call(data_36.l_0xc7dc7f)
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
+
 	music(155)
 	"@You finally got here." next
 	"@This is the third <Your Sanctuary> location." pause(20) linebreak
@@ -527,7 +556,7 @@ l_0xef6814:
 	call(data_13.l_0xc5d36b) eob
 
 l_0xef681a:
-	hasitem(-1,105)	// Jar of fly honey
+	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6874)
 	"@Gyork Gyork!" next
 	"@Hey you, commoner!" pause(20)
@@ -544,8 +573,9 @@ l_0xef6874:
 
 l_0xef68d7:
 	window_open(1)
-	hasitem(-1,105)	// Jar of fly honey
+	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6954)
+
 	"@You have defeated me..." next
 	"@Allow me to eat some Fly Honey for the last time..." next
 	"@Master Belch hates people like you." next
@@ -560,6 +590,8 @@ l_0xef6954:
 	window_closeall
 	eob
 
+
+// Battle text script
 l_0xef69a1:
 	newline
 	"@{target}'s HP are" linebreak
@@ -682,7 +714,6 @@ l_0xef6b43:
 		switch_entry(l_0xef6b54)
 		switch_entry(l_0xef6b59)
 		switch_entry(l_0xef6b5f)
-	goto(l_0xef6b54)
 
 l_0xef6b54:
 	"(he)" eob
@@ -699,7 +730,6 @@ l_0xef6b64:
 		switch_entry(l_0xef6b75)
 		switch_entry(l_0xef6b79)
 		switch_entry(l_0xef6b7d)
-	goto(l_0xef6b75)
 
 l_0xef6b75:
 	"(1)" eob

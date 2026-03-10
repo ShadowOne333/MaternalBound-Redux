@@ -943,7 +943,7 @@ l_0xc9f72f:
 	swap
 	random(99)	// 0x63
 	compare_result(60)	// 0x0000003C, 0x00
-	goto_if_false(data_60.l_0xc9f7af)
+	goto_if_false(battle_text.l_0xc9f7af)
 
 	zwsp_before_letter(0)	// 0x00
 	letter(0)	// 0x00
@@ -961,12 +961,12 @@ l_0xc9f756:
 
 l_0xc9f75f:
 	get_stat_letter(2)	// 0x02
-	goto_if_false(data_60.l_0xc9f786)
+	goto_if_false(battle_text.l_0xc9f786)
 
 	swap
 	random(99)	// 0x63
 	compare_result(60)	// 0x0000003C, 0x00
-	goto_if_false(data_60.l_0xc9f7b5)
+	goto_if_false(battle_text.l_0xc9f7b5)
 
 	zwsp_before_letter(0)	// 0x00
 	letter(0)	// 0x00

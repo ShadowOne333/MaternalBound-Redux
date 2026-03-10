@@ -346,7 +346,7 @@ l_0xef8fcb:
 	goto_if_flag(FLG_FMON_MOON_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0182, 386
 	window_closeall
 	start_battle(438)	// 0x01B6
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_MOON_A_DISAPPEAR)	// 386
 	pause(1)
 	eob
@@ -355,7 +355,7 @@ l_0xef8fe4:
 	goto_if_flag(FLG_FMON_MOON_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0183, 387
 	window_closeall
 	start_battle(439)	// 0x01B7
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_MOON_B_DISAPPEAR)	// 387
 	pause(1)
 	npc_do_mc(1363,635)	// 0x0553, 0x027B
@@ -365,7 +365,7 @@ l_0xef9003:
 	goto_if_flag(FLG_FMON_MOON_B_2_DISAPPEAR, data_35.l_0xc7c588)	// 0x0184, 388
 	window_closeall
 	start_battle(439)	// 0x01B7
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_MOON_B_2_DISAPPEAR)	// 388
 	pause(1)
 	npc_do_mc(1371,635)	// 0x055B, 0x027B
@@ -375,7 +375,7 @@ l_0xef9022:
 	goto_if_flag(FLG_FMON_MOON_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0185, 389
 	window_closeall
 	start_battle(440)	// 0x01B8
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_MOON_C_DISAPPEAR)	// 389
 	pause(1)
 	npc_do_mc(1366,635)	// 0x0556, 0x027B
@@ -386,7 +386,7 @@ l_0xef9041:
 	goto_if_flag(FLG_FMON_PYRA_A_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0186, 390
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_A_DISAPPEAR)	// 390
 	pause(1)
 	npc_do_mc(1166,635)	// 0x048E, 0x027B
@@ -396,7 +396,7 @@ l_0xef9060:
 	goto_if_flag(FLG_FMON_PYRA_A_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0187, 391
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_B_DISAPPEAR)	// 391
 	pause(1)
 	npc_do_mc(1167,635)	// 0x048F, 0x027B
@@ -406,7 +406,7 @@ l_0xef907f:
 	goto_if_flag(FLG_FMON_PYRA_A_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0188, 392
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_C_DISAPPEAR)	// 392
 	pause(1)
 	npc_do_mc(1168,635)	// 0x0490, 0x027B
@@ -416,7 +416,7 @@ l_0xef909e:
 	goto_if_flag(FLG_FMON_PYRA_A_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x0189, 393
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_D_DISAPPEAR)	// 393
 	pause(1)
 	npc_do_mc(1169,635)	// 0x0491, 0x027B
@@ -426,7 +426,7 @@ l_0xef90bd:
 	goto_if_flag(FLG_FMON_PYRA_A_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x018A, 394
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_E_DISAPPEAR)	// 394
 	pause(1)
 	npc_do_mc(1172,635)	// 0x0494, 0x027B
@@ -436,7 +436,7 @@ l_0xef90dc:
 	goto_if_flag(FLG_FMON_PYRA_A_F_DISAPPEAR, data_35.l_0xc7c588)	// 0x018B, 395
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_F_DISAPPEAR)	// 395
 	pause(1)
 	npc_do_mc(1173,635)	// 0x0495, 0x027B
@@ -446,7 +446,7 @@ l_0xef90f9:
 	goto_if_flag(FLG_FMON_PYRA_A_G_DISAPPEAR, data_35.l_0xc7c588)	// 0x018C, 396
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_G_DISAPPEAR)	// 396
 	pause(1)
 	npc_do_mc(1174,635)	// 0x0496, 0x027B
@@ -456,7 +456,7 @@ l_0xef9118:
 	goto_if_flag(FLG_FMON_PYRA_A_H_DISAPPEAR, data_35.l_0xc7c588)	// 0x018D, 397
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_H_DISAPPEAR)	// 397
 	pause(1)
 	npc_do_mc(1176,635)	// 0x0498, 0x027B
@@ -466,7 +466,7 @@ l_0xef9137:
 	goto_if_flag(FLG_FMON_PYRA_A_I_DISAPPEAR, data_35.l_0xc7c588)	// 0x018E, 398
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_I_DISAPPEAR)	// 398
 	pause(1)
 	npc_do_mc(1178,635)	// 0x049A, 0x027B
@@ -476,7 +476,7 @@ l_0xef9156:
 	goto_if_flag(FLG_FMON_PYRA_A_J_DISAPPEAR, data_35.l_0xc7c588)	// 0x018F, 399
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_J_DISAPPEAR)	// 399
 	pause(1)
 	npc_do_mc(1181,635)	// 0x049D, 0x027B
@@ -486,7 +486,7 @@ l_0xef9175:
 	goto_if_flag(FLG_FMON_PYRA_A_K_DISAPPEAR, data_35.l_0xc7c588)	// 0x0190, 400
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_K_DISAPPEAR)	// 400
 	pause(1)
 	npc_do_mc(1182,635)	// 0x049E, 0x027B
@@ -496,7 +496,7 @@ l_0xef9194:
 	goto_if_flag(FLG_FMON_PYRA_A_L_DISAPPEAR, data_35.l_0xc7c588)	// 0x0191, 401
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_L_DISAPPEAR)	// 401
 	pause(1)
 	npc_do_mc(1183,635)	// 0x049F, 0x027B
@@ -506,7 +506,7 @@ l_0xef91b3:
 	goto_if_flag(FLG_FMON_PYRA_A_M_DISAPPEAR, data_35.l_0xc7c588)	// 0x0192, 402
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_M_DISAPPEAR)	// 402
 	pause(1)
 	npc_do_mc(1185,635)	// 0x04A1, 0x027B
@@ -516,7 +516,7 @@ l_0xef91d2:
 	goto_if_flag(FLG_FMON_PYRA_A_N_DISAPPEAR, data_35.l_0xc7c588)	// 0x0193, 403
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_N_DISAPPEAR)	// 403
 	pause(1)
 	npc_do_mc(1186,635)	// 0x04A2, 0x027B
@@ -526,7 +526,7 @@ l_0xef91f1:
 	goto_if_flag(FLG_FMON_PYRA_A_O_DISAPPEAR, data_35.l_0xc7c588)	// 0x0194, 404
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_O_DISAPPEAR)	// 404
 	pause(1)
 	npc_do_mc(1188,635)	// 0x04A4, 0x027B
@@ -536,7 +536,7 @@ l_0xef9210:
 	goto_if_flag(FLG_FMON_PYRA_A_P_DISAPPEAR, data_35.l_0xc7c588)	// 0x0195, 405
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_P_DISAPPEAR)	// 405
 	pause(1)
 	npc_do_mc(1189,635)	// 0x04A5, 0x027B
@@ -546,7 +546,7 @@ l_0xef922f:
 	goto_if_flag(FLG_FMON_PYRA_A_Q_DISAPPEAR, data_35.l_0xc7c588)	// 0x0196, 406
 	window_closeall
 	start_battle(443)	// 0x01BB
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_A_Q_DISAPPEAR)	// 406
 	pause(1)
 	npc_do_mc(1190,635)	// 0x04A6, 0x027B
@@ -556,7 +556,7 @@ l_0xef924e:
 	goto_if_flag(FLG_FMON_PYRA_B_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0197, 407
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_A_DISAPPEAR)	// 407
 	pause(1)
 	npc_do_mc(1170,635)	// 0x0492, 0x027B
@@ -566,7 +566,7 @@ l_0xef926d:
 	goto_if_flag(FLG_FMON_PYRA_B_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x0198, 408
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_B_DISAPPEAR)	// 408
 	pause(1)
 	npc_do_mc(1171,635)	// 0x0493, 0x027B
@@ -576,7 +576,7 @@ l_0xef928c:
 	goto_if_flag(FLG_FMON_PYRA_B_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x0199, 409
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_C_DISAPPEAR)	// 409
 	pause(1)
 	npc_do_mc(1175,635)	// 0x0497, 0x027B
@@ -586,7 +586,7 @@ l_0xef92ab:
 	goto_if_flag(FLG_FMON_PYRA_B_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x019A, 410
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_D_DISAPPEAR)	// 410
 	pause(1)
 	npc_do_mc(1177,635)	// 0x0499, 0x027B
@@ -596,7 +596,7 @@ l_0xef92ca:
 	goto_if_flag(FLG_FMON_PYRA_B_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x019B, 411
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_E_DISAPPEAR)	// 411
 	pause(1)
 	npc_do_mc(1179,635)	// 0x049B, 0x027B
@@ -606,7 +606,7 @@ l_0xef92e9:
 	goto_if_flag(FLG_FMON_PYRA_B_F_DISAPPEAR, data_35.l_0xc7c588)	// 0x019C, 412
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_F_DISAPPEAR)	// 412
 	pause(1)
 	npc_do_mc(1184,635)	// 0x04A0, 0x027B
@@ -616,7 +616,7 @@ l_0xef9308:
 	goto_if_flag(FLG_FMON_PYRA_B_G_DISAPPEAR, data_35.l_0xc7c588)	// 0x019D, 413
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_G_DISAPPEAR)	// 413
 	pause(1)
 	npc_do_mc(1187,635)	// 0x04A3, 0x027B
@@ -626,7 +626,7 @@ l_0xef9327:
 	goto_if_flag(FLG_FMON_PYRA_B_H_DISAPPEAR, data_35.l_0xc7c588)	// 0x019E, 414
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_H_DISAPPEAR)	// 414
 	pause(1)
 	npc_do_mc(1191,635)	// 0x04A7, 0x027B
@@ -636,7 +636,7 @@ l_0xef9346:
 	goto_if_flag(FLG_FMON_PYRA_B_I_DISAPPEAR, data_35.l_0xc7c588)	// 0x019F, 415
 	window_closeall
 	start_battle(444)	// 0x01BC
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_B_I_DISAPPEAR)	// 415
 	pause(1)
 	npc_do_mc(1192,635)	// 0x04A8, 0x027B
@@ -647,7 +647,7 @@ l_0xef9365:
 	goto_if_flag(FLG_FMON_BRICK_A_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A0, 416
 	window_closeall
 	start_battle(445)	// 0x01BD
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_A_A_DISAPPEAR)	// 416
 	pause(1)
 	npc_do_mc(678,635)	// 0x02A6, 0x027B
@@ -657,7 +657,7 @@ l_0xef9384:
 	goto_if_flag(FLG_FMON_BRICK_A_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A1, 417
 	window_closeall
 	start_battle(445)	// 0x01BD
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_A_B_DISAPPEAR)	// 417
 	pause(1)
 	npc_do_mc(679,635)	// 0x02A7, 0x027B
@@ -667,7 +667,7 @@ l_0xef93a3:
 	goto_if_flag(FLG_FMON_BRICK_B_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A2, 418
 	window_closeall
 	start_battle(446)	// 0x01BE
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_B_A_DISAPPEAR)	// 418
 	pause(1)
 	npc_do_mc(680,635)	// 0x02A8, 0x027B
@@ -677,7 +677,7 @@ l_0xef93c2:
 	goto_if_flag(FLG_FMON_BRICK_B_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A3, 419
 	window_closeall
 	start_battle(446)	// 0x01BE
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_B_B_DISAPPEAR)	// 419
 	pause(1)
 	npc_do_mc(681,635)	// 0x02A9, 0x027B
@@ -687,7 +687,7 @@ l_0xef93e1:
 	goto_if_flag(FLG_FMON_BRICK_C_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A4, 420
 	window_closeall
 	start_battle(447)	// 0x01BF
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_C_A_DISAPPEAR)	// 420
 	pause(1)
 	npc_do_mc(682,635)	// 0x02AA, 0x027B
@@ -697,7 +697,7 @@ l_0xef9400:
 	goto_if_flag(FLG_FMON_BRICK_C_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01A5, 421
 	window_closeall
 	start_battle(447)	// 0x01BF
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_BRICK_C_B_DISAPPEAR)	// 421
 	pause(1)
 	npc_do_mc(683,635)	// 0x02AB, 0x027B
@@ -709,7 +709,7 @@ l_0xef941f:
 	call(data_26.l_0xc6cfc5)
 	window_closeall
 	start_battle(466)	// 0x01D2
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_STONE_BOSS_DISAPPEAR)	// 434
 	pause(1)
 	npc_do_mc(672,635)	// 0x02A0, 0x027B
@@ -721,7 +721,7 @@ l_0xef9448:
 	goto_if_flag(FLG_FMON_PYRA_BOSS_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B3, 435
 	window_closeall
 	start_battle(468)	// 0x01D4
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_PYRA_BOSS_DISAPPEAR)	// 435
 	pause(1)
 	npc_do_mc(1180,635)	// 0x049C, 0x027B
@@ -732,7 +732,7 @@ l_0xef9467:
 	goto_if_flag(FLG_FMON_KRAKEN2_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B4, 436
 	window_closeall
 	start_battle(467)	// 0x01D3
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_KRAKEN2_A_DISAPPEAR)	// 436
 	pause(1)
 	npc_do_mc(1354,635)	// 0x054A, 0x027B
@@ -742,7 +742,7 @@ l_0xef9486:
 	goto_if_flag(FLG_FMON_KRAKEN2_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B5, 437
 	window_closeall
 	start_battle(467)	// 0x01D3
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_KRAKEN2_B_DISAPPEAR)	// 437
 	pause(1)
 	npc_do_mc(1355,635)	// 0x054B, 0x027B
@@ -752,7 +752,7 @@ l_0xef94a5:
 	goto_if_flag(FLG_FMON_KRAKEN2_C_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B6, 438
 	window_closeall
 	start_battle(467)	// 0x01D3
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_KRAKEN2_C_DISAPPEAR)	// 438
 	pause(1)
 	npc_do_mc(1356,635)	// 0x054C, 0x027B
@@ -762,7 +762,7 @@ l_0xef94c4:
 	goto_if_flag(FLG_FMON_HIEROGLYPH_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x0259, 601
 	window_closeall
 	start_battle(442)	// 0x01BA
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_HIEROGLYPH_A_DISAPPEAR)	// 601
 	pause(1)
 	npc_do_mc(1039,635)	// 0x040F, 0x027B
@@ -772,7 +772,7 @@ l_0xef94e3:
 	goto_if_flag(FLG_FMON_HIEROGLYPH_B_DISAPPEAR, data_35.l_0xc7c588)	// 0x025A, 602
 	window_closeall
 	start_battle(442)	// 0x01BA
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	set(FLG_FMON_HIEROGLYPH_B_DISAPPEAR)	// 602
 	pause(1)
 	npc_do_mc(1040,635)	// 0x0410, 0x027B
@@ -784,7 +784,7 @@ l_0xef9502:
 	call(data_61.l_0xef681a)
 	window_closeall
 	start_battle(482)	// 0x01E2
-	goto_if_true(data_32.l_0xc77eff)
+	goto_if_true(battle_text.l_0xc77eff)
 	call(data_61.l_0xef68d7)
 	set(FLG_FMON_BOSS_GRAVE_DISAPPEAR)	// 603
 	pause(1)
@@ -911,31 +911,3 @@ l_0xef98d3:
 	"@before your life is gone,| you survive." pause(30)
 	"  This is all I know.)" end
 
-// Battle texts begin here
-l_0xef9a47:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} called" linebreak
-	"  for help!"
-	sound(SND_STATUSCHANGE)	// 72
-	promptw
-	eob
-
-l_0xef9a5e:
-	sound(SND_MONSTERATTACK)	// 25
-	newline
-	"@{user} sowed" linebreak
-	"  some seeds around " call(data_63.self_gender) "!"
-	sound(SND_STATUSCHANGE)	// 72
-	promptw
-	eob
-
-l_0xef9a7e:
-	newline
-	sound(SND_MONSTERATTACK)	// 25
-	"@{user} exploded" linebreak
-	"  into bits!"
-	sound(SND_FIRE4)	// 91
-	promptw
-	pause(30)
-	eob

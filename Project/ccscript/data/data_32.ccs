@@ -227,7 +227,7 @@ l_0xc7749d:
 	eob
 
 l_0xc774c3:
-	"        "
+	// "        "
 
 l_0xc774c6:
 	title(1, Belch)
@@ -480,64 +480,6 @@ l_0xc77dab:
 	if not flag FLG_KEY_ITEMS { take(-1, SOUND_STONE) }	// 0xC4, 196, Sound stone
 	eob
 
-l_0xc77dce:
-	newline
-	"@{user}{get_action_arg}{swap} used" linebreak
-	"  the {itemname(0)}." next
-	"@But nothing happened." promptw
-	eob
-
-l_0xc77df0:
-	"@{user}{get_action_arg}{swap} used" linebreak
-	"  the {itemname(0)}." next
-	"@But nothing happened." promptw
-	eob
-
-l_0xc77e11:
-	newline
-	get_action_arg swap newline
-	"@{user} equipped" linebreak
-	"  the {itemname(0)} instead."
-	sound(SND_BOXOPEN1)	// 115
-	promptw
-	eob
-
-l_0xc77e33:
-	newline
-	get_action_arg swap
-	"@{user} could not" linebreak
-	"  equip the {itemname(0)}." next
-	"@Since there was no alternative," linebreak
-	"  " call(data_36.l_0xc7e602) " fought with " call(data_37.l_0xc7e66e) " previous weapon." promptw
-	eob
-
-l_0xc77e85:
-	newline
-	get_action_arg swap
-	"@{user} tried" linebreak
-	"  to equip the {itemname(0)}." next
-	"@ but {itemname(0)} wasn't meant for " linebreak
-	"  {user}." promptw
-	eob
-
-l_0xc77eb6:
-	newline
-	get_action_arg swap
-	"@{user} tried" linebreak
-	"  to use the {itemname(0)}." next
-	"@but {user} could not use" linebreak
-	"  the {itemname(0)} very well." promptw
-	eob
-
-l_0xc77ee8:
-	get_action_arg swap
-	"@{user} could not use" linebreak
-	"  the {itemname(0)} very well." promptw
-	eob
-
-l_0xc77eff:
-	eob
-
 l_0xc78000:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// event(5)
@@ -556,7 +498,6 @@ l_0xc78000:
 
 l_0xc78033:
 	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 01
-	" "
 	window_open(1)
 	goto_if_flag(FLG_WIN_GEPPU, l_0xc78166)	// 0x47, 71
 	get_party_size_times(2) swap

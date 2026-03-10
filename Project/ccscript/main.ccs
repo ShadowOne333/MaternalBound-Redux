@@ -31,7 +31,12 @@ import "debug/diamond.ccs"
 import "debug/debug_menu_enabler.ccs"
 //------------------------------------------------------------------
 // Dialogue
+import "dialogue/battle_text.ccs"
+import "dialogue/coffee_tea_sequences.ccs"
+import "dialogue/flyover_texts.ccs"
 import "dialogue/item_descriptions.ccs"
+import "dialogue/psi_battle_anims.ccs"
+import "dialogue/staff_text.ccs"
 //------------------------------------------------------------------
 // Essential
 import "essential/asm65816.ccs"

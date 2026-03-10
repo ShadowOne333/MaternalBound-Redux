@@ -256,7 +256,8 @@ def split_ccs_text(text: str) -> str:
         bracket_groups = re.findall(r'\[(?:[0-9A-Fa-f]{2})\]', inner[len(text_part):])
         outputs = []
         # original text part, only add if non-empty; keep as quoted string
-        outputs.append('"' + text_part + '"')
+        if text_part:
+            outputs.append('"' + text_part + '"')
         for bg in bracket_groups:
             outputs.append('"' + bg + '"')
         return outputs
@@ -289,6 +290,7 @@ def split_ccs_text(text: str) -> str:
                 result.append(acc_pause)
 
         for idx, ip in enumerate(merged_parts):
+            if ip is None: continue
             if ip.startswith('{') and ip.endswith('}'):
                 inner_s = ip[1:-1].strip()
                 u = re.match(r'^[A-Za-z_][A-Za-z0-9_.]*\s*(\([^)]*\))?$', inner_s)
@@ -312,13 +314,43 @@ def split_ccs_text(text: str) -> str:
                             flush_pause(); acc_pause = None
                         acc_pause = unwrapped or ip
                 else:
-                    # Non-pause brace: flush and emit standalone
-                    flush_text(); flush_pause()
-                    acc_text = None; acc_pause = None
-                    result.append(unwrapped if unwrapped else ip)
+                    # Non-pause brace: embed if followed by plain text (inline display),
+                    # UNLESS it's a flow/control command that should always stand alone.
+                    # Flow braces: control-flow ops that are not inline display values.
+                    _SPLIT_BRACES = {
+                        'window_open', 'window_closeall', 'rtoarg', 'ctoarg',
+                        'promptw', 'wait_movement', 'restore_camera', 'party_freeze',
+                        'party_unfreeze', 'music_resume', 'music_stop', 'sound',
+                    }
+                    _brace_base = inner_s.split('(')[0].strip()
+                    _is_split_brace = _brace_base in _SPLIT_BRACES
+                    next_ip = merged_parts[idx+1] if idx+1 < len(merged_parts) else None
+                    # A whitespace-only next segment does not count as "plain text"
+                    next_is_plain = (next_ip is not None
+                        and not next_ip.startswith('[') and not next_ip.startswith('{')
+                        and next_ip.strip() != '')
+                    if next_is_plain and not _is_split_brace:
+                        # Embed brace inline — keep as {cmd} in text string
+                        if acc_text is None: acc_text = ip
+                        else: acc_text += ip
+                    else:
+                        # Flow brace or no following text: flush and emit standalone
+                        flush_text(); flush_pause()
+                        acc_text = None; acc_pause = None
+                        result.append(unwrapped if unwrapped else ip)
 
             elif not ip.startswith('[') and not ip.startswith('{'):
-                if ip.startswith('  ') and acc_pause is not None:
+                # Pure-whitespace segments between commands are separators, not text content.
+                # EXCEPTION: whitespace before a [bracket] that will become an inline command
+                # (e.g. '  ' before '[1C 08 01]') is a text-indent prefix — keep it.
+                if ip.strip() == '':
+                    next_ip = merged_parts[idx+1] if idx+1 < len(merged_parts) else None
+                    next_is_bracket = (next_ip is not None and next_ip.startswith('['))
+                    if next_is_bracket and acc_text is None:
+                        # Whitespace-before-bracket: treat as text prefix for the next segment
+                        acc_text = ip
+                    # else: discard — pure separator between commands
+                elif ip.startswith('  ') and acc_pause is not None:
                     # Two-space continuation: close prev segment
                     flush_text(); flush_pause()
                     acc_text = None; acc_pause = None
@@ -331,16 +363,28 @@ def split_ccs_text(text: str) -> str:
                 # Single bytes in [AB]-[CF] are character codes — keep embedded in text
                 single_byte_m = re.match(r'^\[([0-9A-Fa-f]{2})\]$', ip)
                 is_char_code = bool(single_byte_m and
-                    0xAB <= int(single_byte_m.group(1), 16) <= 0xCF)
+                    0x50 <= int(single_byte_m.group(1), 16) <= 0xCF)
                 if acc_text is not None or is_char_code:
                     # Mid-text or character code: keep embedded
                     if acc_text is None: acc_text = ip
                     else: acc_text += ip
                 else:
-                    # Leading bracket: split out as separate item
-                    flush_pause()
-                    acc_pause = None
-                    result.append('"' + ip + '"')
+                    # Leading bracket: check for load_str pattern [19 02] + plain text
+                    next_ip = merged_parts[idx+1] if idx+1 < len(merged_parts) else None
+                    is_load_str_bracket = (ip == '[19 02]')
+                    if is_load_str_bracket and next_ip is not None and not next_ip.startswith('[') and not next_ip.startswith('{'):
+                        # Consume the following text as load_str argument.
+                        # Emit as a quoted token "[19 02]text" so that process_text's
+                        # opening_quote_before path converts it to load_str("text").
+                        flush_pause(); acc_pause = None
+                        result.append('"[19 02]' + next_ip + '"')
+                        # Mark next part consumed
+                        merged_parts[idx+1] = None
+                    else:
+                        # Regular leading bracket: split out as separate item
+                        flush_pause()
+                        acc_pause = None
+                        result.append('"' + ip + '"')
 
         # Flush remainders
         flush_text(); flush_pause()
@@ -455,7 +499,8 @@ def split_ccs_text(text: str) -> str:
                         next_ip = inner_parts[idx_ip+1] if idx_ip+1 < len(inner_parts) else None
                         if (prev.endswith(']') and (prev+ip) in inner
                                 and next_ip is not None
-                                and next_ip.startswith('[') and next_ip.endswith(']')):
+                                and next_ip.startswith('[') and next_ip.endswith(']')
+                                and ip.strip() != ''):  # don't merge whitespace-only separators
                             merged[-1] = prev + ip
                             continue
                     merged.append(ip)
@@ -573,7 +618,8 @@ def split_ccs_text(text: str) -> str:
                             next_ip = inner_parts[idx_ip + 1] if idx_ip + 1 < len(inner_parts) else None
                             if (prev.endswith(']') and (prev + ip) in inner
                                     and next_ip is not None
-                                    and next_ip.startswith('[') and next_ip.endswith(']')):
+                                    and next_ip.startswith('[') and next_ip.endswith(']')
+                                    and ip.strip() != ''):  # don't merge whitespace-only separators
                                 merged_parts[-1] = prev + ip
                                 continue
                         merged_parts.append(ip)
@@ -596,7 +642,7 @@ def split_ccs_text(text: str) -> str:
                     # char-code brackets [AB]-[CF] — they must stay embedded.
                     has_char_code = any(
                         re.match(r'^\[([0-9A-Fa-f]{2})\]$', kp) and
-                        0xAB <= int(re.match(r'^\[([0-9A-Fa-f]{2})\]$', kp).group(1), 16) <= 0xCF
+                        0x50 <= int(re.match(r'^\[([0-9A-Fa-f]{2})\]$', kp).group(1), 16) <= 0xCF
                         for kp in inner_parts)
                     if needs_split or has_char_code:
                         parts.extend(_rebuild_inner_parts(inner_parts))
@@ -660,9 +706,12 @@ def split_ccs_text(text: str) -> str:
                 # call(...) between quoted strings — only when arg is a label ref
                 # (contains '.' or 'l_0x'), not plain commands like pause(20)
                 if re.match(r'^[A-Za-z_][A-Za-z0-9_.]*\(', nxt) and re.search(r'[.(](?:data_|l_0x|[A-Za-z_][A-Za-z0-9_]*\.)', nxt):
+                    # Don't join if the first string ends with ']' — it has a trailing
+                    # hex bracket (mid-text command) that process_text needs to split out.
+                    _has_trailing_bracket = inner.endswith(']') and '[' in inner
                     # peek ahead: is there a quoted string after the call?
                     k = j + 2
-                    if k < len(parts) and parts[k].startswith('"') and parts[k].endswith('"'):
+                    if not _has_trailing_bracket and k < len(parts) and parts[k].startswith('"') and parts[k].endswith('"'):
                         # accumulate: quoted call quoted [keyword...]
                         run = [p, nxt, parts[k]]
                         k += 1
@@ -688,12 +737,18 @@ def split_ccs_text(text: str) -> str:
                     continue
                 # plain trailing keyword
                 # Allow join even if inner ends with ']' when it's a char-code [AB]-[CF]
+                # OR when the trailing bracket is multi-byte (inline command, not a split point)
                 ends_with_char_code = bool(
                     inner and re.search(r'\[([A-Ca-c][0-9A-Fa-f]|[A-Fa-f][Bb-fF])\]$', inner)
                     and re.search(r'\[([0-9A-Fa-f]{2})\]$', inner)
-                    and 0xAB <= int(re.search(r'\[([0-9A-Fa-f]{2})\]$', inner).group(1), 16) <= 0xCF
+                    and 0x50 <= int(re.search(r'\[([0-9A-Fa-f]{2})\]$', inner).group(1), 16) <= 0xCF
                 )
-                if inner and (inner[-1] not in (']', '}') or ends_with_char_code) \
+                _trailing_bracket_m = re.search(r'\[([^\]]+)\]$', inner) if inner else None
+                ends_with_multibyte_bracket = bool(
+                    _trailing_bracket_m
+                    and len(_trailing_bracket_m.group(1).split()) > 1
+                )
+                if inner and (inner[-1] not in (']', '}') or ends_with_char_code or ends_with_multibyte_bracket) \
                   and re.match(r'^(next|linebreak|newline|swap|wait|promptw|end|\.|@)$', nxt):
                     combined = '\t' + p + ' ' + nxt
                     out_lines.append(combined)
@@ -1316,21 +1371,74 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
         # e.g. "[1C 01 12])" next  ->  "{stat(18)})" next
         # Also handles leading whitespace after the quote: '" [19 02]No"' -> strip the space.
         before_rstripped = before.rstrip()
+        # opening_quote_before: the bracket immediately follows an opening quote.
+        # Combine `before` (text before regex match start) and m.group(1) (text
+        # captured as prefix within the match) to get the full prefix up to '['.
+        # The opening quote is present when that combined prefix ends with a bare quote.
+        _full_prefix = before + m.group(1)  # everything from i up to '['
+        _full_prefix_rs = _full_prefix.rstrip()
         opening_quote_before = (
-            before_rstripped and before_rstripped[-1] in ('"', "'")
-            and (len(before_rstripped) < 2 or before_rstripped[-2] != '\\')
+            _full_prefix_rs
+            and _full_prefix_rs[-1] in ('"', "'")
+            and (len(_full_prefix_rs) < 2 or _full_prefix_rs[-2] != '\\')
+            # The char before the quote must be whitespace or start-of-content
+            # (not text), so the quote is truly an opening quote, not a close quote
+            # of a preceding token followed by a separate open quote.
+            and (len(_full_prefix_rs) < 2 or _full_prefix_rs[-2] in ('\t', ' ', '\n', '\r', ',', '('))
         )
         quoted_suffix = None  # suffix chars between m.end() and closing quote, e.g. ")"
-        if opening_quote_before and m.group(1) == '':
-            mqs = re.match(r'^([^"\'\'\[\]\n]*)["\']', text[m.end():])
+        if opening_quote_before:
+            mqs = re.match(r'^([^"\[\]\n]*)["\']', text[m.end():])
             if mqs:
                 quoted_suffix = mqs.group(1)
 
-        # Strip the opening quote (and any trailing whitespace before bracket) from before.
+        # Strip the opening quote from the full prefix when opening_quote_before.
+        # Also capture any text that sits between the opening quote and the bracket —
+        # e.g. '"  [1C 08 01]' has '  ' between the quote and '['.
+        _opening_quote_prefix_text = ''
         if opening_quote_before:
-            before = before_rstripped[:-1]
+            _last_q_in_prefix = _full_prefix_rs.rfind('"')
+            if _last_q_in_prefix >= 0:
+                # Text between the quote and the bracket (from full, un-rstripped prefix)
+                _opening_quote_prefix_text = _full_prefix[_last_q_in_prefix + 1:]
+            before = _full_prefix_rs[:-1]
+
+        # Detect if bracket is embedded inside a quoted string (mid-text, not at start).
+        # Use the bracket's actual position (m.start(2)-1 = '[') to count preceding quotes.
+        _bracket_pos = m.start(2) - 1  # position of '['
+        _line_start = text.rfind('\n', 0, _bracket_pos) + 1
+        _pre = text[_line_start:_bracket_pos]
+        embedded_in_string = (
+            not opening_quote_before
+            and (len(re.findall(r'(?<!\\)"', _pre)) % 2 == 1)
+        )
+
+        # When embedded: before contains '...prefix\n\t"text' where text is inside a
+        # quoted string. Strip the '"text' part from before; we'll emit it separately
+        # as a closed quoted string right after appending the prefix.
+        _embedded_text_before = None
+        _embedded_text_raw = None
+        if embedded_in_string and not opening_quote_before:
+            _bef_rs = before.rstrip()
+            _last_q = _bef_rs.rfind('"')
+            if _last_q >= 0:
+                _text_after_q = before[_last_q+1:]  # text between open-quote and bracket (preserves trailing space)
+                # Use original before for text (preserving spaces); rstripped version for truncation.
+                before = _bef_rs[:_last_q]
+                if _text_after_q:  # actual text content
+                    _indent = _bef_rs[:_last_q]
+                    # Extract just the indent from the line containing the open-quote
+                    _q_line_start = _bef_rs.rfind('\n', 0, _last_q) + 1
+                    _q_indent = _bef_rs[_q_line_start:_q_line_start + len(_bef_rs[_q_line_start:]) - len(_bef_rs[_q_line_start:].lstrip('\t '))]
+                    _embedded_text_before = '"' + _text_after_q + '"'
+                    _embedded_text_raw = _text_after_q  # raw text for inline embedding
+                else:
+                    _embedded_text_raw = ''
 
         out_lines.append(before)
+        if _embedded_text_before is not None:
+            out_lines.append(_embedded_text_before)
+
 
         inner = m.group(2)
         bytes_list, labels = bytes_from_block_text(inner)
@@ -1338,7 +1446,7 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
 
         # Special-character bytes [AB]-[CF] inside text strings must not be
         # converted to commands — they are font/display character codes.
-        if L == 1 and not labels and 0xAB <= bytes_list[0] <= 0xCF:
+        if L == 1 and not labels and 0x50 <= bytes_list[0] <= 0xCF:
             bracket_str = '[' + format(bytes_list[0], '02X') + ']'
             if opening_quote_before:
                 # Re-close the quote: before already had its quote stripped;
@@ -1348,6 +1456,38 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                 end_skip = suffix_m.end() if suffix_m else 0
                 out_lines.append('"' + before.lstrip('\t') + bracket_str + suf + '"')
                 i = m.end() + end_skip
+            elif embedded_in_string:
+                # Char code is mid-text inside a quoted string.
+                # Use the inline scan approach: keep it embedded in the string.
+                _prefix_text = _embedded_text_raw if _embedded_text_raw is not None else ''
+                assembled = _prefix_text + bracket_str
+                # Suppress separate _embedded_text_before already appended
+                if _embedded_text_before is not None and out_lines and out_lines[-1] == _embedded_text_before:
+                    out_lines.pop()
+                # Remove bare indent entry
+                if _embedded_text_raw is not None and out_lines and out_lines[-1].strip() == '':
+                    out_lines.pop()
+                # Scan rest of string for more content
+                scan_i = m.end()
+                while scan_i < len(text):
+                    rest = text[scan_i:]
+                    bkt_m2 = re.search(r'["\n]', rest)
+                    if not bkt_m2:
+                        assembled += rest
+                        scan_i = len(text)
+                        break
+                    assembled += rest[:bkt_m2.start()]
+                    scan_i += bkt_m2.start()
+                    if rest[bkt_m2.start()] in ('"', '\n'):
+                        scan_i += 1
+                        break
+                if out_lines and re.sub(r'[\t ]+$', '', out_lines[-1]).endswith('\n'):
+                    out_lines[-1] = re.sub(r'[\t ]+$', '', out_lines[-1])
+                    _inline_pfx = ''
+                else:
+                    _inline_pfx = '\n'
+                out_lines.append(_inline_pfx + '\t"' + assembled + '"')
+                i = scan_i
             else:
                 out_lines.append(bracket_str)
                 i = m.end()
@@ -1359,32 +1499,22 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
         tail_quoted = False
         if L >= 2 and bytes_list[0] == 0x19 and bytes_list[1] == 0x02 and not labels:
             tail = text[m.end():]
-            mq = re.match(r'^"([^"]*)"', tail) or re.match(r"^'([^']*)'", tail)
-            if mq:
-                content = mq.group(1)
-                consumed_extra_chars = mq.end()   # includes both quotes
-                tail_quoted = True
-                # normalize content just in case
-                if len(content) >= 1 and content[0] in ('"', "'"):
-                    content = content.lstrip('"\'')
-
-                if len(content) >= 1 and content[-1] in ('"', "'"):
-                    content = content.rstrip('"\'')
-
-                replaced = f'load_str("{content}")'
-            else:
-                mu = re.match(r'^([^\s\r\n]+)', tail)
-                if mu:
-                    content = mu.group(1)
-                    consumed_extra_chars = mu.end()
-                    if (content.startswith('"') and content.endswith('"')) or (content.startswith("'") and content.endswith("'")):
-                        content = content[1:-1]
-                        tail_quoted = True
-                    else:
-                        if consumed_extra_chars < len(tail) and tail[consumed_extra_chars] in ('"', "'"):
-                            consumed_extra_chars += 1
-
-                    # strip any lingering surrounding quotes
+            # When [19 02] appears inside a quoted string (opening_quote_before),
+            # the string content follows directly — read up to the closing quote.
+            if opening_quote_before and not tail.startswith('"') and not tail.startswith("'"):
+                mq_inline = re.match(r'^([^"\n]*)"', tail)
+                if mq_inline:
+                    content = mq_inline.group(1)
+                    consumed_extra_chars = mq_inline.end()  # includes closing quote
+                    tail_quoted = True
+                    replaced = f'load_str("{content}")'
+            if replaced is None:
+                mq = re.match(r'^"([^"]*)"', tail) or re.match(r"^'([^']*)'", tail)
+                if mq:
+                    content = mq.group(1)
+                    consumed_extra_chars = mq.end()   # includes both quotes
+                    tail_quoted = True
+                    # normalize content just in case
                     if len(content) >= 1 and content[0] in ('"', "'"):
                         content = content.lstrip('"\'')
 
@@ -1392,6 +1522,26 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                         content = content.rstrip('"\'')
 
                     replaced = f'load_str("{content}")'
+                else:
+                    mu = re.match(r'^([^\s\r\n]+)', tail)
+                    if mu:
+                        content = mu.group(1)
+                        consumed_extra_chars = mu.end()
+                        if (content.startswith('"') and content.endswith('"')) or (content.startswith("'") and content.endswith("'")):
+                            content = content[1:-1]
+                            tail_quoted = True
+                        else:
+                            if consumed_extra_chars < len(tail) and tail[consumed_extra_chars] in ('"', "'"):
+                                consumed_extra_chars += 1
+
+                        # strip any lingering surrounding quotes
+                        if len(content) >= 1 and content[0] in ('"', "'"):
+                            content = content.lstrip('"\'')
+
+                        if len(content) >= 1 and content[-1] in ('"', "'"):
+                            content = content.rstrip('"\'')
+
+                        replaced = f'load_str("{content}")'
 
         if replaced is not None:
             # Compute span to remove: include opening quote if present, bracket, tail (if any),
@@ -1425,9 +1575,55 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
 
         # Fallback: existing matching logic
         done = False
+
+        # Pre-check: switch_call / switch_goto must win before loop1 can match
+        # a partial pattern (e.g. 'give') at a non-zero offset inside their payload.
+        for sw_pat in patterns:
+            if sw_pat['name'] not in ('switch_call', 'switch_goto'):
+                continue
+            sw_res = match_at_offset(sw_pat, bytes_list, labels, 0)
+            if not sw_res:
+                continue
+            sw_consumed, sw_args = sw_res
+            if sw_consumed >= L:
+                break  # full match — let loop2 handle it
+            # Check that all remaining bytes are label references only
+            sw_j = sw_consumed
+            # For switch_call only: first label is overflow/default, not a switch_entry.
+            if sw_pat['name'] == 'switch_call':
+                sw_overflow = next((lbl for (idx, lbl) in labels if idx == sw_j), None)
+                if sw_overflow:
+                    sw_j += 4
+            sw_entries = []
+            sw_only = True
+            while sw_j < L:
+                sw_lbl = next((lbl for (idx, lbl) in labels if idx == sw_j), None)
+                if sw_lbl:
+                    sw_entries.append(sw_lbl)
+                    sw_j += 4
+                else:
+                    sw_only = False
+                    break
+            if sw_only and sw_entries:
+                sw_calltxt, sw_hexcmt = build_call_text(sw_pat, sw_args)
+                bracket_was_quoted = (m.group(1) != '') or embedded_in_string or opening_quote_before
+                sw_main = sw_calltxt
+                if not bracket_was_quoted:
+                    sw_main = '{' + sw_main + '}'
+                sw_cmt = ('\t' + sw_hexcmt) if bracket_was_quoted and sw_hexcmt else ''
+                out_lines.append(sw_main + sw_cmt + '\n')
+                for sw_k, sw_e in enumerate(sw_entries):
+                    nl = '\n' if sw_k < len(sw_entries) - 1 else ''
+                    out_lines.append('\t\t' + f'switch_entry({sw_e})' + nl)
+                i = m.end()
+                done = True
+            break
+
         for pat in patterns:
             if not pat['tokens']:
                 continue
+            if done:
+                break
             for start_off in range(0, max(1, L)):
                 res = match_at_offset(pat, bytes_list, labels, start_off)
                 if not res:
@@ -1444,12 +1640,18 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                     suffix = " [" + suf + "]"
 
                 # Determine whether original bracket was quoted (group 1 holds the optional quote)
-                bracket_was_quoted = (m.group(1) != '')
+                # Also treat as quoted when bracket is embedded inside a quoted string.
+                bracket_was_quoted = (m.group(1) != '') or embedded_in_string or opening_quote_before
 
                 # --- Special-case for switch_goto / switch_call followed only by embedded labels ---
                 if pat['name'] in ('switch_goto', 'switch_call') and start_off + consumed_bytes < L:
                     entries = []
                     j = start_off + consumed_bytes
+                    # For switch_call only: first label is overflow/default, not a switch_entry.
+                    if pat['name'] == 'switch_call':
+                        overflow_lbl = next((lbl for (idx, lbl) in labels if idx == j), None)
+                        if overflow_lbl:
+                            j += 4  # advance past overflow label
                     only_labels = True
                     while j < L:
                         lbl = next((lbl for (idx, lbl) in labels if idx == j), None)
@@ -1466,7 +1668,7 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                             main_call = "{" + main_call + "}"
                         cmt = ('\t' + hexcmt) if bracket_was_quoted and hexcmt else ''
                         out_lines.append(prefix + main_call + cmt + '\n')
-                        # emit indented switch_entry lines for each label
+                        # emit indented switch_entry lines for each label (skipping overflow)
                         for k, lbl in enumerate(entries):
                             nl = '\n' if k != len(entries) - 1 else ''
                             out_lines.append('\t\t' + f"switch_entry({lbl})" + nl)
@@ -1479,14 +1681,164 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                 emit_call = calltxt
                 if not bracket_was_quoted:
                     emit_call = "{" + emit_call + "}"
-                if quoted_suffix is not None:
-                    # Re-wrap in quotes, including any suffix chars before the closing quote.
-                    emit_call = '"' + emit_call + quoted_suffix + '"'
-                    i = m.end() + len(quoted_suffix) + 1  # skip suffix + closing quote
+                cmt = ('\t' + hexcmt) if (bracket_was_quoted or quoted_suffix is not None) and hexcmt else ''
+
+                # Flow-control commands (goto_if_*, switch_goto, etc.) should always split
+                # to their own line, emitting any suffix text as a new quoted string.
+                # Inline-value commands (stat, name, etc.) keep wrapped with their suffix.
+                _FLOW_CMDS = {
+                    'goto_if_false', 'goto_if_true', 'goto_if_flag', 'switch_goto',
+                    'switch_call', 'phone_call', 'give_and_return_location',
+                    'music_switching_off', 'music_switching_on', 'window_switch',
+                    'load_str_callonhover', 'switch_entry',
+                }
+                _is_flow = pat['name'] in _FLOW_CMDS
+                if quoted_suffix is not None and not embedded_in_string:
+                    if _is_flow:
+                        # Emit command on its own line; re-open the quote for the suffix text.
+                        out_lines.append(prefix + emit_call + suffix + cmt)
+                        out_lines.append('\n\t"' + quoted_suffix + '"')
+                        i = m.end() + len(quoted_suffix) + 1
+                    else:
+                        # Inline command — keep wrapped, prepend any text before bracket
+                        # e.g. '"  [1C 08 01]"' -> '"  {smash_text}"'
+                        # Suppress the hex comment only when there's a text prefix
+                        # (the comment would appear mid-string which looks wrong);
+                        # keep it when the bracket is at the very start of the quoted token.
+                        inline_call = '{' + calltxt + '}'
+                        emit_call = '"' + _opening_quote_prefix_text + inline_call + quoted_suffix + '"'
+                        if _opening_quote_prefix_text:
+                            # Has text before bracket — suppress comment (it's inside a string)
+                            out_lines.append(prefix + emit_call + suffix)
+                        else:
+                            cmt = ('\t' + hexcmt) if hexcmt else ''
+                            out_lines.append(prefix + emit_call + suffix + cmt)
+                        i = m.end() + len(quoted_suffix) + 1
+                elif embedded_in_string:
+                    # Command was mid-text: _embedded_text_before already closed the preceding text.
+                    # Flow commands go on their own line; inline commands stay embedded with {} syntax.
+                    next_i = m.end()
+                    if _is_flow:
+                        out_lines.append('\n\t' + emit_call + suffix + cmt)
+                        # Advance past the closing quote that ends the original quoted token.
+                        # The closing '"' may not be immediately next — scan forward past any
+                        # remaining brackets (e.g. [03] after a goto_if_flag bracket) to find it.
+                        scan_close = next_i
+                        while scan_close < len(text) and text[scan_close] != '"' and text[scan_close] != '\n':
+                            if text[scan_close] == '[':
+                                # There are more brackets before the closing quote.
+                                # Each must be a flow-terminator or simple command — emit them too.
+                                bk_close = text.find(']', scan_close)
+                                if bk_close < 0:
+                                    break
+                                bk_inner2 = text[scan_close+1:bk_close]
+                                bk_bl2, bk_labs2 = bytes_from_block_text(bk_inner2)
+                                for bk_pat2 in patterns:
+                                    bk_res2 = match_at_offset(bk_pat2, bk_bl2, bk_labs2, 0)
+                                    if bk_res2 and bk_res2[0] == len(bk_bl2):
+                                        bk_ct2, bk_hc2 = build_call_text(bk_pat2, bk_res2[1])
+                                        out_lines.append('\n\t' + bk_ct2)
+                                        break
+                                scan_close = bk_close + 1
+                            else:
+                                scan_close += 1
+                        if scan_close < len(text) and text[scan_close] == '"':
+                            next_i = scan_close + 1
+                        else:
+                            next_i = scan_close
+                    else:
+                        # Inline embedded command: scan the entire remaining string content,
+                        # converting further brackets to {cmd} inline, emit one complete string.
+                        # Prepend any text that was before the bracket (same quoted string).
+                        inline_call = '{' + calltxt + '}'
+                        _prefix_text = _embedded_text_raw if _embedded_text_raw is not None else ''
+                        assembled = _prefix_text + inline_call
+                        # Suppress the separate _embedded_text_before since we're embedding inline
+                        if _embedded_text_before is not None and out_lines and out_lines[-1] == _embedded_text_before:
+                            out_lines.pop()
+                        # Also remove the bare indent that was emitted as `before` (e.g. '\t')
+                        if _embedded_text_raw is not None and out_lines and out_lines[-1].strip() == '':
+                            out_lines.pop()
+                        scan_i = m.end()
+                        while scan_i < len(text):
+                            # Find next bracket or closing quote
+                            rest = text[scan_i:]
+                            bkt_m = re.search(r'[\["\n]', rest)
+                            if not bkt_m:
+                                assembled += rest
+                                scan_i = len(text)
+                                break
+                            ch = bkt_m.group(0)
+                            assembled += rest[:bkt_m.start()]
+                            scan_i += bkt_m.start()
+                            if ch in ('"', '\n'):
+                                # closing quote or newline: end of string content
+                                scan_i += 1  # consume the closing quote
+                                break
+                            else:  # '['
+                                # Try to match a bracket command inline
+                                bk_end = rest.find(']', bkt_m.start())
+                                if bk_end < 0:
+                                    assembled += '['
+                                    scan_i += 1
+                                    continue
+                                bk_inner = rest[bkt_m.start()+1:bk_end]
+                                bk_bl, bk_labs = bytes_from_block_text(bk_inner)
+                                # Flow-terminator bracket commands: these should end the
+                                # current string and be emitted standalone after it.
+                                _INLINE_FLOW_TERM = {
+                                    'promptw', 'wait', 'next', 'linebreak', 'newline',
+                                    'window_closeall', 'rtoarg', 'ctoarg',
+                                }
+                                bk_matched = False
+                                for bk_pat in patterns:
+                                    bk_res = match_at_offset(bk_pat, bk_bl, bk_labs, 0)
+                                    if bk_res and bk_res[0] == len(bk_bl):
+                                        bk_ct, _ = build_call_text(bk_pat, bk_res[1])
+                                        if bk_pat['name'] in _INLINE_FLOW_TERM:
+                                            # Emit current assembled string, then this command
+                                            # standalone, then continue past closing quote.
+                                            _emit_assembled = assembled if assembled else None
+                                            if _emit_assembled is not None:
+                                                if out_lines:
+                                                    out_lines[-1] = re.sub(r'[\t ]+$', '', out_lines[-1])
+                                                    _pfx = '' if out_lines[-1].endswith('\n') else '\n'
+                                                else:
+                                                    _pfx = '\n'
+                                                out_lines.append(_pfx + '\t"' + _emit_assembled + '"')
+                                            out_lines.append('\n\t' + bk_ct)
+                                            assembled = None  # signal: already emitted
+                                            scan_i += bk_end - bkt_m.start() + 1
+                                            # Skip closing quote if present
+                                            rest2 = text[scan_i:]
+                                            if rest2.startswith('"'):
+                                                scan_i += 1
+                                            bk_matched = True
+                                        else:
+                                            assembled += '{' + bk_ct + '}'
+                                            bk_matched = True
+                                        break
+                                if assembled is None:
+                                    break  # flow terminator already handled
+                                if bk_matched:
+                                    scan_i += bk_end - bkt_m.start() + 1
+                                else:
+                                    assembled += '[' + bk_inner + ']'
+                                    scan_i += bk_end - bkt_m.start() + 1
+                        # Trim trailing whitespace from the previous out_lines entry
+                        # (the truncated 'before' may end with '\t' or '\n\t' causing a blank line)
+                        if assembled is not None:
+                            if out_lines:
+                                out_lines[-1] = re.sub(r'[\t ]+$', '', out_lines[-1])
+                                _inline_prefix = '' if out_lines[-1].endswith('\n') else '\n'
+                            else:
+                                _inline_prefix = '\n'
+                            out_lines.append(_inline_prefix + '\t"' + assembled + '"')
+                        next_i = scan_i
+                    i = next_i
                 else:
                     i = m.end()
-                cmt = ('\t' + hexcmt) if (bracket_was_quoted or quoted_suffix is not None) and hexcmt else ''
-                out_lines.append(prefix + emit_call + suffix + cmt)
+                    out_lines.append(prefix + emit_call + suffix + cmt)
                 done = True
                 break
             if done:
@@ -1503,12 +1855,17 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
                 # full match at offset 0
                 consumed_bytes, arg_values = res
                 # Determine whether original bracket was quoted
-                bracket_was_quoted = (m.group(1) != '')
+                bracket_was_quoted = (m.group(1) != '') or embedded_in_string or opening_quote_before
 
                 # Special-case: switch_goto/switch_call with trailing-only labels
                 if pat['name'] in ('switch_goto', 'switch_call') and consumed_bytes < L:
                     entries = []
                     j = consumed_bytes
+                    # For switch_call only: first label is overflow/default, not a switch_entry.
+                    if pat['name'] == 'switch_call':
+                        overflow_lbl2 = next((lbl for (idx, lbl) in labels if idx == j), None)
+                        if overflow_lbl2:
+                            j += 4
                     only_labels = True
                     while j < L:
                         lbl = next((lbl for (idx, lbl) in labels if idx == j), None)
@@ -1563,7 +1920,7 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
         if name:
             return f'sound({name})\t// {n}'
         return m.group(0)  # no name (no sound / unknown) — leave as-is
-    result = re.sub(r'\bsound\(([0-9]+)\)', replace_sound, result)
+    result = re.sub(r'(?<!\{)\bsound\(([0-9]+)\)', replace_sound, result)
 
     # cannot_take_money(X) immediately followed by goto_if_true(L)
     # -> hasmoney(X) / goto_if_false(L)
@@ -1589,6 +1946,7 @@ def process_text(text: str, patterns: List[Dict[str,Any]], strict: bool=False) -
         (30, '||'),
         (20, '/|'),
         (15, '|'),
+        (10, '//'),
         (5,  '/'),
     ]
 
