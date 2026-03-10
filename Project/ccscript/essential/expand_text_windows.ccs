@@ -44,154 +44,154 @@ define windowExistenceTable = 0x7E88E4
 ///////////
 /// Patches
 // CHECK_DEAD_PLAYERS
-    ROM[0xC2BBD0] = {
-        // Orig: LDX_a(0x8900) STX_d(0x16)
-        JSL(Patch_C2BBD0) TAX
-    }
-    Patch_C2BBD0: {
-        LDA_i(14)
-        JSL(GetExistenceAtA)
-        STA_d(0x16)
-        RTL
-    }
+ROM[0xC2BBD0] = {
+	// Orig: LDX_a(0x8900) STX_d(0x16)
+	JSL(Patch_C2BBD0) TAX
+}
+Patch_C2BBD0: {
+	LDA_i(14)
+	JSL(GetExistenceAtA)
+	STA_d(0x16)
+	RTL
+}
 
 // ENEMY_SELECT_MODE
-    ROM[0xC1E1C1] = {
-        // Orig: LDA_a(0x8900) LDY_i(0x0052)
-        JSL(Patch_C1E1C1) BRA(0)
-    }
-    Patch_C1E1C1: {
-        LDA_i(14)
-        JMP(GetExistenceAndLoadYWithSizeofStats)
-    }
+ROM[0xC1E1C1] = {
+	// Orig: LDA_a(0x8900) LDY_i(0x0052)
+	JSL(Patch_C1E1C1) BRA(0)
+}
+Patch_C1E1C1: {
+	LDA_i(14)
+	JMP(GetExistenceAndLoadYWithSizeofStats)
+}
 
 // FILE_MENU_LOOP 
-    ROM[0xC1FB70] = {
-        // Orig: LDA_a(0x8928) LDY_i(0x0052)
-        JSL(Patch_C1FB70) BRA(0)
-    }
-    Patch_C1FB70: {
-        LDA_i(34)
-        JMP(GetExistenceAndLoadYWithSizeofStats)
-    }
-    ROM[0xC1FC22] = {
-        // Orig: LDA_a(0x892A) LDY_i(0x0052)
-        JSL(Patch_C1FC22) BRA(0)
-    }
-    Patch_C1FC22: {
-        LDA_i(35)
-        JMP(GetExistenceAndLoadYWithSizeofStats)
-    }
+ROM[0xC1FB70] = {
+	// Orig: LDA_a(0x8928) LDY_i(0x0052)
+	JSL(Patch_C1FB70) BRA(0)
+	}
+Patch_C1FB70: {
+	LDA_i(34)
+	JMP(GetExistenceAndLoadYWithSizeofStats)
+}
+ROM[0xC1FC22] = {
+	// Orig: LDA_a(0x892A) LDY_i(0x0052)
+	JSL(Patch_C1FC22) BRA(0)
+}
+Patch_C1FC22: {
+	LDA_i(35)
+	JMP(GetExistenceAndLoadYWithSizeofStats)
+}
 
 // CLOSE_WINDOW 
-    ROM[0xC3E5B3] = {
-        // Orig: ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
-        JSL(Patch_C3E5B3) BRA(2)
-    }
-    Patch_C3E5B3: {
-        TAX
-        SEP(0x20)
-        LDA_8(0xFF)
-        STA_x(windowExistenceTable)
-        REP(0x20)
-        RTL
-    }
+ROM[0xC3E5B3] = {
+	// Orig: ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
+	JSL(Patch_C3E5B3) BRA(2)
+}
+Patch_C3E5B3: {
+	TAX
+	SEP(0x20)
+	LDA_8(0xFF)
+	STA_x(windowExistenceTable)
+	REP(0x20)
+	RTL
+}
 
 // CREATE_WINDOW
-    ROM[0xC104EE] = {
-        // Patch the whole beginning of the Create Window fn.
-        REP(0x31)			// 4EE 
-        PHD				// 4F0
-        TAY				// 4F1
-        TDC				// 4F2
-        ADC_i(0xFFEA)			// 4F3
-        TCD				// 4F6	
-        STY_d(0x14)			// 4F7
-        TYX				// 4F9
-        LDA_x(windowExistenceTable)	// 4FA
-        AND_i(0x00FF)			// 4FD
-        CMP_i(0x00FF)			// 500
-        BNE(3)				// 503
-        JMP(0xC10528) 	// UNKNOWN0	// 505
-        STY_a(0x8958)			// 508
-        JSR(0xC11383)			// 50B
-        LDX_d(0x14)			// 50E
-        LDA_x(windowExistenceTable)	// 510
-        AND_i(0x00FF)			// 513
-        NOP				// 516
-        // Rest of code...		// 517
-    }
-    ROM[0xC105C1] = {
-        TAX				// 5C1
-        LDA_d(0x0E)			// 5C2
-        JSL(SetExistenceAtXToA)		// 5C4
-        NOP				// 5C8
-        // Rest of code...		// 5C9
-    }
+ROM[0xC104EE] = {
+	// Patch the whole beginning of the Create Window fn.
+	REP(0x31)			// 4EE 
+	PHD				// 4F0
+	TAY				// 4F1
+	TDC				// 4F2
+	ADC_i(0xFFEA)			// 4F3
+	TCD				// 4F6	
+	STY_d(0x14)			// 4F7
+	TYX				// 4F9
+	LDA_x(windowExistenceTable)	// 4FA
+	AND_i(0x00FF)			// 4FD
+	CMP_i(0x00FF)			// 500
+	BNE(3)				// 503
+	JMP(0xC10528) 	// UNKNOWN0	// 505
+	STY_a(0x8958)			// 508
+	JSR(0xC11383)			// 50B
+	LDX_d(0x14)			// 50E
+	LDA_x(windowExistenceTable)	// 510
+	AND_i(0x00FF)			// 513
+	NOP				// 516
+	// Rest of code...		// 517
+}
+ROM[0xC105C1] = {
+	TAX				// 5C1
+	LDA_d(0x0E)			// 5C2
+	JSL(SetExistenceAtXToA)		// 5C4
+	NOP				// 5C8
+	// Rest of code...		// 5C9
+}
 
 // SELECTION_MENU
-    ROM[0xC11E94] = {
-        JSL(Patch_C11E94) BRA(0)
-    }
-    Patch_C11E94: {
-        LDA_i(0)
-        JSL(GetExistenceAtA)
-        CMP_a(0x88E2)
-        RTL
-    }
-    ROM[0xC11EA5] = {
-        JSL(Patch_C11EA5) BRA(0)
-    }
-    Patch_C11EA5: {
-        LDA_i(10)
-        JSL(GetExistenceAtA)
-        CMP_i(0xFFFF)
-        RTL
-    }
+ROM[0xC11E94] = {
+	JSL(Patch_C11E94) BRA(0)
+}
+Patch_C11E94: {
+	LDA_i(0)
+	JSL(GetExistenceAtA)
+	CMP_a(0x88E2)
+	RTL
+}
+ROM[0xC11EA5] = {
+	JSL(Patch_C11EA5) BRA(0)
+}
+Patch_C11EA5: {
+	LDA_i(10)
+	JSL(GetExistenceAtA)
+	CMP_i(0xFFFF)
+	RTL
+}
 
 // UNKNOWN_C20ABC
-    ROM[0xC20AD6] = {
-        // Replaces:
-        // ASL CLC ADC_i(0x88e4) TAX   LDA_x(0x0000)
-        JSL(GetExistenceAtA)
-        BRA(3)
-        NOP NOP NOP
-    }
-    ROM[0xC20AE7] = {
-        // Replaces:
-        // LDA_d(0x0E) STA_a(0x8958) LDA_x(0x0000)
-        LDX_d(0x0E)
-        STX_a(0x8958)
-        BRA(1)
-        NOP
-    }
+ROM[0xC20AD6] = {
+	// Replaces:
+	// ASL CLC ADC_i(0x88e4) TAX   LDA_x(0x0000)
+	JSL(GetExistenceAtA)
+	BRA(3)
+	NOP NOP NOP
+}
+ROM[0xC20AE7] = {
+	// Replaces:
+	// LDA_d(0x0E) STA_a(0x8958) LDA_x(0x0000)
+	LDX_d(0x0E)
+	STX_a(0x8958)
+	BRA(1)
+	NOP
+}
 
 // UNKNOWN_C200D9
-    ROM[0xC2013D] = {
-        // Replaces:
-        // ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
-        TAX
-        LDA_i(0xFFFF)
-        JSL(SetExistenceAtXToA)
-    }
-    ROM[0xC2014A] = {
-        // Replaces: CMP_i(0x0035)
-        CMP_i(MAX_WINDOW_TYPES)
-    }
-    // The programmers did an oopsy here - let's skip past this code
-    // that will write garbage into memory
-    ROM[0xC2021F] = BRA(0x21)      // Skip computing X pointer to garbage
-    ROM[0xC20247] = { BRA(1) NOP } // Skip STA_x(...)
+ROM[0xC2013D] = {
+	// Replaces:
+	// ASL TAX LDA_i(0xFFFF) STA_x(0x88E4)
+	TAX
+	LDA_i(0xFFFF)
+	JSL(SetExistenceAtXToA)
+}
+ROM[0xC2014A] = {
+	// Replaces: CMP_i(0x0035)
+	CMP_i(MAX_WINDOW_TYPES)
+}
+	// The programmers did an oopsy here - let's skip past this code
+	// that will write garbage into memory
+ROM[0xC2021F] = BRA(0x21)      // Skip computing X pointer to garbage
+ROM[0xC20247] = { BRA(1) NOP } // Skip STA_x(...)
 
 // UNKNOWN_C436D7
-    ROM[0xC436E3] = {
-        // Replaces:
-        // ASL TAX LDY_x(0x88E4) STY_d(0x10) TYA
-        TAX
-        JSL(GetExistenceAtA)
-        STA_d(0x10)
-        NOP
-    }
+ROM[0xC436E3] = {
+	// Replaces:
+	// ASL TAX LDY_x(0x88E4) STY_d(0x10) TYA
+	TAX
+	JSL(GetExistenceAtA)
+	STA_d(0x10)
+	NOP
+}
 
 // All code that uses the following sequence: 0A AA BD E4 88
 // { ASL TAX LDA_x(0x88E4) }
@@ -281,24 +281,24 @@ _CommonPatch(0xEF01E1)
 // LDA_a(windowExistenceTable+amount) LDY_i(0x0052)
 // This lets those patches load A with a value then jump here :)
 GetExistenceAndLoadYWithSizeofStats: {
-    JSL(GetExistenceAtA)
-    LDY_i(0x0052)
-    RTL
+	JSL(GetExistenceAtA)
+	LDY_i(0x0052)
+	RTL
 }
 
 SetExistenceAtXToA: {
-    SEP(0x20)
-    STA_x(windowExistenceTable)
-    REP(0x20)
-    RTL
+	SEP(0x20)
+	STA_x(windowExistenceTable)
+	REP(0x20)
+	RTL
 }
 
 command SExt8 { AND_i(0x00FF) BIT_i(0x0080) BEQ(3) ORA_i(0xFF00) }
 GetExistenceAtA: {
-    TAX
-    LDA_x(windowExistenceTable)
-    SExt8
-    RTL
+	TAX
+	LDA_x(windowExistenceTable)
+	SExt8
+	RTL
 }
 
 //////////////////////////
@@ -309,59 +309,59 @@ GetExistenceAtA: {
 // Literally only one reference to this table.. smh I thought this would be so easy
 _asmptr(0xC105C9, NewWindowTable)
 NewWindowTable:
-	// 	      #,   X,	   Y, 	    W,	    H
-    WindowDefinition( 0, 1, 1, 15, 8) // Main gameplay menu (1, 1, 13, 8)
-    WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
-    WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
-    WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu (Use/Give/Drop/Help)
-    WindowDefinition( 4, 1, 3, 11, 6) // PSI Description box (Heigth: 8 -> 6)
-    WindowDefinition( 5, 20, 1, 11, 16) // Phone menu
-    WindowDefinition( 6, 8, 1, 20, 10) // Equip menu
-    WindowDefinition( 7, 18, 1, 13, 12) // Item list for equip menu (7, 12,01,0D,10->0C)
-    WindowDefinition( 8, 1, 1, 30, 18) // Status menu
-    WindowDefinition( 9, 12, 1, 19, 18) // Shop windows
-    WindowDefinition(10, 1, 9, 8, 4) // Cash window (1,10,8,4)
-    WindowDefinition(11, 1, 15, 11, 4) // ??? (Unused)
-    WindowDefinition(12, 12, 1, 19, 16) // Store window/Debug menu status effect window
-    WindowDefinition(13, 7, 1, 24, 16) // Escargo Express inventory (Taking items back)
-    WindowDefinition(14, 4, 1, 24, 6) // In-battle text
-    WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu
-    WindowDefinition(16, 4, 1, 8, 8) // Offense/Defense/Assist PSI selection menu (used in-battle)
-    WindowDefinition(17, 12, 1, 12, 4) // PSI name when selected in-battle
-    WindowDefinition(18, 1, 1, 14, 6) // Jeff's Battle menu
-    WindowDefinition(19, 1, 2, 30, 8) // File Select menu
-    WindowDefinition(20, 5, 9, 22, 4) // Continue/Copy/Delete menu
-    WindowDefinition(21, 10, 16, 12, 8) // Copy Menu (2 choices)
-    WindowDefinition(22, 10, 16, 12, 6) // Copy Menu (1 choice)
-    WindowDefinition(23, 6, 17, 21, 10) // Delete confirmation menu
-    WindowDefinition(24, 3, 14, 16, 10) // Text Speed menu
-    WindowDefinition(25, 8, 15, 18, 8) // Music Mode menu
-    WindowDefinition(26, 5, 4, 11, 4) // Character name input (05,04,08,04)
-    WindowDefinition(27, 13, 4, 17, 4) // "Name This Friend" (0D,04,11,04)
-    WindowDefinition(28, 1, 9, 30, 16) // Name/Letter input box
-    WindowDefinition(29, 7, 3, 7, 4) // Ness's Name
-    WindowDefinition(30, 7, 7, 7, 4) // Paula's Name
-    WindowDefinition(31, 7, 11, 7, 4) // Jeff's Name
-    WindowDefinition(32, 7, 15, 7, 4) // Poo's Name
-    WindowDefinition(33, 20, 3, 8, 4) // King's Name
-    WindowDefinition(34, 15, 7, 13, 6) // Favourite Food
-    WindowDefinition(35, 15, 13, 13, 6) // Favourite Thing
-    WindowDefinition(36, 4, 21, 24, 4) // "Are you sure?"
-    WindowDefinition(37, 18, 6, 13, 8) // Healer/Mach Pizza window (room for 3 choices)
-    WindowDefinition(38, 12, 1, 12, 4) // Selected PSI name when selecting a target for single enemy/single row
-    WindowDefinition(39, 3, 3, 26, 6) // "Register your name, please" window above Player's name input window used in Scarabi
-    WindowDefinition(40, 1, 1, 7, 4) // Menu helper window (At top left of screen, displays "Who?", "Where?", "Which?", "Whom?")
-    WindowDefinition(41, 16, 8, 15, 4) // Character select window with 2 characters
-    WindowDefinition(42, 10, 8, 21, 4) // Character select window with 3 characters
-    WindowDefinition(43, 4, 8, 27, 4) // Character select window with 4 characters
-    WindowDefinition(44, 8, 2, 24, 16) // Give items to other chars
-    WindowDefinition(45, 1, 13, 14, 12) // Equip menu Offense/Defense list
-    WindowDefinition(46, 4, 1, 8, 10) // Offense/Defense/Assist/Other PSI menu (for outside of battle)
-    WindowDefinition(47, 1, 9, 30, 10) // Save game corrupted window, PSI information window
-    WindowDefinition(48, 1, 1, 28, 6) // Party leader battle menu
-    WindowDefinition(49, 10, 4, 20, 4) // "To: Enemy" (Battle window)
-    WindowDefinition(50, 14, 11, 15, 16) // Flavour chooser window
-    WindowDefinition(51, 22, 8, 9, 4) // Character select window with 1 character (Normally not seen, but used in debug menu)
-    WindowDefinition(52, 14, 13, 17, 14) // ??? (Unused)
+	// 	  #,   X,	   Y, 	W,	H
+	WindowDefinition( 0, 1, 1, 15, 8) // Main gameplay menu (1, 1, 13, 8)
+	WindowDefinition( 1, 12, 1, 19, 8) // Out-of-battle text
+	WindowDefinition( 2, 7, 1, 24, 16) // Main inventory window
+	WindowDefinition( 3, 1, 1, 6, 10) // Inventory menu (Use/Give/Drop/Help)
+	WindowDefinition( 4, 1, 3, 11, 6) // PSI Description box (Heigth: 8 -> 6)
+	WindowDefinition( 5, 20, 1, 11, 16) // Phone menu
+	WindowDefinition( 6, 8, 1, 20, 10) // Equip menu
+	WindowDefinition( 7, 18, 1, 13, 12) // Item list for equip menu (7, 12,01,0D,10->0C)
+	WindowDefinition( 8, 1, 1, 30, 18) // Status menu
+	WindowDefinition( 9, 12, 1, 19, 18) // Shop windows
+	WindowDefinition(10, 1, 9, 8, 4) // Cash window (1,10,8,4)
+	WindowDefinition(11, 1, 15, 11, 4) // ??? (Unused)
+	WindowDefinition(12, 12, 1, 19, 16) // Store window/Debug menu status effect window
+	WindowDefinition(13, 7, 1, 24, 16) // Escargo Express inventory (Taking items back)
+	WindowDefinition(14, 4, 1, 24, 6) // In-battle text
+	WindowDefinition(15, 1, 1, 21, 6) // Normal battle menu
+	WindowDefinition(16, 4, 1, 8, 8) // Offense/Defense/Assist PSI selection menu (used in-battle)
+	WindowDefinition(17, 12, 1, 12, 4) // PSI name when selected in-battle
+	WindowDefinition(18, 1, 1, 14, 6) // Jeff's Battle menu
+	WindowDefinition(19, 1, 2, 30, 8) // File Select menu
+	WindowDefinition(20, 5, 9, 22, 4) // Continue/Copy/Delete menu
+	WindowDefinition(21, 10, 16, 12, 8) // Copy Menu (2 choices)
+	WindowDefinition(22, 10, 16, 12, 6) // Copy Menu (1 choice)
+	WindowDefinition(23, 6, 17, 21, 10) // Delete confirmation menu
+	WindowDefinition(24, 3, 14, 16, 10) // Text Speed menu
+	WindowDefinition(25, 8, 15, 18, 8) // Music Mode menu
+	WindowDefinition(26, 5, 4, 8, 4) // Character name input (5,4,11,4?)
+	WindowDefinition(27, 13, 4, 17, 4) // "Name This Friend"
+	WindowDefinition(28, 1, 9, 30, 16) // Name/Letter input box
+	WindowDefinition(29, 7, 3, 7, 4) // Ness's Name
+	WindowDefinition(30, 7, 7, 7, 4) // Paula's Name
+	WindowDefinition(31, 7, 11, 7, 4) // Jeff's Name
+	WindowDefinition(32, 7, 15, 7, 4) // Poo's Name
+	WindowDefinition(33, 20, 3, 8, 4) // King's Name
+	WindowDefinition(34, 15, 7, 13, 6) // Favourite Food
+	WindowDefinition(35, 15, 13, 13, 6) // Favourite Thing
+	WindowDefinition(36, 4, 21, 24, 4) // "Are you sure?"
+	WindowDefinition(37, 18, 6, 13, 8) // Healer/Mach Pizza window (room for 3 choices)
+	WindowDefinition(38, 12, 1, 12, 4) // Selected PSI name when selecting a target for single enemy/single row
+	WindowDefinition(39, 3, 3, 26, 6) // "Register your name, please" window above Player's name input window used in Scarabi
+	WindowDefinition(40, 1, 1, 7, 4) // Menu helper window (At top left of screen, displays "Who?", "Where?", "Which?", "Whom?")
+	WindowDefinition(41, 16, 8, 15, 4) // Character select window with 2 characters
+	WindowDefinition(42, 10, 8, 21, 4) // Character select window with 3 characters
+	WindowDefinition(43, 4, 8, 27, 4) // Character select window with 4 characters
+	WindowDefinition(44, 8, 2, 24, 16) // Give items to other chars
+	WindowDefinition(45, 1, 13, 14, 12) // Equip menu Offense/Defense list
+	WindowDefinition(46, 4, 1, 8, 10) // Offense/Defense/Assist/Other PSI menu (for outside of battle)
+	WindowDefinition(47, 1, 9, 30, 10) // Save game corrupted window, PSI information window
+	WindowDefinition(48, 1, 1, 28, 6) // Party leader battle menu
+	WindowDefinition(49, 10, 4, 20, 4) // "To: Enemy" (Battle window)
+	WindowDefinition(50, 14, 11, 15, 16) // Flavour chooser window
+	WindowDefinition(51, 22, 8, 9, 4) // Character select window with 1 character (Normally not seen, but used in debug menu)
+	WindowDefinition(52, 14, 13, 17, 14) // ??? (Unused)
 CustomWindows:
-    _CustomWindows
+	_CustomWindows
