@@ -239,7 +239,7 @@ l_0xc7472f:
 	"  It's the {itemname(TRAVEL_CHARM)}!" next
 	get_item_receiver(-1)	// FF
 	goto_if_false(l_0xc74787)
-	give_and_return_location(0, TRAVEL_CHARM)
+	give_and_return_location(0, TRAVEL_CHARM)	// 0x36 / 54
 	call(data_36.l_0xc7dccf)
 	set(FLG_ITEM_PRETZ)	// 78
 	end

@@ -430,7 +430,7 @@ l_0xc95aa0:
 	isset(FLG_TWSN_CHAOS_STAGE_START)	// 319
 	goto_if_false(l_0xc95ba0)
 	get_char_at_pos(1)
-	get_dir_from_char(0,TO_NPC,243)	// 0, 2, 0x00FD
+	get_dir_from_char(0,TO_NPC,253)	// 0, 2, 0x00FD
 	swap
 
 	store_registers
@@ -448,14 +448,14 @@ l_0xc95aa0:
 
 chaostheatermanager_paid:
 	sound(SND_CHICKEN2)	// 118
-	get_dir_from_char(253,TO_CHAR,1)		// 0x00FD, 1, 1
-	sprite_direction(253,0)	// 00FD
+	get_dir_from_npc(253,TO_CHAR,1)		// 0x00FD, 1, 1
+	npc_direction(253,0)	// 00FD
 
 	title(1, Poochyfud)
 	"@Yipes!" pause(60)
 	"  You surprised me." pause(20)
 	"  Now I'm not sure what to do." next
-	take(-1, WAD_BILLS)	// Take the Suitecase/Wad of bills from inventory
+	if not flag FLG_KEY_ITEMS { take(-1, WAD_BILLS) }	// Take the Suitecase/Wad of bills from inventory
 	"@I got the money, of course,| and now the Runaway Brothers are free to leave." next
 	"@I've got no complaints now that I have my money." promptw
 

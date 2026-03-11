@@ -160,7 +160,8 @@ KeyItems:
 			load_str_callonhover("Sound stone", SetCount2) }
 		if flag FLG_ITEM_MAP {
 			load_str_callonhover("Town map", SetCount3) }
-		if flag FLG_KEY_TABIGOYA and not flag FLG_OPEN_TABIGOYA	{ // Shack Key used
+		if flag FLG_KEY_TABIGOYA and not flag FLG_OPEN_TABIGOYA	and not flag FLG_INFO_XYZ { // Shack Key used
+		// The Shack key flag gets unset again when starting the trip for the Meteorite piece
 			load_str_callonhover("Key to the shack", SetCount4) }
 		if flag FLG_ITEM_CYCLE {
 			load_str_callonhover("Bicycle", SetCount5) }
@@ -170,10 +171,10 @@ KeyItems:
 			load_str_callonhover("Pencil eraser", SetCount7) }
 		if flag FLG_ITEM_KOKESHI {
 			load_str_callonhover("Eraser eraser", SetCount8) }
-		// Check used FLG_HAPPY_CARPAINTER_ITEMFULL originally, but this was buggy when talking back to Carpainter again
 		if flag FLG_WIN_CARPAINTER and not flag FLG_POLA_GRFD { // Paula rescued
+		// Check used FLG_HAPPY_CARPAINTER_ITEMFULL originally, but this was buggy when talking back to Carpainter again
 			load_str_callonhover("Key to the cabin", SetCount9) }
-		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURABUS_APPEAR {
+		if flag FLG_TWSN_ITEM_TONCHIKI and not flag FLG_TWSN_TONZURA_FREE {
 			load_str_callonhover("Suitcase of bills", SetCount10) }
 		if flag FLG_ITEM_TICKET {
 			load_str_callonhover("Backstage pass", SetCount11) }
@@ -205,7 +206,7 @@ KeyItems:
 			load_str_callonhover("Meteorite piece", SetCount23) }
 	}
 
-	if not flag FLG_POO_SOLO {
+	if flag FLG_JEFF_SOLO and not flag FLG_POO_SOLO {
 
 		if flag FLG_ITEM_KEY_LOCKER {
 			load_str_callonhover("Locker Key", SetCount24) }
@@ -217,6 +218,7 @@ KeyItems:
 
 _Help_Backout:
 	print_strings_vertical(2)
+
 _UseHelp_Window_Backout:
 	if not do_menu_nounload {
 		// Exit
@@ -383,8 +385,8 @@ keyitemcounter:
 	if counter_is(TENDAKRAUT) { toggle_with_sound(FLG_GUMI_OLDMAN_ITEM) }
 	if counter_is(METEORITE_PIECE) { toggle_with_sound(FLG_ITEM_XYZ) }
 	if counter_is(BUBBLE_GUM) { toggle_with_sound(FLG_ITEM_BUBBLE_GUM) }
-	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(FLG_ITEM_BACKSTAGE_PASS) }*/
-	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
+	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(FLG_ITEM_BACKSTAGE_PASS) }
+	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }*/
 	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }
 eob
 
