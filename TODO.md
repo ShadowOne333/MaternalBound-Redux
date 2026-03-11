@@ -7,3 +7,4 @@
 * Fix Magicant boost to Vitality and another stat not working if Ness is already level 99 (data_36)
 * Enable Bycicle with a full party (probably make it something like a taxi bike when 2 or more party members are present) (data_38.l_0xc803ac and data_35.l_0xc7c6f1)
 * Fix Town map not opening when pressing Start (probably because the Town map is not in the Goods inventory, make it check flag instead)
+* Game crashes after getting the Tendakraut when the Photoman appears (possible memory leak)

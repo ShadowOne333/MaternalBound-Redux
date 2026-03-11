@@ -198,8 +198,7 @@ KeyItems:
 			load_str_callonhover("Key to the tower", SetCount19) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
 			load_str_callonhover("Hawk eye", SetCount20) }
-		if flag FLG_ITEM_MUKUCHI or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU and not FLG_GUMI_USEBOOK {
-		// Check if we got the book or if the Tenda man hasn't given it back, and check if we have lent it to the Tenda or we have returned it
+		if flag FLG_ITEM_MUKUCHI and not FLG_GUMI_USEBOOK or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU {
 			load_str_callonhover("Shyness book", SetCount21) }
 		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not FLG_DKFD_GUMI_BOSS {	// Open Underworld rock or Tenda boss takes the Tendakraut
 			load_str_callonhover("Tendakraut", SetCount22) }
