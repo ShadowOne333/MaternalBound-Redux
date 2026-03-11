@@ -222,8 +222,9 @@ l_0xc9fc9e:
 l_0xc9fcd5:
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		get_inventory_item(0,0)
-		store_registers swap
+		swap
+		store_registers
+		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
 	result_is(ERASER_ERASER)

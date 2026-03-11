@@ -791,13 +791,18 @@ l_0xc6f9dc:
 	eob
 
 l_0xc6f9fd:
-	call(data_36.l_0xc7dd2c)
+	if flag FLG_KEY_ITEMS {
+		store_registers_shared
+		swap
+		store_registers
+		get_action_arg
+	}
+	else { call(data_36.l_0xc7dd2c) }
 	result_is(LOCKER_KEY)
 	eob
 
 l_0xc6fa05:
-	load_registers
-	swap
+	load_registers swap
 	result_is(BAD_KEY_MACHINE)
 	eob
 
@@ -817,8 +822,7 @@ l_0xc6fa2e:
 	goto_if_false(l_0xc6fab4)
 	store_registers
 	give_and_return_location(0,0)
-	load_registers
-	swap
+	load_registers swap
 	"@{name(0)}{swap} got it." wait
 	sound(SND_BOXTAKE)	// 116
 	pause(1)

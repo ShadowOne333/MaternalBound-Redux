@@ -501,6 +501,7 @@ l_0xc9c7fa:	// At Home ending Door knock setup
 	party_remove(2)	// 0x02
 	event(15)	// 0x0F
 	OSS_on	// event(5)
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 	set(FLG_MYHOME_TO_BE)	// 763
 	set(FLG_MYHOME_KNOCK_APPEAR)	// 295
 	set(FLG_ONET_POKEY_DOOR_CLOSE)	// 468

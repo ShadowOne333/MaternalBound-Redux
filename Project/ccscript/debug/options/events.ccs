@@ -943,7 +943,8 @@ l_0xc9c7fa:
 	event(15)	// 0x0F, clear all event flags
 	OSS_on		// event(5)
 
-	// Set the Key items flag so the main menu doesn't open after selecting an event
+	// Set the Key items flag and its Use Item flag so the main menu doesn't open after selecting an event
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 	set(FLG_TEMP_USEITEM)
 
 	set(FLG_MYHOME_TO_BE)	// 763
@@ -979,8 +980,11 @@ l_0xc9c7fa:
 
 l_0xc5a4ec:
 	event(15)	// 0x0F, Clear all event flags
-	// Set the Key items flag so the main menu doesn't open after selecting an event
+
+	// Set the Key items flag and its Use Item flag so the main menu doesn't open after selecting an event
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 	set(FLG_TEMP_USEITEM)
+
 	call(banana.l_0xc59082)
 	call(l_0xc5a50a)
 	set(FLG_SYS_MONSTER_OFF)	// 11

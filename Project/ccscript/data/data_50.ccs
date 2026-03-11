@@ -349,7 +349,7 @@ l_0xc920a2:
 
 	set(FLG_RAMA_MASTER)	// 150
 	set(FLG_TEMP_9)	// 10
-	hotspot_on(1,1, data_50.l_0xc92203)	// 1, 0x01, 0x00C92203
+	hotspot_on(1,1, l_0xc92203)	// 1, 0x01, 0x00C92203
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	set(FLG_TLPT_RAMA)	// 216
@@ -357,7 +357,8 @@ l_0xc920a2:
 	music_effect(3)	// Fade out
 	pause(60)
 	music_resume
-	party_unfreeze	// 0xFF eob
+	party_unfreeze	// 0xFF
+	eob
 
 l_0xc92203:
 	set(FLG_SYS_MONSTER_OFF)	// 11

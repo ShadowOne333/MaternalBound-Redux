@@ -157,7 +157,7 @@ KeyItems:
 		load_str_callonhover("ATM card", SetCount1)
 		if flag FLG_ONET_2FPICKEY_APPEAR and not flag FLG_WIN_OSCAR { // Buzz Buzz died and Defeated Nightmare
 		// Flag FLG_ONET_2FPICKEY_APPEAR is set after Buzz buzz is killed, but never unset
-			load_str_callonhover("Sound stone", SetCount2) }
+			load_str_callonhover("Sound Stone", SetCount2) }
 		if flag FLG_ITEM_MAP {
 			load_str_callonhover("Town map", SetCount3) }
 		if flag FLG_KEY_TABIGOYA and not flag FLG_OPEN_TABIGOYA	and not flag FLG_INFO_XYZ { // Shack Key used
@@ -184,36 +184,39 @@ KeyItems:
 			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_TONZURA_FREE {	// not FLG_FOUR_MISSFAKE?
 			load_str_callonhover("Diamond", SetCount14) }
-		/*if flag FLG_ITEM_YOGURT_MACHINE and not FLG_FOUR_MAID_THANKS {	// Tofu machine
+		/*if flag FLG_ITEM_YOGURT_MACHINE and not flag FLG_FOUR_MAID_THANKS {	// Tofu machine
 			load_str_callonhover("Tofu machine", SetCount15) }*/
-		if flag FLG_PU and not FLG_SUMS_OMAR_B_APPEAR {
+		if flag FLG_PU and not flag FLG_SUMS_OMAR_B_APPEAR {
 			load_str_callonhover("Tiny ruby", SetCount15) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
 			load_str_callonhover("Signed banana", SetCount16) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
 			load_str_callonhover("Hieroglyph copy", SetCount17) }
-		if flag FLG_ITEM_CARROT_KEY and not FLG_RAMA_RABBIT_DISAPPEAR {	// Rabbit's carrot ->
+		if flag FLG_ITEM_CARROT_KEY and not flag FLG_RAMA_RABBIT_DISAPPEAR {	// Rabbit's carrot ->
 			load_str_callonhover("Rabbits' carrot", SetCount18) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
 			load_str_callonhover("Key to the tower", SetCount19) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
 			load_str_callonhover("Hawk eye", SetCount20) }
-		if flag FLG_ITEM_MUKUCHI and not FLG_GUMI_USEBOOK or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU {
+		if flag FLG_ITEM_MUKUCHI and not flag FLG_GUMI_USEBOOK or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU {
 			load_str_callonhover("Shyness book", SetCount21) }
-		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not FLG_DKFD_GUMI_BOSS {	// Open Underworld rock or Tenda boss takes the Tendakraut
+		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not flag FLG_DKFD_GUMI_BOSS {	// Open Underworld rock or Tenda boss takes the Tendakraut
 			load_str_callonhover("Tendakraut", SetCount22) }
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
 			load_str_callonhover("Meteorite piece", SetCount23) }
 	}
 
-	if flag FLG_JEFF_SOLO and not flag FLG_POO_SOLO {
-
-		if flag FLG_ITEM_KEY_LOCKER {
-			load_str_callonhover("Locker Key", SetCount24) }
+	if flag FLG_JEFF_SOLO {
+		if flag FLG_ITEM_KEY_LOCKER and not flag FLG_ITEM_GAUS {
+			load_str_callonhover("Key to the locker", SetCount24) }
 		if flag FLG_ITEM_GAUS {
-			load_str_callonhover("Bad Key Machine", SetCount25) }
+			load_str_callonhover("Bad key machine", SetCount25) }
 		if flag FLG_ITEM_BUBBLE_GUM and not flag FLG_WINS_BMONKEY_DISAPPEAR {
-			load_str_callonhover("Bubble Gum Pak", SetCount26) }
+			load_str_callonhover("Pak of bubble gum", SetCount26) }
+	}
+
+	if flag FLG_POO_SOLO {
+		load_str_callonhover("Tiny ruby", SetCount15)
 	}
 
 _Help_Backout:

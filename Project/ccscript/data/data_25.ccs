@@ -81,7 +81,8 @@ l_0xc6aa2f:
 	"@It's a little bent though." promptw
 	if flag FLG_KEY_ITEMS { give_menu_key_item(LOCKER_KEY) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc6acda)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6acda)
 		give_and_return_location(0, LOCKER_KEY)	// 0xCD, 205
 		call(data_36.l_0xc7dcb6) }
 	next

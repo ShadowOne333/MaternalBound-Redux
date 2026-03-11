@@ -349,6 +349,7 @@ l_0xc59070:
 
 l_0xc59082:
 	event(15)	// 0x0F
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 
 	compare_counter(10)	// 0x0000000A, 0x02
 	goto_if_false(l_0xc59894)

@@ -123,7 +123,8 @@ l_0xc57760:
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		swap store_registers
+		swap
+		store_registers
 		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
