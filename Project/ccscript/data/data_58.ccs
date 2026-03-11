@@ -1101,8 +1101,9 @@ l_0xc9d95e:
 		take(-1, SHYNESS_BOOK)	// 0xA4, 164
 		give_and_return_location(0, TENDAKRAUT)	// 0xD3, 211
 	}
+
 	store_registers_shared
-	sound(SND_BOXTAKE)	// 116
+	if not flag FLG_KEY_ITEMS { sound(SND_BOXTAKE) }	// 116
 	pause(60)
 
 	window_open(1)

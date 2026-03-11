@@ -419,7 +419,7 @@ l_0xc87e4c:
 	"  <Overcoming Shyness>!)" next
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		give_menu_key_item(CABIN_KEY)
+		give_menu_key_item(SHYNESS_BOOK)
 	}
 	else {
 		get_item_receiver(-1)

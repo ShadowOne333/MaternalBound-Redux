@@ -379,8 +379,8 @@ l_0xc6d391:
 	if not flag FLG_KEY_ITEMS { take(-1, DIAMOND) }	// Item 0xB6, 182, Diamond
 	OSS_on	// special_event(5)
 	sound(SND_CHICKEN2)	// 118
-	get_dir_from_char(839,TO_CHAR,1)	// 0x0347, 1, 0x0001
-	sprite_direction(839,0)	// 0x0347, 0
+	get_dir_from_npc(839,TO_CHAR,1)	// 0x0347, 1, 0x0001
+	npc_direction(839,0)	// 0x0347, 0
 	"@Yaaaieeee!!" next
 	// Item 0xB6 / 182 = Diamond
 	"@That that that {itemname(DIAMOND)}... you're going to pay with that {itemname(DIAMOND)}?!" next
@@ -580,9 +580,11 @@ l_0xc6da6d:
 		get_item_receiver(-1)
 		goto_if_false(l_0xc6daa0)
 	}
+
 	store_registers
 	hasmoney(30)	// 0x0000001E
 	goto_if_false(l_0xc6dac0)
+
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	takemoney(30)	// 0x1E
@@ -609,17 +611,13 @@ l_0xc6daf5:
 	goto(l_0xc6db0a)
 
 l_0xc6db0a:
-	if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET
-	{
-	    goto(l_0xc6dc0c)
-	}
-	else
-	{
-	    get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
-	    call(data_36.l_0xc7dc9b)
-	    goto_if_false(l_0xc6dbae)
-	    "@Please have your tickets ready..." end
-	    goto(l_0xc6db2e)
+	if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET { goto(l_0xc6dc0c) }
+	else {
+		get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
+		call(data_36.l_0xc7dc9b)
+		goto_if_false(l_0xc6dbae)
+		"@Please have your tickets ready..." end
+		goto(l_0xc6db2e)
 	}
 	eob
 
@@ -660,6 +658,7 @@ l_0xc6dc0c:
 	get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc6dbae)
+
 	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
 	if not flag FLG_KEY_ITEMS { take(-1, SHOW_TICKET) }	// 178
 	goto(useshowticket)

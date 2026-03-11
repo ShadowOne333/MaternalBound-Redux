@@ -311,7 +311,7 @@ l_0xc83515:
 	npc_do_mc(951,680)	// 0x03B7, 0x02A8
 	wait_movement
 	npc_freeze(951)	// 0x03B7
-	get_dir_from_npc(951,TO_CHAR,-1)	// 0x03B7, 01, 0x00FF
+	get_dir_from_npc(951,TO_CHAR,255)	// 0x03B7, 01, 0x00FF
 	npc_direction(951,0)	// 0x03B7, 0
 
 	pause(20)

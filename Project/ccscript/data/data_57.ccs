@@ -977,7 +977,7 @@ l_0xc9bc48:
 	npc_spawn(1271,314,1)	// 0x04F7, 0x013A, 0x01
 	wait_movement
 	music_resume
-	get_dir_from_npc(1269,TO_CHAR,-1)	// 0x04F5, 0x01, 0x00FF
+	get_dir_from_npc(1269,TO_CHAR,255)	// 0x04F5, 0x01, 0x00FF
 	npc_direction(1269,0)	// 0x04F5, 0x00
 	npc_freeze(1272)	// 0x04F8
 	npc_freeze(1269)	// 0x04F5

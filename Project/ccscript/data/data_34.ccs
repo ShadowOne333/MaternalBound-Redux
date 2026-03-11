@@ -1105,7 +1105,7 @@ l_0xc7b550:
 l_0xc7b576:
 	npc_delete(968,6)	// 0x03C8, 6
 	npc_spawn(967,8,1)	// 0x03C7, 0x0008, 1
-	get_dir_from_npc(967,TO_CHAR,-1)	// 0x03C7, 0x01, 0x00FF
+	get_dir_from_npc(967,TO_CHAR,255)	// 0x03C7, 0x01, 0x00FF
 	npc_direction(967,0)	// 0x03C7, 0
 
 	window_open(1)

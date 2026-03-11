@@ -360,7 +360,7 @@ l_0xc6ea34:
 	call(data_23.l_0xc68253)
 	set(FLG_POLA_1)	// 15
 	unset(FLG_GLOBAL_POLA_KIDNAPPED)	// 776
-	get_dir_from_npc(872,TO_CHAR,-1)	// 0x0368, 0x01, 0x00FF
+	get_dir_from_npc(872,TO_CHAR,255)	// 0x0368, 0x01, 0x00FF
 	npc_direction(872,0)	// 0x0368, 0x00
 	music_resume
 	pause(120)

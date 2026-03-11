@@ -3,7 +3,7 @@
 * Implement special running sprites for when using the Run button similar to Mother 3. This should apply for all party characters: Ness, Paula, Jeff, Poo; and guest party characters: Porky, Picky, Flying Men, Tony, Bubble Monkey, King. Possibly Dungeon Man too but it depends.
 * Change Saturn shops option menus to use Saturn font for "Buy/Sell"
 * Floating sprite implementation for when Ness receives a phone call, similar to Mother 3's Transceiver. It should be made similar to how Capt. Strong does it in Onett. (Some receiver calls from Orange kid are in data_34)
-* Fix the Last Sanctuary locations showing up in the wrong order, when getting all 8 melodies and all sanctuaries flash quickly
 * Check the Fly Honey softlock and fix it (data_35)
 * Fix Magicant boost to Vitality and another stat not working if Ness is already level 99 (data_36)
 * Enable Bycicle with a full party (probably make it something like a taxi bike when 2 or more party members are present) (data_38.l_0xc803ac and data_35.l_0xc7c6f1)
+* Fix Town map not opening when pressing Start (probably because the Town map is not in the Goods inventory, make it check flag instead)

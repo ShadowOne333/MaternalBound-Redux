@@ -391,7 +391,7 @@ l_0xc8ebe4:
 	eob
 
 l_0xc8ec0f:
-	get_dir_from_npc(534,TO_CHAR,-1)	// 0x0216, 0x01, 0x00FF
+	get_dir_from_npc(534,TO_CHAR,255)	// 0x0216, 0x01, 0x00FF
 	npc_direction(534,0)	// 0x0216, 0x00
 	show_npc_float(534,3)	// 0x0216, 0x03
 	pause(30)

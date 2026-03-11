@@ -282,7 +282,9 @@ l_0xc73217:
 l_0xc73236:
 	"@Hi!" next
 	goto_if_flag(FLG_ONET_LUCY_CHU, l_0xc733ee)	// 0x0297, 663
-	goto_if_flag(FLG_ITEM_MAP, l_0xc733ee)	// 0x01FF, 511
+	if not flag FLG_ITEM_MUKUCHI and not flag FLG_GUMI_OLDMAN_END {
+		goto_if_flag(FLG_ITEM_MAP, l_0xc733ee)	// 0x01FF, 511
+	}
 	goto_if_flag(FLG_ITEM_MUKUCHI, l_0xc73420)	// 0x0059, 89
 	"@Kids can borrow only maps at this library." next
 	"@Do you want to borrow one?" linebreak
@@ -295,8 +297,10 @@ l_0xc73296:
 	goto(l_0xc73296)
 
 l_0xc732e1:
-	get_item_receiver(-1)
-	goto_if_false(l_0xc733a7)
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc733a7)
+	}
 	"@Here's a map." next
 	"@Onett isn't the only thing on the map." next
 	"@All the info is there, except for the info that isn't there." next
@@ -324,18 +328,12 @@ l_0xc73420:
 	"@Please return our book <Overcoming Shyness> later!" end
 
 l_0xc7343f:
-	if flag FLG_KEY_ITEMS {
-		swap get_action_arg
-		result_is(SHYNESS_BOOK)
-		goto_if_false(data_35.l_0xc7c6b6)
-	}
-	else {
-		get_inventory_item(0,0) swap
-		result_is(SHYNESS_BOOK)
-		goto_if_false(data_35.l_0xc7c6b6)
-	}
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	result_is(SHYNESS_BOOK)
+	goto_if_false(data_35.l_0xc7c6b6)
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc73470)	// 0x49, 73
-	"@That book's great!" pause(20)
+	"@That book's great!" pause(20) linebreak
 	"  Study it hard." end
 
 l_0xc73470:
@@ -370,7 +368,6 @@ l_0xc73590:
 	goto_if_true(l_0xc73628)
 	// Stat 8 = Ness' name
 	"@Oh,// hi {stat(8)}." next
-	goto(l_0xc735b3)
 
 l_0xc735b3:
 	"@It's another nice day.  What?" pause(15)
@@ -408,7 +405,8 @@ l_0xc736a6:
 	eob
 
 l_0xc736c0:
-	get_inventory_item(0,0)	swap
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
 	result_is(SHYNESS_BOOK)
 	goto_if_false(data_35.l_0xc7c6b6)
 	"@The truth is,| I like to talk!" next
@@ -435,7 +433,8 @@ l_0xc737a4:
 	eob
 
 l_0xc737b0:
-	get_inventory_item(0,0)	swap
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
 	result_is(SHYNESS_BOOK)
 	goto_if_false(data_35.l_0xc7c6b6)
 	"@Shh!" pause(15)
