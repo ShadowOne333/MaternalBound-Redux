@@ -1,4 +1,7 @@
 * Implement a Key items-only menu similar to Mother 3, exclusively for Key items during the story so they don't clutter up space in the main inventory.
+
+* (FIXED) Game crashes after getting the Tendakraut when the Photoman appears (possible memory leak). Fixed in data_58.l_0xc9d95e, adding the reference in case it happens in other places.
+
 * Implement a Tools items-only menu similar to Mother 3 with Duster, exclusively for Battle items that can be reused infinitely by Jeff. This can be a copy-paste from the Key items one, but it will require a Battle hijack as well so it can be used in battle.
 * Implement special running sprites for when using the Run button similar to Mother 3. This should apply for all party characters: Ness, Paula, Jeff, Poo; and guest party characters: Porky, Picky, Flying Men, Tony, Bubble Monkey, King. Possibly Dungeon Man too but it depends.
 * Change Saturn shops option menus to use Saturn font for "Buy/Sell"
@@ -7,4 +10,3 @@
 * Fix Magicant boost to Vitality and another stat not working if Ness is already level 99 (data_36)
 * Enable Bycicle with a full party (probably make it something like a taxi bike when 2 or more party members are present) (data_38.l_0xc803ac and data_35.l_0xc7c6f1)
 * Fix Town map not opening when pressing Start (probably because the Town map is not in the Goods inventory, make it check flag instead)
-* Game crashes after getting the Tendakraut when the Photoman appears (possible memory leak)

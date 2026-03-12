@@ -1061,7 +1061,14 @@ l_0xc9d940:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc9d95e:
-	OSS_on	// event(5)
+	// Queue text specifically to fix a call stack glitch with the Key Items implementation
+	queue_text(_overcome_tenda_shyness)
+	eob
+
+// Original script with the OSS flags removed (not necessary)
+_overcome_tenda_shyness:
+	window_open(1)
+	//OSS_on	// event(5)
 	"@.....!" next
 	"@Book!" next
 	"@Can fix shyness." next
@@ -1104,10 +1111,10 @@ l_0xc9d95e:
 	}
 
 	store_registers_shared
-	if not flag FLG_KEY_ITEMS { sound(SND_BOXTAKE) }	// 116
+	sound(SND_BOXTAKE)	// 116
 	pause(60)
 
-	window_open(1)
+	if not flag FLG_KEY_ITEMS { window_open(1) }
 	"@{name(1)} lends the leader of the Tenda tribe the book <Overcoming Shyness.>" next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(TENDAKRAUT) }
 	else { call(data_36.l_0xc7dcb6) }
@@ -1120,7 +1127,7 @@ l_0xc9d95e:
 	call(data_24.l_0xc68931)
 	call(data_50.l_0xc935b7)
 	party_unfreeze	// 0xFF
-	OSS_off	// event(6)
+	//OSS_off	// event(6)
 	eob
 
 l_0xc9db12:

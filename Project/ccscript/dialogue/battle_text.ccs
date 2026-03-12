@@ -2991,7 +2991,7 @@ l_0xef8fad:
 	party_size_smaller_than(2)	// 0x02
 	goto_if_true(l_0xef8fc9)
 	get_char_at_pos(2)	// 0x02
-	character_has_status(0,1,2)	// 0x00, 0x01, 0x02
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x00, 0x01, 0x02
 	goto_if_true(l_0xef8fc9)
 	" each."
 	eob
