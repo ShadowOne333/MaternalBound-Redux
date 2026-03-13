@@ -782,44 +782,58 @@ define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
 // New flags for Key items
 //------------------------------------
 
-/* Key Items */
+/* Key and Tool items obtained from Gift boxes */
+define FLG_ITEM_HP_SUCKER		= flag 855
 define FLG_ITEM_CARROT_KEY		= flag 904
 
 // Flags up to 976 are item-related, don't touch!
 
 // Whether Key Item Menu is enabled
 define FLG_KEY_ITEMS			= flag 781
+// Wheter Tools menu is enabled
+define FLG_TOOL_ITEMS		 	= flag 782
+// Used for properly returning to the Main menu when selecting "Use" item from Key items
+define FLG_TEMP_USEITEM			= flag 783
 // Whether a party member is in the party (to prevent removing them all)
 // KI = Key Items party flags
-define FLG_NESS_KI			= flag 782
-define FLG_PAULA_KI			= flag 783
-define FLG_JEFF_KI			= flag 784
-define FLG_POO_KI			= flag 785
-// Whether bike is unrestricted or not
-define FLG_UnrestrictBike		= flag 786
+define FLG_NESS_KI			= flag 784
+define FLG_PAULA_KI			= flag 785
+define FLG_JEFF_KI			= flag 786
+define FLG_POO_KI			= flag 787
 // FLG_ITEM_TICKET is set when obtaining the Backstage pass, FLG_ITEM_BACKSTAGE_PASS not needed
 // Whether Show Ticket has been obtained or not
-define FLG_ITEM_SHOW_TICKET		= flag 787
-define FLG_SHOW_TICKET_TAKEN		= flag 788
+define FLG_ITEM_SHOW_TICKET		= flag 788
+define FLG_SHOW_TICKET_TAKEN		= flag 789
 
 // Whether followers are in your party or not
-define FLG_KING_KI			= flag 789
-define FLG_TONY_KI			= flag 790
-define FLG_FLYINGMAN_KI			= flag 791
-define FLG_TEDDYBEAR_KI			= flag 792
-define FLG_PLUSHBEAR_KI			= flag 793
+define FLG_KING_KI			= flag 790
+define FLG_TONY_KI			= flag 791
+define FLG_FLYINGMAN_KI			= flag 792
+define FLG_TEDDYBEAR_KI			= flag 793
+define FLG_PLUSHBEAR_KI			= flag 794
 // Whether Ness has learned PSI yet
-define FLG_LEARN_PSI			= flag 794
-// Whether player is riding bike (with unrestricted bike enabled)
-define flg_RidingBike			= flag 795
+define FLG_LEARN_PSI			= flag 795
 // Whether player is in Deep Darkness (to use hawk eye)
 define FLG_IN_DEEP_DARKNESS		= flag 796
 // Jeff & Poo solo missions
 define FLG_JEFF_SOLO			= flag 797
 define FLG_POO_SOLO			= flag 798
 
-// Used for properly returning to the Main menu when selecting "Use" item from Key items
-define FLG_TEMP_USEITEM			= flag 799
+// Whether bike is unrestricted or not
+//define FLG_UnrestrictBike		= flag 799
+// Whether player is riding bike (with unrestricted bike enabled)
+//define flg_RidingBike			= flag 977
+
+// Tools items flags
+define FLG_ITEM_COUNTER_PSI_UNIT	= flag 977
+define FLG_ITEM_SLIME_GENERATOR		= flag 978
+define FLG_ITEM_SHIELD_KILLER		= flag 979
+define FLG_ITEM_NEUTRALIZER		= flag 980
+define FLG_ITEM_HUNGRY_HP_SUCKER	= flag 981
+define FLG_ITEM_TOFU_MACHINE		= flag 982
+define FLG_ITEM_BAZOOKA			= flag 983
+define FLG_ITEM_DEFENSE_SHOWER		= flag 984
+define FLG_ITEM_HEAVY_BAZOOKA		= flag 985
 
 /* Original Game Flags */
 define flg_Venus			= flag 0x093

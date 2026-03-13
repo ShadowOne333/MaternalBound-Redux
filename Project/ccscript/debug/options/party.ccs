@@ -56,7 +56,7 @@ PartyReturn:
 Remove_Party_Member_Selector:
 	get_char_at_pos(2)	// Return character number (02)
 	goto_if_false(new_debug_menu.debug_main)
-	number_input(1)
+	"   {number_input(1)}"
 	goto_if_false(new_debug_menu.debug_main)
 	clearline
 	swap

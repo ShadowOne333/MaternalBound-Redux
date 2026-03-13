@@ -24,11 +24,11 @@ Enemy_Spawn:
 
 Battler: //Thank you, phoenixbound and vittorio! --livvy
 	diam "Which Enemy Group?" newline
-	"   " number_input(3)
+	"   {number_input(3)}"
 	swap
 	store_registers_shared
-	window_closeall //n ow we can close the windows without losing the inputted number
+	window_closeall // Now we can close the windows without losing the inputted number
 	load_registers_shared
-	start_battle(0)	// same as battle() but it doesn't have a built-in window_closeall
+	start_battle(0)	// Same as battle() but it doesn't have a built-in window_closeall
 	eob
 //------------------------------------------------------------------

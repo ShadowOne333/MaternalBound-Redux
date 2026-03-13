@@ -37,7 +37,7 @@ Money_Edit:
 			diam "Input your amount:" linebreak
 			text_pos(4,10)"&"
 			text_pos(4,2)"$"
-			number_input(5)
+			"   {number_input(5)}"
 			clearline
 			goto_if_false(new_debug_menu.debug_main)
 			store_registers
@@ -46,7 +46,7 @@ Money_Edit:
 			swap
 			givemoney(0)
 			diam "You now have" linebreak
-			"   ${number(0)} in your wallet." wait
+			"  ${number(0)} in your wallet." wait
 			window_closetop
 			goto(new_debug_menu.debug_main)
 		}

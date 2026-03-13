@@ -44,7 +44,7 @@ Level_Up:
 
 Level_Select:
 	diam "Select your level." linebreak
-	number_input(2)
+	"   {number_input(2)}"
 	clearline
 	eob
 

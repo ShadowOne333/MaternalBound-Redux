@@ -1,0 +1,358 @@
+import "../essential/asm65816.ccs"
+import "../essential/ccexpand.ccs"
+
+// This file allows determiners (eg "a", "an", "some") to be specified per-item.
+// Vanilla EB has no such thing and goes to great lengths to use "a" for everything.
+// Ideally we'd do the same, but... there's no getting around "Asthma Spray"
+
+// Supports "a", "an", "some", and "the" in both lowercase and title case.
+// You could add more.
+
+// Usage:
+// In a script, use `call(CCSub_determiner)` or `call(CCSub_determiner_caps)`.
+// The item should be in the argument register.
+// It will print the determiner.
+// The command `item_determiner(item)` can be used to manually get the determiner value, too.
+// Clobbers the result register.
+// Don't add a space after the determiner call.
+
+// Fill out the determiner_table below as well.
+
+
+// Patch present box script to use the determiner
+ROM[0xC7D947] = { goto(presentBoxItemDeterminer) }
+presentBoxItemDeterminer:
+    newline
+    "@There is {call(CCSub_determiner)}[1C 05 00] inside![03]" eob
+
+determiner_a: "a " eob
+determiner_an: "an " eob
+determiner_some: "some " eob
+determiner_the: "the " eob
+determiner_none: eob
+
+determiner_a_caps: "A " eob
+determiner_an_caps: "An " eob
+determiner_some_caps: "Some " eob
+determiner_the_caps: "The " eob
+determiner_none_caps: eob
+
+define TOTAL_DT_COUNT = 5
+define DT_A = 1
+define DT_AN = 2
+define DT_SOME = 3
+define DT_THE = 4
+define DT_NONE = 5
+
+CCSub_determiner:
+    item_determiner(0)
+    // swap
+    "[1F C0 {byte TOTAL_DT_COUNT}]"
+    long determiner_a
+    long determiner_an
+    long determiner_some
+    long determiner_the
+    long determiner_none
+    eob
+
+CCSub_determiner_caps:
+    item_determiner(0)
+    // swap
+    "[1F C0 {byte TOTAL_DT_COUNT}]"
+    long determiner_a_caps
+    long determiner_an_caps
+    long determiner_some_caps
+    long determiner_the_caps
+    long determiner_none_caps
+    eob
+
+CCSub_determiner_Goodskeeper:
+    item_determiner(0)
+    // swap
+    "[1F C0 {byte TOTAL_DT_COUNT}]"
+    long determiner_the_caps
+    long determiner_the_caps
+    long determiner_the_caps
+    long determiner_the_caps
+    long determiner_none_caps
+    eob
+
+command item_determiner(item) {
+    "[1A 0F]" byte item
+}
+
+CC_ItemDeterminer:
+    M_EB_Function_Wrapper({
+        M_Read_Bytes_or_Arg(1)
+        LDA_d (0x06)
+        JSL(asm_GetDeterminer)
+        STA_d (0x0E)
+        STZ_d (0x10)
+        JSL (R_Set_Working_Memory)
+    })
+
+asm_GetDeterminer:
+    // Item in A --> determiner in A
+    M_EB_Function_Wrapper({
+        TAX
+        LDA_xl (determiner_table)
+        AND_i (0xFF)
+    })
+
+
+determiner_table:
+    // 1:1 with item config table
+    byte DT_A // 0
+    byte DT_THE // 1
+    byte DT_A // 2
+    byte DT_A // 3
+    byte DT_A // 4
+    byte DT_A // 5
+    byte DT_A // 6
+    byte DT_A // 7
+    byte DT_A // 8
+    byte DT_A // 9
+    byte DT_A // 10
+    byte DT_A // 11
+    byte DT_A // 12
+    byte DT_A // 13
+    byte DT_A // 14
+    byte DT_A // 15
+    byte DT_A // 16
+    byte DT_A // 17
+    byte DT_A // 18
+    byte DT_AN // 19
+    byte DT_A // 20
+    byte DT_A // 21
+    byte DT_A // 22
+    byte DT_A // 23
+    byte DT_THE // 24
+    byte DT_THE // 25
+    byte DT_A // 26
+    byte DT_A // 27
+    byte DT_A // 28
+    byte DT_A // 29
+    byte DT_A // 30
+    byte DT_THE // 31
+    byte DT_A // 32
+    byte DT_A // 33
+    byte DT_A // 34
+    byte DT_THE // 35
+    byte DT_A // 36
+    byte DT_A // 37
+    byte DT_A // 38
+    byte DT_THE // 39
+    byte DT_A // 40
+    byte DT_THE // 41
+    byte DT_A // 42
+    byte DT_A // 43
+    byte DT_A // 44
+    byte DT_A // 45
+    byte DT_THE // 46
+    byte DT_A // 47
+    byte DT_A // 48
+    byte DT_A // 49
+    byte DT_A // 50
+    byte DT_A // 51
+    byte DT_A // 52
+    byte DT_A // 53
+    byte DT_A // 54
+    byte DT_A // 55
+    byte DT_A // 56
+    byte DT_A // 57
+    byte DT_A // 58
+    byte DT_A // 59
+    byte DT_A // 60
+    byte DT_A // 61
+    byte DT_A // 62
+    byte DT_THE // 63
+    byte DT_A // 64
+    byte DT_A // 65
+    byte DT_A // 66
+    byte DT_A // 67
+    byte DT_A // 68
+    byte DT_A // 69
+    byte DT_A // 70
+    byte DT_AN // 71
+    byte DT_A // 72
+    byte DT_THE // 73
+    byte DT_A // 74
+    byte DT_A // 75
+    byte DT_A // 76
+    byte DT_A // 77
+    byte DT_A // 78
+    byte DT_A // 79
+    byte DT_A // 80
+    byte DT_A // 81
+    byte DT_A // 82
+    byte DT_A // 83
+    byte DT_A // 84
+    byte DT_A // 85
+    byte DT_A // 86
+    byte DT_THE // 87
+    byte DT_A // 88
+    byte DT_A // 89
+    byte DT_A // 90
+    byte DT_A // 91
+    byte DT_A // 92
+    byte DT_A // 93
+    byte DT_A // 94
+    byte DT_A // 95
+    byte DT_THE // 96
+    byte DT_A // 97
+    byte DT_A // 98
+    byte DT_A // 99
+    byte DT_A // 100
+    byte DT_A // 101
+    byte DT_A // 102
+    byte DT_A // 103
+    byte DT_THE // 104
+    byte DT_THE // 105
+    byte DT_A // 106
+    byte DT_A // 107
+    byte DT_A // 108
+    byte DT_A // 109
+    byte DT_A // 110
+    byte DT_A // 111
+    byte DT_A // 112
+    byte DT_AN // 113
+    byte DT_A // 114
+    byte DT_A // 115
+    byte DT_A // 116
+    byte DT_A // 117
+    byte DT_A // 118
+    byte DT_A // 119
+    byte DT_A // 120
+    byte DT_A // 121
+    byte DT_A // 122
+    byte DT_A // 123
+    byte DT_A // 124
+    byte DT_THE // 125
+    byte DT_A // 126
+    byte DT_A // 127
+    byte DT_A // 128
+    byte DT_A // 129
+    byte DT_A // 130
+    byte DT_THE // 131
+    byte DT_THE // 132
+    byte DT_THE // 133
+    byte DT_THE // 134
+    byte DT_THE // 135
+    byte DT_THE // 136
+    byte DT_AN // 137
+    byte DT_THE // 138
+    byte DT_THE // 139
+    byte DT_A // 140
+    byte DT_A // 141
+    byte DT_A // 142
+    byte DT_A // 143
+    byte DT_A // 144
+    byte DT_A // 145
+    byte DT_A // 146
+    byte DT_A // 147
+    byte DT_A // 148
+    byte DT_AN // 149
+    byte DT_A // 150
+    byte DT_A // 151
+    byte DT_NONE // 152
+    byte DT_A // 153
+    byte DT_A // 154
+    byte DT_A // 155
+    byte DT_THE // 156
+    byte DT_THE // 157
+    byte DT_THE // 158
+    byte DT_A // 159
+    byte DT_A // 160
+    byte DT_A // 161
+    byte DT_A // 162
+    byte DT_THE // 163
+    byte DT_THE // 164
+    byte DT_A // 165
+    byte DT_THE // 166
+    byte DT_THE // 167
+    byte DT_A // 168
+    byte DT_A // 169
+    byte DT_THE // 170
+    byte DT_THE // 171
+    byte DT_THE // 172
+    byte DT_SOME // 173
+    byte DT_THE // 174
+    byte DT_THE // 175
+    byte DT_THE // 176
+    byte DT_THE // 177
+    byte DT_THE // 178
+    byte DT_THE // 179
+    byte DT_THE // 180
+    byte DT_THE // 181
+    byte DT_THE // 182
+    byte DT_THE // 183
+    byte DT_THE // 184
+    byte DT_THE // 185
+    byte DT_SOME // 186
+    byte DT_THE // 187
+    byte DT_A // 188
+    byte DT_A // 189
+    byte DT_A // 190
+    byte DT_AN // 191
+    byte DT_THE // 192
+    byte DT_THE // 193
+    byte DT_AN // 194
+    byte DT_THE // 195
+    byte DT_THE // 196
+    byte DT_AN // 197
+    byte DT_A // 198
+    byte DT_A // 199
+    byte DT_A // 200
+    byte DT_A // 201
+    byte DT_THE // 202
+    byte DT_THE // 203
+    byte DT_THE // 204
+    byte DT_THE // 205
+    byte DT_AN // 206
+    byte DT_A // 207
+    byte DT_THE // 208
+    byte DT_THE // 209
+    byte DT_THE // 210
+    byte DT_THE // 211
+    byte DT_A // 212
+    byte DT_A // 213
+    byte DT_AN // 214
+    byte DT_A // 215
+    byte DT_A // 216
+    byte DT_A // 217
+    byte DT_A // 218
+    byte DT_A // 219
+    byte DT_A // 220
+    byte DT_A // 221
+    byte DT_A // 222
+    byte DT_A // 223
+    byte DT_A // 224
+    byte DT_A // 225
+    byte DT_A // 226
+    byte DT_A // 227
+    byte DT_A // 228
+    byte DT_A // 229
+    byte DT_A // 230
+    byte DT_A // 231
+    byte DT_A // 232
+    byte DT_A // 233
+    byte DT_A // 234
+    byte DT_A // 235
+    byte DT_A // 236
+    byte DT_A // 237
+    byte DT_A // 238
+    byte DT_A // 239
+    byte DT_A // 240
+    byte DT_A // 241
+    byte DT_A // 242
+    byte DT_A // 243
+    byte DT_A // 244
+    byte DT_A // 245
+    byte DT_A // 246
+    byte DT_A // 247
+    byte DT_A // 248
+    byte DT_A // 249
+    byte DT_SOME // 250
+    byte DT_A // 251
+    byte DT_A // 252
+    byte DT_THE // 253

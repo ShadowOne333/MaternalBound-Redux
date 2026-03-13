@@ -15,7 +15,7 @@ ROM[0xC59895] = goto(Events)
 
 Events:
 	diam "Select your event." next
-	"   " number_input(2) newline
+	"   {number_input(2)}" newline
 	switch_goto(70)
 		switch_entry(l_0xc599d0)
 		switch_entry(l_0xc599f4)
@@ -86,7 +86,9 @@ Events:
 		switch_entry(l_0xc5a48b)
 		switch_entry(l_0xc5a4b4)
 		switch_entry(l_0xc5a4cd)
-	newline newline
+	goto(_events_exit)
+
+_events_exit:
 	diam "Events menu off." wait
 	goto(new_debug_menu.debug_main)
 

@@ -447,6 +447,67 @@ l_0xc685fa:
 	"  the {itemname(0)}." next
 	"@After being fixed, the {itemname(0)} became" linebreak
 	"  the {swap}{itemname(0)}." promptw
+
+if flag FLG_TOOL_ITEMS {
+
+_counter_psi_check:
+	load_registers_shared
+	result_is(COUNTER_PSI_UNIT)
+	goto_if_false(_no_counter_psi)
+	take(-1, COUNTER_PSI_UNIT)
+	set(FLG_ITEM_COUNTER_PSI_UNIT)
+
+_no_counter_psi:
+	load_registers_shared
+	result_is(SLIME_GENERATOR)
+	goto_if_false(_no_slime_gen)
+	take(-1, SLIME_GENERATOR)
+	set(FLG_ITEM_SLIME_GENERATOR)
+
+_no_slime_gen:
+	load_registers_shared
+	result_is(SHIELD_KILLER)
+	goto_if_false(_no_shield_killer)
+	take(-1, SHIELD_KILLER)
+	set(FLG_ITEM_SHIELD_KILLER)
+
+_no_shield_killer:
+	load_registers_shared
+	result_is(NEUTRALIZER)
+	goto_if_false(_no_neutralizer)
+	take(-1, NEUTRALIZER)
+	set(FLG_ITEM_NEUTRALIZER)
+
+_no_neutralizer:
+	load_registers_shared
+	result_is(HUNGRY_HP_SUCKER)
+	goto_if_false(_no_hungry_sucker)
+	take(-1, SLIME_GENERATOR)
+	set(FLG_ITEM_HUNGRY_HP_SUCKER)
+
+_no_hungry_sucker:
+	load_registers_shared
+	result_is(BAZOOKA)
+	goto_if_false(_no_bazooka)
+	take(-1, BAZOOKA)
+	set(FLG_ITEM_BAZOOKA)
+
+_no_bazooka:
+	load_registers_shared
+	result_is(DEFENSE_SHOWER)
+	goto_if_false(_no_defense_shower)
+	take(-1, DEFENSE_SHOWER)
+	set(FLG_ITEM_DEFENSE_SHOWER)
+
+_no_defense_shower:
+	load_registers_shared
+	result_is(HEAVY_BAZOOKA)
+	goto_if_false(_no_tool_item)
+	take(-1, HEAVY_BAZOOKA)
+	set(FLG_ITEM_HEAVY_BAZOOKA)
+}
+
+_no_tool_item:
 	set(FLG_WINS_JEFF_REPAIR)	// 696
 	window_closeall
 

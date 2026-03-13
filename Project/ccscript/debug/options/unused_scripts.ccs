@@ -25,7 +25,9 @@ Unused_Scripts:
 	do_menu
 	store_registers_shared
 	window_closetop
-	window_switch(53) newline
+
+	window_switch(53)
+	newline
 	load_registers_shared
 	switch_call(5)
 		switch_entry(data_19.l_0xc642a3)

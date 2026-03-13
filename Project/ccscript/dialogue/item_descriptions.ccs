@@ -14,257 +14,257 @@ l_0xc53711:
 l_0xc53750:
 	newline
 	item_name_in_quotes(TEDDY_BEAR)	// 0x02
-	"@" call(data_05.l_0xc56b5d) end
+	"@A cute teddy bear!" end
 
 l_0xc53761:
 	newline
 	item_name_in_quotes(SUPER_PLUSH_BEAR)	// 0x03
-	"@" call(data_05.teddy) end
+	"@A very cute teddy bear!" end
 
 l_0xc53772:
 	newline
 	item_name_in_quotes(BROKEN_MACHINE)	// 0x04
 	"@There's no way of knowing its original use." next
 	"@It's just some kind of broken gadget." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc537bc:
 	newline
 	item_name_in_quotes(BROKEN_GADGET)	// 0x05
 	"@There's no way of knowing its original use." next
 	"@It's just some kind of broken mechanism." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53809:
 	newline
 	item_name_in_quotes(BROKEN_AIR_GUN)	// 0x06
 	"@A broken air gun." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc5382a:
 	newline
 	item_name_in_quotes(BROKEN_SPRAY_CAN)	// 0x07
 	"@A broken spray can." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc5384d:
 	newline
 	item_name_in_quotes(BROKEN_LASER)	// 0x08
 	"@A broken laser gun." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53870:
 	newline
 	item_name_in_quotes(BROKEN_IRON)	// 0x09
 	"@A contraption that looks like an iron." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53897:
 	newline
 	item_name_in_quotes(BROKEN_PIPE)	// 0x0A
 	"@It looks like a busted water pipe." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc538bc:
 	newline
 	item_name_in_quotes(BROKEN_CANNON)	// 0x0B
 	"@A broken beam cannon." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc538e0:
 	newline
 	item_name_in_quotes(BROKEN_TUBE)	// 0x0C
 	"@A broken tube-shaped item." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53908:
 	newline
 	item_name_in_quotes(BROKEN_BAZOOKA)	// 0x0D
 	"@A broken bazooka." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53929:
 	newline
 	item_name_in_quotes(BROKEN_TRUMPET)	// 0x0E
 	"@A broken apparatus that is shaped like a trumpet." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc53960:
 	newline
 	item_name_in_quotes(BROKEN_HARMONICA)	// 0x0F
 	"@A broken device that looks like a harmonica." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc5398e:
 	newline
 	item_name_in_quotes(BROKEN_ANTENNA)	// 0x10
 	"@A piece of broken equipment that looks like a satellite dish." next
-	call(data_05.l_0xc56b6f) end
+	call(l_0xc56b6f) end
 
 l_0xc539c4:
 	newline
 	item_name_in_quotes(CRACKED_BAT)	// 0x11
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc539d4:
 	newline
 	item_name_in_quotes(TEE_BALL_BAT)	// 0x12
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc539e4:
 	newline
 	item_name_in_quotes(SAND_LOT_BAT)	// 0x13
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc539f4:
 	newline
 	item_name_in_quotes(MINOR_LEAGUE_BAT)	// 0x14
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc53a04:
 	newline
 	item_name_in_quotes(MR_BASEBALL_BAT)	// 0x15
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc53a14:
 	newline
 	item_name_in_quotes(BIG_LEAGUE_BAT)	// 0x16
-	call(data_05.l_0xc56b8e) next
+	call(l_0xc56b8e) next
 	"@This item looks like it could have had cork put into the core!" end
 
 l_0xc53a47:
 	newline
 	item_name_in_quotes(HALL_OF_FAME_BAT)	// 0x17
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc53a57:
 	newline
 	item_name_in_quotes(MAGICANT_BAT)	// 0x18
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc53a67:
 	newline
 	item_name_in_quotes(LEGENDARY_BAT)	// 0x19
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc53a77:
 	newline
 	item_name_in_quotes(GUTSY_BAT)	// 0x1A
-	call(data_05.l_0xc56b8e) next
+	call(l_0xc56b8e) next
 	"@When equipped, it increases your guts." end
 
 l_0xc53a9f:
 	newline
 	item_name_in_quotes(CASEY_BAT)	// 0x1B
-	call(data_05.l_0xc56b8e) next
+	call(l_0xc56b8e) next
 	"@You can't help but swing this bat with all your might." next
 	"@There's a good chance that you may just whiff." end
 
 l_0xc53ae6:
 	newline
 	item_name_in_quotes(FRY_PAN)	// 0x1C
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53af6:
 	newline
 	item_name_in_quotes(THICK_FRY_PAN)	// 0x1D
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b06:
 	newline
 	item_name_in_quotes(DELUXE_FRY_PAN)	// 0x1E
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b16:
 	newline
 	item_name_in_quotes(CHEFS_FRY_PAN)	// 0x1F
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b26:
 	newline
 	item_name_in_quotes(FRENCH_FRY_PAN)	// 0x20
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b36:
 	newline
 	item_name_in_quotes(MAGIC_FRY_PAN)	// 0x21
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b46:
 	newline
 	item_name_in_quotes(HOLY_FRY_PAN)	// 0x22
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc53b56:
 	newline
 	item_name_in_quotes(SWORD_OF_KINGS)	// 0x23
-	call(data_05.l_0xc56ba9) next
+	call(l_0xc56ba9) next
 	"@It increases your offense." end
 
 l_0xc53b76:
 	newline
 	item_name_in_quotes(POP_GUN)	// 0x24
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53b86:
 	newline
 	item_name_in_quotes(STUN_GUN)	// 0x25
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53b96:
 	newline
 	item_name_in_quotes(TOY_AIR_GUN)	// 0x26
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53ba6:
 	newline
 	item_name_in_quotes(MAGNUM_AIR_GUN)	// 0x27
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53bb6:
 	newline
 	item_name_in_quotes(ZIP_GUN)	// 0x28
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53bc6:
 	newline
 	item_name_in_quotes(LASER_GUN)	// 0x29
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53bd6:
 	newline
 	item_name_in_quotes(HYPER_BEAM)	// 0x2A
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53be6:
 	newline
 	item_name_in_quotes(CRUSHER_BEAM)	// 0x2B
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53bf6:
 	newline
 	item_name_in_quotes(SPECTRUM_BEAM)	// 0x2C
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53c06:
 	newline
 	item_name_in_quotes(DEATH_RAY)	// 0x2D
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53c16:
 	newline
 	item_name_in_quotes(BADDEST_BEAM)	// 0x2E
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53c26:
 	newline
 	item_name_in_quotes(MOON_BEAM_GUN)	// 0x2F
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53c36:
 	newline
 	item_name_in_quotes(GAIA_BEAM)	// 0x30
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc53c46:
 	newline
@@ -294,54 +294,54 @@ l_0xc53caf:
 l_0xc53cc8:
 	newline
 	item_name_in_quotes(TRAVEL_CHARM)	// 0x36
-	call(data_05.l_0xc56bc0) end
+	call(l_0xc56bc0) end
 
 l_0xc53cd8:
 	newline
 	item_name_in_quotes(GREAT_CHARM)	// 0x37
-	call(data_05.l_0xc56bc0) next
+	call(l_0xc56bc0) next
 	"@Also, it adds a bit of Speed." end
 
 l_0xc53d00:
 	newline
 	item_name_in_quotes(CRYSTAL_CHARM)	// 0x38
-	call(data_05.l_0xc56bc0) next
+	call(l_0xc56bc0) next
 	"@It also increases your Speed." end
 
 l_0xc53d21:
 	newline
 	item_name_in_quotes(RABBITS_FOOT)	// 0x39
-	call(data_05.l_0xc56bc0) next
+	call(l_0xc56bc0) next
 	"@It increases your Speed in a big way." end
 
 l_0xc53d46:
 	newline
 	item_name_in_quotes(FLAME_PENDANT)	// 0x3A
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It protects you from fire attacks." end
 
 l_0xc53d6a:
 	newline
 	item_name_in_quotes(RAIN_PENDANT)	// 0x3B
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It protects you from freeze attacks." end
 
 l_0xc53d8f:
 	newline
 	item_name_in_quotes(NIGHT_PENDANT)	// 0x3C
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It absorbs the light of a flash attack." end
 
 l_0xc53db8:
 	newline
 	item_name_in_quotes(SEA_PENDANT)	// 0x3D
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It protects you from fire, freeze and flash attacks." end
 
 l_0xc53de8:
 	newline
 	item_name_in_quotes(STAR_PENDANT)	// 0x3E
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It protects you from fire, freeze, flash and paralysis attacks." end
 
 l_0xc53e23:
@@ -353,50 +353,50 @@ l_0xc53e23:
 l_0xc53e4f:
 	newline
 	item_name_in_quotes(CHEAP_BRACELET)	// 0x40
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53e5f:
 	newline
 	item_name_in_quotes(COPPER_BRACELET)	// 0x41
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53e6f:
 	newline
 	item_name_in_quotes(SILVER_BRACELET)	// 0x42
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53e7f:
 	newline
 	item_name_in_quotes(GOLD_BRACELET)	// 0x43
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53e8f:
 	newline
 	item_name_in_quotes(PLATINUM_BAND)	// 0x44
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53e9f:
 	newline
 	item_name_in_quotes(DIAMOND_BAND)	// 0x45
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc53eaf:
 	newline
 	item_name_in_quotes(PIXIES_BRACELET)	// 0x46
-	call(data_05.l_0xc56bf4) next
-	call(data_05.l_0xc56c16) end
+	call(l_0xc56bf4) next
+	call(l_0xc56c16) end
 
 l_0xc53ec6:
 	newline
 	item_name_in_quotes(ANGEL_BAND)	// 0x47
-	call(data_05.l_0xc56bf4) next
-	call(data_05.l_0xc56c16) end
+	call(l_0xc56bf4) next
+	call(l_0xc56c16) end
 
 l_0xc53edd:
 	newline
 	item_name_in_quotes(GODDESS_BAND)	// 0x48
-	call(data_05.l_0xc56bf4) next
-	call(data_05.l_0xc56c16) end
+	call(l_0xc56bf4) next
+	call(l_0xc56c16) end
 
 l_0xc53ef4:
 	newline
@@ -409,110 +409,110 @@ l_0xc53ef4:
 l_0xc53f58:
 	newline
 	item_name_in_quotes(BASEBALL_CAP)	// 0x4A
-	call(data_05.l_0xc56c40) next
+	call(l_0xc56c40) next
 	"@It has the logo of your favorite baseball team." end
 
 l_0xc53f89:
 	newline
 	item_name_in_quotes(HOLMES_HAT)	// 0x4B
-	call(data_05.l_0xc56c40) next
+	call(l_0xc56c40) next
 	"@It makes you feel like the great detective, Sherlock Holmes, when equipped." end
 
 l_0xc53fc9:
 	newline
 	item_name_in_quotes(MR_BASEBALL_CAP)	// 0x4C
-	call(data_05.l_0xc56c40) next
+	call(l_0xc56c40) next
 	"@It is said to have been given to your friend by a famous player at the ballpark." end
 
 l_0xc5400a:
 	newline
 	item_name_in_quotes(HARD_HAT)	// 0x4D
-	call(data_05.l_0xc56c40) next
+	call(l_0xc56c40) next
 	"@Should be worn when searching for buried treasure," next
 	"@or while you are at the construction site." end
 
 l_0xc54055:
 	newline
 	item_name_in_quotes(RIBBON)	// 0x4E
-	call(data_05.l_0xc56c6d) end
+	call(l_0xc56c6d) end
 
 l_0xc54065:
 	newline
 	item_name_in_quotes(RED_RIBBON)	// 0x4F
-	call(data_05.l_0xc56c6d) end
+	call(l_0xc56c6d) end
 
 l_0xc54075:
 	newline
 	item_name_in_quotes(GODDESS_RIBBON)	// 0x50
-	call(data_05.l_0xc56c6d) end
+	call(l_0xc56c6d) end
 
 l_0xc54085:
 	newline
 	item_name_in_quotes(COIN_OF_SERENITY)	// 0x51
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc54095:
 	newline
 	item_name_in_quotes(COIN_OF_DEFENSE)	// 0x52
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc540a5:
 	newline
 	item_name_in_quotes(LUCKY_COIN)	// 0x53
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc540b5:
 	newline
 	item_name_in_quotes(TALISMAN_COIN)	// 0x54
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc540c5:
 	newline
 	item_name_in_quotes(SHINY_COIN)	// 0x55
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc540d5:
 	newline
 	item_name_in_quotes(SOUVENIR_COIN)	// 0x56
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc540e5:
 	newline
 	item_name_in_quotes(DIADEM_OF_KINGS)	// 0x57
-	call(data_05.l_0xc56c91) next
+	call(l_0xc56c91) next
 	"@It increases his Defense." end
 
 l_0xc54106:
 	newline
 	item_name_in_quotes(COOKIE)	// 0x58
-	call(data_05.l_0xc56cb5) "6" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "6" call(l_0xc56cd6) end
 
 l_0xc5411c:
 	newline
 	item_name_in_quotes(BAG_OF_FRIES)	// 0x59
-	call(data_05.l_0xc56cb5) "24" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "24" call(l_0xc56cd6) end
 
 l_0xc54133:
 	newline
 	item_name_in_quotes(HAMBURGER)	// 0x5A
-	call(data_05.l_0xc56cb5) "50" call(data_05.l_0xc56cd6) next
+	call(l_0xc56cb5) "50" call(l_0xc56cd6) next
 	"@100% beef." end
 
 l_0xc54156:
 	newline
 	item_name_in_quotes(BOILED_EGG)	// 0x5B
-	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "40" call(l_0xc56cd6) end
 
 l_0xc5416d:
 	newline
 	item_name_in_quotes(FRESH_EGG)	// 0x5C
-	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) next
+	call(l_0xc56cb5) "80" call(l_0xc56cd6) next
 	"@So fresh, it's still warm!" end
 
 l_0xc54197:
 	newline
 	item_name_in_quotes(PICNIC_LUNCH)	// 0x5D
-	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) next
+	call(l_0xc56cb5) "80" call(l_0xc56cd6) next
 	"@There's even a slice of your favorite cake!" end
 
 l_0xc541cb:
@@ -525,19 +525,19 @@ l_0xc541cb:
 	"@<Oh what I wouldn't give for some really delicious pasta!> ... ... ..." next
 	"@...Well, let's just leave it at that. The story is too long to go through completely..." next
 	"@but it really is a beautiful, touching tale..." next
-	call(data_05.l_0xc56cb5) "110" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "110" call(l_0xc56cd6) end
 
 l_0xc54321:
 	newline
 	item_name_in_quotes(PIZZA)	// 0x5F
-	call(data_05.l_0xc56cb5) "120" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "120" call(l_0xc56cd6) end
 
 l_0xc54339:
 	newline
 	item_name_in_quotes(CHEFS_SPECIAL)	// 0x60
 	"@This is today's special. It is highly recommended by our chef," next
 	"@who trained at a five-star restaurant in Paris." next
-	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "200" call(l_0xc56cd6) end
 
 l_0xc543a4:
 	newline
@@ -560,7 +560,7 @@ l_0xc543f5:
 l_0xc54451:
 	newline
 	item_name_in_quotes(BRAIN_FOOD_LUNCH)	// 0x64
-	call(data_05.l_0xc56cb5) "300 HP and about 50 PP." end
+	call(l_0xc56cb5) "300 HP and about 50 PP." end
 
 l_0xc54471:
 	newline
@@ -570,12 +570,12 @@ l_0xc54471:
 l_0xc544af:
 	newline
 	item_name_in_quotes(CROISSANT)	// 0x66
-	call(data_05.l_0xc56cb5) "60" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "60" call(l_0xc56cd6) end
 
 l_0xc544c6:
 	newline
 	item_name_in_quotes(BREAD_ROLL)	// 0x67
-	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "30" call(l_0xc56cd6) end
 
 l_0xc544dd:
 	newline
@@ -593,7 +593,7 @@ l_0xc5453e:
 l_0xc545a1:
 	newline
 	item_name_in_quotes(FRUIT_JUICE)	// 0x6A
-	call(data_05.l_0xc56cc5) "6" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cc5) "6" call(l_0xc56cd6) end
 
 l_0xc545b7:
 	newline
@@ -601,14 +601,14 @@ l_0xc545b7:
 	"@The highest quality tea, produced by tea expert Mr. Akihito Toda," next
 	"@who carefully selects only hand-picked tea leaves." next
 	"@Long ago, only aristocrats at a king's court were allowed to drink this tea." next
-	call(data_05.l_0xc56cc5) "60" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cc5) "60" call(l_0xc56cd6) end
 
 l_0xc54660:
 	newline
 	item_name_in_quotes(GROWNUP_DRINK)	// 0x6C
 	"@For building a stronger, healthier body." next
 	"@It gives you a blast of nourishment when you are fatigued." next
-	call(data_05.l_0xc56cc5) "80" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cc5) "80" call(l_0xc56cd6) end
 
 l_0xc546bc:
 	newline
@@ -660,37 +660,37 @@ l_0xc54826:
 l_0xc54842:
 	newline
 	item_name_in_quotes(KETCHUP_PACKET)	// 0x76
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc54852:
 	newline
 	item_name_in_quotes(SUGAR_PACKET)	// 0x77
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc54862:
 	newline
 	item_name_in_quotes(TIN_OF_COCOA)	// 0x78
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc54872:
 	newline
 	item_name_in_quotes(CARTON_OF_MILK)	// 0x79
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc54882:
 	newline
 	item_name_in_quotes(SPRIG_OF_PARSLEY)	// 0x7A
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc54892:
 	newline
 	item_name_in_quotes(HOT_SAUCE)	// 0x7B
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc548a2:
 	newline
 	item_name_in_quotes(SALT_PACKET)	// 0x7C
-	call(data_05.l_0xc56d63) end
+	call(l_0xc56d63) end
 
 l_0xc548b2:
 	newline
@@ -715,17 +715,17 @@ l_0xc54979:
 	item_name_in_quotes(REFRESHING_HERB)	// 0x80
 	"@It helps when you have been poisoned, or you are feeling nauseous." next
 	"@It also has other uses..." next
-	call(data_05.l_0xc56d02)
-	call(data_05.l_0xc56d36) end
+	call(l_0xc56d02)
+	call(l_0xc56d36) end
 
 l_0xc549c3:
 	newline
 	item_name_in_quotes(SECRET_HERB)	// 0x81
 	"@May revive a friend who is unconscious." next
-	call(data_05.l_0xc56cdb)
-	call(data_05.l_0xc56d02) next
-	call(data_05.l_0xc56d36)
-	call(data_05.l_0xc56d38) end
+	call(l_0xc56cdb)
+	call(l_0xc56d02) next
+	call(l_0xc56d36)
+	call(l_0xc56d38) end
 
 l_0xc549ff:
 	newline
@@ -733,86 +733,86 @@ l_0xc549ff:
 
 l_0xc54a08:
 	"@Revives a friend who is unconscious." next
-	call(data_05.l_0xc56cdb)
-	call(data_05.l_0xc56d02) next
-	call(data_05.l_0xc56d37)
-	call(data_05.l_0xc56d38) end
+	call(l_0xc56cdb)
+	call(l_0xc56d02) next
+	call(l_0xc56d37)
+	call(l_0xc56d38) end
 
 l_0xc54a3a:
 	newline
 	item_name_in_quotes(COUNTER_PSI_UNIT)	// 0x83
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Contains the enemy's PSI during a battle." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54a6c:
 	newline
 	item_name_in_quotes(SHIELD_KILLER)	// 0x84
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Breaks through the enemy's shield during a battle." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54aa1:
 	newline
 	item_name_in_quotes(BAZOOKA)	// 0x85
-	call(data_05.l_0xc56db7)
-	call(data_05.l_0xc56dc5) next
+	call(l_0xc56db7)
+	call(l_0xc56dc5) next
 	"@Because of its explosive power," next
 	"@it may affect others besides the target creature." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54af5:
 	newline
 	item_name_in_quotes(HEAVY_BAZOOKA)	// 0x86
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Really dishes out a lot of damage to the enemy during a battle." next
 	"@Because of its explosive power," next
 	"@it may affect others besides the target creature." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54b67:
 	newline
 	item_name_in_quotes(HP_SUCKER)	// 0x87
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Sucks up some HP from the target creature." next
 	"@The more HP an enemy has, the more you get." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54bb0:
 	newline
 	item_name_in_quotes(HUNGRY_HP_SUCKER)	// 0x88
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Sucks up some HP from all the enemies." next
 	"@The more HP the enemies have, the more you get." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54bfa:
 	newline
 	item_name_in_quotes(XTERMINATOR_SPRAY)	// 0x89
 	"@Deals 200 points of damage to any bug when used during combat." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54c32:
 	newline
 	item_name_in_quotes(SLIME_GENERATOR)	// 0x8A
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Sprays a sticky substance that stops the enemy from moving." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54c6d:
 	newline
 	item_name_in_quotes(TOFU_MACHINE)	// 0x8B
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Invented by Apple Kid." next
 	"@If used during combat, some damage will be dealt to the enemy," next
 	"@though it's not understood why this happens... it's just tofu after all..." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54ceb:
 	newline
 	item_name_in_quotes(RULER)	// 0x8C
 	"@You can even use this during battle!" next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54d10:
 	newline
@@ -827,20 +827,20 @@ l_0xc54d99:
 	item_name_in_quotes(MUMMY_WRAP)	// 0x8E
 	"@If used as a whip during battle, the enemy will take some damage" next
 	"@and stop moving for a while." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54ddc:
 	newline
-	item_name_in_quotes(PROTACTOR)	// 0x8F
+	item_name_in_quotes(PROTRACTOR)	// 0x8F
 	"@You can even use this during battle!" next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc54e01:
 	newline
 	item_name_in_quotes(PENCIL_ROCKET)	// 0x90
-	call(data_05.l_0xc56db7)
-	call(data_05.l_0xc56dc5) next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56db7)
+	call(l_0xc56dc5) next
+	call(l_0xc56dab) end
 
 l_0xc54e1d:
 	"akm" goto(l_0xc54e20)
@@ -848,24 +848,24 @@ l_0xc54e1d:
 l_0xc54e20:
 	newline
 	item_name_in_quotes(PENCIL_ROCKET_5)	// 0x91
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Fires 5 pencil rockets at once." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54e54:
 	newline
 	item_name_in_quotes(PENCIL_ROCKET_20)	// 0x92
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@Fires 20 pencil rockets at once." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54ea7:
 	newline
 	item_name_in_quotes(BOMB)	// 0x93
-	call(data_05.l_0xc56dc5) next
+	call(l_0xc56dc5) next
 	"@Because of its explosive power," next
 	"@it may affect others besides the target creature. " next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54ef7:
 	newline
@@ -873,20 +873,20 @@ l_0xc54ef7:
 	"@Able to dish out some heavy-duty destruction in combat.  " next
 	"@Because of its explosive power," next
 	"@it may affect others besides the target creature." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54f6a:
 	newline
 	item_name_in_quotes(INSECTICIDE_SPRAY)	// 0x95
 	"@Deals 100 points of damage to any bug when used during combat." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54fa2:
 	newline
 	item_name_in_quotes(RUST_PROMOTER)	// 0x96
 	"@Quickly rusts metallic enemies when used during battle." next
 	"@The enemy will take about 200 points of damage." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc54ff0:
 	newline
@@ -894,48 +894,48 @@ l_0xc54ff0:
 	"@Causes almost instantaneous rusting" next
 	"@when used on metallic enemies during battle." next
 	"@The enemy takes about 400 points of damage." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc55057:
 	newline
 	item_name_in_quotes(PETTENELLAS_SOCKS)	// 0x98
 	"@When used during battle, the enemy gets so nauseous from the ripe odor," next
 	"@they cannot fight." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc5509e:
 	newline
 	item_name_in_quotes(STAG_BETTLE)	// 0x99
 	"@By throwing this at the enemy during battle," next
 	"@the enemy is shocked and stops moving." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc550e3:
 	newline
 	item_name_in_quotes(TOOTHBRUSH)	// 0x9A
 	"@Can be used during battle." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc55105:
 	newline
 	item_name_in_quotes(HANDBAG_STRAP)	// 0x9B
 	"@When used as a whip during battle," next
 	"@the enemy takes enough damage to stop moving for a short time." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc5514f:
 	newline
 	item_name_in_quotes(PHARAOHS_CURSE)	// 0x9C
 	"@An ectoplasmic ooze is disgorged out of the dreadful box," next
 	"@and the enemy may be poisoned." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc5519f:
 	newline
 	item_name_in_quotes(DEFENSE_SHOWER)	// 0x9D
 	"@Increases the Defense of all the friends." next
-	call(data_05.l_0xc56b0d) next
-	call(data_05.l_0xc56d9b) end
+	call(psi_descriptions.l_0xc56b0d) next
+	call(l_0xc56d9b) end
 
 l_0xc551cd:
 	newline
@@ -947,27 +947,27 @@ l_0xc551ea:
 	item_name_in_quotes(SUDDEN_GUTS_PILL)	// 0x9F
 	"@Doubles your guts during battle." next
 	"@However, after a battle, your guts return to normal. " next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc55230:
 	newline
 	item_name_in_quotes(BAG_OF_DRAGONITE)	// 0xA0
 	"@If you sprinkle the powder on one of your friends during battle, " next
 	"@that friend turns into a dragon and attacks all enemies." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc5528d:
 	newline
 	item_name_in_quotes(DEFENSE_SPRAY)	// 0xA1
 	"@Increase one of the friends Defense during battle." next
-	call(data_05.l_0xc56b0d) next
-	call(data_05.l_0xc56dab) end
+	call(psi_descriptions.l_0xc56b0d) next
+	call(l_0xc56dab) end
 
 l_0xc552c4:
 	newline
 	item_name_in_quotes(PIGGY_NOSE)	// 0xA2
 	"@If you wear this on your nose, you can find and root out magic truffles." next
-	call(data_05.l_0xc56d9b) next
+	call(l_0xc56d9b) next
 	"@...let me explain a bit about Magic Truffles." next
 	"@They are a kind of mushroom that grow in damp places, like at the base of big trees." next
 	"@They are almost always buried, " next
@@ -979,7 +979,7 @@ l_0xc553d7:
 	newline
 	item_name_in_quotes(FOR_SALE_SIGN)	// 0xA3
 	"@It invites people to come and buy your unnecessary goods." next
-	call(data_05.l_0xc56d9b) end
+	call(l_0xc56d9b) end
 
 l_0xc55409:
 	newline
@@ -1118,23 +1118,23 @@ l_0xc55897:
 	item_name_in_quotes(HAND_AID)	// 0xBC
 	"@A hand-made Band Aid." next
 	"@It heals your wounded body." next
-	call(data_05.l_0xc56dab) end
+	call(l_0xc56dab) end
 
 l_0xc558ca:
 	newline
 	item_name_in_quotes(STRAWBERRY_TOFU)	// 0xBD
 	"@A fashionable dessert for haute cuisine people, popular in big cities." next
-	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "30" call(l_0xc56cd6) end
 
 l_0xc55915:
 	newline
 	item_name_in_quotes(BANANA)	// 0xBE
-	call(data_05.l_0xc56cb5) "25" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "25" call(l_0xc56cd6) end
 
 l_0xc5592c:
 	newline
 	item_name_in_quotes(ENERGY_BAR)	// 0xBF
-	call(data_05.l_0xc56cb5) "60" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "60" call(l_0xc56cd6) end
 
 l_0xc55943:
 	newline
@@ -1150,13 +1150,13 @@ l_0xc55957:
 l_0xc559a8:
 	newline
 	item_name_in_quotes(EARTH_PENDANT)	// 0xC2
-	call(data_05.l_0xc56bdf)
+	call(l_0xc56bdf)
 	"@It protects you from fire, freeze and flash attacks." end
 
 l_0xc559d9:
 	newline
 	item_name_in_quotes(NEUTRALIZER)	// 0xC3
-	call(data_05.l_0xc56db7)
+	call(l_0xc56db7)
 	"@When used during battle," next
 	"@this item resets the abilities of all creatures (friend or enemy)" next
 	"@to their normal levels." next
@@ -1182,7 +1182,7 @@ l_0xc55b79:
 	newline
 	item_name_in_quotes(GELATO_DE_RESORT)	// 0xC6
 	"@Ice cream that is all the rage among fashionable, young women." next
-	call(data_05.l_0xc56cb5) "30" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "30" call(l_0xc56cd6) end
 
 l_0xc55bc1:
 	newline
@@ -1263,50 +1263,50 @@ l_0xc55e77:
 l_0xc55eab:
 	newline
 	item_name_in_quotes(TREX_BAT)	// 0xD4
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc55ebb:
 	newline
 	item_name_in_quotes(BIG_LEAGUE_BAT2)	// 0xD5
-	call(data_05.l_0xc56b8e) next
+	call(l_0xc56b8e) next
 	"@Wow! Look at the pine tar! It's almost all the way to the end!" end
 
 l_0xc55ef6:
 	newline
 	item_name_in_quotes(ULTIMATE_BAT)	// 0xD6
-	call(data_05.l_0xc56b8e) end
+	call(l_0xc56b8e) end
 
 l_0xc55f06:
 	newline
 	item_name_in_quotes(DOUBLE_BEAM)	// 0xD7
-	call(data_05.l_0xc56ba0) end
+	call(l_0xc56ba0) end
 
 l_0xc55f16:
 	newline
 	item_name_in_quotes(PLATINUM_BAND2)	// 0xD8
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc55f26:
 	newline
 	item_name_in_quotes(DIAMOND_BAND2)	// 0xD9
-	call(data_05.l_0xc56bf4) end
+	call(l_0xc56bf4) end
 
 l_0xc55f36:
 	newline
 	item_name_in_quotes(DEFENSE_RIBBON)	// 0xDA
-	call(data_05.l_0xc56c6d) next
+	call(l_0xc56c6d) next
 	"@When equipped, Luck is increased." end
 
 l_0xc55f5d:
 	newline
 	item_name_in_quotes(TALISMAN_RIBBON)	// 0xDB
-	call(data_05.l_0xc56c6d) next
+	call(l_0xc56c6d) next
 	"@When equipped, Luck is increased." end
 
 l_0xc55f84:
 	newline
 	item_name_in_quotes(SATURN_RIBBON)	// 0xDC
-	call(data_05.l_0xc56c6d) next
+	call(l_0xc56c6d) next
 	"@When equipped, Luck is increased." next
 	"@Same as the one that Mr. Saturn wears on his head.{wait}" linebreak
 	eob
@@ -1314,18 +1314,18 @@ l_0xc55f84:
 l_0xc55fcc:
 	newline
 	item_name_in_quotes(COIN_OF_SILENCE)	// 0xDD
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc55fdc:
 	newline
 	item_name_in_quotes(CHARM_COIN)	// 0xDE
-	call(data_05.l_0xc56c54) end
+	call(l_0xc56c54) end
 
 l_0xc55fec:
 	newline
 	item_name_in_quotes(CUP_OF_NOODLES)	// 0xDF
 	"@You know what this is..." next
-	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "40" call(l_0xc56cd6) end
 
 l_0xc56011:
 	newline
@@ -1378,13 +1378,13 @@ l_0xc561c3:
 l_0xc561ff:
 	newline
 	item_name_in_quotes(CUP_OF_COFFEE)	// 0xE8
-	call(data_05.l_0xc56cc5) "12" call(data_05.l_0xc56cd6) next
+	call(l_0xc56cc5) "12" call(l_0xc56cd6) next
 	"@I guess it tastes good to adults." end
 
 l_0xc56230:
 	newline
 	item_name_in_quotes(DOUBLE_BURGER)	// 0xE9
-	call(data_05.l_0xc56cb5) "90" call(data_05.l_0xc56cd6) next
+	call(l_0xc56cb5) "90" call(l_0xc56cd6) next
 	"@100% beef." end
 
 l_0xc56253:
@@ -1392,20 +1392,20 @@ l_0xc56253:
 	item_name_in_quotes(PEANUT_CHEESE_BAR)	// 0xEA
 	"@It's one of Mr Saturn's favorite foods." next
 	"@It tastes pretty yummy." next
-	call(data_05.l_0xc56cb5) "100" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "100" call(l_0xc56cd6) end
 
 l_0xc5629b:
 	newline
 	item_name_in_quotes(PIGGY_JELLY)	// 0xEB
 	"@It's one of Mr. Saturn's favorite foods." next
 	"@It tastes all right." next
-	call(data_05.l_0xc56cb5) "300" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "300" call(l_0xc56cd6) end
 
 l_0xc562dd:
 	newline
 	item_name_in_quotes(BOWL_OF_RICE_GRUEL)	// 0xEC
 	"@An everyday dish in Dalaam." next
-	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "200" call(l_0xc56cd6) end
 
 l_0xc5630a:
 	newline
@@ -1414,21 +1414,21 @@ l_0xc5630a:
 	"@The chickpeas are mashed, breaded and deep fried." next
 	"@Salt improves it and the olive oil gives it a wonderful" linebreak
 	"  flavor." next
-	call(data_05.l_0xc56cb5) "40" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "40" call(l_0xc56cd6) end
 
 l_0xc563a9:
 	newline
 	item_name_in_quotes(MOLOKHEIYA_SOUP)	// 0xEE
 	"@Molokheiya is a summer vegetable from Scarabia." next
 	"@It's high in nutrients, and it has a light flavor that Scarabians love." next
-	call(data_05.l_0xc56cc5) "80" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cc5) "80" call(l_0xc56cd6) end
 
 l_0xc56417:
 	newline
 	item_name_in_quotes(PLAIN_ROLL)	// 0xEF
 	"@I don't have a lot to say about this." next
 	"@I guess there are some people who think it's good." next
-	call(data_05.l_0xc56cb5) "80" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "80" call(l_0xc56cd6) end
 
 l_0xc5645d:
 	newline
@@ -1436,13 +1436,13 @@ l_0xc5645d:
 	"@Broiled lamb's liver, etc. all served on a skewer." next
 	"@Sometimes meat other than lamb is included..." next
 	"@that's what someone told me..." next
-	call(data_05.l_0xc56cb5) "120" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "120" call(l_0xc56cd6) end
 
 l_0xc564d1:
 	newline
 	item_name_in_quotes(PLAIN_YOGURT)	// 0xF1
 	"@Tastes okay in some respects." next
-	call(data_05.l_0xc56cb5) "160" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "160" call(l_0xc56cd6) end
 
 l_0xc564ff:
 	newline
@@ -1452,12 +1452,12 @@ l_0xc564ff:
 	"@Hang the pieces on a laundry line or something like it" next
 	"@and leave out in the sun for maybe 6 months..." next
 	"@Well, that's what my recipe says." next
-	call(data_05.l_0xc56cb5) "150" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "150" call(l_0xc56cd6) end
 
 l_0xc565bc:
 	newline
 	item_name_in_quotes(MAMMOTH_BURGER)	// 0xF3
-	call(data_05.l_0xc56cb5) "200" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "200" call(l_0xc56cd6) end
 
 l_0xc565d4:
 	newline
@@ -1470,7 +1470,7 @@ l_0xc565d4:
 	"@hang the pieces on a laundry line or something like it" next
 	"@and leave out in the sun for maybe 8 months..." next
 	"@Well, that's what my recipe says..." next
-	call(data_05.l_0xc56cb5) "250" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "250" call(l_0xc56cd6) end
 
 l_0xc566b7:
 	newline
@@ -1480,7 +1480,7 @@ l_0xc566b7:
 	"@who has been making jerky for over 60 years." next
 	"@Jerky fans consider this the caviar of all jerkys." next
 	"@I understand that they don't dry gourmet jerky on a laundry line..." next
-	call(data_05.l_0xc56cb5) "300" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "300" call(l_0xc56cd6) end
 
 l_0xc5678d:
 	newline
@@ -1497,12 +1497,12 @@ l_0xc567dc:
 l_0xc567f4:
 	newline
 	item_name_in_quotes(NON_STICK_FRYPAN)	// 0xF8
-	call(data_05.l_0xc56b97) end
+	call(l_0xc56b97) end
 
 l_0xc56804:
 	newline
 	item_name_in_quotes(MR_SATURN_COIN)	// 0xF9
-	call(data_05.l_0xc56c54) next
+	call(l_0xc56c54) next
 	"@It's not money even though it's called a coin." end
 
 l_0xc5682e:
@@ -1515,7 +1515,7 @@ l_0xc5682e:
 l_0xc5687b:
 	newline
 	item_name_in_quotes(POPSICLE)	// 0xFB
-	call(data_05.l_0xc56cb5) "18" call(data_05.l_0xc56cd6) end
+	call(l_0xc56cb5) "18" call(l_0xc56cd6) end
 
 l_0xc56892:
 	item_name_in_quotes(CUP_OF_LIFENOODLES)	// 0xFC
@@ -1525,3 +1525,96 @@ l_0xc5689f:
 	newline
 	item_name_in_quotes(CARROT_KEY)	// 0xFD
 	"@A special type of bunny's favorite carrot." end
+
+// -----------------------------------
+// Called texts
+l_0xc56b6f:
+	"@That genius {name(3)} should be able to fix it sometime." eob
+
+l_0xc56b8e:
+	"@{name(1)}" goto(l_0xc56bb2)
+
+l_0xc56b97:
+	"@{name(2)}" goto(l_0xc56bb2)
+
+l_0xc56ba0:
+	"@{name(3)}" goto(l_0xc56bb2)
+
+l_0xc56ba9:
+	"@{name(4)}" goto(l_0xc56bb2)
+
+l_0xc56bb2:
+	" can equip this weapon." eob
+
+l_0xc56bc0:
+	call(l_0xc56bdf)
+	"@It protects you from paralysis attacks." eob
+
+l_0xc56bdf:
+	"@Must be equipped on your body." next
+	eob
+
+l_0xc56bf4:
+	"@Must be equipped on your arm." next
+	"@It increases your Defense." eob
+
+l_0xc56c16:
+	"@Helps keep you from being hypnotized, and it also increases your Luck." eob
+
+l_0xc56c40:
+	"@Must be equipped as <other.>" eob
+
+l_0xc56c54:
+	call(l_0xc56c40) next
+	"@Increases your Defense and Luck." eob
+
+l_0xc56c6d:
+	"@Miscellaneous equipment that can only be used by {name(2)}." eob
+
+l_0xc56c91:
+	"@Miscellaneous equipment that can only be used by {name(4)}." eob
+
+l_0xc56cb5:
+	"@When eaten, you recover about " eob
+
+l_0xc56cc5:
+	"@If you drink this, you recover about " eob
+
+l_0xc56cd6:
+	" HP." eob
+
+l_0xc56cdb:
+	"@In addition, it also works well on poison, nausea," next
+	eob
+
+l_0xc56d02:
+	"@colds, sunstroke, falling asleep, uncontrollable crying and feeling strange." eob
+
+l_0xc56d36:
+	eob
+
+l_0xc56d37:
+	eob
+
+l_0xc56d38:
+	"@This is effective when you have paralysis, or you have been diamondized." eob
+
+l_0xc56d63:
+	"@To use, sprinkle over food." next
+	"@A good combination increases the strength of your recovery." eob
+
+l_0xc56d9b:
+	"@Can be used many times." eob
+
+l_0xc56dab:
+	"@Gone after one use." eob
+
+l_0xc56db7:
+	"@Items for {name(3)}." next
+	eob
+
+l_0xc56dc5:
+	"@Damages an enemy when used during battle." eob
+
+l_0xc56ddd:
+	"@When equipped, it increases your Luck." eob

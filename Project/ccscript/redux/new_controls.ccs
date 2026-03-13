@@ -1,6 +1,7 @@
 // ASM Code to implement the New/Improved Controls for EarthBound hack with CoilSnake
 // Made by ShadowOne333
 
+import "../definitions/flags.ccs"
 import "../essential/asm65816.ccs"
 
 // Defines
@@ -11,6 +12,8 @@ define CREATE_WINDOW			= 0x04EE	// C104EE
 define LOAD_NPC_TEXT_POINTER		= 0x3375	// C13375
 define PRINT_MESSAGE			= 0x3394	// C13394
 define INTERACTING_NPC_ID		= 0x5D62	// C15D62
+
+define GET_EVENT_FLAG			= 0xC21628
 
 // Button values for remapping purposes:
 // FOR RAM ADDRESSES LOADED FROM 006D/006F/0065
@@ -24,6 +27,27 @@ ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to c
 ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for Opening the Main Menu (A button by default)
 ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Opening the Map (X button by default)
 ROM[0xC0B915] = AND_i	(0x00A0)	// AND operand check for A+L buttons. This determines which buttons can talk to people / Confirm selections at the Menus
+
+// Make the Map button check for the Town map flag (511) instead of the Item in the inventory
+ROM[0xC13CED] = {
+	JML	(Town_Map_Check)
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+}
+
+Town_Map_Check: {
+	LDA_i	(FLG_ITEM_MAP)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0001)
+	BNE	(0x04)	// _no_town_map
+	JML	(0xC13CF6)	// Show map if the player has obtained the Town map
+
+_no_town_map:
+	JML	(0xC13D02)	// NO_TOWN_MAP
+}
 
 // Skip opening the "No problem here" window for "Talk to"
 ROM[0xC13199] = {
@@ -99,22 +123,36 @@ ROM[0xC1324D] = {
 }
 
 // CMP_i 0x0005 -> 0x0006 so Key Items show up in the menu
-// 5 for only 4 menu entries (up to Stats)
+// 5 for only 4 menu entries (up to Status)
 // 6 for 5 entries (up to Check)
 // 7 for all 6 menu entries
-ROM[0xC13493] = CMP_i	(0x0007)// CMP #$0005
+ROM[0xC13493] = CMP_i	(7)// CMP #$0005
 
-// Open Menu subroutine modifications
-ROM[0xC134E1] = {
-	NOP			// No operation
-	NOP			// No operation
-	NOP			// No operation
-	NOP			// No operation
-	NOP			// No operation
-	CMP_i	(0x0001)	// Change Goods to be option 1 instead of 2
+// Open Menu options order modifications
+ROM[0xC134E1] = CMP_i	(0x0006)	// Change 'Talk to' to be option 6 instead of 1 (for Tools menu)
+/*ROM[0xC134DF] = {
+	JML	(Tools_Check)
+	NOP
+	NOP
+	NOP
 }
 
-ROM[0xC134F3] = CMP_i	(0x0002)// Change Equip to be option 2 instead of 4
+Tools_Check: {
+	LDA_i	(FLG_JEFF_KI)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0001)
+	BNE	(0x07)	// _exit
+
+	LDA_d	(0x06)
+	CMP_i	(6)	// Change 'Talk to' to be option 6 instead of 1 for Tools menu
+	BNE	(0x04)
+	JML	(0xC1350E)	// Hijacked Talk to routine for our Tools menu
+_exit:
+	JML	(0xC134E6)	// Return to Menu options
+}*/
+
+ROM[0xC134E6] = CMP_i	(1)	// Change Goods to be option 1 instead of 2
+ROM[0xC134F3] = CMP_i	(2)	// Change Equip to be option 2 instead of 4
 
 // Modified so we can use the Key items menu
 /*ROM[0xC134FB] = {
@@ -126,10 +164,8 @@ ROM[0xC134F3] = CMP_i	(0x0002)// Change Equip to be option 2 instead of 4
 	NOP			// No operation
 	NOP			// No operation
 	NOP			// No operation*/
-ROM[0xC13503] = {
-	CMP_i	(0x0004)	// Change Check to be option 4 instead of 5
-}
-
+ROM[0xC13503] = CMP_i	(4)	// Change Status to be option 4 instead of 6
+//}
 
 // Talk/Check Button subroutine modifications.
 // Bypass the SFX that plays when opening the window for "No problem here."
@@ -149,7 +185,7 @@ ROM[0xC13C5D] = BNE	(0x13)	// BNE $13, Branch if not equal to STA $06 at $C13C72
 ROM[0xC13C6D] = {
 	BNE	(0x03)		// BNE $03, Branch if not equal to LDA (0x0001)
 	JMP	(0x3C8F)	// JMP $3C8F, WINDOW_TICK?
-	LDA_i	(0x0001)	// LDA #$0001
+	LDA_i	(1)	// LDA #$0001
 	JSR	(CREATE_WINDOW)	// Jump to RAM address $04EE
 	NOP			// No operation
 }

@@ -44,7 +44,7 @@ command Sound_Test_Post_Selection {
 }
 
 Sound_Test_BGM_Selector:
-	number_input(3)
+	"   {number_input(3)}"
 	clearline
 	store_registers
 	if (compare_result(192)) {	// Input validation
@@ -59,7 +59,7 @@ Sound_Test_BGM_Selector:
 	goto(Sound_Test_BGM_Selector)
 
 Sound_Test_SFX_Selector:
-	number_input(3)
+	"   {number_input(3)}"
 	clearline
 	goto_if_false(new_debug_menu.debug_main)
 	swap

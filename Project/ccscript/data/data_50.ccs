@@ -1299,6 +1299,10 @@ l_0xc935b1:
 	eob
 
 l_0xc935b7:
+	// Added fix so the party faces the Tenda elder once again
+	get_dir_from_char(-1,TO_NPC,1252)	// 1, 2, 0x04E4
+	char_direction(-1,0)	// 3, 0
+
 	window_open(1)
 	"@Hey, you!" pause(20)
 	"  I have a happy little question for you..." next

@@ -6,6 +6,7 @@ import "../essential/jsl_rts.ccs"
 import "../bugfixes/try_deposit_money.ccs"
 import "../bugfixes/try_give_money.ccs"
 import "../redux/goods_menu_equip.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/movscr_codes.ccs"
 
 // CCExpand v0.3 - Additional CCScript codes
@@ -53,7 +54,7 @@ CodeTable: {
   long CC_code_AsmCall // [1A 0C]
   long CC_CustomFadeout // [1A 0D]
   long CC_CustomFadein  // [1A 0E]
-  long DoNothing // [1A 0F]
+  long CC_ItemDeterminer // [1A 0F]
   long DoNothing // [1A 10]
   long CC_CharInParty // [1A 11]
   long DoNothing // [1A 12]
