@@ -41,6 +41,8 @@ define OPEN_WHICH_WINDOW	= 0xC193E7
 define CLOSE_WHICH_WINDOW	= 0xC19437
 define CREATE_WINDOW_REDIRECT	= 0xC1DD47
 define SELECTION_MENU_ITEM_SETUP	= 0xC1DDDA
+define PRINT_MENU_ITEMS_REDIRECT	= 0xC1DE25
+define SELECTION_MENU_REDIRECT	= 0xC1DE2B
 
 define SET_WINDOW_TITLE		= 0xC2032B
 define GET_EVENT_FLAG		= 0xC21628
@@ -58,13 +60,13 @@ define WHICH_WINDOW	= 40
 define USE_HELP_WINDOW	= 61
 
 //------------------------------------
-// 	Status code hijack
+// 	'Status' code hijack
 //------------------------------------
-// Hijack the 'Talk to' routine
+// Hijack the 'Talk to' routine for Overworld use
 ROM[0xC1350E] = {
-	MText	(Tools_Prep)	// MText takes 0x0E bytes
+	MText	(Tools_Prep_Overworld)	// MText takes 0x0E bytes
 	// 0xC135
-	JSL	(CC_Close_Custom_Windows)	// Close our custom windows
+	JSL	(CC_Close_Custom_Windows_OW)	// Close our custom windows
 	JMP	(MAIN_PAUSE_MENU)	// Return to the Main menu
 
 _exit_on_item_use:	// 0xC135
@@ -72,31 +74,7 @@ _exit_on_item_use:	// 0xC135
 	// Limit for this section is up to 0xC13541
 }
 
-define SPY_OPTION	= 0xC4A051
-TOOLS_OPTION:	"Tools[00]"
-
-// Hijack the Battle Window option for Spy to add our custom Tools menu
-/*ROM[0xC2378B] = JML	(Tools_Option_Code)
-
-Tools_Option_Code: {
-	ASMLoadAddress0E	(SPY_OPTION)
-	ASMLoadAddress12	(0x000000)
-	LDY_i	(1)	// First row
-	LDX_i	(0)	// 0 spaces over
-	LDA_i	(4)
-	JSL	(SELECTION_MENU_ITEM_SETUP)
-
-	ASMLoadAddress0E	(TOOLS_OPTION)
-	ASMLoadAddress12	(0x000000)
-	LDY_i	(0)	// First row
-	LDX_i	(11)	// 11 spaces over, 0x0B
-	LDA_i	(7)	// Selection
-	JSL	(SELECTION_MENU_ITEM_SETUP)
-
-	JML	(0xC237D9)	// Return to the original code
-}*/
-
-CC_Close_Custom_Windows: {
+CC_Close_Custom_Windows_OW: {
 	// Close all windows properly through ASM
 	LDA_i	(DIALOGUE_WINDOW)	// Load standard dialogue window
 	JSL	(CLOSE_WINDOW)		// Close window routine
@@ -116,12 +94,13 @@ CC_Close_Custom_Windows: {
 	RTL
 }
 
-Tools_Prep: {
+Tools_Prep_Overworld: {
 	call(open_which_window)
 	open_hp
 	show_wallet
-	goto(Tools)
+	goto(Tools_Overworld)
 }
+
 
 //------------------------------------
 // 	Item counters
@@ -140,9 +119,9 @@ SetCount11: { counter(11) ctoarg eob }
 SetCount12: { counter(12) ctoarg eob }
 
 //------------------------------------
-//   Main Tools ccscript code
+//   Main Tools Overworld ccscript code
 //------------------------------------
-Tools:
+Tools_Overworld:
 	// Check if Jeff is in the party, if not, exit immediately
 	if not flag FLG_JEFF_KI { eob }
 	
@@ -161,6 +140,7 @@ Tools:
 	// Item flag checks
 	load_str_callonhover("Spy kit", SetCount1)
 	// load_str_callonhover("Protractor", SetCount2)
+	// load_str_callonhover("Ruler", SetCount3)
 
 	if flag FLG_ITEM_COUNTER_PSI_UNIT {
 		load_str_callonhover("Counter-PSI unit", SetCount2) }
@@ -175,20 +155,18 @@ Tools:
 	//if flag FLG_ITEM_XTERMINATOR_SPRAY {
 		//load_str_callonhover("Xterminator spray", SetCount7) }
 	if flag FLG_ITEM_HUNGRY_HP_SUCKER {
-		load_str_callonhover("Hungry HP-sucker", SetCount8) }
-	if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
-		load_str_callonhover("Tofu machine", SetCount9) }
+		load_str_callonhover("Hungry HP-sucker", SetCount7) }
+	//if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
+		//load_str_callonhover("Tofu machine", SetCount8) }
 	if flag FLG_ITEM_BAZOOKA {
-		load_str_callonhover("Bazooka", SetCount10) }
+		load_str_callonhover("Bazooka", SetCount8) }
 	if flag FLG_ITEM_DEFENSE_SHOWER {
-		load_str_callonhover("Defense shower", SetCount11) }
+		load_str_callonhover("Defense shower", SetCount9) }
 	if flag FLG_ITEM_HEAVY_BAZOOKA {
-		load_str_callonhover("Heavy bazooka", SetCount12) }
+		load_str_callonhover("Heavy bazooka", SetCount10) }
 
 _Help_Backout:
 	print_strings_vertical(2)
-
-_UseHelp_Window_Backout:
 	if not do_menu_nounload {
 		// Exit
 		// Closing the windows is handled through ASM after returning from the Tools menu
@@ -198,7 +176,7 @@ _UseHelp_Window_Backout:
 	ctoarg
 	swap
 
-	switch_goto(26)
+	switch_goto(12)	// Max 16
 		switch_entry(spy)
 		switch_entry(counterpsiunit)
 		switch_entry(slimegenerator)
@@ -206,7 +184,7 @@ _UseHelp_Window_Backout:
 		switch_entry(shieldkiller)
 		switch_entry(neutralizer)
 		switch_entry(hungryhpsucker)
-		switch_entry(tofumachine)
+		//switch_entry(tofumachine)
 		switch_entry(bazooka)
 		switch_entry(defenseshower)
 		switch_entry(heavybazooka)
@@ -216,18 +194,19 @@ _Exit_Tools_Menu:
 //------------------------------------
 // 	  Item scripts
 //------------------------------------
-	spy:		use_help_submenu(ATM_CARD, Spy_Description) eob
-	//protractor:	use_help_submenu(PROTRACTOR, item_descriptions.l_0xc54ddc) eob
-	counterpsiunit:	use_help_submenu(COUNTER_PSI_UNIT, item_descriptions.l_0xc54a3a) eob
-	slimegenerator:	use_help_submenu(SLIME_GENERATOR, item_descriptions.l_0xc54c32) eob
-	hpsucker: 	use_help_submenu(HP_SUCKER, item_descriptions.l_0xc54b67) eob
-	shieldkiller:	use_help_submenu(SHIELD_KILLER, item_descriptions.l_0xc54a6c) eob
-	neutralizer:	use_help_submenu(NEUTRALIZER, item_descriptions.l_0xc559d9) eob
-	hungryhpsucker:	use_help_submenu(HUNGRY_HP_SUCKER, item_descriptions.l_0xc54bb0) eob
-	tofumachine:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
-	bazooka:	use_help_submenu(BAZOOKA, item_descriptions.l_0xc54aa1) eob
-	defenseshower:	use_help_submenu(DEFENSE_SHOWER, item_descriptions.l_0xc5519f) eob
-	heavybazooka:	use_help_submenu(HEAVY_BAZOOKA, item_descriptions.l_0xc54af5) eob
+	spy:		help_submenu(ATM_CARD, Spy_Description) eob
+	//protractor:	help_submenu(PROTRACTOR, item_descriptions.l_0xc54ddc) eob
+	//ruler:	help_submenu(RULER, item_descriptions.l_0xc54ceb) eob
+	counterpsiunit:	help_submenu(COUNTER_PSI_UNIT, item_descriptions.l_0xc54a3a) eob
+	slimegenerator:	help_submenu(SLIME_GENERATOR, item_descriptions.l_0xc54c32) eob
+	hpsucker: 	help_submenu(HP_SUCKER, item_descriptions.l_0xc54b67) eob
+	shieldkiller:	help_submenu(SHIELD_KILLER, item_descriptions.l_0xc54a6c) eob
+	neutralizer:	help_submenu(NEUTRALIZER, item_descriptions.l_0xc559d9) eob
+	hungryhpsucker:	help_submenu(HUNGRY_HP_SUCKER, item_descriptions.l_0xc54bb0) eob
+	//tofumachine:	help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
+	bazooka:	help_submenu(BAZOOKA, item_descriptions.l_0xc54aa1) eob
+	defenseshower:	help_submenu(DEFENSE_SHOWER, item_descriptions.l_0xc5519f) eob
+	heavybazooka:	help_submenu(HEAVY_BAZOOKA, item_descriptions.l_0xc54af5) eob
 
 // Opens up the small window with the "Which?" text
 open_which_window: {
@@ -244,7 +223,8 @@ Spy_Description: {
 	// Description taken from the official Nintendo Player's Guide
 	"@A very special tool" linebreak	// A very special ability
 	"  that allows {name(3)} to size up the enemy" next
-	"@and report all weaknesses to you." end
+	//"@and report all weaknesses to you." end
+	"@and report back all its weaknesses." end
 }
 
 //------------------------------------
@@ -259,28 +239,7 @@ command use_item(itemID) {
 }
 
 // Use/Help submenu command
-command use_help_submenu( itemID, help_text ) {
-	window_close(WHICH_WINDOW)
-	window_open(USE_HELP_WINDOW)
-	load_str("Use")
-	load_str("Help!")
-	print_strings_vertical(1)
-	do_menu
-	switch_goto(2)
-		switch_entry(_use)
-		switch_entry(_help)
-	window_close(USE_HELP_WINDOW)
-	call(open_which_window)
-	window_switch(INVENTORY_WINDOW)
-	goto(_UseHelp_Window_Backout)
-_use:
-	window_closetop
-	set(FLG_TEMP_USEITEM)
-	window_open(DIALOGUE_WINDOW)
-	use_item(itemID)
-	window_closeall
-	eob
-_help:
+command help_submenu( itemID, help_text ) {
 	window_switch(INVENTORY_WINDOW)
 	window_clear
 	window_open(DIALOGUE_WINDOW)
@@ -295,38 +254,19 @@ _help:
 // Set the flag for the corresponding Tools Item
 command give_menu_tools_item(itemID) {
 	counter(itemID)
-	call(keyitemcounter)
 
 	sound(SND_BOXTAKE)	// 116
 	pause(60)
 	window_closeall
 	sound(SND_SPECIALITEM)	// 102
 	pause(100)
-	window_open(1)
+	window_open(DIALOGUE_WINDOW)
 
 	get_char_at_pos(1) swap
 	"@({name(0)} added the" linebreak
 	"  {itemname(itemID)}" linebreak
 	"  to the Tools items.)" //eob
 }
-
-keyitemcounter:
-	/*if counter_is(SOUND_STONE) { toggle_with_sound(flg_BuzzBuzzDead) }
-	if counter_is(SHACK_KEY) { toggle_with_sound(FLG_KEY_TABIGOYA) }
-	if counter_is(BICYCLE) { toggle_with_sound(FLG_ITEM_CYCLE) }
-	if counter_is(TOWN_MAP) { toggle_with_sound(FLG_ITEM_MAP) }
-	if counter_is(RECEIVER_PHONE) { toggle_with_sound(FLG_ITEM_PHONE) }
-	if counter_is(PENCIL_ERASER) { toggle_with_sound(FLG_ITEM_TACO_ERASER) }
-	if counter_is(CABIN_KEY) { toggle_with_sound(FLG_WIN_CARPAINTER) }
-	if counter_is(WAD_BILLS) { toggle_with_sound(FLG_TWSN_ITEM_TONCHIKI) }
-	if counter_is(ZOMBIE_PAPER) { toggle_with_sound(FLG_ITEM_HOIHOI) }
-	if counter_is(LOCKER_KEY) { toggle_with_sound(FLG_ITEM_KEY_LOCKER) }
-	if counter_is(BAD_KEY_MACHINE) { toggle_with_sound(FLG_ITEM_GAUS) }
-	if counter_is(ERASER_ERASER) { toggle_with_sound(FLG_ITEM_KOKESHI) }
-	if counter_is(DIAMOND) { toggle_with_sound(FLG_DSRT_ITEM_DIA) }
-	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
-	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }*/
-eob
 
 // Turn active flag off or vice versa
 command toggle_with_sound(flg) {
@@ -336,3 +276,148 @@ command toggle_with_sound(flg) {
 	else { sound(SND_BOXTAKE) }
 	load_registers_shared
 }
+
+//------------------------------------
+//   Main Tools Battle code
+//------------------------------------
+
+// Hijack the "Spy" routine for Battle use
+ROM[0xC239C9] = JML	(Battle_Tools)
+
+Battle_Tools: {
+	BText	(Tools_InBattle)
+	JSL	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
+	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+}
+
+CC_Close_Custom_Tools_Battle_Window: {
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
+	JMP_l	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
+	//JML	(0xC239EA)	// End of Spy battle action call
+	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+}
+
+// Main In-battle Tools menu
+Tools_InBattle:
+	store_registers_shared
+	back_up_text_rendering_state
+	window_open(INVENTORY_WINDOW)
+	title(0, Tools_Title)
+	pause(1)
+
+	load_registers_shared
+	counter_zero
+	ctoarg
+
+	// Item flag checks
+	load_str_callonhover("Spy kit", SetCount1)
+	// load_str_callonhover("Protractor", SetCount2)
+	// load_str_callonhover("Ruler", SetCount3)
+
+	if flag FLG_ITEM_COUNTER_PSI_UNIT {
+		load_str_callonhover("Counter-PSI unit", SetCount2) }
+	if flag FLG_ITEM_SLIME_GENERATOR {
+		load_str_callonhover("Slime generator", SetCount3) }
+	if flag FLG_ITEM_HP_SUCKER {
+		load_str_callonhover("HP-sucker", SetCount4) }
+	if flag FLG_ITEM_SHIELD_KILLER {
+		load_str_callonhover("Shield killer", SetCount5) }
+	if flag FLG_ITEM_NEUTRALIZER {
+		load_str_callonhover("Neutralizer", SetCount6) }
+	//if flag FLG_ITEM_XTERMINATOR_SPRAY {
+		//load_str_callonhover("Xterminator spray", SetCount7) }
+	if flag FLG_ITEM_HUNGRY_HP_SUCKER {
+		load_str_callonhover("Hungry HP-sucker", SetCount7) }
+	//if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
+		//load_str_callonhover("Tofu machine", SetCount8) }
+	if flag FLG_ITEM_BAZOOKA {
+		load_str_callonhover("Bazooka", SetCount8) }
+	if flag FLG_ITEM_DEFENSE_SHOWER {
+		load_str_callonhover("Defense shower", SetCount9) }
+	if flag FLG_ITEM_HEAVY_BAZOOKA {
+		load_str_callonhover("Heavy bazooka", SetCount10) }
+
+_Help_Battle_Backout:
+	print_strings_vertical(2)
+
+_UseHelp_Battle_Window_Backout:
+	if not do_menu_nounload {
+		// Exit
+		// Closing the windows is handled through ASM after returning from the Tools menu
+		eob
+	}
+
+	ctoarg
+	swap
+
+	switch_goto(12)	// Max 16
+		switch_entry(spy_battle)
+		switch_entry(counterpsiunit_battle)
+		switch_entry(slimegenerator_battle)
+		switch_entry(hpsucker_battle)
+		switch_entry(shieldkiller_battle)
+		switch_entry(neutralizer_battle)
+		switch_entry(hungryhpsucker_battle)
+		//switch_entry(tofumachine_battle)
+		switch_entry(bazooka_battle)
+		switch_entry(defenseshower_battle)
+		switch_entry(heavybazooka_battle)
+_Exit_Tools_Battle_Menu:
+	eob
+
+// Battle actions
+	spy_battle:		use_submenu(ATM_CARD, 6) eob
+	//protractor_battle:	use_submenu(PROTRACTOR, 187) eob
+	//ruler_battle:		use_submenu(RULER, 186) eob
+	counterpsiunit_battle:	use_submenu(COUNTER_PSI_UNIT, 159) eob
+	slimegenerator_battle:	use_submenu(SLIME_GENERATOR, 169) eob
+	hpsucker_battle: 	use_submenu(HP_SUCKER, 161) eob
+	shieldkiller_battle:	use_submenu(SHIELD_KILLER, 160) eob
+	neutralizer_battle:	use_submenu(NEUTRALIZER, 247) eob
+	hungryhpsucker_battle:	use_submenu(HUNGRY_HP_SUCKER, 176) eob
+	//tofumachine_battle:	use_submenu(TOFU_MACHINE, 170) eob
+	bazooka_battle:		use_submenu(BAZOOKA, 310) eob
+	defenseshower_battle:	use_submenu(DEFENSE_SHOWER, 184) eob
+	heavybazooka_battle:	use_submenu(HEAVY_BAZOOKA, 311) eob
+
+// Use/Help submenu command
+command use_submenu( itemID, BattleAction ) {
+	window_closetop
+	window_open(DIALOGUE_WINDOW)
+	cc_asmcall(Original_Spy_Code, RET_NONE)
+	cc_asmcall(0xC23B4D, RET_NONE)
+	//window_closeall
+	eob
+}
+
+command use_battle_item(itemID) {
+	arg(itemID)
+	cc_asmcall(Original_Spy_Action_Code, RET_NONE)
+	eob
+}
+
+//CC_Spy_Action: {
+Original_Spy_Action_Code: {
+	LDA_i	(6)	// BATTLE_ACTIONS::SPY
+	STA_d	(0x02)
+	STA_d	(0x1E)
+	LDA_d	(0x02)
+	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
+	SEP	(0x20)
+	LDA_8	(0x11)
+	STA_a	(0xA981)	//  BATTLE_MENU_SELECTION + battle_menu_selection::targetting
+	LDY_d	(0x02)
+	LDX_i	(0x0001)
+	REP	(0x20)
+	LDA_i	(0x0000)
+	JSL	(0xC1DE37)	// REDIRECT_C1242E
+	SEP	(0x20)
+	STA_a	(0xA982)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_target
+	REP	(0x20)
+	AND_i	(0x00FF)
+	BNE	(0x04)
+	JML	(0xC23829)	// JMP $3829
+	JML	(0xC23B4D)	// JMP $3B4D
+}
+//------------------------------------

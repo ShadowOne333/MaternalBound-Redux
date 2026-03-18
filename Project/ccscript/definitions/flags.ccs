@@ -804,20 +804,22 @@ define FLG_POO_KI			= flag 787
 // Whether Show Ticket has been obtained or not
 define FLG_ITEM_SHOW_TICKET		= flag 788
 define FLG_SHOW_TICKET_TAKEN		= flag 789
+//define FLG_ITEM_TINY_RUBY		= flag 790
 
 // Whether followers are in your party or not
-define FLG_KING_KI			= flag 790
-define FLG_TONY_KI			= flag 791
-define FLG_FLYINGMAN_KI			= flag 792
-define FLG_TEDDYBEAR_KI			= flag 793
-define FLG_PLUSHBEAR_KI			= flag 794
+define FLG_KING_KI			= flag 791
+define FLG_TONY_KI			= flag 792
+define FLG_FLYINGMAN_KI			= flag 793
+define FLG_TEDDYBEAR_KI			= flag 794
+define FLG_PLUSHBEAR_KI			= flag 795
 // Whether Ness has learned PSI yet
-define FLG_LEARN_PSI			= flag 795
+define FLG_LEARN_PSI			= flag 796
 // Whether player is in Deep Darkness (to use hawk eye)
-define FLG_IN_DEEP_DARKNESS		= flag 796
-// Jeff & Poo solo missions
-define FLG_JEFF_SOLO			= flag 797
-define FLG_POO_SOLO			= flag 798
+define FLG_IN_DEEP_DARKNESS		= flag 797
+// Jeff & Poo solo mission
+define FLG_JEFF_SOLO			= flag 798
+define FLG_POO_SOLO			= flag 799
+
 
 // Whether bike is unrestricted or not
 //define FLG_UnrestrictBike		= flag 799

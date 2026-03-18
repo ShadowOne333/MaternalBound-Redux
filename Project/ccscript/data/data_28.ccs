@@ -299,7 +299,6 @@ l_0xc70329:
 	goto_if_flag(FLG_OPEN_TABIGOYA, l_0xc7062a)	// 0x006C, 108
 	goto_if_flag(FLG_KEY_TABIGOYA, l_0xc705e4)	// 0x0050, 80
 	goto_if_flag(FLG_WIN_FRANK, l_0xc7058d)	// 0x0040, 64
-	goto(l_0xc70511)
 
 l_0xc70511:
 	"@It seems that the citizens of Onett have been harassed" next

@@ -84,12 +84,11 @@ l_0xc8a8e7:
 	"@Perhaps a little, shall we say, <under the table deal> would be in order..." end
 
 l_0xc8a976:
-	if flag FLG_KEY_ITEMS { isset(FLG_PU) }
-	else {
-		get_inventory_item(0,0) swap
-		result_is(TINY_RUBY)	// 0xD0, 208, Tiny ruby
-	}
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+	result_is(TINY_RUBY)	// 0xD0, 208, Tiny ruby
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	counter(4)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_35.l_0xc7c6b6)

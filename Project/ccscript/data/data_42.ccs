@@ -314,10 +314,7 @@ l_0xc862f7:
 	eob
 
 l_0xc862f8:
-	if flag FLG_KEY_ITEMS {
-		store_registers_shared
-		give_menu_key_item(METEORITE_PIECE)
-	}
+	if flag FLG_KEY_ITEMS { give_menu_key_item(METEORITE_PIECE) }
 	else {
 		get_item_receiver(-1)
 		goto_if_false(l_0xc86311)

@@ -317,7 +317,8 @@ l_0xc9fee3:
 
 l_0xc9fefd:
 	newline
-	get_inventory_item(0,0) swap
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
 	"@{user}{swap} touched the {itemname(0)} to his forehead and gathered his thoughts." promptw
 	event(9)	// Open Sound Stone screen
 	eob

@@ -867,7 +867,6 @@ l_0xc9b8dd:
 	goto_if_true(l_0xc9b8ff)
 
 	party_remove(0)	// 0x00
-	goto(l_0xc9b8ff)
 
 l_0xc9b8ff:
 	eob

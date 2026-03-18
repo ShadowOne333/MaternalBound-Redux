@@ -21,7 +21,8 @@ l_0xc77df0:
 
 l_0xc77e11:
 	newline
-	get_action_arg swap newline
+	get_action_arg swap
+	newline
 	"@{user} equipped" linebreak
 	"  the {itemname(0)} instead."
 	sound(SND_BOXOPEN1)	// 115
@@ -42,7 +43,7 @@ l_0xc77e85:
 	get_action_arg swap
 	"@{user} tried" linebreak
 	"  to equip the {itemname(0)}." next
-	"@ but {itemname(0)} wasn't meant for " linebreak
+	"@But {itemname(0)} wasn't meant for " linebreak
 	"  {user}." promptw
 	eob
 
@@ -51,7 +52,7 @@ l_0xc77eb6:
 	get_action_arg swap
 	"@{user} tried" linebreak
 	"  to use the {itemname(0)}." next
-	"@but {user} could not use" linebreak
+	"@But {user} could not use" linebreak
 	"  the {itemname(0)} very well." promptw
 	eob
 
@@ -156,7 +157,7 @@ l_0xc8f8a2:
 l_0xc8f8c0:
 	newline
 	"@{user} opened" linebreak
-	"  the jar of <Fly Honey>!" next
+	"  the <Jar of Fly Honey>!" next
 	"@Master Belch grabbed" linebreak
 	"  the <Fly Honey>!" promptw
 	eob
@@ -164,7 +165,7 @@ l_0xc8f8c0:
 l_0xc8f8fd:
 	newline
 	"@{user} opened" linebreak
-	"  the jar of <Fly Honey>!" next
+	"  the <Jar of Fly Honey>!" next
 	"@It didn't smell like" linebreak
 	"  something " call(data_36.l_0xc7e602) " would like!" promptw
 	eob
@@ -404,7 +405,8 @@ l_0xc97bc4:
 	user_and_target_names_identical
 	goto_if_true(l_0xc97c06)
 	newline
-	"{store_registers}@{user} took" linebreak
+	store_registers
+	"@{user} took" linebreak
 	"  the {itemname(0)}," next
 	get_action_arg swap
 	"  used it on" linebreak
@@ -460,7 +462,6 @@ l_0xc97c7b:
 together:
 	get_char_at_pos(1) swap
 	counter(1)
-	goto(tog1)
 
 tog1:
 	inc ctoarg
@@ -499,7 +500,6 @@ l_0xc97c9d:
 
 	newline
 	"@It was pretty good." promptw
-	goto(l_0xc97cb0)
 
 l_0xc97cb0:
 	eob
@@ -510,7 +510,6 @@ l_0xc97cb1:
 
 	newline
 	"@It didn't taste very good." promptw
-	goto(l_0xc97cc9)
 
 l_0xc97cc9:
 	eob
@@ -550,7 +549,7 @@ l_0xc97da3:
 	newline
 	"@{user}{get_action_arg}{swap} used" linebreak
 	"  the {itemname(0)}!" next
-	"@Suddenly, some Strawberry tofu" linebreak
+	"@Suddenly, some {itemname(STRAWBERRY_TOFU)}" linebreak
 	"  was produced!" promptw
 	eob
 
@@ -646,7 +645,8 @@ l_0xc97f56:
 l_0xc97f72:
 	newline
 	get_char_at_pos(2)
-	result_is(9) goto_if_false(l_0xc97f84)
+	result_is(9)
+	goto_if_false(l_0xc97f84)
 	call(data_43.l_0xc88000)
 	eob
 
@@ -685,7 +685,6 @@ l_0xc9f7bb:
 	pause(60)
 	window_open(1)
 	"@" counter(1)
-	goto(l_0xc9f7c4)
 
 l_0xc9f7c4:
 	get_stat_letter(2)	// 0x02
@@ -781,7 +780,7 @@ l_0xef69a1:
 l_0xef69ba:
 	newline
 	"@{target} recovered" linebreak
-	"{delta} HP!"
+	"  {delta} HP!"
 	sound(SND_RECOVER)	// 36
 	promptw
 	eob
@@ -789,7 +788,7 @@ l_0xef69ba:
 l_0xef69d2:
 	newline
 	"@{target} recovered" linebreak
-	"{delta} PP!"
+	"  {delta} PP!"
 	sound(SND_RECOVER)	// 36
 	promptw
 	eob
@@ -1033,7 +1032,6 @@ l_0xef6ceb:
 	goto_if_false(l_0xef6cfc)
 	party_remove(11)	// 0x0B
 	eob
-	goto(l_0xef6cfc)
 
 l_0xef6cfc:
 	load_registers
@@ -1165,7 +1163,7 @@ l_0xef6e81:
 l_0xef6e97:
 	newline
 	"@The poison was removed from" linebreak
-	"{target}'s body!"
+	"  {target}'s body!"
 	sound(SND_STATUSRECOVER)	// 37
 	promptw
 	eob
@@ -1438,10 +1436,50 @@ l_0xef72f7:
 	"@Black smoke poured from" linebreak
 	"  {user}'s body!" prompt
 	linebreak
-	"@" call(data_37.l_0xc7e6d7) " was" linebreak
+	"@" call(data_37.l_0xc7e6d7) call(was) linebreak
 	"  overcome by the smoke!" prompt
 	linebreak
 	"@You can't see a thing!" prompt
+	eob
+
+was:
+	get_char_at_pos(1) swap
+	counter(1)
+
+was1:
+	inc
+	ctoarg
+	party_size_smaller_than(0)
+	goto_if_true(was2)
+	get_char_at_pos(0)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
+	goto_if_true(was2)
+	get_char_at_pos(0)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
+	goto_if_true(was2)
+	goto(was1)
+
+was2:
+	ctoarg
+	swap
+	switch_goto(5)
+		switch_entry(was3)
+		switch_entry(was3)
+		switch_entry(was4)
+		switch_entry(was5)
+		switch_entry(was5)
+	eob
+
+was3:
+	" was"
+	eob
+
+was4:
+	" were"
+	eob
+
+was5:
+	" were"
 	eob
 
 l_0xef733d:
@@ -1460,12 +1498,12 @@ l_0xef733d:
 	"@Lucky quickly ducked behind the robot!" prompt
 	sound(SND_PHONEPICKUP)	// 11
 	window_clear
+	title(1, Lucky)	// Skinny guy
 	"@<I flipped the switch, and it stopped. >" pause(60) next
 	"@<Ha ha ha hah..." linebreak
-	"  Geez, what a loser robot.  It was so easy to stop!>"
-	pause(20)
-	prompt
+	"  Geez, what a loser robot.  It was so easy to stop!>" pause(20) prompt
 	window_clear
+	 //title(1, Lucky)	// Skinny guy
 	"@<That was quick thinking!>" prompt
 	pause(60)
 	set_text_mode(1)	// 0x01
@@ -1475,17 +1513,18 @@ l_0xef733d:
 	eob
 
 l_0xef7415:
+	set(FLG_POO_KI)
 	learn_starstorm_alpha	// 0x04, 0x02
 	newline
 	"@Suddenly, {name(4)} swooped down" linebreak
-	"  from the sky!"
+	"  from the sky!" pause(50)
 	eob
 
 l_0xef743b:
 	newline
 	"@{name(4)} used his new power," prompt
 	linebreak
-	"  PSI Starstorm!" prompt
+	"  PK Starstorm!" prompt
 	linebreak
 	eob
 
@@ -1501,55 +1540,55 @@ l_0xef745f:
 		switch_entry(l_0xef7530)
 		switch_entry(l_0xef7548)
 	newline
-	"@Pokey used {stat(8)}" linebreak
+	"@Porky used {stat(8)}" linebreak
 	"  as a shield!" promptw
 	eob
 
 l_0xef749d:
 	newline
-	"@Pokey played dead!" promptw
+	"@Porky played dead!" promptw
 	eob
 
 l_0xef74b0:
 	newline
-	"@Pokey pretended" linebreak
+	"@Porky pretended" linebreak
 	"  to cry!" promptw
 	eob
 
 l_0xef74c9:
 	newline
-	"@Pokey apologized" linebreak
+	"@Porky apologized" linebreak
 	"  profusely!" promptw
 	eob
 
 l_0xef74e6:
 	newline
-	"@Pokey thought" linebreak
+	"@Porky thought" linebreak
 	"  to himself!" promptw
 	eob
 
 l_0xef74fa:
 	newline
-	"@Pokey acted" linebreak
+	"@Porky acted" linebreak
 	"  all innocent!" promptw
 	eob
 
 l_0xef7514:
 	newline
-	"@Pokey smiled" linebreak
+	"@Porky smiled" linebreak
 	"  insincerely!" promptw
 	eob
 
 l_0xef7530:
 	newline
-	"@Pokey complained" linebreak
+	"@Porky complained" linebreak
 	"  to {stat(8)}!" promptw
 	eob
 
 l_0xef7548:
 	newline
-	"@Pokey tried to" linebreak
-	"  edge closer to the enemy!" promptw
+	"@Porky tried to" linebreak
+	"  join the enemy's team instead!" promptw
 	eob
 
 l_0xef7569:
@@ -1809,7 +1848,7 @@ l_0xef790b:
 		switch_entry(l_0xef792b)
 		switch_entry(l_0xef792e)
 		switch_entry(l_0xef793c)
-	"{user} and its cohorts"
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts"
 	eob
 
 l_0xef792b:
@@ -1817,11 +1856,11 @@ l_0xef792b:
 	eob
 
 l_0xef792e:
-	"{user} and its cohort"
+	"{user} and {call(data_37.l_0xc7e66e)} cohort"
 	eob
 
 l_0xef793c:
-	"{user} and its cohorts"
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts"
 	eob
 
 l_0xef794b:
@@ -1830,7 +1869,7 @@ l_0xef794b:
 		switch_entry(l_0xef796c)
 		switch_entry(l_0xef7970)
 		switch_entry(l_0xef797f)
-	"{user} and its cohorts."
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts."
 	eob
 
 l_0xef796c:
@@ -1838,11 +1877,11 @@ l_0xef796c:
 	eob
 
 l_0xef7970:
-	"{user} and its cohort."
+	"{user} and {call(data_37.l_0xc7e66e)} cohort."
 	eob
 
 l_0xef797f:
-	"{user} and its cohorts."
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts."
 	eob
 
 l_0xef798f:
@@ -1851,7 +1890,7 @@ l_0xef798f:
 		switch_entry(l_0xef79b1)
 		switch_entry(l_0xef79b6)
 		switch_entry(l_0xef79c6)
-	"{user} and its cohorts's"
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts'"
 	eob
 
 l_0xef79b1:
@@ -1859,11 +1898,11 @@ l_0xef79b1:
 	eob
 
 l_0xef79b6:
-	"{user} and its cohort's"
+	"{user} and {call(data_37.l_0xc7e66e)} cohort's"
 	eob
 
 l_0xef79c6:
-	"{user} and its cohorts's"
+	"{user} and {call(data_37.l_0xc7e66e)} cohorts'"
 	eob
 
 l_0xef79d7:
@@ -1964,13 +2003,13 @@ l_0xef7b46:
 	eob
 
 l_0xef7b64:
+	set(FLG_LEARN_PSI)
 	newline
 	sound(SND_LEARNPSI)	// 103
 	"@{target} realized the power of" linebreak
 	get_action_arg swap
 	"  {psiname(0)}." prompt
 	eob
-	goto(l_0xef7b83)
 
 l_0xef7b83:
 	store_registers
@@ -1979,7 +2018,7 @@ l_0xef7b83:
 	goto_if_false(l_0xef7b9d)
 
 	"Sweet!" linebreak
-	"  "
+	"  " // goto(l_0xef7b9d)
 
 l_0xef7b9d:
 	load_registers
@@ -1991,7 +2030,7 @@ l_0xef7ba0:
 	compare_result(8)	// 0x00000008, 0x00
 	goto_if_false(l_0xef7bbc)
 	"That rocks!" linebreak
-	"  "
+	"  " // goto(l_0xef7bbc)
 
 l_0xef7bbc:
 	load_registers
@@ -2003,7 +2042,7 @@ l_0xef7bbf:
 	compare_result(3)	// 0x00000003, 0x00
 	goto_if_false(l_0xef7bdc)
 	"Oh, baby!" linebreak
-	"  "
+	"  " // goto(l_0xef7bdc)
 
 l_0xef7bdc:
 	load_registers
@@ -2017,12 +2056,12 @@ l_0xef7bdf:
 	"@Inside the present," linebreak
 	get_action_arg swap
 	"  there was a {itemname(0)}!" next
-	get_item_receiver(-1) goto_if_false(l_0xef7c73)
+	get_item_receiver(-1)
+	goto_if_false(l_0xef7c73)
 	store_registers
 	call(data_36.l_0xc7dc85)
 	goto_if_true(l_0xef7c42)
-	load_registers
-	swap
+	load_registers swap
 	"@{name(0)}{swap} took it."
 	give_and_return_location(0,0)
 	sound(SND_BOXTAKE)	// 116
@@ -2040,7 +2079,6 @@ l_0xef7c42:
 	sound(SND_BOXTAKE)	// 116
 	prompt
 	eob
-	goto(l_0xef7c73)
 
 l_0xef7c73:
 	"@But, " call(data_37.l_0xc7e6d7) " cannot carry anymore stuff." prompt
@@ -2165,14 +2203,14 @@ l_0xef7eac:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} took a bite" linebreak
-	"  using its poisonous fangs!" promptw
+	"  using " call(data_37.l_0xc7e66e) " poisonous fangs!" promptw
 	eob
 
 l_0xef7ed5:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} fired" linebreak
-	"  a missile, making {call(self_gender)} dizzy."
+	"  a missile, making " call(self_gender) " dizzy."
 	sound(SND_MISSILE)	//70
 	prompt
 	pause(1)
@@ -2458,7 +2496,7 @@ l_0xef8317:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} scattered" linebreak
-	"  its pollen around!"
+	"  " call(data_37.l_0xc7e66e) " pollen around!"
 	sound(SND_SPORES)	// 82
 	promptw
 	pause(1)
@@ -2468,7 +2506,7 @@ l_0xef833e:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} reached" linebreak
-	"  out with its icy hand." promptw
+	"  out with " call(data_37.l_0xc7e66e) " icy hand." promptw
 	eob
 
 l_0xef835c:
@@ -2503,7 +2541,7 @@ l_0xef83ed:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} leaped" linebreak
-	"  forward and spread its wings!" promptw
+	"  forward and spread " call(data_37.l_0xc7e66e) " wings!" promptw
 	eob
 
 l_0xef8413:
@@ -2650,7 +2688,7 @@ l_0xef8aa3:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} scratched" linebreak
-	"  with its claws!" promptw
+	"  with " call(data_37.l_0xc7e66e) " claws!" promptw
 	eob
 
 l_0xef8ac2:
@@ -2677,7 +2715,7 @@ l_0xef8b11:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} spit" linebreak
-	"  its pumpkin seeds!" promptw
+	"  " call(data_37.l_0xc7e66e) " pumpkin seeds!" promptw
 	eob
 
 l_0xef8b2f:
@@ -2708,7 +2746,7 @@ l_0xef8b89:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} swung" linebreak
-	"  his hula hoop."
+	"  " call(data_37.l_0xc7e66e) " hula hoop."
 	sound(SND_BASH)	// 26
 	promptw
 	eob
@@ -2785,7 +2823,7 @@ l_0xef8cac:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} knitted" linebreak
-	"  its brow!" promptw
+	"  " call(data_37.l_0xc7e66e) " brow!" promptw
 	eob
 
 l_0xef8cc7:
@@ -2875,7 +2913,6 @@ l_0xef8e27:
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!" promptw
 	eob
-	goto(l_0xef8e3c)
 
 l_0xef8e3c:
 	newline
@@ -2888,7 +2925,6 @@ l_0xef8e3c:
 	pause(60)
 	promptw
 	eob
-	goto(l_0xef8e5e)
 
 l_0xef8e5e:
 	newline
@@ -2900,7 +2936,6 @@ l_0xef8e5e:
 	pause(60)
 	promptw
 	eob
-	goto(l_0xef8e7e)
 
 l_0xef8e7e:
 	newline
@@ -2912,7 +2947,6 @@ l_0xef8e7e:
 	pause(60)
 	promptw
 	eob
-	goto(l_0xef8e9e)
 
 l_0xef8e9e:
 	newline
@@ -2924,7 +2958,6 @@ l_0xef8e9e:
 	pause(60)
 	promptw
 	eob
-	goto(l_0xef8ebe)
 
 l_0xef8ebe:
 	newline
@@ -3013,7 +3046,7 @@ l_0xef9a5e:
 	sound(SND_MONSTERATTACK)	// 25
 	newline
 	"@{user} sowed" linebreak
-	"  some seeds around " call(battle_text.self_gender) "!"
+	"  some seeds around " call(self_gender) "!"
 	sound(SND_STATUSCHANGE)	// 72
 	promptw
 	eob
@@ -3094,7 +3127,7 @@ l_0xef9b96:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} burped" linebreak
-	"  and blew his nauseating breath at you!"
+	"  and blew " call(data_37.l_0xc7e66e) " nauseating breath at you!"
 	sound(SND_WHIRR)	// 78
 	promptw
 	pause(1)
@@ -3104,7 +3137,7 @@ l_0xef9bc3:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} stung" linebreak
-	"  with its poison stinger!" promptw
+	"  with " call(data_37.l_0xc7e66e) " poison stinger!" promptw
 	pause(1)
 	eob
 
@@ -3176,7 +3209,7 @@ l_0xef9cd1:
 l_0xef9cf1:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
-	"@{user} spit out  a sticky mucus!"
+	"@{user} spit out a sticky mucus!"
 	sound(SND_DRILL)	// 81
 	promptw
 	pause(1)
@@ -3186,7 +3219,7 @@ l_0xef9d14:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} spewed" linebreak
-	"  <Fly Honey> out of his mouth!"
+	"  <Fly Honey> out of " call(data_37.l_0xc7e66e) " mouth!"
 	sound(SND_DRILL)	// 81
 	promptw
 	pause(1)
@@ -3196,7 +3229,7 @@ l_0xef9d3e:
 	newline
 	sound(SND_MONSTERATTACK)	// 25
 	"@{user} shot" linebreak
-	"  spider silk out of its body!" promptw
+	"  spider silk out of " call(data_37.l_0xc7e66e) " body!" promptw
 	eob
 
 l_0xef9d62:
@@ -3304,3 +3337,4 @@ l_0xef9ed7:
 	promptw
 	pause(1)
 	eob
+

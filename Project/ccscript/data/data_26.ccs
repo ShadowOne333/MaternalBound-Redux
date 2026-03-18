@@ -320,7 +320,7 @@ l_0xc6d133:
 l_0xc6d19c:
 	title(1, Fake)
 	goto_if_flag(FLG_TLPT_SUMS, l_0xc6d325)	// 0xD7, 215
-	goto_if_flag(FLG_BOX_RAMA_2, l_0xc6d2e8)	// 0x92, 215
+	goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6d2e8)	// 0x92, 146
 	"@So, you're a Runaway Brothers fan, huh?" next
 	"@What?" next
 	"@Excuse me?" next

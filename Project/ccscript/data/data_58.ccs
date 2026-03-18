@@ -578,7 +578,7 @@ l_0xc9c85d:	// Ending Porky's letter
 
 l_0xc9c98a:
 	pause(1)
-	goto(l_0xc9c98a)	// Loop the pause81)
+	goto(l_0xc9c98a)	// Loop the pause(1)
 
 l_0xc9c991:
 	title(1, Yisuchi)

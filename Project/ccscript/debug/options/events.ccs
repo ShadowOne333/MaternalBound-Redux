@@ -17,78 +17,80 @@ Events:
 	diam "Select your event." next
 	"   {number_input(2)}" newline
 	switch_goto(70)
-		switch_entry(l_0xc599d0)
-		switch_entry(l_0xc599f4)
-		switch_entry(l_0xc59a15)
-		switch_entry(l_0xc59a40)
-		switch_entry(l_0xc59a72)
-		switch_entry(l_0xc59aa4)
-		switch_entry(l_0xc59ace)
-		switch_entry(l_0xc59af5)
-		switch_entry(l_0xc59b25)
-		switch_entry(l_0xc59b45)
-		switch_entry(l_0xc59b78)
-		switch_entry(l_0xc59bb5)
-		switch_entry(l_0xc59bd7)
-		switch_entry(l_0xc59bfc)
-		switch_entry(l_0xc59c39)
-		switch_entry(l_0xc59c67)
-		switch_entry(l_0xc59c84)
-		switch_entry(l_0xc59cb5)
-		switch_entry(l_0xc59cd9)
-		switch_entry(l_0xc59d06)
-		switch_entry(l_0xc59d30)
-		switch_entry(l_0xc59d61)
-		switch_entry(l_0xc59d7f)
-		switch_entry(l_0xc59da0)
-		switch_entry(l_0xc59dbd)
-		switch_entry(l_0xc59de1)
-		switch_entry(l_0xc59e01)
-		switch_entry(l_0xc59e21)
-		switch_entry(l_0xc59e40)
-		switch_entry(l_0xc59e62)
-		switch_entry(l_0xc59e84)
-		switch_entry(l_0xc59eb2)
-		switch_entry(l_0xc59f08)
-		switch_entry(l_0xc59f44)
-		switch_entry(l_0xc59f60)
-		switch_entry(l_0xc59f80)
-		switch_entry(l_0xc59fa0)
-		switch_entry(l_0xc59fbd)
-		switch_entry(l_0xc59ff1)
-		switch_entry(l_0xc5a00c)
-		switch_entry(l_0xc5a036)
-		switch_entry(l_0xc5a05b)
-		switch_entry(l_0xc5a07e)
-		switch_entry(l_0xc5a0b3)
-		switch_entry(l_0xc5a0db)
-		switch_entry(l_0xc5a0fe)
-		switch_entry(l_0xc5a11a)
-		switch_entry(l_0xc5a154)
-		switch_entry(l_0xc5a17d)
-		switch_entry(l_0xc5a1ae)
-		switch_entry(l_0xc5a1cd)
-		switch_entry(l_0xc5a1ff)
-		switch_entry(l_0xc5a232)
-		switch_entry(l_0xc5a25e)
-		switch_entry(l_0xc5a29c)
-		switch_entry(l_0xc5a2c2)
-		switch_entry(l_0xc5a2ec)
-		switch_entry(l_0xc5a318)
-		switch_entry(l_0xc5a342)
-		switch_entry(l_0xc5a36c)
-		switch_entry(l_0xc5a396)
-		switch_entry(l_0xc5a3c0)
-		switch_entry(l_0xc5a3ea)
-		switch_entry(l_0xc5a414)
-		switch_entry(l_0xc5a43e)
-		switch_entry(l_0xc5a465)
-		switch_entry(l_0xc5a48b)
-		switch_entry(l_0xc5a4b4)
-		switch_entry(l_0xc5a4cd)
+		switch_entry(l_0xc599d0)	// 1
+		switch_entry(l_0xc599f4)	// 2
+		switch_entry(l_0xc59a15)	// 3
+		switch_entry(l_0xc59a40)	// 4
+		switch_entry(l_0xc59a72)	// 5
+		switch_entry(l_0xc59aa4)	// 6
+		switch_entry(l_0xc59ace)	// 7
+		switch_entry(l_0xc59af5)	// 8
+		switch_entry(l_0xc59b25)	// 9
+		switch_entry(l_0xc59b45)	// 10
+		switch_entry(l_0xc59b78)	// 11
+		switch_entry(l_0xc59bb5)	// 12
+		switch_entry(l_0xc59bd7)	// 13
+		switch_entry(l_0xc59bfc)	// 14
+		switch_entry(l_0xc59c39)	// 15
+		switch_entry(l_0xc59c67)	// 16
+		switch_entry(l_0xc59c84)	// 17
+		switch_entry(l_0xc59cb5)	// 18
+		switch_entry(l_0xc59cd9)	// 19
+		switch_entry(l_0xc59d06)	// 20
+		switch_entry(l_0xc59d30)	// 21
+		switch_entry(l_0xc59d61)	// 22
+		switch_entry(l_0xc59d7f)	// 23
+		switch_entry(l_0xc59da0)	// 24
+		switch_entry(l_0xc59dbd)	// 25
+		switch_entry(l_0xc59de1)	// 26
+		switch_entry(l_0xc59e01)	// 27
+		switch_entry(l_0xc59e21)	// 28
+		switch_entry(l_0xc59e40)	// 29
+		switch_entry(l_0xc59e62)	// 30
+		switch_entry(l_0xc59e84)	// 31
+		switch_entry(l_0xc59eb2)	// 32
+		switch_entry(l_0xc59f08)	// 33
+		switch_entry(l_0xc59f44)	// 34
+		switch_entry(l_0xc59f60)	// 35
+		switch_entry(l_0xc59f80)	// 36
+		switch_entry(l_0xc59fa0)	// 37
+		switch_entry(l_0xc59fbd)	// 38
+		switch_entry(l_0xc59ff1)	// 39
+		switch_entry(l_0xc5a00c)	// 40
+		switch_entry(l_0xc5a036)	// 41
+		switch_entry(l_0xc5a05b)	// 42
+		switch_entry(l_0xc5a07e)	// 43
+		switch_entry(l_0xc5a0b3)	// 44
+		switch_entry(l_0xc5a0db)	// 45
+		switch_entry(l_0xc5a0fe)	// 46
+		switch_entry(l_0xc5a11a)	// 47
+		switch_entry(l_0xc5a154)	// 48
+		switch_entry(l_0xc5a17d)	// 49
+		switch_entry(l_0xc5a1ae)	// 50
+		switch_entry(l_0xc5a1cd)	// 51
+		switch_entry(l_0xc5a1ff)	// 52
+		switch_entry(l_0xc5a232)	// 53
+		switch_entry(l_0xc5a25e)	// 54
+		switch_entry(l_0xc5a27a)	// 55
+		switch_entry(l_0xc5a29c)	// 56
+		switch_entry(l_0xc5a2c2)	// 57
+		switch_entry(l_0xc5a2ec)	// 58
+		switch_entry(l_0xc5a318)	// 59
+		switch_entry(l_0xc5a342)	// 60
+		switch_entry(l_0xc5a36c)	// 61
+		switch_entry(l_0xc5a396)	// 62
+		switch_entry(l_0xc5a3c0)	// 63
+		switch_entry(l_0xc5a3ea)	// 64
+		switch_entry(l_0xc5a414)	// 65
+		switch_entry(l_0xc5a43e)	// 66
+		switch_entry(l_0xc5a465)	// 67
+		switch_entry(l_0xc5a48b)	// 68
+		switch_entry(l_0xc5a4b4)	// 69
+		switch_entry(l_0xc5a4cd)	// 70
 	goto(_events_exit)
 
 _events_exit:
+	window_clear
 	diam "Events menu off." wait
 	goto(new_debug_menu.debug_main)
 
@@ -431,6 +433,10 @@ l_0xc59e62:
 	counter(63)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
+	// Added so the NPCs and objects appear properly
+	set(FLG_WIN_OSCAR)		// 74
+	set(FLG_TLPT_DKFD)		// 220
+
 	warp(143)	// 0x8F
 	eob
 
@@ -440,6 +446,10 @@ l_0xc59e84:
 	counter(63)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
+	// Added so the NPCs and objects appear properly
+	set(FLG_WIN_OSCAR)		// 74
+	set(FLG_TLPT_DKFD)		// 220
+
 	set(FLG_ITEM_XYZ)		// 79
 	set(FLG_XYZ_OK)			// 134
 	set(FLG_SPACETUNNEL2_START)	// 133
@@ -779,10 +789,9 @@ l_0xc5a2ec:
 	eob
 
 // Prayer events from the original EarthBound
-// Commented out the calls to avoid compilation issues, this won't make it into the Remake either way.
 l_0xc5a318:
-	diam "{name(1)}'s family prayer.{wait}" end 	// linebreak
-	//window_closeall
+	diam "{name(1)}'s family prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -792,8 +801,8 @@ l_0xc5a318:
 	eob
 
 l_0xc5a342:
-	diam "Runaway Bros.' prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Runaway Bros.' prayer." wait  linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -803,8 +812,8 @@ l_0xc5a342:
 	eob
 
 l_0xc5a36c:
-	diam "{name(2)}'s family prayer." wait end 	// linebreak
-	//window_closeall
+	diam "{name(2)}'s family prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -814,8 +823,8 @@ l_0xc5a36c:
 	eob
 
 l_0xc5a396:
-	diam "{name(8)}'s prayer." wait end 	// linebreak
-	//window_closeall
+	diam "{name(8)}'s prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -825,8 +834,8 @@ l_0xc5a396:
 	eob
 
 l_0xc5a3c0:
-	diam "Dalaam prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Dalaam prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -836,8 +845,8 @@ l_0xc5a3c0:
 	eob
 
 l_0xc5a3ea:
-	diam "Frank's prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Frank's prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -847,8 +856,8 @@ l_0xc5a3ea:
 	eob
 
 l_0xc5a414:
-	diam "Saturn Valley prayer.{wait}" end 	// linebreak
-	//window_closeall
+	diam "Saturn Valley prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -858,8 +867,8 @@ l_0xc5a414:
 	eob
 
 l_0xc5a43e:
-	diam "Ride the Sky Walker to Summers." wait end 	// linebreak
-	//window_closeall
+	diam "Ride the Sky Walker to Summers." wait  linebreak
+	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
 	party_add(3)
@@ -870,8 +879,8 @@ l_0xc5a43e:
 	eob
 
 l_0xc5a465:
-	diam "Leave Summers." wait end 	// linebreak
-	//window_closeall
+	diam "Leave Summers." wait linebreak
+	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -882,8 +891,8 @@ l_0xc5a465:
 	eob
 
 l_0xc5a48b:
-	diam "Meeting with Buzz Buzz." wait end 	// linebreak
-	//window_closeall
+	diam "Meeting with Buzz Buzz." wait  linebreak
+	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
 	party_add(5)	// Add Porky
@@ -938,7 +947,8 @@ l_0xc5a4cd:
 	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
-	call(l_0xc9c7fa) eob
+	call(l_0xc9c7fa)
+	eob
 
 l_0xc9c7fa:
 	party_remove(2)	// Remove Paula

@@ -128,8 +128,8 @@ l_0xc90663:
 
 l_0xc9067d:
 	goto_if_flag(FLG_HOTEL_PAPERBOY_APPEAR, l_0xc906e0)	// 0x017F, 383
-	get_party_size_times(60)	// 0x003C
-	"{swap}@Welcome to the Threek Sunset Hotel." next
+	get_party_size_times(60) swap	// 0x003C
+	"@Welcome to the Threek Sunset Hotel." next
 	call(l_0xc90f3b)
 	two_choice_menu("Yes", l_0xc906b6, "No", l_0xc906b0)
 

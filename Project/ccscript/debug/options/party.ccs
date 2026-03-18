@@ -59,9 +59,11 @@ Remove_Party_Member_Selector:
 	"   {number_input(1)}"
 	goto_if_false(new_debug_menu.debug_main)
 	clearline
+
 	swap
 	get_char_at_pos(0)	// Return character number (00)
 	goto_if_false(Remove_Party_Member_Selector)
+
 	swap
 	close_hp
 	party_remove(0)

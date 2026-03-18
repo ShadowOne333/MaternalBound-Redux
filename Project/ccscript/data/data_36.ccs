@@ -640,7 +640,8 @@ l_0xc7e42c:
 	"@{name(0)} tried to give" linebreak
 	"  the {swap}{itemname(0)}" linebreak
 	"  to {name(-1)}," next
-	"{load_registers}@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
+	load_registers
+	"@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
 
 l_0xc7e468:
 	get_inventory_item(0,0) swap
