@@ -96,8 +96,7 @@ l_0xc7dacb:
 	call(l_0xc7dc85)
 	goto_if_true(l_0xc7db22)
 
-	load_registers
-	swap
+	load_registers swap
 	call(data_35.l_0xc7d958)
 	give_and_return_location(0,0) swap
 	sound(SND_BOXTAKE)	// 116

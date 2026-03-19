@@ -385,7 +385,7 @@ _Exit_Tools_Battle_Menu:
 command use_submenu( itemID, BattleAction ) {
 	window_closetop
 	window_open(DIALOGUE_WINDOW)
-	cc_asmcall(Original_Spy_Code, RET_NONE)
+	cc_asmcall(Original_Spy_Action_Code, RET_NONE)
 	cc_asmcall(0xC23B4D, RET_NONE)
 	//window_closeall
 	eob
@@ -399,7 +399,7 @@ command use_battle_item(itemID) {
 
 //CC_Spy_Action: {
 Original_Spy_Action_Code: {
-	LDA_i	(6)	// BATTLE_ACTIONS::SPY
+	LDA_i	(6)		// BATTLE_ACTIONS::SPY
 	STA_d	(0x02)
 	STA_d	(0x1E)
 	LDA_d	(0x02)
