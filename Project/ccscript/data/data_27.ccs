@@ -721,7 +721,7 @@ l_0xc6f8e6:
 	call(l_0xc6fa05)
 	goto_if_false(l_0xc6fb5d)
 	call(l_0xc6fa0c)
-	give_and_return_location(-1, POP_GUN)
+	hasitem(-1, POP_GUN)
 	goto_if_true(l_0xc6fa93)
 	counter(POP_GUN)
 	call(l_0xc6fa2e)
@@ -733,7 +733,7 @@ l_0xc6f913:
 	call(l_0xc6fa05)
 	goto_if_false(l_0xc6fb5d)
 	call(l_0xc6fa0c)
-	give_and_return_location(-1, HOLMES_HAT)
+	hasitem(-1, HOLMES_HAT)
 	goto_if_true(l_0xc6fa93)
 	counter(HOLMES_HAT)
 	call(l_0xc6fa2e)
@@ -745,7 +745,7 @@ l_0xc6f940:
 	call(l_0xc6fa05)
 	goto_if_false(l_0xc6fb5d)
 	call(l_0xc6fa0c)
-	give_and_return_location(-1, BROKEN_AIR_GUN)
+	hasitem(-1, BROKEN_AIR_GUN)
 	goto_if_true(l_0xc6fa93)
 	counter(BROKEN_AIR_GUN)
 	call(l_0xc6fa2e)
@@ -757,7 +757,7 @@ l_0xc6f96d:
 	call(l_0xc6fa05)
 	goto_if_false(l_0xc6fb5d)
 	call(l_0xc6fa0c)
-	give_and_return_location(-1, BROKEN_SPRAY_CAN)
+	hasitem(-1, BROKEN_SPRAY_CAN)
 	goto_if_true(l_0xc6fa93)
 	counter(BROKEN_SPRAY_CAN)
 	call(l_0xc6fa2e)
@@ -793,9 +793,8 @@ l_0xc6f9dc:
 l_0xc6f9fd:
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		swap
+		swap get_action_arg
 		store_registers
-		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
 	result_is(LOCKER_KEY)
@@ -803,11 +802,13 @@ l_0xc6f9fd:
 
 l_0xc6fa05:
 	load_registers swap
+	if flag FLG_KEY_ITEMS { get_action_arg }
 	result_is(BAD_KEY_MACHINE)
 	eob
 
 l_0xc6fa0c:
 	load_registers
+	if flag FLG_KEY_ITEMS { get_char_at_pos(0) }
 	swap
 	"@{name(0)} opened the locker using the {itemname(BAD_KEY_MACHINE)}."
 	sound(SND_PSI3)	// 119

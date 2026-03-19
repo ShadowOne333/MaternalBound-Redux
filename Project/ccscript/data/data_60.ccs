@@ -222,16 +222,21 @@ l_0xc9fc9e:
 l_0xc9fcd5:
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		swap
+		swap get_action_arg
 		store_registers
-		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
 	result_is(ERASER_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
 	load_registers
-	call(data_36.l_0xc7dd37)
+	if flag FLG_KEY_ITEMS {
+		swap
+		"@{name(0)} used" linebreak
+		load_registers
+		"  the {swap}{itemname(0)}." promptw
+	}
+	else { call(data_36.l_0xc7dd37) }
 
 	newline
 	"@(For some reason,| the iron eraser statue disappeared in an instant!)" wait

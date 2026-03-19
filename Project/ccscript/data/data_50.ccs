@@ -314,7 +314,6 @@ l_0xc920a2:
 
 	backup_npc_members_and_money
 	party_add(4)	// Add Poo
-	//if flag FLG_KEY_ITEMS { take(-1, TINY_RUBY) }
 	party_remove(1)	// Remove Ness
 	party_remove(2)	// Remove Paula
 	party_remove(3)	// Remove Jeff

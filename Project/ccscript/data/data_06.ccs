@@ -123,16 +123,21 @@ l_0xc57760:
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		swap
+		swap get_action_arg
 		store_registers
-		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
 	result_is(TOWER_KEY)	// 192
 	goto_if_false(l_0xc577b2)
 
 	load_registers
-	call(data_36.l_0xc7dd37)
+	if flag FLG_KEY_ITEMS {
+		swap
+		"@{name(0)} used" linebreak
+		load_registers
+		"  the {swap}{itemname(0)}." promptw
+	}
+	else { call(data_36.l_0xc7dd37) }
 
 	newline
 	"@(The key worked to open the door./| You may enter.)" wait
@@ -140,6 +145,7 @@ l_0xc57760:
 	set(FLG_SKRB_DUNGEONMAN_OPEN)	// 606
 	sound(SND_PSI3)	// 119
 	window_closeall
+	pause(15)	// Added pause so the SFX has time to finish properly
 	warp(159)	// 0x9F
 	call(data_57.l_0xc9b112)
 	eob

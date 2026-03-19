@@ -33,7 +33,7 @@ extra_animation_sprite_table: {
     ExtraSprites(13,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 4.
     ExtraSprites(14,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 5.
     ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)                    // Teddy Bear.
-    ExtraSprites(16,    51, 51, 51, 51, 51, 35, 35)                    // Super Plush Bear.
+    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	       // Super Plush Bear.
 }
 
 // When running, we need to define two more tables with the same format.
@@ -47,10 +47,10 @@ extra_animation_sprite_table: {
 define run_flag = flag 1000	// flag 1000
 
 extra_animation_sprite_table_running1: {
-    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                       // Ness.
-    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                      // Paula.
-    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                     // Jeff.
-    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                     // Poo.
+    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                     // Ness.
+    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                     // Paula.
+    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                    // Jeff.
+    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                    // Poo.
     ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)                    // Pokey.
     ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)                    // Picky.
     ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)                    // King.
@@ -63,14 +63,14 @@ extra_animation_sprite_table_running1: {
     ExtraSprites(13,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 4.
     ExtraSprites(14,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 5.
     ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)                    // Teddy Bear.
-    ExtraSprites(16,    51, 51, 51, 51, 51, 35, 35)                    // Super Plush Bear.
+    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	       // Super Plush Bear.
 }
 
 extra_animation_sprite_table_running2: {
-    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                       // Ness.
-    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                      // Paula.
-    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                     // Jeff.
-    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                     // Poo.
+    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)                     // Ness.
+    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)                     // Paula.
+    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)                    // Jeff.
+    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)                    // Poo.
     ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)                    // Pokey.
     ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)                    // Picky.
     ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)                    // King.
@@ -83,7 +83,7 @@ extra_animation_sprite_table_running2: {
     ExtraSprites(13,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 4.
     ExtraSprites(14,    39, 39, 39, 39, 39, 39, 39)                    // Flying Man 5.
     ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)                    // Teddy Bear.
-    ExtraSprites(16,    51, 51, 51, 51, 51, 35, 35)                    // Super Plush Bear.
+    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	       // Super Plush Bear.
 }
 
 // These are two special cases that need to be handled outside the table above.

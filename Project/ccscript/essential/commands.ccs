@@ -544,3 +544,35 @@ command item_name_in_quotes(id) {
     //Only one space here because a space and the open quote mark is the same length as a @
     " <{itemname(id)}>" next
 }
+
+command heal_party_hp_pp { call(proper_heal) }
+
+proper_heal: {
+    counter(1)
+
+_loop:
+    ctoarg
+    party_size_smaller_than(0)
+    goto_if_true(_exit)
+    get_char_at_pos(0)
+    store_registers
+    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
+    goto_if_true(_increment)
+    load_registers
+    character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
+    goto_if_true(_increment)
+    load_registers
+    swap
+    heal_percent(0,100)
+    recoverpp_percent(0,100)
+
+_increment:
+    inc
+    goto(_loop)
+
+_exit:
+    eob
+}
+
+command heal_and_revive_party { call(0xC915F4) }
+

@@ -922,16 +922,22 @@ l_0xc9d621:
 l_0xc9d656:
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
-		swap
+		swap get_action_arg
 		store_registers
-		get_action_arg
 	}
 	else { call(data_36.l_0xc7dd2c) }
 	result_is(CARROT_KEY)	// 253, Rabbit's carrot
 	goto_if_false(l_0xc9d6b7)
 
 	load_registers
-	call(data_36.l_0xc7dd37)
+	if flag FLG_KEY_ITEMS {
+		swap
+		"@{name(0)} used" linebreak
+		load_registers
+		"  the {swap}{itemname(0)}." promptw
+	}
+	else { call(data_36.l_0xc7dd37) }
+
 	sound(SND_CHICKEN2)	// 118
 	load_registers_shared
 	if not flag FLG_KEY_ITEMS { take_from_location(0,0) }

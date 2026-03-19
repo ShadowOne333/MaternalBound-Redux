@@ -79,9 +79,6 @@ CC_Close_Custom_Windows_OW: {
 	LDA_i	(DIALOGUE_WINDOW)	// Load standard dialogue window
 	JSL	(CLOSE_WINDOW)		// Close window routine
 
-	LDA_i	(USE_HELP_WINDOW)	// Load inventory menu (Use/Help) window
-	JSL	(CLOSE_WINDOW)		// Close window routine
-
 	LDA_i	(WHICH_WINDOW)		// Load "Which?" text window
 	JSL	(CLOSE_WINDOW)		// Close window routine
 
@@ -227,18 +224,9 @@ Spy_Description: {
 	"@and report back all its weaknesses." end
 }
 
-//------------------------------------
-//	Custom commands
-//------------------------------------
+//	Custom commands		//
 
-// Define custom USE ITEM command
-command use_item(itemID) {
-	arg(itemID)
-	cc_asmcall(CCUseItem, RET_NONE)
-	eob
-}
-
-// Use/Help submenu command
+// Help submenu command
 command help_submenu( itemID, help_text ) {
 	window_switch(INVENTORY_WINDOW)
 	window_clear
@@ -268,15 +256,6 @@ command give_menu_tools_item(itemID) {
 	"  to the Tools items.)" //eob
 }
 
-// Turn active flag off or vice versa
-command toggle_with_sound(flg) {
-	store_registers_shared
-	toggle(flg)
-	if flag flg { sound(SND_GIFTOPEN) }
-	else { sound(SND_BOXTAKE) }
-	load_registers_shared
-}
-
 //------------------------------------
 //   Main Tools Battle code
 //------------------------------------
@@ -285,17 +264,16 @@ command toggle_with_sound(flg) {
 ROM[0xC239C9] = JML	(Battle_Tools)
 
 Battle_Tools: {
-	BText	(Tools_InBattle)
+	RText	(Tools_InBattle)
 	JSL	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
+	//JML	(0xC239FC)	// Exit out of Spy's check
 	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 }
 
 CC_Close_Custom_Tools_Battle_Window: {
 	LDA_i	(INVENTORY_WINDOW)
 	JSL	(CLOSE_WINDOW)
-	JMP_l	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
-	//JML	(0xC239EA)	// End of Spy battle action call
-	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
 }
 
 // Main In-battle Tools menu
@@ -338,10 +316,7 @@ Tools_InBattle:
 	if flag FLG_ITEM_HEAVY_BAZOOKA {
 		load_str_callonhover("Heavy bazooka", SetCount10) }
 
-_Help_Battle_Backout:
 	print_strings_vertical(2)
-
-_UseHelp_Battle_Window_Backout:
 	if not do_menu_nounload {
 		// Exit
 		// Closing the windows is handled through ASM after returning from the Tools menu
@@ -367,57 +342,61 @@ _Exit_Tools_Battle_Menu:
 	eob
 
 // Battle actions
-	spy_battle:		use_submenu(ATM_CARD, 6) eob
-	//protractor_battle:	use_submenu(PROTRACTOR, 187) eob
-	//ruler_battle:		use_submenu(RULER, 186) eob
-	counterpsiunit_battle:	use_submenu(COUNTER_PSI_UNIT, 159) eob
-	slimegenerator_battle:	use_submenu(SLIME_GENERATOR, 169) eob
-	hpsucker_battle: 	use_submenu(HP_SUCKER, 161) eob
-	shieldkiller_battle:	use_submenu(SHIELD_KILLER, 160) eob
-	neutralizer_battle:	use_submenu(NEUTRALIZER, 247) eob
-	hungryhpsucker_battle:	use_submenu(HUNGRY_HP_SUCKER, 176) eob
-	//tofumachine_battle:	use_submenu(TOFU_MACHINE, 170) eob
-	bazooka_battle:		use_submenu(BAZOOKA, 310) eob
-	defenseshower_battle:	use_submenu(DEFENSE_SHOWER, 184) eob
-	heavybazooka_battle:	use_submenu(HEAVY_BAZOOKA, 311) eob
+	spy_battle:		cc_asmcall(SpyKit_Use, RET_NONE) eob
+	//protractor_battle:	cc_asmcall(Protractor_Use, RET_NONE) eob
+	//ruler_battle:		cc_asmcall(Ruler_Use, RET_NONE) eob
+	counterpsiunit_battle:	cc_asmcall(CounterPSIUnit_Use, RET_NONE) eob
+	slimegenerator_battle:	cc_asmcall(SlimeGenerator_Use, RET_NONE) eob
+	hpsucker_battle: 	cc_asmcall(HPSucker_Use, RET_NONE) eob
+	shieldkiller_battle:	cc_asmcall(ShieldKiller_Use, RET_NONE) eob
+	neutralizer_battle:	cc_asmcall(Neutralizer_Use, RET_NONE) eob
+	hungryhpsucker_battle:	cc_asmcall(HungryHPSucker_Use, RET_NONE) eob
+	//tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
+	bazooka_battle:		cc_asmcall(Bazooka_Use, RET_NONE) eob
+	defenseshower_battle:	cc_asmcall(DefenseShower_Use, RET_NONE) eob
+	heavybazooka_battle:	cc_asmcall(HeavyBazooka_Use, RET_NONE) eob
 
-// Use/Help submenu command
-command use_submenu( itemID, BattleAction ) {
-	window_closetop
-	window_open(DIALOGUE_WINDOW)
-	cc_asmcall(Original_Spy_Action_Code, RET_NONE)
-	cc_asmcall(0xC23B4D, RET_NONE)
-	//window_closeall
-	eob
-}
+// Actions code calls
+	SpyKit_Use:		CC_Use_Battle_Action(6)
+	//Protractor_Use:	CC_Use_Battle_Action(187)
+	//Ruler_Use:		CC_Use_Battle_Action(186)
+	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
+	SlimeGenerator_Use:	CC_Use_Battle_Action(169)
+	HPSucker_Use:		CC_Use_Battle_Action(161)
+	ShieldKiller_Use:	CC_Use_Battle_Action(160)
+	Neutralizer_Use:	CC_Use_Battle_Action(247)
+	HungryHPSucker_Use:	CC_Use_Battle_Action(176)
+	//TofuMachine_Use:	CC_Use_Battle_Action(170)
+	Bazooka_Use:		CC_Use_Battle_Action(310)
+	DefenseShower_Use:	CC_Use_Battle_Action(184)
+	HeavyBazooka_Use:	CC_Use_Battle_Action(311)
 
-command use_battle_item(itemID) {
-	arg(itemID)
-	cc_asmcall(Original_Spy_Action_Code, RET_NONE)
-	eob
-}
-
-//CC_Spy_Action: {
-Original_Spy_Action_Code: {
-	LDA_i	(6)		// BATTLE_ACTIONS::SPY
+command CC_Use_Battle_Action( BattleActionID ) {
+_C239C9:
+	LDA_i	(BattleActionID)	// Battle action number (6 = Spy)
 	STA_d	(0x02)
 	STA_d	(0x1E)
 	LDA_d	(0x02)
+
 	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
 	SEP	(0x20)
 	LDA_8	(0x11)
 	STA_a	(0xA981)	//  BATTLE_MENU_SELECTION + battle_menu_selection::targetting
+
 	LDY_d	(0x02)
 	LDX_i	(0x0001)
+
 	REP	(0x20)
 	LDA_i	(0x0000)
 	JSL	(0xC1DE37)	// REDIRECT_C1242E
+
+_Exit_Routine:	// 0xC239EA
 	SEP	(0x20)
 	STA_a	(0xA982)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_target
 	REP	(0x20)
 	AND_i	(0x00FF)
-	BNE	(0x04)
-	JML	(0xC23829)	// JMP $3829
-	JML	(0xC23B4D)	// JMP $3B4D
+	BNE	(0x04)		// BNE (0x03) changed to 04 to account for the JML's 4 bytes
+	JML	(0xC239C9)	// Loop, 0xC23829
+	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 }
 //------------------------------------
