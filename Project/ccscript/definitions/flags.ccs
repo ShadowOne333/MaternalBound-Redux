@@ -782,8 +782,9 @@ define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
 // New flags for Key items
 //------------------------------------
 
-/* Key and Tool items obtained from Gift boxes */
+/* Key and Tool items obtained from boxes */
 define FLG_ITEM_HP_SUCKER		= flag 855
+define FLG_ITEM_NEUTRALIZER		= flag 870
 define FLG_ITEM_CARROT_KEY		= flag 904
 
 // Flags up to 976 are item-related, don't touch!
@@ -830,7 +831,6 @@ define FLG_POO_SOLO			= flag 799
 define FLG_ITEM_COUNTER_PSI_UNIT	= flag 977
 define FLG_ITEM_SLIME_GENERATOR		= flag 978
 define FLG_ITEM_SHIELD_KILLER		= flag 979
-define FLG_ITEM_NEUTRALIZER		= flag 980
 define FLG_ITEM_HUNGRY_HP_SUCKER	= flag 981
 define FLG_ITEM_TOFU_MACHINE		= flag 982
 define FLG_ITEM_BAZOOKA			= flag 983

@@ -62,5 +62,13 @@ ROM[0xC4DE78] = {
 }
 //------------------------------------------------------------------
 // Dad calls after 3 hours instead of 2
-ROM[0xC05284]	= CMP_i	(0x0003)
+ROM[0xC05284] = CMP_i	(0x0003)
+//------------------------------------------------------------------
+// Space out the Main menu from 06 tiles width to 07 tiles width
+// to make room for the Key items text
+ROM[0xC3E964] = {	// Originally 06 -> Changed to 07
+	"[00 00 07 00]"
+	"[00 01 07 01]"
+	"[00 02 07 02]"
+}
 //------------------------------------------------------------------

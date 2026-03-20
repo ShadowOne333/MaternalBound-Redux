@@ -265,15 +265,17 @@ ROM[0xC239C9] = JML	(Battle_Tools)
 
 Battle_Tools: {
 	RText	(Tools_InBattle)
-	JSL	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
+	JML	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
 	//JML	(0xC239FC)	// Exit out of Spy's check
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+	JML	(0xC239FC)	// @UNKNOWN93, after the whole Spy code
 }
 
 CC_Close_Custom_Tools_Battle_Window: {
 	LDA_i	(INVENTORY_WINDOW)
 	JSL	(CLOSE_WINDOW)
 	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
+	//	^NEEDED to return to Main menu
 }
 
 // Main In-battle Tools menu
@@ -339,6 +341,7 @@ Tools_InBattle:
 		switch_entry(defenseshower_battle)
 		switch_entry(heavybazooka_battle)
 _Exit_Tools_Battle_Menu:
+	cc_asmcall(CC_Close_Custom_Tools_Battle_Window, RET_NONE)
 	eob
 
 // Battle actions
@@ -371,32 +374,38 @@ _Exit_Tools_Battle_Menu:
 	DefenseShower_Use:	CC_Use_Battle_Action(184)
 	HeavyBazooka_Use:	CC_Use_Battle_Action(311)
 
-command CC_Use_Battle_Action( BattleActionID ) {
-_C239C9:
-	LDA_i	(BattleActionID)	// Battle action number (6 = Spy)
-	STA_d	(0x02)
+command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
+	LDA_i	(BattleActionID)	// Spy battle action
+	//STA_d   (0x02)		//1
 	STA_d	(0x1E)
-	LDA_d	(0x02)
 
+	//LDA_d   (0x02)		//1
 	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
 	SEP	(0x20)
 	LDA_8	(0x11)
-	STA_a	(0xA981)	//  BATTLE_MENU_SELECTION + battle_menu_selection::targetting
+	STA_a	(0xA981)	// BATTLE_MENU_SELECTION + battle_menu_selection::targetting
 
-	LDY_d	(0x02)
+	//LDY_d   (0x02)		//1
+	REP	(0x20)		//
 	LDX_i	(0x0001)
+	LDY_d	(0x1E)		//
+	// Added so the Inventory window does not cover up the enemy when targetting
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
 
-	REP	(0x20)
+	//REP	(0x20)		//1
 	LDA_i	(0x0000)
+	LDX_i	(0x0001)	//
 	JSL	(0xC1DE37)	// REDIRECT_C1242E
+	//JMP	(_Exit_Routine)
 
 _Exit_Routine:	// 0xC239EA
 	SEP	(0x20)
 	STA_a	(0xA982)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_target
 	REP	(0x20)
 	AND_i	(0x00FF)
-	BNE	(0x04)		// BNE (0x03) changed to 04 to account for the JML's 4 bytes
-	JML	(0xC239C9)	// Loop, 0xC23829
+	BNE	(0x04)
+	JML	(0xC23829)	// Loop back to Menu creation, 0xC239C9
 	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 }
 //------------------------------------

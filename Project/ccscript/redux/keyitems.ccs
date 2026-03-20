@@ -96,6 +96,7 @@ CC_Close_Custom_Windows: {
 }
 
 Key_Items_Prep: {
+	//if flag FLG_JEFF_SOLO and not FLG_ITEM_KEY_LOCKER { eob }
 	call(open_which_window)
 	open_hp
 	show_wallet
