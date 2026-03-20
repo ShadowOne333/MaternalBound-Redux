@@ -739,6 +739,21 @@ l_0xc7d87f:
 
 	swap
 	call(l_0xc7d947)
+
+	if flag FLG_KEY_ITEMS {
+		swap
+		result_is(CARROT_KEY)
+		goto_if_false(_not_carrot_key)
+
+		newline
+		"@{name(0)} adds it" linebreak
+		"  to the Key items." swap wait
+		sound(SND_BOXTAKE)	// 116
+		eob
+	}
+
+_not_carrot_key:
+	if flag FLG_KEY_ITEMS { load_registers swap }
 	get_item_receiver(-1)
 	goto_if_false(l_0xc7d8e6)
 

@@ -412,6 +412,7 @@ l_0xc79f33:
 	unset(FLG_PAULA_KI)
 	unset(FLG_TEDDYBEAR_KI)
 	set(FLG_JEFF_SOLO)
+	set(FLG_TOOL_ITEMS)
 
 	"@But you are our one and only hope!..." promptw
 	window_closeall
