@@ -13,6 +13,7 @@ import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/ccexpand.ccs"
 import "../essential/commands.ccs"
+import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
@@ -278,6 +279,61 @@ CC_Close_Custom_Tools_Battle_Window: {
 	//	^NEEDED to return to Main menu
 }
 
+// Show Tools option only when Jeff is in the party
+ROM[0xC133CB] = {
+	JML	(Key_N_Tools_Option_Appear)
+	NOP
+}
+
+// Hide the Tools menu options if Jeff isn't on the party
+// Also, Hide the Key items option if Jeff hasn't gotten any Key item yet
+Key_N_Tools_Option_Appear: {
+// Original code:
+	LDA_d	(0x02)
+	CMP_i	(0x0003)	// PSI option check
+	BNE	(0x14)		// _BNE1
+
+	JSL_RTS_C1	(0xC1C373)	// B length
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE1
+	JML	(0xC1348F)
+
+_BNE1:
+// Check for Tools menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0006)	// Check for 'Status' / Tools menu option
+	BNE	(0x10)		// _BNE2
+
+// Flag check for Jeff in party for Tools option to appear
+	LDA_i	(FLG_JEFF_KI)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE2
+	JML	(0xC1348F)
+
+_BNE2:
+// Check for Key items menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0005)	// Check for 'Check' / Key items menu option
+	BNE	(0x1F)	// _Exit
+
+// Flag check for Jeff in party and its 1st key for Key items option to appear for him
+	LDA_i	(FLG_JEFF_SOLO)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x03)
+	JMP	(_Exit)
+
+	LDA_i	(FLG_ITEM_KEY_LOCKER)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)	// _Exit
+	JML	(0xC1348F)
+
+_Exit:
+	JML	(0xC133DD)	// Return to original code
+}
+
 // Main In-battle Tools menu
 Tools_InBattle:
 	store_registers_shared
@@ -295,28 +351,28 @@ Tools_InBattle:
 	// load_str_callonhover("Protractor", SetCount2)
 	// load_str_callonhover("Ruler", SetCount3)
 
-	if flag FLG_ITEM_COUNTER_PSI_UNIT {
-		load_str_callonhover("Counter-PSI unit", SetCount2) }
 	if flag FLG_ITEM_SLIME_GENERATOR {
-		load_str_callonhover("Slime generator", SetCount3) }
-	if flag FLG_ITEM_HP_SUCKER {
-		load_str_callonhover("HP-sucker", SetCount4) }
+		load_str_callonhover("Slime generator", SetCount2) }
 	if flag FLG_ITEM_SHIELD_KILLER {
-		load_str_callonhover("Shield killer", SetCount5) }
+		load_str_callonhover("Shield killer", SetCount3) }
+	if flag FLG_ITEM_COUNTER_PSI_UNIT {
+		load_str_callonhover("Counter-PSI unit", SetCount4) }
 	if flag FLG_ITEM_NEUTRALIZER {
-		load_str_callonhover("Neutralizer", SetCount6) }
+		load_str_callonhover("Neutralizer", SetCount5) }
+	if flag FLG_ITEM_DEFENSE_SHOWER {
+		load_str_callonhover("Defense shower", SetCount6) }
 	//if flag FLG_ITEM_XTERMINATOR_SPRAY {
 		//load_str_callonhover("Xterminator spray", SetCount7) }
+	if flag FLG_ITEM_HP_SUCKER {
+		load_str_callonhover("HP-sucker", SetCount7) }
 	if flag FLG_ITEM_HUNGRY_HP_SUCKER {
-		load_str_callonhover("Hungry HP-sucker", SetCount7) }
-	//if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
-		//load_str_callonhover("Tofu machine", SetCount8) }
+		load_str_callonhover("Hungry HP-sucker", SetCount8) }
 	if flag FLG_ITEM_BAZOOKA {
-		load_str_callonhover("Bazooka", SetCount8) }
-	if flag FLG_ITEM_DEFENSE_SHOWER {
-		load_str_callonhover("Defense shower", SetCount9) }
+		load_str_callonhover("Bazooka", SetCount9) }
 	if flag FLG_ITEM_HEAVY_BAZOOKA {
 		load_str_callonhover("Heavy bazooka", SetCount10) }
+	if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
+		load_str_callonhover("Tofu machine", SetCount11) }
 
 	print_strings_vertical(2)
 	if not do_menu_nounload {
@@ -328,18 +384,18 @@ Tools_InBattle:
 	ctoarg
 	swap
 
-	switch_goto(12)	// Max 16
+	switch_goto(11)	// Max 14
 		switch_entry(spy_battle)
-		switch_entry(counterpsiunit_battle)
 		switch_entry(slimegenerator_battle)
-		switch_entry(hpsucker_battle)
 		switch_entry(shieldkiller_battle)
+		switch_entry(counterpsiunit_battle)
 		switch_entry(neutralizer_battle)
-		switch_entry(hungryhpsucker_battle)
-		//switch_entry(tofumachine_battle)
-		switch_entry(bazooka_battle)
 		switch_entry(defenseshower_battle)
+		switch_entry(hpsucker_battle)
+		switch_entry(hungryhpsucker_battle)
+		switch_entry(bazooka_battle)
 		switch_entry(heavybazooka_battle)
+		switch_entry(tofumachine_battle)
 _Exit_Tools_Battle_Menu:
 	cc_asmcall(CC_Close_Custom_Tools_Battle_Window, RET_NONE)
 	eob
@@ -348,64 +404,60 @@ _Exit_Tools_Battle_Menu:
 	spy_battle:		cc_asmcall(SpyKit_Use, RET_NONE) eob
 	//protractor_battle:	cc_asmcall(Protractor_Use, RET_NONE) eob
 	//ruler_battle:		cc_asmcall(Ruler_Use, RET_NONE) eob
-	counterpsiunit_battle:	cc_asmcall(CounterPSIUnit_Use, RET_NONE) eob
 	slimegenerator_battle:	cc_asmcall(SlimeGenerator_Use, RET_NONE) eob
-	hpsucker_battle: 	cc_asmcall(HPSucker_Use, RET_NONE) eob
 	shieldkiller_battle:	cc_asmcall(ShieldKiller_Use, RET_NONE) eob
+	counterpsiunit_battle:	cc_asmcall(CounterPSIUnit_Use, RET_NONE) eob
 	neutralizer_battle:	cc_asmcall(Neutralizer_Use, RET_NONE) eob
-	hungryhpsucker_battle:	cc_asmcall(HungryHPSucker_Use, RET_NONE) eob
-	//tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
-	bazooka_battle:		cc_asmcall(Bazooka_Use, RET_NONE) eob
 	defenseshower_battle:	cc_asmcall(DefenseShower_Use, RET_NONE) eob
+	hpsucker_battle: 	cc_asmcall(HPSucker_Use, RET_NONE) eob
+	hungryhpsucker_battle:	cc_asmcall(HungryHPSucker_Use, RET_NONE) eob
+	bazooka_battle:		cc_asmcall(Bazooka_Use, RET_NONE) eob
 	heavybazooka_battle:	cc_asmcall(HeavyBazooka_Use, RET_NONE) eob
+	tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
 
 // Actions code calls
 	SpyKit_Use:		CC_Use_Battle_Action(6)
 	//Protractor_Use:	CC_Use_Battle_Action(187)
 	//Ruler_Use:		CC_Use_Battle_Action(186)
-	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
 	SlimeGenerator_Use:	CC_Use_Battle_Action(169)
-	HPSucker_Use:		CC_Use_Battle_Action(161)
 	ShieldKiller_Use:	CC_Use_Battle_Action(160)
+	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
 	Neutralizer_Use:	CC_Use_Battle_Action(247)
-	HungryHPSucker_Use:	CC_Use_Battle_Action(176)
-	//TofuMachine_Use:	CC_Use_Battle_Action(170)
-	Bazooka_Use:		CC_Use_Battle_Action(310)
 	DefenseShower_Use:	CC_Use_Battle_Action(184)
+	HPSucker_Use:		CC_Use_Battle_Action(161)
+	HungryHPSucker_Use:	CC_Use_Battle_Action(176)
+	Bazooka_Use:		CC_Use_Battle_Action(310)
 	HeavyBazooka_Use:	CC_Use_Battle_Action(311)
+	TofuMachine_Use:	CC_Use_Battle_Action(170)
 
 command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
 	LDA_i	(BattleActionID)	// Spy battle action
-	//STA_d   (0x02)		//1
 	STA_d	(0x1E)
 
-	//LDA_d   (0x02)		//1
+	LDA_d   (0x1E)		///
 	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
 	SEP	(0x20)
 	LDA_8	(0x11)
 	STA_a	(0xA981)	// BATTLE_MENU_SELECTION + battle_menu_selection::targetting
 
-	//LDY_d   (0x02)		//1
-	REP	(0x20)		//
+	LDY_d   (0x1E)		///
 	LDX_i	(0x0001)
-	LDY_d	(0x1E)		//
+
 	// Added so the Inventory window does not cover up the enemy when targetting
 	LDA_i	(INVENTORY_WINDOW)
 	JSL	(CLOSE_WINDOW)
 
-	//REP	(0x20)		//1
+	REP	(0x20)		///
 	LDA_i	(0x0000)
-	LDX_i	(0x0001)	//
 	JSL	(0xC1DE37)	// REDIRECT_C1242E
-	//JMP	(_Exit_Routine)
 
 _Exit_Routine:	// 0xC239EA
 	SEP	(0x20)
 	STA_a	(0xA982)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_target
-	REP	(0x20)
+	REP	(0x20)		// Did we exit the target selection?
 	AND_i	(0x00FF)
-	BNE	(0x04)
-	JML	(0xC23829)	// Loop back to Menu creation, 0xC239C9
+	BNE	(0x04)		// If not, continue to the end of the Selection
+	JML	(Battle_Tools)	// Loop back to Menu creation (NEEDED)
 	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 }
 //------------------------------------

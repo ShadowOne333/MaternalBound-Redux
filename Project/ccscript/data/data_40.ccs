@@ -286,7 +286,8 @@ l_0xc834a8:
 l_0xc834e1:
 	title(1, Electra)
 	"@I kept asking around for Strawberry tofu, but..." wait
-	hasitem(-1, TOFU_MACHINE)
+	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_TOFU) }
+	else { hasitem(-1, TOFU_MACHINE) }
 	goto_if_true(l_0xc83515)
 	eob
 
@@ -306,7 +307,7 @@ l_0xc83515:
 	"  Don't forget to drop by!" wait
 	window_closeall
 
-	take(-1, TOFU_MACHINE)	// Item 0x8B / 139, Yogurt machine
+	if not flag FLG_KEY_ITEMS { take(-1, TOFU_MACHINE) }	// Item 0x8B / 139, Yogurt machine
 	set(FLG_FOUR_MAID_THANKS)	// 142
 	npc_do_mc(951,680)	// 0x03B7, 0x02A8
 	wait_movement

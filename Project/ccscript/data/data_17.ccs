@@ -10,6 +10,7 @@ import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
 command e(label) "{long label}"
@@ -412,10 +413,14 @@ l_0xc60e30:
 	linebreak
 	"@...Did you come in search of this?" next
 	"@Someone left it behind in this hole." next
-	get_item_receiver(-1)
-	goto_if_false(l_0xc610f1)
-	give_and_return_location(0, TOFU_MACHINE)
-	call(data_36.l_0xc7dcb6)
+
+	if flag FLG_KEY_ITEMS { give_menu_key_item(TOFU_MACHINE) }
+	else {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc610f1)
+		give_and_return_location(0, TOFU_MACHINE)
+		call(data_36.l_0xc7dcb6)
+	}
 	next
 	set(FLG_ITEM_TOFU)	// 554
 	goto(l_0xc60ff3)

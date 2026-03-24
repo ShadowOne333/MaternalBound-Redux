@@ -96,7 +96,6 @@ CC_Close_Custom_Windows: {
 }
 
 Key_Items_Prep: {
-	//if flag FLG_JEFF_SOLO and not FLG_ITEM_KEY_LOCKER { eob }
 	call(open_which_window)
 	open_hp
 	show_wallet
@@ -133,6 +132,7 @@ SetCount24: { counter(24) ctoarg eob }
 SetCount25: { counter(25) ctoarg eob }
 SetCount26: { counter(26) ctoarg eob }
 SetCount27: { counter(27) ctoarg eob }
+SetCount28: { counter(28) ctoarg eob }
 
 //------------------------------------
 //   Main Key items ccscript code
@@ -185,39 +185,39 @@ KeyItems:
 			load_str_callonhover("Show ticket", SetCount13) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_TONZURA_FREE {
 			load_str_callonhover("Diamond", SetCount14) }
-		/*if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {	// Tofu machine
-			load_str_callonhover("Tofu machine", SetCount15) }*/
+		if flag FLG_ITEM_TOFU and not flag FLG_FOUR_MAID_THANKS {	// Tofu machine
+			load_str_callonhover("Tofu machine", SetCount15) }
 		if flag FLG_PU and not flag FLG_SUMS_OMAR_B_APPEAR {
-			load_str_callonhover("Tiny ruby", SetCount15) }
+			load_str_callonhover("Tiny ruby", SetCount16) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
-			load_str_callonhover("Signed banana", SetCount16) }
+			load_str_callonhover("Signed banana", SetCount17) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
-			load_str_callonhover("Hieroglyph copy", SetCount17) }
+			load_str_callonhover("Hieroglyph copy", SetCount18) }
 		if flag FLG_ITEM_CARROT_KEY and not flag FLG_RAMA_RABBIT_DISAPPEAR {
-			load_str_callonhover("Rabbits' carrot", SetCount18) }
+			load_str_callonhover("Rabbits' carrot", SetCount19) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
-			load_str_callonhover("Key to the tower", SetCount19) }
+			load_str_callonhover("Key to the tower", SetCount20) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
-			load_str_callonhover("Hawk eye", SetCount20) }
+			load_str_callonhover("Hawk eye", SetCount21) }
 		if flag FLG_ITEM_MUKUCHI and not flag FLG_GUMI_USEBOOK or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU {
-			load_str_callonhover("Shyness book", SetCount21) }
+			load_str_callonhover("Shyness book", SetCount22) }
 		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not flag FLG_DKFD_GUMI_BOSS {
 		// Open Underworld rock or Tenda boss takes the Tendakraut
-			load_str_callonhover("Tendakraut", SetCount22) }
+			load_str_callonhover("Tendakraut", SetCount23) }
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
-			load_str_callonhover("Meteorite piece", SetCount23) }
+			load_str_callonhover("Meteorite piece", SetCount24) }
 	}
 
 	if flag FLG_JEFF_SOLO {
 		if flag FLG_ITEM_KEY_LOCKER and not flag FLG_ITEM_GAUS {
-			load_str_callonhover("Key to the locker", SetCount24) }
+			load_str_callonhover("Key to the locker", SetCount25) }
 		if flag FLG_ITEM_GAUS {
-			load_str_callonhover("Bad key machine", SetCount25) }
+			load_str_callonhover("Bad key machine", SetCount26) }
 		if flag FLG_ITEM_BUBBLE_GUM and not flag FLG_WINS_ROPE_SWITCH {	// and flag FLG_BALLOONMONKEY
-			load_str_callonhover("Pak of bubble gum", SetCount26) }
+			load_str_callonhover("Pak of bubble gum", SetCount27) }
 	}
 
-	if flag FLG_POO_SOLO { load_str_callonhover("Tiny ruby", SetCount27) }
+	if flag FLG_POO_SOLO { load_str_callonhover("Tiny ruby", SetCount28) }
 
 _Help_Backout:
 	print_strings_vertical(2)
@@ -247,7 +247,7 @@ _UseHelp_Window_Backout:
 		switch_entry(zombiepaper)
 		switch_entry(showticket)
 		switch_entry(diamond)
-		//switch_entry(tofumachine)
+		switch_entry(tofumachine)
 		switch_entry(tinyruby)
 		switch_entry(signedbanana)
 		switch_entry(hieroglyph)
@@ -281,7 +281,7 @@ _Exit_KeyItems_Menu:
 	zombiepaper:	use_help_submenu(ZOMBIE_PAPER, item_descriptions.l_0xc555b8) eob
 	showticket:	use_help_submenu(SHOW_TICKET, item_descriptions.l_0xc5569c) eob
 	diamond:	use_help_submenu(DIAMOND, item_descriptions.l_0xc55740) eob
-	//tofumachine:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
+	tofumachine:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
 	tinyruby:	use_help_submenu(TINY_RUBY, item_descriptions.l_0xc55de0) eob
 	signedbanana:	use_help_submenu(SIGNED_BANANA, item_descriptions.l_0xc5576a) eob
 	hieroglyph:	use_help_submenu(HIEROGLYPH, item_descriptions.l_0xc557e7) eob
@@ -384,7 +384,8 @@ keyitemcounter:
 	*/
 	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }	// Show ticket
 	/*
-	if counter_is(DIAMOND) { toggle_with_sound(FLG_DSRT_ITEM_DIA) }	// Diamond
+	if counter_is(DIAMOND) { toggle_with_sound(FLG_DSRT_ITEM_DIA) }		// Diamond
+	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }	// Tofu machine
 	if counter_is(TINY_RUBY) { toggle_with_sound(FLG_ITEM_TINY_RUBY) }	// Tiny ruby (Main)
 	if counter_is(SIGNED_BANANA) { toggle_with_sound(FLG_ITEM_BANANA) }	// Signed banana
 	if counter_is(HIEROGLYPH) { toggle_with_sound(FLG_SUMS_HIEROGLYPH) }	// Hieroglyph copy
@@ -398,7 +399,6 @@ keyitemcounter:
 	if counter_is(BAD_KEY_MACHINE) { toggle_with_sound(FLG_ITEM_GAUS) }	// Bad key machine
 	if counter_is(BUBBLE_GUM) { toggle_with_sound(FLG_ITEM_BUBBLE_GUM) }	// Bubble gum
 	if counter_is(TINY_RUBY) { toggle_with_sound(FLG_ITEM_TINY_RUBY) }	// Tiny ruby (Poo)
-	if counter_is(TOFU_MACHINE) { toggle_with_sound(FLG_ITEM_YOGURT_MACHINE) }
 	*/
 eob
 

@@ -5,9 +5,11 @@
  */
 
 import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/stdext.ccs"
+import "../redux/tools.ccs"
 import "../redux/window_titles.ccs"
 import "../debug/diamond.ccs"
 
@@ -17,6 +19,7 @@ command e(label) "{long label}"
 // (Continue) Event debug menu moved to "debug/options/events.ccs"
 // Item Descriptions selector moved to "debug/options/item_desc.ccs"
 
+// Near-Pyramid seller (Bazooka)
 l_0xc5b3ba:
 	"@Since I'm dealing in some pretty rough stuff," next
 	"@I can't run my business in town." next
@@ -34,6 +37,23 @@ l_0xc5b405:
 
 l_0xc5b426:
 	"@{itemname(0)}?" next
+	swap
+	result_is(BAZOOKA)
+	goto_if_true(_is_bazooka)
+	eob
+
+_is_bazooka:
+	sound(SND_GUITAR)
+	unset(FLG_SHOP_53)
+	unset(FLG_SHOPTEMP_3)
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+	set(FLG_ITEM_BAZOOKA)
+	//take(-1, BAZOOKA)
+_no_bazooka:
+	"@Hey, thanks!" next
+	"@That's a one-of-a-kind weapon, so be careful with it!" next
+	give_menu_tools_item(BAZOOKA) wait
 	eob
 
 l_0xc5b42e:
@@ -73,7 +93,7 @@ l_0xc5b507:
 	eob
 
 l_0xc5b541:
-	"@What are you going to sell me?" linebreak
+	"@What are you going to sell me?" wait
 	eob
 
 l_0xc5b551:
