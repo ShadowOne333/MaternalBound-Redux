@@ -786,8 +786,9 @@ define FLG_THRK_URBAN_ZOMBI_GONE	= flag 780
 define FLG_ITEM_HP_SUCKER		= flag 855
 define FLG_ITEM_NEUTRALIZER		= flag 870
 define FLG_ITEM_CARROT_KEY		= flag 904
+// FLG_ITEM_TOFU is the Tofu machine flag (554)
 
-// Flags up to 976 are item-related, don't touch!
+/* Flags up to 976 are item-related, don't touch! */
 
 // Whether Key Item Menu is enabled
 define FLG_KEY_ITEMS			= flag 781
@@ -832,10 +833,9 @@ define FLG_ITEM_COUNTER_PSI_UNIT	= flag 977
 define FLG_ITEM_SLIME_GENERATOR		= flag 978
 define FLG_ITEM_SHIELD_KILLER		= flag 979
 define FLG_ITEM_HUNGRY_HP_SUCKER	= flag 981
-define FLG_ITEM_TOFU_MACHINE		= flag 982
-define FLG_ITEM_BAZOOKA			= flag 983
-define FLG_ITEM_DEFENSE_SHOWER		= flag 984
-define FLG_ITEM_HEAVY_BAZOOKA		= flag 985
+define FLG_ITEM_BAZOOKA			= flag 982
+define FLG_ITEM_DEFENSE_SHOWER		= flag 983
+define FLG_ITEM_HEAVY_BAZOOKA		= flag 984
 
 /* Original Game Flags */
 define flg_Venus			= flag 0x093

@@ -788,8 +788,8 @@ l_0xc79081:
 	eob
 
 l_0xc79088:
-	"@(For some weird reason," next
-	"@a pencil-shaped iron statue is blocking the path.)" end
+	"@(For some weird reason," pause(20)
+	"  a pencil-shaped iron statue is blocking the path.)" end
 
 _pencil_check:
 	if flag FLG_KEY_ITEMS {
