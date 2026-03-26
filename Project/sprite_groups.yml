@@ -3835,19 +3835,30 @@
   Size: 16x24
   Swim Flags: [false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false]
-473: # Lamp in Winters tents
+473: # King running sprites
+  East/West Collision Height: 8
+  East/West Collision Width: 12
+  Length: 16
+  North/South Collision Height: 8
+  North/South Collision Width: 12
+  Size: 24x24
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]
+474: # Porky running sprites
   East/West Collision Height: 8
   East/West Collision Width: 8
-  Length: 8
+  Length: 16
   North/South Collision Height: 8
   North/South Collision Width: 8
-  Size: 24x24
-  Swim Flags: [false, false, false, false, false, false, false, false]
-474: # Stove in Winters tents
+  Size: 16x24
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]
+475: # Picky running sprites
   East/West Collision Height: 8
   East/West Collision Width: 8
-  Length: 8
+  Length: 16
   North/South Collision Height: 8
   North/South Collision Width: 8
-  Size: 24x24
-  Swim Flags: [false, false, false, false, false, false, false, false]
+  Size: 16x24
+  Swim Flags: [false, false, false, false, false, false, false, false, false, false,
+    false, false, false, false, false, false]

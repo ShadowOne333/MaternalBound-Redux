@@ -358,7 +358,7 @@ Tools_InBattle: {
 	ASMLoadAddress0E	(Tools)	// Load "Tools" text
 	LDA_i	(INVENTORY_WINDOW)	// Load the inventory window
 	JSL	(SET_WINDOW_TITLE)	// Set the "Tools" text as its title
-	STZ_d	(0x0A)
+	STZ_d	(0x0A)	// On-select CCS callback. Make null
 	STZ_d	(0x0C)
 
 	add_tool(Spy_Kit, 6)
@@ -381,10 +381,12 @@ _start_menu_printing:
 	LDA_i	(1)
 	JSL	(SELECTION_MENU_REDIRECT)
 
+_cancel_select_menu:
 	CMP_i	(0)
 	BNE	(0x03)
 	JMP	(_Back_Out)
 
+_start_menu_options:
 	CMP_i	(1)
 	BNE	(0x03)
 	JMP	(_Spy_Kit_Battle_Action)
