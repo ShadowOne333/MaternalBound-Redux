@@ -21,7 +21,13 @@ import "../redux/window_titles.ccs"
 // 	Definitions
 //------------------------------------
 
-// Define routines
+// Define routines and variables
+define PARTY_ID			= 0x00	// Current kid's ID (1 Ness, 2 Paula, etc)
+define BATTLE_ITEM_USED		= 0xA97C // 1 byte
+define BATTLE_SELECTION_PARAM1	= 0xA97E // 1 byte; item slot (not ID) or PSI ID for action argument
+define BATTLE_SELECTION_ACTION	= 0xA97F	// 2 bytes, RAM
+define BATTLE_SELECTION_TARGETTING	= 0xA981	// 1 byte, but determineTargetting joins it with the target
+
 define UNFREEZE_OBJECTS		= 0xC09451
 define PLAY_SOUND		= 0xC0ABE0
 
@@ -119,10 +125,7 @@ SetCount12: { counter(12) ctoarg eob }
 //------------------------------------
 //   Main Tools Overworld ccscript code
 //------------------------------------
-Tools_Overworld:
-	// Check if Jeff is in the party, if not, exit immediately
-	if not flag FLG_JEFF_KI { eob }
-	
+Tools_Overworld:	
 	unset(FLG_TEMP_USEITEM)
 
 	store_registers_shared
@@ -265,21 +268,6 @@ command give_menu_tools_item(itemID) {
 
 // Hijack the "Spy" routine for Battle use
 ROM[0xC239C9] = JML	(Tools_InBattle)
-
-/*Battle_Tools: {
-	RText	(Tools_InBattle)
-	JML	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
-	//JML	(0xC239FC)	// Exit out of Spy's check
-	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-	JML	(0xC239FC)	// @UNKNOWN93, after the whole Spy code
-}
-
-CC_Close_Custom_Tools_Battle_Window: {
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
-	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
-	//	^NEEDED to return to Main menu
-}*/
 
 // Show Tools option only when Jeff is in the party
 ROM[0xC133CB] = {
@@ -437,16 +425,22 @@ _Back_Out:
 	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
 
 _Spy_Kit_Battle_Action:
-	CC_Use_Battle_Action(6)
-	JMP	(l_C239EA)
+	reset_action
+	set_action(6)
+	ret_target
+	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 
 _Slime_Generator_Battle_Action:
-	CC_Use_Battle_Action(169)
-	JMP	(l_C239EA)
+	reset_action
+	set_action(169)
+	ret_target
+	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 
 _Shield_Killer_Battle_Action:
-	CC_Use_Battle_Action(160)
-	JMP	(l_C239EA)
+	reset_action
+	set_action(160)
+	set_item_args(132)
+	ret_target
 
 _Counter_PSI_Unit_Battle_Action:
 	CC_Use_Battle_Action(159)
@@ -578,8 +572,69 @@ command add_menu_entry {
 	JSL	(SELECTION_MENU_ITEM_SETUP)
 }
 
-/*
-Tools_InBattle: {
+// Hijack the "Spy" routine for Battle use
+//ROM[0xC239C9] = JML	(Battle_Tools)
+
+Battle_Tools: {
+	RText	(Tools_InBattle)
+	JML	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
+	//JML	(0xC239FC)	// Exit out of Spy's check
+	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+	JML	(0xC239FC)	// @UNKNOWN93, after the whole Spy code
+}
+
+CC_Close_Custom_Tools_Battle_Window: {
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
+	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
+	//	^NEEDED to return to Main menu
+}
+
+// Sets the current action to a regular one without an argument
+command set_action(action) {
+	LDA_i	(action)
+	STA_a	(BATTLE_SELECTION_ACTION)
+}
+
+// Does target selection for the current action, and returns or cancels as appropriate
+command ret_target() {
+	LDA_a	(BATTLE_SELECTION_ACTION)
+	LDX_d	(PARTY_ID)
+	JSL_RTS_C1	(0xC1ADB4) // determineTargetting(short actionId, short userId)
+	// returns both targetting bits and target
+	// Added so the Inventory window does not cover up the enemy when targetting
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
+	XBA // but they're swapped
+	STA_a	(BATTLE_SELECTION_TARGETTING)
+	// determineTargetting returns 0 in the target (low byte) if cancelled.
+	// ret_retry() is 0, so mask that to match
+	AND_i	(0xFF00)
+	RTS
+}
+
+// Sets action arguments for an item use.
+// You'll also need to call set_action()
+// You don't need to use this if using the inventory
+command set_item_args(item_id) {
+	SEP	(0x20) // accum8
+	LDA_8	(item_id)
+	STA_a	(BATTLE_ITEM_USED)
+	//LDA_8	(item_slot)
+	STA_a	(BATTLE_SELECTION_PARAM1)
+	REP	(0x20) // accum8
+}
+
+// Zeroes out a bunch of things that can get EB confused
+// Should be called at top of battle menu
+command reset_action() {
+	STZ_a	(BATTLE_ITEM_USED) // Also zeroes selection user
+	STZ_a	(BATTLE_SELECTION_PARAM1) // Bleeds into selection action, but we're zeroing it out too
+	STZ_a	(BATTLE_SELECTION_ACTION)
+	STZ_a	(BATTLE_SELECTION_TARGETTING) // Covers both targetting and target
+}
+
+/*Tools_InBattle:
 	store_registers_shared
 	back_up_text_rendering_state
 	window_open(INVENTORY_WINDOW)
@@ -615,7 +670,7 @@ Tools_InBattle: {
 		load_str_callonhover("Bazooka", SetCount9) }
 	if flag FLG_ITEM_HEAVY_BAZOOKA {
 		load_str_callonhover("Heavy bazooka", SetCount10) }
-	if flag FLG_ITEM_TOFU_MACHINE and not flag FLG_FOUR_MAID_THANKS {
+	if flag FLG_ITEM_TOFU and not flag FLG_FOUR_MAID_THANKS {
 		load_str_callonhover("Tofu machine", SetCount11) }
 
 	print_strings_vertical(2)
@@ -660,11 +715,11 @@ _Exit_Tools_Battle_Menu:
 	tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
 
 // Actions code calls
-	SpyKit_Use:		CC_Use_Battle_Action(6)
+	SpyKit_Use:		{ reset_action set_action(6) ret_target }	// @UNKNOWN112, End of Battle menu selections
 	//Protractor_Use:	CC_Use_Battle_Action(187)
 	//Ruler_Use:		CC_Use_Battle_Action(186)
-	SlimeGenerator_Use:	CC_Use_Battle_Action(169)
-	ShieldKiller_Use:	CC_Use_Battle_Action(160)
+	SlimeGenerator_Use:	{ reset_action set_action(169) ret_target }	// @UNKNOWN112, End of Battle menu selections
+	ShieldKiller_Use:	{ reset_actionset_action(160) set_item_args(132) ret_target }
 	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
 	Neutralizer_Use:	CC_Use_Battle_Action(247)
 	DefenseShower_Use:	CC_Use_Battle_Action(184)
@@ -687,12 +742,12 @@ command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
 
 	LDY_d   (0x02)		///
 	LDX_i	(0x0001)
+	REP	(0x20)		///
 
 	// Added so the Inventory window does not cover up the enemy when targetting
 	LDA_i	(INVENTORY_WINDOW)
 	JSL	(CLOSE_WINDOW)
 
-	REP	(0x20)		///
 	LDA_i	(0x0000)
 	JSL	(0xC1DE37)	// REDIRECT_C1242E
 
