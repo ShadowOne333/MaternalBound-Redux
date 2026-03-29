@@ -577,6 +577,7 @@ CCUseItem: {
 	AND_i	(0xFF)
 	INC
 	STA_d	(0x2A)
+	STA_d	(0x04)
 
 	// Make the slot 0.
 	STZ_d	(0x2C)
