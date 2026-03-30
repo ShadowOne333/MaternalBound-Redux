@@ -21,13 +21,7 @@ import "../redux/window_titles.ccs"
 // 	Definitions
 //------------------------------------
 
-// Define routines and variables
-define PARTY_ID			= 0x00	// Current kid's ID (1 Ness, 2 Paula, etc)
-define BATTLE_ITEM_USED		= 0xA97C // 1 byte
-define BATTLE_SELECTION_PARAM1	= 0xA97E // 1 byte; item slot (not ID) or PSI ID for action argument
-define BATTLE_SELECTION_ACTION	= 0xA97F	// 2 bytes, RAM
-define BATTLE_SELECTION_TARGETTING	= 0xA981	// 1 byte, but determineTargetting joins it with the target
-
+// Define routines
 define UNFREEZE_OBJECTS		= 0xC09451
 define PLAY_SOUND		= 0xC0ABE0
 
@@ -69,6 +63,61 @@ define USE_HELP_WINDOW	= 61
 //------------------------------------
 // 	'Status' code hijack
 //------------------------------------
+// Show Tools option only when Jeff is in the party
+ROM[0xC133CB] = {
+	JML	(Key_N_Tools_Option_Appear)
+	NOP
+}
+
+// Hide the Tools menu options if Jeff isn't on the party
+// Also, Hide the Key items option if Jeff hasn't gotten any Key item yet
+Key_N_Tools_Option_Appear: {
+// Original code:
+	LDA_d	(0x02)
+	CMP_i	(0x0003)	// PSI option check
+	BNE	(0x14)		// _BNE1
+
+	JSL_RTS_C1	(0xC1C373)	// B length
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE1
+	JML	(0xC1348F)
+
+_BNE1:
+// Check for Tools menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0006)	// Check for 'Status' / Tools menu option
+	BNE	(0x10)		// _BNE2
+
+// Flag check for Jeff in party for Tools option to appear
+	LDA_i	(FLG_JEFF_KI)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE2
+	JML	(0xC1348F)
+
+_BNE2:
+// Check for Key items menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0005)	// Check for 'Check' / Key items menu option
+	BNE	(0x1F)	// _Exit
+
+// Flag check for Jeff in party and its 1st key for Key items option to appear for him
+	LDA_i	(FLG_JEFF_SOLO)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x03)
+	JMP	(_Exit)
+
+	LDA_i	(FLG_ITEM_KEY_LOCKER)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)	// _Exit
+	JML	(0xC1348F)
+
+_Exit:
+	JML	(0xC133DD)	// Return to original code
+}
+
 // Hijack the 'Talk to' routine for Overworld use
 ROM[0xC1350E] = {
 	MText	(Tools_Prep_Overworld)	// MText takes 0x0E bytes
@@ -266,8 +315,16 @@ command give_menu_tools_item(itemID) {
 //   Main Tools Battle code
 //------------------------------------
 
+
+
+// REMOVED IN FAVOUR OF THE BATTLE_MENU.CCS MACROS!!!
+
+
+
+//------------------------------------
+/*
 // Hijack the "Spy" routine for Battle use
-ROM[0xC239C9] = JML	(Tools_InBattle)
+ROM[0xC239C9] = JML	(Battle_Tools)
 
 // Show Tools option only when Jeff is in the party
 ROM[0xC133CB] = {
@@ -323,257 +380,6 @@ _BNE2:
 _Exit:
 	JML	(0xC133DD)	// Return to original code
 }
-
-// Text Definitions
-Tools:			"Tools[00]"
-Spy_Kit:		"Spy kit[00]"
-Slime_Generator:	"Slime generator[00]"
-Shield_Killer:		"Shield killer[00]"
-Counter_PSI_Unit:	"Counter-PSI unit[00]"
-Neutralizer:		"Neutralizer[00]"
-Defense_Shower:		"Defense shower[00]"
-HP_Sucker:		"HP-Sucker[00]"
-Hungry_HP_Sucker:	"Hungry HP-Sucker[00]"
-Bazooka:		"Bazooka[00]"
-Heavy_Bazooka:		"Heavy bazooka[00]"
-Tofu_Machine:		"Tofu machine[00]"
-
-// Main In-Battle Tools menu
-Tools_InBattle: {
-	LDA_i	(INVENTORY_WINDOW)	// Load our inventory window
-	JSL	(CREATE_WINDOW_REDIRECT)	// Create window #2 (Inventory)
-
-	ASMLoadAddress0E	(Tools)	// Load "Tools" text
-	LDA_i	(INVENTORY_WINDOW)	// Load the inventory window
-	JSL	(SET_WINDOW_TITLE)	// Set the "Tools" text as its title
-	STZ_d	(0x0A)	// On-select CCS callback. Make null
-	STZ_d	(0x0C)
-
-	add_tool(Spy_Kit, 6)
-	//add_tool_if_flag(FLG_ITEM_RULER, Ruler, 187)
-	//add_tool_if_flag(FLG_ITEM_PROTRACTOR, Protractor, 186)
-	add_tool_if_flag(FLG_ITEM_SLIME_GENERATOR, Slime_Generator, 169)
-	add_tool_if_flag(FLG_ITEM_SHIELD_KILLER, Shield_Killer, 160)
-	add_tool_if_flag(FLG_ITEM_COUNTER_PSI_UNIT, Counter_PSI_Unit, 159)
-	add_tool_if_flag(FLG_ITEM_NEUTRALIZER, Neutralizer, 247)
-	add_tool_if_flag(FLG_ITEM_DEFENSE_SHOWER, Defense_Shower, 184)
-	add_tool_if_flag(FLG_ITEM_HP_SUCKER, HP_Sucker, 161)
-	add_tool_if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, Hungry_HP_Sucker, 176)
-	add_tool_if_flag(FLG_ITEM_BAZOOKA, Bazooka, 310)
-	add_tool_if_flag(FLG_ITEM_HEAVY_BAZOOKA, Heavy_Bazooka, 311)
-	add_tool_if_flag_and_not_flag(FLG_ITEM_TOFU, FLG_FOUR_MAID_THANKS, Tofu_Machine, 170)
-
-_start_menu_printing:
-	JSL	(PRINT_MENU_ITEMS_REDIRECT)
-	INC_d	(0x24)
-	LDA_i	(1)
-	JSL	(SELECTION_MENU_REDIRECT)
-
-_cancel_select_menu:
-	CMP_i	(0)
-	BNE	(0x03)
-	JMP	(_Back_Out)
-
-_start_menu_options:
-	CMP_i	(1)
-	BNE	(0x03)
-	JMP	(_Spy_Kit_Battle_Action)
-
-	CMP_i	(2)
-	BNE	(0x03)
-	JMP	(_Slime_Generator_Battle_Action)
-
-	CMP_i	(3)
-	BNE	(0x03)
-	JMP	(_Shield_Killer_Battle_Action)
-
-	CMP_i	(4)
-	BNE	(0x03)
-	JMP	(_Counter_PSI_Unit_Battle_Action)
-
-	CMP_i	(5)
-	BNE	(0x03)
-	JMP	(_Neutralizer_Battle_Action)
-
-	CMP_i	(6)
-	BNE	(0x03)
-	JMP	(_Defense_Shower_Battle_Action)
-
-	CMP_i	(7)
-	BNE	(0x03)
-	JMP	(_HP_Sucker_Battle_Action)
-
-	CMP_i	(8)
-	BNE	(0x03)
-	JMP	(_Hungry_HP_Sucker_Battle_Action)
-
-	CMP_i	(9)
-	BNE	(0x03)
-	JMP	(_Bazooka_Battle_Action)
-
-	CMP_i	(10)
-	BNE	(0x03)
-	JMP	(_Heavy_Bazooka_Battle_Action)
-
-	CMP_i	(11)
-	BNE	(0x03)
-	JMP	(_Tofu_Machine_Battle_Action)
-
-_Back_Out:
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
-	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
-
-_Spy_Kit_Battle_Action:
-	reset_action
-	set_action(6)
-	ret_target
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-
-_Slime_Generator_Battle_Action:
-	reset_action
-	set_action(169)
-	ret_target
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-
-_Shield_Killer_Battle_Action:
-	reset_action
-	set_action(160)
-	set_item_args(132)
-	ret_target
-
-_Counter_PSI_Unit_Battle_Action:
-	CC_Use_Battle_Action(159)
-	JMP	(l_C239EA)
-
-_Neutralizer_Battle_Action:
-	CC_Use_Battle_Action(247)
-	JMP	(l_C239EA)
-
-_Defense_Shower_Battle_Action:
-	CC_Use_Battle_Action(184)
-	JMP	(l_C239EA)
-
-_HP_Sucker_Battle_Action:
-	CC_Use_Battle_Action(161)
-	JMP	(l_C239EA)
-
-_Hungry_HP_Sucker_Battle_Action:
-	CC_Use_Battle_Action(176)
-	JMP	(l_C239EA)
-
-_Bazooka_Battle_Action:
-	CC_Use_Battle_Action(310)
-	JMP	(l_C239EA)
-
-_Heavy_Bazooka_Battle_Action:
-	CC_Use_Battle_Action(311)
-	JMP	(l_C239EA)
-
-_Tofu_Machine_Battle_Action:
-	CC_Use_Battle_Action(170)
-	JMP	(l_C239EA)
-
-l_C239EA:
-	SEP	(0x20)
-	STA_a	(0xA982)
-	REP	(0x20)
-	AND_i	(0x00FF)
-	BNE	(0x03)
-	JMP	(Tools_InBattle)	// Loop
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-}
-
-command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
-	LDA_i	(BattleActionID)	// Spy battle action
-	STA_d	(0x02)
-	STA_d	(0x1E)
-
-	LDA_d   (0x02)		// 0x02
-	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
-	SEP	(0x20)
-	LDA_8	(0x11)
-	STA_a	(0xA981)	// BATTLE_MENU_SELECTION + battle_menu_selection::targetting
-
-	LDY_d   (0x02)		// 0x02
-	LDX_i	(0x0001)
-	REP	(0x20)
-
-	// Added so the Inventory window does not cover up the enemy when targetting
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
-
-	LDA_i	(0)
-	LDX_i	(1)
-	JSL	(0xC1DE37)	// REDIRECT_C1242E
-}
-
-command add_tool(tool, action) {
-	ASMLoadAddress0E	(tool)
-	LDX_d	(0x0A)
-	LDY_d	(0x0C)
-	LDA_i	(1)
-	JSL	(SELECTION_MENU_ITEM_SETUP)
-	
-	// add menu item ...
-	// you can use the userdata system to return a custom value when the item is selected
-
-_end:
-}
-
-command add_tool_if_flag(flg, tool, action) {
-	LDA_i (flg)
-	JSL (GET_EVENT_FLAG)
-	CMP_i (0)
-	BEQ_a (_end)
-
-	// add menu item ...
-	// you can use the userdata system to return a custom value when the item is selected
-	ASMLoadAddress0E	(tool)
-
-	add_menu_entry()
-
-_end:
-}
-
-command add_tool_if_flag_and_not_flag(flg1, flg2, tool, action) {
-	LDA_i	(flg1)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0)
-	BEQ_a	(_end)
-
-	LDA_i	(flg2)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0)
-	BNE_a	(_end)
-
-	// add menu item ...
-	// you can use the userdata system to return a custom value when the item is selected
-	ASMLoadAddress0E	(tool)
-
-	add_menu_entry()
-
-_end:
-}
-
-command add_menu_entry {
-	LDA_d	(0x0A)
-	CLC
-	ADC_i	(11)	// Length for each item (same as vanilla's inventory)
-	CMP_i	(22)	// Compare against window max width (needs to be multiple of above length)
-	BNE	(0x05)		// If item is not in the max width, don't increment
-	INC_d	(0x0C)
-
-	LDA_i	(0)
-	STA_d	(0x0A)
-	LDX_d	(0x0A)
-	LDY_d	(0x0C)
-	LDA_i	(3)
-	JSL	(SELECTION_MENU_ITEM_SETUP)
-}
-
-// Hijack the "Spy" routine for Battle use
-//ROM[0xC239C9] = JML	(Battle_Tools)
 
 Battle_Tools: {
 	RText	(Tools_InBattle)
@@ -634,7 +440,7 @@ command reset_action() {
 	STZ_a	(BATTLE_SELECTION_TARGETTING) // Covers both targetting and target
 }
 
-/*Tools_InBattle:
+Tools_InBattle:
 	store_registers_shared
 	back_up_text_rendering_state
 	window_open(INVENTORY_WINDOW)
@@ -696,7 +502,7 @@ command reset_action() {
 		switch_entry(heavybazooka_battle)
 		switch_entry(tofumachine_battle)
 _Exit_Tools_Battle_Menu:
-	cc_asmcall(CC_Close_Custom_Tools_Battle_Window, RET_NONE)
+	//cc_asmcall(CC_Close_Custom_Tools_Battle_Window, RET_NONE)
 	eob
 
 // Battle actions
@@ -715,11 +521,11 @@ _Exit_Tools_Battle_Menu:
 	tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
 
 // Actions code calls
-	SpyKit_Use:		{ reset_action set_action(6) ret_target }	// @UNKNOWN112, End of Battle menu selections
+	SpyKit_Use:		Use_Action(6)
 	//Protractor_Use:	CC_Use_Battle_Action(187)
 	//Ruler_Use:		CC_Use_Battle_Action(186)
-	SlimeGenerator_Use:	{ reset_action set_action(169) ret_target }	// @UNKNOWN112, End of Battle menu selections
-	ShieldKiller_Use:	{ reset_actionset_action(160) set_item_args(132) ret_target }
+	SlimeGenerator_Use:	Use_Action(169)
+	ShieldKiller_Use:	Use_Action(160)
 	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
 	Neutralizer_Use:	CC_Use_Battle_Action(247)
 	DefenseShower_Use:	CC_Use_Battle_Action(184)
@@ -729,35 +535,34 @@ _Exit_Tools_Battle_Menu:
 	HeavyBazooka_Use:	CC_Use_Battle_Action(311)
 	TofuMachine_Use:	CC_Use_Battle_Action(170)
 
+command Use_Action( BattleActionID ) {
+	reset_action
+	set_action(BattleActionID)
+	ret_target
+	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
+}
+
 command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
 	LDA_i	(BattleActionID)	// Spy battle action
-	LDA_d	(0x02)
+	STA_d	(0x02)
 	STA_d	(0x1E)
 
-	LDA_d   (0x02)		///
+	LDA_d   (0x02)		// 0x02
 	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
 	SEP	(0x20)
 	LDA_8	(0x11)
 	STA_a	(0xA981)	// BATTLE_MENU_SELECTION + battle_menu_selection::targetting
 
-	LDY_d   (0x02)		///
+	LDY_d   (0x02)		// 0x02
 	LDX_i	(0x0001)
-	REP	(0x20)		///
+	REP	(0x20)
 
 	// Added so the Inventory window does not cover up the enemy when targetting
 	LDA_i	(INVENTORY_WINDOW)
 	JSL	(CLOSE_WINDOW)
 
-	LDA_i	(0x0000)
+	LDA_i	(0)
+	LDX_i	(1)
 	JSL	(0xC1DE37)	// REDIRECT_C1242E
-
-_Exit_Routine:	// 0xC239EA
-	SEP	(0x20)
-	STA_a	(0xA982)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_target
-	REP	(0x20)		// Did we exit the target selection?
-	AND_i	(0x00FF)
-	BNE	(0x04)		// If not, continue to the end of the Selection
-	JML	(Battle_Tools)	// Loop back to Menu creation (NEEDED)
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
 }*/
 //------------------------------------

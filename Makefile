@@ -1,6 +1,6 @@
 # Makefile for creating the 'Fixed PSI Animations' patch for the Base ROM
 SHELL := /bin/bash
-
+#----------------------------------------------------------------
 # Variables
 START := $(shell date +%s)
 CLEAN_ROM = EarthBound.sfc
@@ -12,10 +12,10 @@ PATCH_DIR = Patches
 FLIPS = ./flips
 TIME = `date +'%T, %a %d/%b/%Y'`
 SHA1SUM = `sha1sum $(CLEAN_ROM) | awk '{ print $$1 }'`
-
+#----------------------------------------------------------------
 # Targets
-all: check_rom check_checksum create_base_rom compile_project create_patch create_both_patches finish
-
+all: check_rom check_checksum create_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
+#----------------------------------------------------------------
 # Check if the base ROM exists and has the correct name
 check_rom:
 	@if [ ! -e $(CLEAN_ROM) ]; then \
@@ -24,7 +24,7 @@ check_rom:
 		exit 1; \
 	fi
 	@echo "ROM detected. Verifying name..."
-
+#----------------------------------------------------------------
 # Verify SHA-1 checksum
 check_checksum:
 	@echo "Base ROM detected with proper name."; echo
@@ -35,7 +35,7 @@ check_checksum:
 		exit 1; \
 	fi
 	@echo "Base ROM SHA-1 checksum verified."; echo
-
+#----------------------------------------------------------------
 # Create the base ROM if it doesn't exist
 create_base_rom:
 	@if [ ! -f $(BASE) ]; then \
@@ -45,18 +45,23 @@ create_base_rom:
 	else \
 		echo "$(BASE) already exists, proceeding..."; echo; \
 	fi
-
+#----------------------------------------------------------------
 # Compile the full CoilSnake Project
 compile_project:
 	@echo "Starting compilation process..."; echo
 	@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"
-
+#----------------------------------------------------------------
 # Create the EBP patch based on the Project
 create_patch:
 # No more EBP patch. Only BPS will be used.
 #	@echo
 #	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
-
+#----------------------------------------------------------------
+# Generate the Debug symbols for the project (Requires Python 3)
+create_debug_symbols:
+	@echo "Generating Debug symbols..."
+	@python "Scripts/generate_debug_symbols.py" "Project/ccscript/summary.txt" $(PATCH_NAME).mlb
+#----------------------------------------------------------------
 # Create both additional BPS and IPS patches files
 create_both_patches:
 	@echo
@@ -67,10 +72,10 @@ create_both_patches:
 #	@$(FLIPS) -c "$(CLEAN_ROM)" "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ips"
 #	@echo; echo "BPS & IPS patches created successfully!"; echo
 	@echo
-
+#----------------------------------------------------------------
 # Finish the process
 finish:
 	@echo "Final compilation time: $$(( `date +%s` - $(START) )) seconds"
 	@echo "Redux compilation finished at $(TIME)!"
-
-.PHONY: all check_rom check_checksum create_base_rom compile_project create_patch create_both_patches finish
+#----------------------------------------------------------------
+.PHONY: all check_rom check_checksum create_base_rom compile_project create_patch create_debug_symbols create_both_patches finish

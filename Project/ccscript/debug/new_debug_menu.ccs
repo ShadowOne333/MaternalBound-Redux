@@ -61,6 +61,7 @@ debug_main:
 		"Hint Shop":		{main_menu goto(Hint_Shop)}
 		"Item Descriptions":	{main_menu goto(Item_Desc)}
 		"Unused Script":	{main_menu goto(Unused_Scripts)}
+		"Save Game":		{main_menu goto(Save_Game)}
 	}
 	window_closetop
 	window_switch(53)
@@ -76,7 +77,7 @@ command main_menu {
 	load_registers_shared		// Copy WRAM to Active Memory
 }
 
-Save_The_Game:
+Save_Game:
 	save
 	sound(SND_PHONEPICKUP)	// 11
 	window_closeall
