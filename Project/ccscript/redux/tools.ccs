@@ -15,6 +15,8 @@ import "../essential/ccexpand.ccs"
 import "../essential/commands.ccs"
 import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
+import "../redux/menu_macros.ccs"
+import "../redux/battle_menu.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------
@@ -319,67 +321,157 @@ command give_menu_tools_item(itemID) {
 
 // REMOVED IN FAVOUR OF THE BATTLE_MENU.CCS MACROS!!!
 
+ROM[0xC239C9] = JML	(ToolsMenu)
 
+ToolsMenu: {
+	do_menu_macros(2, CANCELLABLE, {
+		set_window_title(2, "Tools")
+		if_can_move_else({
+			menu_option("Spy kit", 0, 0, {
+				set_action(6)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+			if_flag(FLG_ITEM_SLIME_GENERATOR, {
+				menu_option("Slime generator", 11, 0, {
+					set_action(169)
+					set_item_args_noinv(SLIME_GENERATOR)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_SHIELD_KILLER, {
+				menu_option("Shield killer", 0, 1, {
+					set_action(160)
+					set_item_args_noinv(SHIELD_KILLER)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_COUNTER_PSI_UNIT, {
+				menu_option("Counter PSI unit", 11, 1, {
+					set_action(159)
+					set_item_args_noinv(COUNTER_PSI_UNIT)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_NEUTRALIZER, {
+				menu_option("Neutralizer", 0, 2, {
+					set_action(247)
+					set_item_args_noinv(195)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_DEFENSE_SHOWER, {
+				menu_option("Defense shower", 11, 2, {
+					set_action(184)
+					set_item_args_noinv(157)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_HP_SUCKER, {
+				menu_option("HP sucker", 0, 3, {
+					set_action(161)
+					set_item_args_noinv(135)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
+				menu_option("Hungry HP sucker", 11, 3, {
+					set_action(176)
+					set_item_args_noinv(136)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_BAZOOKA, {
+				menu_option("Bazooka", 0, 4, {
+					set_action(310)
+					set_item_args_noinv(133)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
+				menu_option("Heavy bazooka", 11, 4, {
+					set_action(311)
+					set_item_args_noinv(134)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+			if_flag(FLG_ITEM_TOFU, {
+				if_not_flag(FLG_FOUR_MAID_THANKS, {
+					menu_option("Tofu machine", 0, 5, {
+						set_action(170)
+						set_item_args_noinv(TOFU_MACHINE)
+						LDA_i(2)
+						JSL(0xC3E521)	// Close_Window
+						ret_tools_target()
+					})
+				})
+			})
+		}, {
+			menu_option("Spy kit", 0, 0, {
+				set_action(6)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+	})
+	CMP_i(0)
+	BEQ_a(_cancelled)
+	LDA_i(2)	// Inventory window
+	JSL(0xC3E521)	// Close window on confirmed selection too
+	JML(0xC23B4D)	// Proceed with action
+
+_cancelled:
+	LDA_i(2)
+	JSL(0xC3E521)	// Close window on cancel
+	JML(0xC23829)	// Back to battle menu
+}
+
+command ret_tools_target() {
+	LDA_a(BATTLE_SELECTION_ACTION)
+	STA_d(0x02)
+	STA_d(0x1E)
+	LDA_d(0x02)
+	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP(0x20)			// accum8
+	LDA_8(0x11)
+	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d(0x02)
+	LDX_i(0x0001)
+	REP(0x20)
+	LDA_i(0)
+	JSL(0xC1DE37)			// REDIRECT_C1242E — same as original
+	SEP(0x20)
+	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP(0x20)
+	AND_i(0x00FF)
+	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
+	RTS
+}
 
 //------------------------------------
 /*
 // Hijack the "Spy" routine for Battle use
 ROM[0xC239C9] = JML	(Battle_Tools)
-
-// Show Tools option only when Jeff is in the party
-ROM[0xC133CB] = {
-	JML	(Key_N_Tools_Option_Appear)
-	NOP
-}
-
-// Hide the Tools menu options if Jeff isn't on the party
-// Also, Hide the Key items option if Jeff hasn't gotten any Key item yet
-Key_N_Tools_Option_Appear: {
-// Original code:
-	LDA_d	(0x02)
-	CMP_i	(0x0003)	// PSI option check
-	BNE	(0x14)		// _BNE1
-
-	JSL_RTS_C1	(0xC1C373)	// B length
-	CMP_i	(0x0000)
-	BNE	(0x04)		// _BNE1
-	JML	(0xC1348F)
-
-_BNE1:
-// Check for Tools menu option
-	LDA_d	(0x02)
-	CMP_i	(0x0006)	// Check for 'Status' / Tools menu option
-	BNE	(0x10)		// _BNE2
-
-// Flag check for Jeff in party for Tools option to appear
-	LDA_i	(FLG_JEFF_KI)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0x0000)
-	BNE	(0x04)		// _BNE2
-	JML	(0xC1348F)
-
-_BNE2:
-// Check for Key items menu option
-	LDA_d	(0x02)
-	CMP_i	(0x0005)	// Check for 'Check' / Key items menu option
-	BNE	(0x1F)	// _Exit
-
-// Flag check for Jeff in party and its 1st key for Key items option to appear for him
-	LDA_i	(FLG_JEFF_SOLO)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0x0000)
-	BNE	(0x03)
-	JMP	(_Exit)
-
-	LDA_i	(FLG_ITEM_KEY_LOCKER)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0x0000)
-	BNE	(0x04)	// _Exit
-	JML	(0xC1348F)
-
-_Exit:
-	JML	(0xC133DD)	// Return to original code
-}
 
 Battle_Tools: {
 	RText	(Tools_InBattle)
