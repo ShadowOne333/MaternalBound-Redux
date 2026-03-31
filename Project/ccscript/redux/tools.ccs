@@ -16,7 +16,7 @@ import "../essential/commands.ccs"
 import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../redux/menu_macros.ccs"
-import "../redux/battle_menu.ccs"
+//import "../redux/battle_menu.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------
@@ -316,136 +316,167 @@ command give_menu_tools_item(itemID) {
 //------------------------------------
 //   Main Tools Battle code
 //------------------------------------
-
-
-
-// REMOVED IN FAVOUR OF THE BATTLE_MENU.CCS MACROS!!!
-
+// Hijack 'Spy' battle action routine for our custom Tools menu
 ROM[0xC239C9] = JML	(ToolsMenu)
 
 ToolsMenu: {
+	LDY_i	(0x000E)	// Checks permanent status
+	LDA_diy	(0x22)
+	AND_i	(0x00FF)
+	CMP_i	(0x0003)	// Permanent status 3, paralysis
+	BEQ_a	(_Paralyzed)
+	LDY_i	(0x0010)	// Checks in-battle status
+	LDA_diy	(0x22)
+	AND_i	(0x00FF)
+	CMP_i	(0x0003)	// In-battle status 3, immobilization
+	BNE_a	(_Can_Move)
+
+_Paralyzed:
 	do_menu_macros(2, CANCELLABLE, {
 		set_window_title(2, "Tools")
-		if_can_move_else({
-			menu_option("Spy kit", 0, 0, {
-				set_action(6)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
-				ret_tools_target()
-			})
-			if_flag(FLG_ITEM_SLIME_GENERATOR, {
-				menu_option("Slime generator", 11, 0, {
-					set_action(169)
-					set_item_args_noinv(SLIME_GENERATOR)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_SHIELD_KILLER, {
-				menu_option("Shield killer", 0, 1, {
-					set_action(160)
-					set_item_args_noinv(SHIELD_KILLER)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_COUNTER_PSI_UNIT, {
-				menu_option("Counter PSI unit", 11, 1, {
-					set_action(159)
-					set_item_args_noinv(COUNTER_PSI_UNIT)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_NEUTRALIZER, {
-				menu_option("Neutralizer", 0, 2, {
-					set_action(247)
-					set_item_args_noinv(195)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_DEFENSE_SHOWER, {
-				menu_option("Defense shower", 11, 2, {
-					set_action(184)
-					set_item_args_noinv(157)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_HP_SUCKER, {
-				menu_option("HP sucker", 0, 3, {
-					set_action(161)
-					set_item_args_noinv(135)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
-				menu_option("Hungry HP sucker", 11, 3, {
-					set_action(176)
-					set_item_args_noinv(136)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_BAZOOKA, {
-				menu_option("Bazooka", 0, 4, {
-					set_action(310)
-					set_item_args_noinv(133)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
-				menu_option("Heavy bazooka", 11, 4, {
-					set_action(311)
-					set_item_args_noinv(134)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
-				})
-			})
-			if_flag(FLG_ITEM_TOFU, {
-				if_not_flag(FLG_FOUR_MAID_THANKS, {
-					menu_option("Tofu machine", 0, 5, {
-						set_action(170)
-						set_item_args_noinv(TOFU_MACHINE)
-						LDA_i(2)
-						JSL(0xC3E521)	// Close_Window
-						ret_tools_target()
-					})
-				})
-			})
-		}, {
-			menu_option("Spy kit", 0, 0, {
-				set_action(6)
+		menu_option("Spy kit", 0, 0, {
+			set_action(6)
+			LDA_i(2)
+			JSL(0xC3E521)	// Close_Window
+			ret_tools_target()
+		})
+	})
+	JMP(_done)
+
+_Can_Move:
+	do_menu_macros(2, CANCELLABLE, {
+		set_window_title(2, "Tools")
+		menu_option("Spy kit", 0, 0, {
+			set_action(6)
+			LDA_i(2)
+			JSL(0xC3E521)	// Close_Window
+			ret_tools_target()
+		})
+		if_flag(FLG_ITEM_SLIME_GENERATOR, {
+			menu_option("Slime generator", 11, 0, {
+				set_action(169)
+				set_item_args_noinv(SLIME_GENERATOR)
 				LDA_i(2)
 				JSL(0xC3E521)	// Close_Window
 				ret_tools_target()
 			})
 		})
+		if_flag(FLG_ITEM_SHIELD_KILLER, {
+			menu_option("Shield killer", 0, 1, {
+				set_action(160)
+				set_item_args_noinv(SHIELD_KILLER)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_COUNTER_PSI_UNIT, {
+			menu_option("Counter PSI unit", 11, 1, {
+				set_action(159)
+				set_item_args_noinv(COUNTER_PSI_UNIT)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_NEUTRALIZER, {
+			menu_option("Neutralizer", 0, 2, {
+				set_action(247)
+				set_item_args_noinv(195)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_DEFENSE_SHOWER, {
+			menu_option("Defense shower", 11, 2, {
+				set_action(184)
+				set_item_args_noinv(157)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_HP_SUCKER, {
+			menu_option("HP sucker", 0, 3, {
+				set_action(161)
+				set_item_args_noinv(135)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
+			menu_option("Hungry HP sucker", 11, 3, {
+				set_action(176)
+				set_item_args_noinv(136)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_BAZOOKA, {
+			menu_option("Bazooka", 0, 4, {
+				set_action(310)
+				set_item_args_noinv(133)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
+			menu_option("Heavy bazooka", 11, 4, {
+				set_action(311)
+				set_item_args_noinv(134)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_TOFU, {
+			if_not_flag(FLG_FOUR_MAID_THANKS, {
+				menu_option("Tofu machine", 0, 5, {
+					set_action(170)
+					set_item_args_noinv(TOFU_MACHINE)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_target()
+				})
+			})
+		})
 	})
+
+_done:
 	CMP_i(0)
 	BEQ_a(_cancelled)
-	LDA_i(2)	// Inventory window
-	JSL(0xC3E521)	// Close window on confirmed selection too
-	JML(0xC23B4D)	// Proceed with action
+
+	LDA_i(2)
+	JSL(0xC3E521)
+
+	JML(0xC23B4D)
 
 _cancelled:
 	LDA_i(2)
-	JSL(0xC3E521)	// Close window on cancel
-	JML(0xC23829)	// Back to battle menu
+	JSL(0xC3E521)
+
+	JML(0xC23829)
 }
 
+// Another global, inexplicably not part of the selection struct
+define BATTLE_ITEM_USED = 0xA97C // 1 byte
+
+// Stack variables
+define PARTY_ID = 0x00 // Current kid's ID (1 Ness, 2 Paula, etc)
+
+// These get returned via a global struct at $A97D
+define BATTLE_SELECTION = 0xA97D // Start of struct, used as a pointer value
+define BATTLE_SELECTION_USER = 0xA97D // 1 byte, used by psi menu and goods menu
+define BATTLE_SELECTION_PARAM1 = 0xA97E // 1 byte; item slot (not ID) or PSI ID for action argument
+define BATTLE_SELECTION_ACTION = 0xA97F // 2 bytes
+define BATTLE_SELECTION_TARGETTING = 0xA981 // 1 byte, but determineTargetting joins it with the target
+define BATTLE_SELECTION_TARGET = 0xA982 // 1 byte
+
+// Custom target command based on Spy's battle action routine
 command ret_tools_target() {
 	LDA_a(BATTLE_SELECTION_ACTION)
 	STA_d(0x02)
@@ -468,193 +499,38 @@ command ret_tools_target() {
 	RTS
 }
 
-//------------------------------------
-/*
-// Hijack the "Spy" routine for Battle use
-ROM[0xC239C9] = JML	(Battle_Tools)
-
-Battle_Tools: {
-	RText	(Tools_InBattle)
-	JML	(CC_Close_Custom_Tools_Battle_Window)	// Close our custom windows
-	//JML	(0xC239FC)	// Exit out of Spy's check
-	//JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-	JML	(0xC239FC)	// @UNKNOWN93, after the whole Spy code
-}
-
-CC_Close_Custom_Tools_Battle_Window: {
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
-	JML	(0xC23829)	// 0xC23829, Main Battle window setup, @UNKNOWN63
-	//	^NEEDED to return to Main menu
-}
+/* COMMANDS TAKEN FROM BATTLE_MENU.CCS */
+// https://gist.github.com/tolmar/b19f795a6a153740ed0860bb40f8b395
 
 // Sets the current action to a regular one without an argument
 command set_action(action) {
-	LDA_i	(action)
-	STA_a	(BATTLE_SELECTION_ACTION)
+	LDA_i(action)
+	STA_a(BATTLE_SELECTION_ACTION)
 }
 
 // Does target selection for the current action, and returns or cancels as appropriate
 command ret_target() {
-	LDA_a	(BATTLE_SELECTION_ACTION)
-	LDX_d	(PARTY_ID)
-	JSL_RTS_C1	(0xC1ADB4) // determineTargetting(short actionId, short userId)
+	LDA_a(BATTLE_SELECTION_ACTION)
+	LDX_d(PARTY_ID)
+	JSL_RTS_C1(0xC1ADB4) // determineTargetting(short actionId, short userId)
 	// returns both targetting bits and target
-	// Added so the Inventory window does not cover up the enemy when targetting
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
 	XBA // but they're swapped
-	STA_a	(BATTLE_SELECTION_TARGETTING)
+	STA_a(BATTLE_SELECTION_TARGETTING)
 	// determineTargetting returns 0 in the target (low byte) if cancelled.
 	// ret_retry() is 0, so mask that to match
-	AND_i	(0xFF00)
+	AND_i(0xFF00)
 	RTS
 }
 
 // Sets action arguments for an item use.
 // You'll also need to call set_action()
-// You don't need to use this if using the inventory
-command set_item_args(item_id) {
-	SEP	(0x20) // accum8
-	LDA_8	(item_id)
-	STA_a	(BATTLE_ITEM_USED)
-	//LDA_8	(item_slot)
-	STA_a	(BATTLE_SELECTION_PARAM1)
-	REP	(0x20) // accum8
+// This forces the item ID to be used as the argument without it being in the inventory
+command set_item_args_noinv(item_id) {
+	SEP(0x20) // accum8
+	LDA_8(item_id)
+	STA_a(BATTLE_ITEM_USED)
+	STA_a(BATTLE_SELECTION_PARAM1)
+	REP(0x20) // accum8
 }
 
-// Zeroes out a bunch of things that can get EB confused
-// Should be called at top of battle menu
-command reset_action() {
-	STZ_a	(BATTLE_ITEM_USED) // Also zeroes selection user
-	STZ_a	(BATTLE_SELECTION_PARAM1) // Bleeds into selection action, but we're zeroing it out too
-	STZ_a	(BATTLE_SELECTION_ACTION)
-	STZ_a	(BATTLE_SELECTION_TARGETTING) // Covers both targetting and target
-}
-
-Tools_InBattle:
-	store_registers_shared
-	back_up_text_rendering_state
-	window_open(INVENTORY_WINDOW)
-	title(0, Tools_Title)
-	pause(1)
-
-	load_registers_shared
-	counter_zero
-	ctoarg
-
-	// Item flag checks
-	load_str_callonhover("Spy kit", SetCount1)
-	// load_str_callonhover("Protractor", SetCount2)
-	// load_str_callonhover("Ruler", SetCount3)
-
-	if flag FLG_ITEM_SLIME_GENERATOR {
-		load_str_callonhover("Slime generator", SetCount2) }
-	if flag FLG_ITEM_SHIELD_KILLER {
-		load_str_callonhover("Shield killer", SetCount3) }
-	if flag FLG_ITEM_COUNTER_PSI_UNIT {
-		load_str_callonhover("Counter-PSI unit", SetCount4) }
-	if flag FLG_ITEM_NEUTRALIZER {
-		load_str_callonhover("Neutralizer", SetCount5) }
-	if flag FLG_ITEM_DEFENSE_SHOWER {
-		load_str_callonhover("Defense shower", SetCount6) }
-	//if flag FLG_ITEM_XTERMINATOR_SPRAY {
-		//load_str_callonhover("Xterminator spray", SetCount7) }
-	if flag FLG_ITEM_HP_SUCKER {
-		load_str_callonhover("HP-sucker", SetCount7) }
-	if flag FLG_ITEM_HUNGRY_HP_SUCKER {
-		load_str_callonhover("Hungry HP-sucker", SetCount8) }
-	if flag FLG_ITEM_BAZOOKA {
-		load_str_callonhover("Bazooka", SetCount9) }
-	if flag FLG_ITEM_HEAVY_BAZOOKA {
-		load_str_callonhover("Heavy bazooka", SetCount10) }
-	if flag FLG_ITEM_TOFU and not flag FLG_FOUR_MAID_THANKS {
-		load_str_callonhover("Tofu machine", SetCount11) }
-
-	print_strings_vertical(2)
-	if not do_menu_nounload {
-		// Exit
-		// Closing the windows is handled through ASM after returning from the Tools menu
-		eob
-	}
-
-	ctoarg
-	swap
-
-	switch_goto(11)	// Max 14
-		switch_entry(spy_battle)
-		switch_entry(slimegenerator_battle)
-		switch_entry(shieldkiller_battle)
-		switch_entry(counterpsiunit_battle)
-		switch_entry(neutralizer_battle)
-		switch_entry(defenseshower_battle)
-		switch_entry(hpsucker_battle)
-		switch_entry(hungryhpsucker_battle)
-		switch_entry(bazooka_battle)
-		switch_entry(heavybazooka_battle)
-		switch_entry(tofumachine_battle)
-_Exit_Tools_Battle_Menu:
-	//cc_asmcall(CC_Close_Custom_Tools_Battle_Window, RET_NONE)
-	eob
-
-// Battle actions
-	spy_battle:		cc_asmcall(SpyKit_Use, RET_NONE) eob
-	//protractor_battle:	cc_asmcall(Protractor_Use, RET_NONE) eob
-	//ruler_battle:		cc_asmcall(Ruler_Use, RET_NONE) eob
-	slimegenerator_battle:	cc_asmcall(SlimeGenerator_Use, RET_NONE) eob
-	shieldkiller_battle:	cc_asmcall(ShieldKiller_Use, RET_NONE) eob
-	counterpsiunit_battle:	cc_asmcall(CounterPSIUnit_Use, RET_NONE) eob
-	neutralizer_battle:	cc_asmcall(Neutralizer_Use, RET_NONE) eob
-	defenseshower_battle:	cc_asmcall(DefenseShower_Use, RET_NONE) eob
-	hpsucker_battle: 	cc_asmcall(HPSucker_Use, RET_NONE) eob
-	hungryhpsucker_battle:	cc_asmcall(HungryHPSucker_Use, RET_NONE) eob
-	bazooka_battle:		cc_asmcall(Bazooka_Use, RET_NONE) eob
-	heavybazooka_battle:	cc_asmcall(HeavyBazooka_Use, RET_NONE) eob
-	tofumachine_battle:	cc_asmcall(TofuMachine_Use, RET_NONE) eob
-
-// Actions code calls
-	SpyKit_Use:		Use_Action(6)
-	//Protractor_Use:	CC_Use_Battle_Action(187)
-	//Ruler_Use:		CC_Use_Battle_Action(186)
-	SlimeGenerator_Use:	Use_Action(169)
-	ShieldKiller_Use:	Use_Action(160)
-	CounterPSIUnit_Use:	CC_Use_Battle_Action(159)
-	Neutralizer_Use:	CC_Use_Battle_Action(247)
-	DefenseShower_Use:	CC_Use_Battle_Action(184)
-	HPSucker_Use:		CC_Use_Battle_Action(161)
-	HungryHPSucker_Use:	CC_Use_Battle_Action(176)
-	Bazooka_Use:		CC_Use_Battle_Action(310)
-	HeavyBazooka_Use:	CC_Use_Battle_Action(311)
-	TofuMachine_Use:	CC_Use_Battle_Action(170)
-
-command Use_Action( BattleActionID ) {
-	reset_action
-	set_action(BattleActionID)
-	ret_target
-	JML	(0xC23B4D)	// @UNKNOWN112, End of Battle menu selections
-}
-
-command CC_Use_Battle_Action( BattleActionID ) {	// 0xC239C9
-	LDA_i	(BattleActionID)	// Spy battle action
-	STA_d	(0x02)
-	STA_d	(0x1E)
-
-	LDA_d   (0x02)		// 0x02
-	STA_a	(0xA97F)	// BATTLE_MENU_SELECTION + battle_menu_selection::selected_action
-	SEP	(0x20)
-	LDA_8	(0x11)
-	STA_a	(0xA981)	// BATTLE_MENU_SELECTION + battle_menu_selection::targetting
-
-	LDY_d   (0x02)		// 0x02
-	LDX_i	(0x0001)
-	REP	(0x20)
-
-	// Added so the Inventory window does not cover up the enemy when targetting
-	LDA_i	(INVENTORY_WINDOW)
-	JSL	(CLOSE_WINDOW)
-
-	LDA_i	(0)
-	LDX_i	(1)
-	JSL	(0xC1DE37)	// REDIRECT_C1242E
-}*/
 //------------------------------------
