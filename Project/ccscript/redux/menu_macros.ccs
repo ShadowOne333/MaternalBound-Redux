@@ -1,0 +1,257 @@
+// Macros to make rewriting the game's menus easier
+// by JTolmar
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+
+// See the example below to get a feel for what format this enables.
+// Note that do_menu is designed to be inlined; it's not a complete function by itself, and needs a stack frame.
+// The summary is:
+// do_menu_macros(window, cancellable, { list of options })
+//   the options list is just raw assembly, and you can put other stuff in there
+// menu_option("Text", x, y, { code to run })
+//   the code block is raw asm code. Use ret_retry(), ret_back(), or ret_val() to return.
+// set_flag, if_flag, if_not_flag, if_flag_else, set_window_title, play_sound, print_text_at_pos
+//   they do what you'd expect, read the comments on them
+// How this actually works on the inside:
+//   menu_option inlines your code and sets menu's return value to a short pointer
+//   do_menu JSRs to the returned code pointer, and treats that code's result as its result
+
+// If you'd like a demo, uncomment this to replace the battle menu with the example code
+// ROM[0xC2311B] = JML(Example)
+
+Example:
+  // Standard EB style function intro
+  REP (0x31)
+  PHD
+  TDC
+  ADC_i(-0x20)
+  TCD
+  // Code
+  do_menu_macros(48, UNCANCELLABLE, {
+    set_window_title(48, "Sick title")
+    menu_option("More", 0, 0, {
+      JMP(MoreMenu) // Have to jump because ccs won't allow nested display_menu
+    })
+    menu_option("Trumpet", 6, 0, {
+      play_sound(22)
+      ret_retry()
+    })
+    menu_option("Enable", 12, 0, {
+      set_flag(123, 1) // idk what flag this is, it's fine for my test
+      ret_retry()
+    })
+    menu_option("Smash", 0, 1, {
+      play_sound(31)
+      ret_retry()
+    })
+    menu_option("Ded", 6, 1, {
+      play_sound(32)
+      ret_retry()
+    })
+    menu_option("Disable", 12, 1, {
+      set_flag(123, 0) // idk what flag this is, it's fine for my test
+      ret_retry()
+    })
+    if_flag(123, {
+      menu_option("Sekrit", 18, 0, {
+        play_sound(96)
+        ret_retry()
+      })
+    })
+    print_text_at_pos("Hi", 24, 1)
+  })
+  // EB function outro
+  PLD
+  RTL
+
+MoreMenu:
+  do_menu_macros(48, CANCELLABLE, {
+    set_window_title(48, "Wicked title")
+    menu_option("Fail", 0, 0, {
+      play_sound(5)
+      ret_retry()
+    })
+    menu_option("Back", 6, 0, {
+      ret_back()
+    })
+    menu_option("Skip turn", 0, 1, {
+      ret_val(1)
+    })
+  })
+  RTS
+  
+
+// Change this if you want a different value to mean "pop once"
+define return_pop_once = 0xFFFF
+
+// Does a menu loop for one menu.
+// Requires that you already have a stack frame!
+// windowNum - window num (window_configuration_table.yml)
+// cancellable - if CANCELLABLE, the B button will go back one menu, if UNCANCELLABLE then B does nothing
+// options - {code block}, should be a list menu_option(), possibly with conditionals
+command do_menu_macros(windowNum, cancellable, options) {
+  JMP(_start)
+_springboard:
+  JMP_i(0x7E00BC)
+_start:
+  // Set instant text printing
+  JSL(0xC3E4D4)
+  // Create window
+  LDA_i(windowNum)
+  JSL(0xC1DD47)
+  // Inline all the options
+  options
+  // printMenuItems
+  JSL(0xC1DE25)
+  // selectionMenu(short cancelable)
+  LDA_i(cancellable)
+  JSL_RTS_C1(0xC1196A)
+  // Skip to end if canceled
+  CMP_i(0)
+  BEQ_a(_end)
+  // Jump subroutine to the returned pointer
+  STA_a(0x7E00BC) // Address reserved by EB for springboard pointers
+  JSR(_springboard)
+  // Compare to returned results
+  CMP_i(0)
+  BEQ_a(_start) // No return code = try again
+  // Check if this is a pop-once
+  CMP_i(return_pop_once)
+  BNE_a(_end)
+  LDA_i(0) // Set return to "try again" but exit
+_end:
+}
+
+
+// Adds an option to the menu
+// text - text. doesn't support CCS commands
+// x, y - tile coords inside the window
+// code - asm code {block} to run when selected
+// The code block should end in one of ret_val(), ret_retry(), or ret_bac()
+// If you'd prefer to do it by hand: the code block must return a value in A, and end in RTS
+// Return values:
+// - 0: Retry menu / select again
+// - 0xFFFF: Go up one menu layer and retry that one
+// - Anything else: Go up through every layer of do_menu and return this value in A
+command menu_option(text, x, y, code) {
+  // This inlines a bunch of garbage, jump past it
+  JMP(_after_inline)
+  // Inline and null terminate the text
+_text:
+  text
+  byte 0
+  // Inline the command code
+_code:
+  code
+  // Actual code start
+_after_inline:
+  // All of this is just calling createNewMenuOptionAtPositionWithUserdata, which has a ton of args
+  STZ_d(0x12) // On-select CCS callback. Make null
+  STZ_d(0x14)
+  ASMLoadAddress0E(_text) // Text
+  LDY_i(y) // Y position
+  LDX_i(x) // X position
+  LDA_i(_code) // "user data"
+  JSL_RTS_C1(0xC1153B) // createNewMenuOptionAtPositionWithUserdata
+}
+
+// Sets flag flagId to value (1 set, 0 unset)
+command set_flag(flagId, val) {
+  LDA_i(flagId)
+  LDX_i(val)
+  JSL(0xC2165E)
+}
+
+// Returns val from a menu command
+command ret_val(val) {
+  LDA_i(val)
+  RTS
+}
+
+// Returns "retry" from a menu command
+command ret_retry() {
+  LDA_i(0)
+  RTS
+}
+
+// Returns "up one menu" from a menu command
+command ret_back() {
+  LDA_i(return_pop_once)
+  RTS
+}
+
+// Sets window title. Title is a "string"
+command set_window_title(windowId, text) {
+  JMP(_after_inline)
+  // Inline and null terminate the text
+_text:
+  text
+  byte 0
+_after_inline:
+  // Load text pointer
+  ASMLoadAddress0E(_text)
+  // Call strlen to get its length; thankfully it uses the same text pointer arg
+  JSL(0xC08F22)
+  TAX
+  LDA_i(windowId)
+  JSL(0xC2032B) // setWindowTitle
+}
+
+// Prints text at a position, text is a "string", position is tile coordinates
+command print_text_at_pos(text, x, y) {
+  JMP(_after_inline)
+  // Inline and null terminate the text
+_text:
+  text
+  byte 0
+_after_inline:
+  LDA_i(x)
+  LDX_i(y)
+  JSL(0xC438A5) // moveCurrentTextCursor(x, y);
+  // Load text pointer
+  ASMLoadAddress0E(_text)
+  JSL(0xC08F22) // Call strlen to get its length; thankfully it uses the same text pointer arg
+  JSL(0xC10C8C) // printStringF(length, *text)
+}
+
+// Plays a sound effect.
+command play_sound(sound_id) {
+  LDA_i(sound_id)
+  JSL(0xC0ABE0)
+}
+
+// Does {code} if flag flagId is true
+command if_flag(flagId, code) {
+  LDA_i(flagId)
+  JSL(0xC21628)
+  CMP_i(1)
+  BNE_a(_end)
+  code
+_end:
+}
+
+// Does {code} if flag flagId is false
+command if_not_flag(flagId, code) {
+  LDA_i(flagId)
+  JSL(0xC21628)
+  CMP_i(1)
+  BEQ_a(_end)
+  code
+_end:
+}
+
+// Does {trueCode} if flag flagId is true, falseCode if it's false
+command if_flag_else(flagId, trueCode, falseCode) {
+  LDA_i(flagId)
+  JSL(0xC21628)
+  CMP_i(1)
+  BNE_a(_false)
+  trueCode
+  JMP(_end)
+_false:
+  falseCode
+_end:
+}
+
+define CANCELLABLE = 1
+define UNCANCELLABLE = 0
