@@ -385,7 +385,7 @@ _Can_Move:
 				set_item_args_noinv(195)
 				LDA_i(2)
 				JSL(0xC3E521)	// Close_Window
-				ret_tools_target()
+				ret_tools_multi_target(MULTI_ENEMY_TARGET)
 			})
 		})
 		if_flag(FLG_ITEM_DEFENSE_SHOWER, {
@@ -394,7 +394,7 @@ _Can_Move:
 				set_item_args_noinv(157)
 				LDA_i(2)
 				JSL(0xC3E521)	// Close_Window
-				ret_tools_target()
+				ret_tools_multi_target(PARTY_TARGET)
 			})
 		})
 		if_flag(FLG_ITEM_HP_SUCKER, {
@@ -412,7 +412,7 @@ _Can_Move:
 				set_item_args_noinv(136)
 				LDA_i(2)
 				JSL(0xC3E521)	// Close_Window
-				ret_tools_target()
+				ret_tools_multi_target(MULTI_ENEMY_TARGET)
 			})
 		})
 		if_flag(FLG_ITEM_BAZOOKA, {
@@ -440,7 +440,7 @@ _Can_Move:
 					set_item_args_noinv(TOFU_MACHINE)
 					LDA_i(2)
 					JSL(0xC3E521)	// Close_Window
-					ret_tools_target()
+					ret_tools_multi_target(MULTI_ENEMY_TARGET)
 				})
 			})
 		})
@@ -491,6 +491,28 @@ command ret_tools_target() {
 	REP(0x20)
 	LDA_i(0)
 	JSL(0xC1DE37)			// REDIRECT_C1242E — same as original
+	SEP(0x20)
+	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP(0x20)
+	AND_i(0x00FF)
+	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
+	RTS
+}
+
+define PARTY_TARGET		= 0x04
+define MULTI_ENEMY_TARGET	= 0x12
+
+command ret_tools_multi_target(target) {	// Neutralizer / All characters in battle
+	LDA_a(BATTLE_SELECTION_ACTION)
+	STA_d(0x02)
+	STA_d(0x1E)
+	LDA_d(0x02)
+	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP(0x20)			// accum8
+	LDA_8(target)
+	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d(0x02)
+	LDX_i(0x0001)
 	SEP(0x20)
 	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
 	REP(0x20)
