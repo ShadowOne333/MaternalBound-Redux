@@ -5,6 +5,7 @@
  */
 
 import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 
@@ -251,6 +252,7 @@ l_0xc5e1ef:
 	get_selling_price(0)	// 0x00
 	goto_if_false(l_0xc5e241)
 	call(data_00.l_0xc511e0)
+	show_wallet
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -449,7 +451,7 @@ l_0xc5e3a5:
 
 l_0xc5e3bc:
 	store_registers
-	result_is(226)
+	result_is(LUCKY_SANDWICH)	// 226
 	goto_if_true(l_0xc5e3c9)
 	load_registers
 	eob

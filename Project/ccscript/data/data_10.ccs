@@ -37,23 +37,6 @@ l_0xc5b405:
 
 l_0xc5b426:
 	"@{itemname(0)}?" next
-	swap
-	result_is(BAZOOKA)
-	goto_if_true(_is_bazooka)
-	eob
-
-_is_bazooka:
-	sound(SND_GUITAR)
-	unset(FLG_SHOP_53)
-	unset(FLG_SHOPTEMP_3)
-	unset(FLG_SHOP_TOOK)	// 224
-	unset(FLG_SHOP_SOLD)	// 225
-	set(FLG_ITEM_BAZOOKA)
-	//take(-1, BAZOOKA)
-_no_bazooka:
-	"@Hey, thanks!" next
-	"@That's a one-of-a-kind weapon, so be careful with it!" next
-	give_menu_tools_item(BAZOOKA) wait
 	eob
 
 l_0xc5b42e:
@@ -71,7 +54,7 @@ l_0xc5b447:
 	eob
 
 l_0xc5b468:
-	"@{name(0)}  can't equip this." next
+	"@{name(0)} can't equip this." next
 	"@Are you still interested in buying it?" linebreak
 	eob
 

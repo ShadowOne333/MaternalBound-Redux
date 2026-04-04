@@ -189,12 +189,7 @@ l_0xc5d819:
 	eob
 
 l_0xc5d81d:	// Near-Pyramid seller
-	goto_if_flag(FLG_ITEM_BAZOOKA, _change_shop)
 	do_shop_menu(51)	// 0x33
-	eob
-
-_change_shop:
-	do_shop_menu(49)	// 0x31
 	eob
 
 l_0xc5d821:

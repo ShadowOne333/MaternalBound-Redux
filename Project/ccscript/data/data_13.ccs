@@ -6,6 +6,7 @@
 
 import "../definitions/flags.ccs"
 import "../essential/stdext.ccs"
+import "../dialogue/tools_in_shops.ccs"
 
 command e(label) "{long label}"
 
@@ -504,7 +505,8 @@ l_0xc5d527:
 l_0xc5d539:
 	set(FLG_SHOP_53)	// 599
 	set(FLG_SHOPTEMP_1)	// 656
-	call(data_14.l_0xc5decb)
+	call(tools_in_shops.Pyramid_Bazooka_Seller)
+	//call(data_14.l_0xc5decb)
 	unset(FLG_SHOP_53)	// 599
 	unset(FLG_SHOPTEMP_1)	// 656
 	eob
