@@ -37,6 +37,35 @@ l_0xc5b405:
 
 l_0xc5b426:
 	"@{itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BAZOOKA)
+		goto_if_true(_is_bazooka)
+	}
+	eob
+
+_is_bazooka:
+	// Added check for money
+	hasmoney(950)
+	goto_if_false(l_0xc5b4d7)
+//l_0xc5e3a5:
+	load_registers
+	get_buying_price(0)	// 0x00
+	swap
+	takemoney(0)	// 0x0000
+	show_wallet
+	load_registers
+	give_and_return_location(0,0)	// 0x00, 0x00
+	sound(SND_GUITAR)
+
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+
+	set(FLG_ITEM_BAZOOKA)
+	"@Hey, thanks!" next
+	"@That's a one-of-a-kind weapon, so be careful with it!" next
+	give_menu_tools_item(BAZOOKA) wait
+	newline
 	eob
 
 l_0xc5b42e:
