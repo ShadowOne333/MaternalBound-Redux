@@ -151,12 +151,13 @@ l_0xc5e0a9:
 	goto(l_0xc5e0de)
 
 l_0xc5e0cc:
-	load_registers
 	if flag FLG_TOOL_ITEMS {
+		load_registers
 		swap
 		result_is(BAZOOKA)
 		goto_if_true(_exit_if_bazooka)
 	}
+	load_registers
 	call(data_00.l_0xc507f8)
 	call(l_0xc5e52e)
 	goto_if_false(l_0xc5e1ad)
@@ -184,9 +185,6 @@ l_0xc5e0de:
 		switch_entry(l_0xc5e136)
 		switch_entry(l_0xc5e18b)
 	goto(l_0xc5e18b)
-
-_exit_if_bazooka:
-	eob
 
 l_0xc5e136:
 	sound(SND_BOXOPEN1)	// 115
@@ -217,6 +215,7 @@ l_0xc5e188:
 
 l_0xc5e18b:
 	unset(FLG_SHOPTEMP_3)	// 658
+_exit_if_bazooka:
 	eob
 
 l_0xc5e18f:

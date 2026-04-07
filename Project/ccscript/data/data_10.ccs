@@ -64,7 +64,7 @@ _is_bazooka:
 	set(FLG_ITEM_BAZOOKA)
 	"@Hey, thanks!" next
 	"@That's a one-of-a-kind weapon, so be careful with it!" next
-	give_menu_tools_item(BAZOOKA) wait
+	give_menu_tools_item(BAZOOKA)
 	newline
 	eob
 

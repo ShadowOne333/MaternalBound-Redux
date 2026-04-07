@@ -301,16 +301,22 @@ command give_menu_tools_item(itemID) {
 	counter(itemID)
 
 	sound(SND_BOXTAKE)	// 116
-	pause(60)
-	window_closeall
-	sound(SND_SPECIALITEM)	// 102
-	pause(100)
-	window_open(DIALOGUE_WINDOW)
+	pause(40) newline
+
+	get_char_at_pos(1)
+	result_is(3)
+	goto_if_true(_jeff_leader)
 
 	get_char_at_pos(1) swap
 	"@({name(0)} added the" linebreak
 	"  {itemname(itemID)}" linebreak
-	"  to the Tools items.)" //eob
+	"  to Jeff's Tools.)" end
+
+_jeff_leader:
+	get_char_at_pos(1) swap
+	"@({name(0)} added the" linebreak
+	"  {itemname(itemID)}" linebreak
+	"  to his Tools.)" end
 }
 
 //------------------------------------
