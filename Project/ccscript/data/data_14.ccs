@@ -11,8 +11,9 @@ import "../essential/stdext.ccs"
 command e(label) "{long label}"
 
 // Text Data
-l_0xc5d766:
-	do_shop_menu(11)	// 0x0B
+l_0xc5d766:	// Broken iron seller 1
+	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(11) }	// 0x0B
+	else { do_shop_menu(67) }
 	eob
 
 l_0xc5d76a:
@@ -133,7 +134,8 @@ l_0xc5d7e1:
 	eob
 
 l_0xc5d7e5:
-	do_shop_menu(35)	// 0x23
+	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(35) }	// 0x23
+	else { do_shop_menu(68) }
 	eob
 
 l_0xc5d7e9:
@@ -190,7 +192,7 @@ l_0xc5d819:
 
 l_0xc5d81d:	// Near-Pyramid seller
 	if not flag FLG_ITEM_BAZOOKA { do_shop_menu(51) }	// 0x33
-	else { do_shop_menu(49) }
+	else { do_shop_menu(66) }
 	eob
 
 l_0xc5d821:

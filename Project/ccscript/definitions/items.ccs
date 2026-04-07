@@ -1,7 +1,5 @@
-import "../essential/commands.ccs"
-import "../essential/stdext.ccs"
-
 // Begin item definitions
+define NONE		= 0	// 0x00
 define FRANKLIN_BADGE	= 1	// 0x01
 define TEDDY_BEAR	= 2	// 0x02
 define SUPER_PLUSH_BEAR	= 3	// 0x03

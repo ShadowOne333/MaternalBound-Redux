@@ -164,6 +164,15 @@ l_0xc5b69d:
 
 l_0xc5b6af:
 	"@{itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+	}
+	eob
+
+_is_broken_iron:
+	set(FLG_ITEM_BROKEN_IRON_PURCHASED)
 	eob
 
 l_0xc5b6b7:

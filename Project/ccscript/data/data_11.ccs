@@ -4,6 +4,8 @@
  * Generated using CCScriptWriter.
  */
 
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/stdext.ccs"
@@ -357,8 +359,28 @@ l_0xc5c22e:
 	eob
 
 l_0xc5c23b:
-	"@Okay, man.  You want" linebreak
+	"@Okay, {call(_gender_check)}.  You want" linebreak
 	"  the {itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+	}
+	eob
+
+_gender_check:
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(_paula_leader)
+	"man"
+	eob
+
+_paula_leader:
+	"woman"
+	eob
+
+_is_broken_iron:
+	set(FLG_ITEM_BROKEN_IRON_PURCHASED)
 	eob
 
 l_0xc5c252:
