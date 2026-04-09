@@ -1,5 +1,9 @@
 // Macros to make rewriting the game's menus easier
 // by JTolmar
+
+// Version 2:
+// - adds do_menu_grid and menu_option_floating
+// - Thanks to ShadowOne333 for requesting and testing these out!
 import "../essential/asm65816.ccs"
 import "../essential/jsl_rts.ccs"
 
@@ -8,8 +12,15 @@ import "../essential/jsl_rts.ccs"
 // The summary is:
 // do_menu_macros(window, cancellable, { list of options })
 //   the options list is just raw assembly, and you can put other stuff in there
+// do_menu_grid(window, cancellable, columns, { list of options })
+//   like do_menu but arranges the menu options into a number of columns you choose
+//   use this with menu_option_floating
+//   handy if you don't know how many items you'll have (like an inventory menu, for example)
 // menu_option("Text", x, y, { code to run })
 //   the code block is raw asm code. Use ret_retry(), ret_back(), or ret_val() to return.
+// menu_option_floating("Text", { code to run })
+//   same as menu_option but lets Earthbound decide where to put the option, instead of taking a position
+//   Earthbound is really bad at choosing menu positions; you probably should use this with do_menu_grid
 // set_flag, if_flag, if_not_flag, if_flag_else, set_window_title, play_sound, print_text_at_pos
 //   they do what you'd expect, read the comments on them
 // How this actually works on the inside:
@@ -122,7 +133,13 @@ _start:
 _end:
 }
 
-command do_menu_no_position(windowNum, cancellable, columns, altSpacingMode, options) {
+// Does a menu loop for one menu. Applies a grid to the items.
+// Requires that you already have a stack frame!
+// windowNum - window num (window_configuration_table.yml)
+// cancellable - if CANCELLABLE, the B button will go back one menu, if UNCANCELLABLE then B does nothing
+// columns - how many columns to arrange the items in
+// options - {code block}, should be a list menu_option_floating(), possibly with conditionals
+command do_menu_grid(windowNum, cancellable, columns, options) {
   JMP(_start)
 _springboard:
   JMP_i(0x7E00BC)
@@ -134,9 +151,9 @@ _start:
   JSL(0xC1DD47)
   // Inline all the options
   options
-  // printMenuItems
-  LDA_i(columns)	//JSL(0xC1DE25)
-  LDX_i(altSpacingMode)
+  // printMenuOptionTable(columns, altSpacingMode, unused)
+  LDA_i(columns)
+  LDX_i(0) // Alt spacing mode setting; as far as we can tell, non-0 is just jank
   JSL_RTS_C1(0xC1180D)
   // selectionMenu(short cancelable)
   LDA_i(cancellable)
@@ -189,6 +206,15 @@ _after_inline:
   JSL_RTS_C1(0xC1153B) // createNewMenuOptionAtPositionWithUserdata
 }
 
+// Adds an option to the menu. Lets Earthbound choose the position.
+// text - text. doesn't support CCS commands
+// code - asm code {block} to run when selected
+// The code block should end in one of ret_val(), ret_retry(), or ret_bac()
+// If you'd prefer to do it by hand: the code block must return a value in A, and end in RTS
+// Return values:
+// - 0: Retry menu / select again
+// - 0xFFFF: Go up one menu layer and retry that one
+// - Anything else: Go up through every layer of do_menu and return this value in A
 command menu_option_no_position(text, code) {
   // This inlines a bunch of garbage, jump past it
   JMP(_after_inline)

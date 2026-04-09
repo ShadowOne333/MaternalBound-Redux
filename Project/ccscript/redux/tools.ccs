@@ -349,7 +349,7 @@ _Paralyzed:
 	JMP(_done)
 
 _Can_Move:
-	do_menu_no_position(2, CANCELLABLE, 2, 0, {
+	do_menu_grid(2, CANCELLABLE, 2, {
 		set_window_title(2, "Tools")
 		menu_option_no_position("Spy kit", {
 			set_action(6)
