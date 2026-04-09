@@ -122,6 +122,40 @@ _start:
 _end:
 }
 
+command do_menu_no_position(windowNum, cancellable, columns, altSpacingMode, options) {
+  JMP(_start)
+_springboard:
+  JMP_i(0x7E00BC)
+_start:
+  // Set instant text printing
+  JSL(0xC3E4D4)
+  // Create window
+  LDA_i(windowNum)
+  JSL(0xC1DD47)
+  // Inline all the options
+  options
+  // printMenuItems
+  LDA_i(columns)	//JSL(0xC1DE25)
+  LDX_i(altSpacingMode)
+  JSL_RTS_C1(0xC1180D)
+  // selectionMenu(short cancelable)
+  LDA_i(cancellable)
+  JSL_RTS_C1(0xC1196A)
+  // Skip to end if canceled
+  CMP_i(0)
+  BEQ_a(_end)
+  // Jump subroutine to the returned pointer
+  STA_a(0x7E00BC) // Address reserved by EB for springboard pointers
+  JSR(_springboard)
+  // Compare to returned results
+  CMP_i(0)
+  BEQ_a(_start) // No return code = try again
+  // Check if this is a pop-once
+  CMP_i(return_pop_once)
+  BNE_a(_end)
+  LDA_i(0) // Set return to "try again" but exit
+_end:
+}
 
 // Adds an option to the menu
 // text - text. doesn't support CCS commands
@@ -153,6 +187,26 @@ _after_inline:
   LDX_i(x) // X position
   LDA_i(_code) // "user data"
   JSL_RTS_C1(0xC1153B) // createNewMenuOptionAtPositionWithUserdata
+}
+
+command menu_option_no_position(text, code) {
+  // This inlines a bunch of garbage, jump past it
+  JMP(_after_inline)
+  // Inline and null terminate the text
+_text:
+  text
+  byte 0
+  // Inline the command code
+_code:
+  code
+  // Actual code start
+_after_inline:
+  // All of this is just calling createNewMenuOptionWithUserdata
+  STZ_d(0x12) // On-select CCS callback. Make null
+  STZ_d(0x14)
+  ASMLoadAddress0E(_text) // Text
+  LDA_i(_code) // "user data"
+  JSL_RTS_C1(0xC115F4) // createNewMenuOptionWithUserdata
 }
 
 // Sets flag flagId to value (1 set, 0 unset)

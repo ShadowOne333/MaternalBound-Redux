@@ -1,0 +1,931 @@
+import ShopMain
+import ccexpand
+import asm65816
+// Shop system internals
+
+// based off
+// https://ssl-forum-files.fobby.net/forum_attachments/0040/0732/ShopMain.ccs
+// Bulk-buy system is new.
+// -Kirb
+
+// SETUP:
+// Add `ShopSys.CompareResToArg` to CCExpand's control code tree,
+// then change this define here to the control code it is at.
+// Then, the command `result_is_arg` can be used in scripts.
+
+define CC_Result_Is_Arg = "[1A 0C]"
+
+
+command result_is_arg { CC_Result_Is_Arg }
+// ASM function for comparing the result register to the argument register. By cooprocks123e. Thanks!
+CompareResToArg: M_EB_Function_Wrapper({
+    JSL   (R_Get_Working_Memory)
+    // Move value from $06 to $00 temporarily
+    LDA_d (0x06)
+    STA_d (0x00)
+    LDA_d (0x08)
+    STA_d (0x02)
+    JSL   (R_Get_Argument_Memory)
+    // Initialize output value to 0
+    STZ_d (0x0e)
+    STZ_d (0x10)
+    // Co mpare arg in $06 with working memory in $00
+    LDX_d (0x06)
+    CPX_d (0x00)
+    // If not equal, we're done - return 0
+    BNE_a (done)
+    // Compare high word
+    LDX_d (0x08)
+    CPX_d (0x02)
+    // If not equal, we're done - return 0
+    BNE_a (done)
+    // If we're here then Arg == Working - set return value to 1
+    INC_d (0x0e)
+done:
+    // Write return value into working memory
+    JSL   (R_Set_Working_Memory)
+})
+
+// Internal use
+define Has_Purchased = flag 0x291      // Seemingly marks if you've already purchased something or not, for dialogue. Unsure how it is set, but it is checked
+define Offense_Or_Defense = flag 0x292 // Seemingly marks if offense or defense is to change when equipping an item. Unsure how it is set, but it is checked
+define UnknownFlag1 = flag 0xE0        // Something to do with if you've purchased or not? Unsure why or how it is seperate from Has_Purchased. Unsure how it is set.
+define UnknownFlag2 = flag 0xE1        // Something to do with if you've sold or not?
+//
+
+Sound_Cash_Register:
+//c5d835
+ifgoto (Different_Purchase_Sound, Sound_Ping)
+sound (Sound_Cash)
+eob
+
+Sound_Ping:
+//c5d840
+sound (Sound_Beep)
+eob
+
+
+BuySell_Shop:
+//c5d24b
+// typo I think? looks like c5decb
+// c5d24b is shop_main_1
+
+unset (Has_Purchased)
+call (Greeting)
+
+BuySell_Shop_Choice:
+//c5ded3
+menu {
+	"Buy" : {
+		goto (BuySell_Buy_String)
+	}
+	"Sell" : {
+		goto (BuySell_Sell_String)
+	}
+}
+
+BuySell_Exit_Store_String:
+//c5deef
+ifgoto (Has_Purchased, BuySell_Bought_Something_String)
+call (Exit_Store_Dont_Buy)
+eob
+
+BuySell_Bought_Something_String:
+//c5defc
+call (Exit_Store_Buy)
+unset (Has_Purchased)
+eob
+
+BuySell_Buy_String:
+//c5df05
+call (Open_Shop_Window)
+open_hp
+call (Shop_List_Main) // open shop window
+false_goto (BuySell_Request_Another_Transaction_String) // if backed out
+//call (Check_Item_Number)		//Checks item number, and does the Lucky Sandwich randomization
+store_registers
+notfull (0xFF)
+false_goto (BuySell_Whole_Party_Full_Inventory_String)
+load_registers
+call (Selected_Item_String)
+ifgoto (UnknownFlag1, BuySell_Thanking_String)
+goto (BuySell_Request_Another_Transaction_String)
+
+BuySell_Sell_String:
+//c5df3a
+call (0xc5e431)
+false_goto (BuySell_Nothing_To_Sell_String)
+call (BuySell_What_To_Sell_String)
+ifgoto (UnknownFlag2, BuySell_Thanking_String)
+goto (BuySell_Request_Another_Transaction_String)
+
+BuySell_Thanking_String:
+//c5df56
+call (Transaction_Thanks)
+unset (UnknownFlag1)
+unset (UnknownFlag2)
+goto (BuySell_Request_Another_Transaction_String)
+
+BuySell_Request_Another_Transaction_String:
+//c5df61
+call (Request_Another_Transaction)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (BuySell_Do_Another_Transaction_String)
+adr32 (BuySell_Exit_Store_String)
+goto (BuySell_Exit_Store_String)
+
+/*
+menu {
+	"Yes": {
+		goto (BuySell_Do_Another_Transaction_String)
+	}
+	default "No": {
+		goto (BuySell_Exit_Store_String)
+	}
+}
+*/
+
+
+BuySell_Do_Another_Transaction_String:
+//c5df7f
+call (Do_Another_Transaction)
+goto (BuySell_Shop_Choice)
+
+BuySell_Whole_Party_Full_Inventory_String:
+//c5df89
+call (Whole_Party_Full_Inventory)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (BuySell_Sell_String)
+adr32 (BuySell_Exit_Store_String)
+goto (BuySell_Exit_Store_String)
+
+/*
+menu {
+	"Yes": {
+		goto (BuySell_Sell_String)
+	}
+	default "No": {
+		goto (BuySell_Exit_Store_String)
+	}
+}
+*/
+
+
+BuySell_Nothing_To_Sell_String:
+//c5dfa7
+call (Nothing_To_Sell)
+goto (BuySell_Request_Another_Transaction_String)
+
+
+NoSell_Shop:
+//c5dfb1
+unset (Has_Purchased)
+newline
+call (Greeting)
+goto (NoSell_Buy_String)
+
+NoSell_Buy_String:
+//c5dfba
+call (Open_Shop_Window)
+open_hp
+call (Shop_List_Main)
+false_goto (NoSell_Exit_Store_String)
+store_registers
+notfull (0xFF)
+false_goto (NoSell_Whole_Party_Full_Inventory_String)
+load_registers
+//call (Check_Item_Number)		//Checks item number, and does the Lucky Sandwich randomization
+call (Selected_Item_String)
+ifgoto (UnknownFlag1, NoSell_Thanking_String)
+goto (NoSell_Request_Another_Transaction_String)
+
+NoSell_Thanking_String:
+//c5dfef
+call (Transaction_Thanks)
+unset (UnknownFlag1)
+unset (UnknownFlag2)
+goto (NoSell_Request_Another_Transaction_String)
+
+NoSell_Request_Another_Transaction_String:
+//c5dffa
+call (Request_Another_Transaction)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (NoSell_Buy_String)
+adr32 (NoSell_Exit_Store_String)
+goto (NoSell_Exit_Store_String)
+
+/*
+menu {
+	"Yes": {
+		goto (NoSell_Buy_String)
+	}
+	default "No": {
+		goto (NoSell_Exit_Store_String)
+	}
+}
+*/
+
+NoSell_Exit_Store_String:
+//c5e013
+ifgoto (Has_Purchased, NoSell_Bought_Something_String)
+call (Exit_Store_Dont_Buy)
+eob
+
+NoSell_Bought_Something_String:
+//c5e020
+unset (Has_Purchased)
+call (Exit_Store_Buy)
+eob
+
+NoSell_Whole_Party_Full_Inventory_String:
+//c5e029
+call (Whole_Party_Full_Inventory)
+eob
+
+
+OneItem_Shop:
+//c5e02f
+unset (Has_Purchased)
+newline
+call (Greeting)
+goto (OneItem_Buy_String)
+
+OneItem_Buy_String:
+//c5e038
+call (Open_Shop_Window)
+open_hp
+call (Shop_List_Main)
+false_goto (OneItem_Exit_Store_String)
+store_registers
+notfull (0xFF)
+false_goto (OneItem_Whole_Party_Full_Inventory_String)
+load_registers
+//call (Check_Item_Number)		//Checks item number, and does the Lucky Sandwich randomization
+call (Selected_Item_String)
+ifgoto (UnknownFlag1, OneItem_Thanking_String)
+eob
+
+OneItem_Thanking_String:
+//c5e069
+call (Transaction_Thanks)
+unset (UnknownFlag1)
+unset (UnknownFlag2)
+call (Request_Another_Transaction)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (OneItem_Buy_String)
+adr32 (OneItem_Exit_Store_String)
+goto (OneItem_Exit_Store_String)
+
+/*
+menu {
+	"Yes": {
+		goto (OneItem_Buy_String)
+	}
+	default "No": {
+		goto (OneItem_Exit_Store_String)
+	}
+}
+*/
+
+
+
+OneItem_Exit_Store_String:
+//c5e08d
+ifgoto (Has_Purchased, OneItem_Bought_Something_String)
+call (Exit_Store_Dont_Buy)
+eob
+
+OneItem_Bought_Something_String:
+//c5e09a
+unset (Has_Purchased)
+call (Exit_Store_Buy)
+eob
+
+OneItem_Whole_Party_Full_Inventory_String:
+//c5e0a3
+call (Whole_Party_Full_Inventory)
+eob
+
+
+
+Selected_Item_String:
+//c5e0a9
+call (0xc5e24b)
+true_goto (Not_Enough_Cash_String)
+load_registers
+call (Selected_Item)
+act_to_wram
+
+// NEW CODE
+menu {
+	"Just one"  : { goto(Selected_Item_String_Pt2) }
+	"Multiple" : { goto(BulkBuy) }
+	}
+goto(Cancel_Cant_Equip_String) // this text isn't specific to not equipping; each vendor just says "oh so you dont want to buy anything"
+
+Selected_Item_String_Pt2:
+wram_to_act
+// END NEW CODE
+party_check (2)
+false_goto (Who_Will_Take_Item_String)
+char_num (1)
+goto (Subtract_Money_String)
+
+Who_Will_Take_Item_String:
+//c5e0cc
+load_registers
+call (Who_Will_Take_Item)
+call (Open_Character_Inventory)
+false_goto (Cancel_Cant_Equip_String)
+goto (Subtract_Money_String)
+
+Subtract_Money_String:
+//c5e0de
+store_registers
+swap
+notfull (0)
+false_goto (Chosen_Character_Inventory_Full_String)
+load_registers
+no_space (2)
+false_goto (Character_Cant_Equip_Bought_String)
+call (0xc5e25b)
+call (0xc5e26a)
+false_goto (Character_Cant_Equip_String)
+wram_to_act
+"[1D 0F 00 00]"
+call (0xc5e3a5)
+call (Sound_Cash_Register)
+store_registers
+call (Equip_Now)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (List_Stat_Change)
+adr32 (Buy_Previous_Equipment_String_3)
+goto (Buy_Previous_Equipment_String_3)
+
+/*
+menu {
+	"Yes": {
+		goto (List_Stat_Change)
+	}
+	default "No": {
+		goto (Buy_Previous_Equipment_String_3)
+	}
+}
+*/
+
+List_Stat_Change:
+//c5e136
+sound (115)
+call (Defense_Old_String)	//Reports original offense/defense
+load_registers
+equip (0, 0)
+store_registers
+call (Defense_New_String)	//Reports new offense/defense
+load_registers
+swap
+false_goto (Buy_Previous_Equipment_String_3)
+call (0xc5e36e)
+false_goto (Buy_Previous_Equipment_String_3)
+call (Buy_Previous_Equipment)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (Buy_Previous_Equipment_String_1)
+adr32 (Buy_Previous_Equipment_String_3)
+goto (Buy_Previous_Equipment_String_3)
+
+/*
+menu {
+	"Yes": {
+		goto (Buy_Previous_Equipment_String_1)
+	}
+	default "No": {
+		goto (Buy_Previous_Equipment_String_3)
+	}
+}
+*/
+
+Buy_Previous_Equipment_String_1:
+//c5e17e
+call (Sound_Cash_Register)
+call (0xc5e37a)					//Give money
+goto (Buy_Previous_Equipment_String_2)
+
+Buy_Previous_Equipment_String_2:
+//c5e188
+set (UnknownFlag1)
+goto (Buy_Previous_Equipment_String_3)
+
+Buy_Previous_Equipment_String_3:
+//c5e18b
+unset (Offense_Or_Defense)
+eob
+
+Character_Cant_Equip_String:
+//c5e18f
+call (0xc5e387)
+call (Cant_Equip_Item)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (Character_Cant_Equip_Bought_String)
+adr32 (Cancel_Cant_Equip_String)
+goto (Cancel_Cant_Equip_String)
+
+/*
+menu {
+	"Yes": {
+		goto (Character_Cant_Equip_Bought_String)
+	}
+	default "No": {
+		goto (Cancel_Cant_Equip_String)
+	}
+}
+*/
+
+Cancel_Cant_Equip_String:
+//c5e1ad
+call (Cancel_Cant_Equip)
+goto (Buy_Previous_Equipment_String_3)
+
+Chosen_Character_Inventory_Full_String:
+//c5e1b7
+newline
+call (Chosen_Character_Inventory_Full)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (Who_Will_Take_Item_String)
+adr32 (Cancel_Cant_Equip_String)
+goto (Cancel_Cant_Equip_String)
+
+/*
+menu {
+	"Yes": {
+		goto (Who_Will_Take_Item_String)
+	}
+	default "No": {
+		goto (Cancel_Cant_Equip_String)
+	}
+}
+*/
+
+Not_Enough_Cash_String:
+//c5e1d6
+call (Not_Enough_Cash)
+goto (Buy_Previous_Equipment_String_3)
+
+Character_Cant_Equip_Bought_String:
+//c5e1e0
+call (0xc5e3a5)
+call (Sound_Cash_Register)
+goto (Buy_Previous_Equipment_String_2)
+
+BuySell_What_To_Sell_String:
+//c5e1ef
+call (What_To_Sell)
+call (Select_Sell)
+// wram_to_act
+false_goto (Nothing)
+store_registers
+// swap
+get_iteminfo (0, 0)
+item_sell_price (0)
+false_goto (Unsellable_Item_String)
+call (Confirm_Selling)
+
+call (0xc7dd4f)				//Print Yes/No text
+call (0xc7dd5e)				//Moonside reverse choice flag check
+cc09start (2)
+adr32 (Sell_Item_String)
+adr32 (Cancel_Selling_String)
+goto (Cancel_Selling_String)
+
+/*
+menu {
+	"Yes": {
+		goto (Sell_Item_String)
+	}
+	default "No": {
+		goto (Cancel_Selling_String)
+	}
+}
+*/
+
+
+Sell_Item_String:
+//c5e22c
+call (0xc5e392)
+call (Sound_Cash_Register)
+goto (Nothing)
+
+Cancel_Selling_String:
+//c5e237
+call (Cancel_Selling)
+goto (Nothing)
+
+Unsellable_Item_String:
+//c5e241
+call (Unsellable_Item)
+goto (Nothing)
+
+Defense_Old_String:
+//c5e277
+load_registers
+rtoarg
+"@({name (0)}'s"
+ifgoto (Offense_Or_Defense, Offense_Old_String)
+ifgoto (Offense_Or_Defense, Offense_Old_String)
+" defense" linebreak
+"  changed "
+cc09start (4)		//Checks the Defense stat of a particular party member
+adr32 (Char1_Defense_Old)
+adr32 (Char2_Defense_Old)
+adr32 (Char3_Defense_Old)
+adr32 (Char4_Defense_Old)
+goto (Char1_Defense_Old)
+
+Char1_Defense_Old:
+stat (18)
+eob
+
+Char2_Defense_Old:
+stat (40)
+eob
+
+Char3_Defense_Old:
+stat (62)
+eob
+
+Char4_Defense_Old:
+stat (84)
+eob
+
+Offense_Old_String:
+//c5e2c4
+" offense" linebreak
+"  changed "
+cc09start (4)		//Checks the Offense stat of a particular party member
+adr32 (Char1_Offense_Old)
+adr32 (Char2_Offense_Old)
+adr32 (Char3_Offense_Old)
+adr32 (Char4_Offense_Old)
+goto (Char1_Offense_Old)
+
+Char1_Offense_Old:
+stat (17)
+eob
+
+Char2_Offense_Old:
+stat (39)
+eob
+
+Char3_Offense_Old:
+stat (61)
+eob
+
+Char4_Offense_Old:
+stat (83)
+eob
+
+Defense_New_String:
+//c5e2f7
+" to "
+rtoarg
+ifgoto (Offense_Or_Defense, Offense_New_String)
+cc09start (4)		//Checks the Defense stat of a particular party member
+adr32 (Char1_Defense_New)
+adr32 (Char2_Defense_New)
+adr32 (Char3_Defense_New)
+adr32 (Char4_Defense_New)
+goto (Char1_Defense_New)
+
+Char1_Defense_New:
+stat (18)
+")" next
+eob
+
+Char2_Defense_New:
+stat (40)
+")" next
+eob
+
+Char3_Defense_New:
+stat (62)
+")" next
+eob
+
+Char4_Defense_New:
+stat (84)
+")" next
+eob
+
+Offense_New_String:
+//c5e338
+cc09start (4)		//Checks the Offense stat of a particular party member
+adr32 (Char1_Offense_New)
+adr32 (Char2_Offense_New)
+adr32 (Char3_Offense_New)
+adr32 (Char4_Offense_New)
+goto (Char1_Offense_New)
+
+Char1_Offense_New:
+stat (17)
+")" next
+eob
+
+Char2_Offense_New:
+stat (39)
+")" next
+eob
+
+Char3_Offense_New:
+stat (61)
+")" next
+eob
+
+Char4_Offense_New:
+stat (83)
+")" next
+eob
+
+Open_Character_Inventory:
+//c5e52e
+"[1A 01]"
+adr32 (Character_Inventory_1)
+adr32 (Character_Inventory_2)
+adr32 (Character_Inventory_3)
+adr32 (Character_Inventory_4)
+"[02]"
+window_switch (2)
+window_closetop
+window_switch (Dialogue_Window)
+eob
+
+Character_Inventory_1:
+//c5e584
+"[18 02]"
+display_char_inv (2, 1)
+eob
+
+Character_Inventory_2:
+//c5e58b
+"[18 02]"
+display_char_inv (2, 2)
+eob
+
+Character_Inventory_3:
+//c5e592
+"[18 02]"
+display_char_inv (2, 3)
+eob
+
+Character_Inventory_4:
+//c5e599
+"[18 02]"
+display_char_inv (2, 4)
+eob
+
+Select_Sell:
+//c5e456:
+open_hp
+party_check (2)
+true_goto (Select_Sell_Single_Char)
+"[1A 01]"
+adr32 (Character_Inventory_1)
+adr32 (Character_Inventory_2)
+adr32 (Character_Inventory_3)
+adr32 (Character_Inventory_4)
+"[00]"
+rtoarg
+false_goto (Select_Sell_Window_Switch)
+"[19 1B 02]"
+false_goto (Select_Sell)
+"[18 09 02]"
+false_goto (Select_Sell)
+goto (Select_Sell_Window_Switch)
+
+Select_Sell_Window_Switch:
+//c5e48e
+window_switch (2)
+window_closetop
+window_switch (Dialogue_Window)
+swap
+eob
+
+Select_Sell_Single_Char:
+//c5e499
+char_num (1)
+rtoarg
+act_to_wram
+"[18 02]"
+wram_to_act
+display_char_inv (2, 0)
+wram_to_act
+"[18 09 02]"
+act_to_wram
+window_switch (2)
+window_closetop
+window_switch (Dialogue_Window)
+wram_to_act
+false_goto (Nothing)
+swap
+eob
+
+
+
+Check_Item_Number: // all instances of it being called have been commented out
+//c5e3bc
+store_registers
+result_is (226)
+true_goto (Lucky_Sandwich_Numbers)
+load_registers
+eob
+
+Lucky_Sandwich_Numbers:
+//c5e3c9
+random_number (15)
+check_if_greater_equal (7)
+false_goto (Lucky_Sandwich_Type1)
+
+random_number (8)
+check_if_greater_equal (4)
+false_goto (Lucky_Sandwich_Type2)
+
+random_number (4)
+check_if_greater_equal (3)
+false_goto (Lucky_Sandwich_Type3)
+
+random_number (1)
+false_goto (Lucky_Sandwich_Type4)
+
+random_number (2)
+true_goto (Lucky_Sandwich_Type5)
+
+counter (231)
+ctoarg
+swap
+eob
+
+Lucky_Sandwich_Type5:
+//c5e412
+counter (230)
+ctoarg
+swap
+eob
+
+Lucky_Sandwich_Type4:
+//c5e419
+counter (229)
+ctoarg
+swap
+eob
+
+Lucky_Sandwich_Type3:
+//c5e420
+counter (228)
+ctoarg
+swap
+eob
+
+Lucky_Sandwich_Type2:
+//c5e427
+counter (227)
+ctoarg
+swap
+eob
+
+Lucky_Sandwich_Type1:
+//c5e42e
+load_registers
+eob
+
+Nothing:
+eob
+
+// NEW CODE
+BulkBuy:
+	counter(0)
+	
+	newline " " input(2) // If you want to add some decoration around the input selector, do it here
+	
+	store_registers
+	if result_is(0) { call(Bulk_Buy_Change_Of_Mind) eob } // backed out of the selector / chose 0 
+	load_registers
+	if result_is(1) { ctoarg store_registers newline goto(Selected_Item_String_Pt2) } // chose just one 	
+	load_registers
+
+	//Maedaez's suggestion
+	compare_result(6)
+	goto_if_false(BulkBuy_Continue)
+	call(Bulk_Buy_Lots)
+
+	BulkBuy_Continue:
+	load_registers
+
+	ctoarg 
+	store_registers
+	counter(1) 
+	act_to_wram
+ 	goto(BulkCheckLoop)
+
+BulkCheckLoop: // adds dummy items / removes money until either your inventory is full, wallet cannot afford the item, or the loop is complete
+	if full(0xFF) { wram_to_act counter(1) act_to_wram call(BulkErrorReset) call(Bulk_Buy_Full_Inventory) eob } // call the loop to reset the inventory and wallet
+	load_registers 
+	"[1D 0A 00]" // get item price 
+	swap
+	
+	if not hasmoney(0) { wram_to_act counter(1) act_to_wram call(BulkErrorReset) call(Bulk_Buy_Not_Enough_Cash) eob } // call the loop to reset the inventory and wallet, with different dialogue
+	if hasmoney(0) { takemoney(0) } // if you can afford it, take the money
+	
+	give(0xFF, dummyItem)  // give a dummy item
+	
+	wram_to_act // load the alt registers, which for now will be storing the loop check
+	ctoarg // copy the loop count to arg
+	inc // increase the amount of loops
+	act_to_wram // save the new loop value
+	
+	if result_is_arg { counter(1) goto(BulkResetInv) }  // compare the count of loops to the input the user provided
+	goto(BulkCheckLoop)
+	
+BulkResetInv: // removes the dummy items
+	take(0xFF, dummyItem) // remove a dummy item
+	swap
+	ctoarg // standard loop increment stuff
+	inc
+	swap
+	if result_is_arg { load_registers counter(1) store_registers ctoarg swap act_to_wram goto(BulkMainLoop)}
+	goto(BulkResetInv)
+
+BulkMainLoop: // gives the items to your party 
+	load_registers
+	give(0xFF, 0)
+	
+	call (Sound_Cash_Register)
+	pause(5) // if you don't like this thing, remove this line and the prevous one, and add the sound stuff in the if statement below
+	
+	wram_to_act
+	if result_is_arg { load_registers set(Has_Purchased) set(UnknownFlag1) open_wallet eob }
+	
+	inc
+	swap
+	ctoarg // standard loop increment stuff
+	swap
+	act_to_wram
+	goto(BulkMainLoop)
+	
+BulkErrorReset: // removes the dummy items and refunds in the case that you cannot afford that many / do not have enough inventory slots
+	load_registers
+	"[1D 0A 00]" // get price of item
+	swap
+	givemoney(0) // refund 
+	take(0xFF, dummyItem) // remove a dummy item
+	
+	wram_to_act
+	swap
+	ctoarg // standard loop increment stuff
+	swap
+	inc
+	act_to_wram
+	
+	if result_is_arg { eob } // since we will be calling this, eob to return
+	goto(BulkErrorReset)
+//
+
+command adr32 (a) "[{byte[0] a} {byte[1] a} {byte[2] a} 00]"
+command ifgoto (num, target) "[06 {short num} {long target}]"
+command cc09start (num) "[09 {byte num}]"
+command check_if_greater_equal(number) "[18 07 {long number} 00]"
+command char_num (char) "[19 10 {byte char}]"
+command get_iteminfo (char, slot) "[19 19 {byte char} {byte slot}]"
+command display_char_inv (n, char) "[1A 05 {byte n} {byte char}]"
+command display_shop (num) "[1A 06 {byte num}]"
+command false_goto (target) "[1B 02 {long target}]"
+command true_goto (target) "[1B 03 {long target}]"
+command act_to_wram "[1B 05]"
+command wram_to_act "[1B 06]"
+command no_space (char) "[1D 02 {byte char}]"
+command item_sell_price (price) "[1D 0B {byte price}]"
+command party_check (num) "[1D 19 {byte num}]"
+command random_number(num) "[1D 21 {byte num}]"
+command equip (char, itemslot) "[1F 83 {byte char} {byte itemslot}]"
+command compare_result (value) "[18 07 {long value} 00]"
+command goto_if_false (label) "[1B 02 {long label}]"

@@ -576,3 +576,64 @@ _exit:
 
 command heal_and_revive_party { call(0xC915F4) }
 
+command show_phone_sprite_float {
+	get_char_at_pos(1)
+	result_is(4)
+	goto_if_true(_poo_leader)
+	get_char_at_pos(1)
+	result_is(3)
+	goto_if_true(_jeff_leader)
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(_paula_leader)
+
+_ness_leader:
+	show_sprite2_float(1,2)	// 0x01, 2, show walkie talkie on Ness's hand
+	sprite2_direction(1,11)
+	goto(_continue)
+
+_paula_leader:
+	show_sprite2_float(2,2)	// 0x02, 2, show walkie talkie on Paula's hand
+	sprite2_direction(2,11)
+	goto(_continue)
+
+_jeff_leader:
+	show_sprite2_float(3,2)	// 0x03, 2, show walkie talkie on Jeff's hand
+	sprite2_direction(3,11)
+	goto(_continue)
+
+_poo_leader:
+	show_sprite2_float(4,2)	// 0x04, 2, show walkie talkie on Poo's hand
+	sprite2_direction(4,11)
+
+_continue:
+}
+
+command hide_phone_sprite_float {
+	get_char_at_pos(1)
+	result_is(4)
+	goto_if_true(_poo_leader)
+	get_char_at_pos(1)
+	result_is(3)
+	goto_if_true(_jeff_leader)
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(_paula_leader)
+
+_ness_leader:
+	hide_char_float(1)	// 0x01, 2, show walkie talkie on Ness's hand
+	goto(_continue)
+
+_paula_leader:
+	hide_char_float(2)	// 0x02, 2, show walkie talkie on Paula's hand
+	goto(_continue)
+
+_jeff_leader:
+	hide_char_float(3)	// 0x03, 2, show walkie talkie on Jeff's hand
+	goto(_continue)
+
+_poo_leader:
+	hide_char_float(4)	// 0x04, 2, show walkie talkie on Poo's hand
+
+_continue:
+}

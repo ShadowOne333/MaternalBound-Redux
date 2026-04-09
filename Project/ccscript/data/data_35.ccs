@@ -594,14 +594,17 @@ l_0xc7d2f6:
 	sound(SND_PHONEPICKUP)	// 11
 	"Click!  Beep-beep-beep..." end
 
+// Dad's phone calls
 l_0xc7d33e:
-	//eob		// Disable Dad from calling you after a while
+	//l_0xc9992f, eob		// Disable Dad from calling you after a while
 	goto_if_flag(FLG_WIN_GIEGU, data_55.l_0xc9992f)	// 0x49, 73
 	music(115)
 	pause(60)
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
+
 	goto_if_flag(FLG_PU, l_0xc7d36e)	// 0x10, 16
 	goto_if_flag(FLG_SUMS_RAMMA_START, l_0xc7d4af)	// 0x95, 149
 	goto_if_flag(FLG_JEFF, l_0xc7d36e)	// 0x0E, 14
@@ -625,7 +628,9 @@ l_0xc7d3f5:
 	"@Ah, I see..." next
 	"@Well, it doesn't make me happy," next
 	"@but I understand your point about the fate of the world being at stake." next
-	call(data_36.l_0xc7de54) eob
+	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
+	eob
 
 l_0xc7d43b:
 	"@All right." pause(20)
@@ -633,6 +638,7 @@ l_0xc7d43b:
 	"@When you get to the hotel,| be sure to give your dear ol' dad a call." next
 	"@And hey, keep an eye out for bad guys!" promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	eob
 
 l_0xc7d4af:
@@ -649,6 +655,7 @@ l_0xc7d526:
 	"@Oh well, it's okay...  Anyway, don't strain yourself on your journey." next
 	"@Good luck... whoever you are." promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	eob
 
 l_0xc7d585:
@@ -658,6 +665,7 @@ l_0xc7d585:
 	"@Before you take a break, be sure to call me." next
 	"@Be on the lookout for any shady characters..." promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	eob
 
 l_0xc7d627:
@@ -682,6 +690,7 @@ l_0xc7d6aa:
 	"@You must be a hard worker, if you are a friend of {stat(8)}." next	// Stat 8 = Ness' name
 	"@Remember, I'm rooting for you guys!" promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	eob
 
 l_0xc7d748:
@@ -694,7 +703,9 @@ l_0xc7d748:
 	"@If you see a phone, please call {stat(8)}'s father... well, actually, that's me." next
 	"@And, be sure to be careful of the hoodlums." promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	eob
+// Dad's phone calls end here
 
 l_0xc7d84f:	// Shop flag 1
 	set(FLG_SHOP_01)	// 226

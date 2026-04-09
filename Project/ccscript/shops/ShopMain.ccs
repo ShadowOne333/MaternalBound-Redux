@@ -1,0 +1,395 @@
+import ShopSys
+
+// based off
+// https://ssl-forum-files.fobby.net/forum_attachments/0040/0732/ShopMain.ccs
+// -Kirb
+
+// SETUP:
+// Read instructions thoroughly.
+// Change the definition on line 153 (Shop_Flag_Debug) to a valid flag.
+// Please also see ShopSys.ccs.
+
+// to initialise a shop,
+// give an NPC `ShopMain.Shop_[title]` as their text pointer
+// (see the 'NPC Text' section below)
+
+// ********** TO ADD A NEW SHOP ********** //
+// 1. Decide what kind of shop it is (buy/sell, only buy and no sell, or only offering one item)
+//      Also decide if it should have Moonside logic and the alternate transaction sound (beep)
+//      (there's no logic here for sell-only return desks. They're on a separate system.)
+// 2. Under NPC TEXT (after the template dialogue and the defines), add dialogue following the format:
+//      - set flags, call one of BuySell_Shop, NoSell_Shop, or OneItem_Shop, unset flags, and eob
+// 3. Under SHOP MENU TEXT STRING, add your shop ID (as defined in the shops yml)
+// 4. Add to the following if/else trees (great job EB programmers):
+//    - Shop_List_Main
+//    - Greeting
+//    - Exit_Store_Buy
+//    - Exit_Store_Dont_Buy
+//    - Open_Shop_Window
+//    - Selected_Item
+//    - Who_Will_Take_Item
+//    - Equip_Now (only if shop sells equippable items)
+//    - Buy_Previous_Equipment (ditto)
+//    - Cant_Equip_Item (ditto) (note: this dialogue is generic for changing your mind)
+//    - Cancel_Cant_Equip (ditto)
+//    - Not_Enough_Cash
+//    - Whole_Party_Full_Inv
+//    - What_To_Sell (only if the player can sell items at this shop)
+//    - Confirm_Selling (ditto)
+//    - Cancel_Selling (ditto)
+//    - Nothing_To_Sell (ditto)
+//    - Unsellable_Item (ditto)
+//    - Transaction_Thanks
+//    - Request_Another_Transaction
+//    - Do_Another_Transaction
+//    - Chosen_Character_Inventory_Full
+//    - Bulk_Buy_Lots (only if shop isn't one-item type)
+//    - Bulk_Buy_Not_Enough_Cash (ditto)
+//    - Bulk_Buy_Full_Inventory (ditto)
+
+// You can use this dialogue as a template.
+// The way each one ends is important, so do not change it!
+
+
+Dummy_Greeting:
+    "@Beginning test shop..." linebreak eob
+
+Dummy_Exit_Store_Buy:
+    "@Dialogue when exiting after a transaction." end
+
+Dummy_Exit_Store_Dont_Buy:
+    "@Dialogue when exiting after no transaction." end
+
+Dummy_Open_Shop_Window:
+    "@Opening the shop window." prompt eob
+
+Dummy_Selected_Item: 
+    "@Selected <{itemname(0)}> ({number(0)})." linebreak eob
+
+Dummy_Who_Will_Take_Item:
+    "@Please choose a party member." prompt eob
+
+Dummy_Equip_Now:
+    "@Should it be equipped now?" linebreak eob
+
+Dummy_Buy_Previous_Equipment: // arg: item name, res: item price
+    "@Previous equipment is" linebreak 
+    "  <{itemname(0)}> ({number(0)})." next
+    "@Sell it for ${swap}[1C 0A 00 00 00 00]?" next eob
+
+Dummy_Cant_Equip_Item: // arg: player name
+    "@{name(0)} (P{number(0)}) is not able to equip the item." next
+    "@Purhcase anyway?" linebreak eob
+
+Dummy_Cancel_Cant_Equip: // despite the name, it's often used as a generic change of mind
+    "@Cancelled after change of mind." next eob
+
+Dummy_Not_Enough_Cash:
+    "@Not enough cash for this item." next eob
+
+Dummy_Whole_Party_Full_Inventory:
+    "@The party has too much stuff." next
+    "@Sell something to make room?" linebreak eob
+
+Dummy_What_To_Sell:
+    "@Choose an item to sell." prompt eob
+
+Dummy_Confirm_Selling: // arg: item ID, res: item sell price
+    "@Sell <{itemname(0)}> ({number(0)})" linebreak
+    "  for ${swap}[1C 0A 00 00 00 00]?" linebreak eob
+
+Dummy_Cancel_Selling:
+    "@Cancelled selling." next eob
+
+Dummy_Nothing_To_Sell:
+    "@There are no items in your inventory." next eob
+
+Dummy_Unsellable_Item:
+    "@<{itemname(0)}> ({number(0)}) cannot be sold." next eob
+
+Dummy_Transaction_Thanks:
+    "@Made a purchase." next eob
+
+Dummy_Transaction_Thanks_2: // when is this used?
+    "@If you find out when this text is used please DM Kirb thanks <3" next eob
+
+Dummy_Request_Another_Transaction:
+    "@Perform another transaction?" linebreak eob
+
+Dummy_Do_Another_Transaction:
+    "@Performing another transaction." linebreak eob
+
+Dummy_Chosen_Character_Inventory_Full: // arg = player name
+    "@{name(0)} (P{number(0)})'s  inventory is full." next
+    "@Choose another party member to carry the item?" linebreak eob
+
+Dummy_Bulk_Buy_Lots:
+    "@Buying six or more items." next eob
+
+Dummy_Bulk_Buy_Not_Enough_Cash:
+    "@Cannot afford this many items." next eob
+
+Dummy_Bulk_Buy_Full_Inventory:
+    "@Not enough inventory space for this many items." next eob
+
+Dummy_Bulk_Buy_Change_Of_Mind:
+    "@Chose to purchase zero or pressed B on quantity input." next eob
+
+
+// Dummy item which is used for checking inventory space when bulk buying. If the player has this item, it will be moved to after the purchased items when bulk buying
+// right now, it's the unused 'Video relaxant' item.
+define dummyItem = 203
+
+// Sound effects for shops
+define Sound_Cash = 12
+define Sound_Beep = 120
+
+// Dialogue window for shops. Be aware that since registers are per-window,
+// modifying the code to use different windows in different locations
+// will probably not work well!
+define Dialogue_Window = 1
+
+// Flags used for shops
+define Shop_Flag_Debug	= "REPLACE ME!!!!"
+// ... add more here
+
+
+// shop config flags (from vanilla)
+define FLG_SHOPTEMP_1	= flag 656	// Different_Purchase_Sound, beep instead of cash noise
+define FLG_SHOPTEMP_4	= flag 659	// Moonside_Choice_Reverse, swap yes and no
+
+
+
+// // // NPC TEXT // // //
+
+
+
+// Template:
+/*
+Shop_Name:
+    set (This_Shop_Flag)
+    set (any other config flags like Different_Purchase_Sound)
+    call (BuySell_Shop or NoSell_Shop or OneItem_Shop)
+    unset (This_Shop_Flag)
+    unset (any config flags that were previously set)
+    eob
+*/
+
+// Debug shop
+Shop_Debug:
+    set (Shop_Flag_Debug)
+    call (BuySell_Shop)
+    unset (Shop_Flag_Debug)
+    eob
+
+// ... add more here
+
+
+
+// // // SHOP MENU TEXT STRING // // //
+
+
+
+// Tree for showing the shop menu
+Shop_List_Main:
+    ifgoto (Shop_Flag_Debug, Shop_List_Debug)
+    // ... add more here
+    eob
+
+
+Shop_List_Debug:
+    display_shop (1)
+    eob
+
+// ... add more here
+
+
+
+// // //  LINKS TO VENDOR TEXT // // //
+
+
+
+// Initial message when talking to NPC
+Greeting:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Greeting)
+    // ... add more here
+    eob
+
+// Exiting the store after purchasing at least one item
+Exit_Store_Buy:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Exit_Store_Buy)
+    // ... add more here
+    eob
+
+// Exit shop window without buying anything
+Exit_Store_Dont_Buy:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Exit_Store_Dont_Buy)
+    // ... add more here
+    eob
+
+// Message displayed just before opening the shop window
+// For vendors with the buy/sell commands, this displays after choosing "buy"
+// For other vendors, this displays automatically
+Open_Shop_Window:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Open_Shop_Window)
+    // ... add more here
+    eob
+
+// After selecting an item to buy at the store
+Selected_Item:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Selected_Item)
+    // ... add more here
+    eob
+
+// Asking who will take the item
+Who_Will_Take_Item:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Who_Will_Take_Item)
+    // ... add more here
+    eob
+
+// Asking if the character who took the item wants to equip it
+// Only asked if the character is capable of equipping the item
+// (and only if the shop sells equippables)
+Equip_Now:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Equip_Now)
+    // ... add more here
+    eob
+
+// After equipping a new piece of equipment you purchased, the vendor asks yes/no if you want to sell your old piece of equipment
+Buy_Previous_Equipment:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Buy_Previous_Equipment)
+    // ... add more here
+    eob
+
+// After selecting a piece of equipment, trying to put it in the inventory of a character who cannot equip it
+// Followed by a yes/no question asking if you still want to give that item to that character
+Cant_Equip_Item:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Cant_Equip_Item)
+    // ... add more here
+    eob
+
+// After picking an item, then canceling when choosing the inventory to put it in
+// After selecting to give a piece of equipment to a character who can't equip it, the game will ask yes/no if you still want to give it to that character.  Selecting no prompts this text
+Cancel_Cant_Equip:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Cancel_Cant_Equip)
+    // ... add more here
+    eob
+
+// Occurs when you try to buy an item without having enough money
+Not_Enough_Cash:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Not_Enough_Cash)
+    // ... add more here
+    eob
+
+// Checks if entire party's inventory is full after choosing to purchase an item
+// If the store has the buy/sell option, this will immediately be followed by the NPC asking yes/no if you want to sell something
+Whole_Party_Full_Inventory:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Whole_Party_Full_Inventory)
+    // ... add more here
+    eob
+
+// When choosing to sell an item
+// This is not displayed if the whole party's inventory is full, and the NPC asks if you want to sell something
+What_To_Sell:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_What_To_Sell)
+    // ... add more here
+    eob
+
+// After choosing to sell an item
+Confirm_Selling:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Confirm_Selling)
+    // ... add more here
+    eob
+
+// After picking an item to sell, then selecting "no"
+Cancel_Selling:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Cancel_Selling)
+    // ... add more here
+    eob
+
+// Occurs when you select the "sell" option, without a single item in your party's inventory
+Nothing_To_Sell:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Nothing_To_Sell)
+    // ... add more here
+    eob
+
+// When you try to sell an unsellable item
+Unsellable_Item:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Unsellable_Item)
+    // ... add more here
+    eob
+
+// After buying an item
+// After selling an item
+Transaction_Thanks:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Transaction_Thanks)
+    // ... add more here
+    eob
+
+// After purchasing an item, the vendor asks if you want to buy another item
+Request_Another_Transaction:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Request_Another_Transaction)
+    // ... add more here
+    eob
+
+// After agreeing to buy another item
+Do_Another_Transaction:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Do_Another_Transaction)
+    // ... add more here
+    eob
+
+// After choosing to give an item to a character whose inventory is full
+// Followed by a yes/no question asking if you want to give the item to someone else
+Chosen_Character_Inventory_Full:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Chosen_Character_Inventory_Full)
+    // ... add more here
+    eob
+
+// If you buy 6 or more of an item
+Bulk_Buy_Lots:
+    newline 
+    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Lots)
+    // ... add more here
+    eob
+
+// Can't afford bulk-buying
+Bulk_Buy_Not_Enough_Cash:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Not_Enough_Cash)
+    // ... add more here
+    eob
+
+// Not enough space when bulk buying
+Bulk_Buy_Full_Inventory:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Full_Inventory)
+    // ... add more here
+    eob
+
+// chose zero or pressed B when inputting quantity
+Bulk_Buy_Change_Of_Mind:
+    newline
+    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Change_Of_Mind)
+    // ... add more here
+    eob

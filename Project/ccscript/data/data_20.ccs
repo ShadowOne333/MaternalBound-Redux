@@ -325,18 +325,21 @@ l_0xc64cf8:
 	unset(FLG_DELIVERY_PIZZA)	// 180
 	unset(FLG_PIZZA_SIZE)	// 179
 	call(data_36.l_0xc7de2f)
+	show_phone_sprite_float
 	window_open(1)
 	title(1, Mach)
 	"@Hello!" linebreak
 	"  This is Mach Pizza." linebreak
-	" (hee, ha, he, ha)" next
-	"@...You must be at somewhere really strange, (hee, ha, he, ha)..." next
+	"  (hee, ha, he, ha)" next
+	"@...You must be at somewhere really strange." linebreak
+	"  (hee, ha, he, ha)..." next
 	"@I couldn't deliver the pizza." linebreak
 	"  The pizza got really cold and hard, and my legs are tired..." next
 	"@I am going to give up and go back." next
 	"@...I hope I can find the way home..." linebreak
-	" (hee, ha, he, ha)" promptw
+	"  (hee, ha, he, ha)" promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	call(data_36.l_0xc7de72)
 	eob
 

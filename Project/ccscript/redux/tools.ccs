@@ -16,7 +16,6 @@ import "../essential/commands.ccs"
 import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../redux/menu_macros.ccs"
-//import "../redux/battle_menu.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------
@@ -350,16 +349,16 @@ _Paralyzed:
 	JMP(_done)
 
 _Can_Move:
-	do_menu_macros(2, CANCELLABLE, {
+	do_menu_no_position(2, CANCELLABLE, 2, 0, {
 		set_window_title(2, "Tools")
-		menu_option("Spy kit", 0, 0, {
+		menu_option_no_position("Spy kit", {
 			set_action(6)
 			LDA_i(2)
 			JSL(0xC3E521)	// Close_Window
 			ret_tools_target()
 		})
 		if_flag(FLG_ITEM_SLIME_GENERATOR, {
-			menu_option("Slime generator", 11, 0, {
+			menu_option_no_position("Slime generator", {
 				set_action(169)
 				set_item_args_noinv(SLIME_GENERATOR)
 				LDA_i(2)
@@ -368,7 +367,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_SHIELD_KILLER, {
-			menu_option("Shield killer", 0, 1, {
+			menu_option_no_position("Shield killer", {
 				set_action(160)
 				set_item_args_noinv(SHIELD_KILLER)
 				LDA_i(2)
@@ -377,7 +376,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_COUNTER_PSI_UNIT, {
-			menu_option("Counter PSI unit", 11, 1, {
+			menu_option_no_position("Counter PSI unit", {
 				set_action(159)
 				set_item_args_noinv(COUNTER_PSI_UNIT)
 				LDA_i(2)
@@ -386,7 +385,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_NEUTRALIZER, {
-			menu_option("Neutralizer", 0, 2, {
+			menu_option_no_position("Neutralizer", {
 				set_action(247)
 				set_item_args_noinv(195)
 				LDA_i(2)
@@ -395,7 +394,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_DEFENSE_SHOWER, {
-			menu_option("Defense shower", 11, 2, {
+			menu_option_no_position("Defense shower", {
 				set_action(184)
 				set_item_args_noinv(157)
 				LDA_i(2)
@@ -404,7 +403,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_HP_SUCKER, {
-			menu_option("HP sucker", 0, 3, {
+			menu_option_no_position("HP sucker", {
 				set_action(161)
 				set_item_args_noinv(135)
 				LDA_i(2)
@@ -413,7 +412,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
-			menu_option("Hungry HP sucker", 11, 3, {
+			menu_option_no_position("Hungry HP sucker", {
 				set_action(176)
 				set_item_args_noinv(136)
 				LDA_i(2)
@@ -422,7 +421,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_BAZOOKA, {
-			menu_option("Bazooka", 0, 4, {
+			menu_option_no_position("Bazooka", {
 				set_action(310)
 				set_item_args_noinv(133)
 				LDA_i(2)
@@ -431,7 +430,7 @@ _Can_Move:
 			})
 		})
 		if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
-			menu_option("Heavy bazooka", 11, 4, {
+			menu_option_no_position("Heavy bazooka", {
 				set_action(311)
 				set_item_args_noinv(134)
 				LDA_i(2)
@@ -441,7 +440,7 @@ _Can_Move:
 		})
 		if_flag(FLG_ITEM_TOFU, {
 			if_not_flag(FLG_FOUR_MAID_THANKS, {
-				menu_option("Tofu machine", 0, 5, {
+				menu_option_no_position("Tofu machine", {
 					set_action(170)
 					set_item_args_noinv(TOFU_MACHINE)
 					LDA_i(2)

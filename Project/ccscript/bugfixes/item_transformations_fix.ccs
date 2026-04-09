@@ -1,0 +1,24 @@
+import "../essential/asm65816.ccs"
+
+// Fixes the issue where, upon getting a game over or resetting the system,
+// items that transform (eggs, etc) stop processing until you obtain another
+// transforming item.
+
+// Thanks to JTolmar for digging around and figuring this out
+// while I was eating breakfast this morning and couldn't do it myself due to Curse of Mobile Phone.
+
+/*
+In C05200 partyLeaderTick:
+
+C05241: AD 2A 9F        LDA ITEM_TRANSFORMATIONS_LOADED
+C05244: F0 04           BEQ @UNKNOWN5
+C05246: 22 C4 8F C4     JSL PROCESS_ITEM_TRANSFORMATIONS
+
+Becomes:
+
+C05241: EA EA EA        NOP NOP NOP 
+C05244: EA EA           NOP NOP
+C05246: 22 C4 8F C4     JSL PROCESS_ITEM_TRANSFORMATIONS
+*/
+
+ROM[0xC05241] = { NOP NOP NOP NOP NOP }

@@ -1,0 +1,46 @@
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/jsl_rts.ccs"
+
+// Edits to C1CFC6	(battle menu goods handler).
+// Insert a window that was removed during localization that displays the item
+// name being used.
+
+ROM[0xC1D017] = {
+	// Inserted right after: LDX $0E :: BEQ _return	(the point where it tries to
+	//     break out of the loop)
+	// Clobbers: TXA SEP(0x20) LDY_d	(0x10)
+	JML	(BattleGoods_ShowItemNameWindow)
+	NOP
+}
+ 
+BattleGoods_ShowItemNameWindow: {
+	LDA_i	(38)
+	JSL	(0xC1DD47)	// REDIRECT_CREATE_WINDOW(38)
+
+	JSL	(0xC3E4D4)	// New code: closing the previous window cleared the instant printing flag
+	             	 	// for some reason. SET_INSTANT_PRINTING() because I'm too lazy to use the $5E70
+	              		// mechanism that's supposed to solve this situation
+
+	LDA_i	(6)
+	JSL_RTS_C1	(0x0FEA)	// HIGHLIGHT_TEXT(6) -- 6 is purple
+ 
+	LDX_d	(0x10)		// The argument to this function is stored in $10
+	LDA_x	(0)   		// And we want its field_0x0
+	AND_i	(0xFF)		// which is a single byte, not two bytes
+	LDX_d	(0x0E)		// And we also want the item number
+	JSL	(0xC3E977)	// GET_CHARACTER_ITEM(in_arg->character_num, item_num)
+	JSL_RTS_C1	(0xC19216)	// PRINT_ITEM_NAME(^^^^^)
+ 
+	LDA_i	(0)
+	JSL_RTS_C1	(0x0FEA)	// HIGHLIGHT_TEXT(0) -- 0 is normal
+ 
+	JSL	(0xC3E4CA)	// CLEAR_INSTANT_PRINTING();
+ 
+	// Clobbered code
+	LDA_d	(0x0E)
+	SEP	(0x20)
+	LDY_d	(0x10)
+	JML	(0xC1D01C)	// tie this spaghetti back to where it was originally leading
+}

@@ -48,7 +48,6 @@ l_0xc634b4:
 	// Stat 8 = Ness' name
 	"@{stat(8)}, you like to work hard, just like your mother." next
 	"@But, I don't think it's good to work too hard." next
-	goto(l_0xc634ea)
 
 l_0xc634ea:
 	newline
@@ -122,7 +121,7 @@ l_0xc636e5:
 
 l_0xc6372d:
 	call(l_0xc63ba1)
-	two_choice_menu("Pick-up", l_0xc634b4, "Delivery", l_0xc63506)
+	two_choice_menu("Pick-up", l_0xc63761, "Delivery", l_0xc63790)
 
 l_0xc63756:
 	call(l_0xc63bc1)
@@ -740,17 +739,21 @@ l_0xc6451a:
 	unset(FLG_DELIVERY_UNSOU)	// 181
 	unset(FLG_DELIVERY_UNSOU_B)	// 645
 	call(data_36.l_0xc7de2f)
+	show_phone_sprite_float
 	window_open(1)
 	title(1, Escargo)
 	"@Hello!" linebreak
 	"  This is Escargo Express." linebreak
 	"  (hee, ha, he, ha)" next
 	"@I just (hee, ha, he, ha) couldn't find your location..." next
-	"@...You must be somewhere really strange.  (hee, ha, he, ha)" next
+	"@...You must be somewhere really strange." linebreak
+	"  (hee, ha, he, ha)" next
 	"@I've decided, honestly, that... I should give up." next
-	"@I'm outta here.  (hee, ha, he, ha)" next
+	"@I'm outta here." linebreak
+	"  (hee, ha, he, ha)" next
 	"@Sometimes this happens, you know?" promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	call(data_36.l_0xc7de72)
 	eob
 

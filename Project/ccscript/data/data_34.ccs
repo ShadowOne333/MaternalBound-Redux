@@ -562,6 +562,7 @@ l_0xc7a300:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	window_open(1)
 	title(1, Apple)
@@ -587,6 +588,7 @@ l_0xc7a300:
 	sound(SND_PHONEPICKUP)	// 11
 	"@*Click!* Beeeeep!" wait
 	window_closeall
+	hide_phone_sprite_float
 
 	music_resume
 	pathfinding_npc_time(8)	// Start delivery for Zombie paper
@@ -675,12 +677,14 @@ l_0xc7a7d9:
 	pathfinding_npc_time(8)	// 08
 	eob
 
+// Apple kid phone call
 l_0xc7a7dd:
 	music(115)
 	pause(60)
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	window_open(1)
 	title(1, Apple)
@@ -697,9 +701,12 @@ l_0xc7a7dd:
 	"  Yeah,| everything is..." next
 	"@(Kaboooom!)" next
 	"@Uh, I'vegotsomeproblems" linebreak
-	"  heregottago, bye!" wait
+	"  heregottago, bye!" next
 	sound(SND_PHONEPICKUP)	// 11
+	"@*Click*" wait
 	window_closeall
+	hide_phone_sprite_float
+
 	music_resume
 	eob
 
@@ -796,6 +803,7 @@ l_0xc7acb8:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	get_char_at_pos(1) rtoarg
 	window_open(1)
@@ -815,6 +823,8 @@ l_0xc7acb8:
 	sound(SND_PHONEPICKUP)	// 11
 	"@*Click*" wait
 	window_closeall
+	hide_phone_sprite_float
+
 	music_resume
 	eob
 
@@ -824,6 +834,7 @@ l_0xc7ae41:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	get_char_at_pos(1) rtoarg
 	window_open(1)
@@ -847,6 +858,8 @@ l_0xc7ae41:
 	sound(SND_PHONEPICKUP)	// 11
 	"*Click*" wait
 	window_closeall
+	hide_phone_sprite_float
+
 	set(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
 	eob
 
@@ -856,6 +869,7 @@ l_0xc7af57:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	window_open(1)
 	title(1, Apple)
@@ -873,6 +887,7 @@ l_0xc7af57:
 	sound(SND_PHONEPICKUP)	// 11
 	"*Click*" wait
 	window_closeall
+	hide_phone_sprite_float
 
 	unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
 	music_resume
@@ -887,6 +902,7 @@ l_0xc7b0a0:
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	window_open(1)
 	title(1, Orange)
@@ -897,6 +913,7 @@ l_0xc7b0a0:
 	"@I'm going to really work at it, though... talk to me later." next
 	"@*Click*" wait
 	window_closeall
+	hide_phone_sprite_float
 
 	sound(SND_PHONEPICKUP)	// 11
 	music_resume

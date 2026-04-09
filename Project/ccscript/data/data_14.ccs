@@ -506,6 +506,7 @@ l_0xc5ddf1:
 	unset(FLG_DELIVERY_CUSTOMER_B)	// 646
 	unset(FLG_DELIVERY_CUSTOMER_C)	// 647
 	unset(FLG_DELIVERY_CUSTOMER_D)	// 648
+	show_phone_sprite_float
 	window_open(1)
 	"@Hello!" linebreak
 	"  (gasp... pant...)" next
@@ -519,6 +520,7 @@ l_0xc5ddf1:
 	"@If you took your business more seriously," next
 	"@you would be more considerate of your customers!" promptw
 	call(data_36.l_0xc7de54)
+	hide_phone_sprite_float
 	unset(FLG_SYS_DISTLPT)	// 754
 	eob
 

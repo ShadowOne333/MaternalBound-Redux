@@ -62,6 +62,7 @@ debug_main:
 		"Item Descriptions":	{main_menu goto(Item_Desc)}
 		"Unused Script":	{main_menu goto(Unused_Scripts)}
 		"Save Game":		{main_menu goto(Save_Game)}
+		"Phone Calls":		{main_menu goto(Phone_Calls)}
 	}
 	window_closetop
 	window_switch(53)
@@ -92,5 +93,23 @@ Selector_Text:
 	text_pos(row1,2) "Down: -1"
 	text_pos(row2,2) "Right: -10"
 	eob
+
+Phone_Calls:
+	window_closetop
+	window_open(53)
+	clearline
+	menu 2 {
+		"Dad":		{window_close(53) goto(data_35.l_0xc7d33e)}
+		"Orange kid 1":	{window_close(53) goto(data_34.l_0xc7acb8)}
+		"Apple kid 1":	{window_close(53) goto(data_34.l_0xc7ae41)}
+		"Apple kid 2":	{window_close(53) goto(data_34.l_0xc7af57)}
+		"Orange kid 2":	{window_close(53) goto(data_34.l_0xc7b0a0)}
+		"Sign Sale fail":	{window_close(53) goto(data_14.l_0xc5ddf1)}
+		"Escargo fail":		{window_close(53) goto(data_19.l_0xc6451a)}
+		"Mach Pizza fail":	{window_close(53) goto(data_20.l_0xc64cf8)}
+	}
+	window_clear
+	clearline
+	goto(debug_main)
 
 //------------------------------------------------------------------

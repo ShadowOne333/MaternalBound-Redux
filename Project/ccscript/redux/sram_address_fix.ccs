@@ -1,0 +1,86 @@
+// Access SRAM better
+// by PhoenixBound
+// Last updated 2026-02-25
+// ---
+// This changes all accesses to SRAM on the cartridge to access SRAM via
+// addresses like Bxxxxx instead of 3xxxxx.
+// For most hacks, it doesn't matter. SRAM is accessible at either
+// location on EarthBound's HiROM printed circuit board (the
+// SHVC-1J3M-20).
+// However, hacks that expand the ROM past 32 megabits, to 48 megabits,
+// can only be used on *ExHiROM* PCBs, not *HiROM* PCBs. And none of the
+// PCBs manufactured by Nintendo for big ExHiROM games map SRAM at
+// address 3xxxxx, only Bxxxxx!
+//
+// Most emulators don't care about this and make SRAM accessible at
+// 3xxxxx anyway. In Mesen, whether this happens or not is controlled by
+// the option "Settings" --> "SNES" --> "Emulation" --> "Use strict
+// board mappings (breaks some romhacks) (not recommended)".
+// At least a few flashcarts are lenient about it, too.
+//
+// But there is at least one report of someone trying to play BttDW on
+// a flashcart and running into issues with an antipiracy screen popping
+// up, which is a symptom of accurate/strict SRAM mappings being used.
+//
+// We will be good citizens and access SRAM correctly, so that stuff
+// works no matter someone's emulator settings or flashcart.
+
+
+// Pointers labeled in ebsrc as involving SAVE_BASE
+// ERASE_SAVE_BLOCK
+ROM[0xEF05C9] = "[B0]"
+// CHECK_BLOCK_SIGNATURE
+ROM[0xEF0654] = "[B0]"
+// COPY_SAVE_BLOCK
+ROM[0xEF06B4] = "[B0]"
+// CALC_SAVE_BLOCK_ADD_CHECKSUM
+ROM[0xEF0754] = "[B0]"
+// CALC_SAVE_BLOCK_XOR_CHECKSUM
+ROM[0xEF079B] = "[B0]"
+// VALIDATE_SAVE_BLOCK_CHECKSUMS
+ROM[0xEF07FC] = "[B0]"
+ROM[0xEF080B] = "[B0]"
+// SAVE_GAME_BLOCK
+ROM[0xEF08D1] = "[B0]"
+ROM[0xEF09F4] = "[B0]"
+ROM[0xEF0A29] = "[B0]"
+// LOAD_GAME_SLOT
+ROM[0xEF0A88] = "[B0]"
+// CHECK_SRAM_INTEGRITY
+ROM[0xEF0BB2] = "[B0]"
+ROM[0xEF0BC3] = "[B0]"
+
+// UNKNOWN_316000 / UNKNOWN_3161D9 / UNKNOWN_316413 / UNKNOWN_316493
+//  / UNKNOWN_326000
+// SAVE_REPLAY_SAVE_SLOT
+ROM[0xEFE78B] = "[B1]"
+ROM[0xEFE7CA] = "[B1]"
+ROM[0xEFE7FF] = "[B1]"
+ROM[0xEFE834] = "[B1]"
+ROM[0xEFE869] = "[B2]"
+// LOAD_REPLAY_SAVE_SLOT
+ROM[0xEFE8E1] = "[B1]"
+ROM[0xEFE930] = "[B1]"
+ROM[0xEFE975] = "[B1]"
+ROM[0xEFE9BA] = "[B1]"
+ROM[0xEFEA19] = "[B2]"
+
+// SRAM_SIZE_1_SCRATCH / SRAM_SIZE_2_SCRATCH / SRAM_SIZE_3_SCRATCH
+// TEST_SRAM_SIZE
+ROM[0xC08398] = "[B0]" ROM[0x408398] = "[B0]"
+ROM[0xC0839D] = "[B1]" ROM[0x40839D] = "[B1]"
+ROM[0xC083A1] = "[B0]" ROM[0x4083A1] = "[B0]"
+ROM[0xC083A8] = "[B2]" ROM[0x4083A8] = "[B2]"
+ROM[0xC083AC] = "[B0]" ROM[0x4083AC] = "[B0]"
+
+// The exact numerical value of LAST_SRAM_BANK seems unimportant, as
+// long as it's not 0.
+
+// ANTIPIRACY_SCRATCH_SPACE / ANTIPIRACY_MIRROR_TEST
+// CHECK_HARDWARE
+ROM[0xC0A123] = "[B0]" ROM[0x40A123] = "[B0]"
+ROM[0xC0A128] = "[B1]" ROM[0x40A128] = "[B1]"
+ROM[0xC0A12C] = "[B0]" ROM[0x40A12C] = "[B0]"
+// Checksums for CHECK_HARDWARE -- equal to 2AD8 + 8080 + 8080 + 8080
+ROM[0xC1FFEF] = short 0xAC58
+ROM[0xC3FDF2] = short 0xAC58
