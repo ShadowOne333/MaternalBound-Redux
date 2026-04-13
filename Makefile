@@ -50,17 +50,18 @@ create_base_rom:
 compile_project:
 	@echo "Starting compilation process..."; echo
 	@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"
+	@echo
+#----------------------------------------------------------------
+# Generate the Debug symbols for the project (Requires Python 3)
+create_debug_symbols:
+	@echo "Generating Debug symbols..."
+	@python "Scripts/generate_debug_symbols.py" "Project/ccscript/summary.txt" $(PATCH_NAME).mlb
 #----------------------------------------------------------------
 # Create the EBP patch based on the Project
 create_patch:
 # No more EBP patch. Only BPS will be used.
 #	@echo
 #	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
-#----------------------------------------------------------------
-# Generate the Debug symbols for the project (Requires Python 3)
-create_debug_symbols:
-	@echo "Generating Debug symbols..."
-	@python "Scripts/generate_debug_symbols.py" "Project/ccscript/summary.txt" $(PATCH_NAME).mlb
 #----------------------------------------------------------------
 # Create both additional BPS and IPS patches files
 create_both_patches:

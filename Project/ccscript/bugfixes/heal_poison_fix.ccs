@@ -1,0 +1,51 @@
+// Heal Poison routine fix
+// Credit to ShadowOne333
+
+// Fixes a missing text fallback from the HEAL_POISON routine, which causes the Vial of serum to not give any proper message when the Vial has no effect on a character.
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+//------------------------------------------------------------------
+define DISPLAY_IN_BATTLE_TEXT	= 0xC1DC1C
+define MSG_BTL_MODOKU_OFF	= 0xEF6E97
+define MSG_BTL_HEAL_NG		= 0xEF7696
+
+ROM[0xC2A39D] = JML	(HEAL_POISON_FIX)
+
+HEAL_POISON_FIX: {
+	REP	(0x31)	// BEGIN_C_FUNCTION_FAR
+	// STACK_RESERVE_VARS
+	// STACK_RESERVE_INT32
+	// END_STACK_VARS
+	PHD
+	TDC
+	ADC_i	(0xFFEE)
+	TCD
+
+	LDA_a	(0xA972)	// Current target
+	CLC
+	ADC_i	(0x001D)	// #battler::afflictions + STATUS_GROUP::PERSISTENT_EASYHEAL
+	TAX
+	LDA_x	(0)		// __BSS_START__,X
+	AND_i	(0x00FF)
+	CMP_i	(5)		// #STATUS_0::POISONED
+	BNE	(0x19)		// UNKNOWN0
+
+	SEP	(0x20)
+	LDA_8	(0)
+	STA_x	(0)		// __BSS_START__,X
+	REP	(0x20)
+
+	ASMLoadAddress0E(MSG_BTL_MODOKU_OFF)
+	JSL	(DISPLAY_IN_BATTLE_TEXT)
+	BRA	(0x0E)		// _Exit_Routine
+
+_UNKNOWN0:
+	ASMLoadAddress0E(MSG_BTL_HEAL_NG)
+	JSL	(DISPLAY_IN_BATTLE_TEXT)
+
+_Exit_Routine:
+	PLD
+	RTL
+}
+//------------------------------------------------------------------
