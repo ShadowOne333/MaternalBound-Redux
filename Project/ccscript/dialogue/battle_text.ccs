@@ -14,6 +14,7 @@ l_0xc77dce:
 	eob
 
 l_0xc77df0:
+	newline
 	"@{user}{get_action_arg}{swap} used" linebreak
 	"  the {itemname(0)}." next
 	"@But nothing happened." promptw
