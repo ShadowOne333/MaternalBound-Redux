@@ -588,23 +588,23 @@ command show_phone_sprite_float {
 	goto_if_true(_paula_leader)
 
 _ness_leader:
-	show_sprite2_float(1,2)	// 0x01, 2, show walkie talkie on Ness's hand
-	sprite2_direction(1,11)
+	show_char_float(1,2)	// 0x01, 2, show walkie talkie on Ness's hand
+	char_direction(1,6)
 	goto(_continue)
 
 _paula_leader:
-	show_sprite2_float(2,2)	// 0x02, 2, show walkie talkie on Paula's hand
-	sprite2_direction(2,11)
+	show_char_float(2,2)	// 0x02, 2, show walkie talkie on Paula's hand
+	char_direction(2,6)
 	goto(_continue)
 
 _jeff_leader:
-	show_sprite2_float(3,2)	// 0x03, 2, show walkie talkie on Jeff's hand
-	sprite2_direction(3,11)
+	show_char_float(3,2)	// 0x03, 2, show walkie talkie on Jeff's hand
+	char_direction(3,6)
 	goto(_continue)
 
 _poo_leader:
-	show_sprite2_float(4,2)	// 0x04, 2, show walkie talkie on Poo's hand
-	sprite2_direction(4,11)
+	show_char_float(4,2)	// 0x04, 2, show walkie talkie on Poo's hand
+	char_direction(4,6)
 
 _continue:
 }
