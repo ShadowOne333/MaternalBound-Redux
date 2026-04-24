@@ -250,8 +250,8 @@ l_0xc9fcd5:
 
 l_0xc9fd2e:
 	newline
-	get_char_at_pos(2)	// 0x02
-	goto_if_true(l_0xc9fd5a)
+	//get_char_at_pos(2)	// 0x02
+	//goto_if_true(l_0xc9fd5a)
 
 	get_char_at_pos(1)	// 0x01
 	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00,0x02,0x02

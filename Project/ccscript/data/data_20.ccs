@@ -50,7 +50,7 @@ l_0xc6474f:
 	sound(SND_CHICKEN2)	// 118
 
 	newline
-	"@{item_determiners.CCSub_determiner_caps}{itemname(0)}?" linebreak
+	"@{call(item_determiners.CCSub_determiner_caps)}{itemname(0)}?" linebreak
 	"  Don't worry, I'll keep it safe." next
 	load_registers
 	take_from_location_and_store(0,0)	// 0x00, 0x00

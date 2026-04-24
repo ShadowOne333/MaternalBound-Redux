@@ -1,0 +1,36 @@
+// Change the Bicycle sprite depending on whether there's one or more party members
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+define CREATE_ENTITY	= 0xC01E49
+
+// Hijack the original GET_ON_BICYCLE function to change the sprite when there's two or more party members
+ROM[0xC03C66] = BRA (0x0C)	// Skip the whole section so it continues despite having two or more party members
+
+//ROM[0xC06AA9] = LDA_i	(477)
+ROM[0xC078F2] = LDA_i	(477)	// IMPLEMENT HIJACK HERE
+
+ROM[0xC03CBD] = {
+	JML	(Multichar_Bike)	// LDA party count
+	NOP NOP NOP
+}
+
+Multichar_Bike: {
+	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
+	AND_i	(0x00FF)
+	CMP_i	(1)
+	BNE_a	(_Multiple_Chars)
+	JMP	(Ness_Only)
+
+_Multiple_Chars:
+	LDA_i	(477) 	// 0x1DD, new multi-bike sprite
+	BRA	(3)	// _Load_Entity
+
+Ness_Only:
+	LDA_i	(7)
+
+_Load_Entity:
+	JSL	(CREATE_ENTITY)
+	JML	(0xC03CC4)	// Return to the rest of the original code
+}

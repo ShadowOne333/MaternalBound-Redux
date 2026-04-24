@@ -625,7 +625,11 @@ l_0xc5e54a:
 	get_item_receiver(0)	// 0x00
 	goto_if_true(l_0xc5e579)
 	load_registers_shared
-	swap
+
+	// If the player tries to take out and give an item to a character with a full inventory, the window resets, and if the player then selects another character to give the item to, then the first item in Escargo Storage will be taken instead
+
+	// Commenting out this `swap` seems to fix the issue.
+	//swap
 	goto(l_0xc5e54a)
 
 l_0xc5e579:
