@@ -472,7 +472,7 @@ tog1:
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(tog2)
 	get_char_at_pos(0)
-	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 2
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(tog2)
 	goto(tog1)
 
@@ -1453,10 +1453,10 @@ was1:
 	party_size_smaller_than(0)
 	goto_if_true(was2)
 	get_char_at_pos(0)
-	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(was2)
 	get_char_at_pos(0)
-	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(was2)
 	goto(was1)
 
@@ -3021,11 +3021,14 @@ l_0xef8f91:
 	window_clear
 	eob
 
-l_0xef8fad:
+l_0xef8fad:	// Added check for Diamondized since the original only checks for unconscious
 	party_size_smaller_than(2)	// 0x02
 	goto_if_true(l_0xef8fc9)
 	get_char_at_pos(2)	// 0x02
-	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0x00, 0x01, 0x02
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
+	goto_if_true(l_0xef8fc9)
+	get_char_at_pos(2)
+	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)	// 0, 1, 3
 	goto_if_true(l_0xef8fc9)
 	" each."
 	eob
