@@ -388,7 +388,10 @@ l_0xc7c93f:
 
 l_0xc7c95e:
 	get_char_at_pos(1) swap
-	"@{name(0)} got off the bike." end
+	"@{name(0)} got off the bike." wait
+	pause(60)
+	show_party(1)
+	eob
 
 l_0xc7c973:
 	newline

@@ -5,12 +5,49 @@ import "../essential/ASMRef.ccs"
 
 define CREATE_ENTITY	= 0xC01E49
 
-// Hijack the original GET_ON_BICYCLE function to change the sprite when there's two or more party members
-ROM[0xC03C66] = BRA (0x0C)	// Skip the whole section so it continues despite having two or more party members
-
+//------------------------------------
 //ROM[0xC06AA9] = LDA_i	(477)
-ROM[0xC078F2] = LDA_i	(477)	// IMPLEMENT HIJACK HERE
+ROM[0xC078F2] = {
+	JML	(Leader_Check)
+	NOP NOP
+}
 
+Leader_Check: {
+	// Check who the party leader is
+	LDA_a	(0x9891)
+	AND_i	(0x00FF)
+	CMP_i	(0)	// Ness = 1
+	BEQ	(0x19)	//_Ness_Sprite
+	CMP_i	(1)	// Paula = 2
+	BEQ	(0x0F)	//_Paula_Sprite
+	CMP_i	(2)	// Jeff = 3
+	BEQ	(5)	// _Jeff_Sprite
+
+_Poo_Sprite:
+	// If none of the previous checks hit, then Poo's the leader
+	LDA_i	(4)	// Poo in bike+side car
+	BRA	(0x0D)	// _Return
+
+_Jeff_Sprite:
+	LDA_i	(3)	// Jeff in bike+side car
+	BRA	(8)	// _Return
+
+_Paula_Sprite:
+	LDA_i	(2)	// Paula in bike+side car
+	BRA	(3)	// _Return
+
+_Ness_Sprite:
+	LDA_i	(477)	// Ness in bike+side car
+
+_Return:
+	JML	(0xC079EA)	// @UNKNOWN28, return to where the original code should
+}
+
+//------------------------------------
+// Hijack the original GET_ON_BICYCLE function to change the sprite when there's two or more party members
+ROM[0xC03C66] = BRA (0x1A)	// Skip the whole section so it continues despite having two or more party members
+// 0x0C
+//------------------------------------
 ROM[0xC03CBD] = {
 	JML	(Multichar_Bike)	// LDA party count
 	NOP NOP NOP
@@ -20,14 +57,39 @@ Multichar_Bike: {
 	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
 	AND_i	(0x00FF)
 	CMP_i	(1)
-	BNE_a	(_Multiple_Chars)
-	JMP	(Ness_Only)
+	BNE	(3)	// _Multiple_Chars
+	JMP	(_Ness_Only)
 
 _Multiple_Chars:
-	LDA_i	(477) 	// 0x1DD, new multi-bike sprite
+	// Check who the party leader is
+	LDA_a	(0x9891)
+	AND_i	(0x00FF)
+	CMP_i	(0)	// Ness = 1
+	BEQ	(0x19)	//_Ness_Sprite
+	CMP_i	(1)	// Paula = 2
+	BEQ	(0x0F)	//_Paula_Sprite
+	CMP_i	(2)	// Jeff = 3
+	BEQ	(5)	// _Jeff_Sprite
+
+_Poo_Sprite:
+	// If none of the previous checks hit, then Poo's the leader
+	LDA_i	(4)	// Poo in bike+side car
+	BRA	(0x0D)	// _Return
+
+_Jeff_Sprite:
+	LDA_i	(3)	// Jeff in bike+side car
+	BRA	(8)	// _Return
+
+_Paula_Sprite:
+	LDA_i	(2)	// Paula in bike+side car
+	BRA	(3)	// _Return
+
+_Ness_Sprite:
+	LDA_i	(477)	// Ness in bike+side car
+_Branch_Out:
 	BRA	(3)	// _Load_Entity
 
-Ness_Only:
+_Ness_Only:
 	LDA_i	(7)
 
 _Load_Entity:

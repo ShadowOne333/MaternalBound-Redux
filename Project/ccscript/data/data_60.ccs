@@ -257,7 +257,8 @@ l_0xc9fd2e:
 	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00,0x02,0x02
 	goto_if_true(l_0xc9fd60)
 
-	"@{user} rode a bicycle."
+	"@{user} rode a bicycle." wait
+	hide_party
 	bicycle
 	eob
 
