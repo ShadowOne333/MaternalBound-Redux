@@ -446,7 +446,7 @@ l_0xc90f90:
 	goto_if_flag(FLG_TWSN_POLA_TELEPATHY, data_24.l_0xc68cc3)	// 0x027B, 635
 	goto_if_flag(FLG_WINS_POLA_TELEPATHY, data_24.l_0xc68d5a)	// 0x027C, 636
 	goto_if_flag(FLG_PUT_ZOMBI_HOIHOI, l_0xc90fb1)	// 0x007C, 124
-	call(data_23.l_0xc685da)
+	call(data_23.l_0xc685da)	// Jeff fixing checks
 
 l_0xc90fb1:
 	eob

@@ -6,9 +6,9 @@
 import "../definitions/flags.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccexpand.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../expansion/ccexpand.ccs"
 
 command e(label) "{long label}"
 

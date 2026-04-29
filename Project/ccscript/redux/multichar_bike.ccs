@@ -25,15 +25,15 @@ Leader_Check: {
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(4)	// Poo in bike+side car
+	LDA_i	(480)	// Poo in bike+side car
 	BRA	(0x0D)	// _Return
 
 _Jeff_Sprite:
-	LDA_i	(3)	// Jeff in bike+side car
+	LDA_i	(479)	// Jeff in bike+side car
 	BRA	(8)	// _Return
 
 _Paula_Sprite:
-	LDA_i	(2)	// Paula in bike+side car
+	LDA_i	(478)	// Paula in bike+side car
 	BRA	(3)	// _Return
 
 _Ness_Sprite:
@@ -73,15 +73,15 @@ _Multiple_Chars:
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(4)	// Poo in bike+side car
+	LDA_i	(480)	// Poo in bike+side car
 	BRA	(0x0D)	// _Return
 
 _Jeff_Sprite:
-	LDA_i	(3)	// Jeff in bike+side car
+	LDA_i	(479)	// Jeff in bike+side car
 	BRA	(8)	// _Return
 
 _Paula_Sprite:
-	LDA_i	(2)	// Paula in bike+side car
+	LDA_i	(478)	// Paula in bike+side car
 	BRA	(3)	// _Return
 
 _Ness_Sprite:

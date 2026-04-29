@@ -125,7 +125,6 @@ l_0xc915f6:
 	swap
 	heal_percent(0,100)	// 0x00, 0x64
 	recoverpp_percent(0,100)	// 0x00, 0x64
-	goto(l_0xc91625)
 
 l_0xc91625:
 	inc

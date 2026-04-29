@@ -11,9 +11,9 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
-import "../essential/ccexpand.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../expansion/ccexpand.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------

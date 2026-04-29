@@ -5,7 +5,7 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/expand_text_windows.ccs"
+import "../expansion/expand_text_windows.ccs"
 
 // Prints out the diamond from Mother 2 instead of the white dot bullet
 command diam "[1C 08 03]"

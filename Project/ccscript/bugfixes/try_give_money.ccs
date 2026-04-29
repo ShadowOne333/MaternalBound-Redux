@@ -1,6 +1,6 @@
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccexpand.ccs"
+import "../expansion/ccexpand.ccs"
 
 // Inputs:
 //     amt: The amount of money to give to the player

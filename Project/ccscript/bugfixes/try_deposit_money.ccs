@@ -1,6 +1,6 @@
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
-import "../essential/ccexpand.ccs"
+import "../expansion/ccexpand.ccs"
 
 // Checks if `amt` can be deposited without exceeding the bank balance maximum of 9,999,999.
 // Returns 0 if the amount is allowed to be deposited, or a truthy value (`amt - 9_999_999`) otherwise.

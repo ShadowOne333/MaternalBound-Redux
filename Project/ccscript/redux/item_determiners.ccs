@@ -1,5 +1,5 @@
 import "../essential/asm65816.ccs"
-import "../essential/ccexpand.ccs"
+import "../expansion/ccexpand.ccs"
 
 // This file allows determiners (eg "a", "an", "some") to be specified per-item.
 // Vanilla EB has no such thing and goes to great lengths to use "a" for everything.

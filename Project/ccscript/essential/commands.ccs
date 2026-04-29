@@ -250,6 +250,25 @@ _sub_ShortSleepover1: {
     eob
 }
 
+_sub_ShortSleepover1_Fanfare: {
+    // Sleepover with Good night sleep (intro only) plays
+    window_closeall // Close all windows to begin fade out sequence
+    music_effect(3) // Fade out the original map music
+
+    // Begin fading the screen to black AND play the "good night" music at the same time
+    sprite2_spawn(106, 633, 1)
+    wait_movement
+    music(12)
+
+    // The fade will take 124 frames to run. The fanfare music is longer than that.
+    pause(200)
+
+    // The EB song would continue after that. Cancel it cleanly instead.
+    music_effect(2)
+    pause(1)
+    eob
+}
+
 _sub_ShortSleepover2: {
     // heal
     healall refill_stamina
@@ -269,7 +288,15 @@ command sleepover_intro(dest,track)
 {
     call(_sub_ShortSleepover1)
     music(track)
-    warp(dest) 
+    warp(dest)
+    call(_sub_ShortSleepover2)
+}
+
+command sleepover_fanfare(dest,track)
+{
+    call(_sub_ShortSleepover1_Fanfare)
+    music(track)
+    warp(dest)
     call(_sub_ShortSleepover2)
 }
 
