@@ -1,7 +1,8 @@
 // Change the Bicycle sprite depending on whether there's one or more party members
 
 import "../essential/asm65816.ccs"
-import "../essential/ASMRef.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../expansion/ccexpand.ccs"
 
 define CREATE_ENTITY	= 0xC01E49
 
@@ -13,14 +14,21 @@ ROM[0xC078F2] = {
 }
 
 Leader_Check: {
+	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
+	AND_i	(0x00FF)
+	CMP_i	(1)
+	BNE	(3)	// _Multiple_Chars
+	JMP	(_Ness_Only)
+
+_Multiple_Chars:
 	// Check who the party leader is
 	LDA_a	(0x9891)
 	AND_i	(0x00FF)
-	CMP_i	(0)	// Ness = 1
+	CMP_i	(0)	// Ness = 0
 	BEQ	(0x19)	//_Ness_Sprite
-	CMP_i	(1)	// Paula = 2
+	CMP_i	(1)	// Paula = 1
 	BEQ	(0x0F)	//_Paula_Sprite
-	CMP_i	(2)	// Jeff = 3
+	CMP_i	(2)	// Jeff = 2
 	BEQ	(5)	// _Jeff_Sprite
 
 _Poo_Sprite:
@@ -38,6 +46,11 @@ _Paula_Sprite:
 
 _Ness_Sprite:
 	LDA_i	(477)	// Ness in bike+side car
+_Branch_Out:
+	BRA	(3)	// _Load_Entity
+
+_Ness_Only:
+	LDA_i	(7)
 
 _Return:
 	JML	(0xC079EA)	// @UNKNOWN28, return to where the original code should
@@ -47,6 +60,9 @@ _Return:
 // Hijack the original GET_ON_BICYCLE function to change the sprite when there's two or more party members
 ROM[0xC03C66] = BRA (0x1A)	// Skip the whole section so it continues despite having two or more party members
 // 0x0C
+/*ROM[0xC03CA1] = {
+	STA_a	(0x9A0B)
+}*/
 //------------------------------------
 ROM[0xC03CBD] = {
 	JML	(Multichar_Bike)	// LDA party count
@@ -64,11 +80,11 @@ _Multiple_Chars:
 	// Check who the party leader is
 	LDA_a	(0x9891)
 	AND_i	(0x00FF)
-	CMP_i	(0)	// Ness = 1
+	CMP_i	(0)	// Ness = 0
 	BEQ	(0x19)	//_Ness_Sprite
-	CMP_i	(1)	// Paula = 2
+	CMP_i	(1)	// Paula = 1
 	BEQ	(0x0F)	//_Paula_Sprite
-	CMP_i	(2)	// Jeff = 3
+	CMP_i	(2)	// Jeff = 2
 	BEQ	(5)	// _Jeff_Sprite
 
 _Poo_Sprite:
@@ -96,3 +112,4 @@ _Load_Entity:
 	JSL	(CREATE_ENTITY)
 	JML	(0xC03CC4)	// Return to the rest of the original code
 }
+//------------------------------------------------------------------

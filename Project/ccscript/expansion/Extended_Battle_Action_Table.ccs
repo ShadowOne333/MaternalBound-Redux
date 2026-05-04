@@ -1,0 +1,667 @@
+import "../essential/asm65816.ccs"
+
+/*
+Battle Action Table: Notes
+. 12 bytes inbetween
+
+	Format:
+	-------
+	. Direction: To who does the attack goes to
+		- 0x00 = Enemy
+		- 0x01 = Party
+		- 
+	. Target: The group of target(s) for the attack
+		- 0x00 = None
+		- 0x01 = One
+		- 0x02 = Random
+		- 0x03 = Row
+		- 0x04 = All
+	. Action Type: The type of attack
+		- 0x00 = Nothing
+		- 0x01 = Physical (Affected by shields and defending)
+		- 0x02 = Physical (Unaffected by shields and defending)
+		- 0x03 = PSI
+		- 0x04 = Item
+		- 0x05 = Other
+	. PP Cost: The cost of the PP for the attack
+		- 0x## = Cost of PP
+	. Text Address: Address where the game displays text for the attack at the beginning of the attack
+		- 0x00##### = Text Address, usually 3 bytes
+	. Code Address: Address where the game executes the attack.
+		- 0x00##### = Code Address, usually 3 bytes
+
+Vanilla routines that uses LDA_xl for loading the battle actions table.
+
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c2941d
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c2698b
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c24821
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c24477
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c1cbcd
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c1c8bc
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c1b5b6
+. https://earthbound-rom-explorerr.herokuapp.com/address/$c11fd4
+
+
+*/
+
+
+
+// ROM Addresses where the game loads in the battle action table.
+// Thanks you the_kirby for finding this list!
+ROM[0xC1ADC8] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC1AFFD] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B04F] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B0CB] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B138] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B1A7] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B259] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B371] = ASMLoadAddress18(BattleAction_Table)
+ROM[0xC1B466] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B89C] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1B8E7] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC1B9AD] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1C913] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC1CC9B] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC1DF64] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC1DFB8] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC2451F] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC2582E] = ASMLoadAddress06(BattleAction_Table)
+ROM[0xC25C32] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC25CEB] = ASMLoadAddress0A(BattleAction_Table)
+ROM[0xC2794D] = ASMLoadAddress0A(BattleAction_Table)
+
+ROM[0xC11FF1] = LDA_xl(BattleAction_Table)
+ROM[0xC1B6E4] = LDA_xl(BattleAction_Table)
+ROM[0xC1B80E] = LDA_xl(BattleAction_Table)
+ROM[0xC1C9E7] = LDA_xl(BattleAction_Table)
+ROM[0xC1CD55] = LDA_xl(BattleAction_Table)
+ROM[0xC1CDCF] = LDA_xl(BattleAction_Table)
+ROM[0xC244D4] = LDA_xl(BattleAction_Table)
+ROM[0xC256EE] = LDA_xl(BattleAction_Table)
+ROM[0xC257E4] = LDA_xl(BattleAction_Table)
+ROM[0xC25A12] = LDA_xl(BattleAction_Table)
+ROM[0xC25A8A] = LDA_xl(BattleAction_Table)
+ROM[0xC25B4E] = LDA_xl(BattleAction_Table)
+ROM[0xC25B9D] = LDA_xl(BattleAction_Table)
+ROM[0xC2699F] = LDA_xl(BattleAction_Table)
+ROM[0xC29447] = LDA_xl(BattleAction_Table)
+
+
+/*
+// Resetting back to the EB's original battle actions table.
+// You can only have one section of this to be uncommented, if both are uncommented, then this section will be loaded instead of the above section.
+ROM[0xC1ADC8] = ASMLoadAddress06(0xD57B68)
+ROM[0xC1AFFD] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B04F] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B0CB] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B138] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B1A7] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B259] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B371] = ASMLoadAddress18(0xD57B68)
+ROM[0xC1B466] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B89C] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1B8E7] = ASMLoadAddress06(0xD57B68)
+ROM[0xC1B9AD] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1C913] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC1CC9B] = ASMLoadAddress06(0xD57B68)
+ROM[0xC1DF64] = ASMLoadAddress06(0xD57B68)
+ROM[0xC1DFB8] = ASMLoadAddress06(0xD57B68)
+ROM[0xC2451F] = ASMLoadAddress06(0xD57B68)
+ROM[0xC2582E] = ASMLoadAddress06(0xD57B68)
+ROM[0xC25C32] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC25CEB] = ASMLoadAddress0A(0xD57B68)
+ROM[0xC2794D] = ASMLoadAddress0A(0xD57B68)
+
+ROM[0xC11FF1] = LDA_xl(0xD57B68)
+ROM[0xC1B6E4] = LDA_xl(0xD57B68)
+ROM[0xC1B80E] = LDA_xl(0xD57B68)
+ROM[0xC1C9E7] = LDA_xl(0xD57B68)
+ROM[0xC1CD55] = LDA_xl(0xD57B68)
+ROM[0xC1CDCF] = LDA_xl(0xD57B68)
+ROM[0xC244D4] = LDA_xl(0xD57B68)
+ROM[0xC256EE] = LDA_xl(0xD57B68)
+ROM[0xC257E4] = LDA_xl(0xD57B68)
+ROM[0xC25A12] = LDA_xl(0xD57B68)
+ROM[0xC25A8A] = LDA_xl(0xD57B68)
+ROM[0xC25B4E] = LDA_xl(0xD57B68)
+ROM[0xC25B9D] = LDA_xl(0xD57B68)
+ROM[0xC2699F] = LDA_xl(0xD57B68)
+ROM[0xC29447] = LDA_xl(0xD57B68)
+*/
+
+//++++++++++Battle Action Table Entry Parameters++++++++++
+
+//-----used for the "Direction" field-----
+define Enemy = 0x00
+define Party = 0x01
+
+//-----used for the "Target" field-----
+define None = 0x00
+define One = 0x01
+define Random = 0x02
+define Row = 0x03
+define All = 0x04
+
+//-----used for the "Action_Type" field-----
+define Nothing = 0x00
+define Physical_Affected = 0x01
+define Physical_Unaffected = 0x02
+define PSI = 0x03
+define Item = 0x04
+define Other = 0x05
+
+//-----used for the "Code_Address" field-----
+
+// Character Battle Attacks
+define BTLACT_BASH = 0xC2859F
+define BTLACT_SHOOT = 0xC28740
+define BTLACT_SPY = 0xC28770
+define BTLACT_PRAY = 0xC2AD1B
+define BTLACT_MIRROR = 0xC2B0A1
+
+// Null Attacks
+define BTLACT_NULL = 0xC2889B
+define BTLACT_NULL2 = 0xC29033
+define BTLACT_NULL3 = 0xC29036
+define BTLACT_NULL4 = 0xC29039
+define BTLACT_NULL5 = 0xC2903C
+define BTLACT_NULL6 = 0xC2903F
+define BTLACT_NULL7 = 0xC29042
+define BTLACT_NULL8 = 0xC29045
+define BTLACT_NULL9 = 0xC29048
+define BTLACT_NULL10 = 0xC2904B
+define BTLACT_NULL11 = 0xC2904E
+define BTLACT_NULL12 = 0xC2C513
+
+// PSI Attacks
+define BTLACT_PSI_ROCKIN_A = 0xC29556
+define BTLACT_PSI_ROCKIN_B = 0xC2955F
+define BTLACT_PSI_ROCKIN_G = 0xC29568
+define BTLACT_PSI_ROCKIN_O = 0xC29571
+
+define BTLACT_PSI_FIRE_A = 0xC295AB
+define BTLACT_PSI_FIRE_B = 0xC295B4
+define BTLACT_PSI_FIRE_G = 0xC295BD
+define BTLACT_PSI_FIRE_O = 0xC295C6
+
+define BTLACT_PSI_FREEZE_A = 0xC29647
+define BTLACT_PSI_FREEZE_B = 0xC29650
+define BTLACT_PSI_FREEZE_G = 0xC29659
+define BTLACT_PSI_FREEZE_O = 0xC29662
+
+define BTLACT_PSI_THUNDER_A = 0xC29871
+define BTLACT_PSI_THUNDER_B = 0xC2987D
+define BTLACT_PSI_THUNDER_G = 0xC29889
+define BTLACT_PSI_THUNDER_O = 0xC29895
+
+define BTLACT_PSI_FLASH_A = 0xC29987
+define BTLACT_PSI_FLASH_B = 0xC299AE
+define BTLACT_PSI_FLASH_G = 0xC299EF
+define BTLACT_PSI_FLASH_O = 0xC29A35
+
+define BTLACT_PSI_STARSTORM_A = 0xC29AA6
+define BTLACT_PSI_STARSTORM_O = 0xC29AAf
+
+define BTLACT_LIFEUP_A = 0xC29AC6
+define BTLACT_LIFEUP_B = 0xC29ACF
+define BTLACT_LIFEUP_G = 0xC29AD8
+define BTLACT_LIFEUP_O = 0xC29AE1
+
+define BTLACT_HEALING_A = 0xC29AEA
+define BTLACT_HEALING_B = 0xC29B7A
+define BTLACT_HEALING_G = 0xC29C2C
+define BTLACT_HEALING_O = 0xC29CB8
+
+define BTLACT_SHIELD_A = 0xC29D44
+define BTLACT_SHIELD_B = 0xC29D81
+
+define BTLACT_PSI_SHIELD_A = 0xC29DBE
+define BTLACT_PSI_SHIELD_B = 0xC29DFB
+
+define BTLACT_OFFENSE_UP = 0xC29E38
+define BTLACT_DEFENSE_DOWN = 0xC29E86
+
+define BTLACT_HYPNOSIS = 0xC29F06
+define BTLACT_MAGNET_A = 0xC29F5E
+define BTLACT_MAGNET_O = 0xC29FE1
+define BTLACT_PARALYSIS = 0xC29FFE
+define BTLACT_BRAINSHOCK = 0xC2A056
+
+// Status Effects
+define BTLACT_DIAMONDIZE = 0xC289CE
+define BTLACT_PARALYZE = 0xC28A92
+define BTLACT_SOLIDIFY = 0xC28CF1
+define BTLACT_NAUSEATE = 0xC28AEB
+define BTLACT_POISON = 0xC28B2C
+define BTLACT_COLD = 0xC28B6D
+define BTLACT_MUSHROOMIZE = 0xC28BBE
+define BTLACT_POSSESS = 0xC28BFD
+define BTLACT_CRYING = 0xC28C69
+define BTLACT_IMMOBILIZE = 0xC28CB8
+define BTLACT_CANT_CONCENTRATE = 0xC28D5A
+define BTLACT_FEEL_STRANGE = 0xC28DBB
+define BTLACT_CRYING2 = 0xC28DFC
+define HEAL_POISON = 0xC2A39D
+define BTLACT_REDUCE_OFF = 0xC29254
+define BTLACT_REDUCE_GUTS = 0xC28EAE
+define BTLACT_REDUCE_OFF_AND_DEF = 0xC28F21
+
+// Item Actions/Attacks
+define BTLACT_SUPER_BOMB = 0xC2A821
+define BTLACT_COUNTER_PSI_UNIT = 0xC2A3D1
+define BTLACT_SHIELD_KILLER = 0xC2A422
+define BTLACT_HP_SUCKER = 0xC2A46B
+define BTLACT_MUMMY_WRAP = 0xC2A50E
+define BTLACT_BOTTLE_ROCKET = 0xC2A5D1
+define BTLACT_BIG_BOTTLE_ROCKET = 0xC2A5DA
+define BTLACT_MULIT_BOTTLE_ROCKET = 0xC2A5E3
+define BTLACT_HANDSTRAP_BAG = 0xC2A5EC
+define BTLACT_BOMB = 0xC2A818
+define BTLACT_YOGURT_DISPENSER = 0xC2A86B
+define BTLACT_SNAKE = 0xC2A89D
+define BTLACT_HUNGRY_HP_SUCKER = 0xC2A507
+define BTLACT_BAG_OF_DRAGONITE = 0xC2A99C
+define BTLACT_INSECTICIDE_SPRAY = 0xC2AA0C
+define BTLACT_XTERMINATOR_SPRAY = 0xC2AA15
+define BTLACT_RUST_PROMOTER = 0xC2AA6D
+define BTLACT_RUST_PROMOTER_DX = 0xC2AA76
+define BTLACT_SUDDEN_GUTS_PILL = 0xC2AA7F
+define BTLACT_DEFENSE_SPRAY = 0xC2AAC6
+define BTLACT_DEFENSE_SHOWER = 0xC2AB0D
+define EAT_FOOD = 0xC2B27D
+
+// Enemy Attacks/Actions
+define BTLACT_CALL_FOR_HELP = 0xC2C145
+define BTLACT_SOW_SEEDS = 0xC2C13C
+define BTLACT_STEAL = 0xC2889E
+define BTLACT_FREEZE_TIME = 0xC288EB
+define BTLACT_ATTACK_TWICE_LEVEL_2 = 0xC28FF9
+define BTLACT_350_FIRE_DAMAGE = 0xC2900B
+define BTLACT_LEVEL_4_ATK = 0xC285DA
+define BTLACT_LEVEL_3_ATK = 0xC28651
+define BTLACT_LEVEL_1_ATK = 0xC286CB
+define BTLACT_LEVEL_2_ATK_POISON = 0xC28F97
+define BTLACT_LEVEL_2_ATK_DIAMONDIZE = 0xC2916E
+
+// Mics. Attacks/Actions
+define VERY_SMALL_HEAL_4_HP = 0xC2A0AE
+define SMALL_HEAL_50_HP = 0xC2A0BF
+define DECENT_HEAL_200_HP = 0xC2A0CF
+define SMALL_HEAL_20_PP = 0xC2A0DF
+define DECENT_HEAL_80_PP = 0xC2A0EF
+define DECENT_HEAL_300_HP = 0xC2A26F
+define VERY_SMALL_HEAL_10_HP = 0xC2A360
+define SIGNIFICANT_HEAL_100_HP = 0xC2A370
+define POO_ITEM_HEAL_10000_HP = 0xC2A380
+define BTLACT_TELEPORT_BOX = 0xC2AB71
+define BTLACT_RAINBOW = 0xC2C14E
+define BTLACT_REDUCEPP_SIXTEENTH = 0xC28E42
+
+// Unknown attcks
+define UNKNOWN_ROUTINE_1 = 0xC2A27F
+define UNKNOWN_ROUTINE_2 = 0xC2A0FF
+define UNKNOWN_ROUTINE_3 = 0xC2A14B
+define UNKNOWN_ROUTINE_4 = 0xC2A193
+define UNKNOWN_ROUTINE_5 = 0xC2A1DB
+define UNKNOWN_ROUTINE_6 = 0xC2A227
+define UNKNOWN_ROUTINE_7 = 0xC2C1BD
+define UNKNOWN_ROUTINE_8 = 0xC1DE43
+define UNKNOWN_ROUTINE_9 = 0xC1E00F
+define UNKNOWN_ROUTINE_10 = 0xC290C6
+
+// Boss Actions
+define BTLACT_CLUMSY_ROBOT_DEATH = 0xC29298
+define BTLACT_MASTER_BARF_DEATH = 0xC292EE
+define BTLACT_ENEMY_EXTENDER = 0xC292EB
+
+// GIYGAS PHASE
+define GIYGAS_ALL_MIGHTY_IDIOT_SPEACH = 0xC2C4C0
+define GIYGAS_WET_YOUR_PANTS_SPEACH = 0xC2C516
+define GIYGAS_PRAYER_1 = 0xC2C572
+define GIYGAS_PRAYER_2 = 0xC2C5D1
+define GIYGAS_PRAYER_3 = 0xC2C5FA
+define GIYGAS_PRAYER_4 = 0xC2C623
+define GIYGAS_PRAYER_5 = 0xC2C64C
+define GIYGAS_PRAYER_6 = 0xC2C675
+define GIYGAS_PRAYER_7 = 0xC2C69E
+define GIYGAS_PRAYER_8 = 0xC2C6D0
+define GIYGAS_PRAYER_9 = 0xC2C6F0
+
+/*
+The "Battle_Action" command will put each entry into the table. You should be able to extend the table indefintely until you run out of space in the ROM.
+
+Parameters:
+	. Entry = Action ID, just to indicate what ID that action is in the table. No usages for the commands.
+	. For each parameter in this command, refer to the above section to figure out what values are valid.
+*/
+
+command Battle_Action(Entry, Direction, Target, Action_Type, PP_Cost, Text_Address, Code_Address) "[{byte Direction} {byte Target} {byte Action_Type} {byte PP_Cost} {byte[0] Text_Address} {byte[1] Text_Address} {byte[2] Text_Address} 00 {byte[0] Code_Address} {byte[1] Code_Address} {byte[2] Code_Address} 00]"
+
+//----------Battle Action Table----------
+
+// Battle_Action(Entry, Direction, Target, Action_Type, PP_Cost, Text_Address, Code_Address)
+
+BattleAction_Table:{
+	Battle_Action(0, Party, None, Nothing, 0, 0xC77EFF, BTLACT_NULL4)
+	Battle_Action(1, Party, None, Item, 0, 0xC77DCE, BTLACT_NULL4) //"@But nothing happened."
+	Battle_Action(2, Party, None, Item, 0, 0xC77DF0, BTLACT_NULL4) //"@{user}[19 1F]{swap} used the [1C 05 00]"
+	Battle_Action(3, Party, None, Item, 0, 0xC77EB6, BTLACT_NULL4) //"[19 1F]{swap}@{user} tried to use the [1C 05 00]."
+	Battle_Action(4, Enemy, One, Physical_Affected, 0, 0xEF848C, BTLACT_BASH) //"[1F 41 08][1B 02 {e(l_0xef84a7)}]{sound(25)}@{user} is attacking!{sound(26)}[03]"
+	Battle_Action(5, Enemy, One, Physical_Affected, 0, 0xEF84B6, BTLACT_SHOOT) //"{sound(24)}@{user} attacks!{sound(27)}[03]"
+	Battle_Action(6, Enemy, One, Other, 0, 0xEF8530, BTLACT_SPY) // new check code
+	Battle_Action(7, Party, None, Other, 0, 0xEF89E0, BTLACT_PRAY)
+	Battle_Action(8, Party, None, Other, 0, 0xEF84C6, BTLACT_NULL) //"@{user} is on guard."
+	Battle_Action(9, Party, None, Other, 0, 0xC77EFF, BTLACT_NULL5) //null?
+	Battle_Action(10, Enemy, All, PSI, 10, 0xEF8543, BTLACT_PSI_ROCKIN_A)
+	Battle_Action(11, Enemy, All, PSI, 14, 0xEF8543, BTLACT_PSI_ROCKIN_B)
+	Battle_Action(12, Enemy, All, PSI, 40, 0xEF8543, BTLACT_PSI_ROCKIN_G)
+	Battle_Action(13, Enemy, All, PSI, 98, 0xEF8543, BTLACT_PSI_ROCKIN_O)
+	Battle_Action(14, Enemy, Row, PSI, 6, 0xEF8543, BTLACT_PSI_FIRE_A)
+	Battle_Action(15, Enemy, Row, PSI, 12, 0xEF8543, BTLACT_PSI_FIRE_B)
+	Battle_Action(16, Enemy, Row, PSI, 20, 0xEF8543, BTLACT_PSI_FIRE_G)
+	Battle_Action(17, Enemy, Row, PSI, 42, 0xEF8543, BTLACT_PSI_FIRE_O)
+	Battle_Action(18, Enemy, One, PSI, 4, 0xEF8543, BTLACT_PSI_FREEZE_A)
+	Battle_Action(19, Enemy, One, PSI, 9, 0xEF8543, BTLACT_PSI_FREEZE_B)
+	Battle_Action(20, Enemy, One, PSI, 18, 0xEF8543, BTLACT_PSI_FREEZE_G)
+	Battle_Action(21, Enemy, Row, PSI, 28, 0xEF8543, BTLACT_PSI_FREEZE_O)
+	Battle_Action(22, Enemy, All, PSI, 3, 0xEF8543, BTLACT_PSI_THUNDER_A)
+	Battle_Action(23, Enemy, All, PSI, 7, 0xEF8543, BTLACT_PSI_THUNDER_B)
+	Battle_Action(24, Enemy, All, PSI, 16, 0xEF8543, BTLACT_PSI_THUNDER_G)
+	Battle_Action(25, Enemy, All, PSI, 20, 0xEF8543, BTLACT_PSI_THUNDER_O)
+	Battle_Action(26, Enemy, All, PSI, 8, 0xEF8543, BTLACT_PSI_FLASH_A)
+	Battle_Action(27, Enemy, All, PSI, 16, 0xEF8543, BTLACT_PSI_FLASH_B)
+	Battle_Action(28, Enemy, All, PSI, 24, 0xEF8543, BTLACT_PSI_FLASH_G)
+	Battle_Action(29, Enemy, All, PSI, 32, 0xEF8543, BTLACT_PSI_FLASH_O)
+	Battle_Action(30, Enemy, All, PSI, 24, 0xEF8543, BTLACT_PSI_STARSTORM_A)
+	Battle_Action(31, Enemy, All, PSI, 42, 0xEF8543, BTLACT_PSI_STARSTORM_O)
+	Battle_Action(32, Party, One, PSI, 5, 0xEF8543, BTLACT_LIFEUP_A)
+	Battle_Action(33, Party, One, PSI, 8, 0xEF8543, BTLACT_LIFEUP_B)
+	Battle_Action(34, Party, One, PSI, 13, 0xEF8543, BTLACT_LIFEUP_G)
+	Battle_Action(35, Party, All, PSI, 24, 0xEF8543, BTLACT_LIFEUP_O)
+	Battle_Action(36, Party, One, PSI, 5, 0xEF8543, BTLACT_HEALING_A)
+	Battle_Action(37, Party, One, PSI, 8, 0xEF8543, BTLACT_HEALING_B)
+	Battle_Action(38, Party, One, PSI, 20, 0xEF8543, BTLACT_HEALING_G)
+	Battle_Action(39, Party, One, PSI, 38, 0xEF8543, BTLACT_HEALING_O)
+	Battle_Action(40, Party, One, PSI, 6, 0xEF8543, BTLACT_SHIELD_A)
+	Battle_Action(41, Party, One, PSI, 10, 0xEF8543, BTLACT_SHIELD_B)
+	Battle_Action(42, Party, All, PSI, 18, 0xEF8543, BTLACT_SHIELD_A)
+	Battle_Action(43, Party, All, PSI, 30, 0xEF8543, BTLACT_SHIELD_B)
+	Battle_Action(44, Party, One, PSI, 8, 0xEF8543, BTLACT_PSI_SHIELD_A)
+	Battle_Action(45, Party, One, PSI, 14, 0xEF8543, BTLACT_PSI_SHIELD_B)
+	Battle_Action(46, Party, All, PSI, 24, 0xEF8543, BTLACT_PSI_SHIELD_A)
+	Battle_Action(47, Party, All, PSI, 42, 0xEF8543, BTLACT_PSI_SHIELD_B)
+	Battle_Action(48, Party, One, PSI, 10, 0xEF8543, BTLACT_OFFENSE_UP)
+	Battle_Action(49, Party, All, PSI, 30, 0xEF8543, BTLACT_OFFENSE_UP)
+	Battle_Action(50, Enemy, One, PSI, 6, 0xEF8543, BTLACT_DEFENSE_DOWN)
+	Battle_Action(51, Enemy, All, PSI, 18, 0xEF8543, BTLACT_DEFENSE_DOWN)
+	Battle_Action(52, Enemy, One, PSI, 6, 0xEF8543, BTLACT_HYPNOSIS)
+	Battle_Action(53, Enemy, All, PSI, 18, 0xEF8543, BTLACT_HYPNOSIS)
+	Battle_Action(54, Enemy, One, PSI, 0, 0xEF8543, BTLACT_MAGNET_A)
+	Battle_Action(55, Enemy, All, PSI, 0, 0xEF8543, BTLACT_MAGNET_O)
+	Battle_Action(56, Enemy, One, PSI, 8, 0xEF8543, BTLACT_PARALYSIS)
+	Battle_Action(57, Enemy, All, PSI, 24, 0xEF8543, BTLACT_PARALYSIS)
+	Battle_Action(58, Enemy, One, PSI, 10, 0xEF8543, BTLACT_BRAINSHOCK)
+	Battle_Action(59, Enemy, All, PSI, 30, 0xEF8543, BTLACT_BRAINSHOCK)
+	Battle_Action(60, Party, All, PSI, 2, 0xEF8543, BTLACT_NULL4) // Teleport Alpha
+	Battle_Action(61, Party, All, PSI, 8, 0xEF8543, BTLACT_NULL4) // Teleport Beta
+	Battle_Action(62, Party, None, Other, 0, 0xEF9A47, BTLACT_CALL_FOR_HELP)
+	Battle_Action(63, Party, None, Other, 0, 0xEF9A5E, BTLACT_SOW_SEEDS)
+	Battle_Action(64, Enemy, One, Other, 0, 0xEF9A7E, BTLACT_SUPER_BOMB)
+	Battle_Action(65, Enemy, One, Other, 0, 0xEF9A9E, BTLACT_SUPER_BOMB)
+	Battle_Action(66, Enemy, One, Other, 0, 0xEF9ABB, BTLACT_STEAL)
+	Battle_Action(67, Enemy, One, Physical_Affected, 0, 0xEF9B02, BTLACT_FREEZE_TIME)
+	Battle_Action(68, Enemy, One, Other, 0, 0xEF9B20, BTLACT_DIAMONDIZE)
+	Battle_Action(69, Enemy, One, Other, 0, 0xEF9B43, BTLACT_PARALYZE)
+	Battle_Action(70, Enemy, One, Other, 0, 0xEF9B73, BTLACT_SOLIDIFY)
+	Battle_Action(71, Enemy, One, Other, 0, 0xEF9B96, BTLACT_NAUSEATE)
+	Battle_Action(72, Enemy, One, Other, 0, 0xEF9BC3, BTLACT_POISON)
+	Battle_Action(73, Enemy, One, Other, 0, 0xEF9BE6, BTLACT_POISON)
+	Battle_Action(74, Enemy, One, Other, 0, 0xEF9C02, BTLACT_COLD)
+	Battle_Action(75, Enemy, One, Other, 0, 0xEF9C30, BTLACT_MUSHROOMIZE)
+	Battle_Action(76, Enemy, One, Other, 0, 0xEF9C51, BTLACT_POSSESS)
+	Battle_Action(77, Enemy, One, Other, 0, 0xEF9C7E, BTLACT_HYPNOSIS)
+	Battle_Action(78, Enemy, One, Other, 0, 0xEF9CAD, BTLACT_CRYING)
+	Battle_Action(79, Enemy, One, Other, 0, 0xEF9CD1, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} employed a binding attack![03]{pause(1)}"
+	Battle_Action(80, Enemy, One, Other, 0, 0xEF9CF1, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} spit out  a sticky mucus!{sound(81)}[03]{pause(1)}"
+	Battle_Action(81, Enemy, One, Other, 0, 0xEF9D14, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} spewed <Fly Honey> out of his mouth!{sound(81)}[03]{pause(1)}"
+	Battle_Action(82, Enemy, One, Other, 0, 0xEF9D3E, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} shot spider silk out of its body![03]"
+	Battle_Action(83, Enemy, One, Other, 0, 0xEF9D62, BTLACT_SOLIDIFY) // "{sound(25)}@{user} said something really scary!{sound(84)}[03]{pause(1)}"
+	Battle_Action(84, Enemy, One, Other, 0, 0xEF9D81, BTLACT_BRAINSHOCK) //"{sound(25)}@{user} did something very mysterious!{sound(85)}[03]{pause(1)}"
+	Battle_Action(85, Enemy, One, Other, 0, 0xEF9DA1, BTLACT_CANT_CONCENTRATE)
+	Battle_Action(86, Party, None, Other, 0, 0xEF9DBD, BTLACT_FEEL_STRANGE)
+	Battle_Action(87, Enemy, All, Other, 0, 0xEF9DDA, BTLACT_CRYING2)
+	Battle_Action(88, Enemy, All, Other, 0, 0xEF9E05, BTLACT_PSI_FLASH_G)
+	Battle_Action(89, Enemy, All, Other, 0, 0xEF9E22, BTLACT_PSI_FIRE_A)
+	Battle_Action(90, Enemy, All, Other, 0, 0xEF9E47, BTLACT_HYPNOSIS)
+	Battle_Action(91, Enemy, All, Other, 0, 0xEF9E69, BTLACT_PSI_FIRE_G)
+	Battle_Action(92, Enemy, All, Other, 0, 0xEF9E92, BTLACT_PSI_THUNDER_B)
+	Battle_Action(93, Enemy, All, Other, 0, 0xEF9EB4, BTLACT_PSI_FIRE_O)
+	Battle_Action(94, Enemy, All, Other, 0, 0xEF9ED7, BTLACT_PSI_FIRE_G)
+	Battle_Action(95, Enemy, One, Other, 0, 0xEF7E25, BTLACT_REDUCEPP_SIXTEENTH)
+	Battle_Action(96, Party, None, Other, 0, 0xEF7E3E, BTLACT_OFFENSE_UP)
+	Battle_Action(97, Enemy, One, Other, 0, 0xEF7E55, BTLACT_REDUCE_GUTS)
+	Battle_Action(98, Enemy, One, Other, 0, 0xEF7E70, BTLACT_REDUCE_OFF_AND_DEF)
+	Battle_Action(99, Party, One, Other, 0, 0xEF7E88, BTLACT_LIFEUP_G)
+	Battle_Action(100, Enemy, One, Physical_Unaffected, 0, 0xEF7EAC, BTLACT_LEVEL_2_ATK_POISON)
+	Battle_Action(101, Enemy, One, Other, 0, 0xEF7ED5, BTLACT_SUPER_BOMB)
+	Battle_Action(102, Enemy, One, Physical_Affected, 0, 0xEF7F02, BTLACT_ATTACK_TWICE_LEVEL_2)
+	Battle_Action(103, Party, None, Other, 0, 0xEF7F1E, BTLACT_NULL)
+	Battle_Action(104, Enemy, One, Other, 0, 0xEF7F32, BTLACT_350_FIRE_DAMAGE)
+	Battle_Action(105, Enemy, One, Physical_Unaffected, 0, 0xEF7F5A, BTLACT_LEVEL_4_ATK) //"@{user} rushed in, and intertwined with you!"
+	Battle_Action(106, Enemy, One, Physical_Affected, 0, 0xEF7F7B, BTLACT_LEVEL_3_ATK) //"@{user} attacked with a crushing chop!"
+	Battle_Action(107, Enemy, One, Physical_Unaffected, 0, 0xEF7F9A, BTLACT_LEVEL_3_ATK) //"@{user} grappled and used his submission hold!"
+	Battle_Action(108, Enemy, One, Physical_Unaffected, 0, 0xEF7FC3, BTLACT_LEVEL_3_ATK) //"@{user} revved and accelerated!"
+	Battle_Action(109, Enemy, One, Physical_Affected, 0, 0xEF7FE0, BTLACT_LEVEL_3_ATK) //"@{user} brandished a knife!" 
+	Battle_Action(110, Enemy, One, Physical_Unaffected, 0, 0xEF7FFC, BTLACT_LEVEL_3_ATK) //"@{user} tore into you!"
+	Battle_Action(111, Enemy, One, Physical_Unaffected, 0, 0xEF8010, BTLACT_LEVEL_3_ATK) //"@{user} used a biting attack!"
+	Battle_Action(112, Enemy, One, Physical_Affected, 0, 0xEF8026, BTLACT_LEVEL_3_ATK) //"@{user} clawed with {pronoun} sharp nails!"
+	Battle_Action(113, Enemy, One, Physical_Affected, 0, 0xEF804B, BTLACT_LEVEL_3_ATK) //"@{user} swung {pronoun} tail very hard!"
+	Battle_Action(114, Enemy, One, Physical_Unaffected, 0, 0xEF806D, BTLACT_LEVEL_3_ATK) //"@{user} growled and lunged forward."
+	Battle_Action(115, Enemy, One, Physical_Affected, 0, 0xEF808D, BTLACT_LEVEL_3_ATK) //"@{user} wielded a shopping bag!"
+	Battle_Action(116, Enemy, One, Physical_Affected, 0, 0xEF80AC, BTLACT_LEVEL_3_ATK) //"@{user} swung a club!"
+	Battle_Action(117, Enemy, All, Physical_Unaffected, 0, 0xEF80C4, BTLACT_LEVEL_3_ATK) //"@{user} generated a tornado!"
+	Battle_Action(118, Enemy, One, Physical_Unaffected, 0, 0xEF80E4, BTLACT_LEVEL_3_ATK) //"@{user} sprayed a gigantic blast of water!"
+	Battle_Action(119, Party, None, Other, 0, 0xEF8109, BTLACT_NULL2) //"@{user} flashed a menacing smile!"
+	Battle_Action(120, Party, None, Other, 0, 0xEF812B, BTLACT_NULL2) //"@{user} started laughing histarically!"
+	Battle_Action(121, Party, None, Other, 0, 0xEF814F, BTLACT_NULL2) //"@{user} edged closer!"
+	Battle_Action(122, Party, None, Other, 0, 0xEF81A5, BTLACT_NULL2) //"@{user} muttered <1...>"
+	Battle_Action(123, Party, None, Other, 0, 0xEF8186, BTLACT_NULL2) //"@{user} murmured <2...>"
+	Battle_Action(124, Party, None, Other, 0, 0xEF8167, BTLACT_NULL2) //"@{user} whispered <3...>"
+	Battle_Action(125, Party, None, Other, 0, 0xEF81C4, BTLACT_NULL2) //"@{user} fell down!"
+	Battle_Action(126, Party, None, Other, 0, 0xEF81D7, BTLACT_NULL2) //"@{user} is being absentminded."
+	Battle_Action(127, Party, None, Other, 0, 0xEF81F1, BTLACT_NULL2) //"@{user} generated a burst of steam!"
+	Battle_Action(128, Party, None, Other, 0, 0xEF8211, BTLACT_NULL2) //"@{user} is wobbly."
+	Battle_Action(129, Party, None, Other, 0, 0xEF8226, BTLACT_NULL2) //"@{user} is reeling."
+	Battle_Action(130, Party, None, Other, 0, 0xEF8239, BTLACT_NULL2) //"@{user} has a big grin on {pronoun} face."
+	Battle_Action(131, Party, None, Other, 0, 0xEF825C, BTLACT_NULL2) //"@{user} is taking deep breaths for the next assault."
+	Battle_Action(132, Party, None, Other, 0, 0xEF8281, BTLACT_NULL2) //"@{user} sends a greeting!"
+	Battle_Action(133, Party, None, Other, 0, 0xEF8299, BTLACT_NULL2) //"@{user} is making a loud piercing howl."
+	Battle_Action(134, Party, None, Other, 0, 0xEF82BC, BTLACT_NULL2) //"@{user} is saying <tick-tock.>"
+	Battle_Action(135, Party, One, Item, 0, 0xC97B6B, VERY_SMALL_HEAL_4_HP)
+	Battle_Action(136, Party, One, Item, 0, 0xC97B6B, SMALL_HEAL_50_HP)
+	Battle_Action(137, Party, One, Item, 0, 0xC97B6B, DECENT_HEAL_200_HP)
+	Battle_Action(138, Party, One, Item, 0, 0xC97B6B, BTLACT_LIFEUP_A)
+	Battle_Action(139, Party, One, Item, 0, 0xC97B6B, BTLACT_LIFEUP_B)
+	Battle_Action(140, Party, One, Item, 0, 0xEF8E27, BTLACT_LIFEUP_G)
+	Battle_Action(141, Party, All, Item, 0, 0xC97B6B, BTLACT_LIFEUP_O)
+	Battle_Action(142, Party, One, Item, 0, 0xC97B6B, SMALL_HEAL_20_PP)
+	Battle_Action(143, Party, One, Item, 0, 0xC97B6B, DECENT_HEAL_80_PP)
+	Battle_Action(144, Party, One, Item, 0, 0xC97B6B, DECENT_HEAL_300_HP)
+	Battle_Action(145, Party, One, Item, 0, 0xC97B6B, UNKNOWN_ROUTINE_1)
+	Battle_Action(146, Party, One, Item, 0, 0xC97B6B, VERY_SMALL_HEAL_10_HP)
+	Battle_Action(147, Party, One, Item, 0, 0xC97B6B, SIGNIFICANT_HEAL_100_HP)
+	Battle_Action(148, Party, One, Item, 0, 0xC97B6B, POO_ITEM_HEAL_10000_HP)
+	Battle_Action(149, Party, One, Item, 0, 0xEF8E27, BTLACT_HEALING_A)
+	Battle_Action(150, Party, One, Item, 0, 0xEF8E27, BTLACT_HEALING_B)
+	Battle_Action(151, Party, One, Item, 0, 0xEF8E27, BTLACT_HEALING_G)
+	Battle_Action(152, Party, One, Item, 0, 0xEF8E27, BTLACT_HEALING_O)
+	Battle_Action(153, Party, One, Item, 0, 0xEF8E27, HEAL_POISON)
+	Battle_Action(154, Party, One, Item, 0, 0xC97B6B, UNKNOWN_ROUTINE_2)
+	Battle_Action(155, Party, One, Item, 0, 0xC97B6B, UNKNOWN_ROUTINE_3)
+	Battle_Action(156, Party, One, Item, 0, 0xEF8E27, UNKNOWN_ROUTINE_4)
+	Battle_Action(157, Party, One, Item, 0, 0xEF8E27, UNKNOWN_ROUTINE_5)
+	Battle_Action(158, Party, One, Item, 0, 0xEF8E27, UNKNOWN_ROUTINE_6)
+	Battle_Action(159, Enemy, One, Item, 0, 0xEF8E3C, BTLACT_COUNTER_PSI_UNIT)
+	Battle_Action(160, Enemy, One, Item, 0, 0xEF8E9E, BTLACT_SHIELD_KILLER)
+	Battle_Action(161, Enemy, One, Item, 0, 0xEF8E5E, BTLACT_HP_SUCKER)
+	Battle_Action(162, Enemy, One, Item, 0, 0xC97F56, BTLACT_MUMMY_WRAP)
+	Battle_Action(163, Enemy, One, Item, 0, 0xC97DDC, BTLACT_BOTTLE_ROCKET)
+	Battle_Action(164, Enemy, One, Item, 0, 0xC97DF5, BTLACT_BIG_BOTTLE_ROCKET)
+	Battle_Action(165, Enemy, One, Item, 0, 0xC97E24, BTLACT_MULIT_BOTTLE_ROCKET)
+	Battle_Action(166, Enemy, One, Item, 0, 0xC97F56, BTLACT_HANDSTRAP_BAG)
+	Battle_Action(167, Enemy, One, Item, 0, 0xC97EB7, BTLACT_BOMB)
+	Battle_Action(168, Enemy, One, Item, 0, 0xC97EB7, BTLACT_SUPER_BOMB)
+	Battle_Action(169, Enemy, Random, Item, 0, 0xC97D75, BTLACT_SOLIDIFY)
+	Battle_Action(170, Enemy, Random, Item, 0, 0xC97DA3, BTLACT_YOGURT_DISPENSER)
+	Battle_Action(171, Enemy, Random, Item, 0, 0xC97ED1, BTLACT_SNAKE)
+	Battle_Action(172, Enemy, Random, Item, 0, 0xC97EB7, BTLACT_SOLIDIFY)
+	Battle_Action(173, Enemy, Random, Item, 0, 0xC97EB7, BTLACT_SOLIDIFY)
+	Battle_Action(174, Enemy, Random, Item, 0, 0xC97EFA, BTLACT_SOLIDIFY)
+	Battle_Action(175, Enemy, Random, Item, 0, 0xC97D43, BTLACT_POISON)
+	Battle_Action(176, Enemy, All, Item, 0, 0xEF8E7E, BTLACT_HUNGRY_HP_SUCKER)
+	Battle_Action(177, Enemy, All, Item, 0, 0xC97CCA, BTLACT_BAG_OF_DRAGONITE)
+	Battle_Action(178, Enemy, All, Item, 0, 0xC97D21, BTLACT_INSECTICIDE_SPRAY)
+	Battle_Action(179, Enemy, All, Item, 0, 0xC97D21, BTLACT_XTERMINATOR_SPRAY)
+	Battle_Action(180, Enemy, All, Item, 0, 0xC97D21, BTLACT_RUST_PROMOTER)
+	Battle_Action(181, Enemy, All, Item, 0, 0xC97D21, BTLACT_RUST_PROMOTER_DX)
+	Battle_Action(182, Party, One, Item, 0, 0xEF8E27, BTLACT_SUDDEN_GUTS_PILL)
+	Battle_Action(183, Party, One, Item, 0, 0xEF8E27, BTLACT_DEFENSE_SPRAY)
+	Battle_Action(184, Party, All, Item, 0, 0xEF8E27, BTLACT_DEFENSE_SHOWER)
+	Battle_Action(185, Party, None, Item, 0, 0xEF8E27, BTLACT_TELEPORT_BOX)
+	Battle_Action(186, Party, None, Item, 0, 0xC9FD82, BTLACT_NULL2)
+	Battle_Action(187, Party, None, Item, 0, 0xC9FDBB, BTLACT_NULL2)
+	Battle_Action(188, Party, None, Item, 0, 0xC97F72, BTLACT_NULL2)
+	Battle_Action(189, Party, None, Item, 0, 0xC77EFF, UNKNOWN_ROUTINE_7)
+	Battle_Action(190, Party, None, Item, 0, 0xC9F897, BTLACT_NULL4)
+	Battle_Action(191, Party, None, Item, 0, 0xC9F9F3, BTLACT_NULL4)
+	Battle_Action(192, Party, None, Item, 0, 0xC9FB61, BTLACT_NULL4)
+	Battle_Action(193, Party, None, Item, 0, 0xC9FB8B, BTLACT_NULL4)
+	Battle_Action(194, Party, None, Item, 0, 0xC9FB9F, BTLACT_NULL4)
+	Battle_Action(195, Party, None, Item, 0, 0xC9FDFB, BTLACT_NULL4)
+	Battle_Action(196, Party, None, Item, 0, 0xC9FE1B, BTLACT_NULL4)
+	Battle_Action(197, Party, None, Item, 0, 0xC9FBF2, BTLACT_NULL4)
+	Battle_Action(198, Party, None, Item, 0, 0xC9FC48, BTLACT_NULL4)
+	Battle_Action(199, Party, None, Item, 0, 0xC9FC6F, BTLACT_NULL4)
+	Battle_Action(200, Party, None, Item, 0, 0xC9FD2E, BTLACT_NULL4)
+	Battle_Action(201, Enemy, All, Other, 0, 0xEF82D7, BTLACT_PSI_FLASH_G)
+	Battle_Action(202, Enemy, All, Other, 0, 0xEF82F7, BTLACT_PSI_THUNDER_B)
+	Battle_Action(203, Enemy, One, Other, 0, 0xEF8317, BTLACT_PARALYZE)
+	Battle_Action(204, Enemy, One, Other, 0, 0xEF833E, BTLACT_SOLIDIFY)
+	Battle_Action(205, Enemy, One, Other, 0, 0xEF835C, BTLACT_POISON)
+	Battle_Action(206, Enemy, One, Other, 0, 0xEF838A, BTLACT_CRYING)
+	Battle_Action(207, Enemy, One, Other, 0, 0xEF83A8, BTLACT_BRAINSHOCK)
+	Battle_Action(208, Enemy, One, Other, 0, 0xEF83CA, BTLACT_HYPNOSIS)
+	Battle_Action(209, Enemy, One, Other, 0, 0xEF83ED, BTLACT_SOLIDIFY)
+	Battle_Action(210, Enemy, One, Other, 0, 0xEF8413, BTLACT_SOLIDIFY)
+	Battle_Action(211, Enemy, One, Other, 0, 0xEF89FE, BTLACT_SOLIDIFY)
+	Battle_Action(212, Enemy, One, Other, 0, 0xEF8A18, BTLACT_IMMOBILIZE)
+	Battle_Action(213, Enemy, One, Other, 0, 0xEF8A33, BTLACT_COLD)
+	Battle_Action(214, Enemy, One, Physical_Affected, 0, 0xEF8A52, BTLACT_LEVEL_1_ATK)
+	Battle_Action(215, Enemy, One, Physical_Unaffected, 0, 0xEF8A6F, BTLACT_SHOOT)
+	Battle_Action(216, Enemy, One, Physical_Affected, 0, 0xEF8A8C, BTLACT_BASH)
+	Battle_Action(217, Enemy, One, Physical_Affected, 0, 0xEF8AA3, BTLACT_BASH)
+	Battle_Action(218, Enemy, One, Physical_Unaffected, 0, 0xEF8AC2, BTLACT_BASH)
+	Battle_Action(219, Enemy, One, Physical_Unaffected, 0, 0xEF8ADD, BTLACT_BASH)
+	Battle_Action(220, Enemy, One, Physical_Affected, 0, 0xEF8AF8, BTLACT_BASH)
+	Battle_Action(221, Enemy, One, Physical_Unaffected, 0, 0xEF8B11, BTLACT_SHOOT)
+	Battle_Action(222, Enemy, One, Physical_Unaffected, 0, 0xEF8B2F, BTLACT_SHOOT)
+	Battle_Action(223, Enemy, One, Physical_Unaffected, 0, 0xEF8B4A, BTLACT_BASH)
+	Battle_Action(224, Enemy, One, Physical_Unaffected, 0, 0xEF8B65, BTLACT_BASH)
+	Battle_Action(225, Enemy, One, Physical_Affected, 0, 0xEF8B89, BTLACT_LEVEL_3_ATK)
+	Battle_Action(226, Enemy, One, Physical_Unaffected, 0, 0xEF8BA8, BTLACT_LEVEL_3_ATK)
+	Battle_Action(227, Enemy, One, Physical_Unaffected, 0, 0xEF8BC0, BTLACT_LEVEL_3_ATK)
+	Battle_Action(228, Enemy, One, Physical_Unaffected, 0, 0xEF8BE8, BTLACT_LEVEL_2_ATK_DIAMONDIZE)
+	Battle_Action(229, Enemy, One, Other, 0, 0xEF8BFB, BTLACT_REDUCE_GUTS)
+	Battle_Action(230, Enemy, One, Other, 0, 0xEF8C1D, BTLACT_REDUCE_GUTS)
+	Battle_Action(231, Enemy, One, Other, 0, 0xEF8C3A, BTLACT_REDUCE_GUTS)
+	Battle_Action(232, Enemy, One, Other, 0, 0xEF8C58, BTLACT_REDUCE_OFF)
+	Battle_Action(233, Enemy, One, Other, 0, 0xEF8C75, BTLACT_REDUCE_OFF_AND_DEF)
+	Battle_Action(234, Enemy, One, Other, 0, 0xEF8C92, BTLACT_REDUCE_OFF_AND_DEF)
+	Battle_Action(235, Party, None, Other, 0, 0xEF8CAC, BTLACT_NULL2)
+	Battle_Action(236, Party, None, Other, 0, 0xEF8CC7, BTLACT_NULL2)
+	Battle_Action(237, Enemy, One, Other, 0, 0xEF9C30, BTLACT_POISON)
+	Battle_Action(238, Enemy, One, Physical_Unaffected, 0, 0xEF8010, BTLACT_BASH)
+	Battle_Action(239, Enemy, One, Physical_Affected, 0, 0xC77EFF, UNKNOWN_ROUTINE_8)
+	Battle_Action(240, Party, None, Item, 0, 0xC77EFF, UNKNOWN_ROUTINE_9)
+	Battle_Action(241, Enemy, One, Other, 0, 0xEF8D72, BTLACT_COLD)
+	Battle_Action(242, Enemy, One, Other, 0, 0xEF8DC1, BTLACT_IMMOBILIZE)
+	Battle_Action(243, Party, None, Other, 0, 0xEF72F6, BTLACT_CLUMSY_ROBOT_DEATH)
+	Battle_Action(244, Party, None, Other, 0, 0xEF7415, BTLACT_MASTER_BARF_DEATH)
+	Battle_Action(245, Party, None, Other, 0, 0xC77EFF, BTLACT_ENEMY_EXTENDER)
+	Battle_Action(246, Enemy, One, Physical_Unaffected, 0, 0xC77EFF, UNKNOWN_ROUTINE_8)
+	Battle_Action(247, Enemy, All, Other, 0, 0xEF8E27, UNKNOWN_ROUTINE_10)
+	Battle_Action(248, Enemy, All, Other, 0, 0xEF8D9F, UNKNOWN_ROUTINE_10)
+	Battle_Action(249, Party, One, Item, 0, 0xC97B6B, EAT_FOOD)
+	Battle_Action(250, Party, All, Item, 0, 0xC97C7B, EAT_FOOD)
+	Battle_Action(251, Party, None, Other, 0, 0xEF727F, BTLACT_NULL11)
+	Battle_Action(252, Party, None, Other, 0, 0xEF7192, BTLACT_NULL7)
+	Battle_Action(253, Party, None, Other, 0, 0xEF71DF, BTLACT_NULL10)
+	Battle_Action(254, Party, None, Other, 0, 0xEF71F6, BTLACT_NULL6)
+	Battle_Action(255, Party, None, Other, 0, 0xEF6F0B, BTLACT_NULL8)
+	Battle_Action(256, Party, None, Other, 0, 0xEF720C, BTLACT_NULL9)
+	Battle_Action(257, Party, None, Other, 0, 0xEF725A, BTLACT_NULL2)
+	Battle_Action(258, Party, None, Other, 0, 0xC9FEFD, BTLACT_NULL4)
+	Battle_Action(259, Party, None, Other, 0, 0xEF9EF4, BTLACT_NULL4)
+	Battle_Action(260, Party, None, Other, 0, 0xEF745F, BTLACT_NULL2)
+	Battle_Action(261, Party, None, Other, 0, 0xEF749D, BTLACT_NULL2)
+	Battle_Action(262, Party, None, Other, 0, 0xEF74B0, BTLACT_NULL2)
+	Battle_Action(263, Party, None, Other, 0, 0xEF74C9, BTLACT_NULL2)
+	Battle_Action(264, Party, None, Other, 0, 0xEF7569, BTLACT_NULL2)
+	Battle_Action(265, Party, None, Other, 0, 0xEF7579, BTLACT_NULL2)
+	Battle_Action(266, Party, None, Other, 0, 0xEF7591, BTLACT_NULL2)
+	Battle_Action(267, Party, None, Other, 0, 0xEF7593, BTLACT_NULL2)
+	Battle_Action(268, Enemy, Random, Item, 0, 0xC97F8A, BTLACT_SNAKE)
+	Battle_Action(269, Enemy, Random, Item, 0, 0xC97F8A, BTLACT_POISON)
+	Battle_Action(270, Party, None, Item, 0, 0xEFA0DC, BTLACT_NULL4)
+	Battle_Action(271, Party, None, Item, 0, 0xEFA2AB, BTLACT_NULL4)
+	Battle_Action(272, Party, None, Item, 0, 0xC77EFF, BTLACT_NULL4)
+	Battle_Action(273, Enemy, All, Other, 0, 0xEF8EBE, BTLACT_REDUCE_OFF)
+	Battle_Action(274, Enemy, All, Other, 0, 0xEF8F17, BTLACT_PSI_THUNDER_B)
+	Battle_Action(275, Party, None, Other, 0, 0xC8FB1B, GIYGAS_ALL_MIGHTY_IDIOT_SPEACH)
+	Battle_Action(276, Party, None, Other, 0, 0xC77EFF, BTLACT_NULL4)
+	Battle_Action(277, Party, None, Other, 0, 0xC77EFF, BTLACT_NULL12)
+	Battle_Action(278, Party, None, Other, 0, 0xC77EFF, GIYGAS_WET_YOUR_PANTS_SPEACH)
+	Battle_Action(279, Party, None, Other, 0, 0xEF84F3, BTLACT_NULL4)
+	Battle_Action(280, Enemy, One, Other, 0, 0xEF84D4, BTLACT_MIRROR)
+	Battle_Action(281, Party, None, Item, 0, 0xC6FB6D, BTLACT_NULL4)
+	Battle_Action(282, Party, None, Item, 0, 0xC6FBB5, BTLACT_NULL4)
+	Battle_Action(283, Enemy, Random, Item, 0, 0xC6FC1A, BTLACT_SOLIDIFY)
+	Battle_Action(284, Party, None, Item, 0, 0xC6FC6D, BTLACT_NULL4)
+	Battle_Action(285, Party, None, Item, 0, 0xC6FF9B, BTLACT_NULL4)
+	Battle_Action(286, Party, None, Item, 0, 0xC6FFBB, BTLACT_NULL4)
+	Battle_Action(287, Party, None, Item, 0, 0xC6FC94, BTLACT_NULL4)
+	Battle_Action(288, Party, None, Item, 0, 0xC6FDBE, BTLACT_NULL4)
+	Battle_Action(289, Party, None, Item, 0, 0xC6FED6, BTLACT_NULL4)
+	Battle_Action(290, Party, None, Other, 0, 0xEF8DDE, BTLACT_RAINBOW)
+	Battle_Action(291, Party, None, Other, 0, 0xC9F0B8, GIYGAS_PRAYER_1)
+	Battle_Action(292, Party, None, Other, 0, 0xC9F134, GIYGAS_PRAYER_2)
+	Battle_Action(293, Party, None, Other, 0, 0xC9F196, GIYGAS_PRAYER_3)
+	Battle_Action(294, Party, None, Other, 0, 0xC9F1FD, GIYGAS_PRAYER_4)
+	Battle_Action(295, Party, None, Other, 0, 0xC9F25E, GIYGAS_PRAYER_5)
+	Battle_Action(296, Party, None, Other, 0, 0xC9F2BC, GIYGAS_PRAYER_6)
+	Battle_Action(297, Party, None, Other, 0, 0xC9F325, GIYGAS_PRAYER_7)
+	Battle_Action(298, Party, None, Other, 0, 0xC9F389, GIYGAS_PRAYER_8)
+	Battle_Action(299, Party, None, Other, 0, 0xC9F3EC, GIYGAS_PRAYER_9)
+	Battle_Action(300, Enemy, All, Other, 0, 0xEF8F17, BTLACT_PSI_FREEZE_A)
+	Battle_Action(301, Enemy, All, Other, 0, 0xEF8F17, BTLACT_PSI_FLASH_G)
+	Battle_Action(302, Enemy, All, Other, 0, 0xEF8EE2, BTLACT_PSI_THUNDER_B)
+	Battle_Action(303, Enemy, All, Other, 0, 0xEF8EE2, BTLACT_PSI_FREEZE_A)
+	Battle_Action(304, Enemy, All, Other, 0, 0xEF8EE2, BTLACT_PSI_FLASH_G)
+	Battle_Action(305, Enemy, All, Other, 0, 0xEF8F4A, BTLACT_PSI_THUNDER_B)
+	Battle_Action(306, Enemy, All, Other, 0, 0xEF8F4A, BTLACT_PSI_FREEZE_A)
+	Battle_Action(307, Enemy, All, Other, 0, 0xEF8F4A, BTLACT_PSI_FLASH_G)
+	Battle_Action(308, Party, None, Other, 0, 0xC9EE2F, BTLACT_NULL4)
+	Battle_Action(309, Enemy, None, Other, 0, 0xEF8F91, BTLACT_NULL4)
+	Battle_Action(310, Enemy, One, Item, 0, 0xC97E9E, BTLACT_BOMB)
+	Battle_Action(311, Enemy, One, Item, 0, 0xC97E9E, BTLACT_SUPER_BOMB)
+	Battle_Action(312, Party, None, Other, 0, 0xC9EE68, BTLACT_NULL4)
+	Battle_Action(313, Party, None, Other, 0, 0xEF8D4C, BTLACT_NULL4)
+	Battle_Action(314, Party, None, Other, 0, 0xEF8CDD, BTLACT_NULL4)
+	Battle_Action(315, Party, None, Other, 0, 0xEF8CFB, BTLACT_NULL4)
+	Battle_Action(316, Party, None, Other, 0, 0xEF8D17, BTLACT_NULL4)
+	Battle_Action(317, Party, None, Other, 0, 0xEF8D2F, BTLACT_NULL4)
+	
+	// Extended Battle Action Section
+
+	Battle_Action(318, Party, One, Item, 0, 0xC97B6B, lucky_sandwich_revamp.Lucky_Sandwich_Action)
+}

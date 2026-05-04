@@ -3517,7 +3517,7 @@
   Name: Skip sandwich DX
   Type: 32
 226:
-  Action: 249
+  Action: 318
   Argument:
   - 0
   - 10
@@ -3533,7 +3533,7 @@
   - poo can use
   Name: Lucky sandwich
   Type: 32
-227:
+227:	# Unused
   Action: 249
   Argument:
   - 0
@@ -3550,7 +3550,7 @@
   - poo can use
   Name: Lucky sandwich
   Type: 32
-228:
+228:	# Unused
   Action: 249
   Argument:
   - 0
@@ -3567,7 +3567,7 @@
   - poo can use
   Name: Lucky sandwich
   Type: 32
-229:
+229:	# Unused
   Action: 249
   Argument:
   - 1
@@ -3584,7 +3584,7 @@
   - poo can use
   Name: Lucky sandwich
   Type: 32
-230:
+230:	# Unused
   Action: 249
   Argument:
   - 1
@@ -3602,22 +3602,18 @@
   Name: Lucky sandwich
   Type: 32
 231:
-  Action: 249
+  Action: 6
   Argument:
-  - 2
   - 0
-  - 1
   - 0
-  Cost: 128
-  Help Text Pointer: item_descriptions.l_0xc561c3
+  - 0
+  - 0
+  Cost: 0
+  Help Text Pointer: tools.Spy_Description
   Misc Flags:
-  - item disappears when used
   - jeff can use
-  - ness can use
-  - paula can use
-  - poo can use
-  Name: Lucky sandwich
-  Type: 32
+  Name: Spy kit
+  Type: 52
 232:
   Action: 249
   Argument:

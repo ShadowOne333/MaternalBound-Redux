@@ -1,0 +1,22 @@
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+
+// Clear the text in the status window before printing PSI categories, not after
+// (though, I can't find exactly when it happens ...)
+// Our "Melody" display would push us barely over the edge of the VWF buffer
+// in some cases otherwise.
+
+define WINDOW_STATUS = 8
+
+ROM[0xC1BBAC] = { JSL (StatusWindowClear) NOP NOP }
+
+StatusWindowClear: {
+    // Clear status window
+    LDA_i (WINDOW_STATUS)
+    JSL_RTS_C1 (0xC10F40)
+    JSL (0xC3E4E0) // And force a window tick to make sure it's drawn
+    // Clobbered code (create categories window)
+    LDA_i (0x2E)
+    JSL (0xC1DD47) // Far version of the function (unlike the original code)
+    RTL
+}

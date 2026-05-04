@@ -456,7 +456,10 @@ l_0xc5e3a5:
 	set(FLG_SHOPTEMP_2)	// 657
 	eob
 
-l_0xc5e3bc:
+l_0xc5e3bc:	// The following is not used anymore due to the Lucky Sandwich Revamp hack
+	eob	// Finalize so it doesn't try to give any of the other Lucky sandwiches on purchase
+
+	// The rest of this script should go unused now to avoid getting the other dummy Lucky sandwiches
 	store_registers
 	result_is(LUCKY_SANDWICH)	// 226
 	goto_if_true(l_0xc5e3c9)

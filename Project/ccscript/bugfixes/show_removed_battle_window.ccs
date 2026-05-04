@@ -1,5 +1,4 @@
 import "../essential/asm65816.ccs"
-import "../essential/ASMRef.ccs"
 import "../essential/jsl_rts.ccs"
 import "../expansion/ccexpand.ccs"
 
@@ -24,7 +23,7 @@ BattleGoods_ShowItemNameWindow: {
 	              		// mechanism that's supposed to solve this situation
 
 	LDA_i	(6)
-	JSL_RTS_C1	(0x0FEA)	// HIGHLIGHT_TEXT(6) -- 6 is purple
+	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(6) -- 6 is purple
  
 	LDX_d	(0x10)		// The argument to this function is stored in $10
 	LDA_x	(0)   		// And we want its field_0x0
@@ -34,7 +33,7 @@ BattleGoods_ShowItemNameWindow: {
 	JSL_RTS_C1	(0xC19216)	// PRINT_ITEM_NAME(^^^^^)
  
 	LDA_i	(0)
-	JSL_RTS_C1	(0x0FEA)	// HIGHLIGHT_TEXT(0) -- 0 is normal
+	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(0) -- 0 is normal
  
 	JSL	(0xC3E4CA)	// CLEAR_INSTANT_PRINTING();
  

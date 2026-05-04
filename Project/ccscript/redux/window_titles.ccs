@@ -144,18 +144,18 @@ r_0xC1866D:{
 	ADC_i (0xFFF0)
 	TCD
 	PLA
-	
+
 	STA_d (0x0E)
 	LDA_d (0x1E)
 	STA_d (0x06)
 	LDA_d (0x20)
 	STA_d (0x08)
 	LDA_d (0x0E)
-	
+
 	BNE_a (UNKNOWN0)
 	LDA_i (0x0000)
 	BRA_a (Return)
-	
+
 UNKNOWN0:
 	TAX
 	STZ_x (0x0004)
@@ -165,7 +165,7 @@ UNKNOWN0:
 	LDA_d (0x08)
 	STA_y (0x0002)
 	LDA_d (0x0E)
-	
+
 Return:
 	PLD
 	RTL
@@ -182,12 +182,12 @@ Title_Char_Name:{
 	TDC
 	ADC_i (0xFFEE)
 	TCD
-	
+
 	STX_d (0x06)	// Stores the current Control Code argument to DPR 0x06
 	LDA_a (0x97CA)	// Control Code Counter
 	CMP_i (0x0002)	// Check if we already stored all of our arguments to RAM
 	BCS_a (Title_Name)	// If so, then we can proceed to write the character's name
-	
+
 	// If not, then we need to store the Control Code's arguments
 	TXA		// Transfer the CC argument to the A register
 	SEP (0x20)	// Make A register 8-bit
@@ -199,7 +199,7 @@ Title_Char_Name:{
 	BRA_a (Return)	// Return to continue to write the CC's arguments to the CC argument storage
 
 Title_Name:
-	LDA_a (0x97BA)	// Load in the Widnow ID argument
+	LDA_a (0x97BA)	// Load in the Window ID argument
 	AND_i (0x00FF)	// Get low byte
 	CMP_i (0x0000)	// Checks to see if it's 0
 	BEQ_a (Load_Current_Window)	// If so, then load in the current focused window
@@ -207,31 +207,34 @@ Title_Name:
 	// Else, load in the window ID in the argument
 	STA_d (0x02)	// DPR 0x02 = Window ID
 	BRA_a (Title_Name_2)
-	
+
 Load_Current_Window:
 	LDA_a (0x8958)	// Get the current window ID
 	STA_d (0x02)	// DPR 0x02 = Current Window ID
-	
+
 Title_Name_2:
 	LDA_a (0x97BB)	// Load in the character ID that's in the CC argument storage
 	AND_i (0x00FF)	// Get low byte
 	CMP_i (0x0005)	// Check if the Character ID isn't the main 4
 	BCC_a (Main_4_Names)	// If so, then load in the main 4's names
-	
+
 	// Else, it must be King
 	LDA_i (0x9819)	// Load in King's Name address
 	STA_d (0x04)	// DPR 0x04 = King's name address
 	BRA_a (Title_Name_3)	// Continue with the routine
-	
+
 Main_4_Names:
 	DEC		// Decrement the character's ID
 	TAY
-	LDA_i (0x5F)	// Load in the character's stats table's entry size
+	// Originally, the character names are stored at the start of the character struct, but are now stored separately
+	// Originally LDA_i (0x5F), changed to LDA_i(0x07) for compatibility with Six Letter hack
+	LDA_i (six_letters.NAMES_SIZE)	// Load in the character's stats table's entry size
 	JSL (Mult_YxA)	// Multiply
 	CLC		// Clear C bit in P register
-	ADC_i (0x99CE)	// Add the offset to the starting address of the Chracter Stats Table in RAM to get the address of the names
+	// Originally address 0x99CE, changed to 0xB630 for compatibility with Six Letter hack
+	ADC_i (six_letters.RAM_NAMES)	// Add the offset to the starting address of the Chracter Stats Table in RAM to get the address of the names
 	STA_d (0x04)	// DPR 0x04 = Address of the chracter's name
-	
+
 Title_Name_3:
 	LDA_d (0x02)	// Load in the Window ID
 	LDX_d (0x04)
@@ -241,7 +244,7 @@ Title_Name_3:
 	LDX_d (0x06)	// Load in the length of the name
 	JSL (Title_Window)	// Title the window
 	LDA_i (0x0000)
-	
+
 Return:
 	PLD
 	RTL
@@ -258,12 +261,12 @@ Title_Str_Name:{
 	TDC
 	ADC_i (0xFFEE)
 	TCD
-	
+
 	STX_d (0x06)	// Stores the current Control Code argument to DPR 0x06
 	LDA_a (0x97CA)	// Control Code Counter
 	CMP_i (0x0004)	// Check if we already stored all of our arguemtns to RAM
 	BCS_a (Title_Str)	// If so, then we can proceed to write the character's name
-	
+
 	// If not, then we need to store the Control Code's arguments
 	TXA			// Transfer the CC argument to the A register
 	SEP (0x20)	// Make A register 8-bit
@@ -273,7 +276,7 @@ Title_Str_Name:{
 	INC_a (0x97CA)	// Increment the CC counter
 	LDA_i (0x8677)	// Load this routine's lower 16-bit ROM address
 	BRA_a (Return)	// Return to continue to write the CC's arguments to the CC argument storage
-	
+
 Title_Str:
 	LDA_d (0x06)	// Load in the last CC argument
 	SEP (0x20)		// Make A register 8-bit
@@ -286,11 +289,11 @@ Title_Str:
 	STA_d (0x02)	// Store it into DPR 0x02
 	CMP_i (0x0000)	// Check if the argument is 0
 	BNE_a (Title_Str_1)	// If not, then continue with the code
-	
+
 	// Else, it's the current window
 	LDA_a (0x8958)	// Load in the current window
 	STA_d (0x02)	// Store it into DPR 0x02
-	
+
 Title_Str_1:
 	LDA_a (0x97BB)	// Load in the lower short of the text address
 	STA_d (0x0E)	// Store it into DPR 0x0E
@@ -307,10 +310,10 @@ Return:
 }
 //------------------------------------------------------------------
 // Preset title commands for retrieving character names without EB++
-command title_ness(window)	{ "[18 0B {byte[0] window} 01 05]" clearline }
-command title_paula(window)	{ "[18 0B {byte[0] window} 02 05]" clearline }
-command title_jeff(window)	{ "[18 0B {byte[0] window} 03 05]" clearline }
-command title_poo(window)	{ "[18 0B {byte[0] window} 04 05]" clearline }
+command title_ness(window)	{ "[18 0B {byte[0] window} 01 06]" clearline }
+command title_paula(window)	{ "[18 0B {byte[0] window} 02 06]" clearline }
+command title_jeff(window)	{ "[18 0B {byte[0] window} 03 06]" clearline }
+command title_poo(window)	{ "[18 0B {byte[0] window} 04 06]" clearline }
 command title_dog(window)	{ "[18 0B {byte[0] window} 05 06]" clearline }
 
 // Preset title commands for strings

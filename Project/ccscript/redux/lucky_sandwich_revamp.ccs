@@ -1,0 +1,130 @@
+// Combining all 6 Lucky Sandwiches into 1 single Lucky Sandwich item
+
+//------------------------------------------------------------------
+// THIS CODE REQUIRES TWO ADDITIONAL MODIFICATIONS
+//------------------------------------------------------------------
+/* 1) Label 'l_0xc5e3bc' in the CCScript dump should be dummied out with an 'eob', as follows:
+
+l_0xc5e3bc:	// The following is not used anymore due to the Lucky Sandwich Revamp hack
+	eob	// Finalize so it doesn't try to give any of the other Lucky sandwiches on purchase
+	
+Doesn't matter if the rest of the label's code/text is left after it, just as long as the first line is the 'eob'
+This stops the game from randomizing which one out of the 6 Lucky Sandwich items is given to the player
+*/
+
+//------------------------------------------------------------------
+/* 2) Extended Battle Action Table.ccs is required in order to make a new custom action that calls this code.
+Here's an example entry for it:
+
+	Battle_Action(318, Party, One, Item, 0, 0xC97B6B, lucky_sandwich_revamp.Lucky_Sandwich_Action)
+
+Once that is done in the Extended Battle Action Table, go into item_configuration_table.yml, search for item 226
+(the first Lucky sandwich), and change its action from 249 to 318, like this:
+
+226:
+  Action: 318
+  Argument:
+  - 0
+  - 10
+  - 1
+  - 0
+  Cost: 128
+  Help Text Pointer: 0xc56097
+  Misc Flags:
+  - item disappears when used
+  - jeff can use
+  - ness can use
+  - paula can use
+  - poo can use
+  Name: Lucky sandwich
+  Type: 32
+  
+*/
+//------------------------------------------------------------------
+
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+
+//------------------------------------------------------------------ 
+
+define CURRENT_TARGET	= 0xA972
+
+//------------------------------------------------------------------
+
+// Custom battle action for the Lucky Sandwich so it randomizes the effect of just one Lucky Sandwich on use,
+// Instead of randomizing which one out of the 6 Lucky sandwiches are obtained on purchase
+Lucky_Sandwich_Action: {
+	REP	(0x31)
+	LDA_i	(16)	// Random number
+	JSL	(Rand_0_to_A1)
+	CMP_i	(7)	//If less than 7
+	BCC_a	(LuckySandwich60HP)
+	LDA_i	(9)
+	JSL	(Rand_0_to_A1)
+	CMP_i	(4)	//If less than 4
+	BCC_a	(LuckySandwich240HP)
+	LDA_i	(5)
+	JSL	(Rand_0_to_A1)
+	CMP_i	(3)	//If less than 3
+	BCC_a	(LuckySandwichFullHP)
+	LDA_i	(2)
+	JSL	(Rand_0_to_A1)
+	CMP_i	(0)	//If 0
+	BEQ_a	(LuckySandwich5PP)
+	LDA_i	(3)
+	JSL	(Rand_0_to_A1)
+	CMP_i	(1)	//If greater than 0
+	BCS_a	(LuckySandwich20PP)
+	BRA_a	(LuckySandwichFullHPPP)
+
+LuckySandwich60HP:
+	LDA_i	(60)
+	JSL	(Mult_A_x_Rand_075_125)
+	TAX
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_HP)
+	BRA_a	(LuckySandwichReturn)
+
+LuckySandwich240HP:
+	LDA_i	(240)
+	JSL	(Mult_A_x_Rand_075_125)
+	TAX
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_HP)
+	BRA_a	(LuckySandwichReturn)
+
+LuckySandwichFullHP:
+	LDX_i	(9999)
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_HP)
+	BRA_a	(LuckySandwichReturn)
+	
+LuckySandwich5PP:
+	LDA_i	(5)
+	JSL	(Mult_A_x_Rand_075_125)
+	TAX
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_PP)
+	BRA_a	(LuckySandwichReturn)
+
+LuckySandwich20PP:
+	LDA_i	(20)
+	JSL	(Mult_A_x_Rand_075_125)
+	TAX
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_PP)
+	BRA_a	(LuckySandwichReturn)
+
+LuckySandwichFullHPPP:
+	LDX_i	(9999)
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_HP)
+	LDX_a	(CURRENT_TARGET)	//Current target
+	LDA_x	(0x001B)		//Checks target's maximum PP
+	TAX
+	LDA_a	(CURRENT_TARGET)
+	JSL	(Recover_PP)
+
+LuckySandwichReturn:
+	RTL
+}

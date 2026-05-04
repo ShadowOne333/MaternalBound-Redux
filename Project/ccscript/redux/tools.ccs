@@ -58,8 +58,8 @@ define MAINMENU_WINDOW	= 0
 define DIALOGUE_WINDOW	= 1
 define INVENTORY_WINDOW	= 2
 define CASH_WINDOW	= 10
+define ITEMNAME_WINDOW	= 38
 define WHICH_WINDOW	= 40
-define USE_HELP_WINDOW	= 61
 
 //------------------------------------
 // 	'Status' code hijack
@@ -289,7 +289,6 @@ command help_submenu( help_text ) {
 	window_open(DIALOGUE_WINDOW)
 	call(help_text)
 	window_close(DIALOGUE_WINDOW)
-	window_close(USE_HELP_WINDOW)
 	call(open_which_window)
 	window_switch(INVENTORY_WINDOW)
 	goto(_Help_Backout)
@@ -341,7 +340,7 @@ _Paralyzed:
 		set_window_title(2, "Tools")
 		menu_option("Spy kit", 0, 0, {
 			set_action(6)
-			LDA_i(2)
+			LDA_i(INVENTORY_WINDOW)
 			JSL(0xC3E521)	// Close_Window
 			ret_tools_target()
 		})
@@ -353,16 +352,17 @@ _Can_Move:
 		set_window_title(2, "Tools")
 		menu_option_no_position("Spy kit", {
 			set_action(6)
-			LDA_i(2)
-			JSL(0xC3E521)	// Close_Window
+			set_item_args_noinv(LUCKY_SANDWICH6)
+			LDA_i	(INVENTORY_WINDOW)
+			JSL	(CLOSE_WINDOW)
 			ret_tools_target()
 		})
 		if_flag(FLG_ITEM_SLIME_GENERATOR, {
 			menu_option_no_position("Slime generator", {
 				set_action(169)
 				set_item_args_noinv(SLIME_GENERATOR)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -370,8 +370,8 @@ _Can_Move:
 			menu_option_no_position("Shield killer", {
 				set_action(160)
 				set_item_args_noinv(SHIELD_KILLER)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -379,8 +379,8 @@ _Can_Move:
 			menu_option_no_position("Counter PSI unit", {
 				set_action(159)
 				set_item_args_noinv(COUNTER_PSI_UNIT)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -388,8 +388,8 @@ _Can_Move:
 			menu_option_no_position("Neutralizer", {
 				set_action(247)
 				set_item_args_noinv(195)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(MULTI_ENEMY_TARGET)
 			})
 		})
@@ -397,8 +397,8 @@ _Can_Move:
 			menu_option_no_position("Defense shower", {
 				set_action(184)
 				set_item_args_noinv(157)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(PARTY_TARGET)
 			})
 		})
@@ -406,8 +406,8 @@ _Can_Move:
 			menu_option_no_position("HP sucker", {
 				set_action(161)
 				set_item_args_noinv(135)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -415,8 +415,8 @@ _Can_Move:
 			menu_option_no_position("Hungry HP sucker", {
 				set_action(176)
 				set_item_args_noinv(136)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(MULTI_ENEMY_TARGET)
 			})
 		})
@@ -424,8 +424,8 @@ _Can_Move:
 			menu_option_no_position("Bazooka", {
 				set_action(310)
 				set_item_args_noinv(133)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -433,8 +433,8 @@ _Can_Move:
 			menu_option_no_position("Heavy bazooka", {
 				set_action(311)
 				set_item_args_noinv(134)
-				LDA_i(2)
-				JSL(0xC3E521)	// Close_Window
+				LDA_i	(INVENTORY_WINDOW)
+				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
@@ -443,8 +443,8 @@ _Can_Move:
 				menu_option_no_position("Tofu machine", {
 					set_action(170)
 					set_item_args_noinv(TOFU_MACHINE)
-					LDA_i(2)
-					JSL(0xC3E521)	// Close_Window
+					LDA_i	(INVENTORY_WINDOW)
+					JSL	(CLOSE_WINDOW)
 					ret_tools_multi_target(MULTI_ENEMY_TARGET)
 				})
 			})
@@ -455,14 +455,18 @@ _done:
 	CMP_i(0)
 	BEQ_a(_cancelled)
 
-	LDA_i(2)
-	JSL(0xC3E521)
+	LDA_i	(ITEMNAME_WINDOW)
+	JSL	(CLOSE_WINDOW)
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
 
 	JML(0xC23B4D)
 
 _cancelled:
-	LDA_i(2)
-	JSL(0xC3E521)
+	LDA_i	(ITEMNAME_WINDOW)
+	JSL	(CLOSE_WINDOW)
+	LDA_i	(INVENTORY_WINDOW)
+	JSL	(CLOSE_WINDOW)
 
 	JML(0xC23829)
 }
@@ -483,24 +487,40 @@ define BATTLE_SELECTION_TARGET = 0xA982 // 1 byte
 
 // Custom target command based on Spy's battle action routine
 command ret_tools_target() {
-	LDA_a(BATTLE_SELECTION_ACTION)
-	STA_d(0x02)
-	STA_d(0x1E)
-	LDA_d(0x02)
-	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
-	SEP(0x20)			// accum8
-	LDA_8(0x11)
-	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
-	LDY_d(0x02)
-	LDX_i(0x0001)
-	REP(0x20)
-	LDA_i(0)
-	JSL(0xC1DE37)			// REDIRECT_C1242E — same as original
-	SEP(0x20)
-	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
-	REP(0x20)
-	AND_i(0x00FF)
+	// Copy of Show removed battle window code for single-target Tools
+	LDA_i	(ITEMNAME_WINDOW)
+	JSL	(CREATE_WINDOW_REDIRECT)
+	JSL	(SET_INSTANT_PRINTING)	// New code: closing the previous window cleared the instant printing flag
+					// for some reason. SET_INSTANT_PRINTING() because I'm too lazy to use the $5E70
+					// mechanism that's supposed to solve this situation
+	LDA_i	(6)
+	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(6) -- 6 is purple
+	LDA_a	(BATTLE_ITEM_USED)	// Grab the item number from the recently set item arg ID
+	JSL_RTS_C1	(0xC19216)	// PRINT_ITEM_NAME(^^^^^)
+	LDA_i	(0)
+	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(0) -- 0 is normal
+	JSL	(CLEAR_INSTANT_PRINTING)
+
+	// Actual action setup
+	LDA_a	(BATTLE_SELECTION_ACTION)
+	STA_d	(0x02)
+	STA_d	(0x1E)
+	LDA_d	(0x02)
+	STA_a	(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP	(0x20)			// accum8
+	LDA_8	(0x11)
+	STA_a	(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d	(0x02)
+	LDX_i	(0x0001)
+	REP	(0x20)
+	LDA_i	(0)
+	JSL	(0xC1DE37)			// REDIRECT_C1242E — same as original
+	SEP	(0x20)
+	STA_a	(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP	(0x20)
+	AND_i	(0x00FF)
 	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
+
 	RTS
 }
 
@@ -508,20 +528,20 @@ define PARTY_TARGET		= 0x04
 define MULTI_ENEMY_TARGET	= 0x12
 
 command ret_tools_multi_target(target) {	// Neutralizer / All characters in battle
-	LDA_a(BATTLE_SELECTION_ACTION)
-	STA_d(0x02)
-	STA_d(0x1E)
-	LDA_d(0x02)
-	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
-	SEP(0x20)			// accum8
-	LDA_8(target)
-	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
-	LDY_d(0x02)
-	LDX_i(0x0001)
-	SEP(0x20)
-	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
-	REP(0x20)
-	AND_i(0x00FF)
+	LDA_a	(BATTLE_SELECTION_ACTION)
+	STA_d	(0x02)
+	STA_d	(0x1E)
+	LDA_d	(0x02)
+	STA_a	(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP	(0x20)			// accum8
+	LDA_8	(target)
+	STA_a	(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d	(0x02)
+	LDX_i	(0x0001)
+	SEP	(0x20)
+	STA_a	(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP	(0x20)
+	AND_i	(0x00FF)
 	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
 	RTS
 }
@@ -531,21 +551,21 @@ command ret_tools_multi_target(target) {	// Neutralizer / All characters in batt
 
 // Sets the current action to a regular one without an argument
 command set_action(action) {
-	LDA_i(action)
-	STA_a(BATTLE_SELECTION_ACTION)
+	LDA_i	(action)
+	STA_a(	BATTLE_SELECTION_ACTION)
 }
 
 // Does target selection for the current action, and returns or cancels as appropriate
 command ret_target() {
-	LDA_a(BATTLE_SELECTION_ACTION)
-	LDX_d(PARTY_ID)
-	JSL_RTS_C1(0xC1ADB4) // determineTargetting(short actionId, short userId)
+	LDA_a	(BATTLE_SELECTION_ACTION)
+	LDX_d	(PARTY_ID)
+	JSL_RTS_C1	(0xC1ADB4) // determineTargetting(short actionId, short userId)
 	// returns both targetting bits and target
 	XBA // but they're swapped
-	STA_a(BATTLE_SELECTION_TARGETTING)
+	STA_a	(BATTLE_SELECTION_TARGETTING)
 	// determineTargetting returns 0 in the target (low byte) if cancelled.
 	// ret_retry() is 0, so mask that to match
-	AND_i(0xFF00)
+	AND_i	(0xFF00)
 	RTS
 }
 
@@ -553,11 +573,11 @@ command ret_target() {
 // You'll also need to call set_action()
 // This forces the item ID to be used as the argument without it being in the inventory
 command set_item_args_noinv(item_id) {
-	SEP(0x20) // accum8
-	LDA_8(item_id)
-	STA_a(BATTLE_ITEM_USED)
-	STA_a(BATTLE_SELECTION_PARAM1)
-	REP(0x20) // accum8
+	SEP	(0x20) // accum8
+	LDA_8	(item_id)
+	STA_a	(BATTLE_ITEM_USED)
+	STA_a	(BATTLE_SELECTION_PARAM1)
+	REP	(0x20) // accum8
 }
 
 //------------------------------------

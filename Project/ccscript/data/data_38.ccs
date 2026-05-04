@@ -547,7 +547,7 @@ l_0xc8087a:
 
 	get_char_at_pos(1) rtoarg
 	"@Well, here you are,| {name(1)}." next
-	"@I'll make you some {stat(4)},/1 even though I'm not a very good cook." promptw
+	"@I'll make you some {stat(4)},/ even though I'm not a very good cook." promptw
 	call(data_49.l_0xc915d6)
 	call(data_49.l_0xc91582)
 	eob

@@ -265,7 +265,7 @@ l_0xc5e9a8:
 	unset(FLG_KING_KI)	// Key items King flag
 	call(data_23.l_0xc683d5)
 	window_closeall
-	sprite2_spawn(49,46,1)	// 0x28, 0x2E, 1
+	sprite2_spawn(40,46,1)	// 0x28, 0x2E, 1
 	wait_movement
 	npc_do_mc(124, 627)	// 7C, 0273
 	set(FLG_DOG_LATER_APPEAR)
