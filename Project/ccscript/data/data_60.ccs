@@ -259,7 +259,7 @@ l_0xc9fd2e:
 	goto_if_true(l_0xc9fd60)
 
 	"@{user} rode a bicycle." wait
-	inflict_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE) // Make Ness healthy to fix trailing bug.
+	//inflict_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE) // Make Ness healthy to fix trailing bug.
 	hide_party
 	// It will say "Ness got hurt and collapsed" at start of battle though, but no big deal
 	//ctoarg

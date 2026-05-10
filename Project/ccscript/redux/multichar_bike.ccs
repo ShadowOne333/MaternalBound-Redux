@@ -5,6 +5,12 @@ import "../essential/cc_asmcall.ccs"
 import "../expansion/ccexpand.ccs"
 
 define CREATE_ENTITY	= 0xC01E49
+define DESTROY_ENTITY	= 0XC02140
+define CHANGE_MUSIC	= 0xC4FBBD
+define SET_AUTO_SECTOR_MUSIC_CHANGES	= 0xC4FD45
+
+define INPUT_DISABLE_FRAME_COUNTER	= 0x5D74
+define DISABLE_MUSIC_CHANGES	= 0x5DD8
 
 //------------------------------------
 //ROM[0xC06AA9] = LDA_i	(477)
@@ -64,6 +70,100 @@ ROM[0xC03C66] = BRA (0x1A)	// Skip the whole section so it continues despite hav
 	STA_a	(0x9A0B)
 }*/
 //------------------------------------
+//ROM[0xC03C5E] = {
+//	JSL	(GET_ON_BIKE)
+//	JMP	(0xC03CFD)
+//}
+
+GET_ON_BIKE: {
+_init:
+	REP	(0X31)
+	PHD
+	TDC
+	ADC_i	(0xFFEE)
+	TCD
+
+	LDA_a	(0x98A3)	// GAME_STATE+game_state::party_count
+	AND_i	(0x00FF)
+	CMP_i	(1)
+	BNE_a	(_UNKNOWN3)
+
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96
+	AND_i	(0x00FF)
+	CMP_i	(1)
+	BNE_a	(_UNKNOWN3)
+
+	LDA_a	(DISABLE_MUSIC_CHANGES)
+	BNE	(7)		// UNKNOWN2
+	LDA_i	(82)		// #MUSIC::BICYCLE, 0x52
+	JSL	(CHANGE_MUSIC)
+
+_UNKNOWN2:
+	LDA_i	(24)
+	JSL	(DESTROY_ENTITY)
+
+	LDA_i	(6)
+	STA_a	(0x9887)	// GAME_STATE + game_state::unknown92
+	LDA_i	(3)		// #WALKING_STYLE::BICYCLE
+	STA_a	(0x9883)	// GAME_STATE+game_state::walking_style
+
+	STZ_a	(0x9A0B)	// PARTY_CHARACTERS+char_struct::position_index
+	STZ_a	(0x987D)	// GAME_STATE + game_state::unknown88
+	STZ_a	(0x0A38)	// NEW_ENTITY_VAR0
+	STZ_a	(0x0A3A)	// NEW_ENTITY_VAR1
+
+	LDA_a	(0x0BBE)	// ENTITY_ABS_X_TABLE + (PARTY_LEADER_ENTITY_INDEX * 2)
+	STA_d	(0x0E)		// LOCAL00
+	LDA_a	(0x0BFA)	// ENTITY_ABS_Y_TABLE + (PARTY_LEADER_ENTITY_INDEX * 2)
+	STA_d	(0x10)		// LOCAL01
+
+	LDY_i	(24)		// Main entity
+	LDX_i	(2)		// #EVENT_SCRIPT::EVENT_002
+
+	LDA_i	(7)		// #OVERWORLD_SPRITE::NESS_BICYCLE
+	JSL	(CREATE_ENTITY)
+
+	// The original code at C03CC4-C03CE2 hardcodes entity slot 24 for all table writes.
+	// We replicate it here using the dynamic leader slot, then skip past it to C03CE5.
+	// All entity tables are word arrays; X = slot * 2 is the index.
+	// Base addresses derived from disassembly:
+	//   ENTITY_TICK_CALLBACK_HIGH = 0x10B6
+	//   ENTITY_SCRIPT_VAR7_TABLE  = 0x1002
+	//   ENTITY_ANIMATION_FRAME    = 0x10F2
+	//   ENTITY_DIRECTIONS         = 0x2AF6
+
+	// Disable tick on the leader entity (equivalent to C03CC4-C03CCF)
+	LDX_i	(0x10E6)	// #.LOWORD(ENTITY_TICK_CALLBACK_HIGH) + (24 * 2)
+	LDA_x	(0)		// LDA __BSS_START__,X
+	ORA_i	(0x8000)	// ORA #OBJECT_TICK_DISABLED
+	STA_x	(0)	// STA __BSS_START__,X
+
+	// Set sprite flags on the leader entity (equivalent to C03CD0-C03CDB)
+	LDX_i	(0x1032)	// #.LOWORD(ENTITY_SCRIPT_VAR7_TABLE) + (24 * 2)
+	LDA_x	(0)		// LDA __BSS_START__,X
+	ORA_i	(0x3000)	// ORA #SPRITE_TABLE_10_FLAGS::UNKNOWN12 | UNKNOWN13
+	STA_x	(0)	// STA ENTITY_SCRIPT_VAR7_TABLE,X
+
+	// Reset animation frame (equivalent to C03CDC)
+	STZ_x	(0x1122)	// STZ ENTITY_ANIMATION_FRAME,X
+
+	// Set facing direction (equivalent to C03CDF-C03CE2)
+	LDA_a	(0x987F)	// LDA GAME_STATE+game_state::leader_direction
+	STA_a	(0x2B26)	// STA ENTITY_DIRECTIONS + (PARTY_LEADER_ENTITY_INDEX * 2)
+
+	LDA_i	(0)
+	JSL	(SET_AUTO_SECTOR_MUSIC_CHANGES)
+	LDA_i	(1)
+	STA_a	(0x9885)	// GAME_STATE + game_state::unknown90
+	STA_a	(0x5DBA)	// UNREAD_7E5DBA
+	LDA_i	(2)
+	STA_a	(INPUT_DISABLE_FRAME_COUNTER)
+
+_UNKNOWN3:	// End C function
+	PLD
+	RTL
+}
+
 ROM[0xC03CBD] = {
 	JML	(Multichar_Bike)	// LDA party count
 	NOP NOP NOP
