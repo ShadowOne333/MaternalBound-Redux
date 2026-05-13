@@ -3342,3 +3342,32 @@ l_0xef9ed7:
 	pause(1)
 	eob
 
+// Macro to loop the PSI animations in a nice way.
+// 'number' goes from 66 to 73.
+// 'duration' is in tenths of a second (so 10 would be about one second)... THOUGH, looping the battle animation causes lots of lag?
+
+command sing_animation(number, duration) {
+	// Start by closing the window and starting the tune.
+	window_closetop
+	music_effect(2)
+	music(4)
+	pause(10)
+	music(91)
+	
+	counter_zero
+	
+	// Loop the animation as long as it's needed.
+_loop:
+	battle_animation(number, number)
+	pause(6)
+	inc
+	
+	if not counter_is(duration) {
+	    goto(_loop)
+	}
+	
+	// Make a sound and restore the battle music.
+	music_effect(3)
+	pause(90)
+	music(186)
+}

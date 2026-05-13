@@ -98,6 +98,8 @@ l_0xc5e6f4:
 	focus_camera_on_sprite2(106)	// 0x006A
 	party_unfreeze	// 0xFF
 	eob
+// Attract mode scripts end here
+
 
 l_0xc5e70b:	// Game startup at Ness' bed in Onett
 	set(FLG_YAZIUMA_DISAPPEAR)	// 469

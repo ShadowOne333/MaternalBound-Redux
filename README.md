@@ -107,6 +107,10 @@ Don’t get dizzy while reading the full changelog:
 * Dad no longer calls you after a while. You will no longer be interrupted by him
 * Every location of the game is now accessible through PSI Teleport
 * Some PSI animations had wrong tiles in them, those have been fixed
+    - Brainshock Omega in frames 17, 19-25, 34-39, waves create leftover tiles on subsequent frames
+    - Magnet Alpha in frames 19, 22, 23 and 24, vertical leftover bars
+    - Magnet Omega in frames 19 and 22, vertical leftover bars
+    - Thunder Gamma/Omega in frame 1, horizontal odd yellow bar
 * Fixed the Dusty Dunes teleport location not appearing
 * Reworked enemy battle sprites
 * Now using an equipabble item inside the Goods menu will equip said item, instead of giving the “is an item that can be equipped” message (Thanks, Chaz!)

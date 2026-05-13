@@ -682,6 +682,7 @@ l_0xc5e5b5:
 	show_inventory(44,4)	// 0x2C, 0x04
 	eob
 
+// Attract mode scripts start here
 l_0xc5e5bc:
 	set(FLG_ONET_AMBRAMI)	// 104
 	set(FLG_MAKYO_USE_TAKANOME)	// 288

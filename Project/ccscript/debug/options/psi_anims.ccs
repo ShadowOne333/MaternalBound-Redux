@@ -1,5 +1,6 @@
 // PSI Animations tester debug menu option
 
+import "../../dialogue/battle_text.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/cc_asmcall.ccs"
 import "../../essential/commands.ccs"
@@ -74,14 +75,14 @@ PSI_Test:
 		"PK Flash [8F]":	{ window_closeall call(FlashO) pause(30) goto(PSI_Test) }
 		"Starstorm [8B]":	{ window_closeall call(StarstormA) pause(30) goto(PSI_Test) }
 		"Starstorm [8F]":	{ window_closeall call(StarstormO) pause(30) goto(PSI_Test) }
-		"Lifeup [8B]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Lifeup [8C]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Lifeup [8D]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Lifeup [8F]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Healing [8B]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Healing [8C]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Healing [8D]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Healing [8F]":		{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
+		"Lifeup [8B]":		{ window_closeall call(Lifeup) pause(30) goto(PSI_Test) }
+		"Lifeup [8C]":		{ window_closeall call(Lifeup) pause(30) goto(PSI_Test) }
+		"Lifeup [8D]":		{ window_closeall call(Lifeup) pause(30) goto(PSI_Test) }
+		"Lifeup [8F]":		{ window_closeall call(Lifeup) pause(30) goto(PSI_Test) }
+		"Healing [8B]":		{ window_closeall call(Healing) pause(30) goto(PSI_Test) }
+		"Healing [8C]":		{ window_closeall call(Healing) pause(30) goto(PSI_Test) }
+		"Healing [8D]":		{ window_closeall call(Healing) pause(30) goto(PSI_Test) }
+		"Healing [8F]":		{ window_closeall call(Healing) pause(30) goto(PSI_Test) }
 		// Shields require more pause time to finish properly
 		"Shield [8B]":		{ window_closeall call(ShieldA) pause(90) goto(PSI_Test) }
 		"Shield [8E]":		{ window_closeall call(ShieldE) pause(90) goto(PSI_Test) }
@@ -91,10 +92,11 @@ PSI_Test:
 		"PSI Shield [8E]":	{ window_closeall call(PSIShieldE) pause(90) goto(PSI_Test) }
 		"PSI Shield [8C]":	{ window_closeall call(PSIShieldB) pause(90) goto(PSI_Test) }
 		"PSI Shield [8F]":	{ window_closeall call(PSIShieldO) pause(90) goto(PSI_Test) }
-		"Offense up [8B]":	{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Offense up [8F]":	{ window_closeall call(Lifeup_Healing_Offenseup) pause(30) goto(PSI_Test) }
-		"Def. down [8B]":	{ window_closeall call(DefenseUpA) pause(30) goto(PSI_Test) }
-		"Def. down [8F]":	{ window_closeall call(DefenseUpO) pause(30) goto(PSI_Test) }
+		"Offense up [8B]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
+		"Offense up [8F]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
+		"Defense Shower":	{ window_closeall call(DefenseShower) pause(30) goto(PSI_Test) }
+		"Def. down [8B]":	{ window_closeall call(DefenseDownA) pause(30) goto(PSI_Test) }
+		"Def. down [8F]":	{ window_closeall call(DefenseDownO) pause(30) goto(PSI_Test) }
 		"Hypnosis [8B]":	{ window_closeall call(HypnosisA) pause(30) goto(PSI_Test) }
 		"Hypnosis [8F]":	{ window_closeall call(HypnosisO) pause(30) goto(PSI_Test) }
 		"PSI Magnet [8B]":	{ window_closeall call(PSIMagnetA) pause(30) goto(PSI_Test) }
@@ -112,6 +114,26 @@ PSI_Test:
 		"Giygas' Attack":	{ window_closeall call(GiygasAttack) pause(60) goto(PSI_Test) }
 		// Teleport a & B
 		// Telepathy
+		"PK Beam [8B]":		{ window_closeall call(BeamA) pause(30) goto(PSI_Test) }
+		"PK Beam [8C]":		{ window_closeall call(BeamB) pause(30) goto(PSI_Test) }
+		"PK Beam [8D]":		{ window_closeall call(BeamG) pause(60) goto(PSI_Test) }
+		"PK Beam [8F]":		{ window_closeall call(BeamO) pause(60) goto(PSI_Test) }
+		"4th D-Slip":		{ window_closeall call(FourthDSlip) pause(60) goto(PSI_Test) }
+		"Darkness":		{ window_closeall call(Darkness) pause(60) goto(PSI_Test) }
+		"PSI Block":		{ window_closeall call(PSIBlock) pause(60) goto(PSI_Test) }
+		"Shield-off":		{ window_closeall call(ShieldOff) pause(60) goto(PSI_Test) }
+		"Quick up":		{ window_closeall call(QuickUp) pause(30) goto(PSI_Test) }
+		/*"Sing 1":		{ window_closeall call(Sing_1) pause(60) goto(PSI_Test) }
+		"Sing 2":		{ window_closeall call(Sing_2) pause(60) goto(PSI_Test) }
+		"Sing 3":		{ window_closeall call(Sing_3) pause(60) goto(PSI_Test) }
+		"Sing 4":		{ window_closeall call(Sing_4) pause(60) goto(PSI_Test) }
+		"Sing 5":		{ window_closeall call(Sing_5) pause(60) goto(PSI_Test) }
+		"Sing 6":		{ window_closeall call(Sing_6) pause(60) goto(PSI_Test) }
+		"Sing 7":		{ window_closeall call(Sing_7) pause(60) goto(PSI_Test) }
+		"Sing 8":		{ window_closeall call(Sing_8) pause(60) goto(PSI_Test) }*/
+		"Sing 9":		{ window_closeall call(Sing_9) pause(60) goto(PSI_Test) }
+		"Sing 10":		{ window_closeall call(Sing_10) pause(60) goto(PSI_Test) }
+		"Sing End":		{ window_closeall call(Sing_End) pause(60) goto(PSI_Test) }
 	}
 	//window_close(14)
 	window_closetop
@@ -427,6 +449,38 @@ StarstormO:
 Lifeup_Healing_Offenseup:
 	pause(30)
 	eob
+Lifeup:
+	//pause(30)
+	//sound(SND_PSI1)	// 29
+	battle_animation(0,63)	// 0x00, 0x05
+	pause(40)
+	battle_animation(63,0)	// 0x27, 0x00
+	pause(60)
+	eob
+Healing:
+	//pause(30)
+	//sound(SND_PSI1)	// 29
+	battle_animation(0,75)	// 0x00, 0x05
+	pause(40)
+	battle_animation(75,0)	// 0x27, 0x00
+	pause(60)
+	eob
+Offenseup:
+	//pause(30)
+	//sound(SND_PSI1)	// 29
+	battle_animation(0,59)	// 0x00, 0x05
+	pause(40)
+	battle_animation(59,0)	// 0x27, 0x00
+	pause(60)
+	eob
+DefenseShower:
+	//pause(30)
+	//sound(SND_PSI1)	// 29
+	battle_animation(0,61)	// 0x00, 0x05
+	pause(40)
+	battle_animation(61,0)	// 0x27, 0x00
+	pause(60)
+	eob
 //------------------------------------------------------------------
 ShieldA:
 	sound(SND_SHIELD1)	// 38
@@ -476,7 +530,7 @@ PSIShieldO:
 	pause(1)
 	eob
 //------------------------------------------------------------------
-DefenseUpA:
+DefenseDownA:
 	sound(SND_PARALYSIS)	// 44
 	battle_animation(0,5)	// 0x00, 0x05
 	pause(40)
@@ -484,7 +538,7 @@ DefenseUpA:
 	pause(100)
 	eob
 
-DefenseUpO:
+DefenseDownO:
 	sound(SND_PARALYSIS2)	// 79
 	battle_animation(0,6)	// 0x00, 0x06
 	pause(40)
@@ -603,4 +657,182 @@ GiygasAttack:
 	pause(40)
 	sound(SND_DRILL)	// 81
 	eob
+//------------------------------------------------------------------
+BeamA:
+	battle_animation(0, 55)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	battle_animation(37, 0)
+	sound(49)
+	eob
+
+BeamB:
+	battle_animation(0, 56)
+	sound(49)
+	pause(15)
+	sound(49)
+	battle_animation(37, 0)
+	pause(15)
+	sound(71)
+	pause(15)
+	sound(68)
+	pause(15)
+	sound(58)
+	eob
+
+BeamG:
+	battle_animation(0, 57)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(49)
+	battle_animation(37, 0)
+	sound(50)
+	pause(15)
+	sound(68)
+	pause(30)
+	sound(58)
+	eob
+
+BeamO:
+	battle_animation(0, 58)
+	pause(5)
+	sound(48)
+	pause(5)
+	sound(48)
+	pause(5)
+	sound(48)
+	pause(5)
+	sound(49)
+	battle_animation(37, 0)
+	sound(50)
+	pause(10)
+	sound(68)
+	sound(53)
+	pause(20)
+	sound(58)
+	eob
+//------------------------------------------------------------------
+FourthDSlip:
+	battle_animation(48, 48)
+	pause(150)
+	sound(57)
+	pause(5)
+	sound(57)
+	pause(5)
+	sound(57)
+	pause(30)
+	sound(58)
+	pause(5)
+	sound(58)
+	pause(5)
+	sound(58)
+	sound(58)
+	pause(5)
+	sound(58)
+	pause(5)
+	sound(58)
+	sound(58)
+	pause(5)
+	sound(58)
+	pause(5)
+	sound(58)
+	eob
+//------------------------------------------------------------------
+ShieldOff:
+	pause(30)
+	sound(99)
+	battle_animation(0, 60)
+	pause(60)
+	eob
+//------------------------------------------------------------------
+QuickUp:
+	//pause(30)
+	//sound(SND_PSI1)	// 29
+	battle_animation(0,76)	// 0x00, 0x05
+	pause(40)
+	battle_animation(76,0)	// 0x27, 0x00
+	pause(60)
+	eob
+//------------------------------------------------------------------
+PSIBlock:
+	battle_animation(38, 62)
+	sound(48)
+	pause(5)
+	sound(49)
+	pause(5)
+	sound(50)
+	eob
+//------------------------------------------------------------------
+Darkness:
+	battle_animation(38, 65)
+	sound(67)
+	eob
+//------------------------------------------------------------------
+Sing_1: {
+	sing_animation(66, 21)
+	eob
+}
+//------------------------------------------------------------------
+Sing_2: {
+	sing_animation(67, 31)
+	eob
+}
+//------------------------------------------------------------------
+Sing_3: {
+	sing_animation(68, 41)
+	eob
+}
+//------------------------------------------------------------------
+Sing_4: {
+	sing_animation(69, 55)
+	eob
+}
+//------------------------------------------------------------------
+Sing_5: {
+	sing_animation(69, 71)
+	eob
+}
+//------------------------------------------------------------------
+Sing_6: {
+	sing_animation(70, 79)
+	eob
+}
+//------------------------------------------------------------------
+Sing_7: {
+	sing_animation(70, 89)
+	eob
+}
+//------------------------------------------------------------------
+Sing_8: {
+	sing_animation(71, 99)
+	eob
+}
+//------------------------------------------------------------------
+Sing_9: {
+	sing_animation(72, 113)
+	eob
+}
+//------------------------------------------------------------------
+Sing_10: {
+	sing_animation(72, 121)
+	eob
+}
+//------------------------------------------------------------------
+Sing_End: {
+	sing_animation(73, 150)
+	eob
+}
 //------------------------------------------------------------------

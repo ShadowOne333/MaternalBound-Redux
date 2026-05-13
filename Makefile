@@ -49,7 +49,9 @@ create_base_rom:
 # Compile the full CoilSnake Project
 compile_project:
 	@echo "Starting compilation process..."; echo
-	@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"
+#@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"	
+# Changed the CCScript offset so we can compile the Expanded PSI animation base ROM
+	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE) "$(PATCHED_ROM_NAME)"
 	@echo
 #----------------------------------------------------------------
 # Generate the Debug symbols for the project (Requires Python 3)

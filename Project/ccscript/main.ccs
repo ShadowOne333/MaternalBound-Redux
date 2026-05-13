@@ -60,6 +60,8 @@ import "expansion/ccexpand.ccs"
 import "expansion/expand_shops.ccs"
 import "expansion/expand_text_windows.ccs"
 import "expansion/Extended_Battle_Action_Table.ccs"
+import "expansion/Extended_PSI_Animations.ccs"
+//import "expansion/Extended_PSI_Anims_Free_Range.ccs"	// Uncomment when insertbin pull request is merged into ccscript-legacy
 //------------------------------------------------------------------
 // Redux
 import "redux/better_condiment_search.ccs"

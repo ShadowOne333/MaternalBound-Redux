@@ -1,0 +1,1477 @@
+import "../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+command Int24(Value) {
+	byte[0] Value
+	byte[1] Value
+	byte[2] Value
+}
+
+ROM[0xC3F98D] = JMP	(0xFE00)
+
+ROM[0xC3FE00] = {
+	CMP_i	(0xFFFF)	// 3
+	BEQ	(0x18)		// 2; L3
+	CMP_i	(0x0023)	// 3
+	BCC	(0x0B)		// 2; L1
+	CMP_i	(0x0036)	// 3
+	BCS	(0x03)		// 2; L2
+	JMP	(0xF99B)	// 3
+
+// L2:
+	SBC_i	(0x0014)	// 3
+	STA_d	(0x02)		// 2
+
+// L1:
+	LDA_d	(0x02)		// 2
+	JSL	(0xC2E116)	// 4
+
+// L3:
+	JMP	(0xFAC7)	// 3
+}
+
+ROM[0xC2E34F] = ASMLoadAddress06	(PSI_Config_Table)		// Configuration table
+ROM[0xC2E154] = Int24	(PSI_Config_Table)
+ROM[0xC2E1BB] = Int24	(PSI_Config_Table)
+ROM[0xC2E50A] = Int24	(PSI_Config_Table)
+ROM[0xC2E461] = ASMLoadAddress06	(PSI_Anim_Pointer_Table)	// Animation pointer table
+ROM[0xC2E2F4] = ASMLoadAddress06	(PSI_Palette_Table)		// Palette table
+
+//------------------------------------------------------------------
+
+// Define specific ROM addresses for data import
+define PSI_Config_Table		= 0xF20000
+define PSI_Anim_Pointer_Table	= 0xF20400
+define PSI_Palette_Table	= 0xF20600
+
+// Defines for Config table //
+// GFX tilesets
+define PSI_ANIM_GFX_SET_1	= 0X2E19	// 0xAC25
+define PSI_ANIM_GFX_SET_2	= 0X3875	// 0xB613
+define PSI_ANIM_GFX_SET_3	= 0X3141	// 0xDB27
+define PSI_ANIM_GFX_SET_4	= 0X59A0	// 0xE31D
+// Expanded GFX tilesets
+define PSI_ANIM_GFX_SET_5	= 0X44D6
+define PSI_ANIM_GFX_SET_6	= 0X5153
+define PSI_ANIM_GFX_SET_7	= 0x3F1B
+define PSI_ANIM_GFX_SET_8	= 0x5C90
+define PSI_ANIM_GFX_SET_9	= 0X4C3F
+define PSI_ANIM_GFX_SET_10	= 0x62A1
+// Targets 
+define SINGLE_TARGET		= 0
+define ROW_TARGET		= 1
+define ALL_ENEMIES_TARGET	= 2
+define RANDOM_TARGET		= 3
+
+//------------------------------------------------------------------
+// Import data for expansion
+ROM[PSI_Config_Table] = {
+// This line is commented out, this could be used later on for when CCScript Writer merges the fix for insertbin being added to ROM statements
+// Once that feature is implemented, users can simply dump the data from their modified PSI ROM from 0x320000/0x3203FF into a file called "psi_config_table.bin" and use that instead of manually writting the pointers here.
+//ROM[PSI_Config_Table] = insertbin "psi_config_table.bin"
+
+	// Original config table
+	
+	// 01 - Counter PSI-Unit
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 47	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+
+	// 02 - Brainshock A
+	short PSI_ANIM_GFX_SET_1
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 29
+	byte SINGLE_TARGET
+	byte 50
+	byte 80
+	short 0x00D2
+
+	// 03 - Brainshock O
+	short PSI_ANIM_GFX_SET_1
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 47
+	byte ALL_ENEMIES_TARGET
+	byte 90
+	byte 160
+	short 0x00D0
+
+	// 04 - HP-Sucker
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 33
+	byte SINGLE_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 05 - Defense down A
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 28
+	byte SINGLE_TARGET
+	byte 40
+	byte 70
+	short 0x2800
+
+	// 06 - Defense down O
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x2800
+
+	// 07 - PK Fire A
+	short PSI_ANIM_GFX_SET_2
+	byte 5
+	byte 2
+	byte 1
+	byte 3
+	byte 13
+	byte ROW_TARGET
+	byte 40
+	byte 70
+	short 0x001F
+
+	// 08 - PK Fire B
+	short PSI_ANIM_GFX_SET_2
+	byte 5
+	byte 2
+	byte 1
+	byte 3
+	byte 16
+	byte ROW_TARGET
+	byte 50
+	byte 80
+	short 0x001F
+
+	// 09 - PK Fire G
+	short PSI_ANIM_GFX_SET_2
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 17
+	byte ROW_TARGET
+	byte 50
+	byte 80
+	short 0x001F
+
+	// 10 - PK Fire O
+	short PSI_ANIM_GFX_SET_2
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 27
+	byte ROW_TARGET
+	byte 80
+	byte 130
+	short 0x001F
+
+	// 11 - PK Flash A
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 2
+	byte 6
+	byte ALL_ENEMIES_TARGET
+	byte 10
+	byte 40
+	short 0x77BD
+
+	// 12 - PK Flash B
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 2
+	byte 10
+	byte ALL_ENEMIES_TARGET
+	byte 20
+	byte 50
+	short 0x77BD
+
+	// 13 - PK Flash G
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 19
+	byte ALL_ENEMIES_TARGET
+	byte 30
+	byte 60
+	short 0x77BD
+
+	// 14 - PK Flash O
+	short PSI_ANIM_GFX_SET_2
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 76
+	byte 125
+	short 0x77BD
+
+	// 15 - PK Freeze A
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 23
+	byte SINGLE_TARGET
+	byte 50
+	byte 80
+	short 0x7C00
+
+	// 16 - PK Freeze B
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 22
+	byte SINGLE_TARGET
+	byte 50
+	byte 80
+	short 0x7C00
+
+	// 17 - PK Freeze G
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 23
+	byte SINGLE_TARGET
+	byte 50
+	byte 80
+	short 0x7C00
+
+	// 18 - PK Freeze O
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 35
+	byte ROW_TARGET
+	byte 60
+	byte 135
+	short 0x7C00
+
+	// 19 - PK Special A
+	short PSI_ANIM_GFX_SET_4	// 2
+	byte 3
+	byte 2
+	byte 1
+	byte 3
+	byte 31
+	byte ALL_ENEMIES_TARGET
+	byte 63
+	byte 92
+	short 0x39DA
+
+	// 20 - PK Special B
+	short PSI_ANIM_GFX_SET_4	// 2
+	byte 3
+	byte 2
+	byte 1
+	byte 3
+	byte 48
+	byte ALL_ENEMIES_TARGET
+	byte 114
+	byte 143
+	short 0x39DA
+
+	// 21 - PK Special C
+	short PSI_ANIM_GFX_SET_4	// 2
+	byte 3
+	byte 2
+	byte 1
+	byte 3
+	byte 54
+	byte ALL_ENEMIES_TARGET
+	byte 132
+	byte 161
+	short 0x39DA
+
+	// 22 - PK Special O
+	short PSI_ANIM_GFX_SET_4	// 2
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 64
+	byte ALL_ENEMIES_TARGET
+	byte 141
+	byte 255
+	short 0x39DA
+
+	// 23 - Paralysis A
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte SINGLE_TARGET
+	byte 60
+	byte 90
+	short 0x1140
+
+	// 24 - Paralysis O
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 60
+	byte 90
+	short 0x1140
+
+	// 25 - PSI Magnet A
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 34
+	byte SINGLE_TARGET
+	byte 45
+	byte 75
+	short 0x4A52
+
+	// 26 - PSI Magnet O
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 45
+	byte 75
+	short 0x4A52
+
+	// 27 - Shield killer
+	short PSI_ANIM_GFX_SET_1
+	byte 7
+	byte 4
+	byte 1
+	byte 2
+	byte 17
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 28 - Hypnosis A
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 11
+	byte SINGLE_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 29 - Hypnosis O
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 17
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 30 - Hungry HP-Sucker
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 31 - PK Startstorm A
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 80
+	byte 131
+	short 0x7E52
+
+	// 32 - PK Starstorm O
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 46
+	byte ALL_ENEMIES_TARGET
+	byte 121
+	byte 183
+	short 0x7E52
+
+	// 33 - PK Thunder A/B
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 15
+	byte RANDOM_TARGET
+	byte 25
+	byte 54
+	short 0x2FFF
+
+	// 34 - PK Thunder G/O
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 19
+	byte RANDOM_TARGET
+	byte 49
+	byte 75
+	short 0x2FFF
+
+	// Expanded PSI Config table
+	// 35 - PK Beam A
+	short PSI_ANIM_GFX_SET_5
+	byte 3
+	byte 4
+	byte 1
+	byte 2
+	byte 15
+	byte SINGLE_TARGET
+	byte 10
+	byte 30
+	short 0x023F
+
+	// 36 - PK Beam B
+	short PSI_ANIM_GFX_SET_6
+	byte 6
+	byte 4
+	byte 1
+	byte 2
+	byte 18
+	byte SINGLE_TARGET
+	byte 20
+	byte 80
+	short 0x023F
+
+	// 37 - PK Beam G
+	short PSI_ANIM_GFX_SET_7
+	byte 3
+	byte 4
+	byte 1
+	byte 2
+	byte 33
+	byte SINGLE_TARGET
+	byte 20
+	byte 85
+	short 0x023F
+
+	// 38 - PK Beam O
+	short PSI_ANIM_GFX_SET_8
+	byte 3
+	byte 4
+	byte 1
+	byte 3
+	byte 35
+	byte ALL_ENEMIES_TARGET
+	byte 10
+	byte 100
+	short 0x023F
+
+	// 39 - Offense Up
+	short PSI_ANIM_GFX_SET_9
+	byte 2
+	byte 3
+	byte 1
+	byte 3
+	byte 43
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x00CE
+
+	// 40 - Shield off
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 4
+	byte 1
+	byte 3
+	byte 28
+	byte SINGLE_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 41 - Defense Up / Defense Shower
+	short PSI_ANIM_GFX_SET_9
+	byte 2
+	byte 3
+	byte 1
+	byte 3
+	byte 43
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x25A1
+
+	// 42 - PSI Block
+	short PSI_ANIM_GFX_SET_2
+	byte 3
+	byte 1
+	byte 1
+	byte 3
+	byte 15
+	byte SINGLE_TARGET
+	byte 20
+	byte 70
+	short 0x33EC
+
+	// 43 - Lifeup
+	short PSI_ANIM_GFX_SET_9
+	byte 2
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x0D60
+
+	// 44 - Darkness A
+	short PSI_ANIM_GFX_SET_3
+	byte 3
+	byte 4
+	byte 1
+	byte 3
+	byte 17
+	byte SINGLE_TARGET
+	byte 10
+	byte 90
+	short 0x400A
+
+	// 45 - Darkness O
+	short PSI_ANIM_GFX_SET_3
+	byte 3
+	byte 1
+	byte 1
+	byte 3
+	byte 16
+	byte ALL_ENEMIES_TARGET
+	byte 10
+	byte 100
+	short 0x400A
+
+	// 46 - Sing Melody 1
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 47 - Sing Melody 2
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 48 - Sing Melody 3
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 49 - Sing Melody 4
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 50 - Sing Melody 5
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 51 - Sing Melody 6
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 7
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 52 - Sing Melody 7
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 53 - Sing Melody 8 (Complete)
+	short PSI_ANIM_GFX_SET_10
+	byte 6
+	byte 0
+	byte 1
+	byte 2
+	byte 8
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7EBF
+
+	// 54 - Sing End Animation
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 0
+	byte 1
+	byte 3
+	byte 4
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x7FFF
+
+	// 55 - Healing
+	short PSI_ANIM_GFX_SET_9
+	byte 2
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x2D20
+
+	// 56 - Quickup
+	short PSI_ANIM_GFX_SET_9
+	byte 2
+	byte 3
+	byte 1
+	byte 3
+	byte 43
+	byte ALL_ENEMIES_TARGET
+	byte 40
+	byte 70
+	short 0x0D60
+
+	// 57 - Unused
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte SINGLE_TARGET
+	byte 60
+	byte 90
+	short 0x1140
+
+	// 58
+	short PSI_ANIM_GFX_SET_1
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 60
+	byte 90
+	short 0x1140
+
+	// 59
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 34
+	byte SINGLE_TARGET
+	byte 45
+	byte 75
+	short 0x4A52
+
+	// 60
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 26
+	byte ALL_ENEMIES_TARGET
+	byte 45
+	byte 75
+	short 0x4A52
+
+	// 61
+	short PSI_ANIM_GFX_SET_1
+	byte 7
+	byte 4
+	byte 1
+	byte 2
+	byte 17
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 62
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 11
+	byte SINGLE_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 63
+	short PSI_ANIM_GFX_SET_3
+	byte 5
+	byte 3
+	byte 1
+	byte 3
+	byte 17
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 64
+	short PSI_ANIM_GFX_SET_1
+	byte 3
+	byte 3
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 0
+	byte 0
+	short 0x0000
+
+	// 65
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 33
+	byte ALL_ENEMIES_TARGET
+	byte 80
+	byte 131
+	short 0x7E52
+
+	// 66
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 2
+	byte 1
+	byte 3
+	byte 46
+	byte ALL_ENEMIES_TARGET
+	byte 121
+	byte 183
+	short 0x7E52
+
+	// 67
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 15
+	byte RANDOM_TARGET
+	byte 25
+	byte 54
+	short 0x2FFF
+
+	// 68
+	short PSI_ANIM_GFX_SET_3
+	byte 4
+	byte 3
+	byte 1
+	byte 3
+	byte 19
+	byte RANDOM_TARGET
+	byte 49
+	byte 75
+	short 0x2FFF
+
+	// Config table ends at 0xF20330
+	// Pad to 0xF20400
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}
+
+ROM[PSI_Anim_Pointer_Table] = {
+// This line is commented out, this could be used later on for when CCScript Writer merges the fix for insertbin being added to ROM statements
+// Once that feature is implemented, users can simply dump the data from their modified PSI ROM from 0x320400/0x3205FF into a file called "psi_anim_pointer_table.bin" and use that instead of manually writting the pointers here.
+//ROM[PSI_Anim_Pointer_Table] = insertbin "psi_anim_pointer_table.bin"
+
+	// Original pointer table
+	long 0xCC66A7
+	long 0xCC6898
+	long 0xCC6ADB
+	long 0xCC6CB9
+	long 0xCC6E10
+	long 0xCC6F1A
+	long 0xCC714A
+	long 0xCC74BD
+	long 0xCC78C4
+	long 0xCC800D
+	long 0xCC84F2
+	long 0xCC85EE
+	long 0xCC87AC
+	long 0xCC89FC
+	long 0xCC9188
+	long 0xCC92AE
+	long 0xCC93D8
+	long 0xCC957D
+	long 0xCC9BB2
+	long 0xCCA1AB
+	long 0xCCAB1B
+	long 0xCCB95E
+	long 0xCCC14A
+	long 0xCCC393
+	long 0xCCC900
+	long 0xCCCB41
+	long 0xCCCD86
+	long 0xCCD0F1
+	long 0xCCD2A4
+	long 0xCCD854
+	long 0xCCDB44
+	long 0xCCE1E1
+	long 0xCCEC84
+	long 0xCCED64
+
+	// Duplicated pointer table
+	long 0xCCF1E5
+	long 0xF21000
+	long 0xF21327
+	long 0xF216C7
+	long 0xF221D5
+	long 0xF2283C
+	long 0xF229CA
+	long 0xF23031
+	long 0xF23340
+	long 0xF236B2
+	long 0xF23888
+	long 0xF23ACE
+	long 0xF23B31
+	long 0xF23B97
+	long 0xF23C00
+	long 0xF23C6C
+	long 0xF23CDB
+	long 0xF23D54
+	long 0xF23DD5
+	long 0xCCEFFF
+	long 0xF23E5A
+	long 0xF241CC
+	long 0xF24833
+	long 0xF24A7C
+	long 0xF24FE9
+	long 0xF25232
+	long 0xF2547B
+	long 0xF257E6
+	long 0xF25999
+	long 0xF25F49
+	long 0xF26239
+	long 0xF268D6
+	long 0xF27379
+	long 0xF27459
+
+	/*
+	long 0xCC5EA3
+	long 0xCC6090
+	long 0xCC62D3
+	long 0xCC64A6
+	long 0xCC65FD
+	long 0xCC6707
+	long 0xCC6937
+	long 0xCC6CAA
+	long 0xCC70B1
+	long 0xCC77FA
+	long 0xCC7CDF
+	long 0xCC7DDB
+	long 0xCC7F99
+	long 0xCC81E9
+	long 0xCC8975
+	long 0xCC8A9B
+	long 0xCC8BC5
+	long 0xCC8D6A
+	long 0xCC939F
+	long 0xCC99A1
+	long 0xCCA311
+	long 0xCCB154
+	long 0xCCB940
+	long 0xCCBB89
+	long 0xCCC0F6
+	long 0xCCC33F
+	long 0xCCC588
+	long 0xCCC8F3
+	long 0xCCCAA6
+	long 0xCCD056
+	long 0xCCD346
+	long 0xCCD9E3
+	long 0xCCE486
+	long 0xCCE566
+
+	long 0xCCE80C
+	long 0xCCEA73
+	long 0xF21000
+	long 0xF213A0
+	long 0xCCED9A
+	long 0xCCEEA4
+	long 0xF21EAE
+	long 0xF22221
+	long 0xF22530
+	long 0xCCF1E5
+	long 0xF22C79
+	long 0xCCF3BB
+	long 0xF22EBF
+	long 0xF22F25
+	long 0xF22F8E
+	long 0xF22FFA
+	long 0xF23069
+	long 0xF230E2
+	long 0xF23163
+	long 0xCCF41E
+	long 0xF231E8
+	long 0xF2402B
+	long 0xF24817
+	long 0xF24A60
+	long 0xF24FCD
+	long 0xF25216
+	long 0xF2545F
+	long 0xF257CA
+	long 0xF2597D
+	long 0xF25F2D
+	long 0xF2621D
+	long 0xF268BA
+	long 0xF2735D
+	long 0xF2743D
+	*/
+
+	// Pointer table ends at 0xF20510
+	// Pad to 0xF20600
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}
+
+ROM[PSI_Palette_Table] = {
+// This line is commented out, this could be used later on for when CCScript Writer merges the fix for insertbin being added to ROM statements
+// Once that feature is implemented, users can simply dump the data from their modified PSI ROM from 0x320600/0x320FFF into a file called "psi_palette_table.bin" and use that instead of manually writting the pointers here.
+//ROM[PSI_Palette_Table] = insertbin "psi_palette_table.bin"
+
+	// Original PSI anim palettes
+
+	// 1
+	short 0x0000
+	short 0x7BDE
+	short 0x294A
+	short 0x5294
+	// 2
+	short 0x0000
+	short 0x3294
+	short 0x0000
+	short 0x001E
+	// 3
+	short 0x0000
+	short 0x0280
+	short 0x6A00
+	short 0x001E
+	// 4
+	short 0x0000
+	short 0x739C
+	short 0x7800
+	short 0x7A86
+	// 5
+	short 0x0000
+	short 0x020C
+	short 0x0000
+	short 0x7280
+	// 6
+	short 0x0000
+	short 0x020C
+	short 0x4800
+	short 0x7280
+	// 7
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	// 8
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	// 9
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	// 10
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	// 11
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+	// 12
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+	// 13
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x77CF
+	// 14
+	short 0x0000
+	short 0x7FFF
+	short 0x035F
+	short 0x7650
+	// 15
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	// 16
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	// 17
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	// 18
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	// 19
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	// 20
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	// 21
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	// 22
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	// 23
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	// 24
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	// 25
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	// 26
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	// 27
+	short 0x0000
+	short 0x6156
+	short 0x031E
+	short 0x0000
+	// 28
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	// 29
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	// 30
+	short 0x0000
+	short 0x7A86
+	short 0x7800
+	short 0x7BDE
+	// 31
+	short 0x0000
+	short 0x03FF
+	short 0x7CA5
+	short 0x7FF9
+	// 32
+	short 0x0000
+	short 0x7FFF
+	short 0x4BFF
+	short 0x7E20
+	// 33
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+	// 34
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+
+	// Expanded PSI palettes
+	// 35
+	short 0x0000
+	short 0x01BF
+	short 0x7FFF
+	short 0x13FF
+	// 36
+	short 0x0000
+	short 0x01BF
+	short 0x7FFF
+	short 0x13FF
+	// 37
+	short 0x0000
+	short 0x01BF
+	short 0x7BDE
+	short 0x13FF
+	// 38
+	short 0x0000
+	short 0x01BF
+	short 0x7BDE
+	short 0x13FF
+	// 39
+	short 0x0000
+	short 0x269F
+	short 0x021F
+	short 0x0178
+	// 40
+	short 0x0000
+	short 0x7E4C
+	short 0x0B03
+	short 0x13DE
+	// 41
+	short 0x0000
+	short 0x7FAE
+	short 0x7F62
+	short 0x5A60
+	// 42
+	short 0x0000
+	short 0x7FFF
+	short 0x53F2
+	short 0x274B
+	// 43
+	short 0x0000
+	short 0x47E9
+	short 0x2F80
+	short 0x1A40
+	// 44
+	short 0x0000
+	short 0x1802
+	short 0x2807
+	short 0x4C0D
+	// 45
+	short 0x0000
+	short 0x1C03
+	short 0x2807
+	short 0x500D
+	// 46
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 47
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 48
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 49
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 50
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 51
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 52
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 53
+	short 0x0000
+	short 0x7E31
+	short 0x3892
+	short 0x698C
+	// 54
+	short 0x0000
+	short 0x0000
+	short 0x0000
+	short 0x7F30
+	// 55 - Healing
+	short 0x0000
+	short 0x7FB5
+	short 0x7F6F
+	short 0x7AE4
+	// 56 - Quickup
+	short 0x0000
+	short 0x47E9
+	short 0x2F80
+	short 0x1A40
+	// 57
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	// 58
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	// 59
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	// 60
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	// 61
+	short 0x0000
+	short 0x6156
+	short 0x031E
+	short 0x0000
+	// 62
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	// 63
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	// 64
+	short 0x0000
+	short 0x7A86
+	short 0x7800
+	short 0x7BDE
+	// 65
+	short 0x0000
+	short 0x03FF
+	short 0x7CA5
+	short 0x7FF9
+	// 66
+	short 0x0000
+	short 0x7FFF
+	short 0x4BFF
+	short 0x7E20
+	// 67
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+	// 68
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+
+	// Palette table ends at 0xF20820
+	// Pad to 0xF21000
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+}
+
+// The Free Range data for the editor has to be imported from another ccs file due to a limitation with a single module not allowing more than 64 kB of data
+// This will be imported from "Extended_PSI_Anims_Free_Range.ccs"
+
+//------------------------------------------------------------------
+// Added command to simplify blank space
+command blank_0x100_bytes {
+	// 0 - FF
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}

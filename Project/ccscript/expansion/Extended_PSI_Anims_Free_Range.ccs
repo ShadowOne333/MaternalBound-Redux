@@ -1,0 +1,7 @@
+// Add blank free space for the PSI Anim Editor to use.
+// This range should be added in the Editor
+
+define Expanded_Anims_Free_Range	= 0xF21000
+
+// This line is commented out, this could be used later on for when CCScript Writer merges the fix for insertbin being added to ROM statements
+ROM[Expanded_Anims_Free_Range] = insertbin "expanded_anims_free_range.bin"

@@ -251,6 +251,7 @@ l_0xc9fcd5:
 
 l_0xc9fd2e:
 	newline
+	// Removed so that anyone in the party can initiate the bike
 	//get_char_at_pos(2)	// 0x02
 	//goto_if_true(l_0xc9fd5a)
 
@@ -259,41 +260,9 @@ l_0xc9fd2e:
 	goto_if_true(l_0xc9fd60)
 
 	"@{user} rode a bicycle." wait
-	//inflict_status(1, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE) // Make Ness healthy to fix trailing bug.
 	hide_party
-	// It will say "Ness got hurt and collapsed" at start of battle though, but no big deal
-	//ctoarg
-	//party_size_smaller_than(2)	// 0x02
-	//goto_if_false(multi_bike)
-
 	bicycle
 	eob
-
-/*multi_bike:
-	get_char_at_pos(1)
-	result_is(1)
-	goto_if_true(_ness_bike)
-
-	get_char_at_pos(1)
-	result_is(2)
-	goto_if_true(_paula_bike)
-
-	get_char_at_pos(1)
-	result_is(3)
-	goto_if_true(_jeff_bike)
-
-_poo_bike:
-	//cc_multibike(4) eob
-
-_jeff_bike:
-	//cc_multibike(3) eob
-
-_paula_bike:
-	//cc_multibike(2) eob
-
-_ness_bike:
-	//cc_multibike(1) eob*/
-
 
 l_0xc9fd5a:
 	call(data_35.l_0xc7c802)	// Only one seat, so you shouldn't ride the bike now

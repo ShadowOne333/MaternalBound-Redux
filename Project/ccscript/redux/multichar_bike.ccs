@@ -4,16 +4,31 @@ import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../expansion/ccexpand.ccs"
 
-define CREATE_ENTITY	= 0xC01E49
-define DESTROY_ENTITY	= 0XC02140
-define CHANGE_MUSIC	= 0xC4FBBD
-define SET_AUTO_SECTOR_MUSIC_CHANGES	= 0xC4FD45
+//------------------------------------
 
-define INPUT_DISABLE_FRAME_COUNTER	= 0x5D74
-define DISABLE_MUSIC_CHANGES	= 0x5DD8
+define CREATE_ENTITY	= 0xC01E49
+define DESTROY_ENTITY	= 0xC02140
+define WAIT_UNTIL_NEXT_FRAME	= 0xC08756
+
+define NEW_ENTITY_VAR1	= 0x0A3A
+define PENDING_INTERACTIONS	= 0x5D9A
 
 //------------------------------------
-//ROM[0xC06AA9] = LDA_i	(477)
+
+// ENTITY_SCRIPT_VAR1 for newly created entity
+// Stored into ENTITY_SCRIPT_VAR1_TABLE[slot*2]
+// Used by EVENT_002 (bike action script) at C04EFD
+// to index CHOSEN_FOUR_PTRS -> PLAYER_POSITION_BUFFER.
+// Must be the leader's 0-based char index so the
+// bike entity follows the correct character.
+
+// unknown96[0] at 0x988B = 1-based leader char ID: Ness=1, Paula=2, Jeff=3, Poo=4.
+// Entity slots (CHARACTER_INITIAL_ENTITY_DATA): Ness=24, Paula=25, Jeff=26, Poo=27.
+
+//------------------------------------------------------------------
+//	GET_ON_BIKE routine modifications
+//------------------------------------------------------------------
+// Sprite load for bike
 ROM[0xC078F2] = {
 	JML	(Leader_Check)
 	NOP NOP
@@ -23,40 +38,39 @@ Leader_Check: {
 	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
 	AND_i	(0x00FF)
 	CMP_i	(1)
-	BNE	(3)	// _Multiple_Chars
-	JMP	(_Ness_Only)
+	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
+
+_Ness_Only:	// If there's only one character, use the normal bike sprite (7)
+	LDA_i	(7)	// Normal Ness+Bike sprite ID
+	JMP	(_Return)
 
 _Multiple_Chars:
 	// Check who the party leader is
-	LDA_a	(0x9891)
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
 	AND_i	(0x00FF)
-	CMP_i	(0)	// Ness = 0
-	BEQ	(0x19)	//_Ness_Sprite
-	CMP_i	(1)	// Paula = 1
-	BEQ	(0x0F)	//_Paula_Sprite
-	CMP_i	(2)	// Jeff = 2
-	BEQ	(5)	// _Jeff_Sprite
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Sprite)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Sprite)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Sprite)
+	JMP	(_Poo_Sprite)	// Poo = 4
+
+_Ness_Sprite:
+	LDA_i	(477)	// Ness in bike+side car sprite ID
+	JMP	(_Return)
+
+_Paula_Sprite:
+	LDA_i	(478)	// Paula in bike+side car sprite ID
+	JMP	(_Return)
+
+_Jeff_Sprite:
+	LDA_i	(479)	// Jeff in bike+side car sprite ID
+	JMP	(_Return)
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(480)	// Poo in bike+side car
-	BRA	(0x0D)	// _Return
-
-_Jeff_Sprite:
-	LDA_i	(479)	// Jeff in bike+side car
-	BRA	(8)	// _Return
-
-_Paula_Sprite:
-	LDA_i	(478)	// Paula in bike+side car
-	BRA	(3)	// _Return
-
-_Ness_Sprite:
-	LDA_i	(477)	// Ness in bike+side car
-_Branch_Out:
-	BRA	(3)	// _Load_Entity
-
-_Ness_Only:
-	LDA_i	(7)
+	LDA_i	(480)	// Poo in bike+side car sprite ID
 
 _Return:
 	JML	(0xC079EA)	// @UNKNOWN28, return to where the original code should
@@ -65,151 +79,339 @@ _Return:
 //------------------------------------
 // Hijack the original GET_ON_BICYCLE function to change the sprite when there's two or more party members
 ROM[0xC03C66] = BRA (0x1A)	// Skip the whole section so it continues despite having two or more party members
-// 0x0C
-/*ROM[0xC03CA1] = {
-	STA_a	(0x9A0B)
-}*/
 //------------------------------------
-//ROM[0xC03C5E] = {
-//	JSL	(GET_ON_BIKE)
-//	JMP	(0xC03CFD)
-//}
-
-GET_ON_BIKE: {
-_init:
-	REP	(0X31)
-	PHD
-	TDC
-	ADC_i	(0xFFEE)
-	TCD
-
-	LDA_a	(0x98A3)	// GAME_STATE+game_state::party_count
-	AND_i	(0x00FF)
-	CMP_i	(1)
-	BNE_a	(_UNKNOWN3)
-
-	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96
-	AND_i	(0x00FF)
-	CMP_i	(1)
-	BNE_a	(_UNKNOWN3)
-
-	LDA_a	(DISABLE_MUSIC_CHANGES)
-	BNE	(7)		// UNKNOWN2
-	LDA_i	(82)		// #MUSIC::BICYCLE, 0x52
-	JSL	(CHANGE_MUSIC)
-
-_UNKNOWN2:
-	LDA_i	(24)
-	JSL	(DESTROY_ENTITY)
-
-	LDA_i	(6)
-	STA_a	(0x9887)	// GAME_STATE + game_state::unknown92
-	LDA_i	(3)		// #WALKING_STYLE::BICYCLE
-	STA_a	(0x9883)	// GAME_STATE+game_state::walking_style
-
-	STZ_a	(0x9A0B)	// PARTY_CHARACTERS+char_struct::position_index
-	STZ_a	(0x987D)	// GAME_STATE + game_state::unknown88
-	STZ_a	(0x0A38)	// NEW_ENTITY_VAR0
-	STZ_a	(0x0A3A)	// NEW_ENTITY_VAR1
-
-	LDA_a	(0x0BBE)	// ENTITY_ABS_X_TABLE + (PARTY_LEADER_ENTITY_INDEX * 2)
-	STA_d	(0x0E)		// LOCAL00
-	LDA_a	(0x0BFA)	// ENTITY_ABS_Y_TABLE + (PARTY_LEADER_ENTITY_INDEX * 2)
-	STA_d	(0x10)		// LOCAL01
-
-	LDY_i	(24)		// Main entity
-	LDX_i	(2)		// #EVENT_SCRIPT::EVENT_002
-
-	LDA_i	(7)		// #OVERWORLD_SPRITE::NESS_BICYCLE
-	JSL	(CREATE_ENTITY)
-
-	// The original code at C03CC4-C03CE2 hardcodes entity slot 24 for all table writes.
-	// We replicate it here using the dynamic leader slot, then skip past it to C03CE5.
-	// All entity tables are word arrays; X = slot * 2 is the index.
-	// Base addresses derived from disassembly:
-	//   ENTITY_TICK_CALLBACK_HIGH = 0x10B6
-	//   ENTITY_SCRIPT_VAR7_TABLE  = 0x1002
-	//   ENTITY_ANIMATION_FRAME    = 0x10F2
-	//   ENTITY_DIRECTIONS         = 0x2AF6
-
-	// Disable tick on the leader entity (equivalent to C03CC4-C03CCF)
-	LDX_i	(0x10E6)	// #.LOWORD(ENTITY_TICK_CALLBACK_HIGH) + (24 * 2)
-	LDA_x	(0)		// LDA __BSS_START__,X
-	ORA_i	(0x8000)	// ORA #OBJECT_TICK_DISABLED
-	STA_x	(0)	// STA __BSS_START__,X
-
-	// Set sprite flags on the leader entity (equivalent to C03CD0-C03CDB)
-	LDX_i	(0x1032)	// #.LOWORD(ENTITY_SCRIPT_VAR7_TABLE) + (24 * 2)
-	LDA_x	(0)		// LDA __BSS_START__,X
-	ORA_i	(0x3000)	// ORA #SPRITE_TABLE_10_FLAGS::UNKNOWN12 | UNKNOWN13
-	STA_x	(0)	// STA ENTITY_SCRIPT_VAR7_TABLE,X
-
-	// Reset animation frame (equivalent to C03CDC)
-	STZ_x	(0x1122)	// STZ ENTITY_ANIMATION_FRAME,X
-
-	// Set facing direction (equivalent to C03CDF-C03CE2)
-	LDA_a	(0x987F)	// LDA GAME_STATE+game_state::leader_direction
-	STA_a	(0x2B26)	// STA ENTITY_DIRECTIONS + (PARTY_LEADER_ENTITY_INDEX * 2)
-
-	LDA_i	(0)
-	JSL	(SET_AUTO_SECTOR_MUSIC_CHANGES)
-	LDA_i	(1)
-	STA_a	(0x9885)	// GAME_STATE + game_state::unknown90
-	STA_a	(0x5DBA)	// UNREAD_7E5DBA
-	LDA_i	(2)
-	STA_a	(INPUT_DISABLE_FRAME_COUNTER)
-
-_UNKNOWN3:	// End C function
-	PLD
-	RTL
+// Redirect LDA #24 / JSL DESTROY_ENTITY at C03C8E-C03C94 (7 bytes)
+// to free the correct leader entity slot before CREATE_ENTITY claims it.
+ROM[0xC03C8E] = {
+	JML	(Destroy_Leader_Entity)
+	NOP NOP NOP
 }
 
+Destroy_Leader_Entity: {
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Entity)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Entity)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Entity)
+	JMP	(_Poo_Entity)	// Poo = 4
+
+_Ness_Entity:
+	LDA_i	(24)
+	JMP	(_Return)
+
+_Paula_Entity:
+	LDA_i	(25)
+	JMP	(_Return)
+
+_Jeff_Entity:
+	LDA_i	(26)
+	JMP	(_Return)
+
+_Poo_Entity:
+	LDA_i	(27)
+
+_Return:
+	JSL	(DESTROY_ENTITY)
+	JML	(0xC03C95)
+}
+
+//------------------------------------
 ROM[0xC03CBD] = {
 	JML	(Multichar_Bike)	// LDA party count
 	NOP NOP NOP
 }
 
+// The bike entity's action script (EVENT_002) at C04EFD reads ENTITY_SCRIPT_VAR1_TABLE
+// to find which character's PLAYER_POSITION_BUFFER to follow for map position.
+// NEW_ENTITY_VAR1 (0x0A3A) feeds ENTITY_SCRIPT_VAR1_TABLE[slot*2] via INIT_ENTITY.
+// C03CA7/C03CA9 zeroes both VAR0 and VAR1 before this hook, setting VAR1=0 (Ness).
+// We must set VAR1 = leader's 0-based char index so the bike follows the right character.
 Multichar_Bike: {
 	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
 	AND_i	(0x00FF)
 	CMP_i	(1)
-	BNE	(3)	// _Multiple_Chars
-	JMP	(_Ness_Only)
+	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
+
+_Ness_Only:	// If there's only one character, use the normal bike sprite (7)
+	LDA_i	(7)		// Normal Ness+Bike sprite ID
+	JSL	(CREATE_ENTITY)
+	JML	(0xC03CC4)	// Exit back and continue with Ness' entity flags (original flags)
 
 _Multiple_Chars:
 	// Check who the party leader is
-	LDA_a	(0x9891)
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
 	AND_i	(0x00FF)
-	CMP_i	(0)	// Ness = 0
-	BEQ	(0x19)	//_Ness_Sprite
-	CMP_i	(1)	// Paula = 1
-	BEQ	(0x0F)	//_Paula_Sprite
-	CMP_i	(2)	// Jeff = 2
-	BEQ	(5)	// _Jeff_Sprite
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Sprite)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Sprite)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Sprite)
+	JMP	(_Poo_Sprite)	// Poo = 4
+
+_Ness_Sprite:
+	LDA_i	(0)	// char_index=0 (Ness)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(477)	// Ness in bike+side car sprite ID
+	LDY_i	(24)	// Ness' entity ID
+	JSL	(CREATE_ENTITY)
+	JML	(0xC03CC4)	// Exit back and continue with Ness' entity flags (original flags)
+
+_Paula_Sprite:
+	LDA_i	(1)	// char_index=1 (Paula)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(478)	// Paula in bike+side car sprite ID
+	LDY_i	(25)	// Paula's entity ID
+	JSL	(CREATE_ENTITY)
+	JMP	(Apply_Entity_Flags_25)
+
+_Jeff_Sprite:
+	LDA_i	(2)	// char_index=2 (Jeff)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(479)	// Jeff in bike+side car sprite ID
+	LDY_i	(26)	// Jeff's entity ID
+	JSL	(CREATE_ENTITY)
+	JMP	(Apply_Entity_Flags_26)
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(480)	// Poo in bike+side car
-	BRA	(0x0D)	// _Return
-
-_Jeff_Sprite:
-	LDA_i	(479)	// Jeff in bike+side car
-	BRA	(8)	// _Return
-
-_Paula_Sprite:
-	LDA_i	(478)	// Paula in bike+side car
-	BRA	(3)	// _Return
-
-_Ness_Sprite:
-	LDA_i	(477)	// Ness in bike+side car
-_Branch_Out:
-	BRA	(3)	// _Load_Entity
-
-_Ness_Only:
-	LDA_i	(7)
-
-_Load_Entity:
+	LDA_i	(3)	// char_index=3 (Poo)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(480)    // Poo in bike+side car sprite ID
+	LDY_i	(27)	// Poo's entity ID
 	JSL	(CREATE_ENTITY)
-	JML	(0xC03CC4)	// Return to the rest of the original code
+	JMP	(Apply_Entity_Flags_27)
+}
+
+// Replicate C03CC4-C03CE2 for non-Ness slots, then jump to C03CE5.
+Apply_Entity_Flags_25: {	// Paula's entity flags
+	LDA_a	(0x10E8)
+	ORA_i	(0x8000)
+	STA_a	(0x10E8)
+	LDA_a	(0x1034)
+	ORA_i	(0x3000)
+	STA_a	(0x1034)
+	STZ_a	(0x1124)
+	LDA_a	(0x987F)
+	STA_a	(0x2B28)
+	JML	(0xC03CE5)
+}
+
+Apply_Entity_Flags_26: {	// Jeff's entity flags
+	LDA_a	(0x10EA)
+	ORA_i	(0x8000)
+	STA_a	(0x10EA)
+	LDA_a	(0x1036)
+	ORA_i	(0x3000)
+	STA_a	(0x1036)
+	STZ_a	(0x1126)
+	LDA_a	(0x987F)
+	STA_a	(0x2B2A)
+	JML	(0xC03CE5)
+}
+
+Apply_Entity_Flags_27: {	// Poo's entity flags
+	LDA_a	(0x10EC)
+	ORA_i	(0x8000)
+	STA_a	(0x10EC)
+	LDA_a	(0x1038)
+	ORA_i	(0x3000)
+	STA_a	(0x1038)
+	STZ_a	(0x1128)
+	LDA_a	(0x987F)
+	STA_a	(0x2B2C)
+	JML	(0xC03CE5)
 }
 //------------------------------------------------------------------
+//	GET_OFF_BIKE routine modifications
+//------------------------------------------------------------------
+// Redirect LDA #24 / JSL DESTROY_ENTITY at C03C8E-C03C94 (7 bytes)
+// to free the correct leader entity slot before CREATE_ENTITY claims it.
+ROM[0xC03D25] = {
+	JML	(Destroy_Leader_Entity_Off)
+	NOP NOP NOP
+}
+
+Destroy_Leader_Entity_Off: {
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Entity)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Entity)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Entity)
+	JMP	(_Poo_Entity)	// Poo = 4
+
+_Ness_Entity:
+	LDA_i	(24)
+	JMP	(_Return)
+
+_Paula_Entity:
+	LDA_i	(25)
+	JMP	(_Return)
+
+_Jeff_Entity:
+	LDA_i	(26)
+	JMP	(_Return)
+
+_Poo_Entity:
+	LDA_i	(27)
+
+_Return:
+	JSL	(DESTROY_ENTITY)
+	JML	(0xC03D2C)	// Continue to the rest of the original code
+}
+
+//------------------------------------
+ROM[0xC03D63] = {
+	JML	(Multichar_Off_Bike)	// LDA party count
+	NOP NOP NOP
+}
+
+// The bike entity's action script (EVENT_002) at C04EFD reads ENTITY_SCRIPT_VAR1_TABLE
+// to find which character's PLAYER_POSITION_BUFFER to follow for map position.
+// NEW_ENTITY_VAR1 (0x0A3A) feeds ENTITY_SCRIPT_VAR1_TABLE[slot*2] via INIT_ENTITY.
+// C03CA7/C03CA9 zeroes both VAR0 and VAR1 before this hook, setting VAR1=0 (Ness).
+// We must set VAR1 = leader's 0-based char index so the bike follows the right character.
+Multichar_Off_Bike: {
+	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
+	AND_i	(0x00FF)
+	CMP_i	(1)
+	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
+
+_Ness_Only:	// If there's only one character, use the normal bike sprite (7)
+	LDA_i	(7)		// Normal Ness+Bike sprite ID
+	JSL	(CREATE_ENTITY)
+	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
+
+_Multiple_Chars:
+	// Check who the party leader is
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Sprite)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Sprite)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Sprite)
+	JMP	(_Poo_Sprite)	// Poo = 4
+
+_Ness_Sprite:
+	LDA_i	(0)	// char_index=0 (Ness)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(1)	// Normal Ness sprite
+	LDY_i	(24)	// Ness' entity ID
+	JSL	(CREATE_ENTITY)
+	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
+
+_Paula_Sprite:
+	LDA_i	(1)	// char_index=1 (Paula)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(2)	// Normal Paula sprite
+	LDY_i	(25)	// Paula's entity ID
+	JSL	(CREATE_ENTITY)
+	JMP	(Apply_Entity_Flags_25_Off)
+
+_Jeff_Sprite:
+	LDA_i	(2)	// char_index=2 (Jeff)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(3)	// Normal Jeff sprite
+	LDY_i	(26)	// Jeff's entity ID
+	JSL	(CREATE_ENTITY)
+	JMP	(Apply_Entity_Flags_26_Off)
+
+_Poo_Sprite:
+	// If none of the previous checks hit, then Poo's the leader
+	LDA_i	(3)	// char_index=3 (Poo)
+	STA_a	(NEW_ENTITY_VAR1)
+	LDA_i	(4)    // Normal Poo sprite
+	LDY_i	(27)	// Poo's entity ID
+	JSL	(CREATE_ENTITY)
+	JMP	(Apply_Entity_Flags_27_Off)
+}
+
+// Replicate C03CC4-C03CE2 for non-Ness slots, then jump to C03D9F.
+Apply_Entity_Flags_25_Off: {	// Paula's entity flags
+	STZ_a	(0x1124)
+
+	LDA_a	(0x987F)
+	STA_a	(0x2B28)
+
+	LDA_a	(0x1034)
+	ORA_i	(0x9000)
+	STA_a	(0x1034)
+
+	LDA_a	(PENDING_INTERACTIONS)
+	BEQ_a	(_Return)	// 0x18	
+
+	LDA_a	(0x10E8)
+	ORA_i	(0xC000)
+	STA_a	(0x10E8)
+
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+
+	LDA_i	(25)
+	JSL	(0xC0A780)
+
+_Return:
+	JML	(0xC03D9F)
+}
+
+Apply_Entity_Flags_26_Off: {	// Jeff's entity flags
+	STZ_a	(0x1126)
+
+	LDA_a	(0x987F)
+	STA_a	(0x2B2A)
+
+	LDA_a	(0x1036)
+	ORA_i	(0x9000)
+	STA_a	(0x1036)
+
+	LDA_a	(PENDING_INTERACTIONS)
+	BEQ_a	(_Return)	// 0x18	
+
+	LDA_a	(0x10EA)
+	ORA_i	(0xC000)
+	STA_a	(0x10EA)
+
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+
+	LDA_i	(26)
+	JSL	(0xC0A780)
+
+_Return:
+	JML	(0xC03D9F)
+}
+
+Apply_Entity_Flags_27_Off: {	// Poo's entity flags
+	STZ_a	(0x1128)
+
+	LDA_a	(0x987F)
+	STA_a	(0x2B2C)
+
+	LDA_a	(0x1038)
+	ORA_i	(0x9000)
+	STA_a	(0x1038)
+
+	LDA_a	(PENDING_INTERACTIONS)
+	BEQ_a	(_Return)	// 0x18	
+
+	LDA_a	(0x10EC)
+	ORA_i	(0xC000)
+	STA_a	(0x10EC)
+
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+	JSL	(WAIT_UNTIL_NEXT_FRAME)
+
+	LDA_i	(27)
+	JSL	(0xC0A780)
+
+_Return:
+	JML	(0xC03D9F)
+}

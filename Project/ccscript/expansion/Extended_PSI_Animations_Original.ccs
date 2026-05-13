@@ -1,0 +1,1349 @@
+import "../essential/asm65816.ccs"
+
+//------------------------------------------------------------------
+
+command Int24(Value) {
+	byte[0] Value
+	byte[1] Value
+	byte[2] Value
+}
+
+ROM[0xC3F98D] = JMP	(0xFE00)
+
+ROM[0xC3FE00] = {
+	CMP_i	(0xFFFF)	// 3
+	BEQ	(0x18)		// 2; L3
+	CMP_i	(0x0023)	// 3
+	BCC	(0x0B)		// 2; L1
+	CMP_i	(0x0036)	// 3
+	BCS	(0x03)		// 2; L2
+	JMP	(0xF99B)	// 3
+
+// L2:
+	SBC_i	(0x0014)	// 3
+	STA_d	(0x02)		// 2
+
+// L1:
+	LDA_d	(0x02)		// 2
+	JSL	(0xC2E116)	// 4
+
+// L3:
+	JMP	(0xFAC7)	// 3
+}
+
+ROM[0xC2E34F] = ASMLoadAddress06	(PSI_Config_Table)		// Configuration table
+ROM[0xC2E154] = Int24	(PSI_Config_Table)
+ROM[0xC2E1BB] = Int24	(PSI_Config_Table)
+ROM[0xC2E50A] = Int24	(PSI_Config_Table)
+ROM[0xC2E461] = ASMLoadAddress06	(PSI_Anim_Pointer_Table)	// Animation pointer table
+ROM[0xC2E2F4] = ASMLoadAddress06	(PSI_Palette_Table)		// Palette table
+
+//------------------------------------------------------------------
+
+// Define specific ROM addresses for data import
+define PSI_Config_Table		= 0xF20000
+define PSI_Anim_Pointer_Table	= 0xF20400
+define PSI_Palette_Table	= 0xF20600
+
+// Defines for Config table
+define PSI_ANIM_GFX_SET_1	= 0xAC25
+define PSI_ANIM_GFX_SET_2	= 0xB613
+define PSI_ANIM_GFX_SET_3	= 0xDB27
+define PSI_ANIM_GFX_SET_4	= 0xE31D
+define SINGLE_TARGET		= 0
+define ROW_TARGET		= 1
+define ALL_ENEMIES_TARGET	= 2
+define RANDOM_TARGET		= 3
+
+//------------------------------------------------------------------
+// Import data for expansion
+ROM[PSI_Config_Table] = {
+	// Original config table
+	
+	// 01
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 47	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 02
+	short PSI_ANIM_GFX_SET_3
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 29	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x00D2	// Colour that enemy will change to
+	// 03
+	short PSI_ANIM_GFX_SET_3
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 47	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 90	// Time until enemy colour change
+	byte 160	// Duration of enemy colour change
+	short 0x00D0	// Colour that enemy will change to
+	// 04
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 05
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 28	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x2800	// Colour that enemy will change to
+	// 06
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x2800	// Colour that enemy will change to
+	// 07
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 13	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 08
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 16	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 09
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 17	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 10
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 27	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 80	// Time until enemy colour change
+	byte 130	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 11
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 6	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 10	// Time until enemy colour change
+	byte 40	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 12
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 10	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 20	// Time until enemy colour change
+	byte 50	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 13
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 19	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 30	// Time until enemy colour change
+	byte 60	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 14
+	short PSI_ANIM_GFX_SET_2
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 76	// Time until enemy colour change
+	byte 125	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 15
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 23	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 16
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 22	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 17
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 23	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 18
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 35	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 135	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 19
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 31	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 63	// Time until enemy colour change
+	byte 92	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 20
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 48	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 114	// Time until enemy colour change
+	byte 143	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 21
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 54	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 132	// Time until enemy colour change
+	byte 161	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 22
+	short PSI_ANIM_GFX_SET_4
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 64	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 141	// Time until enemy colour change
+	byte 255	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 23
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 90	// Duration of enemy colour change
+	short 0x1140	// Colour that enemy will change to
+	// 24
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 90	// Duration of enemy colour change
+	short 0x1140	// Colour that enemy will change to
+	// 25
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 34	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 45	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x4A52	// Colour that enemy will change to
+	// 26
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 45	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x4A52	// Colour that enemy will change to
+	// 27
+	short PSI_ANIM_GFX_SET_3
+	byte 7	// Frame duration (1/60th of a second)
+	byte 4	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 17	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 28
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 11	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 29
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 17	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 30
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 31
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 80	// Time until enemy colour change
+	byte 131	// Duration of enemy colour change
+	short 0x7E52	// Colour that enemy will change to
+	// 32
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 46	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 121	// Time until enemy colour change
+	byte 183	// Duration of enemy colour change
+	short 0x7E52	// Colour that enemy will change to
+	// 33
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 15	// Total frames in animation
+	byte RANDOM_TARGET	// PSI_TARGET_ANIM
+	byte 25	// Time until enemy colour change
+	byte 54	// Duration of enemy colour change
+	short 0x2FFF	// Colour that enemy will change to
+	// 34
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 19	// Total frames in animation
+	byte RANDOM_TARGET	// PSI_TARGET_ANIM
+	byte 49	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x2FFF	// Colour that enemy will change to
+
+
+
+	// Extended PSI config table
+	// 01
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 47	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 02
+	short PSI_ANIM_GFX_SET_3
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 29	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x00D2	// Colour that enemy will change to
+	// 03
+	short PSI_ANIM_GFX_SET_3
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 47	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 90	// Time until enemy colour change
+	byte 160	// Duration of enemy colour change
+	short 0x00D0	// Colour that enemy will change to
+	// 04
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 05
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 28	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x2800	// Colour that enemy will change to
+	// 06
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x2800	// Colour that enemy will change to
+	// 07
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 13	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 40	// Time until enemy colour change
+	byte 70	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 08
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 16	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 09
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 17	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 10
+	short PSI_ANIM_GFX_SET_2
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 27	// Total frames in animation
+	byte ROW_TARGET	// PSI_TARGET_ANIM
+	byte 80	// Time until enemy colour change
+	byte 130	// Duration of enemy colour change
+	short 0x001F	// Colour that enemy will change to
+	// 11
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 6	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 10	// Time until enemy colour change
+	byte 40	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 12
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 10	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 20	// Time until enemy colour change
+	byte 50	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 13
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 19	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 30	// Time until enemy colour change
+	byte 60	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 14
+	short PSI_ANIM_GFX_SET_2
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 76	// Time until enemy colour change
+	byte 125	// Duration of enemy colour change
+	short 0x77BD	// Colour that enemy will change to
+	// 15
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 23	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 16
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 22	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 17
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 23	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 50	// Time until enemy colour change
+	byte 80	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 18
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 35	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 135	// Duration of enemy colour change
+	short 0x7C00	// Colour that enemy will change to
+	// 19
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 31	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 63	// Time until enemy colour change
+	byte 92	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 20
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 48	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 114	// Time until enemy colour change
+	byte 143	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 21
+	short PSI_ANIM_GFX_SET_4
+	byte 3	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 54	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 132	// Time until enemy colour change
+	byte 161	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 22
+	short PSI_ANIM_GFX_SET_4
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 64	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 141	// Time until enemy colour change
+	byte 255	// Duration of enemy colour change
+	short 0x39DA	// Colour that enemy will change to
+	// 23
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 90	// Duration of enemy colour change
+	short 0x1140	// Colour that enemy will change to
+	// 24
+	short PSI_ANIM_GFX_SET_3
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 60	// Time until enemy colour change
+	byte 90	// Duration of enemy colour change
+	short 0x1140	// Colour that enemy will change to
+	// 25
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 34	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 45	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x4A52	// Colour that enemy will change to
+	// 26
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 26	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 45	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x4A52	// Colour that enemy will change to
+	// 27
+	short PSI_ANIM_GFX_SET_3
+	byte 7	// Frame duration (1/60th of a second)
+	byte 4	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 2
+	byte 17	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 28
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 11	// Total frames in animation
+	byte SINGLE_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 29
+	short PSI_ANIM_GFX_SET_1
+	byte 5	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 17	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 30
+	short PSI_ANIM_GFX_SET_3
+	byte 3	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 0	// Time until enemy colour change
+	byte 0	// Duration of enemy colour change
+	short 0x0000	// Colour that enemy will change to
+	// 31
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 33	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 80	// Time until enemy colour change
+	byte 131	// Duration of enemy colour change
+	short 0x7E52	// Colour that enemy will change to
+	// 32
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 2	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 46	// Total frames in animation
+	byte ALL_ENEMIES_TARGET	// PSI_TARGET_ANIM
+	byte 121	// Time until enemy colour change
+	byte 183	// Duration of enemy colour change
+	short 0x7E52	// Colour that enemy will change to
+	// 33
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 15	// Total frames in animation
+	byte RANDOM_TARGET	// PSI_TARGET_ANIM
+	byte 25	// Time until enemy colour change
+	byte 54	// Duration of enemy colour change
+	short 0x2FFF	// Colour that enemy will change to
+	// 34
+	short PSI_ANIM_GFX_SET_1
+	byte 4	// Frame duration (1/60th of a second)
+	byte 3	// Palette Duration (1/60th of a second)
+	byte 1
+	byte 3
+	byte 19	// Total frames in animation
+	byte RANDOM_TARGET	// PSI_TARGET_ANIM
+	byte 49	// Time until enemy colour change
+	byte 75	// Duration of enemy colour change
+	short 0x2FFF	// Colour that enemy will change to
+
+	// Config table ends at 0xF20330
+	// Pad to 0xF20400
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}
+
+ROM[PSI_Anim_Pointer_Table] = {	//insertbin "psi_anim_pointer_table.bin"
+	// Original pointer table
+	long 0xCC66A7
+	long 0xCC6894
+	long 0xCC6AD7
+	long 0xCC6CB5
+	long 0xCC6E0C
+	long 0xCC6F16
+	long 0xCC7146
+	long 0xCC74B9
+	long 0xCC78C0
+	long 0xCC8009
+	long 0xCC84EE
+	long 0xCC85EA
+	long 0xCC87A8
+	long 0xCC89F8
+	long 0xCC9184
+	long 0xCC92AA
+	long 0xCC93D4
+	long 0xCC9579
+	long 0xCC9BAE
+	long 0xCCA1A7
+	long 0xCCAB17
+	long 0xCCB95A
+	long 0xCCC146
+	long 0xCCC38F
+	long 0xCCC8FC
+	long 0xCCCB3D
+	long 0xCCCD82
+	long 0xCCD0ED
+	long 0xCCD2A0
+	long 0xCCD850
+	long 0xCCDB40
+	long 0xCCE1DD
+	long 0xCCEC80
+	long 0xCCED60
+
+	// Duplicated pointer table
+	long 0xCCF1E5
+	long 0xF21000
+	long 0xF21327
+	long 0xF216C7
+	long 0xF221D5
+	long 0xF2283C
+	long 0xF229CA
+	long 0xF23031
+	long 0xF23340
+	long 0xF23706
+	long 0xF238DC
+	long 0xF23B22
+	long 0xF23B85
+	long 0xF23BEB
+	long 0xF23C54
+	long 0xF23CC0
+	long 0xF23D2F
+	long 0xF23DA8
+	long 0xF23E29
+	long 0xCCEFFB
+	long 0xF23EAE
+	long 0xF24274
+	long 0xF24A60
+	long 0xF24CA9
+	long 0xF25216
+	long 0xF2545F
+	long 0xF256A8
+	long 0xF25A13
+	long 0xF25BC6
+	long 0xF26176
+	long 0xF26466
+	long 0xF26B03
+	long 0xF275A6
+	long 0xF27686
+
+	// Pointer table ends at 0xF20510
+	// Pad to 0xF20600
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}
+
+ROM[PSI_Palette_Table] = {
+	// Original PSI anim palettes
+
+	// First anim
+	short 0x0000
+	short 0x7BDE
+	short 0x294A
+	short 0x5294
+	//
+	short 0x0000
+	short 0x3294
+	short 0x0000
+	short 0x001E
+	//
+	short 0x0000
+	short 0x0280
+	short 0x6A00
+	short 0x001E
+
+	//
+	short 0x0000
+	short 0x739C
+	short 0x7800
+	short 0x7A86
+
+	//
+	short 0x0000
+	short 0x020C
+	short 0x0000
+	short 0x7280
+	//
+	short 0x0000
+	short 0x020C
+	short 0x4800
+	short 0x7280
+
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A	
+
+	// 
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+	//
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+
+	//
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x77CF
+	//
+	short 0x0000
+	short 0x7FFF
+	short 0x035F
+	short 0x7650
+
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+
+	//
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	//
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+
+	//
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	//
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+
+	//
+	short 0x0000
+	short 0x6156
+	short 0x031E
+	short 0x0000
+
+	//
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	//
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+
+	//
+	short 0x0000
+	short 0x7A86
+	short 0x7800
+	short 0x7BDE
+
+	//
+	short 0x0000
+	short 0x03FF
+	short 0x7CA5
+	short 0x7FF9
+
+	//
+	short 0x0000
+	short 0x7FFF
+	short 0x4BFF
+	short 0x7E20
+
+	//
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+	//
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+
+	// Extended PSI anim palettes
+
+	// First anim
+	short 0x0000
+	short 0x7BDE
+	short 0x294A
+	short 0x5294
+	//
+	short 0x0000
+	short 0x3294
+	short 0x0000
+	short 0x001E
+	//
+	short 0x0000
+	short 0x0280
+	short 0x6A00
+	short 0x001E
+
+	//
+	short 0x0000
+	short 0x739C
+	short 0x7800
+	short 0x7A86
+
+	//
+	short 0x0000
+	short 0x020C
+	short 0x0000
+	short 0x7280
+	//
+	short 0x0000
+	short 0x020C
+	short 0x4800
+	short 0x7280
+
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A
+	//
+	short 0x0000
+	short 0x001E
+	short 0x0014
+	short 0x000A	
+
+	// 
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+	//
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x394A
+
+	//
+	short 0x0000
+	short 0x7BDE
+	short 0x0000
+	short 0x77CF
+	//
+	short 0x0000
+	short 0x7FFF
+	short 0x035F
+	short 0x7650
+
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+	//
+	short 0x0000
+	short 0x6B40
+	short 0x71C0
+	short 0x7800
+
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+	//
+	short 0x0000
+	short 0x039E
+	short 0x7800
+	short 0x001E
+
+	//
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+	//
+	short 0x0000
+	short 0x001C
+	short 0x028C
+	short 0x7240
+
+	//
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+	//
+	short 0x0000
+	short 0x7B0A
+	short 0x7018
+	short 0x4018
+
+	//
+	short 0x0000
+	short 0x6156
+	short 0x031E
+	short 0x0000
+
+	//
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+	//
+	short 0x0000
+	short 0x7BC8
+	short 0x7800
+	short 0x039E
+
+	//
+	short 0x0000
+	short 0x7A86
+	short 0x7800
+	short 0x7BDE
+
+	//
+	short 0x0000
+	short 0x03FF
+	short 0x7CA5
+	short 0x7FF9
+
+	//
+	short 0x0000
+	short 0x7FFF
+	short 0x4BFF
+	short 0x7E20
+
+	//
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+	//
+	short 0x0000
+	short 0x03DE
+	short 0x0000
+	short 0x7940
+
+	// Palette table ends at 0xF20820
+	// Pad to 0xF21000
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+	blank_0x100_bytes
+}
+
+// The Free Range data for the editor has to be imported from another ccs file due to a limitation with a single module not allowing more than 64 kB of data
+// This will be imported from "Extended_PSI_Anims_Free_Range.ccs"
+
+command blank_0x100_bytes {
+	// 0 - FF
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"
+}
