@@ -92,9 +92,9 @@ PSI_Test:
 		"PSI Shield [8E]":	{ window_closeall call(PSIShieldE) pause(90) goto(PSI_Test) }
 		"PSI Shield [8C]":	{ window_closeall call(PSIShieldB) pause(90) goto(PSI_Test) }
 		"PSI Shield [8F]":	{ window_closeall call(PSIShieldO) pause(90) goto(PSI_Test) }
-		"Offense up [8B]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
-		"Offense up [8F]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
-		"Def. Shower":		{ window_closeall call(DefenseShower) pause(30) goto(PSI_Test) }
+		"Offense up [8B]":	{ window_closeall call(OffenseUp) pause(30) goto(PSI_Test) }
+		"Offense up [8F]":	{ window_closeall call(OffenseUp) pause(30) goto(PSI_Test) }
+		"Def. shower":		{ window_closeall call(DefenseShower) pause(30) goto(PSI_Test) }
 		"Def. down [8B]":	{ window_closeall call(DefenseDownA) pause(30) goto(PSI_Test) }
 		"Def. down [8F]":	{ window_closeall call(DefenseDownO) pause(30) goto(PSI_Test) }
 		"Hypnosis [8B]":	{ window_closeall call(HypnosisA) pause(30) goto(PSI_Test) }
@@ -450,28 +450,32 @@ Lifeup_Healing_Offenseup:
 	pause(30)
 	eob
 Lifeup:
-	battle_animation(63,0)	// 0x3B, 0x00
+	battle_animation(0,63)
 	pause(5)
-	sound(SND_FREEZE1)	// 59
+	sound(SND_FREEZE1)	// 56
+	pause(20)
+	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
 Healing:
-	battle_animation(75,0)	// 0x3B, 0x00
+	battle_animation(0,75)
 	pause(5)
-	sound(SND_BEEP2)	// 59
+	sound(SND_FREEZE2)	// 57
+	pause(30)
+	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
-Offenseup:
-	battle_animation(59,0)	// 0x3B, 0x00
+OffenseUp:
+	battle_animation(0,59)	// 0x3B, 0x00
 	pause(5)
-	sound(SND_DEFENSEDOWN2)	// 59
+	sound(127)	// 59
 	pause(60)
 	eob
 DefenseShower:
 	pause(20)
-	battle_animation(61,0)	// 0x3D, 0x00
+	battle_animation(0,61)	// 0x3D, 0x00
 	pause(5)
-	sound(SND_STARMASTER)	// 59
+	sound(SND_DEFENSEDOWN2)	// 59
 	pause(60)
 	eob
 //------------------------------------------------------------------
@@ -752,11 +756,10 @@ ShieldOff:
 	eob
 //------------------------------------------------------------------
 QuickUp:
-	//pause(30)
-	//sound(SND_PSI1)	// 29
-	battle_animation(0,76)	// 0x00, 0x05
-	pause(40)
-	battle_animation(76,0)	// 0x27, 0x00
+	pause(20)
+	battle_animation(0,76)	// 0x3D, 0x00
+	pause(5)
+	sound(SND_DEFENSEDOWN2)	// 59
 	pause(60)
 	eob
 //------------------------------------------------------------------

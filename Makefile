@@ -9,12 +9,13 @@ CHECKSUM = d67a8ef36ef616bc39306aa1b486e1bd3047815a
 PATCH_NAME = MaternalBound-Redux
 PATCHED_ROM_NAME = Mother 2.sfc
 PATCH_DIR = Patches
-FLIPS = ./flips
+FLIPS = ./Binaries/flips
+ASAR = ./Binaries/asar
 TIME = `date +'%T, %a %d/%b/%Y'`
 SHA1SUM = `sha1sum $(CLEAN_ROM) | awk '{ print $$1 }'`
 #----------------------------------------------------------------
 # Targets
-all: check_rom check_checksum create_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
+all: check_rom check_checksum create_base_rom compile_sound_driver compile_project create_patch create_debug_symbols create_both_patches finish
 #----------------------------------------------------------------
 # Check if the base ROM exists and has the correct name
 check_rom:
@@ -45,6 +46,15 @@ create_base_rom:
 	else \
 		echo "$(BASE) already exists, proceeding..."; echo; \
 	fi
+#----------------------------------------------------------------
+# Compile the Sound Driver
+# Remove the leftover driver first
+compile_sound_driver:
+	@echo "Compiling Sound Driver..."
+	@$(RM) "Project/Music/Packs/01/engine.bin"
+# Compile and generate the new engine.bin with Asar
+	@$(ASAR) "SPC700/main.asm" "Project/Music/Packs/01/engine.bin"
+	@echo "Sound Driver compilation successful."; echo
 #----------------------------------------------------------------
 # Compile the full CoilSnake Project
 compile_project:
@@ -81,4 +91,4 @@ finish:
 	@echo "Final compilation time: $$(( `date +%s` - $(START) )) seconds"
 	@echo "Redux compilation finished at $(TIME)!"
 #----------------------------------------------------------------
-.PHONY: all check_rom check_checksum create_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
+.PHONY: all check_rom check_checksum create_base_rom compile_sound_driver compile_project create_patch create_debug_symbols create_both_patches finish

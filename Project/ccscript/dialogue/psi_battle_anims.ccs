@@ -60,8 +60,8 @@ l_0xef857e:
 		switch_entry(l_0xef891e)	// PSI Shield E
 		switch_entry(l_0xef8928)	// PSI Shield B
 		switch_entry(l_0xef8932)	// PSI Shield O
-		switch_entry(Offenseup)	// Offense up A
-		switch_entry(Offenseup)	// Offense up O
+		switch_entry(OffenseUp)	// Offense up A
+		switch_entry(OffenseUp)	// Offense up O
 		switch_entry(l_0xef893c)	// Defense down A
 		switch_entry(l_0xef894c)	// Defense down O
 		switch_entry(l_0xef895c)	// Hypnosis A
@@ -397,10 +397,17 @@ Healing:
 	pause(60)
 	eob
 
-Offenseup:
+OffenseUp:
 	battle_animation(59,0)	// 0x3B, 0x00
 	pause(5)
-	sound(SND_DEFENSEDOWN2)	// 59
+	sound(127)
+	pause(60)
+	eob
+
+QuickUp:
+	battle_animation(76,0)	// 0x3B, 0x00
+	pause(5)
+	sound(127)
 	pause(60)
 	eob
 
