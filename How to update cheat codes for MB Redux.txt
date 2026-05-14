@@ -1,0 +1,55 @@
+In order to be able to update cheat codes for MaternalBound Redux, like the one for the ATM Debug menu, we'll have to find the right address in the patched ROM.
+For example, the original Game Genie cheat code for the ATM Debug menu is the following:
+
+	DD6C-71F9
+	6D6C-7199
+	A96C-71B9
+
+Translated into address format when using the cheat code in Snes9x:
+
+	d584a8=00
+	d584a9=80
+	d584aa=c5
+	
+As you can see, what the cheat code does is modify 3 specific bytes in the original ROM, specifically, those 3 bytes are the pointer for ATM card's text description, which the cheat code modifies so it instead redirects to the address where the Debug menu text is in the game.
+In EarthBound, those addresses $D584A8 - $DA84AA are all in SNES format, to convert these into PC format to check the address in a Hex editor (like HxD), we simply substract C00000 from the address. So with the substraction, these are the PC addresses for searching in HxD:
+
+	1584A8 - 1584AA
+
+With the exact addresses, we open up the original EarthBound ROM in HxD (or your preferred Hex editor) and go to address 1584A8, you should find the following:
+
+	F2 FB C9 00
+
+Those 4 bytes are the original text pointer for the ATM card's description.
+To update the cheat code for Snes9x, we need to do an Hex search in the ROM for those 4 specific bytes (make sure that the search is for Hex values, NOT for text strings!)
+Once the search is done, it should give you exactly one match in the ROM. Grab the address for where the F2 begins, in one of my compilations, this was at address 38FA49.
+To convert that value to SNES format to update our cheat code, we now add C00000 to it, giving us $F8FA49.
+
+Now with that information, we can go ahead and update the addresses from the cheat code in Snes9x. Go to Options -> Cheats, and find your Debug menu cheat code.
+It should be separated into 3 cheats, so select each one and update them accordingly:
+
+	d584a8=00
+	d584a9=80
+	d584aa=c5
+
+Now we put out new address that we found in our search, which was F8FA40 (in SNES format and after the conversion we just made):
+
+	f8fa49=00
+	f8fa4a=80
+	f8fa4b=c5
+
+That should be our updated Debug menu cheat code so it works properly with MaternalBound Redux!
+This method should also apply to any other EarthBound hack, no matter how hard the author tries to obfuscate it, so use this as you will!
+
+Now if you want, you can convert that to a Game Genie format, but that requires external tools which Snes9x doesn't have.
+Instead, you can use a website like the Game Genie Encoder/Decoder:
+	https://games.technoplaza.net/ggencoder/js/
+
+You put the address in the "Address" text box, and the number after the = sign inside the "Value" text box, you should get the following based on the example from above:
+
+	f8fa49=00	->	DDE0-8314
+	f8fa4a=80	->	6DE0-83C4
+	f8fa4b=c5	->	A9E0-8334
+
+That should give you Game Genie cheat codes for use in any emulator of your preference!
+Enjoy!

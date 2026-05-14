@@ -546,7 +546,7 @@ l_0xc97d75:
 	"  stuck to the enemy!" promptw
 	eob
 
-l_0xc97da3:
+l_0xc97da3:	// Tofu machine
 	newline
 	"@{user}{get_action_arg}{swap} used" linebreak
 	"  the {itemname(0)}!" next
@@ -603,7 +603,7 @@ l_0xc97e24:
 	promptw
 	eob
 
-l_0xc97e9e:
+l_0xc97e9e:	// Bazooka & Heavy bazooka
 	newline
 	"@{user}{get_action_arg}{swap} fired" linebreak
 	"  the {itemname(0)}!"
@@ -2915,7 +2915,7 @@ l_0xef8e27:
 	"  {itemname(0)}!" promptw
 	eob
 
-l_0xef8e3c:
+l_0xef8e3c:	// Counter PSI-Unit
 	newline
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!"
@@ -2927,7 +2927,7 @@ l_0xef8e3c:
 	promptw
 	eob
 
-l_0xef8e5e:
+l_0xef8e5e:	// HP-Sucker
 	newline
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!"
@@ -2938,7 +2938,7 @@ l_0xef8e5e:
 	promptw
 	eob
 
-l_0xef8e7e:
+l_0xef8e7e:	// Hungry HP-Sucker
 	newline
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!"
@@ -2949,13 +2949,25 @@ l_0xef8e7e:
 	promptw
 	eob
 
-l_0xef8e9e:
+l_0xef8e9e:	// Shield killer
 	newline
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!"
 	pause(30)
 	sound(SND_STARMASTER)	// 99
 	battle_animation(0,27)	// 0x00, 0x1B
+	pause(60)
+	promptw
+	eob
+
+Defense_Shower_Battle_Anim:
+	newline
+	"@{user}{get_action_arg}{swap} used the" linebreak
+	"  {itemname(0)}!"
+	pause(20)
+	battle_animation(61,0)	// 0x00, 0x3D
+	pause(5)
+	sound(SND_STARMASTER)	// 59
 	pause(60)
 	promptw
 	eob

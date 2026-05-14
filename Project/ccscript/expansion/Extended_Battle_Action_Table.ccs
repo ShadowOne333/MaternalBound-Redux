@@ -511,7 +511,7 @@ BattleAction_Table:{
 	Battle_Action(166, Enemy, One, Item, 0, 0xC97F56, BTLACT_HANDSTRAP_BAG)
 	Battle_Action(167, Enemy, One, Item, 0, 0xC97EB7, BTLACT_BOMB)
 	Battle_Action(168, Enemy, One, Item, 0, 0xC97EB7, BTLACT_SUPER_BOMB)
-	Battle_Action(169, Enemy, Random, Item, 0, 0xC97D75, BTLACT_SOLIDIFY)
+	Battle_Action(169, Enemy, Random, Item, 0, 0xC97D75, BTLACT_SOLIDIFY)	// Slime generator
 	Battle_Action(170, Enemy, Random, Item, 0, 0xC97DA3, BTLACT_YOGURT_DISPENSER)
 	Battle_Action(171, Enemy, Random, Item, 0, 0xC97ED1, BTLACT_SNAKE)
 	Battle_Action(172, Enemy, Random, Item, 0, 0xC97EB7, BTLACT_SOLIDIFY)
@@ -526,7 +526,7 @@ BattleAction_Table:{
 	Battle_Action(181, Enemy, All, Item, 0, 0xC97D21, BTLACT_RUST_PROMOTER_DX)
 	Battle_Action(182, Party, One, Item, 0, 0xEF8E27, BTLACT_SUDDEN_GUTS_PILL)
 	Battle_Action(183, Party, One, Item, 0, 0xEF8E27, BTLACT_DEFENSE_SPRAY)
-	Battle_Action(184, Party, All, Item, 0, 0xEF8E27, BTLACT_DEFENSE_SHOWER)
+	Battle_Action(184, Party, All, Item, 0, battle_text.Defense_Shower_Battle_Anim, BTLACT_DEFENSE_SHOWER)
 	Battle_Action(185, Party, None, Item, 0, 0xEF8E27, BTLACT_TELEPORT_BOX)
 	Battle_Action(186, Party, None, Item, 0, 0xC9FD82, BTLACT_NULL2)
 	Battle_Action(187, Party, None, Item, 0, 0xC9FDBB, BTLACT_NULL2)
@@ -589,7 +589,7 @@ BattleAction_Table:{
 	Battle_Action(244, Party, None, Other, 0, 0xEF7415, BTLACT_MASTER_BARF_DEATH)
 	Battle_Action(245, Party, None, Other, 0, 0xC77EFF, BTLACT_ENEMY_EXTENDER)
 	Battle_Action(246, Enemy, One, Physical_Unaffected, 0, 0xC77EFF, UNKNOWN_ROUTINE_8)
-	Battle_Action(247, Enemy, All, Other, 0, 0xEF8E27, UNKNOWN_ROUTINE_10)
+	Battle_Action(247, Enemy, All, Other, 0, 0xEF8E27, UNKNOWN_ROUTINE_10)	// Neutralizer
 	Battle_Action(248, Enemy, All, Other, 0, 0xEF8D9F, UNKNOWN_ROUTINE_10)
 	Battle_Action(249, Party, One, Item, 0, 0xC97B6B, EAT_FOOD)
 	Battle_Action(250, Party, All, Item, 0, 0xC97C7B, EAT_FOOD)
@@ -652,8 +652,8 @@ BattleAction_Table:{
 	Battle_Action(307, Enemy, All, Other, 0, 0xEF8F4A, BTLACT_PSI_FLASH_G)
 	Battle_Action(308, Party, None, Other, 0, 0xC9EE2F, BTLACT_NULL4)
 	Battle_Action(309, Enemy, None, Other, 0, 0xEF8F91, BTLACT_NULL4)
-	Battle_Action(310, Enemy, One, Item, 0, 0xC97E9E, BTLACT_BOMB)
-	Battle_Action(311, Enemy, One, Item, 0, 0xC97E9E, BTLACT_SUPER_BOMB)
+	Battle_Action(310, Enemy, One, Item, 0, 0xC97E9E, BTLACT_BOMB)		// Bazooka
+	Battle_Action(311, Enemy, One, Item, 0, 0xC97E9E, BTLACT_SUPER_BOMB)	// Heavy bazooka
 	Battle_Action(312, Party, None, Other, 0, 0xC9EE68, BTLACT_NULL4)
 	Battle_Action(313, Party, None, Other, 0, 0xEF8D4C, BTLACT_NULL4)
 	Battle_Action(314, Party, None, Other, 0, 0xEF8CDD, BTLACT_NULL4)

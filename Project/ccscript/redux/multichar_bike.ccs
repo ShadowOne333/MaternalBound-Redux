@@ -10,6 +10,7 @@ define CREATE_ENTITY	= 0xC01E49
 define DESTROY_ENTITY	= 0xC02140
 define WAIT_UNTIL_NEXT_FRAME	= 0xC08756
 
+define NEW_ENTITY_VAR0	= 0x0A38
 define NEW_ENTITY_VAR1	= 0x0A3A
 define PENDING_INTERACTIONS	= 0x5D9A
 
@@ -153,10 +154,7 @@ _Multiple_Chars:
 	JMP	(_Poo_Sprite)	// Poo = 4
 
 _Ness_Sprite:
-	LDA_i	(0)	// char_index=0 (Ness)
-	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(477)	// Ness in bike+side car sprite ID
-	LDY_i	(24)	// Ness' entity ID
 	JSL	(CREATE_ENTITY)
 	JML	(0xC03CC4)	// Exit back and continue with Ness' entity flags (original flags)
 
@@ -225,6 +223,7 @@ Apply_Entity_Flags_27: {	// Poo's entity flags
 	STA_a	(0x2B2C)
 	JML	(0xC03CE5)
 }
+
 //------------------------------------------------------------------
 //	GET_OFF_BIKE routine modifications
 //------------------------------------------------------------------
@@ -278,17 +277,6 @@ ROM[0xC03D63] = {
 // C03CA7/C03CA9 zeroes both VAR0 and VAR1 before this hook, setting VAR1=0 (Ness).
 // We must set VAR1 = leader's 0-based char index so the bike follows the right character.
 Multichar_Off_Bike: {
-	LDA_a	(0x98A3)	// LDA GAME_STATE+game_state::party_count
-	AND_i	(0x00FF)
-	CMP_i	(1)
-	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
-
-_Ness_Only:	// If there's only one character, use the normal bike sprite (7)
-	LDA_i	(7)		// Normal Ness+Bike sprite ID
-	JSL	(CREATE_ENTITY)
-	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
-
-_Multiple_Chars:
 	// Check who the party leader is
 	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
 	AND_i	(0x00FF)
@@ -301,8 +289,6 @@ _Multiple_Chars:
 	JMP	(_Poo_Sprite)	// Poo = 4
 
 _Ness_Sprite:
-	LDA_i	(0)	// char_index=0 (Ness)
-	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(1)	// Normal Ness sprite
 	LDY_i	(24)	// Ness' entity ID
 	JSL	(CREATE_ENTITY)
@@ -310,6 +296,7 @@ _Ness_Sprite:
 
 _Paula_Sprite:
 	LDA_i	(1)	// char_index=1 (Paula)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(2)	// Normal Paula sprite
 	LDY_i	(25)	// Paula's entity ID
@@ -318,6 +305,7 @@ _Paula_Sprite:
 
 _Jeff_Sprite:
 	LDA_i	(2)	// char_index=2 (Jeff)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(3)	// Normal Jeff sprite
 	LDY_i	(26)	// Jeff's entity ID
@@ -327,6 +315,7 @@ _Jeff_Sprite:
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
 	LDA_i	(3)	// char_index=3 (Poo)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(4)    // Normal Poo sprite
 	LDY_i	(27)	// Poo's entity ID
@@ -414,4 +403,43 @@ Apply_Entity_Flags_27_Off: {	// Poo's entity flags
 
 _Return:
 	JML	(0xC03D9F)
+}
+//------------------------------------
+// Entity load for getting off bike
+ROM[0xC03D98] = {
+	JML	(Entity_Check)
+	NOP NOP NOP
+}
+
+Entity_Check: {
+	// Check who the party leader is
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Sprite)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Sprite)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Sprite)
+	JMP	(_Poo_Sprite)	// Poo = 4
+
+_Ness_Sprite:
+	LDA_i	(24)	// Ness in bike+side car sprite ID
+	JMP	(_Return)
+
+_Paula_Sprite:
+	LDA_i	(25)	// Paula in bike+side car sprite ID
+	JMP	(_Return)
+
+_Jeff_Sprite:
+	LDA_i	(26)	// Jeff in bike+side car sprite ID
+	JMP	(_Return)
+
+_Poo_Sprite:
+	// If none of the previous checks hit, then Poo's the leader
+	LDA_i	(27)	// Poo in bike+side car sprite ID
+
+_Return:
+	JSL	(0xC0A780)
+	JML	(0xC03D9F)	// @UNKNOWN3, return to where the original code should
 }

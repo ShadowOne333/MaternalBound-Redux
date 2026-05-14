@@ -94,7 +94,7 @@ PSI_Test:
 		"PSI Shield [8F]":	{ window_closeall call(PSIShieldO) pause(90) goto(PSI_Test) }
 		"Offense up [8B]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
 		"Offense up [8F]":	{ window_closeall call(Offenseup) pause(30) goto(PSI_Test) }
-		"Defense Shower":	{ window_closeall call(DefenseShower) pause(30) goto(PSI_Test) }
+		"Def. Shower":		{ window_closeall call(DefenseShower) pause(30) goto(PSI_Test) }
 		"Def. down [8B]":	{ window_closeall call(DefenseDownA) pause(30) goto(PSI_Test) }
 		"Def. down [8F]":	{ window_closeall call(DefenseDownO) pause(30) goto(PSI_Test) }
 		"Hypnosis [8B]":	{ window_closeall call(HypnosisA) pause(30) goto(PSI_Test) }
@@ -130,8 +130,8 @@ PSI_Test:
 		"Sing 5":		{ window_closeall call(Sing_5) pause(60) goto(PSI_Test) }
 		"Sing 6":		{ window_closeall call(Sing_6) pause(60) goto(PSI_Test) }
 		"Sing 7":		{ window_closeall call(Sing_7) pause(60) goto(PSI_Test) }
-		"Sing 8":		{ window_closeall call(Sing_8) pause(60) goto(PSI_Test) }*/
-		"Sing 9":		{ window_closeall call(Sing_9) pause(60) goto(PSI_Test) }
+		"Sing 8":		{ window_closeall call(Sing_8) pause(60) goto(PSI_Test) }
+		"Sing 9":		{ window_closeall call(Sing_9) pause(60) goto(PSI_Test) }*/
 		"Sing 10":		{ window_closeall call(Sing_10) pause(60) goto(PSI_Test) }
 		"Sing End":		{ window_closeall call(Sing_End) pause(60) goto(PSI_Test) }
 	}
@@ -450,35 +450,28 @@ Lifeup_Healing_Offenseup:
 	pause(30)
 	eob
 Lifeup:
-	//pause(30)
-	//sound(SND_PSI1)	// 29
-	battle_animation(0,63)	// 0x00, 0x05
-	pause(40)
-	battle_animation(63,0)	// 0x27, 0x00
+	battle_animation(63,0)	// 0x3B, 0x00
+	pause(5)
+	sound(SND_FREEZE1)	// 59
 	pause(60)
 	eob
 Healing:
-	//pause(30)
-	//sound(SND_PSI1)	// 29
-	battle_animation(0,75)	// 0x00, 0x05
-	pause(40)
-	battle_animation(75,0)	// 0x27, 0x00
+	battle_animation(75,0)	// 0x3B, 0x00
+	pause(5)
+	sound(SND_BEEP2)	// 59
 	pause(60)
 	eob
 Offenseup:
-	//pause(30)
-	//sound(SND_PSI1)	// 29
-	battle_animation(0,59)	// 0x00, 0x05
-	pause(40)
-	battle_animation(59,0)	// 0x27, 0x00
+	battle_animation(59,0)	// 0x3B, 0x00
+	pause(5)
+	sound(SND_DEFENSEDOWN2)	// 59
 	pause(60)
 	eob
 DefenseShower:
-	//pause(30)
-	//sound(SND_PSI1)	// 29
-	battle_animation(0,61)	// 0x00, 0x05
-	pause(40)
-	battle_animation(61,0)	// 0x27, 0x00
+	pause(20)
+	battle_animation(61,0)	// 0x3D, 0x00
+	pause(5)
+	sound(SND_STARMASTER)	// 59
 	pause(60)
 	eob
 //------------------------------------------------------------------
