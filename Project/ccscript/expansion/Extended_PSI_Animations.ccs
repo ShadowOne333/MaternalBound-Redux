@@ -50,13 +50,13 @@ define PSI_Palette_Table	= 0xF20600
 define PSI_ANIM_GFX_SET_1	= 0X2E19	// 0xAC25
 define PSI_ANIM_GFX_SET_2	= 0X3875	// 0xB613
 define PSI_ANIM_GFX_SET_3	= 0X3141	// 0xDB27
-define PSI_ANIM_GFX_SET_4	= 0X59A0	// 0xE31D
+define PSI_ANIM_GFX_SET_4	= 0X3F1B	// 0xE31D
 // Expanded GFX tilesets
-define PSI_ANIM_GFX_SET_5	= 0X44D6
-define PSI_ANIM_GFX_SET_6	= 0X5153
-define PSI_ANIM_GFX_SET_7	= 0x3F1B
-define PSI_ANIM_GFX_SET_8	= 0x5C90
-define PSI_ANIM_GFX_SET_9	= 0X4C3F
+define PSI_ANIM_GFX_SET_5	= 0X420B
+define PSI_ANIM_GFX_SET_6	= 0X4F2F
+define PSI_ANIM_GFX_SET_7	= 0x4974
+define PSI_ANIM_GFX_SET_8	= 0x577C
+define PSI_ANIM_GFX_SET_9	= 0X5D8D
 define PSI_ANIM_GFX_SET_10	= 0x62A1
 // Targets 
 define SINGLE_TARGET		= 0
@@ -746,31 +746,31 @@ ROM[PSI_Config_Table] = {
 	byte 70
 	short 0x0D60
 
-	// 57 - Unused
-	short PSI_ANIM_GFX_SET_1
-	byte 5
+	// 57 - Bomb
+	short PSI_ANIM_GFX_SET_3
+	byte 3
 	byte 3
 	byte 1
 	byte 3
-	byte 26
+	byte 23
 	byte SINGLE_TARGET
-	byte 60
-	byte 90
-	short 0x1140
+	byte 10
+	byte 40
+	short 0x039C
 
-	// 58
-	short PSI_ANIM_GFX_SET_1
-	byte 5
+	// 58 - Super Bomb
+	short PSI_ANIM_GFX_SET_3
+	byte 3
 	byte 3
 	byte 1
 	byte 3
 	byte 26
 	byte ALL_ENEMIES_TARGET
-	byte 60
-	byte 90
-	short 0x1140
+	byte 10
+	byte 40
+	short 0x039C
 
-	// 59
+	// 59 - Unused
 	short PSI_ANIM_GFX_SET_1
 	byte 3
 	byte 3
@@ -917,36 +917,36 @@ ROM[PSI_Anim_Pointer_Table] = {
 	long 0xCC6898
 	long 0xCC6ADB
 	long 0xCC6CB9
-	long 0xCC6E10
-	long 0xCC6F1A
-	long 0xCC714A
-	long 0xCC74BD
-	long 0xCC78C4
-	long 0xCC800D
-	long 0xCC84F2
-	long 0xCC85EE
-	long 0xCC87AC
-	long 0xCC89FC
-	long 0xCC9188
-	long 0xCC92AE
-	long 0xCC93D8
-	long 0xCC957D
-	long 0xCC9BB2
-	long 0xCCA1AB
-	long 0xCCAB1B
-	long 0xCCB95E
-	long 0xCCC14A
-	long 0xCCC393
-	long 0xCCC900
-	long 0xCCCB41
-	long 0xCCCD86
-	long 0xCCD0F1
-	long 0xCCD2A4
-	long 0xCCD854
-	long 0xCCDB44
-	long 0xCCE1E1
-	long 0xCCEC84
-	long 0xCCED64
+	long 0xCC6E0C
+	long 0xCC6F16
+	long 0xCC7146
+	long 0xCC74B9
+	long 0xCC78C0
+	long 0xCC8009
+	long 0xCC84EE
+	long 0xCC85EA
+	long 0xCC87A8
+	long 0xCC89F8
+	long 0xCC9184
+	long 0xCC92AA
+	long 0xCC93D4
+	long 0xCC9579
+	long 0xCC9BAE
+	long 0xCCA1A7
+	long 0xCCAB17
+	long 0xCCB95A
+	long 0xCCC146
+	long 0xCCC38F
+	long 0xCCC8FC
+	long 0xCCCB3D
+	long 0xCCCD82
+	long 0xCCD0ED
+	long 0xCCD2A0
+	long 0xCCD850
+	long 0xCCDB40
+	long 0xCCE1DD
+	long 0xCCEC80
+	long 0xCCED60
 
 	// Duplicated pointer table
 	long 0xCCF1E5
@@ -968,21 +968,21 @@ ROM[PSI_Anim_Pointer_Table] = {
 	long 0xF23CDB
 	long 0xF23D54
 	long 0xF23DD5
-	long 0xCCEFFF
+	long 0xCCEFFB
 	long 0xF23E5A
 	long 0xF241CC
 	long 0xF24833
-	long 0xF24A7C
-	long 0xF24FE9
-	long 0xF25232
-	long 0xF2547B
-	long 0xF257E6
-	long 0xF25999
-	long 0xF25F49
-	long 0xF26239
-	long 0xF268D6
-	long 0xF27379
-	long 0xF27459
+	long 0xF249AC
+	long 0xF24BDB
+	long 0xF24E24
+	long 0xF2506D
+	long 0xF253D8
+	long 0xF2558B
+	long 0xF25B3B
+	long 0xF25E2B
+	long 0xF264C8
+	long 0xF26F6B
+	long 0xF2704B
 
 	/*
 	long 0xCC5EA3
@@ -1364,16 +1364,16 @@ ROM[PSI_Palette_Table] = {
 	short 0x47E9
 	short 0x2F80
 	short 0x1A40
-	// 57
+	// 57 - Bomb
 	short 0x0000
-	short 0x001C
-	short 0x028C
-	short 0x7240
-	// 58
+	short 0x039F
 	short 0x0000
-	short 0x001C
-	short 0x028C
-	short 0x7240
+	short 0x01D8
+	// 58 - Super Bomb
+	short 0x0000
+	short 0x039F
+	short 0x0000
+	short 0x01D8
 	// 59
 	short 0x0000
 	short 0x7B0A

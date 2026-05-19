@@ -131,9 +131,11 @@ PSI_Test:
 		"Sing 6":		{ window_closeall call(Sing_6) pause(60) goto(PSI_Test) }
 		"Sing 7":		{ window_closeall call(Sing_7) pause(60) goto(PSI_Test) }
 		"Sing 8":		{ window_closeall call(Sing_8) pause(60) goto(PSI_Test) }
-		"Sing 9":		{ window_closeall call(Sing_9) pause(60) goto(PSI_Test) }*/
-		"Sing 10":		{ window_closeall call(Sing_10) pause(60) goto(PSI_Test) }
+		"Sing 9":		{ window_closeall call(Sing_9) pause(60) goto(PSI_Test) }
+		"Sing 10":		{ window_closeall call(Sing_10) pause(60) goto(PSI_Test) }*/
 		"Sing End":		{ window_closeall call(Sing_End) pause(60) goto(PSI_Test) }
+		"Bomb":			{ window_closeall call(Bomb) pause(60) goto(PSI_Test) }
+		"Super Bomb":		{ window_closeall call(SuperBomb) pause(60) goto(PSI_Test) }
 	}
 	//window_close(14)
 	window_closetop
@@ -835,4 +837,28 @@ Sing_End: {
 	sing_animation(73, 150)
 	eob
 }
+//------------------------------------------------------------------
+Bomb:
+	pause(30)
+	sound(SND_DEFENSEDOWN2)	// 59
+	battle_animation(0,77)	// 0x00, 0x4D
+	pause(20)
+	battle_animation(33,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE2)	// 91
+	pause(19)
+	sound(SND_FIRE2)	// 91
+	eob
+//------------------------------------------------------------------
+SuperBomb:
+	pause(30)
+	sound(SND_DEFENSEDOWN2)	// 59
+	battle_animation(0,78)	// 0x00, 0x4E
+	pause(20)
+	battle_animation(34,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE4)	// 91
+	pause(19)
+	sound(SND_FIRE4)	// 91
+	eob
 //------------------------------------------------------------------
