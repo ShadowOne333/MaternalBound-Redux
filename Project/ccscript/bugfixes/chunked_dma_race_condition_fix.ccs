@@ -1,0 +1,16 @@
+// Fix that VERY WEIRD race condition the HAL Library has with the Chunked DMA handler (by Catador)
+// The fix: instead of asking "are there still bytes pending to be DMA'd?", we call a function that waits until the DMA queue is empty
+
+import "../essential/asm65816.ccs"
+
+define WAIT_DMA_QUEUE = 0xC08F8B
+
+/*
+ * C0/85DE: AD 99 00     LDA DMA_Total
+ * C0/85E1: D0 FB        BNE $85DE
+*/
+
+ROM[0xC085DE] = {
+    JSL (WAIT_DMA_QUEUE)
+    NOP
+}

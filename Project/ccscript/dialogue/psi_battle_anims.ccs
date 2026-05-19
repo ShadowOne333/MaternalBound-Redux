@@ -384,30 +384,34 @@ l_0xef88e9:	// Reused for Lifeup, Healing and Offense up
 	eob
 
 Lifeup:
-	battle_animation(63,0)	// 0x3B, 0x00
+	battle_animation(63,0)	// 0x3F, 0x00
 	pause(5)
-	sound(SND_FREEZE1)	// 59
+	sound(SND_FREEZE1)	// 56
+	pause(20)
+	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
 
 Healing:
-	battle_animation(75,0)	// 0x3B, 0x00
+	battle_animation(75,0)	// 0x4B, 0x00
 	pause(5)
-	sound(SND_BEEP2)	// 59
+	sound(SND_FREEZE2)	// 57
+	pause(30)
+	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
 
 OffenseUp:
 	battle_animation(59,0)	// 0x3B, 0x00
 	pause(5)
-	sound(127)
+	sound(127)	// 127
 	pause(60)
 	eob
 
 QuickUp:
-	battle_animation(76,0)	// 0x3B, 0x00
+	battle_animation(76,0)	// 0x4C, 0x00
 	pause(5)
-	sound(127)
+	sound(127)	// 127
 	pause(60)
 	eob
 

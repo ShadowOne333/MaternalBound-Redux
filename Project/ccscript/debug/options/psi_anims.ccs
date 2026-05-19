@@ -449,33 +449,37 @@ StarstormO:
 Lifeup_Healing_Offenseup:
 	pause(30)
 	eob
+
 Lifeup:
-	battle_animation(0,63)
+	battle_animation(0,63)	// 0x00, 0x3F
 	pause(5)
 	sound(SND_FREEZE1)	// 56
 	pause(20)
 	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
+
 Healing:
-	battle_animation(0,75)
+	battle_animation(0,75)	// 0x00, 0x4B
 	pause(5)
 	sound(SND_FREEZE2)	// 57
 	pause(30)
 	sound(SND_BEEP2)	// 121
 	pause(60)
 	eob
+
 OffenseUp:
-	battle_animation(0,59)	// 0x3B, 0x00
+	battle_animation(0,59)	// 0x00, 0x3B
 	pause(5)
-	sound(127)	// 59
+	sound(127)	// 127
 	pause(60)
 	eob
+
 DefenseShower:
 	pause(20)
-	battle_animation(0,61)	// 0x3D, 0x00
+	battle_animation(0,61)	// 0x00, 0x3D
 	pause(5)
-	sound(SND_DEFENSEDOWN2)	// 59
+	sound(127)	// 127
 	pause(60)
 	eob
 //------------------------------------------------------------------
@@ -757,9 +761,9 @@ ShieldOff:
 //------------------------------------------------------------------
 QuickUp:
 	pause(20)
-	battle_animation(0,76)	// 0x3D, 0x00
+	battle_animation(0,76)	// 0x00, 0x4C
 	pause(5)
-	sound(SND_DEFENSEDOWN2)	// 59
+	sound(127)	// 127
 	pause(60)
 	eob
 //------------------------------------------------------------------

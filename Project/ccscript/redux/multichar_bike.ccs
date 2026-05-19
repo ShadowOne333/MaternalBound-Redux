@@ -89,18 +89,18 @@ ROM[0xC03C8E] = {
 }
 
 Destroy_Leader_Entity: {
-	// Destroy ALL party entity slots (24-27) before creating the bike entity.
-	// This also hides followers so they don't trail behind the bike.
-	// DESTROY_ENTITY is safe on already-free slots.
+	// Destroy ALL party entity slots before creating the bike entity.
+	// This hides followers (including Teddy Bear at slot 28) so they
+	// don't trail behind the bike. DESTROY_ENTITY is safe on free slots.
 	LDA_i	(24)	// Ness entity
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(25)	// Paula entity
+	LDA_i	(25)	// Paula entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(26)	// Jeff entity
+	LDA_i	(26)	// Jeff entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(27)	// Poo entity
+	LDA_i	(27)	// Poo entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(28)	// Check for Teddy bears
+	LDA_i	(28)	// Teddy Bear / Super Plush Bear entity slot
 	JSL	(DESTROY_ENTITY)
 	JML	(0xC03C95)
 }
@@ -221,17 +221,17 @@ ROM[0xC03D25] = {
 }
 
 Destroy_Leader_Entity_Off: {
-	// Destroy ALL party entity slots (24-27) before restoring walking entities.
-	// DESTROY_ENTITY is safe on already-free slots.
-	LDA_i	(24)	// Ness entity
+	// Destroy ALL party entity slots before restoring walking entities.
+	// This includes Teddy Bear at slot 28. DESTROY_ENTITY is safe on free slots.
+	LDA_i	(24)	// Ness entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(25)	// Paula entity
+	LDA_i	(25)	// Paula entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(26)	// Jeff entity
+	LDA_i	(26)	// Jeff entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(27)	// Poo entity
+	LDA_i	(27)	// Poo entity slot
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(28)	// Check for Teddy bears
+	LDA_i	(28)	// Teddy Bear / Super Plush Bear entity slot
 	JSL	(DESTROY_ENTITY)
 	JML	(0xC03D2C)	// Continue to the rest of the original code
 }

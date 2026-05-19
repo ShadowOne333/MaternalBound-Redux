@@ -286,15 +286,9 @@ l_0xc7c6c9:
 	"  the {swap}{itemname(0)}." end
 
 l_0xc7c6f1:
-	/*get_action_arg swap
-	if result_is(BICYCLE) {	// 176
-		set(flg_BikeCantNormallyBeUsed)
-		goto(keyitems.BicycleStart) }
-	else {*/
 	get_action_arg swap
 	"@The {itemname(0)} can't be used here." wait
 	eob
-	//}
 
 l_0xc7c705:
 	store_registers

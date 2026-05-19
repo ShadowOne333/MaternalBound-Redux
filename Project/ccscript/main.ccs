@@ -9,6 +9,7 @@ import "data_mem_overwrite.ccs"
 //------------------------------------------------------------------
 // Bugfixes
 import "bugfixes/brainstone_fix.ccs"
+import "bugfixes/chunked_dma_race_condition_fix.ccs"
 import "bugfixes/crying_fix.ccs"
 import "bugfixes/gameover_oss_fix.ccs"
 import "bugfixes/guts_fix.ccs"
