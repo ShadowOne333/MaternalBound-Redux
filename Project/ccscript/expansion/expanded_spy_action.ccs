@@ -1,0 +1,50 @@
+// Expand the Spy battle action to also check for Speed
+
+import "../essential/asm65816.ccs"
+
+define DISPLAY_TEXT_WAIT	= 0xC1DC66
+
+define CURRENT_TARGET	= 0xA972
+
+define BATTLER_OFFENSE	= 0x0026
+define BATTLER_DEFENSE	= 0x0028
+define BATTLER_SPEED	= 0x002A
+
+define MSG_BTL_CHECK_DEFENSE	= battle_text.l_0xef69ff
+define MSG_BTL_CHECK_SPEED	= battle_text.Spy_Speed
+
+ROM[0xC28798] = {
+	JML	(Spy_Expansion)
+	NOP NOP
+}
+
+Spy_Expansion: {
+	// Original code for checking Defense
+	ASMLoadAddress0E	(MSG_BTL_CHECK_DEFENSE)
+	LDX_a	(CURRENT_TARGET)
+	LDA_x	(BATTLER_DEFENSE)
+	STA_d	(0x06)	// STORE_INT1632 @VIRTUAL06
+	STZ_d	(0x08)	// STORE_INT1632 @VIRTUAL06
+	LDA_d	(0x06)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	STA_d	(0x12)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	LDA_d	(0x08)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	STA_d	(0x14)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	JSL	(DISPLAY_TEXT_WAIT)
+
+	// Custom code to add Speed into the checks
+	ASMLoadAddress0E	(MSG_BTL_CHECK_SPEED)
+	LDX_a	(CURRENT_TARGET)
+	LDA_x	(BATTLER_SPEED)
+	STA_d	(0x06)	// STORE_INT1632 @VIRTUAL06
+	STZ_d	(0x08)	// STORE_INT1632 @VIRTUAL06
+	LDA_d	(0x06)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	STA_d	(0x12)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	LDA_d	(0x08)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	STA_d	(0x14)	// MOVE_INT @VIRTUAL06, @LOCAL01
+	JSL	(DISPLAY_TEXT_WAIT)
+
+	// Return to the original code so Spy continues normally
+	JML	(0xC287B8)
+}
+
+

@@ -805,6 +805,11 @@ l_0xef69ff:
 	"@Defense is {delta}!" promptw
 	eob
 
+Spy_Speed:
+	newline
+	"@Speed is {delta}!" promptw
+	eob
+
 l_0xef6a0d:
 	newline
 	"@Vulnerable to PK Fire!" promptw
