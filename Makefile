@@ -41,8 +41,9 @@ check_checksum:
 create_base_rom:
 	@if [ ! -f $(BASE) ]; then \
 		echo "Base ROM ($(BASE)) not found, creating it..."; \
-		coilsnake-cli patchrom $(CLEAN_ROM) $(BASE) "Patches/FixedPSIAnims.ebp" false; echo; \
-		coilsnake-cli expand $(BASE) false; echo; \
+#		coilsnake-cli patchrom $(CLEAN_ROM) $(BASE) "Patches/FixedPSIAnims.ebp" false; echo; \
+#		coilsnake-cli expand $(BASE) false; echo; \
+		$(FLIPS) -a "$(PATCH_DIR)/FixedPSIAnims.bps" "$(CLEAN_ROM)" "PSIAnimsBase.sfc"; echo; \
 	else \
 		echo "$(BASE) already exists, proceeding..."; echo; \
 	fi

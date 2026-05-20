@@ -48,14 +48,14 @@ define PSI_Palette_Table	= 0xF20600
 // Defines for Config table //
 // GFX tilesets
 define PSI_ANIM_GFX_SET_1	= 0X2E19	// 0xAC25
-define PSI_ANIM_GFX_SET_2	= 0X53F7	// 0xB613
-define PSI_ANIM_GFX_SET_3	= 0X3141	// 0xDB27
-define PSI_ANIM_GFX_SET_4	= 0X5A9D	// 0xE31D
+define PSI_ANIM_GFX_SET_2	= 0x3141	// 0xB613
+define PSI_ANIM_GFX_SET_3	= 0X3DA2	// 0xDB27
+define PSI_ANIM_GFX_SET_4	= 0X4C3F	// 0xE31D
 // Expanded GFX tilesets
-define PSI_ANIM_GFX_SET_5	= 0X3875
-define PSI_ANIM_GFX_SET_6	= 0X4BAA
-define PSI_ANIM_GFX_SET_7	= 0x3FDE
-define PSI_ANIM_GFX_SET_8	= 0x4599
+define PSI_ANIM_GFX_SET_5	= 0X44D6
+define PSI_ANIM_GFX_SET_6	= 0X4F2F
+define PSI_ANIM_GFX_SET_7	= 0x37E7
+define PSI_ANIM_GFX_SET_8	= 0x577C
 define PSI_ANIM_GFX_SET_9	= 0X5D8D
 define PSI_ANIM_GFX_SET_10	= 0x62A1
 // Targets 
