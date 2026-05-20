@@ -603,7 +603,15 @@ l_0xc97e24:
 	promptw
 	eob
 
-Bazooka:	// l_0xc97e9e
+l_0xc97e9e:
+	newline
+	"@{user}{get_action_arg}{swap} fired" linebreak
+	"  the {itemname(0)}!"
+	sound(SND_MISSILE)	// 70
+	promptw
+	eob
+
+Bazooka_Anim:	// l_0xc97e9e
 	newline
 	"@{user}{get_action_arg}{swap} fired" linebreak
 	"  the {itemname(0)}!"
@@ -620,7 +628,7 @@ Bazooka:	// l_0xc97e9e
 	promptw
 	eob
 
-Heavy_Bazooka:
+Heavy_Bazooka_Anim:
 	newline
 	"@{user}{get_action_arg}{swap} fired" linebreak
 	"  the {itemname(0)}!"
@@ -642,6 +650,42 @@ l_0xc97eb7:
 	"@{user}{get_action_arg}{swap} threw" linebreak
 	"  the {itemname(0)}!"
 	sound(SND_MISSILE)	// 70
+	promptw
+	eob
+
+Bomb_Anim:	// l_0xc97eb7
+	newline
+	"@{user}{get_action_arg}{swap} threw" linebreak
+	"  the {itemname(0)}!"
+	pause(20)
+	battle_animation(0,77)	// 0x00, 0x4D
+	pause(5)
+	sound(SND_MISSILE)	// 70
+	pause(10)
+	battle_animation(33,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE2)	// 52
+	pause(19)
+	sound(SND_FIRE2)	// 52
+	promptw
+	eob
+	promptw
+	eob
+
+Super_Bomb_Anim:	// l_0xc97eb7
+	newline
+	"@{user}{get_action_arg}{swap} threw" linebreak
+	"  the {itemname(0)}!"
+	pause(20)
+	battle_animation(0,78)	// 0x00, 0x4E
+	pause(5)
+	sound(SND_MISSILE)	// 70
+	pause(10)
+	battle_animation(34,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE4)	// 91
+	pause(19)
+	sound(SND_FIRE4)	// 91
 	promptw
 	eob
 
@@ -2991,7 +3035,7 @@ l_0xef8e9e:	// Shield killer
 	promptw
 	eob
 
-Defense_Shower_Battle_Anim:
+Defense_Shower_Anim:
 	newline
 	"@{user}{get_action_arg}{swap} used the" linebreak
 	"  {itemname(0)}!"

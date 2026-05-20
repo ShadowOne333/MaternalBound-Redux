@@ -1173,14 +1173,14 @@
   Direction: enemy
   PP Cost: 0
   Target: one
-  Text Address: battle_text.l_0xc97eb7
+  Text Address: battle_text.Bomb_Anim
 168:
   Action type: item
   Code Address: $c2a821
   Direction: enemy
   PP Cost: 0
   Target: one
-  Text Address: battle_text.l_0xc97eb7
+  Text Address: battle_text.Super_Bomb_Anim
 169:
   Action type: item
   Code Address: $c28cf1
@@ -2174,14 +2174,14 @@
   Direction: enemy
   PP Cost: 0
   Target: one
-  Text Address: battle_text.Bazooka
+  Text Address: battle_text.Bazooka_Anim
 311:
   Action type: item
   Code Address: $c2a821
   Direction: enemy
   PP Cost: 0
   Target: one
-  Text Address: battle_text.Heavy_Bazooka
+  Text Address: battle_text.Heavy_Bazooka_Anim
 312:
   Action type: other
   Code Address: $c29039
