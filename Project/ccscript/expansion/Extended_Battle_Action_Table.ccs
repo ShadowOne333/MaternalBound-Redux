@@ -652,8 +652,8 @@ BattleAction_Table:{
 	Battle_Action(307, Enemy, All, Other, 0, 0xEF8F4A, BTLACT_PSI_FLASH_G)
 	Battle_Action(308, Party, None, Other, 0, 0xC9EE2F, BTLACT_NULL4)
 	Battle_Action(309, Enemy, None, Other, 0, 0xEF8F91, BTLACT_NULL4)
-	Battle_Action(310, Enemy, One, Item, 0, 0xC97E9E, BTLACT_BOMB)		// Bazooka
-	Battle_Action(311, Enemy, One, Item, 0, 0xC97E9E, BTLACT_SUPER_BOMB)	// Heavy bazooka
+	Battle_Action(310, Enemy, One, Item, 0, battle_text.Bazooka, BTLACT_BOMB)		// Bazooka
+	Battle_Action(311, Enemy, One, Item, 0, battle_text.Heavy_Bazooka, BTLACT_SUPER_BOMB)	// Heavy bazooka
 	Battle_Action(312, Party, None, Other, 0, 0xC9EE68, BTLACT_NULL4)
 	Battle_Action(313, Party, None, Other, 0, 0xEF8D4C, BTLACT_NULL4)
 	Battle_Action(314, Party, None, Other, 0, 0xEF8CDD, BTLACT_NULL4)

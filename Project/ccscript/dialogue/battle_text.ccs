@@ -603,11 +603,37 @@ l_0xc97e24:
 	promptw
 	eob
 
-l_0xc97e9e:	// Bazooka & Heavy bazooka
+Bazooka:	// l_0xc97e9e
 	newline
 	"@{user}{get_action_arg}{swap} fired" linebreak
 	"  the {itemname(0)}!"
+	pause(20)
+	battle_animation(0,77)	// 0x00, 0x4D
+	pause(5)
 	sound(SND_MISSILE)	// 70
+	pause(10)
+	battle_animation(33,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE2)	// 52
+	pause(19)
+	sound(SND_FIRE2)	// 52
+	promptw
+	eob
+
+Heavy_Bazooka:
+	newline
+	"@{user}{get_action_arg}{swap} fired" linebreak
+	"  the {itemname(0)}!"
+	pause(20)
+	battle_animation(0,78)	// 0x00, 0x4E
+	pause(5)
+	sound(SND_MISSILE)	// 70
+	pause(10)
+	battle_animation(34,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_FIRE4)	// 91
+	pause(19)
+	sound(SND_FIRE4)	// 91
 	promptw
 	eob
 

@@ -260,7 +260,7 @@ l_0xc9fd2e:
 	goto_if_true(l_0xc9fd60)
 
 	"@{user} rode a bicycle." wait
-	hide_party	// Added so the rest of the party doesn't appear when riding the bike
+	//hide_party	// Added so the rest of the party doesn't appear when riding the bike
 	bicycle
 	eob
 

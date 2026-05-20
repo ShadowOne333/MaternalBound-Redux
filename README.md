@@ -108,6 +108,7 @@ Don’t get dizzy while reading the full changelog:
 * Every location of the game is now accessible through PSI Teleport
 * Some PSI animations had wrong tiles in them, those have been fixed
     - Brainshock Omega in frames 17, 19-25, 34-39, waves create leftover tiles on subsequent frames
+    - HP Sucker in frame 19, vertical tiles over the 'hourglass' shape
     - Magnet Alpha in frames 19, 22, 23 and 24, vertical leftover bars
     - Magnet Omega in frames 19 and 22, vertical leftover bars
     - Thunder Gamma/Omega in frame 1, horizontal odd yellow bar

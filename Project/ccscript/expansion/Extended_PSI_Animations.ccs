@@ -48,14 +48,14 @@ define PSI_Palette_Table	= 0xF20600
 // Defines for Config table //
 // GFX tilesets
 define PSI_ANIM_GFX_SET_1	= 0X2E19	// 0xAC25
-define PSI_ANIM_GFX_SET_2	= 0X3875	// 0xB613
+define PSI_ANIM_GFX_SET_2	= 0X53F7	// 0xB613
 define PSI_ANIM_GFX_SET_3	= 0X3141	// 0xDB27
-define PSI_ANIM_GFX_SET_4	= 0X3F1B	// 0xE31D
+define PSI_ANIM_GFX_SET_4	= 0X5A9D	// 0xE31D
 // Expanded GFX tilesets
-define PSI_ANIM_GFX_SET_5	= 0X420B
-define PSI_ANIM_GFX_SET_6	= 0X4F2F
-define PSI_ANIM_GFX_SET_7	= 0x4974
-define PSI_ANIM_GFX_SET_8	= 0x577C
+define PSI_ANIM_GFX_SET_5	= 0X3875
+define PSI_ANIM_GFX_SET_6	= 0X4BAA
+define PSI_ANIM_GFX_SET_7	= 0x3FDE
+define PSI_ANIM_GFX_SET_8	= 0x4599
 define PSI_ANIM_GFX_SET_9	= 0X5D8D
 define PSI_ANIM_GFX_SET_10	= 0x62A1
 // Targets 
@@ -746,7 +746,7 @@ ROM[PSI_Config_Table] = {
 	byte 70
 	short 0x0D60
 
-	// 57 - Bomb
+	// 57 - Bazooka
 	short PSI_ANIM_GFX_SET_3
 	byte 3
 	byte 3
@@ -758,17 +758,17 @@ ROM[PSI_Config_Table] = {
 	byte 40
 	short 0x039C
 
-	// 58 - Super Bomb
+	// 58 - Heavy Bazooka
 	short PSI_ANIM_GFX_SET_3
 	byte 3
 	byte 3
 	byte 1
 	byte 3
 	byte 26
-	byte ALL_ENEMIES_TARGET
+	byte SINGLE_TARGET
 	byte 10
 	byte 40
-	short 0x039C
+	short 0x025C
 
 	// 59 - Unused
 	short PSI_ANIM_GFX_SET_1
@@ -1364,15 +1364,15 @@ ROM[PSI_Palette_Table] = {
 	short 0x47E9
 	short 0x2F80
 	short 0x1A40
-	// 57 - Bomb
+	// 57 - Bazooka
 	short 0x0000
 	short 0x039F
-	short 0x0000
+	short 0x031C
 	short 0x01D8
-	// 58 - Super Bomb
+	// 58 - Heavy Bazooka
 	short 0x0000
-	short 0x039F
-	short 0x0000
+	short 0x02DE
+	short 0x027A
 	short 0x01D8
 	// 59
 	short 0x0000
