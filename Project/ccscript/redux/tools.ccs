@@ -340,8 +340,9 @@ _Paralyzed:
 		set_window_title(2, "Tools")
 		menu_option("Spy kit", 0, 0, {
 			set_action(6)
-			LDA_i(INVENTORY_WINDOW)
-			JSL(0xC3E521)	// Close_Window
+			set_item_args_noinv(LUCKY_SANDWICH6)
+			LDA_i	(INVENTORY_WINDOW)
+			JSL	(CLOSE_WINDOW)
 			ret_tools_target()
 		})
 	})
@@ -387,7 +388,7 @@ _Can_Move:
 		if_flag(FLG_ITEM_NEUTRALIZER, {
 			menu_option_no_position("Neutralizer", {
 				set_action(247)
-				set_item_args_noinv(195)
+				set_item_args_noinv(NEUTRALIZER)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(MULTI_ENEMY_TARGET)
@@ -396,25 +397,25 @@ _Can_Move:
 		if_flag(FLG_ITEM_DEFENSE_SHOWER, {
 			menu_option_no_position("Defense shower", {
 				set_action(184)
-				set_item_args_noinv(157)
+				set_item_args_noinv(DEFENSE_SHOWER)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(PARTY_TARGET)
 			})
 		})
 		if_flag(FLG_ITEM_HP_SUCKER, {
-			menu_option_no_position("HP sucker", {
+			menu_option_no_position("HP-sucker", {
 				set_action(161)
-				set_item_args_noinv(135)
+				set_item_args_noinv(HP_SUCKER)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
 			})
 		})
 		if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
-			menu_option_no_position("Hungry HP sucker", {
+			menu_option_no_position("Hungry HP-sucker", {
 				set_action(176)
-				set_item_args_noinv(136)
+				set_item_args_noinv(HUNGRY_HP_SUCKER)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_multi_target(MULTI_ENEMY_TARGET)
@@ -423,7 +424,7 @@ _Can_Move:
 		if_flag(FLG_ITEM_BAZOOKA, {
 			menu_option_no_position("Bazooka", {
 				set_action(310)
-				set_item_args_noinv(133)
+				set_item_args_noinv(BAZOOKA)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
@@ -432,7 +433,7 @@ _Can_Move:
 		if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
 			menu_option_no_position("Heavy bazooka", {
 				set_action(311)
-				set_item_args_noinv(134)
+				set_item_args_noinv(HEAVY_BAZOOKA)
 				LDA_i	(INVENTORY_WINDOW)
 				JSL	(CLOSE_WINDOW)
 				ret_tools_target()
@@ -472,18 +473,18 @@ _cancelled:
 }
 
 // Another global, inexplicably not part of the selection struct
-define BATTLE_ITEM_USED = 0xA97C // 1 byte
+define BATTLE_ITEM_USED		= 0xA97C	// 1 byte
 
 // Stack variables
-define PARTY_ID = 0x00 // Current kid's ID (1 Ness, 2 Paula, etc)
+define PARTY_ID			= 0x00	// Current kid's ID (1 Ness, 2 Paula, etc)
 
 // These get returned via a global struct at $A97D
-define BATTLE_SELECTION = 0xA97D // Start of struct, used as a pointer value
-define BATTLE_SELECTION_USER = 0xA97D // 1 byte, used by psi menu and goods menu
-define BATTLE_SELECTION_PARAM1 = 0xA97E // 1 byte; item slot (not ID) or PSI ID for action argument
-define BATTLE_SELECTION_ACTION = 0xA97F // 2 bytes
-define BATTLE_SELECTION_TARGETTING = 0xA981 // 1 byte, but determineTargetting joins it with the target
-define BATTLE_SELECTION_TARGET = 0xA982 // 1 byte
+define BATTLE_SELECTION		= 0xA97D	// Start of struct, used as a pointer value
+define BATTLE_SELECTION_USER	= 0xA97D	// 1 byte, used by psi menu and goods menu
+define BATTLE_SELECTION_PARAM1	= 0xA97E	// 1 byte; item slot (not ID) or PSI ID for action argument
+define BATTLE_SELECTION_ACTION	= 0xA97F	// 2 bytes
+define BATTLE_SELECTION_TARGETTING	= 0xA981	// 1 byte, but determineTargetting joins it with the target
+define BATTLE_SELECTION_TARGET	= 0xA982	// 1 byte
 
 // Custom target command based on Spy's battle action routine
 command ret_tools_target() {
