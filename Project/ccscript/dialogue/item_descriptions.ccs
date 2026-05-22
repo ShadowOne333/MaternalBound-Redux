@@ -1369,11 +1369,14 @@ l_0xc56187:
 	"@It helps you recover your power..." next
 	"@How much and what you exactly recover depends on your luck!" end
 
-l_0xc561c3:
+l_0xc561c3:	// Spy kit description
 	newline
-	item_name_in_quotes(LUCKY_SANDWICH6)	// 0xE7
-	"@It helps you recover your power..." next
-	"@How much and what you exactly recover depends on your luck!" end
+	item_name_in_quotes(SPY_KIT)	// 0xE7
+	// Description taken from the official Nintendo Player's Guide
+	"@A very special tool" linebreak	// A very special ability
+	"  that allows {name(3)} to size up the enemy" next
+	//"@and report all weaknesses to you." end
+	"@and report back all its weaknesses." end
 
 l_0xc561ff:
 	newline

@@ -340,7 +340,7 @@ _Paralyzed:
 		set_window_title(2, "Tools")
 		menu_option("Spy kit", 0, 0, {
 			set_action(6)
-			set_item_args_noinv(LUCKY_SANDWICH6)
+			set_item_args_noinv(SPY_KIT)
 			LDA_i	(INVENTORY_WINDOW)
 			JSL	(CLOSE_WINDOW)
 			ret_tools_target()
@@ -353,7 +353,7 @@ _Can_Move:
 		set_window_title(2, "Tools")
 		menu_option_no_position("Spy kit", {
 			set_action(6)
-			set_item_args_noinv(LUCKY_SANDWICH6)
+			set_item_args_noinv(SPY_KIT)
 			LDA_i	(INVENTORY_WINDOW)
 			JSL	(CLOSE_WINDOW)
 			ret_tools_target()
@@ -497,6 +497,7 @@ command ret_tools_target() {
 	LDA_i	(6)
 	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(6) -- 6 is purple
 	LDA_a	(BATTLE_ITEM_USED)	// Grab the item number from the recently set item arg ID
+	AND_i	(0x00FF)		// We need it to be one byte instead of two
 	JSL_RTS_C1	(0xC19216)	// PRINT_ITEM_NAME(^^^^^)
 	LDA_i	(0)
 	JSL_RTS_C1	(0xC10FEA)	// HIGHLIGHT_TEXT(0) -- 0 is normal
@@ -577,7 +578,6 @@ command set_item_args_noinv(item_id) {
 	SEP	(0x20) // accum8
 	LDA_8	(item_id)
 	STA_a	(BATTLE_ITEM_USED)
-	STA_a	(BATTLE_SELECTION_PARAM1)
 	REP	(0x20) // accum8
 }
 

@@ -480,31 +480,31 @@ l_0xc5e3c9:
 	goto_if_false(l_0xc5e419)
 	random(2)	// 0x02
 	goto_if_true(l_0xc5e412)
-	counter(231)
+	counter(231)	// LUCKY_SANDWICH6, repurposed for Spy kit
 	ctoarg
 	swap
 	eob
 
 l_0xc5e412:
-	counter(230)
+	counter(LUCKY_SANDWICH5)
 	ctoarg
 	swap
 	eob
 
 l_0xc5e419:
-	counter(229)
+	counter(LUCKY_SANDWICH4)
 	ctoarg
 	swap
 	eob
 
 l_0xc5e420:
-	counter(228)
+	counter(LUCKY_SANDWICH3)
 	ctoarg
 	swap
 	eob
 
 l_0xc5e427:
-	counter(227)
+	counter(LUCKY_SANDWICH2)
 	ctoarg
 	swap
 	eob
