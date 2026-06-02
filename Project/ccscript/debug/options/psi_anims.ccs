@@ -844,7 +844,7 @@ Bazooka:
 	pause(5)
 	sound(SND_MISSILE)	// 70
 	pause(10)
-	battle_animation(33,0)	// 0x2D, 0x00
+	battle_animation(46,0)	// 0x2D, 0x00
 	pause(24)
 	sound(SND_FIRE2)	// 52
 	pause(19)
@@ -857,7 +857,7 @@ HeavyBazooka:
 	pause(5)
 	sound(SND_MISSILE)	// 70
 	pause(10)
-	battle_animation(34,0)	// 0x2D, 0x00
+	battle_animation(37,0)	// 0x2D, 0x00
 	pause(24)
 	sound(SND_FIRE4)	// 91
 	pause(19)
