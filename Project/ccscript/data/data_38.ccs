@@ -350,7 +350,7 @@ l_0xc8015a:
 	set(FLG_ITEM_CYCLE)	// 81
 
 _rent_text_for_multiple_chars:
-	"@Two people can ride on one bicycle with an accompanying side-car!" next
+	"@Two people can ride on one bicycle with an accompanying side-car," next
 	"@so of course three or four people on a bike can fit within it!" next
 	"@Did you also know that you can still ride a bike with things following you?" next
 	"@Teddy bears, for example..." next
@@ -428,15 +428,13 @@ _allow_with_multiple_chars:
 _continue_question:
 	if flag FLG_KEY_ITEMS {
 		isset(FLG_ITEM_CYCLE)
-		goto_if_false(_exit_ride_bike_question)
+		goto_if_false(l_0xc800f5)
 		goto(l_0xc803f8)
 	}
 	else {
 		hasitem(-1, BICYCLE)	// 0xFF, 0xB0, 176
 		goto_if_true(l_0xc803f8)
 	}
-
-_exit_ride_bike_question:
 	eob
 
 l_0xc803f8:

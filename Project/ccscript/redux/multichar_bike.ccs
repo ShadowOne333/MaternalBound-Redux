@@ -1,21 +1,65 @@
-// Change the Bicycle sprite depending on whether there's one or more party members
-
+// 	MULTI-CHARACTER BICYCLE		//
+// Changes the Bicycle sprite depending on whether there's one or more party members
+//------------------------------------
+// This hack modifies how the GET_ON_BIKE and GET_OFF_BIKE routines work
+// by checking the party leader's entity, and depending on who it is and if there's two or more party members,
+// it changes the bike sprite to a custom one with either Ness alone (normal sprite),
+// Ness with a side-car, Paula with a side-car, Jeff with a side-car or Poo with a side-car.
+//------------------------------------
+// File import needed for this to work
 import "../essential/asm65816.ccs"
-import "../essential/cc_asmcall.ccs"
-import "../essential/jsl_rts.ccs"
-import "../expansion/ccexpand.ccs"
+//------------------------------------
+// BEFORE USING THIS HACK:
+
+// Dialogue script 'l_0xc9fd2e' needs to have its check for character 2 removed or commented out
+// in order for the code to allow the party to mount the bike even when there's 2 or more party members
+// Having it like this should do it:
+/*
+l_0xc9fd2e:
+	newline
+	// Removed so that anyone in the party can initiate the bike
+	//get_char_at_pos(2)	// 0x02
+	//goto_if_true(l_0xc9fd5a)
+
+	get_char_at_pos(1)	// 0x01
+	character_has_status(0, SCR_STATUS_GROUP_1, SCR_STATUS_1_MUSHROOMIZED)	// 0x00,0x02,0x02
+	goto_if_true(l_0xc9fd60)
+
+	"@{user} rode a bicycle." wait
+	bicycle
+	eob
+*/
+// Other additional changes to the dialogue are needed, like the dialogues for when the player
+// rents the bike in Twoson, but those are pretty minor and don't modify anything regarding riding the bike
+
+// This hack uses sprites 477, 478, 479 and 480 for Ness, Paula, Jeff and Poo with the side-car, respectively.
+// You need a version of Coilsnake that allows for expanding the sprite groups beyond 463 to add them./
+// Alternatively, replace unused sprites in the original game with these ones, simply change the 
 
 //------------------------------------
-
+// Variables / routines definitions
 define CREATE_ENTITY	= 0xC01E49
 define DESTROY_ENTITY	= 0xC02140
+define PARTY_TRAIL_RESET	= 0xC03F1E	// Clear trail buffer to the leader's pos
 define WAIT_UNTIL_NEXT_FRAME	= 0xC08756
 define HIDE_CHAR_OR_PARTY	= 0xC463F4
 define UNHIDE_CHAR_OR_PARTY	= 0xC4645A
 
+// Addresses definitions
 define NEW_ENTITY_VAR0	= 0x0A38
 define NEW_ENTITY_VAR1	= 0x0A3A
 define PENDING_INTERACTIONS	= 0x5D9A
+
+// Sprite definitions
+define NESS_SPRITE		= 1
+define PAULA_SPRITE		= 2
+define JEFF_SPRITE		= 3
+define POO_SPRITE		= 4
+define NESS_BIKE_ALONE		= 7
+define NESS_BIKE_SIDECAR	= 477
+define PAULA_BIKE_SIDECAR	= 478
+define JEFF_BIKE_SIDECAR	= 479
+define POO_BIKE_SIDECAR		= 480
 
 //------------------------------------
 
@@ -45,7 +89,7 @@ Leader_Check: {
 	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
 
 _Ness_Only:	// If there's only one character, use the normal bike sprite (7)
-	LDA_i	(7)	// Normal Ness+Bike sprite ID
+	LDA_i	(NESS_BIKE_ALONE)	// Normal Ness+Bike sprite ID
 	JMP	(_Return)
 
 _Multiple_Chars:
@@ -61,20 +105,20 @@ _Multiple_Chars:
 	JMP	(_Poo_Sprite)	// Poo = 4
 
 _Ness_Sprite:
-	LDA_i	(477)	// Ness in bike+side car sprite ID
+	LDA_i	(NESS_BIKE_SIDECAR)	// Ness in bike+side car sprite ID
 	JMP	(_Return)
 
 _Paula_Sprite:
-	LDA_i	(478)	// Paula in bike+side car sprite ID
+	LDA_i	(PAULA_BIKE_SIDECAR)	// Paula in bike+side car sprite ID
 	JMP	(_Return)
 
 _Jeff_Sprite:
-	LDA_i	(479)	// Jeff in bike+side car sprite ID
+	LDA_i	(JEFF_BIKE_SIDECAR)	// Jeff in bike+side car sprite ID
 	JMP	(_Return)
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(480)	// Poo in bike+side car sprite ID
+	LDA_i	(POO_BIKE_SIDECAR)	// Poo in bike+side car sprite ID
 
 _Return:
 	JML	(0xC079EA)	// @UNKNOWN28, return to where the original code should
@@ -144,7 +188,7 @@ Multichar_Bike: {
 	BNE_a	(_Multiple_Chars)	// If there's multiple characters present, branch to sprite selector
 
 _Ness_Only:	// If there's only one character, use the normal bike sprite (7)
-	LDA_i	(7)		// Normal Ness+Bike sprite ID
+	LDA_i	(NESS_BIKE_ALONE)	// Normal Ness+Bike sprite ID
 	JSL	(CREATE_ENTITY)
 	JML	(0xC03CC4)	// Exit back and continue with Ness' entity flags (original flags)
 
@@ -161,14 +205,14 @@ _Multiple_Chars:
 	JMP	(_Poo_Sprite)	// Poo = 4
 
 _Ness_Sprite:
-	LDA_i	(477)	// Ness in bike+side car sprite ID
+	LDA_i	(NESS_BIKE_SIDECAR)	// Ness in bike+side car sprite ID
 	JSL	(CREATE_ENTITY)
 	JML	(0xC03CC4)	// Exit back and continue with Ness' entity flags (original flags)
 
 _Paula_Sprite:
 	LDA_i	(1)	// char_index=1 (Paula)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(478)	// Paula in bike+side car sprite ID
+	LDA_i	(PAULA_BIKE_SIDECAR)	// Paula in bike+side car sprite ID
 	LDY_i	(25)	// Paula's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_25)
@@ -176,7 +220,7 @@ _Paula_Sprite:
 _Jeff_Sprite:
 	LDA_i	(2)	// char_index=2 (Jeff)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(479)	// Jeff in bike+side car sprite ID
+	LDA_i	(JEFF_BIKE_SIDECAR)	// Jeff in bike+side car sprite ID
 	LDY_i	(26)	// Jeff's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_26)
@@ -185,7 +229,7 @@ _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
 	LDA_i	(3)	// char_index=3 (Poo)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(480)    // Poo in bike+side car sprite ID
+	LDA_i	(POO_BIKE_SIDECAR)    // Poo in bike+side car sprite ID
 	LDY_i	(27)	// Poo's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_27)
@@ -269,8 +313,6 @@ _Poo_Entity:
 
 _Return:
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(0xFF)		// Load argument (FF to show the full party)
-	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D2C)	// Continue to the rest of the original code
 }
 
@@ -298,16 +340,19 @@ Multichar_Off_Bike: {
 	JMP	(_Poo_Sprite)	// Poo = 4
 
 _Ness_Sprite:
-	LDA_i	(1)	// Normal Ness sprite
+	LDA_i	(NESS_SPRITE)	// Normal Ness sprite
 	LDY_i	(24)	// Ness' entity ID
 	JSL	(CREATE_ENTITY)
+	JSL	(PARTY_TRAIL_RESET) 
+	LDA_i	(0xFF)		// Load argument (FF to show the full party)
+	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
 
 _Paula_Sprite:
 	LDA_i	(1)	// char_index=1 (Paula)
 	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(2)	// Normal Paula sprite
+	LDA_i	(PAULA_SPRITE)	// Normal Paula sprite
 	LDY_i	(25)	// Paula's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_25_Off)
@@ -316,7 +361,7 @@ _Jeff_Sprite:
 	LDA_i	(2)	// char_index=2 (Jeff)
 	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(3)	// Normal Jeff sprite
+	LDA_i	(JEFF_SPRITE)	// Normal Jeff sprite
 	LDY_i	(26)	// Jeff's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_26_Off)
@@ -326,7 +371,7 @@ _Poo_Sprite:
 	LDA_i	(3)	// char_index=3 (Poo)
 	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(4)    // Normal Poo sprite
+	LDA_i	(POO_SPRITE)    // Normal Poo sprite
 	LDY_i	(27)	// Poo's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_27_Off)
@@ -357,6 +402,9 @@ Apply_Entity_Flags_25_Off: {	// Paula's entity flags
 	JSL	(0xC0A780)
 
 _Return:
+	JSL	(PARTY_TRAIL_RESET) 
+	LDA_i	(0xFF)		// Load argument (FF to show the full party)
+	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)
 }
 
@@ -384,6 +432,9 @@ Apply_Entity_Flags_26_Off: {	// Jeff's entity flags
 	JSL	(0xC0A780)
 
 _Return:
+	JSL	(PARTY_TRAIL_RESET) 
+	LDA_i	(0xFF)		// Load argument (FF to show the full party)
+	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)
 }
 
@@ -411,6 +462,9 @@ Apply_Entity_Flags_27_Off: {	// Poo's entity flags
 	JSL	(0xC0A780)
 
 _Return:
+	JSL	(PARTY_TRAIL_RESET) 
+	LDA_i	(0xFF)		// Load argument (FF to show the full party)
+	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)
 }
 //------------------------------------
