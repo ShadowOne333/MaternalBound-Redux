@@ -382,12 +382,7 @@ l_0xc7c93f:
 
 l_0xc7c95e:
 	get_char_at_pos(1) swap
-	"@{name(0)} got off the bike." wait
-	//cc_asmcall(0xC03F1E, RET_NONE)	// Clear trail buffer to the leader's pos
-	music_effect(2)
-	//pause(60)
-	//show_party(1)
-	eob
+	"@{name(0)} got off the bike." end
 
 l_0xc7c973:
 	newline

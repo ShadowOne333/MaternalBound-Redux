@@ -451,6 +451,7 @@ l_0xc97c5f:
 	promptw
 	eob
 
+// Eating pizza party size check (Ported from MaternalBound Redux)
 l_0xc97c7b:
 	newline
 	"@" call(data_37.l_0xc7e6d7) get_action_arg swap " ate" linebreak

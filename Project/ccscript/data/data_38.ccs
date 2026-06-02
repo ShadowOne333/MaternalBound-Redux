@@ -311,9 +311,17 @@ l_0xc80027:
 	two_choice_menu("Yes", l_0xc800f5, "No", l_0xc800c1)
 
 l_0xc800c1:
-	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_CYCLE) }
-	else { hasitem(-1, BICYCLE) }	// 0xFF, 0xB0, 176
-	goto_if_true(l_0xc802e6)
+	if flag FLG_KEY_ITEMS {
+		isset(FLG_ITEM_CYCLE)
+		goto_if_false(_continue_bike_check)
+		goto(l_0xc802e6)
+	}
+	else {
+		hasitem(-1, BICYCLE)	// 0xFF, 0xB0, 176
+		goto_if_true(l_0xc802e6)
+	}
+
+_continue_bike_check:
 	goto_if_flag(FLG_ITEM_CYCLE, l_0xc8034d)	// 0x0051, 81
 	"@Oh... you don't know how to ride a bike." next
 	"@Me neither." end
@@ -340,6 +348,17 @@ l_0xc8015a:
 
 	next
 	set(FLG_ITEM_CYCLE)	// 81
+
+_rent_text_for_multiple_chars:
+	"@Two people can ride on one bicycle with an accompanying side-car!" next
+	"@so of course three or four people on a bike can fit within it!" next
+	"@Did you also know that you can still ride a bike with things following you?" next
+	"@Teddy bears, for example..." next
+	"@Carrying a bear and riding is possible," next
+	"@as long as you put it in the side-car." next
+	"@Just don't think about riding a bike into a cave..." end
+
+_original_text:
 	"@You know that two people can't ride on one bicycle," next
 	"@so of course three or four people on a bike would be impossible!" next
 	"@Did you also know that you can't ride a bike with anything following you?" next
@@ -393,13 +412,32 @@ l_0xc8037f:
 l_0xc803ac:
 	counter(1)
 	"@Do you wanna ride a bike?" next
+
+	// Added so that it uses new text for the added multi-char bike
+	get_char_at_pos(2)	// 0x02
+	goto_if_true(_allow_with_multiple_chars)
+
 	"@That's not gonna work..." linebreak
 	"  two people on one bike is strictly forbidden." promptw
+	goto(_continue_question)
 
-	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_CYCLE) }
-	else { hasitem(-1, BICYCLE) }	// 0xFF, 0xB0, 176
-	goto_if_true(l_0xc803f8)
-	end
+_allow_with_multiple_chars:
+	"@Two people on one bike is entirely possible," next
+	"@just make sure you use its accompanying side-car!" promptw
+
+_continue_question:
+	if flag FLG_KEY_ITEMS {
+		isset(FLG_ITEM_CYCLE)
+		goto_if_false(_exit_ride_bike_question)
+		goto(l_0xc803f8)
+	}
+	else {
+		hasitem(-1, BICYCLE)	// 0xFF, 0xB0, 176
+		goto_if_true(l_0xc803f8)
+	}
+
+_exit_ride_bike_question:
+	eob
 
 l_0xc803f8:
 	next
@@ -412,6 +450,13 @@ l_0xc8042b:
 
 l_0xc8045b:
 	title(1, Charlie)
+	"@You know that two people can ride a bike," next
+	"@but did you know that you can also ride a bike" next
+	"@even when you are carrying an unconscious friend's stuff?" next
+	"@Carrying a lot of items and riding around is entirely possible for you," next
+	"@just use the accompaying side-car to store all that stuff!" end
+
+_original_cant_ride_text:
 	"@You know that two people can't ride a bike," next
 	"@but did you know that you can't ride a bike" next
 	"@when you are carrying an unconscious friend's stuff?" next

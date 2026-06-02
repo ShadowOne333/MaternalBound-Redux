@@ -2,6 +2,7 @@
 
 import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../essential/jsl_rts.ccs"
 import "../expansion/ccexpand.ccs"
 
 //------------------------------------
@@ -9,6 +10,8 @@ import "../expansion/ccexpand.ccs"
 define CREATE_ENTITY	= 0xC01E49
 define DESTROY_ENTITY	= 0xC02140
 define WAIT_UNTIL_NEXT_FRAME	= 0xC08756
+define HIDE_CHAR_OR_PARTY	= 0xC463F4
+define UNHIDE_CHAR_OR_PARTY	= 0xC4645A
 
 define NEW_ENTITY_VAR0	= 0x0A38
 define NEW_ENTITY_VAR1	= 0x0A3A
@@ -89,19 +92,37 @@ ROM[0xC03C8E] = {
 }
 
 Destroy_Leader_Entity: {
-	// Destroy ALL party entity slots before creating the bike entity.
-	// This hides followers (including Teddy Bear at slot 28) so they
-	// don't trail behind the bike. DESTROY_ENTITY is safe on free slots.
-	LDA_i	(24)	// Ness entity
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Entity)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Entity)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Entity)
+	JMP	(_Poo_Entity)	// Poo = 4
+
+_Ness_Entity:
+	LDA_i	(24)
+	JMP	(_Return)
+
+_Paula_Entity:
+	LDA_i	(25)
+	JMP	(_Return)
+
+_Jeff_Entity:
+	LDA_i	(26)
+	JMP	(_Return)
+
+_Poo_Entity:
+	LDA_i	(27)
+
+_Return:
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(25)	// Paula entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(26)	// Jeff entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(27)	// Poo entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(28)	// Teddy Bear / Super Plush Bear entity slot
-	JSL	(DESTROY_ENTITY)
+	//LDA_i	(6)	// Load fading argument
+	//JSL	(0xC4C91A)	// initializeEntityFade
+	LDA_i	(0xFF)		// Load argument (FF to hide the full party)
+	JSL	(HIDE_CHAR_OR_PARTY)
 	JML	(0xC03C95)
 }
 
@@ -221,18 +242,35 @@ ROM[0xC03D25] = {
 }
 
 Destroy_Leader_Entity_Off: {
-	// Destroy ALL party entity slots before restoring walking entities.
-	// This includes Teddy Bear at slot 28. DESTROY_ENTITY is safe on free slots.
-	LDA_i	(24)	// Ness entity slot
+	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
+	AND_i	(0x00FF)
+	CMP_i	(1)		// Ness = 1
+	BEQ_a	(_Ness_Entity)
+	CMP_i	(2)		// Paula = 2
+	BEQ_a	(_Paula_Entity)
+	CMP_i	(3)		// Jeff = 3
+	BEQ_a	(_Jeff_Entity)
+	JMP	(_Poo_Entity)	// Poo = 4
+
+_Ness_Entity:
+	LDA_i	(24)
+	JMP	(_Return)
+
+_Paula_Entity:
+	LDA_i	(25)
+	JMP	(_Return)
+
+_Jeff_Entity:
+	LDA_i	(26)
+	JMP	(_Return)
+
+_Poo_Entity:
+	LDA_i	(27)
+
+_Return:
 	JSL	(DESTROY_ENTITY)
-	LDA_i	(25)	// Paula entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(26)	// Jeff entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(27)	// Poo entity slot
-	JSL	(DESTROY_ENTITY)
-	LDA_i	(28)	// Teddy Bear / Super Plush Bear entity slot
-	JSL	(DESTROY_ENTITY)
+	LDA_i	(0xFF)		// Load argument (FF to show the full party)
+	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D2C)	// Continue to the rest of the original code
 }
 
@@ -374,44 +412,5 @@ Apply_Entity_Flags_27_Off: {	// Poo's entity flags
 
 _Return:
 	JML	(0xC03D9F)
-}
-//------------------------------------
-// Entity load for getting off bike
-ROM[0xC03D98] = {
-	JML	(Entity_Check)
-	NOP NOP NOP
-}
-
-Entity_Check: {
-	// Check who the party leader is
-	LDA_a	(0x988B)	// GAME_STATE + game_state::unknown96,X
-	AND_i	(0x00FF)
-	CMP_i	(1)		// Ness = 1
-	BEQ_a	(_Ness_Sprite)
-	CMP_i	(2)		// Paula = 2
-	BEQ_a	(_Paula_Sprite)
-	CMP_i	(3)		// Jeff = 3
-	BEQ_a	(_Jeff_Sprite)
-	JMP	(_Poo_Sprite)	// Poo = 4
-
-_Ness_Sprite:
-	LDA_i	(24)	// Ness in bike+side car sprite ID
-	JMP	(_Return)
-
-_Paula_Sprite:
-	LDA_i	(25)	// Paula in bike+side car sprite ID
-	JMP	(_Return)
-
-_Jeff_Sprite:
-	LDA_i	(26)	// Jeff in bike+side car sprite ID
-	JMP	(_Return)
-
-_Poo_Sprite:
-	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(27)	// Poo in bike+side car sprite ID
-
-_Return:
-	JSL	(0xC0A780)
-	JML	(0xC03D9F)	// @UNKNOWN3, return to where the original code should
 }
 //------------------------------------
