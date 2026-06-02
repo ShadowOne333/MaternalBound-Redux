@@ -381,8 +381,8 @@ l_0xc60e30:
 	goto_if_flag(FLG_ITEM_TOFU, l_0xc60ff3)	// 0x022A, 554
 	music(119)
 	title(1, Talah)
-	"@The truth of space and time moves through the universe like a wave..." next
-	"@Truth speaks through space and matter and makes itself known to human beings." next
+	"@The truth of the universe travels through the cosmos like particles and waves..." next
+	"@It speaks through space and time and makes itself known to human beings." next
 	"@Your coming here,| my waiting here..." pause(30) next
 	"@It was all predestined truth..." next
 	// Stat 8 = Ness' name
@@ -404,7 +404,7 @@ l_0xc60e30:
 	pause(20)
 	// Stat 0x4A / 74 = Poo's name
 	" and {stat(74)}..." next
-	"@When these four forces meet,/| twisted space will breathe calmly once more." next
+	"@When these four forces meet,/| the twisting cosmos will breathe calmly once more." next
 	"@Do you understand?" next
 	"@It doesn't matter." pause(20) linebreak
 	"  Proceed as you wish." next

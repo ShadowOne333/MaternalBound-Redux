@@ -61,6 +61,15 @@ define PAULA_BIKE_SIDECAR	= 478
 define JEFF_BIKE_SIDECAR	= 479
 define POO_BIKE_SIDECAR		= 480
 
+// Bike speed definition
+define BIKE_CARDINAL_SPEED	= long 0x01EEEE	// 0x01CCCC
+define BIKE_DIAGONAL_SPEED	= long 0x0165D5	// 0x0145D5
+
+//------------------------------------
+// Modify the original Bike speeds to it's a bit faster than running
+ROM[0xC3E0C8] = BIKE_CARDINAL_SPEED
+ROM[0xC3E100] = BIKE_DIAGONAL_SPEED
+
 //------------------------------------
 
 // ENTITY_SCRIPT_VAR1 for newly created entity
