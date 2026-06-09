@@ -1,0 +1,58 @@
+//********************************************************************************
+// CATADOR: Fix yet another vanilla bug that allows for an OBJFX controller to take
+//          a party member slot (any slot from 24 to 29). On rare occasions, the
+//          game will attempt to animate the OBJFX controller because it is in a
+//          party member reserved slot (it thinks it's a party member).
+//          Because the OBJFX never allocated VRAM for itself, it ends up sending
+//          garbage graphics data into VRAM.
+
+import "../essential/asm65816.ccs"
+
+ROM[0xC4C95E] = {
+    JSL (FixOBJFXSlotBug)
+    JMP (0xC4C975)
+    NOP NOP // Align for disassembly cause why not
+}
+
+// Values for freshly created objects
+define new_object_var0     = 0x0A38
+define new_object_var1     = 0x0A3A
+define new_object_var2     = 0x0A3C
+define new_object_var3     = 0x0A3E
+define new_object_var4     = 0x0A40
+define new_object_var5     = 0x0A42
+define new_object_var6     = 0x0A44
+define new_object_var7     = 0x0A46
+define new_object_posz     = 0x0A48
+define new_object_priority = 0x0A4A
+define new_object_min_slot = 0x0A4C // Minimum slot to allocate
+define new_object_max_slot = 0x0A4E // Maximum slot to allocate (exclusive)
+
+
+FixOBJFXSlotBug: {
+    // Copied from 0xC092F5
+    STZ_a (new_object_posz)
+    STZ_a (new_object_var0)
+    STZ_a (new_object_var1)
+    STZ_a (new_object_var2)
+    STZ_a (new_object_var3)
+    STZ_a (new_object_var4)
+    STZ_a (new_object_var5)
+    STZ_a (new_object_var6)
+    STZ_a (new_object_var7)
+    STZ_a (new_object_priority)
+
+    // Set proper minimum and maximum slot (DO NOT ALLOW FOR PARTY MEMBER SLOTS)
+    STZ_a (new_object_min_slot)
+    LDA_i (22)                  // Same value as used in C01E49 (the "high level" create object function)
+    STA_a (new_object_max_slot)
+
+    // Actually create the object
+    LDY_i (0)                   // Y position
+    TYX                         // X position
+    LDA_i (859)                 // Script #859 (OBJFX controller)
+    JSL   (0xC09321)            // Create object (no good name for this address)
+    RTL
+}
+
+//********************************************************************************

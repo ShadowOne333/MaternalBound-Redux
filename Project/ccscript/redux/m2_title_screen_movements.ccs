@@ -4,6 +4,11 @@ import "../essential/asm65816.ccs"
 import "../redux/movscr_codes.ccs"
 
 //------------------------------------
+// CATADOR: Hacks to make the screen not blank briefly when pressing A on the title screen
+ROM[0xEF04E9] = "[EA EA EA EA]"             // Do not turn the screen off
+ROM[0xEF04F1] = "[EA EA EA EA]"             // Do not load the title screen graphics again
+
+//------------------------------------
 
 // Hijack all of the Xpos values for each letter
 

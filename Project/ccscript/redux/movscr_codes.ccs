@@ -22,7 +22,9 @@ ONPOSITION, set screen position for sprite:
   $A03A -> Position based on layer 1 scroll + Z coordinate (height)
   $A055 -> Position based on layer 3 scroll
   $A06C -> Unused. And not a good idea to use (ends up setting the absolute position along with screen position)
+           * It is asmcalled though, so not completely unused
   $A089 -> Unused. "Mirrored" version of $A055? (Uses addition instead of subtraction)
+           Since it's completely unused, this has been repurposed for the shaking coffins. See movscr/coffin_shake.ccs
   $A0A0 -> Position based on layer 3 scroll + Z coordinate (height)
   $A0BB -> Position using absolute coordinates
 
@@ -677,6 +679,37 @@ MovTask_Anim16_Diagonals: { // Animate every 24 frames using directionals and di
 }
 
 define MovTask_Anim_Var4                 = 0xC3A12E // Animate with [VAR4] frame delay
+MovTask_Anim_Var4_Diagonals: {
+    m_get_var4
+    m_jeq(_unk)
+
+    m_loop_result
+    m_pause(1)
+    m_get_var4
+    m_breakeq(_unk)
+
+    m_endloop
+
+    m_set_anim(2)
+    m_asmcall(0xC0AAAC)
+    m_get_var4
+    m_jeq(_unk)
+
+    m_loop_result
+    m_pause(1)
+    m_get_var4
+    m_breakeq(_unk)
+
+    m_endloop
+
+    m_set_anim(0)
+    m_asmcall(0xC0AAAC)
+    m_jmp(MovTask_Anim_Var4_Diagonals)
+
+_unk:
+    m_pause(1)
+    m_jmp(MovTask_Anim_Var4_Diagonals)
+}
 define MovTask_Anim8_Toggle_DestroyIfFar = 0xC3A15E // Animate with 8 frame delay (togglable via VAR4) and destroy if far
 define MovTask_Anim12_24_DestroyIfFar    = 0xC3A17B // Animate with 12 then 24 frame delay and destroy if far
 define MovTask_Anim24_DestroyIfFar       = 0xC3A18F // Animate with 24 frame delay and destroy if far
@@ -1087,6 +1120,11 @@ command m_walk_to_dest_no_face {
         m_jsl (_SCR_moveuntilatdest_noface)
 }
 
+// Makes the entity move towards its current destination, without refreshing graphics
+command m_walk_to_dest_norefresh {
+        m_jsl (_SCR_moveuntilatdest_norefresh)
+}
+
 // Makes the entity walk next to the party leader, halting script execution until reaching the destination
 command m_walk_to_leader {
         m_set_dest_radius (17)
@@ -1353,6 +1391,20 @@ _loop:    m_pause   (1)        // Wait 1 frame
         m_rtl
 }
 
+_SCR_moveuntilatdest_norefresh: {
+        m_asmcall (0xC46ADB) // Get angle towards destination
+        m_asmcall (0xC47044) // Set velocity based on angle (does not modify RESULT)
+        m_asmcall (0xC46B0A) // Set movement direction based on angle
+        m_asmcall (0xC0A65F) // Set facing direction
+
+_loop:    m_pause   (1)        // Wait 1 frame
+          m_asmcall (0xC0A8DC) // Move towards destination and check for proximity
+          m_jeq     (_loop)    // Go back if still not near destination
+
+        m_zerovel  // Zero velocities when done
+        m_rtl
+}
+
 _SCR_initbasicmoving: {
         m_set_speed_to_result
         m_onmove    (0xA360)   // Move if not blocked and update surface flags
@@ -1537,3 +1589,62 @@ _ret:   // ORIGINAL CODE
         // ORIGINAL CODE
         RTL
 }
+
+// Moved from newmov.ccs, for compatibility with the rest of the movscripts
+command tptmove(npc,move,time) "[1F F1 {short npc} {short move}][10 {byte time}][1F F1 {short npc} 08 00]"
+command spritemove(npc,move,time) "[1F F2 {short npc} {short move}][10 {byte time}][1F F2 {short npc} 08 00]"
+
+command tptstartmove(npc,move) "[1F F1 {short npc} {short move}]"
+command spritestartmove(npc,move) "[1F F2 {short npc} {short move}]"
+command tptendmove(npc) "[1F F1 {short npc} {short 8}]"
+command spriteendmove(npc) "[1F F2 {short npc} {short 8}]"
+
+define MOVE_TIP_N   = 895
+define MOVE_TIP_NE  = 896
+define MOVE_TIP_E   = 897
+define MOVE_TIP_SE  = 898
+define MOVE_TIP_S   = 899
+define MOVE_TIP_SW  = 900
+define MOVE_TIP_W   = 901
+define MOVE_TIP_NW  = 902
+define MOVE_WALK_N  = 903
+define MOVE_WALK_NE = 904
+define MOVE_WALK_E  = 905
+define MOVE_WALK_SE = 906
+define MOVE_WALK_S  = 907
+define MOVE_WALK_SW = 908
+define MOVE_WALK_W  = 909
+define MOVE_WALK_NW = 910
+define MOVE_RUN_N   = 911
+define MOVE_RUN_NE  = 912
+define MOVE_RUN_E   = 913
+define MOVE_RUN_SE  = 914
+define MOVE_RUN_S   = 915
+define MOVE_RUN_SW  = 916
+define MOVE_RUN_W   = 917
+define MOVE_RUN_NW  = 918
+define MOVE_SPEEDY_N   = 919
+define MOVE_SPEEDY_NE  = 920
+define MOVE_SPEEDY_E   = 921
+define MOVE_SPEEDY_SE  = 922
+define MOVE_SPEEDY_S   = 923
+define MOVE_SPEEDY_SW  = 924
+define MOVE_SPEEDY_W   = 925
+define MOVE_SPEEDY_NW  = 926
+
+define MOM_MOVE_COUCH = 931
+
+define TIPUP     = 895
+define TIPRIGHT  = 897
+define TIPDOWN   = 899
+define TIPLEFT   = 901
+define WALKUP    = 903
+define WALKRIGHT = 905
+define WALKDOWN  = 907
+define WALKLEFT  = 909
+define RUNUP     = 911
+define RUNRIGHT  = 913
+define RUNDOWN   = 915
+define RUNLEFT   = 917
+
+define Script_35 = 0xC3A204

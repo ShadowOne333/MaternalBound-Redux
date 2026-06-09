@@ -304,9 +304,9 @@ l_0xc732e1:
 	"@Here's a map." next
 	"@Onett isn't the only thing on the map." next
 	"@All the info is there, except for the info that isn't there." next
-	"@Pressing the Start Button allows you to view the map at any time." next
+	"@Pressing the Select Button allows you to view the map at any time." next
 	"@How convenient!" next
-	"@You know, the Start Button... located near the center." pause(15) linebreak
+	"@You know, the Select Button... located near the center." pause(15) linebreak
 	"  Ha ha ha." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(TOWN_MAP) }
 	else {

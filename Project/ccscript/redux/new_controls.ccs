@@ -5,6 +5,7 @@ import "../definitions/flags.ccs"
 import "../essential/asm65816.ccs"
 
 // Defines
+define INVENTORY_WINDOW			= 1
 
 define FIND_NEARBY_CHECKABLE_TPT_ENTRY	= 0xC04279
 
@@ -23,9 +24,11 @@ define GET_EVENT_FLAG			= 0xC21628
 // 0100 = D-Pad Right	| 0200 = D-Pad Left	| 0400 = D-Pad Down	| 0800 = D-Pad Up
 // 1000 = Start Button	| 2000 = Select Button	| 4000 = Y Button	| 8000 = B Button
 
-ROM[0xC4D6E2] = AND_i	(0x1040)	// AND operand check for X and Start buttons to close the Map (Start didn't close the Map previously)
-ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for Opening the Main Menu (A button by default)
-ROM[0xC0B907] = AND_i	(0x1000)	// AND operand check for Opening the Map (X button by default)
+ROM[0xC4D6E2] = AND_i	(0xA000)	// AND operand check for X, B and Select buttons to close the Map (Start didn't close the Map previously)
+ROM[0xC0B8E3] = AND_i	(0x0040)	// AND operand check for X button opening the Main Menu (A button by default)
+ROM[0xC0B8F1] = AND_i	(0x9000)	// AND operand check for B and Start buttons opening the HP/PP box (B and Select by default)
+ROM[0xC13CC6] = AND_i	(0x9000)	// AND operand check for B and Start buttons closing the HP/PP box (B and Select by default)
+ROM[0xC0B907] = AND_i	(0x2000)	// AND operand check for Select button opening the Map (X button by default)
 ROM[0xC0B915] = AND_i	(0x00A0)	// AND operand check for A+L buttons. This determines which buttons can talk to people / Confirm selections at the Menus
 
 // Make the Map button check for the Town map flag (511) instead of the Item in the inventory
@@ -118,7 +121,7 @@ ROM[0xC1324D] = {
 	BNE	(0x03)		// Branch if not equal to next JMP (0x3394) - Label6
 	JMP	(0x3375) 	// Jump to $3375
 	JMP	(0x3394) 	// Jump to $3394
-	LDA_i	(0x0001)	// LDA #$0001
+	LDA_i	(INVENTORY_WINDOW)		// LDA #$0001, Load Window #1
 	JSR	(CREATE_WINDOW)	// Jump to address $04EE
 }
 
@@ -130,25 +133,13 @@ ROM[0xC13493] = CMP_i	(7)// CMP #$0005
 
 // Open Menu options order modifications
 ROM[0xC134E1] = CMP_i	(0x0006)	// Change 'Talk to' to be option 6 instead of 1 (for Tools menu)
-/*ROM[0xC134DF] = {
-	JML	(Tools_Check)
-	NOP
-	NOP
-	NOP
-}
-
-Tools_Check: {
-	LDA_i	(FLG_JEFF_KI)
-	JSL	(GET_EVENT_FLAG)
-	CMP_i	(0x0001)
-	BNE	(0x07)	// _exit
-
-	LDA_d	(0x06)
-	CMP_i	(6)	// Change 'Talk to' to be option 6 instead of 1 for Tools menu
-	BNE	(0x04)
-	JML	(0xC1350E)	// Hijacked Talk to routine for our Tools menu
-_exit:
-	JML	(0xC134E6)	// Return to Menu options
+/*ROM[0xC134E1] = {
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	NOP			// No operation
+	CMP_i	(0x0001)	// CMP #$0001
 }*/
 
 ROM[0xC134E6] = CMP_i	(1)	// Change Goods to be option 1 instead of 2
@@ -179,17 +170,15 @@ ROM[0xC13C3E] = {
 	NOP			// No operation
 }
 
-
 ROM[0xC13C5D] = BNE	(0x13)	// BNE $13, Branch if not equal to STA $06 at $C13C72
 
 ROM[0xC13C6D] = {
 	BNE	(0x03)		// BNE $03, Branch if not equal to LDA (0x0001)
 	JMP	(0x3C8F)	// JMP $3C8F, WINDOW_TICK?
-	LDA_i	(1)	// LDA #$0001
+	LDA_i	(INVENTORY_WINDOW)	// LDA #$0001, Load Window #1
 	JSR	(CREATE_WINDOW)	// Jump to RAM address $04EE
 	NOP			// No operation
 }
-
 
 /* THE FOLLOWING SECTIONS ARE NOT ASM CODE, BUT RATHER PART OF THE DIALOG WINDOW ATTRIBUTES TABLE AND TEXT.
 DUE TO COILSNAKE COMPILING WINDOW ATTRIBUTES AND TEXT THROUGH CCS/YML FILES, THE FOLLOWING CHANGES ARE REQUIRED:
