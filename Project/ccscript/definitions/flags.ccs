@@ -81,20 +81,20 @@ define FLG_SEBASTIAN_DISAPPEAR  	= flag 52
 define FLG_WINS_BRICK_BARKER_DISAPPEAR	= flag 53
 define FLG_DSRT_SYOZI_DUNGEON_APPEAR	= flag 54
 define FLG_DSRT_SYOZI_DISAPPEAR 	= flag 55
-// Flag 56 is never referenced in the messages
+// Flag 56 is never referenced in the messages, repurposed for invert_run_button
 define FLG_FOUR_DEPT_BOSS_APPEAR	= flag 57
-define FLG_FOUR_KOMORITA_APPEAR 	= flag 58
-define FLG_FOUR_MAID_APPEAR     	= flag 59
-define FLG_FOUR_TONCHIKI_APPEAR 	= flag 60
-define FLG_SUMS_MASSAGE_APPEAR  	= flag 61
+define FLG_FOUR_KOMORITA_APPEAR		= flag 58
+define FLG_FOUR_MAID_APPEAR		= flag 59
+define FLG_FOUR_TONCHIKI_APPEAR		= flag 60
+define FLG_SUMS_MASSAGE_APPEAR		= flag 61
 define FLG_SKRB_BRICKROAD_DISAPPEAR	= flag 62
-define FLG_MOON_R_DISAPPEAR     	= flag 63
-define FLG_WIN_FRANK            	= flag 64
-// Flag 65 is never referenced in the messages
-define FLG_TWSN_WIN_TONCHIKI    	= flag 66
-define FLG_HAPPY_WIN_GUARD      	= flag 67
-define FLG_WIN_CARPAINTER       	= flag 68
-define FLG_WIN_MATENT           	= flag 69
+define FLG_MOON_R_DISAPPEAR		= flag 63
+define FLG_WIN_FRANK			= flag 64
+// Flag 65 is never referenced in the messages, repurposed for run_flag
+define FLG_TWSN_WIN_TONCHIKI		= flag 66
+define FLG_HAPPY_WIN_GUARD		= flag 67
+define FLG_WIN_CARPAINTER		= flag 68
+define FLG_WIN_MATENT			= flag 69
 define FLG_WIN_GANSEKIMAN       	= flag 70
 define FLG_WIN_GEPPU            	= flag 71
 define FLG_WIN_DSRT_BOSS        	= flag 72
@@ -837,7 +837,4 @@ define FLG_ITEM_BAZOOKA			= flag 982
 define FLG_ITEM_DEFENSE_SHOWER		= flag 983
 define FLG_ITEM_HEAVY_BAZOOKA		= flag 984
 define FLG_ITEM_BROKEN_IRON_PURCHASED	= flag 985
-
-/* Original Game Flags */
-define flg_Venus			= flag 0x093
 

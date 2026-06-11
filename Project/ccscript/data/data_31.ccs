@@ -432,7 +432,7 @@ l_0xc76391:
 
 l_0xc763a3:
 	goto_if_flag(FLG_TEMP_2, l_0xc763b0)	// 0x03
-	call(data_13.l_0xc5d263)
+	call(ShopMain.l_0xc5d263)	//call(data_13.l_0xc5d263)
 	eob
 
 l_0xc763b0:
@@ -441,7 +441,7 @@ l_0xc763b0:
 
 l_0xc763dc:
 	goto_if_flag(FLG_TEMP_1, l_0xc763b0)	// 0x02
-	call(data_13.l_0xc5d26f)
+	call(ShopMain.l_0xc5d26f)	//call(data_13.l_0xc5d26f)
 	eob
 
 l_0xc763e9:
@@ -453,7 +453,7 @@ l_0xc7640b:
 	"@They never ask me|| <Would you like fries with that shake?>" end
 
 l_0xc76443:
-	call(data_13.l_0xc5d27b) eob
+	call(ShopMain.l_0xc5d27b) eob	//call(data_13.l_0xc5d27b) eob
 
 l_0xc76449:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc765cf)	// 0x49, 73

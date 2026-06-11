@@ -1,4 +1,7 @@
 import ShopSys
+//import "../data_mem_overwrite.ccs"
+import "../definitions/flags.ccs"
+import "../essential/stdext.ccs"
 
 // based off
 // https://ssl-forum-files.fobby.net/forum_attachments/0040/0732/ShopMain.ccs
@@ -138,11 +141,12 @@ Dummy_Bulk_Buy_Change_Of_Mind:
 
 // Dummy item which is used for checking inventory space when bulk buying. If the player has this item, it will be moved to after the purchased items when bulk buying
 // right now, it's the unused 'Video relaxant' item.
-define dummyItem = 203
+define dummyItem			= 203
+define FLG_ITEM_HEAVY_BAZOOKA		= flag 984
 
 // Sound effects for shops
-define Sound_Cash = 12
-define Sound_Beep = 120
+define Sound_Cash			= 12
+define Sound_Beep			= 120
 
 // Dialogue window for shops. Be aware that since registers are per-window,
 // modifying the code to use different windows in different locations
@@ -150,19 +154,78 @@ define Sound_Beep = 120
 define Dialogue_Window = 1
 
 // Flags used for shops
-define Shop_Flag_Debug	= "REPLACE ME!!!!"
-// ... add more here
+define Shop_Flag_Debug			= flag 558	// Flag 558 is never used in the original game
+
+define FLG_SHOP_01              	= flag 226
+define FLG_SHOP_02              	= flag 227
+define FLG_SHOP_03              	= flag 228
+define FLG_SHOP_04              	= flag 229
+define FLG_SHOP_05              	= flag 230
+define FLG_SHOP_06              	= flag 231
+define FLG_SHOP_07              	= flag 232
+define FLG_SHOP_08              	= flag 233
+define FLG_SHOP_09              	= flag 234
+define FLG_SHOP_10              	= flag 235
+define FLG_SHOP_11              	= flag 236
+define FLG_SHOP_12              	= flag 237
+define FLG_SHOP_13              	= flag 238
+define FLG_SHOP_14              	= flag 239
+define FLG_SHOP_15              	= flag 240
+define FLG_SHOP_16              	= flag 241
+define FLG_SHOP_17              	= flag 242
+define FLG_SHOP_18              	= flag 243
+define FLG_SHOP_19              	= flag 244
+define FLG_SHOP_20              	= flag 245
+define FLG_SHOP_21              	= flag 246
+define FLG_SHOP_22              	= flag 247
+define FLG_SHOP_23              	= flag 248
+define FLG_SHOP_24              	= flag 249
+define FLG_SHOP_25              	= flag 250
+define FLG_SHOP_26              	= flag 251
+define FLG_SHOP_27              	= flag 252
+define FLG_SHOP_28              	= flag 253
+define FLG_SHOP_29              	= flag 254
+define FLG_SHOP_30              	= flag 255
+define FLG_SHOP_31              	= flag 256
+define FLG_SHOP_32              	= flag 257
+define FLG_SHOP_33              	= flag 258
+define FLG_SHOP_34              	= flag 259
+define FLG_SHOP_35              	= flag 260
+define FLG_SHOP_36              	= flag 261
+define FLG_SHOP_37              	= flag 262
+define FLG_SHOP_38              	= flag 263
+define FLG_SHOP_39              	= flag 264
+define FLG_SHOP_40              	= flag 265
+define FLG_SHOP_41              	= flag 266
+define FLG_SHOP_42              	= flag 267
+define FLG_SHOP_43              	= flag 268
+define FLG_SHOP_44              	= flag 269
+define FLG_SHOP_45              	= flag 270
+define FLG_SHOP_46              	= flag 271
+define FLG_SHOP_47              	= flag 324
+define FLG_SHOP_48              	= flag 325
+define FLG_SHOP_49              	= flag 326
+define FLG_SHOP_50              	= flag 478
+define FLG_SHOP_51              	= flag 597
+define FLG_SHOP_52              	= flag 598
+define FLG_SHOP_53              	= flag 599
+define FLG_SHOP_54              	= flag 600
+define FLG_SHOP_55              	= flag 653
+define FLG_SHOP_56              	= flag 731
+define FLG_SHOP_57              	= flag 732
+define FLG_SHOP_58              	= flag 733
 
 
 // shop config flags (from vanilla)
-define FLG_SHOPTEMP_1	= flag 656	// Different_Purchase_Sound, beep instead of cash noise
-define FLG_SHOPTEMP_4	= flag 659	// Moonside_Choice_Reverse, swap yes and no
-
+define FLG_SHOPTEMP_1			= flag 656	// Different_Purchase_Sound, beep instead of cash noise
+define FLG_SHOPTEMP_2			= flag 657
+define FLG_SHOPTEMP_3			= flag 658
+define FLG_SHOPTEMP_4			= flag 659	// Moonside_Choice_Reverse, swap yes and no
+define Different_Purchase_Sound		= flag 656	// beep instead of cash noise, 0x290
+define Moonside_Choice_Reverse		= flag 659	// flip yes and no, 0x293
 
 
 // // // NPC TEXT // // //
-
-
 
 // Template:
 /*
@@ -175,221 +238,2047 @@ Shop_Name:
     eob
 */
 
-// Debug shop
-Shop_Debug:
-    set (Shop_Flag_Debug)
-    call (BuySell_Shop)
-    unset (Shop_Flag_Debug)
-    eob
+// l_0xc5decb = BuySell_Shop
+// l_0xc5dfb1 = NoSell_Shop
+// l_0xc5e02f = OneItem_Shop
 
-// ... add more here
+// Shop flags definitions start
+// Taken from data_13.ccs
+l_0xc5d24b:
+	set(FLG_SHOP_01)	// 226
+	call(BuySell_Shop)
+	unset(FLG_SHOP_01)	// 226
+	eob
+
+l_0xc5d257:
+	set(FLG_SHOP_02)	// 227
+	call(BuySell_Shop)
+	unset(FLG_SHOP_02)	// 227
+	eob
+
+l_0xc5d263:
+	set(FLG_SHOP_03)	// 228
+	call(NoSell_Shop)
+	unset(FLG_SHOP_03)	// 228
+	eob
+
+l_0xc5d26f:
+	set(FLG_SHOP_04)	// 229
+	call(NoSell_Shop)
+	unset(FLG_SHOP_04)	// 229
+	eob
+
+l_0xc5d27b:
+	set(FLG_SHOP_05)	// 230
+	call(NoSell_Shop)
+	unset(FLG_SHOP_05)	// 230
+	eob
+
+l_0xc5d287:
+	set(FLG_SHOP_06)	// 231
+	call(NoSell_Shop)
+	unset(FLG_SHOP_06)	// 231
+	eob
+
+l_0xc5d293:
+	set(FLG_SHOP_07)	// 232
+	call(NoSell_Shop)
+	unset(FLG_SHOP_07)	// 232
+	eob
+
+l_0xc5d29f:
+	set(FLG_SHOP_08)	// 233
+	call(BuySell_Shop)
+	unset(FLG_SHOP_08)	// 233
+	eob
+
+l_0xc5d2ab:
+	set(FLG_SHOP_09)	// 234
+	call(BuySell_Shop)
+	unset(FLG_SHOP_09)	// 234
+	eob
+
+l_0xc5d2b7:
+	set(FLG_SHOP_10)	// 235
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_10)	// 235
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d2c9:
+	set(FLG_SHOP_11)	// 236
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_11)	// 236
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d2db:
+	set(FLG_SHOP_12)	// 237
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_12)	// 237
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d2ed:
+	set(FLG_SHOP_13)	// 238
+	set(FLG_SHOPTEMP_1)	// 656
+	call(OneItem_Shop)
+	unset(FLG_SHOP_13)	// 238
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d2ff:
+	set(FLG_SHOP_14)	// 239
+	call(BuySell_Shop)
+	unset(FLG_SHOP_14)	// 239
+	eob
+
+l_0xc5d30b:
+	set(FLG_SHOP_15)	// 240
+	call(BuySell_Shop)
+	unset(FLG_SHOP_15)	// 240
+	eob
+
+l_0xc5d317:
+	set(FLG_SHOP_16)	// 241
+	call(BuySell_Shop)
+	unset(FLG_SHOP_16)	// 241
+	eob
+
+l_0xc5d323:
+	set(FLG_SHOP_17)	// 242
+	call(BuySell_Shop)
+	unset(FLG_SHOP_17)	// 242
+	eob
+
+l_0xc5d32f:
+	set(FLG_SHOP_18)	// 243
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_18)	// 243
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d341:
+	set(FLG_SHOP_19)	// 244
+	call(NoSell_Shop)
+	unset(FLG_SHOP_19)	// 244
+	eob
+
+l_0xc5d34d:
+	set(FLG_SHOP_20)	// 245
+	call(BuySell_Shop)
+	unset(FLG_SHOP_20)	// 245
+	eob
+
+l_0xc5d359:
+	set(FLG_SHOP_21)	// 246
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_21)	// 246
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d36b:
+	set(FLG_SHOP_22)	// 247
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_22)	// 247
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d37d:
+	set(FLG_SHOP_23)	// 248
+	call(BuySell_Shop)
+	unset(FLG_SHOP_23)	// 248
+	eob
+
+l_0xc5d389:
+	set(FLG_SHOP_24)	// 249
+	call(BuySell_Shop)
+	unset(FLG_SHOP_24)	// 249
+	eob
+
+l_0xc5d395:
+	set(FLG_SHOP_25)	// 250
+	call(BuySell_Shop)
+	unset(FLG_SHOP_25)	// 250
+	eob
+
+l_0xc5d3a1:
+	set(FLG_SHOP_26)	// 251
+	call(BuySell_Shop)
+	unset(FLG_SHOP_26)	// 251
+	eob
+
+l_0xc5d3ad:
+	set(FLG_SHOP_27)	// 252
+	call(BuySell_Shop)
+	unset(FLG_SHOP_27)	// 252
+	eob
+
+l_0xc5d3b9:
+	set(FLG_SHOP_28)	// 253
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_28)	// 253
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d3cb:
+	set(FLG_SHOP_29)	// 254
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_29)	// 254
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d3dd:
+	set(FLG_SHOP_30)	// 255
+	call(NoSell_Shop)
+	unset(FLG_SHOP_30)	// 255
+	eob
+
+l_0xc5d3e9:
+	set(FLG_SHOP_31)	// 256
+	call(BuySell_Shop)
+	unset(FLG_SHOP_31)	// 256
+	eob
+
+l_0xc5d3f5:
+	set(FLG_SHOP_32)	// 257
+	call(BuySell_Shop)
+	unset(FLG_SHOP_32)	// 257
+	eob
+
+l_0xc5d401:
+	set(FLG_SHOP_33)	// 258
+	call(NoSell_Shop)
+	unset(FLG_SHOP_33)	// 258
+	eob
+
+l_0xc5d40d:
+	set(FLG_SHOP_34)	// 259
+	call(BuySell_Shop)
+	unset(FLG_SHOP_34)	// 259
+	eob
+
+l_0xc5d419:
+	set(FLG_SHOP_35)	// 260
+	call(BuySell_Shop)
+	unset(FLG_SHOP_35)	// 260
+	eob
+
+l_0xc5d425:
+	set(FLG_SHOP_36)	// 261
+	call(NoSell_Shop)
+	unset(FLG_SHOP_36)	// 261
+	eob
+
+l_0xc5d431:
+	set(FLG_SHOP_37)	// 262
+	call(NoSell_Shop)
+	unset(FLG_SHOP_37)	// 262
+	eob
+
+l_0xc5d43d:
+	set(FLG_SHOP_38)	// 263
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_38)	// 263
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d44f:
+	set(FLG_SHOP_39)	// 264
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_39)	// 264
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d461:
+	set(FLG_SHOP_40)	// 265
+	call(BuySell_Shop)
+	unset(FLG_SHOP_40)	// 265
+	eob
+
+l_0xc5d46d:
+	set(FLG_SHOP_41)	// 266
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_41)	// 266
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d47f:
+	set(FLG_SHOP_42)	// 267
+	call(BuySell_Shop)
+	unset(FLG_SHOP_42)	// 267
+	eob
+
+l_0xc5d48b:
+	set(FLG_SHOP_43)	// 268
+	set(FLG_SHOPTEMP_1)	// 656
+	call(OneItem_Shop)
+	unset(FLG_SHOP_43)	// 268
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d49d:
+	set(FLG_SHOP_44)	// 269
+	set(FLG_SHOPTEMP_1)	// 656
+	call(OneItem_Shop)
+	unset(FLG_SHOP_44)	// 269
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d4af:
+	set(FLG_SHOP_45)	// 270
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_45)	// 270
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d4c1:
+	set(FLG_SHOP_46)	// 271
+	call(BuySell_Shop)
+	unset(FLG_SHOP_46)	// 271
+	eob
+
+l_0xc5d4cd:
+	set(FLG_SHOP_47)	// 324
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_47)	// 324
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d4df:
+	set(FLG_SHOP_48)	// 325
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_48)	// 325
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d4f1:
+	set(FLG_SHOP_49)	// 326
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_49)	// 326
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d503:
+	set(FLG_SHOP_50)	// 478
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_50)	// 478
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d515:
+	set(FLG_SHOP_51)	// 597
+	set(FLG_SHOPTEMP_1)	// 656
+	call(NoSell_Shop)
+	unset(FLG_SHOP_51)	// 597
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d527:
+	set(FLG_SHOP_52)	// 598
+	set(FLG_SHOPTEMP_1)	// 656
+	call(OneItem_Shop)
+	unset(FLG_SHOP_52)	// 598
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d539:
+	set(FLG_SHOP_53)	// 599
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_53)	// 599
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d54b:
+	set(FLG_SHOP_54)	// 600
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_54)	// 600
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d55d:
+	set(FLG_SHOP_55)	// 653
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_55)	// 653
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d56f:
+	set(FLG_SHOP_56)	// 731
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_56)	// 731
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d581:
+	set(FLG_SHOP_57)	// 732
+	set(FLG_SHOPTEMP_1)	// 656
+	call(BuySell_Shop)
+	unset(FLG_SHOP_57)	// 732
+	unset(FLG_SHOPTEMP_1)	// 656
+	eob
+
+l_0xc5d593:
+	set(FLG_SHOP_58)	// 733
+	set(FLG_SHOPTEMP_1)	// 656
+	set(FLG_SHOPTEMP_4)	// 659
+	call(NoSell_Shop)
+	unset(FLG_SHOP_58)	// 733
+	unset(FLG_SHOPTEMP_1)	// 656
+	unset(FLG_SHOPTEMP_4)	// 659
+	eob
+	// Shop flags definitions end
+	// ... add more here
 
 
 
 // // // SHOP MENU TEXT STRING // // //
 
-
-
 // Tree for showing the shop menu
 Shop_List_Main:
-    ifgoto (Shop_Flag_Debug, Shop_List_Debug)
-    // ... add more here
-    eob
+	goto_if_flag(FLG_SHOP_01, l_0xc5d742)	// 0xE2, 226
+	goto_if_flag(FLG_SHOP_02, l_0xc5d746)	// 0xE3, 227
+	goto_if_flag(FLG_SHOP_03, l_0xc5d74a)	// 0xE4, 228
+	goto_if_flag(FLG_SHOP_04, l_0xc5d74e)	// 0xE5, 229
+	goto_if_flag(FLG_SHOP_05, l_0xc5d752)	// 0xE6, 230
+	goto_if_flag(FLG_SHOP_06, l_0xc5d756)	// 0xE7, 231
+	goto_if_flag(FLG_SHOP_07, l_0xc5d75a)	// 0xE8, 232
+	goto_if_flag(FLG_SHOP_08, l_0xc5d75e)	// 0xE9, 233
+	goto_if_flag(FLG_SHOP_09, l_0xc5d762)	// 0xEA, 234
+	goto_if_flag(FLG_SHOP_10, l_0xc5d766)	// 0xEB, 235
+	goto_if_flag(FLG_SHOP_11, l_0xc5d76a)	// 0xEC, 236
+	goto_if_flag(FLG_SHOP_12, l_0xc5d76e)	// 0xED, 237
+	goto_if_flag(FLG_SHOP_13, l_0xc5d772)	// 0xEE, 238
+	goto_if_flag(FLG_SHOP_14, l_0xc5d776)	// 0xEF, 239
+	goto_if_flag(FLG_SHOP_15, l_0xc5d77a)	// 0xF0, 240
+	goto_if_flag(FLG_SHOP_16, l_0xc5d77e)	// 0xF1, 241
+	goto_if_flag(FLG_SHOP_17, l_0xc5d782)	// 0xF2, 242
+	goto_if_flag(FLG_SHOP_18, l_0xc5d786)	// 0xF3, 243
+	goto_if_flag(FLG_SHOP_19, l_0xc5d78a)	// 0xF4, 244
+	goto_if_flag(FLG_SHOP_20, l_0xc5d78e)	// 0xF5, 245
+	goto_if_flag(FLG_SHOP_21, l_0xc5d792)	// 0xF6, 246
+	goto_if_flag(FLG_SHOP_22, l_0xc5d7a1)	// 0xF7, 247
+	goto_if_flag(FLG_SHOP_23, l_0xc5d7a5)	// 0xF8, 248
+	goto_if_flag(FLG_SHOP_24, l_0xc5d7a9)	// 0xF9, 249
+	goto_if_flag(FLG_SHOP_25, l_0xc5d7ad)	// 0xFA, 250
+	goto_if_flag(FLG_SHOP_26, l_0xc5d7b1)	// 0xFB, 251
+	goto_if_flag(FLG_SHOP_27, l_0xc5d7b5)	// 0xFC, 252
+	goto_if_flag(FLG_SHOP_28, l_0xc5d7b9)	// 0xFD, 253
+	goto_if_flag(FLG_SHOP_29, l_0xc5d7bd)	// 0xFE, 254
+	goto_if_flag(FLG_SHOP_30, l_0xc5d7c1)	// 0xFF, 255
+	goto_if_flag(FLG_SHOP_31, l_0xc5d7c5)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, l_0xc5d7c9)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, l_0xc5d7cd)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, l_0xc5d7d1)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, l_0xc5d7d5)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, l_0xc5d7d9)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, l_0xc5d7dd)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, l_0xc5d7e1)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, l_0xc5d7e5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, l_0xc5d7e9)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, l_0xc5d7ed)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, l_0xc5d7f1)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, l_0xc5d7f5)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, l_0xc5d7f9)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, l_0xc5d7fd)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, l_0xc5d801)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, l_0xc5d805)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, l_0xc5d809)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, l_0xc5d80d)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, l_0xc5d811)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, l_0xc5d815)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, l_0xc5d819)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, l_0xc5d81d)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, l_0xc5d821)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, l_0xc5d825)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, l_0xc5d829)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, l_0xc5d82d)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, l_0xc5d831)	// 0x02DD, 733
+	// ... add more here
+eob
 
 
-Shop_List_Debug:
-    display_shop (1)
-    eob
+// Shop flags checks
+l_0xc5d742:
+	do_shop_menu(1)
+	eob
 
+l_0xc5d746:
+	do_shop_menu(2)
+	eob
+
+l_0xc5d74a:
+	do_shop_menu(4)
+	eob
+
+l_0xc5d74e:
+	do_shop_menu(4)
+	eob
+
+l_0xc5d752:
+	do_shop_menu(5)
+	eob
+
+l_0xc5d756:
+	do_shop_menu(6)
+	eob
+
+l_0xc5d75a:
+	do_shop_menu(7)
+	eob
+
+l_0xc5d75e:
+	do_shop_menu(8)
+	eob
+
+l_0xc5d762:
+	do_shop_menu(9)
+	eob
+
+l_0xc5d766:	// Broken iron seller 1
+	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(11) }	// 0x0B
+	else { do_shop_menu(67) }
+	eob
+
+l_0xc5d76a:
+	do_shop_menu(14)	// 0x0E
+	eob
+
+l_0xc5d76e:
+	do_shop_menu(54)	// 0x36
+	eob
+
+l_0xc5d772:
+	do_shop_menu(15)	// 0x0F
+	eob
+
+l_0xc5d776:
+	do_shop_menu(55)	// 0x37
+	eob
+
+l_0xc5d77a:
+	do_shop_menu(16)	// 0x10
+	eob
+
+l_0xc5d77e:
+	do_shop_menu(17)	// 0x11
+	eob
+
+l_0xc5d782:
+	do_shop_menu(18)	// 0x12
+	eob
+
+l_0xc5d786:
+	do_shop_menu(19)	// 0x13
+	eob
+
+l_0xc5d78a:
+	do_shop_menu(20)	// 0x14
+	eob
+
+l_0xc5d78e:
+	do_shop_menu(22)	// 0x16
+	eob
+
+l_0xc5d792:
+	goto_if_flag(FLG_TLPT_SUMS, l_0xc5d79d)	// 0xD7, 215
+	do_shop_menu(64)	// 0x40
+	eob
+
+l_0xc5d79d:
+	do_shop_menu(65)	// 0x41
+	eob
+
+l_0xc5d7a1:
+	do_shop_menu(56)	// 0x38
+	eob
+
+l_0xc5d7a5:
+	do_shop_menu(23)	// 0x17
+	eob
+
+l_0xc5d7a9:
+	do_shop_menu(50)	// 0x32
+	eob
+
+l_0xc5d7ad:
+	do_shop_menu(57)	// 0x39
+	eob
+
+l_0xc5d7b1:
+	do_shop_menu(24)	// 0x18
+	eob
+
+l_0xc5d7b5:
+	do_shop_menu(58)	// 0x3A
+	eob
+
+l_0xc5d7b9:
+	do_shop_menu(59)	// 0x3B
+	eob
+
+l_0xc5d7bd:
+	do_shop_menu(25)	// 0x19
+	eob
+
+l_0xc5d7c1:
+	do_shop_menu(26)	// 0x1A
+	eob
+
+l_0xc5d7c5:
+	do_shop_menu(27)	// 0x1B
+	eob
+
+l_0xc5d7c9:
+	do_shop_menu(28)	// 0x1C
+	eob
+
+l_0xc5d7cd:
+	do_shop_menu(29)	// 0x1D
+	eob
+
+l_0xc5d7d1:
+	do_shop_menu(31)	// 0x1F
+	eob
+
+l_0xc5d7d5:
+	do_shop_menu(32)	// 0x20
+	eob
+
+l_0xc5d7d9:
+	do_shop_menu(33)	// 0x21
+	eob
+
+l_0xc5d7dd:
+	do_shop_menu(30)	// 0x1E
+	eob
+
+l_0xc5d7e1:
+	do_shop_menu(34)	// 0x22
+	eob
+
+l_0xc5d7e5:
+	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(35) }	// 0x23
+	else { do_shop_menu(68) }
+	eob
+
+l_0xc5d7e9:
+	do_shop_menu(38)	// 0x26
+	eob
+
+l_0xc5d7ed:
+	do_shop_menu(40)	// 0x28
+	eob
+
+l_0xc5d7f1:
+	do_shop_menu(39)	// 0x27
+	eob
+
+l_0xc5d7f5:
+	do_shop_menu(3)	// 0x03
+	eob
+
+l_0xc5d7f9:
+	do_shop_menu(10)	// 0x0A
+	eob
+
+l_0xc5d7fd:
+	do_shop_menu(61)	// 0x3D
+	eob
+
+l_0xc5d801:
+	do_shop_menu(41)	// 0x29
+	eob
+
+l_0xc5d805:
+	do_shop_menu(43)	// 0x2B
+	eob
+
+l_0xc5d809:
+	do_shop_menu(44)	// 0x2C
+	eob
+
+l_0xc5d80d:
+	do_shop_menu(45)	// 0x2D
+	eob
+
+l_0xc5d811:
+	do_shop_menu(63)	// 0x3F
+	eob
+
+l_0xc5d815:
+	do_shop_menu(62)	// 0x3E
+	eob
+
+l_0xc5d819:
+	do_shop_menu(21)	// 0x15
+	eob
+
+l_0xc5d81d:	// Near-Pyramid seller
+	if not flag FLG_ITEM_BAZOOKA { do_shop_menu(51) }	// 0x33
+	else { do_shop_menu(66) }
+	eob
+
+l_0xc5d821:
+	do_shop_menu(46)	// 0x2E
+	eob
+
+l_0xc5d825:
+	do_shop_menu(52)	// 0x34
+	eob
+
+l_0xc5d829:
+	do_shop_menu(53)	// 0x35
+	eob
+
+l_0xc5d82d:
+	do_shop_menu(36)	// 0x24
+	eob
+
+l_0xc5d831:
+	do_shop_menu(60)	// 0x3C
+	eob
 // ... add more here
 
 
 
 // // //  LINKS TO VENDOR TEXT // // //
 
-
-
 // Initial message when talking to NPC
-Greeting:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Greeting)
-    // ... add more here
-    eob
+Greeting:	// l_0xc50000
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51ccb)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b12)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bb76)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bb76)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5baa4)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bb76)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5baa4)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b12)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc5211e)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b625)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bc70)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bef9)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd18)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b12)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b12)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b12)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b12)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_01.l_0xc52d94)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5baa4)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b12)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d050)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c32a)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc530a2)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc530a2)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc530a2)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b12)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b12)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c71f)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_01.l_0xc52d94)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5baa4)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc5211e)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b12)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5baa4)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b12)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51eea)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bb76)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5ce22)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_01.l_0xc52d94)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c1e5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc522ef)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bd92)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc524f7)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf67)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5ca56)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c845)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc527c7)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c05f)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52acc)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_01.l_0xc52d94)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bef9)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c59e)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cbc0)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3ba)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b12)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_01.l_0xc52d94)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5341d)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b896)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c96a)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Exiting the store after purchasing at least one item
-Exit_Store_Buy:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Exit_Store_Buy)
-    // ... add more here
-    eob
+Exit_Store_Buy:	// l_0xc50198
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51cef)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b28)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bb9a)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bb9a)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5bab4)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bb9a)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5bab4)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b28)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc52130)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b666)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcc2)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf87)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd29)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b28)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b28)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b28)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b28)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52dcc)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5bab4)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b28)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d06d)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c39e)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc530fc)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc530fc)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc530fc)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b28)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b28)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c74c)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52dcc)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5bab4)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc52130)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b28)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5bab4)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b28)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f2c)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bb9a)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cec0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52dcc)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c203)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5230c)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bde0)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52546)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf82)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cab4)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c86c)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52809)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0ad)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b37)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52dcc)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf87)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c5dd)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cbdc)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3eb)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b28)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52dcc)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53454)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8d6)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c99a)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Exit shop window without buying anything
-Exit_Store_Dont_Buy:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Exit_Store_Dont_Buy)
-    // ... add more here
-    eob
+Exit_Store_Dont_Buy:	// l_0xc50330
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51cfa)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b31)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbb2)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbb2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_10.l_0xc5babd)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbb2)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_10.l_0xc5babd)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b31)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc52139)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b674)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcca)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf8e)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd2f)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b31)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b31)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b31)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b31)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52de8)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_10.l_0xc5babd)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b31)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d08d)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c456)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5310f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5310f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5310f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b31)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b31)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c755)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52de8)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_10.l_0xc5babd)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc52139)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b31)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_10.l_0xc5babd)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_01.l_0xc52d8c)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f45)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbb2)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cec8)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52de8)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c210)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52312)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be00)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5256c)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf8a)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cad0)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c876)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52836)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0cb)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b67)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52de8)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf8e)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c5f3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc35)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b3f6)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b31)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52de8)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5346f)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8df)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9a4)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Message displayed just before opening the shop window
 // For vendors with the buy/sell commands, this displays after choosing "buy"
 // For other vendors, this displays automatically
-Open_Shop_Window:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Open_Shop_Window)
-    // ... add more here
-    eob
+Open_Shop_Window:	// l_0xc504c8
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d20)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b39)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbce)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbce)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bac5)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbce)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bac5)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b39)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc52154)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b69d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcd2)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bf95)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd51)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b39)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b39)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b39)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b39)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e0d)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bac5)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b39)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0aa)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4e3)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5311f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5311f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5311f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b39)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b39)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c765)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e0d)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bac5)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc52154)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b39)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bac5)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b39)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f62)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbce)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5ced0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e0d)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c22e)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52339)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be16)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52574)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cf9b)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5caec)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c88a)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52855)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0e3)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b82)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e0d)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bf95)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c61a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc53)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b405)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b39)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e0d)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5348a)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8eb)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9ae)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // After selecting an item to buy at the store
-Selected_Item:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Selected_Item)
-    // ... add more here
-    eob
+Selected_Item:	// l_0xc50660
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d31)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b49)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbdc)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbdc)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bad3)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbdc)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bad3)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b49)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc52163)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6af)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcdd)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfa1)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd64)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b49)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b49)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b49)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b49)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e1c)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bad3)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b49)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0c9)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4ee)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53134)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53134)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53134)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b49)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b49)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c76f)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e1c)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bad3)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc52163)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b49)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bad3)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b49)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f74)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbdc)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cedc)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e1c)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c23b)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5234d)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be24)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52583)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfa6)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cafe)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c896)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52860)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c0f3)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b8d)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e1c)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfa1)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c63a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc63)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b426)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b49)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e1c)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5349f)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b8f8)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9b7)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Asking who will take the item
-Who_Will_Take_Item:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Who_Will_Take_Item)
-    // ... add more here
-    eob
+Who_Will_Take_Item:	// l_0xc507f8
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d39)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b57)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbe4)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbe4)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5badb)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbe4)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5badb)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b57)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc5216b)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6b7)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bce5)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfb0)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd73)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b57)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b57)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b57)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b57)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e24)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5badb)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b57)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d0df)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c4fd)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53144)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53144)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53144)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b57)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b57)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c77e)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e24)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5badb)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc5216b)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b57)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5badb)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b57)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f7c)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbe4)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cee4)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e24)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c252)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52355)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be34)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5258b)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfae)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb12)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c89e)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52868)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c10f)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52b9b)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e24)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfb0)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c64d)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc83)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b42e)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b57)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e24)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534a7)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b900)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9c2)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Asking if the character who took the item wants to equip it
 // Only asked if the character is capable of equipping the item
 // (and only if the shop sells equippables)
-Equip_Now:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Equip_Now)
-    // ... add more here
-    eob
+Equip_Now:	// l_0xc50990
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d45)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b6a)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b6a)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc5217a)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6ca)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b6a)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b6a)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b6a)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b6a)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e3a)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b6a)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53161)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53161)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53161)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b6a)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b6a)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e3a)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc5217a)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b6a)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b6a)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51f91)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e3a)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52361)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525a4)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52885)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52baa)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e3a)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b43c)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b6a)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e3a)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534b6)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b910)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After equipping a new piece of equipment you purchased, the vendor asks yes/no if you want to sell your old piece of equipment
-Buy_Previous_Equipment:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Buy_Previous_Equipment)
-    // ... add more here
-    eob
+Buy_Previous_Equipment:	// l_0xc50a72
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d5b)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b7e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b7e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc52189)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b6e2)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b7e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b7e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b7e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b7e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e59)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b7e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53172)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53172)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53172)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b7e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b7e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e59)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc52189)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b7e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b7e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51fa7)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e59)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52371)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525bb)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52893)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52bbd)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e59)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b447)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b7e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e59)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534c8)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b92c)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After selecting a piece of equipment, trying to put it in the inventory of a character who cannot equip it
 // Followed by a yes/no question asking if you still want to give that item to that character
-Cant_Equip_Item:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Cant_Equip_Item)
-    // ... add more here
-    eob
+Cant_Equip_Item:	// l_0xc50b54
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d7b)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51b9d)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51b9d)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521aa)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b70b)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51b9d)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51b9d)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51b9d)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51b9d)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52e85)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51b9d)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc531ba)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc531ba)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc531ba)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51b9d)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51b9d)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52e85)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521aa)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51b9d)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51b9d)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51fc8)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52e85)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5238f)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc525e6)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528bf)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52bdd)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52e85)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b468)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51b9d)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52e85)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc534e9)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b94d)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After picking an item, then canceling when choosing the inventory to put it in
 // After selecting to give a piece of equipment to a character who can't equip it, the game will ask yes/no if you still want to give it to that character.  Selecting no prompts this text
-Cancel_Cant_Equip:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Cancel_Cant_Equip)
-    // ... add more here
-    eob
+Cancel_Cant_Equip:	// l_0xc50c36
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d96)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bb7)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbf2)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbf2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bae8)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbf2)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bae8)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bb7)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521d3)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b72d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcf4)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfbf)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd7f)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bb7)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bb7)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bb7)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bb7)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52eb2)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bae8)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bb7)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d104)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c50d)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc531ea)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc531ea)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc531ea)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bb7)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bb7)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c78a)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52eb2)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bae8)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521d3)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bb7)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bae8)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bb7)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51fe7)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbf2)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52eb2)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c268)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523be)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be45)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52603)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfba)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb1e)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8aa)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528eb)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c125)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c00)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52eb2)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfbf)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c65c)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc8f)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b48c)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bb7)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52eb2)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53515)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b971)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9ce)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Occurs when you try to buy an item without having enough money
-Not_Enough_Cash:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Not_Enough_Cash)
-    // ... add more here
-    eob
+Not_Enough_Cash:	// l_0xc50dce
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51db0)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bc0)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbfb)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbfb)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5baf1)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbfb)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5baf1)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bc0)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521dc)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b746)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcfd)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfc7)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd97)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bc0)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bc0)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bc0)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bc0)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ed7)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5baf1)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bc0)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d120)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c521)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53212)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53212)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53212)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bc0)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bc0)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7ae)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ed7)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5baf1)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521dc)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bc0)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5baf1)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bc0)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51ff8)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbfb)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef9)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ed7)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c27f)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523cb)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be4e)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52622)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfd5)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb29)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8c8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528f9)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c13e)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c1c)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ed7)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfc7)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c67a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccae)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b4d7)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bc0)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ed7)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5352c)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b97e)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9e7)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Checks if entire party's inventory is full after choosing to purchase an item
 // If the store has the buy/sell option, this will immediately be followed by the NPC asking yes/no if you want to sell something
-Whole_Party_Full_Inventory:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Whole_Party_Full_Inventory)
-    // ... add more here
-    eob
+Whole_Party_Full_Inventory:	// l_0xc50f66
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51dcb)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bde)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc0d)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc0d)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb02)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc0d)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb02)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bde)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521ec)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b76f)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd0c)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfd3)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdb3)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bde)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bde)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bde)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bde)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ef5)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb02)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bde)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d148)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c536)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53259)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53259)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53259)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bde)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bde)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7b9)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ef5)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb02)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521ec)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bde)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb02)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bde)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc5201d)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc0d)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf0a)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ef5)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2a5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523ef)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be6f)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5264b)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfdf)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb33)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8d8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52938)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c161)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c3d)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ef5)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfd3)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c68a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccbd)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b507)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bde)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ef5)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53562)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b994)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9f2)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // When choosing to sell an item
 // This is not displayed if the whole party's inventory is full, and the NPC asks if you want to sell something
-What_To_Sell:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_What_To_Sell)
-    // ... add more here
-    eob
+What_To_Sell:	// l_0xc510fe
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e14)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c03)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c03)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc5222e)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b799)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c03)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c03)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c03)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c03)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f4a)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c03)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5328f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5328f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5328f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c03)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c03)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f4a)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc5222e)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c03)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c03)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc52059)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f4a)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5241d)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526a2)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52972)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c81)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f4a)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b541)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c03)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f4a)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc535d3)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9c1)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After choosing to sell an item
-Confirm_Selling:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Confirm_Selling)
-    // ... add more here
-    eob
+Confirm_Selling:	// l_0xc511e0
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e1f)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c0e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c0e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc5223c)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7a6)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c0e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c0e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c0e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c0e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f5f)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c0e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc532b3)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc532b3)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc532b3)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c0e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c0e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f5f)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc5223c)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c0e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c0e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc5206d)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f5f)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5242b)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526b8)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52989)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c9b)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f5f)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b551)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c0e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f5f)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc535df)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9d1)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After picking an item to sell, then selecting "no"
-Cancel_Selling:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Cancel_Selling)
-    // ... add more here
-    eob
+Cancel_Selling:		// l_0xc512c2
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e4a)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c38)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c38)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52261)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7cd)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c38)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c38)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c38)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c38)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52f94)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c38)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc532fa)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc532fa)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc532fa)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c38)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c38)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52f94)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52261)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c38)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c38)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc5209b)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52f94)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5244f)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc526e5)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc529d2)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52cd4)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52f94)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b572)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c38)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52f94)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53615)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b9fe)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // Occurs when you select the "sell" option, without a single item in your party's inventory
-Nothing_To_Sell:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Nothing_To_Sell)
-    // ... add more here
-    eob
+Nothing_To_Sell:	// l_0xc513a4
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e67)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c41)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c41)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52272)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b7f2)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c41)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c41)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c41)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c41)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52fb6)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c41)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53312)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53312)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53312)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c41)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c41)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52fb6)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52272)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c41)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c41)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520a2)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52fb6)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52469)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5270f)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc529e0)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52ced)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52fb6)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b591)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c41)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52fb6)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53645)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba07)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // When you try to sell an unsellable item
-Unsellable_Item:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Unsellable_Item)
-    // ... add more here
-    eob
+Unsellable_Item:	// l_0xc51486
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e81)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c56)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c56)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52288)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b807)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c56)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c56)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c56)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c56)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ffa)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c56)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53363)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53363)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53363)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c56)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c56)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ffa)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52288)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c56)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c56)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520b9)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ffa)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc52485)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52732)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a09)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d03)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ffa)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5b1)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c56)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ffa)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5366d)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba28)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After buying an item
 // After selling an item
-Transaction_Thanks:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Transaction_Thanks)
-    // ... add more here
-    eob
+Transaction_Thanks:	// l_0xc51568
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51e95)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c6e)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc23)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc23)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb22)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc23)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb22)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c6e)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc52299)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b826)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd49)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c025)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdc0)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c6e)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c6e)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c6e)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c6e)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53018)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb22)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c6e)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d178)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c564)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc5338f)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc5338f)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc5338f)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c6e)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c6e)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7f1)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53018)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb22)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc52299)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c6e)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb22)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c6e)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520cf)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc23)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf1c)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53018)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2c6)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc5249a)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5beb3)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52750)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d00c)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb67)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c916)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a2a)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c192)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d1e)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53018)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c025)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6c3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccca)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5ce)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c6e)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53018)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53687)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba5b)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca04)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // After purchasing an item, the vendor asks if you want to buy another item
-Request_Another_Transaction:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Request_Another_Transaction)
-    // ... add more here
-    eob
+Request_Another_Transaction:	// l_0xc51700
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51ea9)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c87)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc3c)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc3c)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb36)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc3c)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb36)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c87)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522aa)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b84e)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd59)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c033)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdd8)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c87)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c87)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c87)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c87)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53063)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb36)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c87)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d1c7)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c572)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533b6)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533b6)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533b6)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c87)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c87)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c804)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53063)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb36)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522aa)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c87)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb36)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c87)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520e1)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc3c)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf30)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53063)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2de)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524b8)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5bec1)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52776)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d01e)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb7b)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c92a)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a5c)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c1a7)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d38)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53063)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c033)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6e3)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccea)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5e2)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c87)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53063)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536c1)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba69)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca10)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // After agreeing to buy another item
-Do_Another_Transaction:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Do_Another_Transaction)
-    // ... add more here
-    eob
+Do_Another_Transaction:	// l_0xc51898
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51eb6)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51c95)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51c95)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522ba)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b860)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51c95)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51c95)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51c95)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51c95)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc53072)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51c95)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533d5)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533d5)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533d5)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51c95)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51c95)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc53072)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522ba)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51c95)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51c95)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520f1)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc53072)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524c5)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52788)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a82)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d54)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc53072)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5f0)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51c95)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc53072)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536d2)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba78)	// 0x02DC, 732
+	// ... add more here
+eob
 
 // After choosing to give an item to a character whose inventory is full
 // Followed by a yes/no question asking if you want to give the item to someone else
-Chosen_Character_Inventory_Full:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Chosen_Character_Inventory_Full)
-    // ... add more here
-    eob
+Chosen_Character_Inventory_Full:	// l_0xc5197a
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51ec4)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51ca3)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc4c)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc4c)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb46)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc4c)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb46)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51ca3)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_01.l_0xc522ca)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b86d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd62)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5c03c)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdf2)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51ca3)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51ca3)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51ca3)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51ca3)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc5307d)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb46)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51ca3)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d1ed)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_12.l_0xc5c57b)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc533e5)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc533e5)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc533e5)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51ca3)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51ca3)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c80d)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc5307d)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb46)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_01.l_0xc522ca)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51ca3)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb46)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51ca3)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc520fa)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc4c)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf3d)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc5307d)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2e7)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc524d2)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5becd)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52796)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5d02d)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb88)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c933)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52a92)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c1be)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52d5f)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc5307d)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5c03c)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c6ec)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccf5)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b5fe)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51ca3)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc5307d)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc536e1)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5ba86)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca1e)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // If you buy 6 or more of an item
 Bulk_Buy_Lots:
-    newline 
-    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Lots)
-    // ... add more here
-    eob
+	//newline 
+	//"@All these?" next
+	//"@Number + item here" next
+	// ... add more here
+eob
 
 // Can't afford bulk-buying
-Bulk_Buy_Not_Enough_Cash:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Not_Enough_Cash)
-    // ... add more here
-    eob
+Bulk_Buy_Not_Enough_Cash:	// Copy from "Not_Enough_Cash"
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51db0)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bc0)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbfb)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbfb)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5baf1)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbfb)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5baf1)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bc0)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521dc)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b746)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcfd)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfc7)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd97)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bc0)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bc0)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bc0)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bc0)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ed7)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5baf1)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bc0)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d120)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c521)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53212)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53212)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53212)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bc0)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bc0)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7ae)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ed7)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5baf1)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521dc)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bc0)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5baf1)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bc0)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51ff8)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbfb)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef9)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ed7)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c27f)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523cb)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be4e)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52622)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfd5)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb29)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8c8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528f9)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c13e)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c1c)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ed7)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfc7)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c67a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccae)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b4d7)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bc0)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ed7)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc5352c)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b97e)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9e7)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // Not enough space when bulk buying
-Bulk_Buy_Full_Inventory:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Full_Inventory)
-    // ... add more here
-    eob
+Bulk_Buy_Full_Inventory:	// Copy from "Whole_Party_Full_Inventory"
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51dcb)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bde)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bc0d)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bc0d)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bb02)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bc0d)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bb02)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bde)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521ec)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b76f)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bd0c)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfd3)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cdb3)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bde)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bde)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bde)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bde)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52ef5)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bb02)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bde)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d148)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c536)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc53259)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc53259)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc53259)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bde)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bde)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c7b9)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52ef5)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bb02)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521ec)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bde)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bb02)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bde)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc5201d)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bc0d)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_13.l_0xc5cf0a)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52ef5)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c2a5)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523ef)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be6f)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc5264b)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfdf)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb33)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8d8)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc52938)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c161)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c3d)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52ef5)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfd3)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c68a)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5ccbd)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b507)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bde)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52ef5)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53562)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b994)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9f2)	// 0x02DD, 733
+	// ... add more here
+eob
 
 // chose zero or pressed B when inputting quantity
-Bulk_Buy_Change_Of_Mind:
-    newline
-    ifgoto (Shop_Flag_Debug, Dummy_Bulk_Buy_Change_Of_Mind)
-    // ... add more here
-    eob
+Bulk_Buy_Change_Of_Mind:	// Copy from "Cancel_Cant_Equip"
+	newline
+	goto_if_flag(FLG_SHOP_01, data_00.l_0xc51d96)	// 0x00E2, 226
+	goto_if_flag(FLG_SHOP_02, data_00.l_0xc51bb7)	// 0x00E3, 227
+	goto_if_flag(FLG_SHOP_03, data_11.l_0xc5bbf2)	// 0x00E4, 228
+	goto_if_flag(FLG_SHOP_04, data_11.l_0xc5bbf2)	// 0x00E5, 229
+	goto_if_flag(FLG_SHOP_05, data_11.l_0xc5bae8)	// 0x00E6, 230
+	goto_if_flag(FLG_SHOP_06, data_11.l_0xc5bbf2)	// 0x00E7, 231
+	goto_if_flag(FLG_SHOP_07, data_11.l_0xc5bae8)	// 0x00E8, 232
+	goto_if_flag(FLG_SHOP_08, data_00.l_0xc51bb7)	// 0x00E9, 233
+	goto_if_flag(FLG_SHOP_09, data_00.l_0xc521d3)	// 0x00EA, 234
+	goto_if_flag(FLG_SHOP_10, data_10.l_0xc5b72d)	// 0x00EB, 235
+	goto_if_flag(FLG_SHOP_11, data_11.l_0xc5bcf4)	// 0x00EC, 236
+	goto_if_flag(FLG_SHOP_12, data_11.l_0xc5bfbf)	// 0x00ED, 237
+	goto_if_flag(FLG_SHOP_13, data_12.l_0xc5cd7f)	// 0x00EE, 238
+	goto_if_flag(FLG_SHOP_14, data_00.l_0xc51bb7)	// 0x00EF, 239
+	goto_if_flag(FLG_SHOP_15, data_00.l_0xc51bb7)	// 0x00F0, 240
+	goto_if_flag(FLG_SHOP_16, data_00.l_0xc51bb7)	// 0x00F1, 241
+	goto_if_flag(FLG_SHOP_17, data_00.l_0xc51bb7)	// 0x00F2, 242
+	goto_if_flag(FLG_SHOP_18, data_02.l_0xc52eb2)	// 0x00F3, 243
+	goto_if_flag(FLG_SHOP_19, data_11.l_0xc5bae8)	// 0x00F4, 244
+	goto_if_flag(FLG_SHOP_20, data_00.l_0xc51bb7)	// 0x00F5, 245
+	goto_if_flag(FLG_SHOP_21, data_13.l_0xc5d104)	// 0x00F6, 246
+	goto_if_flag(FLG_SHOP_22, data_11.l_0xc5c50d)	// 0x00F7, 247
+	goto_if_flag(FLG_SHOP_23, data_02.l_0xc531ea)	// 0x00F8, 248
+	goto_if_flag(FLG_SHOP_24, data_02.l_0xc531ea)	// 0x00F9, 249
+	goto_if_flag(FLG_SHOP_25, data_02.l_0xc531ea)	// 0x00FA, 250
+	goto_if_flag(FLG_SHOP_26, data_00.l_0xc51bb7)	// 0x00FB, 251
+	goto_if_flag(FLG_SHOP_27, data_00.l_0xc51bb7)	// 0x00FC, 252
+	goto_if_flag(FLG_SHOP_28, data_12.l_0xc5c78a)	// 0x00FD, 253
+	goto_if_flag(FLG_SHOP_29, data_02.l_0xc52eb2)	// 0x00FE, 254
+	goto_if_flag(FLG_SHOP_30, data_11.l_0xc5bae8)	// 0x00FF, 255
+	goto_if_flag(FLG_SHOP_31, data_00.l_0xc521d3)	// 0x0100, 256
+	goto_if_flag(FLG_SHOP_32, data_00.l_0xc51bb7)	// 0x0101, 257
+	goto_if_flag(FLG_SHOP_33, data_11.l_0xc5bae8)	// 0x0102, 258
+	goto_if_flag(FLG_SHOP_34, data_00.l_0xc51bb7)	// 0x0103, 259
+	goto_if_flag(FLG_SHOP_35, data_00.l_0xc51fe7)	// 0x0104, 260
+	goto_if_flag(FLG_SHOP_36, data_11.l_0xc5bbf2)	// 0x0105, 261
+	goto_if_flag(FLG_SHOP_37, data_12.l_0xc5cef0)	// 0x0106, 262
+	goto_if_flag(FLG_SHOP_38, data_02.l_0xc52eb2)	// 0x0107, 263
+	goto_if_flag(FLG_SHOP_39, data_11.l_0xc5c268)	// 0x0108, 264
+	goto_if_flag(FLG_SHOP_40, data_01.l_0xc523be)	// 0x0109, 265
+	goto_if_flag(FLG_SHOP_41, data_11.l_0xc5be45)	// 0x010A, 266
+	goto_if_flag(FLG_SHOP_42, data_01.l_0xc52603)	// 0x010B, 267
+	goto_if_flag(FLG_SHOP_43, data_13.l_0xc5cfba)	// 0x010C, 268
+	goto_if_flag(FLG_SHOP_44, data_12.l_0xc5cb1e)	// 0x010D, 269
+	goto_if_flag(FLG_SHOP_45, data_12.l_0xc5c8aa)	// 0x010E, 270
+	goto_if_flag(FLG_SHOP_46, data_01.l_0xc528eb)	// 0x010F, 271
+	goto_if_flag(FLG_SHOP_47, data_11.l_0xc5c125)	// 0x0144, 324
+	goto_if_flag(FLG_SHOP_48, data_01.l_0xc52c00)	// 0x0145, 325
+	goto_if_flag(FLG_SHOP_49, data_02.l_0xc52eb2)	// 0x0146, 326
+	goto_if_flag(FLG_SHOP_50, data_11.l_0xc5bfbf)	// 0x01DE, 478
+	goto_if_flag(FLG_SHOP_51, data_12.l_0xc5c65c)	// 0x0255, 597
+	goto_if_flag(FLG_SHOP_52, data_12.l_0xc5cc8f)	// 0x0256, 598
+	goto_if_flag(FLG_SHOP_53, data_10.l_0xc5b48c)	// 0x0257, 599
+	goto_if_flag(FLG_SHOP_54, data_00.l_0xc51bb7)	// 0x0258, 600
+	goto_if_flag(FLG_SHOP_55, data_02.l_0xc52eb2)	// 0x028D, 653
+	goto_if_flag(FLG_SHOP_56, data_02.l_0xc53515)	// 0x02DB, 731
+	goto_if_flag(FLG_SHOP_57, data_10.l_0xc5b971)	// 0x02DC, 732
+	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5c9ce)	// 0x02DD, 733
+	// ... add more here
+eob

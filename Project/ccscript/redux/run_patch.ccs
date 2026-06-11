@@ -5,8 +5,8 @@ import "../redux/run_stamina_mechanic.ccs"
 // By jtolmar
 // Unlike the standard run button patch, this one does not affect the skip sandwich status in memory. Useful if you want skip sandwiches to do something else.
 
-define invert_run_button	= flag 305 // Replace this flag with the one you want
-define run_flag			= flag 1000 // From four_frames_run.ccs patch
+define invert_run_button	= flag 56 // Replace this flag with the one you want
+define run_flag			= flag 65 // From four_frames_run.ccs patch
 define GET_EVENT_FLAG	= 0xC21628
 define SET_EVENT_FLAG	= 0xC2165E
 

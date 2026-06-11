@@ -1,0 +1,128 @@
+// ----------------------------------------------------------------------------------------------------
+
+import "../essential/asm65816.ccs"
+
+// ----------------------------------------------------------------------------------------------------
+
+define Blank11 = "[00 00 00 00 00 00 00 00 00 00 00]"
+
+command dont_care_name(str) {
+	addr: Blank11
+	ROMTBL[addr, 11, 0] = str
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+// Load in new length for names.
+
+ROM[0xC1E4FB] = LDX_i(11)
+
+// Load in new length for favorite food.
+
+ROM[0xC1E500] = LDX_i(11)
+
+// Repoint Don't care names table.
+
+ROM[0xC1E569] = LDA_xl(dont_care_names)
+
+// Multiply x11 instead of x6.
+
+ROM[0xC1E54B] = JSL(x11)
+
+x11: {
+	ASL
+	ASL
+	ADC_d(0x04)
+	ASL
+	ADC_d(0x04)
+	RTL
+}
+
+// Multiply x77 instead of x42.
+
+ROM[0xC1E55A] = JSL(x77)
+
+x77: {
+	ASL
+	ASL
+	ASL
+	SEC
+	SBC_d(0x04)
+	SBC_d(0x04)
+	SBC_d(0x04)
+	RTL
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+dont_care_names:
+	
+	// Ness
+	
+	dont_care_name      ("Ness")
+	dont_care_name      ("Alec")
+	dont_care_name      ("Roger")
+	dont_care_name      ("John")
+	dont_care_name      ("Brian")
+	dont_care_name      ("Mario")
+	dont_care_name      ("Lane")
+	
+	// Paula
+	
+	dont_care_name      ("Ana")
+	dont_care_name      ("Nancy")
+	dont_care_name      ("Paige")
+	dont_care_name      ("Yoko")
+	dont_care_name      ("Marie")
+	dont_care_name      ("Peach")
+	dont_care_name      ("Jane")
+	
+	// Jeff
+	
+	dont_care_name      ("Jeff")
+	dont_care_name      ("Dan")
+	dont_care_name      ("Henry")
+	dont_care_name      ("Paul")
+	dont_care_name      ("Isaac")
+	dont_care_name      ("Luigi")
+	dont_care_name      ("Rob")
+	
+	// Poo
+	
+	dont_care_name      ("Poo")
+	dont_care_name      ("Kato")
+	dont_care_name      ("Kai")
+	dont_care_name      ("George")
+	dont_care_name      ("Ramin")
+	dont_care_name      ("Toad")
+	dont_care_name      ("Lado")
+	
+	// Pet's name
+	
+	dont_care_name      ("King")
+	dont_care_name      ("Ponky")
+	dont_care_name      ("Sparky")
+	dont_care_name      ("Ringo")
+	dont_care_name      ("Rex")
+	dont_care_name      ("Yoshi")
+	dont_care_name      ("Rover")
+	
+	// Favorite food
+	
+	dont_care_name      ("Steak")
+	dont_care_name      ("Pie")
+	dont_care_name      ("Pasta")
+	dont_care_name      ("Cake")
+	dont_care_name      ("Eggs")
+	dont_care_name      ("Bread")
+	dont_care_name      ("Salmon")
+	
+	// Favorite thing names would go here
+	
+	dont_care_name      ("Rockin")
+	dont_care_name      ("Spirit")
+	dont_care_name      ("Love")
+	dont_care_name      ("Gift")
+	dont_care_name      ("Slime")
+	dont_care_name      ("Gaming")
+	dont_care_name      ("Boxing")

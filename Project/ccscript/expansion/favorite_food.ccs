@@ -1,0 +1,30 @@
+import "../essential/asm65816.ccs"
+
+// Script to change the max length of the favorite food (specifically for the remake!!).
+
+// The RAM spot where the favorite food is saved isn't changed, since we can use the space for the favorite thing.
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+define FAV_FOOD_LENGTH = 10
+
+command change_length(addr) { ROMTBL[addr, 1, 1] = byte FAV_FOOD_LENGTH }
+
+// <------------------------------------------------------------------------------------------------------------------------------>
+
+// Fix for Don't care.
+change_length(0xC1E500)
+
+// Max characters in naming screen.
+change_length(0xC1FA2E)
+
+// Max length when printing the favorite food with "[1C 01 04]".
+change_length(0xC4551A)
+
+// Since you don't need to pick a favorite thing here, skip the code that writes stuff to RAM.
+ROM[0xC1FE35] = BRA(22) // Skip the "PSI " prefixing.
+
+// Fix for save file integrity.
+// Check byte 0 of favorite food instead of byte 1 of favorite thing.
+ROM[0xC1ED7B] = "[1F]"
+ROM[0xC1EE7A] = "[1F]"

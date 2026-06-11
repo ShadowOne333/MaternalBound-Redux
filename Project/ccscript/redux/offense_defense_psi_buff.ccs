@@ -5,6 +5,67 @@ import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 
 //------------------------------------
+// Changed Offense Up/Down to 37.5%, increased Offense Up cap to 212.5%, and left Offense Down cap at 75%
+// Changed Defense Up/Down to 25% and changed caps to 175% and 62.5%
+
+// Increase Offense 1/16 -> 37.5% (3/8)
+// Also increase cap to 212.5%
+ROM[0xC27D34] = {
+    TAY
+    LDA_y(0x0032) // Base Offense
+    AND_i(0x00FF)
+    STA_d(0x10)
+    LDA_y(0x0026) // Offense
+    STA_d(0x0E)
+    JSL(_Find3Over8)
+    CLC
+    ADC_d(0x0E)
+    STA_d(0x0E)
+    // $0E now contains the adjusted offense
+    LDA_d(0x10)
+    JSL(_Find17Over8)
+    CMP_d(0x0E)
+    // If carry is clear, this means that the calculated offense is greater
+    // than the cap. We branch in this case to keep the cap loaded in A,
+    // and we then store it into the battler struct.
+    BCC(2)
+        LDA_d(0x0E)
+    LDY_d(0x02)
+    STA_y(0x0026) // Offense
+    PLD RTS
+}
+
+// 37.5%
+_Find3Over8: {
+    // I've ensured that this local variable is free in all
+    // Increase/Decrease Offense/Defense functions.
+    // Multiply by 3
+    STA_d(0x04)
+    ASL
+    ADC_d(0x04)
+    // Divide by 8 - 3/8=37.5%
+    LSR
+    LSR
+    LSR
+    RTL
+}
+
+// 212.5% (Three uses of +3/8)
+_Find17Over8: {
+    // Multiply by 17
+    STA_d(0x04)
+    ASL
+    ASL
+    ASL
+    ASL
+    ADC_d(0x04)
+    // Divide by 8 - 17/8=212.5%
+    LSR
+    LSR
+    LSR
+    RTL
+}
+//------------------------------------
 // The original Increase and Decrease routines for both Offense/Defense have 4 consecutive LSR opcodes, NOP'ing one of them would effectively make the increase/decrease be 1/8 instead.
 // If we want to increase/decrease the change to 1/4, we can NOP two LSRs instead of just one.
 
@@ -14,13 +75,23 @@ import "../essential/ASMRef.ccs"
 //LSR	// 1/8 = 12.5% - NOP for 25%
 //NOP	// Change to LSR if we want 1/16 (6.25%) increase
 //------------------------------------
-// Increase Offense 1/16 -> 1/8
-ROM[0xC27D3C] = { LSR LSR LSR NOP }
-// Increase Defense 1/16 -> 1/8
-ROM[0xC27D96] = { LSR LSR LSR NOP }
+// Increase Offense 1/16 -> 1/4
+//ROM[0xC27D3C] = { LSR LSR NOP NOP }
+// Increase Defense 1/16 -> 1/4
+ROM[0xC27D96] = { LSR LSR NOP NOP }
 
-// Decrease Ofense 1/16 -> 1/8
-ROM[0xC27DF0] = { LSR LSR LSR NOP }
-// Decrease Defense 1/16 -> 1/8
-ROM[0xC27E47] = { LSR LSR LSR NOP }
+// Decrease Offense 1/16 -> 38%
+ROM[0xC27DF0] = { JSL(_Find3Over8) }
+// Decrease Defense 1/16 -> 1/4
+ROM[0xC27E47] = { LSR LSR NOP NOP }
+
+// Change defense up cap to 175% (base + 3/4trs) aka (value*7) / 4
+// (vanilla is 125% aka (value*5) / 4)
+ROM[0xC27DBE] = { JSL (DefenseUpCapMult7) NOP NOP }
+DefenseUpCapMult7: { STA_d (0x04) ASL ADC_d (0x04) ASL ADC_d (0x04) RTL }
+
+// Change defense down cap to 62.5% (base - 3/8ths) aka (value*5) / 8
+// (vanilla is 75% aka (value*3) / 4)
+ROM[0xC27E6F] = { JSL (DefenseDownCapMult5Div2) NOP }
+DefenseDownCapMult5Div2: { STA_d (0x04) ASL ASL ADC_d (0x04) LSR RTL }
 //------------------------------------

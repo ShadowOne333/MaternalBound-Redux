@@ -37,7 +37,7 @@ Special_Status:
 			consumepp_percent(0,100)
 			goto(Special_Status)
 		}
-		"Petrified": {
+		"Diamondized": {
 			special_status_post_selection
 			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_NONE)
 			inflict_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_DIAMONDIZED)

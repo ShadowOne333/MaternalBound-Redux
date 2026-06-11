@@ -483,7 +483,7 @@ l_0xc98b5a:
 	eob
 
 l_0xc98b68:
-	call(data_13.l_0xc5d30b) eob
+	call(ShopMain.l_0xc5d30b) eob	//call(data_13.l_0xc5d30b) eob
 
 l_0xc98b6e:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc98940)	// 0x49, 73

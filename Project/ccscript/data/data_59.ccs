@@ -384,7 +384,7 @@ l_0xc9e87d:
 l_0xc9e985:
 	"@...Needless to say, this is a rural village." next
 	"@...Heh heh,| we have poor items." next
-	call(data_13.l_0xc5d54b)
+	call(ShopMain.l_0xc5d54b)	//call(data_13.l_0xc5d54b)
 	eob
 
 l_0xc9e9c6:

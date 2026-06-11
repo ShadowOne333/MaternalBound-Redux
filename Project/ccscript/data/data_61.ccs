@@ -477,7 +477,7 @@ l_0xef679a:
 	eob
 
 l_0xef6814:
-	call(data_13.l_0xc5d36b) eob
+	call(ShopMain.l_0xc5d36b) eob	//call(data_13.l_0xc5d36b) eob
 
 l_0xef681a:
 	hasitem(-1, FLY_HONEY)	// 105

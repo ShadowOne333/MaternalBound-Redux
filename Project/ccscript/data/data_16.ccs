@@ -1034,7 +1034,7 @@ l_0xc5ffb7:
 	eob
 
 l_0xc60000:
-	call(data_13.l_0xc5d3a1)
+	call(ShopMain.l_0xc5d3a1)	//call(data_13.l_0xc5d3a1)
 	eob
 
 l_0xc60006:

@@ -372,7 +372,7 @@ l_0xc60dc4:
 	"@I am happy that there are animals in the desert, aren't you?" end
 
 l_0xc60e2a:
-	call(data_13.l_0xc5d3cb)
+	call(ShopMain.l_0xc5d3cb)	//call(data_13.l_0xc5d3cb)
 	eob
 
 l_0xc60e30:

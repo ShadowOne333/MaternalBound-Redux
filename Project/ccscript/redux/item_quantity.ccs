@@ -1,0 +1,112 @@
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+
+// Many item check
+// Control code that gets the amount of a certain item in the inventories of all characters.
+// Supremekirb
+
+// CCS command provided here:
+//// item_quantity ////
+// args:
+// byte itemID - ID of item to check for. If 0, use arg reigster
+
+// Add the following label to CCExpand:
+// CC_ItemQuantity
+// and then define its control code here
+define CONTROL_CODE_MANY_CHECK = "[1A 10]"
+
+// Ready to use! :3
+
+
+
+//////// !! MAGIC ZONE !! ////////
+
+// locals
+define d_itemID = 0
+define d_itemHits = 2
+define d_characterLoopCount = 4
+
+// RAM
+define a_partyMemberPtrs = 0x4DC8
+define a_partyOrder = 0x988B
+define offset_inventory = 35
+
+// constants
+define inv_size = 14
+define char_count = 4
+
+command item_quantity(itemID) {
+    CONTROL_CODE_MANY_CHECK
+    byte itemID
+}
+
+CC_ItemQuantity: M_EB_Function_Wrapper({
+    // get the item ID parameter
+    // store it in the item ID local var
+    LDY_i (1)
+    M_Read_Bytes_or_Arg(1) // is a macro
+    LDA_d (0x06) // only read the low word, high word is irrelevant
+    STA_d (d_itemID)
+
+    // initialise the item hits local var
+    LDA_i (0)
+    STA_d (d_itemHits)
+
+    // initialise the for-char loop local var
+    LDA_i (0)
+    STA_d (d_characterLoopCount)
+
+    // for(i=0, i!=4, i++)
+    forCharLoop:
+        // Get character from the party order
+        LDX_d (d_characterLoopCount)
+        LDA_x (a_partyOrder)
+        AND_i (0xFF)
+        // zero means end of party
+        BEQ_a (_return)
+        // > 4 means not a player
+        CMP_i (5)
+        BCS_a (_return)
+        // turn it into an index
+        DEC
+        ASL
+        TAX
+        // get party member inventory addr --> x
+        LDA_x (a_partyMemberPtrs)
+        CLC
+        ADC_i (offset_inventory)
+        TAX
+        // initialise loop count for the following
+        LDY_i (0)
+
+        // for(i=0, i!=14, i++)
+        forItemLoop:
+            // x is the address of the inventory item we're looking at
+            LDA_x (0)
+            AND_i (0xFF) // low byte only
+            CMP_d (d_itemID)
+            BNE (2) // skip following opcode (2 bytes)
+            INC_d (d_itemHits)
+            
+            INX // increment pointer
+            INY // increment loop count
+            // check if we should loop
+            CPY_i (inv_size)
+            BNE_a (forItemLoop)
+
+        INC_d (d_characterLoopCount) // increment char ID
+        // check if we should loop
+        LDA_i (char_count)
+        CMP_d (d_characterLoopCount)
+        BNE_a (forCharLoop)
+
+    // set working memory to the amount of hits
+    _return:
+    LDA_d (d_itemHits)
+    STA_d (0x0E)
+    LDA_i (0)
+    STA_d (0x10)
+    JSL (R_Set_Working_Memory)
+
+    // done! wrapper handles cleanup
+})

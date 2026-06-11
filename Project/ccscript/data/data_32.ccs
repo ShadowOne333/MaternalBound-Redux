@@ -17,7 +17,7 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc76f20:
-	call(data_13.l_0xc5d581) eob
+	call(ShopMain.l_0xc5d581) eob	//call(data_13.l_0xc5d581) eob
 
 l_0xc76f26:
 	call(l_0xc7716d)

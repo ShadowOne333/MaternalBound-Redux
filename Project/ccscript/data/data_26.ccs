@@ -681,7 +681,7 @@ l_0xc6dc62:
 	"  The show will be starting at any moment." end
 
 l_0xc6dc8d:
-	call(data_13.l_0xc5d3dd) eob
+	call(ShopMain.l_0xc5d3dd) eob	//call(data_13.l_0xc5d3dd) eob
 
 l_0xc6dc93:
 	"@This city's baked goods have an exquisite, metropolitan delectableness." next

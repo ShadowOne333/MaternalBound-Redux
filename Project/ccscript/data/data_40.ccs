@@ -54,10 +54,10 @@ l_0xc829df:
 	"@Sorry, but you can't carry all of these..." end
 
 l_0xc829f8:
-	call(data_13.l_0xc5d3e9) eob
+	call(ShopMain.l_0xc5d3e9) eob	//call(data_13.l_0xc5d3e9) eob
 
 l_0xc829fe:
-	call(data_13.l_0xc5d3f5) eob
+	call(ShopMain.l_0xc5d3f5) eob	//call(data_13.l_0xc5d3f5) eob
 
 l_0xc82a04:
 	goto_if_flag(FLG_FOUR_DEPT_MSGCHG, l_0xc82a34)	// 0x022C, 556
@@ -69,10 +69,10 @@ l_0xc82a34:
 	"@I was sitting here 'cause I was scared." end
 
 l_0xc82a63:
-	call(data_13.l_0xc5d401) eob
+	call(ShopMain.l_0xc5d401) eob	//call(data_13.l_0xc5d401) eob
 
 l_0xc82a69:
-	call(data_13.l_0xc5d431) eob
+	call(ShopMain.l_0xc5d431) eob	//call(data_13.l_0xc5d431) eob
 
 l_0xc82a6f:
 	goto_if_flag(FLG_FOUR_DEPT_MSGCHG, l_0xc82aa8)	// 0x022C, 556
@@ -501,10 +501,10 @@ l_0xc83cf9:
 	"@Ooo... it was scary!" end
 
 l_0xc83d18:
-	call(data_13.l_0xc5d43d) eob
+	call(ShopMain.l_0xc5d43d) eob	//call(data_13.l_0xc5d43d) eob
 
 l_0xc83d1e:
-	call(data_13.l_0xc5d44f) eob
+	call(ShopMain.l_0xc5d44f) eob	//call(data_13.l_0xc5d44f) eob
 
 l_0xc83d24:
 	goto_if_flag(FLG_WIN_MGNT_BOSS, data_35.l_0xc7c588)	// 0xC2, 194

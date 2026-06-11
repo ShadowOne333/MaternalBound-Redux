@@ -199,7 +199,7 @@ l_0xc93dec:
 	"@(You're fantastic...you even take time to talk to animals.)" end
 
 l_0xc93e16:
-	call(data_13.l_0xc5d2b7) eob
+	call(ShopMain.l_0xc5d2b7) eob	//call(data_13.l_0xc5d2b7) eob
 
 l_0xc93e1c:
 	goto_if_flag(FLG_ITEM_SIGNBOARD, l_0xc93f69)	// 0x029E, 670
@@ -377,7 +377,7 @@ l_0xc9442c:
 	"@Do you think I'm really an honest, reliable person?" end
 
 l_0xc94479:
-	call(data_13.l_0xc5d2c9)
+	call(ShopMain.l_0xc5d2c9)	//call(data_13.l_0xc5d2c9)
 	eob
 
 l_0xc9447f:
@@ -394,7 +394,7 @@ l_0xc944ab:
 	"  Hmmm..." end
 
 l_0xc94503:
-	call(data_13.l_0xc5d2ed)
+	call(ShopMain.l_0xc5d2ed)	//call(data_13.l_0xc5d2ed)
 	eob
 
 l_0xc94509:

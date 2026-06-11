@@ -1313,11 +1313,11 @@ l_0xc8a333:
 	"@...now brown cow?" end
 
 l_0xc8a34b:
-	call(data_13.l_0xc5d47f)
+	call(ShopMain.l_0xc5d47f)	//call(data_13.l_0xc5d47f)
 	eob
 
 l_0xc8a351:
-	call(data_13.l_0xc5d461)
+	call(ShopMain.l_0xc5d461)	//call(data_13.l_0xc5d461)
 	eob
 
 l_0xc8a357:
@@ -1390,7 +1390,7 @@ l_0xc8a5c8:
 	"Miss." eob
 
 l_0xc8a5ce:
-	call(data_13.l_0xc5d46d)
+	call(ShopMain.l_0xc5d46d)	//call(data_13.l_0xc5d46d)
 	eob
 
 l_0xc8a5d4:

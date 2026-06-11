@@ -1,0 +1,11 @@
+import "../essential/asm65816.ccs"
+
+// Slightly less invasive version of the enemy wall fix.
+// Doesn't adjust collision loading,
+// at the cost of enemies spawning closer again
+
+// ...coincidentally maybe fixes spawn line misalignment from vanilla..??
+
+// refreshMapAtPosition
+ROM[0xC01603] = ADC_i (33) // Enemy spawn column
+ROM[0xC016BA] = ADC_i (33) // Enemy spawn row

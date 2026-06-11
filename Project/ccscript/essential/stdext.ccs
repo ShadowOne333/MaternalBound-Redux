@@ -211,6 +211,10 @@ command get_target_info(n) "[1C 15 {byte n}]"
 //command take(char, item) "[1D 01 {byte char} {byte item}]"
 command arg_item_type_is_not(type) "[1D 02 {byte type}]"
     command arg_item_type_is(type) not arg_item_type_is_not(type)
+    define OTHERS = 1
+    define EQUIPPABLE = 2
+    define EDIBLE = 3
+    define USABLE = 4
 command get_item_receiver(char) "[1D 03 {byte char}]"
     //command notfull(char) get_item_receiver(char)
     //command full(char) not get_item_receiver(char)

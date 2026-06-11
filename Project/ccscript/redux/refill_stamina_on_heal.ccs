@@ -1,0 +1,102 @@
+import "../essential/stdext.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../redux/run_stamina_mechanic.ccs"
+
+// Patch the heal-all script subroutines to also replenish stamina.
+// There are three of them.
+// It's a small detail we use in the remake (ableit manually) which we should replicate here too.
+// Triggers in hotels, hot springs, instant-revitalizing devices, and other places where you get a good rest.
+// Not doing it for stuff like hospitals where only one character is healed.
+
+ROM[0xC91582] = goto(SleepoverHealHijack)
+ROM[0xC915F4] = goto(FullHealHijack)
+ROM[0xC9162C] = goto(HotSpringHealHijack)
+
+// Used in hotels & other resting spots. Skips friends that are unconscious/diamond and doesn't cure status effects.
+SleepoverHealHijack: {
+    cc_asmcall(stamina_reset, RET_NONE)
+    counter(1)
+
+    _loop:
+        ctoarg
+        party_size_smaller_than(0)
+        goto_if_true(_break)
+        get_char_at_pos(0)
+        store_registers
+        character_has_status(0, 1, 2)
+        goto_if_true(_continue)
+        load_registers
+        character_has_status(0, 1, 3)
+        goto_if_true(_continue)
+        load_registers
+        swap
+        heal_percent(0, 100)
+        recoverpp_percent(0, 100)
+        goto(_continue)
+
+    _continue:
+        inc
+        goto(_loop)
+
+    _break:
+        goto(0xC915BE)
+}
+
+// Used in circumstances like the instant-revitalizing machine. Cures all status effects and revives friends.
+FullHealHijack: {
+    cc_asmcall(stamina_reset, RET_NONE)
+    counter(1)
+    _loop:
+        ctoarg
+        swap
+        store_registers
+        result_is(5) 
+        goto_if_true(_break) 
+        load_registers
+        inflict_status(0, 1, 1)
+        goto_if_false(_continue) // Honestly not sure what this is for but OK
+        inflict_status(0, 2, 1)
+        inflict_status(0, 6, 1)
+        swap
+        heal_percent(0, 100)
+        recoverpp_percent(0, 100)
+
+    _continue:
+        inc
+        goto(_loop)
+
+    _break:
+        eob
+}
+
+// Used for hot springs and special places like Dr. Saturn. Revives, but doesn't refill HP/PP if you're conscious.
+HotSpringHealHijack: {
+    cc_asmcall(stamina_reset, RET_NONE)
+    counter(1)
+    _loop:
+        ctoarg
+        party_size_smaller_than(0)
+        goto_if_true(_break)
+        get_char_at_pos(0)
+        store_registers
+        character_has_status(0, 1, 2)
+        goto_if_false(_continue)
+        load_registers
+        inflict_status(0, 1, 1)
+        swap
+        heal_percent(0, 100)
+        recoverpp_percent(0, 100)
+        goto(_continue)
+
+    _continue:
+        load_registers
+        inflict_status(0, 1, 1)
+        inflict_status(0, 2, 1)
+        inflict_status(0, 6, 1)
+        sound(37)
+        inc
+        goto(_loop)
+
+    _break:
+        eob
+}

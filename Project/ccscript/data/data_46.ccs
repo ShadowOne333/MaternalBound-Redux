@@ -155,15 +155,15 @@ l_0xc8e132:
 	eob
 
 l_0xc8e138:
-	call(data_13.l_0xc5d317)
+	call(ShopMain.l_0xc5d317)	//call(data_13.l_0xc5d317)
 	eob
 
 l_0xc8e13e:
-	call(data_13.l_0xc5d323)
+	call(ShopMain.l_0xc5d323)	//call(data_13.l_0xc5d323)
 	eob
 
 l_0xc8e144:
-	call(data_13.l_0xc5d341)
+	call(ShopMain.l_0xc5d341)	//call(data_13.l_0xc5d341)
 	eob
 
 l_0xc8e14a:
@@ -436,7 +436,7 @@ l_0xc8ec90:
 	eob
 
 l_0xc8ecb4:
-	call(data_13.l_0xc5d32f)
+	call(ShopMain.l_0xc5d32f)	//call(data_13.l_0xc5d32f)
 	eob
 
 l_0xc8ecba:

@@ -16,10 +16,10 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc56df3:
-	call(data_13.l_0xc5d4c1) eob
+	call(ShopMain.l_0xc5d4c1) eob	//call(data_13.l_0xc5d4c1) eob
 
 l_0xc56df9:
-	call(data_13.l_0xc5d4f1) eob
+	call(ShopMain.l_0xc5d4f1) eob	//call(data_13.l_0xc5d4f1) eob
 
 l_0xc56dff:
 	"@No, I don't want any mummy bandages!" next
@@ -105,10 +105,10 @@ l_0xc570f2:
 	"@Since you have too many items,| I humbly keep this important {itemname(SNAKE_BAG)}." end
 
 l_0xc5711a:
-	call(data_13.l_0xc5d4cd) eob
+	call(ShopMain.l_0xc5d4cd) eob	//call(data_13.l_0xc5d4cd) eob
 
 l_0xc57120:
-	call(data_13.l_0xc5d4df) eob
+	call(ShopMain.l_0xc5d4df) eob	//call(data_13.l_0xc5d4df) eob
 
 l_0xc57126:
 	// Item 0xA2 / 162 = Piggy nose

@@ -424,10 +424,10 @@ l_0xc74e61:
 	"@I don't think so." end
 
 l_0xc74e83:
-	call(data_13.l_0xc5d24b) eob
+	call(ShopMain.l_0xc5d24b) eob	//call(data_13.l_0xc5d24b) eob
 
 l_0xc74e89:
-	call(data_13.l_0xc5d257) eob
+	call(ShopMain.l_0xc5d257) eob	//call(data_13.l_0xc5d257) eob
 
 l_0xc74e8f:
 	get_char_at_pos(1) result_is(1)
