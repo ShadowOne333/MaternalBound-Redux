@@ -28,7 +28,7 @@ l_0xc6523d:
 	set(FLG_GUMI_7_BOOK)	// 430
 	eob
 
-// Angrez in Lost Underworld script
+// Cash dispenser in Deep Darkness (Scuba diver?)
 l_0xc65243:
 	"@Shhhhh! Be quiet!" linebreak
 	"  I look very important, but I'm not really....." next
@@ -173,6 +173,7 @@ l_0xc6558c:
 	call(data_18._text_position)
 	eob
 
+// Angrez in Lost Underworld
 l_0xc655b1:
 	goto_if_flag(FLG_TEMP_2, l_0xc65962)	// 0x03
 	set(FLG_TEMP_2)	// 3

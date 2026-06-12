@@ -1079,6 +1079,7 @@ l_0xc5197a:	// Chosen_Character_Inventory_Full
 	goto_if_flag(FLG_SHOP_58, data_12.l_0xc5ca1e)	// 0x02DD, 733
 	eob
 
+// General Drugstore (Shops 2, 8, 14-17, 20, 26-27, 32, 34, 54)
 l_0xc51b12:
 	"@Hello there!" linebreak
 	"  How may I help you?" linebreak
@@ -1176,6 +1177,7 @@ l_0xc51ca3:
 	"@Would someone else like to carry it?" linebreak
 	eob
 
+// 1. Onett Drugstore
 l_0xc51ccb:
 	"@Hi, come in, come in, darling!" next
 	"@What can I do for you today?" linebreak
@@ -1275,6 +1277,7 @@ l_0xc51ec4:
 	"@Does anyone else want to carry it?" linebreak
 	eob
 
+// 31. Fourside Dept. Store Sports Shop
 l_0xc51eea:
 	"@Hey dudes!  It's summer!" linebreak
 	"  It's the manly time of year!" linebreak
@@ -1374,6 +1377,7 @@ l_0xc520fa:
 	"@Does somebody else want to carry it?" linebreak
 	eob
 
+// Twoson / Fourside Drugstore shopkeeper script
 l_0xc5211e:
 	"@Hi!" next
 	"@Can I help you?" linebreak

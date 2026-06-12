@@ -54,6 +54,7 @@ l_0xc5bb46:
 	"@{name(0)} doesn't seem to be able to accept any more things." next
 	"@Can someone else carry it?" linebreak
 	eob
+// End of Bakery shop script
 
 l_0xc5bb76:	// Burger shops script
 	"@Hello, may I take your order?" linebreak
@@ -108,6 +109,8 @@ l_0xc5bc4c:
 	"@Does someone else want to carry it?" linebreak
 	eob
 // End of burger shops script
+
+// Burglin Park Bakery script
 l_0xc5bc70:
 	"@I like to sell my goodies on the street." next
 	"@Sure, flies land on them, but in my opinion, it makes them taste even better!" next
@@ -159,7 +162,9 @@ l_0xc5bd62:
 	"@{name(0)} is carrying too many things already." next
 	"@Can anyone else carry it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
 	eob
+// Burglin Park Bakery script
 
+//
 l_0xc5bd92:
 	"@So, where's your mom and dad?" next
 	"@You mean you kids came in here all by yourselves...?" next
@@ -216,6 +221,7 @@ l_0xc5becd:
 	"@Can someone else carry it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
 	eob
 
+// Burglin Park Condiments shop
 l_0xc5bef9:
 	"@Hello!  Would you like some seasonings to add to your foods at meal time?" next
 	"@They are really quite miraculous!" next
@@ -271,7 +277,9 @@ l_0xc5c03c:
 	"@{name(0)} is already carrying too many things." next
 	"@Can someone else carry it?" linebreak
 	eob
+// End of Burglin Park Condiments shop
 
+// Snakes seller in Scarabia
 l_0xc5c05f:
 	"@Hissss, Red Snake! C'mon!" next
 	title(1, Snake)
@@ -419,6 +427,7 @@ l_0xc5c2e7:
 	"@One of you other guys want to haul it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
 	eob
 
+// Grapefruit Falls salesman script
 l_0xc5c32a:
 	"@You must have a long, tough road ahead of you, do you not?" next
 	"@No, there is no need to explain.  I already know... you must be hungry." next

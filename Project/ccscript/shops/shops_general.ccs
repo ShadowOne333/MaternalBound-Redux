@@ -1,0 +1,340 @@
+//		GENERAL SHOP SCRIPTS			// 
+// Scripts for shops or sellers that are reused at different places in the game
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// General drugstore
+// Used in multiple drugstores throughout the game
+// Shops 1, 6, 14-15, 20, 30, 32, 34, (51 too?)
+GeneralDrugstore_Greeting:		//l_0xc51b12:
+	"@Hello there!" linebreak
+	"  How may I help you?" linebreak
+	eob
+
+GeneralDrugstore_Exit_Store_Buy:	//l_0xc51b28:
+	"@Thank you very much." end
+
+GeneralDrugstore_Exit_Store_Dont_Buy:	//l_0xc51b31
+	"@Please come again." end
+
+GeneralDrugstore_Open_Shop_Window:	//l_0xc51b39
+	"@Can I get you" linebreak
+	"  anything?" promptw
+	eob
+
+GeneralDrugstore_Selected_Item:		//l_0xc51b49
+	"@{itemname(0)}?" linebreak
+	"  All right." next
+	eob
+
+GeneralDrugstore_Who_Will_Take_Item:	//l_0xc51b57
+	"@Which of you will carry this?" promptw
+	eob
+
+GeneralDrugstore_Equip_Now:		//l_0xc51b6a
+	"@Thank you.  Are you going to equip it here?" linebreak
+	eob
+
+GeneralDrugstore_Buy_Previous_Equipment:	//l_0xc51b7e
+ // arg: item name, res: item price
+	"@Would you like me to buy" linebreak
+	"  the {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" next
+	eob
+
+GeneralDrugstore_Cant_Equip_Item:		//l_0xc51b9d
+// arg: player name
+	"@{name(0)} cannot equip this." next
+	"@Do you still want to buy it?" linebreak
+	eob
+
+GeneralDrugstore_Cancel_Cant_Equip:	//l_0xc51bb7
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+GeneralDrugstore_Not_Enough_Cash:		//l_0xc51bc0
+	"@Excuse me, uhhh... you don't seem to have enough money." next
+	eob
+
+GeneralDrugstore_Whole_Party_Full_Inventory:	//l_0xc51bde
+	"@I'm afraid you cannot carry anything else." next
+	"@Do you want to sell some things that you don't need?" linebreak
+	eob
+
+GeneralDrugstore_What_To_Sell:		//l_0xc51c03
+	"@What do you want to sell?" promptw
+	eob
+
+GeneralDrugstore_Confirm_Selling:		//l_0xc51c0e
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  I can buy it" linebreak
+	"  for {swap}$" number(0) "." next
+	"@Would you like to do that?" linebreak
+	eob
+
+GeneralDrugstore_Cancel_Selling:		//l_0xc51c38
+	"@Please come again." next
+	eob
+
+GeneralDrugstore_Nothing_To_Sell:		//l_0xc51c41
+	"@I don't think you have any thing that you can sell." next
+	eob
+
+GeneralDrugstore_Unsellable_Item:		//l_0xc51c56
+	"@I am sorry, but we cannot buy the {itemname(0)}." next
+	eob
+
+GeneralDrugstore_Transaction_Thanks:	//l_0xc51c6e
+	"@Thank you very much." next
+	eob
+
+GeneralDrugstore_Transaction_Thanks_2:	//l_0xc51c78
+// when is this used?
+	"@Thank you for shopping here." next
+	eob
+
+GeneralDrugstore_Request_Another_Transaction:	//l_0xc51c87
+	"@Can I get you anything else?" linebreak
+	eob
+
+GeneralDrugstore_Do_Another_Transaction:	//l_0xc51c95
+	"@What would you like to get next?" linebreak
+	eob
+
+GeneralDrugstore_Chosen_Character_Inventory_Full:	//l_0xc51ca3
+// arg = player name
+	"@It looks like {name(0)} can't carry any more stuff." next
+	"@Would someone else like to carry it?" linebreak
+	eob
+
+GeneralDrugstore_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+GeneralDrugstore_Bulk_Buy_Not_Enough_Cash:
+	"@Excuse me, uhhh... you don't seem to have enough money for all that." next
+	eob
+
+GeneralDrugstore_Bulk_Buy_Full_Inventory:
+	"@I'm afraid you cannot carry anything else." next
+	"@Do you want to sell some things that you don't need?" linebreak
+	eob
+
+GeneralDrugstore_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// General burgershop
+// Used in multiple burger shops throughout the game
+// Shops 2, 4, 26
+GeneralBurger_Greeting:		//l_0xc5bb76
+	"@Hello, may I take your order?" linebreak
+	"  (smile, smile)" next
+	eob
+
+GeneralBurger_Exit_Store_Buy:	//l_0xc5bb9a
+	"@Thank you very much." linebreak
+	"  (smile, smile)" end
+
+GeneralBurger_Exit_Store_Dont_Buy:	//l_0xc5bbb2
+	"@Have a nice day!" linebreak
+	"  (smile, smile)" end
+
+GeneralBurger_Open_Shop_Window:		//l_0xc5bbce
+	"@What can I get for you?" promptw
+	eob
+
+GeneralBurger_Selected_Item:		//l_0xc5bbdc
+	"@{itemname(0)}?" next
+	eob
+
+GeneralBurger_Who_Will_Take_Item:	//l_0xc5bbe4
+	"@Who is going to take this?" promptw
+	eob
+
+GeneralBurger_Equip_Now:		// Burgershops don't sell equippables
+	eob
+
+GeneralBurger_Buy_Previous_Equipment:	// Burgershops don't sell equippables
+	eob
+
+GeneralBurger_Cant_Equip_Item:		// Burgershops don't sell equippables
+	eob
+
+GeneralBurger_Cancel_Cant_Equip:	// l_0xc5bbf2
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+GeneralBurger_Not_Enough_Cash:		//l_0xc5bbfb
+	"@Whoops!  You don't have enough money." next
+	eob
+
+GeneralBurger_Whole_Party_Full_Inventory:	//l_0xc5bc0d
+	"@Ooops! You already have too much stuff." end
+
+GeneralBurger_What_To_Sell:		// Burgershops don't purchase items
+	eob
+
+GeneralBurger_Confirm_Selling:		// Burgershops don't purchase items
+	eob
+
+GeneralBurger_Cancel_Selling:		// Burgershops don't purchase items
+	eob
+
+GeneralBurger_Nothing_To_Sell:		// Burgershops don't purchase items
+	eob
+
+GeneralBurger_Unsellable_Item:		// Burgershops don't purchase items
+	eob
+
+GeneralBurger_Transaction_Thanks:	//l_0xc5bc23
+	"@Thank you very much." next
+	eob
+
+GeneralBurger_Transaction_Thanks_2:	//l_0xc5bc2d
+// when is this used?
+	"@Thank you for shopping here." next
+	eob
+
+GeneralBurger_Request_Another_Transaction:	//l_0xc5bc3c
+	"@Do you have any other orders?" linebreak
+	eob
+
+GeneralBurger_Do_Another_Transaction:	// Burgershops don't run this line
+	eob
+
+GeneralBurger_Chosen_Character_Inventory_Full:	//l_0xc5bc4c
+// arg = player name
+	"@{name(0)} seems to have too many things." next
+	"@Does someone else want to carry it?" linebreak
+	eob
+
+GeneralBurger_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+GeneralBurger_Bulk_Buy_Not_Enough_Cash:
+	"@Whoops!  You don't have enough money for these." next
+	eob
+
+GeneralBurger_Bulk_Buy_Full_Inventory:
+	"@Ooops! You already have too much stuff." end
+
+GeneralBurger_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// General Bakery
+// Used in multiple bakery shops throughout the game
+// Shops 3, 5, 17, 23, 27
+GeneralBakery_Greeting:			//l_0xc5baa4
+	"@Hello. May I help you?" next
+	eob
+
+GeneralBakery_Exit_Store_Buy:		//l_0xc5bab4
+	"@Thank you very much." end
+
+GeneralBakery_Exit_Store_Dont_Buy:	//l_0xc5babd
+	"@Please come again." end
+
+GeneralBakery_Open_Shop_Window:		//l_0xc5bac5
+	"@What shall I get you?" promptw
+	eob
+
+GeneralBakery_Selected_Item:		//l_0xc5bad3
+	"@{itemname(0)}?" next
+	eob
+
+GeneralBakery_Who_Will_Take_Item:	//l_0xc5badb
+	"@Who is going to carry it?" next
+	eob
+
+GeneralBakery_Equip_Now:		// Bakeries don't sell equippables
+	eob
+
+GeneralBakery_Buy_Previous_Equipment:	// Bakeries don't sell equippables
+	eob
+
+GeneralBakery_Cant_Equip_Item:		// Bakeries don't sell equippables
+	eob
+
+GeneralBakery_Cancel_Cant_Equip:	// l_0xc5bae8
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+GeneralBakery_Not_Enough_Cash:		//l_0xc5baf1
+	"@It seems like you don't have enough money." next
+	eob
+
+GeneralBakery_Whole_Party_Full_Inventory:	//l_0xc5bb02
+	"@You have so many belongings...  You just can't carry any more!" wait linebreak
+	eob
+
+GeneralBakery_What_To_Sell:		// Bakeries don't purchase items
+	eob
+
+GeneralBakery_Confirm_Selling:		// Bakeries don't purchase items
+	eob
+
+GeneralBakery_Cancel_Selling:		// Bakeries don't purchase items
+	eob
+
+GeneralBakery_Nothing_To_Sell:		// Bakeries don't purchase items
+	eob
+
+GeneralBakery_Unsellable_Item:		// Bakeries don't purchase items
+	eob
+
+GeneralBakery_Transaction_Thanks:	//l_0xc5bb22
+	"@Thank you very much." next
+	eob
+
+GeneralBakery_Transaction_Thanks_2:	//l_0xc5bb2c
+// when is this used?
+	"@Thank you so much." next
+	eob
+
+GeneralBakery_Request_Another_Transaction:	//l_0xc5bb36:
+	"@Do you have any other orders?" linebreak
+	eob
+
+GeneralBakery_Do_Another_Transaction:	// Bakeries don't run this line
+	eob
+
+GeneralBakery_Chosen_Character_Inventory_Full:	//l_0xc5bb46
+// arg = player name
+	"@{name(0)} doesn't seem to be able to accept any more things." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+GeneralBakery_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+GeneralBakery_Bulk_Buy_Not_Enough_Cash:
+	"@It seems like you don't have enough money for these." next
+	eob
+
+GeneralBakery_Bulk_Buy_Full_Inventory:
+	"@You have so many belongings...  You just can't carry all of these!" wait linebreak
+	eob
+
+GeneralBakery_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+
+
+
+
+
+
+

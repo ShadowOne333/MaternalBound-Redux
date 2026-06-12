@@ -544,7 +544,7 @@ l_0xc581ee:
 l_0xc58214:
 	get_char_at_pos(2)	// 0x02
 	goto_if_false(l_0xc5824b)
-	"  " number_input(1)	// 0x01
+	"   " number_input(1)	// 0x01
 	goto_if_false(l_0xc5824b)
 
 	clearline

@@ -16,6 +16,7 @@ l_0xc5c57b:
 	"@{name(0)} has too many things already." next
 	"@Can anyone else carry it?" linebreak
 	eob
+// End of Grapefruit Falls salesman script
 
 l_0xc5c59e:
 	"@Hello there!  Welcome to my humble shop!" next
@@ -345,6 +346,7 @@ l_0xc5ccf5:
 	"@Can someone else carry it?" linebreak
 	eob
 
+// Burglin Park Banana lady script
 l_0xc5cd18:
 	"@Would you like some bananas?" next
 	eob
@@ -395,7 +397,9 @@ l_0xc5cdf2:
 	"@{name(0)} has too many things to carry a banana." next
 	"@Will someone else carry it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
 	eob
+// End of Burglin Park Banana lady script
 
+// 
 l_0xc5ce22:
 	"@Hello there!" next
 	"@How would you like to buy some seasonings" next

@@ -1,0 +1,133 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Onett drugstore
+OnettDrugstore_Greeting:		//l_0xc51ccb
+	"@Hi, come in, come in, darling!" next
+	"@What can I do for you today?" linebreak
+	eob
+
+OnettDrugstore_Exit_Store_Buy:		//l_0xc51cef
+	"@Thanks a bunch!" end
+
+OnettDrugstore_Exit_Store_Dont_Buy:	//l_0xc51cfa
+	"@You don't want to buy anything from me?" next
+	"@Oh, you hurt my feelings." end
+
+OnettDrugstore_Open_Shop_Window:	//l_0xc51d20
+	"@Can I help you find something?" promptw
+	eob
+
+OnettDrugstore_Selected_Item:		//l_0xc51d31
+	"@{itemname(0)}?" next
+	eob
+
+OnettDrugstore_Who_Will_Take_Item:	//l_0xc51d39
+	"@Who's going to carry it?" promptw
+	eob
+
+OnettDrugstore_Equip_Now:		//l_0xc51d45
+	"@Do you want to, like, <equip> it here?" linebreak
+	eob
+
+OnettDrugstore_Buy_Previous_Equipment:	//l_0xc51d5b
+ // arg: item name, res: item price
+	"@I can buy your" linebreak
+	"  {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "." next
+	eob
+
+OnettDrugstore_Cant_Equip_Item:		//l_0xc51d7b
+// arg: player name
+	"@{name(0)}  can't equip this." next
+	"@Do you still want to buy it?" linebreak
+	eob
+
+OnettDrugstore_Cancel_Cant_Equip:	//l_0xc51d96
+// despite the name, it's often used as a generic change of mind
+	"@So, you say you don't want it... Hmmmm..." next
+	eob
+
+OnettDrugstore_Not_Enough_Cash:		//l_0xc51db0
+	"@Oh no!" linebreak
+	"  Don't tell me you don't have enough money!!" next
+	eob
+
+OnettDrugstore_Whole_Party_Full_Inventory:	//l_0xc51dcb
+	"@Oh, my!" next
+	"@I just don't think you can carry any more than what you already have." next
+	"@But you know, I might be able to buy some of the stuff you don't need." next
+	eob
+
+OnettDrugstore_What_To_Sell:		//l_0xc51e14
+	"@What do you want to sell?" promptw
+	eob
+
+OnettDrugstore_Confirm_Selling:		//l_0xc51e1f
+// arg: item ID, res: item sell price
+	"@The {itemname(0)}?" linebreak
+	"  I'll buy it for {swap}$" number(0) "." next
+	"@Do you wanna sell it?" linebreak
+	eob
+
+OnettDrugstore_Cancel_Selling:		//l_0xc51e4a
+	"@Oh, so you don't want to do that?" linebreak
+	"  Well, all right." next
+	eob
+
+OnettDrugstore_Nothing_To_Sell:		//l_0xc51e67
+	"@Well, it looks like you don't have anything to sell to us." next
+	eob
+
+OnettDrugstore_Unsellable_Item:		//l_0xc51e81
+	"@Oh, no!" linebreak
+	"  You can't sell that here." next
+	eob
+
+OnettDrugstore_Transaction_Thanks:	//l_0xc51e95
+	"@Thanks a bunch!" next
+	eob
+
+OnettDrugstore_Transaction_Thanks_2:	//l_0xc51ea1
+// when is this used?
+	"@Thanks again." next
+	eob
+
+OnettDrugstore_Request_Another_Transaction:	//l_0xc51ea9
+	"@Do you need anything else from me?" linebreak
+	eob
+
+OnettDrugstore_Do_Another_Transaction:	//l_0xc51eb6
+	"@What can I do for you?" linebreak
+	eob
+
+OnettDrugstore_Chosen_Character_Inventory_Full:	//l_0xc51ec4
+// arg = player name
+	"@{name(0)} is already carrying too much stuff." next
+	"@Does anyone else want to carry it?" linebreak
+	eob
+
+OnettDrugstore_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+OnettDrugstore_Bulk_Buy_Not_Enough_Cash:
+	"@Oh no!" linebreak
+	"  Don't tell me you don't have enough money for all of these!!" next
+	eob
+
+OnettDrugstore_Bulk_Buy_Full_Inventory:
+	"@Oh, my!" next
+	"@I just don't think you can carry way more than what you already have." next
+	"@But you know, I might be able to buy some of the stuff you don't need." next
+	eob
+
+OnettDrugstore_Bulk_Buy_Change_Of_Mind:
+	"@So, you say you don't want them... Hmmmm..." next
+	eob
+
+//------------------------------------------------------------------
+

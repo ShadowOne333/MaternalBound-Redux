@@ -1,0 +1,558 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Twoson drugstore
+//------------------------------------------------------------------
+TwosonDrugstore_Greeting:		//l_0xc5211e
+	"@Hi!" next
+	"@Can I help you?" linebreak
+	eob
+
+TwosonDrugstore_Exit_Store_Buy:		//l_0xc52130
+	"@Thanks so much!" end
+
+TwosonDrugstore_Exit_Store_Dont_Buy:	//l_0xc52139
+	"@Are you here just to say <Hi>?  What a loser!" end
+
+TwosonDrugstore_Open_Shop_Window:	//l_0xc52154
+	"@So, what are you going to buy?" promptw
+	eob
+
+TwosonDrugstore_Selected_Item:		//l_0xc52163
+	"@{itemname(0)}?" next
+	eob
+
+TwosonDrugstore_Who_Will_Take_Item:	//l_0xc5216b
+	"@Who's going to carry this?" promptw
+	eob
+
+TwosonDrugstore_Equip_Now:		//l_0xc5217a
+	"@Would you like to equip it here?" linebreak
+	eob
+
+TwosonDrugstore_Buy_Previous_Equipment:	//l_0xc52189
+ // arg: item name, res: item price
+	"@Do you want me to buy" linebreak
+	"  your {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" next
+	eob
+
+TwosonDrugstore_Cant_Equip_Item:	//l_0xc521aa
+// arg: player name
+	"@Even though {name(0)} can't equip this," next
+	"@do you still want to purchase it?" linebreak
+	eob
+
+TwosonDrugstore_Cancel_Cant_Equip:	//l_0xc521d3
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+TwosonDrugstore_Not_Enough_Cash:	//l_0xc521dc
+	"@I'm sorry, but you don't have enough money." next
+	eob
+
+TwosonDrugstore_Whole_Party_Full_Inventory:	//l_0xc521ec
+	"@Oh, how are you planning to carry this?  You've got too much stuff!" next
+	"@Well, I guess I could buy the stuff you don't need." next
+	"@Do you want to sell anything?" linebreak
+	eob
+
+TwosonDrugstore_What_To_Sell:		//l_0xc5222e
+	"@What can you sell me?" promptw
+	eob
+
+TwosonDrugstore_Confirm_Selling:	//l_0xc5223c
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  I'll pay {swap}$" number(0) " for it." next
+	"@Is that okay?" linebreak
+	eob
+
+TwosonDrugstore_Cancel_Selling:		//l_0xc52261
+	"@Hummm.  Is that so?" next
+	eob
+
+TwosonDrugstore_Nothing_To_Sell:	//l_0xc52272
+	"@Oh, so you don't really have anything to sell?" next
+	eob
+
+TwosonDrugstore_Unsellable_Item:	//l_0xc52288
+	"@I'm sorry, but I can't buy that." next
+	eob
+
+TwosonDrugstore_Transaction_Thanks:	//l_0xc52299
+	"@Thank you very much." next
+	eob
+
+TwosonDrugstore_Transaction_Thanks_2:	//l_0xc522a3
+// when is this used?
+	"@Thank you." next
+	eob
+
+TwosonDrugstore_Request_Another_Transaction:	//l_0xc522aa
+	"@Is there anything I can do for you?" linebreak
+	eob
+
+TwosonDrugstore_Do_Another_Transaction:	//l_0xc522ba
+	"@What can I do for you now?" linebreak
+	eob
+
+TwosonDrugstore_Chosen_Character_Inventory_Full:	//l_0xc522ca
+	"@{name(0)} can't carry any more." next
+	"@Will another one of you take it?" linebreak
+	eobs
+
+TwosonDrugstore_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+TwosonDrugstore_Bulk_Buy_Not_Enough_Cash:
+	"@I'm sorry, but you don't have enough money for all that." next
+	eob
+
+TwosonDrugstore_Bulk_Buy_Full_Inventory:
+	"@Oh, how are you planning to carry these?  You've got too much stuff!" next
+	"@Well, I guess I could buy the stuff you don't need." next
+	"@Do you want to sell anything?" linebreak
+	eob
+
+TwosonDrugstore_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// Burglin Park Bakery shop
+//------------------------------------------------------------------
+TwosonBurglinBakery_Greeting:		//l_0xc5bc70
+	"@I like to sell my goodies on the street." next
+	"@Sure, flies land on them, but in my opinion, it makes them taste even better!" next
+	eob
+
+TwosonBurglinBakery_Exit_Store_Buy:	//l_0xc5bcc2
+	"@Thanks a lot." end
+
+TwosonBurglinBakery_Exit_Store_Dont_Buy:	//l_0xc5bcca
+	"@Please come again." end
+
+TwosonBurglinBakery_Open_Shop_Window:	//l_0xc5bcd2
+	"@What would you like?" promptw
+	eob
+
+TwosonBurglinBakery_Selected_Item:	//l_0xc5bcdd
+	"@{itemname(0)}?" next
+	eob
+
+TwosonBurglinBakery_Who_Will_Take_Item:	//l_0xc5bce5
+	"@Who is going to carry this?" promptw
+	eob
+
+TwosonBurglinBakery_Equip_Now:		// Bakeries don't sell equippables
+	eob
+
+TwosonBurglinBakery_Buy_Previous_Equipment:	// Bakeries don't sell equippables
+	eob
+
+TwosonBurglinBakery_Cant_Equip_Item:	// Bakeries don't sell equippables
+	eob
+
+TwosonBurglinBakery_Cancel_Cant_Equip:	//l_0xc5bcf4
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+TwosonBurglinBakery_Not_Enough_Cash:	//l_0xc5bcfd
+	"@It looks like you don't have enough money." next
+	eob
+
+TwosonBurglinBakery_Whole_Party_Full_Inventory:	//l_0xc5bd0c
+	"@You are already carrying too much stuff." next
+	"@You should sell some things, or throw them away, or just leave them somewhere." end
+
+TwosonBurglinBakery_What_To_Sell:	// Bakeries don't purchase items
+	eob
+
+TwosonBurglinBakery_Confirm_Selling:	// Bakeries don't purchase items
+	eob
+
+TwosonBurglinBakery_Cancel_Selling:	// Bakeries don't purchase items
+	eob
+
+TwosonBurglinBakery_Nothing_To_Sell:	// Bakeries don't purchase items
+	eob
+
+TwosonBurglinBakery_Unsellable_Item:	// Bakeries don't purchase items
+	eob
+
+TwosonBurglinBakery_Transaction_Thanks:		//l_0xc5bd49
+	"@Thank you very much." next
+	eob
+
+TwosonBurglinBakery_Transaction_Thanks_2:	//l_0xc5bd53
+// when is this used?
+	"@Thanks." next
+	eob
+
+TwosonBurglinBakery_Request_Another_Transaction:	//l_0xc5bd59
+	"@Do you want to buy anything else?" linebreak
+	eob
+
+TwosonBurglinBakery_Do_Another_Transaction:		// Bakeries don't run this line
+	"@What can I do for you now?" linebreak
+	eob
+
+TwosonBurglinBakery_Chosen_Character_Inventory_Full:	//l_0xc5bd62
+	"@{name(0)} is carrying too many things already." next
+	"@Can anyone else carry it for " swap call(0xc7e6a4) "?" linebreak
+	eob
+
+TwosonBurglinBakery_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+TwosonBurglinBakery_Bulk_Buy_Not_Enough_Cash:
+	"@It looks like you don't have enough money for these." next
+	eob
+
+TwosonBurglinBakery_Bulk_Buy_Full_Inventory:
+	"@You are already carrying too much stuff." next
+	"@You should sell some things, or throw them away, or just leave them somewhere." end
+
+TwosonBurglinBakery_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// Burglin Park Condiments shop
+//------------------------------------------------------------------
+TwosonBurglinCondiments_Greeting:		//l_0xc5bef9
+	"@Hello!  Would you like some seasonings to add to your foods at meal time?" next
+	"@They are really quite miraculous!" next
+	"@Whenever you eat something, the seasonings will sprinkle automatically." next
+	"@They come in these cute little packets and jars." next
+	eob
+
+TwosonBurglinCondiments_Exit_Store_Buy:		//l_0xc5bf87
+	"@Come again." end
+
+TwosonBurglinCondiments_Exit_Store_Dont_Buy:	//l_0xc5bf8e
+	"@Come again." end
+
+TwosonBurglinCondiments_Open_Shop_Window:	//l_0xc5bf95
+	"@What kind do you like?" promptw
+	eob
+
+TwosonBurglinCondiments_Selected_Item:		//l_0xc5bfa1
+	"@You want" linebreak
+	"  the {itemname(0)}?" next
+	eob
+
+TwosonBurglinCondiments_Who_Will_Take_Item:	//l_0xc5bfb0
+	"@Who is going to take it?" next
+	eob
+
+TwosonBurglinCondiments_Equip_Now:		// Condiment shops don't sell equippables
+	eob
+
+TwosonBurglinCondiments_Buy_Previous_Equipment:	// Condiment shops don't sell equippables
+	eob
+
+TwosonBurglinCondiments_Cant_Equip_Item:	// Condiment shops don't sell equippables
+	eob
+
+TwosonBurglinCondiments_Cancel_Cant_Equip:	//l_0xc5bfbf
+// despite the name, it's often used as a generic change of mind
+	"@Come again." next
+	eob
+
+TwosonBurglinCondiments_Not_Enough_Cash:	//l_0xc5bfc7
+	"@Oh, you don't have enough money." next
+	eob
+
+TwosonBurglinCondiments_Whole_Party_Full_Inventory:	//l_0xc5bfd3
+	"@You already have the maximum number of things you can carry." next
+	"@You're going to have to sell some things, or just throw them away." next
+	"@Then come again." end
+
+TwosonBurglinCondiments_What_To_Sell:		// Condiment shops don't purchase items
+	eob
+
+TwosonBurglinCondiments_Confirm_Selling:	// Condiment shops don't purchase items
+	eob
+
+TwosonBurglinCondiments_Cancel_Selling:		// Condiment shops don't purchase items
+	eob
+
+TwosonBurglinCondiments_Nothing_To_Sell:	// Condiment shops don't purchase items
+	eob
+
+TwosonBurglinCondiments_Unsellable_Item:	// Condiment shops don't purchase items
+	eob
+
+TwosonBurglinCondiments_Transaction_Thanks:	//l_0xc5c025
+	"@Thank you." next
+	eob
+
+TwosonBurglinCondiments_Transaction_Thanks_2:	//l_0xc5c02c
+// when is this used?
+	"@Thank you." next
+	eob
+
+TwosonBurglinCondiments_Request_Another_Transaction:	//l_0xc5c033
+	"@Do you want to buy anything else?" linebreak
+	eob
+
+TwosonBurglinCondiments_Do_Another_Transaction:		// Condiment shops don't run this line
+	"@What can I do for you now?" linebreak
+	eob
+
+TwosonBurglinCondiments_Chosen_Character_Inventory_Full:	//l_0xc5c03c
+	"@{name(0)} is already carrying too many things." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+TwosonBurglinCondiments_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+TwosonBurglinCondiments_Bulk_Buy_Not_Enough_Cash:
+	"@Oh, you don't have enough money for these." next
+	eob
+
+TwosonBurglinCondiments_Bulk_Buy_Full_Inventory:
+	"@You already have the maximum number of things you can carry." next
+	"@You're going to have to sell some things, or just throw them away." next
+	"@Then come again." end
+
+TwosonBurglinCondiments_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// Burglin Park Tool shop
+//------------------------------------------------------------------
+TwosonBurglinTools_Greeting:		//l_0xc5b625
+	"@Hey mon!  You got to expand your mind an' use this stuff creatively." next
+	"@C'mon, buy some of my junk!" linebreak
+	eob
+
+TwosonBurglinTools_Exit_Store_Buy:	//l_0xc5b666
+	"@Take care, mon!" end
+
+TwosonBurglinTools_Exit_Store_Dont_Buy:	//l_0xc5b674
+	"@Ah scientific mon mig be able to mek gud use of dis ting here..." end
+
+TwosonBurglinTools_Open_Shop_Window:	//l_0xc5b69d
+	"@So, what would you like, mon?" promptw
+	eob
+
+TwosonBurglinTools_Selected_Item:	//l_0xc5b6af
+	"@{itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+	}
+	eob
+
+_is_broken_iron:
+	set(FLG_ITEM_BROKEN_IRON_PURCHASED)
+	eob
+
+TwosonBurglinTools_Who_Will_Take_Item:	//l_0xc5b6b7
+	"@Who's goin' to take it?" promptw
+	eob
+
+TwosonBurglinTools_Equip_Now:		//l_0xc5b6ca
+	"@Thank you, mon." next
+	"@Do you want to equip that here then?" linebreak
+	eob
+
+TwosonBurglinTools_Buy_Previous_Equipment:	//l_0xc5b6e2
+ // arg: item name, res: item price
+	"@Would you be liking me to buy" linebreak
+	"  your {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" next
+	eob
+
+TwosonBurglinTools_Cant_Equip_Item:	//l_0xc5b70b
+// arg: player name
+	"@{name(0)} cannot equip this here thing." next
+	"@Are you still willing to buy it?" linebreak
+	eob
+
+TwosonBurglinTools_Cancel_Cant_Equip:	//l_0xc5b72d
+// despite the name, it's often used as a generic change of mind
+	"@Ah, I see mon.  That's too bad." next
+	eob
+
+TwosonBurglinTools_Not_Enough_Cash:	//l_0xc5b746
+	"@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
+	eob
+
+TwosonBurglinTools_Whole_Party_Full_Inventory:	//l_0xc5b76f
+	"@Well, you're straining with too many things now." next
+	"@I'll buy the things you don't need, mon." linebreak
+	eob
+
+TwosonBurglinTools_What_To_Sell:	//l_0xc5b799
+	"@What is it you want to sell, mon?" promptw
+	eob
+
+TwosonBurglinTools_Confirm_Selling:	//l_0xc5b7a6
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  Oh, I can give you" linebreak
+	"  about {swap}$" number(0) ", OK?" next
+	eob
+
+TwosonBurglinTools_Cancel_Selling:	//l_0xc5b7cd
+	"@Not goin' to go for it, eh mon?  No problem." next
+	eob
+
+TwosonBurglinTools_Nothing_To_Sell:	//l_0xc5b7f2
+	"@But look, you don't have any things to sell!" next
+	eob
+
+TwosonBurglinTools_Unsellable_Item:	//l_0xc5b807
+	"@Hold on, mon.  We don't carry that kind of stuff." next
+	eob
+
+TwosonBurglinTools_Transaction_Thanks:	//l_0xc5b826
+	"@Thanks a lot, mon." next
+	eob
+
+TwosonBurglinTools_Transaction_Thanks_2:	//l_0xc5b833
+// when is this used?
+	"@There you go." linebreak
+	"  Thanks a lot, mon." next
+	eob
+
+TwosonBurglinTools_Request_Another_Transaction:	//l_0xc5b84e
+	"@Is there anything else you need, mon?" linebreak
+	eob
+
+TwosonBurglinTools_Do_Another_Transaction:	//l_0xc5b860
+	"@Lay it on me." linebreak
+	eob
+
+TwosonBurglinTools_Chosen_Character_Inventory_Full:	//l_0xc5b86d
+	"@Oh, {name(0)} has too many things already." next
+	"@Won't one of your friends carry it for you?" linebreak
+	eob
+
+TwosonBurglinTools_Bulk_Buy_Lots:
+	"@All these?" next eob
+
+TwosonBurglinTools_Bulk_Buy_Not_Enough_Cash:
+	"@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
+	eob
+
+TwosonBurglinTools_Bulk_Buy_Full_Inventory:
+	"@Well, you're straining with too many things now." next
+	"@I'll buy the things you don't need, mon." linebreak
+	eob
+
+TwosonBurglinTools_Bulk_Buy_Change_Of_Mind:
+	"@Ah, I see mon.  That's too bad." next
+	eob
+
+//------------------------------------------------------------------
+// Burglin Park Banana lady
+//------------------------------------------------------------------
+TwosonBurglinBanana_Greeting:		//l_0xc5cd18
+	"@Hey kid!" next
+	"@Would you like some bananas?" next
+	eob
+
+TwosonBurglinBanana_Exit_Store_Buy:	//l_0xc5cd29
+	"@Thank you." end
+
+TwosonBurglinBanana_Exit_Store_Dont_Buy:	//l_0xc5cd2f
+	"@Well, when you want to eat bananas, I'll be here, selling them!" end
+
+TwosonBurglinBanana_Open_Shop_Window:	//l_0xc5cd51
+	//"@Hey kid!" next	// Moved to Greeting line so it doesn't sound awkward
+	"@Do you want to buy some?" next
+	eob
+
+TwosonBurglinBanana_Selected_Item:	//l_0xc5cd64
+	"@You want" linebreak
+	"  the {itemname(0)}?" next
+	eob
+
+TwosonBurglinBanana_Who_Will_Take_Item:	//l_0xc5cd73
+	"@Who is going to carry it?" promptw
+	eob
+
+TwosonBurglinBanana_Equip_Now:		// Banana lady doesn't sell equippables
+	eob
+
+TwosonBurglinBanana_Buy_Previous_Equipment:	// Banana lady doesn't sell equippables
+	eob
+
+TwosonBurglinBanana_Cant_Equip_Item:	// Banana lady doesn't sell equippables
+	eob
+
+TwosonBurglinBanana_Cancel_Cant_Equip:	//l_0xc5cd7f
+// despite the name, it's often used as a generic change of mind
+	"@You don't want any?  Whatever you say." end
+
+TwosonBurglinBanana_Not_Enough_Cash:	//l_0xc5cd97
+	//load_registers
+	"@You can't buy the bananas if you don't have enough money." end
+
+TwosonBurglinBanana_Whole_Party_Full_Inventory:	//l_0xc5cdb3
+	"@You cannot carry any more." end
+
+TwosonBurglinBanana_What_To_Sell:	// Banana lady doesn't purchase items
+	eob
+
+TwosonBurglinBanana_Confirm_Selling:	// Banana lady doesn't purchase items
+	eob
+
+TwosonBurglinBanana_Cancel_Selling:	// Banana lady doesn't purchase items
+	eob
+
+TwosonBurglinBanana_Nothing_To_Sell:	// Banana lady doesn't purchase items
+	eob
+
+TwosonBurglinBanana_Unsellable_Item:	// Banana lady doesn't purchase items
+	eob
+
+TwosonBurglinBanana_Transaction_Thanks:	//l_0xc5cdc0
+	"@Thank you, thank you." next
+	eob
+
+TwosonBurglinBanana_Transaction_Thanks_2:	//l_0xc5cdcc
+// when is this used?
+	"@Thank you, thank you." next
+	eob
+
+TwosonBurglinBanana_Request_Another_Transaction:	//l_0xc5cdd8
+	"@I have more bananas...  Do you want some more?" linebreak
+	eob
+
+TwosonBurglinBanana_Do_Another_Transaction:		// Banana lady doesn't run this line
+	eob
+
+TwosonBurglinBanana_Chosen_Character_Inventory_Full:	//l_0xc5cdf2
+	"@{name(0)} has too many things to carry a banana." next
+	"@Will someone else carry it for " swap call(0xc7e6a4) "?" linebreak
+	eob
+
+TwosonBurglinBanana_Bulk_Buy_Lots:
+	"@All these bananas?" next eob
+
+TwosonBurglinBanana_Bulk_Buy_Not_Enough_Cash:
+	//load_registers
+	"@You can't buy bananas if you don't have enough money." end
+
+TwosonBurglinBanana_Bulk_Buy_Full_Inventory:
+	"@You cannot carry any more." end
+
+TwosonBurglinBanana_Bulk_Buy_Change_Of_Mind:
+	"@You don't want any?  Whatever you say." end
+	eob
+

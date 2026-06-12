@@ -329,6 +329,8 @@ Selected_Item_String:
 	store_registers_shared
 
 	// NEW CODE
+	newline
+	"@How many?" linebreak
 	menu {
 		"Just one" : { goto(Selected_Item_String_Pt2) }
 		"Multiple" : { goto(BulkBuy) }
@@ -815,7 +817,7 @@ Nothing:
 BulkBuy:
 	counter(0)
 	
-	newline " " input(2) // If you want to add some decoration around the input selector, do it here
+	newline "   " number_input(2) // If you want to add some decoration around the input selector, do it here
 	
 	store_registers
 	if result_is(0) { call(Bulk_Buy_Change_Of_Mind) eob } // backed out of the selector / chose 0 

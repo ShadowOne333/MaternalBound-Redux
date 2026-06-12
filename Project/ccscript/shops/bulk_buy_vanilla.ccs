@@ -1,0 +1,182 @@
+import "../expansion/ccexpand.ccs"
+import "../essential/stdext.ccs"
+import "../essential/asm65816.ccs"
+
+// ASM function for comparing the result register to the argument register. By cooprocks123e. Thanks!
+command result_is_arg { "[1A 0D]" }
+CompareResToArg: M_EB_Function_Wrapper({
+    JSL(R_Get_Working_Memory)
+    // Move value from $06 to $00 temporarily
+    LDA_d(0x06)
+    STA_d(0x00)
+    LDA_d(0x08)
+    STA_d(0x02)
+    JSL(R_Get_Argument_Memory)
+    // Initialize output value to 0
+    STZ_d(0x0e)
+    STZ_d(0x10)
+    // Compare arg in $06 with working memory in $00
+    LDX_d(0x06)
+    CPX_d(0x00)
+    // If not equal, we're done - return 0
+    BNE_a(done)
+    // Compare high word
+    LDX_d(0x08)
+    CPX_d(0x02)
+    // If not equal, we're done - return 0
+    BNE_a(done)
+    // If we're here then Arg == Working - set return value to 1
+    INC_d(0x0e)
+done:
+    // Write return value into working memory
+    JSL(R_Set_Working_Memory)
+})
+
+define Has_Purchased = flag 0x291      // Seemingly marks if you've already purchased something or not, for dialogue. Unsure how it is set, but it is checked
+define Offense_Or_Defense = flag 0x292 // Seemingly marks if offense or defense is to change when equipping an item. Unsure how it is set, but it is checked
+define UnknownFlag1 = flag 0xE0        // Something to do with if you've purchased or not? Unsure why or how it is seperate from Has_Purchased. Unsure how it is set.
+define UnknownFlag2 = flag 0xE1        // Something to do with if you've sold or not?
+
+define dummyItem = 203 // Video Relaxant unused item
+
+/*
+Selected_Item_String:
+C5E0A9  08 00 C5 E2 4B      call(l_0xc5e24b)           ; Check can afford?
+C5E0AE  1B 03 00 C5 E1 D6   goto_if_true(l_0xc5e1d6)   ; Can't afford
+C5E0B4  1B 01               load_registers             ;
+C5E0B6  08 00 C5 06 60      call(data_00.l_0xc50660)   ; Selected item dialogue
+C5E0BB  1D 19 02            party_size_smaller_than(2) ;
+*/
+// Our hijack goes before the `party_size_smaller_than(2)` command
+
+ROM[0xC5E0B6] = { goto(BulkBuyHijack) }
+
+BulkBuyHijack: {
+    call(0xC50660) // Selected item
+    store_registers_shared
+
+    newline
+    "@How many?" linebreak
+    menu {
+        "Just one" : { load_registers_shared goto(0xC5E0BB) } // Continue vanilla code for buying one
+        "Multiple" : { goto(BulkBuy) }
+    }
+    goto(0xC5E1AD) // "Please come again" type line
+}
+
+BulkBuy: {
+    counter(0)
+    newline "   " number_input(2) // If you want to add some decoration around the input selector, do it here
+
+    store_registers
+    if result_is(0) { call(0xC50C36) eob } // backed out of the selector / chose 0 - vanilla lines for cancelling after a character can't equip (they work)
+    load_registers
+    if result_is(1) { ctoarg store_registers newline goto(0xC5E0BB) } // chose just one 	
+
+    // Commenting out the extra comment when you buy lots
+    // because that would require original lines.
+    
+    // load_registers
+
+    //Maedaez's suggestion
+    // compare_result(6)
+    // goto_if_false(BulkBuy_Continue)
+    // call(Bulk_Buy_Lots)
+
+    // if result_is(6) { call(Bulk_Buy_Lots) }
+    // load_registers
+    // if result_is(7) { call(Bulk_Buy_Lots) }
+    // load_registers
+    // if result_is(8) { call(Bulk_Buy_Lots) }
+    // load_registers
+    // if result_is(9) { call(Bulk_Buy_Lots) } 
+    // load_registers
+
+    BulkBuy_Continue:
+    load_registers
+
+    ctoarg 
+    store_registers
+    counter(1) 
+    act_to_wram
+        goto(BulkCheckLoop)
+
+BulkCheckLoop: // adds dummy items / removes money until either your inventory is full, wallet cannot afford the item, or the loop is complete
+    if full(0xFF) { wram_to_act counter(1) act_to_wram call(BulkErrorReset) call(0xC50F66) eob } // call the loop to reset the inventory and wallet. Text is vanilla whole-party-full text, it works
+    load_registers 
+    "[1D 0A 00]" // get item price 
+    swap
+
+    if not hasmoney(0) { wram_to_act counter(1) act_to_wram call(BulkErrorReset) call(0xC50DCE) eob } // call the loop to reset the inventory and wallet. Text is vanilla not-enough-cash text, it works
+    if hasmoney(0) { takemoney(0) } // if you can afford it, take the money
+
+    give(0xFF, dummyItem)  // give a dummy item
+
+    wram_to_act // load the alt registers, which for now will be storing the loop check
+    ctoarg // copy the loop count to arg
+    inc // increase the amount of loops
+    act_to_wram // save the new loop value
+
+    if result_is_arg { counter(1) goto(BulkResetInv) }  // compare the count of loops to the input the user provided
+    goto(BulkCheckLoop)
+
+BulkResetInv: // removes the dummy items
+    take(0xFF, dummyItem) // remove a dummy item
+    swap
+    ctoarg // standard loop increment stuff
+    inc
+    swap
+    if result_is_arg { load_registers counter(1) store_registers ctoarg swap act_to_wram goto(BulkMainLoop)}
+    goto(BulkResetInv)
+
+BulkMainLoop: // gives the items to your party 
+    load_registers
+    give(0xFF, 0)
+
+    call (0xC5D835) // cash register / ping sound
+    pause(5) // if you don't like this thing, remove this line and the prevous one, and add the sound stuff in the if statement below
+
+    wram_to_act
+    if result_is_arg { load_registers set(Has_Purchased) set(UnknownFlag1) open_wallet eob }
+
+    inc
+    swap
+    ctoarg // standard loop increment stuff
+    swap
+    act_to_wram
+    goto(BulkMainLoop)
+
+BulkErrorReset: // removes the dummy items and refunds in the case that you cannot afford that many / do not have enough inventory slots
+    load_registers
+    "[1D 0A 00]" // get price of item
+    swap
+    givemoney(0) // refund 
+    take(0xFF, dummyItem) // remove a dummy item
+
+    wram_to_act
+    swap
+    ctoarg // standard loop increment stuff
+    swap
+    inc
+    act_to_wram
+
+    if result_is_arg { eob } // since we will be calling this, eob to return
+    goto(BulkErrorReset)
+}
+
+command adr32 (a) "[{byte[0] a} {byte[1] a} {byte[2] a} 00]"
+command ifgoto (num, target) "[06 {short num} {long target}]"
+command cc09start (num) "[09 {byte num}]"
+command check_if_greater_equal(number) "[18 07 {long number} 00]"
+command char_num (char) "[19 10 {byte char}]"
+command get_iteminfo (char, slot) "[19 19 {byte char} {byte slot}]"
+command display_char_inv (n, char) "[1A 05 {byte n} {byte char}]"
+command display_shop (num) "[1A 06 {byte num}]"
+command false_goto (target) "[1B 02 {long target}]"
+command true_goto (target) "[1B 03 {long target}]"
+command act_to_wram "[1B 05]"
+command wram_to_act "[1B 06]"
+command no_space (char) "[1D 02 {byte char}]"
+command item_sell_price (price) "[1D 0B {byte price}]"
+command party_check (num) "[1D 19 {byte num}]"
+command random_number(num) "[1D 21 {byte num}]"

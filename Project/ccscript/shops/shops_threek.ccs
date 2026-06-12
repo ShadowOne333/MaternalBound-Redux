@@ -1,0 +1,251 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Threek arms dealer
+//------------------------------------------------------------------
+ThreekArmsDealer_Greeting:		//l_0xc52d94
+	"@Sssshhh!" linebreak
+	"  Don't talk too loud!" next
+	"@What do you want?" linebreak
+	eob
+
+ThreekArmsDealer_Exit_Store_Buy:	//l_0xc52dcc
+	"@Will that be all?" linebreak
+	"  Good luck, buddy!" end
+
+l_0xc52db6:	// Unused line?
+	"@...you again?!" linebreak
+	"  What do you want now?" linebreak
+	eob
+
+ThreekArmsDealer_Exit_Store_Dont_Buy:	//l_0xc52de8
+	"@So that's everything?" linebreak
+	"  Keep on the watch for bad guys." end
+
+ThreekArmsDealer_Open_Shop_Window:	//l_0xc52e0d
+	"@I've got what you need." promptw
+	eob
+
+ThreekArmsDealer_Selected_Item:		//l_0xc52e1c
+	"@{itemname(0)}?" next
+	eob
+
+ThreekArmsDealer_Who_Will_Take_Item:	//l_0xc52e24
+	"@Who's gonna lug this around?" promptw
+	eob
+
+ThreekArmsDealer_Equip_Now:		//l_0xc52e3a
+	"@OK.  I suppose you're going to want to equip it here?" linebreak
+	eob
+
+ThreekArmsDealer_Buy_Previous_Equipment:	//l_0xc52e59
+ // arg: item name, res: item price
+	"@The {itemname(0)}...?" linebreak
+	"  I'd say about {swap}$" number(0) "." next
+	"@Take it or leave it." linebreak
+	eob
+
+ThreekArmsDealer_Cant_Equip_Item:	//l_0xc52e85
+// arg: player name
+	"@{name(0)} won't be able to equip this." next
+	"@Are you intent on purchasing it anyway?" linebreak
+	eob
+
+ThreekArmsDealer_Cancel_Cant_Equip:	//l_0xc52eb2
+// despite the name, it's often used as a generic change of mind
+	"@Well, that's showing good sense.  You shouldn't strain yourself too much." next
+	eob
+
+ThreekArmsDealer_Not_Enough_Cash:	//l_0xc52ed7
+	"@Hold it just a second!  You haven't got enough money!" next
+	eob
+
+ThreekArmsDealer_Whole_Party_Full_Inventory:	//l_0xc52ef5
+	"@You aren't going to be able to carry any more stuff." next
+	"@You're dragging around all that junk..." next
+	"@I guess I could help you out by buying some things that you don't need..." next
+	eob
+
+ThreekArmsDealer_What_To_Sell:		//l_0xc52f4a
+	"@What are you going to pawn off on me?" promptw
+	eob
+
+ThreekArmsDealer_Confirm_Selling:	//l_0xc52f5f
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  I'll give you {swap}$" number(0) ", and not a penny more." next
+	"@Take it or leave it." linebreak
+	eob
+
+ThreekArmsDealer_Cancel_Selling:	//l_0xc52f94
+	"@...I don't think you'll find a better price anywhere else." next
+	eob
+
+ThreekArmsDealer_Nothing_To_Sell:	//l_0xc52fb6
+	"@What are you trying to pull, anyway?" next
+	"@You say you want to sell, but you have nothing to offer?!" next
+	"@You've got some nerve, kid!" next
+	eob
+
+ThreekArmsDealer_Unsellable_Item:	//l_0xc52ffa
+	"@Forget it!" linebreak
+	"  I don't want to buy that junk!" next
+	eob
+
+ThreekArmsDealer_Transaction_Thanks:	//l_0xc53018
+	"@Excellent." linebreak
+	"  Glad we could work something out." next
+	eob
+
+ThreekArmsDealer_Transaction_Thanks_2:	//l_0xc53037
+// when is this used?
+	"@Thank you." pause(20)
+	"  Things must be pretty tough, especially for a kid like you." next
+	eob
+
+ThreekArmsDealer_Request_Another_Transaction:	//l_0xc53063
+	"@So, will there be anything else?" linebreak
+	eob
+
+ThreekArmsDealer_Do_Another_Transaction:	//l_0xc53072
+	"@What is it now?" linebreak
+	eob
+
+ThreekArmsDealer_Chosen_Character_Inventory_Full:	//l_0xc5307d
+	"@{name(0)} can't carry any more." next
+	"@Is anyone else willing to carry it?" linebreak
+	eob
+
+ThreekArmsDealer_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+ThreekArmsDealer_Bulk_Buy_Not_Enough_Cash:
+	"@Hold it just a second!  You haven't got enough money!" next
+	eob
+
+ThreekArmsDealer_Bulk_Buy_Full_Inventory:
+	"@You aren't going to be able to carry all this stuff." next
+	"@You're dragging around all that junk..." next
+	"@I guess I could help you out by buying some things that you don't need..." next
+	eob
+
+ThreekArmsDealer_Bulk_Buy_Change_Of_Mind:
+	"@Well, that's showing good sense.  You shouldn't strain yourself too much." next
+	eob
+
+//------------------------------------------------------------------
+// Grapefruit Falls Salesman
+//------------------------------------------------------------------
+ThreekGrapefruitFallsSalesman_Greeting:		//l_0xc5c32a:
+	"@You must have a long, tough road ahead of you, do you not?" next
+	"@No, there is no need to explain.  I already know... you must be hungry." next
+	"@This is good timing for you.  I happen to be carrying something to eat." next
+	eob
+
+ThreekGrapefruitFallsSalesman_Exit_Store_Buy:	//l_0xc5c39e
+	"@If you want to fully recover, there is a village full of..." next
+	"@interesting people... just ahead.  Go there and take a good rest." next
+	"@I have heard that the name of this village is Saturn Valley," next
+	"@but it cannot be found on any map." next
+	"@I enjoy helping those who are in trouble." next
+	"@...though I charge them for my trouble." end
+
+ThreekGrapefruitFallsSalesman_Exit_Store_Dont_Buy:	//l_0xc5c456
+	"@Please, by all means, come again.  ... Ah, I just remembered..." next
+	"@There is a village with many... interesting people... just ahead." next
+	"@You should go there and visit." next
+	"@I heard that the name of the village is Saturn Valley," next
+	"@but it cannot be found on any map." end
+
+ThreekGrapefruitFallsSalesman_Open_Shop_Window:		//l_0xc5c4e3
+	"@What would you like?" promptw
+	eob
+
+ThreekGrapefruitFallsSalesman_Selected_Item:		//l_0xc5c4ee
+	"@You want" linebreak
+	"  the {itemname(0)}?" next
+	eob
+
+ThreekGrapefruitFallsSalesman_Who_Will_Take_Item:	//l_0xc5c4fd
+	"@Who is going to carry this?" next
+	eob
+
+ThreekGrapefruitFallsSalesman_Equip_Now:		// Salesman doesn't sell equippables
+	eob
+
+ThreekGrapefruitFallsSalesman_Buy_Previous_Equipment:	// Salesman doesn't sell equippables
+	eob
+
+ThreekGrapefruitFallsSalesman_Cant_Equip_Item:		// Salesman doesn't sell equippables
+	eob
+
+ThreekGrapefruitFallsSalesman_Cancel_Cant_Equip:	//l_0xc5c50d
+// despite the name, it's often used as a generic change of mind
+	"@I see.  That's ...too bad." promptw
+	eob
+
+ThreekGrapefruitFallsSalesman_Not_Enough_Cash:		//l_0xc5c521
+	"@You... do no seem to have enough money." next
+	eob
+
+ThreekGrapefruitFallsSalesman_Whole_Party_Full_Inventory:	//l_0xc5c536
+	"@You're already carrying too much stuff." next
+	"@Sell something, or just abandon something, and come again." end
+
+ThreekGrapefruitFallsSalesman_What_To_Sell:	// Salesman doesn't purchase items
+	eob
+
+ThreekGrapefruitFallsSalesman_Confirm_Selling:	// Salesman doesn't purchase items
+	eob
+
+ThreekGrapefruitFallsSalesman_Cancel_Selling:	// Salesman doesn't purchase items
+	eob
+
+ThreekGrapefruitFallsSalesman_Nothing_To_Sell:	// Salesman doesn't purchase items
+	eob
+
+ThreekGrapefruitFallsSalesman_Unsellable_Item:	// Salesman doesn't purchase items
+	eob
+
+ThreekGrapefruitFallsSalesman_Transaction_Thanks:	//l_0xc5c564
+	"@Thank you." next
+	eob
+
+ThreekGrapefruitFallsSalesman_Transaction_Thanks_2:	//l_0xc5c56b
+// when is this used?
+	"@Thank you." next
+	eob
+
+ThreekGrapefruitFallsSalesman_Request_Another_Transaction:	//l_0xc5c572
+	"@Do you want to buy anything else?" linebreak
+	eob
+
+ThreekGrapefruitFallsSalesman_Do_Another_Transaction:		// Salesman doesn't run this line
+	"@What can I do for you now?" linebreak
+	eob
+
+ThreekGrapefruitFallsSalesman_Chosen_Character_Inventory_Full:	//l_0xc5c57b
+	"@{name(0)} has too many things already." next
+	"@Can anyone else carry it?" linebreak
+	eob
+
+ThreekGrapefruitFallsSalesman_Bulk_Buy_Lots:
+	"@All of these?" next eob
+
+ThreekGrapefruitFallsSalesman_Bulk_Buy_Not_Enough_Cash:
+	"@You... do no seem to have enough money for these." next
+	eob
+
+ThreekGrapefruitFallsSalesman_Bulk_Buy_Full_Inventory:
+	"@You're already carrying too much stuff." next
+	"@Sell something, or just abandon something, and come again." end
+
+ThreekGrapefruitFallsSalesman_Bulk_Buy_Change_Of_Mind:
+	"@I see.  That's ...too bad." promptw
+	eob
+
+//------------------------------------------------------------------

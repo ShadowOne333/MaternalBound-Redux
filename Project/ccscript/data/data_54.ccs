@@ -424,7 +424,7 @@ l_0xc989ea:
 
 l_0xc98a27:
 	"@How much would you like to donate?" linebreak
-	"    ${number_input(2)}" 
+	"   ${number_input(2)}" 
 	clearline
 	swap
 	compare_register(1,0)
