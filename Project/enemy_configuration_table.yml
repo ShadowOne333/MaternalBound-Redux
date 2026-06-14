@@ -1610,7 +1610,7 @@
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 300
+  Defense: 255	# Stat overflow, originally 300
   Encounter Text Pointer: battle_text.l_0xef7858
   Experience points: 0
   Final Action: 0
@@ -6639,7 +6639,7 @@
   Boss Flag: 'false'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 274
+  Defense: 255	# Stat overflow, originally 274
   Encounter Text Pointer: battle_text.l_0xef7858
   Experience points: 0
   Final Action: 0
@@ -6921,7 +6921,7 @@
   Boss Flag: 'false'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d83
-  Defense: 262
+  Defense: 255	# Stat overflow, originally 262
   Encounter Text Pointer: battle_text.l_0xef78c7
   Experience points: 37618
   Final Action: 0
@@ -9600,7 +9600,7 @@
   Boss Flag: 'false'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 274
+  Defense: 255	# Stat overflow, originally 274
   Encounter Text Pointer: battle_text.l_0xef7858
   Experience points: 0
   Final Action: 0
@@ -10211,7 +10211,7 @@
   Boss Flag: 'false'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xc77eff
-  Defense: 274
+  Defense: 255	# Stat overflow, originally 274
   Encounter Text Pointer: battle_text.l_0xef7858
   Experience points: 0
   Final Action: 0
