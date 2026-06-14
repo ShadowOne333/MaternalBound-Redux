@@ -1,0 +1,12 @@
+import "../redux/movscr_codes.ccs"
+
+// Moldyman / Mushroom to start on their 9th direction "resting" frame
+
+ROM[0xC3A6CE] = { m_jml(Moldyman_Frame_Fix) }
+
+Moldyman_Frame_Fix: {
+    m_set_speed(384) // Clobbered code
+    m_set_anim(0)
+    m_asmcall(0xC0A651) byte 8 // Set direction
+    m_jml(0xC3A6D4) // Return
+}

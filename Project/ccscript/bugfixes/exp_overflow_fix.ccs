@@ -1,0 +1,61 @@
+import "../essential/asm65816.ccs"
+
+// Fixes a theoretical issue where characters could gain exp points until they overflow the 32-bit integer limit,
+// causing the status menu to display a weird number and ... do not much else frankly.
+// Fix it by checking if the player exceeds the maximum display value for exp of 9,999,999
+// but only at lv.99 because it was easy to insert a hijack there.
+
+/*
+/// $C1D9E9
+  void gainEXP(short character, short printMessages, uint exp) {
+  	  partyCharacters[character - 1].exp += exp;
+  	  if (partyCharacters[character - 1].level >= 99) {
++         if (partyCharacters[character - 1].exp >= 9_999_999) {
++             partyCharacters[character - 1].exp = 9_999_999;
++         }
+  		  return;
+  	  }
+    ...
+*/
+
+define MAX_EXP = 9999999 // 0x98967F (0x967F 0x0098)
+
+ROM[0xC1DA4F] = JML (EXPOverflowFix)
+
+EXPOverflowFix: {
+    // JUMPLTEQS that we clobbered
+    BVC_a (_jlteq_1)
+    BMI_a (_jlteq_2)
+    JMP (_cap_exp)
+    _jlteq_1:
+    BPL_a (_jlteq_2)
+    JMP (_cap_exp)
+    _jlteq_2:
+    BRA_a (_not_lv_99)
+
+    // X is char offset
+    _cap_exp:
+    // Check exp hi first
+    LDA_x (0x99D6) // exp hi
+    CMP_i (short [1] MAX_EXP)
+    BCC_a (_no_cap) // less than, don't cap
+    BNE_a (_cap) // greater than, cap
+    // equal, check exp lo
+    LDA_x (0x99D4) // exp lo
+    CMP_i (short [0] MAX_EXP)
+    BCC_a (_no_cap) // less than, don't cap
+    // greater or equal, cap
+    
+    // Cap exp
+    _cap:
+    LDA_i (short [0] MAX_EXP)
+    STA_x (0x99D4) // exp lo
+    LDA_i (short [1] MAX_EXP)
+    STA_x (0x99D6) // exp hi
+
+    _no_cap:
+    JML (0xC1DB31) // Jump to function end
+
+    _not_lv_99:
+    JML (0xC1DA5B) // Continue function
+}

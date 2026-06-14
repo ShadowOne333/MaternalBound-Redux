@@ -1,0 +1,15 @@
+import "../essential/asm65816.ccs"
+
+// Fix a zero-divison bug that occurs if the player and the enemy die at the same time.
+// This is possible when an enemy's final attack hits more than one character.
+// This occurs because the logic for losing a battle and winning a battle aren't if (playerCount == 0) { lose } else { win }, it's if (playerCount == 0) { lose } if (enemyCount == 0) { win }
+// We will change it to if (playerCount == 0) { lose } elif (enemyCount == 0) { win }
+ROM[0xC25F1A] = { JML (FixTieZerodiv) NOP }
+FixTieZerodiv: {
+    // Clobbered code
+    LDA_i (1)
+    STA_d (0x23)
+    // Then instead of continuing into checking how many enemies lived,
+    // jump past the "win" logic as a whole
+    JML (0xC26081)
+}
