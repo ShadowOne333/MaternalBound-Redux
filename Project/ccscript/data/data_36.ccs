@@ -587,6 +587,13 @@ l_0xc7dfbe:	// Ness' boosts after Magicant
 	boost_luck(1,5) promptw
 	window_closeall
 
+	get_stat(9)
+	swap
+	compare_argument(99)
+	goto_if_false(_not_level_99)
+	change_level(1, 99)
+
+_not_level_99:
 	event(14)	// 0x0E, stop HP/PP scrolling
 	pause(60)
 

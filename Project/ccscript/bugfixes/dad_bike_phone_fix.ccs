@@ -1,0 +1,21 @@
+import "../essential/asm65816.ccs"
+
+// Fix Dad calling you on the bike messing up the bell sound effect by simply stopping him from calling you while you're on the bike
+
+ROM[0xC0DCF1] = { JML (DadBikePhoneFix) NOP }
+
+DadBikePhoneFix: {
+    // Clobbered code
+    CMP_i (0)
+    BNE_a (_skip)
+
+    // Check bikeiness
+    LDA_a (0x9883) // game_state::walking_style
+    CMP_i (3) // bike walking style
+    BEQ_a (_skip)
+
+    JML (0xC0DCF6) // Yes phone call
+
+    _skip:
+    JML (0xC0DD0D) // No phone call
+}
