@@ -587,8 +587,8 @@ l_0xc7dfbe:	// Ness' boosts after Magicant
 	boost_luck(1,5) promptw
 	window_closeall
 
-	get_stat(9)
-	swap
+	// Fix the HP/PP stats not updating to their max values if the player is already at level 99 when reaching Magicant.
+	get_stat(9) swap
 	compare_argument(99)
 	goto_if_false(_not_level_99)
 	change_level(1, 99)
