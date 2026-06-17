@@ -161,6 +161,7 @@ l_0xc8f8c0:
 	"  the <Jar of Fly Honey>!" next
 	"@Master Belch grabbed" linebreak
 	"  the <Fly Honey>!" promptw
+	take(-1, FLY_HONEY)	// 0xFF, 0x69
 	eob
 
 l_0xc8f8fd:
