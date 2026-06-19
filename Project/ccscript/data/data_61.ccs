@@ -402,7 +402,7 @@ l_0xef6569:
 	"  Come on, let's go!" promptw
 
 	call(data_23.l_0xc68554)
-	goto_if_true(data_23.l_0xc683de)
+	goto_if_true(player_died_to_belch)	// data_23.l_0xc683de
 
 	window_open(1)
 	music(134)
@@ -443,6 +443,26 @@ l_0xef6569:
 	set_respawn_point(4)
 	music_resume
 	eob
+
+player_died_to_belch: {
+	// Check if the player has obtained the Fly honey from its gift box
+	goto_if_flag(FLG_ITEM_HAEMITU, _restore_fly_honey)
+	eob
+
+_restore_fly_honey:
+	// Check if the party used the Fly honey during battle
+	// If the player still has the Fly honey (meaning they didn't use it), don't do anything
+	hasitem(-1, FLY_HONEY)	// 105
+	goto_if_true(_player_still_has_fly_honey)
+
+_give_back_fly_honey:
+	// Give back the Fly honey after a game over
+	give(-1, FLY_HONEY)
+	eob
+
+_player_still_has_fly_honey:
+	eob
+}
 
 l_0xef66ca:
 	"@...No?..." linebreak
