@@ -563,11 +563,17 @@ l_0xc6d9ca:
 	"@I don't exactly know why... it's just a musician's hunch." end
 
 l_0xc6da0b:
+	goto_if_flag(FLG_ITEM_SHOW_TICKET, DeptStore_Sold_Out)
 	"@Do you wanna buy a ticket?" linebreak
 	two_choice_menu("Yes", l_0xc6da3f, "No", l_0xc6da37)
 
 l_0xc6da37:
 	"@Please come again." end
+
+DeptStore_Sold_Out:
+	"@I'm sorry " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "..." next
+	sprite_direction(921,7)	// 0399, 7
+	"@We're all sold out." end
 
 l_0xc6da3f:
 	"@30 bucks, please." linebreak
@@ -600,7 +606,7 @@ l_0xc6daa0:
 	"@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." end
 
 l_0xc6dac0:
-	"@I'm sorry sir..." next
+	"@I'm sorry " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "..." next
 	sprite_direction(921,7)	// 0399, 7
 	"@We don't just give away the tickets... you must pay 30 dollars." end
 

@@ -506,8 +506,7 @@ l_0xc948dc:
 	"@Here's a {itemname(BACKSTAGE_PASS)}." pause(20)
 	"  You can get into our shows with this!" next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BACKSTAGE_PASS) }
-	else
-	{
+	else {
 	    get_item_receiver(-1)
 	    goto_if_false(l_0xc94966)
 	    give_and_return_location(0, BACKSTAGE_PASS)	// Item 0x7D / 125, Backstage pass
