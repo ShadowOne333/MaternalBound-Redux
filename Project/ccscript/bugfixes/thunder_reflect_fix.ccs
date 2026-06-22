@@ -1,0 +1,23 @@
+// General ASM code for fixing or modifying different things in-game
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/jsl_rts.ccs"
+//------------------------------------------------------------------
+// Thunder reflection fix
+// If the player had both a Shield up (either Physical or PSI) and a Franklin badge, and an enemy used Thunder, the Franklin badge would reflect the attack, but the Shield would still be destroyed.
+// The original routine goes straight into the Shield checks even after checking for the Badge
+// This makes it so that if the character has a Franklin badge, it then bypasses the whole Shield checks and goes straight into the damage calculation portion of the Thunder code.
+//------------------------------------------------------------------
+define CURRENT_TARGET		= 0xA972
+define DAMAGE_IS_REFLECTED	= 0xAA96
+define SWAP_ATTACKER_WITH_TARGET	= 0xC27E8A
+
+ROM[0xC297E2] = JML	(thunder_reflection_fix)
+
+thunder_reflection_fix: {
+	LDA_i	(1)
+	STA_a	(DAMAGE_IS_REFLECTED)
+	JSL_RTS_C2	(SWAP_ATTACKER_WITH_TARGET)
+	JML	(0xC29811)	// Avoid running all the shield code after Badge reflection
+}
+//------------------------------------------------------------------
