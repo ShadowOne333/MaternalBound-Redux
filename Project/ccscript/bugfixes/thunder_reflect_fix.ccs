@@ -20,4 +20,8 @@ thunder_reflection_fix: {
 	JSL_RTS_C2	(SWAP_ATTACKER_WITH_TARGET)
 	JML	(0xC29811)	// Avoid running all the shield code after Badge reflection
 }
+
+//C297F5: E0 01 00        CPX #1	<--- PSI Power Shield check (Reflect)
+//C297FA: E0 02 00        CPX #2	<--- PSI Shield check (Nullify)
+// 03 is Reflective Power Shield, and 04 is normal Physical shield
 //------------------------------------------------------------------

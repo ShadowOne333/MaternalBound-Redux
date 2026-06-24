@@ -1,3 +1,5 @@
+import "../essential/asm65816.ccs"
+import "../essential/cc_asmcall.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -378,12 +380,22 @@ l_0xef88b8:	// Starstorm O
 	pause(4)
 	sound(SND_FIRE4)	// 91
 	eob
-
+//------------------------------------
+// Vanilla script used when using Lifeup, Healing or Offense up
+// For in battle and overworld use, but this will be used for Lifeup and Healing in the overworld with out changes
 l_0xef88e9:	// Reused for Lifeup, Healing and Offense up
 	pause(30)
 	eob
-
+//------------------------------------
+// Custom code to check if we are in a battle or not so the proper animation and sounds play out
+In_Battle_Check: {
+	LDA_a	(0x9643)	// 0x00 = Overworld, 0x01 = Battle. Other values = 0x01
+	RTL
+}
+//------------------------------------
 Lifeup:
+	cc_asmcall(In_Battle_Check, RET_RESULT)	// Check if we are in a battle
+	goto_if_false(l_0xef88e9)	// If not in battle (overworld), use the vanilla anim code to avoid playing the extra sounds in the overworld
 	battle_animation(63,0)	// 0x3F, 0x00
 	pause(5)
 	sound(SND_FREEZE1)	// 56
@@ -393,6 +405,7 @@ Lifeup:
 	eob
 
 Healing:
+	goto_if_false(l_0xef88e9)	// If not in battle (overworld), use the vanilla anim code to avoid playing the extra sounds in the overworld
 	battle_animation(75,0)	// 0x4B, 0x00
 	pause(5)
 	sound(SND_FREEZE2)	// 57
@@ -414,7 +427,7 @@ QuickUp:
 	sound(127)	// 127
 	pause(60)
 	eob
-
+//------------------------------------
 l_0xef88ec:
 	sound(SND_SHIELD1)	// 38
 	battle_animation(50,0)	// 0x32, 0x00
