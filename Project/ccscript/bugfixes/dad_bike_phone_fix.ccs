@@ -10,12 +10,12 @@ DadBikePhoneFix: {
     BNE_a (_skip)
 
     // Check bikeiness
-    LDA_a (0x9883) // game_state::walking_style
-    CMP_i (3) // bike walking style
+    LDA_a (0x9883)	// game_state::walking_style
+    CMP_i (3)		// bike walking style
     BEQ_a (_skip)
 
-    JML (0xC0DCF6) // Yes phone call
+    JML (0xC0DCF6)	// Yes phone call
 
-    _skip:
-    JML (0xC0DD0D) // No phone call
+_skip:
+    JML (0xC0DD0D)	// No phone call
 }
