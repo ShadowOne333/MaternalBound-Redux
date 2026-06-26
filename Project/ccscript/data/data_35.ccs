@@ -336,10 +336,6 @@ l_0xc7c78f:
 	"@{name(0)} was horribly poisoned and collapsed." end
 
 l_0xc7c7af:	// Critical condition message, check for stairs fix
-	// Check if the player is walking through stairs, ropes, ladders or escalators
-	cc_asmcall(stairs_message_fix.walking_style_check, RET_RESULT)
-	goto_if_true(_walking_on_stairs)
-
 	"@Alert!" next
 	"@{user}'s condition is critical." next
 	"@" call(data_36.l_0xc7e61d) " will collapse if " call(data_37.l_0xc7e66e) " condition isn't treated." next

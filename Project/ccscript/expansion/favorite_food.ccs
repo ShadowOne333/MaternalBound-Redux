@@ -22,7 +22,7 @@ change_length(0xC1FA2E)
 change_length(0xC4551A)
 
 // Since you don't need to pick a favorite thing here, skip the code that writes stuff to RAM.
-ROM[0xC1FE35] = BRA(22) // Skip the "PSI " prefixing.
+//ROM[0xC1FE35] = BRA(22) // Skip the "PSI " prefixing.
 
 // Fix for save file integrity.
 // Check byte 0 of favorite food instead of byte 1 of favorite thing.

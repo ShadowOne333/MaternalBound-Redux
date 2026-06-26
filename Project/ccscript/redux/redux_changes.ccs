@@ -1,6 +1,7 @@
 // General ASM code for fixing or modifying different things in-game
 //------------------------------------------------------------------
 import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
 //------------------------------------------------------------------
 /* Lower HP/PP windows by one tile */
 // REMOVED IN FAVOUR OF MOTHER 3 SPRITES CODE BY VITTORIO
@@ -70,5 +71,45 @@ ROM[0xC3E964] = {	// Originally 06 -> Changed to 07
 	"[00 00 07 00]"
 	"[00 01 07 01]"
 	"[00 02 07 02]"
+}
+//------------------------------------------------------------------
+// Pressing Select while on the Naming Screen changes between Uppercase and lowercase characters
+
+ROM[0xC1E9C5] = JML	(Naming_Select_Letters)
+
+define PAD_PRESS	= 0x006D
+define B_BUTTON		= 0x8000
+define SELECT_BUTTON	= 0x2000
+define PLAY_SOUND	= 0xC0ABE0
+
+Naming_Select_Letters: {
+	LDA_a	(PAD_PRESS)
+	AND_i	(SELECT_BUTTON)
+	BEQ_a	(_change_letters)
+
+	LDA_a	(PAD_PRESS)
+	AND_i	(B_BUTTON)
+	BEQ_a	(_UNKNOWN35)	// UNKNOWN35
+
+	LDA_i	(125)		// SFX 125 / 0x7D
+	LDY_i	(-1)	// 0xFFFF
+	LDX_d	(0x2C)		// LOCAL0E
+	LDA_d	(0x2A)		// LOCAL0D
+	JSL_RTS_C1	(0xC1E48D)
+	CMP_i	(0)
+	BEQ_a	(_UNKNOWN11)	// UNKNOWN11
+	LDA_d	(0x28)		// LOCAL0C
+	CMP_i	(-1)	// 0xFFFF
+	BEQ_a	(_UNKNOWN11)	// UNKNOWN11
+
+_change_letters:
+	JML	(0xC1E653)
+
+	LDA_i	(1)
+	JML	(0xC1A4EA)	// UNKNOWN48
+_UNKNOWN11:
+	JML	(0xC1E736)
+_UNKNOWN35:
+	JML	(0xC1E9F6)
 }
 //------------------------------------------------------------------

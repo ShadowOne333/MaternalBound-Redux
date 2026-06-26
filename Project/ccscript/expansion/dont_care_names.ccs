@@ -19,14 +19,14 @@ command dont_care_name_dog(str) {
 }
 
 // ----------------------------------------------------------------------------------------------------
-/*
+
 // Load in new length for names.
 
 ROM[0xC1E4FB] = LDX_i(11)
 
 // Load in new length for favorite food.
-
-ROM[0xC1E500] = LDX_i(11)
+// Used in favorite_food.ccs
+//ROM[0xC1E500] = LDX_i(11)
 
 // Repoint Don't care names table.
 
@@ -59,7 +59,7 @@ x77: {
 	SBC_d(0x04)
 	RTL
 }
-*/
+
 // ----------------------------------------------------------------------------------------------------
 
 dont_care_names:
