@@ -1,0 +1,35 @@
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------------------------------------
+// Pressing Select while on the Naming Screen changes between Uppercase (CAPITAL) and lowercase (small) letters
+//------------------------------------------------------------------
+define TEXT_INPUT_SFX	= 122	// 0x007A
+define PAD_PRESS	= 0x006D
+define B_BUTTON		= 0x8000
+define SELECT_BUTTON	= 0x2000
+define PLAY_SOUND	= 0xC0ABE0
+//------------------------------------------------------------------
+ROM[0xC1E9C5] = {
+	JML	(Naming_Select_Letters)
+	NOP NOP
+}
+
+Naming_Select_Letters: {
+	LDA_a	(PAD_PRESS)
+	AND_i	(SELECT_BUTTON)
+	BNE_a	(_change_letters)
+
+	// Put back the original hijacked code for B button press in naming screen
+	LDA_a	(PAD_PRESS)
+	AND_i	(B_BUTTON)
+	JML	(0xC1E9CB)	// Return to original code
+
+_change_letters:
+	LDA_i	(TEXT_INPUT_SFX)
+	JSL	(PLAY_SOUND)
+	LDA_d	(0x26)	// LOCAL0B
+	BEQ	(4)
+	JML	(0xC1E9A2)	// UNKNOWN29
+	JML	(0xC1E9A7)	// UNKNOWN30
+}
+//------------------------------------------------------------------

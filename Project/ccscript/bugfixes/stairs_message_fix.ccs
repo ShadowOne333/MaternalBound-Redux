@@ -11,7 +11,7 @@ define AUTO_MOVEMENT_DIRECTION	= 0x5DCA
 // During this brief momoment, if the SHOW_HP_ALERT routine happens to run, it completely breaks that automatic movement causing a collision break
 // This code enables the Overworld Status Supression flag before that automatic movement transition, and re-enables it after it finishes.
 // Enabling OSS flag effectively prevents the player from getting the message during the automatic movement transition.
-
+//------------------------------------
 ROM[0xC04B6C] = JML	(stairs_automovement_fix)
 
 stairs_automovement_fix: {

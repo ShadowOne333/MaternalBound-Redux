@@ -335,7 +335,7 @@ l_0xc7c77e:
 l_0xc7c78f:
 	"@{name(0)} was horribly poisoned and collapsed." end
 
-l_0xc7c7af:	// Critical condition message, check for stairs fix
+l_0xc7c7af:	// Critical condition message / HP alert message
 	"@Alert!" next
 	"@{user}'s condition is critical." next
 	"@" call(data_36.l_0xc7e61d) " will collapse if " call(data_37.l_0xc7e66e) " condition isn't treated." next
