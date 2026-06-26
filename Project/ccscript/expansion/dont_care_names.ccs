@@ -11,8 +11,15 @@ command dont_care_name(str) {
 	ROMTBL[addr, 11, 0] = str
 }
 
-// ----------------------------------------------------------------------------------------------------
+define Blank7 = "[00 00 00 00 00 00 00]"
 
+command dont_care_name_dog(str) {
+	addr: Blank7
+	ROMTBL[addr, 7, 0] = str
+}
+
+// ----------------------------------------------------------------------------------------------------
+/*
 // Load in new length for names.
 
 ROM[0xC1E4FB] = LDX_i(11)
@@ -52,7 +59,7 @@ x77: {
 	SBC_d(0x04)
 	RTL
 }
-
+*/
 // ----------------------------------------------------------------------------------------------------
 
 dont_care_names:
@@ -69,7 +76,7 @@ dont_care_names:
 	
 	// Paula
 	
-	dont_care_name      ("Ana")
+	dont_care_name      ("Paula")
 	dont_care_name      ("Nancy")
 	dont_care_name      ("Paige")
 	dont_care_name      ("Yoko")
@@ -99,13 +106,13 @@ dont_care_names:
 	
 	// Pet's name
 	
-	dont_care_name      ("King")
-	dont_care_name      ("Ponky")
-	dont_care_name      ("Sparky")
-	dont_care_name      ("Ringo")
-	dont_care_name      ("Rex")
-	dont_care_name      ("Yoshi")
-	dont_care_name      ("Rover")
+	dont_care_name_dog      ("King")
+	dont_care_name_dog      ("Ponky")
+	dont_care_name_dog      ("Sparky")
+	dont_care_name_dog      ("Ringo")
+	dont_care_name_dog      ("Rex")
+	dont_care_name_dog      ("Yoshi")
+	dont_care_name_dog      ("Rover")
 	
 	// Favorite food
 	

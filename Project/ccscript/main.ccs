@@ -28,6 +28,7 @@ import "bugfixes/return_item_fix.ccs"
 import "bugfixes/rock_candy_fix.ccs"
 import "bugfixes/show_removed_battle_item_window.ccs"
 import "bugfixes/single_2bpp_battle_bg_fix.ccs"
+import "bugfixes/stairs_message_fix.ccs"
 import "bugfixes/status_window_clear.ccs"
 import "bugfixes/swirls_without_ness_fix.ccs"
 import "bugfixes/teleport_hardlock_fix.ccs"
@@ -73,7 +74,7 @@ import "expansion/expanded_spy_action.ccs"
 import "expansion/Extended_Battle_Action_Table.ccs"
 import "expansion/Extended_PSI_Animations.ccs"
 //import "expansion/Extended_PSI_Anims_Free_Range.ccs"	// Uncomment when insertbin pull request is merged into ccscript-legacy
-//import "expansion/favorite_food.ccs"
+import "expansion/favorite_food.ccs"
 //------------------------------------------------------------------
 // Redux
 import "redux/better_condiment_search.ccs"
