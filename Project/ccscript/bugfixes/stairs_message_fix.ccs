@@ -1,41 +1,28 @@
-// Stairs glitch "fix"
-// Avoid printing out the "Alert" text box ONLY if the player's walking on stairs, ropes, ladders or escalators.
+// Stairs glitch fix
+// by ShadowOne333
 //------------------------------------
 import "../essential/asm65816.ccs"
 import "../definitions/flags.ccs"
 //------------------------------------
-define SET_EVENT_FLAG		= 0xC2165E
-define SHOW_HP_ALERT		= 0xC1DBBB
-define OSS_FLAG			= 0x5D98
-define GAME_STATE_WALKING_STYLE	= 0x9883
-define WALKING_STYLE_LADDER	= 7
-define WALKING_STYLE_ROPE	= 8
-define WALKING_STYLE_ESCALATOR	= 12
-define WALKING_STYLE_STAIRS	= 13
+define TRIGGER_SPECIAL_EVENT	= 0xC172DA
+define AUTO_MOVEMENT_DIRECTION	= 0x5DCA
 //------------------------------------
-// Check whether the player is using a different walking style other than normal.
-// We'll use this as a way to handle whether or not the player will get the poison/sunstroke/cold warning message.
+// The original game adds a slight "delay" in which the party leader automatically moves a few steps down/up stairs.
+// During this brief momoment, if the SHOW_HP_ALERT routine happens to run, it completely breaks that automatic movement causing a collision break
+// This code enables the Overworld Status Supression flag before that automatic movement transition, and re-enables it after it finishes.
+// Enabling OSS flag effectively prevents the player from getting the message during the automatic movement transition.
 
-ROM[0xC04FDD] = JML	(walking_style_check)
+ROM[0xC04B6C] = JML	(stairs_automovement_fix)
 
-walking_style_check: {
-	LDA_a	(GAME_STATE_WALKING_STYLE)
-	//CMP_i	(WALKING_STYLE_LADDER)
-	//BEQ_a	(_true)
-	//CMP_i	(WALKING_STYLE_ROPE)
-	//BEQ_a	(_true)
-	//CMP_i	(WALKING_STYLE_ESCALATOR)
-	//BEQ_a	(_true)
-	CMP_i	(WALKING_STYLE_STAIRS)
-	BEQ_a	(_party_on_stairs)
+stairs_automovement_fix: {
+	LDA_i	(5)	// OSS flag ON / event(5)
+	JSL	(TRIGGER_SPECIAL_EVENT)
+	LDA_a	(AUTO_MOVEMENT_DIRECTION)
+	STA_d	(0x10)	// LOCAL01
+	LDA_i	(6)	// OSS flag OFF / / event(6)
+	JSL	(TRIGGER_SPECIAL_EVENT)
 
-_party_not_on_stairs:
-	LDX_d	(0x0E)		// LOCAL00
-	LDA_x	(0x0035)	// char_struct::unknown53
-	INC
-	JSL	(SHOW_HP_ALERT)
-
-_party_on_stairs:
-	JML	(0xC04FE7)	// UNKNOWN00
+	// Return to the original code sequence
+	JML	(0xC04B71)
 }
 //------------------------------------

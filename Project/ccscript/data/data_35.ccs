@@ -341,9 +341,6 @@ l_0xc7c7af:	// Critical condition message, check for stairs fix
 	"@" call(data_36.l_0xc7e61d) " will collapse if " call(data_37.l_0xc7e66e) " condition isn't treated." next
 	"@Be careful!" end
 
-_walking_on_stairs:
-	eob
-
 l_0xc7c802:
 	"@There is only one seat,| so you can't ride the bike now." end
 

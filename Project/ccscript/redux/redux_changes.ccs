@@ -75,7 +75,7 @@ ROM[0xC3E964] = {	// Originally 06 -> Changed to 07
 //------------------------------------------------------------------
 // Pressing Select while on the Naming Screen changes between Uppercase and lowercase characters
 
-ROM[0xC1E9C5] = JML	(Naming_Select_Letters)
+//ROM[0xC1E9C5] = JML	(Naming_Select_Letters)
 
 define PAD_PRESS	= 0x006D
 define B_BUTTON		= 0x8000
