@@ -6,13 +6,23 @@ import "../definitions/flags.ccs"
 //------------------------------------
 define TRIGGER_SPECIAL_EVENT	= 0xC172DA
 define AUTO_MOVEMENT_DIRECTION	= 0x5DCA
+define UNKNOWN2		= 0xC06FBC
 //------------------------------------
 // The original game adds a slight "delay" in which the party leader automatically moves a few steps down/up stairs.
 // During this brief momoment, if the SHOW_HP_ALERT routine happens to run, it completely breaks that automatic movement causing a collision break
 // This code enables the Overworld Status Supression flag before that automatic movement transition, and re-enables it after it finishes.
 // Enabling OSS flag effectively prevents the player from getting the message during the automatic movement transition.
 //------------------------------------
-ROM[0xC04B6C] = JML	(stairs_automovement_fix)
+//ROM[0xC04B6C] = JML	(stairs_automovement_fix)
+
+// How the hell does this work?
+// I do not know, but hey it works, if someone happens to know the reason, please let me know.
+ROM[0xC06F9A] = BNE	(26)
+ROM[0xC06FB6] = {
+	NOP
+	LDA_i	(1)
+	STA_d	(0x12)
+}
 
 stairs_automovement_fix: {
 	LDA_i	(5)	// OSS flag ON / event(5)
