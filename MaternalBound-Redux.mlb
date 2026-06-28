@@ -4,7 +4,7 @@ SnesPrgRom:3BEFA8:DadBikePhoneFix
 SnesPrgRom:36FFB4:EXPOverflowFix
 SnesPrgRom:39FFF8:LostScriptedBattle
 SnesPrgRom:37FFB5:HEAL_POISON_FIX
-SnesPrgRom:3BF04F:Moldyman_Frame_Fix
+SnesPrgRom:3BF038:Moldyman_Frame_Fix
 SnesPrgRom:3BEEDA:FixOBJFXSlotBug
 SnesPrgRom:3BED2C:dirDiagonal
 SnesPrgRom:3BED20:dirHorizontal
@@ -13,13 +13,12 @@ SnesPrgRom:3BECFC:newDirectionalUpdateCheck
 SnesPrgRom:3BED04:updateDirectionalIndexFuncList
 SnesPrgRom:38FFE7:hijack_cc_1D_15
 SnesPrgRom:3BEE13:BattleGoods_ShowItemNameWindow
-SnesPrgRom:3BEFF8:stairs_automovement_fix
 SnesPrgRom:3BEFDE:StatusWindowClear
 SnesPrgRom:34FFC4:TeleportSpriteDespawn
-SnesPrgRom:3BF00F:bounds_check_door_coords
+SnesPrgRom:3BEFF8:bounds_check_door_coords
 SnesPrgRom:3BEBA3:new_highlight_loop
-SnesPrgRom:3BF026:thunder_reflection_fix
-SnesPrgRom:3BF060:FixTieZerodiv
+SnesPrgRom:3BF00F:thunder_reflection_fix
+SnesPrgRom:3BF049:FixTieZerodiv
 SnesPrgRom:3BE770:CC_CanGiveMoney
 SnesPrgRom:3BE71E:CC_TryGiveMoney
 SnesPrgRom:3BE7A9:Can_Give_Money
@@ -1226,7 +1225,7 @@ SnesPrgRom:3BBB39:main_capital
 SnesPrgRom:3BBBD6:main_small
 SnesPrgRom:3BBC73:player_capital
 SnesPrgRom:3BBD10:player_small
-SnesPrgRom:3BF03B:Town_Map_Check
+SnesPrgRom:3BF024:Town_Map_Check
 SnesPrgRom:3AB1DF:Arms_Resistance
 SnesPrgRom:3AB1EA:Body_Other_Resistance
 SnesPrgRom:3AA7CB:BrainshockEquip_Text

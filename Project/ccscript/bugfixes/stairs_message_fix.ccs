@@ -17,13 +17,34 @@ define UNKNOWN2		= 0xC06FBC
 
 // How the hell does this work?
 // I do not know, but hey it works, if someone happens to know the reason, please let me know.
-ROM[0xC06F9A] = BNE	(26)
-ROM[0xC06FB6] = {
-	NOP
-	LDA_i	(1)
-	STA_d	(0x12)
+
+// GET_ON_STAIRS
+ROM[0xC06F9C] = {
+	LDA_i	(1)	// 0x0001
+	STA_d	(0x12)	// LOCAL01
+	JMP	(0xC06FBC)	// Banch to UNKNOWN2 (0xC06FBC)
 }
 
+ROM[0xC06FAE] = {
+	LDA_i	(1)	// 0x0001
+	STA_d	(0x12)	// LOCAL01
+	JMP	(0xC06FBC)	// Banch to UNKNOWN2 (0xC06FBC)
+}
+
+// GET_OFF_STAIRS
+ROM[0xC07007] = {
+	LDA_i	(1)	// 0x0001
+	STA_d	(0x12)	// LOCAL01
+	JMP	(0xC07025)	// Banch to UNKNOWN2 (0xC07025)
+}
+
+ROM[0xC07016] = {
+	LDA_i	(1)	// 0x0001
+	STA_d	(0x12)	// LOCAL01
+	JMP	(0xC07025)	// Banch to UNKNOWN2 (0xC07025)
+}
+
+/*
 stairs_automovement_fix: {
 	LDA_i	(5)	// OSS flag ON / event(5)
 	JSL	(TRIGGER_SPECIAL_EVENT)
@@ -34,5 +55,5 @@ stairs_automovement_fix: {
 
 	// Return to the original code sequence
 	JML	(0xC04B71)
-}
+}*/
 //------------------------------------
