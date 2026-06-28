@@ -405,6 +405,7 @@ Lifeup:
 	eob
 
 Healing:
+	cc_asmcall(In_Battle_Check, RET_RESULT)	// Check if we are in a battle
 	goto_if_false(l_0xef88e9)	// If not in battle (overworld), use the vanilla anim code to avoid playing the extra sounds in the overworld
 	battle_animation(75,0)	// 0x4B, 0x00
 	pause(5)
