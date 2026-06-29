@@ -23,9 +23,8 @@ command dont_care_name(str) {
 
 // Force the Dog's leftover dashes to be a maximum of 6 characters when selecting Don't care instead of 10 chars
 
-ROM[0xC1E4ED] = JML	(Fix_Names_Length)
-
-Fix_Names_Length: {
+ROM[0xC1E4ED] = {
+	// Fix Names Length for compatibility with 10 letters Fav Food hack
 	LDA_d	(0x16)	// Load LOCAL04 directly
 	
 	CMP_i	(5)	// Compare with 6-1 (Fav thing is #6), but LOCAL04 has -1 for it
@@ -39,9 +38,10 @@ Fix_Names_Length: {
 	// Value 6: use LDX #10
 	// 6 = Fav food
 	LDX_i	(10)
-	
-_UNKNOWN3:
-	JML	(0xC1E503)
+
+	// Pad out to fill this section up to 0xC1E503
+	JMP	(0xC1E503)
+	NOP NOP NOP NOP
 }
 
 // Repoint Don't care names table.
