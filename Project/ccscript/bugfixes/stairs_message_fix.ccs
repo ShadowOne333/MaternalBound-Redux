@@ -1,22 +1,14 @@
-// Stairs glitch fix
-// by ShadowOne333
+// Stairs glitch fix by ShadowOne333
 //------------------------------------
 import "../essential/asm65816.ccs"
 import "../definitions/flags.ccs"
 //------------------------------------
-define TRIGGER_SPECIAL_EVENT	= 0xC172DA
-define AUTO_MOVEMENT_DIRECTION	= 0x5DCA
-define UNKNOWN2		= 0xC06FBC
-//------------------------------------
 // The original game adds a slight "delay" in which the party leader automatically moves a few steps down/up stairs.
 // During this brief momoment, if the SHOW_HP_ALERT routine happens to run, it completely breaks that automatic movement causing a collision break
-// This code enables the Overworld Status Supression flag before that automatic movement transition, and re-enables it after it finishes.
-// Enabling OSS flag effectively prevents the player from getting the message during the automatic movement transition.
+// What the original game does during this part, is that, when the player gets on a stairs tile, the code shifts the player's movement either -1 or +1 in Y. When the HP Alert message pops up, that slight shift in the Y-axis is what breaks the collision out of the stairs.
 //------------------------------------
-//ROM[0xC04B6C] = JML	(stairs_automovement_fix)
 
-// How the hell does this work?
-// I do not know, but hey it works, if someone happens to know the reason, please let me know.
+// Override the -1/+1 code that the game does when the party walks into a stairs tile
 
 // GET_ON_STAIRS
 ROM[0xC06F9C] = {
@@ -43,17 +35,4 @@ ROM[0xC07016] = {
 	STA_d	(0x12)	// LOCAL01
 	JMP	(0xC07025)	// Banch to UNKNOWN2 (0xC07025)
 }
-
-/*
-stairs_automovement_fix: {
-	LDA_i	(5)	// OSS flag ON / event(5)
-	JSL	(TRIGGER_SPECIAL_EVENT)
-	LDA_a	(AUTO_MOVEMENT_DIRECTION)
-	STA_d	(0x10)	// LOCAL01
-	LDA_i	(6)	// OSS flag OFF / / event(6)
-	JSL	(TRIGGER_SPECIAL_EVENT)
-
-	// Return to the original code sequence
-	JML	(0xC04B71)
-}*/
 //------------------------------------
