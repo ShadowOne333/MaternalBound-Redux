@@ -1,18 +1,31 @@
 //Originally created by Chaz for the EarthBound Randomizer
 //CCScript adaptation by phoenixbound, ShadowOne333, and vince94
+//v2.0 fix for unequipping an item if it's already equipped by ShadowOne333
 //This patch lets you ignore the Equip menu and equip stuff right in Goods!
 //This version also adds the word "from" and removes the extra spaces in the message that displays.
 
 import "../definitions/flags.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_asmcall.ccs"
 import "../essential/commands.ccs"
+import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../expansion/ccexpand.ccs"
 
 command e(label) "{long label}"
 
-define UsingEquipmentCheckFlag = flag 0x3F0
+define UsingEquipmentCheckFlag = flag 0x3F0	// 1008
+define EQUIPMENT_SLOT_WEAPON	= 0x99FF
+define EQUIPMENT_SLOT_BODY	= 0x9A00
+define EQUIPMENT_SLOT_ARMS	= 0x9A01
+define EQUIPMENT_SLOT_OTHERS	= 0x9A02
+define MULT168			= 0xC08FF7
+define CHANGE_EQUIPPED_WEAPON	= 0xC4577D
+define CHANGE_EQUIPPED_BODY	= 0xC457CA
+define CHANGE_EQUIPPED_ARMS	= 0xC45815
+define CHANGE_EQUIPPED_OTHER	= 0xC45860
+define ITEM_CONFIGURATION_TABLE	= 0xD55000
 
 ROM[0xC7C742] = goto(newUse)
 ROM[0xC5E36E] = goto(newCheck)
@@ -27,28 +40,16 @@ newUse:
 	can_equip_item_at_location(0,0)
 	goto_if_false(_cant_equip)
 
-	/*load_registers
-	equipped_item_check(0,0)
-	goto_if_true(_already_equipped)*/
-
 	load_registers
-	// counter = current equipped item's inventory slot number (temporarily equips the other item)
-	equip(0,0)
-	counter(0)
-	equip(0,0)
-	// Move them to the result and arg registers
-	swap
-	ctoarg
-	// Are the two inventory slots equal?
-	result_is_arg
-	goto_if_true(_already_equipped)
+	item_at_location_is_equipped(0,0)
+	goto_if_true(_unequip)
 
 	get_action_arg swap
-	call(0xc5e25b) // Equip check
+	call(0xC5E25B) // Equip check
 
 	load_registers
 	set(UsingEquipmentCheckFlag)
-	goto(0xc5e136) // Second Check
+	goto(0xC5E136) // Second Check
 
 newCheck:
 	swap
@@ -65,6 +66,7 @@ newCheck:
 	load_registers
 	get_inventory_item(0,0)
 	get_selling_price(0)
+_end:
 	eob
 
 _cant_equip:
@@ -72,6 +74,10 @@ _cant_equip:
 
 _already_equipped:
 	"@{user} has already equipped the {get_action_arg}{swap}{itemname(0)}." end
+
+_unequip:
+	unequip(0,0)
+	"@{user} unequipped the {get_action_arg}{swap}{itemname(0)}." end
 
 //////////////////////////////////
 // Changes to the Equip message //
@@ -175,3 +181,112 @@ done:
 	// Write return value into working memory
 	JSL(R_Set_Working_Memory)
 })
+
+command unequip(char, slot) {
+	cc_asmcall(ASM_Unequip, RET_ARG) 
+	byte char
+	byte slot
+}
+
+ASM_Unequip: {	// C19066
+	REP	(0x31)
+
+	PHD
+	PHA
+	TDC
+	ADC_i	(0xFFEE)
+	TCD
+	PLA
+
+	// Read CCScript arguments (2 bytes).
+	LDY_i(2)
+	JSL(R_Read_Parameter_Bytes)
+
+	LDA_a(D_cc_argv_1)
+	AND_i(0xFF)
+	BNE_a(_loaded_slot)
+
+	// If 'slot' is zero read from argument.
+	JSL_RTS_C1(0xC103DC) // Win_GetArg
+	LDA_d(0x06)
+
+_loaded_slot:
+	TAX    // slot into X.
+
+	LDA_a(D_cc_argv_0)
+	AND_i(0xFF)    // char into A.
+	BNE_a(_loaded_char)
+
+	// If 'char' is zero read from result.
+	PHX
+	JSL_RTS_C1(0xC1040A)
+	PLX
+	LDA_d(0x06)
+
+_loaded_char:
+	STX_d	(0x10)	// LOCAL01
+	STA_d	(0x0E)	// LOCAL00
+	TXA
+	DEC
+	STA_d	(0x02)	// VIRTUAL02
+	LDA_d	(0x0E)	// LOCAL00
+	DEC
+	LDY_i	(0x005F)	// char_struct
+	JSL	(MULT168)
+	CLC
+
+	ADC_i	(0x99F1)	// char_struct::items
+	CLC
+	ADC_d	(0x02)	// VIRTUAL02
+	TAX
+
+	LDA_x	(0)
+	AND_i	(0x00FF)
+	LDY_i	(0x0027)	// OPTIMIZED_MULT @VIRTUAL04
+	JSL	(MULT168)	// OPTIMIZED_MULT @VIRTUAL04
+	CLC
+	ADC_i	(0x0019)	// item::type
+	TAX
+	LDA_xl	(ITEM_CONFIGURATION_TABLE)
+	AND_i	(0x00FF)
+	AND_i	(0x000C)	// EQUIPMENT_SLOT::ALL<<2
+	BEQ_a	(_weapon)
+	CMP_i	(0x0004)	// EQUIPMENT_SLOT::BODY<<2
+	BEQ_a	(_body)
+	CMP_i	(0x0008)	// EQUIPMENT_SLOT::ARMS<<2
+	BEQ_a	(_arms)
+	CMP_i	(0x000C)	// EQUIPMENT_SLOT::OTHER<<2
+	BEQ_a	(_other)
+	BRA_a	(_nothing)
+
+_weapon:
+	LDX_i	(0)	// LDX_d	(0x10)	// LOCAL01
+	LDA_d	(0x0E)	// LOCAL00
+	JSL	(CHANGE_EQUIPPED_WEAPON)
+	BRA_a	(_end)
+
+_body:
+	LDX_i	(0)
+	LDA_d	(0x0E)	// LOCAL00
+	JSL	(CHANGE_EQUIPPED_BODY)
+	BRA_a	(_end)
+
+_arms:
+	LDX_i	(0)
+	LDA_d	(0x0E)	// LOCAL00
+	JSL	(CHANGE_EQUIPPED_ARMS)
+	BRA_a	(_end)
+
+_other:
+	LDX_i	(0)
+	LDA_d	(0x0E)	// LOCAL00
+	JSL	(CHANGE_EQUIPPED_OTHER)
+	BRA_a	(_end)
+
+_nothing:
+	LDA_i	(0)
+
+_end:
+	PLD
+	RTL
+}

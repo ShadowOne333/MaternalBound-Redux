@@ -295,7 +295,6 @@ l_0xc5e25b:
 	result_is(1)
 	goto_if_false(l_0xc5e269)
 	set(FLG_SHOPTEMP_3)	// 658
-	goto(l_0xc5e269)
 
 l_0xc5e269:
 	eob

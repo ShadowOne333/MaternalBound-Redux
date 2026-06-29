@@ -363,7 +363,7 @@ BattleAction_Table:{
 	Battle_Action(18, Enemy, One, PSI, 4, 0xEF8543, BTLACT_PSI_FREEZE_A)
 	Battle_Action(19, Enemy, One, PSI, 9, 0xEF8543, BTLACT_PSI_FREEZE_B)
 	Battle_Action(20, Enemy, One, PSI, 18, 0xEF8543, BTLACT_PSI_FREEZE_G)
-	Battle_Action(21, Enemy, Row, PSI, 28, 0xEF8543, BTLACT_PSI_FREEZE_O)
+	Battle_Action(21, Enemy, One, PSI, 28, 0xEF8543, BTLACT_PSI_FREEZE_O)
 	Battle_Action(22, Enemy, All, PSI, 3, 0xEF8543, BTLACT_PSI_THUNDER_A)
 	Battle_Action(23, Enemy, All, PSI, 7, 0xEF8543, BTLACT_PSI_THUNDER_B)
 	Battle_Action(24, Enemy, All, PSI, 16, 0xEF8543, BTLACT_PSI_THUNDER_G)

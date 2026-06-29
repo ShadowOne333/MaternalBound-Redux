@@ -11,22 +11,38 @@ command dont_care_name(str) {
 	ROMTBL[addr, 11, 0] = str
 }
 
-define Blank7 = "[00 00 00 00 00 00 00]"
-
-command dont_care_name_dog(str) {
-	addr: Blank7
-	ROMTBL[addr, 7, 0] = str
-}
-
 // ----------------------------------------------------------------------------------------------------
 
 // Load in new length for names.
 
-ROM[0xC1E4FB] = LDX_i(11)
+//ROM[0xC1E4FB] = LDX_i	(11)
 
 // Load in new length for favorite food.
-// Used in favorite_food.ccs
-//ROM[0xC1E500] = LDX_i(11)
+
+//ROM[0xC1E500] = LDX_i	(11)
+
+// Force the Dog's leftover dashes to be a maximum of 6 characters when selecting Don't care instead of 10 chars
+
+ROM[0xC1E4ED] = JML	(Fix_Names_Length)
+
+Fix_Names_Length: {
+	LDA_d	(0x16)	// Load LOCAL04 directly
+	
+	CMP_i	(5)	// Compare with 6-1 (Fav thing is #6), but LOCAL04 has -1 for it
+	BEQ	(5)	// If equal, use LDX #10 (Ten characters)
+	
+	// Values 1-5 and 7: use LDX #6 (Six characters)
+	// 1-5 = Ness up to King, 7 = Fav thing
+	LDX_i	(6)
+	BRA	(3)
+	
+	// Value 6: use LDX #10
+	// 6 = Fav food
+	LDX_i	(10)
+	
+_UNKNOWN3:
+	JML	(0xC1E503)
+}
 
 // Repoint Don't care names table.
 
@@ -39,9 +55,9 @@ ROM[0xC1E54B] = JSL(x11)
 x11: {
 	ASL
 	ASL
-	ADC_d(0x04)
+	ADC_d	(0x04)
 	ASL
-	ADC_d(0x04)
+	ADC_d	(0x04)
 	RTL
 }
 
@@ -54,9 +70,9 @@ x77: {
 	ASL
 	ASL
 	SEC
-	SBC_d(0x04)
-	SBC_d(0x04)
-	SBC_d(0x04)
+	SBC_d	(0x04)
+	SBC_d	(0x04)
+	SBC_d	(0x04)
 	RTL
 }
 
@@ -66,70 +82,70 @@ dont_care_names:
 	
 	// Ness
 	
-	dont_care_name      ("Ness")
-	dont_care_name      ("Alec")
-	dont_care_name      ("Roger")
-	dont_care_name      ("John")
-	dont_care_name      ("Brian")
-	dont_care_name      ("Mario")
-	dont_care_name      ("Lane")
+	dont_care_name	("Ness")
+	dont_care_name	("Alec")
+	dont_care_name	("Roger")
+	dont_care_name	("John")
+	dont_care_name	("Brian")
+	dont_care_name	("Mario")
+	dont_care_name	("Lane")
 	
 	// Paula
 	
-	dont_care_name      ("Paula")
-	dont_care_name      ("Nancy")
-	dont_care_name      ("Paige")
-	dont_care_name      ("Yoko")
-	dont_care_name      ("Marie")
-	dont_care_name      ("Peach")
-	dont_care_name      ("Jane")
+	dont_care_name	("Paula")
+	dont_care_name	("Nancy")
+	dont_care_name	("Paige")
+	dont_care_name	("Yoko")
+	dont_care_name	("Marie")
+	dont_care_name	("Peach")
+	dont_care_name	("Jane")
 	
 	// Jeff
 	
-	dont_care_name      ("Jeff")
-	dont_care_name      ("Dan")
-	dont_care_name      ("Henry")
-	dont_care_name      ("Paul")
-	dont_care_name      ("Isaac")
-	dont_care_name      ("Luigi")
-	dont_care_name      ("Rob")
+	dont_care_name	("Jeff")
+	dont_care_name	("Dan")
+	dont_care_name	("Henry")
+	dont_care_name	("Paul")
+	dont_care_name	("Isaac")
+	dont_care_name	("Luigi")
+	dont_care_name	("Rob")
 	
 	// Poo
 	
-	dont_care_name      ("Poo")
-	dont_care_name      ("Kato")
-	dont_care_name      ("Kai")
-	dont_care_name      ("George")
-	dont_care_name      ("Ramin")
-	dont_care_name      ("Toad")
-	dont_care_name      ("Lado")
+	dont_care_name	("Poo")
+	dont_care_name	("Kato")
+	dont_care_name	("Kai")
+	dont_care_name	("George")
+	dont_care_name	("Ramin")
+	dont_care_name	("Toad")
+	dont_care_name	("Lado")
 	
 	// Pet's name
 	
-	dont_care_name_dog      ("King")
-	dont_care_name_dog      ("Ponky")
-	dont_care_name_dog      ("Sparky")
-	dont_care_name_dog      ("Ringo")
-	dont_care_name_dog      ("Rex")
-	dont_care_name_dog      ("Yoshi")
-	dont_care_name_dog      ("Rover")
+	dont_care_name	("King")
+	dont_care_name	("Ponky")
+	dont_care_name	("Sparky")
+	dont_care_name	("Ringo")
+	dont_care_name	("Rex")
+	dont_care_name	("Yoshi")
+	dont_care_name	("Rover")
 	
 	// Favorite food
 	
-	dont_care_name      ("Steak")
-	dont_care_name      ("Pie")
-	dont_care_name      ("Pasta")
-	dont_care_name      ("Cake")
-	dont_care_name      ("Eggs")
-	dont_care_name      ("Bread")
-	dont_care_name      ("Salmon")
+	dont_care_name	("Steak")
+	dont_care_name	("Pie")
+	dont_care_name	("Pasta")
+	dont_care_name	("Cake")
+	dont_care_name	("Eggs")
+	dont_care_name	("Bread")
+	dont_care_name	("Salmon")
 	
 	// Favorite thing names would go here
 	
-	dont_care_name      ("Rockin")
-	dont_care_name      ("Spirit")
-	dont_care_name      ("Love")
-	dont_care_name      ("Gift")
-	dont_care_name      ("Slime")
-	dont_care_name      ("Gaming")
-	dont_care_name      ("Boxing")
+	dont_care_name	("Rockin")
+	dont_care_name	("Spirit")
+	dont_care_name	("Love")
+	dont_care_name	("Gift")
+	dont_care_name	("Slime")
+	dont_care_name	("Gaming")
+	dont_care_name	("Boxing")

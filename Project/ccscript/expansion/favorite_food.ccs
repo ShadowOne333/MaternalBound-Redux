@@ -13,13 +13,19 @@ command change_length(addr) { ROMTBL[addr, 1, 1] = byte FAV_FOOD_LENGTH }
 // <------------------------------------------------------------------------------------------------------------------------------>
 
 // Fix for Don't care.
-change_length(0xC1E500)
+//change_length(0xC1E500)	// Used in dont_care_names.ccs
 
-// Max characters in naming screen.
+// Max characters in naming screen for Favorite food
 change_length(0xC1FA2E)
+
+// Max characters in naming screen for Favorite thing
+//change_length(0xC1FA80)
 
 // Max length when printing the favorite food with "[1C 01 04]".
 change_length(0xC4551A)
+
+// Max length when printing the favorite thing with "[1C 01 05]".
+//change_length(0xC4551D)
 
 // Since you don't need to pick a favorite thing here, skip the code that writes stuff to RAM.
 //ROM[0xC1FE35] = BRA(22) // Skip the "PSI " prefixing.

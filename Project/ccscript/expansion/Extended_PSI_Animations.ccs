@@ -48,15 +48,15 @@ define PSI_Palette_Table	= 0xF20600
 // Defines for Config table //
 // GFX tilesets
 define PSI_ANIM_GFX_SET_1	= 0X2E19	// 0xAC25
-define PSI_ANIM_GFX_SET_2	= 0x3141	// 0xB613
-define PSI_ANIM_GFX_SET_3	= 0X3DA2	// 0xDB27
-define PSI_ANIM_GFX_SET_4	= 0X4C3F	// 0xE31D
+define PSI_ANIM_GFX_SET_2	= 0x4599	// 0xB613
+define PSI_ANIM_GFX_SET_3	= 0X38AA	// 0xDB27
+define PSI_ANIM_GFX_SET_4	= 0X5FB1	// 0xE31D
 // Expanded GFX tilesets
-define PSI_ANIM_GFX_SET_5	= 0X44D6
-define PSI_ANIM_GFX_SET_6	= 0X4F2F
-define PSI_ANIM_GFX_SET_7	= 0x37E7
-define PSI_ANIM_GFX_SET_8	= 0x577C
-define PSI_ANIM_GFX_SET_9	= 0X5D8D
+define PSI_ANIM_GFX_SET_5	= 0X3141
+define PSI_ANIM_GFX_SET_6	= 0X4C3F
+define PSI_ANIM_GFX_SET_7	= 0x3FDE
+define PSI_ANIM_GFX_SET_8	= 0x548C
+define PSI_ANIM_GFX_SET_9	= 0X5A9D
 define PSI_ANIM_GFX_SET_10	= 0x62A1
 // Targets 
 define SINGLE_TARGET		= 0
@@ -284,7 +284,7 @@ ROM[PSI_Config_Table] = {
 	byte 1
 	byte 3
 	byte 35
-	byte ROW_TARGET
+	byte SINGLE_TARGET
 	byte 60
 	byte 135
 	short 0x7C00
@@ -703,7 +703,7 @@ ROM[PSI_Config_Table] = {
 	byte 6
 	byte 0
 	byte 1
-	byte 2
+	byte 3
 	byte 8
 	byte ALL_ENEMIES_TARGET
 	byte 0
@@ -913,148 +913,76 @@ ROM[PSI_Anim_Pointer_Table] = {
 //ROM[PSI_Anim_Pointer_Table] = insertbin "psi_anim_pointer_table.bin"
 
 	// Original pointer table
-	long 0xCC66A7
-	long 0xCC6898
-	long 0xCC6ADB
-	long 0xCC6CB9
-	long 0xCC6E0C
-	long 0xCC6F16
-	long 0xCC7146
-	long 0xCC74B9
-	long 0xCC78C0
-	long 0xCC8009
-	long 0xCC84EE
-	long 0xCC85EA
-	long 0xCC87A8
-	long 0xCC89F8
-	long 0xCC9184
-	long 0xCC92AA
-	long 0xCC93D4
-	long 0xCC9579
-	long 0xCC9BAE
-	long 0xCCA1A7
-	long 0xCCAB17
-	long 0xCCB95A
-	long 0xCCC146
-	long 0xCCC38F
-	long 0xCCC8FC
-	long 0xCCCB3D
-	long 0xCCCD82
-	long 0xCCD0ED
-	long 0xCCD2A0
-	long 0xCCD850
-	long 0xCCDB40
-	long 0xCCE1DD
-	long 0xCCEC80
-	long 0xCCED60
+	long 0xCC66AB
+	long 0xCC689C
+	long 0xCC6ADF
+	long 0xCC6CBD
+	long 0xCC6E10
+	long 0xCC6F1A
+	long 0xCC714A
+	long 0xCC74BD
+	long 0xCC78C4
+	long 0xCC800D
+	long 0xCC84F2
+	long 0xCC85EE
+	long 0xCC87AC
+	long 0xCC89FC
+	long 0xCC9188
+	long 0xCC92AE
+	long 0xCC93D8
+	long 0xCC957D
+	long 0xCC982B
+	long 0xCC9E24
+	long 0xCCA794
+	long 0xCCB5D7
+	long 0xCCBDC3
+	long 0xCCC00C
+	long 0xCCC579
+	long 0xCCC7BA
+	long 0xCCC9FF
+	long 0xCCCD6A
+	long 0xCCCF1D
+	long 0xCCD4CD
+	long 0xCCD7BD
+	long 0xCCDE5A
+	long 0xCCE8FD
+	long 0xCCE9DD
 
 	// Duplicated pointer table
-	long 0xCCF1E5
+	long 0xCCEC78
 	long 0xF21000
 	long 0xF21327
 	long 0xF216C7
 	long 0xF221D5
-	long 0xF2283C
-	long 0xF229CA
-	long 0xF23031
-	long 0xF23340
-	long 0xF236B2
-	long 0xF23888
-	long 0xF23ACE
-	long 0xF23B31
-	long 0xF23B97
-	long 0xF23C00
-	long 0xF23C6C
-	long 0xF23CDB
-	long 0xF23D54
-	long 0xF23DD5
-	long 0xCCEFFB
-	long 0xF23E5A
-	long 0xF241CC
-	long 0xF24833
-	long 0xF249AC
-	long 0xF24BDB
-	long 0xF24E24
-	long 0xF2506D
-	long 0xF253D8
-	long 0xF2558B
-	long 0xF25B3B
-	long 0xF25E2B
-	long 0xF264C8
-	long 0xF26F6B
-	long 0xF2704B
-
-	/*
-	long 0xCC5EA3
-	long 0xCC6090
-	long 0xCC62D3
-	long 0xCC64A6
-	long 0xCC65FD
-	long 0xCC6707
-	long 0xCC6937
-	long 0xCC6CAA
-	long 0xCC70B1
-	long 0xCC77FA
-	long 0xCC7CDF
-	long 0xCC7DDB
-	long 0xCC7F99
-	long 0xCC81E9
-	long 0xCC8975
-	long 0xCC8A9B
-	long 0xCC8BC5
-	long 0xCC8D6A
-	long 0xCC939F
-	long 0xCC99A1
-	long 0xCCA311
-	long 0xCCB154
-	long 0xCCB940
-	long 0xCCBB89
-	long 0xCCC0F6
-	long 0xCCC33F
-	long 0xCCC588
-	long 0xCCC8F3
-	long 0xCCCAA6
-	long 0xCCD056
-	long 0xCCD346
-	long 0xCCD9E3
-	long 0xCCE486
-	long 0xCCE566
-
-	long 0xCCE80C
-	long 0xCCEA73
-	long 0xF21000
-	long 0xF213A0
-	long 0xCCED9A
-	long 0xCCEEA4
-	long 0xF21EAE
-	long 0xF22221
-	long 0xF22530
 	long 0xCCF1E5
-	long 0xF22C79
-	long 0xCCF3BB
-	long 0xF22EBF
-	long 0xF22F25
-	long 0xF22F8E
-	long 0xF22FFA
-	long 0xF23069
-	long 0xF230E2
-	long 0xF23163
-	long 0xCCF41E
-	long 0xF231E8
-	long 0xF2402B
-	long 0xF24817
-	long 0xF24A60
-	long 0xF24FCD
-	long 0xF25216
-	long 0xF2545F
-	long 0xF257CA
-	long 0xF2597D
-	long 0xF25F2D
-	long 0xF2621D
-	long 0xF268BA
-	long 0xF2735D
-	long 0xF2743D
-	*/
+	long 0xF2283C
+	long 0xF22EA3
+	long 0xF231B2
+	long 0xF23524
+	long 0xF236FA
+	long 0xCCEEDF
+	long 0xCCEF42
+	long 0xCCEFA8
+	long 0xCCF373
+	long 0xCCF3DF
+	long 0xF23940
+	long 0xF239B9
+	long 0xF23A3A
+	long 0xCCF011
+	long 0xF23ABF
+	long 0xF23E31
+	long 0xF24498
+	long 0xF24611
+	long 0xF24840
+	long 0xF24A89
+	long 0xF24CD2
+	long 0xF2503D
+	long 0xF251F0
+	long 0xF257A0
+	long 0xF25A90
+	long 0xF2612D
+	long 0xF26BD0
+	long 0xF26CB0
 
 	// Pointer table ends at 0xF20510
 	// Pad to 0xF20600
