@@ -351,7 +351,7 @@ BattleAction_Table:{
 	Battle_Action(5, Enemy, One, Physical_Affected, 0, 0xEF84B6, BTLACT_SHOOT) //"{sound(24)}@{user} attacks!{sound(27)}[03]"
 	Battle_Action(6, Enemy, One, Other, 0, 0xEF8530, BTLACT_SPY) // new check code
 	Battle_Action(7, Party, None, Other, 0, 0xEF89E0, BTLACT_PRAY)
-	Battle_Action(8, Party, None, Other, 0, 0xEF84C6, BTLACT_NULL) //"@{user} is on guard."
+	Battle_Action(8, Party, None, Other, 0, 0xEF84C6, BTLACT_NULL) //"@{user} is on guard.", m3_defend_roller.getHPPPMeterSpeedPatch
 	Battle_Action(9, Party, None, Other, 0, 0xC77EFF, BTLACT_NULL5) //null?
 	Battle_Action(10, Enemy, All, PSI, 10, 0xEF8543, BTLACT_PSI_ROCKIN_A)
 	Battle_Action(11, Enemy, All, PSI, 14, 0xEF8543, BTLACT_PSI_ROCKIN_B)

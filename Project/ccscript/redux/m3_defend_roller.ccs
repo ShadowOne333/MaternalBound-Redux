@@ -1,0 +1,48 @@
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+
+// MOTHER 3 style mechanic that reduces the rolling speed of your HP/PP meter while you are guarding
+
+// [!] Uses some unused space at the end of bank 02 - add the following line to used_ranges.yml [!]
+/*
+- (0x02FFCC, 0x02FFD0) # HP/PP meter guard script
+*/
+
+define getHPPPMeterSpeedSpringboard = 0xC2FFCC
+ROM[getHPPPMeterSpeedSpringboard] = { JSL (getHPPPMeterSpeedPatch) RTS }
+ROM[0xC21139] = JSR (getHPPPMeterSpeedSpringboard)
+ROM[0xC211C3] = JSR (getHPPPMeterSpeedSpringboard)
+
+define getHPPPMeterSpeed = 0xC20F58 // RTS
+
+define TIMES_TO_HALVE_SPEED = 2 // How many times to halve the speed when guarding. In other words, speed = speed/(2^this)
+
+getHPPPMeterSpeedPatch: {
+    JSL_RTS_C2 (0xC20F58) // Writes to caller's dp $06
+
+    // check if we're in battle
+    LDA_a (0x9643)
+    BEQ_a (_return) // No battle, don't do guard logic
+
+    // get character (using parent's stack frame - we don't have one of our own)
+    LDX_d (0x10) // *PartyCharacter
+    LDA_x (53) // ubyte characterID, 0-indexed
+    AND_i (0xFF)
+    // get *Battler. Characters are battlers 0-3 based on their ID
+    LDY_i (0x4E) // sizeof(Battler)
+    JSL (0xC08FF7) // MULT168
+    CLC
+    ADC_i (0x9FAC) // + *battlersTable
+    TAX
+    LDA_x (36) // is guarding flag
+    AND_i (0xFF)
+    BEQ_a (_return) // not guarding, don't do guard logic
+
+    // character is guarding, so reduce the roll speed in dp $06 with another ASR32
+    // thankfully this is already the correct dp location to do math in
+    LDY_i (TIMES_TO_HALVE_SPEED)
+    JSL (0xC09262) // ASR32
+
+_return:
+    RTL
+}

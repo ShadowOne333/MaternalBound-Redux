@@ -42,3 +42,18 @@ Max_HP_Update_Limit_Fix:{
 	JML	(0xC21493)	// Return to the original hijacked code (FILL_CHARACTER_HP_TILE_BUFFER)
 }
 //------------------------------------
+// Apply the max HP limit fix to the Status window.
+ROM[0xC19614] = JML (Max_HP_Status_Limit_Fix)
+
+Max_HP_Status_Limit_Fix: {
+	CMP_i	(999)
+	BCC	(3)
+	LDA_i	(999)
+
+	// Original hijacked code
+	STA_d	(0x06)	// VIRTUAL06
+	STZ_d	(0x08)	// LOCAL00
+
+	JML	(0xC19618)	// Return to the orginal hijacked code
+}
+//------------------------------------
