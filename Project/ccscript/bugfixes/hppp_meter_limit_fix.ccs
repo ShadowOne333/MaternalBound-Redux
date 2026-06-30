@@ -1,0 +1,153 @@
+//------------------------------------
+// HP/PP box max HP limit fix by ShadowOne333
+//------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------
+// If the HP or PP values exceed 999, the HP/PP box meter will start displaying glitched graphics to represent >999 numbers.
+// A similar issue occurs if the player views the Status screen from the main menu, where if the HP/PP values surpass 999, they will display the actual amount >999, though unlike with the HP/PP meter, this display isn't glitched.
+// This fixes that issue by limiting the maximum HP and PP numbers to be displayed on the HP/PP meter to be 990. For consistency sake, the Status window numbers for HP and PP will also be limited to 999.
+//------------------------------------
+//	HP/PP Static Meter Fixes
+//------------------------------------
+// Apply the max HP limit on the static HP meter
+ROM[0xC20610] = JML	(Max_HP_Limit_Fix)
+
+Max_HP_Limit_Fix: {
+	LDY_i	(0x0045)	// char_struct::current_hp
+	LDA_diy	(0x24)		// CHAR_ENTRY,Y
+	TAX
+	LDA_d	(0x26)		// CHAR_ID
+	LDY_d	(0x14)		// LOCAL02
+
+	// Added check to make the maximum limit 999 instead of overflowing
+	CPX_i	(999)		// Check if we're at 999 HP
+	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
+	LDX_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
+
+	JML	(0xC2061A)	// Return to the original hijacked code (FILL_CHARACTER_HP_TILE_BUFFER)
+}
+
+// Apply the max PP limit on the static PP meter
+ROM[0xC206B5] = JML	(Max_PP_Limit_Fix)
+
+Max_PP_Limit_Fix: {
+	LDY_i	(0x004B)	// char_struct::current_pp
+	LDA_diy	(0x24)		// CHAR_ENTRY,Y
+	TAY
+	LDA_d	(0x24)		// CHAR_ID
+	CLC
+	ADC_i	(0x000E)	// char_struct::afflictions
+	TAX
+	LDA_d	(0x26)		// CHAR_ID
+
+	// Added check to make the maximum limit 999 instead of overflowing
+	CPY_i	(999)		// Check if we're at 999 PP
+	BCC	(3)		// If less than 999 PP, continue to HP/PP tile buffer
+	LDY_i	(999) 		// Otherwise, force the max PP number to be 999 before printing the value
+
+	JML	(0xC206C4)	// Return to the original hijacked code (FILL_CHARACTER_PP_TILE_BUFFER)
+}
+//------------------------------------
+//	HP/PP Filling Meter Fixes
+//------------------------------------
+// Apply the max HP limit fix when filling the HP meter (after Reviving or using Lifeup)
+ROM[0xC21489] = JML	(Max_HP_Update_Limit_Fix)
+
+Max_HP_Update_Limit_Fix:{
+	LDY_i	(0x0045)	// char_struct::current_hp
+	LDA_diy	(0x18)		// LOCAL05,Y
+	TAX
+	LDA_d	(0x20)		// LOCAL09
+	LDY_d	(0x14)		// LOCAL03
+  
+	// Added check to make the maximum limit 999 instead of overflowing
+	CPX_i	(999)		// Check if we're at 999 HP
+	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
+	LDX_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
+
+	JML	(0xC21493)	// Return to the original hijacked code (FILL_CHARACTER_HP_TILE_BUFFER)
+}
+
+// Apply the max PP limit fix when filling the PP meter (after Reviving or using PSI Magnet)
+ROM[0xC2155B] = JML	(Max_PP_Update_Limit_Fix)
+
+Max_PP_Update_Limit_Fix:{
+	LDY_i	(0x004B)	// char_struct::current_pp
+	LDA_diy	(0x18)		// LOCAL05,Y
+	TAY
+	LDA_d	(0x18)		// LOCAL05
+	CLC
+	ADC_i	(0x000E)	// char_struct::afflictions
+	TAX
+	LDA_d	(0x20)		// LOCAL09
+  
+	// Added check to make the maximum limit 999 instead of overflowing
+	CPY_i	(999)		// Check if we're at 999 PP
+	BCC	(3)		// If less than 999 PP, continue to HP/PP tile buffer
+	LDY_i	(999) 		// Otherwise, force the max PP number to be 999 before printing the value
+
+	JML	(0xC2156A)	// Return to the original hijacked code (FILL_CHARACTER_HP_TILE_BUFFER)
+}
+//------------------------------------
+//	Status Window Fixes
+//------------------------------------
+// Apply the current HP limit fix to the Status window.
+ROM[0xC195E6] = JML (Current_HP_Status_Limit_Fix)
+
+Current_HP_Status_Limit_Fix: {
+	CMP_i	(999)
+	BCC	(3)
+	LDA_i	(999)
+
+	// Original hijacked code
+	STA_d	(0x06)		// VIRTUAL06
+	STZ_d	(0x08)		// LOCAL00
+
+	JML	(0xC195EA)	// Return to the orginal hijacked code
+}
+
+// Apply the max HP limit fix to the Status window.
+ROM[0xC19614] = JML (Max_HP_Status_Limit_Fix)
+
+Max_HP_Status_Limit_Fix: {
+	CMP_i	(999)
+	BCC	(3)
+	LDA_i	(999)
+
+	// Original hijacked code
+	STA_d	(0x06)		// VIRTUAL06
+	STZ_d	(0x08)		// LOCAL00
+
+	JML	(0xC19618)	// Return to the orginal hijacked code
+}
+
+// Apply the current PP limit fix to the Status window.
+ROM[0xC19632] = JML (Current_PP_Status_Limit_Fix)
+
+Current_PP_Status_Limit_Fix: {
+	CMP_i	(999)
+	BCC	(3)
+	LDA_i	(999)
+
+	// Original hijacked code
+	STA_d	(0x06)		// VIRTUAL06
+	STZ_d	(0x08)		// LOCAL00
+
+	JML	(0xC19636)	// Return to the orginal hijacked code
+}
+
+// Apply the max PP limit fix to the Status window.
+ROM[0xC19660] = JML (Max_PP_Status_Limit_Fix)
+
+Max_PP_Status_Limit_Fix: {
+	CMP_i	(999)
+	BCC	(3)
+	LDA_i	(999)
+
+	// Original hijacked code
+	STA_d	(0x06)		// VIRTUAL06
+	STZ_d	(0x08)		// LOCAL00
+
+	JML	(0xC19664)	// Return to the orginal hijacked code
+}
+//------------------------------------
