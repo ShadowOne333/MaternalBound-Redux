@@ -1,7 +1,6 @@
 // Stairs glitch fix by ShadowOne333
 //------------------------------------
 import "../essential/asm65816.ccs"
-import "../definitions/flags.ccs"
 //------------------------------------
 // The original game adds a slight "delay" in which the party leader automatically moves a few steps down/up stairs.
 // During this brief momoment, if the SHOW_HP_ALERT routine happens to run, it completely breaks that automatic movement causing a collision break

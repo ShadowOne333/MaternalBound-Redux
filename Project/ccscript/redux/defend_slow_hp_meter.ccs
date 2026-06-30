@@ -1,0 +1,16 @@
+// Slow HP Meter Rolling for Defending Characters
+//------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------
+define ENABLE_HALF_HP_METER_SPEED	= 0xEF0262
+define HALF_HPPP_METER_SPEED		= 0x9695
+//------------------------------------
+BTLACT_GUARD: {	// ENABLE_HALF_HP_METER_SPEED - 0xEF0262
+	REP	(0x31)
+	SEP	(0x20)
+	LDA_8	(1)
+	STA_a	(HALF_HPPP_METER_SPEED)
+	REP	(0x20)
+	RTL
+}
+//------------------------------------
