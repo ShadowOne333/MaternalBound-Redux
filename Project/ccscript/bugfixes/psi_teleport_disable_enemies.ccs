@@ -1,0 +1,37 @@
+import "../essential/asm65816.ccs"
+
+// Disables enemy spawns during PSI Teleport. Prevents the "bonking on nothing, then an enemy appears" issue,
+// but does make avoiding enemies with PSI Teleport significantly easier.
+// Also addresses the issue where you could hit an enemy and initiate a fight on the teleport arrival runway,
+// which could cause crashes and other effects.
+
+define RAM_enemy_spawns_enabled = 0x4A5A // vanilla RAM
+
+ROM[0xC0EAA1] = JML (BeginTeleportHijack)
+ROM[0xC0EBC5] = JML (EndTeleportHijack)
+
+BeginTeleportHijack: {
+    // Clobbered code
+    JSL (0xC0ABC6) // Stop music
+
+    // Backup enemy spawn state
+    LDA_a (RAM_enemy_spawns_enabled)
+    PHA // -> Stack
+    // Disable spawns
+    STZ_a (RAM_enemy_spawns_enabled)
+
+    // Return
+    JML (0xC0EAA5)
+}
+
+EndTeleportHijack: {
+    // Clobbered code
+    JSL (0xC09451) // Unfreeze entities
+
+    // Restore enemy spawn state backup
+    PLA // <- Stack
+    STA_a (RAM_enemy_spawns_enabled)
+
+    // Return
+    JML (0xC0EBC9)
+}
