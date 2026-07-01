@@ -1,0 +1,43 @@
+import "../essential/asm65816.ccs"
+
+// Disables enemy spawns during the arrival phase of PSI Teleport.
+// Addresses the issue where you could hit an enemy and initiate a fight on the teleport arrival runway,
+// which could cause crashes and other effects.
+
+define RAM_enemy_spawns_enabled = 0x4A5A // vanilla RAM
+
+ROM[0xC0EAA1] = JML (BeginTeleportHijack)
+ROM[0xC0EB7E] = JSL (SuccessfulTeleportHijack)
+ROM[0xC0EBC5] = JML (EndTeleportHijack)
+
+BeginTeleportHijack: {
+    // Clobbered code
+    JSL (0xC0ABC6) // Stop music
+
+    // Backup enemy spawn state
+    LDA_a (RAM_enemy_spawns_enabled)
+    PHA // -> Stack
+
+    // Return
+    JML (0xC0EAA5)
+}
+
+SuccessfulTeleportHijack: {
+    // Disable spawns now
+    STZ_a (RAM_enemy_spawns_enabled)
+
+    // Tail call to clobbered code
+    JML (0xC0DD79) // load arrival destination
+}
+
+EndTeleportHijack: {
+    // Clobbered code
+    JSL (0xC09451) // Unfreeze entities
+
+    // Restore enemy spawn state backup
+    PLA // <- Stack
+    STA_a (RAM_enemy_spawns_enabled)
+
+    // Return
+    JML (0xC0EBC9)
+}

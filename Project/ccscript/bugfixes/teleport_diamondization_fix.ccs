@@ -7,16 +7,18 @@
 //------------------------------------------------------------------
 import "../essential/asm65816.ccs"
 //------------------------------------------------------------------
-
 define PSI_TELEPORT_WAIT_N_FRAMES	= 0xC0DD2C
 define FULL_PARTY_UPDATE	= 0xC3EE4D
-
+//------------------------------------------------------------------
 // Hijack the waiting frames portion of the Teleport Main Loop routine (0xC0EA99)
 ROM[0xC0EBA0] = JML (Teleport_Diamondization_Fix)
 
 Teleport_Diamondization_Fix: {
-	JSL	(FULL_PARTY_UPDATE)
-	LDA_i	(10)
+	//JSL	(FULL_PARTY_UPDATE)
+	//JSL	(0xC07B52)	// Leader pos update?
+	//JSL	(0xC04D78)	// Party member tick
+
+	LDA_i	(1)
 	JSL	(PSI_TELEPORT_WAIT_N_FRAMES)
 
 	JML	(0xC0EBA7)	// Return to the trial end of the Failed Teleport routine

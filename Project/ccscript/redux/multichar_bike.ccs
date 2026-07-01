@@ -236,10 +236,10 @@ _Jeff_Sprite:
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(3)	// char_index=3 (Poo)
+	LDA_i	(3)		// char_index=3 (Poo)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(POO_BIKE_SIDECAR)    // Poo in bike+side car sprite ID
-	LDY_i	(27)	// Poo's entity ID
+	LDA_i	(POO_BIKE_SIDECAR)	// Poo in bike+side car sprite ID
+	LDY_i	(27)		// Poo's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_27)
 }
@@ -352,7 +352,7 @@ _Ness_Sprite:
 	LDA_i	(NESS_SPRITE)	// Normal Ness sprite
 	LDY_i	(24)	// Ness' entity ID
 	JSL	(CREATE_ENTITY)
-	JSL	(PARTY_TRAIL_RESET) 
+	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
@@ -377,11 +377,11 @@ _Jeff_Sprite:
 
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
-	LDA_i	(3)	// char_index=3 (Poo)
+	LDA_i	(3)		// char_index=3 (Poo)
 	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
-	LDA_i	(POO_SPRITE)    // Normal Poo sprite
-	LDY_i	(27)	// Poo's entity ID
+	LDA_i	(POO_SPRITE)	// Normal Poo sprite
+	LDY_i	(27)		// Poo's entity ID
 	JSL	(CREATE_ENTITY)
 	JMP	(Apply_Entity_Flags_27_Off)
 }
@@ -411,7 +411,7 @@ Apply_Entity_Flags_25_Off: {	// Paula's entity flags
 	JSL	(0xC0A780)
 
 _Return:
-	JSL	(PARTY_TRAIL_RESET) 
+	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)
@@ -441,7 +441,7 @@ Apply_Entity_Flags_26_Off: {	// Jeff's entity flags
 	JSL	(0xC0A780)
 
 _Return:
-	JSL	(PARTY_TRAIL_RESET) 
+	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)
@@ -471,7 +471,7 @@ Apply_Entity_Flags_27_Off: {	// Poo's entity flags
 	JSL	(0xC0A780)
 
 _Return:
-	JSL	(PARTY_TRAIL_RESET) 
+	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
 	JML	(0xC03D9F)

@@ -25,11 +25,11 @@ SnesPrgRom:38FFE7:hijack_cc_1D_15
 SnesPrgRom:3BEFBA:BattleGoods_ShowItemNameWindow
 SnesPrgRom:3BF1A0:StatusWindowClear
 SnesPrgRom:34FFC4:TeleportSpriteDespawn
-SnesPrgRom:3BF20B:Teleport_Diamondization_Fix
+SnesPrgRom:33FFF3:Teleport_Diamondization_Fix
 SnesPrgRom:3BF1BA:bounds_check_door_coords
 SnesPrgRom:3BED4A:new_highlight_loop
 SnesPrgRom:3BF1D1:thunder_reflection_fix
-SnesPrgRom:3BF21A:FixTieZerodiv
+SnesPrgRom:3BF216:FixTieZerodiv
 SnesPrgRom:3BE875:CC_CanGiveMoney
 SnesPrgRom:3BE823:CC_TryGiveMoney
 SnesPrgRom:3BE8AE:Can_Give_Money
@@ -1012,7 +1012,7 @@ SnesPrgRom:3B9A91:ASM_ObjDeleteAll
 SnesPrgRom:3B9AB3:ASM_ObjSetUpDeletion
 SnesPrgRom:3B9974:TBL_EnemyTypeCountToPaletteSetting
 SnesPrgRom:3B9C8B:TBL_TileAllocIdxToTileNumFull
-SnesPrgRom:33FFF3:cast_window_flavor_palette_mixup
+SnesPrgRom:3BF20B:cast_window_flavor_palette_mixup
 SnesPrgRom:3BE0BA:Init_Debug_Party
 SnesPrgRom:3BE0AD:buttoncheck
 SnesPrgRom:3BE099:buttontalk
