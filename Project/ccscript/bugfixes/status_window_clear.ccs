@@ -3,8 +3,6 @@ import "../essential/jsl_rts.ccs"
 
 // Clear the text in the status window before printing PSI categories, not after
 // (though, I can't find exactly when it happens ...)
-// Our "Melody" display would push us barely over the edge of the VWF buffer
-// in some cases otherwise.
 
 define WINDOW_STATUS = 8
 

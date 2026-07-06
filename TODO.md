@@ -1,5 +1,6 @@
 * Change Saturn shops option menus to use Saturn font for "Buy/Sell"
 * Fix the Magic truffle glitch of the player being able to equip a non-equippable item when a Teddy Bear is removed, and the items are shifted. (C4577D. BTLACT_SWITCH_WEAPONS)
+* Make collision changes to Winters to avoid the out-of-bounds glitch (similar to Onett)
 
 ---FIXED/DONE---
 
