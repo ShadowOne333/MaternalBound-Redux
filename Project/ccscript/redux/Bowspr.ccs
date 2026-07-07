@@ -830,6 +830,9 @@ ROM[0xC0866C] = CMP_a(MEM_BowsprDmaThresholdP1)
 
 ROM[0xC085F6] = ADC_a(MEM_BowsprDmaThresholdDiv2)
 
+// Fix an issue where the game decides to use an alternate entity drawing routine if Select is pressed on Pad2
+ROM[0xC0DB1D] = BRA(6)
+
 // Draw callback
 // This must be only 4 bytes!
 ROM[ASMNEAR_C0_BowsprDrawCallback] = { JML(ASM_BowsprDrawCallback) }
