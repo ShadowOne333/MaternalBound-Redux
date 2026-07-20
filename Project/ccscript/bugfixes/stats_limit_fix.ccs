@@ -1,0 +1,137 @@
+//------------------------------------
+// Max Stats limit fix by ShadowOne333
+//------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------
+// If any Stat (other than Offense and Defense) values exceed 255 (0xFF), the Stats will overflow and roll back to 0, due to the variable being an signed value in the code.
+// The original game only properly caps both Offense and Defense up to 255, but the rest of the stats (Speed, Guts, Luck Vitality, IQ), don't have such a limit.
+// This code fixes that issue by limiting the maximum Stat values when levelling up to have a maximum limit of 255.
+//------------------------------------
+//	Speed Max Limit fixes
+//------------------------------------
+// Apply the max Speed limit on character Level Up for Max Speed
+ROM[0xC21B82] = JML	(Max_Speed_Limit_Fix)
+
+Max_Speed_Limit_Fix: {
+	LDA_d	(0x0F)
+	CLC
+	SBC_i	(0x00FF)
+
+	// BRANCHLTEQS @UNKNOWN3
+	BVC	(4)
+	BPL	(9)
+	BRA	(2)
+	BMI	(5)
+
+	LDX_i	(0x00FF)
+	BRA	(8)	// _exit
+
+// Original code
+_UNKNOWN3:
+	LDA_d	(0x0F)	// LOCAL01
+	REP	(0x20)
+	AND_i	(0x00FF)
+	TAX
+
+_exit:
+	JML	(0xC21B8A)	// Return to the original hijacked code 
+}
+
+//------------------------------------
+//	Guts Max Limit fixes
+//------------------------------------
+// Apply the max PP limit on character Level Up for Max PP
+ROM[0xC21C3B] = JML	(Max_Guts_Limit_Fix)
+
+Max_Guts_Limit_Fix: {
+	LDA_d	(0x0F)
+	CLC
+	SBC_i	(0x00FF)
+
+	// BRANCHLTEQS @UNKNOWN3
+	BVC	(4)
+	BPL	(9)
+	BRA	(2)
+	BMI	(5)
+
+	LDX_i	(0x00FF)
+	BRA	(8)	// _exit
+
+// Original code
+_UNKNOWN3:
+	LDA_d	(0x0F)	// LOCAL01
+	REP	(0x20)
+	AND_i	(0x00FF)
+	TAX
+
+_exit:
+	JML	(0xC21C43)	// Return to the original hijacked code 
+}
+//------------------------------------
+//	Luck Max Limit fixes
+//------------------------------------
+// Apply the max Luck limit on character Level Up
+ROM[0xC21D43] = JML	(Max_Luck_Limit_Fix)
+
+Max_Luck_Limit_Fix: {
+	LDA_d	(0x0F)
+	CLC
+	SBC_i	(0x00FF)
+
+	// BRANCHLTEQS @UNKNOWN3
+	BVC	(4)
+	BPL	(9)
+	BRA	(2)
+	BMI	(5)
+
+	LDX_i	(0x00FF)
+	BRA	(8)	// _exit
+
+// Original code
+_UNKNOWN3:
+	LDA_d	(0x0F)	// LOCAL01
+	REP	(0x20)
+	AND_i	(0x00FF)
+	TAX
+
+_exit:
+	JML	(0xC21D4B)	// Return to the original hijacked code 
+}
+//------------------------------------
+//	Vitality Max Limit fixes
+//------------------------------------
+// Apply the max Vitality limit on character Level Up
+ROM[0xC21D72] = JML	(Max_Vitality_Limit_Fix)
+
+Max_Vitality_Limit_Fix: {
+	LDA_x	(0x99EF)	// PARTY_CHARACTERS+char_struct::base_vitality,X
+	CLC
+	ADC_x	(0x9A27)	// PARTY_CHARACTERS+char_struct::boosted_vitality,X
+
+	// Added check to make the maximum limit 255 instead of overflowing
+	BVS	(2)		// Branch if Overflow Set
+	LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
+
+	STA_x	(0x99E8)	// PARTY_CHARACTERS+char_struct::vitality,X
+	JML	(0xC21D7C)	// Return to the original hijacked code 
+}
+//------------------------------------
+//	IQ Max Limit fixes
+//------------------------------------
+// Apply the max IQ limit on character Level Up
+ROM[0xC21D8A] = JML	(Max_IQ_Limit_Fix)
+
+Max_IQ_Limit_Fix: {
+	LDA_x	(0x99F0)	// PARTY_CHARACTERS+char_struct::base_iq,X
+	CLC
+	ADC_x	(0x9A28)	// PARTY_CHARACTERS+char_struct::boosted_iq,X
+
+	// Added check to make the maximum limit 255 instead of overflowing
+	BVS	(2)		// Branch if Overflow Set
+	LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
+
+	STA_x	(0x99E9)	// PARTY_CHARACTERS+char_struct::iq,X
+
+	JML	(0xC21D94)	// Return to the original hijacked code 
+}
+//------------------------------------

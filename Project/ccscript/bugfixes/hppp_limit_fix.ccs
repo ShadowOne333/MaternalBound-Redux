@@ -1,5 +1,5 @@
 //------------------------------------
-// HP/PP box max HP limit fix by ShadowOne333
+// HP/PP max limit fix by ShadowOne333
 //------------------------------------
 import "../essential/asm65816.ccs"
 //------------------------------------
@@ -8,7 +8,7 @@ import "../essential/asm65816.ccs"
 // This code fixes that issue by limiting the maximum HP and PP numbers when levelling up to have a maximum limit of 999.
 // This automatically limits both the HP/PP meters and the Status screen numbers since the Level Up checks limit the max value to 999 instead of overflowing past it.
 //------------------------------------
-//	HP Limit fixes
+//	HP Max Limit fixes
 //------------------------------------
 // Apply the max HP limit on character Level Up for Max HP
 ROM[0xC1D66A] = JML	(Max_HP_Limit_Fix)
@@ -18,7 +18,7 @@ Max_HP_Limit_Fix: {
 
 	// Added check to make the maximum limit 999 instead of overflowing
 	CMP_i	(999)		// Check if we're at 999 HP
-	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
+	BCC	(3)		// If less than 999 HP, continue with HP code
 	LDA_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
 
 	STA_x	(0x0000)	// __BSS_START__
@@ -34,7 +34,7 @@ Current_HP_Limit_Fix: {
 
 	// Added check to make the maximum limit 999 instead of overflowing
 	CMP_i	(999)		// Check if we're at 999 HP
-	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
+	BCC	(3)		// If less than 999 HP, continue with HP code
 	LDA_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
 
 	STA_x	(0x0000)	// __BSS_START__
@@ -42,7 +42,7 @@ Current_HP_Limit_Fix: {
 	JML	(0xC1D67F)	// Return to the original hijacked code 
 }
 //------------------------------------
-//	PP Limit fixes
+//	PP Max Limit fixes
 //------------------------------------
 // Apply the max PP limit on character Level Up for Max PP
 ROM[0xC1D73C] = JML	(Max_PP_Limit_Fix)
@@ -51,9 +51,9 @@ Max_PP_Limit_Fix: {
 	ADC_d	(0x02)		// VIRTUAL02
 
 	// Added check to make the maximum limit 999 instead of overflowing
-	CMP_i	(999)		// Check if we're at 999 HP
-	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
-	LDA_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
+	CMP_i	(999)		// Check if we're at 999 PP
+	BCC	(3)		// If less than 999 PP, continue with PP code
+	LDA_i	(999) 		// Otherwise, force the max PP number to be 999 before printing the value
 
 	STA_x	(0x0000)	// __BSS_START__
 
@@ -67,9 +67,9 @@ Current_PP_Limit_Fix: {
 	ADC_d	(0x02)		// VIRTUAL02
 
 	// Added check to make the maximum limit 999 instead of overflowing
-	CMP_i	(999)		// Check if we're at 999 HP
-	BCC	(3)		// If less than 999 HP, continue to HP/PP tile buffer
-	LDA_i	(999) 		// Otherwise, force the max HP number to be 999 before printing the value
+	CMP_i	(999)		// Check if we're at 999 PP
+	BCC	(3)		// If less than 999 PP, continue with PP code
+	LDA_i	(999) 		// Otherwise, force the max PP number to be 999 before printing the value
 
 	STA_x	(0x0000)	// __BSS_START__
 
