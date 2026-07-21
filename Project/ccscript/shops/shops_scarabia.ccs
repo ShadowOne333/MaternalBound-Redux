@@ -1,0 +1,741 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/tools.ccs"
+import "../redux/window_titles.ccs"
+//------------------------------------------------------------------
+// Scarabia Normal shop
+//------------------------------------------------------------------
+ScarabiaShop_Greeting:		//l_0xc527c7
+	"@Welcome, welcome!  Ach, the heat!  Is your body okay?" next
+	"@Can I interest you in some of my merchandise?" linebreak
+	eob
+
+ScarabiaShop_Exit_Store_Buy:	//l_0xc52809
+	"@Ohh, thank you very much.  May you never find rocks in your sandals." end
+
+ScarabiaShop_Exit_Store_Dont_Buy:	//l_0xc52836
+	"@Why don't you buy something?  I've got a family to feed!" end
+
+ScarabiaShop_Open_Shop_Window:		//l_0xc52855
+	"@What would you like?" promptw
+	eob
+
+ScarabiaShop_Selected_Item:		//l_0xc52860
+	"@{itemname(0)}?" next
+	eob
+
+ScarabiaShop_Who_Will_Take_Item:	//l_0xc52868
+	"@So, which of you will take this wonderful item?" promptw
+	eob
+
+ScarabiaShop_Equip_Now:			//l_0xc52885
+	"@Will you equip it here?" linebreak
+	eob
+
+ScarabiaShop_Buy_Previous_Equipment:	//l_0xc52893
+ // arg: item name, res: item price
+	"@Would you be interested in selling your {itemname(0)}" next
+	"@for {swap}$" number(0) "?" linebreak
+	eob
+
+ScarabiaShop_Cant_Equip_Item:		//l_0xc528bf
+// arg: player name
+	"@{name(0)} will have no use for this." next
+	"@Do you still want to buy this marvelous thing?" linebreak
+	eob
+
+ScarabiaShop_Cancel_Cant_Equip:		//l_0xc528eb
+// despite the name, it's often used as a generic change of mind
+	"@Very well then." next
+	eob
+
+ScarabiaShop_Not_Enough_Cash:		//l_0xc528f9
+	"@A thousand pardons, but you do not seem to have the money" next
+	"@required to make this purchase." next
+	eob
+
+ScarabiaShop_Whole_Party_Full_Inventory:	//l_0xc52938
+	"@Ahh, I can see that your caravan is overloaded." next
+	"@Would you like to sell some of your extra items to me?" linebreak
+	eob
+
+ScarabiaShop_What_To_Sell:	//l_0xc52972
+	"@Very well then, what would you like to sell?" promptw
+	eob
+
+ScarabiaShop_Confirm_Selling:	//l_0xc52989
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  Ahhh, I would pay you..." linebreak
+	"  {swap}$" number(0) " for that." next
+	"@A trifle, I realize, but do you accept?" linebreak
+	eob
+
+ScarabiaShop_Cancel_Selling:	//l_0xc529d2
+	"@Very well then." next
+	eob
+
+ScarabiaShop_Nothing_To_Sell:	//l_0xc529e0
+	"@From my humble vantage point, it appears you have nothing to sell." next
+	eob
+
+ScarabiaShop_Unsellable_Item:	//l_0xc52a09
+	"@A thousand pardons.  We do not carry that item here." next
+	eob
+
+ScarabiaShop_Transaction_Thanks:	//l_0xc52a2a
+	"@Ahh, you are most gracious and kind." next
+	eob
+
+ScarabiaShop_Transaction_Thanks_2:	//l_0xc52a45
+// when is this used?
+	"@Thank you for visiting my poor shop." next
+	eob
+
+ScarabiaShop_Request_Another_Transaction:	//l_0xc52a5c
+	"@If there is anything else I can do for you, please, do not hesitate to ask." next
+	eob
+
+ScarabiaShop_Do_Another_Transaction:		//l_0xc52a82
+	"@So, what more can I do for you?" linebreak
+	eob
+
+ScarabiaShop_Chosen_Character_Inventory_Full:	//l_0xc52a92
+	"@{name(0)} simply cannot carry any more goods." next
+	"@Perhaps another of your party could bear this load?" linebreak
+	eob
+
+ScarabiaShop_Bulk_Buy_Lots:
+	"@All these items?" next
+	eob
+
+ScarabiaShop_Bulk_Buy_Not_Enough_Cash:
+	"@A thousand pardons, but you do not seem to have the money" next
+	"@required to make these purchases." next
+	eob
+
+ScarabiaShop_Bulk_Buy_Full_Inventory:
+	"@Ahh, I can see that your caravan is overloaded." next
+	"@Would you like to sell some of your extra items to me?" linebreak
+	eob
+
+ScarabiaShop_Bulk_Buy_Change_Of_Mind:
+	"@Very well then." next
+	eob
+
+//------------------------------------------------------------------
+// Scarabia Snake shop
+//------------------------------------------------------------------
+ScarabiaSnake_Greeting:		//l_0xc5c05f
+	"@Hissss, Red Snake! C'mon!" next
+	title(1, Snake)
+	"@Kissss of Fire! Armpit hair fertilizer!" linebreak
+	"  Yesssssss!" next
+	eob
+
+ScarabiaSnake_Exit_Store_Buy:	//l_0xc5c0ad
+	title(1, Snake)
+	"@Yesssss, you got ssssome good sssstuff!" end
+
+ScarabiaSnake_Exit_Store_Dont_Buy:	//l_0xc5c0cb
+	title(1, Snake)
+	"@Oh, no..." next
+	"@You dissssappoint me..." end
+
+ScarabiaSnake_Open_Shop_Window:		//l_0xc5c0e3
+	title(1, Snake)
+	"@What issss it you want to buy?" promptw
+	eob
+
+ScarabiaSnake_Selected_Item:		//l_0xc5c0f3
+	title(1, Snake)
+	"@Hisssss, here isssss" linebreak
+	"  your {itemname(0)}!" next
+	eob
+
+ScarabiaSnake_Who_Will_Take_Item:	//l_0xc5c10f
+	title(1, Snake)
+	"@Who issss going to carry thisssss?" promptw
+	eob
+
+ScarabiaSnake_Equip_Now:		// Snake seller doesn't have equippable items
+	eob
+
+ScarabiaSnake_Buy_Previous_Equipment:	// Snake seller doesn't have equippable items
+ // arg: item name, res: item price
+	eob
+
+ScarabiaSnake_Cant_Equip_Item:		// Snake seller doesn't have equippable items
+// arg: player name
+	eob
+
+ScarabiaSnake_Cancel_Cant_Equip:	//l_0xc5c125
+// despite the name, it's often used as a generic change of mind
+	title(1, Snake)
+	"@Oh, no..." next
+	"@You dissssappoint me..." next
+	eob
+
+ScarabiaSnake_Not_Enough_Cash:		//l_0xc5c13e
+	title(1, Snake)
+	"@Oh, no..." next
+	"@You dissssappoint me...  You don't have enough money..." next
+	eob
+
+ScarabiaSnake_Whole_Party_Full_Inventory:	//l_0xc5c161
+	title(1, Snake)
+	"@You are carrying too much ssssstuff" next
+	"@Ssssell it, or tossss it, and come again!" end
+
+ScarabiaSnake_What_To_Sell:	// Snake seller doesn't purchase items
+	eob
+
+ScarabiaSnake_Confirm_Selling:	// Snake seller doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+ScarabiaSnake_Cancel_Selling:	// Snake seller doesn't purchase items
+	eob
+
+ScarabiaSnake_Nothing_To_Sell:	// Snake seller doesn't purchase items
+	eob
+
+ScarabiaSnake_Unsellable_Item:	// Snake seller doesn't purchase items
+	eob
+
+ScarabiaSnake_Transaction_Thanks:	//l_0xc5c192
+	title(1, Snake)
+	"@Thankssssss!" next
+	eob
+
+ScarabiaSnake_Transaction_Thanks_2:	//l_0xc5c19d
+// when is this used?
+	title(1, Snake)
+	"@Thanksssss!" next
+	eob
+
+ScarabiaSnake_Request_Another_Transaction:	//l_0xc5c1a7
+	title(1, Snake)
+	"@Can I do anything elsssse for you?" linebreak
+	eob
+
+ScarabiaSnake_Do_Another_Transaction:		// Snake seller doesn't run this line
+	eob
+
+ScarabiaSnake_Chosen_Character_Inventory_Full:	//l_0xc5c1be
+	title(1, Snake)
+	"@You have too many thingssss to carry." next
+	"@Can anyone elsssse carry it?" linebreak
+	eob
+
+ScarabiaSnake_Bulk_Buy_Lots:
+	"@All thesssse?" next
+	eob
+
+ScarabiaSnake_Bulk_Buy_Not_Enough_Cash:
+	title(1, Snake)
+	"@Oh, no..." next
+	"@You dissssappoint me...  You don't have enough money..." next
+	eob
+
+ScarabiaSnake_Bulk_Buy_Full_Inventory:
+	title(1, Snake)
+	"@You are carrying too much ssssstuff" next
+	"@Ssssell it, or tossss it, and come again!" end
+
+ScarabiaSnake_Bulk_Buy_Change_Of_Mind:
+	title(1, Snake)
+	"@Oh, no..." next
+	"@You dissssappoint me..." next
+	eob
+
+//------------------------------------------------------------------
+// Scarabia Food shop
+//------------------------------------------------------------------
+ScarabiaFood_Greeting:		//l_0xc5c59e
+	"@Hello there!  Welcome to my humble shop!" next
+	"@How about some of our famous Scarabia delicacies?" next
+	eob
+
+ScarabiaFood_Exit_Store_Buy:	//l_0xc5c5dd
+	"@Oh well, please find a way to come again." end
+
+ScarabiaFood_Exit_Store_Dont_Buy:	//l_0xc5c5f3
+	"@The sun is merciless today, so please take care of yourself." end
+
+ScarabiaFood_Open_Shop_Window:		//l_0xc5c61a
+	"@We carry a variety of things.  What would you like?" promptw
+	eob
+
+ScarabiaFood_Selected_Item:		//l_0xc5c63a
+	"@Here you go!" linebreak
+	"  Your {itemname(0)}!" next
+	eob
+
+ScarabiaFood_Who_Will_Take_Item:	//l_0xc5c64d
+	"@Who is going to carry this?" promptw
+	eob
+
+ScarabiaFood_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+ScarabiaFood_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+ScarabiaFood_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+ScarabiaFood_Cancel_Cant_Equip:		//l_0xc5c65c
+// despite the name, it's often used as a generic change of mind
+	"@Oh?  You're not going to buy after all?  Is that right?" next
+	eob
+
+ScarabiaFood_Not_Enough_Cash:		//l_0xc5c67a
+	"@Oh, my!  You don't have enough money." next
+	eob
+
+ScarabiaFood_Whole_Party_Full_Inventory:	//l_0xc5c68a
+	"@For heaven's sake!  You're already carrying too much stuff." next
+	"@Sell something, or throw something away, and come again." end
+
+ScarabiaFood_What_To_Sell:	// This shop doesn't purchase items
+	eob
+
+ScarabiaFood_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+ScarabiaFood_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+ScarabiaFood_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+ScarabiaFood_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+ScarabiaFood_Transaction_Thanks:	//l_0xc5c6c3
+	"@Thank you very, very much!" next
+	eob
+
+ScarabiaFood_Transaction_Thanks_2:	//l_0xc5c6d2
+// when is this used?
+	"@Thanks for shopping here!" next
+	eob
+
+ScarabiaFood_Request_Another_Transaction:	//l_0xc5c6e3
+	"@Do you want to buy anything else?" linebreak
+	eob
+
+ScarabiaFood_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+ScarabiaFood_Chosen_Character_Inventory_Full:	//l_0xc5c6ec
+	"@For heaven's sake!" linebreak
+	"  {name(0)} already has too many things!" next
+	"@Can anyone else carry it?" linebreak
+	eob
+
+ScarabiaFood_Bulk_Buy_Lots:
+	"@All these things?" next
+	eob
+
+ScarabiaFood_Bulk_Buy_Not_Enough_Cash:
+	"@Oh, my!  You don't have enough money." next
+	eob
+
+ScarabiaFood_Bulk_Buy_Full_Inventory:
+	"@For heaven's sake!  You're already carrying way too much stuff." next
+	"@Sell something, or throw something away, and come again." end
+
+ScarabiaFood_Bulk_Buy_Change_Of_Mind:
+	"@Oh?  You're not going to buy after all?  Is that right?" next
+	eob
+
+//------------------------------------------------------------------
+// Scarabia Tool shop
+//------------------------------------------------------------------
+ScarabiaTool_Greeting:		//l_0xc52acc
+	"@If you've already got what you need, great!" next
+	"@But if you don't, well, that would be a real shame." next
+	"@Take a good look at my menu and decide." next
+	"@Is there anything listed that you might want?" linebreak
+	eob
+
+ScarabiaTool_Exit_Store_Buy:	//l_0xc52b37
+	"@If you do decide that you need any of my goodies, you just hurry on back now, y'hear?" end
+
+ScarabiaTool_Exit_Store_Dont_Buy:	//l_0xc52b67
+	"@Come back any time, if do need any of my goods." end
+
+ScarabiaTool_Open_Shop_Window:		//l_0xc52b82
+	"@What'll it be?" promptw
+	eob
+
+ScarabiaTool_Selected_Item:		//l_0xc52b8d
+	"@The {itemname(0)}, you say?" next
+	eob
+
+ScarabiaTool_Who_Will_Take_Item:	//l_0xc52b9b
+	"@Who's going to carry this?" promptw
+	eob
+
+ScarabiaTool_Equip_Now:			//l_0xc52baa
+	"@Will you be equipping that here?" linebreak
+	eob
+
+ScarabiaTool_Buy_Previous_Equipment:	//l_0xc52bbd
+ // arg: item name, res: item price
+	"@I can buy your" linebreak
+	"  {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "." next
+	eob
+
+ScarabiaTool_Cant_Equip_Item:		//l_0xc52bdd
+// arg: player name
+	"@{name(0)} won't be able to equip this." next
+	"@Are you sure you really need it?" linebreak
+	eob
+
+ScarabiaTool_Cancel_Cant_Equip:		//l_0xc52c00
+// despite the name, it's often used as a generic change of mind
+	"@Oh?  Decided you don't want to buy it, huh?" next
+	eob
+
+ScarabiaTool_Not_Enough_Cash:		//l_0xc52c1c
+	"@Hmmm...  Hate to break this to you, but you don't have enough money." next
+	eob
+
+ScarabiaTool_Whole_Party_Full_Inventory:	//l_0xc52c3d
+	"@Oh... uh... it looks like you've got too many goods to carry." next
+	"@Would you be willing to sell me some of the goods you don't need?" next
+	eob
+
+ScarabiaTool_What_To_Sell:	//l_0xc52c81
+	"@Fantastic!  What do you wanna sell?" promptw
+	eob
+
+ScarabiaTool_Confirm_Selling:	//l_0xc52c9b
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  I'd say it's worth" linebreak
+	"  about... {swap}$" number(0) "." next
+	"@Whaddya say, partner?" linebreak
+	eob
+
+ScarabiaTool_Cancel_Selling:	//l_0xc52cd4
+	"@OK, I see.  Y'all come back now, hear?" next
+	eob
+
+ScarabiaTool_Nothing_To_Sell:	//l_0xc52ced
+	"@What gives?  You don't have anything to sell." promptw
+	eob
+
+ScarabiaTool_Unsellable_Item:	//l_0xc52d03
+	"@Look, I'm really sorry, but we can't buy that." next
+	eob
+
+ScarabiaTool_Transaction_Thanks:	//l_0xc52d1e
+	"@Thanks a million!" next
+	eob
+
+ScarabiaTool_Transaction_Thanks_2:	//l_0xc52d2c
+// when is this used?
+	"@Thanks a bunch!" next
+	eob
+
+ScarabiaTool_Request_Another_Transaction:	//l_0xc52d38
+	"@Is there anything else" linebreak
+	"  I can get for you" linebreak
+	"  while you're here?" next
+	eob
+
+ScarabiaTool_Do_Another_Transaction:		//l_0xc52d54
+	"@What'll it be?" linebreak
+	eob
+
+ScarabiaTool_Chosen_Character_Inventory_Full:	//l_0xc52d5f
+	"@Sakes alive! {name(0)} can't carry another thing." next
+	"@Maybe someone else can carry it." linebreak
+	eob
+
+ScarabiaTool_Bulk_Buy_Lots:
+	"@All these goods?" next
+	eob
+
+ScarabiaTool_Bulk_Buy_Not_Enough_Cash:
+	"@Hmmm...  Hate to break this to you, but you don't have enough money." next
+	eob
+
+ScarabiaTool_Bulk_Buy_Full_Inventory:
+	"@Oh... uh... it looks like you've got way too many goods to carry." next
+	"@Would you be willing to sell me some of the goods you don't need?" next
+	eob
+
+ScarabiaTool_Bulk_Buy_Change_Of_Mind:
+	"@Oh?  Decided you don't want to buy it, huh?" next
+	eob
+
+//------------------------------------------------------------------
+// Scarabia Water shop
+//------------------------------------------------------------------
+ScarabiaWater_Greeting:		//l_0xc5cbc0
+	"@I sell water to those who are thirsty." next
+	eob
+
+ScarabiaWater_Exit_Store_Buy:	//l_0xc5cbdc
+	"@The price of things is determined by the relationship between supply and demand." next
+	"@You kids are pretty sharp to be able to understand this theory so well!" end
+
+ScarabiaWater_Exit_Store_Dont_Buy:	//l_0xc5cc35
+	"@Well, you'll die by dehydration!  I'm warning you!" end
+
+ScarabiaWater_Open_Shop_Window:		//l_0xc5cc53
+	"@It's expensive, though!" next
+	eob
+
+ScarabiaWater_Selected_Item:		//l_0xc5cc63
+	"@You've changed your mind and want to buy some" linebreak
+	"  {itemname(0)}?" next
+	eob
+
+ScarabiaWater_Who_Will_Take_Item:	//l_0xc5cc83
+	"@Who is going to carry it?" promptw
+	eob
+
+ScarabiaWater_Equip_Now:		// This shop doesn't sell equippables
+	eob
+
+ScarabiaWater_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+ScarabiaWater_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+ScarabiaWater_Cancel_Cant_Equip:	//l_0xc5cc8f
+// despite the name, it's often used as a generic change of mind
+	"@You'll be dead of dehydration!  I'm warning you!" end
+
+ScarabiaWater_Not_Enough_Cash:		//l_0xc5ccae
+	"@I don't think you have enough money." end
+
+ScarabiaWater_Whole_Party_Full_Inventory:	//l_0xc5ccbd
+	"@You cannot carry any more." end
+
+ScarabiaWater_What_To_Sell:	// This shop doesn't purchase items
+	eob
+
+ScarabiaWater_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+ScarabiaWater_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+ScarabiaWater_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+ScarabiaWater_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+ScarabiaWater_Transaction_Thanks:	//l_0xc5ccca
+	"@I think it was a good buy!" next
+	eob
+
+ScarabiaWater_Transaction_Thanks_2:	//l_0xc5ccda
+// when is this used?
+	"@I think it was a good buy!" next
+	eob
+
+ScarabiaWater_Request_Another_Transaction:	//l_0xc5ccea
+	"@Do you want to buy some more?" linebreak
+	eob
+
+ScarabiaWater_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+ScarabiaWater_Chosen_Character_Inventory_Full:	//l_0xc5ccf5
+	"@{name(0)} is already carrying too many things." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+ScarabiaWater_Bulk_Buy_Lots:
+	"@All these bottles?" next
+	eob
+
+ScarabiaWater_Bulk_Buy_Not_Enough_Cash:
+	"@I don't think you have enough money." end
+
+ScarabiaWater_Bulk_Buy_Full_Inventory:
+	"@You cannot carry any more." end
+
+ScarabiaWater_Bulk_Buy_Change_Of_Mind:
+	"@You'll be dead of dehydration!  I'm warning you!" end
+
+//------------------------------------------------------------------
+// Scarabia South Pyramid seller
+//------------------------------------------------------------------
+ScarabiaSouthPyramid_Greeting:		//l_0xc5b3ba
+	"@Since I'm dealing in some pretty rough stuff," next
+	"@I can't run my business in town." next
+	eob
+
+ScarabiaSouthPyramid_Exit_Store_Buy:	//l_0xc5b3eb
+	"@See you later." end
+
+ScarabiaSouthPyramid_Exit_Store_Dont_Buy:	//l_0xc5b3f6
+	"@See you... later." end
+
+ScarabiaSouthPyramid_Open_Shop_Window:		//l_0xc5b405
+	"@I've got a wide selection.  What are you looking for?" promptw
+	eob
+
+ScarabiaSouthPyramid_Selected_Item: {		//l_0xc5b426
+	"@{itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BAZOOKA)
+		goto_if_true(_is_bazooka)
+	}
+	eob
+
+_is_bazooka:
+	// Added check for money
+	hasmoney(950)
+	goto_if_false(ScarabiaSouthPyramid_Not_Enough_Cash)
+//l_0xc5e3a5:
+	load_registers
+	get_buying_price(0)	// 0x00
+	swap
+	takemoney(0)	// 0x0000
+	show_wallet
+	load_registers
+	give_and_return_location(0,0)	// 0x00, 0x00
+	sound(SND_GUITAR)
+
+	unset(FLG_SHOP_TOOK)	// 224
+	unset(FLG_SHOP_SOLD)	// 225
+
+	set(FLG_ITEM_BAZOOKA)
+	"@Hey, thanks!" next
+	"@That's a one-of-a-kind weapon, so be careful with it!" next
+	give_menu_tools_item(BAZOOKA)
+	newline
+	eob
+}
+
+ScarabiaSouthPyramid_Who_Will_Take_Item:	//l_0xc5b42e
+	"@Who's going to get this?" promptw
+	eob
+
+ScarabiaSouthPyramid_Equip_Now:			//l_0xc5b43c
+	"@Do you want to equip it here?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Buy_Previous_Equipment:	//l_0xc5b447
+ // arg: item name, res: item price
+	"@Would you like me to buy" linebreak
+	"  your {itemname(0)}" next
+	"@for {swap}$" number(0) "?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Cant_Equip_Item:		//l_0xc5b468
+// arg: player name
+	"@{name(0)} can't equip this." next
+	"@Are you still interested in buying it?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Cancel_Cant_Equip:		//l_0xc5b48c
+// despite the name, it's often used as a generic change of mind
+	"@Ain't that the pits..." next
+	"@I'm actually gonna have to wait for another customer in this crazy heat?" next
+	"@That's harsh..." next
+	eob
+
+ScarabiaSouthPyramid_Not_Enough_Cash:		//l_0xc5b4d7
+	"@If you don't have enough money," next
+	"@it's a waste of my time to even talk about dealing with you." next
+	eob
+
+ScarabiaSouthPyramid_Whole_Party_Full_Inventory:	//l_0xc5b507
+	"@You guys are completely overloaded." next
+	"@However, I can buy the stuff you don't need." next
+	"@What do you want to do?" linebreak
+	eob
+
+ScarabiaSouthPyramid_What_To_Sell:	//l_0xc5b541
+	"@What are you going to sell me?" wait
+	eob
+
+ScarabiaSouthPyramid_Confirm_Selling:	//l_0xc5b551
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  Let's see..." next
+	"@How about {swap}$" number(0) "?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Cancel_Selling:	//l_0xc5b572
+	"@OK.  I thought my offer was more than fair." next
+	eob
+
+ScarabiaSouthPyramid_Nothing_To_Sell:	//l_0xc5b591
+	"@Are you trying to con me?  You've got nothing to sell!!" next
+	eob
+
+ScarabiaSouthPyramid_Unsellable_Item:	//l_0xc5b5b1
+	"@Sorry, that is an item I just don't deal in." next
+	eob
+
+ScarabiaSouthPyramid_Transaction_Thanks:	//l_0xc5b5ce
+	"@Hey, thanks!" next
+	eob
+
+ScarabiaSouthPyramid_Transaction_Thanks_2:	//l_0xc5b5d8
+// when is this used?
+	"@Hey, thanks!" next
+	eob
+
+ScarabiaSouthPyramid_Request_Another_Transaction:	//l_0xc5b5e2
+	"@Is there anything else you need?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Do_Another_Transaction:		//l_0xc5b5f0
+	"@So what's the deal?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Chosen_Character_Inventory_Full:	//l_0xc5b5fe
+	"@{name(0)} has way too much stuff and can't carry anything else." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+ScarabiaSouthPyramid_Bulk_Buy_Not_Enough_Cash:
+	"@If you don't have enough money," next
+	"@it's a waste of my time to even talk about dealing with you." next
+	eob
+
+ScarabiaSouthPyramid_Bulk_Buy_Full_Inventory:
+	"@You guys are completely overloaded." next
+	"@However, I can buy the stuff you don't need." next
+	"@What do you want to do?" linebreak
+	eob
+
+ScarabiaSouthPyramid_Bulk_Buy_Change_Of_Mind:
+	"@Ain't that the pits..." next
+	"@I'm actually gonna have to wait for another customer in this crazy heat?" next
+	"@That's harsh..." next
+	eob
+
+//------------------------------------------------------------------

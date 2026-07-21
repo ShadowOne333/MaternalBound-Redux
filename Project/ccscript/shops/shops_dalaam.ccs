@@ -1,0 +1,112 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Dalaam / Ramma Restaurant
+//------------------------------------------------------------------
+DalaamRestaurant_Greeting:		//l_0xc5c845
+	"@We serve water, rice gruel and those sorts of things." next
+	eob
+
+DalaamRestaurant_Exit_Store_Buy:	//l_0xc5c86c
+	"@Good-bye." end
+
+DalaamRestaurant_Exit_Store_Dont_Buy:	//l_0xc5c876
+	"@Good-bye.  Please take care." end
+
+DalaamRestaurant_Open_Shop_Window:	//l_0xc5c88a
+	"@What would you like to do?" promptw
+	eob
+
+DalaamRestaurant_Selected_Item:		//l_0xc5c896
+	"@{itemname(0)}?" next
+	eob
+
+DalaamRestaurant_Who_Will_Take_Item:	//l_0xc5c89e
+	"@Who is going to carry it?" promptw
+	eob
+
+DalaamRestaurant_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+DalaamRestaurant_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+DalaamRestaurant_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+DalaamRestaurant_Cancel_Cant_Equip:		//l_0xc5c8aa
+// despite the name, it's often used as a generic change of mind
+	"@You are not interested in our menu?  I see." next
+	eob
+
+DalaamRestaurant_Not_Enough_Cash:		//l_0xc5c8c8
+	"@You do not have enough money." next
+	eob
+
+DalaamRestaurant_Whole_Party_Full_Inventory:	//l_0xc5c8d8
+	"@You're already carrying too many things." next
+	"@Sell something, or throw something away," next
+	"@or just leave something somewhere, and come again." end
+
+DalaamRestaurant_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+DalaamRestaurant_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+DalaamRestaurant_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+DalaamRestaurant_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+DalaamRestaurant_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+DalaamRestaurant_Transaction_Thanks:	//l_0xc5c916
+	"@Thank you very much." next
+	eob
+
+DalaamRestaurant_Transaction_Thanks_2:	//l_0xc5c920
+// when is this used?
+	"@Thank you very much." next
+	eob
+
+DalaamRestaurant_Request_Another_Transaction:	//l_0xc5c92a
+	"@Do you want to buy anything else?" linebreak
+	eob
+
+DalaamRestaurant_Do_Another_Transaction:	// This shop doesn't run this line
+	eob
+
+DalaamRestaurant_Chosen_Character_Inventory_Full:	//l_0xc5c933
+	"@{name(0)} seems to have too many things already." next
+	"@I don't think " swap call(data_36.l_0xc7e5f3) " can carry any more." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+DalaamRestaurant_Bulk_Buy_Lots:
+	"@All of these?" next
+	eob
+
+DalaamRestaurant_Bulk_Buy_Not_Enough_Cash:
+	"@You do not have enough money." next
+	eob
+
+DalaamRestaurant_Bulk_Buy_Full_Inventory:
+	"@You're already carrying way too many things." next
+	"@Sell something, or throw something away," next
+	"@or just leave something somewhere, and come again." end
+
+DalaamRestaurant_Bulk_Buy_Change_Of_Mind:
+	"@You are not interested in our menu?  I see." next
+	eob
+
+//------------------------------------------------------------------

@@ -1,0 +1,124 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Winters Lab Cave boy shop
+//------------------------------------------------------------------
+Winters_Greeting:		//l_0xc5d050
+	"@Oooga boooga." linebreak
+	"  (May I help you?)" next
+	eob
+
+Winters_Exit_Store_Buy:		//l_0xc5d06d
+	"@Ungawa goongaloo!" linebreak
+	"  (Thank you very much.)" end
+
+Winters_Exit_Store_Dont_Buy:	//l_0xc5d08d
+	"@Woongu Goongaree!" linebreak
+	"  (Please come again.)" end
+
+Winters_Open_Shop_Window:	//l_0xc5d0aa
+	"@Wakka ungawa?" linebreak
+	"  (What would you like?)" next
+	eob
+
+Winters_Selected_Item:		//l_0xc5d0c9
+	"@Wunga Din?" linebreak
+	"  ({itemname(0)}?)" next
+	eob
+
+Winters_Who_Will_Take_Item:	//l_0xc5d0df
+	"@Spoongawa goonga ugh!?" linebreak
+	"  (Who is going to carry it?)" promptw
+	eob
+
+Winters_Equip_Now:		// This shop doesn't sell equippables
+	eob
+
+Winters_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+Winters_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+Winters_Cancel_Cant_Equip:		//l_0xc5d104
+// despite the name, it's often used as a generic change of mind
+	"@Goongoo, woo woo!" linebreak
+	"  (Come again.)" next
+	eob
+
+Winters_Not_Enough_Cash:		//l_0xc5d120
+	"@Wunga woo gun woonga wakka!!" linebreak
+	"  (You don't have enough money.)" next
+	eob
+
+Winters_Whole_Party_Full_Inventory:	//l_0xc5d148
+	"@Whoa!  Woon woonga wakka woo!" linebreak
+	"  (You are already carrying too many things.)" end
+
+Winters_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+Winters_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+Winters_Cancel_Selling:		// This shop doesn't purchase items
+	eob
+
+Winters_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+Winters_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+Winters_Transaction_Thanks:	//l_0xc5d178
+	"@Ungaah, goon wakkawoo!" linebreak
+	"  (Thank you very much.)" next
+	eob
+
+Winters_Transaction_Thanks_2:	//l_0xc5d19d
+// when is this used?
+	"@Wanga woon gawa din goo!" linebreak
+	"  (Thank you for shopping here.)" next
+	eob
+
+Winters_Request_Another_Transaction:	//l_0xc5d1c7
+	"@Wakka gowoon din woo?!" linebreak
+	"  (Would you like anything else?)" linebreak
+	eob
+
+Winters_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+Winters_Chosen_Character_Inventory_Full:	//l_0xc5d1ed
+	"@Ungawa ungawa ungawa woo!  Wonga wakka woonga!" linebreak
+	"  ({name(0)} is already carrying too many things." next
+	"@  Can someone else help " swap call(data_37.l_0xc7e6a4) " out?)" linebreak
+	eob
+
+Winters_Bulk_Buy_Lots:
+	"@Wanga oog?" linebreak
+	"  (All of these?)" next
+	eob
+
+Winters_Bulk_Buy_Not_Enough_Cash:
+	"@Wunga woo gun woonga wakka!!" linebreak
+	"  (You don't have enough money.)" next
+	eob
+
+Winters_Bulk_Buy_Full_Inventory:
+	"@Whoa!  Woon woonga din wakka woo!" linebreak
+	"  (You are already carrying way too many things.)" end
+
+Winters_Bulk_Buy_Change_Of_Mind:
+	"@Goongoo, woo woo!" linebreak
+	"  (Come again.)" next
+	eob
+
+//------------------------------------------------------------------

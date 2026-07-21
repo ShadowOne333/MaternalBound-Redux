@@ -51,7 +51,7 @@ l_0xc522ca:
 	eob
 // End of Twoson / Fourside Drugstore shopkeeper script
 
-// 
+// Summers shop
 l_0xc522ef:
 	"@Hi!  Welcome to my store." next
 	"@What do you need?" linebreak
@@ -147,6 +147,7 @@ l_0xc524d2:
 	"@Can one of you others carry it?" linebreak
 	eob
 
+// Summers Toto shop
 l_0xc524f7:
 	"@If ye be headin' to Scarabia, ye ought to shop here." next
 	"@Things're expensive down there..." next
@@ -244,6 +245,7 @@ l_0xc52796:
 	"@Will someone else take this instead?" linebreak
 	eob
 
+// Scarabia shop
 l_0xc527c7:
 	"@Welcome, welcome!  Ach, the heat!  Is your body okay?" next
 	"@Can I interest you in some of my merchandise?" linebreak
@@ -339,6 +341,7 @@ l_0xc52a92:
 	"@Perhaps another of your party could bear this load?" linebreak
 	eob
 
+// Scarabia Tool shop
 l_0xc52acc:
 	"@If you've already got what you need, great!" next
 	"@But if you don't, well, that would be a real shame." next
@@ -437,10 +440,10 @@ l_0xc52d5f:
 	"@Sakes alive! {name(0)} can't carry another thing." next
 	"@Maybe someone else can carry it." linebreak
 	eob
+// End of Scarabia Tool shop
 
 l_0xc52d8c:
 	"@Please come again." end
-// End of 
 
 // Threek arms dealer script
 l_0xc52d94:

@@ -1,0 +1,129 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Magicant shop
+//------------------------------------------------------------------
+Magicant_Greeting:		//l_0xc5b896
+	"@Hi!  This shop specializes in puddings and pendants!" next
+	"@You'd like to buy some, wouldn't you?" linebreak
+	eob
+
+Magicant_Exit_Store_Buy:	//l_0xc5b8d6
+	"@Thank you so much!" end
+
+Magicant_Exit_Store_Dont_Buy:	//l_0xc5b8df
+	"@Please come back soon!" end
+
+Magicant_Open_Shop_Window:	//l_0xc5b8eb
+	"@What do you want to buy?!" next
+	eob
+
+Magicant_Selected_Item:		//l_0xc5b8f8
+	"@{itemname(0)}?" next
+	eob
+
+Magicant_Who_Will_Take_Item:	//l_0xc5b900
+	"@OK, who's going to carry it?!" promptw
+	eob
+
+Magicant_Equip_Now:			//l_0xc5b910
+	"@Oh, thank you!  Do you want to equip it in the store?!" linebreak
+	eob
+
+Magicant_Buy_Previous_Equipment:	//l_0xc5b92c
+ // arg: item name, res: item price
+	"@Shall I buy" linebreak
+	"  your {itemname(0)}" next
+	"  for {swap}$" number(0) "?" linebreak
+	eob
+
+Magicant_Cant_Equip_Item:		//l_0xc5b94d
+// arg: player name
+	"@But {name(0)} will not be able to equip this?!" next
+	"@Do you still want to buy it?!" linebreak
+	eob
+
+Magicant_Cancel_Cant_Equip:		//l_0xc5b971
+// despite the name, it's often used as a generic change of mind
+	"@Please hurry back!" next
+	eob
+
+Magicant_Not_Enough_Cash:		//l_0xc5b97e
+	"@Shame on you!  You don't have enough money!" next
+	eob
+
+Magicant_Whole_Party_Full_Inventory:	//l_0xc5b994
+	"@You've got too much stuff already!" next
+	"@How about selling me some of the things you don't need?!" linebreak
+	eob
+
+Magicant_What_To_Sell:		//l_0xc5b9c1
+	"@OK, what do you want to sell?!" promptw
+	eob
+
+Magicant_Confirm_Selling:	//l_0xc5b9d1
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" next
+	"@I can buy that" linebreak
+	"  for {swap}$" number(0) "." linebreak
+	"  Is it a deal?!" next
+	eob
+
+Magicant_Cancel_Selling:	//l_0xc5b9fe
+	"@Please come again!" next
+	eob
+
+Magicant_Nothing_To_Sell:	//l_0xc5ba07
+	"@Uhhh, what's the deal?!  You don't have anything to sell!" next
+	eob
+
+Magicant_Unsellable_Item:	//l_0xc5ba28
+	"@Don't mean to rain on your parade," next
+	"@but there's no possible way I can buy" linebreak
+	"  your {itemname(0)}!" next
+	eob
+
+Magicant_Transaction_Thanks:		//l_0xc5ba5b
+	"@Thank you!" next
+	eob
+
+Magicant_Transaction_Thanks_2:		//l_0xc5ba62
+// when is this used?
+	"@Thank you!" next
+	eob
+
+Magicant_Request_Another_Transaction:		//l_0xc5ba69
+	"@Can I do anything else for you?" linebreak
+	eob
+
+Magicant_Do_Another_Transaction:		//l_0xc5ba78
+	"@What do you want to do now?!" linebreak
+	eob
+
+Magicant_Chosen_Character_Inventory_Full:	//l_0xc5ba86
+	"@{name(0)}  has too much stuff!" next
+	"@Can someone else carry it?" linebreak
+	eob
+
+Magicant_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+Magicant_Bulk_Buy_Not_Enough_Cash:
+	"@Shame on you!  You don't have enough money!" next
+	eob
+
+Magicant_Bulk_Buy_Full_Inventory:
+	"@You've got way too much stuff already!" next
+	"@How about selling me some of the things you don't need?!" linebreak
+	eob
+
+Magicant_Bulk_Buy_Change_Of_Mind:
+	"@Please hurry back!" next
+	eob
+
+//------------------------------------------------------------------

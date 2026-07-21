@@ -29,11 +29,13 @@ l_0xc5cf3d:
 	"@{name(0)} is already carrying too many things." next
 	"@Can someone else carry it?" linebreak
 	eob
+// End of Fourside Condiment shop
 
 l_0xc5cf60:
 	" resort)"
 	goto(l_0xc5cf67)
 
+// Summers Gelato shop
 l_0xc5cf67:
 	"@We've got some really spectacular things!" next
 	eob
@@ -83,6 +85,7 @@ l_0xc5d02d:
 	"@Can someone else carry it?" linebreak
 	eob
 
+// Winters lab Cave boy shop
 l_0xc5d050:
 	"@Oooga boooga." linebreak
 	"  (May I help you?)" next
@@ -145,6 +148,10 @@ l_0xc5d1ed:
 	"  ({name(0)} is already carrying too many things." next
 	"@  Can someone else help " swap call(data_37.l_0xc7e6a4) " out?)" linebreak
 	eob
+
+//------------------------------------
+// SHOP SCRIPTS END HERE!!!
+//------------------------------------
 
 // Shop flags definitions start
 l_0xc5d24b:

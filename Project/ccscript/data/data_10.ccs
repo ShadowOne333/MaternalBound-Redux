@@ -19,6 +19,9 @@ command e(label) "{long label}"
 // (Continue) Event debug menu moved to "debug/options/events.ccs"
 // Item Descriptions selector moved to "debug/options/item_desc.ccs"
 
+//------------------------------------
+// SHOP SCRIPTS START HERE!!!
+//------------------------------------
 // Near-Pyramid seller (Bazooka)
 l_0xc5b3ba:
 	"@Since I'm dealing in some pretty rough stuff," next
@@ -254,7 +257,7 @@ l_0xc5b86d:
 	eob
 // End of Burglin Park Tool shop script
 
-// 
+// Magicant shop
 l_0xc5b896:
 	"@Hi!  This shop specializes in puddings and pendants!" next
 	"@You'd like to buy some, wouldn't you?" linebreak

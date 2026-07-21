@@ -1,0 +1,470 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Fourside Junk shop
+//------------------------------------------------------------------
+FoursideJunk_Greeting:		//l_0xc5c1e5
+	"@C'mon in!" linebreak
+	"  We've got the goods, G!" next
+	eob
+
+FoursideJunk_Exit_Store_Buy:		//l_0xc5c203
+	"@Thanks a lot, bro!" end
+
+FoursideJunk_Exit_Store_Dont_Buy:	//l_0xc5c210
+	"@God damn!" linebreak
+	"  You can't do me like that!" end
+
+FoursideJunk_Open_Shop_Window:	//l_0xc5c22e
+	"@What are you looking for?!" next
+	eob
+
+FoursideJunk_Selected_Item: {		//l_0xc5c23b
+	"@Okay, {call(_gender_check)}.  You want" linebreak
+	"  the {itemname(0)}?" next
+	if flag FLG_TOOL_ITEMS {
+		swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+	}
+	eob
+
+_gender_check:
+	get_char_at_pos(1)
+	result_is(2)
+	goto_if_true(_paula_leader)
+	"man"
+	eob
+
+_paula_leader:
+	"woman"
+	eob
+
+_is_broken_iron:
+	set(FLG_ITEM_BROKEN_IRON_PURCHASED)
+	eob
+}
+
+FoursideJunk_Who_Will_Take_Item:	//l_0xc5c252
+	"@Hey guys, who's going to carry this?" next
+	eob
+
+FoursideJunk_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+FoursideJunk_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+FoursideJunk_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+FoursideJunk_Cancel_Cant_Equip:		//l_0xc5c268
+// despite the name, it's often used as a generic change of mind
+	"@I'm with you." linebreak
+	"  Lookin' for anything else?" next
+	eob
+
+FoursideJunk_Not_Enough_Cash:		//l_0xc5c27f
+	"@Hey homiee!" linebreak
+	"  You ain't got the dough for this purchase!" promptw
+	eob
+
+FoursideJunk_Whole_Party_Full_Inventory:	//l_0xc5c2a5
+	"@Most unfortunately for you," linebreak
+	"  you're carrying too much stuff." end
+
+FoursideJunk_What_To_Sell:	// This shop doesn't purchase items
+	eob
+
+FoursideJunk_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+FoursideJunk_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+FoursideJunk_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+FoursideJunk_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+FoursideJunk_Transaction_Thanks:	//l_0xc5c2c6
+	"@Thank you, thank you." next
+	eob
+
+FoursideJunk_Transaction_Thanks_2:	//l_0xc5c2d2
+// when is this used?
+	"@Thank you, thank you." next
+	eob
+
+FoursideJunk_Request_Another_Transaction:	//l_0xc5c2de
+	"@Do you need anything else?" linebreak
+	eob
+
+FoursideJunk_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+FoursideJunk_Chosen_Character_Inventory_Full:	//l_0xc5c2e7
+	"@Sorry, buddy!" linebreak
+	"  {name(0)} has got too much stuff already." next
+	"@One of you other guys want to haul it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
+	eob
+
+FoursideJunk_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+FoursideJunk_Bulk_Buy_Not_Enough_Cash:
+	"@Hey homiee!" linebreak
+	"  You ain't got the dough for these purchases!" promptw
+	eob
+
+FoursideJunk_Bulk_Buy_Full_Inventory:
+	"@Most unfortunately for you," linebreak
+	"  you're carrying too much stuff." end
+
+FoursideJunk_Bulk_Buy_Change_Of_Mind:
+	"@I'm with you." linebreak
+	"  Lookin' for anything else?" next
+	eob
+
+//------------------------------------------------------------------
+// Fourside Condiment shop
+//------------------------------------------------------------------
+FoursideCondiment_Greeting:		//l_0xc5ce22
+	"@Hello there!" next
+	"@How would you like to buy some seasonings" next
+	"@that go great on your food at meal time?" next
+	"@These are not just your average seasonings!" next
+	"@Whenever you try to eat something, the seasoning will automatically sprinkle" next
+	"@on your food.  It's really almost magical!" next
+	eob
+
+FoursideCondiment_Exit_Store_Buy:	//l_0xc5cec0
+	"@Please come again." end
+
+FoursideCondiment_Exit_Store_Dont_Buy:	//l_0xc5cec8
+	"@Please come again." end
+
+FoursideCondiment_Open_Shop_Window:	//l_0xc5ced0
+	"@What would you like?" next
+	eob
+
+FoursideCondiment_Selected_Item:	//l_0xc5cedc
+	"@{itemname(0)}?" next
+	eob
+
+FoursideCondiment_Who_Will_Take_Item:	//l_0xc5cee4
+	"@Who is going to carry it?" promptw
+	eob
+
+FoursideCondiment_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+FoursideCondiment_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+FoursideCondiment_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+FoursideCondiment_Cancel_Cant_Equip:	//l_0xc5cef0
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+FoursideCondiment_Not_Enough_Cash:	//l_0xc5cef9
+	"@Oh, it looks like you don't have enough money." next
+	eob
+
+FoursideCondiment_Whole_Party_Full_Inventory:	//l_0xc5cf0a
+	"@Oh, I don't think you can carry any more." end
+
+FoursideCondiment_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+FoursideCondiment_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+FoursideCondiment_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+FoursideCondiment_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+FoursideCondiment_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+FoursideCondiment_Transaction_Thanks:	//l_0xc5cf1c
+	"@Thank you very much." next
+	eob
+
+FoursideCondiment_Transaction_Thanks_2:	//l_0xc5cf26
+// when is this used?
+	"@Thank you very much." next
+	eob
+
+FoursideCondiment_Request_Another_Transaction:	//l_0xc5cf30
+	"@Would you like to buy anything else?" linebreak
+	eob
+
+FoursideCondiment_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+FoursideCondiment_Chosen_Character_Inventory_Full:	//l_0xc5cf3d
+	"@{name(0)} is already carrying too many things." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+FoursideCondiment_Bulk_Buy_Lots:
+	"@All of these?" next
+	eob
+
+FoursideCondiment_Bulk_Buy_Not_Enough_Cash:
+	"@Oh, it looks like you don't have enough money." next
+	eob
+
+FoursideCondiment_Bulk_Buy_Full_Inventory:
+	"@Oh, I don't think you can carry all of these." end
+
+FoursideCondiment_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// Fourside Dept. Store Sports Shop
+//------------------------------------------------------------------
+FoursideSports_Greeting:		//l_0xc51eea
+	"@Hey dudes!  It's summer!" linebreak
+	"  It's the manly time of year!" linebreak
+	"  Time for sports, guys!" next
+	"@What can I do you for?" linebreak
+	eob
+
+FoursideSports_Exit_Store_Buy:	//l_0xc51f2c
+	"@Hey buddy, thanks!" linebreak
+	"  See you around!" end
+
+FoursideSports_Exit_Store_Dont_Buy:	//l_0xc51f45
+	"@If you ever need anything, come back here, and I'll set you up!" end
+
+FoursideSports_Open_Shop_Window:	//l_0xc51f62
+	"@So what'll it be today?" promptw
+	eob
+
+FoursideSports_Selected_Item:	//l_0xc51f74
+	"@{itemname(0)}?" next
+	eob
+
+FoursideSports_Who_Will_Take_Item:	//l_0xc51f7c
+	"@Which of you is going to carry this?" promptw
+	eob
+
+FoursideSports_Equip_Now:			//l_0xc51f91
+	"@So, man, are you gonna equip it here?" linebreak
+	eob
+
+FoursideSports_Buy_Previous_Equipment:	//l_0xc51fa7
+ // arg: item name, res: item price
+	"@Can I buy your" linebreak
+	"  {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" linebreak
+	eob
+
+FoursideSports_Cant_Equip_Item:	//l_0xc51fc8
+// arg: player name
+	"@{name(0)} can't equip this." next
+	"  Do ya still want to buy it?" linebreak
+	eob
+
+FoursideSports_Cancel_Cant_Equip:	//l_0xc51fe7
+// despite the name, it's often used as a generic change of mind
+	"@Catch ya later!" next
+	eob
+
+FoursideSports_Not_Enough_Cash:	//l_0xc51ff8
+	"@Oh, most heinous!" linebreak
+	"  You dudes don't have enough money for this." next
+	eob
+
+FoursideSports_Whole_Party_Full_Inventory:	//l_0xc5201d
+	"@Dudes!" linebreak
+	"  You simply have too much stuff in your kit!" next
+	"@But don't sweat it, I can buy some stuff you don't need." linebreak
+	eob
+
+FoursideSports_What_To_Sell:		//l_0xc52059
+	"@Now, you're sure you want to sell this to me..." promptw
+	eob
+
+FoursideSports_Confirm_Selling:	//l_0xc5206d
+	"@The {itemname(0)}?" linebreak
+	"  I'll buy it for {swap}$" number(0) "." next
+	"@You positive you want to sell it?" linebreak
+	eob
+
+FoursideSports_Cancel_Selling:	//l_0xc5209b
+	"@OK." next
+	eob
+
+FoursideSports_Nothing_To_Sell:	//l_0xc520a2
+	"@Man, you don't have anything to sell me!" next
+	eob
+
+FoursideSports_Unsellable_Item:	//l_0xc520b9
+	"@Sorry dude, but I can't buy that." next
+	eob
+
+FoursideSports_Transaction_Thanks:	//l_0xc520cf
+	"@Thanks!" next
+	eob
+
+FoursideSports_Transaction_Thanks_2:	//l_0xc520d5
+// when is this used?
+	"@Thanks, buddy!" next
+	eob
+
+FoursideSports_Request_Another_Transaction:	//l_0xc520e1
+	"@Is there anything else I can do for you?" linebreak
+	eob
+
+FoursideSports_Do_Another_Transaction:	//l_0xc520f1
+	"@What is it?" linebreak
+	eob
+
+FoursideSports_Chosen_Character_Inventory_Full:	//l_0xc520fa
+	"@{name(0)} has too many things." next
+	"@Does somebody else want to carry it?" linebreak
+	eob
+
+FoursideSports_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+FoursideSports_Bulk_Buy_Not_Enough_Cash:
+	"@Oh, most heinous!" linebreak
+	"  You dudes don't have enough money for these." next
+	eob
+
+FoursideSports_Bulk_Buy_Full_Inventory:
+	"@Dudes!" next
+	"@You simply have too much stuff in your kit for these!" next
+	"@But don't sweat it, I can buy some stuff you don't need." linebreak
+	eob
+
+FoursideSports_Bulk_Buy_Change_Of_Mind:
+	"@Catch ya later!" next
+	eob
+
+//------------------------------------------------------------------
+// Moonside Hotel Shop
+//------------------------------------------------------------------
+MoonsideHotel_Greeting:		//l_0xc5c96a
+	"@Hi, how are you doing?  From the look of things," next
+	"@I would say, not so good." next
+	eob
+
+MoonsideHotel_Exit_Store_Buy:	//l_0xc5c99a
+	"@See ya!" end
+
+MoonsideHotel_Exit_Store_Dont_Buy:	//l_0xc5c9a4
+	"@See ya!" end
+
+MoonsideHotel_Open_Shop_Window:	//l_0xc5c9ae
+	"@Do you need anything?" promptw
+	eob
+
+MoonsideHotel_Selected_Item:	//l_0xc5c9b7
+	"@The {itemname(0)}...?" next
+	eob
+
+MoonsideHotel_Who_Will_Take_Item:	//l_0xc5c9c2
+	"@Who is going to carry it?" promptw
+	eob
+
+MoonsideHotel_Equip_Now:		// This shop doesn't sell equippables
+	eob
+
+MoonsideHotel_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+MoonsideHotel_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+MoonsideHotel_Cancel_Cant_Equip:	//l_0xc5c9ce
+// despite the name, it's often used as a generic change of mind
+	"@So you're saying you don't want it after all...?" next
+	eob
+
+MoonsideHotel_Not_Enough_Cash:		//l_0xc5c9e7
+	"@You don't have enough money." next
+	eob
+
+MoonsideHotel_Whole_Party_Full_Inventory:	//l_0xc5c9f2
+	"@You're carrying too many things already." end
+
+MoonsideHotel_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+MoonsideHotel_Confirm_Selling:		// This shop doesn't purchase items
+	eob
+
+MoonsideHotel_Cancel_Selling:		// This shop doesn't purchase items
+	eob
+
+MoonsideHotel_Nothing_To_Sell:		// This shop doesn't purchase items
+	eob
+
+MoonsideHotel_Unsellable_Item:		// This shop doesn't purchase items
+	eob
+
+MoonsideHotel_Transaction_Thanks:	//l_0xc5ca04
+	"@Thanks." next
+	eob
+
+MoonsideHotel_Transaction_Thanks_2:	//l_0xc5ca0a
+// when is this used?
+	"@Thanks." next
+	eob
+
+MoonsideHotel_Request_Another_Transaction:	//l_0xc5ca10
+	"@Are you going to buy anything else?" linebreak
+	eob
+
+MoonsideHotel_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+MoonsideHotel_Chosen_Character_Inventory_Full:	//l_0xc5ca1e
+	"@{name(0)} seems to have too many things already." next
+	"@I don't think " swap call(data_36.l_0xc7e5f3) " can carry any more." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+MoonsideHotel_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+MoonsideHotel_Bulk_Buy_Not_Enough_Cash:
+	"@You don't have enough money." next
+	eob
+
+MoonsideHotel_Bulk_Buy_Full_Inventory:
+	"@You're carrying way too many things already." end
+
+MoonsideHotel_Bulk_Buy_Change_Of_Mind:
+	"@So you're saying you don't want them after all...?" next
+	eob
+
+//------------------------------------------------------------------

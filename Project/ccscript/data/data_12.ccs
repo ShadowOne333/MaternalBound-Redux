@@ -18,6 +18,7 @@ l_0xc5c57b:
 	eob
 // End of Grapefruit Falls salesman script
 
+// Scaraba delicacies shop
 l_0xc5c59e:
 	"@Hello there!  Welcome to my humble shop!" next
 	"@How about some of our famous Scarabia delicacies?" next
@@ -72,6 +73,7 @@ l_0xc5c6ec:
 	"@Can anyone else carry it?" linebreak
 	eob
 
+// Dusty Dunes desert shop
 l_0xc5c71f:
 	"@Out walking in the desert must make you very hungry and thirsty!" next
 	eob
@@ -123,8 +125,9 @@ l_0xc5c80d:
 	"@{name(0)} seems to have too many things already." next
 	"@I don't think " swap call(data_36.l_0xc7e5f3) " can carry any more." next
 	"@Can someone else carry it?" linebreak
-	" " eob
+	eob
 
+// Dalaam / Ramma restaurant
 l_0xc5c845:
 	"@We serve water, rice gruel and those sorts of things." next
 	eob
@@ -178,6 +181,7 @@ l_0xc5c933:
 	"@Can someone else carry it?" linebreak
 	eob
 
+// Moonside Hotel shop
 l_0xc5c96a:
 	"@Hi, how are you doing?  From the look of things," next
 	"@I would say, not so good." next
@@ -230,6 +234,7 @@ l_0xc5ca1e:
 	"@Can someone else carry it?" linebreak
 	eob
 
+// Summers Magic cake
 l_0xc5ca56:
 	title(1, Jill)
 	"@I can no longer make Magic cakes..." next
@@ -296,6 +301,7 @@ l_0xc5cb88:
 	"@Can someone else carry it?" linebreak
 	eob
 
+// Scarabia Water shop
 l_0xc5cbc0:
 	"@I sell water to those who are thirsty." next
 	eob
@@ -399,7 +405,7 @@ l_0xc5cdf2:
 	eob
 // End of Burglin Park Banana lady script
 
-// 
+// Fourside Condiment Shop
 l_0xc5ce22:
 	"@Hello there!" next
 	"@How would you like to buy some seasonings" next

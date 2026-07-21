@@ -1,0 +1,574 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/window_titles.ccs"
+//------------------------------------------------------------------
+// Summers Restaurant
+//------------------------------------------------------------------
+SummersRestaurant_Greeting:		//l_0xc5bd92
+	"@So, where's your mom and dad?" next
+	"@You mean you kids came in here all by yourselves...?" next
+	"@Well, I can make your order to go." next
+	eob
+
+SummersRestaurant_Exit_Store_Buy:	//l_0xc5bde0
+	"@Thank you." next
+	"@Be careful not to drop or spill it." end
+
+SummersRestaurant_Exit_Store_Dont_Buy:	//l_0xc5be00
+	"@We are looking forward to seeing you again." end
+
+SummersRestaurant_Open_Shop_Window:	//l_0xc5be16
+	"@What can I get for you?" promptw
+	eob
+
+SummersRestaurant_Selected_Item:	//l_0xc5be24
+	"@You want" linebreak
+	"  a {itemname(0)}?" next
+	eob
+
+SummersRestaurant_Who_Will_Take_Item:	//l_0xc5be34
+	"@Whose order is this?" promptw
+	eob
+
+SummersRestaurant_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+SummersRestaurant_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+SummersRestaurant_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+SummersRestaurant_Cancel_Cant_Equip:		//l_0xc5be45
+// despite the name, it's often used as a generic change of mind
+	"@Please come again." next
+	eob
+
+SummersRestaurant_Not_Enough_Cash:		//l_0xc5be4e
+	"@Sorry, but you haven't got enough to cover the check." next
+	eob
+
+SummersRestaurant_Whole_Party_Full_Inventory:	//l_0xc5be6f
+	"@You are already carrying too much stuff." next
+	"@You can sell your stuff, throw something away, or just abandon it." next
+	"@Then, come again." end
+
+SummersRestaurant_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+SummersRestaurant_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+SummersRestaurant_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+SummersRestaurant_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+SummersRestaurant_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+SummersRestaurant_Transaction_Thanks:		//l_0xc5beb3
+	"@Thank you." next
+	eob
+
+SummersRestaurant_Transaction_Thanks_2:		//l_0xc5beba
+// when is this used?
+	"@Thank you." next
+	eob
+
+SummersRestaurant_Request_Another_Transaction:	//l_0xc5bec1
+	"@Do you want to order anything else?" linebreak
+	eob
+
+SummersRestaurant_Do_Another_Transaction:	// This shop doesn't run this line
+	eob
+
+SummersRestaurant_Chosen_Character_Inventory_Full:	//l_0xc5becd
+	"@{name(0)} is already carrying too many things." next
+	"@Can someone else carry it for " swap call(data_37.l_0xc7e6a4) "?" linebreak
+	eob
+
+SummersRestaurant_Bulk_Buy_Lots:
+	"@Is that all?" next
+	eob
+
+SummersRestaurant_Bulk_Buy_Not_Enough_Cash:
+	"@Sorry, but you haven't got enough to cover the whole check." next
+	eob
+
+SummersRestaurant_Bulk_Buy_Full_Inventory:
+	"@You are already carrying way too much stuff." next
+	"@You can sell your stuff, throw something away, or just abandon it." next
+	"@Then, come again." end
+
+SummersRestaurant_Bulk_Buy_Change_Of_Mind:
+	"@Please come again." next
+	eob
+
+//------------------------------------------------------------------
+// Summers Shop
+//------------------------------------------------------------------
+SummersShop_Greeting:		//l_0xc522ef
+	"@Hi!  Welcome to my store." next
+	"@What do you need?" linebreak
+	eob
+
+SummersShop_Exit_Store_Buy:	//l_0xc5230c
+	"@Thank you!" end
+
+SummersShop_Exit_Store_Dont_Buy:	//l_0xc52312
+	"@This place isn't for looky loos.  If you're not buying, get out!" end
+
+SummersShop_Open_Shop_Window:	//l_0xc52339
+	"@So, you're going to buy something, eh?" promptw
+	eob
+
+SummersShop_Selected_Item:	//l_0xc5234d
+	"@{itemname(0)}?" next
+	eob
+
+SummersShop_Who_Will_Take_Item:	//l_0xc52355
+	"@Who's going to carry it?" promptw
+	eob
+
+SummersShop_Equip_Now:		//l_0xc52361
+	"@Are you going to equip it here?" linebreak
+	eob
+
+SummersShop_Buy_Previous_Equipment:	//l_0xc52371
+ // arg: item name, res: item price
+	"@I'll buy your" linebreak
+	"  {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "." next
+	eob
+
+SummersShop_Cant_Equip_Item:		//l_0xc5238f
+// arg: player name
+	"@Even though {name(0)} can't put this on, you still want to buy it?" next
+	"@Well, it's your money..." linebreak
+	eob
+
+SummersShop_Cancel_Cant_Equip:		//l_0xc523be
+// despite the name, it's often used as a generic change of mind
+	"@Hurry back now." next
+	eob
+
+SummersShop_Not_Enough_Cash:		//l_0xc523cb
+	"@Hey!  What are you trying to pull?!  You haven't got enough money!!" next
+	eob
+
+SummersShop_Whole_Party_Full_Inventory:	//l_0xc523ef
+	"@Hey!  You've got enough junk already!" next
+	"@Do you want to sell me some of the junk you don't need?" linebreak
+	eob
+
+SummersShop_What_To_Sell:	//l_0xc5241d
+	"@What can you sell me?" promptw
+	eob
+
+SummersShop_Confirm_Selling:	//l_0xc5242b
+	"@{itemname(0)}?" linebreak
+	"  I'll give you {swap}$" number(0) "." next
+	"@How would that be?" linebreak
+	eob
+
+SummersShop_Cancel_Selling:	//l_0xc5244f
+	"@Hurrm.  Changed your mind, eh?" next
+	eob
+
+SummersShop_Nothing_To_Sell:	//l_0xc52469
+	"@C'mon!" linebreak
+	"  You don't have anything to sell, do you?!" next
+	eob
+
+SummersShop_Unsellable_Item:	//l_0xc52485
+	"@Sorry, but I have no use for that." next
+	eob
+
+SummersShop_Transaction_Thanks:		//l_0xc5249a
+	"@Hey, it was nice doing business with you." next
+	eob
+
+SummersShop_Transaction_Thanks_2:	//l_0xc524b2
+// when is this used?
+	"@Thanks." next
+	eob
+
+SummersShop_Request_Another_Transaction:	//l_0xc524b8
+	"@Will there be anything else?" linebreak
+	eob
+
+SummersShop_Do_Another_Transaction:		//l_0xc524c5
+	"@What else do you want?" linebreak
+	eob
+
+SummersShop_Chosen_Character_Inventory_Full:	//l_0xc524d2
+	"@{name(0)} can't carry any more stuff." next
+	"@Can one of you others carry it?" linebreak
+	eob
+
+SummersShop_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+SummersShop_Bulk_Buy_Not_Enough_Cash:
+	"@Hey!  What are you trying to pull?!  You haven't got enough money!!" next
+	eob
+
+SummersShop_Bulk_Buy_Full_Inventory:
+	"@Hey!  You've got too much junk already!" next
+	"@Do you want to sell me some of the junk you don't need?" linebreak
+	eob
+
+SummersShop_Bulk_Buy_Change_Of_Mind:
+	"@Hurry back now." next
+	eob
+
+//------------------------------------------------------------------
+// Summers Gelato Shop
+//------------------------------------------------------------------
+SummersGelato_Greeting:			//l_0xc5cf67
+	"@We've got some really spectacular things!" next
+	eob
+
+SummersGelato_Exit_Store_Buy:		//l_0xc5cf82
+	"@Please come again." end
+
+SummersGelato_Exit_Store_Dont_Buy:	//l_0xc5cf8a
+	"@You really should eat here! " end
+
+SummersGelato_Open_Shop_Window:		//l_0xc5cf9b
+	"@What would you like?" promptw
+	eob
+
+SummersGelato_Selected_Item:		//l_0xc5cfa6
+	"@{itemname(0)}?" next
+	eob
+
+SummersGelato_Who_Will_Take_Item:	//l_0xc5cfae
+	"@Who is going to carry it?" promptw
+	eob
+
+SummersGelato_Equip_Now:		// This shop doesn't sell equippables
+	eob
+
+SummersGelato_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+SummersGelato_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+SummersGelato_Cancel_Cant_Equip:	//l_0xc5cfba
+// despite the name, it's often used as a generic change of mind
+	"@Do you mean to tell me you are not going to buy anything...?" end
+
+SummersGelato_Not_Enough_Cash:		//l_0xc5cfd5
+	"@You don't have enough money." end
+
+SummersGelato_Whole_Party_Full_Inventory:	//l_0xc5cfdf
+	"@You are carrying too many things already." next
+	"@Sell something, or throw something away, and come back." end
+
+SummersGelato_What_To_Sell:	// This shop doesn't purchase items
+	eob
+
+SummersGelato_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+SummersGelato_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+SummersGelato_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+SummersGelato_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+SummersGelato_Transaction_Thanks:		//l_0xc5d00c
+	"@Thank you very much." promptw
+	eob
+
+SummersGelato_Transaction_Thanks_2:		//l_0xc5d015
+// when is this used?
+	"@Thank you very much." promptw
+	eob
+
+SummersGelato_Request_Another_Transaction:	//l_0xc5d01e
+	"@Would you like to buy one more?" linebreak
+	eob
+
+SummersGelato_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+SummersGelato_Chosen_Character_Inventory_Full:	//l_0xc5d02d
+	"@{name(0)} is already carrying too many things." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+SummersGelato_Bulk_Buy_Lots:
+	"@Is that all?" next
+	eob
+
+SummersGelato_Bulk_Buy_Not_Enough_Cash:
+	"@You don't have enough money." end
+
+SummersGelato_Bulk_Buy_Full_Inventory:
+	"@You are carrying way too many things already." next
+	"@Sell something, or throw something away, and come back." end
+
+SummersGelato_Bulk_Buy_Change_Of_Mind:
+	"@Do you mean to tell me you are not going to buy anything...?" end
+
+//------------------------------------------------------------------
+// Summers Magic cake cart
+//------------------------------------------------------------------
+SummersMagicCake_Greeting:		//l_0xc5ca56
+	title(1, Jill)
+	"@I can no longer make Magic cakes..." next
+	"@But it doesn't matter because now I'm selling Magic Tarts," next
+	"@which taste even better than Magic cakes!" next
+	eob
+
+SummersMagicCake_Exit_Store_Buy:	//l_0xc5cab4
+	title(1, Jill)
+	"@You reminded me how much I love this job!" end
+
+SummersMagicCake_Exit_Store_Dont_Buy:	//l_0xc5cad0
+	title(1, Jill)
+	"@You reminded me how much I love this job!" end
+
+SummersMagicCake_Open_Shop_Window:	//l_0xc5caec
+	title(1, Jill)
+	"@I only have this....." next
+	eob
+
+SummersMagicCake_Selected_Item:		//l_0xc5cafe
+	title(1, Jill)
+	"@Are you going to buy" linebreak
+	"  my {itemname(0)}?" next
+	eob
+
+SummersMagicCake_Who_Will_Take_Item:	//l_0xc5cb12
+	title(1, Jill)
+	"@Who is going to carry it?" promptw
+	eob
+
+SummersMagicCake_Equip_Now:			// This shop doesn't sell equippables
+	eob
+
+SummersMagicCake_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+SummersMagicCake_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+SummersMagicCake_Cancel_Cant_Equip:		//l_0xc5cb1e
+// despite the name, it's often used as a generic change of mind
+	title(1, Jill)
+	"@That's too bad." end
+
+SummersMagicCake_Not_Enough_Cash:		//l_0xc5cb29
+	title(1, Jill)
+	"@You don't have enough money." end
+
+SummersMagicCake_Whole_Party_Full_Inventory:	//l_0xc5cb33
+	title(1, Jill)
+	"@You are carrying too many things." next
+	"@Come again when you reduce the number of things you are carrying." end
+
+SummersMagicCake_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+SummersMagicCake_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+SummersMagicCake_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+SummersMagicCake_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+SummersMagicCake_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+SummersMagicCake_Transaction_Thanks:		//l_0xc5cb67
+	title(1, Jill)
+	"@Thank you very much." next
+	eob
+
+SummersMagicCake_Transaction_Thanks_2:		//l_0xc5cb71
+// when is this used?
+	title(1, Jill)
+	"@Thank you again." next
+	eob
+
+SummersMagicCake_Request_Another_Transaction:	//l_0xc5cb7b
+	title(1, Jill)
+	"@Would you like to buy anything else?" linebreak
+	eob
+
+SummersMagicCake_Do_Another_Transaction:	// This shop doesn't run this line
+	eob
+
+SummersMagicCake_Chosen_Character_Inventory_Full:	//l_0xc5cb88
+	title(1, Jill)
+	"@{name(0)} seems to have too many things already." next
+	"@I don't think " swap call(data_36.l_0xc7e5f3) " can carry any more." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+SummersMagicCake_Bulk_Buy_Lots:
+	"@All those?" next
+	eob
+
+SummersMagicCake_Bulk_Buy_Not_Enough_Cash:
+	title(1, Jill)
+	"@You don't have enough money." end
+
+SummersMagicCake_Bulk_Buy_Full_Inventory:
+	title(1, Jill)
+	"@You are carrying way too many things." next
+	"@Come again when you reduce the number of things you are carrying." end
+
+SummersMagicCake_Bulk_Buy_Change_Of_Mind:
+	title(1, Jill)
+	"@That's too bad." end
+
+//------------------------------------------------------------------
+// Summers Toto Shop
+//------------------------------------------------------------------
+SummersToto_Greeting:		//l_0xc524f7
+	"@If ye be headin' to Scarabia, ye ought to shop here." next
+	"@Things're expensive down there..." next
+	"@So, what're ye lookin' fer?" linebreak
+	eob
+
+SummersToto_Exit_Store_Buy:	//l_0xc52546
+	"@Thanks much." next
+	"@If'n yer going to Scarabia, take care of yerself." end
+
+SummersToto_Exit_Store_Dont_Buy:	//l_0xc5256c
+	"@Please come again!" end
+
+SummersToto_Open_Shop_Window:	//l_0xc52574
+	"@What would ye like, then?" promptw
+	eob
+
+SummersToto_Selected_Item:	//l_0xc52583
+	"@{itemname(0)}?" next
+	eob
+
+SummersToto_Who_Will_Take_Item:	//l_0xc5258b
+	"@Which of ye is goin' to carry this?" promptw
+	eob
+
+SummersToto_Equip_Now:			//l_0xc525a4
+	"@Would ye like to equip it here, then?" linebreak
+	eob
+
+SummersToto_Buy_Previous_Equipment:	//l_0xc525bb
+ // arg: item name, res: item price
+	"@Would ye like it if I bought yer" linebreak
+	"  {itemname(0)}" linebreak
+	"  for {swap}$" number(0) "?" linebreak
+	eob
+
+SummersToto_Cant_Equip_Item:		//l_0xc525e6
+// arg: player name
+	"@{name(0)} cannot equip this." next
+	"@Do ye still want to buy it?" linebreak
+	eob
+
+SummersToto_Cancel_Cant_Equip:		//l_0xc52603
+// despite the name, it's often used as a generic change of mind
+	"@Yer not goin' to buy this thing?  All righty then." next
+	eob
+
+SummersToto_Not_Enough_Cash:		//l_0xc52622
+	"@Beggin' yer pardon, but it appears ye don't have enough money..." next
+	eob
+
+SummersToto_Whole_Party_Full_Inventory:	//l_0xc5264b
+	"@You've got entirely too many goodies." next
+	"@Would ye like me to take some of those things off yer hands?" next
+	"@I can buy the ones ye don't need, if ye want." linebreak
+	eob
+
+SummersToto_What_To_Sell:	//l_0xc526a2
+	"@What would ye like to sell me, then?" promptw
+	eob
+
+SummersToto_Confirm_Selling:	//l_0xc526b8
+// arg: item ID, res: item sell price
+	"@{itemname(0)}?" linebreak
+	"  I would pay {swap}$" number(0) "." next
+	"@Are ye happy with my offer?" linebreak
+	eob
+
+SummersToto_Cancel_Selling:	//l_0xc526e5
+	"@Oh, it's not quite what ye expected?  Well, all righty then." next
+	eob
+
+SummersToto_Nothing_To_Sell:	//l_0xc5270f
+	"@Oh?  Well, it appears to me that ye don't have anything to sell." next
+	eob
+
+SummersToto_Unsellable_Item:	//l_0xc52732
+	"@Beggin' yer pardon, but I can't buy that." next
+	eob
+
+SummersToto_Transaction_Thanks:		//l_0xc52750
+	"@Here ye go.  Thank ye." next
+	eob
+
+SummersToto_Transaction_Thanks_2:	//l_0xc52764
+// when is this used?
+	"@Thank ye kindly." next
+	eob
+
+SummersToto_Request_Another_Transaction:	//l_0xc52776
+	"@Will ye be needin' anything else?" linebreak
+	eob
+
+SummersToto_Do_Another_Transaction:	//l_0xc52788
+	"@What do ye need now?" linebreak
+	eob
+
+SummersToto_Chosen_Character_Inventory_Full:	//l_0xc52796
+	"@It appears {name(0)} has a full load." next
+	"@Will someone else take this instead?" linebreak
+	eob
+
+SummersToto_Bulk_Buy_Lots:
+	"@All these goodies?" next
+	eob
+
+SummersToto_Bulk_Buy_Not_Enough_Cash:
+	"@Beggin' yer pardon, but it appears ye don't have enough money..." next
+	eob
+
+SummersToto_Bulk_Buy_Full_Inventory:
+	"@You've got entirely way too many goodies." next
+	"@Would ye like me to take some of those things off yer hands?" next
+	"@I can buy the ones ye don't need, if ye want." linebreak
+	eob
+
+SummersToto_Bulk_Buy_Change_Of_Mind:
+	"@Yer not goin' to buy this thing?  All righty then." next
+	eob
+
+//------------------------------------------------------------------

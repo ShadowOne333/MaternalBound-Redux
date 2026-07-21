@@ -2037,47 +2037,92 @@ l_0xef7a66:
 
 l_0xef7a7d:
 	newline
-	"@" call(l_0xef7bbf) "Offense went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Offense went up by "
+	get_stat(25) if (compare_result(255)) {"0!" prompt eob }	// Ness base Offense
+	get_stat(47) if (compare_result(255)) {"0!" prompt eob }	// Paula base Offense
+	get_stat(69) if (compare_result(255)) {"0!" prompt eob }	// Jeff base Offense
+	get_stat(91) if (compare_result(255)) {"0!" prompt eob }	// Poo base Offense
+	"{delta}!" prompt
 	eob
 
 l_0xef7a97:
 	newline
-	"@" call(l_0xef7bbf) "Defense went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Defense went up by "
+	get_stat(26) if (compare_result(255)) {"0!" prompt eob }	// Ness base Defense
+	get_stat(48) if (compare_result(255)) {"0!" prompt eob }	// Paula base Defense
+	get_stat(70) if (compare_result(255)) {"0!" prompt eob }	// Jeff base Defense
+	get_stat(92) if (compare_result(255)) {"0!" prompt eob }	// Poo base Defense
+	"{delta}!" prompt
 	eob
 
 l_0xef7ab1:
 	newline
-	"@" call(l_0xef7bbf) "Speed went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Speed went up by "
+	get_stat(27) if (compare_result(255)) {"0!" prompt eob }	// Ness base Speed
+	get_stat(49) if (compare_result(255)) {"0!" prompt eob }	// Paula base Speed
+	get_stat(71) if (compare_result(255)) {"0!" prompt eob }	// Jeff base Speed
+	get_stat(93) if (compare_result(255)) {"0!" prompt eob }	// Poo base Speed
+	"{delta}!" prompt
 	eob
 
 l_0xef7ac9:
 	newline
-	"@" call(l_0xef7bbf) "Guts went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Guts went up by "
+	get_stat(28) if (compare_result(255)) {"0!" prompt eob }	// Ness base Guts
+	get_stat(50) if (compare_result(255)) {"0!" prompt eob }	// Paula base Guts
+	get_stat(72) if (compare_result(255)) {"0!" prompt eob }	// Jeff base Guts
+	get_stat(94) if (compare_result(255)) {"0!" prompt eob }	// Poo base Guts
+	"{delta}!" prompt
 	eob
 
 l_0xef7ae0:
 	newline
-	"@" call(l_0xef7bbf) "Vitality went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Vitality went up by "
+	get_stat(22) if (compare_result(255)) {"0!" prompt eob }	// Ness total Vitality
+	get_stat(44) if (compare_result(255)) {"0!" prompt eob }	// Paula total Vitality
+	get_stat(66) if (compare_result(255)) {"0!" prompt eob }	// Jeff total Vitality
+	get_stat(88) if (compare_result(255)) {"0!" prompt eob }	// Poo total Vitality
+	"{delta}!" prompt
 	eob
 
 l_0xef7afb:
 	newline
-	"@" call(l_0xef7bbf) "IQ went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "IQ went up by "
+	get_stat(24) if (compare_result(255)) {"0!" prompt eob }	// Ness base IQ
+	get_stat(46) if (compare_result(255)) {"0!" prompt eob }	// Paula base IQ
+	get_stat(68) if (compare_result(255)) {"0!" prompt eob }	// Jeff base IQ
+	get_stat(90) if (compare_result(255)) {"0!" prompt eob }	// Poo base IQ
+	"{delta}!" prompt
 	eob
 
 l_0xef7b11:
 	newline
-	"@" call(l_0xef7bbf) "Luck went up by {delta}!" prompt
+	"@" call(l_0xef7bbf) "Luck went up by "
+	get_stat(29) if (compare_result(255)) {"0!" prompt eob }	// Ness base Luck
+	get_stat(51) if (compare_result(255)) {"0!" prompt eob }	// Paula base Luck
+	get_stat(73) if (compare_result(255)) {"0!" prompt eob }	// Jeff base Luck
+	get_stat(95) if (compare_result(255)) {"0!" prompt eob }	// Poo base Luck
+	"{delta}!" prompt
 	eob
 
 l_0xef7b28:
 	newline
-	"@" call(l_0xef7b83) "Maximum HP went up by {delta}!" prompt
+	"@" call(l_0xef7b83) "Maximum HP went up by "
+	get_stat(13) if (compare_result(999)) {"0!" prompt eob }	// Ness max HP
+	get_stat(35) if (compare_result(999)) {"0!" prompt eob }	// Paula max HP
+	get_stat(57) if (compare_result(999)) {"0!" prompt eob }	// Jeff max HP
+	get_stat(79) if (compare_result(999)) {"0!" prompt eob }	// Poo max HP
+	"{delta}!" prompt
 	eob
 
 l_0xef7b46:
 	newline
-	"@" call(l_0xef7ba0) "Maximum PP went up by {delta}!" prompt
+	"@" call(l_0xef7ba0) "Maximum PP went up by "
+	get_stat(16) if (compare_result(999)) {"0!" prompt eob }	// Ness max PP
+	get_stat(38) if (compare_result(999)) {"0!" prompt eob }	// Paula max PP
+	get_stat(60) if (compare_result(999)) {"0!" prompt eob }	// Jeff max PP
+	get_stat(82) if (compare_result(999)) {"0!" prompt eob }	// Poo max PP
+	"{delta}!" prompt
 	eob
 
 l_0xef7b64:

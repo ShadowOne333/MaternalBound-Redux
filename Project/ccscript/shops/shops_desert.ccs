@@ -1,0 +1,111 @@
+//------------------------------------------------------------------
+import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+//------------------------------------------------------------------
+// Dusty Dunes Desert shop
+//------------------------------------------------------------------
+Desert_Greeting:		//l_0xc5c71f
+	"@Out walking in the desert must make you very hungry and thirsty!" next
+	eob
+
+Desert_Exit_Store_Buy:		//l_0xc5c74c
+	"@Thank you very much." end
+
+Desert_Exit_Store_Dont_Buy:	//l_0xc5c755
+	"@So, you don't want to buy anything? " end
+
+Desert_Open_Shop_Window:	//l_0xc5c765
+	"@What do you want?" next
+	eob
+
+Desert_Selected_Item:		//l_0xc5c76f
+	"@You want" linebreak
+	"  the {itemname(0)}?" next
+	eob
+
+Desert_Who_Will_Take_Item:	//l_0xc5c77e
+	"@Who is going to carry it?" promptw
+	eob
+
+Desert_Equip_Now:		// This shop doesn't sell equippables
+	eob
+
+Desert_Buy_Previous_Equipment:	// This shop doesn't sell equippables
+ // arg: item name, res: item price
+	eob
+
+Desert_Cant_Equip_Item:		// This shop doesn't sell equippables
+// arg: player name
+	eob
+
+Desert_Cancel_Cant_Equip:	//l_0xc5c78a
+// despite the name, it's often used as a generic change of mind
+	"@Oh?  So you changed your mind and don't want anything after all?" next
+	eob
+
+Desert_Not_Enough_Cash:		//l_0xc5c7ae
+	"@You don't have enough money." next
+	eob
+
+Desert_Whole_Party_Full_Inventory:	//l_0xc5c7b9
+	"@You're already carrying too much stuff." next
+	"@Sell something, or just throw something away, and then come back to see me." end
+
+Desert_What_To_Sell:		// This shop doesn't purchase items
+	eob
+
+Desert_Confirm_Selling:	// This shop doesn't purchase items
+// arg: item ID, res: item sell price
+	eob
+
+Desert_Cancel_Selling:	// This shop doesn't purchase items
+	eob
+
+Desert_Nothing_To_Sell:	// This shop doesn't purchase items
+	eob
+
+Desert_Unsellable_Item:	// This shop doesn't purchase items
+	eob
+
+Desert_Transaction_Thanks:	//l_0xc5c7f1
+	"@Thank you very much." next
+	eob
+
+Desert_Transaction_Thanks_2:	//l_0xc5c7fb
+// when is this used?
+	"@Thanks a lot." next
+	eob
+
+Desert_Request_Another_Transaction:	//l_0xc5c804
+	"@Do you need anything else?" linebreak
+	eob
+
+Desert_Do_Another_Transaction:		// This shop doesn't run this line
+	eob
+
+Desert_Chosen_Character_Inventory_Full:	//l_0xc5c80d
+	"@{name(0)} seems to have too many things already." next
+	"@I don't think " swap call(data_36.l_0xc7e5f3) " can carry any more." next
+	"@Can someone else carry it?" linebreak
+	eob
+
+Desert_Bulk_Buy_Lots:
+	"@All these?" next
+	eob
+
+Desert_Bulk_Buy_Not_Enough_Cash:
+	"@You don't have enough money." next
+	eob
+
+Desert_Bulk_Buy_Full_Inventory:
+	"@You're already carrying too much stuff for all these." next
+	"@Sell something, or just throw something away, and then come back to see me." end
+
+Desert_Bulk_Buy_Change_Of_Mind:
+	"@Oh?  So you changed your mind and don't want anything after all?" next
+	eob
+
+//------------------------------------------------------------------

@@ -5,247 +5,244 @@ import "../expansion/ccexpand.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 //------------------------------------------------------------------
-// Saturn Valley shop
+// Saturn Valley shops
 //------------------------------------------------------------------
-SaturnValley_Greeting:		//l_0xc52d94
-	"@Sssshhh!" linebreak
-	"  Don't talk too loud!" next
-	"@What do you want?" linebreak
+SaturnValley_Greeting:		//l_0xc530a2
+	font_saturn
+	"@Hi Hi Hi." linebreak
+	"  You come" linebreak
+	"  buying?" next
+	"@You can sell," linebreak
+	"  too." next
+	"@I, Mr. Saturn,  boing" next
+	"@can do all  for you." next
+	"@What do you" linebreak
+	"  want zoom?" linebreak
+	font_normal
 	eob
 
-SaturnValley_Exit_Store_Buy:	//l_0xc52dcc
-	"@Will that be all?" linebreak
-	"  Good luck, buddy!" end
-
-l_0xc52db6:	// Unused line?
-	"@...you again?!" linebreak
-	"  What do you want now?" linebreak
+SaturnValley_Exit_Store_Buy:	//l_0xc530fc
+	font_saturn
+	"@Oh," linebreak
+	"  you thank!" wait
+	font_normal
 	eob
 
-SaturnValley_Exit_Store_Dont_Buy:	//l_0xc52de8
-	"@So that's everything?" linebreak
-	"  Keep on the watch for bad guys." end
-
-SaturnValley_Open_Shop_Window:	//l_0xc52e0d
-	"@I've got what you need." promptw
+SaturnValley_Exit_Store_Dont_Buy:	//l_0xc5310f
+	font_saturn
+	"@Thank you." linebreak
+	"  Boing!" wait
+	font_normal
 	eob
 
-SaturnValley_Selected_Item:		//l_0xc52e1c
-	"@{itemname(0)}?" next
+SaturnValley_Open_Shop_Window:	//l_0xc5311f
+	font_saturn
+	"@What you" linebreak
+	"  buying zoom?" promptw
+	font_normal
 	eob
 
-SaturnValley_Who_Will_Take_Item:	//l_0xc52e24
-	"@Who's gonna lug this around?" promptw
+SaturnValley_Selected_Item:		//l_0xc53134
+	font_saturn
+	"@The" linebreak
+	"  {itemname(0)}?" next
+	font_normal
 	eob
 
-SaturnValley_Equip_Now:		//l_0xc52e3a
-	"@OK.  I suppose you're going to want to equip it here?" linebreak
+SaturnValley_Who_Will_Take_Item:	//l_0xc53144
+	font_saturn
+	"@Which" linebreak
+	"  you carry" linebreak
+	"  this burden?" promptw
+	font_normal
 	eob
 
-SaturnValley_Buy_Previous_Equipment:	//l_0xc52e59
+SaturnValley_Equip_Now:		//l_0xc53161
+	font_saturn
+	"@Equip" linebreak
+	"  here?" linebreak
+	font_normal
+	eob
+
+SaturnValley_Buy_Previous_Equipment:	//l_0xc53172
  // arg: item name, res: item price
-	"@The {itemname(0)}...?" linebreak
-	"  I'd say about {swap}$" number(0) "." next
-	"@Take it or leave it." linebreak
+	font_saturn
+	"@{itemname(0)}?" next
+	"@Uhh," linebreak
+	"  that one is" linebreak
+	"  " swap "$" number(0) "." next
+	"@What think you about" next
+	"@that price..." linebreak
+	"  zoom?" linebreak
+	font_normal
 	eob
 
-SaturnValley_Cant_Equip_Item:	//l_0xc52e85
+SaturnValley_Cant_Equip_Item:	//l_0xc531ba
 // arg: player name
-	"@{name(0)} won't be able to equip this." next
-	"@Are you intent on purchasing it anyway?" linebreak
+	font_saturn
+	"@{name(0)} is not be able to equip this." next
+	"@Boing!" next
+	"@Still wanna" linebreak
+	"  buy?" linebreak
+	font_normal
 	eob
 
-SaturnValley_Cancel_Cant_Equip:	//l_0xc52eb2
+SaturnValley_Cancel_Cant_Equip:	//l_0xc531ea
 // despite the name, it's often used as a generic change of mind
-	"@Well, that's showing good sense.  You shouldn't strain yourself too much." next
+	font_saturn
+	"@If you not" linebreak
+	"  gonna buy," next
+	"@don't" linebreak
+	"  buy zoom!" next
+	font_normal
 	eob
 
-SaturnValley_Not_Enough_Cash:	//l_0xc52ed7
-	"@Hold it just a second!  You haven't got enough money!" next
+SaturnValley_Not_Enough_Cash:	//l_0xc53212
+	font_saturn
+	"@Uhh," next
+	"@at a looking boing glance," linebreak
+	"  no chance." next
+	"@No" linebreak
+	"  enough" next
+	"@cashoooooola." linebreak
+	"  Zoicks!" next
+	font_normal
 	eob
 
-SaturnValley_Whole_Party_Full_Inventory:	//l_0xc52ef5
-	"@You aren't going to be able to carry any more stuff." next
-	"@You're dragging around all that junk..." next
-	"@I guess I could help you out by buying some things that you don't need..." next
+SaturnValley_Whole_Party_Full_Inventory:	//l_0xc53259
+	font_saturn
+	"@What a happy happy" next
+	"@surprise." linebreak
+	"  Zoom..." next
+	"@You have" linebreak
+	"  much" linebreak
+	"  junk." next
+	font_normal
 	eob
 
-SaturnValley_What_To_Sell:		//l_0xc52f4a
-	"@What are you going to pawn off on me?" promptw
+SaturnValley_What_To_Sell:		//l_0xc5328f
+	font_saturn
+	"@You want to" linebreak
+	"  sell me" linebreak
+	"  things" next
+	"@at me boing?" promptw
+	font_normal
 	eob
 
-SaturnValley_Confirm_Selling:	//l_0xc52f5f
+SaturnValley_Confirm_Selling:	//l_0xc532b3
 // arg: item ID, res: item sell price
-	"@{itemname(0)}?" linebreak
-	"  I'll give you {swap}$" number(0) ", and not a penny more." next
-	"@Take it or leave it." linebreak
+	font_saturn
+	"@{itemname(0)}?" next
+	"@The most" linebreak
+	"  us pay that" linebreak
+	"  is {swap}$" number(0) "." next
+	"@That kay-o" linebreak
+	"  on you?" next
+	"@Ding! Ding!" linebreak
+	font_normal
 	eob
 
-SaturnValley_Cancel_Selling:	//l_0xc52f94
-	"@...I don't think you'll find a better price anywhere else." next
+SaturnValley_Cancel_Selling:	//l_0xc532fa
+	font_saturn
+	"@Oh Joy!  Zooooom!" next
+	font_normal
 	eob
 
-SaturnValley_Nothing_To_Sell:	//l_0xc52fb6
-	"@What are you trying to pull, anyway?" next
-	"@You say you want to sell, but you have nothing to offer?!" next
-	"@You've got some nerve, kid!" next
+SaturnValley_Nothing_To_Sell:	//l_0xc53312
+	font_saturn
+	"@Ah-choo!  Hi Hi Hi!" next
+	"@try of" linebreak
+	"  tricking boing?" next
+	"@'Cause you" linebreak
+	"  have no" linebreak
+	"  anything" next
+	"@ selling.  Ding Ding!" next
+	font_normal
 	eob
 
-SaturnValley_Unsellable_Item:	//l_0xc52ffa
-	"@Forget it!" linebreak
-	"  I don't want to buy that junk!" next
+SaturnValley_Unsellable_Item:	//l_0xc53363
+	font_saturn
+	"@Dear, dear,  dear  ...Boing!" next
+	"@No can" linebreak
+	"  buy that." next
+	font_normal
 	eob
 
-SaturnValley_Transaction_Thanks:	//l_0xc53018
-	"@Excellent." linebreak
-	"  Glad we could work something out." next
+SaturnValley_Transaction_Thanks:	//l_0xc5338f
+	font_saturn
+	"@Oh," linebreak
+	"  you thank." next
+	font_normal
 	eob
 
-SaturnValley_Transaction_Thanks_2:	//l_0xc53037
+SaturnValley_Transaction_Thanks_2:	//l_0xc533a3
 // when is this used?
-	"@Thank you." pause(20)
-	"  Things must be pretty tough, especially for a kid like you." next
+	font_saturn
+	"@Thanks!  Ding Zoom!" next
+	font_normal
 	eob
 
-SaturnValley_Request_Another_Transaction:	//l_0xc53063
-	"@So, will there be anything else?" linebreak
+SaturnValley_Request_Another_Transaction:	//l_0xc533b6
+	font_saturn
+	"@Is there  anything  Zoom" next
+	"@else need?" next
+	font_normal
 	eob
 
-SaturnValley_Do_Another_Transaction:	//l_0xc53072
-	"@What is it now?" linebreak
+SaturnValley_Do_Another_Transaction:	//l_0xc533d5
+	font_saturn
+	"@What next, Boing?" linebreak
+	font_normal
 	eob
 
-SaturnValley_Chosen_Character_Inventory_Full:	//l_0xc5307d
-	"@{name(0)} can't carry any more." next
-	"@Is anyone else willing to carry it?" linebreak
+SaturnValley_Chosen_Character_Inventory_Full:	//l_0xc533e5
+	font_saturn
+	"@{name(0)} has" linebreak
+	"  kookie much" linebreak
+	"  junk?" next
+	"@Does anyone" linebreak
+	"  want help" linebreak
+	"  Zoom?" next
+	font_normal
 	eob
 
 SaturnValley_Bulk_Buy_Lots:
-	"@All of these?" next eob
+	font_saturn
+	"@This all," linebreak
+	"  Zoom?" next
+	font_normal
+	eob
 
 SaturnValley_Bulk_Buy_Not_Enough_Cash:
-	"@Hold it just a second!  You haven't got enough money!" next
+	font_saturn
+	"@Uhh," next
+	"@at a looking boing glance," linebreak
+	"  no chance." next
+	"@No" linebreak
+	"  enough" next
+	"@cashoooooola." linebreak
+	"  Zoicks!" next
+	font_normal
 	eob
 
 SaturnValley_Bulk_Buy_Full_Inventory:
-	"@You aren't going to be able to carry all this stuff." next
-	"@You're dragging around all that junk..." next
-	"@I guess I could help you out by buying some things that you don't need..." next
+	font_saturn
+	"@What a happy happy" next
+	"@surprise." linebreak
+	"  Zoom..." next
+	"@You have" linebreak
+	"  much" linebreak
+	"  junk." next
+	font_normal
 	eob
 
 SaturnValley_Bulk_Buy_Change_Of_Mind:
-	"@Well, that's showing good sense.  You shouldn't strain yourself too much." next
-	eob
-
-//------------------------------------------------------------------
-// Grapefruit Falls Salesman
-//------------------------------------------------------------------
-ThreekGrapefruitFallsSalesman_Greeting:		//l_0xc5c32a:
-	"@You must have a long, tough road ahead of you, do you not?" next
-	"@No, there is no need to explain.  I already know... you must be hungry." next
-	"@This is good timing for you.  I happen to be carrying something to eat." next
-	eob
-
-ThreekGrapefruitFallsSalesman_Exit_Store_Buy:	//l_0xc5c39e
-	"@If you want to fully recover, there is a village full of..." next
-	"@interesting people... just ahead.  Go there and take a good rest." next
-	"@I have heard that the name of this village is Saturn Valley," next
-	"@but it cannot be found on any map." next
-	"@I enjoy helping those who are in trouble." next
-	"@...though I charge them for my trouble." end
-
-ThreekGrapefruitFallsSalesman_Exit_Store_Dont_Buy:	//l_0xc5c456
-	"@Please, by all means, come again.  ... Ah, I just remembered..." next
-	"@There is a village with many... interesting people... just ahead." next
-	"@You should go there and visit." next
-	"@I heard that the name of the village is Saturn Valley," next
-	"@but it cannot be found on any map." end
-
-ThreekGrapefruitFallsSalesman_Open_Shop_Window:		//l_0xc5c4e3
-	"@What would you like?" promptw
-	eob
-
-ThreekGrapefruitFallsSalesman_Selected_Item:		//l_0xc5c4ee
-	"@You want" linebreak
-	"  the {itemname(0)}?" next
-	eob
-
-ThreekGrapefruitFallsSalesman_Who_Will_Take_Item:	//l_0xc5c4fd
-	"@Who is going to carry this?" next
-	eob
-
-ThreekGrapefruitFallsSalesman_Equip_Now:		// Salesman doesn't sell equippables
-	eob
-
-ThreekGrapefruitFallsSalesman_Buy_Previous_Equipment:	// Salesman doesn't sell equippables
-	eob
-
-ThreekGrapefruitFallsSalesman_Cant_Equip_Item:		// Salesman doesn't sell equippables
-	eob
-
-ThreekGrapefruitFallsSalesman_Cancel_Cant_Equip:	//l_0xc5c50d
-// despite the name, it's often used as a generic change of mind
-	"@I see.  That's ...too bad." promptw
-	eob
-
-ThreekGrapefruitFallsSalesman_Not_Enough_Cash:		//l_0xc5c521
-	"@You... do no seem to have enough money." next
-	eob
-
-ThreekGrapefruitFallsSalesman_Whole_Party_Full_Inventory:	//l_0xc5c536
-	"@You're already carrying too much stuff." next
-	"@Sell something, or just abandon something, and come again." end
-
-ThreekGrapefruitFallsSalesman_What_To_Sell:	// Salesman doesn't purchase items
-	eob
-
-ThreekGrapefruitFallsSalesman_Confirm_Selling:	// Salesman doesn't purchase items
-	eob
-
-ThreekGrapefruitFallsSalesman_Cancel_Selling:	// Salesman doesn't purchase items
-	eob
-
-ThreekGrapefruitFallsSalesman_Nothing_To_Sell:	// Salesman doesn't purchase items
-	eob
-
-ThreekGrapefruitFallsSalesman_Unsellable_Item:	// Salesman doesn't purchase items
-	eob
-
-ThreekGrapefruitFallsSalesman_Transaction_Thanks:	//l_0xc5c564
-	"@Thank you." next
-	eob
-
-ThreekGrapefruitFallsSalesman_Transaction_Thanks_2:	//l_0xc5c56b
-// when is this used?
-	"@Thank you." next
-	eob
-
-ThreekGrapefruitFallsSalesman_Request_Another_Transaction:	//l_0xc5c572
-	"@Do you want to buy anything else?" linebreak
-	eob
-
-ThreekGrapefruitFallsSalesman_Do_Another_Transaction:		// Salesman doesn't run this line
-	"@What can I do for you now?" linebreak
-	eob
-
-ThreekGrapefruitFallsSalesman_Chosen_Character_Inventory_Full:	//l_0xc5c57b
-	"@{name(0)} has too many things already." next
-	"@Can anyone else carry it?" linebreak
-	eob
-
-ThreekGrapefruitFallsSalesman_Bulk_Buy_Lots:
-	"@All of these?" next eob
-
-ThreekGrapefruitFallsSalesman_Bulk_Buy_Not_Enough_Cash:
-	"@You... do no seem to have enough money for these." next
-	eob
-
-ThreekGrapefruitFallsSalesman_Bulk_Buy_Full_Inventory:
-	"@You're already carrying too much stuff." next
-	"@Sell something, or just abandon something, and come again." end
-
-ThreekGrapefruitFallsSalesman_Bulk_Buy_Change_Of_Mind:
-	"@I see.  That's ...too bad." promptw
+	font_saturn
+	"@If you not" linebreak
+	"  gonna buy," next
+	"@don't" linebreak
+	"  buy zoom!" next
+	font_normal
 	eob
 
 //------------------------------------------------------------------
