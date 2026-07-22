@@ -20,12 +20,12 @@ l_0xc5df3a:
 	goto(l_0xc5df61)
 
 l_0xc5df56:
-	call(data_00.l_0xc51568)
+	call(ShopMain.Transaction_Thanks)	//data_00.l_0xc51568)
 	unset(FLG_SHOP_TOOK)	// 224
 	unset(FLG_SHOP_SOLD)	// 225
 
 l_0xc5df61:
-	call(data_00.l_0xc51700)
+	call(ShopMain.Request_Another_Transaction)	//data_00.l_0xc51700)
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -34,11 +34,11 @@ l_0xc5df61:
 	goto(data_14.l_0xc5deef)
 
 l_0xc5df7f:
-	call(data_00.l_0xc51898)
+	call(ShopMain.Do_Another_Transaction)	//data_00.l_0xc51898
 	goto(data_14.l_0xc5ded3)
 
 l_0xc5df89:
-	call(data_00.l_0xc50f66)
+	call(ShopMain.Whole_Party_Full_Inventory)	//data_00.l_0xc50f66
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -47,18 +47,18 @@ l_0xc5df89:
 	goto(data_14.l_0xc5deef)
 
 l_0xc5dfa7:
-	call(data_00.l_0xc513a4)
+	call(ShopMain.Nothing_To_Sell)	//data_00.l_0xc513a4
 	goto(l_0xc5df61)
 
 l_0xc5dfb1:
 	unset(FLG_SHOPTEMP_2)	// 657
 	newline
-	call(data_00.l_0xc50000)
+	call(ShopMain.Greeting)	//data_00.l_0xc50000
 
 l_0xc5dfba:
-	call(data_00.l_0xc504c8)
+	call(ShopMain.Open_Shop_Window)	//data_00.l_0xc504c8
 	open_hp
-	call(data_13.l_0xc5d5ab)
+	call(ShopMain.Shop_List_Main)	//data_13.l_0xc5d5ab
 	goto_if_false(l_0xc5e013)
 	store_registers
 	get_item_receiver(-1)	// 0xFF
@@ -70,12 +70,12 @@ l_0xc5dfba:
 	goto(l_0xc5dffa)
 
 l_0xc5dfef:
-	call(data_00.l_0xc51568)
+	call(ShopMain.Transaction_Thanks)	//data_00.l_0xc51568)
 	unset(FLG_SHOP_TOOK)	// 224
 	unset(FLG_SHOP_SOLD)	// 225
 
 l_0xc5dffa:
-	call(data_00.l_0xc51700)
+	call(ShopMain.Request_Another_Transaction)	//data_00.l_0xc51700)
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -84,27 +84,27 @@ l_0xc5dffa:
 
 l_0xc5e013:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e020)	// 0x0291, 657
-	call(data_00.l_0xc50330)
+	call(ShopMain.Exit_Store_Dont_Buy)	//data_00.l_0xc50330
 	eob
 
 l_0xc5e020:
 	unset(FLG_SHOPTEMP_2)	// 657
-	call(data_00.l_0xc50198)
+	call(ShopMain.Exit_Store_Buy)	//data_00.l_0xc50198
 	eob
 
 l_0xc5e029:
-	call(data_00.l_0xc50f66)
+	call(ShopMain.Whole_Party_Full_Inventory)	//data_00.l_0xc50f66
 	eob
 
 l_0xc5e02f:
 	unset(FLG_SHOPTEMP_2)	// 657
 	newline
-	call(data_00.l_0xc50000)
+	call(ShopMain.Greeting)	//data_00.l_0xc50000
 
 l_0xc5e038:
-	call(data_00.l_0xc504c8)
+	call(ShopMain.Open_Shop_Window)	//data_00.l_0xc504c8
 	open_hp
-	call(data_13.l_0xc5d5ab)
+	call(ShopMain.Shop_List_Main)	//data_13.l_0xc5d5ab
 	goto_if_false(l_0xc5e08d)
 	store_registers
 	get_item_receiver(-1)	// 0xFF
@@ -116,10 +116,10 @@ l_0xc5e038:
 	eob
 
 l_0xc5e069:
-	call(data_00.l_0xc51568)
+	call(ShopMain.Transaction_Thanks)	//data_00.l_0xc51568)
 	unset(FLG_SHOP_TOOK)	// 224
 	unset(FLG_SHOP_SOLD)	// 225
-	call(data_00.l_0xc51700)
+	call(ShopMain.Request_Another_Transaction)	//data_00.l_0xc51700)
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -128,23 +128,23 @@ l_0xc5e069:
 
 l_0xc5e08d:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5e09a)	// 0x0291, 657
-	call(data_00.l_0xc50330)
+	call(ShopMain.Exit_Store_Dont_Buy)	//data_00.l_0xc50330
 	eob
 
 l_0xc5e09a:
 	unset(FLG_SHOPTEMP_2)	// 657
-	call(data_00.l_0xc50198)
+	call(ShopMain.Exit_Store_Buy)	//data_00.l_0xc50198
 	eob
 
 l_0xc5e0a3:
-	call(data_00.l_0xc50f66)
+	call(ShopMain.Whole_Party_Full_Inventory)	//data_00.l_0xc50f66
 	eob
 
 l_0xc5e0a9:
 	call(l_0xc5e24b)
 	goto_if_false(l_0xc5e1d6)
 	load_registers
-	call(data_00.l_0xc50660)
+	call(ShopMain.Selected_Item)	//data_00.l_0xc50660
 	party_size_smaller_than(2)	// 0x02
 	goto_if_false(l_0xc5e0cc)
 	get_char_at_pos(1)	// 0x01
@@ -158,7 +158,7 @@ l_0xc5e0cc:
 		goto_if_true(_exit_if_bazooka)
 	}
 	load_registers
-	call(data_00.l_0xc507f8)
+	call(ShopMain.Who_Will_Take_Item)	//data_00.l_0xc507f8
 	call(l_0xc5e52e)
 	goto_if_false(l_0xc5e1ad)
 
@@ -178,7 +178,7 @@ l_0xc5e0de:
 	call(l_0xc5e3a5)
 	call(data_14.l_0xc5d835)
 	store_registers
-	call(data_00.l_0xc50990)
+	call(ShopMain.Equip_Now)	//data_00.l_0xc50990
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -198,7 +198,7 @@ l_0xc5e136:
 	goto_if_false(l_0xc5e18b)
 	call(l_0xc5e36e)
 	goto_if_false(l_0xc5e18b)
-	call(data_00.l_0xc50a72)
+	call(ShopMain.Buy_Previous_Equipment)	//data_00.l_0xc50a72
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -220,7 +220,7 @@ _exit_if_bazooka:
 
 l_0xc5e18f:
 	call(l_0xc5e387)
-	call(data_00.l_0xc50b54)
+	call(ShopMain.Cant_Equip_Item)	//data_00.l_0xc50b54
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -228,12 +228,12 @@ l_0xc5e18f:
 		switch_entry(l_0xc5e1ad)
 
 l_0xc5e1ad:
-	call(data_00.l_0xc50c36)
+	call(ShopMain.Cancel_Cant_Equip)	//data_00.l_0xc50c36
 	goto(l_0xc5e18b)
 
 l_0xc5e1b7:
 	newline
-	call(data_00.l_0xc5197a)
+	call(ShopMain.Chosen_Character_Inventory_Full)	//data_00.l_0xc5197a
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
 	switch_goto(2)	// 0x02
@@ -242,7 +242,7 @@ l_0xc5e1b7:
 	goto(l_0xc5e1ad)
 
 l_0xc5e1d6:
-	call(data_00.l_0xc50dce)
+	call(ShopMain.Not_Enough_Cash)	//data_00.l_0xc50dce
 	goto(l_0xc5e18b)
 
 l_0xc5e1e0:
@@ -251,14 +251,14 @@ l_0xc5e1e0:
 	goto(l_0xc5e188)
 
 l_0xc5e1ef:
-	call(data_00.l_0xc510fe)
+	call(ShopMain.What_To_Sell)	//data_00.l_0xc510fe
 	call(l_0xc5e456)
 	goto_if_false(l_0xc5e236)
 	store_registers
 	get_inventory_item(0,0)	// 0x00, 0x00
 	get_selling_price(0)	// 0x00
 	goto_if_false(l_0xc5e241)
-	call(data_00.l_0xc511e0)
+	call(ShopMain.Confirm_Selling)	//data_00.l_0xc511e0
 	show_wallet
 	call(data_36.l_0xc7dd4f)
 	call(data_36.l_0xc7dd5e)
@@ -275,11 +275,11 @@ l_0xc5e236:
 	eob
 
 l_0xc5e237:
-	call(data_00.l_0xc512c2)
+	call(ShopMain.Cancel_Selling)	//data_00.l_0xc512c2
 	goto(l_0xc5e236)
 
 l_0xc5e241:
-	call(data_00.l_0xc51486)
+	call(ShopMain.Unsellable_Item)	//data_00.l_0xc51486
 	goto(l_0xc5e236)
 
 l_0xc5e24b:

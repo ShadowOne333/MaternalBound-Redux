@@ -11,210 +11,9 @@ import "../essential/stdext.ccs"
 command e(label) "{long label}"
 
 // Text Data
-l_0xc5d766:	// Broken iron seller 1
-	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(11) }	// 0x0B
-	else { do_shop_menu(67) }
-	eob
-
-l_0xc5d76a:
-	do_shop_menu(14)	// 0x0E
-	eob
-
-l_0xc5d76e:
-	do_shop_menu(54)	// 0x36
-	eob
-
-l_0xc5d772:
-	do_shop_menu(15)	// 0x0F
-	eob
-
-l_0xc5d776:
-	do_shop_menu(55)	// 0x37
-	eob
-
-l_0xc5d77a:
-	do_shop_menu(16)	// 0x10
-	eob
-
-l_0xc5d77e:
-	do_shop_menu(17)	// 0x11
-	eob
-
-l_0xc5d782:
-	do_shop_menu(18)	// 0x12
-	eob
-
-l_0xc5d786:
-	do_shop_menu(19)	// 0x13
-	eob
-
-l_0xc5d78a:
-	do_shop_menu(20)	// 0x14
-	eob
-
-l_0xc5d78e:
-	do_shop_menu(22)	// 0x16
-	eob
-
-l_0xc5d792:
-	goto_if_flag(FLG_TLPT_SUMS, l_0xc5d79d)	// 0xD7, 215
-	do_shop_menu(64)	// 0x40
-	eob
-
-l_0xc5d79d:
-	do_shop_menu(65)	// 0x41
-	eob
-
-l_0xc5d7a1:
-	do_shop_menu(56)	// 0x38
-	eob
-
-l_0xc5d7a5:
-	do_shop_menu(23)	// 0x17
-	eob
-
-l_0xc5d7a9:
-	do_shop_menu(50)	// 0x32
-	eob
-
-l_0xc5d7ad:
-	do_shop_menu(57)	// 0x39
-	eob
-
-l_0xc5d7b1:
-	do_shop_menu(24)	// 0x18
-	eob
-
-l_0xc5d7b5:
-	do_shop_menu(58)	// 0x3A
-	eob
-
-l_0xc5d7b9:
-	do_shop_menu(59)	// 0x3B
-	eob
-
-l_0xc5d7bd:
-	do_shop_menu(25)	// 0x19
-	eob
-
-l_0xc5d7c1:
-	do_shop_menu(26)	// 0x1A
-	eob
-
-l_0xc5d7c5:
-	do_shop_menu(27)	// 0x1B
-	eob
-
-l_0xc5d7c9:
-	do_shop_menu(28)	// 0x1C
-	eob
-
-l_0xc5d7cd:
-	do_shop_menu(29)	// 0x1D
-	eob
-
-l_0xc5d7d1:
-	do_shop_menu(31)	// 0x1F
-	eob
-
-l_0xc5d7d5:
-	do_shop_menu(32)	// 0x20
-	eob
-
-l_0xc5d7d9:
-	do_shop_menu(33)	// 0x21
-	eob
-
-l_0xc5d7dd:
-	do_shop_menu(30)	// 0x1E
-	eob
-
-l_0xc5d7e1:
-	do_shop_menu(34)	// 0x22
-	eob
-
-l_0xc5d7e5:
-	if not flag FLG_ITEM_BROKEN_IRON_PURCHASED { do_shop_menu(35) }	// 0x23
-	else { do_shop_menu(68) }
-	eob
-
-l_0xc5d7e9:
-	do_shop_menu(38)	// 0x26
-	eob
-
-l_0xc5d7ed:
-	do_shop_menu(40)	// 0x28
-	eob
-
-l_0xc5d7f1:
-	do_shop_menu(39)	// 0x27
-	eob
-
-l_0xc5d7f5:
-	do_shop_menu(3)	// 0x03
-	eob
-
-l_0xc5d7f9:
-	do_shop_menu(10)	// 0x0A
-	eob
-
-l_0xc5d7fd:
-	do_shop_menu(61)	// 0x3D
-	eob
-
-l_0xc5d801:
-	do_shop_menu(41)	// 0x29
-	eob
-
-l_0xc5d805:
-	do_shop_menu(43)	// 0x2B
-	eob
-
-l_0xc5d809:
-	do_shop_menu(44)	// 0x2C
-	eob
-
-l_0xc5d80d:
-	do_shop_menu(45)	// 0x2D
-	eob
-
-l_0xc5d811:
-	do_shop_menu(63)	// 0x3F
-	eob
-
-l_0xc5d815:
-	do_shop_menu(62)	// 0x3E
-	eob
-
-l_0xc5d819:
-	do_shop_menu(21)	// 0x15
-	eob
-
-l_0xc5d81d:	// Near-Pyramid seller
-	if not flag FLG_ITEM_BAZOOKA { do_shop_menu(51) }	// 0x33
-	else { do_shop_menu(66) }
-	eob
-
-l_0xc5d821:
-	do_shop_menu(46)	// 0x2E
-	eob
-
-l_0xc5d825:
-	do_shop_menu(52)	// 0x34
-	eob
-
-l_0xc5d829:
-	do_shop_menu(53)	// 0x35
-	eob
-
-l_0xc5d82d:
-	do_shop_menu(36)	// 0x24
-	eob
-
-l_0xc5d831:
-	do_shop_menu(60)	// 0x3C
-	eob
-
+//------------------------------------
+// Previous data from this file is now in ShopMain and the Shop scripts
+//------------------------------------
 l_0xc5d835:
 	goto_if_flag(FLG_SHOPTEMP_1, l_0xc5d840)	// 0x0290, 656
 	sound(SND_KACHING)	// 12
@@ -526,7 +325,7 @@ l_0xc5ddf1:
 
 l_0xc5decb:
 	unset(FLG_SHOPTEMP_2)	// 657
-	call(data_00.l_0xc50000)
+	call(ShopMain.Greeting)	//data_00.l_0xc50000
 
 l_0xc5ded3:
 	load_str("Buy")
@@ -544,18 +343,18 @@ l_0xc5dee0:
 
 l_0xc5deef:
 	goto_if_flag(FLG_SHOPTEMP_2, l_0xc5defc)	// 0x0291, 657
-	call(data_00.l_0xc50330)
+	call(ShopMain.Exit_Store_Dont_Buy)	//data_00.l_0xc50330
 	eob
 
 l_0xc5defc:
-	call(data_00.l_0xc50198)
+	call(ShopMain.Exit_Store_Buy)	//data_00.l_0xc50198
 	unset(FLG_SHOPTEMP_2)	// 657
 	eob
 
 l_0xc5df05:
-	call(data_00.l_0xc504c8)
+	call(ShopMain.Open_Shop_Window)	//data_00.l_0xc504c8
 	open_hp
-	call(data_13.l_0xc5d5ab)
+	call(ShopMain.Shop_List_Main)	//data_13.l_0xc5d5ab
 	goto_if_false(data_15.l_0xc5df61)
 	call(data_15.l_0xc5e3bc)
 	store_registers

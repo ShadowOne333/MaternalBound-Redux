@@ -41,7 +41,7 @@ _exit:
 //	Guts Max Limit fixes
 //------------------------------------
 // Apply the max PP limit on character Level Up for Max PP
-ROM[0xC21C3B] = JML	(Max_Guts_Limit_Fix)
+//ROM[0xC21C3B] = JML	(Max_Guts_Limit_Fix)
 
 Max_Guts_Limit_Fix: {
 	LDA_d	(0x0F)
@@ -66,6 +66,22 @@ _UNKNOWN3:
 
 _exit:
 	JML	(0xC21C43)	// Return to the original hijacked code 
+}
+
+ROM[0xC2B480] = JML	(Max_Guts_Increase_Limit_Fix)
+
+Max_Guts_Increase_Limit_Fix: {
+	// Added check to make the maximum limit 255 instead of overflowing
+	CMP_i	(0x00FF)
+	BCC	(2)		// Branch if lower than 255
+	LDA_i	(0x00FF)		// Otherwise, force the max Vitality number to be 255 before printing the value
+
+	// Added check to make the maximum limit 255 instead of overflowing
+	//BVS	(2)		// Branch if Overflow Set
+	//LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
+
+	JSL	(0xC21BA4)
+	JML	(0xC2B484)	// Return to the original hijacked code 
 }
 //------------------------------------
 //	Luck Max Limit fixes

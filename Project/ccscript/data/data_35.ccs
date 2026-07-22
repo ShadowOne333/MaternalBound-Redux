@@ -282,7 +282,7 @@ l_0xc7c6b6:
 
 l_0xc7c6c9:
 	get_inventory_item(0, 0) swap
-	"@{itemname(0)} is the only one who should carry" linebreak
+	"@{name(0)} is the only one who should carry" linebreak
 	"  the {swap}{itemname(0)}." end
 
 l_0xc7c6f1:
