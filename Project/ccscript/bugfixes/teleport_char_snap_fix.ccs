@@ -1,0 +1,32 @@
+//------------------------------------------------------------------
+// Teleport Character Snapping fix by Catador
+//------------------------------------------------------------------
+// Fix for the Teleport bug that causes Ness' sprite to briefly move to the front of the party at the start of a Teleport if he's diamondized or unconscious teleport
+//------------------------------------------------------------------
+import "../essential/asm65816.ccs"
+//------------------------------------------------------------------
+define PARTY_MEMBERS		= 0x988B
+define PARTY_MEMBER_DATA	= 0x99CE
+define MULT168			= 0xC08FF7
+//------------------------------------------------------------------
+// Hijack the full party update routine, which refreshes party positions for all members
+ROM[0xC07B5A] = {
+	JSL (FIX_TeleportNessSnapsToLeader)
+	NOP
+}
+/*
+C0/7B5A: AD 0B 9A     LDA $9A0B
+C0/7B5D: 85 14        STA $14
+*/
+FIX_TeleportNessSnapsToLeader: {
+    LDA_a 	(PARTY_MEMBERS)	// Get actual leader party member
+    LDY_i	(0x005F)	// sizeof(PartyMemberData)
+    JSL		(MULT168)	// Mul16x8r16
+    CLC
+    ADC_i	(PARTY_MEMBER_DATA)	// PartyMemberData struct array
+    TAX
+    LDA_x	(0x003D)	// walk_history_index field
+    STA_d	(0x14)
+    RTL
+}
+//------------------------------------------------------------------

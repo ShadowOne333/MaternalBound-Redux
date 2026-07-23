@@ -1,27 +1,70 @@
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 
+// Flyover Text Commands
+command flyover_end "[00]"
+command flyover_setx(n) "[01 {byte n}]"
+command flyover_sety(n) "[02 {byte n}]"
+command flyover_name(n) "[08 {byte n}]"
+command flyover_linebreak "[09]"
+
 // Begin Flyover texts
 l_0xe10b86:
-	"[ 02 0C ][ 01 32 ]The year is 199X[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(50)
+	"The year is 199X"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10b9c:
-	"[ 02 0C ][ 01 0C ]Onett, a small town in Eagleland[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(12)
+	"Onett, a small town in Eagleland"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10bc2:
-	"[ 02 0C ][ 01 3D ][ 08 01 ]'s house[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(61)
+	"{flyover_name(1)}'s house"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10bd2:
-	"[ 02 0C ][ 01 00 ]Winters, a small country to the north[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(0)
+	"Winters, a small country to the north"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10bfd:
-	"[ 02 0C ][ 01 15 ]Snow Wood Boarding House[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(21)
+	"Snow Wood Boarding House"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10c1b:
-	"[ 02 0C ][ 01 23 ]Dalaam, in the Far East[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(35)
+	"Dalaam, in the Far East"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10c38:
-	"[ 02 0B ][ 01 25 ]The palace of [ 08 04 ][ 09 ][ 01 30 ]The Crown Prince[ 09 ][ 00 ]"
+	flyover_sety(11)
+	flyover_setx(37)
+	"The palace of {flyover_name(4)}"
+	flyover_linebreak
+	flyover_setx(48)
+	"The Crown Prince"
+	flyover_linebreak
+	flyover_end
 
 l_0xe10c61:
-	"[ 02 0C ][ 01 30 ]Later that night...[ 09 ][ 00 ]"
+	flyover_sety(12)
+	flyover_setx(48)
+	"Later that night..."
+	flyover_linebreak
+	flyover_end
+

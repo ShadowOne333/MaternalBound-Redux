@@ -9,170 +9,178 @@ import "../essential/stdext.ccs"
 // [01 0X] = 1st line, X -> Tile spacing
 // [00] = End
 
+// Flyover Text Commands (apply to Coffee/Tea sequences as well)
+command flyover_end "[00]"
+command flyover_setx(n) "[01 {byte n}]"
+command flyover_sety(n) "[02 {byte n}]"
+command flyover_name(n) "[08 {byte n}]"
+command flyover_linebreak "[09]"
+
 // Saturn Valley Coffee Sequence
 l_0xe10000:
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]You've traveled very far from"
-	"[ 09 ][ 01 0C ]home..."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]Do you remember how your long"
-	"[ 09 ][ 01 0C ]and winding journey began with"
-	"[ 09 ][ 01 0C ]someone pounding at your door?"
-	"[ 09 ][ 01 0C ]It was Porky, the worst person in"
-	"[ 09 ][ 01 0C ]your neighborhood, who knocked"
-	"[ 09 ][ 01 0C ]on the door that fateful night."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]On your way, you have walked,"
-	"[ 09 ][ 01 0C ]thought and fought.  Yet through"
-	"[ 09 ][ 01 0C ]all this, you have never lost your"
-	"[ 09 ][ 01 0C ]courage. You have grown steadily"
-	"[ 09 ][ 01 0C ]stronger, though you have"
-	"[ 09 ][ 01 0C ]experienced the pain of battle"
-	"[ 09 ][ 01 0C ]many times."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]You are no longer alone in your"
-	"[ 09 ][ 01 0C ]adventure, [ 08 02 ] who is"
-	"[ 09 ][ 01 0C ]steadfast, kind and even pretty,"
-	"[ 09 ][ 01 0C ]is always at your side."
-	"[ 09 ][ 01 0C ][ 08 03 ] is with you as well."
-	"[ 09 ][ 01 0C ]Though he is timid, he came from"
-	"[ 09 ][ 01 0C ]a distant land to help you."
-	"[ 09 ][ 01 0C ][ 08 01 ], as you certainly"
-	"[ 09 ][ 01 0C ]know by now, you are not a"
-	"[ 09 ][ 01 0C ]regular young man...  You have"
-	"[ 09 ][ 01 0C ]an awesome destiny to fulfill."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]The journey from this point will"
-	"[ 09 ][ 01 0C ]be long, and it will be more"
-	"[ 09 ][ 01 0C ]difficult than anything you have"
-	"[ 09 ][ 01 0C ]undergone to this point.  Yet, I"
-	"[ 09 ][ 01 0C ]know you will be all right.  When"
-	"[ 09 ][ 01 0C ]good battles evil, which side do"
-	"[ 09 ][ 01 0C ]you believe wins?  Do you have"
-	"[ 09 ][ 01 0C ]faith that good is triumphant?"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]One thing you must never lose is"
-	"[ 09 ][ 01 0C ]courage.  If you believe in the"
-	"[ 09 ][ 01 0C ]goal you are striving for, you will"
-	"[ 09 ][ 01 0C ]be courageous.  There are many"
-	"[ 09 ][ 01 0C ]difficult times ahead, but you"
-	"[ 09 ][ 01 0C ]must keep your sense of humor,"
-	"[ 09 ][ 01 0C ]work through the tough"
-	"[ 09 ][ 01 0C ]situations and enjoy yourself."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]When you have finished this cup"
-	"[ 09 ][ 01 0C ]of coffee, your adventure will"
-	"[ 09 ][ 01 0C ]begin again.  Next, you must pass"
-	"[ 09 ][ 01 0C ]through a vast desert and"
-	"[ 09 ][ 01 0C ]proceed to the big city of"
-	"[ 09 ][ 01 0C ]Fourside."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ][ 08 01 ]..."
-	"[ 09 ][ 01 0C ]           [ 08 02 ]..."
-	"[ 09 ][ 01 0C ]                      [ 08 03 ]..."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]             May the goddess"
-	"[ 09 ][ 01 0C ]              of good fortune"
-	"[ 09 ][ 01 0C ]         smile upon you always..."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 00 ]"
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "You've traveled very far from" flyover_linebreak
+	flyover_setx(12) "home..." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "Do you remember how your long" flyover_linebreak
+	flyover_setx(12) "and winding journey began with" flyover_linebreak
+	flyover_setx(12) "someone pounding at your door?" flyover_linebreak
+	flyover_setx(12) "It was Porky, the worst person in" flyover_linebreak
+	flyover_setx(12) "your neighborhood, who knocked" flyover_linebreak
+	flyover_setx(12) "on the door that fateful night." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "On your way, you have walked," flyover_linebreak
+	flyover_setx(12) "thought and fought.  Yet through" flyover_linebreak
+	flyover_setx(12) "all this, you have never lost your" flyover_linebreak
+	flyover_setx(12) "courage. You have grown steadily" flyover_linebreak
+	flyover_setx(12) "stronger, though you have" flyover_linebreak
+	flyover_setx(12) "experienced the pain of battle" flyover_linebreak
+	flyover_setx(12) "many times." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "You are no longer alone in your" flyover_linebreak
+	flyover_setx(12) "adventure, {flyover_name(2)} who is" flyover_linebreak
+	flyover_setx(12) "steadfast, kind and even pretty," flyover_linebreak
+	flyover_setx(12) "is always at your side." flyover_linebreak
+	flyover_setx(12) "{flyover_name(3)} is with you as well." flyover_linebreak
+	flyover_setx(12) "Though he is timid, he came from" flyover_linebreak
+	flyover_setx(12) "a distant land to help you." flyover_linebreak
+	flyover_setx(12) "{flyover_name(1)}, as you certainly" flyover_linebreak
+	flyover_setx(12) "know by now, you are not a" flyover_linebreak
+	flyover_setx(12) "regular young man...  You have" flyover_linebreak
+	flyover_setx(12) "an awesome destiny to fulfill." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "The journey from this point will" flyover_linebreak
+	flyover_setx(12) "be long, and it will be more" flyover_linebreak
+	flyover_setx(12) "difficult than anything you have" flyover_linebreak
+	flyover_setx(12) "undergone to this point.  Yet, I" flyover_linebreak
+	flyover_setx(12) "know you will be all right.  When" flyover_linebreak
+	flyover_setx(12) "good battles evil, which side do" flyover_linebreak
+	flyover_setx(12) "you believe wins?  Do you have" flyover_linebreak
+	flyover_setx(12) "faith that good is triumphant?" flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "One thing you must never lose is" flyover_linebreak
+	flyover_setx(12) "courage.  If you believe in the" flyover_linebreak
+	flyover_setx(12) "goal you are striving for, you will" flyover_linebreak
+	flyover_setx(12) "be courageous.  There are many" flyover_linebreak
+	flyover_setx(12) "difficult times ahead, but you" flyover_linebreak
+	flyover_setx(12) "must keep your sense of humor," flyover_linebreak
+	flyover_setx(12) "work through the tough" flyover_linebreak
+	flyover_setx(12) "situations and enjoy yourself." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "When you have finished this cup" flyover_linebreak
+	flyover_setx(12) "of coffee, your adventure will" flyover_linebreak
+	flyover_setx(12) "begin again.  Next, you must pass" flyover_linebreak
+	flyover_setx(12) "through a vast desert and" flyover_linebreak
+	flyover_setx(12) "proceed to the big city of" flyover_linebreak
+	flyover_setx(12) "Fourside." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "{flyover_name(1)...}" flyover_linebreak
+	flyover_setx(12) "           {flyover_name(2)...}" flyover_linebreak
+	flyover_setx(12) "                      {flyover_name(3)...}" flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "             May the goddess" flyover_linebreak
+	flyover_setx(12) "              of good fortune" flyover_linebreak
+	flyover_setx(12) "         smile upon you always..." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_end
 
 // Tenda Village Tea Sequence
 l_0xe10652:
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]Like a great tapestry, vertical and"
-	"[ 09 ][ 01 0C ]horizontal threads have met and"
-	"[ 09 ][ 01 0C ]become intertwined, creating a"
-	"[ 09 ][ 01 0C ]huge, beautiful image."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]You may have cursed this never-"
-	"[ 09 ][ 01 0C ]ending journey.  You have known"
-	"[ 09 ][ 01 0C ]injury and defeat, but you have"
-	"[ 09 ][ 01 0C ]struggled on to reach this place."
-	"[ 09 ][ 01 0C ]Your in-born wisdom and"
-	"[ 09 ][ 01 0C ]courage have helped bring you"
-	"[ 09 ][ 01 0C ]here.  You have believed in your"
-	"[ 09 ][ 01 0C ]friends, and as a group, you have"
-	"[ 09 ][ 01 0C ]supported each other.  Have you"
-	"[ 09 ][ 01 0C ]ever stopped to consider how"
-	"[ 09 ][ 01 0C ]much your power has grown?"
-	"[ 09 ][ 01 0C ]Now, you could fell enemies in"
-	"[ 09 ][ 01 0C ]Onett and Twoson with one"
-	"[ 09 ][ 01 0C ]blow.  As you certainly know,"
-	"[ 09 ][ 01 0C ]you cannot turn back.  Giygas,"
-	"[ 09 ][ 01 0C ]the arch fiend of the universe, is"
-	"[ 09 ][ 01 0C ]growing frightened of you and"
-	"[ 09 ][ 01 0C ]your power.  He is searching for"
-	"[ 09 ][ 01 0C ]ways to end your journey."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]From here, the challenge grows"
-	"[ 09 ][ 01 0C ]and your adventure will take you"
-	"[ 09 ][ 01 0C ]beyond anything you ever"
-	"[ 09 ][ 01 0C ]imagined.  You are drawing near"
-	"[ 09 ][ 01 0C ]to Giygas.  Remember, when you"
-	"[ 09 ][ 01 0C ]are suffering hardships, your"
-	"[ 09 ][ 01 0C ]enemy is also struggling."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]Still, where DID Porky go,"
-	"[ 09 ][ 01 0C ]anyway?  When this cup of"
-	"[ 09 ][ 01 0C ]tea is finished, your adventure will"
-	"[ 09 ][ 01 0C ]continue.  Your destiny pulls you"
-	"[ 09 ][ 01 0C ]in the right direction.  Believe in"
-	"[ 09 ][ 01 0C ]yourself and press forward."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 02 ][ 08 01 ]!"
-	"[ 09 ][ 01 02 ]           [ 08 02 ]!"
-	"[ 09 ][ 01 02 ]                      [ 08 03 ]!"
-	"[ 09 ][ 01 02 ]                                 [ 08 04 ]!"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ][ 01 0C ]             May the goddess"
-	"[ 09 ][ 01 0C ]              of good fortune"
-	"[ 09 ][ 01 0C ]         smile upon you always..."
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 09 ]"
-	"[ 00 ]"
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "Like a great tapestry, vertical and" flyover_linebreak
+	flyover_setx(12) "horizontal threads have met and" flyover_linebreak
+	flyover_setx(12) "become intertwined, creating a" flyover_linebreak
+	flyover_setx(12) "huge, beautiful image." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "You may have cursed this never-" flyover_linebreak
+	flyover_setx(12) "ending journey.  You have known" flyover_linebreak
+	flyover_setx(12) "injury and defeat, but you have" flyover_linebreak
+	flyover_setx(12) "struggled on to reach this place." flyover_linebreak
+	flyover_setx(12) "Your in-born wisdom and" flyover_linebreak
+	flyover_setx(12) "courage have helped bring you" flyover_linebreak
+	flyover_setx(12) "here.  You have believed in your" flyover_linebreak
+	flyover_setx(12) "friends, and as a group, you have" flyover_linebreak
+	flyover_setx(12) "supported each other.  Have you" flyover_linebreak
+	flyover_setx(12) "ever stopped to consider how" flyover_linebreak
+	flyover_setx(12) "much your power has grown?" flyover_linebreak
+	flyover_setx(12) "Now, you could fell enemies in" flyover_linebreak
+	flyover_setx(12) "Onett and Twoson with one" flyover_linebreak
+	flyover_setx(12) "blow.  As you certainly know," flyover_linebreak
+	flyover_setx(12) "you cannot turn back.  Giygas," flyover_linebreak
+	flyover_setx(12) "the arch fiend of the universe, is" flyover_linebreak
+	flyover_setx(12) "growing frightened of you and" flyover_linebreak
+	flyover_setx(12) "your power.  He is searching for" flyover_linebreak
+	flyover_setx(12) "ways to end your journey." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "From here, the challenge grows" flyover_linebreak
+	flyover_setx(12) "and your adventure will take you" flyover_linebreak
+	flyover_setx(12) "beyond anything you ever" flyover_linebreak
+	flyover_setx(12) "imagined.  You are drawing near" flyover_linebreak
+	flyover_setx(12) "to Giygas.  Remember, when you" flyover_linebreak
+	flyover_setx(12) "are suffering hardships, your" flyover_linebreak
+	flyover_setx(12) "enemy is also struggling." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "Still, where DID Porky go," flyover_linebreak
+	flyover_setx(12) "anyway?  When this cup of" flyover_linebreak
+	flyover_setx(12) "tea is finished, your adventure will" flyover_linebreak
+	flyover_setx(12) "continue.  Your destiny pulls you" flyover_linebreak
+	flyover_setx(12) "in the right direction.  Believe in" flyover_linebreak
+	flyover_setx(12) "yourself and press forward." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(2) "{flyover_name(1)}!" flyover_linebreak
+	flyover_setx(2) "           {flyover_name(2)}!" flyover_linebreak
+	flyover_setx(2) "                      {flyover_name(3)}!" flyover_linebreak
+	flyover_setx(2) "                                 {flyover_name(4)}!" flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_setx(12) "             May the goddess" flyover_linebreak
+	flyover_setx(12) "              of good fortune" flyover_linebreak
+	flyover_setx(12) "         smile upon you always..." flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_linebreak
+	flyover_end
 

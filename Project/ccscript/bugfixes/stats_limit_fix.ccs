@@ -10,108 +10,108 @@ import "../essential/asm65816.ccs"
 //	Speed Max Limit fixes
 //------------------------------------
 // Apply the max Speed limit on character Level Up for Max Speed
-ROM[0xC21B82] = JML	(Max_Speed_Limit_Fix)
+ROM[0xC21B69] = JML	(Max_Speed_Limit_Fix)
 
 Max_Speed_Limit_Fix: {
-	LDA_d	(0x0F)
+	ADC_d	(4)		// Original: ADC @VIRTUAL04
+
+	// Cap the final result at 255
+	CMP_i	(0x0100)
+	BCC	(3)
+	LDA_i	(0x00FF)
+
+	STA_d	(0x0F)		// STA @LOCAL01
+	STA_d	(4)		// STA @VIRTUAL04
+	JML	(0xC21B6F)
+}
+
+// Apply the max Speed limit when applying a Speed Boost through a capsule
+ROM[0xC2B4D8] = JML	(Max_Speed_Boost_Limit_Fix)
+
+Max_Speed_Boost_Limit_Fix: {
+	LDA_x	(0)
 	CLC
-	SBC_i	(0x00FF)
+	ADC_d	(0)
+	PLX
 
-	// BRANCHLTEQS @UNKNOWN3
-	BVC	(4)
-	BPL	(9)
-	BRA	(2)
-	BMI	(5)
+	// If carry is set, we overflowed past 255
+	BCC	(2)		// No carry = no overflow
+	LDA_8	(0xFF)		// Overflow detected, force to 255
 
-	LDX_i	(0x00FF)
-	BRA	(8)	// _exit
-
-// Original code
-_UNKNOWN3:
-	LDA_d	(0x0F)	// LOCAL01
-	REP	(0x20)
-	AND_i	(0x00FF)
-	TAX
-
-_exit:
-	JML	(0xC21B8A)	// Return to the original hijacked code 
+	STA_x	(0)
+	JML	(0xC2B4E2)
 }
 
 //------------------------------------
 //	Guts Max Limit fixes
 //------------------------------------
-// Apply the max PP limit on character Level Up for Max PP
-//ROM[0xC21C3B] = JML	(Max_Guts_Limit_Fix)
+// Apply the max Guts limit on character Level Up for Max Guts
+ROM[0xC21C22] = JML	(Max_Guts_Limit_Fix)
 
 Max_Guts_Limit_Fix: {
-	LDA_d	(0x0F)
+	ADC_d	(4)		// Original: ADC @VIRTUAL04
+
+	// Cap the final result at 255
+	CMP_i	(0x0100)
+	BCC	(3)
+	LDA_i	(0x00FF)
+
+	STA_d	(0x0F)		// STA @LOCAL01
+	STA_d	(4)		// STA @VIRTUAL04
+	JML	(0xC21C28)
+}
+
+// Apply the max Guts limit when applying a Guts Boost through a capsule
+ROM[0xC2B471] = JML	(Max_Guts_Boost_Limit_Fix)
+
+Max_Guts_Boost_Limit_Fix: {
+	LDA_x	(0)
 	CLC
-	SBC_i	(0x00FF)
+	ADC_d	(0)
+	PLX
 
-	// BRANCHLTEQS @UNKNOWN3
-	BVC	(4)
-	BPL	(9)
-	BRA	(2)
-	BMI	(5)
+	// If carry is set, we overflowed past 255
+	BCC	(2)		// No carry = no overflow
+	LDA_8	(0xFF)		// Overflow detected, force to 255
 
-	LDX_i	(0x00FF)
-	BRA	(8)	// _exit
-
-// Original code
-_UNKNOWN3:
-	LDA_d	(0x0F)	// LOCAL01
-	REP	(0x20)
-	AND_i	(0x00FF)
-	TAX
-
-_exit:
-	JML	(0xC21C43)	// Return to the original hijacked code 
+	STA_x	(0)
+	JML	(0xC2B47B)
 }
 
-ROM[0xC2B480] = JML	(Max_Guts_Increase_Limit_Fix)
-
-Max_Guts_Increase_Limit_Fix: {
-	// Added check to make the maximum limit 255 instead of overflowing
-	CMP_i	(0x00FF)
-	BCC	(2)		// Branch if lower than 255
-	LDA_i	(0x00FF)		// Otherwise, force the max Vitality number to be 255 before printing the value
-
-	// Added check to make the maximum limit 255 instead of overflowing
-	//BVS	(2)		// Branch if Overflow Set
-	//LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
-
-	JSL	(0xC21BA4)
-	JML	(0xC2B484)	// Return to the original hijacked code 
-}
 //------------------------------------
 //	Luck Max Limit fixes
 //------------------------------------
-// Apply the max Luck limit on character Level Up
-ROM[0xC21D43] = JML	(Max_Luck_Limit_Fix)
+// Apply the max Luck limit on character Level Up for Max Luck
+ROM[0xC21D2A] = JML	(Max_Luck_Limit_Fix)
 
 Max_Luck_Limit_Fix: {
-	LDA_d	(0x0F)
+	ADC_d	(4)		// Original: ADC @VIRTUAL04
+
+	// Cap the final result at 255
+	CMP_i	(0x0100)
+	BCC	(3)
+	LDA_i	(0x00FF)
+
+	STA_d	(0x0F)		// STA @LOCAL01
+	STA_d	(4)		// STA @VIRTUAL04
+	JML	(0xC21D30)
+}
+
+// Apply the max Luck limit when applying a Luck Boost through a capsule
+ROM[0xC2B5A5] = JML	(Max_Luck_Boost_Limit_Fix)
+
+Max_Luck_Boost_Limit_Fix: {
+	LDA_x	(0)
 	CLC
-	SBC_i	(0x00FF)
+	ADC_d	(0)
+	PLX
 
-	// BRANCHLTEQS @UNKNOWN3
-	BVC	(4)
-	BPL	(9)
-	BRA	(2)
-	BMI	(5)
+	// If carry is set, we overflowed past 255
+	BCC	(2)		// No carry = no overflow
+	LDA_8	(0xFF)		// Overflow detected, force to 255
 
-	LDX_i	(0x00FF)
-	BRA	(8)	// _exit
-
-// Original code
-_UNKNOWN3:
-	LDA_d	(0x0F)	// LOCAL01
-	REP	(0x20)
-	AND_i	(0x00FF)
-	TAX
-
-_exit:
-	JML	(0xC21D4B)	// Return to the original hijacked code 
+	STA_x	(0)
+	JML	(0xC2B5AF)
 }
 //------------------------------------
 //	Vitality Max Limit fixes
