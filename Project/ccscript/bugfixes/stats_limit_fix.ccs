@@ -125,11 +125,28 @@ Max_Vitality_Limit_Fix: {
 	ADC_x	(0x9A27)	// PARTY_CHARACTERS+char_struct::boosted_vitality,X
 
 	// Added check to make the maximum limit 255 instead of overflowing
-	BVS	(2)		// Branch if Overflow Set
+	BCC	(2)		// Branch if Overflow Set
 	LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
 
 	STA_x	(0x99E8)	// PARTY_CHARACTERS+char_struct::vitality,X
 	JML	(0xC21D7C)	// Return to the original hijacked code 
+}
+
+// Apply the max Vitality limit when applying a Vitality Boost through a capsule
+ROM[0xC2B53F] = JML	(Max_Vitality_Boost_Limit_Fix)
+
+Max_Vitality_Boost_Limit_Fix: {
+	LDA_x	(0)
+	CLC
+	ADC_d	(0)
+	PLX
+
+	// If carry is set, we overflowed past 255
+	BCC	(2)		// No carry = no overflow
+	LDA_8	(0xFF)		// Overflow detected, force to 255
+
+	STA_x	(0)
+	JML	(0xC2B549)
 }
 //------------------------------------
 //	IQ Max Limit fixes
@@ -143,11 +160,28 @@ Max_IQ_Limit_Fix: {
 	ADC_x	(0x9A28)	// PARTY_CHARACTERS+char_struct::boosted_iq,X
 
 	// Added check to make the maximum limit 255 instead of overflowing
-	BVS	(2)		// Branch if Overflow Set
+	BCC	(2)		// Branch if Overflow Set
 	LDA_8	(0xFF)		// Otherwise, force the max Vitality number to be 255 before printing the value
 
 	STA_x	(0x99E9)	// PARTY_CHARACTERS+char_struct::iq,X
 
 	JML	(0xC21D94)	// Return to the original hijacked code 
+}
+
+// Apply the max IQ limit when applying a IQ Boost through a capsule
+ROM[0xC2B40A] = JML	(Max_IQ_Boost_Limit_Fix)
+
+Max_IQ_Boost_Limit_Fix: {
+	LDA_x	(0)
+	CLC
+	ADC_d	(0)
+	PLX
+
+	// If carry is set, we overflowed past 255
+	BCC	(2)		// No carry = no overflow
+	LDA_8	(0xFF)		// Overflow detected, force to 255
+
+	STA_x	(0)
+	JML	(0xC2B414)
 }
 //------------------------------------
