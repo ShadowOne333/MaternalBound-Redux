@@ -512,7 +512,6 @@ l_0xc69394:
 	"@He asked me to hold onto the {itemname(HAWK_EYE)} for you." next
 	"@Do you know anything about this?" next
 	set(FLG_GLOBAL_LOST_TAKANOME)	// 693
-	goto(l_0xc693be)
 
 l_0xc693be:
 	"@Well, since you know about the item, I'll hold onto it for you." next

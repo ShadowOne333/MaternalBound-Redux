@@ -1168,9 +1168,14 @@ l_0xc9329b:
 	set_respawn_point(8)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	call(data_36.l_0xc7de60)
-	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_TAKANOME) }
-	else { hasitem(4, HAWK_EYE) }	// 0xAF / 175 = Hawk eye
-	goto_if_false(data_55.l_0xc9992f)
+	if flag FLG_KEY_ITEMS {
+		isset(FLG_ITEM_TAKANOME)
+		goto_if_true(data_55.l_0xc9992f)
+	}
+	else {
+		hasitem(4, HAWK_EYE)	// 0xAF / 175 = Hawk eye
+		goto_if_false(data_55.l_0xc9992f)
+	}
 	set(FLG_SKRB_PU_TAKANOME)	// 691
 	if not flag FLG_KEY_ITEMS { take(4, HAWK_EYE) }	// 0xAF / 175 = Hawk eye
 	eob

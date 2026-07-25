@@ -828,9 +828,14 @@ l_0xc89580:
 
 	hotspot_off(1)	// 0x01
 	hotspot_on(1,12, l_0xc896a7)	// 0x01, 0x0C, 0x00C896A7
-	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_TACO_ERASER) }
-	else { hasitem(2, PENCIL_ERASER) }	// 0x02, 0xB8, 184
-	goto_if_false(data_55.l_0xc9992f)
+	if flag FLG_KEY_ITEMS {
+		isset(FLG_ITEM_TACO_ERASER)
+		goto_if_true(data_55.l_0xc9992f)
+	}
+	else {
+		hasitem(2, PENCIL_ERASER)	// 0xB8 / 184 = Pencil eraser
+		goto_if_false(data_55.l_0xc9992f)
+	}
 	set(FLG_FOUR_PAULA_TAKOKESHI)	// 690
 	if not flag FLG_KEY_ITEMS { take(2, PENCIL_ERASER) }	// 0x02, 0xB8, 184
 	eob
