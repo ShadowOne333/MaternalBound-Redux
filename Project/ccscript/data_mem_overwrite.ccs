@@ -5865,7 +5865,6 @@ ROM[0xefa2d6] = goto(data_66.l_0xefa2d6)
 ROM[0xefa2fa] = goto(data_66.l_0xefa2fa)
 
 // Special Pointers
-ROM[0xc49ec0] = "[{e(flyover_texts.l_0xe10c61)}]"
 ROM[0xc49ea4] = "[{e(flyover_texts.l_0xe10b86)}]"
 ROM[0xc49ea8] = "[{e(flyover_texts.l_0xe10b9c)}]"
 ROM[0xc49eac] = "[{e(flyover_texts.l_0xe10bc2)}]"
@@ -5874,6 +5873,8 @@ ROM[0xc49eb4] = "[{e(flyover_texts.l_0xe10bfd)}]"
 //ROM[0xccffd5] = "[{e(data_38.l_0xc80530)}]"
 ROM[0xc49eb8] = "[{e(flyover_texts.l_0xe10c1b)}]"
 ROM[0xc49ebc] = "[{e(flyover_texts.l_0xe10c38)}]"
+ROM[0xc49ec0] = "[{e(flyover_texts.l_0xe10c61)}]"
+_asmptr(0xc49dbd, coffee_tea_sequences.l_0xe10000)
 _asmptr(0xc49dc9, coffee_tea_sequences.l_0xe10652)
 _lasmptr(0xc4f252, staff_text.l_0xe1413f)
-_asmptr(0xc49dbd, coffee_tea_sequences.l_0xe10000)
+ROM[0xc3d44b] = "{short [1] data_44.l_0xc89bc5}{short [0] data_44.l_0xc89bc5}"

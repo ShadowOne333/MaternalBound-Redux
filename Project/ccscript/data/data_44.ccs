@@ -1084,6 +1084,8 @@ l_0xc89b4f:
 	pause(60)
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	restore_camera
+
+l_0xc89bc5:
 	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
 	sprite2_spawn(106,191,1)	// 0x006A, 0x00BF, 0x01
 	focus_camera_on_sprite2(106)	// 0x006A

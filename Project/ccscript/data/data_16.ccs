@@ -140,9 +140,10 @@ l_0xc5e70b:	// Game startup at Ness' bed in Onett
 	unset(FLG_MYHOME_SLEEPNES_APPEAR)	// 477
 	unset(FLG_YAZIUMA_DISAPPEAR)	// 469
 
-	// Added for Key items menu
+	// Added for Key items & Tools menus
 	set(FLG_NESS_KI)
 	set(FLG_KEY_ITEMS)
+	set(FLG_TOOL_ITEMS)
 
 	save
 	eob
