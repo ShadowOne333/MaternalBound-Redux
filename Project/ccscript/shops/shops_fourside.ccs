@@ -27,11 +27,6 @@ FoursideJunk_Open_Shop_Window:	//l_0xc5c22e
 FoursideJunk_Selected_Item: {		//l_0xc5c23b
 	"@Okay, {call(_gender_check)}.  You want" linebreak
 	"  the {itemname(0)}?" next
-	if flag FLG_TOOL_ITEMS {
-		swap
-		result_is(BROKEN_IRON)
-		goto_if_true(_is_broken_iron)
-	}
 	eob
 
 _gender_check:
@@ -43,10 +38,6 @@ _gender_check:
 
 _paula_leader:
 	"woman"
-	eob
-
-_is_broken_iron:
-	set(FLG_ITEM_BROKEN_IRON_PURCHASED)
 	eob
 }
 

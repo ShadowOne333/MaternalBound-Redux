@@ -601,10 +601,12 @@ ScarabiaSouthPyramid_Open_Shop_Window:		//l_0xc5b405
 
 ScarabiaSouthPyramid_Selected_Item: {		//l_0xc5b426
 	"@{itemname(0)}?" next
+	// Check if the item we're getting is the Bazooka, so it gives a special text
 	if flag FLG_TOOL_ITEMS {
 		swap
 		result_is(BAZOOKA)
 		goto_if_true(_is_bazooka)
+		load_registers
 	}
 	eob
 
@@ -612,14 +614,8 @@ _is_bazooka:
 	// Added check for money
 	hasmoney(950)
 	goto_if_false(ScarabiaSouthPyramid_Not_Enough_Cash)
-//l_0xc5e3a5:
-	load_registers
-	get_buying_price(0)	// 0x00
-	swap
-	takemoney(0)	// 0x0000
+	takemoney(950)	// 0x0000
 	show_wallet
-	load_registers
-	give_and_return_location(0,0)	// 0x00, 0x00
 	sound(SND_GUITAR)
 
 	unset(FLG_SHOP_TOOK)	// 224

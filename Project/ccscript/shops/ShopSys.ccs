@@ -1,4 +1,6 @@
 import ShopMain
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
 import "../expansion/ccexpand.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/stdext.ccs"
@@ -57,12 +59,12 @@ define UnknownFlag2		= flag 0xE1	// Something to do with if you've sold or not?
 Sound_Cash_Register:
 	//c5d835
 	goto_if_flag(Different_Purchase_Sound, Sound_Ping)
-	sound(12)
+	sound(SND_KACHING)	// 12
 	eob
 
 Sound_Ping:
 	//c5d840
-	sound(120)
+	sound(SND_GUITAR)	// 120
 	eob
 
 
@@ -121,6 +123,23 @@ BuySell_Sell_String:
 	goto(BuySell_Request_Another_Transaction_String)
 
 BuySell_Thanking_String:
+	// Add a check to see if the purchased item was a Broken iron
+	if flag FLG_TOOL_ITEMS {
+		load_registers swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+		load_registers
+		goto(_continue_thanks)
+
+	_is_broken_iron:
+		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
+		take(-1,  BROKEN_IRON)
+		swap
+		give_and_return_location(0, BROKEN_IRON_TOOL)
+		load_registers
+	}
+
+_continue_thanks:
 	//c5df56
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -207,6 +226,22 @@ NoSell_Buy_String:
 	goto(NoSell_Request_Another_Transaction_String)
 
 NoSell_Thanking_String:
+	// Add a check to see if the purchased item was a Broken iron
+	if flag FLG_TOOL_ITEMS {
+		load_registers swap
+		result_is(BROKEN_IRON)
+		goto_if_true(_is_broken_iron)
+		load_registers
+		goto(_continue_thanks)
+
+	_is_broken_iron:
+		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
+		take(-1,  BROKEN_IRON)
+		swap
+		give_and_return_location(0, BROKEN_IRON_TOOL)
+		load_registers
+	}
+
 	//c5dfef
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -326,8 +361,26 @@ Selected_Item_String:
 	goto_if_false(Not_Enough_Cash_String)
 	load_registers
 	call(Selected_Item)
-	store_registers_shared
 
+	if flag FLG_TOOL_ITEMS {
+		load_registers swap
+		result_is(BAZOOKA)
+		goto_if_true(_skip_bulk_buy)
+
+		load_registers swap
+		result_is(BROKEN_IRON)
+		goto_if_true(Selected_Item_String_Pt2)
+
+		load_registers
+		goto(_continue_buying)
+
+	_skip_bulk_buy:
+		load_registers	// TEST
+		eob
+	}
+
+_continue_buying:
+	store_registers_shared
 	// NEW CODE
 	newline
 	"@How many?" linebreak
@@ -392,7 +445,7 @@ Subtract_Money_String:
 
 List_Stat_Change:
 	//c5e136
-	sound(115)
+	sound(SND_BOXOPEN1)	// 115
 	call(Defense_Old_String)	//Reports original offense/defense
 	load_registers
 	equip(0,0)
