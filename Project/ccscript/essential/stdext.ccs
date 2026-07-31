@@ -170,11 +170,11 @@ command load_registers_shared "[1B 06]"
 //command name(char) "[1C 02 {byte char}]"
 command letter(c) "[1C 03 {byte c}]"
 //command open_hp "[1C 04]"
-command show_goods_menu	 cc_asmcall(0xC13599, RET_NONE)
-command show_equip_menu	cc_asmcall(0xC13BAD, RET_NONE)
-command show_psi_menu cc_asmcall(0xC13B62, RET_NONE)
-command show_status_menu cc_asmcall(0xC13C01, RET_NONE)
-command close_hp cc_asmcall(0xC10000, RET_NONE)
+command show_goods_menu		cc_asmcall(0xC13599, RET_NONE)
+command show_equip_menu		cc_asmcall(0xC13BAD, RET_NONE)
+command show_psi_menu		cc_asmcall(0xC13B62, RET_NONE)
+command show_status_menu	cc_asmcall(0xC13C01, RET_NONE)
+command close_hp		cc_asmcall(0xC10000, RET_NONE)
 //command itemname(item) "[1C 05 {byte item}]"
 //command teleportname(dest) "[1C 06 {byte dest}]"
 command print_strings_horizontal(n) "[1C 07 {byte n}]"

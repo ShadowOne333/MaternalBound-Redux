@@ -46,10 +46,12 @@ TwosonBurglinBakery_Cancel_Cant_Equip:	//l_0xc5bcf4
 	eob
 
 TwosonBurglinBakery_Not_Enough_Cash:	//l_0xc5bcfd
+	sound(SND_ERRORBEEP)
 	"@It looks like you don't have enough money." next
 	eob
 
 TwosonBurglinBakery_Whole_Party_Full_Inventory:	//l_0xc5bd0c
+	sound(SND_ERRORBEEP)
 	"@You are already carrying too much stuff." next
 	"@You should sell some things, or throw them away, or just leave them somewhere." end
 
@@ -94,10 +96,12 @@ TwosonBurglinBakery_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 TwosonBurglinBakery_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@It looks like you don't have enough money for these." next
 	eob
 
 TwosonBurglinBakery_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You are already carrying too much stuff." next
 	"@You should sell some things, or throw them away, or just leave them somewhere." end
 
@@ -155,10 +159,12 @@ TwosonBurglinTools_Cancel_Cant_Equip:	//l_0xc5b72d
 	eob
 
 TwosonBurglinTools_Not_Enough_Cash:	//l_0xc5b746
+	sound(SND_ERRORBEEP)
 	"@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
 	eob
 
 TwosonBurglinTools_Whole_Party_Full_Inventory:	//l_0xc5b76f
+	sound(SND_ERRORBEEP)
 	"@Well, you're straining with too many things now." next
 	"@I'll buy the things you don't need, mon." linebreak
 	eob
@@ -213,10 +219,12 @@ TwosonBurglinTools_Bulk_Buy_Lots:
 	"@All these?" next eob
 
 TwosonBurglinTools_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Ah, mon, you are short of the green stuff, if you know what I mean, mon." next
 	eob
 
 TwosonBurglinTools_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Well, you're straining with too many things now." next
 	"@I'll buy the things you don't need, mon." linebreak
 	eob
@@ -267,10 +275,12 @@ TwosonBurglinBanana_Cancel_Cant_Equip:	//l_0xc5cd7f
 	"@You don't want any?  Whatever you say." end
 
 TwosonBurglinBanana_Not_Enough_Cash:	//l_0xc5cd97
+	sound(SND_ERRORBEEP)
 	//load_registers
 	"@You can't buy the bananas if you don't have enough money." end
 
 TwosonBurglinBanana_Whole_Party_Full_Inventory:	//l_0xc5cdb3
+	sound(SND_ERRORBEEP)
 	"@You cannot carry any more." end
 
 TwosonBurglinBanana_What_To_Sell:	// Banana lady doesn't purchase items
@@ -313,10 +323,12 @@ TwosonBurglinBanana_Bulk_Buy_Lots:
 	"@All these bananas?" next eob
 
 TwosonBurglinBanana_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	//load_registers
 	"@You can't buy bananas if you don't have enough money." end
 
 TwosonBurglinBanana_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You cannot carry any more." end
 
 TwosonBurglinBanana_Bulk_Buy_Change_Of_Mind:

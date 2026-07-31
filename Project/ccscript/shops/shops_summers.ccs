@@ -51,10 +51,12 @@ SummersRestaurant_Cancel_Cant_Equip:		//l_0xc5be45
 	eob
 
 SummersRestaurant_Not_Enough_Cash:		//l_0xc5be4e
+	sound(SND_ERRORBEEP)
 	"@Sorry, but you haven't got enough to cover the check." next
 	eob
 
 SummersRestaurant_Whole_Party_Full_Inventory:	//l_0xc5be6f
+	sound(SND_ERRORBEEP)
 	"@You are already carrying too much stuff." next
 	"@You can sell your stuff, throw something away, or just abandon it." next
 	"@Then, come again." end
@@ -101,10 +103,12 @@ SummersRestaurant_Bulk_Buy_Lots:
 	eob
 
 SummersRestaurant_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Sorry, but you haven't got enough to cover the whole check." next
 	eob
 
 SummersRestaurant_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You are already carrying way too much stuff." next
 	"@You can sell your stuff, throw something away, or just abandon it." next
 	"@Then, come again." end
@@ -162,10 +166,12 @@ SummersShop_Cancel_Cant_Equip:		//l_0xc523be
 	eob
 
 SummersShop_Not_Enough_Cash:		//l_0xc523cb
+	sound(SND_ERRORBEEP)
 	"@Hey!  What are you trying to pull?!  You haven't got enough money!!" next
 	eob
 
 SummersShop_Whole_Party_Full_Inventory:	//l_0xc523ef
+	sound(SND_ERRORBEEP)
 	"@Hey!  You've got enough junk already!" next
 	"@Do you want to sell me some of the junk you don't need?" linebreak
 	eob
@@ -220,10 +226,12 @@ SummersShop_Bulk_Buy_Lots:
 	eob
 
 SummersShop_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Hey!  What are you trying to pull?!  You haven't got enough money!!" next
 	eob
 
 SummersShop_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Hey!  You've got too much junk already!" next
 	"@Do you want to sell me some of the junk you don't need?" linebreak
 	eob
@@ -273,9 +281,11 @@ SummersGelato_Cancel_Cant_Equip:	//l_0xc5cfba
 	"@Do you mean to tell me you are not going to buy anything...?" end
 
 SummersGelato_Not_Enough_Cash:		//l_0xc5cfd5
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." end
 
 SummersGelato_Whole_Party_Full_Inventory:	//l_0xc5cfdf
+	sound(SND_ERRORBEEP)
 	"@You are carrying too many things already." next
 	"@Sell something, or throw something away, and come back." end
 
@@ -321,9 +331,11 @@ SummersGelato_Bulk_Buy_Lots:
 	eob
 
 SummersGelato_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." end
 
 SummersGelato_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You are carrying way too many things already." next
 	"@Sell something, or throw something away, and come back." end
 
@@ -382,10 +394,12 @@ SummersMagicCake_Cancel_Cant_Equip:		//l_0xc5cb1e
 
 SummersMagicCake_Not_Enough_Cash:		//l_0xc5cb29
 	title(1, Jill)
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." end
 
 SummersMagicCake_Whole_Party_Full_Inventory:	//l_0xc5cb33
 	title(1, Jill)
+	sound(SND_ERRORBEEP)
 	"@You are carrying too many things." next
 	"@Come again when you reduce the number of things you are carrying." end
 
@@ -437,10 +451,12 @@ SummersMagicCake_Bulk_Buy_Lots:
 
 SummersMagicCake_Bulk_Buy_Not_Enough_Cash:
 	title(1, Jill)
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." end
 
 SummersMagicCake_Bulk_Buy_Full_Inventory:
 	title(1, Jill)
+	sound(SND_ERRORBEEP)
 	"@You are carrying way too many things." next
 	"@Come again when you reduce the number of things you are carrying." end
 
@@ -499,10 +515,12 @@ SummersToto_Cancel_Cant_Equip:		//l_0xc52603
 	eob
 
 SummersToto_Not_Enough_Cash:		//l_0xc52622
+	sound(SND_ERRORBEEP)
 	"@Beggin' yer pardon, but it appears ye don't have enough money..." next
 	eob
 
 SummersToto_Whole_Party_Full_Inventory:	//l_0xc5264b
+	sound(SND_ERRORBEEP)
 	"@You've got entirely too many goodies." next
 	"@Would ye like me to take some of those things off yer hands?" next
 	"@I can buy the ones ye don't need, if ye want." linebreak
@@ -558,10 +576,12 @@ SummersToto_Bulk_Buy_Lots:
 	eob
 
 SummersToto_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Beggin' yer pardon, but it appears ye don't have enough money..." next
 	eob
 
 SummersToto_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You've got entirely way too many goodies." next
 	"@Would ye like me to take some of those things off yer hands?" next
 	"@I can buy the ones ye don't need, if ye want." linebreak

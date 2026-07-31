@@ -20,12 +20,18 @@ command delete_tpt(entry, effect) "[1F 1E {short entry} {byte effect}]" // delet
 
 command inst_pack_loc (target) "[{byte[2] target} {byte[0] target} {byte[1] target}]"
 
-
 command fade_1 "[1F 15 6A 00 FE 02 01]" // Simple fade out. (106, 766)
 
 command fade_2 "[1F 15 6A 00 79 02 01][1F 61][10 78][1F 1F 6A 00 06]" // Fade out, but stays black until a warp is used. (106, 633)
 
 command fade_in "[1F EA 6A 00][1F 61]" // To be used at some point after fade_1 if you want the screen to fade back in.
+
+command text_pos_1s(y)	text_pos(115,y)
+command text_pos_10s(y)	text_pos(109,y)
+command text_pos_100s(y)	text_pos(103,y)
+command text_pos_1000s(y)	text_pos(97,y)
+command text_pos_10000s(y)	text_pos(91,y)
+command text_pos_100000s(y)	text_pos(85,y)
 
 command two_choice_menu(opt1, label1, opt2, label2) {
 	load_str(opt1)
@@ -663,4 +669,16 @@ _poo_leader:
 	hide_char_float(4)	// 0x04, 2, show walkie talkie on Poo's hand
 
 _continue:
+}
+
+command set_pixel_mode	cc_asmcall(SET_TEXT_POS_PIXEL_MODE, RET_NONE)
+command set_tile_mode	cc_asmcall(SET_TEXT_POS_TILE_MODE, RET_NONE)
+SET_TEXT_POS_PIXEL_MODE: {
+	LDA_i  (1)
+	STA_a  (0x5E71)
+	RTL
+}
+SET_TEXT_POS_TILE_MODE: {
+	STZ_a  (0x5E71)
+	RTL
 }

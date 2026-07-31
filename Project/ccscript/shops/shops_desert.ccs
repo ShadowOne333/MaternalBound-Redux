@@ -47,10 +47,12 @@ Desert_Cancel_Cant_Equip:	//l_0xc5c78a
 	eob
 
 Desert_Not_Enough_Cash:		//l_0xc5c7ae
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." next
 	eob
 
 Desert_Whole_Party_Full_Inventory:	//l_0xc5c7b9
+	sound(SND_ERRORBEEP)
 	"@You're already carrying too much stuff." next
 	"@Sell something, or just throw something away, and then come back to see me." end
 
@@ -97,10 +99,12 @@ Desert_Bulk_Buy_Lots:
 	eob
 
 Desert_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." next
 	eob
 
 Desert_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You're already carrying too much stuff for all these." next
 	"@Sell something, or just throw something away, and then come back to see me." end
 

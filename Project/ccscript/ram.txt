@@ -1,0 +1,53 @@
+// ----------------------------- //
+
+   Free RAM used in this project.
+
+// ----------------------------- //
+
+MEM_BowsprDrawOamOnePriority_Temp1 = 0x00C2 ; 2 bytes in 'Bowspr'
+MEM_BowsprDrawOamOnePriority_Temp2 = 0x00C4 ; 2 bytes in 'Bowspr'
+/////////////////////////////////// ^^^ Must be below 0x0100
+
+RAM_weapon_slot_ID_cache = 0x00D4 ; 8 bytes, in 'equip_anything_fix'
+RAM_msu1_tracks = 0x0100 ; 4 bytes, in 'msu1'
+
+/////////////////////////////////// vvv Must be below 0x2000
+MEM_BowsprDmaThreshold       = 0x1BD6 ; 2 bytes in 'Bowspr'
+MEM_BowsprDmaThresholdP1     = 0x1BD8 ; 2 bytes in 'Bowspr'
+MEM_BowsprDmaThresholdDiv2   = 0x1BDA ; 2 bytes in 'Bowspr'
+/////////////////////////////////// ^^^ Must be below 0x2000
+
+MEM_BowsprEnable             = 0x31C2 ; 2 bytes in 'Bowspr'
+MEM_BowsprTileAllocIdx       = 0x31C4 ; 2 bytes in 'Bowspr'
+MEM_BowsprPrevObjListHead    = 0x31C6 ; 2 bytes in 'Bowspr'
+MEM_BowsprPaletteMap         = 0x31C8 ; 8 bytes in 'Bowspr'
+
+OBJ_destructor_lo = 0x31D0 ; 60 bytes in 'movscr_codes'
+OBJ_destructor_hi = 0x320C ; 60 bytes in 'movscr_codes'
+
+RAM_primary_timer = 0x3250 ; 1 byte, in 'run_stamina_mechanic'.
+RAM_secondary_timer = 0x3251 ; 1 byte, in 'run_stamina_mechanic'.
+
+RAM_teddy_turn = 0x3253 ; 1 byte in 'battle_functions'.
+
+RAM_giygas_singing_phase = 0x3254 ; 1 byte in 'battle_functions'.
+
+RAM_psiWindowMiscInfo = 0x3255 ; 1 byte in 'psi_window_rework'.
+RAM_psiWindowMaxPage = 0x3256 ; 1 byte in 'psi_window_rework'.
+
+RAM_free_ram = 0x3260 ; 2 bytes in 'm3sprites'
+
+New SRAM block: 0xB600 to 0xB69D ; Used by expanded event flags and party member names.
+
+
+
+
+// ----------------------------- //
+
+           Repurposed RAM.
+
+// ----------------------------- //
+
+// Originally where Ness' name is stored at.
+RAM_big_bag_counter = 0x99CE ; Counter for the Big Bag.
+RAM_confiscated_weapon = 0x99CF ; The weapon that was confiscated from Ninten if you get arrested

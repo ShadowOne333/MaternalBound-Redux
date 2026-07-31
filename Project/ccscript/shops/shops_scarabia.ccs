@@ -55,11 +55,13 @@ ScarabiaShop_Cancel_Cant_Equip:		//l_0xc528eb
 	eob
 
 ScarabiaShop_Not_Enough_Cash:		//l_0xc528f9
+	sound(SND_ERRORBEEP)
 	"@A thousand pardons, but you do not seem to have the money" next
 	"@required to make this purchase." next
 	eob
 
 ScarabiaShop_Whole_Party_Full_Inventory:	//l_0xc52938
+	sound(SND_ERRORBEEP)
 	"@Ahh, I can see that your caravan is overloaded." next
 	"@Would you like to sell some of your extra items to me?" linebreak
 	eob
@@ -115,11 +117,13 @@ ScarabiaShop_Bulk_Buy_Lots:
 	eob
 
 ScarabiaShop_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@A thousand pardons, but you do not seem to have the money" next
 	"@required to make these purchases." next
 	eob
 
 ScarabiaShop_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Ahh, I can see that your caravan is overloaded." next
 	"@Would you like to sell some of your extra items to me?" linebreak
 	eob
@@ -183,12 +187,14 @@ ScarabiaSnake_Cancel_Cant_Equip:	//l_0xc5c125
 
 ScarabiaSnake_Not_Enough_Cash:		//l_0xc5c13e
 	title(1, Snake)
+	sound(SND_ERRORBEEP)
 	"@Oh, no..." next
 	"@You dissssappoint me...  You don't have enough money..." next
 	eob
 
 ScarabiaSnake_Whole_Party_Full_Inventory:	//l_0xc5c161
 	title(1, Snake)
+	sound(SND_ERRORBEEP)
 	"@You are carrying too much ssssstuff" next
 	"@Ssssell it, or tossss it, and come again!" end
 
@@ -239,12 +245,14 @@ ScarabiaSnake_Bulk_Buy_Lots:
 
 ScarabiaSnake_Bulk_Buy_Not_Enough_Cash:
 	title(1, Snake)
+	sound(SND_ERRORBEEP)
 	"@Oh, no..." next
 	"@You dissssappoint me...  You don't have enough money..." next
 	eob
 
 ScarabiaSnake_Bulk_Buy_Full_Inventory:
 	title(1, Snake)
+	sound(SND_ERRORBEEP)
 	"@You are carrying too much ssssstuff" next
 	"@Ssssell it, or tossss it, and come again!" end
 
@@ -298,10 +306,12 @@ ScarabiaFood_Cancel_Cant_Equip:		//l_0xc5c65c
 	eob
 
 ScarabiaFood_Not_Enough_Cash:		//l_0xc5c67a
+	sound(SND_ERRORBEEP)
 	"@Oh, my!  You don't have enough money." next
 	eob
 
 ScarabiaFood_Whole_Party_Full_Inventory:	//l_0xc5c68a
+	sound(SND_ERRORBEEP)
 	"@For heaven's sake!  You're already carrying too much stuff." next
 	"@Sell something, or throw something away, and come again." end
 
@@ -348,10 +358,12 @@ ScarabiaFood_Bulk_Buy_Lots:
 	eob
 
 ScarabiaFood_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Oh, my!  You don't have enough money." next
 	eob
 
 ScarabiaFood_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@For heaven's sake!  You're already carrying way too much stuff." next
 	"@Sell something, or throw something away, and come again." end
 
@@ -410,10 +422,12 @@ ScarabiaTool_Cancel_Cant_Equip:		//l_0xc52c00
 	eob
 
 ScarabiaTool_Not_Enough_Cash:		//l_0xc52c1c
+	sound(SND_ERRORBEEP)
 	"@Hmmm...  Hate to break this to you, but you don't have enough money." next
 	eob
 
 ScarabiaTool_Whole_Party_Full_Inventory:	//l_0xc52c3d
+	sound(SND_ERRORBEEP)
 	"@Oh... uh... it looks like you've got too many goods to carry." next
 	"@Would you be willing to sell me some of the goods you don't need?" next
 	eob
@@ -471,10 +485,12 @@ ScarabiaTool_Bulk_Buy_Lots:
 	eob
 
 ScarabiaTool_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Hmmm...  Hate to break this to you, but you don't have enough money." next
 	eob
 
 ScarabiaTool_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Oh... uh... it looks like you've got way too many goods to carry." next
 	"@Would you be willing to sell me some of the goods you don't need?" next
 	eob
@@ -526,9 +542,11 @@ ScarabiaWater_Cancel_Cant_Equip:	//l_0xc5cc8f
 	"@You'll be dead of dehydration!  I'm warning you!" end
 
 ScarabiaWater_Not_Enough_Cash:		//l_0xc5ccae
+	sound(SND_ERRORBEEP)
 	"@I don't think you have enough money." end
 
 ScarabiaWater_Whole_Party_Full_Inventory:	//l_0xc5ccbd
+	sound(SND_ERRORBEEP)
 	"@You cannot carry any more." end
 
 ScarabiaWater_What_To_Sell:	// This shop doesn't purchase items
@@ -573,9 +591,11 @@ ScarabiaWater_Bulk_Buy_Lots:
 	eob
 
 ScarabiaWater_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@I don't think you have enough money." end
 
 ScarabiaWater_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You cannot carry any more." end
 
 ScarabiaWater_Bulk_Buy_Change_Of_Mind:
@@ -658,11 +678,13 @@ ScarabiaSouthPyramid_Cancel_Cant_Equip:		//l_0xc5b48c
 	eob
 
 ScarabiaSouthPyramid_Not_Enough_Cash:		//l_0xc5b4d7
+	sound(SND_ERRORBEEP)
 	"@If you don't have enough money," next
 	"@it's a waste of my time to even talk about dealing with you." next
 	eob
 
 ScarabiaSouthPyramid_Whole_Party_Full_Inventory:	//l_0xc5b507
+	sound(SND_ERRORBEEP)
 	"@You guys are completely overloaded." next
 	"@However, I can buy the stuff you don't need." next
 	"@What do you want to do?" linebreak
@@ -718,11 +740,13 @@ ScarabiaSouthPyramid_Bulk_Buy_Lots:
 	eob
 
 ScarabiaSouthPyramid_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@If you don't have enough money," next
 	"@it's a waste of my time to even talk about dealing with you." next
 	eob
 
 ScarabiaSouthPyramid_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You guys are completely overloaded." next
 	"@However, I can buy the stuff you don't need." next
 	"@What do you want to do?" linebreak

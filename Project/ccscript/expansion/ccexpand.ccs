@@ -40,40 +40,40 @@ import "../redux/movscr_codes.ccs"
 // The Original1A* codes should not be replaced unless you are rewriting it
 // or it will go unused in your hack.
 CodeTable: {
-  long Original1A00 // [1A 00] -- character select menu, no cancel
-  long Original1A01 // [1A 01] -- character select menu, can cancel
-  long SwirlDisplayRGB // [1A 02]
-  long CCUseItem // [1A 03]
-  long Original1A04 // [1A 04] -- unused
-  long Original1A05 // [1A 05] -- display character inventory
-  long Original1A06 // [1A 06] -- display shop menu
-  long Original1A07 // [1A 07] -- something about Escargo Express
-  long Original1A08 // [1A 08] -- unused
-  long Original1A09 // [1A 09] -- unused
-  long Original1A0A // [1A 0A] -- something about phones
-  long Original1A0B // [1A 0B] -- unused
-  long CC_code_AsmCall // [1A 0C]
-  long CC_CustomFadeout // [1A 0D]
-  long CC_CustomFadein  // [1A 0E]
-  long CC_ItemDeterminer // [1A 0F]
-  long CC_ItemQuantity // [1A 10]
-  long CC_CharInParty // [1A 11]
-  long DoNothing // [1A 12]
-  long DoNothing // [1A 13]
-  long DoNothing // [1A 14]
-  long DoNothing // [1A 15]
-  long DoNothing // [1A 16]
-  long DoNothing // [1A 17]
-  long CC_TryGiveMoney // [1A 18]
-  long CC_CanGiveMoney // [1A 19]
-  long CC_CanDepositMoney // [1A 1A]
-  long DoNothing // [1A 1B]
-  long DoNothing // [1A 1C]
-  long DoNothing // [1A 1D]
-  long DoNothing // [1A 1E]
-  long DoNothing // [1A 1F]
-  long DoNothing // [1A 20]
-  long CompareResToArg // [1A 21]
+  long Original1A00	// [1A 00] -- character select menu, no cancel
+  long Original1A01	// [1A 01] -- character select menu, can cancel
+  long SwirlDisplayRGB	// [1A 02]
+  long CCUseItem	// [1A 03]
+  long Original1A04	// [1A 04] -- unused
+  long Original1A05	// [1A 05] -- display character inventory
+  long Original1A06	// [1A 06] -- display shop menu
+  long Original1A07	// [1A 07] -- something about Escargo Express
+  long Original1A08	// [1A 08] -- unused
+  long Original1A09	// [1A 09] -- unused
+  long Original1A0A	// [1A 0A] -- something about phones
+  long Original1A0B	// [1A 0B] -- unused
+  long CC_code_AsmCall	// [1A 0C]
+  long CC_CustomFadeout	// [1A 0D]
+  long CC_CustomFadein	// [1A 0E]
+  long CC_ItemDeterminer	// [1A 0F]
+  long CC_ItemQuantity	// [1A 10]
+  long CC_CharInParty	// [1A 11]
+  long DoNothing	// [1A 12]
+  long DoNothing	// [1A 13]
+  long DoNothing	// [1A 14]
+  long DoNothing	// [1A 15]
+  long DoNothing	// [1A 16]
+  long DoNothing	// [1A 17]
+  long CC_TryGiveMoney	// [1A 18]
+  long CC_CanGiveMoney	// [1A 19]
+  long CC_CanDepositMoney	// [1A 1A]
+  long DoNothing	// [1A 1B]
+  long DoNothing	// [1A 1C]
+  long DoNothing	// [1A 1D]
+  long DoNothing	// [1A 1E]
+  long DoNothing	// [1A 1F]
+  long DoNothing	// [1A 20]
+  long CompareResToArg	// [1A 21]
   // ...
   // You can keep adding them up to [1A FF].
 }

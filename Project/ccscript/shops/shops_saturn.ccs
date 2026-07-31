@@ -98,6 +98,7 @@ SaturnValley_Cancel_Cant_Equip:	//l_0xc531ea
 	eob
 
 SaturnValley_Not_Enough_Cash:	//l_0xc53212
+	sound(SND_ERRORBEEP)
 	font_saturn
 	"@Uhh," next
 	"@at a looking boing glance," linebreak
@@ -110,6 +111,7 @@ SaturnValley_Not_Enough_Cash:	//l_0xc53212
 	eob
 
 SaturnValley_Whole_Party_Full_Inventory:	//l_0xc53259
+	sound(SND_ERRORBEEP)
 	font_saturn
 	"@What a happy happy" next
 	"@surprise." linebreak
@@ -214,6 +216,7 @@ SaturnValley_Bulk_Buy_Lots:
 	eob
 
 SaturnValley_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	font_saturn
 	"@Uhh," next
 	"@at a looking boing glance," linebreak
@@ -226,6 +229,7 @@ SaturnValley_Bulk_Buy_Not_Enough_Cash:
 	eob
 
 SaturnValley_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	font_saturn
 	"@What a happy happy" next
 	"@surprise." linebreak

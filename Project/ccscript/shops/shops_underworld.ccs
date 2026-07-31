@@ -54,11 +54,13 @@ LostUnderworld_Cancel_Cant_Equip:	//l_0xc53515
 	eob
 
 LostUnderworld_Not_Enough_Cash:		//l_0xc5352c
+	sound(SND_ERRORBEEP)
 	get_char_at_pos(1)
 	"@" call(data_37.l_0xc7e6c5) ", it appears you do not have the money necessary for this transaction." next
 	eob
 
 LostUnderworld_Whole_Party_Full_Inventory:	//l_0xc53562
+	sound(SND_ERRORBEEP)
 	"@I really don't think you can carry any more purchases." next
 	"@You can come again after you sell something," next
 	"@or you can simply discard an item to lighten your load." next
@@ -119,11 +121,13 @@ LostUnderworld_Bulk_Buy_Lots:
 	eob
 
 LostUnderworld_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	get_char_at_pos(1)
 	"@" call(data_37.l_0xc7e6c5) ", it appears you do not have the money necessary for these transactions." next
 	eob
 
 LostUnderworld_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@I really don't think you can carry any more purchases." next
 	"@You can come again after you sell something," next
 	"@or you can simply discard an item to lighten your load." next

@@ -53,11 +53,13 @@ OnettDrugstore_Cancel_Cant_Equip:	//l_0xc51d96
 	eob
 
 OnettDrugstore_Not_Enough_Cash:		//l_0xc51db0
+	sound(SND_ERRORBEEP)
 	"@Oh no!" linebreak
 	"  Don't tell me you don't have enough money!!" next
 	eob
 
 OnettDrugstore_Whole_Party_Full_Inventory:	//l_0xc51dcb
+	sound(SND_ERRORBEEP)
 	"@Oh, my!" next
 	"@I just don't think you can carry any more than what you already have." next
 	"@But you know, I might be able to buy some of the stuff you don't need." next
@@ -115,11 +117,13 @@ OnettDrugstore_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 OnettDrugstore_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Oh no!" linebreak
 	"  Don't tell me you don't have enough money for all of these!!" next
 	eob
 
 OnettDrugstore_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Oh, my!" next
 	"@I just don't think you can carry way more than what you already have." next
 	"@But you know, I might be able to buy some of the stuff you don't need." next

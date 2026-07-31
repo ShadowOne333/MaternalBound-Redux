@@ -53,10 +53,12 @@ Magicant_Cancel_Cant_Equip:		//l_0xc5b971
 	eob
 
 Magicant_Not_Enough_Cash:		//l_0xc5b97e
+	sound(SND_ERRORBEEP)
 	"@Shame on you!  You don't have enough money!" next
 	eob
 
 Magicant_Whole_Party_Full_Inventory:	//l_0xc5b994
+	sound(SND_ERRORBEEP)
 	"@You've got too much stuff already!" next
 	"@How about selling me some of the things you don't need?!" linebreak
 	eob
@@ -114,10 +116,12 @@ Magicant_Bulk_Buy_Lots:
 	eob
 
 Magicant_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Shame on you!  You don't have enough money!" next
 	eob
 
 Magicant_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You've got way too much stuff already!" next
 	"@How about selling me some of the things you don't need?!" linebreak
 	eob

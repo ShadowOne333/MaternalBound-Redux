@@ -46,10 +46,12 @@ DalaamRestaurant_Cancel_Cant_Equip:		//l_0xc5c8aa
 	eob
 
 DalaamRestaurant_Not_Enough_Cash:		//l_0xc5c8c8
+	sound(SND_ERRORBEEP)
 	"@You do not have enough money." next
 	eob
 
 DalaamRestaurant_Whole_Party_Full_Inventory:	//l_0xc5c8d8
+	sound(SND_ERRORBEEP)
 	"@You're already carrying too many things." next
 	"@Sell something, or throw something away," next
 	"@or just leave something somewhere, and come again." end
@@ -97,10 +99,12 @@ DalaamRestaurant_Bulk_Buy_Lots:
 	eob
 
 DalaamRestaurant_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@You do not have enough money." next
 	eob
 
 DalaamRestaurant_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You're already carrying way too many things." next
 	"@Sell something, or throw something away," next
 	"@or just leave something somewhere, and come again." end

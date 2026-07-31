@@ -53,11 +53,13 @@ Winters_Cancel_Cant_Equip:		//l_0xc5d104
 	eob
 
 Winters_Not_Enough_Cash:		//l_0xc5d120
+	sound(SND_ERRORBEEP)
 	"@Wunga woo gun woonga wakka!!" linebreak
 	"  (You don't have enough money.)" next
 	eob
 
 Winters_Whole_Party_Full_Inventory:	//l_0xc5d148
+	sound(SND_ERRORBEEP)
 	"@Whoa!  Woon woonga wakka woo!" linebreak
 	"  (You are already carrying too many things.)" end
 
@@ -108,11 +110,13 @@ Winters_Bulk_Buy_Lots:
 	eob
 
 Winters_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Wunga woo gun woonga wakka!!" linebreak
 	"  (You don't have enough money.)" next
 	eob
 
 Winters_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Whoa!  Woon woonga din wakka woo!" linebreak
 	"  (You are already carrying way too many things.)" end
 

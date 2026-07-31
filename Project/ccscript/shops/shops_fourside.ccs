@@ -63,11 +63,13 @@ FoursideJunk_Cancel_Cant_Equip:		//l_0xc5c268
 	eob
 
 FoursideJunk_Not_Enough_Cash:		//l_0xc5c27f
+	sound(SND_ERRORBEEP)
 	"@Hey homiee!" linebreak
 	"  You ain't got the dough for this purchase!" promptw
 	eob
 
 FoursideJunk_Whole_Party_Full_Inventory:	//l_0xc5c2a5
+	sound(SND_ERRORBEEP)
 	"@Most unfortunately for you," linebreak
 	"  you're carrying too much stuff." end
 
@@ -114,11 +116,13 @@ FoursideJunk_Bulk_Buy_Lots:
 	eob
 
 FoursideJunk_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Hey homiee!" linebreak
 	"  You ain't got the dough for these purchases!" promptw
 	eob
 
 FoursideJunk_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Most unfortunately for you," linebreak
 	"  you're carrying too much stuff." end
 
@@ -174,10 +178,12 @@ FoursideCondiment_Cancel_Cant_Equip:	//l_0xc5cef0
 	eob
 
 FoursideCondiment_Not_Enough_Cash:	//l_0xc5cef9
+	sound(SND_ERRORBEEP)
 	"@Oh, it looks like you don't have enough money." next
 	eob
 
 FoursideCondiment_Whole_Party_Full_Inventory:	//l_0xc5cf0a
+	sound(SND_ERRORBEEP)
 	"@Oh, I don't think you can carry any more." end
 
 FoursideCondiment_What_To_Sell:		// This shop doesn't purchase items
@@ -222,10 +228,12 @@ FoursideCondiment_Bulk_Buy_Lots:
 	eob
 
 FoursideCondiment_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Oh, it looks like you don't have enough money." next
 	eob
 
 FoursideCondiment_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Oh, I don't think you can carry all of these." end
 
 FoursideCondiment_Bulk_Buy_Change_Of_Mind:
@@ -284,11 +292,13 @@ FoursideSports_Cancel_Cant_Equip:	//l_0xc51fe7
 	eob
 
 FoursideSports_Not_Enough_Cash:	//l_0xc51ff8
+	sound(SND_ERRORBEEP)
 	"@Oh, most heinous!" linebreak
 	"  You dudes don't have enough money for this." next
 	eob
 
 FoursideSports_Whole_Party_Full_Inventory:	//l_0xc5201d
+	sound(SND_ERRORBEEP)
 	"@Dudes!" linebreak
 	"  You simply have too much stuff in your kit!" next
 	"@But don't sweat it, I can buy some stuff you don't need." linebreak
@@ -343,11 +353,13 @@ FoursideSports_Bulk_Buy_Lots:
 	eob
 
 FoursideSports_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Oh, most heinous!" linebreak
 	"  You dudes don't have enough money for these." next
 	eob
 
 FoursideSports_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Dudes!" next
 	"@You simply have too much stuff in your kit for these!" next
 	"@But don't sweat it, I can buy some stuff you don't need." linebreak
@@ -400,10 +412,12 @@ MoonsideHotel_Cancel_Cant_Equip:	//l_0xc5c9ce
 	eob
 
 MoonsideHotel_Not_Enough_Cash:		//l_0xc5c9e7
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." next
 	eob
 
 MoonsideHotel_Whole_Party_Full_Inventory:	//l_0xc5c9f2
+	sound(SND_ERRORBEEP)
 	"@You're carrying too many things already." end
 
 MoonsideHotel_What_To_Sell:		// This shop doesn't purchase items
@@ -448,10 +462,12 @@ MoonsideHotel_Bulk_Buy_Lots:
 	eob
 
 MoonsideHotel_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@You don't have enough money." next
 	eob
 
 MoonsideHotel_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You're carrying way too many things already." end
 
 MoonsideHotel_Bulk_Buy_Change_Of_Mind:

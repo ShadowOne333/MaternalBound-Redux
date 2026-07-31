@@ -60,10 +60,12 @@ GeneralDrugstore_Cancel_Cant_Equip:	//l_0xc51bb7
 	eob
 
 GeneralDrugstore_Not_Enough_Cash:		//l_0xc51bc0
+	sound(SND_ERRORBEEP)
 	"@Excuse me, uhhh... you don't seem to have enough money." next
 	eob
 
 GeneralDrugstore_Whole_Party_Full_Inventory:	//l_0xc51bde
+	sound(SND_ERRORBEEP)
 	"@I'm afraid you cannot carry anything else." next
 	"@Do you want to sell some things that you don't need?" linebreak
 	eob
@@ -119,10 +121,12 @@ GeneralDrugstore_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralDrugstore_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Excuse me, uhhh... you don't seem to have enough money for all that." next
 	eob
 
 GeneralDrugstore_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@I'm afraid you cannot carry anything else." next
 	"@Do you want to sell some things that you don't need?" linebreak
 	eob
@@ -176,10 +180,12 @@ GeneralBurger_Cancel_Cant_Equip:	// l_0xc5bbf2
 	eob
 
 GeneralBurger_Not_Enough_Cash:		//l_0xc5bbfb
+	sound(SND_ERRORBEEP)
 	"@Whoops!  You don't have enough money." next
 	eob
 
 GeneralBurger_Whole_Party_Full_Inventory:	//l_0xc5bc0d
+	sound(SND_ERRORBEEP)
 	"@Ooops! You already have too much stuff." end
 
 GeneralBurger_What_To_Sell:		// Burgershops don't purchase items
@@ -223,10 +229,12 @@ GeneralBurger_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralBurger_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Whoops!  You don't have enough money for these." next
 	eob
 
 GeneralBurger_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Ooops! You already have too much stuff." end
 
 GeneralBurger_Bulk_Buy_Change_Of_Mind:
@@ -275,11 +283,14 @@ GeneralBakery_Cancel_Cant_Equip:	// l_0xc5bae8
 	eob
 
 GeneralBakery_Not_Enough_Cash:		//l_0xc5baf1
+	sound(SND_ERRORBEEP)
 	"@It seems like you don't have enough money." next
 	eob
 
 GeneralBakery_Whole_Party_Full_Inventory:	//l_0xc5bb02
-	"@You have so many belongings...  You just can't carry any more!" wait linebreak
+	sound(SND_ERRORBEEP)
+	"@You have so many belongings..." linebreak
+	"  You just can't carry any more!" wait
 	eob
 
 GeneralBakery_What_To_Sell:		// Bakeries don't purchase items
@@ -323,11 +334,14 @@ GeneralBakery_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralBakery_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@It seems like you don't have enough money for these." next
 	eob
 
 GeneralBakery_Bulk_Buy_Full_Inventory:
-	"@You have so many belongings...  You just can't carry all of these!" wait linebreak
+	sound(SND_ERRORBEEP)
+	"@You have so many belongings..." linebreak
+	"  You just can't carry all of these!" wait
 	eob
 
 GeneralBakery_Bulk_Buy_Change_Of_Mind:
@@ -393,10 +407,12 @@ GeneralArmsDealer_Cancel_Cant_Equip:	//l_0xc52eb2
 	eob
 
 GeneralArmsDealer_Not_Enough_Cash:	//l_0xc52ed7
+	sound(SND_ERRORBEEP)
 	"@Hold it just a second!  You haven't got enough money!" next
 	eob
 
 GeneralArmsDealer_Whole_Party_Full_Inventory:	//l_0xc52ef5
+	sound(SND_ERRORBEEP)
 	"@You aren't going to be able to carry any more stuff." next
 	"@You're dragging around all that junk..." next
 	"@I guess I could help you out by buying some things that you don't need..." next
@@ -456,10 +472,12 @@ GeneralArmsDealer_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralArmsDealer_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Hold it just a second!  You haven't got enough money!" next
 	eob
 
 GeneralArmsDealer_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You aren't going to be able to carry all this stuff." next
 	"@You're dragging around all that junk..." next
 	"@I guess I could help you out by buying some things that you don't need..." next
@@ -520,10 +538,12 @@ GeneralToolshop_Cancel_Cant_Equip:	//l_0xc521d3
 	eob
 
 GeneralToolshop_Not_Enough_Cash:	//l_0xc521dc
+	sound(SND_ERRORBEEP)
 	"@I'm sorry, but you don't have enough money." next
 	eob
 
 GeneralToolshop_Whole_Party_Full_Inventory:	//l_0xc521ec
+	sound(SND_ERRORBEEP)
 	"@Oh, how are you planning to carry this?  You've got too much stuff!" next
 	"@Well, I guess I could buy the stuff you don't need." next
 	"@Do you want to sell anything?" linebreak
@@ -578,10 +598,12 @@ GeneralToolshop_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralToolshop_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@I'm sorry, but you don't have enough money for all that." next
 	eob
 
 GeneralToolshop_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@Oh, how are you planning to carry these?  You've got too much stuff!" next
 	"@Well, I guess I could buy the stuff you don't need." next
 	"@Do you want to sell anything?" linebreak
@@ -637,10 +659,12 @@ GeneralCondiments_Cancel_Cant_Equip:	//l_0xc5bfbf
 	eob
 
 GeneralCondiments_Not_Enough_Cash:	//l_0xc5bfc7
+	sound(SND_ERRORBEEP)
 	"@Oh, you don't have enough money." next
 	eob
 
 GeneralCondiments_Whole_Party_Full_Inventory:	//l_0xc5bfd3
+	sound(SND_ERRORBEEP)
 	"@You already have the maximum number of things you can carry." next
 	"@You're going to have to sell some things, or just throw them away." next
 	"@Then come again." end
@@ -686,10 +710,12 @@ GeneralCondiments_Bulk_Buy_Lots:
 	"@All of these?" next eob
 
 GeneralCondiments_Bulk_Buy_Not_Enough_Cash:
+	sound(SND_ERRORBEEP)
 	"@Oh, you don't have enough money for these." next
 	eob
 
 GeneralCondiments_Bulk_Buy_Full_Inventory:
+	sound(SND_ERRORBEEP)
 	"@You already have the maximum number of things you can carry." next
 	"@You're going to have to sell some things, or just throw them away." next
 	"@Then come again." end

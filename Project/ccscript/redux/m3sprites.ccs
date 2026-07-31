@@ -18,7 +18,7 @@ import "../redux/movscr_codes.ccs"
 // Note that this resets Bowspr and could be not ideal.
 
 // We use two bytes of free RAM to access the action scripts (it's just a lot easier this way).
-define free_ram =	0x3260	// Since it's two bytes, 0x3251 would also be used, although it's always 0.
+define free_ram =	0x3260	// Since it's two bytes, 0x3261 would also be used, although it's always 0.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
