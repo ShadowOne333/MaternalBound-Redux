@@ -1,10 +1,10 @@
 // Events debug menu option
 
-import "../../essential/commands.ccs"
 import "../../definitions/flags.ccs"
+import "../../essential/asm65816.ccs"
+import "../../essential/commands.ccs"
 import "../../essential/stdext.ccs"
 import "../../debug/diamond.ccs"
-import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ Enemy_Spawn:
 
 Battler: //Thank you, phoenixbound and vittorio! --livvy
 	diam "Which Enemy Group?" newline
-	"   {number_input(3)}"
+	"   " number_input(3)
 	swap
 	store_registers_shared
 	window_closeall // Now we can close the windows without losing the inputted number

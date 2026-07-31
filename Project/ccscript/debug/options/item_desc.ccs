@@ -16,10 +16,15 @@ Item_Desc:
 	"   {number_input(3)}" clearline
 	goto_if_false(new_debug_menu.debug_main)
 	swap
+
+	if (compare_argument(254)) {	// Input validation
+		diam "Items 254 and above are non-existent." next
+		goto(Item_Desc)
+	}
+
 	diam "Description:" next
-	"   {itemname(0)}." promptw
-	wait
-	linebreak
+	"   " itemname(0) "." //"[03]"
+	prompt wait linebreak
 	window_clear
 	// Multi-address reference pointers
 	compare_argument(0) switch_call(1) switch_entry(item_descriptions.l_0xc539c4)	// 00
@@ -276,12 +281,7 @@ Item_Desc:
 	compare_argument(251) switch_call(1) switch_entry(item_descriptions.l_0xc5687b)
 	compare_argument(252) switch_call(1) switch_entry(item_descriptions.l_0xc56892)
 	compare_argument(253) switch_call(1) switch_entry(item_descriptions.l_0xc5689f) linebreak
-	
-	compare_argument(254)
 
-	goto_if_false(Item_Desc)
-	diam "Item {number(253)} non-existent." promptw wait
-	linebreak
 	goto(Item_Desc)
 
 //------------------------------------------------------------------

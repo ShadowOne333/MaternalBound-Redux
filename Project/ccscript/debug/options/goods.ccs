@@ -260,7 +260,6 @@ item_remove:
 	goto_if_false(item_remove)
 	do_menu_in_window(2)
 	goto_if_false(item_remove)
-	goto(l_0xc5e48e)
 
 l_0xc5e48e:
 	window_switch(2)
@@ -286,7 +285,6 @@ l_0xc5e499:
 	goto_if_false(l_0xc5e4c2)
 	swap
 	eob
-	goto(l_0xc5e4c2)
 
 l_0xc5e4c2:
 	eob
@@ -412,6 +410,5 @@ return_to_all_events:
 
 remove_all_end_events:
 	eob
-
 
 //------------------------------------------------------------------

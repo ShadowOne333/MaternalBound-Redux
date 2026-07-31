@@ -1,10 +1,10 @@
 // Events debug menu option
 
-import "../../essential/commands.ccs"
 import "../../definitions/flags.ccs"
+import "../../essential/asm65816.ccs"
+import "../../essential/commands.ccs"
 import "../../essential/stdext.ccs"
 import "../../debug/diamond.ccs"
-import "../../essential/asm65816.ccs"
 
 //------------------------------------------------------------------
 

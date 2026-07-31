@@ -657,7 +657,7 @@ l_0xc5a154:
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
-	set(FLG_SYS_PHONE_MYHOME2)	// 210
+	set(FLG_SYS_PHONE_MYHOME2)	// 201
 	set(FLG_SYS_PHONE_PIZZA)	// 202
 	call(l_0xc5a526)
 	give_and_return_location(1, FOR_SALE_SIGN)	// 0xA3, 163, For sale sign
