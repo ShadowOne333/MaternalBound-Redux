@@ -1,10 +1,15 @@
 // Script that enables debug mode if you hold L+R while the game boots
 
+import "../debug/diamond.ccs"
+import "../definitions/flags.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/commands.ccs"
-import "../definitions/flags.ccs"
 import "../essential/stdext.ccs"
-import "../debug/diamond.ccs"
+
+// Set to 0 before compiling release builds
+define DEBUG_BUILD = 0
+
+// Script that enables debug mode if you hold L+R while the game boots
 
 // OPTION 10 (Teleport) -- LEARN TELEPORT ALPHA
 // OPTION 11 (Star α) -- LEARN STARSTORM ALPHA
@@ -19,14 +24,19 @@ ROM[0xC0B9B0] = {
 }
 
 DebugCheck: {
+	LDA_i (DEBUG_BUILD)
+	BEQ_a (_return)
+
 	JSL   (0xC08756) // WaitFrame (guarantee controllers are read on a cold reset)
 
 	LDA_a (0x0065) // Held buttons on controller 1
 	BIT_i (0x0030) // JOY_L | JOY_R
-	BEQ   (7)      // Branch to "RTL"
-	  // If we reached this, it means we were holding L or R while the game was booting
+	BEQ   (7)	  // Branch to "RTL"
+	// If we reached this, it means we were holding L or R while the game was booting
 	DEC_a (0x436C)   // Enable debug flag
 	JSL   (DEBUG_EntryPoint)
+
+_return:
 	RTL
 }
 

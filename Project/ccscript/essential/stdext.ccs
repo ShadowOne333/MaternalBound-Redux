@@ -148,6 +148,7 @@ command get_stat_letter(s) "[19 28 {byte s}]"
 
 command select_char_nocancel(t1, t2, t3, t4, show) "[1A 00 {long t1} {long t2} {long t3} {long t4} {byte show}]"
 command select_char(t1, t2, t3, t4, show) "[1A 01 {long t1} {long t2} {long t3} {long t4} {byte show}]"
+    command select_char_cancel	select_char(0,0,0,0,1)
 command do_menu_nocancel "[1A 04]"
 command show_inventory(char, window) "[1A 05 {byte char} {byte window}]"
 command do_shop_menu(id) "[1A 06 {byte id}]"

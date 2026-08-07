@@ -1,9 +1,9 @@
 // Move To Area debug menu option
 // When adding new stuff here to help test story things, don't forget to update Warps.md!
 
+import "../../definitions/flags.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/commands.ccs"
-import "../../definitions/flags.ccs"
 import "../../essential/stdext.ccs"
 import "../../debug/diamond.ccs"
 
@@ -16,8 +16,7 @@ command close_and_warp(id) {
 	enable_input
 	eob
 }
-
-
+//------------------------------------------------------------------
 Move_to_area:
 	window_closeall
 	window_open(8)

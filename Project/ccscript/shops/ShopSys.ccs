@@ -795,8 +795,6 @@ Select_Sell_Single_Char:
 	swap
 	eob
 
-
-
 Check_Item_Number: // all instances of it being called have been commented out
 	//c5e3bc
 	store_registers
@@ -873,9 +871,17 @@ BulkBuy:
 	newline "   " number_input(2) // If you want to add some decoration around the input selector, do it here
 	
 	store_registers
-	if result_is(0) { call(Bulk_Buy_Change_Of_Mind) eob } // backed out of the selector / chose 0 
+	if result_is(0) {	// Backed out of the selector / chose 0
+		call(Bulk_Buy_Change_Of_Mind)
+		eob
+	}
 	load_registers
-	if result_is(1) { ctoarg store_registers newline goto(Selected_Item_String_Pt2) } // chose just one 	
+	if result_is(1) {	// Choose just one
+		ctoarg
+		store_registers
+		newline
+		goto(Selected_Item_String_Pt2)
+	}
 	load_registers
 
 	//Maedaez's suggestion

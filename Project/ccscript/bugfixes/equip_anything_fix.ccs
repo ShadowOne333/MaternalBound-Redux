@@ -1,4 +1,7 @@
-// Fix the Equip glitch that occurs when a Teddy bear is killed and a character changes equipment during that same turn.
+//------------------------------------------------------------------
+//	Fix the Equip glitch that occurs when a Teddy bear is killed
+//	and a character changes equipment during that same turn.
+//------------------------------------------------------------------
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 //------------------------------------------------------------------
@@ -11,12 +14,12 @@ define BATTLER_ID			= 0x9FAC	// BATTLERS_TABLE + battler::id
 define BATTLER_CURRENT_ACTION_ARGUMENT	= 0x9FB4	// BATTLERS_TABLE + battler::current_action_argument
 define BATTLE_ITEM_USED			= 0xA97C
 define BATTLE_MENU_SELECTION_PARAM1	= 0xA97E	// BATTLE_MENU_SELECTION + battle_menu_selection::param1
-// ================================================================
-// PATCH 1 - cache the item ID at the moment the menu selection is
+//------------------------------------------------------------------
+// Cache the item ID at the moment the menu selection is
 // committed into the battler struct. Indexed by (char_id - 1), the
 // same index EQUIP_ITEM itself uses for its own address math, so the
 // read side needs no translation at all.
-// ================================================================
+//------------------------------------------------------------------
 ROM[0xC251B1] = JML	(Item_Slot_Assign_And_Cache)
 
 Item_Slot_Assign_And_Cache: {
@@ -24,40 +27,40 @@ Item_Slot_Assign_And_Cache: {
 	STA_x	(BATTLER_ACTION_ITEM_SLOT)	// battler::action_item_slot,X (original store, unchanged)
 
 	CMP_8	(0x00)
-	BEQ_a	(_NO_CACHE)	// slot 0 -> defensive, nothing to cache
+	BEQ_a	(_NO_CACHE)	// Slot 0 -> Defensive, nothing to cache
 
-	STA_d	(0x0E)	// @LOCAL00, scratch: raw slot
-	STZ_d	(0x0F)	// clear the local's high byte -- it will be read as 16-bit below
-	PHX		// [1] save this battler's compact BATTLERS_TABLE-relative offset
+	STA_d	(0x0E)		// @LOCAL00, scratch: raw slot
+	STZ_d	(0x0F)		// Clear the local's high byte -- it will be read as 16-bit below
+	PHX			// [1] Save this battler's compact BATTLERS_TABLE-relative offset
 
-	REP	(0x20)	// 16-bit accum for address math
+	REP	(0x20)		// 16-bit accum for address math
 	LDA_x	(BATTLER_ID)	// battler::id,X (word) -- X still the saved offset here
 	AND_i	(0x00FF)
 	DEC			// char_id - 1  (same index EQUIP_ITEM uses for its own math)
-	PHA		// [2] save char_id-1 on the hardware stack -- NOT direct page, since
-			//     MULT168 below may clobber direct-page scratch internally
+	PHA			// [2] Save char_id-1 on the hardware stack -- NOT direct page,
+				// since MULT168 below may clobber direct-page scratch internally
 
 	LDY_i	(SIZEOF_CHAR_STRUCT)
 	JSL	(MULT168)
 	CLC
 	ADC_i	(PARTY_CHARACTERS_ITEMS_MINUS_1)
 	CLC
-	ADC_d	(0x0E)	// + raw slot -> address of items[slot-1]
+	ADC_d	(0x0E)		// + Raw slot -> Address of items[slot-1]
 	TAX
-	LDA_x	(0)	// item id currently in that slot
+	LDA_x	(0)		// Item id currently in that slot
 	AND_i	(0x00FF)
-	STA_d	(0x0E)	// stash item id here (raw slot no longer needed past this point)
+	STA_d	(0x0E)		// Stash item id here (raw slot no longer needed past this point)
 
-	PLY		// [2] pull char_id-1 back (matches the push right before the JSL)
-	TYX		// X = char_id - 1
+	PLY			// [2] Pull char_id-1 back (matches the push right before the JSL)
+	TYX			// X = char_id - 1
 
-	LDA_d	(0x0E)	// item id
-	SEP	(0x20)	// 8-bit accum for the cache store
-	STA_x	(WEAPON_SLOT_ID_CACHE)	// cache[char_id-1] = item id
+	LDA_d	(0x0E)		// Item id
+	SEP	(0x20)		// 8-bit accum for the cache store
+	STA_x	(WEAPON_SLOT_ID_CACHE)	// Cache[char_id-1] = Item id
 
-	PLX		// [1] restore this battler's compact offset
+	PLX			// [1] Restore this battler's compact offset
 	LDA_a	(BATTLE_ITEM_USED)
-	STA_x	(BATTLER_CURRENT_ACTION_ARGUMENT)	// original second store, unchanged
+	STA_x	(BATTLER_CURRENT_ACTION_ARGUMENT)	// Original second store, unchanged
 	JML	(0xC251CA)
 
 _NO_CACHE:
@@ -65,53 +68,53 @@ _NO_CACHE:
 	STA_x	(BATTLER_CURRENT_ACTION_ARGUMENT)
 	JML	(0xC251CA)
 }
-// ================================================================
-// PATCH 2 - inside EQUIP_ITEM, right after it computes the trusted
+//------------------------------------------------------------------
+// Inside EQUIP_ITEM, right after it computes the trusted
 // address of items[slot-1] and reads the item sitting there. Verifies
 // identity against the Patch 1 cache; on mismatch, retries at the
 // previous slot and -- critically -- also corrects @LOCAL01 (the raw
 // slot param EQUIP_ITEM re-reads for every CHANGE_EQUIPPED_* call),
 // so the actual equip swap happens at the right slot too, not just
 // the type-dispatch decision.
-// ================================================================
+//------------------------------------------------------------------
 ROM[0xC1908A] = JML	(Item_Read_With_Identity_Check)
 
 Item_Read_With_Identity_Check: {
 	// Entry: X = address of items[slot-1], computed by EQUIP_ITEM's own
-	//        (trusted) math just above. Accum is 16-bit throughout EQUIP_ITEM.
-	STX_d	(0x02)	// @VIRTUAL02 (unused after this point in EQUIP_ITEM), scratch: candidate address
+	// (trusted) math just above. Accum is 16-bit throughout EQUIP_ITEM.
+	STX_d	(0x02)		// @VIRTUAL02 (unused after this point in EQUIP_ITEM), scratch: candidate address
 
-	LDA_d	(0x0E)	// @LOCAL00, char_id (same value EQUIP_ITEM was called with)
+	LDA_d	(0x0E)		// @LOCAL00, char_id (same value EQUIP_ITEM was called with)
 	AND_i	(0x00FF)
-	DEC		// char_id - 1, same index Patch 1 caches under
+	DEC			// char_id - 1, same index Patch 1 caches under
 	TAX
 	LDA_x	(WEAPON_SLOT_ID_CACHE)
 	AND_i	(0x00FF)
-	STA_d	(0x04)	// @VIRTUAL04 (unused until the OPTIMIZED_MULT right after we resume), scratch: cached expected item id
+	STA_d	(0x04)		// @VIRTUAL04 (unused until the OPTIMIZED_MULT right after we resume), scratch: cached expected item id
 
 	LDX_d	(0x02)
 	LDA_x	(0)
 	AND_i	(0x00FF)
 	CMP_d	(0x04)
-	BEQ_a	(_MATCH)	// matches cache -> candidate address (and @LOCAL01) are already correct
+	BEQ_a	(_MATCH)	// Matches cache -> Candidate address (and @LOCAL01) are already correct
 
 	LDX_d	(0x02)
-	DEX		// try one slot earlier
+	DEX			// Try one slot earlier
 	LDA_x	(0)
 	AND_i	(0x00FF)
 	CMP_d	(0x04)
-	BNE_a	(_GIVE_UP)	// still no match -> give up, use the original candidate as-is
+	BNE_a	(_GIVE_UP)	// Still no match -> Give up, use the original candidate as-is
 
-	STX_d	(0x02)	// corrected address, for our own re-read below
-	LDA_d	(0x10)	// @LOCAL01, the raw slot -- EQUIP_ITEM re-reads THIS for every CHANGE_EQUIPPED_* call
-	DEC		// shift it back by one to match, so the actual swap happens at the right slot too
+	STX_d	(0x02)		// Corrected address, for our own re-read below
+	LDA_d	(0x10)		// @LOCAL01, the raw slot -- EQUIP_ITEM re-reads THIS for every CHANGE_EQUIPPED_* call
+	DEC			// Shift it back by one to match, so the actual swap happens at the right slot too
 	STA_d	(0x10)
 
 _GIVE_UP:
 _MATCH:
 	LDX_d	(0x02)
 	LDA_x	(0)
-	AND_i	(0x00FF)	// matches the original instruction's effect at this point
+	AND_i	(0x00FF)	// Matches the original instruction's effect at this point
 	JML	(0xC19090)
 }
 //------------------------------------------------------------------

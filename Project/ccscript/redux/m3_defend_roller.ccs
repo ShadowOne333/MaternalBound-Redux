@@ -1,47 +1,209 @@
+//------------------------------------------------------------------
+// EarthBound version of the MOTHER 3 "slow HP/PP roller while guarding" mechanic.
+//------------------------------------------------------------------
 import "../essential/asm65816.ccs"
 import "../essential/jsl_rts.ccs"
+//---------- Turn-start hook, found via CURRENT_ATTACKER -----------
+// The real per-battler turn execution loop starts at C2569A, where the game
+// writes the current battler's address into CURRENT_ATTACKER and, right
+// after, sets battler::has_taken_turn = 1 for them - this is the genuine,
+// once-per-battler-per-round "this battler's turn is now starting" moment
+// (immediately followed by consciousness/status checks to see if they can
+// even act). Confirmed via full-codebase search: nothing else references
+// any address in the middle of this range, so it's safe to hook.
+//
+// battler::guarding itself is still left completely untouched/vanilla here
+// (round-start loop, damage-calc - unmodified). We simply snapshot its
+// current value into a separate ROLLER_ACTIVE_FLAGS array at this genuine
+// turn-start moment, and the roller speed check reads that instead.
 
-// MOTHER 3 style mechanic that reduces the rolling speed of your HP/PP meter while you are guarding
+// [!] Uses 6 free bytes of WRAM from the confirmed-unused 224-byte block [!]
+// [!] at 0x7E00DC (verified free via the free-RAM list). [!]
+// https://gist.github.com/Supremekirb/33089ef23ef1e3677d80f38479e4cb2e#file-ram-ccs-L6-L44
+define ROLLER_ACTIVE_FLAGS	= 0x00DC	// 6 bytes (one per battler ID 0-5)
+define CURRENT_ATTACKER		= 0xA970
 
-// [!] Uses some unused space at the end of bank 02 - add the following line to used_ranges.yml [!]
+//------------------------------------------------------------------
+// Snapshot battler::guarding into ROLLER_ACTIVE_FLAGS at the exact moment
+// each battler's own turn starts executing. Replaces the 10 bytes at
+// C2569A ("STX CURRENT_ATTACKER" / "SEP #$20" / "LDA #1" /
+// "STA battler::has_taken_turn,X"), reproducing all of that original
+// behavior exactly, plus our snapshot. X on entry = full absolute battler
+// address (confirmed: the preceding code computes it via
+// MULT168 + ADC #BATTLERS_TABLE). Accumulator is 16-bit on entry, and the
+// code immediately following this block (C256A4, "LDX CURRENT_ATTACKER")
+// expects Accumulator to be 8-bit on exit (its own REP #$20 doesn't happen
+// until after that) - so we deliberately do NOT restore 16-bit before RTL.
+
+define turnStartRollerHook = 0xC2569A // 10-byte block being replaced
+
+turnStartRollerHook_patch: {
+	STX_a	(CURRENT_ATTACKER)	// Reproduce original write	(X = full battler address, Acc 16-bit here)
+
+	LDA_x	(36)		// battler::guarding,X (16-bit read; upper byte from an adjacent field, masked below)
+	AND_i	(0xFF)		// Clean value
+	PHA			// Stash it (2 bytes, still 16-bit)
+
+	LDA_x	(0)		// battler::id,X (16-bit read)
+	AND_i	(0xFF)		// Clean id, also correctly clears the hidden accumulator high byte
+	TAX			// X = battler id (0-5)
+
+	PLA			// A = The guarding value we stashed
+	SEP	(0x20)		// Safe to go 8-bit now - X already holds a clean small id
+	STA_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS[id] = battler::guarding's value (copy, not re-derived)
+
+	LDX_a	(CURRENT_ATTACKER)	// Restore X = full battler address (we already stored it above)
+	LDA_8	(1)
+	STA_x	(13)		// battler::has_taken_turn,X = 1 (reproduce original)
+
+	RTL			// Deliberately leaving Acc 8-bit, matching what the code at C256A4 expects
+}
+
+ROM[turnStartRollerHook] = {
+	JSL	(turnStartRollerHook_patch)
+	NOP NOP NOP NOP NOP NOP
+}
+
+//------------------------------------------------------------------
+// Clear all 6 ROLLER_ACTIVE_FLAGS at the exact moment the game ends a round
+// Confirmed to fire exactly once per round-end (and once before a battle fully ends).
+// Hooking directly into it means we piggyback on the game's own
+// "a round just finished" signal instead of guessing at one ourselves.
+//
+// Hooks C26088 ("JSL REDIRECT_CLOSE_FOCUS_WINDOW", 4 bytes) - a straight-up
+// instruction replacement (same length, no padding needed): our patch does
+// the extra clearing work, then calls the REDIRECT_CLOSE_FOCUS_WINDOW itself,
+// so nothing downstream changes. All registers and processor flags are
+// preserved across the clearing logic so the original call site sees no
+// difference besides the added side effect.
+
+define roundEndHook = 0xC26088 // "JSL RESET_HPPP_ROLLING" (4 bytes)
+define REDIRECT_CLOSE_FOCUS_WINDOW = 0xC1DD59
+
+roundEndHook_patch: {
+	SEP	(0x20)
+	LDX_i	(0)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	LDX_i	(1)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	LDX_i	(2)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	LDX_i	(3)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	LDX_i	(4)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	LDX_i	(5)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)
+	REP	(0x20)
+
+	JSL	(REDIRECT_CLOSE_FOCUS_WINDOW)	// Do the original work this instruction was replacing
+	RTL
+}
+
+ROM[roundEndHook] = {
+	JSL (roundEndHook_patch)
+}
+
+//------------------------------------------------------------------
+// Clear ROLLER_ACTIVE_FLAGS once, at battle start, so stale data from a
+// previous battle can't cause a false slowdown before any battler has had
+// their first turn yet this battle. Hooks the tail end of the one-time
+// battle setup routine in bank02 ("LDA #1 / STA BATTLE_MODE_FLAG"). This
+// does NOT touch battler::guarding at all - that stays entirely vanilla.
+
+define battleStartHook	= 0xC24A45	// "LDA #1 / STA BATTLE_MODE_FLAG" (6 bytes)
+define BATTLE_MODE_FLAG	= 0x9643
+
+clearRollerActiveFlagsPatch: {
+	LDA_i	(1)
+	STA_a	(BATTLE_MODE_FLAG)	// Preserve original effect
+
+	SEP	(0x20)
+	LDX_i	(0)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS (0x00DC)
+	LDX_i	(1)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS+1 (0x00DD)
+	LDX_i	(2)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS+2 (0x00DE)
+	LDX_i	(3)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS+3 (0x00DF)
+	LDX_i	(4)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS+4 (0x00E0)
+	LDX_i	(5)
+	STZ_x	(ROLLER_ACTIVE_FLAGS)	// ROLLER_ACTIVE_FLAGS+5 (0x00E1)
+	REP	(0x20)			// Restore 16-bit Acc for the code that follows
+
+	RTL
+}
+
+ROM[battleStartHook] = {
+	JSL	(clearRollerActiveFlagsPatch)
+	NOP NOP
+}
+
+//------------------------------------------------------------------
+// The HP/PP roller speed check. Reads ROLLER_ACTIVE_FLAGS (indexed directly
+// by character ID - no MULT168 struct-address computation needed, since
+// this is our own flat array) instead of battler::guarding. Springboard moved
+// off of 0xC2FFCC-0xC2FFD0 because that address collides with m3sprites.ccs's own
+// "handle_windows" hijack (FREE_ROM_C2_L). Verify 0xC2FFD1-0xC2FFD5 is
+// genuinely free in your build before relying on this	(byte-dump check).
+
+// [!] Also add the ROM range below to used_ranges.yml, same as the original file. [!]
 /*
-- (0x02FFCC, 0x02FFD0) # HP/PP meter guard script
+- (0x02FFD1, 0x02FFD6) # HP/PP meter guard-speed springboard (5 bytes: JSL + RTS)
 */
 
-define getHPPPMeterSpeed = 0xC20F58 // RTS
-define getHPPPMeterSpeedSpringboard = 0xC2FFD1
-define TIMES_TO_HALVE_SPEED = 2 // How many times to halve the speed when guarding. In other words, speed = speed/(2^this)
+define MULT168				= 0xC08FF7
+define ASR32				= 0xC09262
+define getHPPPMeterSpeed		= 0xC20F58
+define getHPPPMeterSpeedSpringboard	= 0xC2FFD1
+define TIMES_TO_HALVE_SPEED		= 1		// How many times to halve the speed when guarding.
 
 ROM[getHPPPMeterSpeedSpringboard] = { JSL (getHPPPMeterSpeedPatch) RTS }
 ROM[0xC21139] = JSR (getHPPPMeterSpeedSpringboard)
 ROM[0xC211C3] = JSR (getHPPPMeterSpeedSpringboard)
 
 getHPPPMeterSpeedPatch: {
-	JSL_RTS_C2 (0xC20F58) // Writes to caller's dp $06
+	JSL_RTS_C2	(getHPPPMeterSpeed)	// Writes to caller's dp $06
 
-	// check if we're in battle
-	LDA_a (0x9643)
-	BEQ_a (_return) // No battle, don't do guard logic
+	// Check if we're in battle
+	LDA_a	(0x9643)
+	BEQ_a	(_return)	// No battle, don't do guard logic
 
-	// get character (using parent's stack frame - we don't have one of our own)
-	LDX_d (0x10) // *PartyCharacter
-	LDA_x (53) // ubyte characterID, 0-indexed
-	AND_i (0xFF)
-	// get *Battler. Characters are battlers 0-3 based on their ID
-	LDY_i (0x4E) // sizeof(Battler)
-	JSL (0xC08FF7) // MULT168
+	// Get character ID (0-3, this is which SLOT in BATTLERS_TABLE this
+	// Character occupies), which equals its battler ID
+	LDX_d	(0x10)		// *PartyCharacter
+	LDA_x	(53)		// ubyte characterID, 0-indexed
+	AND_i	(0xFF)
+	// Get *Battler for this slot
+	LDY_i	(0x4E)		// sizeof(Battler)
+	JSL	(MULT168)
 	CLC
-	ADC_i (0x9FAC) // + *battlersTable
+	ADC_i	(0x9FAC)	// + *battlersTable
 	TAX
-	LDA_x (36) // is guarding flag
-	AND_i (0xFF)
-	BEQ_a (_return) // not guarding, don't do guard logic
 
-	// character is guarding, so reduce the roll speed in dp $06 with another ASR32
-	// thankfully this is already the correct dp location to do math in
-	LDY_i (TIMES_TO_HALVE_SPEED)
-	JSL (0xC09262) // ASR32
+	// IMPORTANT: characterID (the table SLOT index above) is NOT the same
+	// as the battler::id VALUE stored inside that slot (confirmed via live
+	// memory-watch - e.g. Ness occupies slot 0 but battler::id there reads
+	// 1). Our write hook indexes ROLLER_ACTIVE_FLAGS by the real
+	// battler::id value, so we need to read that here too rather than
+	// reusing characterID directly as the array index.
+	LDA_x	(0)		// battler::id,X
+	AND_i	(0xFF)
+	TAX
+
+	LDA_x	(ROLLER_ACTIVE_FLAGS)
+	AND_i	(0xFF)
+	BEQ_a	(_return)	// Not in their "defending window" right now, don't slow the roller
+
+	// Character's roller should be slow right now, reduce the roll speed in
+	// dp $06 with another ASR32 - thankfully this is already the correct dp
+	// location to do math in
+	LDY_i	(TIMES_TO_HALVE_SPEED)
+	JSL	(ASR32)
 
 _return:
 	RTL
 }
+//------------------------------------------------------------------

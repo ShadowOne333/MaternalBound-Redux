@@ -9,6 +9,7 @@ MEM_BowsprDrawOamOnePriority_Temp2 = 0x00C4 ; 2 bytes in 'Bowspr'
 /////////////////////////////////// ^^^ Must be below 0x0100
 
 RAM_weapon_slot_ID_cache = 0x00D4 ; 8 bytes, in 'equip_anything_fix'
+RAM_m3_roller_active_flags = 0x00DC ; 6 bytes, in 'm3_defend_roller'
 RAM_msu1_tracks = 0x0100 ; 4 bytes, in 'msu1'
 
 /////////////////////////////////// vvv Must be below 0x2000

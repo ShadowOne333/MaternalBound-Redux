@@ -1,17 +1,17 @@
 // Special Status debug menu option
 
+import "../../debug/diamond.ccs"
+import "../../definitions/flags.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/commands.ccs"
-import "../../definitions/flags.ccs"
 import "../../essential/stdext.ccs"
-import "../../debug/diamond.ccs"
 
 //------------------------------------------------------------------
 
 Special_Status:
 	clearline
 	diam "To whom?" newline
-	select_char(0,0,0,0,1)	// Current party member selection menu, lets you cancel with the B button
+	select_char_cancel	// Current party member selection menu (select_char(0,0,0,0,1)), lets you cancel with the B button
 	goto_if_false(new_debug_menu.debug_main)
 	store_registers
 	window_clear

@@ -68,7 +68,7 @@ compile_project:
 # Generate the Debug symbols for the project (Requires Python 3)
 create_debug_symbols:
 	@echo "Generating Debug symbols..."
-	@python "Scripts/generate_debug_symbols.py" "Project/ccscript/summary.txt" $(PATCH_NAME).mlb
+	@python3 "Scripts/generate_debug_symbols.py" "Project/ccscript/summary.txt" $(PATCH_NAME).mlb
 #----------------------------------------------------------------
 # Create the EBP patch based on the Project
 create_patch:

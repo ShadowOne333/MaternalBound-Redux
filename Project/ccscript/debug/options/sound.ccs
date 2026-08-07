@@ -1,10 +1,10 @@
 // Sound Test debug menu option
 
+import "../../debug/diamond.ccs"
+import "../../definitions/flags.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/commands.ccs"
-import "../../definitions/flags.ccs"
 import "../../essential/stdext.ccs"
-import "../../debug/diamond.ccs"
 
 //------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ command Sound_Test_Post_Selection {
 }
 
 Sound_Test_BGM_Selector:
-	"   {number_input(3)}"
+	"   " number_input(3)
 	clearline
 	store_registers
 	if (compare_result(192)) {	// Input validation
@@ -59,7 +59,7 @@ Sound_Test_BGM_Selector:
 	goto(Sound_Test_BGM_Selector)
 
 Sound_Test_SFX_Selector:
-	"   {number_input(3)}"
+	"   " number_input(3)
 	clearline
 	goto_if_false(new_debug_menu.debug_main)
 	swap

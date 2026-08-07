@@ -50,6 +50,11 @@ import "debug/new_debug_menu.ccs"
 import "debug/diamond.ccs"
 import "debug/debug_menu_enabler.ccs"
 //------------------------------------------------------------------
+// Definition files
+import "definitions/flags.ccs"
+import "definitions/items.ccs"
+import "definitions/sounds.ccs"
+//------------------------------------------------------------------
 // Dialogue
 import "dialogue/battle_text.ccs"
 import "dialogue/coffee_tea_sequences.ccs"
@@ -67,7 +72,6 @@ import "essential/cc_char_in_party.ccs"
 import "essential/cc_effects.ccs"
 import "essential/commands.ccs"
 import "essential/fade_tools.ccs"
-import "definitions/flags.ccs"
 import "essential/jsl_rts.ccs"
 import "essential/stdext.ccs"
 //------------------------------------------------------------------
@@ -97,8 +101,7 @@ import "redux/item_quantity.ccs"
 import "redux/keyitems.ccs"
 import "redux/lucky_sandwich_revamp.ccs"
 import "redux/m2_title_screen_movements.ccs"
-//import "redux/eb_defend_roller.ccs"
-//import "redux/m3_defend_roller.ccs"
+import "redux/m3_defend_roller.ccs"
 import "redux/m3sprites.ccs"
 import "redux/menu_macros.ccs"	// Used for Tools battle menu
 import "redux/movement_reloc.ccs"
