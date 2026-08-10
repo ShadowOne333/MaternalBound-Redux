@@ -69,7 +69,7 @@ primary_timer_update: {
 	AND_8(0x40) // Y button.
 	BNE_a(_isRunning) // If Y button is pressed, player is running.
 	
-	_isNotRunning:
+_isNotRunning:
 	LDA_a(RAM_secondary_timer)
 	AND_8(0x7F)
 	CMP_8(stamina_max)
@@ -99,7 +99,7 @@ primary_timer_update: {
 	
 	BRA_a(_end)
 	
-	_isRunning:
+_isRunning:
 	LDA_a(RAM_primary_timer)
 	AND_8(0x7F)
 	STA_a(RAM_primary_timer)
@@ -113,7 +113,7 @@ primary_timer_update: {
 	STA_a(RAM_primary_timer)
 	BRA_a(_end)
 	
-	_end:
+_end:
 	REP(0x20)
 	RTL
 }
@@ -135,7 +135,7 @@ secondary_timer_update: {
 	AND_8(0x40) // Y button.
 	BNE_a(_isRunning) // If Y button is pressed, player is running.
 	
-	_isNotRunning:
+_isNotRunning:
 	LDA_a(RAM_secondary_timer)
 	AND_8(0x7F)
 	CMP_8(stamina_max)
@@ -151,13 +151,13 @@ secondary_timer_update: {
 	BEQ_a(_recovered) // If the cooldown ended, restore up to max stamina.
 	BRA_a(_end)
 	
-	_recovered:
+_recovered:
 	CLC
 	ADC_8(stamina_max)
 	STA_a(RAM_secondary_timer)
 	BRA_a(_end)
 	
-	_isRunning:
+_isRunning:
 	LDA_a(RAM_secondary_timer)
 	AND_8(0x7F)
 	BEQ_a(_ranOut) // If ran out of stamina, subtract from timer (cooldown).
@@ -171,17 +171,17 @@ secondary_timer_update: {
 	BNE_a(_decrease) // If it isn't already 0, decrease stamina.
 	BRA_a(_end)
 	
-	_ranOut:
+_ranOut:
 	SEC
 	SBC_8(stamina_cooldown)
 	AND_8(0x7F)
 	STA_a(RAM_secondary_timer)
 	BRA_a(_end)
 	
-	_decrease:
+_decrease:
 	DEC_a(RAM_secondary_timer)
 	
-	_end:
+_end:
 	REP(0x20)
 	RTL
 }
@@ -214,7 +214,7 @@ sweating_effect: {
 	ORA_i(0x8000)
 	STA_x(0x2E7A)
 	
-	_return:
+_return:
 	LDA_a(0x9840)
 	RTL
 }

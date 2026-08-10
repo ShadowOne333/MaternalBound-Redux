@@ -82,6 +82,7 @@ l_0xc66d3e:
 	pause(1)
 	set(FLG_YAZIUMA_MAMA)	// 471
 	unset(FLG_MYHOME_NES_CHANGE)	// 749
+	refill_stamina
 	warp(196)	// 0xC4
 	eob
 
@@ -107,6 +108,7 @@ l_0xc66e9f:
 
 l_0xc66eca:
 	window_closeall
+	refill_stamina
 	music_effect(3)	// Fade out
 	set(FLG_MYHOME_KNOCK_APPEAR)	// 295
 	set(FLG_YAZIUMA_DISAPPEAR)	// 469

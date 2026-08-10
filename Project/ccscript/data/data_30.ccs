@@ -482,6 +482,7 @@ l_0xc750b3:
 	window_closeall
 	pause(1)
 	unset(FLG_MYHOME_NES_CHANGE)	// 749
+	refill_stamina
 	warp(196)	// 0xC4
 	eob
 
@@ -517,6 +518,7 @@ l_0xc75176:
 	window_closeall
 	call(data_24.l_0xc695ba)
 	call(data_49.l_0xc91693)
+	refill_stamina
 	warp(196)	// 0xC4
 	set(FLG_MYHOME_SLEEP)	// 514
 	eob

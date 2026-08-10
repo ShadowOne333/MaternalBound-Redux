@@ -29,10 +29,6 @@ OBJ_destructor_hi = 0x320C ; 60 bytes in 'movscr_codes'
 RAM_primary_timer = 0x3250 ; 1 byte, in 'run_stamina_mechanic'.
 RAM_secondary_timer = 0x3251 ; 1 byte, in 'run_stamina_mechanic'.
 
-RAM_teddy_turn = 0x3253 ; 1 byte in 'battle_functions'.
-
-RAM_giygas_singing_phase = 0x3254 ; 1 byte in 'battle_functions'.
-
 RAM_psiWindowMiscInfo = 0x3255 ; 1 byte in 'psi_window_rework'.
 RAM_psiWindowMaxPage = 0x3256 ; 1 byte in 'psi_window_rework'.
 
