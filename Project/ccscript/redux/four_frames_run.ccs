@@ -17,23 +17,23 @@ import "../essential/asm65816.ccs"
 
 // This table is for animation frames 3 and 4 for walking
 extra_animation_sprite_table: {
-    ExtraSprites(0,     8, 1, 17, 5, 21, 34, 27)		// Ness.
-    ExtraSprites(1,     9, 2, 18, 343, 22, 34, 28)		// Paula.
-    ExtraSprites(2,     10, 3, 19, 355, 23, 34, 29)		// Jeff.
-    ExtraSprites(3,     11, 4, 20, 457, 24, 34, 30)		// Poo.
-    ExtraSprites(4,     44, 44, 44, 44, 44, 44, 44)		// Pokey.
-    ExtraSprites(5,     45, 45, 45, 45, 45, 45, 45)		// Picky.
-    ExtraSprites(6,     40, 40, 42, 40, 43, 40, 40)		// King.
-    ExtraSprites(7,     182, 182, 182, 182, 182, 182, 182)	// Tony
-    ExtraSprites(8,     46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
-    ExtraSprites(9,     41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
-    ExtraSprites(10,    39, 39, 39, 39, 39, 39, 39)		// Flying Man 1.
-    ExtraSprites(11,    39, 39, 39, 39, 39, 39, 39)		// Flying Man 2.
-    ExtraSprites(12,    39, 39, 39, 39, 39, 39, 39)		// Flying Man 3.
-    ExtraSprites(13,    39, 39, 39, 39, 39, 39, 39)		// Flying Man 4.
-    ExtraSprites(14,    39, 39, 39, 39, 39, 39, 39)		// Flying Man 5.
-    ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
-    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
+	ExtraSprites(0,	 8, 1, 17, 5, 21, 34, 27)		// Ness.
+	ExtraSprites(1,	 9, 2, 18, 343, 22, 34, 28)		// Paula.
+	ExtraSprites(2,	 10, 3, 19, 355, 23, 34, 29)		// Jeff.
+	ExtraSprites(3,	 11, 4, 20, 457, 24, 34, 30)		// Poo.
+	ExtraSprites(4,	 44, 44, 44, 44, 44, 44, 44)		// Pokey.
+	ExtraSprites(5,	 45, 45, 45, 45, 45, 45, 45)		// Picky.
+	ExtraSprites(6,	 40, 40, 42, 40, 43, 40, 40)		// King.
+	ExtraSprites(7,	 182, 182, 182, 182, 182, 182, 182)	// Tony
+	ExtraSprites(8,	 46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
+	ExtraSprites(9,	 41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
+	ExtraSprites(10,	39, 39, 39, 39, 39, 39, 39)		// Flying Man 1.
+	ExtraSprites(11,	39, 39, 39, 39, 39, 39, 39)		// Flying Man 2.
+	ExtraSprites(12,	39, 39, 39, 39, 39, 39, 39)		// Flying Man 3.
+	ExtraSprites(13,	39, 39, 39, 39, 39, 39, 39)		// Flying Man 4.
+	ExtraSprites(14,	39, 39, 39, 39, 39, 39, 39)		// Flying Man 5.
+	ExtraSprites(15,	51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
+	ExtraSprites(16,	464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
 }
 
 // When running, we need to define two more tables with the same format.
@@ -47,43 +47,43 @@ extra_animation_sprite_table: {
 define run_flag = flag 65	// flag 1000
 
 extra_animation_sprite_table_running1: {
-    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)		// Ness.
-    ExtraSprites(1,     9, 467, 18, 343, 22, 34, 28)		// Paula.
-    ExtraSprites(2,     10, 468, 19, 355, 23, 34, 29)		// Jeff.
-    ExtraSprites(3,     11, 469, 20, 457, 24, 34, 30)		// Poo.
-    ExtraSprites(4,     44, 474, 44, 44, 44, 44, 44)		// Pokey.
-    ExtraSprites(5,     45, 475, 45, 45, 45, 45, 45)		// Picky.
-    ExtraSprites(6,     40, 473, 42, 40, 43, 40, 40)		// King.
-    ExtraSprites(7,     182, 476, 182, 182, 182, 182, 182)	// Tony
-    ExtraSprites(8,     46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
-    ExtraSprites(9,     41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
-    ExtraSprites(10,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 1.
-    ExtraSprites(11,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 2.
-    ExtraSprites(12,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 3.
-    ExtraSprites(13,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 4.
-    ExtraSprites(14,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 5.
-    ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
-    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
+	ExtraSprites(0,	 8, 466, 17, 5, 21, 34, 27)		// Ness.
+	ExtraSprites(1,	 9, 467, 18, 343, 22, 34, 28)		// Paula.
+	ExtraSprites(2,	 10, 468, 19, 355, 23, 34, 29)		// Jeff.
+	ExtraSprites(3,	 11, 469, 20, 457, 24, 34, 30)		// Poo.
+	ExtraSprites(4,	 44, 474, 44, 44, 44, 44, 44)		// Pokey.
+	ExtraSprites(5,	 45, 475, 45, 45, 45, 45, 45)		// Picky.
+	ExtraSprites(6,	 40, 473, 42, 40, 43, 40, 40)		// King.
+	ExtraSprites(7,	 182, 476, 182, 182, 182, 182, 182)	// Tony
+	ExtraSprites(8,	 46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
+	ExtraSprites(9,	 41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
+	ExtraSprites(10,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 1.
+	ExtraSprites(11,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 2.
+	ExtraSprites(12,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 3.
+	ExtraSprites(13,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 4.
+	ExtraSprites(14,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 5.
+	ExtraSprites(15,	51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
+	ExtraSprites(16,	464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
 }
 
 extra_animation_sprite_table_running2: {
-    ExtraSprites(0,     8, 466, 17, 5, 21, 34, 27)		// Ness.
-    ExtraSprites(1,     9, 467, 18, 343, 22, 34, 28)		// Paula.
-    ExtraSprites(2,     10, 468, 19, 355, 23, 34, 29)		// Jeff.
-    ExtraSprites(3,     11, 469, 20, 457, 24, 34, 30)		// Poo.
-    ExtraSprites(4,     44, 474, 44, 44, 44, 44, 44)		// Pokey.
-    ExtraSprites(5,     45, 475, 45, 45, 45, 45, 45)		// Picky.
-    ExtraSprites(6,     40, 473, 42, 40, 43, 40, 40)		// King.
-    ExtraSprites(7,     182, 476, 182, 182, 182, 182, 182)	// Tony
-    ExtraSprites(8,     46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
-    ExtraSprites(9,     41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
-    ExtraSprites(10,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 1.
-    ExtraSprites(11,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 2.
-    ExtraSprites(12,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 3.
-    ExtraSprites(13,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 4.
-    ExtraSprites(14,    39, 472, 39, 39, 39, 39, 39)		// Flying Man 5.
-    ExtraSprites(15,    51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
-    ExtraSprites(16,    464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
+	ExtraSprites(0,	 8, 466, 17, 5, 21, 34, 27)		// Ness.
+	ExtraSprites(1,	 9, 467, 18, 343, 22, 34, 28)		// Paula.
+	ExtraSprites(2,	 10, 468, 19, 355, 23, 34, 29)		// Jeff.
+	ExtraSprites(3,	 11, 469, 20, 457, 24, 34, 30)		// Poo.
+	ExtraSprites(4,	 44, 474, 44, 44, 44, 44, 44)		// Pokey.
+	ExtraSprites(5,	 45, 475, 45, 45, 45, 45, 45)		// Picky.
+	ExtraSprites(6,	 40, 473, 42, 40, 43, 40, 40)		// King.
+	ExtraSprites(7,	 182, 476, 182, 182, 182, 182, 182)	// Tony
+	ExtraSprites(8,	 46, 46, 46, 46, 47, 46, 46)		// Bubble Monkey.
+	ExtraSprites(9,	 41, 41, 41, 41, 41, 41, 41)		// Dungeon Man.
+	ExtraSprites(10,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 1.
+	ExtraSprites(11,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 2.
+	ExtraSprites(12,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 3.
+	ExtraSprites(13,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 4.
+	ExtraSprites(14,	39, 472, 39, 39, 39, 39, 39)		// Flying Man 5.
+	ExtraSprites(15,	51, 51, 51, 51, 51, 35, 35)		// Teddy Bear.
+	ExtraSprites(16,	464, 464, 464, 464, 464, 465, 465)	// Super Plush Bear.
 }
 
 // These are two special cases that need to be handled outside the table above.
@@ -119,81 +119,80 @@ command ExtraSprites(entry, dead, normal, ladder, robot, rope, tiny_ghost, tiny_
 
 // Here, we alternate the object's VAR4 between 0 and 1 half as fast as the normal walking cycle.
 var4_cycle: {
-    PHA // Push A just in case.
+	PHA // Push A just in case.
 
-    STA_x(0x10F2) // Original code. Store the swapped animation frame.
-    BEQ(5)
-    return_frame_1 // If the stored frame wasn't 0 we can return to the normal code.
-    
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BEQ(8) // If VAR4 is 0 we set it to 1.
-    
-    // Else, VAR4 is 1, then we set it to 0 and return.
-    
-    STZ_x(0x0F4E)
-    return_frame_0
+	STA_x(0x10F2) // Original code. Store the swapped animation frame.
+	BEQ(5)
+	return_frame_1 // If the stored frame wasn't 0 we can return to the normal code.
 
-    LDA_i(0x01)
-    STA_x(0x0F4E)
-    return_frame_0
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BEQ(8) // If VAR4 is 0 we set it to 1.
+
+	// Else, VAR4 is 1, then we set it to 0 and return.
+
+	STZ_x(0x0F4E)
+	return_frame_0
+
+	LDA_i(0x01)
+	STA_x(0x0F4E)
+	return_frame_0
 }
 
 // Here, when the party member isn't walking we set its VAR4 to 0.
 restore_var4: {
-    AND_i(0x2000) // Original code. If the party member is walking, this will return 0.
-    BEQ(7)
-    STZ_x(0x0F4E) // Store 0 in VAR4.
-    JML(0xC0A70D)
-    JML(0xC0A717)
+	AND_i(0x2000) // Original code. If the party member is walking, this will return 0.
+	BEQ(7)
+	STZ_x(0x0F4E) // Store 0 in VAR4.
+	JML(0xC0A70D)
+	JML(0xC0A717)
 }
 
 // Here, we add a check for VAR4 being 1, if so, use the sprites from our new table.
 // We also check whether we're running or not.
 new_sprite_check: {
-    PHX
-    
-    LDA_i(run_flag)
-    JSL(0xC21628) // Get state of the run flag.
-    CMP_i(0)
-    BEQ_a(_not_running)
-    
-    _running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BEQ(9) // If it's 0 get the sprite from the first table for running.
-    
-    // Else, get sprite from the second table for running.
-    
-    PLX
-    LDA_xl(extra_animation_sprite_table_running2)
-    JML(0xC079EA)
-    
-    // First two frames, first table.
-    
-    PLX
-    LDA_xl(extra_animation_sprite_table_running1)
-    JML(0xC079EA)
-    
-    _not_running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BEQ(9) // If it's 0 end normally (get default sprite).
-    
-    // Else, get sprite from our new table.
-    
-    PLX
-    LDA_xl(extra_animation_sprite_table)
-    JML(0xC079EA)
-    
-    // Normal end, get from the default table.
-    
-    PLX
-    LDA_xl(0xC3F2B5) // char_gfx_table
-    JML(0xC079EA)
+	PHX
+
+	LDA_i(run_flag)
+	JSL(0xC21628) // Get state of the run flag.
+	CMP_i(0)
+	BEQ_a(_not_running)
+
+_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BEQ(9) // If it's 0 get the sprite from the first table for running.
+
+	// Else, get sprite from the second table for running.
+
+	PLX
+	LDA_xl(extra_animation_sprite_table_running2)
+	JML(0xC079EA)
+
+	// First two frames, first table.
+	PLX
+	LDA_xl(extra_animation_sprite_table_running1)
+	JML(0xC079EA)
+
+_not_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BEQ(9) // If it's 0 end normally (get default sprite).
+
+	// Else, get sprite from our new table.
+
+	PLX
+	LDA_xl(extra_animation_sprite_table)
+	JML(0xC079EA)
+
+	// Normal end, get from the default table.
+
+	PLX
+	LDA_xl(0xC3F2B5) // char_gfx_table
+	JML(0xC079EA)
 }
 
 // This is for the two special cases: Ness' Pajamas and Magicant sprites.
@@ -201,84 +200,100 @@ new_sprite_check: {
 ROM[0xC07835] = { JML(ness_pajamas_check) BRA(0) }
 ROM[0xC078FF] = { JML(ness_magicant_check) BRA(0) }
 
+pajama_sweating_effect: {
+	STZ_x(0x2E7A)
+
+	LDA_a(0x3251)
+	AND_i(0x80)
+	BNE_a(_return)
+
+	LDA_x(0x0E5E)
+	CMP_i(4)
+	BCS_a(_return)
+
+	LDA_x(0x2E7A)
+	ORA_i(0x8000)
+	STA_x(0x2E7A)
+
+_return:
+	RTL
+}
+
 ness_pajamas_check: {
-    LDA_i(run_flag)
-    JSL(0xC21628) // Get state of the run flag.
-    CMP_i(0)
-    BEQ_a(_not_running)
+	STZ_x(0x2E7A)
 
-    _running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BNE(7)
-    
-    // Return the first running sprite.
-    
-    LDA_i(NessPajamasExtraSprite_Running1)
-    JML(0xC079EA)
-    
-    // Return the second running sprite.
-    
-    LDA_i(NessPajamasExtraSprite_Running2)
-    JML(0xC079EA)
+	// Check if we're running or not based on the run flag
+	LDA_i(run_flag)
+	JSL(0xC21628) // Get state of the run flag.
+	CMP_i(0)
+	BEQ_a(_not_running)
 
-    _not_running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BNE(7)
-    
-    // Return the normal pajamas sprite.
-    
-    LDA_i(0x01B5)
-    JML(0xC079EA)
-    
-    // Return our new pajamas sprite.
-    
-    LDA_i(NessPajamasExtraSprite)
-    JML(0xC079EA)
+_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BNE(7)
+
+	// Return the first running sprite.
+	LDA_i(NessPajamasExtraSprite_Running1)
+	JML(0xC079EA)
+
+	// Return the second running sprite.
+	JSL(pajama_sweating_effect)
+	LDA_i(NessPajamasExtraSprite_Running2)
+	JML(0xC079EA)
+
+_not_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BNE(7)
+
+	// Return the normal pajamas sprite.
+	LDA_i(0x01B5)
+	JML(0xC079EA)
+
+	// Return our new pajamas sprite.
+	JSL(pajama_sweating_effect)
+	LDA_i(NessPajamasExtraSprite)
+	JML(0xC079EA)
 }
 
 ness_magicant_check: {
-    LDA_i(run_flag)
-    JSL(0xC21628) // Get state of the run flag.
-    CMP_i(0)
-    BEQ_a(_not_running)
-    
-    _running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BNE(7)
-    
-    // Return the first running sprite.
-    
-    LDA_i(NessMagicantExtraSprite_Running1)
-    JML(0xC079EA)
-    
-    // Return the second running sprite.
-    
-    LDA_i(NessMagicantExtraSprite_Running2)
-    JML(0xC079EA)
-    
-    _not_running:
-    LDA_d(0x02)
-    ASL
-    TAX
-    LDA_x(0x0F4E) // Fetch the object's VAR4.
-    BNE(7)
-    
-    // Return the normal Magicant sprite.
-    
-    LDA_i(0x06)
-    JML(0xC079EA)
-    
-    // Return our new Magicant sprite.
-    
-    LDA_i(NessMagicantExtraSprite)
-    JML(0xC079EA)
+	LDA_i(run_flag)
+	JSL(0xC21628) // Get state of the run flag.
+	CMP_i(0)
+	BEQ_a(_not_running)
+
+_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BNE(7)
+
+	// Return the first running sprite.
+	LDA_i(NessMagicantExtraSprite_Running1)
+	JML(0xC079EA)
+
+	// Return the second running sprite.
+	LDA_i(NessMagicantExtraSprite_Running2)
+	JML(0xC079EA)
+
+_not_running:
+	LDA_d(0x02)
+	ASL
+	TAX
+	LDA_x(0x0F4E) // Fetch the object's VAR4.
+	BNE(7)
+
+	// Return the normal Magicant sprite.
+	LDA_i(0x06)
+	JML(0xC079EA)
+
+	// Return our new Magicant sprite.
+	LDA_i(NessMagicantExtraSprite)
+	JML(0xC079EA)
 }

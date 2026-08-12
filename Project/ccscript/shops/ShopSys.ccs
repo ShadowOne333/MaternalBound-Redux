@@ -129,7 +129,7 @@ BuySell_Thanking_String:
 		result_is(BROKEN_IRON)
 		goto_if_true(_is_broken_iron)
 		load_registers
-		goto(_continue_thanks)
+		goto(_continue_buysell_thanks)
 
 	_is_broken_iron:
 		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
@@ -139,7 +139,7 @@ BuySell_Thanking_String:
 		load_registers
 	}
 
-_continue_thanks:
+_continue_buysell_thanks:
 	//c5df56
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -232,7 +232,7 @@ NoSell_Thanking_String:
 		result_is(BROKEN_IRON)
 		goto_if_true(_is_broken_iron)
 		load_registers
-		goto(_continue_thanks)
+		goto(_continue_nosell_thanks)
 
 	_is_broken_iron:
 		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
@@ -242,6 +242,7 @@ NoSell_Thanking_String:
 		load_registers
 	}
 
+_continue_nosell_thanks:
 	//c5dfef
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -367,12 +368,22 @@ Selected_Item_String:
 		result_is(BAZOOKA)
 		goto_if_true(_skip_bulk_buy)
 
+		// If there's only one character, skip the Broken iron check so it works properly
+		party_size_smaller_than(2)
+		goto_if_true(_skip_iron_check)
+
+		// If multiple chars, then check for the Broken iron
 		load_registers swap
 		result_is(BROKEN_IRON)
 		goto_if_true(Selected_Item_String_Pt2)
 
 		load_registers
 		goto(_continue_buying)
+
+	_skip_iron_check:
+		load_registers
+		get_char_at_pos(1)
+		goto(Subtract_Money_String)
 
 	_skip_bulk_buy:
 		load_registers	// TEST
@@ -404,7 +415,6 @@ Who_Will_Take_Item_String:
 	call(Who_Will_Take_Item)
 	call(Open_Character_Inventory)
 	goto_if_false(Cancel_Cant_Equip_String)
-	goto(Subtract_Money_String)
 
 Subtract_Money_String:
 	//c5e0de
@@ -415,18 +425,18 @@ Subtract_Money_String:
 	load_registers
 	arg_item_type_is_not(EQUIPPABLE)
 	goto_if_false(Character_Cant_Equip_Bought_String)
-	call(0xc5e25b)
-	call(0xc5e26a)
+	call(0xc5e25b)		// Get equippable item type
+	call(0xc5e26a)		// Give and check if item can be equipped
 	goto_if_false(Character_Cant_Equip_String)
 	load_registers_shared
 	take_from_location(0,0)
-	call(0xc5e3a5)
+	call(0xc5e3a5)		// Get buying price, take money and give item
 	call(Sound_Cash_Register)
 	store_registers
 	call(Equip_Now)
 
-	call(0xc7dd4f)				//Print Yes/No text
-	call(0xc7dd5e)				//Moonside reverse choice flag check
+	call(0xc7dd4f)		//Print Yes/No text
+	call(0xc7dd5e)		//Moonside reverse choice flag check
 	switch_goto(2)
 		switch_entry(List_Stat_Change)
 		switch_entry(Buy_Previous_Equipment_String_3)
@@ -458,8 +468,8 @@ List_Stat_Change:
 	goto_if_false(Buy_Previous_Equipment_String_3)
 	call(Buy_Previous_Equipment)
 
-	call(0xc7dd4f)				//Print Yes/No text
-	call(0xc7dd5e)				//Moonside reverse choice flag check
+	call(0xc7dd4f)			//Print Yes/No text
+	call(0xc7dd5e)			//Moonside reverse choice flag check
 	switch_goto(2)
 		switch_entry(Buy_Previous_Equipment_String_1)
 		switch_entry(Buy_Previous_Equipment_String_3)
