@@ -410,10 +410,9 @@ l_0xc959e2:
 	"@The Runaway Brothers owe me a lot of money." next
 	"@They'll stay here until they pay me back." next
 	"@They might be here for 100 years," next
-	"@unless you decide to pay off their debt...  Heh, heh, heh." wait	//end
-	if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI { // flg_KeyItem_WadofBills
-		goto(chaostheatermanager_paid) }
-	eob
+	"@unless you decide to pay off their debt...  Heh, heh, heh." end
+	//if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI { // flg_KeyItem_WadofBills
+		//goto(chaostheatermanager_paid) }
 
 l_0xc95a5f:
 	"@The Runaway Brothers are free to leave." next
