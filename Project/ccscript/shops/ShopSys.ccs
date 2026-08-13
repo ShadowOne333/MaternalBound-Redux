@@ -123,23 +123,6 @@ BuySell_Sell_String:
 	goto(BuySell_Request_Another_Transaction_String)
 
 BuySell_Thanking_String:
-	// Add a check to see if the purchased item was a Broken iron
-	if flag FLG_TOOL_ITEMS {
-		load_registers swap
-		result_is(BROKEN_IRON)
-		goto_if_true(_is_broken_iron)
-		load_registers
-		goto(_continue_buysell_thanks)
-
-	_is_broken_iron:
-		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
-		take(-1,  BROKEN_IRON)
-		swap
-		give_and_return_location(0, BROKEN_IRON_TOOL)
-		load_registers
-	}
-
-_continue_buysell_thanks:
 	//c5df56
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -226,23 +209,6 @@ NoSell_Buy_String:
 	goto(NoSell_Request_Another_Transaction_String)
 
 NoSell_Thanking_String:
-	// Add a check to see if the purchased item was a Broken iron
-	if flag FLG_TOOL_ITEMS {
-		load_registers swap
-		result_is(BROKEN_IRON)
-		goto_if_true(_is_broken_iron)
-		load_registers
-		goto(_continue_nosell_thanks)
-
-	_is_broken_iron:
-		set(FLG_ITEM_BROKEN_IRON_PURCHASED)
-		take(-1,  BROKEN_IRON)
-		swap
-		give_and_return_location(0, BROKEN_IRON_TOOL)
-		load_registers
-	}
-
-_continue_nosell_thanks:
 	//c5dfef
 	call(Transaction_Thanks)
 	unset(UnknownFlag1)
@@ -368,22 +334,8 @@ Selected_Item_String:
 		result_is(BAZOOKA)
 		goto_if_true(_skip_bulk_buy)
 
-		// If there's only one character, skip the Broken iron check so it works properly
-		party_size_smaller_than(2)
-		goto_if_true(_skip_iron_check)
-
-		// If multiple chars, then check for the Broken iron
-		load_registers swap
-		result_is(BROKEN_IRON)
-		goto_if_true(Selected_Item_String_Pt2)
-
 		load_registers
 		goto(_continue_buying)
-
-	_skip_iron_check:
-		load_registers
-		get_char_at_pos(1)
-		goto(Subtract_Money_String)
 
 	_skip_bulk_buy:
 		load_registers	// TEST

@@ -694,7 +694,7 @@ l_0xc6dc93:
 	"@To tell you the truth,/| I'm the owner of this bakery." end
 
 l_0xc6dce7:
-	title(1, Pettenella)
+	title(1, Petenella)
 	"@I was thinking <There's a tight wad born every minute...>" end
 
 l_0xc6dd0a:
@@ -704,7 +704,7 @@ l_0xc6dd0a:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
-	title(1, Pettenella)
+	title(1, Petenella)
 	"@What?" next
 	// Item 0xBB / 187, Contact lens
 	"@You came to deliver my grandma's memento, the {itemname(CONTACT_LENS)}?!" next
@@ -720,7 +720,7 @@ l_0xc6dd1d:
 	sound(SND_BOXTAKE)	// 116
 	take(-1,CONTACT_LENS)	// FF, Item 0xBB / 187, Contact lens
 	get_item_receiver(-1)
-	give_and_return_location(-1, PETTENELLAS_SOCKS)	// item 0x98, 152, Pettenella's socks
+	give_and_return_location(-1, PETENELLAS_SOCKS)	// item 0x98, 152, Petenella's socks
 	call(data_36.l_0xc7dccf) next
 	"@Please take good care of my socks... *sniff!*" wait
 	set(FLG_FOUR_PETENERA)	// 736

@@ -9,6 +9,7 @@ import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../expansion/ccexpand.ccs"
@@ -255,6 +256,8 @@ l_0xc5e9a8:
 	get_char_at_pos(3)
 	result_is(7)	// Check for King in party
 	goto_if_false(data_55.l_0xc9992f)
+
+	//cc_open_letterbox
 	window_open(1)
 	get_dir_from_char(1,TO_CHAR,7)	// 0x01, 1, 0x07
 	char_direction(1,0)	// 0x01, 0
@@ -272,6 +275,7 @@ l_0xc5e9a8:
 	wait_movement
 	npc_do_mc(124, 627)	// 7C, 0273
 	set(FLG_DOG_LATER_APPEAR)
+	//cc_close_letterbox
 	eob
 
 l_0xc5ea35:
@@ -1116,14 +1120,14 @@ l_0xc6026c:
 	"@(I lost a pair of contact lenses here in the Dusty Dunes Desert." next
 	"@They were a memento from my grandma, and very important to me." next
 	"@If you find them, bring them to me and I'll give you a reward." next
-	"@I'm Pettenella Giovanni." next
-	title(1, Pettenella)
+	"@I'm Petenella Giovanni." next
+	title(1, Petenella)
 	"@Find me at the Fourside Bakery, second floor.)"
 	goto_if_flag(FLG_FOUR_PETENERA, l_0xc60322)	// 0x02E0, 736
 	end
 
 l_0xc60322:
-	title(1, Pettenella)
+	title(1, Petenella)
 	next
 	"@(Thank you, I found them." pause(20)
 	"  Thanks again for all your help.)" end

@@ -454,7 +454,7 @@ l_0xc87eee:
 l_0xc88000:
 	isset(FLG_BALLOONMONKEY)	// 22
 	goto_if_false(l_0xc8807d)
-	"@(The bubble monkey took a piece of bubble gum," next
+	"@(The Bubble monkey took a piece of bubble gum," next
 	"@chewed it and started blowing.)" promptw
 	window_closeall
 
