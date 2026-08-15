@@ -1057,6 +1057,7 @@ l_0xc6002c:
 	call(data_49.l_0xc91582)
 	warp(44)	// 0x2C
 	goto_if_flag(FLG_DSRT_DIA_RESERVE, l_0xc6005f)	// 0x02F5, 757
+	eob
 
 l_0xc6005f:
 	party_freeze	// 0xFF

@@ -749,12 +749,40 @@ l_0xc7d87f:
 
 	if flag FLG_KEY_ITEMS {
 		swap
+		result_is(HP_SUCKER)
+		goto_if_true(_tools_item)
+
+		load_registers
+		result_is(NEUTRALIZER)
+		goto_if_true(_tools_item)
+
+		load_registers
 		result_is(CARROT_KEY)
 		goto_if_false(_not_carrot_key)
 
 		newline
+		swap
 		"@{name(0)} adds it" linebreak
 		"  to the Key items." swap wait
+		sound(SND_BOXTAKE)	// 116
+		eob
+
+	_tools_item:
+		newline
+		get_char_at_pos(1)
+		result_is(3)
+		goto_if_true(_jeff_leader)
+
+		get_char_at_pos(1) swap
+		"@({name(0)} added it" linebreak
+		"  to Jeff's Tools.)" swap wait
+		sound(SND_BOXTAKE)	// 116
+		eob
+
+	_jeff_leader:
+		get_char_at_pos(1) swap
+		"@({name(0)} adds it" linebreak
+		"  to his Tools.)" swap wait
 		sound(SND_BOXTAKE)	// 116
 		eob
 	}
