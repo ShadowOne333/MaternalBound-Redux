@@ -314,10 +314,12 @@ l_0xc68f74:
 	else { get_inventory_item(0,0) swap }
 	store_registers
 	// Check for Eraser eraser, item 0xD2, 210
-	result_is(ERASER_ERASER) goto_if_true(l_0xc68fa6)
+	result_is(ERASER_ERASER)
+	goto_if_true(l_0xc68fa6)
 	load_registers
 	// Check for Pencil eraser, item 0xB8, 184
-	result_is(PENCIL_ERASER) goto_if_false(data_35.l_0xc7c6b6)
+	result_is(PENCIL_ERASER)
+	goto_if_false(data_35.l_0xc7c6b6)
 	"@Do you really think this looks like a pencil?" end
 
 l_0xc68fa6:
