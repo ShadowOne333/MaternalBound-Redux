@@ -459,12 +459,12 @@ l_0xc7de60:
 	unset(FLG_SYS_DISTLPT_EVENT)	// 779
 	call(l_0xc7dd8d)
 	goto_if_true(data_55.l_0xc9992f)
-	unset(FLG_GENKAN_MAMA_APPEAR)	// 754
+	unset(FLG_SYS_DISTLPT)	// 754
 	eob
 
 l_0xc7de72:
 	goto_if_flag(FLG_SYS_DISTLPT_EVENT, data_55.l_0xc9992f)	// 0x030B, 779
-	unset(FLG_GENKAN_MAMA_APPEAR)	// 754
+	unset(FLG_SYS_DISTLPT)	// 754
 	eob
 
 l_0xc7de7d:	// Game over text
