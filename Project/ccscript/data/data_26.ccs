@@ -595,7 +595,8 @@ l_0xc6da6d:
 	pause(1)
 	takemoney(30)	// 0x1E
 	show_wallet
-	"@Thanks a lot." wait
+	"@Thanks a lot." next	// wait
+	"@That ticket should give you access for as long as you have it handy." wait
 	sound(SND_BOXTAKE)	// 116
 	load_registers
 	if flag FLG_KEY_ITEMS { give_menu_key_item(SHOW_TICKET) }

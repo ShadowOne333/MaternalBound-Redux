@@ -679,7 +679,7 @@ Topollo_Sold_Out:
 
 l_0xc828ca:
 	"@Orchestra seats and balcony seats are sold out." next
-	"@Now, there's <standing room only> left." pause(20)
+	"@Now, there's <standing room only> left." linebreak	// pause(20)
 	"  It's $30 per person." next
 	"@Is that okay with you?" linebreak
 	goto(data_40.l_0xc8292c)

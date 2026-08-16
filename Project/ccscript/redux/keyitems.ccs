@@ -184,7 +184,7 @@ KeyItems:
 			load_str_callonhover("Bad key machine", SetCount12) }
 		if flag FLG_ITEM_HOIHOI and not flag FLG_PUT_ZOMBI_HOIHOI and not flag FLG_THRK_ZOMBI_CAPTURED and not flag FLG_WIN_GEPPU {
 			load_str_callonhover("Zombie paper", SetCount13) }
-		if flag FLG_ITEM_SHOW_TICKET and not flag FLG_SHOW_TICKET_TAKEN {
+		if flag FLG_ITEM_SHOW_TICKET { //and not flag FLG_SHOW_TICKET_TAKEN {	// We don't need it removed though, so keep it
 			load_str_callonhover("Show ticket", SetCount14) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_TONZURA_FREE {
 			load_str_callonhover("Diamond", SetCount15) }

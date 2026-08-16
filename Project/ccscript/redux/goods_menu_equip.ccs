@@ -5,6 +5,7 @@
 //This version also adds the word "from" and removes the extra spaces in the message that displays.
 
 import "../definitions/flags.ccs"
+import "../definitions/sounds.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/cc_asmcall.ccs"
@@ -77,6 +78,7 @@ _already_equipped:
 
 _unequip:
 	unequip(0,0)
+	sound(SND_UNKNOWN)	// 117
 	"@{user} unequipped the {get_action_arg}{swap}{itemname(0)}." end
 
 //////////////////////////////////

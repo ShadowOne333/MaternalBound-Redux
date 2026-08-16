@@ -35,7 +35,9 @@ l_0xc82945:
 	pause(1)
 	takemoney(30)
 	show_wallet
-	"@Thanks a lot." pause(20)
+	"@Thanks a lot." next	// pause(20)
+	"@You can enter the theater anytime with it." linebreak
+	pause(20)
 	"  Enjoy the show." wait
 	sound(SND_BOXTAKE)	// 116
 	load_registers
