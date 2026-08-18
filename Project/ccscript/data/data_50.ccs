@@ -766,7 +766,7 @@ l_0xc92ab9:
 	set(FLG_BGM_TASSY)	// 537
 	call(data_36.l_0xc7dd6b)
 	music_resume
-	sprite2_spawn(106,482,1)	// 0x6A, 0x01E2, 1
+	sprite2_spawn(106,483,1)	// 0x6A, 0x01E3, 1
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x6A
 	party_unfreeze	// 0xFF
