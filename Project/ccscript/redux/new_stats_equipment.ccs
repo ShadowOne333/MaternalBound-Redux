@@ -61,10 +61,22 @@ Returns:
 
 //ROM[0xC40091] = CPY_i (0x0042)
 
-ROM[0xC1AAE0] = {
-	JMP_l (Close_Equipment_Window)
-} 
+//ROM[0xC1A999] = NOP NOP NOP	// Don't open the "Which?" window when checking equipment
 
+ROM[0xC1A906] = JML	(Close_Main_Equipment_List)
+// We need to close the main Char Equipment to avoid text overflow closing the windows with certain items
+Close_Main_Equipment_List: {
+	LDA_i	(6)	// Main equipment list window
+	JSL	(0xC3E521) // Close Window
+
+	// Put back removed code
+	LDA_d	(2)
+	CMP_i	(0x0E)
+
+	JML	(0xC1A90B)	// Return from our hijack
+}
+
+ROM[0xC1AAE0] = { JML (Close_Equipment_Window) }
 Close_Equipment_Window:{
 	LDA_i (52)	// Change window to close for Resistances
 	JSL (0xC3E521) // Close Window
@@ -887,7 +899,7 @@ Fire:
 	BEQ_a(Freeze)
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33F68B
+	LDA_i(0x0053)//Text's horizontal positioning. $33F68B
 	STA_d(0x20)
 	LDA_i(0x0000)//Text's vertical positioning.
 	STA_d(0x22)
@@ -998,7 +1010,7 @@ Freeze:
 	BEQ_a(Flash)
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33F745
+	LDA_i(0x0053)//Text's horizontal positioning. $33F745
 	STA_d(0x20)
 	LDA_i(0x0001)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1110,7 +1122,7 @@ Flash:
 	BEQ_a(Paralysis)
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33F7FF
+	LDA_i(0x0053)//Text's horizontal positioning. $33F7FF
 	STA_d(0x20)
 	LDA_i(0x0002)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1222,7 +1234,7 @@ Paralysis:
 	BEQ_a(Hypnosis)
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33F8B9
+	LDA_i(0x0053)//Text's horizontal positioning. $33F8B9
 	STA_d(0x20)
 	LDA_i(0x0003)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1327,7 +1339,7 @@ Hypnosis:
 	BEQ_a(Brainshock)
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33F961
+	LDA_i(0x0053)//Text's horizontal positioning. $33F961
 	STA_d(0x20)
 	LDA_i(0x0004)//Text's vertical positioning.
 	STA_d(0x22)
@@ -1434,7 +1446,7 @@ Brainshock:
 	
 	
 //Preparing text.
-	LDA_i(0x0050)//Text's horizontal positioning. $33FA0D
+	LDA_i(0x0053)//Text's horizontal positioning. $33FA0D
 	STA_d(0x20)
 	LDA_i(0x0005)//Text's vertical positioning.
 	STA_d(0x22)
@@ -2012,7 +2024,7 @@ NewEquipmentStatsOutput:
 	RTL
 	
 Percent_Sign:
-	"[BF]" eob
+	"%" eob
 	
 NewEquipmentStatsOutput_Elemental:
 	LDA_i(0x0001)

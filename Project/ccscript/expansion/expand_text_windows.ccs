@@ -362,6 +362,6 @@ NewWindowTable:
 	WindowDefinition(49, 10, 4, 20, 4) // "To: Enemy" (Battle window)
 	WindowDefinition(50, 14, 11, 15, 16) // Flavour chooser window
 	WindowDefinition(51, 22, 8, 9, 4) // Character select window with 1 character (Normally not seen, but used in debug menu)
-	WindowDefinition(52, 14, 13, 17, 14) // ??? (Unused)
+	WindowDefinition(52, 14, 13, 17, 14) // ??? (Unused), 15, 13, 16, 14, Resistances window in Equipment now
 CustomWindows:
 	_CustomWindows
