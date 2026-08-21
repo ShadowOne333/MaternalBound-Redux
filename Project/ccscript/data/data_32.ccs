@@ -240,6 +240,7 @@ l_0xc774ec:
 	"@{name(1)}..." next
 	"@I still feel pain where you wounded me." wait
 	fade_map_palette(31,6,60)	// Tileset 1F, palette 06, speed 3C
+	eob
 
 l_0xc77511:
 	"@Yay, {name(1)},/| let's play!" end

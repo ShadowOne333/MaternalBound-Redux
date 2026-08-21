@@ -609,6 +609,9 @@ l_0xc9b4c9:
 	restore_camera
 	party_freeze	// 0xFF
 	set(FLG_FIRE_PARTY_APPEAR)	// 349
+	set(FLG_PAULA_KI)
+	set(FLG_JEFF_KI)
+	set(FLG_POO_KI)
 	call(data_36.l_0xc7dd6b)
 	goto_if_flag(FLG_MGKT_BACK_FIRE, l_0xc9b799)	// 0x0224, 548
 	goto_if_flag(FLG_MGKT_BACK_MGNT, l_0xc9b6e3)	// 0x0223, 547
