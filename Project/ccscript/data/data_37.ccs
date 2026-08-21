@@ -701,7 +701,7 @@ l_0xc7f34c:
 	"@You might not be able to return." pause(20)
 	"  So, make sure you are optimally outfitted." next
 	"@Are you ready to go?" linebreak
-	two_choice_menu("Yes", l_0xc7f459, "No", l_0xc7f459)
+	two_choice_menu("Yes", l_0xc7f54c, "No", l_0xc7f459)
 
 l_0xc7f459:
 	"@Even if you're not 100%,| perfectly,| completely ready..." next
