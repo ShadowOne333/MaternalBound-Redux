@@ -77,6 +77,7 @@ _already_equipped:
 	"@{user} has already equipped the {get_action_arg}{swap}{itemname(0)}." end
 
 _unequip:
+	load_registers
 	unequip(0,0)
 	sound(SND_UNKNOWN)	// 117
 	"@{user} unequipped the {get_action_arg}{swap}{itemname(0)}." end
