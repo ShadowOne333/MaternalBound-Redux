@@ -4,11 +4,13 @@
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 
-//------------------------------------
+// -----------------------------------
+
+// Offense Up and Defense Down buff changes
 // Changed Offense Up/Down to 37.5%, increased Offense Up cap to 212.5%, and left Offense Down cap at 75%
 // Changed Defense Up/Down to 25% and changed caps to 175% and 62.5%
 
-// Increase Offense 1/16 -> 37.5% (3/8)
+// Increase Offense 1/16 -> 37.5% (3/8) - Changed to 12.5%
 // Also increase cap to 212.5%
 ROM[0xC27D34] = {
     TAY
@@ -35,15 +37,16 @@ ROM[0xC27D34] = {
     PLD RTS
 }
 
-// 37.5%
+// 37.5% - Changed to 12.5%
 _Find3Over8: {
     // I've ensured that this local variable is free in all
     // Increase/Decrease Offense/Defense functions.
     // Multiply by 3
     STA_d(0x04)
-    ASL
+    //ASL
     ADC_d(0x04)
-    // Divide by 8 - 3/8=37.5%
+    // Divide by 8 - 3/8=37.5% - Changed to 12.5%
+    LSR
     LSR
     LSR
     LSR
@@ -65,25 +68,25 @@ _Find17Over8: {
     LSR
     RTL
 }
-//------------------------------------
-// The original Increase and Decrease routines for both Offense/Defense have 4 consecutive LSR opcodes, NOP'ing one of them would effectively make the increase/decrease be 1/8 instead.
-// If we want to increase/decrease the change to 1/4, we can NOP two LSRs instead of just one.
-
-// Shift value right to take a percentage of the full amount
-//LSR	// 1/2 = 50% - NOP for 100%
-//LSR	// 1/4 = 25% - NOP for 50%
-//LSR	// 1/8 = 12.5% - NOP for 25%
-//NOP	// Change to LSR if we want 1/16 (6.25%) increase
-//------------------------------------
-// Increase Offense 1/16 -> 1/4
-//ROM[0xC27D3C] = { LSR LSR NOP NOP }
-// Increase Defense 1/16 -> 1/4
-ROM[0xC27D96] = { LSR LSR NOP NOP }
 
 // Decrease Offense 1/16 -> 38%
 ROM[0xC27DF0] = { JSL(_Find3Over8) }
-// Decrease Defense 1/16 -> 1/4
-ROM[0xC27E47] = { LSR LSR NOP NOP }
+
+
+// The original Increase and Decrease routines for both Offense/Defense have 4 consecutive LSR opcodes,
+// NOP'ing one of them would effectively make the increase/decrease be 1/8 instead.
+// NOP'ing two of them makes the increase/decrease be 1/4.
+//LSR	// 1/2 = 50% - NOP for 100%
+//LSR	// 1/4 = 25% - NOP for 50%
+//LSR	// 1/8 = 12.5% - NOP for 25%
+//LSR	// 1/16 = 6.25% - NOP for 12.5%
+//------------------------------------
+// Increase Offense 1/16 -> 1/4 - Changed to 12.5%
+//ROM[0xC27D3C] = { LSR LSR NOP NOP }
+// Increase Defense 1/16 -> 1/4 - Changed to 12.5%
+ROM[0xC27D96] = { LSR LSR LSR NOP }
+// Decrease Defense 1/16 -> 1/4 - Changed to 12.5%
+ROM[0xC27E47] = { LSR LSR LSR NOP }
 
 // Change defense up cap to 175% (base + 3/4trs) aka (value*7) / 4
 // (vanilla is 125% aka (value*5) / 4)
@@ -94,4 +97,5 @@ DefenseUpCapMult7: { STA_d (0x04) ASL ADC_d (0x04) ASL ADC_d (0x04) RTL }
 // (vanilla is 75% aka (value*3) / 4)
 ROM[0xC27E6F] = { JSL (DefenseDownCapMult5Div2) NOP }
 DefenseDownCapMult5Div2: { STA_d (0x04) ASL ASL ADC_d (0x04) LSR RTL }
-//------------------------------------
+
+// -----------------------------------

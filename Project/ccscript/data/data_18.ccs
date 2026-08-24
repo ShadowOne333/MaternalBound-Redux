@@ -618,7 +618,6 @@ _enter_withdraw_amount:	//l_0xc62f99
 	call(_show_balance)
 	"@Please enter the amount of your withdrawal." next
 	"@Balance: ${stat(7)}" linebreak
-	goto(_text_position)
 
 _text_position:
 	show_wallet
@@ -642,7 +641,6 @@ l_0xc63029:
 	phone_call
 	goto_if_true(l_0xc63032)
 	newline
-	goto(l_0xc63032)
 
 l_0xc63032:
 	eob
@@ -653,7 +651,6 @@ l_0xc63033:
 	newline
 	givemoney(1)
 	show_wallet
-	goto(l_0xc63042)
 
 l_0xc63042:
 	eob
@@ -666,6 +663,7 @@ l_0xc63043:
 
 l_0xc63089:
 	two_choice_menu("Repair", data_49.l_0xc915e1, "Communicate", l_0xc630a8)
+	eob	// l_0xc6307c
 
 l_0xc630a8:
 	call(l_0xc63229)

@@ -38,17 +38,31 @@ l_0xc9fd2e:
 
 //------------------------------------
 // Variables / routines definitions
-define CREATE_ENTITY	= 0xC01E49
-define DESTROY_ENTITY	= 0xC02140
+define CREATE_ENTITY		= 0xC01E49
+define DESTROY_ENTITY		= 0xC02140
+define UPDATE_PARTY		= 0xC034D6
+define INIT_BATTLE_COMMON	= 0xC052AA
+define GET_ON_BICYCLE		= 0xC03C5E
+define GET_OFF_BICYCLE		= 0xC03CFD
+define REBUILD_PARTY_ENTITIES	= 0xC03A94	// rebuilds every party member's overworld
+						// entity with a status-aware sprite (ghost,
+						// diamondized, etc.) -- used internally by
+						// the TELEPORT_PARTY_TO_TPT_ENTITY script command
 define PARTY_TRAIL_RESET	= 0xC03F1E	// Clear trail buffer to the leader's pos
 define WAIT_UNTIL_NEXT_FRAME	= 0xC08756
+define FREEZE_ENTITIES		= 0xC0943C
+define UNFREEZE_ENTITIES	= 0xC09451
 define HIDE_CHAR_OR_PARTY	= 0xC463F4
 define UNHIDE_CHAR_OR_PARTY	= 0xC4645A
+define CHANGE_MUSIC		= 0xC4FBBD
 
 // Addresses definitions
-define NEW_ENTITY_VAR0	= 0x0A38
-define NEW_ENTITY_VAR1	= 0x0A3A
+define NEW_ENTITY_VAR0		= 0x0A38
+define NEW_ENTITY_VAR1		= 0x0A3A
 define PENDING_INTERACTIONS	= 0x5D9A
+define MUSHROOMIZED_WALKING_FLAG	= 0x5DA0	// LDA_a : BEQ (NOT_MUSHROOMIZED)
+define GAME_STATE_WALKING_STYLE	= 0x9883
+define PARTY_MEMBER_INDEX	= 0x988B	// leader/order array, same table as game_state::unknown96
 
 // Sprite definitions
 define NESS_SPRITE		= 1
@@ -65,13 +79,96 @@ define POO_BIKE_SIDECAR		= 480
 define BIKE_CARDINAL_SPEED	= long 0x01EEEE	// 0x01CCCC
 define BIKE_DIAGONAL_SPEED	= long 0x0165D5	// 0x0145D5
 
+// Bike walking style definition
+define WALKING_STYLE_BICYCLE	= 3
+
+// Mushroomization checks
+define STATUS_1_TABLE		= 0x000F
+define STATUS_1_MUSHROOMIZED	= 1
+
 //------------------------------------
 // Modify the original Bike speeds to it's a bit faster than running
 ROM[0xC3E0C8] = BIKE_CARDINAL_SPEED
 ROM[0xC3E100] = BIKE_DIAGONAL_SPEED
 
-//------------------------------------
+//------------------------------------------------------------------
+// Hook 1: right after a battle ends
+//------------------------------------------------------------------
+// Bypass the Bike check that forces the player out of a bike if they're mushroomized in-battle, we'll do it on our own check post-battle
+ROM[0xC02C71] = BRA (12)
 
+// Do an entity/sprite refresh after a battle if we're on a bike
+ROM[0xC0B7D0] = JML	(Post_Battle_Refresh)
+Post_Battle_Refresh: {
+	LDA_i	(0xFFFF)		// original hijacked call
+	STA_d	(0x4DB6)
+
+	// If the party leader enters a battle while riding a bike, and the main leader gets mushroomized, the game crahes.
+	// Fix that crash when an enemy tries to apply mushroomization to the party leader
+	LDA_a	(PARTY_MEMBER_INDEX)
+	DEC
+	AND_i	(0x00FF)
+	TAX
+	LDA_x	(STATUS_1_TABLE)
+	AND_i	(0x00FF)
+	CMP_i	(STATUS_1_MUSHROOMIZED)
+	BEQ_a	(_leader_mushroomized)
+
+	// Continue with bike check if we're not mushroomized
+	LDA_a	(GAME_STATE_WALKING_STYLE)
+	CMP_i	(WALKING_STYLE_BICYCLE)
+	BNE_a	(_Skip)
+	JSL	(PARTY_TRAIL_RESET)
+	JSL	(FREEZE_ENTITIES)
+	JSL	(REBUILD_PARTY_ENTITIES)
+	JSL	(GET_ON_BICYCLE)
+	JSL	(UNFREEZE_ENTITIES)
+_Skip:
+	JML	(0xC0B7D6)
+
+_leader_mushroomized:
+	JSL	(GET_OFF_BICYCLE)
+	JSL	(REBUILD_PARTY_ENTITIES)
+	JML	(0xC0B7D6)
+}
+
+//------------------------------------------------------------------
+// Hook 2: leader (or anyone) dies from overworld status damage
+//------------------------------------------------------------------
+ROM[0xC051F0] = JML	(Post_Death_Bike_Refresh)
+
+Post_Death_Bike_Refresh: {
+	JSL	(UPDATE_PARTY)
+	LDA_a	(GAME_STATE_WALKING_STYLE)
+	CMP_i	(WALKING_STYLE_BICYCLE)
+	BNE_a	(_Skip)
+	JSL	(FREEZE_ENTITIES)
+	JSL	(REBUILD_PARTY_ENTITIES)
+	JSL	(GET_ON_BICYCLE)
+	JSL	(UNFREEZE_ENTITIES)
+_Skip:
+	JML	(0xC051F4)
+}
+
+//------------------------------------------------------------------
+// Hook 3: leader (or anyone above the current leader in order) is revived
+//------------------------------------------------------------------
+ROM[0xC3EE4F] = JML	(Post_Status_Change_Bike_Refresh)
+
+Post_Status_Change_Bike_Refresh: {
+	JSL	(UPDATE_PARTY)
+	LDA_a	(GAME_STATE_WALKING_STYLE)
+	CMP_i	(WALKING_STYLE_BICYCLE)
+	BNE_a	(_Skip)
+	JSL	(FREEZE_ENTITIES)
+	JSL	(REBUILD_PARTY_ENTITIES)
+	JSL	(GET_ON_BICYCLE)
+	JSL	(UNFREEZE_ENTITIES)
+_Skip:
+	JML	(0xC3EE53)
+}
+
+//------------------------------------
 // ENTITY_SCRIPT_VAR1 for newly created entity
 // Stored into ENTITY_SCRIPT_VAR1_TABLE[slot*2]
 // Used by EVENT_002 (bike action script) at C04EFD

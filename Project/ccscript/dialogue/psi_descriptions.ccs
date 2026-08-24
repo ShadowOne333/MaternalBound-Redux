@@ -70,7 +70,9 @@ l_0xc56b3e:
 	"@It may not be so effective against some enemies." eob
 
 l_0xef4e20:
-	call(l_0xc568c9) " each enemy about 50 points of damage."
+	// The original game has 50 damage for PK Rockin a, but that's untrue since the lowest is 40 and highest is 120.
+	// All PSI has a variance ot +/- 50% from their base power, so the correct damage output for Rockin is 80.
+	call(l_0xc568c9) " each enemy about 80 points of damage."
 	eob
 
 l_0xef4e38:

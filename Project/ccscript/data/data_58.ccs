@@ -167,6 +167,7 @@ l_0xc9c293:
 	set(FLG_DOG)	// 19
 	set(FLG_DOG_LATER_APPEAR)	// 304
 	set(FLG_SYS_MONSTER_OFF)	// 11
+	unset(FLG_JEFF_KI)	// 786 - Disables the Tool menu in the post-game
 	OSS_on	// event(5)
 	stop_music
 	call(data_24.l_0xc69082)
