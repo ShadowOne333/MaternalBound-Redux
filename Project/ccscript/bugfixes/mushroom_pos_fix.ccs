@@ -1,0 +1,61 @@
+//------------------------------------------------------------------
+// Mushroom position fix
+//------------------------------------------------------------------
+// General ASM code for fixing or modifying different things in-game
+import "../essential/asm65816.ccs"
+//------------------------------------------------------------------
+// If any character has been mushroomized, and the party goes into either shallow or deep water (be it the springs in Saturn Valley, Deep Darkness' waters, etc.), upon entering the water, the mushroom's overlay sprite will remain in the same Y position, meaning it isn't lowered to match the character's head.
+// This fixes that by checking for shallow/deep water flags, and depending on which flag is being set at the moment, it moves the mushroom sprite down by either 8 (shallow) or 16 (deep) pixels, so it matches the new character's head position when they go into shallow/deep water.
+//------------------------------------------------------------------
+// Defined variables
+define MUSHROOM_SHALLOW_WATER_Y_OFFSET	= 8
+define MUSHROOM_DEEP_WATER_Y_OFFSET	= 16
+
+define SHALLOW_WATER_SURFACE_FLAG	= 8
+define DEEP_WATER_SURFACE_FLAG		= 12
+
+define ENTITY_MUSHROOMIZED_NEXT_UPDATE_FRAMES = 0x2EF2
+
+define TRODDEN_TILE_TYPE		= 0x9881
+define ENTITY_SCREEN_X_TABLE		= 0x0B16
+define ENTITY_SCREEN_Y_TABLE		= 0x0B52
+//------------------------------------------------------------------
+ROM[0xC0AD3F] = JML	(mushroom_position_fix)
+
+mushroom_position_fix: {
+	// Original hijacked code (UNKNOWN9)
+	DEC_x	(ENTITY_MUSHROOMIZED_NEXT_UPDATE_FRAMES)
+
+	LDA_x	(ENTITY_SCREEN_X_TABLE)
+	STA_d	(0x06)
+	LDY_x	(ENTITY_SCREEN_Y_TABLE)
+
+	// Fix code starts here
+	LDA_a	(TRODDEN_TILE_TYPE)	// This was the only address in RAM updated depending on shallow/deep water entrance
+	AND_i	(0x000C)
+	CMP_i	(SHALLOW_WATER_SURFACE_FLAG)
+	BEQ_a	(MUSHROOM_SHALLOW_OFFSET)
+	CMP_i	(DEEP_WATER_SURFACE_FLAG)
+	BEQ_a	(MUSHROOM_DEEP_OFFSET)
+	JMP	(MUSHROOM_Y_READY)
+
+MUSHROOM_SHALLOW_OFFSET:
+	// If the character is in shallow water, only move the mushroom 8 pixels down.
+	TYA
+	CLC
+	ADC_i	(MUSHROOM_SHALLOW_WATER_Y_OFFSET)
+	TAY
+	JMP	(MUSHROOM_Y_READY)
+
+MUSHROOM_DEEP_OFFSET:
+	// If the character is in deep water, move the mushroom 16 pixels down.
+	TYA
+	CLC
+	ADC_i	(MUSHROOM_DEEP_WATER_Y_OFFSET)
+	TAY
+
+MUSHROOM_Y_READY:
+	// If the player is not in shallow nor deep water, continue normally
+	JML	(0xC0AD4A)	// Return back to LDA ENTITY_MUSHROOMIZED_SPRITEMAPS,X
+}
+//------------------------------------------------------------------

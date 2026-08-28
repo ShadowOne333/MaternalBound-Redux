@@ -1,24 +1,58 @@
+//------------------------------------------------------------------
+// Thunder reflection fix
+//------------------------------------------------------------------
 // General ASM code for fixing or modifying different things in-game
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/jsl_rts.ccs"
 //------------------------------------------------------------------
-// Thunder reflection fix
-// If the player had both a Shield up (either Physical or PSI) and a Franklin badge, and an enemy used Thunder, the Franklin badge would reflect the attack, but the Shield would still be destroyed.
+// If the player had both a Shield up (either Physical or PSI) and a Franklin badge, and an enemy used Thunder, the Franklin badge would reflect the attack, but the Shield would still be destroyed/weakened.
 // The original routine goes straight into the Shield checks even after checking for the Badge
 // This makes it so that if the character has a Franklin badge, it then bypasses the whole Shield checks and goes straight into the damage calculation portion of the Thunder code.
 //------------------------------------------------------------------
-define CURRENT_TARGET		= 0xA972
-define DAMAGE_IS_REFLECTED	= 0xAA96
+define SHIELD_HP			= 0x0025
+define CURRENT_TARGET			= 0xA972
+define SHIELD_HAS_NULLIFIED_DAMAGE 	= 0xAA94
+define DAMAGE_IS_REFLECTED		= 0xAA96
+
+define FIFTY_PERCENT_VARIANCE		= 0xC26A44
 define SWAP_ATTACKER_WITH_TARGET	= 0xC27E8A
+define CALC_RESIST_DAMAGE		= 0xC28125
+define PSI_SHIELD_NULLIFY		= 0xC2941D
+define WEAKEN_SHIELD			= 0xC294CE
+define COUNT_CHARS			= 0xC2BAC5
+//------------------------------------------------------------------
+ROM[0xC297E2] = JML	(Thunder_Reflection_Fix)
 
-ROM[0xC297E2] = JML	(thunder_reflection_fix)
-
-thunder_reflection_fix: {
+Thunder_Reflection_Fix: {
+	// Original code from the hijack
 	LDA_i	(1)
 	STA_a	(DAMAGE_IS_REFLECTED)
 	JSL_RTS_C2	(SWAP_ATTACKER_WITH_TARGET)
-	JML	(0xC29811)	// Avoid running all the shield code after Badge reflection
+
+	// Here we bypass 3 things from the original code:
+	// 	1. Shield type check (Normal or Power)
+	// 	2. Shield HP check
+	//	3. Shield nullification check
+	// These bypasses are done since reflecting with the badge should not affect Badge-holding-user's shield in any way
+
+	// We need this portion from the original code so the reflected hit does damage properly
+	LDA_d	(0x04)
+	JSL_RTS_C2	(FIFTY_PERCENT_VARIANCE)
+	LDX_i	(0x00FF)	//LDX_a	(CURRENT_TARGET)
+	JSL_RTS_C2	(CALC_RESIST_DAMAGE)
+
+	// Lastly, one more bypass is neded, here we bypass the routine that weakens shields.
+
+_UNKNOWN21:
+	// Without this, after the first Badge reflection, any subsequent reflect will always hit the Badge-holder.
+	// Swap target once again and then restore the reflected damage flag
+	JSL_RTS_C2	(SWAP_ATTACKER_WITH_TARGET)
+	STZ_a	(DAMAGE_IS_REFLECTED)
+
+	// Fix the targetting changing back to the party after the first Thunder hit is reflected
+_exit:
+	JML	(0xC2983D)	// Avoid running all the shield code after Badge reflection
 }
 
 //C297F5: E0 01 00        CPX #1	<--- PSI Power Shield check (Reflect)

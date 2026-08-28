@@ -44,7 +44,7 @@ define UPDATE_PARTY		= 0xC034D6
 define INIT_BATTLE_COMMON	= 0xC052AA
 define GET_ON_BICYCLE		= 0xC03C5E
 define GET_OFF_BICYCLE		= 0xC03CFD
-define REBUILD_PARTY_ENTITIES	= 0xC03A94	// rebuilds every party member's overworld
+define REBUILD_PARTY_ENTITIES	= 0xC03A94	// Rebuilds every party member's overworld
 						// entity with a status-aware sprite (ghost,
 						// diamondized, etc.) -- used internally by
 						// the TELEPORT_PARTY_TO_TPT_ENTITY script command
@@ -59,10 +59,13 @@ define CHANGE_MUSIC		= 0xC4FBBD
 // Addresses definitions
 define NEW_ENTITY_VAR0		= 0x0A38
 define NEW_ENTITY_VAR1		= 0x0A3A
+define ENTITY_COLLIDED_OBJECTS	= 0x289E
+define TOUCHED_ENEMY		= 0x4DB6
+define PLAYER_INTANGIBILITY_FRAMES	= 0x5D58
 define PENDING_INTERACTIONS	= 0x5D9A
 define MUSHROOMIZED_WALKING_FLAG	= 0x5DA0	// LDA_a : BEQ (NOT_MUSHROOMIZED)
 define GAME_STATE_WALKING_STYLE	= 0x9883
-define PARTY_MEMBER_INDEX	= 0x988B	// leader/order array, same table as game_state::unknown96
+define PARTY_MEMBER_INDEX	= 0x988B	// Leader/order array, same table as game_state::unknown96
 
 // Sprite definitions
 define NESS_SPRITE		= 1
@@ -92,48 +95,42 @@ ROM[0xC3E0C8] = BIKE_CARDINAL_SPEED
 ROM[0xC3E100] = BIKE_DIAGONAL_SPEED
 
 //------------------------------------------------------------------
-// Hook 1: right after a battle ends
+// Hook 1: Right after a battle ends
 //------------------------------------------------------------------
 // Bypass the Bike check that forces the player out of a bike if they're mushroomized in-battle, we'll do it on our own check post-battle
-ROM[0xC02C71] = BRA (12)
+ROM[0xC02C71] = BRA (15)
 
 // Do an entity/sprite refresh after a battle if we're on a bike
 ROM[0xC0B7D0] = JML	(Post_Battle_Refresh)
 Post_Battle_Refresh: {
-	LDA_i	(0xFFFF)		// original hijacked call
-	STA_d	(0x4DB6)
+	LDA_i	(0xFFFF)
+	STA_a	(TOUCHED_ENEMY)
 
 	// If the party leader enters a battle while riding a bike, and the main leader gets mushroomized, the game crahes.
-	// Fix that crash when an enemy tries to apply mushroomization to the party leader
-	LDA_a	(PARTY_MEMBER_INDEX)
-	DEC
-	AND_i	(0x00FF)
-	TAX
-	LDA_x	(STATUS_1_TABLE)
-	AND_i	(0x00FF)
-	CMP_i	(STATUS_1_MUSHROOMIZED)
-	BEQ_a	(_leader_mushroomized)
+	// Fix that crash when an enemy tries to apply mushroomization to the party leader so that if any member gets mushroomized, bike is not available
+	LDA_a	(MUSHROOMIZED_WALKING_FLAG)
+	BNE_a	(_party_mushroomized)	// BEQ checks if the leader is NOT mushroomized
 
 	// Continue with bike check if we're not mushroomized
 	LDA_a	(GAME_STATE_WALKING_STYLE)
 	CMP_i	(WALKING_STYLE_BICYCLE)
 	BNE_a	(_Skip)
 	JSL	(PARTY_TRAIL_RESET)
-	JSL	(FREEZE_ENTITIES)
 	JSL	(REBUILD_PARTY_ENTITIES)
 	JSL	(GET_ON_BICYCLE)
 	JSL	(UNFREEZE_ENTITIES)
-_Skip:
+
+_Skip:	// Restore hijacked code and return
 	JML	(0xC0B7D6)
 
-_leader_mushroomized:
+_party_mushroomized:
 	JSL	(GET_OFF_BICYCLE)
 	JSL	(REBUILD_PARTY_ENTITIES)
 	JML	(0xC0B7D6)
 }
 
 //------------------------------------------------------------------
-// Hook 2: leader (or anyone) dies from overworld status damage
+// Hook 2: Leader (or anyone) dies from overworld status damage
 //------------------------------------------------------------------
 ROM[0xC051F0] = JML	(Post_Death_Bike_Refresh)
 
@@ -142,16 +139,15 @@ Post_Death_Bike_Refresh: {
 	LDA_a	(GAME_STATE_WALKING_STYLE)
 	CMP_i	(WALKING_STYLE_BICYCLE)
 	BNE_a	(_Skip)
-	JSL	(FREEZE_ENTITIES)
+	JSL	(PARTY_TRAIL_RESET)
 	JSL	(REBUILD_PARTY_ENTITIES)
 	JSL	(GET_ON_BICYCLE)
-	JSL	(UNFREEZE_ENTITIES)
 _Skip:
 	JML	(0xC051F4)
 }
 
 //------------------------------------------------------------------
-// Hook 3: leader (or anyone above the current leader in order) is revived
+// Hook 3: Leader (or anyone above the current leader in order) is revived
 //------------------------------------------------------------------
 ROM[0xC3EE4F] = JML	(Post_Status_Change_Bike_Refresh)
 
@@ -160,10 +156,9 @@ Post_Status_Change_Bike_Refresh: {
 	LDA_a	(GAME_STATE_WALKING_STYLE)
 	CMP_i	(WALKING_STYLE_BICYCLE)
 	BNE_a	(_Skip)
-	JSL	(FREEZE_ENTITIES)
+	JSL	(PARTY_TRAIL_RESET)
 	JSL	(REBUILD_PARTY_ENTITIES)
 	JSL	(GET_ON_BICYCLE)
-	JSL	(UNFREEZE_ENTITIES)
 _Skip:
 	JML	(0xC3EE53)
 }
@@ -273,6 +268,11 @@ _Return:
 	//JSL	(0xC4C91A)	// initializeEntityFade
 	LDA_i	(0xFF)		// Load argument (FF to hide the full party)
 	JSL	(HIDE_CHAR_OR_PARTY)
+
+	// Disable collision for trailing party members
+	LDA_i	(0x8000)
+	STA_x	(ENTITY_COLLIDED_OBJECTS)		// Disables collision for whichever entity X points at
+
 	JML	(0xC03C95)
 }
 
@@ -317,6 +317,7 @@ _Ness_Sprite:
 
 _Paula_Sprite:
 	LDA_i	(1)	// char_index=1 (Paula)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(PAULA_BIKE_SIDECAR)	// Paula in bike+side car sprite ID
 	LDY_i	(25)	// Paula's entity ID
@@ -325,6 +326,7 @@ _Paula_Sprite:
 
 _Jeff_Sprite:
 	LDA_i	(2)	// char_index=2 (Jeff)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(JEFF_BIKE_SIDECAR)	// Jeff in bike+side car sprite ID
 	LDY_i	(26)	// Jeff's entity ID
@@ -334,6 +336,7 @@ _Jeff_Sprite:
 _Poo_Sprite:
 	// If none of the previous checks hit, then Poo's the leader
 	LDA_i	(3)		// char_index=3 (Poo)
+	STA_a	(NEW_ENTITY_VAR0)
 	STA_a	(NEW_ENTITY_VAR1)
 	LDA_i	(POO_BIKE_SIDECAR)	// Poo in bike+side car sprite ID
 	LDY_i	(27)		// Poo's entity ID
@@ -452,6 +455,11 @@ _Ness_Sprite:
 	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
+
+	// Restore collision for trailing party members
+	LDA_i	(0xFFFF)
+	STA_x	(ENTITY_COLLIDED_OBJECTS)	// Restores normal collision
+
 	JML	(0xC03D6A)	// Exit back and continue with Ness' entity flags (original flags)
 
 _Paula_Sprite:
@@ -511,6 +519,9 @@ _Return:
 	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
+	// Restore collision for trailing party members
+	LDA_i	(0xFFFF)
+	STA_x	(ENTITY_COLLIDED_OBJECTS)	// Restores normal collision
 	JML	(0xC03D9F)
 }
 
@@ -541,6 +552,9 @@ _Return:
 	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
+	// Restore collision for trailing party members
+	LDA_i	(0xFFFF)
+	STA_x	(ENTITY_COLLIDED_OBJECTS)	// Restores normal collision
 	JML	(0xC03D9F)
 }
 
@@ -571,6 +585,9 @@ _Return:
 	JSL	(PARTY_TRAIL_RESET)
 	LDA_i	(0xFF)		// Load argument (FF to show the full party)
 	JSL	(UNHIDE_CHAR_OR_PARTY)
+	// Restore collision for trailing party members
+	LDA_i	(0xFFFF)
+	STA_x	(ENTITY_COLLIDED_OBJECTS)	// Restores normal collision
 	JML	(0xC03D9F)
 }
 //------------------------------------

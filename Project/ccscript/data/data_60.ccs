@@ -267,7 +267,7 @@ l_0xc9fd5a:
 	call(data_35.l_0xc7c802)	// Only one seat, so you shouldn't ride the bike now
 	eob
 
-l_0xc9fd60:
+l_0xc9fd60:	// Party leader is mushroomized
 	"@If you are not feeling well, you should not ride a bicycle." end
 
 l_0xc9fd82:
