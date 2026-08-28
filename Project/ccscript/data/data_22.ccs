@@ -251,10 +251,18 @@ l_0xc674aa:
 
 l_0xc67501:	// Starman Jr. spawns
 	music(124)
-	sprite2_spawn(43,622,1)	// 0x2B, 0x026E, 1
+	//sprite2_spawn(43,622,1)	// 0x2B, 0x026E, 1
+	sprite2_spawn(481,622,1)	// 0x2B, 0x026E, 1
 	wait_movement
 
-	pause(30)
+	sprite2_do_mc(481,606)		// Make capsule sprite move a bit
+	pause(120)
+
+	sprite2_delete(481, 6) 		// Delete capsule sprite
+	sprite2_spawn(242, 895, 1)	// Smoke sprite
+	sprite2_spawn(43, 605, 1)	// Starman Jr. sprite
+
+	pause(60)
 	window_open(1)
 	music(155)
 	title(1, StarmanJr)

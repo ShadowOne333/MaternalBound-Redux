@@ -1,0 +1,27 @@
+//------------------------------------
+//	Cutscene modifications
+//------------------------------------
+import "../redux/movscr_codes.ccs"
+//------------------------------------
+// This file does action script modifications to certain cutscenes in the original EB game
+
+//------------------------------------
+StarmanJr_Smoke:
+	m_disable_collision()
+	m_refresh_graphics_frame0()
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_task_long(MovTask_DestroyIfFar)
+	m_task_long(MovTask_Anim8)
+
+	m_priority(0)	// Put above Starman's sprite
+	m_set_facing_anim(0, 0)
+	m_pause(8)
+	m_set_facing_anim(2, 0)
+	m_pause(8)
+	m_set_facing_anim(4, 0)
+	m_pause(8)
+	m_set_facing_anim(6, 0)
+	m_pause(8)
+	m_destroy_self
+//------------------------------------
