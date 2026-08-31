@@ -5036,12 +5036,12 @@ SnesPrgRom:3BCDBA:Patch_C3E5B3
 SnesPrgRom:3BCDE3:SetExistenceAtXToA
 SnesPrgRom:3BF458:distract_check_for_brain_stone
 SnesPrgRom:3BF53A:Crying_EnemyMissRates
-SnesPrgRom:36FFE1:DadBikePhoneFix
+SnesPrgRom:3BF55B:DadBikePhoneFix
 SnesPrgRom:3BEF29:Item_Read_With_Identity_Check
 SnesPrgRom:3BEED8:Item_Slot_Assign_And_Cache
 SnesPrgRom:38FFB3:EXPOverflowFix
 SnesPrgRom:3AFFF7:LostScriptedBattle
-SnesPrgRom:3BF360:HEAL_POISON_FIX
+SnesPrgRom:3BF31C:HEAL_POISON_FIX
 SnesPrgRom:3BF2E9:Current_HP_Limit_Fix
 SnesPrgRom:3BF30B:Current_PP_Limit_Fix
 SnesPrgRom:3BF2D8:Max_HP_Limit_Fix
@@ -5054,8 +5054,8 @@ SnesPrgRom:3BF1ED:dirHorizontal
 SnesPrgRom:3BF1E1:dirVertical
 SnesPrgRom:3BF1C9:newDirectionalUpdateCheck
 SnesPrgRom:3BF1D1:updateDirectionalIndexFuncList
-SnesPrgRom:3BF576:BeginTeleportHijack
-SnesPrgRom:3BF585:EndTeleportHijack
+SnesPrgRom:36FFE1:BeginTeleportHijack
+SnesPrgRom:36FFF0:EndTeleportHijack
 SnesPrgRom:3BF5AB:hijack_cc_1D_15
 SnesPrgRom:3BF28A:BattleGoods_ShowItemNameWindow
 SnesPrgRom:3BECF9:Max_Guts_Boost_Limit_Fix
@@ -5898,7 +5898,7 @@ SnesPrgRom:3BD228:x11
 SnesPrgRom:3BD230:x77
 SnesPrgRom:3BDC2E:CustomShops
 SnesPrgRom:3BDA60:NewShopTable
-SnesPrgRom:3BF31C:Spy_Expansion
+SnesPrgRom:3BF360:Spy_Expansion
 SnesPrgRom:3AA59E:BattleAction_Table
 SnesPrgRom:3BDFC3:apply_sauce
 SnesPrgRom:3BDFDA:find_condiment
@@ -6127,7 +6127,7 @@ SnesPrgRom:3BB13F:TextDrawCharacter
 SnesPrgRom:3BE91A:FullHealHijack
 SnesPrgRom:3BE958:HotSpringHealHijack
 SnesPrgRom:3BE8CE:SleepoverHealHijack
-SnesPrgRom:3BF55B:Reset
+SnesPrgRom:3BF576:Reset
 SnesPrgRom:34FFA6:InRunMode
 SnesPrgRom:3BF4EC:Naming_Select_Letters
 SnesPrgRom:3BE220:calc_spacing

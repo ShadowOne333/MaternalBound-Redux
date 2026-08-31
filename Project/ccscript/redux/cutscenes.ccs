@@ -14,7 +14,7 @@ StarmanJr_Smoke:
 	m_task_long(MovTask_DestroyIfFar)
 	m_task_long(MovTask_Anim8)
 
-	m_priority(0)	// Put above Starman's sprite
+	m_priority(1)	// Put above Starman's sprite, but behind Ness
 	m_set_facing_anim(0, 0)
 	m_pause(8)
 	m_set_facing_anim(2, 0)

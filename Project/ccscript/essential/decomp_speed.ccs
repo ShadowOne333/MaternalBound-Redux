@@ -39,13 +39,13 @@ ROM[0xC41A9E] = {
 
 _C41AA1:
 	CMP_8	(0x20)
-	STX_d	(0x62)
+	STX_d	(0x32)
 	BCC	(3)	// _C41AAA
 	LDA_8	(0x08)
 	INX
 
 _C41AAA:
-	STA_d	(0x60)
+	STA_d	(0x30)
 
 	REP	(0x21)
 	INC_d	(0x70)
@@ -72,7 +72,7 @@ _C41AC6:
 	LDA_d	(0x70)
 
 _C41AD7:
-	STA_d	(0x65)
+	STA_d	(0x35)
 	SEC
 	SBC_d	(0x70)
 	EOR_i	(0xFFFF)
@@ -80,13 +80,13 @@ _C41AD7:
 	STA_d	(0x70)
 
 	SEP	(0x20)
-	LDA_8	(0x40)
+	LDA_8	(0x08)
 	STA_al	(0x00420B)
 	BCC	(0xCE)	// _C41AB8
 
-	LDA_d	(0x60)
+	LDA_d	(0x30)
 	BNE	(9)	// _C41AF9
-	LDX_d	(0x62)
+	LDX_d	(0x32)
 	BRA	(5)	// _C41AF9
 
 	SEP	(0x20)
@@ -130,7 +130,7 @@ _C41B23:
 	INX
 	STX_d	(0x08)
 	TYX
-	STA_dly	(0x68)
+	STA_dly	(0x38)
 	INY
 	INY
 	LDA_d	(0x70)
@@ -143,7 +143,7 @@ _C41B3B:
 	INX
 	LDA_x	(0)
 	INX
-	STA_dly	(0x68)
+	STA_dly	(0x38)
 	INY
 	BRA	(0xB4)	// _C41AC6
 
@@ -182,7 +182,7 @@ _C41B62:
 	BEQ	(0x29)	// _C41BA1
 	CMP_8	(0xE0)
 	BEQ	(0x25)	// _C41BA1
-	LDA_d	(0x6A)
+	LDA_d	(0x3A)
 	PHA
 	PLB
 
@@ -256,7 +256,7 @@ ROM[0xC4FD4B] = {
 	PLD
 
 	STY_d	(0x0A)
-	STA_d	(0x6A)
+	STA_d	(0x3A)
 	STA_d	(0x77)
 	STA_d	(0x76)
 	STA_al	(0x002183)
@@ -268,16 +268,16 @@ ROM[0xC4FD4B] = {
 	LDA_8	(0xC4)
 	STA_d	(0x7B)
 	LDA_8	(0x80)
-	STA_d	(0x61)
+	STA_d	(0x31)
 
 	LDA_s	(0x01)
-	STA_d	(0x6B)
-	STA_d	(0x64)
+	STA_d	(0x3B)
+	STA_d	(0x34)
 	REP	(0x20)
 
 	LDA_i	(0x1AF4)
 	STA_d	(0x79)
-	STZ_d	(0x68)
+	STZ_d	(0x38)
 
 	LDA_i	(0xC4FF)
 	STA_d	(0x73)
@@ -290,7 +290,7 @@ ROM[0xC4FD4B] = {
 	STX_d	(0x08)
 	LDX_d	(0x70)
 	INX
-	STA_dly	(0x68)
+	STA_dly	(0x38)
 	INY
 	INC
 	DEX
