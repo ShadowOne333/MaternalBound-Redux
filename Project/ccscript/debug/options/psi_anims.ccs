@@ -663,100 +663,100 @@ GiygasAttack:
 //------------------------------------------------------------------
 BeamA:
 	battle_animation(0, 55)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
 	battle_animation(37, 0)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	eob
 
 BeamB:
 	battle_animation(0, 56)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(15)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	battle_animation(37, 0)
 	pause(15)
-	sound(71)
+	sound(SND_HISS)	// 71
 	pause(15)
-	sound(68)
+	sound(SND_EAT)	// 68
 	pause(15)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	eob
 
 BeamG:
 	battle_animation(0, 57)
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	battle_animation(37, 0)
-	sound(50)
+	sound(SND_ROCKIN3)	// 50
 	pause(15)
-	sound(68)
+	sound(SND_EAT)	// 68
 	pause(30)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	eob
 
 BeamO:
 	battle_animation(0, 58)
 	pause(5)
-	sound(48)
+	sound(SND_ROCKIN1)	// 48
 	pause(5)
-	sound(48)
+	sound(SND_ROCKIN1)	// 48
 	pause(5)
-	sound(48)
+	sound(SND_ROCKIN1)	// 48
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	battle_animation(37, 0)
-	sound(50)
+	sound(SND_ROCKIN3)	// 50
 	pause(10)
-	sound(68)
-	sound(53)
+	sound(SND_EAT)	// 68
+	sound(SND_FIRE3)	// 53
 	pause(20)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	eob
 //------------------------------------------------------------------
 FourthDSlip:
 	battle_animation(48, 48)
 	pause(150)
-	sound(57)
+	sound(SND_FREEZE2)	// 57
 	pause(5)
-	sound(57)
+	sound(SND_FREEZE2)	// 57
 	pause(5)
-	sound(57)
+	sound(SND_FREEZE2)	// 57
 	pause(30)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	pause(5)
-	sound(58)
+	sound(SND_DEFENSEDOWN1)	// 58
 	eob
 //------------------------------------------------------------------
 ShieldOff:
 	pause(30)
-	sound(99)
+	sound(SND_STARMASTER)	// 99
 	battle_animation(0, 60)
 	pause(60)
 	eob
@@ -771,16 +771,16 @@ QuickUp:
 //------------------------------------------------------------------
 PSIBlock:
 	battle_animation(38, 62)
-	sound(48)
+	sound(SND_ROCKIN1)	// 48
 	pause(5)
-	sound(49)
+	sound(SND_ROCKIN2)	// 49
 	pause(5)
-	sound(50)
+	sound(SND_ROCKIN3)	// 50
 	eob
 //------------------------------------------------------------------
 Darkness:
 	battle_animation(38, 65)
-	sound(67)
+	sound(SND_FLASH3)	// 67
 	eob
 //------------------------------------------------------------------
 Sing_1: {

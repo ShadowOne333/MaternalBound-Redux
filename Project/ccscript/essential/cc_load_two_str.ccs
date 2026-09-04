@@ -1,0 +1,401 @@
+//------------------------------------
+// v1 (space-padding-in-label) was abandoned: embedding "str1 + N spaces
+// + str2" in the option's label overflowed its ~20-25 byte buffer for
+// wide windows. v2 (this file) positions str2 directly via C43D75, the
+// same mechanism vanilla's printPrice (C4507A) uses.
+//------------------------------------
+import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
+import "../expansion/ccexpand.ccs"
+//------------------------------------
+define CONTROL_CODE_LOAD_TWO_STR       = "[1A 1B]"
+define CONTROL_CODE_FINISH_TWO_STR     = "[1A 1C]"
+
+define CURRENT_FOCUS_WINDOW = 0x7E8958
+define OPEN_WINDOW_TABLE    = 0x7E88E4
+define WINDOW_STATS         = 0x7E8650
+define WINDOW_HEAD          = 0x7E88E0
+define MULT168               = 0xC08FF7
+define PRINT_LETTER          = 0xC10CB6
+define SET_TEXT_PIXEL_X      = 0xC43D75  // In: A=target pixel X (window's own
+                                          // origin, no window_x), X=text_y (row).
+                                          // Splits into tile+remainder internally.
+
+define WINDOW_STATS_NEXT_OFFSET = 0x0002
+define WINDOW_STATS_ID_OFFSET   = 0x0004
+
+define SCRATCH_BANK             = 0x007E
+define TEMP_STR1_NEAR           = 0x00E2
+
+// str2 is queued per row here, printed later by CC_FinishTwoStrMenu
+// after print_strings_vertical draws the labels. A row's text_y is
+// simply its row index (C114B1 sets it unconditionally).
+define QUEUE_ENTRY_SIZE         = 0x0010  // 16 bytes/row, generous for a number
+define MAX_QUEUE_ROWS           = 8
+define D_LoadTwoStr_Queue       = 0x012A  // spans 0x012A..0x01A9
+
+define D_LoadTwoStr_LastWindow  = 0x0122
+define D_LoadTwoStr_RowCounter  = 0x0124
+define D_LoadTwoStr_QueueCount  = 0x0126
+// Slot index from ResolveWindowStatsAddress. Must be an absolute WRAM
+// global, not a direct-page offset -- those don't survive a call
+// boundary (each function gets its own D-shifted frame).
+define D_LoadTwoStr_ResolvedSlot = 0x0128
+
+define SIZEOF_WINDOW_STATS      = 0x0052
+//------------------------------------
+
+command load_two_str(str1, str2) {
+	CONTROL_CODE_LOAD_TWO_STR
+	str1
+	byte 00
+	str2
+	byte 00
+	byte 02
+}
+
+command load_two_str_callonhover(str1, str2, target) {
+	CONTROL_CODE_LOAD_TWO_STR
+	str1
+	byte 00
+	str2
+	byte 00
+	byte 01
+	long target
+}
+
+command finish_two_str_menu "[1A 1C]"
+
+//------------------------------------
+// Assembly code
+//------------------------------------
+
+// In: A = near (16-bit) destination address within SCRATCH_BANK
+ReadCCStringUntilZero: {
+	M_EB_ASMFunction_Start(-0x30)
+
+	STA_d(0x22)
+	LDA_i(SCRATCH_BANK)
+	STA_d(0x24)
+
+	LDA_a(0x97b8)
+	STA_d(0x00)
+	ASL
+	ADC_d(0x00)
+	ASL
+	ASL
+	ADC_d(0x00)
+	ASL
+	ADC_d(0x00)
+	STA_d(0x00)
+	TAX
+	LDA_x(0x96aa)
+	STA_d(0x0e)
+	LDA_x(0x96ac)
+	STA_d(0x10)
+
+	LDY_i(0x0000)
+
+	_loop:
+		SEP(0x20)
+		LDA_dly(0x0e)
+		STA_dly(0x22)
+		REP(0x20)
+		AND_i(0x00FF)
+		BEQ_a(_done)
+		INY
+		BRA_a(_loop)
+	_done:
+
+	INY
+	TYA
+	CLC
+	ADC_d(0x0e)
+	LDX_d(0x00)
+	STA_x(0x96aa)
+	LDA_d(0x10)
+	ADC_i(0x0000)
+	STA_x(0x96ac)
+
+	M_EB_ASMFunction_End
+}
+
+// Draws a null-terminated string by calling PRINT_LETTER once per
+// character. Assumes the print cursor was already positioned (via
+// JSL(SET_TEXT_PIXEL_X)) and that SET_INSTANT_PRINTING is active.
+// In: A = near address of the string within SCRATCH_BANK
+DrawStringViaPrintLetter: {
+	M_EB_ASMFunction_Start(-0x30)
+
+	STA_d(0x0e)
+	LDA_i(SCRATCH_BANK)
+	STA_d(0x10)
+
+	LDY_i(0x0000)
+	_loop:
+		SEP(0x20)
+		LDA_dly(0x0e)
+		REP(0x20)
+		AND_i(0x00FF)
+		BEQ_a(_done)
+		PHY
+		JSL_RTS_C1(PRINT_LETTER)
+		PLY
+		INY
+		BRA_a(_loop)
+	_done:
+
+	M_EB_ASMFunction_End
+}
+
+// Right edge in the same coordinate space as SET_TEXT_PIXEL_X/text_x
+// (no window_x). width*8 exactly (and +1) triggers a text_x-reset
+// corruption bug (likely an off-by-one wrap check somewhere in the
+// drawing path); width*8-1 is confirmed safe, leaving a small ~2px gap.
+//
+// In: A = resolved window_stats address
+GetWindowRightEdgeX: M_EB_Function_Wrapper({
+	TAX
+
+	LDA_x(0x000A)        // window_stats::width, tile units
+	ASL
+	ASL
+	ASL                  // width * 8, in pixels
+	SEC
+	SBC_i(0x0001)        // back off 1px from the corruption boundary
+})
+
+// Resolves window_stats for D_LoadTwoStr_LastWindow by walking the
+// window linked list (WINDOW_HEAD -> next), since OPEN_WINDOW_TABLE is
+// confirmed stale/invalid for this window even while it's open. Stores
+// the matching slot index in D_LoadTwoStr_ResolvedSlot.
+//
+// Out: A = resolved window_stats address
+ResolveWindowStatsAddress: M_EB_Function_Wrapper_UserStack_Clobber(-0x30, {
+	LDA_a(WINDOW_HEAD)
+	STA_d(0x2E)
+
+	_findWindowLoop:
+		LDA_d(0x2E)
+		CMP_i(0xFFFF)
+		BEQ_a(_findWindowNotFound)
+
+		PHA                   // keep the slot index safe across MULT168/etc
+		LDY_i(SIZEOF_WINDOW_STATS)
+		JSL(MULT168)
+		CLC
+		ADC_i(WINDOW_STATS)
+		STA_d(0x00)           // candidate address (temp, doesn't disturb $2E)
+		TAX
+
+		LDA_x(WINDOW_STATS_ID_OFFSET)
+		CMP_a(D_LoadTwoStr_LastWindow)
+		BEQ_a(_findWindowDone)
+
+		PLA                   // discard the pushed slot index (no longer needed)
+		LDA_x(WINDOW_STATS_NEXT_OFFSET)
+		STA_d(0x2E)
+		BRA_a(_findWindowLoop)
+
+	_findWindowNotFound:
+		LDA_i(0x0000)
+		STA_a(D_LoadTwoStr_ResolvedSlot)  // safe fallback slot index
+		LDA_i(WINDOW_STATS)
+		BRA_a(_findWindowReturn)
+
+	_findWindowDone:
+		PLA
+		STA_a(D_LoadTwoStr_ResolvedSlot)  // the matching slot index
+		LDA_d(0x00)           // return value: the resolved address
+
+	_findWindowReturn:
+})
+
+CC_LoadTwoStr: {
+	M_EB_ASMFunction_Start_Clobber(-0x40)
+
+	LDA_a(CURRENT_FOCUS_WINDOW)
+	CMP_a(D_LoadTwoStr_LastWindow)
+	BEQ_a(_sameWindow)
+	STA_a(D_LoadTwoStr_LastWindow)
+	LDA_i(0x0000)
+	STA_a(D_LoadTwoStr_RowCounter)
+	STA_a(D_LoadTwoStr_QueueCount)
+	_sameWindow:
+
+	LDA_i(TEMP_STR1_NEAR)
+	JSL(ReadCCStringUntilZero)
+
+	// ---- read str2 straight into this row's queue slot ----
+	LDA_a(D_LoadTwoStr_QueueCount)
+	AND_i(0x00FF)
+	STA_d(0x1e)
+	LDY_i(QUEUE_ENTRY_SIZE)
+	JSL(MULT168)
+	CLC
+	ADC_i(D_LoadTwoStr_Queue)
+	JSL(ReadCCStringUntilZero)
+
+	// ---- callback param handling (unchanged) ----
+	LDY_i(1)
+	JSL(R_Read_Parameter_Bytes)
+	LDA_a(D_cc_argv_0)
+	AND_i(0x00FF)
+	CMP_i(0x0001)
+	BEQ_a(_hasCallback)
+		LDA_i(0x0000)
+		STA_d(0x30)
+		STA_d(0x32)
+		BRA_a(_gotCallback)
+	_hasCallback:
+		LDY_i(4)
+		JSL(R_Read_Parameter_Bytes)
+		LDA_a(D_cc_argv_0)
+		STA_d(0x30)
+		LDA_a(D_cc_argv_2)
+		STA_d(0x32)
+	_gotCallback:
+
+	// ---- create the option, str1 as its (normal, unpadded) label ----
+	LDA_i(TEMP_STR1_NEAR)
+	STA_d(0x0e)
+	LDA_i(SCRATCH_BANK)
+	STA_d(0x10)
+	LDA_d(0x30)
+	STA_d(0x12)
+	LDA_d(0x32)
+	STA_d(0x14)
+	LDX_a(D_LoadTwoStr_RowCounter)
+	LDA_i(0x0000)
+	JSL_RTS_C1(0xC114B1)
+
+	LDA_a(D_LoadTwoStr_QueueCount)
+	INC
+	STA_a(D_LoadTwoStr_QueueCount)
+
+	LDA_a(D_LoadTwoStr_RowCounter)
+	INC
+	STA_a(D_LoadTwoStr_RowCounter)
+
+_return:
+	JSL(R_Set_Working_Memory)
+	LDA_i(0)
+
+	M_EB_ASMFunction_End
+}
+
+CC_FinishTwoStrMenu: {
+	M_EB_ASMFunction_Start_Clobber(-0x40)
+
+	// Save the actual focus window in $30.
+	LDA_a(CURRENT_FOCUS_WINDOW)
+	STA_d(0x30)
+
+	// Force the known window while drawing.
+	LDA_a(D_LoadTwoStr_LastWindow)
+	STA_a(CURRENT_FOCUS_WINDOW)
+
+	SEI
+
+	// $2A = resolved window_stats address; D_LoadTwoStr_ResolvedSlot =
+	// matching slot index (see ResolveWindowStatsAddress).
+	JSL(ResolveWindowStatsAddress)
+	STA_d(0x2A)
+
+	// Force OPEN_WINDOW_TABLE[LastWindow] to the correct slot for the
+	// duration of drawing -- SET_TEXT_PIXEL_X depends on it too.
+	LDA_a(D_LoadTwoStr_LastWindow)
+	ASL
+	STA_d(0x2C)           // byte offset into OPEN_WINDOW_TABLE, for restore
+	TAX
+	LDA_x(OPEN_WINDOW_TABLE)
+	STA_d(0x32)           // save original (broken) table entry
+	LDA_a(D_LoadTwoStr_ResolvedSlot)
+	STA_x(OPEN_WINDOW_TABLE)
+
+	// Save+clear VWF_INDENT_NEW_LINE, like vanilla's C4507A does. If left
+	// set (e.g. by print_strings_vertical's own label printing), it
+	// forces text_x back to 0 on the next character drawn. Restored below.
+	SEP(0x20)
+	LDA_a(0x7E5E75)
+	STA_d(0x36)
+	STZ_a(0x7E5E75)
+	REP(0x20)
+
+	LDA_i(0x0000)
+	STA_d(0x00)           // row index
+
+	_rowLoop:
+		LDA_d(0x00)
+		CMP_a(D_LoadTwoStr_QueueCount)
+		BEQ_a(_allDone)
+
+		JSL(0xC3E4D4)             // SET_INSTANT_PRINTING
+
+		// Get this row's queue-entry address.
+		LDA_d(0x00)
+		LDY_i(QUEUE_ENTRY_SIZE)
+		JSL(MULT168)
+		CLC
+		ADC_i(D_LoadTwoStr_Queue)
+		STA_d(0x26)           // near address of this row's str2
+
+		// Get string 2's width via vanilla's own getStringRenderWidth
+		// (C43E31) -- confirmed working, no need for our own reimplementation.
+		// A = max chars (budget), $0e/$10 = near/bank of the string.
+		LDA_d(0x26)
+		STA_d(0x0e)
+		LDA_i(SCRATCH_BANK)
+		STA_d(0x10)
+		LDA_i(0x001E)
+		JSL(0xC43E31)
+		STA_d(0x28)
+
+		// Right edge minus string width = target position, in pixels
+		// (same relative coordinate space SET_TEXT_PIXEL_X expects).
+		LDA_d(0x2A)
+		JSL(GetWindowRightEdgeX)
+		SEC
+		SBC_d(0x28)
+		STA_d(0x34)           // target pixel X (NOT $2C -- needed intact
+		                      // for the OPEN_WINDOW_TABLE restore below)
+
+		// Position: X = row index (= text_y), A = target pixel X.
+		LDX_d(0x00)
+		LDA_d(0x34)
+		JSL(SET_TEXT_PIXEL_X)
+
+		// Draw string 2.
+		LDA_d(0x26)
+		JSL(DrawStringViaPrintLetter)
+
+		LDA_d(0x00)
+		INC
+		STA_d(0x00)
+		BRA_a(_rowLoop)
+
+_allDone:
+	JSL(0xC3E4CA)         // CLEAR_INSTANT_PRINTING
+
+	LDA_i(0x0000)
+	STA_a(D_LoadTwoStr_QueueCount)
+
+	// Restore VWF_INDENT_NEW_LINE to whatever it was before we cleared it.
+	SEP(0x20)
+	LDA_d(0x36)
+	STA_a(0x7E5E75)
+	REP(0x20)
+
+	// Restore OPEN_WINDOW_TABLE's original (broken) value.
+	LDX_d(0x2C)
+	LDA_d(0x32)
+	STA_x(OPEN_WINDOW_TABLE)
+
+	CLI
+
+	// Restore the focus window saved at entry.
+	LDA_d(0x30)
+	STA_a(CURRENT_FOCUS_WINDOW)
+
+	M_EB_ASMFunction_End
+}

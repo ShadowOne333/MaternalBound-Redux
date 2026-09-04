@@ -393,6 +393,23 @@ l_0xc97b6b:
 	promptw
 	eob
 
+skip_sandwich_stamina_refill:
+	refill_stamina
+	get_action_arg swap
+	find_condiment(0)
+	goto_if_true(l_0xc97bc4)
+
+	user_and_target_names_identical
+	goto_if_true(l_0xc97bab)
+
+	newline
+	"@{user} took" linebreak
+	"  the {itemname(0)} out and" next
+	"@{target} ate it."
+	sound(SND_EAT)	// 68
+	promptw
+	eob
+
 l_0xc97bab:
 	newline
 	"@{user}{get_action_arg}{swap} ate" linebreak

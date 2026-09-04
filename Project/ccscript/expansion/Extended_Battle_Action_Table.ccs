@@ -665,4 +665,5 @@ BattleAction_Table:{
 	// Extended Battle Action Section
 
 	Battle_Action(318, Party, One, Item, 0, 0xC97B6B, lucky_sandwich_revamp.Lucky_Sandwich_Action)
+	Battle_Action(319, Party, One, Item, 0, battle_text.skip_sandwich_stamina_refill, EAT_FOOD)	// Skip sandwiches should restore stamina
 }

@@ -140,7 +140,7 @@ l_0xc9c293:
 	pause(120)
 	sound(SND_MISSILE)	// 70
 	get_char_at_pos(1)	// 0x01
-	get_dir_from_char(0,3,370)	// 0x00, 0x03, 0x0172
+	get_dir_from_char(0, TO_SPRITE2, 370)	// 0x00, 0x03, 0x0172
 	party_direction(0)	// 0x00
 	sprite2_spawn(458,549,5)	// 0x01CA, 0x0225, 0x05
 	wait_movement
@@ -335,16 +335,16 @@ l_0xc9c293:
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	pause(30)
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	sprite2_unfreeze(1)	// 0x0001
 	wait_movement
 
@@ -356,14 +356,14 @@ l_0xc9c293:
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	pause(30)
 	call(data_38.l_0xc7f9f8)
 	pause(30)
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	npc_do_mc(728,565)	// 0x02D8, 0x0235
 	wait_movement
 
@@ -380,27 +380,27 @@ l_0xc9c293:
 	npc_do_mc(719,566)	// 0x02CF, 0x0236
 	wait_movement
 
-	npc_freeze(719)	// 0x02CF
+	npc_freeze(719)		// 0x02CF
 	pause(30)
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	pause(60)
 	npc_unfreeze(734)	// 0x02DE
 	wait_movement
 
-	npc_freeze(734)	// 0x02DE
+	npc_freeze(734)		// 0x02DE
 	pause(30)
 	npc_unfreeze(719)	// 0x02CF
 	wait_movement
 
-	npc_freeze(719)	// 0x02CF
+	npc_freeze(719)		// 0x02CF
 	pause(15)
 	npc_unfreeze(728)	// 0x02D8
 	wait_movement
 
-	npc_freeze(728)	// 0x02D8
+	npc_freeze(728)		// 0x02D8
 	pause(80)
 	sprite2_unfreeze(2)	// 0x0002
 	wait_movement

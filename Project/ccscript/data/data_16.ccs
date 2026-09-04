@@ -385,6 +385,10 @@ l_0xc5ee13:
 	hide_char_float(5)
 	sprite2_freeze(347)	// 0x015B
 
+	// Make the party respawn here in case they die against Starman Jr.
+	// Fixes a bug where the player can bypass Starman Jr by dying to him and spawning back at the house.
+	set_respawn_point(2)
+
 	window_open(1)
 	title(1,Porky)
 	"@{name(1)}!" next
