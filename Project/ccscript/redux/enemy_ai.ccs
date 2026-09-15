@@ -1,0 +1,491 @@
+// CCS-based Enemy AI Scripting
+// by JTolmar and The_Kirby
+// (Mostly JTolmar but I reused The_Kirby's hijack. Also shoutouts to Coop for making ccexpand)
+//------------------------------------
+
+import "../essential/asm65816.ccs"
+import "../expansion/ccexpand.ccs"
+import "../redux/enemy_ai_actions.ccs"
+
+//------------------------------------
+// Instructions (once installed):
+// - write the enemy's logic in ccscript (anywhere, doesn't need to be this file)
+// - put that CCScript label in that enemy's slot in EnemyAiTable below
+//   (e.g. if your new code is at the label MyNewScript in enemy_stuff.ccs,
+//     replace DoNothing with enemy_stuff.MyNewScript for that enemy ID)
+// - set the enemy's action order to something higher than 4
+
+// CCScript enemy logic:
+// - It works like normal CCscript, you can use call(), goto(), flags, all the normal stuff
+// - The script runs until it hits an eob, like normal, but...
+//   on the next turn, the script will resume from the next command after the eob
+// - This means the script can't end! Make sure to make an infinite loop with a goto().
+// - The ccscript registers (arg, result, counter) are not saved past an eob.
+// Example script:
+//    ExampleAi:
+//      window_open(1)
+//      "@Welcome to the AI test buddy." next
+//      window_closetop
+//      setAction(132, 0) eob
+//    ExampleAi_Loop:
+//      if checkPpThreshold(4) {
+//        setAction(54, 45) eob // Magnet A
+//        goto(TestAi_Loop)
+//      }
+//      if checkHpThreshold(17) {
+//        window_open(1)
+//        "@Ow my scales." next
+//        window_closetop
+//        setAction(32, 23) eob // Lifeup A
+//        goto(TestAi_Loop)
+//      }
+//      setAction(4, 0) eob // Bash
+//      goto(ExampleAi_Loop)
+// - Enemy scripts run at the start of the turn, before anyone acts. If you want to open a window
+//   and start chatting or something, it will happen there, not when the enemy acts.
+
+//------------------------------------
+// Installation
+// - This requires ccexpand
+// - Add ControlCodesetAction to ccexpand, and set CC_SET_ACTION to match the slot you used
+define CC_SET_ACTION = "[1A 1D]" // ControlCodeSetAction - used by setAction()
+// - Repeat this for any of the below commands that you want to be able to use
+define CC_HP_THRESHOLD = "[1A 1E]" // ControlCodeHpThreshold - used by checkHpThreshold()
+define CC_PP_THRESHOLD = "[1A 1F]" // ControlCodePpThreshold - used by checkPpThreshold()
+define CC_CHECK_STATUS = "[1A 20]" // ControlCodeCheckStatus - used by checkStatus()
+// (You don't actually have to do any of these, even setAction, but this script sure isn't very
+//  useful if you don't lol)
+
+//------------------------------------
+//	Enemy AI table
+//------------------------------------
+EnemyAiTable:
+EnemyAi000: DoNothing
+EnemyAi001: DoNothing
+EnemyAi002: DoNothing
+EnemyAi003: DoNothing
+EnemyAi004: DoNothing
+EnemyAi005: DoNothing
+EnemyAi006: DoNothing
+EnemyAi007: DoNothing
+EnemyAi008: DoNothing
+EnemyAi009: DoNothing
+EnemyAi010: DoNothing
+EnemyAi011: DoNothing
+EnemyAi012: DoNothing
+EnemyAi013: DoNothing
+EnemyAi014: DoNothing
+EnemyAi015: DoNothing
+EnemyAi016: DoNothing
+EnemyAi017: DoNothing
+EnemyAi018: DoNothing
+EnemyAi019: DoNothing
+EnemyAi020: DoNothing
+EnemyAi021: DoNothing
+EnemyAi022: DoNothing
+EnemyAi023: DoNothing
+EnemyAi024: DoNothing
+EnemyAi025: DoNothing
+EnemyAi026: DoNothing
+EnemyAi027: DoNothing
+EnemyAi028: DoNothing
+EnemyAi029: DoNothing
+EnemyAi030: DoNothing
+EnemyAi031: DoNothing
+EnemyAi032: DoNothing
+EnemyAi033: DoNothing
+EnemyAi034: DoNothing
+EnemyAi035: DoNothing
+EnemyAi036: DoNothing
+EnemyAi037: DoNothing
+EnemyAi038: DoNothing
+EnemyAi039: DoNothing
+EnemyAi040: DoNothing
+EnemyAi041: DoNothing
+EnemyAi042: DoNothing
+EnemyAi043: DoNothing
+EnemyAi044: DoNothing
+EnemyAi045: DoNothing
+EnemyAi046: DoNothing
+EnemyAi047: DoNothing
+EnemyAi048: DoNothing
+EnemyAi049: enemy_ai_actions.Kraken_Boss
+EnemyAi050: DoNothing
+EnemyAi051: DoNothing
+EnemyAi052: DoNothing
+EnemyAi053: DoNothing
+EnemyAi054: DoNothing
+EnemyAi055: DoNothing
+EnemyAi056: DoNothing
+EnemyAi057: DoNothing
+EnemyAi058: DoNothing
+EnemyAi059: DoNothing
+EnemyAi060: DoNothing
+EnemyAi061: DoNothing
+EnemyAi062: DoNothing
+EnemyAi063: DoNothing
+EnemyAi064: DoNothing
+EnemyAi065: DoNothing
+EnemyAi066: DoNothing
+EnemyAi067: DoNothing
+EnemyAi068: DoNothing
+EnemyAi069: DoNothing
+EnemyAi070: DoNothing
+EnemyAi071: DoNothing
+EnemyAi072: DoNothing
+EnemyAi073: DoNothing
+EnemyAi074: DoNothing
+EnemyAi075: DoNothing
+EnemyAi076: DoNothing
+EnemyAi077: DoNothing
+EnemyAi078: DoNothing
+EnemyAi079: DoNothing
+EnemyAi080: DoNothing
+EnemyAi081: DoNothing
+EnemyAi082: DoNothing
+EnemyAi083: DoNothing
+EnemyAi084: DoNothing
+EnemyAi085: DoNothing
+EnemyAi086: DoNothing
+EnemyAi087: DoNothing
+EnemyAi088: DoNothing
+EnemyAi089: DoNothing
+EnemyAi090: DoNothing
+EnemyAi091: DoNothing
+EnemyAi092: DoNothing
+EnemyAi093: DoNothing
+EnemyAi094: DoNothing
+EnemyAi095: DoNothing
+EnemyAi096: DoNothing
+EnemyAi097: DoNothing
+EnemyAi098: DoNothing
+EnemyAi099: DoNothing
+EnemyAi100: DoNothing
+EnemyAi101: DoNothing
+EnemyAi102: DoNothing
+EnemyAi103: DoNothing
+EnemyAi104: DoNothing
+EnemyAi105: DoNothing
+EnemyAi106: DoNothing
+EnemyAi107: DoNothing
+EnemyAi108: DoNothing
+EnemyAi109: DoNothing
+EnemyAi110: DoNothing
+EnemyAi111: DoNothing
+EnemyAi112: DoNothing
+EnemyAi113: DoNothing
+EnemyAi114: DoNothing
+EnemyAi115: DoNothing
+EnemyAi116: DoNothing
+EnemyAi117: DoNothing
+EnemyAi118: DoNothing
+EnemyAi119: DoNothing
+EnemyAi120: DoNothing
+EnemyAi121: DoNothing
+EnemyAi122: DoNothing
+EnemyAi123: DoNothing
+EnemyAi124: DoNothing
+EnemyAi125: DoNothing
+EnemyAi126: DoNothing
+EnemyAi127: DoNothing
+EnemyAi128: DoNothing
+EnemyAi129: DoNothing
+EnemyAi130: DoNothing
+EnemyAi131: DoNothing
+EnemyAi132: DoNothing
+EnemyAi133: DoNothing
+EnemyAi134: DoNothing
+EnemyAi135: DoNothing
+EnemyAi136: DoNothing
+EnemyAi137: DoNothing
+EnemyAi138: DoNothing
+EnemyAi139: DoNothing
+EnemyAi140: DoNothing
+EnemyAi141: DoNothing
+EnemyAi142: DoNothing
+EnemyAi143: DoNothing
+EnemyAi144: DoNothing
+EnemyAi145: DoNothing
+EnemyAi146: DoNothing
+EnemyAi147: DoNothing
+EnemyAi148: DoNothing
+EnemyAi149: DoNothing
+EnemyAi150: DoNothing
+EnemyAi151: DoNothing
+EnemyAi152: DoNothing
+EnemyAi153: DoNothing
+EnemyAi154: DoNothing
+EnemyAi155: DoNothing
+EnemyAi156: DoNothing
+EnemyAi157: DoNothing
+EnemyAi158: DoNothing
+EnemyAi159: DoNothing
+EnemyAi160: DoNothing
+EnemyAi161: DoNothing
+EnemyAi162: DoNothing
+EnemyAi163: DoNothing
+EnemyAi164: DoNothing
+EnemyAi165: DoNothing
+EnemyAi166: DoNothing
+EnemyAi167: DoNothing
+EnemyAi168: DoNothing
+EnemyAi169: DoNothing
+EnemyAi170: DoNothing
+EnemyAi171: DoNothing
+EnemyAi172: DoNothing
+EnemyAi173: DoNothing
+EnemyAi174: DoNothing
+EnemyAi175: DoNothing
+EnemyAi176: DoNothing
+EnemyAi177: DoNothing
+EnemyAi178: DoNothing
+EnemyAi179: DoNothing
+EnemyAi180: DoNothing
+EnemyAi181: DoNothing
+EnemyAi182: DoNothing
+EnemyAi183: DoNothing
+EnemyAi184: DoNothing
+EnemyAi185: DoNothing
+EnemyAi186: DoNothing
+EnemyAi187: DoNothing
+EnemyAi188: DoNothing
+EnemyAi189: DoNothing
+EnemyAi190: DoNothing
+EnemyAi191: DoNothing
+EnemyAi192: DoNothing
+EnemyAi193: DoNothing
+EnemyAi194: DoNothing
+EnemyAi195: DoNothing
+EnemyAi196: DoNothing
+EnemyAi197: DoNothing
+EnemyAi198: DoNothing
+EnemyAi199: DoNothing
+EnemyAi200: DoNothing
+EnemyAi201: DoNothing
+EnemyAi202: DoNothing
+EnemyAi203: DoNothing
+EnemyAi204: DoNothing
+EnemyAi205: DoNothing
+EnemyAi206: DoNothing
+EnemyAi207: DoNothing
+EnemyAi208: DoNothing
+EnemyAi209: DoNothing
+EnemyAi210: DoNothing
+EnemyAi211: DoNothing
+EnemyAi212: DoNothing
+EnemyAi213: DoNothing
+EnemyAi214: DoNothing
+EnemyAi215: DoNothing
+EnemyAi216: DoNothing
+EnemyAi217: DoNothing
+EnemyAi218: DoNothing
+EnemyAi219: DoNothing
+EnemyAi220: DoNothing
+EnemyAi221: DoNothing
+EnemyAi222: DoNothing
+EnemyAi223: DoNothing
+EnemyAi224: DoNothing
+EnemyAi225: DoNothing
+EnemyAi226: DoNothing
+EnemyAi227: DoNothing
+EnemyAi228: DoNothing
+EnemyAi229: DoNothing
+EnemyAi230: DoNothing
+// If you expanded the enemy table somehow, this table will keep going. It only relies on the enemy
+// ID field still being there in the first two bytes of the battler struct.
+
+//------------------------------------
+// ---- Commands and their documentation ----
+// Sets the action and argument that the enemy will use this turn.
+// If you call it more than once in a turn, the last call will win.
+command setAction(action, argument) { CC_SET_ACTION short action byte argument }
+
+// Checks the enemy's HP. Returns true if current HP is this number or lower (in the result reg)
+command checkHpThreshold(hp) { CC_HP_THRESHOLD short hp }
+
+// Checks the enemy's HP. Returns true if current PP is this number or lower (in the result reg)
+command checkPpThreshold(pp) { CC_PP_THRESHOLD short pp }
+
+// Checks for a specific status. Returns true if present, in result register
+command checkStatus(group, status) { CC_CHECK_STATUS byte group byte status }
+
+//------------------------------------
+// Advanced - making new control codes
+// - It's just normal CCExpand control codes
+// - The enemy who's AI we're running is in CURRENT_ATTACKER (0x7EA970)
+
+// Advanced - compatibility
+// - Repurposes the money field from the battler struct to be more AI state
+// - touches battleInitEnemyStats (where it loads money)
+// - touches the enemy AI selector in the main battle routine
+// - touches koTarget where it tracks money (because it's not in the battler struct anymore)
+
+// Empty AI
+DoNothing:
+	eob
+	goto(DoNothing)
+
+// ---- Implementation stuff now ----
+define CURRENT_ATTACKER = 0x7EA970
+define CCE_arg_byte = 0x06 // Used by CCExpand
+
+// Implementation -- main hijack (borrowed from The_Kirby)
+ROM[0xC25363] = JML(BattleScripts_Hijack)
+BattleScripts_Hijack:
+	BNE(4)
+	JML(0xC25377)//Random
+	CMP_i(1)
+	BNE(4)
+	JML(0xC25385)//Random, Action #1 = 1/2, Action #2 = 1/4, Actions #3 and #4 = 1/8
+	CMP_i(2)
+	BNE(4)
+	JML(0xC253C3)//In order
+	CMP_i(3)
+	BNE(4)
+	JML(0xC253E6)//Two sets of random actions cycled each round.
+	CMP_i(4)
+	BCC(4)
+	JML(BattleScripts_Main)
+	JML(0xC25419)
+BattleScripts_Main:
+	LDX_d(0x02)
+	STA_d(0x04)
+	LDA_x(0x000F)//Load NPC value.
+	AND_i(0x00FF)
+	BNE_a(BattleScripts_Main2)
+	LDA_x(0x000E)//Load party value.
+	AND_i(0x00FF)
+	BNE_a(BattleScripts_Main2)
+	LDA_d(0x04)
+	SEC
+	SBC_i(4)
+	JML(BattleScripts_Hijack)
+// This is where the AI script starts and the difference from The_Kirby's version
+BattleScripts_Main2:
+	STX_a(CURRENT_ATTACKER) // Save the enemy to CURRENT_ATTACKER so script can use it
+	// Call text using saved pointer
+	LDA_x(6)    // AI state
+	AND_i(0xFF)
+	STA_d(0x10)
+	LDA_x(61) // Money (repurposed as the rest of the AI state)
+	STA_d(0x0E)
+	JSL(0xC186B1) // Call text
+	LDX_d(0x02) // enemy pointer
+	LDA_d(0x06) // Return val
+	STA_x(61) // Money
+	LDA_d(0x08) // More return val
+	STA_x8(6) // AI state
+	// Jump back into normal flow
+	JML(0xC25466)
+
+// Implementation -- patch battleInitEnemyStats to store the initial script
+//  C2B88F: A6 02           LDX @VIRTUAL02
+//  C2B891: 9D 3D 00        STA a:battler::money,X
+ROM[0xC2B88F] = { JSL(BattleInitPatch) NOP }
+BattleInitPatch:
+	// Load the AI state instead of money
+	LDY_d(0x02) // battler pointer in Y
+	LDA_y(0) // enemy ID
+	ASL ASL // mul 4
+	TAX // offset into enemy AI table in X
+	LDA_xl(EnemyAiTable) // loading low two bytes, store into extended AI state (formerly money)
+	STA_y(61) // Was money, now more state
+	INX INX
+	LDA_xl(EnemyAiTable) // loading high two bytes, store the good one into AI state
+	STA_y8(6) // AI state
+	RTL
+
+// Implementation -- patch koTarget to not need money in battler
+// this is the only place where battler money is actually used, and it can be found in the enemy
+// table instead, so by changing it here, I get the extra two bytes needed to store the AI state
+//  C278AD: BD 3D 00        LDA a:battler::money,X
+//  C278B0: 18              CLC
+ROM[0xC278AD] = JSL(KoBattlerPatch)
+KoBattlerPatch:
+	// Get pointer to enemy config table
+	LDA_x(0) // get enemy ID
+	LDY_i(0x5E) // size of enemy data struct
+	JSL(0xC08FF7) // mult
+	TAX
+	LDA_x(0x29) // enemy data money
+	CLC // missing CLC we clobbered
+	RTL
+
+// Implementation -- ccexpand codes
+ControlCodeSetAction: M_EB_Function_Wrapper({
+	M_Read_Bytes_or_Arg(2) // action
+	LDA_d(CCE_arg_byte)
+	LDX_a(CURRENT_ATTACKER)
+	STA_x(4) // current action
+	M_Read_Bytes_or_Arg(1) // arg
+	LDA_d(CCE_arg_byte)
+	LDX_a(CURRENT_ATTACKER)
+	STA_x8(8) // action arg
+})
+
+ControlCodeHpThreshold: M_EB_Function_Wrapper({
+	STZ_d(0x0E) // Default return value (false)
+	STZ_d(0x10) // Unused high bytes of return value
+	// Read the HP argument
+	M_Read_Bytes_or_Arg(2)
+	LDA_d(CCE_arg_byte)
+	// Compare with attacker
+	LDX_a(CURRENT_ATTACKER)
+	CMP_x(17) // HP 
+	BMI_a(_end)
+	LDA_i(1)
+	STA_d(0x0E) // return 1
+_end:
+	JSL(R_Set_Working_Memory)
+})
+
+ControlCodePpThreshold: M_EB_Function_Wrapper({
+	STZ_d(0x0E) // Default return value (false)
+	STZ_d(0x10) // Unused high bytes of return value
+	// Read the PP argument
+	M_Read_Bytes_or_Arg(2)
+	LDA_d(CCE_arg_byte)
+	// Compare with attacker
+	LDX_a(CURRENT_ATTACKER)
+	CMP_x(23) // PP
+	BMI_a(_end)
+	LDA_i(1)
+	STA_d(0x0E) // return 1
+_end:
+	JSL(R_Set_Working_Memory)
+})
+
+ControlCodeCheckStatus: M_EB_Function_Wrapper({
+	STZ_d(0x0E) // Default return value (false)
+	STZ_d(0x10) // Unused high bytes of return value
+	// Read the group argument
+	M_Read_Bytes_or_Arg(1)
+	LDA_d(CCE_arg_byte)
+	STA_d(0) // Stash in 0
+	// Read the status argument
+	M_Read_Bytes_or_Arg(1)
+	LDA_d(CCE_arg_byte)
+	// Check for match
+	CMP_d(0)
+	BNE_a(_end)
+	STA_d(0x0E) // return 1
+_end:
+	JSL(R_Set_Working_Memory)
+})
+
+
+// Helper function - 8 bit STA foo,x
+command STA_x8(offset) {
+	SEP(0x20)
+	STA_x(offset)
+	REP(0x20)
+}
+
+// Helper function - 8 bit STA foo,y
+command STA_y8(offset) {
+	SEP(0x20)
+	STA_y(offset)
+	REP(0x20)
+}
+
+// hi!

@@ -1,0 +1,73 @@
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
+import "../essential/asm65816.ccs"
+import "../essential/ASMRef.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/keyitems.ccs"
+import "../redux/window_titles.ccs"
+
+two_choice_menu("Yes", , "No", )
+
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
+
+	if flag FLG_KEY_ITEMS { give_menu_key_item(CABIN_KEY) }
+	else {
+		get_item_receiver(-1)
+		goto_if_false(address)
+		give_and_return_location(0, CABIN_KEY)	// 0xAB, 171, Cabin key
+		call(data_36.l_0xc7dcb6)
+	}
+
+	if flag FLG_KEY_ITEMS { give_menu_key_item(TOWN_MAP) }
+	else {
+		give_and_return_location(0, TOWN_MAP)	// 0xCA, 202, Town map
+		call(data_36.l_0xc7dccf) }
+
+	if flag FLG_KEY_ITEMS { isset(FLG_KEY_TABIGOYA) }
+	else { hasitem(-1, SHACK_KEY) }	// 0xAA, 170
+	goto_if_false(l_0xc99f2d)
+
+	if flag FLG_KEY_ITEMS { isset(FLG_KEY_TABIGOYA) }
+	else { hasitem(-1, SHACK_KEY) }	// 0xAA, 170
+
+	if flag FLG_KEY_ITEMS {
+		store_registers_shared
+		swap get_action_arg
+		store_registers
+	}
+	else { call(data_36.l_0xc7dd2c) }
+
+	if flag FLG_KEY_ITEMS {
+		swap get_action_arg
+		result_is(SHYNESS_BOOK)
+		goto_if_false(data_35.l_0xc7c6b6)
+	}
+	else {
+		get_inventory_item(0,0) swap
+		result_is(SHYNESS_BOOK)
+		goto_if_false(data_35.l_0xc7c6b6)
+	}
+
+
+l_0xc5d89e:
+	open_hp
+	call(data_15.l_0xc5e456)
+	goto_if_false(l_0xc5d905)
+
+	store_registers
+	get_inventory_item(0,0)
+	get_selling_price(0)
+	goto_if_false(l_0xc5d8fb)
+
+	call(l_0xc5d974)
+
+	call(data_36.l_0xc7dd4f)
+	do_menu
+	clearline
+	switch_goto(2)
+		switch_entry(l_0xc5d8da)
+		switch_entry(l_0xc5d8d0)
+	goto(l_0xc5d8d0)
+

@@ -1,0 +1,94 @@
+// CCS-based Enemy AI Scripting
+// by JTolmar and The_Kirby
+// (Mostly JTolmar but I reused The_Kirby's hijack. Also shoutouts to Coop for making ccexpand)
+//------------------------------------
+import "../essential/stdext.ccs"
+import "../redux/enemy_ai.ccs"
+//------------------------------------
+//	Action Orders commands
+//------------------------------------
+// Custom command for Action Order 0
+command order0(a, b, c, d) {
+	random(3)
+	switch_goto(3)
+		switch_entry(_1)
+		switch_entry(_2)
+		switch_entry(_3)
+		d goto(_end)
+_1: a goto(_end)
+_2: b goto(_end)
+_3: c
+
+_end:
+}
+
+// Custom command for Action Order 1
+command order1(a, b, c, d) {
+	random(7)
+	switch_goto(7)
+		switch_entry(_1)
+		switch_entry(_2)
+		switch_entry(_3)
+		switch_entry(_4)
+		switch_entry(_5)
+		switch_entry(_6)
+		switch_entry(_7)
+		d goto(_end)
+_1: a goto(_end)
+_2: a goto(_end)
+_3: a goto(_end)
+_4: a goto(_end)
+_5: b goto(_end)
+_6: b goto(_end)
+_7: c
+
+_end:
+}
+
+// Action Order 2 can be used like normal ccscript, as they'll go in order:
+// setAction(1,0) eob
+// setAction(2,0) eob
+// setAction(3,0) eob
+// setAction(4,0) eob
+// goto(_loop)
+
+// Custom command for Action Order 3
+command order3(a, b, c, d) {
+	random(1)
+	switch_goto(1)
+		switch_entry(_1)
+		b goto(_set2)
+_1: a
+
+_set2:
+	random(1)
+	switch_goto(1)
+		switch_entry(_2)
+		d goto(_end)
+_2: c
+_end:
+}
+
+//------------------------------------
+Kraken_Boss: {	// Enemy 49 & 182
+_loop:		// Action order 0 (Random)
+	order0(
+		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
+		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
+		{ setAction(92, 0) eob },	// Thunder Beta, Crashing Boom Bang
+		{ goto(_extender) }	// Run enemy extender (182)
+	)
+	goto(_loop)
+
+_extender:	// Action order 3 (staggered order)
+	order3(
+		// First set
+		{ setAction(27, 18) eob },	// Flash B
+		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
+		// Second set (After 1st set runs once)
+		{ setAction(117, 0) eob },	// Tornado
+		{ goto(_loop) }	// Back to the original enemy entry (49)
+	)
+	goto(_extender)
+}
+//------------------------------------

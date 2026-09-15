@@ -298,7 +298,7 @@ l_0xc59082:
 	set(FLG_TEMP_USEITEM)
 
 	compare_counter(10)
-	goto_if_true(l_0xc59894)
+	goto_if_false(l_0xc59894)
 	set(FLG_BGM_INSEKI_FALL_A)	// 532
 	set(FLG_MYHOME_START)	// 375
 	unset(FLG_BGM_INSEKI_FALL_A)	// 532
@@ -937,7 +937,6 @@ l_0xc59082:
 	compare_counter(68)
 	goto_if_false(l_0xc59894)
 	set(FLG_MYHOME_TO_BE)	//763
-	goto(l_0xc59894)
 
 l_0xc59894:
 	eob

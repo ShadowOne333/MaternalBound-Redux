@@ -260,6 +260,7 @@ l_0xc67501:	// Starman Jr. spawns
 
 	sprite2_delete(481, 6) 		// Delete capsule sprite
 	sprite2_spawn(242, 895, 1)	// Smoke sprite
+	sound(SND_SPROING)		// 88, 0x58
 	sprite2_spawn(43, 605, 1)	// Starman Jr. sprite
 
 	pause(60)

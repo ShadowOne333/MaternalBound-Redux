@@ -933,7 +933,7 @@ l_0xc5514f:
 l_0xc5519f:
 	newline
 	item_name_in_quotes(DEFENSE_SHOWER)	// 0x9D
-	"@Increases the Defense of all the friends." next
+	"@Increases the Defense of all friends." next
 	call(psi_descriptions.l_0xc56b0d) next
 	call(l_0xc56d9b) end
 

@@ -1,6 +1,7 @@
 /* Add all Stats and Resistances to the Equipment menu */
 
 import "../essential/asm65816.ccs"
+import "../essential/jsl_rts.ccs"
 import "../expansion/expand_text_windows.ccs"
 
 /*	NOTES:
@@ -67,7 +68,8 @@ ROM[0xC1A906] = JML	(Close_Main_Equipment_List)
 // We need to close the main Char Equipment to avoid text overflow closing the windows with certain items
 Close_Main_Equipment_List: {
 	LDA_i	(6)	// Main equipment list window
-	JSL	(0xC3E521) // Close Window
+	//JSL	(0xC3E521) // Close Window
+	JSL_RTS_C1	(0xC10F40) // Clear window
 
 	// Put back removed code
 	LDA_d	(2)
@@ -80,7 +82,7 @@ ROM[0xC1AAE0] = { JML (Close_Equipment_Window) }
 Close_Equipment_Window:{
 	LDA_i (52)	// Change window to close for Resistances
 	JSL (0xC3E521) // Close Window
-	LDA_i (0x002D)	// Close window 45 (Status)
+	LDA_i (45)	// Close window 45 (Status)
 	JSL (0xC3E521) // Close Window
 	LDA_i (6)
 	JSL (0xC3E521) // Close Window

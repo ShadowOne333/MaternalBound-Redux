@@ -71,9 +71,15 @@ import "../essential/ASMRef.ccs"
 
 //------------------------------------------------------------------
 define Title_Window = 0xC2032B
+define Combine_Buffer = 0x7EB43E
 
 ROM[0xC1794D] = {
 	JMP_l (Win_Title)
+	NOP
+}
+
+ROM[0xC1794D] = {
+	JML (Win_Title)
 	NOP
 }
 
@@ -86,6 +92,13 @@ Win_Title:{
 	
 	CMP_i (0x000D)
 	BEQ_a (CC_18_0D)
+
+	CMP_i (0x000E)
+	BEQ_a (CC_18_0E)
+
+	CMP_i (0x000F)
+	BEQ_a (CC_18_0F)
+
 	JMP_l (0xC179A5)	// UNKNOWN12 in CC_18_Tree
 	
 CC_18_0B:
@@ -98,9 +111,17 @@ CC_18_0C:
 	
 CC_18_0D:	
 	JMP_l (0xC179A0)	// UNKNOWN11 in CC_18_Tree
-}
-//------------------------------------------------------------------
 
+CC_18_0E:
+	LDA_i (0x867C)          // new jump-table slot's low 16-bit address
+	JMP_l (0xC179A8)        // UNKNOWN13 in CC_18_Tree (same tail as 0B/0C)
+
+CC_18_0F:
+	LDA_i (0x8681)          // new jump-table slot's low 16-bit address
+	JMP_l (0xC179A8)        // UNKNOWN13 in CC_18_Tree (same tail as 0B/0C)
+}
+
+//------------------------------------------------------------------
 /*	This is a bit hacky way to do things, but I'm gonna need to use the  routine 0xC1866D's address because of how the text parsing works in EarthBound. In the Control Code Trees, every control code that has parameters requires the lower 16-bit address of a ROM Address. For example:
 	
 	Looking at the CC_18_Tree Control Code Tree,
@@ -309,6 +330,236 @@ Return:
 	RTL
 }
 //------------------------------------------------------------------
+Title_Char_And_Str:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+
+	STX_d (0x06)
+	LDA_a (0x97CA)
+	CMP_i (0x0006)              // 6 args: WinID, CharID, Length, addr0, addr1, addr2
+	BCS_a (Title_Combined)
+
+	TXA
+	SEP (0x20)
+	LDX_a (0x97CA)
+	STA_x (0x97BA)
+	REP (0x20)
+	INC_a (0x97CA)
+	LDA_i (0x867C)
+	BRA_a (Return)
+
+Title_Combined:
+	LDA_d (0x06)                 // final arg (terminator 00)
+	SEP (0x20)
+	LDX_a (0x97CA)
+	STA_x (0x97BA)
+	REP (0x20)
+
+	// --- Window ID (97BA) ---
+	LDA_a (0x97BA)
+	AND_i (0x00FF)
+	BEQ_a (Load_Current_Window)
+	STA_d (0x02)
+	BRA_a (Get_Name_Addr)
+Load_Current_Window:
+	LDA_a (0x8958)
+	STA_d (0x02)
+
+	// --- Name address from CharID (97BB) ---
+Get_Name_Addr:
+	LDA_a (0x97BB)
+	AND_i (0x00FF)
+	CMP_i (0x0005)
+	BCC_a (Main_4_Names)
+	LDA_i (0x9819)
+	STA_d (0x04)                 // DPR $04 = name pointer (3 bytes: $04-$06)
+	BRA_a (Copy_Name)
+Main_4_Names:
+	DEC
+	TAY
+	LDA_i (six_letters.NAMES_SIZE)
+	JSL (Mult_YxA)
+	CLC
+	ADC_i (six_letters.RAM_NAMES)
+	STA_d (0x04)
+
+	// --- Copy name bytes into Combine_Buffer using [dp],Y ---
+Copy_Name:
+	LDA_i (0x007E)
+	STA_d (0x06)
+
+	LDA_a (0x97BC)
+	AND_i (0x00FF)
+	TAX                       // X = max name length (loop counter/ceiling)
+	LDY_i (0x0000)            // Y = buffer offset / actual copied count
+	SEP (0x20)
+CopyName_Loop:
+	CPX_i (0x0000)
+	BEQ_a (Name_Done)
+	LDA_dly (0x04)
+	BEQ_a (Name_Done)         // stop early if we hit a null padding byte
+	STA_y (Combine_Buffer)
+	INY
+	DEX
+	BRA_a (CopyName_Loop)
+
+Name_Done:
+	REP (0x20)
+	TYA
+	STA_d (0x12)               // save ACTUAL name length (not the fixed 6) for later
+	SEP (0x20)
+
+Load_String_Ptr:
+	REP (0x20)
+	LDA_a (0x97BD)
+	STA_d (0x0E)
+	LDA_a (0x97BF)
+	STA_d (0x10)
+	LDX_d (0x12)                // X = destination offset, resumes at REAL name length
+	LDY_i (0x0000)
+	SEP (0x20)
+CopyStr_Loop:
+	LDA_dly (0x0E)
+	BEQ_a (Do_Title)
+	STA_x (Combine_Buffer)
+	INY
+	INX
+	BRA_a (CopyStr_Loop)
+
+Do_Title:
+	LDA_8 (0x00)
+	STA_x (Combine_Buffer)
+
+	REP (0x20)
+	LDX_i (0xFFFF)                // treat as null-terminated
+	ASMLoadAddress0E (Combine_Buffer)   // sets DPR $0E/$10 from Combine_Buffer's short[0]/short[1]
+	LDA_d (0x02)                  // window ID
+	JSL (Title_Window)
+	LDA_i (0x0000)
+
+Return:
+	PLD
+	RTL
+}
+//------------------------------------------------------------------
+Title_Str_And_Char:{
+	REP (0x31)
+	PHD
+	TDC
+	ADC_i (0xFFEE)
+	TCD
+
+	STX_d (0x06)
+	LDA_a (0x97CA)
+	CMP_i (0x0006)
+	BCS_a (Title_Combined)
+
+	TXA
+	SEP (0x20)
+	LDX_a (0x97CA)
+	STA_x (0x97BA)
+	REP (0x20)
+	INC_a (0x97CA)
+	LDA_i (0x8681)
+	BRA_a (Return)
+
+Title_Combined:
+	LDA_d (0x06)
+	SEP (0x20)
+	LDX_a (0x97CA)
+	STA_x (0x97BA)
+	REP (0x20)
+
+	// --- Window ID (97BA) ---
+	LDA_a (0x97BA)
+	AND_i (0x00FF)
+	BEQ_a (Load_Current_Window)
+	STA_d (0x02)
+	BRA_a (Copy_String)
+Load_Current_Window:
+	LDA_a (0x8958)
+	STA_d (0x02)
+
+	// --- Copy string FIRST, into Combine_Buffer starting at 0 ---
+Copy_String:
+	LDA_a (0x97BD)
+	STA_d (0x0E)
+	LDA_a (0x97BF)
+	STA_d (0x10)
+	LDY_i (0x0000)
+	SEP (0x20)
+CopyStr_Loop:
+	LDA_dly (0x0E)
+	BEQ_a (Str_Done)
+	STA_y (Combine_Buffer)
+	INY
+	BRA_a (CopyStr_Loop)
+
+Str_Done:
+	REP (0x20)
+	TYA
+	STA_d (0x12)              // save string length so name copy knows where to resume
+	SEP (0x20)
+
+	// --- Name address from CharID (97BB) ---
+	REP (0x20)
+	LDA_a (0x97BB)
+	AND_i (0x00FF)
+	CMP_i (0x0005)
+	BCC_a (Main_4_Names)
+	LDA_i (0x9819)
+	STA_d (0x04)
+	BRA_a (Copy_Name)
+Main_4_Names:
+	DEC
+	TAY
+	LDA_i (six_letters.NAMES_SIZE)
+	JSL (Mult_YxA)
+	CLC
+	ADC_i (six_letters.RAM_NAMES)
+	STA_d (0x04)
+
+	// --- Append name AFTER the string, using X as destination offset ---
+Copy_Name:
+	LDA_i (0x007E)
+	STA_d (0x06)
+
+	LDA_a (0x97BC)             // max name length
+	AND_i (0x00FF)
+	TAX                        // wait — X needs to be the LOOP COUNTER, see note below
+	STA_d (0x14)               // stash max length separately
+	LDX_d (0x12)                // X = destination offset, resumes at string length
+	LDY_i (0x0000)               // Y = source name offset, starts fresh at 0
+	SEP (0x20)
+CopyName_Loop:
+	LDA_dly (0x04)
+	BEQ_a (Do_Title)            // stop on null padding
+	CPY_d (0x14)
+	BCS_a (Do_Title)            // stop if we've hit the max name length
+	STA_x (Combine_Buffer)
+	INY
+	INX
+	BRA_a (CopyName_Loop)
+
+Do_Title:
+	LDA_8 (0x00)
+	STA_x (Combine_Buffer)
+
+	REP (0x20)
+	LDX_i (0xFFFF)
+	ASMLoadAddress0E (Combine_Buffer)
+	LDA_d (0x02)
+	JSL (Title_Window)
+	LDA_i (0x0000)
+
+Return:
+	PLD
+	RTL
+}
+//------------------------------------------------------------------
 // Preset title commands for retrieving character names without EB++
 command title_ness(window)	{ "[18 0B {byte[0] window} 01 06]" clearline }
 command title_paula(window)	{ "[18 0B {byte[0] window} 02 06]" clearline }
@@ -316,9 +567,23 @@ command title_jeff(window)	{ "[18 0B {byte[0] window} 03 06]" clearline }
 command title_poo(window)	{ "[18 0B {byte[0] window} 04 06]" clearline }
 command title_dog(window)	{ "[18 0B {byte[0] window} 05 06]" clearline }
 
-// Preset title commands for strings
+// Preset title commands for only strings
 command title(window, label)	{ "[18 0C {byte[0] window} {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
 
+// Preset title commands for the Character's name followed by a suffixed string (Ninten's dad, Ana's mom, etc.)
+command title_ness_suffix(window, label)	{ "[18 0E {byte[0] window} 01 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_paula_suffix(window, label)	{ "[18 0E {byte[0] window} 02 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_jeff_suffix(window, label)	{ "[18 0E {byte[0] window} 03 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_poo_suffix(window, label)		{ "[18 0E {byte[0] window} 04 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_dog_suffix(window, label)		{ "[18 0E {byte[0] window} 05 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+
+// Preset title commands for a string followed by the Character's name (Padre de Ninten, Madre de Ana's mom, etc.)
+command title_ness_prefix(window, label)	{ "[18 0F {byte[0] window} 01 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_paula_prefix(window, label)	{ "[18 0F {byte[0] window} 02 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_jeff_prefix(window, label)	{ "[18 0F {byte[0] window} 03 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_poo_prefix(window, label)		{ "[18 0F {byte[0] window} 04 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+command title_dog_prefix(window, label)		{ "[18 0F {byte[0] window} 05 06 {byte[0] label} {byte[1] label} {byte[2] label} 00]" clearline }
+//------------------------------------------------------------------
 Mom:		"Mom[00]"
 Dad:		"Dad[00]"
 Tracy:		"Tracy[00]"
