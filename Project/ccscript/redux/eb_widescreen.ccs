@@ -1,0 +1,55 @@
+// EarthBound widescreen hack by Raid
+// Credit to GiovannyGB for the original Widescreen Backgrounds hack
+//------------------------------------
+// This was made by replacing bytes directly in Mesen's Memory editor (CPU Memory).
+import "../essential/asm65816.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../essential/jsl_rts.ccs"
+//------------------------------------
+// 1. Viewport & Camera Hooks (Bank $C0)
+//------------------------------------
+// Expands viewport from 34 to 49 tiles)
+ROM[0xC00F06] = CMP_i	(49)	// 0x31, Originally MAX_RESOLUTION__WIDTH = 0x22 / 34
+// Right scroll trigger
+ROM[0xC015E4] = ADC_i	(40)	// 0x28, Originally 0x20 / 32
+// Jumps to left origin routine at $C0FF58
+ROM[0xC00E43] = JMP	(Left_Camera_Origin)	// Originally DEC : STA_d (0x20)
+// Jumps to left scroll routine at $C0FF70
+ROM[0xC0163A] = JMP	(Left_Scroll_Trigger) NOP	// Originally DEC : JSR (0x0FCB)
+//------------------------------------
+// 2. Sprite Culling Hook (Bank $C0)
+//------------------------------------
+// Jumps to sprite check at $C0FF80; leaves $C08D45 untouched so native on-screen sprites render normally
+ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
+//------------------------------------
+// 3. Custom Subroutines (Bank $C0 padding)
+//------------------------------------
+define Left_Camera_Origin	= 0xC0FF58
+define Left_Scroll_Trigger	= 0xC0FF70
+define Sprite_Bounds_Handler	= 0xC0FF80
+// Relocate these to wherever fits your setup best, was just used because of empty memory)
+ROM[Left_Camera_Origin] = {	// 0xC0FF58, 13 bytes
+	DEC DEC DEC DEC
+	DEC DEC DEC DEC
+	STA_d	(0x20)
+	JMP	(0x0E46)
+}
+
+ROM[Left_Scroll_Trigger] = {	// 0xC0FF70, 13 bytes
+	DEC DEC DEC DEC
+	DEC DEC DEC DEC
+	JSR	(0x0FCB)
+	JMP	(0x163E)
+}
+
+// Checks if high byte is $01 or $FF so actors aren't culled past the 8:7 frame, then returns to $8D4B
+ROM[Sprite_Bounds_Handler] = {	// 0xC0FF80, 16 bytes
+	CMP_8	(1)
+	BEQ	(7)
+	CMP_8	(0xFF)
+	BEQ	(5)
+	JMP	(0x8D21)
+	LDA_8	(0xFF)
+	JMP	(0x8D4B)
+}
+//------------------------------------

@@ -12,7 +12,7 @@ import "../redux/enemy_ai_actions.ccs"
 // - write the enemy's logic in ccscript (anywhere, doesn't need to be this file)
 // - put that CCScript label in that enemy's slot in EnemyAiTable below
 //   (e.g. if your new code is at the label MyNewScript in enemy_stuff.ccs,
-//     replace DoNothing with enemy_stuff.MyNewScript for that enemy ID)
+//     replace NoAi with enemy_stuff.MyNewScript for that enemy ID)
 // - set the enemy's action order to something higher than 4
 
 // CCScript enemy logic:
@@ -30,29 +30,42 @@ import "../redux/enemy_ai_actions.ccs"
 //    ExampleAi_Loop:
 //      if checkPpThreshold(4) {
 //        setAction(54, 45) eob // Magnet A
-//        goto(TestAi_Loop)
+//        goto(ExampleAi_Loop)
 //      }
 //      if checkHpThreshold(17) {
 //        window_open(1)
 //        "@Ow my scales." next
 //        window_closetop
 //        setAction(32, 23) eob // Lifeup A
-//        goto(TestAi_Loop)
+//        goto(ExampleAi_Loop)
 //      }
 //      setAction(4, 0) eob // Bash
 //      goto(ExampleAi_Loop)
+// Another example, controlling King's AI with a menu:
+//    ExampleKing:
+//      window_open(15)
+//      menu 2 {
+//        "Bite": { setAction(238, 0) goto(ExampleKing_postMenu) }
+//        "Lunge": { setAction(114, 0) goto(ExampleKing_postMenu) }
+//        "Charge": { setAction(226, 0) goto(ExampleKing_postMenu) }
+//        "Bark": { setAction(264, 0) goto(ExampleKing_postMenu) }
+//      }
+//      goto(ExampleKing)
+//      ExampleKing_postMenu:
+//        window_closetop
+//        eob // do the attack
+//        goto(ExampleKing)
 // - Enemy scripts run at the start of the turn, before anyone acts. If you want to open a window
 //   and start chatting or something, it will happen there, not when the enemy acts.
 
-//------------------------------------
 // Installation
 // - This requires ccexpand
 // - Add ControlCodesetAction to ccexpand, and set CC_SET_ACTION to match the slot you used
-define CC_SET_ACTION = "[1A 1D]" // ControlCodeSetAction - used by setAction()
+define CC_SET_ACTION = "[1A 1B]" // ControlCodeSetAction - used by setAction()
 // - Repeat this for any of the below commands that you want to be able to use
-define CC_HP_THRESHOLD = "[1A 1E]" // ControlCodeHpThreshold - used by checkHpThreshold()
-define CC_PP_THRESHOLD = "[1A 1F]" // ControlCodePpThreshold - used by checkPpThreshold()
-define CC_CHECK_STATUS = "[1A 20]" // ControlCodeCheckStatus - used by checkStatus()
+define CC_HP_THRESHOLD = "[1A 1C]" // ControlCodeHpThreshold - used by checkHpThreshold()
+define CC_PP_THRESHOLD = "[1A 1D]" // ControlCodePpThreshold - used by checkPpThreshold()
+define CC_CHECK_STATUS = "[1A 1E]" // ControlCodeCheckStatus - used by checkStatus()
 // (You don't actually have to do any of these, even setAction, but this script sure isn't very
 //  useful if you don't lol)
 
@@ -60,241 +73,241 @@ define CC_CHECK_STATUS = "[1A 20]" // ControlCodeCheckStatus - used by checkStat
 //	Enemy AI table
 //------------------------------------
 EnemyAiTable:
-EnemyAi000: DoNothing
-EnemyAi001: DoNothing
-EnemyAi002: DoNothing
-EnemyAi003: DoNothing
-EnemyAi004: DoNothing
-EnemyAi005: DoNothing
-EnemyAi006: DoNothing
-EnemyAi007: DoNothing
-EnemyAi008: DoNothing
-EnemyAi009: DoNothing
-EnemyAi010: DoNothing
-EnemyAi011: DoNothing
-EnemyAi012: DoNothing
-EnemyAi013: DoNothing
-EnemyAi014: DoNothing
-EnemyAi015: DoNothing
-EnemyAi016: DoNothing
-EnemyAi017: DoNothing
-EnemyAi018: DoNothing
-EnemyAi019: DoNothing
-EnemyAi020: DoNothing
-EnemyAi021: DoNothing
-EnemyAi022: DoNothing
-EnemyAi023: DoNothing
-EnemyAi024: DoNothing
-EnemyAi025: DoNothing
-EnemyAi026: DoNothing
-EnemyAi027: DoNothing
-EnemyAi028: DoNothing
-EnemyAi029: DoNothing
-EnemyAi030: DoNothing
-EnemyAi031: DoNothing
-EnemyAi032: DoNothing
-EnemyAi033: DoNothing
-EnemyAi034: DoNothing
-EnemyAi035: DoNothing
-EnemyAi036: DoNothing
-EnemyAi037: DoNothing
-EnemyAi038: DoNothing
-EnemyAi039: DoNothing
-EnemyAi040: DoNothing
-EnemyAi041: DoNothing
-EnemyAi042: DoNothing
-EnemyAi043: DoNothing
-EnemyAi044: DoNothing
-EnemyAi045: DoNothing
-EnemyAi046: DoNothing
-EnemyAi047: DoNothing
-EnemyAi048: DoNothing
-EnemyAi049: enemy_ai_actions.Kraken_Boss
-EnemyAi050: DoNothing
-EnemyAi051: DoNothing
-EnemyAi052: DoNothing
-EnemyAi053: DoNothing
-EnemyAi054: DoNothing
-EnemyAi055: DoNothing
-EnemyAi056: DoNothing
-EnemyAi057: DoNothing
-EnemyAi058: DoNothing
-EnemyAi059: DoNothing
-EnemyAi060: DoNothing
-EnemyAi061: DoNothing
-EnemyAi062: DoNothing
-EnemyAi063: DoNothing
-EnemyAi064: DoNothing
-EnemyAi065: DoNothing
-EnemyAi066: DoNothing
-EnemyAi067: DoNothing
-EnemyAi068: DoNothing
-EnemyAi069: DoNothing
-EnemyAi070: DoNothing
-EnemyAi071: DoNothing
-EnemyAi072: DoNothing
-EnemyAi073: DoNothing
-EnemyAi074: DoNothing
-EnemyAi075: DoNothing
-EnemyAi076: DoNothing
-EnemyAi077: DoNothing
-EnemyAi078: DoNothing
-EnemyAi079: DoNothing
-EnemyAi080: DoNothing
-EnemyAi081: DoNothing
-EnemyAi082: DoNothing
-EnemyAi083: DoNothing
-EnemyAi084: DoNothing
-EnemyAi085: DoNothing
-EnemyAi086: DoNothing
-EnemyAi087: DoNothing
-EnemyAi088: DoNothing
-EnemyAi089: DoNothing
-EnemyAi090: DoNothing
-EnemyAi091: DoNothing
-EnemyAi092: DoNothing
-EnemyAi093: DoNothing
-EnemyAi094: DoNothing
-EnemyAi095: DoNothing
-EnemyAi096: DoNothing
-EnemyAi097: DoNothing
-EnemyAi098: DoNothing
-EnemyAi099: DoNothing
-EnemyAi100: DoNothing
-EnemyAi101: DoNothing
-EnemyAi102: DoNothing
-EnemyAi103: DoNothing
-EnemyAi104: DoNothing
-EnemyAi105: DoNothing
-EnemyAi106: DoNothing
-EnemyAi107: DoNothing
-EnemyAi108: DoNothing
-EnemyAi109: DoNothing
-EnemyAi110: DoNothing
-EnemyAi111: DoNothing
-EnemyAi112: DoNothing
-EnemyAi113: DoNothing
-EnemyAi114: DoNothing
-EnemyAi115: DoNothing
-EnemyAi116: DoNothing
-EnemyAi117: DoNothing
-EnemyAi118: DoNothing
-EnemyAi119: DoNothing
-EnemyAi120: DoNothing
-EnemyAi121: DoNothing
-EnemyAi122: DoNothing
-EnemyAi123: DoNothing
-EnemyAi124: DoNothing
-EnemyAi125: DoNothing
-EnemyAi126: DoNothing
-EnemyAi127: DoNothing
-EnemyAi128: DoNothing
-EnemyAi129: DoNothing
-EnemyAi130: DoNothing
-EnemyAi131: DoNothing
-EnemyAi132: DoNothing
-EnemyAi133: DoNothing
-EnemyAi134: DoNothing
-EnemyAi135: DoNothing
-EnemyAi136: DoNothing
-EnemyAi137: DoNothing
-EnemyAi138: DoNothing
-EnemyAi139: DoNothing
-EnemyAi140: DoNothing
-EnemyAi141: DoNothing
-EnemyAi142: DoNothing
-EnemyAi143: DoNothing
-EnemyAi144: DoNothing
-EnemyAi145: DoNothing
-EnemyAi146: DoNothing
-EnemyAi147: DoNothing
-EnemyAi148: DoNothing
-EnemyAi149: DoNothing
-EnemyAi150: DoNothing
-EnemyAi151: DoNothing
-EnemyAi152: DoNothing
-EnemyAi153: DoNothing
-EnemyAi154: DoNothing
-EnemyAi155: DoNothing
-EnemyAi156: DoNothing
-EnemyAi157: DoNothing
-EnemyAi158: DoNothing
-EnemyAi159: DoNothing
-EnemyAi160: DoNothing
-EnemyAi161: DoNothing
-EnemyAi162: DoNothing
-EnemyAi163: DoNothing
-EnemyAi164: DoNothing
-EnemyAi165: DoNothing
-EnemyAi166: DoNothing
-EnemyAi167: DoNothing
-EnemyAi168: DoNothing
-EnemyAi169: DoNothing
-EnemyAi170: DoNothing
-EnemyAi171: DoNothing
-EnemyAi172: DoNothing
-EnemyAi173: DoNothing
-EnemyAi174: DoNothing
-EnemyAi175: DoNothing
-EnemyAi176: DoNothing
-EnemyAi177: DoNothing
-EnemyAi178: DoNothing
-EnemyAi179: DoNothing
-EnemyAi180: DoNothing
-EnemyAi181: DoNothing
-EnemyAi182: DoNothing
-EnemyAi183: DoNothing
-EnemyAi184: DoNothing
-EnemyAi185: DoNothing
-EnemyAi186: DoNothing
-EnemyAi187: DoNothing
-EnemyAi188: DoNothing
-EnemyAi189: DoNothing
-EnemyAi190: DoNothing
-EnemyAi191: DoNothing
-EnemyAi192: DoNothing
-EnemyAi193: DoNothing
-EnemyAi194: DoNothing
-EnemyAi195: DoNothing
-EnemyAi196: DoNothing
-EnemyAi197: DoNothing
-EnemyAi198: DoNothing
-EnemyAi199: DoNothing
-EnemyAi200: DoNothing
-EnemyAi201: DoNothing
-EnemyAi202: DoNothing
-EnemyAi203: DoNothing
-EnemyAi204: DoNothing
-EnemyAi205: DoNothing
-EnemyAi206: DoNothing
-EnemyAi207: DoNothing
-EnemyAi208: DoNothing
-EnemyAi209: DoNothing
-EnemyAi210: DoNothing
-EnemyAi211: DoNothing
-EnemyAi212: DoNothing
-EnemyAi213: DoNothing
-EnemyAi214: DoNothing
-EnemyAi215: DoNothing
-EnemyAi216: DoNothing
-EnemyAi217: DoNothing
-EnemyAi218: DoNothing
-EnemyAi219: DoNothing
-EnemyAi220: DoNothing
-EnemyAi221: DoNothing
-EnemyAi222: DoNothing
-EnemyAi223: DoNothing
-EnemyAi224: DoNothing
-EnemyAi225: DoNothing
-EnemyAi226: DoNothing
-EnemyAi227: DoNothing
-EnemyAi228: DoNothing
-EnemyAi229: DoNothing
-EnemyAi230: DoNothing
+	NO_AI // enemy 0
+	NO_AI // enemy 1
+	NO_AI // enemy 2
+	NO_AI // enemy 3
+	NO_AI // enemy 4
+	NO_AI // enemy 5
+	NO_AI // enemy 6
+	NO_AI // enemy 7
+	NO_AI // enemy 8
+	NO_AI // enemy 9
+	NO_AI // enemy 10
+	NO_AI // enemy 11
+	NO_AI // enemy 12
+	NO_AI // enemy 13
+	NO_AI // enemy 14
+	NO_AI // enemy 15
+	NO_AI // enemy 16
+	NO_AI // enemy 17
+	NO_AI // enemy 18
+	NO_AI // enemy 19
+	NO_AI // enemy 20
+	NO_AI // enemy 21
+	NO_AI // enemy 22
+	NO_AI // enemy 23
+	NO_AI // enemy 24
+	NO_AI // enemy 25
+	NO_AI // enemy 26
+	NO_AI // enemy 27
+	NO_AI // enemy 28
+	NO_AI // enemy 29
+	NO_AI // enemy 30
+	NO_AI // enemy 31
+	NO_AI // enemy 32
+	NO_AI // enemy 33
+	NO_AI // enemy 34
+	NO_AI // enemy 35
+	NO_AI // enemy 36
+	NO_AI // enemy 37
+	NO_AI // enemy 38
+	NO_AI // enemy 39
+	NO_AI // enemy 40
+	NO_AI // enemy 41
+	NO_AI // enemy 42
+	NO_AI // enemy 43
+	NO_AI // enemy 44
+	NO_AI // enemy 45
+	NO_AI // enemy 46
+	NO_AI // enemy 47
+	NO_AI // enemy 48
+	enemy_ai_actions.Kraken_Boss // enemy 49
+	NO_AI // enemy 50
+	NO_AI // enemy 51
+	NO_AI // enemy 52
+	NO_AI // enemy 53
+	NO_AI // enemy 54
+	NO_AI // enemy 55
+	NO_AI // enemy 56
+	NO_AI // enemy 57
+	NO_AI // enemy 58
+	NO_AI // enemy 59
+	NO_AI // enemy 60
+	NO_AI // enemy 61
+	NO_AI // enemy 62
+	NO_AI // enemy 63
+	NO_AI // enemy 64
+	NO_AI // enemy 65
+	NO_AI // enemy 66
+	NO_AI // enemy 67
+	NO_AI // enemy 68
+	NO_AI // enemy 69
+	NO_AI // enemy 70
+	NO_AI // enemy 71
+	NO_AI // enemy 72
+	NO_AI // enemy 73
+	NO_AI // enemy 74
+	NO_AI // enemy 75
+	NO_AI // enemy 76
+	NO_AI // enemy 77
+	NO_AI // enemy 78
+	NO_AI // enemy 79
+	NO_AI // enemy 80
+	NO_AI // enemy 81
+	NO_AI // enemy 82
+	NO_AI // enemy 83
+	NO_AI // enemy 84
+	NO_AI // enemy 85
+	NO_AI // enemy 86
+	NO_AI // enemy 87
+	NO_AI // enemy 88
+	NO_AI // enemy 89
+	NO_AI // enemy 90
+	NO_AI // enemy 91
+	NO_AI // enemy 92
+	NO_AI // enemy 93
+	NO_AI // enemy 94
+	NO_AI // enemy 95
+	NO_AI // enemy 96
+	NO_AI // enemy 97
+	NO_AI // enemy 98
+	NO_AI // enemy 99
+	NO_AI // enemy 100
+	NO_AI // enemy 101
+	NO_AI // enemy 102
+	NO_AI // enemy 103
+	NO_AI // enemy 104
+	NO_AI // enemy 105
+	NO_AI // enemy 106
+	NO_AI // enemy 107
+	NO_AI // enemy 108
+	NO_AI // enemy 109
+	NO_AI // enemy 110
+	NO_AI // enemy 111
+	NO_AI // enemy 112
+	NO_AI // enemy 113
+	NO_AI // enemy 114
+	NO_AI // enemy 115
+	NO_AI // enemy 116
+	NO_AI // enemy 117
+	NO_AI // enemy 118
+	NO_AI // enemy 119
+	NO_AI // enemy 120
+	NO_AI // enemy 121
+	NO_AI // enemy 122
+	NO_AI // enemy 123
+	NO_AI // enemy 124
+	NO_AI // enemy 125
+	NO_AI // enemy 126
+	NO_AI // enemy 127
+	NO_AI // enemy 128
+	NO_AI // enemy 129
+	NO_AI // enemy 130
+	NO_AI // enemy 131
+	NO_AI // enemy 132
+	NO_AI // enemy 133
+	NO_AI // enemy 134
+	NO_AI // enemy 135
+	NO_AI // enemy 136
+	NO_AI // enemy 137
+	NO_AI // enemy 138
+	NO_AI // enemy 139
+	NO_AI // enemy 140
+	NO_AI // enemy 141
+	NO_AI // enemy 142
+	NO_AI // enemy 143
+	NO_AI // enemy 144
+	NO_AI // enemy 145
+	NO_AI // enemy 146
+	NO_AI // enemy 147
+	NO_AI // enemy 148
+	NO_AI // enemy 149
+	NO_AI // enemy 150
+	NO_AI // enemy 151
+	NO_AI // enemy 152
+	NO_AI // enemy 153
+	NO_AI // enemy 154
+	NO_AI // enemy 155
+	NO_AI // enemy 156
+	NO_AI // enemy 157
+	NO_AI // enemy 158
+	NO_AI // enemy 159
+	NO_AI // enemy 160
+	NO_AI // enemy 161
+	NO_AI // enemy 162
+	NO_AI // enemy 163
+	NO_AI // enemy 164
+	NO_AI // enemy 165
+	NO_AI // enemy 166
+	NO_AI // enemy 167
+	NO_AI // enemy 168
+	NO_AI // enemy 169
+	NO_AI // enemy 170
+	NO_AI // enemy 171
+	NO_AI // enemy 172
+	NO_AI // enemy 173
+	NO_AI // enemy 174
+	NO_AI // enemy 175
+	NO_AI // enemy 176
+	NO_AI // enemy 177
+	NO_AI // enemy 178
+	NO_AI // enemy 179
+	NO_AI // enemy 180
+	NO_AI // enemy 181
+	enemy_ai_actions.Kraken_Boss // enemy 182
+	NO_AI // enemy 183
+	NO_AI // enemy 184
+	NO_AI // enemy 185
+	NO_AI // enemy 186
+	NO_AI // enemy 187
+	NO_AI // enemy 188
+	NO_AI // enemy 189
+	NO_AI // enemy 190
+	NO_AI // enemy 191
+	NO_AI // enemy 192
+	NO_AI // enemy 193
+	NO_AI // enemy 194
+	NO_AI // enemy 195
+	NO_AI // enemy 196
+	NO_AI // enemy 197
+	NO_AI // enemy 198
+	NO_AI // enemy 199
+	NO_AI // enemy 200
+	NO_AI // enemy 201
+	NO_AI // enemy 202
+	NO_AI // enemy 203
+	NO_AI // enemy 204
+	NO_AI // enemy 205
+	NO_AI // enemy 206
+	NO_AI // enemy 207
+	NO_AI // enemy 208
+	NO_AI // enemy 209
+	NO_AI // enemy 210
+	NO_AI // enemy 211
+	NO_AI // enemy 212
+	NO_AI // enemy 213
+	NO_AI // enemy 214
+	NO_AI // enemy 215
+	NO_AI // enemy 216
+	NO_AI // enemy 217
+	NO_AI // enemy 218
+	NO_AI // enemy 219
+	NO_AI // enemy 220
+	NO_AI // enemy 221
+	NO_AI // enemy 222
+	NO_AI // enemy 223
+	NO_AI // enemy 224
+	NO_AI // enemy 225
+	NO_AI // enemy 226
+	NO_AI // enemy 227
+	NO_AI // enemy 228
+	NO_AI // enemy 229
+	NO_AI // enemy 230
 // If you expanded the enemy table somehow, this table will keep going. It only relies on the enemy
 // ID field still being there in the first two bytes of the battler struct.
 
-//------------------------------------
+
 // ---- Commands and their documentation ----
 // Sets the action and argument that the enemy will use this turn.
 // If you call it more than once in a turn, the last call will win.
@@ -319,13 +332,9 @@ command checkStatus(group, status) { CC_CHECK_STATUS byte group byte status }
 // - touches battleInitEnemyStats (where it loads money)
 // - touches the enemy AI selector in the main battle routine
 // - touches koTarget where it tracks money (because it's not in the battler struct anymore)
-
-// Empty AI
-DoNothing:
-	eob
-	goto(DoNothing)
-
+//------------------------------------
 // ---- Implementation stuff now ----
+define NO_AI = long 0
 define CURRENT_ATTACKER = 0x7EA970
 define CCE_arg_byte = 0x06 // Used by CCExpand
 

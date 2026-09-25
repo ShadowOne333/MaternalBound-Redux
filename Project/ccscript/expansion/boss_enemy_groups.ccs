@@ -1,0 +1,573 @@
+import "../essential/asm65816.ccs"
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// Boss Enemy Groups Redefinition Script by Vittorio.
+
+// Normally the game considers enemy groups 448 and higher as boss ones, using the boss swirl and fanfare for them.
+// This script will let you define if each enemy group is a boss or normal one individually instead.
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+Enemy_Groups_Boss_Flags:
+	Normal // 000
+	Normal // 001
+	Normal // 002
+	Normal // 003
+	Normal // 004
+	Normal // 005
+	Normal // 006
+	Normal // 007
+	Normal // 008
+	Normal // 009
+	Normal // 010
+	Normal // 011
+	Normal // 012
+	Normal // 013
+	Normal // 014
+	Normal // 015
+	Normal // 016
+	Normal // 017
+	Normal // 018
+	Normal // 019
+	Normal // 020
+	Normal // 021
+	Normal // 022
+	Normal // 023
+	Normal // 024
+	Normal // 025
+	Normal // 026
+	Normal // 027
+	Normal // 028
+	Normal // 029
+	Normal // 030
+	Normal // 031
+	Normal // 032
+	Normal // 033
+	Normal // 034
+	Normal // 035
+	Normal // 036
+	Normal // 037
+	Normal // 038
+	Normal // 039
+	Normal // 040
+	Normal // 041
+	Normal // 042
+	Normal // 043
+	Normal // 044
+	Normal // 045
+	Normal // 046
+	Normal // 047
+	Normal // 048
+	Normal // 049
+	Normal // 050
+	Normal // 051
+	Normal // 052
+	Normal // 053
+	Normal // 054
+	Normal // 055
+	Normal // 056
+	Normal // 057
+	Normal // 058
+	Normal // 059
+	Normal // 060
+	Normal // 061
+	Normal // 062
+	Normal // 063
+	Normal // 064
+	Normal // 065
+	Normal // 066
+	Normal // 067
+	Normal // 068
+	Normal // 069
+	Normal // 070
+	Normal // 071
+	Normal // 072
+	Normal // 073
+	Normal // 074
+	Normal // 075
+	Normal // 076
+	Normal // 077
+	Normal // 078
+	Normal // 079
+	Normal // 080
+	Normal // 081
+	Normal // 082
+	Normal // 083
+	Normal // 084
+	Normal // 085
+	Normal // 086
+	Normal // 087
+	Normal // 088
+	Normal // 089
+	Normal // 090
+	Normal // 091
+	Normal // 092
+	Normal // 093
+	Normal // 094
+	Normal // 095
+	Normal // 096
+	Normal // 097
+	Normal // 098
+	Normal // 099
+	Normal // 100
+	Normal // 101
+	Normal // 102
+	Normal // 103
+	Normal // 104
+	Normal // 105
+	Normal // 106
+	Normal // 107
+	Normal // 108
+	Normal // 109
+	Normal // 110
+	Normal // 111
+	Normal // 112
+	Normal // 113
+	Normal // 114
+	Normal // 115
+	Normal // 116
+	Normal // 117
+	Normal // 118
+	Normal // 119
+	Normal // 120
+	Normal // 121
+	Normal // 122
+	Normal // 123
+	Normal // 124
+	Normal // 125
+	Normal // 126
+	Normal // 127
+	Normal // 128
+	Normal // 129
+	Normal // 130
+	Normal // 131
+	Normal // 132
+	Normal // 133
+	Normal // 134
+	Normal // 135
+	Normal // 136
+	Normal // 137
+	Normal // 138
+	Normal // 139
+	Normal // 140
+	Normal // 141
+	Normal // 142
+	Normal // 143
+	Normal // 144
+	Normal // 145
+	Normal // 146
+	Normal // 147
+	Normal // 148
+	Normal // 149
+	Normal // 150
+	Normal // 151
+	Normal // 152
+	Normal // 153
+	Normal // 154
+	Normal // 155
+	Normal // 156
+	Normal // 157
+	Normal // 158
+	Normal // 159
+	Normal // 160
+	Normal // 161
+	Normal // 162
+	Normal // 163
+	Normal // 164
+	Normal // 165
+	Normal // 166
+	Normal // 167
+	Normal // 168
+	Normal // 169
+	Normal // 170
+	Normal // 171
+	Normal // 172
+	Normal // 173
+	Normal // 174
+	Normal // 175
+	Normal // 176
+	Normal // 177
+	Normal // 178
+	Normal // 179
+	Normal // 180
+	Normal // 181
+	Normal // 182
+	Normal // 183
+	Normal // 184
+	Normal // 185
+	Normal // 186
+	Normal // 187
+	Normal // 188
+	Normal // 189
+	Normal // 190
+	Normal // 191
+	Normal // 192
+	Normal // 193
+	Normal // 194
+	Normal // 195
+	Normal // 196
+	Normal // 197
+	Normal // 198
+	Normal // 199
+	Normal // 200
+	Normal // 201
+	Normal // 202
+	Normal // 203
+	Normal // 204
+	Normal // 205
+	Normal // 206
+	Normal // 207
+	Normal // 208
+	Normal // 209
+	Normal // 210
+	Normal // 211
+	Normal // 212
+	Normal // 213
+	Normal // 214
+	Normal // 215
+	Normal // 216
+	Normal // 217
+	Normal // 218
+	Normal // 219
+	Normal // 220
+	Normal // 221
+	Normal // 222
+	Normal // 223
+	Normal // 224
+	Normal // 225
+	Normal // 226
+	Normal // 227
+	Normal // 228
+	Normal // 229
+	Normal // 230
+	Normal // 231
+	Normal // 232
+	Normal // 233
+	Normal // 234
+	Normal // 235
+	Normal // 236
+	Normal // 237
+	Normal // 238
+	Normal // 239
+	Normal // 240
+	Normal // 241
+	Normal // 242
+	Normal // 243
+	Normal // 244
+	Normal // 245
+	Normal // 246
+	Normal // 247
+	Normal // 248
+	Normal // 249
+	Normal // 250
+	Normal // 251
+	Normal // 252
+	Normal // 253
+	Normal // 254
+	Normal // 255
+	Normal // 256
+	Normal // 257
+	Normal // 258
+	Normal // 259
+	Normal // 260
+	Normal // 261
+	Normal // 262
+	Normal // 263
+	Normal // 264
+	Normal // 265
+	Normal // 266
+	Normal // 267
+	Normal // 268
+	Normal // 269
+	Normal // 270
+	Normal // 271
+	Normal // 272
+	Normal // 273
+	Normal // 274
+	Normal // 275
+	Normal // 276
+	Normal // 277
+	Normal // 278
+	Normal // 279
+	Normal // 280
+	Normal // 281
+	Normal // 282
+	Normal // 283
+	Normal // 284
+	Normal // 285
+	Normal // 286
+	Normal // 287
+	Normal // 288
+	Normal // 289
+	Normal // 290
+	Normal // 291
+	Normal // 292
+	Normal // 293
+	Normal // 294
+	Normal // 295
+	Normal // 296
+	Normal // 297
+	Normal // 298
+	Normal // 299
+	Normal // 300
+	Normal // 301
+	Normal // 302
+	Normal // 303
+	Normal // 304
+	Normal // 305
+	Normal // 306
+	Normal // 307
+	Normal // 308
+	Normal // 309
+	Normal // 310
+	Normal // 311
+	Normal // 312
+	Normal // 313
+	Normal // 314
+	Normal // 315
+	Normal // 316
+	Normal // 317
+	Normal // 318
+	Normal // 319
+	Normal // 320
+	Normal // 321
+	Normal // 322
+	Normal // 323
+	Normal // 324
+	Normal // 325
+	Normal // 326
+	Normal // 327
+	Normal // 328
+	Normal // 329
+	Normal // 330
+	Normal // 331
+	Normal // 332
+	Normal // 333
+	Normal // 334
+	Normal // 335
+	Normal // 336
+	Normal // 337
+	Normal // 338
+	Normal // 339
+	Normal // 340
+	Normal // 341
+	Normal // 342
+	Normal // 343
+	Normal // 344
+	Normal // 345
+	Normal // 346
+	Normal // 347
+	Normal // 348
+	Normal // 349
+	Normal // 350
+	Normal // 351
+	Normal // 352
+	Normal // 353
+	Normal // 354
+	Normal // 355
+	Normal // 356
+	Normal // 357
+	Normal // 358
+	Normal // 359
+	Normal // 360
+	Normal // 361
+	Normal // 362
+	Normal // 363
+	Normal // 364
+	Normal // 365
+	Normal // 366
+	Normal // 367
+	Normal // 368
+	Normal // 369
+	Normal // 370
+	Normal // 371
+	Normal // 372
+	Normal // 373
+	Normal // 374
+	Normal // 375
+	Normal // 376
+	Normal // 377
+	Normal // 378
+	Normal // 379
+	Normal // 380
+	Normal // 381
+	Normal // 382
+	Normal // 383
+	Normal // 384
+	Normal // 385
+	Normal // 386
+	Normal // 387
+	Normal // 388
+	Normal // 389
+	Normal // 390
+	Normal // 391
+	Normal // 392
+	Normal // 393
+	Normal // 394
+	Normal // 395
+	Normal // 396
+	Normal // 397
+	Normal // 398
+	Normal // 399
+	Normal // 400
+	Normal // 401
+	Normal // 402
+	Normal // 403
+	Normal // 404
+	Normal // 405
+	Normal // 406
+	Normal // 407
+	Normal // 408
+	Normal // 409
+	Normal // 410
+	Normal // 411
+	Normal // 412
+	Normal // 413
+	Normal // 414
+	Normal // 415
+	Normal // 416
+	Normal // 417
+	Normal // 418
+	Normal // 419
+	Normal // 420
+	Normal // 421
+	Normal // 422
+	Normal // 423
+	Normal // 424
+	Normal // 425
+	Normal // 426
+	Normal // 427
+	Normal // 428
+	Normal // 429
+	Normal // 430
+	Normal // 431
+	Normal // 432
+	Normal // 433
+	Normal // 434
+	Normal // 435
+	Normal // 436
+	Normal // 437
+	Normal // 438
+	Normal // 439
+	Normal // 440
+	Normal // 441
+	Normal // 442
+	Normal // 443
+	Normal // 444
+	Normal // 445
+	Normal // 446
+	Normal // 447
+	Boss // 448
+	Boss // 449
+	Boss // 450
+	Boss // 451
+	Boss // 452
+	Boss // 453
+	Boss // 454
+	Boss // 455
+	Boss // 456
+	Boss // 457
+	Boss // 458
+	Boss // 459
+	Boss // 460
+	Boss // 461
+	Boss // 462
+	Boss // 463
+	Boss // 464
+	Boss // 465
+	Boss // 466
+	Boss // 467
+	Boss // 468
+	Boss // 469
+	Boss // 470
+	Boss // 471
+	Boss // 472
+	Boss // 473
+	Boss // 474
+	Boss // 475
+	Boss // 476
+	Boss // 477
+	Boss // 478
+	Boss // 479
+	Boss // 480
+	Boss // 481
+	Boss // 482
+	Boss // 483
+
+// If you're using 'expanded_enemy_groups.ccs' you can keep adding here.
+
+	Boss // 484, Sea of Eden Krakens
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// CCS and ASM stuff below, don't edit!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+define Normal = "{byte 0}"
+define Boss = "{byte 1}"
+
+// Fanfare.
+
+ROM[0xC25FC6] = JML(group_check_1)
+
+group_check_1: {
+	LDA_a(0x4A8C)
+	TAX
+	LDA_xl(Enemy_Groups_Boss_Flags)
+	AND_i(0xFF)
+	BNE(4)
+	JML(0xC25FE6)
+	JML(0xC25FCE)
+}
+
+// Swirl.
+
+ROM[0xC2E94B] = JML(group_check_2)
+
+group_check_2: {
+	LDA_a(0x4A8C)
+	TAX
+	LDA_xl(Enemy_Groups_Boss_Flags)
+	AND_i(0xFF)
+	BNE(4)
+	JML(0xC2E964)
+	JML(0xC2E953)
+}
+
+// <--------------------------------------------------------------------------------------------------------------------------------->

@@ -8,7 +8,9 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_asmcall.ccs"
 import "../essential/commands.ccs"
+import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
 
@@ -660,16 +662,52 @@ l_0xc69928:
 	"@(I'm Ruffini the dog." next
 	title(1, Ruffini)
 	"@I'm being possessed by the spirit of the game designer.../| Ruff!" next
+	open_hp
 	"@Do you see the window showing HP and PP at the bottom of the screen?" next
 	"@When you go to a store that has equippable items," next
 	"@this window will either flash, look normal or become black." next
 	"@If you are allowed to equip an item, and it is stronger than your current item," next
-	"@the window will flash." next
+	"@the window will flash."
+	cc_asmcall(_enable_blink, RET_NONE)
+	next
 	"@If the item's power is equal to, or less than your current equipped item," next
+	cc_asmcall(_disable_blink, RET_NONE)
 	"@the window looks normal." next
-	"@If you can't equip an item, the window is black." next
+	"@If you can't equip an item," next
+	"@the window is black."
+	cc_asmcall(_black_box, RET_NONE)
+	next
 	"@Ruff!  I thought you'd like to know." next
-	"@Now it's time to become a regular dog again...)" end
+	"@Now it's time to become a regular dog again...)"
+	cc_asmcall(_disable_blink, RET_NONE)
+	end
+
+// ASM code to control de HP/PP Box flashing and its palette change to black
+define REDRAW_ALL_WINDOWS	= 0x9623
+
+HP_Box_Control:
+_enable_blink:	// Copied from tail end of SET_HPPP_WINDOW_MODE_ITEM
+	LDA_i	(0x1400)
+	JMP	(_set_hppp_windows)
+
+_disable_blink:
+	LDA_i	(0x0400)
+	JMP	(_set_hppp_windows)
+
+_black_box:
+	JSL_RTS_C1	(0xC19CDD)	// Prepare palette change for HP/PP windows
+	LDA_i	(0x0C00)
+
+_set_hppp_windows:
+	STA_a	(0x9A1D)	// PARTY_CHARACTERS+char_struct::hp_pp_window_options, Ness' HP window
+	// In case the player has the other party members too, then store it in their player structs too
+	STA_a	(0x9A7C)	// Paula's HP window
+	STA_a	(0x9ADB)	// Jeff's HP window
+	STA_a	(0x9B3A)	// Poo's HP window
+
+	LDA_i	(1)
+	STA_a	(REDRAW_ALL_WINDOWS)
+	RTL
 
 l_0xc69ac6:
 	title(1, Ruffini)

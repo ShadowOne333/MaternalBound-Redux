@@ -1,6 +1,7 @@
 //------------------------------------
 //	Cutscene modifications
 //------------------------------------
+import "../essential/cc_effects.ccs"
 import "../redux/movscr_codes.ccs"
 //------------------------------------
 // This file does action script modifications to certain cutscenes in the original EB game
@@ -24,4 +25,14 @@ StarmanJr_Smoke:
 	m_set_facing_anim(6, 0)
 	m_pause(8)
 	m_destroy_self
+//------------------------------------
+define UPDATE_LETTERBOX_HDMA_TABLE	= 0xC2D0AC
+
+PostWarp_Letterbox: {
+	m_ondraw(0x9FF0)
+	m_asmcall(cc_effects.instantLetterbox)
+	m_asmcall(UPDATE_LETTERBOX_HDMA_TABLE)	// Build letterbox HDMA table
+	m_destroy_self
+	m_end
+}
 //------------------------------------

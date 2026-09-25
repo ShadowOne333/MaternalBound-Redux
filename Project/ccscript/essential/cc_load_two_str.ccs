@@ -1,124 +1,104 @@
 //------------------------------------
-// v1 (space-padding-in-label) was abandoned: embedding "str1 + N spaces
-// + str2" in the option's label overflowed its ~20-25 byte buffer for
-// wide windows. v2 (this file) positions str2 directly via C43D75, the
-// same mechanism vanilla's printPrice (C4507A) uses.
+// v3: repurposes vanilla's own "19 02" control code (load_str /
+// load_str_callonhover) to also handle our two-string variant, instead
+// of using separate expanded control codes (1A 1B / 1A 1C). Vanilla's
+// own dispatcher (UNKNOWN_C17889) checks a differentiator byte after
+// gathering a string: 1=callonhover, 2=normal (creates the option
+// immediately). We add 3=our callonhover variant, 4=our normal variant,
+// each of which gathers a SECOND string before creating the option.
+//
+// print_strings_vertical (C1180D) is patched to automatically draw all
+// queued str2 values right after PRINT_MENU_ITEMS finishes drawing the
+// labels -- this timing (str2 drawn only after labels are printed) was
+// proven necessary through extensive testing; drawing it earlier does
+// not work reliably. This removes the need for a separate
+// finish_two_str_menu control code entirely.
 //------------------------------------
 import "../essential/asm65816.ccs"
 import "../essential/jsl_rts.ccs"
 import "../expansion/ccexpand.ccs"
 //------------------------------------
-define CONTROL_CODE_LOAD_TWO_STR       = "[1A 1B]"
-define CONTROL_CODE_FINISH_TWO_STR     = "[1A 1C]"
+define CURRENT_FOCUS_WINDOW	= 0x7E8958
+define OPEN_WINDOW_TABLE	= 0x7E88E4
+define WINDOW_STATS		= 0x7E8650
+define WINDOW_HEAD		= 0x7E88E0
+define MULT168			= 0xC08FF7
+define PRINT_LETTER		= 0xC10CB6
+define PRINT_MENU_ITEMS		= 0xC1163C
+define GET_STRING_RENDER_WIDTH	= 0xC43E31
+define SET_TEXT_PIXEL_X		= 0xC43D75	// In: A=target pixel X (window's own
+						// origin, no window_x), X=text_y (row).
+						// Splits into tile+remainder internally.
 
-define CURRENT_FOCUS_WINDOW = 0x7E8958
-define OPEN_WINDOW_TABLE    = 0x7E88E4
-define WINDOW_STATS         = 0x7E8650
-define WINDOW_HEAD          = 0x7E88E0
-define MULT168               = 0xC08FF7
-define PRINT_LETTER          = 0xC10CB6
-define SET_TEXT_PIXEL_X      = 0xC43D75  // In: A=target pixel X (window's own
-                                          // origin, no window_x), X=text_y (row).
-                                          // Splits into tile+remainder internally.
+define WINDOW_STATS_NEXT_OFFSET	= 0x0002
+define WINDOW_STATS_ID_OFFSET	= 0x0004
 
-define WINDOW_STATS_NEXT_OFFSET = 0x0002
-define WINDOW_STATS_ID_OFFSET   = 0x0004
+define SCRATCH_BANK		= 0x007E
 
-define SCRATCH_BANK             = 0x007E
-define TEMP_STR1_NEAR           = 0x00E2
+// Vanilla's own multi-byte-argument-gathering infrastructure, shared by
+// many control codes -- NOT specific to "19 02".
+define CC_ARGUMENT_GATHERING_LOOP_COUNTER	= 0x7E97CA
+define TEXT_NEW_MENU_OPTION_BUFFER	= 0x7E97D7  // str1 lives here (vanilla's own buffer)
 
-// str2 is queued per row here, printed later by CC_FinishTwoStrMenu
+// Vanilla's own "19 02" dispatcher (UNKNOWN_C17889) and its labels,
+// patched below but otherwise left completely intact.
+define VANILLA_1902_DISPATCH	= 0xC17889
+define VANILLA_1902_EPILOGUE	= 0xC178F5	// @UNKNOWN3: PLD; RTS (shared exit)
+define VANILLA_1902_CALLONHOVER	= 0xC178A0	// @UNKNOWN0 (differentiator=1, single string)
+define VANILLA_1902_NORMAL	= 0xC178B2	// @UNKNOWN1 (differentiator=2, single string)
+define VANILLA_1902_APPEND	= 0xC178E5	// @UNKNOWN2 (default: append char to buffer)
+
+// str2 is queued per row here, printed later (see DrawAllQueuedStr2)
 // after print_strings_vertical draws the labels. A row's text_y is
 // simply its row index (C114B1 sets it unconditionally).
-define QUEUE_ENTRY_SIZE         = 0x0010  // 16 bytes/row, generous for a number
-define MAX_QUEUE_ROWS           = 8
-define D_LoadTwoStr_Queue       = 0x012A  // spans 0x012A..0x01A9
+//
+// MAX_QUEUE_ROWS was originally 8, which silently overflowed for a
+// 9-item shop (writing row index 8 past the allocated space, corrupting
+// whatever came right after it -- this was the actual cause of the last
+// entry's price/callback data getting scrambled, not a callback-specific
+// bug). Expanded to 14 and moved to its own confirmed-free 234-byte
+// block (0x7E3B2A) to make room.
+define QUEUE_ENTRY_SIZE		= 0x0010	// 16 bytes/row, generous for a number
+define MAX_QUEUE_ROWS		= 14
+define D_LoadTwoStr_Queue	= 0x012A	// spans 0x012A..0x01A9
 
-define D_LoadTwoStr_LastWindow  = 0x0122
-define D_LoadTwoStr_RowCounter  = 0x0124
-define D_LoadTwoStr_QueueCount  = 0x0126
+define D_LoadTwoStr_LastWindow	= 0x0122
+define D_LoadTwoStr_RowCounter	= 0x0124
+define D_LoadTwoStr_QueueCount	= 0x0126
 // Slot index from ResolveWindowStatsAddress. Must be an absolute WRAM
 // global, not a direct-page offset -- those don't survive a call
 // boundary (each function gets its own D-shifted frame).
-define D_LoadTwoStr_ResolvedSlot = 0x0128
+define D_LoadTwoStr_ResolvedSlot	= 0x0128
 
-define SIZEOF_WINDOW_STATS      = 0x0052
+// ---- new state for the "19 02" rework ----
+// Our dispatch code runs with NO local direct-page frame of its own
+// (no PHD/PLD) -- it executes as a direct continuation of vanilla's
+// UNKNOWN_C17889, whose own prologue already did a PHD that its shared
+// epilogue (VANILLA_1902_EPILOGUE) will PLD. All our working state must
+// be plain absolute WRAM globals for this reason.
+//
+// Placed at 0x7E0720, a confirmed-unused 224-byte block (per the
+// project's own free-RAM list). An earlier attempt placed these in page
+// 1 ($0000-$01FF, where the hardware stack lives) and caused a real
+// crash: D_LoadTwoStr_Phase got corrupted by stack activity, misrouting
+// EVERY load_str call in the game (not just ours) into our str2/callback
+// logic.
+define D_LoadTwoStr_Phase		= 0x7E0720	// 0=str1(vanilla default),1=str2,2=callback
+define D_LoadTwoStr_ExpectCallback	= 0x7E0722
+define D_LoadTwoStr_CallbackByteIdx	= 0x7E0724
+define D_LoadTwoStr_CallbackBuffer	= 0x7E0726	// 4 bytes, spans 0x7E0726-0x7E0729
+define D_LoadTwoStr_CallbackBuffer_Hi	= 0x7E0728	// high word of the above
+define D_LoadTwoStr_Str2Buffer		= 0x7E072A	// spans 0x7E072A-0x7E0749 (32 bytes)
+
+define SIZEOF_WINDOW_STATS		= 0x0052
 //------------------------------------
 
-command load_two_str(str1, str2) {
-	CONTROL_CODE_LOAD_TWO_STR
-	str1
-	byte 00
-	str2
-	byte 00
-	byte 02
-}
-
-command load_two_str_callonhover(str1, str2, target) {
-	CONTROL_CODE_LOAD_TWO_STR
-	str1
-	byte 00
-	str2
-	byte 00
-	byte 01
-	long target
-}
-
-command finish_two_str_menu "[1A 1C]"
+command load_two_str(str1, str2) "[19 02 {str1} 04 {str2} 00]"
+command load_two_str_callonhover(str1, str2, target) "[19 02 {str1} 03 {str2} 00 {long target}]"
 
 //------------------------------------
 // Assembly code
 //------------------------------------
-
-// In: A = near (16-bit) destination address within SCRATCH_BANK
-ReadCCStringUntilZero: {
-	M_EB_ASMFunction_Start(-0x30)
-
-	STA_d(0x22)
-	LDA_i(SCRATCH_BANK)
-	STA_d(0x24)
-
-	LDA_a(0x97b8)
-	STA_d(0x00)
-	ASL
-	ADC_d(0x00)
-	ASL
-	ASL
-	ADC_d(0x00)
-	ASL
-	ADC_d(0x00)
-	STA_d(0x00)
-	TAX
-	LDA_x(0x96aa)
-	STA_d(0x0e)
-	LDA_x(0x96ac)
-	STA_d(0x10)
-
-	LDY_i(0x0000)
-
-	_loop:
-		SEP(0x20)
-		LDA_dly(0x0e)
-		STA_dly(0x22)
-		REP(0x20)
-		AND_i(0x00FF)
-		BEQ_a(_done)
-		INY
-		BRA_a(_loop)
-	_done:
-
-	INY
-	TYA
-	CLC
-	ADC_d(0x0e)
-	LDX_d(0x00)
-	STA_x(0x96aa)
-	LDA_d(0x10)
-	ADC_i(0x0000)
-	STA_x(0x96ac)
-
-	M_EB_ASMFunction_End
-}
 
 // Draws a null-terminated string by calling PRINT_LETTER once per
 // character. Assumes the print cursor was already positioned (via
@@ -150,8 +130,8 @@ DrawStringViaPrintLetter: {
 
 // Right edge in the same coordinate space as SET_TEXT_PIXEL_X/text_x
 // (no window_x). width*8 exactly (and +1) triggers a text_x-reset
-// corruption bug (likely an off-by-one wrap check somewhere in the
-// drawing path); width*8-1 is confirmed safe, leaving a small ~2px gap.
+// corruption bug (an off-by-one wrap check somewhere in the drawing
+// path); width*8-1 is confirmed safe, leaving a small ~2px gap.
 //
 // In: A = resolved window_stats address
 GetWindowRightEdgeX: M_EB_Function_Wrapper({
@@ -211,7 +191,12 @@ ResolveWindowStatsAddress: M_EB_Function_Wrapper_UserStack_Clobber(-0x30, {
 	_findWindowReturn:
 })
 
-CC_LoadTwoStr: {
+// Creates the menu option (str1 as its label, from TEXT_NEW_MENU_OPTION_BUFFER,
+// already null-terminated by our dispatch code) and queues str2 (from
+// D_LoadTwoStr_Str2Buffer) for later drawing. Reads
+// D_LoadTwoStr_ExpectCallback/CallbackBuffer for the optional callback.
+// Called via JSL from our dispatch code once both strings are gathered.
+CreateOptionAndQueueStr2: {
 	M_EB_ASMFunction_Start_Clobber(-0x40)
 
 	LDA_a(CURRENT_FOCUS_WINDOW)
@@ -223,10 +208,7 @@ CC_LoadTwoStr: {
 	STA_a(D_LoadTwoStr_QueueCount)
 	_sameWindow:
 
-	LDA_i(TEMP_STR1_NEAR)
-	JSL(ReadCCStringUntilZero)
-
-	// ---- read str2 straight into this row's queue slot ----
+	// ---- copy str2 into this row's queue slot ----
 	LDA_a(D_LoadTwoStr_QueueCount)
 	AND_i(0x00FF)
 	STA_d(0x1e)
@@ -234,37 +216,42 @@ CC_LoadTwoStr: {
 	JSL(MULT168)
 	CLC
 	ADC_i(D_LoadTwoStr_Queue)
-	JSL(ReadCCStringUntilZero)
+	STA_d(0x20)           // destination near address
 
-	// ---- callback param handling (unchanged) ----
-	LDY_i(1)
-	JSL(R_Read_Parameter_Bytes)
-	LDA_a(D_cc_argv_0)
-	AND_i(0x00FF)
-	CMP_i(0x0001)
-	BEQ_a(_hasCallback)
-		LDA_i(0x0000)
-		STA_d(0x30)
-		STA_d(0x32)
+	LDA_i(D_LoadTwoStr_Str2Buffer)
+	STA_d(0x22)           // source near address
+
+	LDY_i(0x0000)
+	_copyStr2Loop:
+		SEP(0x20)
+		LDA_dly(0x22)
+		STA_dly(0x20)
+		REP(0x20)
+		AND_i(0x00FF)
+		BEQ_a(_copyStr2Done)
+		INY
+		BRA_a(_copyStr2Loop)
+	_copyStr2Done:
+
+	// ---- callback handling ----
+	LDA_a(D_LoadTwoStr_ExpectCallback)
+	BEQ_a(_noCallback)
+		LDA_a(D_LoadTwoStr_CallbackBuffer)
+		STA_d(0x12)
+		LDA_a(D_LoadTwoStr_CallbackBuffer_Hi)
+		STA_d(0x14)
 		BRA_a(_gotCallback)
-	_hasCallback:
-		LDY_i(4)
-		JSL(R_Read_Parameter_Bytes)
-		LDA_a(D_cc_argv_0)
-		STA_d(0x30)
-		LDA_a(D_cc_argv_2)
-		STA_d(0x32)
+	_noCallback:
+		LDA_i(0x0000)
+		STA_d(0x12)
+		STA_d(0x14)
 	_gotCallback:
 
-	// ---- create the option, str1 as its (normal, unpadded) label ----
-	LDA_i(TEMP_STR1_NEAR)
+	// ---- create the option, str1 (vanilla's own buffer) as its label ----
+	LDA_i(TEXT_NEW_MENU_OPTION_BUFFER)
 	STA_d(0x0e)
 	LDA_i(SCRATCH_BANK)
 	STA_d(0x10)
-	LDA_d(0x30)
-	STA_d(0x12)
-	LDA_d(0x32)
-	STA_d(0x14)
 	LDX_a(D_LoadTwoStr_RowCounter)
 	LDA_i(0x0000)
 	JSL_RTS_C1(0xC114B1)
@@ -277,15 +264,20 @@ CC_LoadTwoStr: {
 	INC
 	STA_a(D_LoadTwoStr_RowCounter)
 
-_return:
 	JSL(R_Set_Working_Memory)
 	LDA_i(0)
 
 	M_EB_ASMFunction_End
 }
 
-CC_FinishTwoStrMenu: {
+// Draws all queued str2 values, right-aligned per row. Called from our
+// print_strings_vertical hook, right after PRINT_MENU_ITEMS draws the
+// labels -- this ordering is required (see header note).
+DrawAllQueuedStr2: {
 	M_EB_ASMFunction_Start_Clobber(-0x40)
+
+	LDA_a(D_LoadTwoStr_QueueCount)
+	BEQ_a(_nothingToDraw)
 
 	// Save the actual focus window in $30.
 	LDA_a(CURRENT_FOCUS_WINDOW)
@@ -340,19 +332,16 @@ CC_FinishTwoStrMenu: {
 		ADC_i(D_LoadTwoStr_Queue)
 		STA_d(0x26)           // near address of this row's str2
 
-		// Get string 2's width via vanilla's own getStringRenderWidth
-		// (C43E31) -- confirmed working, no need for our own reimplementation.
-		// A = max chars (budget), $0e/$10 = near/bank of the string.
+		// Get string 2's width via vanilla's own getStringRenderWidth.
 		LDA_d(0x26)
 		STA_d(0x0e)
 		LDA_i(SCRATCH_BANK)
 		STA_d(0x10)
 		LDA_i(0x001E)
-		JSL(0xC43E31)
+		JSL(GET_STRING_RENDER_WIDTH)
 		STA_d(0x28)
 
-		// Right edge minus string width = target position, in pixels
-		// (same relative coordinate space SET_TEXT_PIXEL_X expects).
+		// Right edge minus string width = target position, in pixels.
 		LDA_d(0x2A)
 		JSL(GetWindowRightEdgeX)
 		SEC
@@ -374,7 +363,7 @@ CC_FinishTwoStrMenu: {
 		STA_d(0x00)
 		BRA_a(_rowLoop)
 
-_allDone:
+	_allDone:
 	JSL(0xC3E4CA)         // CLEAR_INSTANT_PRINTING
 
 	LDA_i(0x0000)
@@ -397,5 +386,161 @@ _allDone:
 	LDA_d(0x30)
 	STA_a(CURRENT_FOCUS_WINDOW)
 
+	_nothingToDraw:
+
 	M_EB_ASMFunction_End
+}
+
+// Replaces UNKNOWN_C17889's entry point (patched below). Runs with NO
+// local frame (no PHD/PLD) -- executes as a direct continuation of
+// vanilla's own function, whose prologue already did a PHD that
+// VANILLA_1902_EPILOGUE will PLD. Receives the current script byte in X,
+// exactly like vanilla's own dispatcher did.
+Our1902Dispatch: {
+	LDA_a(D_LoadTwoStr_Phase)
+	CMP_i(0x0001)
+	BEQ_a(_str2Phase)
+	CMP_i(0x0002)
+	BEQ_a(_callbackPhase)
+
+	_str1Phase:
+		// Replicates the TXA;CMP#1;CMP#2 logic we overwrote, then adds our
+		// own CMP#3/CMP#4 checks, before falling to vanilla's own default
+		// (append character) case -- all vanilla behavior for 1/2/default
+		// is completely unchanged.
+		TXA
+		CMP_i(0x0001)
+		BEQ_a(_toVanillaCallonhover)
+		CMP_i(0x0002)
+		BEQ_a(_toVanillaNormal)
+		CMP_i(0x0003)
+		BEQ_a(_str1DoneCallback)
+		CMP_i(0x0004)
+		BEQ_a(_str1DoneNormal)
+		JML(VANILLA_1902_APPEND)
+
+	_toVanillaCallonhover:
+		JML(VANILLA_1902_CALLONHOVER)
+	_toVanillaNormal:
+		JML(VANILLA_1902_NORMAL)
+
+	_str1DoneCallback:
+		LDX_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		SEP(0x20)
+		STZ_x(TEXT_NEW_MENU_OPTION_BUFFER)
+		REP(0x20)
+		STZ_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		LDA_i(0x0001)
+		STA_a(D_LoadTwoStr_ExpectCallback)
+		LDA_i(0x0001)
+		STA_a(D_LoadTwoStr_Phase)
+		LDA_i(VANILLA_1902_DISPATCH)
+		JML(VANILLA_1902_EPILOGUE)
+
+	_str1DoneNormal:
+		LDX_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		SEP(0x20)
+		STZ_x(TEXT_NEW_MENU_OPTION_BUFFER)
+		REP(0x20)
+		STZ_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		LDA_i(0x0000)
+		STA_a(D_LoadTwoStr_ExpectCallback)
+		LDA_i(0x0001)
+		STA_a(D_LoadTwoStr_Phase)
+		LDA_i(VANILLA_1902_DISPATCH)
+		JML(VANILLA_1902_EPILOGUE)
+
+	_str2Phase:
+		TXA
+		CMP_i(0x0000)
+		BEQ_a(_str2Done)
+		LDA_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		CMP_i(0x001E)         // 30, leaving room for the null terminator
+		BCS_a(_str2Skip)      // buffer full -- drop the character, keep scanning for the terminator
+		TXA
+		LDX_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		SEP(0x20)
+		STA_x(D_LoadTwoStr_Str2Buffer)
+		REP(0x20)
+		INC_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+	_str2Skip:
+		LDA_i(VANILLA_1902_DISPATCH)
+		JML(VANILLA_1902_EPILOGUE)
+
+	_str2Done:
+		LDX_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+		SEP(0x20)
+		STZ_x(D_LoadTwoStr_Str2Buffer)
+		REP(0x20)
+		STZ_a(CC_ARGUMENT_GATHERING_LOOP_COUNTER)
+
+		LDA_a(D_LoadTwoStr_ExpectCallback)
+		BEQ_a(_createOptionNow)
+			LDA_i(0x0000)
+			STA_a(D_LoadTwoStr_CallbackByteIdx)
+			LDA_i(0x0002)
+			STA_a(D_LoadTwoStr_Phase)
+			LDA_i(VANILLA_1902_DISPATCH)
+			JML(VANILLA_1902_EPILOGUE)
+
+	_createOptionNow:
+		JSL(CreateOptionAndQueueStr2)
+		LDA_i(0x0000)
+		STA_a(D_LoadTwoStr_Phase)
+		LDA_i(0x0000)
+		JML(VANILLA_1902_EPILOGUE)
+
+	_callbackPhase:
+		TXA
+		LDX_a(D_LoadTwoStr_CallbackByteIdx)
+		SEP(0x20)
+		STA_x(D_LoadTwoStr_CallbackBuffer)
+		REP(0x20)
+		INC_a(D_LoadTwoStr_CallbackByteIdx)
+		LDA_a(D_LoadTwoStr_CallbackByteIdx)
+		CMP_i(0x0004)
+		BEQ_a(_callbackDone)
+		LDA_i(VANILLA_1902_DISPATCH)
+		JML(VANILLA_1902_EPILOGUE)
+
+	_callbackDone:
+		JSL(CreateOptionAndQueueStr2)
+		LDA_i(0x0000)
+		STA_a(D_LoadTwoStr_Phase)
+		LDA_i(0x0000)
+		JML(VANILLA_1902_EPILOGUE)
+}
+
+// Replaces the tail of print_strings_vertical's C1180D (from the
+// "JSR C451FA" call onward, patched below). JMLs back to the routine's
+// own original ending (0xC1181A, its existing RTS) rather than faking a
+// bank01 return -- simpler and avoids the earlier crash caused by an
+// unrelated queue-overflow bug (see D_LoadTwoStr_Queue/MAX_QUEUE_ROWS).
+OurPrintStringsVerticalHook: {
+	JSL(0xC451FA)
+	JSL_RTS_C1(PRINT_MENU_ITEMS)
+	JSL(DrawAllQueuedStr2)
+	JML(0xC1181A)          // return to the routine's original ending RTS
+}
+
+//------------------------------------
+// ROM patches
+//------------------------------------
+
+// UNKNOWN_C17889 (vanilla's "19 02" per-byte dispatcher): replaces its
+// entry ("TXA; CMP #1", 4 bytes) with a JML into our own dispatch. Only
+// the ENTRY is patched -- @UNKNOWN0/@UNKNOWN1/@UNKNOWN2/@UNKNOWN3 (the
+// shared epilogue) all remain completely untouched, so existing vanilla
+// uses of "19 02" (differentiators 1/2) are unaffected.
+ROM[0xC17893] = {
+	JML(Our1902Dispatch)
+}
+
+// C1180D (print_strings_vertical's real implementation): replaces
+// "JSR C451FA; JSR PRINT_MENU_ITEMS" (patched below, starting at the
+// JSR C451FA call) with a JML into our own hook, which replicates both
+// calls itself, then draws all queued str2 values, then JMLs back to
+// this routine's own original ending (its existing RTS).
+ROM[0xC11813] = {
+	JML(OurPrintStringsVerticalHook)
 }

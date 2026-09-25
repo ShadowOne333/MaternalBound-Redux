@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../bugfixes/try_deposit_money.ccs"
@@ -508,6 +509,7 @@ l_0xc660a6:
 	goto_if_flag(FLG_TEMP_1, l_0xc66392)	// 0x02
 	goto_if_flag(FLG_WIN_FRANK, l_0xc66353)	// 0x40, 64
 	goto_if_flag(FLG_WIN_FRANK_ONLY, l_0xc66469)	// 0x0203, 515
+	cc_open_letterbox
 	"@....." next
 	"@...I'm Frank Fly." pause(30)
 	"  You are?" next
@@ -516,6 +518,7 @@ l_0xc660a6:
 	"@C'mon,| can't you at least say your name?" promptw
 	call(data_23.l_0xc683fb)
 	goto_if_true(data_23.l_0xc683de)
+	cc_open_letterbox
 	stop_music
 	window_open(1)
 	title(1, Frank)
@@ -526,11 +529,11 @@ l_0xc660a6:
 	set(FLG_WIN_FRANK_ONLY)	// 515
 	call(data_23.l_0xc68402)
 	goto_if_true(data_23.l_0xc683de)
+	cc_open_letterbox
 	npc_do_mc(202,635)	// 0x00CA, 0x027B
 	pause(30)
 	set(FLG_WIN_FRANK)	// 64
 	window_open(1)
-	goto(l_0xc66175)
 
 l_0xc66175:
 	newline
@@ -552,6 +555,7 @@ l_0xc66175:
 	"@Pirkle,| the Mayor of Onett,| has a key to the shack." next
 	"@{name(1)},| you've become stronger than I!" pause(20)
 	"  Your adventure is just beginning..." wait
+	cc_close_letterbox
 	set(FLG_WIN_FRANK)	// 64
 	set(FLG_ONET_SHARK_2F_DISAPPEAR)	// 697
 	set(FLG_ONET_SHARK_A_DISAPPEAR)	// 363
@@ -639,6 +643,7 @@ l_0xc66670:
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the first <Your Sanctuary> location." pause(20) linebreak
@@ -646,12 +651,15 @@ l_0xc66670:
 	"@Take it from me,|| if you dare..." promptw
 	call(data_23.l_0xc68409)
 	goto_if_true(data_23.l_0xc683de)
+	cc_open_letterbox
 	npc_delete(209,8)	// 0x00D1, 8
 	pause(120)
 	set(FLG_WIN_GIAN_BOSS)	// 190
+	cc_close_letterbox
 	eob
 
 l_0xc666ea:
+	cc_open_letterbox
 	window_open(1)
 	title(1, Lier)
 	"@...So {name(1)} buddy,| I've found proof of a great treasure... a huge haul..." next
@@ -659,6 +667,7 @@ l_0xc666ea:
 	"  I'll show you,| but you're the only one." pause(20)
 	"  C'mon." promptw
 	window_closeall
+	cc_close_letterbox
 	call(data_16.l_0xc5f642)
 	unset(FLG_B3MIZUNO_B_APPEAR)	// 307
 	set(FLG_B4MIZUNO_APPEAR)	// 308
@@ -667,13 +676,16 @@ l_0xc666ea:
 l_0xc66762:
 	goto_if_flag(FLG_WIN_GIEGU, data_29.l_0xc73ab9)	// 0x49, 73
 	goto_if_flag(FLG_TLPT_TWSN, l_0xc6681d)	// 0xD2, 210
+	cc_open_letterbox
 	title(1, Lier)
 	"@If this is a sign of what lies below,| I just need a little time." next
 	"@My destiny is to find and dig up the buried treasure." next
 	"@I'll eat garlic and work out to help strengthen myself." next
 	"@Go home now." pause(20)
 	"  You're getting in the way of my work." next
-	"@You may start to get greedy thoughts..." end
+	"@You may start to get greedy thoughts..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6681d:
 	counter(1)

@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -141,6 +142,7 @@ l_0xc72ad6:
 l_0xc72af8:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc72e08)	// 0x49, 73
 	goto_if_flag(FLG_KEY_TABIGOYA, l_0xc72dd0)	// 0x50, 80
+	cc_open_letterbox
 	"@Hey// hey// hey!" pause(15) linebreak
 	"  I'm Mayor B.H. Pirkle." pause(15) linebreak
 	"  It's so nice to meet you." next
@@ -165,7 +167,9 @@ l_0xc72cac:
 
 l_0xc72cee:
 	"@Look,// I'm the big cheese around here," next
-	"@and a brat like you should realize when someone is trying to be nice." end
+	"@and a brat like you should realize when someone is trying to be nice." wait
+	cc_close_letterbox
+	eob
 
 l_0xc72d2f:
 	"@You're such a smart kid..." pause(20)
@@ -180,7 +184,9 @@ l_0xc72d2f:
 		call(data_36.l_0xc7dcb6)
 	}
 	set(FLG_KEY_TABIGOYA)	// 80
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc72d6e:
 	sound(SND_ERRORBEEP)	// 5
@@ -188,7 +194,9 @@ l_0xc72d6e:
 	newline
 	"@Although it's small,| the key is very important." next
 	"@You seem to have too much to carry." next
-	"@Get rid of some stuff you don't need,| and come back for the key later on." end
+	"@Get rid of some stuff you don't need,| and come back for the key later on." wait
+	cc_close_letterbox
+	eob
 
 l_0xc72dd0:
 	title(1, Pirkle)
@@ -232,7 +240,6 @@ l_0xc73024:
 	goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc73039)	// 0x027E, 638
 	goto_if_flag(FLG_POLA, l_0xc730cf)	// 0x0C, 12
 	goto_if_flag(FLG_POLA_GRFD, l_0xc730cf)	// 0x0D, 13
-	goto(l_0xc73039)
 
 l_0xc73039:
 	"@I moved here from the way,| way,| way away next town." next
@@ -471,6 +478,7 @@ l_0xc738b6:
 l_0xc73940:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc73ab9)	// 0x0049, 73
 	goto_if_flag(FLG_TLPT_TWSN, l_0xc73a03)	// 0x00D2, 210
+	cc_open_letterbox
 	title(1, Lier)
 	"@I'm doing this because I trust you." next
 	"@First,| let's go to the basement." promptw
@@ -485,11 +493,13 @@ l_0xc73940:
 	"@I know you think I'm a big liar but maybe I'll surprise you!" wait
 	window_closeall
 	call(data_16.l_0xc5f639)
+	cc_close_letterbox
 	unset(FLG_1FMIZUNO_APPEAR)	// 31
 	set(FLG_B1MIZUNO_APPEAR)	// 32
 	eob
 
 l_0xc73a03:
+	cc_open_letterbox
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc73bcc)
@@ -500,7 +510,9 @@ l_0xc73a03:
 	"  I can tell by the look on your face you don't want to hang out,// do you?" next
 	"@That's all right." pause(20)
 	"  After all,| we are not even related." next
-	"@Someone like you should just hang around that dreamer Gerardo Montague." end
+	"@Someone like you should just hang around that dreamer Gerardo Montague." wait
+	cc_close_letterbox
+	eob
 
 l_0xc73ab9:
 	title(1, Lier)
@@ -517,16 +529,22 @@ l_0xc73ab9:
 
 l_0xc73b87:
 	"@{stat(8)}," linebreak
-	"@Don't be such a snob!" end
+	"@Don't be such a snob!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc73b9d:
-	"@When you grow up,| why don't you become my partner and we'll make lots of money." end
+	"@When you grow up,| why don't you become my partner and we'll make lots of money." wait
+	cc_close_letterbox
+	eob
 
 l_0xc73bcc:
 	title(1, Lier)
 	"@You might think me a fool but when I do a job,| I do it well." next
 	"@I'm a| man//'s man.  I'll be a big hero." next
-	"@Ignore me for now if you want..." end
+	"@Ignore me for now if you want..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc73c28:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc73cfa)	// 0x0049, 73

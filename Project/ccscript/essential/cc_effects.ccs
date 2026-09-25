@@ -315,7 +315,7 @@ doLetterbox: {
 	LDA_i(0)
 	LDY_i(224)
 	
-	_loop:
+_loop:
 	PHA
 	PHY
 	
@@ -340,6 +340,30 @@ doLetterbox: {
 	RTL
 }
 
+instantLetterbox: {
+	LDA_i(23)
+	STA_a(0xADAE)	// Enable sprites, layer 1, layer 2, layer 3 outside letterboxed region
+
+	LDA_i(4)
+	STA_a(0xADB0)	// Enable layer 3 inside letterboxed region
+
+	LDA_i(40)
+	STA_a(0xADB2)	// Final top position
+
+	LDA_i(184)
+	STA_a(0xADB4)	// Final bottom position
+
+	JSL(0xC2D0AC)	// Update Letterbox HDMA
+
+	// Apply/update the screen once
+	LDA_i(2)
+	JSL(0xC429E8)	// Enable Letterbox HDMA
+
+	JSL(0xC08756)	// Wait one frame
+
+	RTL
+}
+
 closeLetterbox: {
 	LDA_i(23)
 	STA_a(0xADAE)
@@ -349,7 +373,7 @@ closeLetterbox: {
 	LDA_i(39)
 	LDY_i(185)
 	
-	_loop:
+_loop:
 	PHA
 	PHY
 	
@@ -378,6 +402,7 @@ closeLetterbox: {
 }
 
 command cc_open_letterbox cc_asmcall(doLetterbox, RET_NONE)
+command cc_instant_letterbox cc_asmcall(instantLetterbox, RET_NONE)
 command cc_close_letterbox cc_asmcall(closeLetterbox, RET_NONE)
 
 

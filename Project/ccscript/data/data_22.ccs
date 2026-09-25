@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -250,6 +251,7 @@ l_0xc674aa:
 	"  I'm thinking about going to bed." end
 
 l_0xc67501:	// Starman Jr. spawns
+	cc_open_letterbox
 	music(124)
 	//sprite2_spawn(43,622,1)	// 0x2B, 0x026E, 1
 	sprite2_spawn(481,622,1)	// 0x2B, 0x026E, 1
@@ -278,6 +280,7 @@ l_0xc67501:	// Starman Jr. spawns
 
 	call(data_23.l_0xc685b4)
 	goto_if_true(data_23.l_0xc683de)
+	cc_open_letterbox
 	pause(1)
 	sprite2_do_mc(43,635)	// 0x2B, 0x027B
 	pause(60)
@@ -287,7 +290,8 @@ l_0xc67501:	// Starman Jr. spawns
 	title(1, Buzz)
 	"@Whew!..." pause(20)
 	"  I was taking a big chance there..." next
-	"@That Starman Junior was a hired assassin sent by Giygas." next
+	"@That Starman Junior was a hired assassin sent by" linebreak
+	"  Giygas." next
 	"@He came from 10 years in the future to kill me,| so we can't relax yet!" next
 	"@From now on,| you'll be fighting enemies sent by Giygas," next
 	"@as well as humans who have evil thoughts." next
@@ -296,6 +300,7 @@ l_0xc67501:	// Starman Jr. spawns
 	"@due to Giygas' influence over the evil in their minds!" next
 	"@It is the truth,| so listen!" wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc676d4:

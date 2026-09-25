@@ -1,0 +1,407 @@
+import "../essential/asm65816.ccs"
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// Enemy Groups Expansion Script by Vittorio.
+// v2: make memory-reading conditional on the group number being > 483.
+
+// This script will allow you to have more than the default limit of 484 enemy groups.
+// You can use them in map_enemy_groups.yml or in the [1F 23 XX XX] control code / battle(num) standard command to start a battle.
+
+// Enemy groups 0-483 can be still edited normally through 'enemy_groups.yml'.
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// Entry and background data for the new enemy groups.
+
+// Use 'command enemyGroup(num, bg1, bg2, enemy_group_data, fear_flag, fear_mode, letterbox_size)' to create the new enemy groups. 
+
+// The 'Enemy Group' field is a pointer to the enemy group data, see 'the actual content of the enemy groups' below.
+
+New_Enemy_Groups:
+	
+	// examples!
+	enemyGroup(
+		484,	// Number (for reference, this is actually a dummy).
+		201,	// BG1.
+		200,	// BG2.
+		enemy_group_484,	// Pointer to the enemy group data.
+		0,	// Fear event flag.
+		run_if_flag_unset,	// Fear mode ('run_if_flag_unset' or 'run_if_flag_set').
+		none	// Letterbox size ('none', 'small', 'medium' or 'big').
+	)
+	
+	//enemyGroup(485, 184, 183, enemy_group_485, 0, run_if_flag_unset, small)
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// This is the actual content of the enemy groups.
+
+// Use 'enemy(amount, enemy)' and 'enemy_group_end' to mark the end of the block.
+// Remember you're limited to 4 distinct enemies per group at most.
+
+// examples!
+
+enemy_group_484:
+	enemy(1, 182)
+	enemy_group_end
+
+//enemy_group_485:
+	//enemy(2, 139)
+	//enemy(2, 88)
+	//enemy_group_end
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// CCS and ASM stuff below, don't edit!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+/*
+
+- We combine the battle entry pointer table and background layer table into a single one for commodity.
+
+- Each entry will consist of:
+[AA AA BB BB CC CC CC CC DD DD EE FF]
+
+- AA AA: bg layer 1 to be used by the group.
+- BB BB: bg layer 2 to be used by the group.
+- CC CC CC CC: pointer to the enemy group data.
+- DD DD: fear flag.
+- EE: fear mode
+- FF: letterbox size
+
+*/
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// Now we define the 'enemyGroup' command so it works like that.
+
+command enemyGroup(dummy_num, bg1, bg2, pointer, fear_flag, mode, letterbox) {
+	"{short bg1}"
+	"{short bg2}"
+	"{long pointer}"
+	"{short fear_flag}"
+	"{byte mode}"
+	"{byte letterbox}"
+}
+
+// We also define the group data structure.
+
+command enemy(amount, enemy) {
+	"{byte amount}"
+	"{short enemy}"
+}
+
+define enemy_group_end = "[FF]"
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// Let's define a few names for common field values.
+
+// Fear mode.
+define run_if_flag_unset = 0x00
+define run_if_flag_set = 0x01
+
+// Letterbox size.
+define none = 0x00
+define small = 0x01
+define medium = 0x02
+define big = 0x03
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// And now, let's edit the ASM spots that load from the old tables to load from the new one if the group is higher than 483.
+// There are 11 references to the battle entry pointer table ($D0C60D), and 3 references to the background layer table ($CBD89A).
+
+// First spot is at the battle routine, starting from $C248A7.
+// This will take care of 1 of the references to $CBD89A and 1 to $D0C60D.
+
+ROM[0xC248A7] = JML(conditional_repoint_1)
+
+conditional_repoint_1: {
+	LDA_a(0x4A8C)
+	CMP_i(484)
+	BCS(5)
+	ASL
+	JML(0xC248AB)
+	JSL(common_conditional_repoint_1) // For optimization, we can use common code for this part.
+	JML(0xC248E0)
+}
+
+// The next spot is also at the battle routine, a bit after the previous one.
+// This also takes care of 1 reference to $CBD89A and 1 to $D0C60D.
+
+ROM[0xC24B7E] = JML(conditional_repoint_2)
+
+conditional_repoint_2: {
+	STA_d(0x31)
+	STA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC24B83)
+	JSL(common_conditional_repoint_1) // For optimization, we can use common code for this part.
+	JML(0xC24C78)
+}
+
+// Common routine for the previous conditional repoints.
+
+common_conditional_repoint_1: {
+	LDX_i(short[0] New_Enemy_Groups)
+	STX_d(0x0A)
+	LDX_i(short[1] New_Enemy_Groups)
+	STX_d(0x0C)
+	SEC
+	SBC_i(484)
+	STA_d(0x2D)
+	ASL
+	CLC
+	ADC_d(0x2D)
+	ASL
+	ASL
+	TAY
+	LDA_dly(0x0A)
+	STA_d(0x2D)
+	INY
+	INY
+	LDA_dly(0x0A)
+	STA_d(0x2B)
+	INY
+	INY
+	INY
+	INY
+	INY
+	INY
+	INY
+	INY
+	INY
+	LDA_dly(0x0A)
+	AND_i(0xFF)
+	STA_a(0x3250)
+	STA_d(0x29)
+	RTL
+}
+
+// Now there's a last reference to $CBD89A and another reference to $D0C60D at 'switchToNewGiygasBattle', located at $C2C21F.
+// I'm not going to make the selective repoint here, assuming the Giygas battles will stay below 484.
+
+// There's a reference to enemy 1 of the battle group 1 at $C24878 that also should remain untouched.
+
+// <--------------------------------------------------------------------------------------------------------------------------------->
+
+// We've taken care of all references to $CBD89A by this point, and we've still got 8 references to $D0C60D left; let's continue.
+
+// This is related to enemy groups spawning.
+
+ROM[0xC02886] = JML(conditional_repoint_3)
+
+conditional_repoint_3: {
+	STA_d(0x2A)
+	STA_a(0x4A72)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC0288B)
+	LDX_i(short[0] New_Enemy_Groups)
+	STX_d(0x06)
+	LDX_i(short[1] New_Enemy_Groups)
+	STX_d(0x08)
+	SEC
+	SBC_i(484)
+	STA_d(0x0A)
+	ASL
+	CLC
+	ADC_d(0x0A)
+	ASL
+	ASL
+	TAY
+	INY
+	INY
+	INY
+	INY
+	LDA_dly(0x06)
+	STA_d(0x0A)
+	INY
+	INY
+	LDA_dly(0x06)
+	STA_d(0x0C)
+	JML(0xC028AB)
+}
+
+// This one's related to checking if enemies should fear the player.
+
+ROM[0xC0C534] = JML(conditional_repoint_4)
+
+conditional_repoint_4: {
+	AND_i(0x7FFF)
+	STA_d(0x12)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC0C539)
+	LDX_i(short[0] New_Enemy_Groups)
+	STX_d(0x06)
+	LDX_i(short[1] New_Enemy_Groups)
+	STX_d(0x08)
+	SEC
+	SBC_i(484)
+	STA_d(0x10)
+	ASL
+	ADC_d(0x10)
+	ASL
+	ASL
+	INC
+	INC
+	INC
+	INC
+	JML(0xC0C548)
+}
+
+// Not sure what this one is for, pathfinding?
+
+ROM[0xC0D266] = JML(conditional_repoint_5)
+
+conditional_repoint_5: {
+	STA_d(0x1A)
+	STA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC0D26B)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC0D28B)
+}
+
+// This is at the same function than the previous one.
+
+ROM[0xC0D334] = JML(conditional_repoint_6)
+
+conditional_repoint_6: {
+	LDA_i(0xF200)
+	STA_d(0x16)
+	LDA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC0D339)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC0D35A)
+}
+
+// Something about the debug menu.
+
+ROM[0xC1E3A5] = JML(conditional_repoint_7)
+
+conditional_repoint_7: {
+	LDA_d(0x04)
+	STA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC1E3AA)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC1E3CA)
+}
+
+// Scripted battle initialization routine.
+
+ROM[0xC22F42] = JML(conditional_repoint_8)
+
+conditional_repoint_8: {
+	STA_d(0x10)
+	STA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC22F47)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC22F67)
+}
+
+// Calling for help common routine.
+
+ROM[0xC2BD7B] = JML(conditional_repoint_9)
+
+conditional_repoint_9: {
+	AND_i(0xFF)
+	STA_d(0x26)
+	LDA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC2BD80)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC2BDB4)
+}
+
+// Routine for battle sprites upload to VRAM.
+
+ROM[0xC2EEEF] = JML(conditional_repoint_10)
+
+conditional_repoint_10: {
+	STZ_a(0xAAB4)
+	STZ_a(0xAAB2)
+	LDA_a(0x4A8C)
+	CMP_i(484)
+	BCS(4)
+	JML(0xC2EEF5)
+	JSL(common_conditional_repoint_2) // For optimization, we can use common code for this part.
+	JML(0xC2EF16)
+}
+
+// Common routine for the previous conditional repoints.
+
+common_conditional_repoint_2: {
+	LDX_i(short[0] New_Enemy_Groups)
+	STX_d(0x0A)
+	LDX_i(short[1] New_Enemy_Groups)
+	STX_d(0x0C)
+	SEC
+	SBC_i(484)
+	STA_d(0x06)
+	ASL
+	ADC_d(0x06)
+	ASL
+	ASL
+	TAY
+	INY
+	INY
+	INY
+	INY
+	LDA_dly(0x0A)
+	STA_d(0x06)
+	INY
+	INY
+	LDA_dly(0x0A)
+	STA_d(0x08)
+	RTL
+}
+
+// <--------------------------------------------------------------------------------------------------------------------------------->

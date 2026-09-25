@@ -8,22 +8,22 @@ import "../redux/enemy_ai.ccs"
 //	Action Orders commands
 //------------------------------------
 // Custom command for Action Order 0
-command order0(a, b, c, d) {
+command order0(action1, action2, action3, action4) {
+_loop:
 	random(3)
 	switch_goto(3)
 		switch_entry(_1)
 		switch_entry(_2)
 		switch_entry(_3)
-		d goto(_end)
-_1: a goto(_end)
-_2: b goto(_end)
-_3: c
-
-_end:
+		action4 goto(_loop)
+_1: action1 goto(_loop)
+_2: action2 goto(_loop)
+_3: action3 goto(_loop)
 }
 
 // Custom command for Action Order 1
-command order1(a, b, c, d) {
+command order1(action1, action2, action3, action4) {
+_loop:
 	random(7)
 	switch_goto(7)
 		switch_entry(_1)
@@ -33,16 +33,14 @@ command order1(a, b, c, d) {
 		switch_entry(_5)
 		switch_entry(_6)
 		switch_entry(_7)
-		d goto(_end)
-_1: a goto(_end)
-_2: a goto(_end)
-_3: a goto(_end)
-_4: a goto(_end)
-_5: b goto(_end)
-_6: b goto(_end)
-_7: c
-
-_end:
+		action4 goto(_loop)
+_1: action1 goto(_loop)
+_2: action1 goto(_loop)
+_3: action1 goto(_loop)
+_4: action1 goto(_loop)
+_5: action2 goto(_loop)
+_6: action2 goto(_loop)
+_7: action3 goto(_loop)
 }
 
 // Action Order 2 can be used like normal ccscript, as they'll go in order:
@@ -51,44 +49,112 @@ _end:
 // setAction(3,0) eob
 // setAction(4,0) eob
 // goto(_loop)
+command order2(action1, action2, action3, action4) {
+_loop:
+	_1: action1
+	_2: action2
+	_3: action3
+	_4: action4
+	goto(_loop)
+}
+
+command rand2(block1, block2) {
+	if random(1) {
+		block1
+	} else {
+		block2
+	}
+}
 
 // Custom command for Action Order 3
-command order3(a, b, c, d) {
-	random(1)
-	switch_goto(1)
-		switch_entry(_1)
-		b goto(_set2)
-_1: a
-
-_set2:
-	random(1)
-	switch_goto(1)
-		switch_entry(_2)
-		d goto(_end)
-_2: c
-_end:
+command order3(action1, action2, action3, action4) {
+_loop:
+	rand2(action1, action2)
+	rand2(action3, action4)
+	goto(_loop)
 }
 
 //------------------------------------
+Null: {	// Enemy 0
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+Insane_Cultist: {	// Enemy 1
+	order0(	// Action order 0 (Random)
+		{ setAction(215, 0) eob },	// Utilized paint attack
+		{ setAction(62, 1) eob },	// Call for help (Insane cultist)
+		{ setAction(215, 0) eob },	// Utilized paint attack
+		{ setAction(215, 0) eob }	// Utilized paint attack
+	)
+}
+//------------------------------------
+Dept_Store_Spook: {	// Enemy 2
+_entry2:
+	order3(	// Action order 3 (Staggered order)
+		{ if not checkPpThreshold(4) { setAction(18, 9) eob } },	// Freeze A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ goto(_entry171) }	// Run enemy extender (171)
+	)
+
+_entry171:
+	order3(	// Action order 3 (staggered order)
+		{ setAction(55, 46) eob },	// Magnet O
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } },	// Brainshock A
+		{ if not checkPpThreshold(4) { setAction(18, 9) eob } },	// Freeze A
+		{ goto(_entry2) }	// Run enemy extender (2)
+	)
+}
+//------------------------------------
+Armored_Frog: {	// Enemy 3
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(95, 0) eob }	// Something spin around (Reduce PP)
+	)
+}
+//------------------------------------
+Bad_Buffalo: {	// Enemy 4
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(219, 0) eob },	// Rammed and trampled you
+		{ setAction(110, 0) eob },	// Tore into you
+		{ setAction(219, 0) eob },	// Rammed and trampled you
+		{ setAction(235, 0) eob }	// Knited brow
+	)
+}
+//------------------------------------
+Black_Antoid: {	// Enemy 5
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(62, 5) eob },	// Call for help (Black antoid)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
 Kraken_Boss: {	// Enemy 49 & 182
-_loop:		// Action order 0 (Random)
+_entry49:		// Action order 0 (Random)
 	order0(
 		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
 		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
 		{ setAction(92, 0) eob },	// Thunder Beta, Crashing Boom Bang
-		{ goto(_extender) }	// Run enemy extender (182)
+		{ goto(_entry182) }	// Run enemy extender (182)
 	)
-	goto(_loop)
 
-_extender:	// Action order 3 (staggered order)
+_entry182:	// Action order 3 (Staggered order)
 	order3(
 		// First set
-		{ setAction(27, 18) eob },	// Flash B
+		{ if not checkPpThreshold(16) { setAction(27, 18) eob } },	// Flash B
 		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
 		// Second set (After 1st set runs once)
 		{ setAction(117, 0) eob },	// Tornado
-		{ goto(_loop) }	// Back to the original enemy entry (49)
+		{ goto(_entry49) }		// Back to the original enemy entry (49)
 	)
-	goto(_extender)
 }
 //------------------------------------

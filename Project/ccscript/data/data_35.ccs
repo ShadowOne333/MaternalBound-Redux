@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -18,6 +19,7 @@ command e(label) "{long label}"
 // Text Data
 l_0xc7c1f7:
 	call(data_57.l_0xc9b226)
+	cc_close_letterbox
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c204)	// 0x0180, 384
 	eob
 
@@ -26,6 +28,7 @@ l_0xc7c204:
 	eob
 
 l_0xc7c208:
+	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -54,11 +57,13 @@ l_0xc7c258:
 	set(FLG_POWR_MGNT)	// 186
 	set(FLG_PHOTO_DINO_MUSEUM)	// 494
 	window_closetop
+	cc_close_letterbox
 
 l_0xc7c2c5:
 	eob
 
 l_0xc7c2c6:
+	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -89,6 +94,7 @@ l_0xc7c317:
 
 l_0xc7c38a:
 	call(data_57.l_0xc9b226)
+	cc_close_letterbox
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c397)	// 0x0180, 384
 	eob
 
@@ -97,6 +103,8 @@ l_0xc7c397:
 	eob
 
 l_0xc7c39b:
+	// If we set the letterbox on the Lumine cutscene, the letters on the wall are cut-off
+	//cc_open_letterbox
 	goto_if_flag(FLG_POWR_LUMI, l_0xc7c3c2)	// 0xBC, 188
 	call(l_0xc7c57d)
 	pause(1)
@@ -133,11 +141,13 @@ l_0xc7c412:
 	"@{name(1)}'s Sound Stone recorded the melody of Lumine Hall." wait
 	set(FLG_POWR_LUMI)	// 188
 	window_closetop
+	//cc_close_letterbox
 
 l_0xc7c478:
 	eob
 
 l_0xc7c479:
+	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -168,6 +178,7 @@ l_0xc7c4c9:
 
 l_0xc7c53a:
 	call(data_57.l_0xc9b226)
+	cc_close_letterbox
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c547)	// 0x0180, 384
 	eob
 

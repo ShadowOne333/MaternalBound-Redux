@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -739,6 +740,7 @@ l_0xc7a959:
 
 l_0xc7ab3f:
 	goto_if_flag(FLG_PHOTO_SATURN, data_55.l_0xc9992f)	// 0x01FE, 510
+	cc_open_letterbox
 	call(data_36.l_0xc7dd74)
 	music(88)
 	pause(180) pause(60)
@@ -794,6 +796,7 @@ l_0xc7ac42:
 	music_effect(3)	// Fade out
 	pause(60)
 	music_resume
+	cc_close_letterbox
 	eob
 
 // Orange & Apple Kids phone calls
@@ -1689,11 +1692,15 @@ l_0xc7bd89:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
+//------------------------------------
+// Sanctuary locations cutscenes
+//------------------------------------
 l_0xc7beb9:
 // This label ":---------------------" at the start, but the real code start at the following label
 // "":---------------------" was part of the leftover comments from the original development team
 // Same thing for the multiple long spaces in between control codes in several labels
 l_0xc7becf:	// Added 
+	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -1726,11 +1733,13 @@ l_0xc7bf1e:	// Giant Step recording
 	set(FLG_POLICE_STRONG_DISAPPEAR)	// 450
 	set(FLG_ONET_POLA_TELEPATHY)	// 634
 	window_closetop
+	cc_close_letterbox
 
 l_0xc7bf94:
 	eob
 
 l_0xc7bf95:
+	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -1763,7 +1772,8 @@ l_0xc7bfe8:
 l_0xc7c058:
 	call(data_49.l_0xc915f4)
 	call(data_57.l_0xc9b226)
-	goto_if_flag(FLG_POWR_ALL, l_0xc7c058)	// 0x0180, 384
+	cc_close_letterbox
+	goto_if_flag(FLG_POWR_ALL, l_0xc7c06a)	// 0x0180, 384
 	eob
 
 l_0xc7c06a:
@@ -1771,6 +1781,7 @@ l_0xc7c06a:
 	eob
 
 l_0xc7c06e:
+	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)
@@ -1799,11 +1810,13 @@ l_0xc7c0c0:
 
 	set(FLG_POWR_RAIN)	// 184
 	window_closetop
+	cc_close_letterbox
 
 l_0xc7c129:
 	eob
 
 l_0xc7c12a:
+	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dd6b)

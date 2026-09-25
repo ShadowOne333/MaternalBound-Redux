@@ -2,7 +2,7 @@
   Background 1: 0
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 159}
+  - {Amount: 3, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -10,7 +10,7 @@
   Background 1: 262
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 159}
+  - {Amount: 1, Enemy: 159}	#Spiteful Crow
   Fear event flag: 64
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -18,7 +18,7 @@
   Background 1: 260
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 121}
+  - {Amount: 1, Enemy: 121}	#Runaway Dog
   Fear event flag: 64
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -26,7 +26,7 @@
   Background 1: 261
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 55}
+  - {Amount: 1, Enemy: 55}	#Coil Snake
   Fear event flag: 64
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -34,8 +34,8 @@
   Background 1: 114
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 224}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 224}	#Evil Eye
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -43,8 +43,8 @@
   Background 1: 115
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 86}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 86}	#Mechanical Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -52,8 +52,8 @@
   Background 1: 116
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 224}
-  - {Amount: 1, Enemy: 86}
+  - {Amount: 1, Enemy: 224}	#Evil Eye
+  - {Amount: 1, Enemy: 86}	#Mechanical Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -61,9 +61,9 @@
   Background 1: 117
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 86}
-  - {Amount: 1, Enemy: 224}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 86}	#Mechanical Octobot
+  - {Amount: 1, Enemy: 224}	#Evil Eye
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -71,9 +71,9 @@
   Background 1: 5
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 64}
-  - {Amount: 1, Enemy: 129}
-  - {Amount: 0, Enemy: 134}
+  - {Amount: 1, Enemy: 64}	#Skate Punk
+  - {Amount: 1, Enemy: 129}	#Yes Man Junior
+  - {Amount: 0, Enemy: 134}	#Pogo Punk
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -81,9 +81,9 @@
   Background 1: 6
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 64}
-  - {Amount: 1, Enemy: 134}
-  - {Amount: 0, Enemy: 129}
+  - {Amount: 1, Enemy: 64}	#Skate Punk
+  - {Amount: 1, Enemy: 134}	#Pogo Punk
+  - {Amount: 0, Enemy: 129}	#Yes Man Junior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -91,8 +91,8 @@
   Background 1: 7
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 134}
-  - {Amount: 1, Enemy: 129}
+  - {Amount: 1, Enemy: 134}	#Pogo Punk
+  - {Amount: 1, Enemy: 129}	#Yes Man Junior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -100,9 +100,9 @@
   Background 1: 8
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 64}
-  - {Amount: 1, Enemy: 129}
-  - {Amount: 1, Enemy: 134}
+  - {Amount: 1, Enemy: 64}	#Skate Punk
+  - {Amount: 1, Enemy: 129}	#Yes Man Junior
+  - {Amount: 1, Enemy: 134}	#Pogo Punk
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -110,7 +110,7 @@
   Background 1: 124
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 211}
+  - {Amount: 1, Enemy: 211}	#Runaway Dog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -118,7 +118,7 @@
   Background 1: 123
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 159}
+  - {Amount: 1, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -126,7 +126,7 @@
   Background 1: 122
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 145}
+  - {Amount: 1, Enemy: 145}	#Gruff Goat
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -134,8 +134,8 @@
   Background 1: 125
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 52}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -143,8 +143,8 @@
   Background 1: 313
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 62}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -152,8 +152,8 @@
   Background 1: 125
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 62}
-  - {Amount: 1, Enemy: 52}
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -161,9 +161,9 @@
   Background 1: 125
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 52}
-  - {Amount: 1, Enemy: 62}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -171,7 +171,7 @@
   Background 1: 126
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 159}
+  - {Amount: 1, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -179,7 +179,7 @@
   Background 1: 127
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 145}
+  - {Amount: 1, Enemy: 145}	#Gruff Goat
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -187,7 +187,7 @@
   Background 1: 129
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 211}
+  - {Amount: 1, Enemy: 211}	#Runaway Dog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -195,8 +195,8 @@
   Background 1: 315
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 52}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -204,8 +204,8 @@
   Background 1: 315
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 62}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -213,8 +213,8 @@
   Background 1: 130
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 62}
-  - {Amount: 1, Enemy: 52}
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -222,9 +222,9 @@
   Background 1: 315
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 62}
-  - {Amount: 1, Enemy: 52}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 62}	#Wooly Shambler
+  - {Amount: 1, Enemy: 52}	#Whirling Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -232,7 +232,7 @@
   Background 1: 314
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 212}
+  - {Amount: 1, Enemy: 212}	#Bigfoot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -240,8 +240,8 @@
   Background 1: 131
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 123}
-  - {Amount: 1, Enemy: 29}
+  - {Amount: 2, Enemy: 123}	#Bigfoot
+  - {Amount: 1, Enemy: 29}	#Mighty Bear Seven
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -249,8 +249,8 @@
   Background 1: 125
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 123}
-  - {Amount: 2, Enemy: 29}
+  - {Amount: 1, Enemy: 123}	#Bigfoot
+  - {Amount: 2, Enemy: 29}	#Mighty Bear Seven
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -258,8 +258,8 @@
   Background 1: 131
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 123}
-  - {Amount: 1, Enemy: 29}
+  - {Amount: 1, Enemy: 123}	#Bigfoot
+  - {Amount: 1, Enemy: 29}	#Mighty Bear Seven
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -267,7 +267,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 5}
+  - {Amount: 4, Enemy: 5}	#Black Antoid
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -275,7 +275,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 7}
+  - {Amount: 1, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -283,7 +283,7 @@
   Background 1: 12
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 7}
+  - {Amount: 2, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -291,8 +291,8 @@
   Background 1: 10
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 5}
-  - {Amount: 1, Enemy: 7}
+  - {Amount: 2, Enemy: 5}	#Black Antoid
+  - {Amount: 1, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -300,7 +300,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 7}
+  - {Amount: 1, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -308,7 +308,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 7}
+  - {Amount: 2, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -316,8 +316,8 @@
   Background 1: 1
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 121}
-  - {Amount: 1, Enemy: 54}
+  - {Amount: 2, Enemy: 121}	#Runaway Dog
+  - {Amount: 1, Enemy: 54}	#Cop
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -325,7 +325,7 @@
   Background 1: 14
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 32}
+  - {Amount: 1, Enemy: 32}	#Cranky Lady
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -333,7 +333,7 @@
   Background 1: 14
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 22}
+  - {Amount: 1, Enemy: 22}	#Annoying Old Party Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -341,7 +341,7 @@
   Background 1: 269
   Background 2: 270
   Enemies:
-  - {Amount: 1, Enemy: 24}
+  - {Amount: 1, Enemy: 24}	#Unassuming Local Guy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -349,7 +349,7 @@
   Background 1: 269
   Background 2: 270
   Enemies:
-  - {Amount: 1, Enemy: 25}
+  - {Amount: 1, Enemy: 25}	#New Age Retro Hippie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -357,8 +357,8 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 7}
-  - {Amount: 1, Enemy: 9}
+  - {Amount: 1, Enemy: 7}	#Ramblin' Evil Mushroom
+  - {Amount: 1, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -366,7 +366,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 7}
+  - {Amount: 2, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -374,8 +374,8 @@
   Background 1: 11
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 9}
-  - {Amount: 1, Enemy: 81}
+  - {Amount: 1, Enemy: 9}	#Walking Sprout
+  - {Amount: 1, Enemy: 81}	#Territorial Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -383,8 +383,8 @@
   Background 1: 11
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 9}
-  - {Amount: 1, Enemy: 81}
+  - {Amount: 2, Enemy: 9}	#Walking Sprout
+  - {Amount: 1, Enemy: 81}	#Territorial Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -392,8 +392,8 @@
   Background 1: 21
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 9}
-  - {Amount: 1, Enemy: 150}
+  - {Amount: 2, Enemy: 9}	#Walking Sprout
+  - {Amount: 1, Enemy: 150}	#Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -401,7 +401,7 @@
   Background 1: 21
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 9}
+  - {Amount: 2, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -409,7 +409,7 @@
   Background 1: 21
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 9}
+  - {Amount: 3, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -417,7 +417,7 @@
   Background 1: 11
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 81}
+  - {Amount: 1, Enemy: 81}	#Territorial Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -425,7 +425,7 @@
   Background 1: 22
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 51}
+  - {Amount: 1, Enemy: 51}	#Spinning Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -433,7 +433,7 @@
   Background 1: 20
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 150}
+  - {Amount: 1, Enemy: 150}	#Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -441,8 +441,8 @@
   Background 1: 20
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 150}
-  - {Amount: 1, Enemy: 9}
+  - {Amount: 1, Enemy: 150}	#Li'l UFO
+  - {Amount: 1, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -450,8 +450,8 @@
   Background 1: 22
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 150}
-  - {Amount: 1, Enemy: 51}
+  - {Amount: 1, Enemy: 150}	#Li'l UFO
+  - {Amount: 1, Enemy: 51}	#Spinning Robo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -459,7 +459,7 @@
   Background 1: 20
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 150}
+  - {Amount: 2, Enemy: 150}	#Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -467,7 +467,7 @@
   Background 1: 16
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 1}
+  - {Amount: 1, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -475,7 +475,7 @@
   Background 1: 16
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 1}
+  - {Amount: 1, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -483,7 +483,7 @@
   Background 1: 1
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 159}
+  - {Amount: 2, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -491,7 +491,7 @@
   Background 1: 1
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 159}
+  - {Amount: 1, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -499,7 +499,7 @@
   Background 1: 14
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 32}
+  - {Amount: 1, Enemy: 32}	#Cranky Lady
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -507,7 +507,7 @@
   Background 1: 14
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 22}
+  - {Amount: 1, Enemy: 22}	#Annoying Old Party Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -515,7 +515,7 @@
   Background 1: 269
   Background 2: 270
   Enemies:
-  - {Amount: 1, Enemy: 25}
+  - {Amount: 1, Enemy: 25}	#New Age Retro Hippie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -523,8 +523,8 @@
   Background 1: 3
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 122}
-  - {Amount: 1, Enemy: 117}
+  - {Amount: 1, Enemy: 122}	#Trick or Trick Kid
+  - {Amount: 1, Enemy: 117}	#Handsome Tom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -532,7 +532,7 @@
   Background 1: 3
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 122}
+  - {Amount: 1, Enemy: 122}	#Trick or Trick Kid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -540,8 +540,8 @@
   Background 1: 15
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 117}
-  - {Amount: 1, Enemy: 118}
+  - {Amount: 1, Enemy: 117}	#Handsome Tom
+  - {Amount: 1, Enemy: 118}	#Smilin' Sam
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -549,7 +549,7 @@
   Background 1: 25
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 117}
+  - {Amount: 1, Enemy: 117}	#Handsome Tom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -557,7 +557,7 @@
   Background 1: 25
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 118}
+  - {Amount: 1, Enemy: 118}	#Smilin' Sam
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -565,7 +565,7 @@
   Background 1: 27
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 76}
+  - {Amount: 2, Enemy: 76}	#Urban Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -573,8 +573,8 @@
   Background 1: 26
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 77}
-  - {Amount: 1, Enemy: 76}
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
+  - {Amount: 1, Enemy: 76}	#Urban Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -582,8 +582,8 @@
   Background 1: 28
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 157}
-  - {Amount: 1, Enemy: 30}
+  - {Amount: 2, Enemy: 157}	#No Good Fly
+  - {Amount: 1, Enemy: 30}	#Putrid Moldyman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -591,8 +591,8 @@
   Background 1: 27
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 30}
-  - {Amount: 1, Enemy: 108}
+  - {Amount: 1, Enemy: 30}	#Putrid Moldyman
+  - {Amount: 1, Enemy: 108}	#Smelly Ghost
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -600,8 +600,8 @@
   Background 1: 26
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 77}
-  - {Amount: 1, Enemy: 30}
+  - {Amount: 2, Enemy: 77}	#Zombie Possessor
+  - {Amount: 1, Enemy: 30}	#Putrid Moldyman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -609,8 +609,8 @@
   Background 1: 26
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 77}
-  - {Amount: 1, Enemy: 108}
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
+  - {Amount: 1, Enemy: 108}	#Smelly Ghost
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -618,8 +618,8 @@
   Background 1: 27
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 30}
-  - {Amount: 1, Enemy: 108}
+  - {Amount: 1, Enemy: 30}	#Putrid Moldyman
+  - {Amount: 1, Enemy: 108}	#Smelly Ghost
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -627,8 +627,8 @@
   Background 1: 28
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 157}
-  - {Amount: 1, Enemy: 30}
+  - {Amount: 3, Enemy: 157}	#No Good Fly
+  - {Amount: 1, Enemy: 30}	#Putrid Moldyman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -636,8 +636,8 @@
   Background 1: 28
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 157}
-  - {Amount: 1, Enemy: 108}
+  - {Amount: 2, Enemy: 157}	#No Good Fly
+  - {Amount: 1, Enemy: 108}	#Smelly Ghost
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -645,7 +645,7 @@
   Background 1: 27
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 157}
+  - {Amount: 3, Enemy: 157}	#No Good Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -653,7 +653,7 @@
   Background 1: 29
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 78}
+  - {Amount: 1, Enemy: 78}	#Zombie Dog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -661,8 +661,8 @@
   Background 1: 27
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 78}
-  - {Amount: 2, Enemy: 157}
+  - {Amount: 1, Enemy: 78}	#Zombie Dog
+  - {Amount: 2, Enemy: 157}	#No Good Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -670,8 +670,8 @@
   Background 1: 317
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 209}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 209}	#Black Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -679,8 +679,8 @@
   Background 1: 317
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 2, Enemy: 209}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 2, Enemy: 209}	#Black Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -688,9 +688,9 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -698,8 +698,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -707,8 +707,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 3, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -716,8 +716,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 6}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 3, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -725,8 +725,8 @@
   Background 1: 30
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 3}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 1, Enemy: 3}	#Armored Frog
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -734,7 +734,7 @@
   Background 1: 316
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -742,8 +742,8 @@
   Background 1: 30
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 3}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 2, Enemy: 3}	#Armored Frog
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -751,8 +751,8 @@
   Background 1: 31
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 154}
-  - {Amount: 2, Enemy: 6}
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
+  - {Amount: 2, Enemy: 6}	#Red Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -760,9 +760,9 @@
   Background 1: 316
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 154}
-  - {Amount: 1, Enemy: 3}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
+  - {Amount: 1, Enemy: 3}	#Armored Frog
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -770,8 +770,8 @@
   Background 1: 31
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 154}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -779,8 +779,8 @@
   Background 1: 31
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 154}
-  - {Amount: 1, Enemy: 222}
+  - {Amount: 2, Enemy: 154}	#Plain Alligator
+  - {Amount: 1, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -788,9 +788,9 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 209}
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 209}	#Black Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -798,8 +798,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 209}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 209}	#Black Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -807,8 +807,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 2, Enemy: 209}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 2, Enemy: 209}	#Black Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -816,9 +816,9 @@
   Background 1: 317
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
-  - {Amount: 1, Enemy: 154}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -826,8 +826,8 @@
   Background 1: 317
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 2, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -835,8 +835,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 6}
-  - {Amount: 1, Enemy: 154}
+  - {Amount: 3, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -844,8 +844,8 @@
   Background 1: 32
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 6}
-  - {Amount: 2, Enemy: 154}
+  - {Amount: 3, Enemy: 6}	#Red Antoid
+  - {Amount: 2, Enemy: 154}	#Plain Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -853,8 +853,8 @@
   Background 1: 317
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 6}
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 3, Enemy: 6}	#Red Antoid
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -862,7 +862,7 @@
   Background 1: 30
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 3}
+  - {Amount: 1, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -870,7 +870,7 @@
   Background 1: 30
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 3}
+  - {Amount: 2, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -878,8 +878,8 @@
   Background 1: 31
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 154}
-  - {Amount: 2, Enemy: 3}
+  - {Amount: 1, Enemy: 154}	#Plain Alligator
+  - {Amount: 2, Enemy: 3}	#Armored Frog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -887,7 +887,7 @@
   Background 1: 31
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 154}
+  - {Amount: 2, Enemy: 154}	#Plain Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -895,7 +895,7 @@
   Background 1: 33
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 88}
+  - {Amount: 1, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -903,7 +903,7 @@
   Background 1: 34
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 59}
+  - {Amount: 1, Enemy: 59}	#Violent Roach
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -911,7 +911,7 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 149}
+  - {Amount: 2, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -919,8 +919,8 @@
   Background 1: 21
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -928,7 +928,7 @@
   Background 1: 21
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 10}
+  - {Amount: 3, Enemy: 10}	#Tough Walking Sprout
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -936,9 +936,9 @@
   Background 1: 9
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 10}
-  - {Amount: 1, Enemy: 8}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 1, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -946,8 +946,8 @@
   Background 1: 35
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 4}
-  - {Amount: 1, Enemy: 92}
+  - {Amount: 1, Enemy: 4}	#Bad Buffalo
+  - {Amount: 1, Enemy: 92}	#Desert Wolf
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -955,8 +955,8 @@
   Background 1: 35
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 4}
-  - {Amount: 1, Enemy: 70}
+  - {Amount: 1, Enemy: 4}	#Bad Buffalo
+  - {Amount: 1, Enemy: 70}	#Smilin' Sphere
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -964,7 +964,7 @@
   Background 1: 35
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 4}
+  - {Amount: 1, Enemy: 4}	#Bad Buffalo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -972,7 +972,7 @@
   Background 1: 38
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 92}
+  - {Amount: 1, Enemy: 92}	#Desert Wolf
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -980,8 +980,8 @@
   Background 1: 259
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
-  - {Amount: 1, Enemy: 132}
+  - {Amount: 1, Enemy: 65}	#Skelpion
+  - {Amount: 1, Enemy: 132}	#Cute Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -989,8 +989,8 @@
   Background 1: 318
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
-  - {Amount: 1, Enemy: 70}
+  - {Amount: 1, Enemy: 65}	#Skelpion
+  - {Amount: 1, Enemy: 70}	#Smilin' Sphere
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -998,9 +998,9 @@
   Background 1: 318
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
-  - {Amount: 1, Enemy: 70}
-  - {Amount: 1, Enemy: 132}
+  - {Amount: 1, Enemy: 65}	#Skelpion
+  - {Amount: 1, Enemy: 70}	#Smilin' Sphere
+  - {Amount: 1, Enemy: 132}	#Cute Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1008,8 +1008,8 @@
   Background 1: 318
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
-  - {Amount: 1, Enemy: 104}
+  - {Amount: 1, Enemy: 65}	#Skelpion
+  - {Amount: 1, Enemy: 104}	#Crested Booka
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1017,7 +1017,7 @@
   Background 1: 259
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
+  - {Amount: 1, Enemy: 65}	#Skelpion
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1025,7 +1025,7 @@
   Background 1: 259
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 65}
+  - {Amount: 2, Enemy: 65}	#Skelpion
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1033,8 +1033,8 @@
   Background 1: 36
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 104}
-  - {Amount: 1, Enemy: 4}
+  - {Amount: 1, Enemy: 104}	#Crested Booka
+  - {Amount: 1, Enemy: 4}	#Bad Buffalo
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1042,8 +1042,8 @@
   Background 1: 36
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 104}
-  - {Amount: 1, Enemy: 92}
+  - {Amount: 1, Enemy: 104}	#Crested Booka
+  - {Amount: 1, Enemy: 92}	#Desert Wolf
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1051,9 +1051,9 @@
   Background 1: 319
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 104}
-  - {Amount: 1, Enemy: 132}
-  - {Amount: 1, Enemy: 70}
+  - {Amount: 1, Enemy: 104}	#Crested Booka
+  - {Amount: 1, Enemy: 132}	#Cute Li'l UFO
+  - {Amount: 1, Enemy: 70}	#Smilin' Sphere
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1061,8 +1061,8 @@
   Background 1: 319
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 104}
-  - {Amount: 1, Enemy: 132}
+  - {Amount: 1, Enemy: 104}	#Crested Booka
+  - {Amount: 1, Enemy: 132}	#Cute Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1070,8 +1070,8 @@
   Background 1: 36
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 104}
-  - {Amount: 1, Enemy: 70}
+  - {Amount: 1, Enemy: 104}	#Crested Booka
+  - {Amount: 1, Enemy: 70}	#Smilin' Sphere
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1079,7 +1079,7 @@
   Background 1: 41
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 136}
+  - {Amount: 1, Enemy: 136}	#Mad Taxi
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1087,7 +1087,7 @@
   Background 1: 39
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 33}
+  - {Amount: 1, Enemy: 33}	#Extra Cranky Lady
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1095,7 +1095,7 @@
   Background 1: 42
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 23}
+  - {Amount: 1, Enemy: 23}	#Annoying Reveler
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1103,7 +1103,7 @@
   Background 1: 40
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 61}
+  - {Amount: 1, Enemy: 61}	#Crazed Sign
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1111,7 +1111,7 @@
   Background 1: 43
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 89}
+  - {Amount: 1, Enemy: 89}	#Dali's Clock
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1119,7 +1119,7 @@
   Background 1: 189
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 11}
+  - {Amount: 1, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1127,7 +1127,7 @@
   Background 1: 320
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 11}
+  - {Amount: 2, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1135,7 +1135,7 @@
   Background 1: 44
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 124}
+  - {Amount: 1, Enemy: 124}	#Abstract Art
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1143,7 +1143,7 @@
   Background 1: 157
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 153}
+  - {Amount: 1, Enemy: 153}	#Robo-pump
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1151,8 +1151,8 @@
   Background 1: 288
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 153}
-  - {Amount: 1, Enemy: 11}
+  - {Amount: 1, Enemy: 153}	#Robo-pump
+  - {Amount: 1, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -1160,7 +1160,7 @@
   Background 1: 203
   Background 2: 202
   Enemies:
-  - {Amount: 1, Enemy: 136}
+  - {Amount: 1, Enemy: 136}	#Mad Taxi
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1168,8 +1168,8 @@
   Background 1: 203
   Background 2: 202
   Enemies:
-  - {Amount: 1, Enemy: 136}
-  - {Amount: 1, Enemy: 61}
+  - {Amount: 1, Enemy: 136}	#Mad Taxi
+  - {Amount: 1, Enemy: 61}	#Crazed Sign
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1177,7 +1177,7 @@
   Background 1: 48
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 61}
+  - {Amount: 1, Enemy: 61}	#Crazed Sign
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1185,7 +1185,7 @@
   Background 1: 46
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 135}
+  - {Amount: 1, Enemy: 135}	#Tough Guy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1193,8 +1193,8 @@
   Background 1: 49
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 80}
-  - {Amount: 1, Enemy: 135}
+  - {Amount: 1, Enemy: 80}	#Over Zealous Cop
+  - {Amount: 1, Enemy: 135}	#Tough Guy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1202,7 +1202,7 @@
   Background 1: 49
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 80}
+  - {Amount: 1, Enemy: 80}	#Over Zealous Cop
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1210,8 +1210,8 @@
   Background 1: 53
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 151}
-  - {Amount: 1, Enemy: 133}
+  - {Amount: 1, Enemy: 151}	#High-class UFO
+  - {Amount: 1, Enemy: 133}	#Beautiful UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1219,7 +1219,7 @@
   Background 1: 53
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 151}
+  - {Amount: 1, Enemy: 151}	#High-class UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1227,7 +1227,7 @@
   Background 1: 321
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 151}
+  - {Amount: 2, Enemy: 151}	#High-class UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1235,7 +1235,7 @@
   Background 1: 54
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 133}
+  - {Amount: 1, Enemy: 133}	#Beautiful UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1243,8 +1243,8 @@
   Background 1: 56
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 66}
-  - {Amount: 1, Enemy: 105}
+  - {Amount: 1, Enemy: 66}	#Dread Skelpion
+  - {Amount: 1, Enemy: 105}	#Great Crested Booka
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1252,7 +1252,7 @@
   Background 1: 56
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 66}
+  - {Amount: 1, Enemy: 66}	#Dread Skelpion
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1260,7 +1260,7 @@
   Background 1: 52
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 105}
+  - {Amount: 1, Enemy: 105}	#Great Crested Booka
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1268,8 +1268,8 @@
   Background 1: 52
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 105}
-  - {Amount: 1, Enemy: 66}
+  - {Amount: 1, Enemy: 105}	#Great Crested Booka
+  - {Amount: 1, Enemy: 66}	#Dread Skelpion
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1277,7 +1277,7 @@
   Background 1: 52
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 105}
+  - {Amount: 2, Enemy: 105}	#Great Crested Booka
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1285,8 +1285,8 @@
   Background 1: 321
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 151}
-  - {Amount: 1, Enemy: 133}
+  - {Amount: 2, Enemy: 151}	#High-class UFO
+  - {Amount: 1, Enemy: 133}	#Beautiful UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1294,9 +1294,9 @@
   Background 1: 53
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 151}
-  - {Amount: 1, Enemy: 84}
-  - {Amount: 1, Enemy: 133}
+  - {Amount: 1, Enemy: 151}	#High-class UFO
+  - {Amount: 1, Enemy: 84}	#Marauder Octobot
+  - {Amount: 1, Enemy: 133}	#Beautiful UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1304,8 +1304,8 @@
   Background 1: 53
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 151}
-  - {Amount: 1, Enemy: 84}
+  - {Amount: 2, Enemy: 151}	#High-class UFO
+  - {Amount: 1, Enemy: 84}	#Marauder Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1313,7 +1313,7 @@
   Background 1: 321
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 133}
+  - {Amount: 1, Enemy: 133}	#Beautiful UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1321,7 +1321,7 @@
   Background 1: 55
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 84}
+  - {Amount: 1, Enemy: 84}	#Marauder Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1329,7 +1329,7 @@
   Background 1: 57
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 82}
+  - {Amount: 1, Enemy: 82}	#Hostile Elder Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1337,7 +1337,7 @@
   Background 1: 61
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 112}
+  - {Amount: 4, Enemy: 112}	#Pit Bull Slug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1345,7 +1345,7 @@
   Background 1: 59
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 148}
+  - {Amount: 1, Enemy: 148}	#Demonic Rafflesia
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1353,8 +1353,8 @@
   Background 1: 58
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 94}
-  - {Amount: 0, Enemy: 46}
+  - {Amount: 1, Enemy: 94}	#Big Pile of Puke
+  - {Amount: 0, Enemy: 46}	#Even Slimier Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1362,8 +1362,8 @@
   Background 1: 58
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 94}
-  - {Amount: 1, Enemy: 46}
+  - {Amount: 1, Enemy: 94}	#Big Pile of Puke
+  - {Amount: 1, Enemy: 46}	#Even Slimier Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1371,7 +1371,7 @@
   Background 1: 57
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 82}
+  - {Amount: 1, Enemy: 82}	#Hostile Elder Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1379,8 +1379,8 @@
   Background 1: 60
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 100}
-  - {Amount: 1, Enemy: 156}
+  - {Amount: 1, Enemy: 100}	#Zap Eel
+  - {Amount: 1, Enemy: 156}	#Hard Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1388,7 +1388,7 @@
   Background 1: 60
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 100}
+  - {Amount: 2, Enemy: 100}	#Zap Eel
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1396,8 +1396,8 @@
   Background 1: 62
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 46}
-  - {Amount: 1, Enemy: 100}
+  - {Amount: 1, Enemy: 46}	#Even Slimier Little Pile
+  - {Amount: 1, Enemy: 100}	#Zap Eel
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1405,8 +1405,8 @@
   Background 1: 62
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 46}
-  - {Amount: 1, Enemy: 156}
+  - {Amount: 1, Enemy: 46}	#Even Slimier Little Pile
+  - {Amount: 1, Enemy: 156}	#Hard Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1414,8 +1414,8 @@
   Background 1: 62
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 46}
-  - {Amount: 1, Enemy: 119}
+  - {Amount: 1, Enemy: 46}	#Even Slimier Little Pile
+  - {Amount: 1, Enemy: 119}	#Manly Fish
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1423,8 +1423,8 @@
   Background 1: 63
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 119}
-  - {Amount: 1, Enemy: 156}
+  - {Amount: 1, Enemy: 119}	#Manly Fish
+  - {Amount: 1, Enemy: 156}	#Hard Alligator
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1432,8 +1432,8 @@
   Background 1: 63
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 119}
-  - {Amount: 1, Enemy: 120}
+  - {Amount: 1, Enemy: 119}	#Manly Fish
+  - {Amount: 1, Enemy: 120}	#Manly Fish's Brother
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1441,7 +1441,7 @@
   Background 1: 61
   Background 2: 0
   Enemies:
-  - {Amount: 6, Enemy: 112}
+  - {Amount: 6, Enemy: 112}	#Pit Bull Slug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1449,7 +1449,7 @@
   Background 1: 59
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 148}
+  - {Amount: 1, Enemy: 148}	#Demonic Rafflesia
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1457,8 +1457,8 @@
   Background 1: 59
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 148}
-  - {Amount: 1, Enemy: 82}
+  - {Amount: 1, Enemy: 148}	#Demonic Rafflesia
+  - {Amount: 1, Enemy: 82}	#Hostile Elder Oak
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1466,7 +1466,7 @@
   Background 1: 64
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 35}
+  - {Amount: 1, Enemy: 35}	#Googlysaurus
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -1474,7 +1474,7 @@
   Background 1: 65
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 36}
+  - {Amount: 1, Enemy: 36}	#Hungrosaurus
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -1482,7 +1482,7 @@
   Background 1: 66
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 127}
+  - {Amount: 1, Enemy: 127}	#Ego Orb
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -1490,8 +1490,8 @@
   Background 1: 71
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 115}
-  - {Amount: 2, Enemy: 138}
+  - {Amount: 1, Enemy: 115}	#Care Free Bomb
+  - {Amount: 2, Enemy: 138}	#Mr. Molecule
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1499,7 +1499,7 @@
   Background 1: 322
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 115}
+  - {Amount: 2, Enemy: 115}	#Care Free Bomb
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1507,7 +1507,7 @@
   Background 1: 70
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 97}
+  - {Amount: 1, Enemy: 97}	#French Kiss of Death
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1515,9 +1515,10 @@
   Background 1: 67
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 44}
-  - {Amount: 0, Enemy: 115} # - {Amount: 0, Enemy: 133}
-  - {Amount: 0, Enemy: 151}
+  - {Amount: 1, Enemy: 44}	#Loaded Dice
+  - {Amount: 0, Enemy: 115}	#Care Free Bomb
+# - {Amount: 0, Enemy: 133}	#Beautiful UFO
+  - {Amount: 0, Enemy: 151}	#High-class UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1525,9 +1526,10 @@
   Background 1: 323
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 195}
-  - {Amount: 0, Enemy: 17} # - {Amount: 0, Enemy: 99}
-  - {Amount: 0, Enemy: 71}
+  - {Amount: 1, Enemy: 195}	#Loaded Dice
+  - {Amount: 0, Enemy: 17}	#Electro Swoosh
+# - {Amount: 0, Enemy: 99}	#Fobby
+  - {Amount: 0, Enemy: 71}	#Uncontrollable Sphere
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1535,7 +1537,7 @@
   Background 1: 268
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 17}
+  - {Amount: 1, Enemy: 17}	#Electro Swoosh
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1543,8 +1545,8 @@
   Background 1: 268
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 17}
-  - {Amount: 1, Enemy: 97}
+  - {Amount: 1, Enemy: 17}	#Electro Swoosh
+  - {Amount: 1, Enemy: 97}	#French Kiss of Death
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1552,7 +1554,7 @@
   Background 1: 68
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 138}
+  - {Amount: 3, Enemy: 138}	#Mr. Molecule
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1560,7 +1562,7 @@
   Background 1: 68
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 138}
+  - {Amount: 4, Enemy: 138}	#Mr. Molecule
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1568,8 +1570,8 @@
   Background 1: 72
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 113}
-  - {Amount: 1, Enemy: 111}
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
+  - {Amount: 1, Enemy: 111}	#Attack Slug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1577,7 +1579,7 @@
   Background 1: 72
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1585,8 +1587,8 @@
   Background 1: 10
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 210}
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 1, Enemy: 210}	#Wanderin' Evil Mushroom
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1594,7 +1596,7 @@
   Background 1: 10
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 210}
+  - {Amount: 1, Enemy: 210}	#Wanderin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1602,7 +1604,7 @@
   Background 1: 10
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 210}
+  - {Amount: 2, Enemy: 210}	#Wanderin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1610,7 +1612,7 @@
   Background 1: 75
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 111}
+  - {Amount: 2, Enemy: 111}	#Attack Slug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1618,7 +1620,7 @@
   Background 1: 75
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 111}
+  - {Amount: 3, Enemy: 111}	#Attack Slug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1626,8 +1628,8 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 58}
-  - {Amount: 1, Enemy: 47}
+  - {Amount: 1, Enemy: 58}	#Elder Batty
+  - {Amount: 1, Enemy: 47}	#Arachnid!
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1635,7 +1637,7 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 58}
+  - {Amount: 2, Enemy: 58}	#Elder Batty
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1643,8 +1645,8 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 58}
-  - {Amount: 1, Enemy: 47}
+  - {Amount: 2, Enemy: 58}	#Elder Batty
+  - {Amount: 1, Enemy: 47}	#Arachnid!
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1652,8 +1654,8 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 58}
-  - {Amount: 1, Enemy: 155}
+  - {Amount: 2, Enemy: 58}	#Elder Batty
+  - {Amount: 1, Enemy: 155}	#Strong Alligator
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1661,8 +1663,8 @@
   Background 1: 74
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 155}
-  - {Amount: 1, Enemy: 47}
+  - {Amount: 1, Enemy: 155}	#Strong Alligator
+  - {Amount: 1, Enemy: 47}	#Arachnid!
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1670,7 +1672,7 @@
   Background 1: 74
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 155}
+  - {Amount: 1, Enemy: 155}	#Strong Alligator
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1678,7 +1680,7 @@
   Background 1: 74
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 155}
+  - {Amount: 2, Enemy: 155}	#Strong Alligator
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1686,7 +1688,7 @@
   Background 1: 78
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 47}
+  - {Amount: 1, Enemy: 47}	#Arachnid!
   Fear event flag: 192
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1694,8 +1696,8 @@
   Background 1: 80
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 5}
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 1, Enemy: 5}	#Black Antoid
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1703,8 +1705,8 @@
   Background 1: 81
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 5}
-  - {Amount: 1, Enemy: 111}
+  - {Amount: 1, Enemy: 5}	#Black Antoid
+  - {Amount: 1, Enemy: 111}	#Attack Slug
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1712,7 +1714,7 @@
   Background 1: 81
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 5}
+  - {Amount: 1, Enemy: 5}	#Black Antoid
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1720,8 +1722,8 @@
   Background 1: 81
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 5}
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 2, Enemy: 5}	#Black Antoid
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1729,7 +1731,7 @@
   Background 1: 79
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 5}
+  - {Amount: 2, Enemy: 5}	#Black Antoid
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1737,7 +1739,7 @@
   Background 1: 79
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1745,7 +1747,7 @@
   Background 1: 79
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 113}
+  - {Amount: 2, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1753,7 +1755,7 @@
   Background 1: 80
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 111}
+  - {Amount: 4, Enemy: 111}	#Attack Slug
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1761,7 +1763,7 @@
   Background 1: 80
   Background 2: 0
   Enemies:
-  - {Amount: 6, Enemy: 111}
+  - {Amount: 6, Enemy: 111}	#Attack Slug
   Fear event flag: 190
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1769,7 +1771,7 @@
   Background 1: 82
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1777,7 +1779,7 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 57}
+  - {Amount: 2, Enemy: 57}	#Mr. Batty
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1785,8 +1787,8 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 57}
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 2, Enemy: 57}	#Mr. Batty
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1794,8 +1796,8 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 57}
-  - {Amount: 1, Enemy: 28}
+  - {Amount: 2, Enemy: 57}	#Mr. Batty
+  - {Amount: 1, Enemy: 28}	#Mighty Bear
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1803,7 +1805,7 @@
   Background 1: 73
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 57}
+  - {Amount: 3, Enemy: 57}	#Mr. Batty
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1811,7 +1813,7 @@
   Background 1: 82
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -1819,8 +1821,8 @@
   Background 1: 82
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 144}
-  - {Amount: 1, Enemy: 28}
+  - {Amount: 2, Enemy: 144}	#Mole Playing Rough
+  - {Amount: 1, Enemy: 28}	#Mighty Bear
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1828,7 +1830,7 @@
   Background 1: 76
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 28}
+  - {Amount: 1, Enemy: 28}	#Mighty Bear
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1836,8 +1838,8 @@
   Background 1: 76
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 28}
-  - {Amount: 1, Enemy: 57}
+  - {Amount: 1, Enemy: 28}	#Mighty Bear
+  - {Amount: 1, Enemy: 57}	#Mr. Batty
   Fear event flag: 191
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -1845,8 +1847,8 @@
   Background 1: 153
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 76}
-  - {Amount: 1, Enemy: 78}
+  - {Amount: 1, Enemy: 76}	#Urban Zombie
+  - {Amount: 1, Enemy: 78}	#Zombie Dog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1854,7 +1856,7 @@
   Background 1: 153
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 76}
+  - {Amount: 2, Enemy: 76}	#Urban Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1862,8 +1864,8 @@
   Background 1: 154
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 78}
-  - {Amount: 2, Enemy: 157}
+  - {Amount: 1, Enemy: 78}	#Zombie Dog
+  - {Amount: 2, Enemy: 157}	#No Good Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1871,7 +1873,7 @@
   Background 1: 152
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 77}
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1879,8 +1881,8 @@
   Background 1: 152
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 77}
-  - {Amount: 1, Enemy: 76}
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
+  - {Amount: 1, Enemy: 76}	#Urban Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1888,8 +1890,8 @@
   Background 1: 152
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 77}
-  - {Amount: 1, Enemy: 76}
+  - {Amount: 2, Enemy: 77}	#Zombie Possessor
+  - {Amount: 1, Enemy: 76}	#Urban Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1897,7 +1899,7 @@
   Background 1: 152
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 77}
+  - {Amount: 2, Enemy: 77}	#Zombie Possessor
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -1905,7 +1907,7 @@
   Background 1: 186
   Background 2: 185
   Enemies:
-  - {Amount: 1, Enemy: 59}
+  - {Amount: 1, Enemy: 59}	#Violent Roach
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1913,7 +1915,7 @@
   Background 1: 274
   Background 2: 275
   Enemies:
-  - {Amount: 1, Enemy: 98}
+  - {Amount: 1, Enemy: 98}	#Foppy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1921,7 +1923,7 @@
   Background 1: 274
   Background 2: 275
   Enemies:
-  - {Amount: 2, Enemy: 98}
+  - {Amount: 2, Enemy: 98}	#Foppy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1929,7 +1931,7 @@
   Background 1: 274
   Background 2: 275
   Enemies:
-  - {Amount: 3, Enemy: 98}
+  - {Amount: 3, Enemy: 98}	#Foppy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1937,7 +1939,7 @@
   Background 1: 276
   Background 2: 277
   Enemies:
-  - {Amount: 4, Enemy: 98}
+  - {Amount: 4, Enemy: 98}	#Foppy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1945,7 +1947,7 @@
   Background 1: 276
   Background 2: 277
   Enemies:
-  - {Amount: 6, Enemy: 98}
+  - {Amount: 6, Enemy: 98}	#Foppy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1953,7 +1955,7 @@
   Background 1: 280
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 158}
+  - {Amount: 3, Enemy: 158}	#Mostly Bad Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1961,8 +1963,8 @@
   Background 1: 280
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 45}
-  - {Amount: 1, Enemy: 158}
+  - {Amount: 1, Enemy: 45}	#Slimy Little Pile
+  - {Amount: 1, Enemy: 158}	#Mostly Bad Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1970,8 +1972,8 @@
   Background 1: 280
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 45}
-  - {Amount: 2, Enemy: 158}
+  - {Amount: 1, Enemy: 45}	#Slimy Little Pile
+  - {Amount: 2, Enemy: 158}	#Mostly Bad Fly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1979,7 +1981,7 @@
   Background 1: 192
   Background 2: 191
   Enemies:
-  - {Amount: 1, Enemy: 45}
+  - {Amount: 1, Enemy: 45}	#Slimy Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1987,7 +1989,7 @@
   Background 1: 192
   Background 2: 191
   Enemies:
-  - {Amount: 2, Enemy: 45}
+  - {Amount: 2, Enemy: 45}	#Slimy Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -1995,7 +1997,7 @@
   Background 1: 192
   Background 2: 191
   Enemies:
-  - {Amount: 3, Enemy: 45}
+  - {Amount: 3, Enemy: 45}	#Slimy Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2003,7 +2005,7 @@
   Background 1: 281
   Background 2: 282
   Enemies:
-  - {Amount: 3, Enemy: 222}
+  - {Amount: 3, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2011,7 +2013,7 @@
   Background 1: 281
   Background 2: 282
   Enemies:
-  - {Amount: 4, Enemy: 222}
+  - {Amount: 4, Enemy: 222}	#Muddy Zombie
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2019,8 +2021,8 @@
   Background 1: 134
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 8}
-  - {Amount: 2, Enemy: 10}
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2028,9 +2030,9 @@
   Background 1: 134
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 8}
-  - {Amount: 1, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 2, Enemy: 8}	#Struttin' Evil Mushroom
+  - {Amount: 1, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2038,7 +2040,7 @@
   Background 1: 135
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 149}
+  - {Amount: 2, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2046,8 +2048,8 @@
   Background 1: 135
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2055,8 +2057,8 @@
   Background 1: 133
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2064,8 +2066,8 @@
   Background 1: 135
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
-  - {Amount: 1, Enemy: 8}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2073,9 +2075,9 @@
   Background 1: 134
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 8}
-  - {Amount: 1, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 2, Enemy: 8}	#Struttin' Evil Mushroom
+  - {Amount: 1, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2083,9 +2085,9 @@
   Background 1: 135
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 8}
-  - {Amount: 1, Enemy: 10}
-  - {Amount: 1, Enemy: 149}
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
+  - {Amount: 1, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2093,7 +2095,7 @@
   Background 1: 132
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 149}
+  - {Amount: 2, Enemy: 149}	#Ranboob
   Fear event flag: 193
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2101,8 +2103,8 @@
   Background 1: 133
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 10}
-  - {Amount: 1, Enemy: 8}
+  - {Amount: 1, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2110,8 +2112,8 @@
   Background 1: 133
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
-  - {Amount: 1, Enemy: 8}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2119,7 +2121,7 @@
   Background 1: 133
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 10}
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2127,7 +2129,7 @@
   Background 1: 132
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 8}
+  - {Amount: 1, Enemy: 8}	#Struttin' Evil Mushroom
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2135,7 +2137,7 @@
   Background 1: 139
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 38}
+  - {Amount: 1, Enemy: 38}	#Gigantic Ant
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2143,7 +2145,7 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 38}
+  - {Amount: 2, Enemy: 38}	#Gigantic Ant
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2151,8 +2153,8 @@
   Background 1: 139
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 56}
-  - {Amount: 1, Enemy: 38}
+  - {Amount: 1, Enemy: 56}	#Dry Coil Snake
+  - {Amount: 1, Enemy: 38}	#Gigantic Ant
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2160,7 +2162,7 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 56}
+  - {Amount: 1, Enemy: 56}	#Dry Coil Snake
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2168,7 +2170,7 @@
   Background 1: 136
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 56}
+  - {Amount: 2, Enemy: 56}	#Dry Coil Snake
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2176,8 +2178,8 @@
   Background 1: 137
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 88}
-  - {Amount: 1, Enemy: 56}
+  - {Amount: 1, Enemy: 88}	#Mad Duck
+  - {Amount: 1, Enemy: 56}	#Dry Coil Snake
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2185,7 +2187,7 @@
   Background 1: 139
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 88}
+  - {Amount: 3, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2193,8 +2195,8 @@
   Background 1: 136
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 152}
-  - {Amount: 1, Enemy: 88}
+  - {Amount: 1, Enemy: 152}	#Noose Man
+  - {Amount: 1, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2202,8 +2204,8 @@
   Background 1: 136
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 152}
-  - {Amount: 2, Enemy: 88}
+  - {Amount: 1, Enemy: 152}	#Noose Man
+  - {Amount: 2, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2211,8 +2213,8 @@
   Background 1: 136
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 152}
-  - {Amount: 3, Enemy: 88}
+  - {Amount: 1, Enemy: 152}	#Noose Man
+  - {Amount: 3, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2220,8 +2222,8 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 152}
-  - {Amount: 2, Enemy: 88}
+  - {Amount: 2, Enemy: 152}	#Noose Man
+  - {Amount: 2, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2229,8 +2231,8 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 5, Enemy: 152}
-  - {Amount: 1, Enemy: 88}
+  - {Amount: 5, Enemy: 152}	#Noose Man
+  - {Amount: 1, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2238,8 +2240,8 @@
   Background 1: 137
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 152}
-  - {Amount: 1, Enemy: 38}
+  - {Amount: 1, Enemy: 152}	#Noose Man
+  - {Amount: 1, Enemy: 38}	#Gigantic Ant
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2247,8 +2249,8 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 152}
-  - {Amount: 1, Enemy: 88}
+  - {Amount: 3, Enemy: 152}	#Noose Man
+  - {Amount: 1, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2256,8 +2258,8 @@
   Background 1: 136
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 152}
-  - {Amount: 2, Enemy: 88}
+  - {Amount: 2, Enemy: 152}	#Noose Man
+  - {Amount: 2, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2265,7 +2267,7 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 152}
+  - {Amount: 4, Enemy: 152}	#Noose Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2273,8 +2275,8 @@
   Background 1: 138
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 152}
-  - {Amount: 1, Enemy: 38}
+  - {Amount: 2, Enemy: 152}	#Noose Man
+  - {Amount: 1, Enemy: 38}	#Gigantic Ant
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2282,8 +2284,8 @@
   Background 1: 85
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 91}
-  - {Amount: 1, Enemy: 12}
+  - {Amount: 1, Enemy: 91}	#Musica
+  - {Amount: 1, Enemy: 12}	#Mystical Record
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2291,8 +2293,8 @@
   Background 1: 86
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 91}
-  - {Amount: 2, Enemy: 12}
+  - {Amount: 1, Enemy: 91}	#Musica
+  - {Amount: 2, Enemy: 12}	#Mystical Record
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2300,7 +2302,7 @@
   Background 1: 85
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 91}
+  - {Amount: 1, Enemy: 91}	#Musica
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2308,8 +2310,8 @@
   Background 1: 87
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 43}
-  - {Amount: 1, Enemy: 12}
+  - {Amount: 1, Enemy: 43}	#Scalding Coffee Cup
+  - {Amount: 1, Enemy: 12}	#Mystical Record
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2317,8 +2319,8 @@
   Background 1: 84
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 43}
-  - {Amount: 2, Enemy: 12}
+  - {Amount: 1, Enemy: 43}	#Scalding Coffee Cup
+  - {Amount: 2, Enemy: 12}	#Mystical Record
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2326,7 +2328,7 @@
   Background 1: 84
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 43}
+  - {Amount: 1, Enemy: 43}	#Scalding Coffee Cup
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2334,7 +2336,7 @@
   Background 1: 86
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 12}
+  - {Amount: 2, Enemy: 12}	#Mystical Record
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2342,7 +2344,7 @@
   Background 1: 142
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 109}
+  - {Amount: 2, Enemy: 109}	#Stinky Ghost
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2350,8 +2352,8 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 114}
-  - {Amount: 1, Enemy: 109}
+  - {Amount: 1, Enemy: 114}	#Deadly Mouse
+  - {Amount: 1, Enemy: 109}	#Stinky Ghost
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2359,7 +2361,7 @@
   Background 1: 141
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 60}
+  - {Amount: 1, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2367,7 +2369,7 @@
   Background 1: 141
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 60}
+  - {Amount: 2, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2375,7 +2377,7 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 114}
+  - {Amount: 2, Enemy: 114}	#Deadly Mouse
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2383,8 +2385,8 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 114}
-  - {Amount: 1, Enemy: 109}
+  - {Amount: 1, Enemy: 114}	#Deadly Mouse
+  - {Amount: 1, Enemy: 109}	#Stinky Ghost
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2392,7 +2394,7 @@
   Background 1: 142
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 109}
+  - {Amount: 2, Enemy: 109}	#Stinky Ghost
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2400,8 +2402,8 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 114}
-  - {Amount: 1, Enemy: 109}
+  - {Amount: 2, Enemy: 114}	#Deadly Mouse
+  - {Amount: 1, Enemy: 109}	#Stinky Ghost
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2409,7 +2411,7 @@
   Background 1: 141
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 60}
+  - {Amount: 1, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2417,7 +2419,7 @@
   Background 1: 141
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 60}
+  - {Amount: 2, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2425,7 +2427,7 @@
   Background 1: 140
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 60}
+  - {Amount: 1, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2433,7 +2435,7 @@
   Background 1: 141
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 60}
+  - {Amount: 2, Enemy: 60}	#Filthy Attack Roach
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2441,7 +2443,7 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 114}
+  - {Amount: 3, Enemy: 114}	#Deadly Mouse
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2449,7 +2451,7 @@
   Background 1: 143
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 114}
+  - {Amount: 4, Enemy: 114}	#Deadly Mouse
   Fear event flag: 194
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -2457,7 +2459,7 @@
   Background 1: 51
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 31}
+  - {Amount: 1, Enemy: 31}	#Thunder Mite
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2465,7 +2467,7 @@
   Background 1: 146
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 101}
+  - {Amount: 1, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2473,8 +2475,8 @@
   Background 1: 304
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 31}
-  - {Amount: 1, Enemy: 101}
+  - {Amount: 1, Enemy: 31}	#Thunder Mite
+  - {Amount: 1, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2482,8 +2484,8 @@
   Background 1: 146
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 101}
-  - {Amount: 1, Enemy: 96}
+  - {Amount: 1, Enemy: 101}	#Tengu
+  - {Amount: 1, Enemy: 96}	#Kiss of Death
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2491,8 +2493,8 @@
   Background 1: 304
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 31}
-  - {Amount: 1, Enemy: 101}
+  - {Amount: 1, Enemy: 31}	#Thunder Mite
+  - {Amount: 1, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2500,7 +2502,7 @@
   Background 1: 305
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 101}
+  - {Amount: 2, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2508,7 +2510,7 @@
   Background 1: 51
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 31}
+  - {Amount: 2, Enemy: 31}	#Thunder Mite
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2516,8 +2518,8 @@
   Background 1: 305
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 18}
-  - {Amount: 1, Enemy: 101}
+  - {Amount: 1, Enemy: 18}	#Conducting Menace
+  - {Amount: 1, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2525,7 +2527,7 @@
   Background 1: 146
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 18}
+  - {Amount: 2, Enemy: 18}	#Conducting Menace
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2533,7 +2535,7 @@
   Background 1: 144
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 96}
+  - {Amount: 1, Enemy: 96}	#Kiss of Death
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2541,8 +2543,8 @@
   Background 1: 144
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 96}
-  - {Amount: 1, Enemy: 18}
+  - {Amount: 1, Enemy: 96}	#Kiss of Death
+  - {Amount: 1, Enemy: 18}	#Conducting Menace
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2550,7 +2552,7 @@
   Background 1: 145
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 18}
+  - {Amount: 2, Enemy: 18}	#Conducting Menace
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2558,8 +2560,8 @@
   Background 1: 305
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 18}
-  - {Amount: 1, Enemy: 101}
+  - {Amount: 1, Enemy: 18}	#Conducting Menace
+  - {Amount: 1, Enemy: 101}	#Tengu
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2567,9 +2569,9 @@
   Background 1: 146
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 18}
-  - {Amount: 1, Enemy: 101}
-  - {Amount: 1, Enemy: 96}
+  - {Amount: 1, Enemy: 18}	#Conducting Menace
+  - {Amount: 1, Enemy: 101}	#Tengu
+  - {Amount: 1, Enemy: 96}	#Kiss of Death
   Fear event flag: 195
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -2577,7 +2579,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 48}
+  - {Amount: 2, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2585,7 +2587,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 48}
+  - {Amount: 1, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2593,7 +2595,7 @@
   Background 1: 294
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2601,8 +2603,8 @@
   Background 1: 96
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
-  - {Amount: 1, Enemy: 48}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
+  - {Amount: 1, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2610,7 +2612,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 48}
+  - {Amount: 4, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2618,7 +2620,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 48}
+  - {Amount: 3, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2626,7 +2628,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 48}
+  - {Amount: 2, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2634,7 +2636,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 48}
+  - {Amount: 1, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2642,8 +2644,8 @@
   Background 1: 96
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 72}
-  - {Amount: 1, Enemy: 16}
+  - {Amount: 1, Enemy: 72}	#Petrified Royal Guard
+  - {Amount: 1, Enemy: 16}	#Lethal Asp Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2651,8 +2653,8 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 48}
-  - {Amount: 1, Enemy: 15}
+  - {Amount: 1, Enemy: 48}	#Arachnid!!!
+  - {Amount: 1, Enemy: 15}	#Guardian Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2660,7 +2662,7 @@
   Background 1: 98
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2668,8 +2670,8 @@
   Background 1: 97
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
-  - {Amount: 1, Enemy: 72}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
+  - {Amount: 1, Enemy: 72}	#Petrified Royal Guard
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2677,7 +2679,7 @@
   Background 1: 97
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 72}
+  - {Amount: 1, Enemy: 72}	#Petrified Royal Guard
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2685,7 +2687,7 @@
   Background 1: 99
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 16}
+  - {Amount: 1, Enemy: 16}	#Lethal Asp Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2693,7 +2695,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 48}
+  - {Amount: 2, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2701,7 +2703,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 48}
+  - {Amount: 1, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2709,7 +2711,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 48}
+  - {Amount: 3, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2717,7 +2719,7 @@
   Background 1: 95
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 48}
+  - {Amount: 2, Enemy: 48}	#Arachnid!!!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2725,7 +2727,7 @@
   Background 1: 98
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2733,8 +2735,8 @@
   Background 1: 98
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
-  - {Amount: 1, Enemy: 72}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
+  - {Amount: 1, Enemy: 72}	#Petrified Royal Guard
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2742,8 +2744,8 @@
   Background 1: 96
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 72}
-  - {Amount: 1, Enemy: 16}
+  - {Amount: 1, Enemy: 72}	#Petrified Royal Guard
+  - {Amount: 1, Enemy: 16}	#Lethal Asp Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2751,8 +2753,8 @@
   Background 1: 98
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 126}
-  - {Amount: 1, Enemy: 15}
+  - {Amount: 1, Enemy: 126}	#Fierce Shattered Man
+  - {Amount: 1, Enemy: 15}	#Guardian Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2760,9 +2762,9 @@
   Background 1: 159
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 43}
-  - {Amount: 1, Enemy: 12}
-  - {Amount: 1, Enemy: 139}
+  - {Amount: 1, Enemy: 43}	#Scalding Coffee Cup
+  - {Amount: 1, Enemy: 12}	#Mystical Record
+  - {Amount: 1, Enemy: 139}	#Worthless Protoplasm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2770,7 +2772,7 @@
   Background 1: 155
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 132}
+  - {Amount: 2, Enemy: 132}	#Cute Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2778,7 +2780,7 @@
   Background 1: 155
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 132}
+  - {Amount: 3, Enemy: 132}	#Cute Li'l UFO
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2786,7 +2788,7 @@
   Background 1: 158
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 89}
+  - {Amount: 1, Enemy: 89}	#Dali's Clock
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2794,8 +2796,8 @@
   Background 1: 45
   Background 2: 258
   Enemies:
-  - {Amount: 1, Enemy: 153}
-  - {Amount: 1, Enemy: 11}
+  - {Amount: 1, Enemy: 153}	#Robo-pump
+  - {Amount: 1, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2803,7 +2805,7 @@
   Background 1: 45
   Background 2: 258
   Enemies:
-  - {Amount: 1, Enemy: 153}
+  - {Amount: 1, Enemy: 153}	#Robo-pump
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2811,7 +2813,7 @@
   Background 1: 162
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 11}
+  - {Amount: 1, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2819,7 +2821,7 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2827,7 +2829,7 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 106}
+  - {Amount: 2, Enemy: 106}	#Lesser Mook
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2835,8 +2837,8 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2844,7 +2846,7 @@
   Background 1: 160
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 107}
+  - {Amount: 2, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2852,7 +2854,7 @@
   Background 1: 160
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2860,7 +2862,7 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 106}
+  - {Amount: 2, Enemy: 106}	#Lesser Mook
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2868,7 +2870,7 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 106}
+  - {Amount: 2, Enemy: 106}	#Lesser Mook
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2876,7 +2878,7 @@
   Background 1: 161
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 106}
+  - {Amount: 1, Enemy: 106}	#Lesser Mook
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -2884,7 +2886,7 @@
   Background 1: 156
   Background 2: 0
   Enemies:
-  - {Amount: 5, Enemy: 139}
+  - {Amount: 5, Enemy: 139}	#Worthless Protoplasm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2892,7 +2894,7 @@
   Background 1: 156
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 139}
+  - {Amount: 4, Enemy: 139}	#Worthless Protoplasm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2900,7 +2902,7 @@
   Background 1: 156
   Background 2: 0
   Enemies:
-  - {Amount: 3, Enemy: 139}
+  - {Amount: 3, Enemy: 139}	#Worthless Protoplasm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -2908,7 +2910,7 @@
   Background 1: 198
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2916,7 +2918,7 @@
   Background 1: 151
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2924,7 +2926,7 @@
   Background 1: 324
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 107}
+  - {Amount: 2, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2932,7 +2934,7 @@
   Background 1: 283
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2940,7 +2942,7 @@
   Background 1: 151
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2948,7 +2950,7 @@
   Background 1: 283
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2956,7 +2958,7 @@
   Background 1: 198
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 107}
+  - {Amount: 2, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2964,8 +2966,8 @@
   Background 1: 151
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
-  - {Amount: 1, Enemy: 107}
+  - {Amount: 1, Enemy: 67}	#Starman
+  - {Amount: 1, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2973,8 +2975,8 @@
   Background 1: 151
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
-  - {Amount: 1, Enemy: 13}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2982,7 +2984,7 @@
   Background 1: 271
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2990,7 +2992,7 @@
   Background 1: 198
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 107}
+  - {Amount: 2, Enemy: 107}	#Mook Senior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -2998,8 +3000,8 @@
   Background 1: 324
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3007,8 +3009,8 @@
   Background 1: 324
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 107}
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 107}	#Mook Senior
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3016,7 +3018,7 @@
   Background 1: 271
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 67}
+  - {Amount: 2, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3024,8 +3026,8 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3033,8 +3035,8 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 67}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 67}	#Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3042,7 +3044,7 @@
   Background 1: 271
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 68}
+  - {Amount: 1, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3050,8 +3052,8 @@
   Background 1: 148
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
-  - {Amount: 1, Enemy: 68}
+  - {Amount: 1, Enemy: 67}	#Starman
+  - {Amount: 1, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3059,8 +3061,8 @@
   Background 1: 286
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 68}
-  - {Amount: 1, Enemy: 13}
+  - {Amount: 1, Enemy: 68}	#Super Starman
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3068,8 +3070,8 @@
   Background 1: 286
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 67}
-  - {Amount: 1, Enemy: 68}
+  - {Amount: 1, Enemy: 67}	#Starman
+  - {Amount: 1, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3077,9 +3079,9 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 67}
-  - {Amount: 1, Enemy: 68}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 67}	#Starman
+  - {Amount: 1, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3087,9 +3089,9 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 67}
-  - {Amount: 1, Enemy: 68}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 67}	#Starman
+  - {Amount: 1, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3097,8 +3099,8 @@
   Background 1: 271
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 68}
-  - {Amount: 1, Enemy: 13}
+  - {Amount: 2, Enemy: 68}	#Super Starman
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3106,8 +3108,8 @@
   Background 1: 148
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 68}
-  - {Amount: 1, Enemy: 85}
+  - {Amount: 1, Enemy: 68}	#Super Starman
+  - {Amount: 1, Enemy: 85}	#Military Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3115,8 +3117,8 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 2, Enemy: 68}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 2, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3124,8 +3126,8 @@
   Background 1: 243
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 85}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 85}	#Military Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3133,8 +3135,8 @@
   Background 1: 287
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 1, Enemy: 85}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 1, Enemy: 85}	#Military Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3142,8 +3144,8 @@
   Background 1: 287
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 13}
-  - {Amount: 2, Enemy: 85}
+  - {Amount: 1, Enemy: 13}	#Atomic Power Robot
+  - {Amount: 2, Enemy: 85}	#Military Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3151,7 +3153,7 @@
   Background 1: 290
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 99}
+  - {Amount: 4, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3159,7 +3161,7 @@
   Background 1: 291
   Background 2: 0
   Enemies:
-  - {Amount: 6, Enemy: 99}
+  - {Amount: 6, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3167,7 +3169,7 @@
   Background 1: 289
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 99}
+  - {Amount: 1, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3175,7 +3177,7 @@
   Background 1: 312
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 99}
+  - {Amount: 4, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3183,8 +3185,8 @@
   Background 1: 100
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 71}
-  - {Amount: 1, Enemy: 99}
+  - {Amount: 1, Enemy: 71}	#Uncontrollable Sphere
+  - {Amount: 1, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3192,7 +3194,7 @@
   Background 1: 312
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 99}
+  - {Amount: 4, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3200,8 +3202,8 @@
   Background 1: 102
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 53}
-  - {Amount: 1, Enemy: 99}
+  - {Amount: 1, Enemy: 53}	#Hyper Spinning Robo
+  - {Amount: 1, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3209,7 +3211,7 @@
   Background 1: 290
   Background 2: 0
   Enemies:
-  - {Amount: 4, Enemy: 99}
+  - {Amount: 4, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3217,7 +3219,7 @@
   Background 1: 291
   Background 2: 0
   Enemies:
-  - {Amount: 6, Enemy: 99}
+  - {Amount: 6, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 3
@@ -3225,8 +3227,8 @@
   Background 1: 100
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 19}
-  - {Amount: 1, Enemy: 99}
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
+  - {Amount: 1, Enemy: 99}	#Fobby
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3234,8 +3236,8 @@
   Background 1: 309
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 71}
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 71}	#Uncontrollable Sphere
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3243,7 +3245,7 @@
   Background 1: 311
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 71}
+  - {Amount: 1, Enemy: 71}	#Uncontrollable Sphere
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3251,7 +3253,7 @@
   Background 1: 103
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3259,7 +3261,7 @@
   Background 1: 100
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 19}
+  - {Amount: 2, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3267,8 +3269,8 @@
   Background 1: 311
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 53}
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 53}	#Hyper Spinning Robo
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3276,7 +3278,7 @@
   Background 1: 311
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3284,8 +3286,8 @@
   Background 1: 102
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 71}
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 71}	#Uncontrollable Sphere
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3293,8 +3295,8 @@
   Background 1: 310
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 53}
-  - {Amount: 1, Enemy: 19}
+  - {Amount: 1, Enemy: 53}	#Hyper Spinning Robo
+  - {Amount: 1, Enemy: 19}	#Conducting Spirit
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3302,7 +3304,7 @@
   Background 1: 310
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 53}
+  - {Amount: 1, Enemy: 53}	#Hyper Spinning Robo
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3310,8 +3312,8 @@
   Background 1: 103
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 53}
-  - {Amount: 1, Enemy: 71}
+  - {Amount: 1, Enemy: 53}	#Hyper Spinning Robo
+  - {Amount: 1, Enemy: 71}	#Uncontrollable Sphere
   Fear event flag: 196
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3319,7 +3321,7 @@
   Background 1: 106
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3327,7 +3329,7 @@
   Background 1: 303
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 142}
+  - {Amount: 1, Enemy: 142}	#Psychic Psycho
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3335,7 +3337,7 @@
   Background 1: 104
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 20}
+  - {Amount: 2, Enemy: 20}	#Evil Elemental
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3343,8 +3345,8 @@
   Background 1: 299
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 20}
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 20}	#Evil Elemental
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3352,8 +3354,8 @@
   Background 1: 299
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 20}
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 20}	#Evil Elemental
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3361,7 +3363,7 @@
   Background 1: 104
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 20}
+  - {Amount: 2, Enemy: 20}	#Evil Elemental
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3369,8 +3371,8 @@
   Background 1: 299
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 20}
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 20}	#Evil Elemental
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3378,7 +3380,7 @@
   Background 1: 106
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3386,7 +3388,7 @@
   Background 1: 106
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3394,8 +3396,8 @@
   Background 1: 105
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 142}
-  - {Amount: 1, Enemy: 143}
+  - {Amount: 1, Enemy: 142}	#Psychic Psycho
+  - {Amount: 1, Enemy: 143}	#Major Psychic Psycho
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3403,8 +3405,8 @@
   Background 1: 325
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 20}
-  - {Amount: 1, Enemy: 142}
+  - {Amount: 1, Enemy: 20}	#Evil Elemental
+  - {Amount: 1, Enemy: 142}	#Psychic Psycho
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3412,8 +3414,8 @@
   Background 1: 303
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
-  - {Amount: 1, Enemy: 143}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
+  - {Amount: 1, Enemy: 143}	#Major Psychic Psycho
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3421,8 +3423,8 @@
   Background 1: 303
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
-  - {Amount: 1, Enemy: 143}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
+  - {Amount: 1, Enemy: 143}	#Major Psychic Psycho
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3430,7 +3432,7 @@
   Background 1: 106
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 147}
+  - {Amount: 1, Enemy: 147}	#Soul Consuming Flame
   Fear event flag: 197
   Fear mode: run away if flag is set
   Letterbox Size: 2
@@ -3438,8 +3440,8 @@
   Background 1: 297
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 14}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 14}	#Nuclear Reactor Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3447,8 +3449,8 @@
   Background 1: 111
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 63}
-  - {Amount: 1, Enemy: 87}
+  - {Amount: 1, Enemy: 63}	#Wild 'n Wooly Shambler
+  - {Amount: 1, Enemy: 87}	#Ultimate Octobot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3456,8 +3458,8 @@
   Background 1: 209
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 87}
-  - {Amount: 1, Enemy: 14}
+  - {Amount: 1, Enemy: 87}	#Ultimate Octobot
+  - {Amount: 1, Enemy: 14}	#Nuclear Reactor Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3465,7 +3467,7 @@
   Background 1: 296
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 103}
+  - {Amount: 1, Enemy: 103}	#Squatter Demon
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3473,8 +3475,8 @@
   Background 1: 297
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 63}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 63}	#Wild 'n Wooly Shambler
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3482,8 +3484,8 @@
   Background 1: 107
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 14}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 14}	#Nuclear Reactor Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3491,8 +3493,8 @@
   Background 1: 110
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 14}
-  - {Amount: 1, Enemy: 75}
+  - {Amount: 1, Enemy: 14}	#Nuclear Reactor Robot
+  - {Amount: 1, Enemy: 75}	#Final Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3500,8 +3502,8 @@
   Background 1: 300
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 75}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 75}	#Final Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3509,9 +3511,9 @@
   Background 1: 301
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 69}
-  - {Amount: 1, Enemy: 75}
-  - {Amount: 1, Enemy: 14}
+  - {Amount: 1, Enemy: 69}	#Ghost of Starman
+  - {Amount: 1, Enemy: 75}	#Final Starman
+  - {Amount: 1, Enemy: 14}	#Nuclear Reactor Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3519,7 +3521,7 @@
   Background 1: 109
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 50}
+  - {Amount: 1, Enemy: 50}	#Bionic Kraken
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 1
@@ -3527,8 +3529,8 @@
   Background 1: 212
   Background 2: 213
   Enemies:
-  - {Amount: 1, Enemy: 9}
-  - {Amount: 1, Enemy: 7}
+  - {Amount: 1, Enemy: 9}	#Walking Sprout
+  - {Amount: 1, Enemy: 7}	#Ramblin' Evil Mushroom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3536,7 +3538,7 @@
   Background 1: 212
   Background 2: 213
   Enemies:
-  - {Amount: 1, Enemy: 9}
+  - {Amount: 1, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3544,7 +3546,7 @@
   Background 1: 212
   Background 2: 213
   Enemies:
-  - {Amount: 2, Enemy: 9}
+  - {Amount: 2, Enemy: 9}	#Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3552,7 +3554,7 @@
   Background 1: 16
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 1}
+  - {Amount: 1, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3560,7 +3562,7 @@
   Background 1: 16
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 1}
+  - {Amount: 2, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3568,7 +3570,7 @@
   Background 1: 26
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 77}
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3576,7 +3578,7 @@
   Background 1: 89
   Background 2: 0
   Enemies:
-  - {Amount: 2, Enemy: 57}
+  - {Amount: 2, Enemy: 57}	#Mr. Batty
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3584,8 +3586,8 @@
   Background 1: 89
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 57}
-  - {Amount: 1, Enemy: 77}
+  - {Amount: 1, Enemy: 57}	#Mr. Batty
+  - {Amount: 1, Enemy: 77}	#Zombie Possessor
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3593,23 +3595,24 @@
   Background 1: 259
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 65}
+  - {Amount: 1, Enemy: 65}	#Skelpion
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
 422:
-  Background 1: 83
-  Background 2: 0
+  Background 1: 201 #83
+  Background 2: 200 #0
   Enemies:
-  - {Amount: 1, Enemy: 136}
+# - {Amount: 1, Enemy: 136}	#Mad Taxi
+  - {Amount: 1, Enemy: 182}	#Kraken
   Fear event flag: 0
   Fear mode: run away if flag is unset
-  Letterbox Size: 3
+  Letterbox Size: 0	#3
 423:
   Background 1: 266
   Background 2: 267
   Enemies:
-  - {Amount: 1, Enemy: 223}
+  - {Amount: 1, Enemy: 223}	#Criminal Caterpillar
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3617,7 +3620,7 @@
   Background 1: 190
   Background 2: 326
   Enemies:
-  - {Amount: 1, Enemy: 227}
+  - {Amount: 1, Enemy: 227}	#Master Criminal Worm
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3625,7 +3628,7 @@
   Background 1: 0
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 225}
+  - {Amount: 1, Enemy: 225}	#Magic Butterfly
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3633,7 +3636,7 @@
   Background 1: 306
   Background 2: 307
   Enemies:
-  - {Amount: 1, Enemy: 55}
+  - {Amount: 1, Enemy: 55}	#Coil Snake
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3641,7 +3644,7 @@
   Background 1: 3
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 55}
+  - {Amount: 1, Enemy: 55}	#Coil Snake
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3649,7 +3652,7 @@
   Background 1: 259
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3657,7 +3660,7 @@
   Background 1: 49
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3665,7 +3668,7 @@
   Background 1: 60
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 144}
+  - {Amount: 1, Enemy: 144}	#Mole Playing Rough
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3673,9 +3676,9 @@
   Background 1: 5
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 64}
-  - {Amount: 0, Enemy: 134}
-  - {Amount: 0, Enemy: 129}
+  - {Amount: 1, Enemy: 64}	#Skate Punk
+  - {Amount: 0, Enemy: 134}	#Pogo Punk
+  - {Amount: 0, Enemy: 129}	#Yes Man Junior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3683,7 +3686,7 @@
   Background 1: 7
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 134}
+  - {Amount: 1, Enemy: 134}	#Pogo Punk
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3691,7 +3694,7 @@
   Background 1: 6
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 129}
+  - {Amount: 1, Enemy: 129}	#Yes Man Junior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3699,7 +3702,7 @@
   Background 1: 306
   Background 2: 307
   Enemies:
-  - {Amount: 1, Enemy: 1}
+  - {Amount: 1, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3707,7 +3710,7 @@
   Background 1: 307
   Background 2: 306
   Enemies:
-  - {Amount: 1, Enemy: 24}
+  - {Amount: 1, Enemy: 24}	#Unassuming Local Guy
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3715,8 +3718,8 @@
   Background 1: 307
   Background 2: 306
   Enemies:
-  - {Amount: 2, Enemy: 1}
-  - {Amount: 1, Enemy: 159}
+  - {Amount: 2, Enemy: 1}	#Insane Cultist
+  - {Amount: 1, Enemy: 159}	#Spiteful Crow
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3724,7 +3727,7 @@
   Background 1: 192
   Background 2: 191
   Enemies:
-  - {Amount: 1, Enemy: 45}
+  - {Amount: 1, Enemy: 45}	#Slimy Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3732,7 +3735,7 @@
   Background 1: 43
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 11}
+  - {Amount: 1, Enemy: 11}	#Enraged Fire Plug
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3740,7 +3743,7 @@
   Background 1: 157
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 153}
+  - {Amount: 1, Enemy: 153}	#Robo-pump
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3748,7 +3751,7 @@
   Background 1: 44
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 124}
+  - {Amount: 1, Enemy: 124}	#Abstract Art
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3756,7 +3759,7 @@
   Background 1: 284
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 140}
+  - {Amount: 1, Enemy: 140}	#Sentry Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3764,7 +3767,7 @@
   Background 1: 195
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 125}
+  - {Amount: 1, Enemy: 125}	#Shattered Man
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3772,7 +3775,7 @@
   Background 1: 97
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 15}
+  - {Amount: 1, Enemy: 15}	#Guardian Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3780,7 +3783,7 @@
   Background 1: 99
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 16}
+  - {Amount: 1, Enemy: 16}	#Lethal Asp Hieroglyph
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3788,7 +3791,7 @@
   Background 1: 213
   Background 2: 212
   Enemies:
-  - {Amount: 1, Enemy: 88}
+  - {Amount: 1, Enemy: 88}	#Mad Duck
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3796,7 +3799,7 @@
   Background 1: 215
   Background 2: 214
   Enemies:
-  - {Amount: 1, Enemy: 139}
+  - {Amount: 1, Enemy: 139}	#Worthless Protoplasm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3804,7 +3807,7 @@
   Background 1: 217
   Background 2: 216
   Enemies:
-  - {Amount: 1, Enemy: 113}
+  - {Amount: 1, Enemy: 113}	#Rowdy Mouse
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
@@ -3812,7 +3815,7 @@
   Background 1: 180
   Background 2: 179
   Enemies:
-  - {Amount: 1, Enemy: 131}
+  - {Amount: 1, Enemy: 131}	#Frank
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3820,7 +3823,7 @@
   Background 1: 182
   Background 2: 181
   Enemies:
-  - {Amount: 1, Enemy: 130}
+  - {Amount: 1, Enemy: 130}	#Frankystein Mark II
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3828,8 +3831,8 @@
   Background 1: 170
   Background 2: 169
   Enemies:
-  - {Amount: 1, Enemy: 37}
-  - {Amount: 2, Enemy: 209}
+  - {Amount: 1, Enemy: 37}	#Titanic Ant
+  - {Amount: 2, Enemy: 209}	#Black Antoid
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3837,7 +3840,7 @@
   Background 1: 184
   Background 2: 183
   Enemies:
-  - {Amount: 1, Enemy: 54}
+  - {Amount: 1, Enemy: 54}	#Cop
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
@@ -3845,7 +3848,7 @@
   Background 1: 184
   Background 2: 183
   Enemies:
-  - {Amount: 1, Enemy: 228}
+  - {Amount: 1, Enemy: 228}	#Captain Strong
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3853,7 +3856,7 @@
   Background 1: 273
   Background 2: 272
   Enemies:
-  - {Amount: 1, Enemy: 110}
+  - {Amount: 1, Enemy: 110}	#Everdred
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3861,7 +3864,7 @@
   Background 1: 278
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 26}
+  - {Amount: 1, Enemy: 26}	#Mr. Carpainter
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3869,7 +3872,7 @@
   Background 1: 172
   Background 2: 171
   Enemies:
-  - {Amount: 1, Enemy: 41}
+  - {Amount: 1, Enemy: 41}	#Mondo Mole
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3877,8 +3880,8 @@
   Background 1: 194
   Background 2: 193
   Enemies:
-  - {Amount: 1, Enemy: 93}
-  - {Amount: 0, Enemy: 45}
+  - {Amount: 1, Enemy: 93}	#Master Belch
+  - {Amount: 0, Enemy: 45}	#Slimy Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3886,8 +3889,8 @@
   Background 1: 174
   Background 2: 173
   Enemies:
-  - {Amount: 1, Enemy: 90}
-  - {Amount: 2, Enemy: 10}
+  - {Amount: 1, Enemy: 90}	#Trillion Year Sprout
+  - {Amount: 2, Enemy: 10}	#Tough Walking Sprout
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3895,7 +3898,7 @@
   Background 1: 293
   Background 2: 292
   Enemies:
-  - {Amount: 1, Enemy: 102}
+  - {Amount: 1, Enemy: 102}	#Boogey Tent
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3903,7 +3906,7 @@
   Background 1: 196
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 42}
+  - {Amount: 1, Enemy: 42}	#Guardian Digger
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3911,8 +3914,8 @@
   Background 1: 197
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 2}
-  - {Amount: 0, Enemy: 1}
+  - {Amount: 1, Enemy: 2}	#Dept. Store Spook
+  - {Amount: 0, Enemy: 1}	#Insane Cultist
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3920,7 +3923,7 @@
   Background 1: 302
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 137}
+  - {Amount: 1, Enemy: 137}	#Mani Mani Devil
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3928,7 +3931,7 @@
   Background 1: 285
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 146}
+  - {Amount: 1, Enemy: 146}	#Clumsy Robot
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3936,7 +3939,7 @@
   Background 1: 178
   Background 2: 177
   Enemies:
-  - {Amount: 1, Enemy: 40}
+  - {Amount: 1, Enemy: 40}	#Plague Rat of Doom
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3944,7 +3947,7 @@
   Background 1: 176
   Background 2: 175
   Enemies:
-  - {Amount: 1, Enemy: 128}
+  - {Amount: 1, Enemy: 128}	#Thunder and Storm
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3952,7 +3955,7 @@
   Background 1: 168
   Background 2: 167
   Enemies:
-  - {Amount: 1, Enemy: 39}
+  - {Amount: 1, Enemy: 39}	#Shrooom!
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3960,9 +3963,9 @@
   Background 1: 199
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 74}
-  - {Amount: 0, Enemy: 67}
-  - {Amount: 0, Enemy: 68}
+  - {Amount: 1, Enemy: 74}	#Starman Deluxe
+  - {Amount: 0, Enemy: 67}	#Starman
+  - {Amount: 0, Enemy: 68}	#Super Starman
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3970,7 +3973,7 @@
   Background 1: 201
   Background 2: 200
   Enemies:
-  - {Amount: 1, Enemy: 49}
+  - {Amount: 1, Enemy: 49}	#Kraken
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3978,7 +3981,7 @@
   Background 1: 208
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 73}
+  - {Amount: 1, Enemy: 73}	#Guardian General
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3986,8 +3989,8 @@
   Background 1: 211
   Background 2: 210
   Enemies:
-  - {Amount: 1, Enemy: 95}
-  - {Amount: 0, Enemy: 46}
+  - {Amount: 1, Enemy: 95}	#Master Barf
+  - {Amount: 0, Enemy: 46}	#Even Slimier Little Pile
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -3995,7 +3998,7 @@
   Background 1: 164
   Background 2: 163
   Enemies:
-  - {Amount: 1, Enemy: 116}
+  - {Amount: 1, Enemy: 116}	#Electro Specter
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4003,8 +4006,8 @@
   Background 1: 166
   Background 2: 165
   Enemies:
-  - {Amount: 1, Enemy: 27}
-  - {Amount: 0, Enemy: 83}
+  - {Amount: 1, Enemy: 27}	#Carbon Dog
+  - {Amount: 0, Enemy: 83}	#Diamond Dog
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4012,7 +4015,7 @@
   Background 1: 298
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 21}
+  - {Amount: 1, Enemy: 21}	#Ness' demon
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4020,7 +4023,7 @@
   Background 1: 0
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 198}
+  - {Amount: 1, Enemy: 198}	#Debug (Squatter demon)
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4028,7 +4031,7 @@
   Background 1: 219
   Background 2: 218
   Enemies:
-  - {Amount: 1, Enemy: 214}
+  - {Amount: 1, Enemy: 214}	#Starman Junior
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4036,8 +4039,8 @@
   Background 1: 220
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 218}
-  - {Amount: 1, Enemy: 216}
+  - {Amount: 1, Enemy: 218}	#Giygas
+  - {Amount: 1, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4045,8 +4048,8 @@
   Background 1: 222
   Background 2: 221
   Enemies:
-  - {Amount: 1, Enemy: 219}
-  - {Amount: 1, Enemy: 216}
+  - {Amount: 1, Enemy: 219}	#Giygas
+  - {Amount: 1, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4054,8 +4057,8 @@
   Background 1: 224
   Background 2: 223
   Enemies:
-  - {Amount: 1, Enemy: 220}
-  - {Amount: 0, Enemy: 216}
+  - {Amount: 1, Enemy: 220}	#Giygas
+  - {Amount: 0, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4063,8 +4066,8 @@
   Background 1: 225
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 221}
-  - {Amount: 0, Enemy: 216}
+  - {Amount: 1, Enemy: 221}	#Giygas
+  - {Amount: 0, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4072,8 +4075,8 @@
   Background 1: 226
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 229}
-  - {Amount: 0, Enemy: 216}
+  - {Amount: 1, Enemy: 229}	#Giygas
+  - {Amount: 0, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4081,8 +4084,8 @@
   Background 1: 227
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 229}
-  - {Amount: 0, Enemy: 216}
+  - {Amount: 1, Enemy: 229}	#Giygas
+  - {Amount: 0, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4090,7 +4093,7 @@
   Background 1: 0
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 225}
+  - {Amount: 1, Enemy: 225}	#Magic Butterfly
   Fear event flag: 340
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4098,7 +4101,7 @@
   Background 1: 192
   Background 2: 191
   Enemies:
-  - {Amount: 1, Enemy: 226}
+  - {Amount: 1, Enemy: 226}	#Mini Barf
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
@@ -4106,8 +4109,8 @@
   Background 1: 265
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 229}
-  - {Amount: 0, Enemy: 216}
+  - {Amount: 1, Enemy: 229}	#Giygas
+  - {Amount: 0, Enemy: 216}	#Heavily Armed Porky
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0

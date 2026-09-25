@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -145,6 +146,7 @@ l_0xc7436c:
 l_0xc743b0:
 	unset(FLG_ONET_KANBANCOP_APPEAR)	// 36
 	set(FLG_POLICE_KANBANCOP_APPEAR)	// 39
+	cc_open_letterbox
 	window_open(1)
 	"@Hey you,| the board says:" pause(15) linebreak
 	"  <DON'T ENTER.>" pause(20) linebreak
@@ -155,12 +157,14 @@ l_0xc74403:
 	"@What a rebellious kid!" pause(15)
 	"  Come to the Onett Police Station later!" wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc74431:
 	"@So you just didn't want to read the sign, huh kid..." next
 	"@Get yer butt to the Onett Police Station later!" wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc74475:

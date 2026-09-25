@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -355,12 +356,14 @@ l_0xc99a6b:
 	eob
 
 l_0xc99a7b:
+	cc_open_letterbox
 	music(122)
 	pause(155)
 	fade_map_palette(1,0,255)	// 0x01 Tileset, 0x00 palette, 0xFF speed
 	set(FLG_ONET_DAYBREAK)	// 422
 	unset(FLG_ONET_LARDNA)	// 107
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc99a8f:

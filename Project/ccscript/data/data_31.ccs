@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -246,6 +247,7 @@ l_0xc75b0f:
 
 l_0xc75c33:
 	goto_if_flag(FLG_MYHOME_POKEY, l_0xc75f3b)	// 0x60, 96
+	cc_open_letterbox
 	window_closeall
 	pause(30)
 	music(177)
@@ -304,6 +306,7 @@ l_0xc75ebc:
 	window_closeall
 	pause(1)
 	npc_do_mc(14,43)	// 0x0E, 0x2B
+	cc_close_letterbox
 	eob
 
 l_0xc75f3b:
@@ -577,6 +580,7 @@ l_0xc7699e:
 	"@so we police are being ultra cautious." end
 
 l_0xc76a1f:
+	cc_open_letterbox
 	"@Why is the road to Twoson closed?" pause(20)
 	"  An emergency,// of course." next
 	"@At times like this,| kids like you should be playing Nintendo games." next
@@ -584,7 +588,9 @@ l_0xc76a1f:
 	two_choice_menu("Yes", l_0xc76ad6, "No", l_0xc76aa7)
 
 l_0xc76aa7:
-	"@Well then,| perhaps you should just crawl back to your shack,| little mister." end
+	"@Well then,| perhaps you should just crawl back to your shack,| little mister." wait
+	cc_close_letterbox
+	eob
 
 l_0xc76ad6:
 	"@Okay, *chortle*" pause(15)
@@ -596,6 +602,8 @@ l_0xc76ad6:
 	unset(FLG_ONET_COPD_DISAPPEAR)	// 292
 	unset(FLG_ONET_COPE_DISAPPEAR)	// 293
 	window_closeall
+	// Prepare letterbox for after the warp
+	sprite2_spawn(376, 896, 0xFF)
 	goto(data_16.l_0xc5f859)
 
 l_0xc76b0a:
