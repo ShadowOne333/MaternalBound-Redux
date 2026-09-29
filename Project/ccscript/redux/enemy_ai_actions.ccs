@@ -73,7 +73,8 @@ _loop:
 	rand2(action3, action4)
 	goto(_loop)
 }
-
+//------------------------------------
+//	ENEMY ACTIONS START HERE!
 //------------------------------------
 Null: {	// Enemy 0
 	order0(	// Action order 0 (Random)
@@ -93,7 +94,7 @@ Insane_Cultist: {	// Enemy 1
 	)
 }
 //------------------------------------
-Dept_Store_Spook: {	// Enemy 2
+Dept_Store_Spook: {	// Enemy 2 & 171
 _entry2:
 	order3(	// Action order 3 (Staggered order)
 		{ if not checkPpThreshold(4) { setAction(18, 9) eob } },	// Freeze A
@@ -123,7 +124,7 @@ Armored_Frog: {	// Enemy 3
 Bad_Buffalo: {	// Enemy 4
 	order1(	// Action order 1 (Random - 50/25/12.5)
 		{ setAction(219, 0) eob },	// Rammed and trampled you
-		{ setAction(110, 0) eob },	// Tore into you
+		{ setAction(110, 0) eob },	// Tore into you (Lvl 3 attack)
 		{ setAction(219, 0) eob },	// Rammed and trampled you
 		{ setAction(235, 0) eob }	// Knited brow
 	)
@@ -138,12 +139,489 @@ Black_Antoid: {	// Enemy 5
 	)
 }
 //------------------------------------
+Red_Antoid: {	// Enemy 6
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(62, 6) eob },	// Call for help (Red antoid)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ if not checkPpThreshold(6) { setAction(50, 41) eob } }	// Defense down
+	)
+}
+//------------------------------------
+Ramblin_Evil_Mushroom: {	// Enemy 7
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(75, 0) eob }	// Mushroomize
+	)
+}
+//------------------------------------
+Struttin_Evil_Mushroom: {	// Enemy 8
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(75, 0) eob },	// Mushroomize
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(237, 0) eob }	// Poison
+	)
+}
+//------------------------------------
+Walking_Sprout: {	// Enemy 9
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(54, 45) eob },	// Magnet A
+		{ setAction(63, 9) eob },	// Sow seeds (Walking Sprout)
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Tough_Walking_Sprout: {	// Enemy 10
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(63, 10) eob },	// Sow seeds (Tough Walking Sprout)
+		{ setAction(54, 45) eob },	// Magnet A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Enraged_Fire_Plug: {	// Enemy 11
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(118, 0) eob },	// Sprayed a gigantic blast of water
+		{ setAction(4, 10) eob },	// Bash
+		{ setAction(118, 0) eob },	// Sprayed a gigantic blast of water
+		{ setAction(118, 0) eob }	// Sprayed a gigantic blast of water
+	)
+}
+//------------------------------------
+Mystical_Record: {	// Enemy 12
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(4, 10) eob },	// Bash
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(226, 0) eob }	// Charged forward
+	)
+}
+//------------------------------------
+Atomic_Power_Robot: {	// Enemy 13
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(99, 0) eob },	// Lifeup G
+		{ setAction(222, 10) eob },	// Fired a beam
+		{ setAction(99, 0) eob },	// Lifeup G
+		{ setAction(99, 0) eob }	// Lifeup G
+	)
+}
+//------------------------------------
+Nuclear_Reactor_Robot: {	// Enemy 14
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(99, 0) eob },	// Lifeup G
+		{ setAction(222, 10) eob },	// Fired a beam
+		{ setAction(99, 0) eob },	// Lifeup G
+		{ setAction(99, 0) eob }	// Lifeup G
+	)
+}
+//------------------------------------
+Guardian_Hieroglyph: {	// Enemy 15
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(213, 0) eob },	// Let loose hacking cough, Cold
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } }	// Thunder B
+	)
+}
+//------------------------------------
+Lethal_Asp_Hieroglyph: {	// Enemy 16
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(238, 0) eob },	// Used a biting attack (Bash)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(242, 0) eob }	// Coiled around you, Immobilize
+	)
+}
+//------------------------------------
+Electro_Swoosh: {	// Enemy 17
+	order2(	// Action order 2 (In order)
+		{ setAction(132, 0) eob },	// Sends a greeting
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(226, 0) eob }	// Charged forward
+	)
+}
+//------------------------------------
+Conducting_Menace: {	// Enemy 18
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ if not checkPpThreshold(16) { setAction(27, 18) eob } },	// Flash B
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } }	// Thunder B
+	)
+}
+//------------------------------------
+Conducting_Spirit: {	// Enemy 19
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ if not checkPpThreshold(16) { setAction(27, 18) eob } },	// Flash B
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } },	// Thunder B
+		{ if not checkPpThreshold(16) { setAction(24, 15) eob } }	// Thunder G
+	)
+}
+//------------------------------------
+Evil_Elemental: {	// Enemy 20
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(85, 0) eob },	// Disrupted senses (Can't concentrate)
+		{ setAction(76, 0) eob },	// Possess
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Ness_Demon: {	// Enemy 21 & 172
+_entry21:	// Action order 0 (Random)
+	order0(
+		{ goto(_entry172) },	// Run enemy extender (172)
+		{ if not checkPpThreshold(10) { setAction(10, 1) eob } },	// Rockin A
+		{ setAction(201, 0) eob },	// Glorious light (Flash G)
+		{ if not checkPpThreshold(10) { setAction(41, 33) eob } }	// Shield B
+	)
+
+_entry172:	// Action order 2 (In order)
+	order2(
+		{ if not checkPpThreshold(10) { setAction(10, 1) eob } },	// Rockin A
+		{ if not checkPpThreshold(8) { setAction(33, 24) eob } },	// Lifeup B
+		{ if not checkPpThreshold(98) { setAction(13, 4) eob } },	// Rockin A
+		{ goto(_entry21) }	// Back to the original enemy entry (21)
+	)
+}
+//------------------------------------
+Annoying_Old_Party_Man: {	// Enemy 22
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(229, 0) eob },	// Grumbled about today's youth (Reduce guts)
+		{ setAction(128, 0) eob },	// Wobbly
+		{ setAction(129, 0) eob }	// Reeling
+	)
+}
+//------------------------------------
+Annoying_Reveler: {	// Enemy 23
+	order0(	// Action order 0 (Random)
+		{ setAction(229, 0) eob },	// Grumbled about today's youth (Reduce guts)
+		{ setAction(230, 0) eob },	// Lecturing you (Reduce guts)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(128, 0) eob }	// Wobbly
+	)
+}
+//------------------------------------
+Unassuming_Local_Guy: {	// Enemy 24
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(210, 0) eob }	// Friendly and affectionate (Solidify)
+	)
+}
+//------------------------------------
+New_Age_Retro_Hippie: {	// Enemy 25
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(96, 0) eob },	// Lost tempter (Offense Up)
+		{ setAction(174, 154) eob },	// Brightness of teeth (Solidify)
+		{ setAction(186, 140) eob }	// Used the Ruler?
+	)
+}
+//------------------------------------
+Mr_Carpainter: {	// Enemy 26 & 173
+_entry26:	// Action order 2 (In order)
+	order2(
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(215, 0) eob },	// Paint attack (Shoot)
+		{ goto(_entry173) }	// Run enemy extender (173)
+	)
+
+_entry173:	// Action order 2 (In order)
+	order2(
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ if not checkPpThreshold(8) { setAction(44, 35) eob } },	// PSI Shield A
+		{ setAction(215, 0) eob },	// Paint attack (Shoot)
+		{ goto(_entry26) }		// Back to the original enemy entry (26)
+	)
+}
+//------------------------------------
+Carbon_Dog: {	// Enemy 27 & 174
+_entry27:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(104, 0) eob },	// Flaming fireball (350 fire damage)
+		{ goto(_entry174) },	// Run enemy extender (174)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob }	// Biting attack (Bash)
+	)
+
+_entry174:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(93, 0) eob },	// Spray of fire (Fire O)
+		{ goto(_entry27) },	// Back to the original enemy entry (27)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(133, 0) eob }	// Piercing howl
+	)
+}
+//------------------------------------
+Mighty_Bear: {	// Enemy 28
+	order0(	// Action order 0 (Random)
+		{ setAction(112, 0) eob },	// Clawed with sharp nails (Lvl 3 attack)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Mighty_Bear_Seven: {	// Enemy 29
+	order0(	// Action order 0 (Random)
+		{ setAction(112, 0) eob },	// Clawed with sharp nails (Lvl 3 attack)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Putrid_Moldyman: {	// Enemy 30
+	order0(	// Action order 0 (Random)
+		{ setAction(78, 0) eob },	// Mold spores (Crying)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Thunder_Mite: {	// Enemy 31
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } },	// Thunder B
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } }	// Thunder B
+	)
+}
+//------------------------------------
+Cranky_Lady: {	// Enemy 32
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(115, 0) eob },	// Wielded shopping bag (Lvl 3 attack)
+		{ setAction(231, 0) eob },	// Scowled sharply (Reduce guts)
+		{ setAction(130, 0) eob }	// Big grin
+	)
+}
+//------------------------------------
+Extra_Cranky_Lady: {	// Enemy 33
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(231, 0) eob },	// Scowled sharply (Reduce guts)
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(115, 0) eob },	// Wielded shopping bag (Lvl 3 attack)
+		{ setAction(83, 0) eob }	// Said something scary (Solidify)
+	)
+}
+//------------------------------------
+Giygas_Unused: {	// Enemy 34, (Unused)
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Googlysaurus: {	// Enemy 35
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(224, 0) eob },	// Stomped with huge foot (Bash)
+		{ setAction(113, 0) eob },	// Swong tail (Lvl 3 attack)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(211, 0) eob }	// Loud rumble (Solidify)
+	)
+}
+//------------------------------------
+Hungrosaurus: {	// Enemy 36 & 175
+_entry36:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ setAction(113, 0) eob },	// Swong tail (Lvl 3 attack)
+		{ goto(_entry175) }	// Run enemy extender (175)
+	)
+
+_entry175:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(224, 0) eob },	// Stomped with huge foot (Bash)
+		{ goto(_entry36) },	// Back to the original enemy entry (36)
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ if not checkPpThreshold(20) { setAction(16, 7) eob } }	// Fire G
+	)
+}
+//------------------------------------
+Titanic_Ant: {	// Enemy 37 & 176
+_entry37:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ goto(_entry176) },	// Run enemy extender (176)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ if not checkPpThreshold(6) { setAction(50, 41) eob } },	// Defense down
+		{ setAction(54, 45) eob }	// Magnet A
+	)
+
+_entry176:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ goto(_entry37) },	// Back to the original enemy entry (37)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ if not checkPpThreshold(6) { setAction(40, 31) eob } }	// Shield A
+	)
+}
+//------------------------------------
+Gigantic_Ant: {	// Enemy 38 & 177
+_entry38:	// Action order 0 (Random)
+	order0(
+		{ setAction(54, 45) eob },	// Magnet A
+		{ setAction(72, 0) eob },	// Stung with poison stinger (Poison)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ goto(_entry177) }	// Run enemy extender (177)
+	)
+
+_entry177:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } },	// Paralysis
+		{ setAction(119, 0) eob },	// Menacing smile
+		{ setAction(62, 38) eob },	// Call for help (Gigantic Ant)
+		{ goto(_entry38) }	// Back to the original enemy entry (38)
+	)
+}
+//------------------------------------
+Shroom: {	// Enemy 39 & 178
+_entry39:	// Action order 2 (In order)
+	order2(
+		{ setAction(75, 0) eob },	// Magnet A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(237, 0) eob },	// Scattered sportes (Poison)
+		{ goto(_entry178) }	// Run enemy extender (178)
+	)
+
+_entry178:	// Action order 0 (Random)
+	order0(
+		{ setAction(75, 0) eob },	// Magnet A
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(85, 0) eob },	// Disrupted senses (Can't concentrate)
+		{ goto(_entry39) }	// Back to the original enemy entry (39)
+	)
+}
+//------------------------------------
+Plague_Rat_Doom: {	// Enemy 40 & 179
+_entry40:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(100, 0) eob },	// Bite with poisonous fangs (Poison)
+		{ goto(_entry179) },	// Run enemy extender (179)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(4, 0) eob }		// Bash
+	)
+
+_entry179:	// Action order 0 (Random)
+	order0(
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry40) },	// Back to the original enemy entry (40)
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Mondo_Mole: {	// Enemy 41 & 180
+_entry41:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(110, 0) eob },	// Tore into you (Lvl 3 attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry180) }	// Run enemy extender (180)
+	)
+
+_entry180:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(8) { setAction(44, 35) eob } },	// PSI Shield A
+		{ if not checkPpThreshold(10) { setAction(48, 39) eob } },	// Offense up
+		{ setAction(112, 0) eob },	// Clawed with sharp nails (Lvl 3 attack)
+		{ goto(_entry41) }	// Back to the original enemy entry (41)
+	)
+}
+//------------------------------------
+Guardian_Digger: {	// Enemy 42 & 181
+_entry42:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(112, 0) eob },	// Clawed with sharp nails (Lvl 3 attack)
+		{ goto(_entry181) },	// Run enemy extender (181)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(10) { setAction(41, 33) eob } }	// Shield B
+	)
+
+_entry181:	// Action order 1 (Random - 50/25/12.5)
+	order1(
+		{ setAction(110, 0) eob },	// Tore into you (Lvl 3 attack)
+		{ goto(_entry42) },	// Back to the original enemy entry (42)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Scalding_Coffee_Cup: {	// Enemy 43
+	order0(	// Action order 0 (Random)
+		{ setAction(89, 0) eob },	// Scalding hot espresso (Fire A)
+		{ setAction(89, 0) eob },	// Scalding hot espresso (Fire A)
+		{ setAction(89, 0) eob },	// Scalding hot espresso (Fire A)
+		{ setAction(89, 0) eob }	// Scalding hot espresso (Fire A)
+	)
+}
+//------------------------------------
+Loaded_Dice: {	// Enemy 44
+	order0(	// Action order 0 (Random)
+		{ setAction(62, 115) eob },	// Call for help (Care Free Bomb)
+		{ setAction(62, 133) eob },	// Call for help (Beautiful UFO)
+		{ setAction(62, 151) eob },	// Call for help (High-class UFO)
+		{ setAction(62, 115) eob }	// Call for help (Care Free Bomb)
+	)
+}
+//------------------------------------
+Slimy_Little_Pile: {	// Enemy 45
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(87, 0) eob },	// Stinky breath (Crying 2)
+		{ setAction(62, 45) eob },	// Call for help (Slimy Little Pile)
+		{ setAction(80, 0) eob },	// Sticky mucus (Immobilize)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Even_Slimier_Little_Pile: {	// Enemy 46
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(62, 45) eob },	// Call for help (Even Slimier Little Pile)
+		{ setAction(80, 0) eob },	// Sticky mucus (Immobilize)
+		{ setAction(87, 0) eob }	// Stinky breath (Crying 2)
+	)
+}
+//------------------------------------
+Arachnid: {	// Enemy 47
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(82, 0) eob },	// Spider silk (Immobilize)
+		{ setAction(72, 0) eob }	// Stung with poison stinger (Poison)
+	)
+}
+//------------------------------------
+Arachnid2: {	// Enemy 48
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(72, 0) eob },	// Stung with poison stinger (Poison)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(82, 0) eob }	// Spider silk (Immobilize)
+	)
+}
+//------------------------------------
 Kraken_Boss: {	// Enemy 49 & 182
-_entry49:		// Action order 0 (Random)
+_entry49:	// Action order 0 (Random)
 	order0(
 		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
 		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
-		{ setAction(92, 0) eob },	// Thunder Beta, Crashing Boom Bang
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
 		{ goto(_entry182) }	// Run enemy extender (182)
 	)
 
@@ -157,4 +635,1610 @@ _entry182:	// Action order 3 (Staggered order)
 		{ goto(_entry49) }		// Back to the original enemy entry (49)
 	)
 }
+//------------------------------------
+Bionic_Kraken: {	// Enemy 50
+	order0(	// Action order 0 (Random)
+		{ setAction(117, 0) eob },	// Tornado
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
+		{ setAction(248, 0) eob }	// Pale green light (Negate PSI effects)
+	)
+}
+//------------------------------------
+Spinning_Robo: {	// Enemy 51
+	order0(	// Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired a beam
+		{ setAction(222, 0) eob },	// Fired a beam
+		{ setAction(241, 0) eob },	// Night-time beam, Cold
+		{ if not checkPpThreshold(6) { setAction(40, 31) eob } }	// Shield A
+	)
+}
+//------------------------------------
+Whirling_Robo: {	// Enemy 52
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired a beam
+		{ setAction(241, 0) eob },	// Night-time beam, Cold
+		{ setAction(247, 195) eob },	// Neutralizer
+		{ if not checkPpThreshold(6) { setAction(40, 31) eob } }	// Shield A
+	)
+}
+//------------------------------------
+Hyper_Spinning_Robo: {	// Enemy 53
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired a beam
+		{ setAction(222, 0) eob },	// Fired a beam
+		{ setAction(85, 0) eob },	// Disrupted senses (Can't concentrate)
+		{ if not checkPpThreshold(10) { setAction(41, 33) eob } }	// Shield B
+	)
+}
+//------------------------------------
+Cop: {	// Enemy 54
+	order0(	// Action order 0 (Random)
+		{ setAction(106, 0) eob },	// Crushing chop (Lvl 3 attack)
+		{ setAction(106, 0) eob },	// Crushing chop (Lvl 3 attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Coil_Snake: {	// Enemy 55
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(242, 0) eob }	// Coiled around you (Immobilize)
+	)
+}
+//------------------------------------
+Dry_Coil_Snake: {	// Enemy 56
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(100, 0) eob },	// Bite with poisonous fangs (Poison)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(242, 0) eob }	// Coiled around you (Immobilize)
+	)
+}
+//------------------------------------
+Mr_Batty: {	// Enemy 57
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(86, 0) eob },	// Sizing up situation (Feel strange)
+		{ setAction(210, 0) eob },	// Friendly and affectionate (Solidify)
+		{ setAction(86, 0) eob }	// Sizing up situation (Feel strange)
+	)
+}
+//------------------------------------
+Elder_Batty: {	// Enemy 58
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(86, 0) eob },	// Sizing up situation (Feel strange)
+		{ setAction(210, 0) eob },	// Friendly and affectionate (Solidify)
+		{ setAction(111, 0) eob }	// Biting attack (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Violent_Roach: {	// Enemy 59
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(235, 0) eob },	// Knited brow
+		{ setAction(232, 0) eob },	// Terrible odor (Reduce offense)
+		{ setAction(209, 0) eob }	// Spread wings (Solidify)
+	)
+}
+//------------------------------------
+Filthy_Attack_Roach: {	// Enemy 60
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(235, 0) eob },	// Knited brow
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(209, 0) eob }	// Spread wings (Solidify)
+	)
+}
+//------------------------------------
+Crazed_Sign: { // Enemy 61
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } },	// Paralysis
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } }	// Hypnosis
+	)
+}
+//------------------------------------
+Wooly_Shambler: { // Enemy 62
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(8) { setAction(44, 35) eob } },	// PSI Shield A
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } }	// Flash A
+	)
+}
+//------------------------------------
+Wild_Wooly_Shambler: { // Enemy 63
+	order0( // Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(14) { setAction(45, 37) eob } },	// PSI Shield B
+		{ if not checkPpThreshold(16) { setAction(27, 18) eob } }	// Flash B
+	)
+}
+//------------------------------------
+Skate_Punk: { // Enemy 64
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(227, 0) eob },	// Shred skateboard (Lvl 3 Attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(62, 129) eob },	// Call for help (Yes Man Junior)
+		{ setAction(62, 134) eob }	// Call for help (Pogo Punk)
+	)
+}
+//------------------------------------
+Skelpion: { // Enemy 65
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(72, 0) eob },	// Stung with poison stinger (Poison)
+		{ setAction(121, 0) eob },	// Edged closer
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } }	// Thunder A
+	)
+}
+//------------------------------------
+Dread_Skelpion: { // Enemy 66
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(72, 0) eob },	// Stung with poison stinger (Poison)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(7) { setAction(23, 14) eob } }	// Thunder B
+	)
+}
+//------------------------------------
+Starman: { // Enemy 67 & 184
+_entry67:	// Action order 0 (Random)
+	order0(
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(103, 0) eob },	// On guard
+		{ setAction(54, 45) eob },	// Magnet A
+		{ goto(_entry184) }	// Run enemy extender (184)
+	)
+
+_entry184:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(6) { setAction(40, 31) eob } },	// Shield A
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(182, 159) eob },	// Sudden guts pill
+		{ goto(_entry67) }	// Back to the original enemy entry (67)
+	)
+}
+//------------------------------------
+Super_Starman: { // Enemy 68 & 185
+_entry68:	// Action order 0 (Random)
+	order0(
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(62, 67) eob },	// Call for help (Starman)
+		{ setAction(103, 0) eob },	// On guard
+		{ goto(_entry185) }	// Run enemy extender (185)
+	)
+
+_entry185:	// Action order 0 (Random)
+	order0(
+		{ if not checkPpThreshold(14) { setAction(45, 37) eob } },	// PSI Shield B
+		{ if not checkPpThreshold(38) { setAction(39, 30) eob } },	// Healing O
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ goto(_entry68) }	// Back to the original enemy entry (68)
+	)
+}
+//------------------------------------
+Ghost_Starman: { // Enemy 69 & 186
+_entry69:	// Action order 2 (In order)
+	order2(
+		{ if not checkPpThreshold(24) { setAction(30, 21) eob } },	// Starstorm A
+		{ setAction(119, 0) eob },	// Menacing smile
+		{ setAction(122, 0) eob },	// Muttered 1
+		{ goto(_entry186) }	// Run enemy extender (186)
+	)
+
+_entry186:	// Action order 2 (In order)
+	order2(
+		{ setAction(123, 0) eob },	// Muttered 2
+		{ setAction(124, 0) eob },	// Muttered 3
+		{ if not checkPpThreshold(42) { setAction(31, 22) eob } },	// Starstorm O
+		{ goto(_entry69) }	// Back to the original enemy entry (69)
+	)
+}
+//------------------------------------
+Smilin_Sphere: { // Enemy 70
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(207, 0) eob }	// Laugh maniacally (Brainshock)
+	)
+}
+//------------------------------------
+Uncontrollable_Sphere: { // Enemy 71
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ setAction(207, 0) eob }	// Laugh maniacally (Brainshock)
+	)
+}
+//------------------------------------
+Petrified_Royal_Guard: { // Enemy 72
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(234, 0) eob }	// Shrieked war cry (Reduce Offense and Defense)
+	)
+}
+//------------------------------------
+Guardian_General: { // Enemy 73 & 208
+_entry73:	// Action order 0 (Random)
+	order0(
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(95, 0) eob },	// Something spin around (Reduce PP 16th)
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry208) }	// Run enemy extender (208)
+	)
+
+_entry208:	// Action order 0 (Random)
+	order0(
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(234, 0) eob },	// Shrieked war cry (Reduce Offense and Defense)
+		{ goto(_entry73) }	// Back to the original enemy entry (73)
+	)
+}
+//------------------------------------
+Starman_Deluxe: { // Enemy 74 & 187
+_entry74:
+	order0( // Action order 0 (Random)
+		{ goto(_entry187) },	// Run enemy extender (187)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(24) { setAction(30, 21) eob } },	// Starstorm A
+		{ setAction(62, 68) eob }	// Call for help (Super Starman)
+	)
+
+_entry187:
+	order0(	// Action order 0 (Random)
+		{ goto(_entry74) },	// Back to the original enemy entry (74)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(14) { setAction(45, 37) eob } },	// PSI Shield B
+		{ setAction(62, 67) eob }	// Call for help (Starman)
+	)
+}
+//------------------------------------
+Final_Starman: { // Enemy 75 & 188
+_entry75:
+	order3( // Action order 3 (Staggered order)
+		{ if not checkPpThreshold(10) { setAction(41, 33) eob } },	// Shield B
+		{ if not checkPpThreshold(30) { setAction(59, 50) eob } },	// Brainshock O
+		{ if not checkPpThreshold(24) { setAction(30, 21) eob } },	// Starstorm A
+		{ goto(_entry188) }	// Run enemy extender (188)
+	)
+
+_entry188:
+	order3(	// Action order 3 (Staggered order)
+		{ if not checkPpThreshold(42) { setAction(31, 22) eob } },	// Starstorm O
+		{ setAction(119, 0) eob },	// Menacing smile
+		{ if not checkPpThreshold(38) { setAction(39, 30) eob } },	// Healing O
+		{ goto(_entry75) }	// Back to the original enemy entry (75)
+	)
+}
+//------------------------------------
+Urban_Zombie: { // Enemy 76
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(120, 0) eob },	// Laugh hysterically
+		{ setAction(74, 0) eob },	// Arctic-cold breath (Cold)
+		{ setAction(84, 0) eob }	// Something mysterious (Brainshock)
+	)
+}
+//------------------------------------
+Zombie_Possessor: { // Enemy 77
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(204, 0) eob },	// Icy hand (Solidify)
+		{ setAction(62, 77) eob },	// Call for help (Zombie possessor)
+		{ setAction(76, 0) eob }	// Possess
+	)
+}
+//------------------------------------
+Zombie_Dog: { // Enemy 78
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(100, 0) eob }	// Bite with poisonous fangs (Poison)
+	)
+}
+//------------------------------------
+Crooked_Cop: { // Enemy 79
+	order0( // Action order 0 (Random)
+		{ setAction(107, 0) eob },	// Submission hold (Lvl 3 attack)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(103, 0) eob },	// On guard
+		{ setAction(96, 0) eob }	// Lost tempter (Offense Up)
+	)
+}
+//------------------------------------
+Over_Zealous_Cop: { // Enemy 80
+	order0( // Action order 0 (Random)
+		{ setAction(107, 0) eob },	// Submission hold (Lvl 3 attack)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(103, 0) eob },	// On guard
+		{ setAction(96, 0) eob }	// Lost tempter (Offense Up)
+	)
+}
+//------------------------------------
+Territorial_Oak: { // Enemy 81
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } },	// Brainshock A
+		{ setAction(98, 0) eob }	// Vacuum attack (Reduce Offense and Defense)
+	)
+}
+//------------------------------------
+Hostile_Elder_Oak: { // Enemy 82
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } },	// Brainshock A
+		{ setAction(54, 45) eob }	// Magnet A
+	)
+}
+//------------------------------------
+Diamond_Dog: { // Enemy 83 & 190
+_entry83:
+	order0( // Action order 0 (Random)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ goto(_entry190) },	// Run enemy extender (190)
+		{ if not checkPpThreshold(10) { setAction(41, 33) eob } },	// Shield B
+		{ setAction(201, 0) eob }	// Glorious light (Flash G)
+	)
+
+_entry190:
+	order0(	// Action order 0 (Random)
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ goto(_entry83) },	// Back to the original enemy entry (83)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(228, 0) eob }	// Bit hard (Lvl 2 Attack Diamondize)
+	)
+}
+//------------------------------------
+Marauder_Octobot: { // Enemy 84
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(66, 0) eob },	// Steal item
+		{ setAction(242, 0) eob }	// Coiled around you (Immobilize)
+	)
+}
+//------------------------------------
+Military_Octobot: { // Enemy 85
+	order0( // Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(66, 0) eob },	// Steal item
+		{ setAction(242, 0) eob }	// Coiled around you (Immobilize)
+	)
+}
+//------------------------------------
+Mechanical_Octobot: { // Enemy 86
+	order0( // Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(66, 0) eob },	// Steal item
+		{ setAction(69, 0) eob }	// Mysterious electric field (Paralyze)
+	)
+}
+//------------------------------------
+Ultimate_Octobot: { // Enemy 87
+	order0( // Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(69, 0) eob },	// Mysterious electric field (Paralyze)
+		{ setAction(66, 0) eob },	// Steal item
+		{ setAction(69, 0) eob }	// Mysterious electric field (Paralyze)
+	)
+}
+//------------------------------------
+Mad_Duck: { // Enemy 88
+	order0( // Action order 0 (Random)
+		{ setAction(85, 0) eob },	// Disrupted senses (Can't concentrate)
+		{ setAction(125, 0) eob },	// Fell down
+		{ setAction(95, 0) eob },	// Something spin around (Reduce PP 16th)
+		{ setAction(218, 0) eob }	// Pecked eyes (Bash)
+	)
+}
+//------------------------------------
+Dalis_Clock: { // Enemy 89
+	order0( // Action order 0 (Random)
+		{ setAction(67, 0) eob },	// Froze time (Freeze time)
+		{ setAction(67, 0) eob },	// Froze time (Freeze time)
+		{ setAction(67, 0) eob },	// Froze time (Freeze time)
+		{ setAction(134, 0) eob }	// Saying tick-tock
+	)
+}
+//------------------------------------
+Trillion_Year_Sprout: { // Enemy 90 & 191
+_entry90:
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry191) },	// Run enemy extender (191)
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } }	// Paralysis
+	)
+
+_entry191:
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(8) { setAction(44, 35) eob } },	// PSI Shield A
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(68, 0) eob },	// Eerie eyes (Diamondize)
+		{ goto(_entry90) }	// Back to the original enemy entry (90)
+	)
+}
+//------------------------------------
+Musica: { // Enemy 91
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(90, 0) eob },	// Haunting melody (Hypnosis)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(202, 0) eob }	// Electrical shock (Thunder B)
+	)
+}
+//------------------------------------
+Desert_Wolf: { // Enemy 92
+	order0( // Action order 0 (Random)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(100, 0) eob }	// Bite with poisonous fangs (Poison)
+	)
+}
+//------------------------------------
+Master_Belch: { // Enemy 93 & 192
+_entry93:
+	order2( // Action order 2 (In order)
+		{ setAction(71, 0) eob },	// Nauseating breath (Nausea)
+		{ setAction(71, 0) eob },	// Nauseating breath (Nausea)
+		{ setAction(62, 45) eob },	// Call for help (Slimy Little Pile)
+		{ goto(_entry192) }	// Run enemy extender (192)
+	)
+
+_entry192:
+	order0(	// Action order 0 (Random)
+		{ setAction(71, 0) eob },	// Nauseating breath (Nausea)
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(62, 45) eob },	// Call for help (Slimy Little Pile)
+		{ setAction(121, 0) eob }	// Edged closer
+	)
+}
+//------------------------------------
+Big_Pile_Puke: { // Enemy 94
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(87, 0) eob },	// Stinky breath (Crying 2)
+		{ setAction(80, 0) eob },	// Sticky mucus (Immobilize)
+		{ setAction(71, 0) eob }	// Nauseating breath (Nausea)
+	)
+}
+//------------------------------------
+Master_Barf: { // Enemy 95 & 194
+_entry95:
+	order0( // Action order 0 (Random)
+		{ setAction(71, 0) eob },	// Nauseating breath (Nausea)
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(87, 0) eob },	// Stinky breath (Crying 2)
+		{ goto(_entry194) }	// Run enemy extender (194)
+	)
+
+_entry194:
+	order0(	// Action order 0 (Random)
+		{ setAction(62, 46) eob },	// Call for help (Even Slimier Little Pile)
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(71, 0) eob },	// Nauseating breath (Nausea)
+		{ goto(_entry95) }	// Back to the original enemy entry (95)
+	)
+}
+//------------------------------------
+Kiss_Death: { // Enemy 96
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(73, 0) eob },	// Kiss of death (Poison)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+French_Kiss_Death: { // Enemy 97
+	order0( // Action order 0 (Random)
+		{ setAction(73, 0) eob },	// Kiss of death (Poison)
+		{ setAction(73, 0) eob },	// Kiss of death (Poison)
+		{ setAction(73, 0) eob },	// Kiss of death (Poison)
+		{ setAction(73, 0) eob }	// Kiss of death (Poison)
+	)
+}
+//------------------------------------
+Foppy: { // Enemy 98
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(126, 0) eob },	// Absentminded
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } },	// Brainshock A
+		{ setAction(54, 45) eob }	// Magnet A
+	)
+}
+//------------------------------------
+Fobby: { // Enemy 99
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(161, 135) eob },	// HP-Sucker
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } },	// Brainshock A
+		{ setAction(54, 45) eob }	// Magnet A
+	)
+}
+//------------------------------------
+Zap_Eel: { // Enemy 100
+	order0( // Action order 0 (Random)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(202, 0) eob }	// Electrical shock (Thunder B)
+	)
+}
+//------------------------------------
+Tengu: { // Enemy 101
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(208, 0) eob },	// Breath flute (Hypnosis)
+		{ setAction(205, 0) eob },	// Play flute (Poison)
+		{ setAction(208, 0) eob }	// Breath flute (Hypnosis)
+	)
+}
+//------------------------------------
+Boogey_Tent: { // Enemy 102
+_entry102:
+	order0( // Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(183, 161) eob },	// Defense spray
+		{ setAction(81, 0) eob },	// Spew Fly honey (Immobilize)
+		{ goto(_entry197) }	// Run enemy extender (197)
+	)
+
+_entry197:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ goto(_entry102) }	// Back to the original enemy entry (102)
+	)
+}
+//------------------------------------
+Squatter_Demon: { // Enemy 103
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(100, 0) eob },	// Bite with poisonous fangs (Poison)
+		{ setAction(228, 0) eob },	// Bit hard (Lvl 2 Attack Diamondize)
+		{ setAction(160, 132) eob },	// Shield killer
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } }	// Hypnosis
+	)
+}
+//------------------------------------
+Crested_Booka: { // Enemy 104
+	order3( // Action order 3 (Staggered order)
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(234, 0) eob },	// Shrieked war cry (Reduce Offense and Defense)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Great_Crested_Booka: { // Enemy 105
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(234, 0) eob },	// Shrieked war cry (Reduce Offense and Defense)
+		{ setAction(226, 0) eob }	// Charged forward
+	)
+}
+//------------------------------------
+Lesser_Mook: { // Enemy 106
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(4) { setAction(18, 9) eob } },	// Freeze A
+		{ if not checkPpThreshold(9) { setAction(19, 10) eob } },	// Freeze B
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } },	// Hypnosis
+		{ setAction(68, 0) eob }	// Eerie eyes (Diamondize)
+	)
+}
+//------------------------------------
+Mook_Senior: { // Enemy 107
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(9) { setAction(19, 10) eob } },	// Freeze B
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(68, 0) eob }	// Eerie eyes (Diamondize)
+	)
+}
+//------------------------------------
+Smelly_Ghost: { // Enemy 108
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(130, 0) eob },	// Big grin
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ setAction(232, 0) eob }	// Terrible odor (Reduce offense)
+	)
+}
+//------------------------------------
+Stinky_Ghost: { // Enemy 109
+	order1( // Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(76, 0) eob },	// Possess
+		{ setAction(232, 0) eob }	// Terrible odor (Reduce offense)
+	)
+}
+//------------------------------------
+Everdred: { // Enemy 110
+_entry110:
+	order0( // Action order 0 (Random)
+		{ setAction(235, 0) eob },	// Knitted brow
+		{ setAction(66, 0) eob },	// Steal item
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry199) }	// Run enemy extender (199)
+	)
+
+_entry199:
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ goto(_entry110) }	// Back to the original enemy entry (110)
+	)
+}
+//------------------------------------
+Attack_Slug: {	// Enemy 111
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(121, 0) eob },	// Edged closer
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } }	// Hypnosis
+	)
+}
+//------------------------------------
+Pit_Bull_Slug: {	// Enemy 112
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(98, 0) eob },	// Vacuum attack (Reduce Offense and Defense)
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } }	// Hypnosis
+	)
+}
+//------------------------------------
+Rowdy_Mouse: {	// Enemy 113
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob }	// Biting attack (Bash)
+	)
+}
+//------------------------------------
+Deadly_Mouse: {	// Enemy 114
+	order0(	// Action order 0 (Random)
+		{ setAction(100, 0) eob },	// Bite with poisonous fangs (Poison)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob }	// Biting attack (Bash)
+	)
+}
+//------------------------------------
+Care_Free_Bomb: {	// Enemy 115
+	order0(	// Action order 0 (Random)
+		{ setAction(167, 147) eob },	// Bomb
+		{ setAction(167, 147) eob },	// Bomb
+		{ setAction(167, 147) eob },	// Bomb
+		{ setAction(168, 148) eob }	// Super bomb
+	)
+}
+//------------------------------------
+Electro_Specter: {	// Enemy 116 & 200
+_entry116:
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ goto(_entry200) },	// Run enemy extender (200)
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ setAction(176, 136) eob }
+	)
+
+_entry200:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(247, 195) eob },	// Neutralizer
+		{ setAction(160, 132) eob },	// Shield killer
+		{ setAction(202, 0) eob },	// Electrical shock (Thunder B)
+		{ goto(_entry116) }	// Back to the original enemy entry (116)
+	)
+}
+//------------------------------------
+Handsome_Tom: {	// Enemy 117
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(129, 0) eob },	// Reeling
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } },	// Hypnosis
+		{ if not checkPpThreshold(10) { setAction(58, 49) eob } }	// Brainshock A
+	)
+}
+//------------------------------------
+Smilin_Sam: {	// Enemy 118
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(129, 0) eob },	// Reeling
+		{ if not checkPpThreshold(6) { setAction(50, 41) eob } },	// Defense down
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Manly_Fish: {	// Enemy 119
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(223, 0) eob },	// Jabbed spear (Bash)
+		{ setAction(223, 0) eob },	// Jabbed spear (Bash)
+		{ setAction(223, 0) eob },	// Jabbed spear (Bash)
+		{ setAction(223, 0) eob }	// Jabbed spear (Bash)
+	)
+}
+//------------------------------------
+Manly_Fish_Brother: {	// Enemy 120
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } },	// Hypnosis
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } },	// Paralysis
+		{ if not checkPpThreshold(9) { setAction(19, 10) eob } },	// Freeze B
+		{ if not checkPpThreshold(38) { setAction(39, 30) eob } }	// Healing O
+	)
+}
+//------------------------------------
+Runaway_Dog: {	// Enemy 121
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob }	// Biting attack (Bash)
+	)
+}
+//------------------------------------
+Trick_Treat_Kid: {	// Enemy 122
+	order0(	// Action order 0 (Random)
+		{ setAction(221, 0) eob },	// Spit pumpkin seeds (Shoot)
+		{ setAction(221, 0) eob },	// Spit pumpkin seeds (Shoot)
+		{ setAction(221, 0) eob },	// Spit pumpkin seeds (Shoot)
+		{ setAction(130, 0) eob }	// Big grin
+	)
+}
+//------------------------------------
+Bigfoot: {	// Enemy 123
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(233, 0) eob },	// Shouted loud voice (Reduce Offense and Defense)
+		{ setAction(116, 0) eob },	// Swung club (Lvl 3 Attack)
+		{ setAction(233, 0) eob },	// Shouted loud voice (Reduce Offense and Defense)
+		{ setAction(116, 0) eob }	// Swung club (Lvl 3 Attack)
+	)
+}
+//------------------------------------
+Abstract_Art: {	// Enemy 124
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(6) { setAction(52, 43) eob } }	// Hypnosis
+	)
+}
+//------------------------------------
+Shattered_Man: {	// Enemy 125
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(114, 0) eob },	// Lunged forward (Lvl 3 Attack)
+		{ setAction(212, 0) eob },	// Great big hug (Immobilize)
+		{ setAction(204, 0) eob }	// Icy hand (Solidify)
+	)
+}
+//------------------------------------
+Fierce_Shattered_Man: {	// Enemy 126
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(102, 0) eob },	// Continuos attack (Attack twice Lvl 2 attack)
+		{ setAction(212, 0) eob },	// Great big hug (Immobilize)
+		{ setAction(204, 0) eob }	// Icy hand (Solidify)
+	)
+}
+//------------------------------------
+Ego_Orb: {	// Enemy 127
+	order0(	// Action order 0 (Random)
+		{ setAction(110, 0) eob },	// Tore into you (Lvl 3 attack)
+		{ setAction(114, 0) eob },	// Lunged forward (Lvl 3 Attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Thunder_and_Storm: {	// Enemy 128 & 201
+_entry128:
+	order2(	// Action order 2 (In order)
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ setAction(131, 0) eob },	// Deep breath
+		{ setAction(105, 0) eob },	// Intertwined (Lvl 4 Attack)
+		{ goto(_entry201) }	// Run enemy extender (201)
+	)
+
+_entry201:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(88, 0) eob },	// Summoned storm (Flash G)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ goto(_entry128) }	// Back to the original enemy entry (128)
+	)
+}
+//------------------------------------
+Yes_Man_Junior: {	// Enemy 129
+	order0(	// Action order 0 (Random)
+		{ setAction(225, 0) eob },	// Swung hula hoop (Lvl 3 Attack)
+		{ setAction(225, 0) eob },	// Swung hula hoop (Lvl 3 Attack)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(120, 0) eob }	// Laugh hysterically
+	)
+}
+//------------------------------------
+Frankystein_Mark_II: {	// Enemy 130 & 202
+_entry130:
+	order2(	// Action order 2 (In order)
+		{ setAction(127, 0) eob },	// Burst of steam
+		{ setAction(220, 0) eob },	// Punch (Bash)
+		{ setAction(127, 0) eob },	// Burst of steam
+		{ goto(_entry202) }	// Run enemy extender (202)
+	)
+
+_entry202:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(110, 0) eob },	// Tore into you (Lvl 3 attack)
+		{ setAction(220, 0) eob },	// Punch (Bash)
+		{ setAction(127, 0) eob },	// Burst of steam
+		{ goto(_entry130) }	// Back to the original enemy entry (130)
+	)
+}
+//------------------------------------
+Frank: {	// Enemy 131
+	order0(	// Action order 0 (Random)
+		{ setAction(109, 0) eob },	// Brandished knife (Lvl 3 Attack)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(97, 0) eob },	// Said something nasty (Reduce guts)
+		{ setAction(109, 0) eob }	// Brandished knife (Lvl 3 Attack)
+	)
+}
+//------------------------------------
+Cute_Lil_UFO: {	// Enemy 132
+	order0(	// Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Beautiful_UFO: {	// Enemy 133
+	order0(	// Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Pogo_Punk: {	// Enemy 134
+	order0(	// Action order 0 (Random)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(125, 0) eob }	// Fell down
+	)
+}
+//------------------------------------
+Tough_Guy: {	// Enemy 135
+	order0(	// Action order 0 (Random)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(96, 0) eob }	// Lost tempter (Offense Up)
+	)
+}
+//------------------------------------
+Mad_Taxi: {	// Enemy 136
+	order0(	// Action order 0 (Random)
+		{ setAction(108, 0) eob },	// Accelerated (Lvl 3 Attack)
+		{ setAction(108, 0) eob },	// Accelerated (Lvl 3 Attack)
+		{ setAction(206, 0) eob },	// Spewed exhaust fumes (Crying)
+		{ setAction(206, 0) eob }	// Spewed exhaust fumes (Crying)
+	)
+}
+//------------------------------------
+Mani_Mani_Devil: {	// Enemy 137 & 203
+_entry137:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(54, 45) eob },	// Magnet A
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } },	// Paralysis
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry203) }	// Run enemy extender (203)
+	)
+
+_entry203:
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(201, 0) eob },	// Glorious light (Flash G)
+		{ goto(_entry137) }	// Back to the original enemy entry (137)
+	)
+
+}
+//------------------------------------
+Mr_Molecule: {	// Enemy 138
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(3) { setAction(22, 13) eob } },	// Thunder A
+		{ if not checkPpThreshold(8) { setAction(26, 17) eob } },	// Flash A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(4) { setAction(18, 9) eob } }		// Freeze A
+	)
+}
+//------------------------------------
+Worthless_Protoplasm: {	// Enemy 139
+	order0(	// Action order 0 (Random)
+		{ setAction(86, 0) eob },	// Sizing up situation (Feel strange)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(62, 139) eob },	// Call for help (Worthless protoplasm)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Sentry_Robot: {	// Enemy 140
+	order0(	// Action order 0 (Random)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(134, 0) eob },	// Saying tick-tock
+		{ setAction(62, 140) eob },	// Call for help (Sentry robot)
+		{ setAction(163, 144) eob }	// Bottle rocket
+	)
+}
+//------------------------------------
+Heavily_Armed_Porkey_Unused: {	// Enemy 141 & 204 (UNUSED)
+_entry141:
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry204) }	// Run enemy extender (204)
+	)
+
+_entry204:
+	order2(	// Action order 2 (In order)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ goto(_entry141) }	// Back to the original enemy entry (141)
+	)
+}
+//------------------------------------
+Psychic_Psycho: {	// Enemy 142
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } }	// Fire B
+	)
+}
+//------------------------------------
+Major_Psychic_Psycho: {	// Enemy 143
+	order3(	// Action order 3 (Staggered order)
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ if not checkPpThreshold(42) { setAction(47, 38) eob } },	// PSI Shield O
+		{ if not checkPpThreshold(8) { setAction(56, 47) eob } },	// Paralysis
+		{ if not checkPpThreshold(20) { setAction(16, 7) eob } }	// Fire G
+	)
+}
+//------------------------------------
+Mole_Playing_Rough: {	// Enemy 144
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(217, 0) eob },	// Scratched with claws (Bash)
+		{ setAction(86, 0) eob },	// Sizing up situation (Feel strange)
+		{ setAction(126, 0) eob },	// Absentminded
+		{ setAction(112, 0) eob }	// Clawed with sharp nails (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Gruff_Goat: {	// Enemy 145
+	order0(	// Action order 0 (Random)
+		{ setAction(219, 0) eob },	// Rammed and trampled you
+		{ setAction(219, 0) eob },	// Rammed and trampled you
+		{ setAction(219, 0) eob },	// Rammed and trampled you
+		{ setAction(110, 0) eob }	// Tore into you (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Clumsy_Robot: {	// Enemy 146, 205 & 230
+_entry146:	// Action order 3 (Staggered order)
+	order3(
+		{ setAction(314, 0) eob },	// Lost gear and bolts
+		{ setAction(315, 0) eob },	// Reapplied bandage
+		{ setAction(101, 0) eob },	// Fired missile (Super bomb)
+		{ goto(_entry205) }	// Run enemy extender (205)
+	)
+
+_entry205:	// Action order 2 (In order)
+	order2(
+		{ setAction(70, 0) eob },	// Strange beam (Solidify)
+		{ setAction(316, 0) eob },	// Cleaned area
+		{ setAction(313, 0) eob },	// Ate bologne sandwich
+		{ goto(_entry230) }	// Run enemy extender (230)
+	)
+
+_entry230:	// Action order 3 (Staggered order)
+	order3(	// First set
+		{ setAction(129, 0) eob },	// Reeling
+		{ setAction(128, 0) eob },	// Wobbly
+		// Second set
+		{ setAction(317, 0) eob },	// Wanted to get a battery
+		{ goto(_entry146) }	// Back to the original enemy entry (146)
+	)
+}
+//------------------------------------
+Soul_Consuming_Flame: {	// Enemy 147
+	order0(	// Action order 0 (Random)
+		{ setAction(121, 0) eob },	// Edged closer
+		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
+		{ setAction(104, 0) eob },	// Flaming fireball (350 fire damage)
+		{ setAction(93, 0) eob }	// Spray of fire (Fire O)
+	)
+}
+//------------------------------------
+Demonic_Rafflesia: {	// Enemy 148
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(121, 0) eob },	// Edged closer
+		{ setAction(91, 0) eob },	// Extinguishing blast (Fire G)
+		{ setAction(121, 0) eob },	// Edged closer
+		{ setAction(203, 0) eob }	// Scattered pollen (Paralysis)
+	)
+}
+//------------------------------------
+Ranboob: {	// Enemy 149
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(4, 0) eob },	// Bash
+		{ if not checkPpThreshold(6) { setAction(40, 31) eob } },	// Shield A
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(77, 0) eob }	// Sprinkled powder (Hypnosis)
+	)
+}
+//------------------------------------
+Lil_UFO: {	// Enemy 150
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(241, 0) eob },	// Night-time beam, Cold
+		{ setAction(222, 0) eob }	// Fired beam (Shoot)
+	)
+}
+//------------------------------------
+High_Class_UFO: {	// Enemy 151
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(222, 0) eob },	// Fired beam (Shoot)
+		{ setAction(85, 0) eob },	// Disrupted senses (Can't concentrate)
+		{ if not checkPpThreshold(8) { setAction(44, 35) eob } }	// PSI Shield A
+	)
+}
+//------------------------------------
+Noose_Man: {	// Enemy 152
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(79, 0) eob }	// Binding attack (Immobilize)
+	)
+}
+//------------------------------------
+Robo_Pump: {	// Enemy 153 & 206
+_entry153:
+	order2(	// Action order 2 (In order)
+		{ setAction(122, 0) eob },	// Muttered 1
+		{ setAction(123, 0) eob },	// Muttered 2
+		{ setAction(124, 0) eob },	// Muttered 3
+		{ goto(_entry206) }	// Run enemy extender (206)
+	)
+
+_entry206:
+	order2(	// Action order 2 (In order)
+		{ setAction(167, 147) eob },	// Bomb
+		{ setAction(99, 0) eob },	// Lifeup G
+		{ setAction(134, 0) eob },	// Saying tick-tock
+		{ goto(_entry153) }	// Back to the original enemy entry (153)
+	)
+}
+//------------------------------------
+Plain_Alligator: {	// Enemy 154
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(121, 0) eob },	// Edged closer
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(113, 0) eob }	// Swong tail (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Strong_Alligator: {	// Enemy 155
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(121, 0) eob },	// Edged closer
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(113, 0) eob }	// Swong tail (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Hard_Alligator: {	// Enemy 156
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(111, 0) eob },	// Biting attack (Lvl 3 attack)
+		{ setAction(113, 0) eob }	// Swong tail (Lvl 3 attack)
+	)
+}
+//------------------------------------
+No_Good_Fly: {	// Enemy 157
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(97, 0) eob },	// Said something nasty (Reduce guts)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Mostly_Bad_Fly: {	// Enemy 158
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(97, 0) eob },	// Said something nasty (Reduce guts)
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Spiteful_Crow: {	// Enemy 159
+	order0(	// Action order 0 (Random)
+		{ setAction(218, 0) eob },	// Pecked eyes (Bash)
+		{ setAction(218, 0) eob },	// Pecked eyes (Bash)
+		{ setAction(130, 0) eob },	// Big grin
+		{ setAction(66, 0) eob }	// Steal item
+	)
+}
+//------------------------------------
+My_Pet: {	// Enemy 160
+	order0(	// Action order 0 (Random)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(114, 0) eob },	// Lunged forward (Lvl 3 Attack)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(264, 0) eob }	// Barking
+	)
+}
+//------------------------------------
+Porky: {	// Enemy 161
+	order0(	// Action order 0 (Random)
+		{ setAction(260, 0) eob },	// Porky's 1/8 actions
+		{ setAction(260, 0) eob },	// Porky's 1/8 actions
+		{ setAction(260, 0) eob },	// Porky's 1/8 actions
+		{ setAction(260, 0) eob }	// Porky's 1/8 actions
+	)
+}
+//------------------------------------
+Picky: {	// Enemy 162
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(265, 0) eob }	// Chanting magic spell
+	)
+}
+//------------------------------------
+Tony: {	// Enemy 163 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(266, 0) eob }	// Newline
+	)
+}
+//------------------------------------
+Bubble_Monkey: {	// Enemy 164
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(267, 0) eob }	// Scratching its head
+	)
+}
+//------------------------------------
+Dungeon_Man: {	// Enemy 165
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(212, 0) eob }	// Great big hug (Immobilize)
+	)
+}
+//------------------------------------
+Flying_Man: {	// Enemy 166
+	order0(	// Action order 0 (Random)
+		{ setAction(220, 0) eob },	// Punch (Bash)
+		{ setAction(220, 0) eob },	// Punch (Bash)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(226, 0) eob }	// Charged forward
+	)
+}
+//------------------------------------
+Teddy_Bear: {	// Enemy 167
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+Super_Plush_Bear: {	// Enemy 168
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+Master_Belch_Honey: {	// Enemy 169
+	order0(	// Action order 0 (Random)
+		{ setAction(257, 0) eob },	// Wolfing down Fly honey
+		{ setAction(257, 0) eob },	// Wolfing down Fly honey
+		{ setAction(257, 0) eob },	// Wolfing down Fly honey
+		{ setAction(257, 0) eob }	// Wolfing down Fly honey
+	)
+}
+//------------------------------------
+Insane_Cultist_Unused: {	// Enemy 170 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Dept_Store_Spook: {	// Enemy 171 (Repeated in 2)
+//------------------------------------
+//Ness_Demon: {		// Enemy 172 (Repeated in 21)
+//------------------------------------
+//Mr._Carpainter: {	// Enemy 173 (Repeated in 26)
+//------------------------------------
+//Carbon_Dog: {		// Enemy 174 (Repeated in 27)
+//------------------------------------
+//Hungrosaurus: {	// Enemy 175 (Repeated in 36)
+//------------------------------------
+//Titanic_Ant: {	// Enemy 176 (Repeated in 37)
+//------------------------------------
+//Gigantic_Ant: {	// Enemy 177 (Repeated in 38)
+//------------------------------------
+//Shrooom2: {		// Enemy 178 (Repeated in 39)
+//------------------------------------
+//Plague_Rat_of_Doom: {	// Enemy 179 (Repeated in 40)
+//------------------------------------
+//Mondo_Mole: {		// Enemy 180 (Repeated in 41)
+//------------------------------------
+//Guardian_Digger: {	// Enemy 181 (Repeated in 42)
+//------------------------------------
+Magikraken: {	// Enemy 182 (49 added in)
+_entry49:	// Action order 0 (Random)
+	order0(
+		{ setAction(94, 0) eob },	// Fire Gamma, breathed fire
+		{ setAction(248, 0) eob },	// Pale green light (Negate PSI effects)
+		{ setAction(92, 0) eob },	// Crashing Boom Bang (Thunder B)
+		{ goto(_entry182) }	// Run enemy extender (182)
+	)
+
+_entry182:	// Action order 3 (Staggered order)
+	order3(
+		// First set
+		{ if not checkPpThreshold(16) { setAction(27, 18) eob } },	// Flash B
+		{ setAction(84, 0) eob },	// Brainshock, did something mysterious!
+		// Second set (After 1st set runs once)
+		{ setAction(117, 0) eob },	// Tornado
+		{ goto(_entry49) }	// Back to the original enemy entry (49)
+	)
+}
+//------------------------------------
+Bionic_Kraken_Unused: {	// Enemy 183 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Starman: {		// Enemy 184 (Repeated in 67)
+//------------------------------------
+//Super_Starman: {	// Enemy 185 (Repeated in 68)
+//------------------------------------
+//Ghost_Starman: {	// Enemy 186 (Repeated in 69)
+//------------------------------------
+//Starman_Deluxe: {	// Enemy 187 (Repeated in 74)
+//------------------------------------
+//Final_Starman: {	// Enemy 188 (Repeated in 75)
+//------------------------------------
+Urban_Zombie_Unused: {	// Enemy 189 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Diamond_Dog: {	// Enemy 190 (Repeated in 83)
+//------------------------------------
+//Trillion_Year_Sprout: {	// Enemy 191 (Repeated in 90)
+//------------------------------------
+//Master_Belch: {	// Enemy 192 (Repeated in 93)
+//------------------------------------
+Big_Pile_of_Puke: {	// Enemy 193
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Master_Barf: {	// Enemy 194 (Repeated in 95)
+//------------------------------------
+Loaded_Dice_Magicant: {	// Enemy 195
+	order0(	// Action order 0 (Random)
+		{ setAction(62, 17) eob },	// Call for help (Electro Swoosh)
+		{ setAction(62, 99) eob },	// Call for help (Fobby)
+		{ setAction(62, 71) eob },	// Call for help (Uncontrollable Sphere)
+		{ setAction(62, 17) eob }	// Call for help (Electro Swoosh)
+	)
+}
+//------------------------------------
+Tengu_Unused: {	// Enemy 196 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Boogey_Tent: {	// Enemy 197 (Repeated in 102)
+//------------------------------------
+Squatter_Demon_Unused:
+Debug: {	// Enemy 198 (Debug entry)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Everdred: {	// Enemy 199 (Repeated in 110)
+//------------------------------------
+//Electro_Specter: {	// Enemy 200 (Repeated in 116)
+//------------------------------------
+//Thunder_and_Storm: {	// Enemy 201 (Repeated in 128)
+//------------------------------------
+//Frankystein_Mark_II: {	// Enemy 202 (Repeated in 130)
+//------------------------------------
+//Mani_Mani_Devil: {	// Enemy 203 (Repeated in 137)
+//------------------------------------
+//Heavily_Armed_Porky: {	// Enemy 204 (Repeated in 141)
+//------------------------------------
+//Clumsy_Robot: {	// Enemy 205 (Repeated in 146 & 230)
+//------------------------------------
+//Robo-pump: {	// Enemy 206 (Repeated in 153)
+//------------------------------------
+Foppy_Unused: {	// Enemy 207 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+//Guardian_General: {	// Enemy 208 (Repeated in 73)
+//------------------------------------
+Black_Antoid_Falls: {	// Enemy 209
+	order3(	// Action order 3 (Staggered order)
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } },	// Life Up A
+		{ if not checkPpThreshold(5) { setAction(32, 23) eob } }	// Life Up A
+	)
+}
+//------------------------------------
+Wanderin_Evil_Mushroom: {	// Enemy 210
+	order0(	// Action order 0 (Random)
+		{ setAction(126, 0) eob },	// Absentminded
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Runaway_Dog_Winters: {	// Enemy 211
+	order0(	// Action order 0 (Random)
+		{ setAction(133, 0) eob },	// Piercing howl
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(238, 0) eob },	// Biting attack (Bash)
+		{ setAction(111, 0) eob }	// Biting attack (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Bigfoot_Post_Winters: {	// Enemy 212
+	order0(	// Action order 0 (Random)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Tiny_Lil_Ghost: {	// Enemy 213
+	order0(	// Action order 0 (Random)
+		{ setAction(204, 0) eob },	// Icy hand (Solidify)
+		{ setAction(204, 0) eob },	// Icy hand (Solidify)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Starman_Junior: {	// Enemy 214
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ setAction(103, 0) eob },					// On guard
+		{ if not checkPpThreshold(4) { setAction(18, 9) eob } },	// Freeze A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } }		// Fire A
+	)
+}
+//------------------------------------
+Buzz_Buzz: {	// Enemy 215
+	order3(	// Action order 3 (Staggered order)
+		{ if not checkPpThreshold(24) { setAction(46, 36) eob } },	// PSI Shield E
+		{ if not checkPpThreshold(24) { setAction(46, 36) eob } },	// PSI Shield E
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Heavily_Armed_Porky: {	// Enemy 216
+	order3(	// Action order 3 (Staggered order)
+		{ setAction(273, 0) eob },	// Stinky gas (Reduce Offense)
+		{ setAction(273, 0) eob },	// Stinky gas (Reduce Offense)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(110, 0) eob }	// Tore into you (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Heavily_Armed_Porky_Unused2: {	// Enemy 217 (UNUSED)
+	order0(	// Action order 0 (Random)
+		{ setAction(273, 0) eob },	// Stinky gas (Reduce Offense)
+		{ setAction(276, 0) eob },	// Nothing (eob)
+		{ setAction(226, 0) eob },	// Charged forward
+		{ setAction(110, 0) eob }	// Tore into you (Lvl 3 attack)
+	)
+}
+//------------------------------------
+Giygas: {	// Enemy 218
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(10) { setAction(10, 1) eob } },	// Rockin A
+		{ if not checkPpThreshold(14) { setAction(11, 2) eob } },	// Rockin B
+		{ if not checkPpThreshold(10) { setAction(10, 1) eob } },	// Rockin A
+		{ if not checkPpThreshold(14) { setAction(11, 2) eob } }	// Rockin B
+	)
+}
+//------------------------------------
+Giygas2: {	// Enemy 219
+	order2(	// Action order 2 (In order)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(277, 0) eob }	// Nothing (eob)
+	)
+}
+//------------------------------------
+Giygas3: {	// Enemy 220
+	order0(	// Action order 0 (Random)
+		{ setAction(274, 0) eob },	// Cannot grasp1 (Thunder B)
+		{ setAction(300, 0) eob },	// Cannot grasp1 (Freeze A)
+		{ setAction(301, 0) eob },	// Cannot grasp1 (Flash G)
+		{ setAction(312, 0) eob }	// Cannot grasp1 (Super Bomb)
+	)
+}
+
+//------------------------------------
+Giygas4: {	// Enemy 221
+	order0(	// Action order 0 (Random)
+		{ setAction(302, 0) eob },	// Cannot grasp2 (Thunder B)
+		{ setAction(303, 0) eob },	// Cannot grasp2 (Freeze A)
+		{ setAction(304, 0) eob },	// Cannot grasp2 (Flash G)
+		{ setAction(308, 0) eob }	// Giygas random text
+	)
+}
+//------------------------------------
+Muddy_Zombie: {	// Enemy 222
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(120, 0) eob },	// Laugh hysterically
+		{ setAction(74, 0) eob },	// Arctic-cold breath (Cold)
+		{ setAction(84, 0) eob }	// Something mysterious (Brainshock)
+	)
+}
+//------------------------------------
+Criminal_Caterpillar: {	// Enemy 223
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } }		// Fire A
+	)
+}
+//------------------------------------
+Evil_Eye: {	// Enemy 224
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ if not checkPpThreshold(30) { setAction(59, 50) eob } },	// Brainshock O
+		{ setAction(68, 0) eob },	// Eerie eyes (Diamondize)
+		{ if not checkPpThreshold(24) { setAction(57, 48) eob } },	// Paralysis O
+		{ setAction(4, 0) eob }		// Bash
+	)
+}
+//------------------------------------
+Magic_Butterfly: {	// Enemy 225
+	order0(	// Action order 0 (Random)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob },	// Nothing (eob)
+		{ setAction(0, 0) eob }		// Nothing (eob)
+	)
+}
+//------------------------------------
+Mini_Barf: {	// Enemy 226
+	order1(	// Action order 1 (Random - 50/25/12.5)
+		{ setAction(87, 0) eob },	// Stinky breath (Crying 2)
+		{ setAction(4, 0) eob },	// Bash
+		{ setAction(232, 0) eob },	// Terrible odor (Reduce offense)
+		{ setAction(80, 0) eob }	// Sticky mucus (Immobilize)
+	)
+}
+//------------------------------------
+Master_Criminal_Worm: {	// Enemy 227
+	order0(	// Action order 0 (Random)
+		{ if not checkPpThreshold(12) { setAction(15, 6) eob } },	// Fire B
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } },	// Fire A
+		{ if not checkPpThreshold(6) { setAction(14, 5) eob } }		// Fire A
+	)
+}
+//------------------------------------
+Captain_Strong: {	// Enemy 228
+	order0(	// Action order 0 (Random)
+		{ setAction(107, 0) eob },	// Submission hold (Lvl 3 attack)
+		{ setAction(216, 0) eob },	// Swinging (Bash)
+		{ setAction(103, 0) eob },	// On guard
+		{ setAction(96, 0) eob }	// Lost tempter (Offense Up)
+	)
+}
+//------------------------------------
+Giygas5: {	// Enemy 229
+	order0(	// Action order 0 (Random)
+		{ setAction(305, 0) eob },	// Cannot grasp3 (Thunder B)
+		{ setAction(306, 0) eob },	// Cannot grasp3 (Freeze A)
+		{ setAction(307, 0) eob },	// Cannot grasp3 (Flash G)
+		{ setAction(309, 0) eob }	// Giygas random text
+	)
+}
+//------------------------------------
+//Clumsy_Robot: {	// Enemy 230 (Repeated in 146 & 205)
 //------------------------------------

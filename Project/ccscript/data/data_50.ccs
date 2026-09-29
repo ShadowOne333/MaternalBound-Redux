@@ -360,7 +360,7 @@ l_0xc920a2:
 	party_unfreeze	// 0xFF
 	eob
 
-l_0xc92203:
+l_0xc92203:	// Mu training scene
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	sprite2_spawn(106,339,1)	// 0x6A, 0x0153, 1
 	call(data_57.l_0xc9b4b8)

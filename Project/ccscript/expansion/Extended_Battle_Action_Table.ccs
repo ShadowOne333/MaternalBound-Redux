@@ -423,7 +423,7 @@ BattleAction_Table:{
 	Battle_Action(77, Enemy, One, Other, 0, 0xEF9C7E, BTLACT_HYPNOSIS)
 	Battle_Action(78, Enemy, One, Other, 0, 0xEF9CAD, BTLACT_CRYING)
 	Battle_Action(79, Enemy, One, Other, 0, 0xEF9CD1, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} employed a binding attack![03]{pause(1)}"
-	Battle_Action(80, Enemy, One, Other, 0, 0xEF9CF1, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} spit out  a sticky mucus!{sound(81)}[03]{pause(1)}"
+	Battle_Action(80, Enemy, One, Other, 0, 0xEF9CF1, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} spit out a sticky mucus!{sound(81)}[03]{pause(1)}"
 	Battle_Action(81, Enemy, One, Other, 0, 0xEF9D14, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} spewed <Fly Honey> out of his mouth!{sound(81)}[03]{pause(1)}"
 	Battle_Action(82, Enemy, One, Other, 0, 0xEF9D3E, BTLACT_IMMOBILIZE) //"{sound(25)}@{user} shot spider silk out of its body![03]"
 	Battle_Action(83, Enemy, One, Other, 0, 0xEF9D62, BTLACT_SOLIDIFY) // "{sound(25)}@{user} said something really scary!{sound(84)}[03]{pause(1)}"

@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -743,8 +744,10 @@ l_0xc78fca:
 	eob
 
 l_0xc79028:
+	//cc_open_letterbox
 	npc_do_mc(222,101)	// 0x00DE, 0x0065
 	wait_movement
+	cc_close_letterbox
 	set(FLG_TEMP_3)	// 4
 	eob
 

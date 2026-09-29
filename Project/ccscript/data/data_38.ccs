@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -699,6 +700,7 @@ l_0xc80c31:
 	goto_if_flag(FLG_TWSN_PAUL_UPSET, l_0xc80e03)	// 0x0076, 118
 	goto_if_flag(FLG_TWSN_PAUL, l_0xc80dd8)	// 0x0142, 322
 
+	cc_open_letterbox
 	title(1, MrJones)
 	"@So,| you wanna see {name(2)}?" next
 	"@Many come here to see her miraculous powers,| but they're just leeches." next
@@ -719,6 +721,7 @@ l_0xc80cd4:
 	"@She doesn't seem to be here." next
 	"@I wonder where she went?" pause(20)
 	"  I'm sorry,/| could you come back later?" wait
+	cc_close_letterbox
 	set(FLG_TWSN_PAUL)	// 322
 	set(FLG_TWSN_POLA_TELEPATHY)	// 635
 	eob

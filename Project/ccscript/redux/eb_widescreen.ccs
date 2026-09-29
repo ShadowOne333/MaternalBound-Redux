@@ -20,13 +20,15 @@ ROM[0xC0163A] = JMP	(Left_Scroll_Trigger) NOP	// Originally DEC : JSR (0x0FCB)
 // 2. Sprite Culling Hook (Bank $C0)
 //------------------------------------
 // Jumps to sprite check at $C0FF80; leaves $C08D45 untouched so native on-screen sprites render normally
-ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
+//ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
+ROM[0xC08D47] = LDA_8	(0xFF) NOP NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
 //------------------------------------
 // 3. Custom Subroutines (Bank $C0 padding)
 //------------------------------------
-define Left_Camera_Origin	= 0xC0FF58
-define Left_Scroll_Trigger	= 0xC0FF70
-define Sprite_Bounds_Handler	= 0xC0FF80
+define Left_Camera_Origin	= 0xC07D20	//0xC0FF58
+define Left_Scroll_Trigger	= 0xC07D30	//0xC0FF70
+define Sprite_Bounds_Handler	= 0xC07D40	//0xC0FF80
+
 // Relocate these to wherever fits your setup best, was just used because of empty memory)
 ROM[Left_Camera_Origin] = {	// 0xC0FF58, 13 bytes
 	DEC DEC DEC DEC

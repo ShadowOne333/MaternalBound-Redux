@@ -5,6 +5,7 @@ SHELL := /bin/bash
 START := $(shell date +%s)
 CLEAN_ROM = EarthBound.sfc
 BASE = PSIAnimsBase.sfc
+BASE6MB = PSIAnimsBase6MB.sfc
 CHECKSUM = d67a8ef36ef616bc39306aa1b486e1bd3047815a
 PATCH_NAME = MaternalBound-Redux
 PATCHED_ROM_NAME = Mother 2.sfc
@@ -15,7 +16,7 @@ TIME = `date +'%T, %a %d/%b/%Y'`
 SHA1SUM = `sha1sum $(CLEAN_ROM) | awk '{ print $$1 }'`
 #----------------------------------------------------------------
 # Targets
-all: check_rom check_checksum create_base_rom compile_sound_driver compile_project create_patch create_debug_symbols create_both_patches finish
+all: check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
 #----------------------------------------------------------------
 # Check if the base ROM exists and has the correct name
 check_rom:
@@ -43,7 +44,7 @@ create_base_rom:
 		echo "Base ROM ($(BASE)) not found, creating it..."; \
 #		coilsnake-cli patchrom $(CLEAN_ROM) $(BASE) "Patches/FixedPSIAnims.ebp" false; echo; \
 #		coilsnake-cli expand $(BASE) false; echo; \
-		$(FLIPS) -a "$(PATCH_DIR)/FixedPSIAnims.bps" "$(CLEAN_ROM)" "PSIAnimsBase.sfc"; echo; \
+		$(FLIPS) -a "$(PATCH_DIR)/FixedPSIAnims.bps" "$(CLEAN_ROM)" "$(BASE)"; echo; \
 	else \
 		echo "$(BASE) already exists, proceeding..."; echo; \
 	fi
@@ -57,12 +58,21 @@ compile_sound_driver:
 	@$(ASAR) "SPC700/main.asm" "Project/Music/Packs/01/engine.bin"
 	@echo "Sound Driver compilation successful."; echo
 #----------------------------------------------------------------
+# We'll now copy and expand our Base ROM to 6MB
+expand_base_rom:
+	@echo "Expanding Base ROM to 6MB..."
+	@cp $(BASE) $(BASE6MB)
+	@coilsnake-cli expand $(BASE6MB) true
+	@echo
+#----------------------------------------------------------------
 # Compile the full CoilSnake Project
 compile_project:
 	@echo "Starting compilation process..."; echo
 #@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"	
 # Changed the CCScript offset so we can compile the Expanded PSI animation base ROM
-	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE) "$(PATCHED_ROM_NAME)"
+# Also, changed the compilation so it now uses the 6MB expanded ROM instead of the 4MB one
+#@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE) "$(PATCHED_ROM_NAME)"
+	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE6MB) "$(PATCHED_ROM_NAME)"
 	@echo
 #----------------------------------------------------------------
 # Generate the Debug symbols for the project (Requires Python 3)
@@ -92,4 +102,4 @@ finish:
 	@echo "Final compilation time: $$(( `date +%s` - $(START) )) seconds"
 	@echo "Redux compilation finished at $(TIME)!"
 #----------------------------------------------------------------
-.PHONY: all check_rom check_checksum create_base_rom compile_sound_driver compile_project create_patch create_debug_symbols create_both_patches finish
+.PHONY: all check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols create_both_patches finish

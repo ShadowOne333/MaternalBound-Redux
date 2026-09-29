@@ -3907,7 +3907,7 @@
   Size: 32x48
   Swim Flags: [false, false, false, false, false, false, false, false, false, false,
     false, false, false, false, false, false]
-481: #Mother 1 capsule
+481: # Mother 1 capsule
   East/West Collision Height: 11
   East/West Collision Width: 8
   Length: 8
@@ -3915,3 +3915,11 @@
   North/South Collision Width: 8
   Size: 16x16
   Swim Flags: [false, false, false, false, false, false, false, false]
+482: # Magikraken
+  East/West Collision Height: 11
+  East/West Collision Width: 13
+  Length: 8
+  North/South Collision Height: 11
+  North/South Collision Width: 13
+  Size: 32x32
+  Swim Flags: [true, true, true, true, true, true, true, true]

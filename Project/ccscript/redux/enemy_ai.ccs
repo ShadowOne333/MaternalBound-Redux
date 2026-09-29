@@ -29,17 +29,17 @@ import "../redux/enemy_ai_actions.ccs"
 //      setAction(132, 0) eob
 //    ExampleAi_Loop:
 //      if checkPpThreshold(4) {
-//        setAction(54, 45) eob // Magnet A
+//        setAction(54, 45) eob	// Magnet A
 //        goto(ExampleAi_Loop)
 //      }
 //      if checkHpThreshold(17) {
 //        window_open(1)
 //        "@Ow my scales." next
 //        window_closetop
-//        setAction(32, 23) eob // Lifeup A
+//        setAction(32, 23) eob	// Lifeup A
 //        goto(ExampleAi_Loop)
 //      }
-//      setAction(4, 0) eob // Bash
+//      setAction(4, 0) eob	// Bash
 //      goto(ExampleAi_Loop)
 // Another example, controlling King's AI with a menu:
 //    ExampleKing:
@@ -53,7 +53,7 @@ import "../redux/enemy_ai_actions.ccs"
 //      goto(ExampleKing)
 //      ExampleKing_postMenu:
 //        window_closetop
-//        eob // do the attack
+//        eob	// do the attack
 //        goto(ExampleKing)
 // - Enemy scripts run at the start of the turn, before anyone acts. If you want to open a window
 //   and start chatting or something, it will happen there, not when the enemy acts.
@@ -61,11 +61,11 @@ import "../redux/enemy_ai_actions.ccs"
 // Installation
 // - This requires ccexpand
 // - Add ControlCodesetAction to ccexpand, and set CC_SET_ACTION to match the slot you used
-define CC_SET_ACTION = "[1A 1B]" // ControlCodeSetAction - used by setAction()
+define CC_SET_ACTION = "[1A 1B]"	// ControlCodeSetAction - used by setAction()
 // - Repeat this for any of the below commands that you want to be able to use
-define CC_HP_THRESHOLD = "[1A 1C]" // ControlCodeHpThreshold - used by checkHpThreshold()
-define CC_PP_THRESHOLD = "[1A 1D]" // ControlCodePpThreshold - used by checkPpThreshold()
-define CC_CHECK_STATUS = "[1A 1E]" // ControlCodeCheckStatus - used by checkStatus()
+define CC_HP_THRESHOLD = "[1A 1C]"	// ControlCodeHpThreshold - used by checkHpThreshold()
+define CC_PP_THRESHOLD = "[1A 1D]"	// ControlCodePpThreshold - used by checkPpThreshold()
+define CC_CHECK_STATUS = "[1A 1E]"	// ControlCodeCheckStatus - used by checkStatus()
 // (You don't actually have to do any of these, even setAction, but this script sure isn't very
 //  useful if you don't lol)
 
@@ -73,237 +73,237 @@ define CC_CHECK_STATUS = "[1A 1E]" // ControlCodeCheckStatus - used by checkStat
 //	Enemy AI table
 //------------------------------------
 EnemyAiTable:
-	NO_AI // enemy 0
-	NO_AI // enemy 1
-	NO_AI // enemy 2
-	NO_AI // enemy 3
-	NO_AI // enemy 4
-	NO_AI // enemy 5
-	NO_AI // enemy 6
-	NO_AI // enemy 7
-	NO_AI // enemy 8
-	NO_AI // enemy 9
-	NO_AI // enemy 10
-	NO_AI // enemy 11
-	NO_AI // enemy 12
-	NO_AI // enemy 13
-	NO_AI // enemy 14
-	NO_AI // enemy 15
-	NO_AI // enemy 16
-	NO_AI // enemy 17
-	NO_AI // enemy 18
-	NO_AI // enemy 19
-	NO_AI // enemy 20
-	NO_AI // enemy 21
-	NO_AI // enemy 22
-	NO_AI // enemy 23
-	NO_AI // enemy 24
-	NO_AI // enemy 25
-	NO_AI // enemy 26
-	NO_AI // enemy 27
-	NO_AI // enemy 28
-	NO_AI // enemy 29
-	NO_AI // enemy 30
-	NO_AI // enemy 31
-	NO_AI // enemy 32
-	NO_AI // enemy 33
-	NO_AI // enemy 34
-	NO_AI // enemy 35
-	NO_AI // enemy 36
-	NO_AI // enemy 37
-	NO_AI // enemy 38
-	NO_AI // enemy 39
-	NO_AI // enemy 40
-	NO_AI // enemy 41
-	NO_AI // enemy 42
-	NO_AI // enemy 43
-	NO_AI // enemy 44
-	NO_AI // enemy 45
-	NO_AI // enemy 46
-	NO_AI // enemy 47
-	NO_AI // enemy 48
-	enemy_ai_actions.Kraken_Boss // enemy 49
-	NO_AI // enemy 50
-	NO_AI // enemy 51
-	NO_AI // enemy 52
-	NO_AI // enemy 53
-	NO_AI // enemy 54
-	NO_AI // enemy 55
-	NO_AI // enemy 56
-	NO_AI // enemy 57
-	NO_AI // enemy 58
-	NO_AI // enemy 59
-	NO_AI // enemy 60
-	NO_AI // enemy 61
-	NO_AI // enemy 62
-	NO_AI // enemy 63
-	NO_AI // enemy 64
-	NO_AI // enemy 65
-	NO_AI // enemy 66
-	NO_AI // enemy 67
-	NO_AI // enemy 68
-	NO_AI // enemy 69
-	NO_AI // enemy 70
-	NO_AI // enemy 71
-	NO_AI // enemy 72
-	NO_AI // enemy 73
-	NO_AI // enemy 74
-	NO_AI // enemy 75
-	NO_AI // enemy 76
-	NO_AI // enemy 77
-	NO_AI // enemy 78
-	NO_AI // enemy 79
-	NO_AI // enemy 80
-	NO_AI // enemy 81
-	NO_AI // enemy 82
-	NO_AI // enemy 83
-	NO_AI // enemy 84
-	NO_AI // enemy 85
-	NO_AI // enemy 86
-	NO_AI // enemy 87
-	NO_AI // enemy 88
-	NO_AI // enemy 89
-	NO_AI // enemy 90
-	NO_AI // enemy 91
-	NO_AI // enemy 92
-	NO_AI // enemy 93
-	NO_AI // enemy 94
-	NO_AI // enemy 95
-	NO_AI // enemy 96
-	NO_AI // enemy 97
-	NO_AI // enemy 98
-	NO_AI // enemy 99
-	NO_AI // enemy 100
-	NO_AI // enemy 101
-	NO_AI // enemy 102
-	NO_AI // enemy 103
-	NO_AI // enemy 104
-	NO_AI // enemy 105
-	NO_AI // enemy 106
-	NO_AI // enemy 107
-	NO_AI // enemy 108
-	NO_AI // enemy 109
-	NO_AI // enemy 110
-	NO_AI // enemy 111
-	NO_AI // enemy 112
-	NO_AI // enemy 113
-	NO_AI // enemy 114
-	NO_AI // enemy 115
-	NO_AI // enemy 116
-	NO_AI // enemy 117
-	NO_AI // enemy 118
-	NO_AI // enemy 119
-	NO_AI // enemy 120
-	NO_AI // enemy 121
-	NO_AI // enemy 122
-	NO_AI // enemy 123
-	NO_AI // enemy 124
-	NO_AI // enemy 125
-	NO_AI // enemy 126
-	NO_AI // enemy 127
-	NO_AI // enemy 128
-	NO_AI // enemy 129
-	NO_AI // enemy 130
-	NO_AI // enemy 131
-	NO_AI // enemy 132
-	NO_AI // enemy 133
-	NO_AI // enemy 134
-	NO_AI // enemy 135
-	NO_AI // enemy 136
-	NO_AI // enemy 137
-	NO_AI // enemy 138
-	NO_AI // enemy 139
-	NO_AI // enemy 140
-	NO_AI // enemy 141
-	NO_AI // enemy 142
-	NO_AI // enemy 143
-	NO_AI // enemy 144
-	NO_AI // enemy 145
-	NO_AI // enemy 146
-	NO_AI // enemy 147
-	NO_AI // enemy 148
-	NO_AI // enemy 149
-	NO_AI // enemy 150
-	NO_AI // enemy 151
-	NO_AI // enemy 152
-	NO_AI // enemy 153
-	NO_AI // enemy 154
-	NO_AI // enemy 155
-	NO_AI // enemy 156
-	NO_AI // enemy 157
-	NO_AI // enemy 158
-	NO_AI // enemy 159
-	NO_AI // enemy 160
-	NO_AI // enemy 161
-	NO_AI // enemy 162
-	NO_AI // enemy 163
-	NO_AI // enemy 164
-	NO_AI // enemy 165
-	NO_AI // enemy 166
-	NO_AI // enemy 167
-	NO_AI // enemy 168
-	NO_AI // enemy 169
-	NO_AI // enemy 170
-	NO_AI // enemy 171
-	NO_AI // enemy 172
-	NO_AI // enemy 173
-	NO_AI // enemy 174
-	NO_AI // enemy 175
-	NO_AI // enemy 176
-	NO_AI // enemy 177
-	NO_AI // enemy 178
-	NO_AI // enemy 179
-	NO_AI // enemy 180
-	NO_AI // enemy 181
-	enemy_ai_actions.Kraken_Boss // enemy 182
-	NO_AI // enemy 183
-	NO_AI // enemy 184
-	NO_AI // enemy 185
-	NO_AI // enemy 186
-	NO_AI // enemy 187
-	NO_AI // enemy 188
-	NO_AI // enemy 189
-	NO_AI // enemy 190
-	NO_AI // enemy 191
-	NO_AI // enemy 192
-	NO_AI // enemy 193
-	NO_AI // enemy 194
-	NO_AI // enemy 195
-	NO_AI // enemy 196
-	NO_AI // enemy 197
-	NO_AI // enemy 198
-	NO_AI // enemy 199
-	NO_AI // enemy 200
-	NO_AI // enemy 201
-	NO_AI // enemy 202
-	NO_AI // enemy 203
-	NO_AI // enemy 204
-	NO_AI // enemy 205
-	NO_AI // enemy 206
-	NO_AI // enemy 207
-	NO_AI // enemy 208
-	NO_AI // enemy 209
-	NO_AI // enemy 210
-	NO_AI // enemy 211
-	NO_AI // enemy 212
-	NO_AI // enemy 213
-	NO_AI // enemy 214
-	NO_AI // enemy 215
-	NO_AI // enemy 216
-	NO_AI // enemy 217
-	NO_AI // enemy 218
-	NO_AI // enemy 219
-	NO_AI // enemy 220
-	NO_AI // enemy 221
-	NO_AI // enemy 222
-	NO_AI // enemy 223
-	NO_AI // enemy 224
-	NO_AI // enemy 225
-	NO_AI // enemy 226
-	NO_AI // enemy 227
-	NO_AI // enemy 228
-	NO_AI // enemy 229
-	NO_AI // enemy 230
+	enemy_ai_actions.Null		// enemy 0
+	enemy_ai_actions.Insane_Cultist	// enemy 1
+	enemy_ai_actions.Dept_Store_Spook	// enemy 2
+	enemy_ai_actions.Armored_Frog	// enemy 3
+	enemy_ai_actions.Bad_Buffalo	// enemy 4
+	enemy_ai_actions.Black_Antoid	// enemy 5
+	enemy_ai_actions.Red_Antoid	// enemy 6
+	enemy_ai_actions.Ramblin_Evil_Mushroom	// enemy 7
+	enemy_ai_actions.Struttin_Evil_Mushroom	// enemy 8
+	enemy_ai_actions.Walking_Sprout	// enemy 9
+	enemy_ai_actions.Tough_Walking_Sprout	// enemy 10
+	enemy_ai_actions.Enraged_Fire_Plug	// enemy 11
+	enemy_ai_actions.Mystical_Record	// enemy 12
+	enemy_ai_actions.Atomic_Power_Robot	// enemy 13
+	enemy_ai_actions.Nuclear_Reactor_Robot	// enemy 14
+	enemy_ai_actions.Guardian_Hieroglyph	// enemy 15
+	enemy_ai_actions.Lethal_Asp_Hieroglyph	// enemy 16
+	enemy_ai_actions.Electro_Swoosh	// enemy 17
+	enemy_ai_actions.Conducting_Menace	// enemy 18
+	enemy_ai_actions.Conducting_Spirit	// enemy 19
+	enemy_ai_actions.Evil_Elemental	// enemy 20
+	enemy_ai_actions.Ness_Demon	// enemy 21
+	enemy_ai_actions.Annoying_Old_Party_Man	// enemy 22
+	enemy_ai_actions.Annoying_Reveler	// enemy 23
+	enemy_ai_actions.Unassuming_Local_Guy	// enemy 24
+	enemy_ai_actions.New_Age_Retro_Hippie	// enemy 25
+	enemy_ai_actions.Mr_Carpainter	// enemy 26
+	enemy_ai_actions.Carbon_Dog	// enemy 27
+	enemy_ai_actions.Mighty_Bear	// enemy 28
+	enemy_ai_actions.Mighty_Bear_Seven	// enemy 29
+	enemy_ai_actions.Putrid_Moldyman	// enemy 30
+	enemy_ai_actions.Thunder_Mite	// enemy 31
+	enemy_ai_actions.Cranky_Lady	// enemy 32
+	enemy_ai_actions.Extra_Cranky_Lady	// enemy 33
+	NO_AI	// enemy 34, enemy_ai_actions.Giygas_Unused
+	enemy_ai_actions.Googlysaurus	// enemy 35
+	enemy_ai_actions.Hungrosaurus	// enemy 36
+	enemy_ai_actions.Titanic_Ant	// enemy 37
+	enemy_ai_actions.Gigantic_Ant	// enemy 38
+	enemy_ai_actions.Shroom	// enemy 39
+	enemy_ai_actions.Plague_Rat_Doom	// enemy 40
+	enemy_ai_actions.Mondo_Mole	// enemy 41
+	enemy_ai_actions.Guardian_Digger	// enemy 42
+	enemy_ai_actions.Scalding_Coffee_Cup	// enemy 43
+	enemy_ai_actions.Loaded_Dice	// enemy 44
+	enemy_ai_actions.Slimy_Little_Pile	// enemy 45
+	enemy_ai_actions.Even_Slimier_Little_Pile	// enemy 46
+	enemy_ai_actions.Arachnid	// enemy 47
+	enemy_ai_actions.Arachnid2	// enemy 48
+	enemy_ai_actions.Kraken_Boss	// enemy 49
+	enemy_ai_actions.Bionic_Kraken	// enemy 50
+	enemy_ai_actions.Spinning_Robo	// enemy 51
+	enemy_ai_actions.Whirling_Robo	// enemy 52
+	enemy_ai_actions.Hyper_Spinning_Robo	// enemy 53
+	enemy_ai_actions.Cop	// enemy 54
+	enemy_ai_actions.Coil_Snake	// enemy 55
+	enemy_ai_actions.Dry_Coil_Snake	// enemy 56
+	enemy_ai_actions.Mr_Batty	// enemy 57
+	enemy_ai_actions.Elder_Batty	// enemy 58
+	enemy_ai_actions.Violent_Roach	// enemy 59
+	enemy_ai_actions.Filthy_Attack_Roach	// enemy 60
+	enemy_ai_actions.Crazed_Sign	// enemy 61
+	enemy_ai_actions.Wooly_Shambler	// enemy 62
+	enemy_ai_actions.Wild_Wooly_Shambler	// enemy 63
+	enemy_ai_actions.Skate_Punk	// enemy 64
+	enemy_ai_actions.Skelpion	// enemy 65
+	enemy_ai_actions.Dread_Skelpion	// enemy 66
+	enemy_ai_actions.Starman	// enemy 67
+	enemy_ai_actions.Super_Starman	// enemy 68
+	enemy_ai_actions.Ghost_Starman	// enemy 69
+	enemy_ai_actions.Smilin_Sphere	// enemy 70
+	enemy_ai_actions.Uncontrollable_Sphere	// enemy 71
+	enemy_ai_actions.Petrified_Royal_Guard	// enemy 72
+	enemy_ai_actions.Guardian_General	// enemy 73
+	enemy_ai_actions.Starman_Deluxe	// enemy 74
+	enemy_ai_actions.Final_Starman	// enemy 75
+	enemy_ai_actions.Urban_Zombie	// enemy 76
+	enemy_ai_actions.Zombie_Possessor	// enemy 77
+	enemy_ai_actions.Zombie_Dog	// enemy 78
+	enemy_ai_actions.Crooked_Cop	// enemy 79
+	enemy_ai_actions.Over_Zealous_Cop	// enemy 80
+	enemy_ai_actions.Territorial_Oak	// enemy 81
+	enemy_ai_actions.Hostile_Elder_Oak	// enemy 82
+	enemy_ai_actions.Diamond_Dog	// enemy 83
+	enemy_ai_actions.Marauder_Octobot	// enemy 84
+	enemy_ai_actions.Military_Octobot	// enemy 85
+	enemy_ai_actions.Mechanical_Octobot	// enemy 86
+	enemy_ai_actions.Ultimate_Octobot	// enemy 87
+	enemy_ai_actions.Mad_Duck	// enemy 88
+	enemy_ai_actions.Dalis_Clock	// enemy 89
+	enemy_ai_actions.Trillion_Year_Sprout	// enemy 90
+	enemy_ai_actions.Musica	// enemy 91
+	enemy_ai_actions.Desert_Wolf	// enemy 92
+	enemy_ai_actions.Master_Belch	// enemy 93
+	enemy_ai_actions.Big_Pile_Puke	// enemy 94
+	enemy_ai_actions.Master_Barf	// enemy 95
+	enemy_ai_actions.Kiss_Death	// enemy 96
+	enemy_ai_actions.French_Kiss_Death	// enemy 97
+	enemy_ai_actions.Foppy	// enemy 98
+	enemy_ai_actions.Fobby	// enemy 99
+	enemy_ai_actions.Zap_Eel	// enemy 100
+	enemy_ai_actions.Tengu	// enemy 101
+	enemy_ai_actions.Boogey_Tent	// enemy 102
+	enemy_ai_actions.Squatter_Demon	// enemy 103
+	enemy_ai_actions.Crested_Booka	// enemy 104
+	enemy_ai_actions.Great_Crested_Booka	// enemy 105
+	enemy_ai_actions.Lesser_Mook	// enemy 106
+	enemy_ai_actions.Mook_Senior	// enemy 107
+	enemy_ai_actions.Smelly_Ghost	// enemy 108
+	enemy_ai_actions.Stinky_Ghost	// enemy 109
+	enemy_ai_actions.Everdred	// enemy 110
+	enemy_ai_actions.Attack_Slug	// enemy 111
+	enemy_ai_actions.Pit_Bull_Slug	// enemy 112
+	enemy_ai_actions.Rowdy_Mouse	// enemy 113
+	enemy_ai_actions.Deadly_Mouse	// enemy 114
+	enemy_ai_actions.Care_Free_Bomb	// enemy 115
+	enemy_ai_actions.Electro_Specter	// enemy 116
+	enemy_ai_actions.Handsome_Tom	// enemy 117
+	enemy_ai_actions.Smilin_Sam	// enemy 118
+	enemy_ai_actions.Manly_Fish	// enemy 119
+	enemy_ai_actions.Manly_Fish_Brother	// enemy 120
+	enemy_ai_actions.Runaway_Dog	// enemy 121
+	enemy_ai_actions.Trick_Treat_Kid	// enemy 122
+	enemy_ai_actions.Bigfoot	// enemy 123
+	enemy_ai_actions.Abstract_Art	// enemy 124
+	enemy_ai_actions.Shattered_Man	// enemy 125
+	enemy_ai_actions.Fierce_Shattered_Man	// enemy 126
+	enemy_ai_actions.Ego_Orb	// enemy 127
+	enemy_ai_actions.Thunder_and_Storm	// enemy 128
+	enemy_ai_actions.Yes_Man_Junior	// enemy 129
+	enemy_ai_actions.Frankystein_Mark_II	// enemy 130
+	enemy_ai_actions.Frank	// enemy 131
+	enemy_ai_actions.Cute_Lil_UFO	// enemy 132
+	enemy_ai_actions.Beautiful_UFO	// enemy 133
+	enemy_ai_actions.Pogo_Punk	// enemy 134
+	enemy_ai_actions.Tough_Guy	// enemy 135
+	enemy_ai_actions.Mad_Taxi	// enemy 136
+	enemy_ai_actions.Mani_Mani_Devil	// enemy 137
+	enemy_ai_actions.Mr_Molecule	// enemy 138
+	enemy_ai_actions.Worthless_Protoplasm	// enemy 139
+	enemy_ai_actions.Sentry_Robot	// enemy 140
+	NO_AI	// enemy 141, enemy_ai_actions.Heavily_Armed_Porkey_Unused
+	enemy_ai_actions.Psychic_Psycho	// enemy 142
+	enemy_ai_actions.Major_Psychic_Psycho	// enemy 143
+	enemy_ai_actions.Mole_Playing_Rough	// enemy 144
+	enemy_ai_actions.Gruff_Goat	// enemy 145
+	enemy_ai_actions.Clumsy_Robot	// enemy 146
+	enemy_ai_actions.Soul_Consuming_Flame	// enemy 147
+	enemy_ai_actions.Demonic_Rafflesia	// enemy 148
+	enemy_ai_actions.Ranboob	// enemy 149
+	enemy_ai_actions.Lil_UFO	// enemy 150
+	enemy_ai_actions.High_Class_UFO	// enemy 151
+	enemy_ai_actions.Noose_Man	// enemy 152
+	enemy_ai_actions.Robo_Pump	// enemy 153
+	enemy_ai_actions.Plain_Alligator	// enemy 154
+	enemy_ai_actions.Strong_Alligator	// enemy 155
+	enemy_ai_actions.Hard_Alligator	// enemy 156
+	enemy_ai_actions.No_Good_Fly	// enemy 157
+	enemy_ai_actions.Mostly_Bad_Fly	// enemy 158
+	enemy_ai_actions.Spiteful_Crow	// enemy 159
+	enemy_ai_actions.My_Pet	// enemy 160
+	enemy_ai_actions.Porky	// enemy 161
+	enemy_ai_actions.Picky	// enemy 162
+	NO_AI	// enemy 163, enemy_ai_actions.Tony
+	enemy_ai_actions.Bubble_Monkey	// enemy 164
+	enemy_ai_actions.Dungeon_Man	// enemy 165
+	enemy_ai_actions.Flying_Man	// enemy 166
+	enemy_ai_actions.Teddy_Bear	// enemy 167
+	enemy_ai_actions.Super_Plush_Bear	// enemy 168
+	enemy_ai_actions.Master_Belch_Honey	// enemy 169
+	NO_AI	// enemy 170, enemy_ai_actions.Insane_Cultist_Unused
+	NO_AI	// enemy 171 -> 2
+	NO_AI	// enemy 172 -> 21
+	NO_AI	// enemy 173 -> 26
+	NO_AI	// enemy 174 -> 27
+	NO_AI	// enemy 175 -> 36
+	NO_AI	// enemy 176 -> 37
+	NO_AI	// enemy 177 -> 38
+	NO_AI	// enemy 178 -> 39
+	NO_AI	// enemy 179 -> 40
+	NO_AI	// enemy 180 -> 41
+	NO_AI	// enemy 181 -> 42
+	enemy_ai_actions.Magikraken	// enemy 182 -> 49
+	NO_AI	// enemy 183, enemy_ai_actions.Bionic_Kraken_Unused
+	NO_AI	// enemy 184 -> 67
+	NO_AI	// enemy 185 -> 68
+	NO_AI	// enemy 186 -> 69
+	NO_AI	// enemy 187 -> 74
+	NO_AI	// enemy 188 -> 75
+	NO_AI	// enemy 189, enemy_ai_actions.Urban_Zombie_Unused
+	NO_AI	// enemy 190 -> 83
+	NO_AI	// enemy 191 -> 90
+	NO_AI	// enemy 192 -> 93
+	enemy_ai_actions.Big_Pile_of_Puke	// enemy 193
+	NO_AI	// enemy 194 -> 95
+	enemy_ai_actions.Loaded_Dice_Magicant	// enemy 195
+	NO_AI	// enemy 196, enemy_ai_actions.Tengu_Unused
+	NO_AI	// enemy 197 -> 102
+	NO_AI	// enemy 198, enemy_ai_actions.Squatter_Demon_Unused
+	NO_AI	// enemy 199 -> 110
+	NO_AI	// enemy 200 -> 116
+	NO_AI	// enemy 201 -> 128
+	NO_AI	// enemy 202 -> 130
+	NO_AI	// enemy 203 -> 137
+	NO_AI	// enemy 204 -> 141, enemy_ai_actions.Heavily_Armed_Porkey_Unused
+	NO_AI	// enemy 205 -> 146+230
+	NO_AI	// enemy 206 -> 102
+	NO_AI	// enemy 207, enemy_ai_actions.Foppy_Unused
+	NO_AI	// enemy 208 -> 73
+	enemy_ai_actions.Black_Antoid_Falls	// enemy 209
+	enemy_ai_actions.Wanderin_Evil_Mushroom	// enemy 210
+	enemy_ai_actions.Runaway_Dog_Winters	// enemy 211
+	enemy_ai_actions.Bigfoot_Post_Winters	// enemy 212
+	enemy_ai_actions.Tiny_Lil_Ghost	// enemy 213
+	enemy_ai_actions.Starman_Junior	// enemy 214
+	enemy_ai_actions.Buzz_Buzz	// enemy 215
+	enemy_ai_actions.Heavily_Armed_Porky	// enemy 216
+	NO_AI	// enemy 217, enemy_ai_actions.Heavily_Armed_Porky_Unused2
+	enemy_ai_actions.Giygas		// enemy 218
+	enemy_ai_actions.Giygas2	// enemy 219
+	enemy_ai_actions.Giygas3	// enemy 220
+	enemy_ai_actions.Giygas4	// enemy 221
+	enemy_ai_actions.Muddy_Zombie	// enemy 222
+	enemy_ai_actions.Criminal_Caterpillar	// enemy 223
+	enemy_ai_actions.Evil_Eye	// enemy 224
+	enemy_ai_actions.Magic_Butterfly	// enemy 225
+	enemy_ai_actions.Mini_Barf	// enemy 226
+	enemy_ai_actions.Master_Criminal_Worm	// enemy 227
+	enemy_ai_actions.Captain_Strong	// enemy 228
+	enemy_ai_actions.Giygas5	// enemy 229
+	NO_AI	// enemy 230 -> 205+230
 // If you expanded the enemy table somehow, this table will keep going. It only relies on the enemy
 // ID field still being there in the first two bytes of the battler struct.
 
@@ -336,7 +336,7 @@ command checkStatus(group, status) { CC_CHECK_STATUS byte group byte status }
 // ---- Implementation stuff now ----
 define NO_AI = long 0
 define CURRENT_ATTACKER = 0x7EA970
-define CCE_arg_byte = 0x06 // Used by CCExpand
+define CCE_arg_byte = 0x06	// Used by CCExpand
 
 // Implementation -- main hijack (borrowed from The_Kirby)
 ROM[0xC25363] = JML(BattleScripts_Hijack)
@@ -371,19 +371,19 @@ BattleScripts_Main:
 	JML(BattleScripts_Hijack)
 // This is where the AI script starts and the difference from The_Kirby's version
 BattleScripts_Main2:
-	STX_a(CURRENT_ATTACKER) // Save the enemy to CURRENT_ATTACKER so script can use it
+	STX_a(CURRENT_ATTACKER)	// Save the enemy to CURRENT_ATTACKER so script can use it
 	// Call text using saved pointer
-	LDA_x(6)    // AI state
+	LDA_x(6)   	// AI state
 	AND_i(0xFF)
 	STA_d(0x10)
-	LDA_x(61) // Money (repurposed as the rest of the AI state)
+	LDA_x(61)	// Money (repurposed as the rest of the AI state)
 	STA_d(0x0E)
-	JSL(0xC186B1) // Call text
-	LDX_d(0x02) // enemy pointer
-	LDA_d(0x06) // Return val
-	STA_x(61) // Money
-	LDA_d(0x08) // More return val
-	STA_x8(6) // AI state
+	JSL(0xC186B1)	// Call text
+	LDX_d(0x02)	// enemy pointer
+	LDA_d(0x06)	// Return val
+	STA_x(61)	// Money
+	LDA_d(0x08)	// More return val
+	STA_x8(6)	// AI state
 	// Jump back into normal flow
 	JML(0xC25466)
 
@@ -393,15 +393,15 @@ BattleScripts_Main2:
 ROM[0xC2B88F] = { JSL(BattleInitPatch) NOP }
 BattleInitPatch:
 	// Load the AI state instead of money
-	LDY_d(0x02) // battler pointer in Y
-	LDA_y(0) // enemy ID
-	ASL ASL // mul 4
-	TAX // offset into enemy AI table in X
-	LDA_xl(EnemyAiTable) // loading low two bytes, store into extended AI state (formerly money)
-	STA_y(61) // Was money, now more state
+	LDY_d(0x02)	// battler pointer in Y
+	LDA_y(0)	// enemy ID
+	ASL ASL	// mul 4
+	TAX	// offset into enemy AI table in X
+	LDA_xl(EnemyAiTable)	// loading low two bytes, store into extended AI state (formerly money)
+	STA_y(61)	// Was money, now more state
 	INX INX
-	LDA_xl(EnemyAiTable) // loading high two bytes, store the good one into AI state
-	STA_y8(6) // AI state
+	LDA_xl(EnemyAiTable)	// loading high two bytes, store the good one into AI state
+	STA_y8(6)	// AI state
 	RTL
 
 // Implementation -- patch koTarget to not need money in battler
@@ -412,72 +412,72 @@ BattleInitPatch:
 ROM[0xC278AD] = JSL(KoBattlerPatch)
 KoBattlerPatch:
 	// Get pointer to enemy config table
-	LDA_x(0) // get enemy ID
-	LDY_i(0x5E) // size of enemy data struct
-	JSL(0xC08FF7) // mult
+	LDA_x(0)	// get enemy ID
+	LDY_i(0x5E)	// size of enemy data struct
+	JSL(0xC08FF7)	// mult
 	TAX
-	LDA_x(0x29) // enemy data money
-	CLC // missing CLC we clobbered
+	LDA_x(0x29)	// enemy data money
+	CLC	// missing CLC we clobbered
 	RTL
 
 // Implementation -- ccexpand codes
 ControlCodeSetAction: M_EB_Function_Wrapper({
-	M_Read_Bytes_or_Arg(2) // action
+	M_Read_Bytes_or_Arg(2)	// action
 	LDA_d(CCE_arg_byte)
 	LDX_a(CURRENT_ATTACKER)
-	STA_x(4) // current action
-	M_Read_Bytes_or_Arg(1) // arg
+	STA_x(4)	// current action
+	M_Read_Bytes_or_Arg(1)	// arg
 	LDA_d(CCE_arg_byte)
 	LDX_a(CURRENT_ATTACKER)
-	STA_x8(8) // action arg
+	STA_x8(8)	// action arg
 })
 
 ControlCodeHpThreshold: M_EB_Function_Wrapper({
-	STZ_d(0x0E) // Default return value (false)
-	STZ_d(0x10) // Unused high bytes of return value
+	STZ_d(0x0E)	// Default return value (false)
+	STZ_d(0x10)	// Unused high bytes of return value
 	// Read the HP argument
 	M_Read_Bytes_or_Arg(2)
 	LDA_d(CCE_arg_byte)
 	// Compare with attacker
 	LDX_a(CURRENT_ATTACKER)
-	CMP_x(17) // HP 
+	CMP_x(17)	// HP 
 	BMI_a(_end)
 	LDA_i(1)
-	STA_d(0x0E) // return 1
+	STA_d(0x0E)	// return 1
 _end:
 	JSL(R_Set_Working_Memory)
 })
 
 ControlCodePpThreshold: M_EB_Function_Wrapper({
-	STZ_d(0x0E) // Default return value (false)
-	STZ_d(0x10) // Unused high bytes of return value
+	STZ_d(0x0E)	// Default return value (false)
+	STZ_d(0x10)	// Unused high bytes of return value
 	// Read the PP argument
 	M_Read_Bytes_or_Arg(2)
 	LDA_d(CCE_arg_byte)
 	// Compare with attacker
 	LDX_a(CURRENT_ATTACKER)
-	CMP_x(23) // PP
+	CMP_x(23)	// PP
 	BMI_a(_end)
 	LDA_i(1)
-	STA_d(0x0E) // return 1
+	STA_d(0x0E)	// return 1
 _end:
 	JSL(R_Set_Working_Memory)
 })
 
 ControlCodeCheckStatus: M_EB_Function_Wrapper({
-	STZ_d(0x0E) // Default return value (false)
-	STZ_d(0x10) // Unused high bytes of return value
+	STZ_d(0x0E)	// Default return value (false)
+	STZ_d(0x10)	// Unused high bytes of return value
 	// Read the group argument
 	M_Read_Bytes_or_Arg(1)
 	LDA_d(CCE_arg_byte)
-	STA_d(0) // Stash in 0
+	STA_d(0)	// Stash in 0
 	// Read the status argument
 	M_Read_Bytes_or_Arg(1)
 	LDA_d(CCE_arg_byte)
 	// Check for match
 	CMP_d(0)
 	BNE_a(_end)
-	STA_d(0x0E) // return 1
+	STA_d(0x0E)	// return 1
 _end:
 	JSL(R_Set_Working_Memory)
 })

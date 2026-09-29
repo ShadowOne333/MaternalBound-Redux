@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -481,6 +482,7 @@ l_0xc95ba0:
 	"@I've got definite rules about how I handle my money matters..." end
 
 l_0xc95c0e:
+	//cc_open_letterbox	// Done in data_34.l_0xc7b4fb
 	goto_if_flag(FLG_TWSN_ITEM_TONCHIKI, l_0xc960d7)	// 0x0055, 85
 	goto_if_flag(FLG_POLA, l_0xc95f0a)	// 0x000C, 12
 	goto_if_flag(FLG_POLA_GRFD, l_0xc95df9)	// 0x000D, 13
@@ -492,6 +494,7 @@ l_0xc95c0e:
 	call(data_23.l_0xc6846b)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	window_open(1)
 	"@Yes, I'm Everdred, boss of Burglin Park." next
 	title(1, Everdred)
@@ -507,9 +510,11 @@ l_0xc95c0e:
 	"  so hurry and go there." next
 
 l_0xc95dc6:
-	"@If you save {name(2)},| be sure to come back here, okay?" pause(15)
+	"@If you save {name(2)},| be sure to come back here, okay?" linebreak
+	pause(15)
 	"  Don't/| forget!" wait
 	window_closeall
+	//cc_close_letterbox	// Done in data_34.l_0xc7b4fb
 	set(FLG_TWSN_WIN_TONCHIKI)	// 66
 	eob
 
@@ -527,7 +532,9 @@ l_0xc95df9:
 	"  They're really worried." next
 	"@I also have something to give you,| so be sure to come back here." next
 	"@Promise?" pause(20)
-	"  All right." end
+	"  All right." wait
+	cc_close_letterbox
+	eob
 
 l_0xc95e73:
 	title(1, Everdred)
@@ -569,9 +576,10 @@ l_0xc95f0a:
 		give_and_return_location(0, WAD_BILLS)
 		call(data_36.l_0xc7dcb6)
 	}
-
+	wait
+	cc_close_letterbox
 	set(FLG_TWSN_ITEM_TONCHIKI)	// 85
-	end
+	eob
 
 l_0xc9605d:
 	pause(60) linebreak
@@ -581,12 +589,16 @@ l_0xc9605d:
 
 	"@Your backpack is filled with junk." pause(20)
 	"  Get rid of something!" next
-	"@I'll put the money in a safe place until you get back." end
+	"@I'll put the money in a safe place until you get back." wait
+	cc_close_letterbox
+	eob
 
 l_0xc960ab:
 	title(1, Everdred)
 	"@I need to talk to {name(1)}." next
-	"@Even if you're his friend,| I won't talk to you." end
+	"@Even if you're his friend,| I won't talk to you." wait
+	cc_close_letterbox
+	eob
 
 l_0xc960d7:
 	counter(1)
@@ -596,7 +608,9 @@ l_0xc960d7:
 	title(1, Everdred)
 	"@Please use the 10,000 dollars any way you wish." next
 	"@There's no use in trying to give it back to me!" pause(20) linebreak
-	"  Just give it up and take it!" end
+	"  Just give it up and take it!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc96124:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc96267)	// 0x0049, 73

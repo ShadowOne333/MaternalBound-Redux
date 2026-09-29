@@ -1091,6 +1091,8 @@ l_0xc7b4fb:
 	pause(60)
 	hide_npc_float(334)	// 0x014E
 	npc_delete(334,6)	// 0x014E, 0x06
+
+	cc_open_letterbox	// Do this after the floating exclamation mark so it's not hidden by the letterbox
 	sprite2_spawn(397,648,1)	// 0x018D, 0x0288, 0x01
 	sprite2_spawn(344,649,1)	// 0x0158, 0x0289, 0x01
 	wait_movement
@@ -1106,6 +1108,7 @@ l_0xc7b4fb:
 	npc_do_mc(334,650)	// 0x014E, 0x028A
 	wait_movement
 
+	cc_close_letterbox
 	set(FLG_TWSN_TONCHIKI_R_DISAPPEAR)	// 612
 	set(FLG_TWSN_TONCHIKI_APPEAR)	// 624
 	eob

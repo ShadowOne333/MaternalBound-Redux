@@ -4401,7 +4401,7 @@
   Level: 27
   Luck: 61
   Max Call: 3
-  Mirror Success Rate: 0
+  Mirror Success Rate: 100
   Miss Rate: 0
   Money: 664
   Movement pattern: 29
@@ -5769,7 +5769,7 @@
   Money: 47
   Movement pattern: 21
   Music: 96
-  Name: Trick or Trick Kid
+  Name: Trick or Treat Kid
   Offense: 30
   Overworld Sprite: 444
   PP: 0
@@ -8566,7 +8566,7 @@
   Boss Flag: 'true'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 166
+  Defense: 180	#166
   Encounter Text Pointer: battle_text.l_0xef7866
   Experience points: 79267
   Final Action: 0
@@ -8589,14 +8589,14 @@
   Money: 3049
   Movement pattern: 29
   Music: 104
-  Name: Kraken
-  Offense: 105
-  Overworld Sprite: 295
+  Name: Magikraken
+  Offense: 130	#105
+  Overworld Sprite: 482
   PP: 176
   Paralysis vulnerability: 50%
   Row: 0
   Run Flag: 'true'
-  Speed: 21
+  Speed: 32	#21
   Type: normal
   Unknown: 3
 183:
@@ -9306,13 +9306,13 @@
   Unknown: 3
 198: # Debug battle enemy
   '"The" Flag': 'false'
-  Action 1: 245 #move extention
-  Action 1 Argument: 27
-  Action 2: 4 #Bash
+  Action 1: 0
+  Action 1 Argument: 0
+  Action 2: 0
   Action 2 Argument: 0
-  Action 3: 374 # attack
+  Action 3: 0
   Action 3 Argument: 0
-  Action 4: 216 #came out swinging
+  Action 4: 0 
   Action 4 Argument: 0
   Action Order: 1
   Boss Flag: 'false'

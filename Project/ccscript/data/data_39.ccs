@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -121,6 +122,7 @@ l_0xc815f9:
 	"@I rely on your support,| even though I am a super genius." end
 
 l_0xc81676:
+	cc_open_letterbox
 	goto_if_flag(FLG_ITEM_PHONE, l_0xc818f1)	// 0x52, 82
 	goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc818b9)	// 0x70, 112
 	goto_if_flag(FLG_TWSN_APPLE_FOOD, l_0xc81915)	// 0x0227, 551
@@ -165,7 +167,6 @@ l_0xc817dc:
 	"  You seem very nice." pause(20)
 	"  Uh,| I wonder if..." next
 	set(FLG_TWSN_APPLE_FOOD)	// 551
-	goto(l_0xc8180c)
 
 l_0xc8180c:
 	"@Maybe you would like to invest some money in my inventions?" next
@@ -212,7 +213,9 @@ l_0xc818f1:
 	"@Maybe you shouldn't spend too much time wandering around Twoson."
 
 l_0xc81913:
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc81915:
 	title(1, Apple)
@@ -221,13 +224,16 @@ l_0xc81915:
 
 l_0xc81934:
 	unset(FLG_WARP_APPLE_TWSN)	// 294
+	cc_open_letterbox
 	goto_if_flag(FLG_ITEM_PHONE, l_0xc81945)	// 0x52, 82
 	goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc81970)	// 0x70, 112
 
 l_0xc81945:
 	"@I am a mouse." pause(20)
 	"  As yet I have no name."
-	goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
+	goto_if_flag(FLG_TEMP_3, l_0xc819f1) wait	// 0x04
+	cc_close_letterbox
+	eob
 
 l_0xc81970:
 	OSS_off	// event(6)
@@ -244,7 +250,9 @@ l_0xc81970:
 		call(data_36.l_0xc7dcb6)
 	}
 	set(FLG_ITEM_PHONE)
-	goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
+	goto_if_flag(FLG_TEMP_3, l_0xc819f1) wait	// 0x04
+	cc_close_letterbox
+	eob
 
 l_0xc819f1:
 	next
@@ -254,6 +262,8 @@ l_0xc819f1:
 
 	call(l_0xc81a5d)
 	call(data_33.l_0xc79034)
+	cc_close_letterbox
+	
 	unset(FLG_WARP_APPLE_TWSN)	// 294
 	unset(FLG_TEMP_3)	// 4
 	eob

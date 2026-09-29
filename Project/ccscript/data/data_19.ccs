@@ -406,6 +406,7 @@ l_0xc63dc8:
 
 l_0xc63de3:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc63e5a)	// 0x49, 73
+	show_phone_sprite_float
 	title(1, Escargo)
 	"@Hello!" linebreak
 	"  This is Escargo Express." next
@@ -760,7 +761,9 @@ l_0xc6451a:
 l_0xc645f2:
 	newline
 	sound(SND_PHONEPICKUP)	// 11
-	"@(Click!)" end
+	"@(Click!)" wait
+	hide_phone_sprite_float
+	eob
 
 l_0xc64600:
 	isset(FLG_WIN_GIEGU)	// 0x49, 73
