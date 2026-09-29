@@ -3599,15 +3599,14 @@
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 3
-422:
-  Background 1: 201 #83
-  Background 2: 200 #0
+422:	# PSI anim debug fight (Unused originally)
+  Background 1: 0
+  Background 2: 0
   Enemies:
-# - {Amount: 1, Enemy: 136}	#Mad Taxi
-  - {Amount: 1, Enemy: 182}	#Kraken
+  - {Amount: 1, Enemy: 198}	#Debug (Squatter demon)
   Fear event flag: 0
   Fear mode: run away if flag is unset
-  Letterbox Size: 0	#3
+  Letterbox Size: 0
 423:
   Background 1: 266
   Background 2: 267
@@ -4019,14 +4018,15 @@
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 0
-473: # PSI anim debug fight (Unused originally)
-  Background 1: 0
-  Background 2: 0
+473:	# Magicant Krakens (Sea of Eden)
+  Background 1: 201 #83
+  Background 2: 200 #0
   Enemies:
-  - {Amount: 1, Enemy: 198}	#Debug (Squatter demon)
+# - {Amount: 1, Enemy: 136}	#Mad Taxi
+  - {Amount: 1, Enemy: 182}	#Magiraken
   Fear event flag: 0
   Fear mode: run away if flag is unset
-  Letterbox Size: 0
+  Letterbox Size: 0	#3
 474:
   Background 1: 219
   Background 2: 218

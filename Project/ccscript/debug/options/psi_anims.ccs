@@ -10,7 +10,7 @@ import "../../debug/diamond.ccs"
 
 //------------------------------------------------------------------
 
-define debug_group = 473	// 100,0
+define debug_group = 422	// 100,0
 
 // This happens right after the encounter text script finishes.
 ROM[0xC24FC5] = JML(debug_battle_check)
