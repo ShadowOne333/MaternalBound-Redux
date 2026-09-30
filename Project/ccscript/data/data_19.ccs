@@ -364,10 +364,6 @@ l_0xc63c86:
 
 l_0xc63ca8:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc63cea)	// 0x49, 73
-	"@You would like us to deliver something?  We can deliver up to three things." next
-	"@Please select the goods you want." promptw
-	eob
-
 l_0xc63cea:
 	"@You would like us to deliver something?  We can deliver up to three things." next
 	"@Please select the goods you want." promptw
@@ -406,7 +402,6 @@ l_0xc63dc8:
 
 l_0xc63de3:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc63e5a)	// 0x49, 73
-	show_phone_sprite_float
 	title(1, Escargo)
 	"@Hello!" linebreak
 	"  This is Escargo Express." next
@@ -423,7 +418,16 @@ l_0xc63e5a:
 	"  This is a recording." promptw
 	eob
 
+// Enable the cutscene letterbox right when the Escargo music starts playing
+ROM[0xEF0FF1] = JML	(Escargo_Letterbox)
+Escargo_Letterbox: {
+	JSL	(doLetterbox)
+	JSL	(0xC03CFD)
+	JML	(0xEF0FF5)
+}
+
 l_0xc63eb0:
+	//cc_open_letterbox	// Handled through the Escargo Letterbox ASM
 	call(data_21.l_0xc659bf)
 	unset(FLG_DELIVERY_UNSOU_B)	// 645
 	check_impediment_for_storing(1,1)
@@ -443,6 +447,7 @@ l_0xc63f1f:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc63f42:
@@ -454,13 +459,11 @@ l_0xc63f42:
 l_0xc63f74:
 	hasmoney(18)	// 0x00000012
 	goto_if_false(l_0xc6427c)
-	goto(l_0xc63f80)
 
 l_0xc63f80:
 	"@What do you want me to take?" next
 	"@I can take up to three things." promptw
 	open_hp
-	goto(l_0xc63fa2)
 
 l_0xc63fa2:
 	call(data_15.l_0xc5e456)
@@ -483,7 +486,6 @@ l_0xc63fa2:
 
 l_0xc63ffd:
 	"@What do you want me to take?" promptw
-	goto(l_0xc6400a)
 
 l_0xc6400a:
 	call(data_15.l_0xc5e456)
@@ -555,6 +557,7 @@ l_0xc64116:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc64155:
@@ -593,6 +596,7 @@ l_0xc641b0:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc64240:
@@ -609,9 +613,11 @@ l_0xc6427c:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc642a3:
+	//cc_open_letterbox	// Handled through the Escargo Letterbox ASM
 	call(data_21.l_0xc659bf)
 	unset(FLG_DELIVERY_UNSOU)	// 181
 	title(1, Escargo)
@@ -655,6 +661,7 @@ l_0xc643a7:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc643ce:
@@ -697,6 +704,7 @@ l_0xc6442f:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc6445f:
@@ -731,6 +739,7 @@ l_0xc644e3:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc64515:
@@ -762,7 +771,6 @@ l_0xc645f2:
 	newline
 	sound(SND_PHONEPICKUP)	// 11
 	"@(Click!)" wait
-	hide_phone_sprite_float
 	eob
 
 l_0xc64600:
@@ -775,6 +783,7 @@ l_0xc64600:
 	window_closeall
 	call(data_36.l_0xc7dde8)
 	call(data_21.l_0xc659c8)
+	cc_close_letterbox
 	eob
 
 l_0xc6462e:

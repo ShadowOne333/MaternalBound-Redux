@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -31,17 +32,24 @@ l_0xc978aa:
 	"  You really surprised me!" next
 	"@You're the man whose eyebrows are connected and who has a gold tooth!" next
 	"@Whadya say we dump these brats and go drink us some bourbon or something?!" promptw
+
 	npc_do_mc(1396,354)	// 0x0574, 0x0162
 	wait_movement
+
 	set(FLG_MOON_R_DISAPPEAR)	// 63
 	eob
 
 l_0xc9794b:
+	cc_open_letterbox
 	"@(It is a golden statue that you have seen before.)" promptw
+
 	call(data_23.l_0xc68583)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	pause(1)
 	call(data_24.l_0xc69082)
+
 	npc_do_mc(1406,635)	// 0x057E, 0x027B
 	set(FLG_FOUR_MAID_APPEAR)	// 59
 	set(FLG_WIN_MANIMANI)	// 75
@@ -49,7 +57,6 @@ l_0xc9794b:
 	OSS_on	// event(5)
 	party_freeze	// 0xFF
 	pause(20)
-	goto(l_0xc97990)
 
 l_0xc97990:
 	window_open(1)
@@ -58,6 +65,7 @@ l_0xc97990:
 	window_closeall
 	set_respawn_point(5)	// 0x05
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc979e5:
@@ -122,6 +130,7 @@ l_0xc98024:
 	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc982b3)	// 0x44, 68
 	set(FLG_HAPPY_THUNDER)	// 744
 
+	cc_open_letterbox
 	"@Thanks for coming!" pause(15)
 	"  I've been waiting for you." next
 	"@I need your assistance to help make the world blue" next
@@ -137,6 +146,7 @@ l_0xc980c1:
 
 	call(data_23.l_0xc6847a)
 	goto_if_true(data_23.l_0xc683de)
+
 	// Check if party has Franklin badge
 	hasitem(-1, FRANKLIN_BADGE)	// 0xFF, 0x01
 	goto_if_true(l_0xc9817a)
@@ -144,13 +154,20 @@ l_0xc980c1:
 
 l_0xc98148:
 	"@You fool,/| I have drawn you into my trap." wait
+
 	call(data_23.l_0xc6847a)
 	goto_if_true(data_23.l_0xc683de)
+
 	hasitem(-1, FRANKLIN_BADGE)	// 0xFF, 0x01
 	goto_if_true(l_0xc9817a)
+	
+	// This runs if Ness confronts Carpainter without the Badge (Warp next to the cow)
+	pause(145)	// Added so the letterbox closes alongside regaining control of Ness
+	cc_close_letterbox
 	eob
 
 l_0xc9817a:
+	cc_instant_letterbox
 	window_open(1)
 	newline
 	title(1, Carpainter)
@@ -185,13 +202,16 @@ l_0xc981c6:
 
 	wait
 	window_closeall
+	cc_close_letterbox
 	unset(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
 	eob
 
 l_0xc9827c:
 	set(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 
 	"@Your backpack is full..." next
-	"@You should take this even if you need to throw away one of your items." end
+	"@You should take this even if you need to throw away one of your items." wait
+	cc_close_letterbox
+	eob
 
 l_0xc982b3:
 	title(1, Carpainter)
@@ -521,6 +541,7 @@ l_0xc98cc1:
 	"@You really think I was a bad boy?" end
 
 l_0xc98cd3:
+	cc_open_letterbox
 	npc_do_mc(411,623)	// 0x019B, 0x026F
 	wait_movement
 
@@ -549,6 +570,7 @@ l_0xc98cd3:
 	npc_unfreeze(411)	// 0x019B
 	unset(FLG_HAPPY_POKEY_APPEAR)	// 44
 	OSS_off	// event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc98d78:

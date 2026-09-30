@@ -389,7 +389,7 @@ l_0xc5ee13:
 	pause(120)
 
 	window_open(1)
-	"@Buzz Buzz now joins you." promptw
+	"@(Buzz Buzz now joins you.)" promptw
 	window_closeall
 	sprite2_unfreeze(347)	// 0x015B
 	set(FLG_BUNBUN)	// 18

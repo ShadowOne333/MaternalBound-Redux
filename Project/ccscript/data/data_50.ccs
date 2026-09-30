@@ -455,16 +455,19 @@ l_0xc9237e:
 l_0xc923b4:
 	sprite2_spawn(4,345,1)	// 0x0004, 0x0159, 1
 	wait_movement
+
 	unset(FLG_BGM_TELEPORT)	// 593
 	music(4)
 	sprite2_freeze(4)	// 0x0004
 	npc_freeze(1051)	// 0x041B
 	call(l_0xc929ca)
 	window_closeall
+
 	party_add(4)	// Add Poo
 	hide_char(4)	// Hide Poo
 	sprite2_do_mc(4,47)	// 0x04, 0x2F
 	wait_movement
+
 	sprite2_delete(4,6)	// 0x04, 6
 	show_char(4,1)	// Show Poo, 0x04, 1
 	music(11)
@@ -473,7 +476,7 @@ l_0xc923b4:
 	music_resume
 
 	window_open(1)
-	"@{name(4)} joined you." promptw
+	"@({name(4)} joined you.)" promptw
 	window_closeall
 
 	unset(FLG_SYS_MONSTER_OFF)	// 11

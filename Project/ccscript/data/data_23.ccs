@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -256,12 +257,16 @@ l_0xc6847a:
 	hasitem(-1, FRANKLIN_BADGE)
 	goto_if_true(l_0xc684a6)
 	window_closeall
+
 	pause(1)
 	music(124)
 	sprite2_spawn(106,705,1)	// 0x006A, 0x02C1, 01
 	pause(80)
 	hide_party	// 0xFF
 	pause(70)
+
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox after the warp
+
 	warp(105)	// 0x69
 	show_party(2)	// 1F EC FF 02
 	set(FLG_TEMP_9)	// 10
@@ -271,10 +276,13 @@ l_0xc684a6:
 	window_closeall
 	pause(1)
 	music(124)
+
 	sprite2_spawn(106,706,1)	// 0x006A, 0x02C2, 01
 	wait_movement
+
 	music_effect(2)	// Quick music fade
 	wait_movement
+
 	window_open(1)
 	// Check if Paula has the Frankling badge
 	hasitem(2, FRANKLIN_BADGE)

@@ -584,7 +584,7 @@ l_0xc680f2:
 	music_resume
 	window_open(1)
 	// Stat 3 = King's name
-	"@{stat(3)} joins you." promptw
+	"@({stat(3)} joins you.)" promptw
 	window_closeall
 	set(FLG_DOG)	// 19
 	eob
@@ -603,7 +603,7 @@ l_0xc68139:
 	music_resume
 	window_open(1)
 	// Stat 3 = King's name
-	"@{stat(3)} joins you." promptw
+	"@({stat(3)} joins you.)" promptw
 	window_closeall
 	eob
 

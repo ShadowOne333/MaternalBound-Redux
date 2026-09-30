@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -29,23 +30,28 @@ l_0xc936e6:
 	"  that we are..." end
 
 l_0xc9370d:
+	cc_open_letterbox
 	"@Powerful.../| I..." next
 	"@so... show...|| everyone..." promptw
 	window_closeall
 	npc_direction(1258,3)	// 0x04EA, 0x03
 	npc_do_mc(1263,596)	// 0x04EF, 0x0254
 	wait_movement
+
 	npc_freeze(1263)	// 0x04EF
 	window_open(1)
 	"@Hu|u/u{pause(1)}up!" pause(15)
 	"  I got it!" pause(15)
 	"  I got it!  Eeeee yeah!!!" promptw
 	window_closeall
+
 	npc_unfreeze(1263)	// 0x04EF
 	wait_movement
+
 	npc_delete(1263,6)	// 0x04EF, 0x06
 	sound(SND_BEEP2)	// 121
 	set(FLG_GUMI_CAVEOPEN)	// 153
+	cc_close_letterbox
 	eob
 
 l_0xc9378a:
@@ -398,9 +404,12 @@ l_0xc94503:
 	eob
 
 l_0xc94509:
+	cc_open_letterbox
 	title(1, Orange)
 	"@Are you looking for that so-called genius, Apple Kid?" next
-	"@As a true genius,| I'll tell you that he's in Burglin Park, looking for you." end
+	"@As a true genius,| I'll tell you that he's in Burglin Park, looking for you." wait
+	cc_close_letterbox
+	eob
 
 l_0xc9455f:
 	eob
@@ -468,9 +477,10 @@ l_0xc947e7:
 	goto_if_true(l_0xc9484c)
 
 	title(1, Nice)	// Fatty guy
-	"@You're with a girl today." pause(20)
+	"@You're with a girl today." pause(20) linebreak
 	"  Ya must be pretty popular." next
-	"@How about introducin' her to my bandmate?  He's right there." end
+	"@How about introducin' her to my bandmate?" linebreak
+	"  He's right there." end
 
 l_0xc9484c:
 	title(1, Nice )	// Fatty guy
@@ -500,6 +510,7 @@ l_0xc948dc:
 
 	goto_if_flag(FLG_ITEM_TICKET, l_0xc94a1c)	// 0x0229, 553
 
+	cc_open_letterbox
 	title(1, Lucky)	// Skinny guy
 	"@Hey,| ya came with {name(2)}!" next
 	"@Then you deserve a present, playboy." next
@@ -515,22 +526,32 @@ l_0xc948dc:
 	wait
 	set(FLG_ITEM_TICKET)	// 553
 	set(FLG_PHOTO_CHAOS)	// 484
+	cc_close_letterbox
 	eob
 
 l_0xc94966:
 	title(1, Lucky)	// Skinny guy
+	sound(SND_ERRORBEEP)	// 5
 	"@It seems like you've got an awful lot of junk." next
-	"@Get rid of somethin' and come back for the pass." end
+	"@Get rid of somethin' and come back for the pass." wait
+	cc_close_letterbox
+	eob
 
 l_0xc949a2:
+	cc_open_letterbox
 	title(1, Lucky)	// Skinny guy
 	"@Hey,| you're {name(2)}!" next
-	"@A boy with a red cap seemed to be lookin' for ya." end
+	"@A boy with a red cap seemed to be lookin' for ya." wait
+	cc_close_letterbox
+	eob
 
 l_0xc949ce:
+	cc_open_letterbox
 	title(1, Lucky)	// Skinny guy
 	"@I heard you're workin' hard tryin' to find the girl who lives at the preschool." next
-	"@If ya find her,| bring her to our concert." end
+	"@If ya find her,| bring her to our concert." wait
+	cc_close_letterbox
+	eob
 
 l_0xc94a1c:
 	title(1, Lucky)	// Skinny guy
@@ -547,6 +568,7 @@ l_0xc94a95:
 	"@I'm not sure what happened,| but it looked like it was good news." end
 
 l_0xc94abc:
+	cc_open_letterbox
 	title(1, Nice)	// Fatty guy
 	"@Let's go to Threek!" next
 	"@Our tour bus is too loud for any ghosts to bother us." next
@@ -554,4 +576,6 @@ l_0xc94abc:
 	two_choice_menu("Yes", data_52.l_0xc94b32, "No", l_0xc94b15)
 
 l_0xc94b15:
-	"@If ya change your mind,| come back anytime." end
+	"@If ya change your mind,| come back anytime." wait
+	cc_close_letterbox
+	eob

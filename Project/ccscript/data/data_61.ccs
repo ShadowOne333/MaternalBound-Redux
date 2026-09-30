@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -68,9 +69,11 @@ l_0xef58c7:
 	end
 
 l_0xef5917:	// Starmaster appears to teach Starstorm
+	cc_open_letterbox
 	sound(SND_STARMASTER)	// 99
 	sprite2_spawn(169,620,1)	// 0x00A9, 0x026C, 1
 	wait_movement
+
 	sprite2_delete(169,6)	// 0xA9, 6
 	sprite2_spawn(98,8,1)	// 0x62, 0x0008, 1
 	sprite2_direction(98,7)	// 0x62, 7
@@ -128,6 +131,7 @@ l_0xef5917:	// Starmaster appears to teach Starstorm
 	sound(SND_LEARNPSI)	// 103
 	wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xef5a3e:

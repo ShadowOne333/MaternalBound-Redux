@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -203,17 +204,20 @@ l_0xc9fc48:
 	eob
 
 l_0xc9fc6f:
+	cc_open_letterbox
 	newline
 	"@{user}{get_action_arg}{swap} used the {itemname(0)}!"
 	sound(SND_BUTTERFLY)	// 95
 	pause(1)
 	wait
 	window_closeall
+
 	if not flag FLG_KEY_ITEMS { take(-1, HAWK_EYE) }	// 0xFF,0xAF / 175
 	set(FLG_MAKYO_USE_TAKANOME)	// 288
 	npc_delete(1231,6)	// 0x04CF,0x06
 	call(data_50.l_0xc935b1) ")"
 	set(FLG_PHOTO_MAKYOU)	// 508}"
+	cc_close_letterbox
 	eob
 
 l_0xc9fc9e:
@@ -230,6 +234,10 @@ l_0xc9fcd5:
 	result_is(ERASER_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
+	window_closeall	// Close all menus
+
+	cc_open_letterbox
+	window_open(1)
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		swap
@@ -247,6 +255,7 @@ l_0xc9fcd5:
 	sound(SND_ENEMYDEATH)	// 33
 	npc_delete(671,10)	// 0x029F,0x0A
 	set(FLG_WINS_STONE_TACO_DISAPPEAR)	// 299
+	cc_close_letterbox
 	eob
 
 l_0xc9fd2e:
@@ -313,8 +322,8 @@ l_0xc9fe9d:
 	"@The Teleport Box began to groan."
 	sound(SND_STARMASTER) next	// 99
 	battle_animation(48,0)	// 0x30, 0x00
-	"@The Teleport Box didn't work quite right..."
 	sound(SND_ERRORBEEP)	// 5
+	"@The Teleport Box didn't work quite right..."
 	pause(30)
 	end
 

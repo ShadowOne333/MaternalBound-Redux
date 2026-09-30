@@ -35,7 +35,7 @@ l_0xc88650:
 	music_resume
 
 	window_open(1)
-	"@{name(3)} joined you." promptw
+	"@({name(3)} joined you.)" promptw
 	window_closeall
 
 	pause(1)

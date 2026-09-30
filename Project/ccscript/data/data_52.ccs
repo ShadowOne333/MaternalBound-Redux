@@ -22,6 +22,7 @@ l_0xc94b32:
 	"  Let's go!" pause(20) linebreak
 	"  Get on the bus!" wait
 	npc_do_mc(373,181)	// 0175, 00B5
+	//cc_close_letterbox	// The warp will remove the letterbox
 	eob
 
 l_0xc94b57:
@@ -69,7 +70,7 @@ l_0xc94d7a:
 	goto_if_flag(FLG_WIN_GEPPU, l_0xc94df6)	// 0x47, 71
 	"@I got bit by zombies in Threek,| the next town over,| so I'm stuck in this hospital." next
 	"@I left something good at the Threek Hospital," next
-	"@but now I can't go get it" pause(10)" because the bus can't get through the tunnel." end
+	"@but now I can't go get it// because the bus can't get through the tunnel." end
 
 l_0xc94df6:
 	"@I'm in perfect, tip-top health now." pause(20)
@@ -550,6 +551,7 @@ l_0xc95ea5:
 	"@Come back when you've accomplished something." end
 
 l_0xc95f0a:
+	cc_open_letterbox
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc960ab)
@@ -567,7 +569,8 @@ l_0xc95f0a:
 	"  Just give it up and take it!" next
 	"@Now I plan on looking for the evil Mani Mani Statue or whatever" next
 	"@that some petty bad guy named Lier X. Agerate or something dug up in Onett." next
-	"@I'll see you at another time, in another space." promptw
+	"@I'll see you at another time," linebreak
+	"  in another space." promptw
 
 	if flag FLG_KEY_ITEMS { give_menu_key_item(WAD_BILLS) }
 	else {
@@ -577,7 +580,7 @@ l_0xc95f0a:
 		call(data_36.l_0xc7dcb6)
 	}
 	wait
-	cc_close_letterbox
+	cc_close_letterbox	// Already handled by Everdred's control code
 	set(FLG_TWSN_ITEM_TONCHIKI)	// 85
 	eob
 
@@ -609,7 +612,7 @@ l_0xc960d7:
 	"@Please use the 10,000 dollars any way you wish." next
 	"@There's no use in trying to give it back to me!" pause(20) linebreak
 	"  Just give it up and take it!" wait
-	cc_close_letterbox
+	//cc_close_letterbox	// Not needed
 	eob
 
 l_0xc96124:

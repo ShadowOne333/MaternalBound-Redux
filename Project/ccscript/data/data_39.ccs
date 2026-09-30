@@ -19,7 +19,9 @@ command e(label) "{long label}"
 // Text Data
 l_0xc8125d:
 	"@I guess I was just too hopeful." pause(20)
-	"  Oh well, never mind." end
+	"  Oh well, never mind." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81286:
 	"@Oh goody!" pause(20)
@@ -35,19 +37,18 @@ l_0xc812d1:
 	takemoney(200)
 
 	show_wallet
-	goto(l_0xc812e6)
 
 l_0xc812e6:
 	"@Thank you very much!" next
 	"@Your support should have a tremendous impact on all mankind." next
 	set(FLG_TWSN_ORANGE_THANKS)	// 117
-	goto(l_0xc81318)
 
 l_0xc81318:
 	goto_if_flag(FLG_ITEM_GREATORANGE, l_0xc81418)	// 0x0226, 550
 	"@Let me give you my new <Super Orange Machine.>" next
 	// Suporma, item 0xCC, 204
 	"@I call it <{itemname(SUPORMA)}> for short." next
+	window_open(1)
 
 	get_item_receiver(-1)
 	goto_if_false(l_0xc81392)
@@ -56,18 +57,26 @@ l_0xc81318:
 
 	set(FLG_ITEM_GREATORANGE)	// 550
 	next
-	"@Please use it for spreading peace and goodwill on Earth." end
+	title(1, Orange)
+	"@Please use it for spreading peace and goodwill on Earth." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81392:
+	sound(SND_ERRORBEEP)	// 5
 	"@Ah ha!" pause(20)
 	"  You have too many items." next
 	// Suporma, item 0xCC, 204
-	"@I hope you'll accept the {itemname(SUPORMA)},| even if you have to toss some of your food..." end
+	"@I hope you'll accept the {itemname(SUPORMA)},| even if you have to toss some of your food..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc813d4:
 	"@What?!" pause(15)
 	"  You don't have that much money?" next
-	"@Well, perhaps you shouldn't be yappin' about having cash then,| buddy." end
+	"@Well, perhaps you shouldn't be yappin' about having cash then,| buddy." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81418:
 	title(1, Orange)
@@ -87,6 +96,7 @@ l_0xc81475:
 	eob
 
 l_0xc814b9:
+	cc_open_letterbox
 	title(1, Orange)
 	"@You didn't invest any money in my venture," next
 	"@but someone else donated a few million bucks,| so everything is great." next
@@ -96,7 +106,9 @@ l_0xc814b9:
 l_0xc8153d:
 	"@Oh,| I'm sorry to hear that." next
 	"@...And you never heard how much money I got, too." pause(15)
-	"  Right? *wink* *wink*..." end
+	"  Right? *wink* *wink*..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81585:
 	hasmoney(50)	// 0x00000032
@@ -122,10 +134,10 @@ l_0xc815f9:
 	"@I rely on your support,| even though I am a super genius." end
 
 l_0xc81676:
-	cc_open_letterbox
 	goto_if_flag(FLG_ITEM_PHONE, l_0xc818f1)	// 0x52, 82
 	goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc818b9)	// 0x70, 112
 	goto_if_flag(FLG_TWSN_APPLE_FOOD, l_0xc81915)	// 0x0227, 551
+	cc_open_letterbox
 	"@Well,| I have sort of neglected doing my housework..." next
 	"@I know it's a bit of a pigsty,| but anyway..." next
 	"@I'm Apple Kid." next
@@ -199,6 +211,7 @@ l_0xc818b9:
 	set(FLG_TWSN_APPLE_THANKS)	// 112
 	set(FLG_WARP_APPLE_TWSN)	// 294
 	OSS_on	// event(5)
+	goto_if_flag(FLG_TEMP_3, l_0xc818dc)
 	goto(data_33.l_0xc79028)
 
 l_0xc818dc:
@@ -210,7 +223,7 @@ l_0xc818dd:
 
 l_0xc818f1:
 	title(1, Apple)
-	"@Maybe you shouldn't spend too much time wandering around Twoson."
+	"@Maybe you shouldn't spend too much time wandering around Twoson." end
 
 l_0xc81913:
 	wait
@@ -218,13 +231,13 @@ l_0xc81913:
 	eob
 
 l_0xc81915:
+	cc_open_letterbox
 	title(1, Apple)
 	"@It seems like you are expecting something from me." next
 	goto(l_0xc8180c)
 
 l_0xc81934:
 	unset(FLG_WARP_APPLE_TWSN)	// 294
-	cc_open_letterbox
 	goto_if_flag(FLG_ITEM_PHONE, l_0xc81945)	// 0x52, 82
 	goto_if_flag(FLG_TWSN_APPLE_THANKS, l_0xc81970)	// 0x70, 112
 
@@ -232,11 +245,11 @@ l_0xc81945:
 	"@I am a mouse." pause(20)
 	"  As yet I have no name."
 	goto_if_flag(FLG_TEMP_3, l_0xc819f1) wait	// 0x04
-	cc_close_letterbox
 	eob
 
 l_0xc81970:
 	OSS_off	// event(6)
+	cc_open_letterbox
 	"@I am a mouse." pause(20)
 	"  As yet I have no name." next
 	"@You took care of my master." next
@@ -458,10 +471,11 @@ l_0xc81f2a:
 l_0xc81f56:
 	title(1, Apple)
 	goto_if_flag(FLG_ITEM_TACO_ERASER, l_0xc8207c)	// 0x53, 83
+	cc_open_letterbox
 	"@I'm feeling really out of it because I've been working all night," next
 	"@but finally the {itemname(PENCIL_ERASER)} is ready." next
 	"@This machine will eradicate all pencil-shaped figures in just one second." next
-	"@It's incredibly powerful." pause(20)
+	"@It's incredibly powerful." pause(20) linebreak
 	"  Just don't use it near a shop that sells pencils." next
 	"@Here, it's yours now." next
 
@@ -474,8 +488,10 @@ l_0xc81f56:
 	}
 
 	next
+	title(1, Apple)
 	"@If I invent some other brilliant item,| I'll call you." wait
 	window_closeall
+	cc_close_letterbox
 
 	unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
 	set(FLG_HAPPY_SWITCH)	// 175

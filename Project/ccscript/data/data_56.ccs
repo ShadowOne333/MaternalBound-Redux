@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -95,6 +96,7 @@ l_0xc99dce:
 	eob
 
 l_0xc99de1:
+	cc_open_letterbox
 	show_npc_float(323,3)	// 0x0143, 0x03
 	pause(10)
 	get_dir_from_char(-1,TO_NPC,323)	// 0xFF, 0x02, 0x0143
@@ -121,6 +123,7 @@ l_0xc99e1b:
 	pause(60)
 	unset(FLG_TWSN_MESSENGER_APPEAR)	// 611
 	OSS_off	// event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc99e48:

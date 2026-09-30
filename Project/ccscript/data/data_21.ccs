@@ -640,18 +640,22 @@ l_0xc665e7:
 
 l_0xc66670:
 	goto_if_flag(FLG_WIN_GIAN_BOSS, data_35.l_0xc7c588)	// 0xBE, 190
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
+
 	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the first <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
+
 	call(data_23.l_0xc68409)
 	goto_if_true(data_23.l_0xc683de)
-	cc_open_letterbox
+
+	cc_instant_letterbox
 	npc_delete(209,8)	// 0x00D1, 8
 	pause(120)
 	set(FLG_WIN_GIAN_BOSS)	// 190

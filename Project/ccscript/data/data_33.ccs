@@ -744,7 +744,6 @@ l_0xc78fca:
 	eob
 
 l_0xc79028:
-	//cc_open_letterbox
 	npc_do_mc(222,101)	// 0x00DE, 0x0065
 	wait_movement
 	cc_close_letterbox
@@ -791,7 +790,7 @@ l_0xc79081:
 	eob
 
 l_0xc79088:
-	"@(For some weird reason," pause(20)
+	"@(For some weird reason," pause(20) linebreak
 	"  a pencil-shaped iron statue is blocking the path.)" end
 
 _pencil_check:
@@ -813,11 +812,18 @@ l_0xc790c4:
 	result_is(PENCIL_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
+	window_closeall	// Close menus
+
+	cc_open_letterbox
+	window_open(1)
 	call(l_0xc7911e)
 	npc_delete(450,10)	// 0x01C2, 0x0A
 	window_closeall
+
 	set(FLG_GRFD_LLPT_TACO_DISAPPEAR)	// 284
 	set(FLG_PHOTO_RIVER)	// 482
+	pause(120)
+	cc_close_letterbox
 	eob
 
 l_0xc790e4:
@@ -825,10 +831,17 @@ l_0xc790e4:
 	result_is(PENCIL_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
+	window_closeall	// Close menus
+
+	cc_open_letterbox
+	window_open(1)
 	call(l_0xc7911e)
 	npc_delete(827,10)	// 0x033B, 0x0A
 	window_closeall
+
 	set(FLG_DSRT_SARU_TACO_DISAPPEAR)	// 516
+	pause(120)
+	cc_close_letterbox
 	eob
 
 l_0xc79101:
@@ -836,26 +849,35 @@ l_0xc79101:
 	result_is(PENCIL_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
+	window_closeall	// Close menus
+
+	cc_open_letterbox
+	window_open(1)
 	call(l_0xc7911e)
 	npc_delete(645,10)	// 0x0285, 0x0A
 	window_closeall
+
 	set(FLG_WINS_TACO_DISAPPEAR)	// 609
+	pause(120)
+	cc_close_letterbox
 	eob
 
 l_0xc7911e:
 	get_char_at_pos(1) rtoarg
-	"@{name(0)} used the Pencil eraser." next
+	"@{name(0)} used the {itemname(PENCIL_ERASER)}." next
 	"@For some weird reason, the iron pencil statue" linebreak
 	"  was erased!" promptw
 	sound(SND_ENEMYDEATH)	// 33
 	eob
 
 l_0xc7916c:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
 
 	window_open(1)
 	"@Hello... this is the Apple Kid." next
@@ -868,11 +890,13 @@ l_0xc7916c:
 	"  Slam!" pause(20) linebreak
 	"  Beeeep..." wait
 	window_closeall
+	hide_phone_sprite_float
 
 	set(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
 	set(FLG_TWSN_APPLE_DISAPPEAR)	// 339
 	set(FLG_TWSN_INFO_TACO)	// 341
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc79211:
@@ -979,6 +1003,7 @@ l_0xc79489:
 	"@Oh,| that was almost too much!" end
 
 l_0xc7949e:
+	cc_open_letterbox
 	unset(FLG_TEMP_1)	// 2
 	unset(FLG_TEMP_2)	// 3
 	npc_unfreeze(439)	// 0x01B7
@@ -992,10 +1017,12 @@ l_0xc794b1:
 	"@Hey {name(1)}!" pause(20)
 	"  You're just here to bother me, aren't you?" next
 	"@And I was just about to become an important person in Happy Happyism," next
-	"@thanks to the great Mr. Carpainter..." next
+	"@thanks to the great" linebreak
+	"  Mr. Carpainter..." next
 	"@You should join us,| but I know you won't..." pause(15) linebreak
 	"  I'm glad I joined..." next
-	"@I'm not going to fight you,| but these guys will..." pause(15) linebreak
+	"@I'm not going to fight you,|" linebreak
+	"  but these guys will..." pause(15) linebreak
 	"  Later potater..." promptw
 	window_closeall
 
@@ -1012,14 +1039,18 @@ l_0xc794b1:
 	npc_freeze(440)	// 0x01B8
 	npc_freeze(441)	// 0x01B9
 	npc_freeze(442)	// 0x01BA
+
 	call(data_23.l_0xc68531)
 	goto_if_true(l_0xc795bd)
+
+	cc_instant_letterbox
 	pause(1)
 	npc_do_mc(440,635)	// 0x01B8, 0x027B
 	npc_do_mc(441,635)	// 0x01B9, 0x027B
 	npc_do_mc(442,635)	// 0x01BA, 0x027B
 	pause(60)
 	OSS_off	// event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc795bd:
@@ -1039,8 +1070,11 @@ l_0xc795c1:
 		goto_if_false(l_0xc796ee)
 		take(-1,CABIN_KEY)	// 0xAB, 171, Key to the cabin
 	}
+	window_closeall	// Close all menus
+
+	cc_open_letterbox
+	window_open(1)
 	"@(" call(data_37.l_0xc7e74e) " used the {itemname(CABIN_KEY)}.)" next
-	goto(rescuepaula)
 
 rescuepaula:
 	set(FLG_PAULA_KI)	// Key items party flag
@@ -1073,7 +1107,7 @@ rescuepaula:
 	music_resume
 
 	window_open(1)
-	"@{name(2)} joined you." promptw
+	"@({name(2)} joined you.)" promptw
 	window_closeall
 
 	set(FLG_POLA_GRFD)	// 13
@@ -1082,6 +1116,7 @@ rescuepaula:
 	set(FLG_TWSN_INFO_TONCHIKI)	// 321
 	set(FLG_MYHOME_PHONE_PAULA)	// 689
 	set(FLG_PHOTO_CABIN)	// 483
+	cc_close_letterbox
 	eob
 
 l_0xc796ee:
@@ -1093,6 +1128,7 @@ l_0xc79707:
 	npc_freeze(217)	// 0xD9, 217
 
 l_0xc7970b:
+	cc_open_letterbox
 	counter(2)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc798fe)
@@ -1156,6 +1192,7 @@ l_0xc798bf:
 
 	goto_if_flag(FLG_TEMP_0, l_0xc798f7)	// 0x0001
 	set(FLG_TEMP_0)	// 1
+	cc_close_letterbox
 	eob
 
 l_0xc798f7:
@@ -1173,7 +1210,9 @@ l_0xc798fe:
 	promptw
 	sound(SND_DOOROPEN)	// 8
 	window_closeall
+
 	pause(20)
 	sound(SND_DOORCLOSE)	// 9
 	npc_delete(217,6)	// 0x00D9, 0x06
+	cc_close_letterbox
 	eob

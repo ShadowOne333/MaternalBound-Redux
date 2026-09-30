@@ -480,6 +480,7 @@ l_0xc8054d:
 	"  God| is with her." end
 
 l_0xc80579:
+	cc_open_letterbox
 	counter(2)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc80673)
@@ -502,6 +503,7 @@ l_0xc805ba:
 	"  Ooo!| That rhymes!" next
 	"@I know, I'll call it a Hand-aid!" next
 
+	window_open(1)
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc8082a)
 	give_and_return_location(0, HAND_AID)	// 0x00, 0xBC, 188
@@ -510,15 +512,20 @@ l_0xc805ba:
 	set(FLG_TWSN_ITEM_ISABELLA)	// 84
 
 	newline
+	title(1, MsJones)
 	"@Did you meet Dad?" next
 	"@He is sorry that he suspected Mr. Everdred of Burglin Park." wait
+	cc_close_letterbox
 	eob
 
 l_0xc80673:
 	title(1, MsJones)
 	"@Is that you, {name(2)}?" pause(20)
 	"  Oh,| I thought she would be back,| but not yet..." next
-	"@Oh no, I'm not worried... I'll be okay." end
+	"@Oh no, I'm not worried..." linebreak
+	"  I'll be okay." wait
+	cc_close_letterbox
+	eob
 
 l_0xc806bb:
 	counter(1)
@@ -549,9 +556,11 @@ msjones_reassure_nessdead:
 	"@Isn't {name(1)} with you?" next
 	"@...{name(2)},| your mom is trusting his courage and your miraculous power." next
 	"@I won't say I'm not worried." next
-	"@But I'll let you go along...  It's for a good cause..." end
+	"@But I'll let you go along...  It's for a good cause..." wait
+	eob
 
 l_0xc807bc:
+	cc_open_letterbox
 	title(1, MsJones)
 	goto_if_flag(FLG_TWSN_ITEM_ISABELLA, l_0xc8087a)	// 0x0054, 84
 	"@{name(2)},| if you must go,| be sure to bring this along." next
@@ -564,6 +573,7 @@ l_0xc807bc:
 	call(data_36.l_0xc7dccf)
 	wait
 	set(FLG_TWSN_ITEM_ISABELLA)	// 84
+	cc_close_letterbox
 	eob
 
 l_0xc8082a:
@@ -572,7 +582,9 @@ l_0xc8082a:
 	"@What's that?" pause(15)
 	"  You're being a little impatient..." next
 	"@You need to sell,| use or drop something." pause(20)
-	"  After that,| I can give this to you." end
+	"  After that,| I can give this to you." wait
+	cc_close_letterbox
+	eob
 
 no_ness:
 	get_char_at_pos(1)	// 0x01
@@ -729,7 +741,9 @@ l_0xc80cd4:
 l_0xc80dab:
 	title(1, MrJones)
 	"@Then leave." next
-	"@My daughter isn't a circus attraction!" end
+	"@My daughter isn't a circus attraction!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc80dd8:
 	title(1, MrJones)
@@ -749,6 +763,7 @@ l_0xc80e03:
 
 l_0xc80e61:
 	goto_if_flag(FLG_GLOBAL_POLA_KIDNAPPED, l_0xc80f1c)	// 0x0308, 776
+	cc_open_letterbox
 
 	counter(1)
 	call(data_36.l_0xc7dc7f)
@@ -765,18 +780,22 @@ l_0xc80e61:
 
 l_0xc80ec3:
 	"@Come on,| why don't you put your dogs up" linebreak
-	"  and re/e/e/e/lax." end
+	"  and re/e/e/e/lax." wait
+	cc_close_letterbox
+	eob
 
 l_0xc80ef3:
 	"@{name(1)}, sleep here tonight." next
 	"@In separate rooms, of course..." promptw
 	call(data_49.l_0xc91693)
-	warp(34)	// 0x22
+	warp(34)	// 0x22, this resets the letterbox
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
 	newline
 	eob
 
 l_0xc80f1c:
+	cc_open_letterbox
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc81027)
@@ -788,7 +807,7 @@ l_0xc80f1c:
 	"@Why don't you just rest for now." next
 	"@You know where the other room is..." promptw
 	call(data_49.l_0xc91693)
-	warp(34)	// 0x22
+	warp(34)	// 0x22, this resets the letterbox
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
 	eob
 
@@ -804,7 +823,7 @@ l_0xc80f94:
 	"@How about we share a piece of pie like we used to?" linebreak
 	"  Ha ha ha!" promptw
 	call(data_49.l_0xc91693)
-	warp(34)	// 0x22
+	warp(34)	// 0x22, this resets the letterbox
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
 	eob
 
@@ -816,24 +835,28 @@ l_0xc81027:
 	"  Yes, you're telling the truth." next
 	"@Would you like to get some shut eye?" promptw
 	call(data_49.l_0xc91693)
-	warp(34)	// 0x22
+	warp(34)	// 0x22, this resets the letterbox
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
 	eob
 
 l_0xc81087:
+	cc_open_letterbox
 	title(1, MrJones)
 	"@You're a very strong, young man." pause(20)
 	"  My opinion of you has changed." next
 	"@Perhaps you should continue dating {name(2)}." next
 	"@Just treat her right..." next
 	"@Come by and visit anytime." next
-	"@You should come stay the night sometime too, you can crash in my room." end
+	"@You should come stay the night sometime too, you can crash in my room." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81122:
 	goto_if_flag(FLG_WIN_GIEGU, data_39.l_0xc8159f)	// 0x0049, 73
 	goto_if_flag(FLG_TWSN_ORANGE_THANKS, data_39.l_0xc81318)	// 0x0075, 117
 	goto_if_flag(FLG_TWSN_INFO_TACO, data_39.l_0xc814b9)	// 0x0155, 341
 
+	cc_open_letterbox
 	"@Greetings." pause(20)
 	"  I'm Orange Kid, the inventor." next
 	title(1, Orange)
@@ -843,7 +866,7 @@ l_0xc81122:
 	"@I'm basically a happy-go-lucky person,| so I'm not worried." next
 	"@You know,| I'm working on this machine" next
 	"@that would really help you in Grateful Dead Valley." next
-	"@I hope it's ready soon... what?" next
+	"@I hope it's ready soon.../| what?" next
 	"@You're actually willing to help finance the project?" linebreak
 	two_choice_menu("Yes", data_39.l_0xc81286, "No", data_39.l_0xc8125d)
 	goto(data_39.l_0xc8125d)
