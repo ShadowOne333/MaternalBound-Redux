@@ -22,7 +22,7 @@ l_0xc94b32:
 	"  Let's go!" pause(20) linebreak
 	"  Get on the bus!" wait
 	npc_do_mc(373,181)	// 0175, 00B5
-	//cc_close_letterbox	// The warp will remove the letterbox
+	cc_close_letterbox
 	eob
 
 l_0xc94b57:
@@ -404,7 +404,6 @@ l_0xc959a5:
 
 l_0xc959db:
 	goto_if_flag(FLG_TWSN_FIELD_TONZ_DISAPPEAR, l_0xc95ba0)	// 0x0225, 549
-	goto(l_0xc959e2)
 
 l_0xc959e2:
 	title(1, Poochyfud)
@@ -413,8 +412,9 @@ l_0xc959e2:
 	"@They'll stay here until they pay me back." next
 	"@They might be here for 100 years," next
 	"@unless you decide to pay off their debt...  Heh, heh, heh." end
-	//if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI { // flg_KeyItem_WadofBills
-		//goto(chaostheatermanager_paid) }
+	/*if flag FLG_KEY_ITEMS and flag FLG_TWSN_ITEM_TONCHIKI { // flg_KeyItem_WadofBills
+		goto(chaostheatermanager_paid)
+	}*/
 
 l_0xc95a5f:
 	"@The Runaway Brothers are free to leave." next
@@ -430,6 +430,11 @@ l_0xc95a8d:
 l_0xc95aa0:
 	isset(FLG_TWSN_CHAOS_STAGE_START)	// 319
 	goto_if_false(l_0xc95ba0)
+
+	window_closeall	// Close menus
+	cc_open_letterbox
+	window_open(1)
+
 	get_char_at_pos(1)
 	get_dir_from_char(0,TO_NPC,253)	// 0, 2, 0x00FD
 	swap
@@ -445,7 +450,6 @@ l_0xc95aa0:
 	load_registers
 	result_is(8)
 	goto_if_true(l_0xc95b64)
-	goto(chaostheatermanager_paid)
 
 chaostheatermanager_paid:
 	sound(SND_CHICKEN2)	// 118
@@ -463,7 +467,7 @@ chaostheatermanager_paid:
 	set(FLG_TWSN_TONZURA_FREE)	// 119
 	set(FLG_TWSN_TONZURABUS_APPEAR)	// 309
 	unset(FLG_TWSN_TONCHIKI_APPEAR)	// 624
-	goto(data_34.l_0xc799d7)
+	goto(data_34.l_0xc799d7)	// Close letterbox goes in data_34
 
 l_0xc95b63:
 	eob
@@ -472,7 +476,9 @@ l_0xc95b64:
 	title(1, Poochyfud)
 	"@W-what is that?!" pause(15) linebreak
 	 "  Let me see it closer up!" linebreak
-	"  Right/ by/ my/ face/!" end
+	"  Right/ by/ my/ face/!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc95ba0:
 	title(1, Poochyfud)

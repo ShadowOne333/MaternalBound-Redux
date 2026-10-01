@@ -1,13 +1,31 @@
 //------------------------------------
 //	Cutscene modifications
 //------------------------------------
+import "../definitions/flags.ccs"
 import "../essential/cc_effects.ccs"
 import "../redux/movscr_codes.ccs"
 //------------------------------------
 // This file does action script modifications to certain cutscenes in the original EB game
-
 //------------------------------------
-StarmanJr_Smoke:
+// Make the Ghost lady at the Hotel reception move quicker to avoid the player catching her while running
+define Script_78	= 0xC3B86C
+ROM[Script_78] = {
+/* C3B86C */	m_jsr(0xC3AAB8)
+/* C3B86F */	m_refresh_graphics_frame0
+/* C3B873 */	m_copy_xy_to_var01
+/* C3B877 */	m_set_var2(40)
+/* C3B87B */	m_set_var3(40)
+/* C3B87F */	m_jsr(0xC3AB8A)
+/* C3B882 */	m_unset_flag(FLG_THRK_BIKINIZOMBI_F_APPEAR)	// Flag 296
+/* C3B88B */	m_set_flag(FLG_THRK_BIKINIZOMBI_P_APPEAR)	// Flag 297
+/* C3B894 */	m_set_speed(448)	// Walking speed of the Ghost Woman inside the Hotel's reception (256)
+/* C3B89A */	m_set_result(6)
+/* C3B89D */	m_jsr(0xC3AA1E)	// Set facing dest + Start walking in dir 6
+/* C3B8A0 */	m_pause(32)	// 56
+/* C3B8A2 */	m_jmp(Script_35)
+}
+//------------------------------------
+StarmanJr_Smoke:	// 895
 	m_disable_collision()
 	m_refresh_graphics_frame0()
 	m_onmove(0xA37A) //84
@@ -28,7 +46,7 @@ StarmanJr_Smoke:
 //------------------------------------
 define UPDATE_LETTERBOX_HDMA_TABLE	= 0xC2D0AC
 
-PostWarp_Letterbox: {
+PostWarp_Letterbox: {	// 896
 	m_ondraw(0x9FF0)
 	m_asmcall(cc_effects.instantLetterbox)
 	m_asmcall(UPDATE_LETTERBOX_HDMA_TABLE)	// Build letterbox HDMA table

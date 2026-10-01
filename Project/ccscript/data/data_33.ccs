@@ -910,6 +910,7 @@ l_0xc7921a:
 	eob
 
 l_0xc79223:
+	cc_open_letterbox
 	party_freeze	// 0xFF
 	music_effect(3)	// 0x03
 	window_closeall
@@ -930,6 +931,7 @@ l_0xc79223:
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x006A
 	pause(1)
+	cc_close_letterbox	// Closing it here so the full Runaway bros stage is visible
 	eob
 
 l_0xc79287:
@@ -950,6 +952,9 @@ l_0xc79287:
 
 	sprite2_do_mc(316,369)	// 0x013C, 0x0171
 	music_resume
+	// Uncomment this line if we want the letterbox present throughout all the Runaway show
+	// Comment the one above
+	//cc_close_letterbox
 	eob
 
 l_0xc792dc:
@@ -974,8 +979,8 @@ l_0xc7930c:
 	"@Tonight,| you got the Chaos Theater's Soul Men comin' at ya!" next
 	"@Rockin' and rollin' live on this here stage for a limited time only!" next
 	"@The world's greatest Bluesmen," next
-	"@the Runaway Brothers!" pause(20)
-	"  And here they come!" pause(15)
+	"@the Runaway Brothers!" pause(20) linebreak
+	"  And here they come!" pause(15) linebreak
 	"  Oh yeah!" pause(10)
 	"  Baby!" promptw
 	window_closeall

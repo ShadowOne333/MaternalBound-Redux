@@ -346,7 +346,7 @@ l_0xc69038:
 	"@Ah, {name(1)}... you've read it already." next
 	"@...That Tony has a heart of gold..." end
 
-l_0xc69082:	// Unset all the delivery flags in preparation for Magicant fadeout event
+l_0xc69082:	// Unset all the delivery flags in preparation for Magicant fadeout event && Winters event
 	unset(FLG_DELIVERY_PIZZA)	// 180
 	unset(FLG_DELIVERY_UNSOU)	// 181
 	unset(FLG_DELIVERY_UNSOU_B)	// 645

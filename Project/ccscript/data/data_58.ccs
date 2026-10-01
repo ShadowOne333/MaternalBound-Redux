@@ -677,7 +677,7 @@ l_0xc9cd02:
 	goto_if_flag(FLG_BOX_RAMA_1, data_23.l_0xc685cb)	// 0x00DD, 221
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} opened the present." next
-	"@Inside was the {itemname(BRAIN_FOOD_LUNCH)}." next
+	"@Inside was a {itemname(BRAIN_FOOD_LUNCH)}." next
 
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(data_23.l_0xc685bb)

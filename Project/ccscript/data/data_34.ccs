@@ -32,6 +32,8 @@ l_0xc79997:
 	call(data_57.l_0xc9b4b8)
 	sprite2_spawn(120,110,-1)	// 0x0078, 0x006E, 0xFF
 	sprite2_spawn(106,112,-1)	// 0x006A, 0x0070, 0xFF
+
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(65)	// 0x41
 	call(data_57.l_0xc9b4b8)
 	sprite2_delete(106,6)	// 0x006A, 0x06
@@ -90,6 +92,7 @@ l_0xc799d7:
 
 	unset(FLG_TEMP_5)	// 6
 	wait_movement
+	cc_close_letterbox
 	eob
 
 l_0xc79a64:
@@ -121,6 +124,7 @@ gorgeoustext:	// Sax guy
 	"@I didn't stand out and get much attention, did I?" end
 
 l_0xc79b12:
+	cc_open_letterbox
 	show_npc_float(320,3)	// 0x0140, 0x03
 	pause(5)
 	hide_npc_float(320)	// 0x0140
@@ -151,9 +155,11 @@ l_0xc79b12:
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	restore_camera
 	hotspot_on(1,3, l_0xc79b12)	// 1, 0x03, 0x00C79B12
+	cc_close_letterbox
 	eob
 
 l_0xc79b98:
+	cc_open_letterbox
 	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
 	OSS_on	// event(5)
 	set(FLG_TWSN_TONZURA_GO)	// 747
@@ -199,6 +205,7 @@ l_0xc79c1e:
 	restore_camera
 	set(FLG_TUNNEL_TWSN_THRK_TR)	// 314
 	sprite2_spawn(243,185,-1)	// 0x00F3, 0x00B9, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(60)	// 0x3C
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -207,6 +214,7 @@ l_0xc79c32:
 	restore_camera
 	unset(FLG_TUNNEL_TWSN_THRK_TR)	// 314
 	sprite2_spawn(243,186,-1)	// 0x00F3, 0x00BA, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(63)	// 0x3F
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -254,6 +262,7 @@ l_0xc79c46:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	cc_close_letterbox
 	eob
 
 l_0xc79cc8:
@@ -296,6 +305,7 @@ l_0xc79d7a:
 	eob
 
 l_0xc79d81:
+	cc_open_letterbox
 	party_freeze	// 0xFF
 	OSS_on	// event(5)
 	get_char_at_pos(1)	// 0x01
@@ -324,6 +334,7 @@ l_0xc79d81:
 	hide_party	// 0xFF, 0x06
 	sprite2_spawn(16,662,-1)	// 0x0010, 0x0296, 0xFF
 	sprite2_spawn(393,663,-1)	// 0x0189, 0x0297, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(77)	// 0x4D
 	party_freeze	// 0xFF
 	pause(240)
@@ -342,9 +353,11 @@ l_0xc79d81:
 	sprite2_delete(2,6)	// 0x0002, 0x06
 	show_party(1)	// 0xFF, 0x01
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc79e55:
+	cc_open_letterbox
 	call(data_24.l_0xc69082)
 	pause(60)
 	char_direction(2,5)	// 0x02, 0x05
@@ -366,13 +379,17 @@ l_0xc79e55:
 	"@We are trying to contact you..." wait
 	pause(30)
 	window_closeall
+	cc_fade_out(3)	// Fade the screen to black slowly instead of having them disappear instantly
 
+	// Winters flyover
 	pause(1)
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	hide_party	// 0xFF, 0x06
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(200)	// 0xC8
 	sprite2_spawn(106,643,1)	// 0x006A, 0x0283, 0x01
 	call(data_57.l_0xc9b4b8)
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(201)	// 0xC9
 	sprite2_spawn(106,644,1)	// 0x006A, 0x0284, 0x01
 	call(data_57.l_0xc9b4b8)
@@ -384,6 +401,7 @@ l_0xc79f32:
 	eob
 
 l_0xc79f33:
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(66)
 	party_freeze	// 0xFF
 	backup_npc_members_and_money
@@ -428,9 +446,11 @@ l_0xc79f33:
 	unset(FLG_THRK_BIKINIZOMBI_P_APPEAR)	// 297
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	set(FLG_TLPT_WINS)	// 212
+	cc_close_letterbox
 	eob
 
 l_0xc7a04a:
+	cc_open_letterbox
 	show_npc_float(591,3)	// 0x024F, 0x03
 	pause(60)
 	hide_npc_float(591)	// 0x024F
@@ -484,11 +504,14 @@ l_0xc7a04a:
 
 	set(FLG_WINS_TONY)	// 23
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc7a1ba:
+	cc_open_letterbox
 	hasitem(-1, POP_GUN)	// 0xFF, 0x24 / 36
 	goto_if_true(l_0xc7a20c)
+
 	char_direction(8,5)	// 0x08, 0x05
 	get_dir_from_char(3,TO_CHAR,8)	// 0x03, 0x01, 0x0008
 	char_direction(3,0)	// 0x03, 0x00
@@ -498,9 +521,11 @@ l_0xc7a1ba:
 	"@I think you can get out by going over the gate..." next
 	"@But you need to get some stuff to take with you." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
-l_0xc7a20c:
+l_0xc7a20c:	// Tony moves towards the gate
+	//cc_open_letterbox	// Already handled in data_23
 	call(data_23.l_0xc683d9)
 	sprite2_spawn(182,266,1)	// 0x00B6, 0x010A, 0x01
 	wait_movement
@@ -508,9 +533,11 @@ l_0xc7a20c:
 	sprite2_delete(182,6)	// 0x00B6, 0x06
 	npc_spawn(634,8,1)	// 0x027A, 0x0008, 0x01
 	set(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
+	cc_close_letterbox
 	eob
 
-l_0xc7a22a:
+l_0xc7a22a:	// Jeff escapes the school by jumping over the gate
+	cc_open_letterbox
 	unset(FLG_TONY_KI)	// Key items party flag
 	title(1, Tony)
 	"@Okay,| now use me as a step and climb over the gate." promptw
@@ -535,7 +562,8 @@ l_0xc7a22a:
 	window_closeall
 	sprite2_unfreeze(337)	// 0151
 	sprite2_unfreeze(344)	// 0158
-	wait_movement
+	//wait_movement
+	pause(37)
 
 	restore_camera
 	show_party(1)
@@ -543,6 +571,7 @@ l_0xc7a22a:
 	sprite2_spawn(182,269,1)	// 00B6, 010D, 1
 	hotspot_off(1)
 	set_respawn_point(6)
+	cc_close_letterbox
 	unset(FLG_WINS_TONY_CROUCH_APPEAR)	// 335
 	music_effect(3)	// Fade out
 	pause(120)
@@ -558,6 +587,8 @@ l_0xc7a2f7:
 l_0xc7a300:
 	call(data_36.l_0xc7dd8d)
 	goto_if_true(l_0xc7a2f7)
+
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -595,9 +626,11 @@ l_0xc7a300:
 	pathfinding_npc_time(8)	// Start delivery for Zombie paper
 	set(FLG_DELIVERY_HOIHOI)	// 675
 	set(FLG_SYS_DISTLPT)	// 754
+	cc_close_letterbox
 	eob
 
 l_0xc7a542:
+	cc_open_letterbox
 	window_open(1)
 	title(1, Mach)
 	"@While delivering pizza, this weird guy asked me to help him out..." next
@@ -630,6 +663,7 @@ l_0xc7a63e:
 	set(FLG_ITEM_HOIHOI)	// 552
 	call(data_36.l_0xc7dde8)
 	unset(FLG_SYS_DISTLPT)	// 754
+	cc_close_letterbox
 	eob
 
 l_0xc7a6a9:
@@ -663,6 +697,7 @@ l_0xc7a754:
 
 	call(data_36.l_0xc7dde8)
 	unset(FLG_SYS_DISTLPT)	// 754
+	cc_close_letterbox
 	eob
 
 l_0xc7a7a6:
@@ -680,6 +715,7 @@ l_0xc7a7d9:
 
 // Apple kid phone call
 l_0xc7a7dd:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -709,9 +745,11 @@ l_0xc7a7dd:
 	hide_phone_sprite_float
 
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc7a959:
+	//cc_open_letterbox	// Handled through the call some labels below
 	get_char_at_pos(1) rtoarg
 	window_open(1)
 	"@*Crash*" next
@@ -736,6 +774,7 @@ l_0xc7a959:
 	"@Maybe that thing I forgot is important to you..." next
 	"@So... have a good time in the desert!..." wait
 	window_closeall
+	//cc_close_letterbox
 	eob
 
 l_0xc7ab3f:
@@ -801,6 +840,7 @@ l_0xc7ac42:
 
 // Orange & Apple Kids phone calls
 l_0xc7acb8:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -829,9 +869,11 @@ l_0xc7acb8:
 	hide_phone_sprite_float
 
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc7ae41:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -864,9 +906,11 @@ l_0xc7ae41:
 	hide_phone_sprite_float
 
 	set(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
+	cc_close_letterbox
 	eob
 
 l_0xc7af57:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -895,11 +939,13 @@ l_0xc7af57:
 	unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
 	music_resume
 	isset(FLG_TWSN_ORANGE_THANKS)	// 117
+	cc_close_letterbox
 	goto_if_false(data_55.l_0xc9992f)
 	hotspot_on(1,52, l_0xc7b0a0)	// 1, 0x34, 0x00C7B0A0
 	eob
 
 l_0xc7b0a0:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
@@ -920,9 +966,11 @@ l_0xc7b0a0:
 
 	sound(SND_PHONEPICKUP)	// 11
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc7b146:
+	cc_open_letterbox
 	show_npc_float(906,3)	// 0x038A, 0x03
 	pause(30)
 	hide_npc_float(906)	// 0x038A
@@ -983,6 +1031,7 @@ l_0xc7b1d8:
 
 	npc_do_mc(906,605)	// 0x038A, 0x025D
 	hotspot_on(1,40, l_0xc7b146)	// 1, 0x28, 0x00C7B146
+	cc_close_letterbox
 	eob
 
 l_0xc7b2bd:
@@ -1002,9 +1051,11 @@ l_0xc7b2bd:
 
 	npc_do_mc(906,605)	// 0x038A, 0x025D
 	set(FLG_GLOBAL_MUSEUM_PAID)	// 768
+	cc_close_letterbox
 	eob
 
 l_0xc7b318:
+	cc_open_letterbox
 	show_npc_float(1033, 3)	// 0409, 3
 	pause(30)
 	hide_npc_float(1033)
@@ -1063,6 +1114,7 @@ l_0xc7b3c0:
 
 	npc_do_mc(1033,605)	// 0x0409, 0x025D
 	hotspot_on(1, 50, l_0xc7b318)	// 1, 0x32, 0x00C7B318
+	cc_close_letterbox
 	eob
 
 l_0xc7b4a2:
@@ -1082,6 +1134,7 @@ l_0xc7b4a2:
 
 	npc_do_mc(1033,605)	// 0x0409, 0x025D
 	set(FLG_GLOBAL_MUSEUM_PAID)	// 768
+	cc_close_letterbox
 	eob
 
 l_0xc7b4fb:
@@ -1127,6 +1180,7 @@ l_0xc7b550:
 	eob
 
 l_0xc7b576:
+	cc_open_letterbox
 	npc_delete(968,6)	// 0x03C8, 6
 	npc_spawn(967,8,1)	// 0x03C7, 0x0008, 1
 	get_dir_from_npc(967,TO_CHAR,255)	// 0x03C7, 0x01, 0x00FF
@@ -1201,6 +1255,7 @@ l_0xc7b576:
 	sprite2_unfreeze(396)	// 018C
 	wait_movement
 	pause(30)
+	cc_close_letterbox
 	eob
 
 l_0xc7b7c8:
@@ -1337,7 +1392,10 @@ l_0xc7b96c:
 	npc_unfreeze(1267)	// 0x04F3
 	eob
 
-l_0xc7b9a1:
+//------------------------------------
+//	Giygas prayers cutscenes
+//------------------------------------
+l_0xc7b9a1:	// Ness family prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1385,7 +1443,7 @@ l_0xc7b9a1:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7ba2c:
+l_0xc7ba2c:	// Runaway brothers prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1432,7 +1490,7 @@ l_0xc7ba2c:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7bac7:
+l_0xc7bac7:	// Paula family prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1469,7 +1527,7 @@ l_0xc7bac7:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7bb38:
+l_0xc7bb38:	// Tony and school prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1522,7 +1580,7 @@ l_0xc7bb38:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7bbf3:
+l_0xc7bbf3:	// Dalaam / Ranma prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1556,7 +1614,7 @@ l_0xc7bbf3:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7bc56:
+l_0xc7bc56:	// Frank prayer
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
 	unset(FLG_ANIM_PORT_0)	// 522
@@ -1578,7 +1636,7 @@ l_0xc7bc56:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	eob
 
-l_0xc7bc96:	// Saturn Village prayer movements
+l_0xc7bc96:	// Saturn Village prayer
 	unset(FLG_TLPT_DKFD)	// 220
 	unset(FLG_WIN_OSCAR)	// 74
 	set(FLG_SYS_MONSTER_OFF)	// 11
@@ -1644,6 +1702,7 @@ l_0xc7bc96:	// Saturn Village prayer movements
 	eob
 
 l_0xc7bd89:
+	cc_open_letterbox
 	unset(FLG_ANIM_PORT_0)	// 522
 	sprite2_spawn(106,712,1)	// 0x006A, 0x02C8, 0x01
 	wait_movement
@@ -1693,6 +1752,7 @@ l_0xc7bd89:
 	pause(12)
 	set(FLG_FOUR_HELI_DISAPPEAR)	// 672
 	unset(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	eob
 
 //------------------------------------

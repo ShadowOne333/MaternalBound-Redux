@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -666,6 +667,7 @@ l_0xc92958:
 	eob
 
 l_0xc929ae:
+	cc_open_letterbox
 	window_open(1)
 	call(data_58.l_0xc9d523)
 	window_closeall
@@ -674,9 +676,11 @@ l_0xc929ae:
 	sound(SND_STARMASTER)	// 99
 	sprite2_spawn(169,667,6)	// 0xA9, 0x029B, 6
 	wait_movement
+	cc_close_letterbox
 	eob
 
 l_0xc929ca:
+	cc_open_letterbox
 	set(FLG_NESS_KI)
 	set(FLG_JEFF_KI)
 	set(FLG_PAULA_KI)
@@ -700,6 +704,7 @@ l_0xc929ca:
 	//set(FLG_ITEM_TINY_RUBY)
 	set(FLG_PHOTO_TOTO)	// 504
 	set(FLG_PHOTO_RAMMA_FIELD)	// 499
+	cc_close_letterbox
 	eob
 
 l_0xc92a48:
@@ -813,7 +818,7 @@ l_0xc92be3:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_delete(439,6)	// 0x01B7, 6
-	fade_map_palette(27,4,180)	// Tilser 1B, palette 4, speed B4
+	fade_map_palette(27,4,180)	// Tilset 1B, palette 4, speed B4
 
 	get_char_at_pos(1) rtoarg
 	window_open(1)
@@ -831,7 +836,8 @@ l_0xc92be3:
 	music_resume
 	eob
 
-l_0xc92c70:
+l_0xc92c70:	// Summers boat trip up to Kraken
+	cc_open_letterbox
 	OSS_on	// event(5)
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	npc_do_mc(1065,291)	// 0x0429, 0x0123
@@ -848,6 +854,7 @@ l_0xc92c70:
 
 	restore_camera
 	party_freeze	// 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(89)	// 0x59
 	sprite2_spawn(261,294,1)	// 0x0105, 0x0126, 1
 	pause(1)
@@ -874,6 +881,8 @@ l_0xc92c70:
 
 	call(data_23.l_0xc685ad)
 	goto_if_true(l_0xc92dde)
+
+	cc_instant_letterbox
 	sprite2_do_mc(295,635)	// 0x0127, 0x027B
 	pause(60)
 
@@ -893,6 +902,7 @@ l_0xc92d92:
 
 	restore_camera
 	party_freeze	// 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(90)	// 0x5A
 	sprite2_spawn(212,296,1)	// 0xD4, 0x0128, 1
 	pause(1)
@@ -915,6 +925,7 @@ l_0xc92d92:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	set(FLG_TLPT_SKRB)	// 217
+	cc_close_letterbox
 	eob
 
 l_0xc92dde:
@@ -1087,6 +1098,7 @@ l_0xc9310d:
 l_0xc9312e:
 	goto_if_flag(FLG_SKRB_PYRAMID_OK, l_0xc93180)	// 0x015B, 347
 
+	cc_open_letterbox
 	window_open(1)
 	"@(You seem to have stepped on a switch of some sort.)" next
 	sound(117)	// 117, Unknown
@@ -1095,6 +1107,7 @@ l_0xc9312e:
 
 	sound(SND_CREEPY)	// 114
 	set(FLG_SKRB_PYRAMID_OK)	// 347
+	cc_close_letterbox
 	eob
 
 l_0xc93180:
@@ -1102,12 +1115,15 @@ l_0xc93180:
 
 l_0xc93181:
 	goto_if_flag(FLG_ITEM_TAKANOME, l_0xc93234)	// 0x015C, 348
+	cc_open_letterbox
 	"@(There is something on the platform." next
 	"@Do you want to get it?)" linebreak
 	two_choice_menu("Yes", l_0xc931d3, "No", l_0xc931b7)
 
 l_0xc931b7:
-	"@(Wasn't it the whole reason you came here?)" end
+	"@(Wasn't it the whole reason you came here?)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc931d3:
 	if flag FLG_KEY_ITEMS { give_menu_key_item(HAWK_EYE) }
@@ -1121,11 +1137,15 @@ l_0xc931d3:
 	set(FLG_ITEM_TAKANOME)	// 348
 	pause(10)
 	npc_delete(1195,6)	// 0x04AB, 6
+	cc_close_letterbox
 	eob
 
 l_0xc931f1:
+	sound(SND_ERRORBEEP)	// 5
 	"@(It's unbelievable that you would get this far," next
-	"@and not claim your prize just because you have too much stuff.)" end
+	"@and not claim your prize just because you have too much stuff.)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc93234:
 	goto(data_35.l_0xc7c59e)
@@ -1154,6 +1174,7 @@ l_0xc93258:
 	goto(data_06.l_0xc573dc)
 
 l_0xc9329b:
+	cc_open_letterbox
 	call(l_0xc932f6)
 	sprite2_unfreeze(4)	// 0x0004
 	wait_movement
@@ -1181,6 +1202,7 @@ l_0xc9329b:
 	}
 	set(FLG_SKRB_PU_TAKANOME)	// 691
 	if not flag FLG_KEY_ITEMS { take(4, HAWK_EYE) }	// 0xAF / 175 = Hawk eye
+	cc_close_letterbox
 	eob
 
 l_0xc932f6:
@@ -1203,6 +1225,7 @@ l_0xc93378:
 	eob
 
 l_0xc93381:
+	cc_open_letterbox
 	pause(20)
 	window_open(1)
 	title(1, Dungeon)
@@ -1229,9 +1252,11 @@ l_0xc93381:
 	sound(SND_ERRORBEEP)	// 5
 	call(data_36.l_0xc7dd6b)
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc9344f:
+	cc_open_letterbox
 	goto_if_flag(FLG_TLPT_MAKY, l_0xc934e4)	// 218
 	window_open(1)
 	goto_if_flag(FLG_SKRB_YARIMAN, l_0xc934a4)	// 97
@@ -1240,6 +1265,7 @@ l_0xc9344f:
 	"@Do not worry about me..." pause(20)
 	"  Please continue on." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc934a4:
@@ -1256,6 +1282,7 @@ l_0xc934e4:
 	eob
 
 l_0xc934ed:
+	cc_open_letterbox
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// special_event(5)
 	party_freeze	// 0xFF
@@ -1271,6 +1298,7 @@ l_0xc934ed:
 	
 	hide_party	// 0xFF
 	sprite2_spawn(245,298,-1)	// F5, 12A, FF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(91)	// 5B
 	sprite2_freeze(245)	// F5
 	call(data_36.l_0xc7dd6b)
@@ -1284,6 +1312,7 @@ l_0xc934ed:
 	
 	party_freeze	// 0xFF
 	sprite2_spawn(245,299,-1)	// F5, 12B, FF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(92)	// 5C
 	focus_camera_on_sprite2(245)	// F5
 	party_unfreeze
@@ -1301,6 +1330,7 @@ l_0xc934ed:
 	unset(FLG_DSRT_KANBAN_44_MOVE)	// 762
 	set_respawn_point(10)
 	OSS_off	// special_event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc935b1:

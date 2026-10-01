@@ -854,7 +854,7 @@ l_0xc7d92a:	// Check for shop flags 2
 
 l_0xc7d947:
 	newline
-	"@There is a {itemname(0)} inside!" promptw
+	"@There is {call(item_determiners.CCSub_determiner)}{itemname(0)} inside!" promptw
 	eob
 
 l_0xc7d958:

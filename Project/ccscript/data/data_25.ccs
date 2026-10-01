@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -66,8 +67,10 @@ l_0xc6aa2f:
 	goto_if_flag(FLG_ITEM_GAUS, l_0xc6ad29)		// 0x58, 88
 	goto_if_flag(FLG_WINS_LOCKER_FAILED, l_0xc6abd5)	// 0x025D, 605
 	goto_if_flag(FLG_ITEM_KEY_LOCKER, l_0xc6ad29)	// 0x025C, 604
+
+	cc_open_letterbox
 	title(1, Gauss)
-	"@Oh,| {name(3)} and Tony." pause(20)
+	"@Oh,| {name(3)} and Tony." pause(20) linebreak
 	"  You startled me." next
 	"@Are you looking for a late night snack?" next
 	"@I'm having some trouble with my project." next
@@ -87,21 +90,24 @@ l_0xc6aa2f:
 		call(data_36.l_0xc7dcb6) }
 	next
 	set(FLG_ITEM_KEY_LOCKER)	// 604
+	title(1, Gauss)
 	"@If you leave,| call me, and I'll record your adventure." next
 	"@It's like saving the game." pause(15) linebreak
 	"  Ah, ha, ha, ha, ha." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc6abd5:
 	if not flag FLG_KEY_ITEMS { take(-1, LOCKER_KEY) }	// Item 0xCD, 205, Locker key
+	cc_open_letterbox
 	title(1, Gauss)
-	"@Hah, ha, ha.  The key didn't work, did it?" next
-	"@I thought that might be the case." pause(15)
+	"@Hah, ha, ha." linebreak
+	"  The key didn't work, did it?" next
+	"@I thought that might be the case." pause(15) linebreak
 	"  So I just invented// the..." next
 	"@<Machine that Opens Doors, especially when you have a slightly bad key.>" next
-	"@Sorry for" linebreak
-	"  the inconvenience." promptw
+	"@Sorry for the inconvenience." promptw
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BAD_KEY_MACHINE) }
 	else {
 		get_item_receiver(-1) goto_if_false(l_0xc6acda)
@@ -109,10 +115,12 @@ l_0xc6abd5:
 		call(data_36.l_0xc7dcb6) }
 	next
 	set(FLG_ITEM_GAUS)	// 88
+	title(1, Gauss)
 	"@If you are Dr. Andonuts' son," next
 	"@you should be able to repair small tools and make them useful." next
 	"@Just try to keep a positive attitude." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc6acda:
@@ -131,6 +139,7 @@ l_0xc6ad68:
 
 l_0xc6ad6e:
 	goto_if_flag(FLG_ITEM_BUBBLE_GUM, l_0xc6af0b)	// 0x0143, 323
+	cc_open_letterbox
 	"@There's a monkey at the entrance." pause(15)
 	"  Take the monkey.  He's really noisy." next
 	"@If you buy a pack of bubble gum, you can have the monkey for free." next
@@ -139,8 +148,10 @@ l_0xc6ad6e:
 	two_choice_menu("Yes", l_0xc6ae36, "No", l_0xc6ae07)
 
 l_0xc6ae07:
-	"@You absolutely,| positively should buy him." pause(20)
-	"  You know what I mean?" end
+	"@You absolutely,| positively should buy him." pause(20) linebreak
+	"  You know what I mean?" wait
+	cc_close_letterbox
+	eob
 
 l_0xc6ae36:
 	hasmoney(1)
@@ -156,21 +167,25 @@ l_0xc6ae36:
 	store_registers
 	sound(SND_CHICKEN2)	// 118
 	show_wallet
-	"@Thanks!" pause(15)
+	"@Thanks!" pause(15) linebreak
 	"  The monkey's yours."
 
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BUBBLE_GUM) }
 	else { call(data_36.l_0xc7dcb6) }
 
 	set(FLG_ITEM_BUBBLE_GUM)	// 323
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc6ae77:
+	sound(SND_ERRORBEEP)	// 5
 	"@What?" pause(20)
 	"  You don't even have a buck?" next
 	"@Then, I'll let you have the monkey for free." next
 	if not flag FLG_KEY_ITEMS {
-		get_item_receiver(-1) goto_if_false(l_0xc6aee1)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6aee1)
 		give_and_return_location(0, BUBBLE_GUM)	// 0x68, 104
 	}
 	"@Here's a pack of bubble gum." pause(20)
@@ -178,9 +193,12 @@ l_0xc6ae77:
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BUBBLE_GUM) }
 	else { call(data_36.l_0xc7dcb6) }
 	set(FLG_ITEM_BUBBLE_GUM)	// 323
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc6aee1:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, oh,| you can't carry anything else." next
 	"@Why don't you return after you get rid of something." end
 
@@ -208,6 +226,7 @@ l_0xc6af6c:
 	"@Kyee Kyee! (Yeah!)" end
 
 l_0xc6af8a:
+	cc_open_letterbox
 	title(1, Bubble)
 	"@Kyu Ukyee" linebreak
 	"  (Gimme some gum.)" next
@@ -218,6 +237,7 @@ l_0xc6af8a:
 	set(FLG_BALLOONMONKEY)	// 22
 	call(data_43.l_0xc880b9)
 	call(data_23.l_0xc6822a)
+	cc_close_letterbox
 	eob
 
 l_0xc6afe1:
@@ -236,7 +256,6 @@ l_0xc6b037:
 	warp(46)	// 0x2E
 	goto_if_flag(FLG_PHOTO_7, l_0xc6b063)	// 0x02C0, 704
 	set(FLG_PHOTO_TACY)	// 485
-	goto(l_0xc6b063)
 
 l_0xc6b063:
 	goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x0E, 14
@@ -248,7 +267,8 @@ l_0xc6b063:
 	eob
 
 l_0xc6b087:
-	hide_char(9)	// 0x09, Hide Tony
+	cc_open_letterbox
+	hide_char(9)	// 0x09, Hide Bubble monkey
 	sprite2_spawn(46,251,1)	// 0x02E, 0xFB, 01
 	wait_movement
 	get_dir_from_char(3,TO_SPRITE2,46)	// 0x03, 0x03, 0x2E
@@ -264,7 +284,7 @@ l_0xc6b087:
 	"  (I'll take care of everything.)" wait
 	window_closeall
 	pause(30)
-	goto(data_43.l_0xc88103)
+	goto(data_43.l_0xc88103)	// Cutscene letterbox closes at data_43
 
 l_0xc6b0f9:
 	eob
@@ -282,6 +302,7 @@ l_0xc6b161:
 	"@Do you think Sebastian's kidnapping will be in tomorrow's paper?" end
 
 l_0xc6b18d:
+	cc_open_letterbox
 	title(1, Andonuts)
 	goto_if_flag(FLG_JEFF, l_0xc6b4bb)	// 0x0E, 14
 	goto_if_flag(FLG_WINS_ANDONUT, l_0xc6b492)	// 0x7F, 127
@@ -333,6 +354,7 @@ l_0xc6b492:
 	"@Let's get together again in 10 years or so." wait
 	npc_do_mc(623,137)	// 0x026F, 0x0089
 	set(FLG_WINS_ANDONUT)	// 127
+	cc_close_letterbox
 	eob
 
 l_0xc6b4bb:
@@ -515,9 +537,9 @@ l_0xc6bc43:
 	"@You're such a great man.)" end
 
 l_0xc6bc80:
+	cc_open_letterbox
 	goto_if_flag(FLG_WINS_BRICK_BARKER_DISAPPEAR, l_0xc6bc9b)	// 0x35, 53
 	"@Maybe it was too easy...?" next
-	goto(l_0xc6bc9b)
 
 l_0xc6bc9b:
 	title(1, Brickroad)
@@ -533,10 +555,13 @@ l_0xc6bc9b:
 	two_choice_menu("Yes", l_0xc6bdab, "No", l_0xc6bd9d)
 
 l_0xc6bd9d:
-	"@You don't want to rest?" end
+	"@You don't want to rest?" wait
+	cc_close_letterbox
+	eob
 
 l_0xc6bdab:
 	call(data_49.l_0xc91693)
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(47)	// 0x2F
 	party_freeze	// 0xFF
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383
@@ -545,6 +570,7 @@ l_0xc6bdab:
 	"@Take care.  Come back again." wait
 	window_closeall
 	party_freeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc6bdd2:
@@ -601,18 +627,30 @@ kid5:
 
 l_0xc6be74:
 	goto_if_flag(FLG_WIN_RAIN_BOSS, data_35.l_0xc7c588)	// 0xC0, 192
+
 	get_char_at_pos(1)
-	result_is(1) goto_if_false(data_24.l_0xc690a6)
-	counter(1) call(data_36.l_0xc7dc7f) goto_if_true(data_24.l_0xc690a6)
+	result_is(1)
+	goto_if_false(data_24.l_0xc690a6)
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(data_24.l_0xc690a6)
+
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the fourth <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,/| if you dare..." promptw
-	call(data_23.l_0xc68417) goto_if_true(data_23.l_0xc683de)
+
+	call(data_23.l_0xc68417)
+	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	hide_sprite(676, 8)	// 0x02A4, 08
 	pause(120)
 	set(FLG_WIN_RAIN_BOSS)	// 192
+	cc_close_letterbox
 	eob
 
 l_0xc6bef9:
@@ -677,15 +715,17 @@ l_0xc6c099:
 
 l_0xc6c107:
 	next
-	"@...Oh, {name(1)}?" goto(l_0xc6c13a)
+	"@...Oh, {name(1)}?"
+	goto(l_0xc6c13a)
 
 l_0xc6c118:
 	next
-	"@...Oh, {name(2)}?" goto(l_0xc6c13a)
+	"@...Oh, {name(2)}?"
+	goto(l_0xc6c13a)
 
 l_0xc6c129:
 	next
-	"@...Oh, {name(4)}?" goto(l_0xc6c13a)
+	"@...Oh, {name(4)}?"
 
 l_0xc6c13a:
 	next

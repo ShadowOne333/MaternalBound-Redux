@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -100,7 +101,8 @@ l_0xc9ae16:
 	queue_text(l_0xc9ae2c)
 	eob
 
-l_0xc9ae2c:
+l_0xc9ae2c:	// Winters tent exit palette change and leaf sprites
+	cc_instant_letterbox
 	sprite2_spawn(367,495,1)	// 0x016F, 0x01EF, 0x01
 	sprite2_spawn(367,496,1)	// 0x016F, 0x01F0, 0x01
 	sprite2_spawn(367,496,1)	// 0x016F, 0x01F0, 0x01
@@ -108,6 +110,7 @@ l_0xc9ae2c:
 	goto_if_flag(FLG_WINS_DAYBREAK, data_55.l_0xc9992f)	// 0x011F, 287
 	fade_map_palette(13,0,120)	// 0x0D, 0x00, 0x78
 	set(FLG_WINS_DAYBREAK)	// 287
+	cc_close_letterbox
 	eob
 
 l_0xc9ae58:

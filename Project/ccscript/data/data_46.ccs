@@ -5,6 +5,7 @@
  */
 
 import "../definitions/flags.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 
@@ -380,9 +381,11 @@ l_0xc8ebdd:
 	eob
 
 l_0xc8ebe4:
+	cc_open_letterbox
 	window_open(1)
 	"@(He stares into your soul.)" promptw
 	window_closeall
+	cc_close_letterbox
 
 	goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x000E, 14
 	set(FLG_THRK_BIKINIZOMBI_APPEAR)	// 46
@@ -391,6 +394,7 @@ l_0xc8ebe4:
 	eob
 
 l_0xc8ec0f:
+	cc_open_letterbox
 	get_dir_from_npc(534,TO_CHAR,255)	// 0x0216, 0x01, 0x00FF
 	npc_direction(534,0)	// 0x0216, 0x00
 	show_npc_float(534,3)	// 0x0216, 0x03
@@ -418,6 +422,8 @@ l_0xc8ec0f:
 	window_closeall
 
 	npc_unfreeze(535)	// 0x0217
+	cc_close_letterbox
+
 	goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x000E, 14
 	set(FLG_THRK_BIKINIZOMBI_APPEAR)	// 46
 	set(FLG_THRK_HOTELMAN_DISAPPEAR)	// 433
@@ -425,9 +431,11 @@ l_0xc8ec0f:
 	eob
 
 l_0xc8ec90:
+	cc_open_letterbox
 	window_open(1)
 	"@(He looks you over.)" promptw
 	window_closeall
+	cc_close_letterbox
 
 	goto_if_flag(FLG_JEFF, data_55.l_0xc9992f)	// 0x000E, 14
 	set(FLG_THRK_BIKINIZOMBI_APPEAR)	// 46

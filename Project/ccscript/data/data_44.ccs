@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -52,6 +53,7 @@ l_0xc88650:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	restore_npc_members_and_money
+	cc_close_letterbox
 	eob
 
 l_0xc886d7:
@@ -182,6 +184,7 @@ l_0xc888af:
 	eob
 
 l_0xc888c0:
+	cc_open_letterbox
 	unset(FLG_BGM_BUS)	// 534
 	music_resume
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
@@ -211,6 +214,7 @@ l_0xc888c0:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
 	set(FLG_STEP_DSRT)	// 370
+	cc_close_letterbox
 	eob
 
 l_0xc8897f:
@@ -395,6 +399,7 @@ l_0xc88b6d:
 	eob
 
 l_0xc88d91:
+	cc_open_letterbox
 	party_freeze	// 0xFF
 	music_effect(3)	// Fade out
 	window_closeall
@@ -416,6 +421,7 @@ l_0xc88d91:
 	sprite2_spawn(150,384,1)	// 0x0096, 0x0180, 0x01
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x006A
+	cc_close_letterbox	// Closing it here so the full Runaway bros stage is visible
 	eob
 
 l_0xc88e0a:
@@ -478,6 +484,9 @@ l_0xc88e0a:
 	pause(30)
 	sprite2_spawn(106,400,1)	// 0x006A, 0x0190, 0x01
 	music_resume
+	// Uncomment this line if we want the letterbox present throughout all the Runaway show
+	// Comment the one above
+	//cc_close_letterbox
 	eob
 
 l_0xc88efe:

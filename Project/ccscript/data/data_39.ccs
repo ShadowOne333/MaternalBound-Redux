@@ -316,24 +316,29 @@ l_0xc81a88:
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc81ade)
 
+	cc_open_letterbox
 	"@Hello,| please present your ticket." next //end
 
-	if flag FLG_KEY_ITEMS and flag FLG_ITEM_TICKET
+	// We'll keep the original behaviour of showing/using up the Backstage pass
+	/*if flag FLG_KEY_ITEMS and flag FLG_ITEM_TICKET
 	{
 	    goto(chaostheaterticket)
-	}
+	}*/
+	cc_close_letterbox
 	eob
 
 l_0xc81ac4:
 	"@Sorry,| the show is on hold for a while." end
 
 l_0xc81ade:
+	cc_open_letterbox
 	"@Oh, pardon me." promptw
 	window_closeall
 
 	goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81afb)	// 0x77, 119
 	call(data_33.l_0xc7921a)
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc81afb:
@@ -360,7 +365,10 @@ l_0xc81b0c:
 	call(data_36.l_0xc7dc9b)
 	goto_if_false(l_0xc81ade)
 
-	"@Please show me your ticket." end
+	cc_open_letterbox
+	"@Please show me your ticket." wait
+	cc_close_letterbox
+	eob
 
 l_0xc81b50:
 	get_dir_from_char(-1,TO_NPC,226)	// 0xFF, 2, 0xE2
@@ -368,6 +376,10 @@ l_0xc81b50:
 	goto_if_false(l_0xc81ade)
 
 chaostheaterticket:
+	window_closeall	// Close menus
+
+	cc_open_letterbox
+	window_open(1)
 	sound(SND_CHICKEN2)	// 118
 	"@Here you go." pause(15)
 	"  Hurry!" pause(20)
@@ -375,6 +387,7 @@ chaostheaterticket:
 	call(data_33.l_0xc79211)
 	set(FLG_TWSN_FIELD_TONZ_DISAPPEAR)	// 549
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc81b9b:
@@ -409,10 +422,12 @@ l_0xc81cd6:
 	goto_if_flag(FLG_TWSN_TONZURA_FREE, l_0xc81dc3)	// 0x77, 119
 	goto_if_flag(FLG_TWSN_MICHIKO_THANKYOU, l_0xc81db5)	// 0x73, 115
 
+	cc_open_letterbox
 	"@Lucky of the Runaway Brothers told me to come see him backstage," next
 	"@but I don't have a pass." next
-	"@I'm sure security will stop me." pause(20)
-	"  Hey!" pause(20)
+	"@I'm sure security will stop me." next
+	pause(20)
+	"@Hey!" pause(20)
 	"  Really?" pause(30)
 	"  You have a pass?" next
 	"@I can't believe it!" pause(20)
@@ -426,6 +441,7 @@ l_0xc81cd6:
 	call(data_34.l_0xc79997)
 	unset(FLG_TWSN_MICHIKO_APPEAR)	// 43
 	set(FLG_TWSN_MICHIKO_THANKYOU)	// 115
+	cc_close_letterbox
 	eob
 
 l_0xc81db5:
