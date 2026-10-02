@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -116,7 +117,8 @@ l_0xc9c27e:
 	font_normal
 	eob
 
-l_0xc9c293:
+l_0xc9c293:	// Giygas fight
+	cc_open_letterbox
 	music_effect(3)	// 0x03
 	pause(180)
 	music(72)
@@ -154,6 +156,7 @@ l_0xc9c293:
 	call(data_23.l_0xc68577)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	set(FLG_WIN_GIEGU)	// 73
 	unset(FLG_ONET_DOOR_CLOSE)	// 632
 	set(FLG_ONET_MIZUNO_DOOR_OPEN)	// 633
@@ -175,6 +178,8 @@ l_0xc9c293:
 	hide_party	// 0xFF, 0x06
 	sprite2_spawn(106,555,1)	// 0x006A, 0x022B, 0x01
 	wait_movement
+
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 
 	warp(215)	// 0xD7
 	party_freeze	// 0xFF
@@ -232,6 +237,9 @@ l_0xc9c293:
 	sprite2_spawn(393,578,255)	// 0x0189, 0x0242, 0xFF
 	sprite2_spawn(394,579,255)	// 0x018A, 0x0243, 0xFF
 	sprite2_spawn(395,580,255)	// 0x018B, 0x0244, 0xFF
+
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+
 	warp(216)	// 0xD8
 	music(181)
 	party_freeze	// 0xFF
@@ -428,6 +436,7 @@ l_0xc9c293:
 	party_unfreeze	// 0xFF
 	OSS_on	// event(5)
 	unset(FLG_PHOTO_RAMMA)	// 498
+	cc_close_letterbox
 	isset(FLG_GOT_CAPEESTATE)	// 99
 	goto_if_false(data_55.l_0xc9992f)
 	set(FLG_ONET_ESTATE_DOOR_OPEN)	// 746

@@ -601,13 +601,19 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	//cc_open_letterbox	// Handled in the script that calls this label
 	hide_char_with_style(9,6)	// 0x09, 0x06
 	sprite2_spawn(49,253,1)	// 0x0031, 0x00FD, 0x01
-	//focus_camera_on_sprite2(49)
 	wait_movement
 
 	sprite2_delete(49,6)	// 0x0031, 0x06
 	sprite2_spawn(50,261,1)	// 0x0032, 0x0105, 0x01
 	sprite2_spawn(344,255,1)	// 0x0158, 0x00FF, 0x01
-	//focus_camera_on_sprite2(50)
+	// Spawn a duplicate Jeff sprite, hide_party and spawn camera entity
+	sprite2_spawn(3,898,1)	// Spawn a Jeff duplicate
+	sprite2_spawn(106,897,1)	// Spawn camera panning entity
+	pause(1)
+	focus_camera_on_sprite2(106)
+	party_unfreeze
+	hide_party
+	// Continue with the vanilla code
 	wait_movement
 
 	sprite2_do_mc(344,262)	// 0x0158, 0x0106
@@ -629,9 +635,12 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	sprite2_spawn(46,265,1)	// 0x002E, 0x0109, 0x01
 	wait_movement
 
+	sprite2_delete(106,6)	// Delete camera entity
+	sprite2_delete(3,6)	// Delete Jeff decoy
 	sprite2_delete(46,6)	// 0x002E, 0x06
 	show_char(9,1)	// 0x09, 0x01
 	restore_camera
+	show_party(1)
 	unset(FLG_BMONKEY_ROPE)	// 338
 	set(FLG_WINS_ROPE_SWITCH)	// 311
 	cc_close_letterbox
@@ -663,7 +672,7 @@ l_0xc882bd:	// Bubble monkey leaves
 	cc_close_letterbox
 	eob
 
-l_0xc88332:	// Jeff joins the party
+l_0xc88332:	// Jeff rides the Sky Walker
 	cc_open_letterbox
 	set(FLG_NESS_KI)
 	set(FLG_PAULA_KI)
@@ -694,13 +703,13 @@ l_0xc88332:	// Jeff joins the party
 	goto_if_flag(FLG_TEMP_8, l_0xc88386)
 
 	call(data_44.l_0xc886f9)
-	cc_close_letterbox
+	//cc_close_letterbox	// Don't close the letterbox since it should continue straight into the Sky Walker's flight scene
 
 l_0xc88386:
 	eob
 
 l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
-	cc_open_letterbox
+	//cc_open_letterbox	// Don't close the letterbox since it should continue straight into the Sky Walker's flight scene
 	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
 	npc_unfreeze(623)	// 0x026F
 	wait_movement
@@ -716,6 +725,7 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// First clouds flying scene
 	restore_camera
 	sprite2_spawn(209,147,-1)	// 0x00D1, 0x0093, 0xFF
 	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
@@ -725,6 +735,7 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// Fourside flying scene
 	restore_camera
 	sprite2_spawn(209,153,-1)	// 0x00D1, 0x0099, 0xFF
 	sprite2_spawn(230,155,-1)	// 0x00E6, 0x009B, 0xFF
@@ -735,6 +746,7 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// Second clouds flying scene
 	restore_camera
 	sprite2_spawn(209,148,-1)	// 0x00D1, 0x0094, 0xFF
 	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
@@ -744,6 +756,7 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// Desert flying scene
 	restore_camera
 	sprite2_spawn(209,157,-1)	// 0x00D1, 0x009D, 0xFF
 	sprite2_spawn(230,159,-1)	// 0x00E6, 0x009F, 0xFF
@@ -754,6 +767,7 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// Third clouds flying scene
 	restore_camera
 	sprite2_spawn(209,149,-1)	// 0x00D1, 0x0095, 0xFF
 	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
@@ -763,12 +777,13 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	pause(1)
 	wait_movement
 
+	// Threek flying scene
 	restore_camera
 	sprite2_spawn(209,161,-1)	// 0x00D1, 0x00A1, 0xFF
 	sprite2_spawn(230,164,-1)	// 0x00E6, 0x00A4, 0xFF
 	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(193)	// 0xC1
-	focus_camera_on_sprite2(230)	// 0x00E6
+	focus_camera_on_sprite2(209)	// 0x00E6 (230)
 	wait_movement
 
 	sprite2_freeze(209)	// 0x00D1

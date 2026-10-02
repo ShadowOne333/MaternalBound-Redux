@@ -75,7 +75,7 @@ l_0xc886f5:
 l_0xc886f9:
 	window_open(1)
 	title(1, Andonuts)
-	"@What happened?" pause(20)
+	"@What happened?" pause(20) linebreak
 	"  It's not moving!" next
 	"@Hey!  Why don't you try pressing the button on the controller!" promptw
 	window_closeall
@@ -83,6 +83,7 @@ l_0xc886f9:
 
 l_0xc88739:
 	call(data_36.l_0xc7dd74)
+	cc_open_letterbox
 	sound(SND_POSSESSED)	// 96
 	music(155)
 	set(FLG_SYS_MONSTER_OFF)	// 11
@@ -90,7 +91,7 @@ l_0xc88739:
 	npc_do_mc(532,7)	// 0x0214, 0x0007
 	npc_do_mc(533,7)	// 0x0215, 0x0007
 	pause(120)
-	goto(data_46.l_0xc8eb75)
+	goto(data_46.l_0xc8eb75)	// Letterbox closes in data_46
 
 l_0xc88761:
 	sprite2_spawn(308,593,1)	// 0x0134, 0x0251, 0x01
@@ -99,6 +100,7 @@ l_0xc88761:
 	eob
 
 l_0xc88772:
+	cc_open_letterbox
 	window_closeall
 	music(44)
 	set(FLG_SYS_MONSTER_OFF)	// 11
@@ -107,6 +109,7 @@ l_0xc88772:
 	hide_party	// 0xFF, 0x06
 	sprite2_spawn(308,322,-1)	// 0x0134, 0x0142, 0xFF
 	sprite2_spawn(308,323,-1)	// 0x0134, 0x0143, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(95)	// 0x5F
 	party_freeze	// 0xFF
 	pause(120) pause(120)
@@ -114,11 +117,13 @@ l_0xc88772:
 	sprite2_spawn(308,324,-1)	// 0x0134, 0x0144, 0xFF
 	sprite2_spawn(308,325,-1)	// 0x0134, 0x0145, 0xFF
 	sprite2_spawn(308,326,-1)	// 0x0134, 0x0146, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(96)	// 0x60
 	party_freeze	// 0xFF
 	npc_delete(536,6)	// 0x0218, 0x06
 	pause(30) pause(30)
 	pause(120)
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(97)	// 0x61
 	party_freeze	// 0xFF
 	pause(1)
@@ -135,6 +140,7 @@ l_0xc88772:
 	sprite2_spawn(308,332,-1)	// 0x0134, 0x014C, 0xFF
 	sprite2_spawn(364,333,-1)	// 0x016C, 0x014D, 0xFF
 	sprite2_spawn(308,334,-1)	// 0x0134, 0x014E, 0xFF
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
 	warp(98)	// 0x62
 	party_freeze	// 0xFF
 	pause(120) pause(120)

@@ -351,15 +351,18 @@ l_0xc8eb2c:
 	"  He used to be in a band." end
 
 l_0xc8eb75:
+	//cc_open_letterbox	// Handled in data_44
 	window_open(1)
 	"@Ga/a/o/o{pause(1)}o{pause(1)}o{pause(1)}r{pause(1)}r{pause(1)}g{pause(1)}g!!!" promptw
 	window_closeall
 
 	pause(1)
 	unset(FLG_THRK_MATENT_APPEAR)	// 49
+
 	call(data_23.l_0xc68538)
 	goto_if_true(l_0xc8ebdd)
 
+	cc_instant_letterbox
 	npc_delete(531,9)	// 0x0213, 0x09
 	npc_delete(532,9)	// 0x0214, 0x09
 	npc_delete(533,9)	// 0x0215, 0x09
@@ -368,11 +371,15 @@ l_0xc8eb75:
 	set(FLG_WIN_MATENT)	// 69
 	unset(FLG_THRK_MATENT_FACE_APPEAR)	// 373
 	pause(1)
+
+	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+
 	warp(160)	// 0xA0
 	pause(1)
 	party_freeze	// 0xFF
 	call(data_44.l_0xc88761)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	goto(data_34.l_0xc7a2f7)
 
 l_0xc8ebdd:

@@ -25,6 +25,66 @@ ROM[Script_78] = {
 /* C3B8A2 */	m_jmp(Script_35)
 }
 //------------------------------------
+// Camera Pan for when Bubble Monkey lowers the rope
+Rope_Camera_Pan: {
+	m_warp_to_leader
+	m_disable_collision
+	m_priority(0)
+	m_refresh_graphics_frame0
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_set_speed(80)
+	m_set_var5(2)
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_move_until_at(5032, 320)
+	m_endlasttask()
+	m_pause(1)
+	/*m_pause(240)
+	m_pause(240)
+	m_pause(180)
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_set_speed(80)
+	m_set_var5(2)
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_set_dest_leader	//m_set_dest_pc(3)
+	m_walk_to_dest
+	m_endlasttask()
+	m_pause(1)*/
+	m_unlock_text()
+	m_destroy_self()
+}
+
+Jeff_Dup: {
+	m_warp_to_leader
+	m_priority(0)
+	//m_mov_var(0, 1)
+	m_set_facing_anim(0,0)
+	m_refresh_graphics
+	m_unlock_text
+	m_halt
+}
+
+Move_Back_To_Jeff: {
+/* C3097C */	m_set_speed(256)
+/* C30982 */	m_set_var5(1)
+/* C30986 */	m_set_dest_leader	//m_set_dest_pc(3)
+/* C3098B */	m_walk_to_dest
+/* C3098E */	m_unlock_text
+/* C30992 */	m_halt
+}
+//------------------------------------
+// Script 146 modification, Make the full Sky Walker visible with the new cutscene letterboxes
+ROM[0xC3C6F9] = m_pause(110)	// Stop the Sky Walker sooner when its exiting the lab roof (200)
+// Script 153 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Fourside
+ROM[0xC3C9A0] = m_set_zpos(168)	// Make the Sky Walker appear lower when its visible out of the letterbox on Fourside (192)
+// Script 157 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Desert
+ROM[0xC3CAFA] = m_set_zpos(168)	// Make the Sky Walker appear lower when its visible out of the letterbox on Desert (192)
+// Script 161 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Threek
+//ROM[0xC3CCBA] = m_add_ypos(-112)	// Stop the Sky Walker later when going down into Threek (128)
+//------------------------------------
 StarmanJr_Smoke:	// 895
 	m_disable_collision()
 	m_refresh_graphics_frame0()

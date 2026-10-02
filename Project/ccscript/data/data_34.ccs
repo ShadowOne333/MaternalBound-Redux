@@ -630,7 +630,7 @@ l_0xc7a300:
 	eob
 
 l_0xc7a542:
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled by the Escargo letterbox ASM
 	window_open(1)
 	title(1, Mach)
 	"@While delivering pizza, this weird guy asked me to help him out..." next

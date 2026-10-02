@@ -309,7 +309,7 @@ l_0xc6b18d:
 	"@Mr. Brickroad, the dungeon maker referred you, right?" next
 	"@And not only that...  What?|  Who?|  My son?" pause(20)
 	"  Oh... I... can't... I can't believe it..." next
-	"@You're {name(3)}, my son." pause(15)
+	"@You're {name(3)}, my son." pause(15) linebreak
 	"  It's been maybe 10 years since I last saw you." next
 	"@I'm so glad you're such a healthy boy." next
 	"@Uh, those glasses look good on you." next
@@ -321,7 +321,8 @@ l_0xc6b28c:
 	goto(l_0xc6b2ca)
 
 l_0xc6b2a3:
-	"@Well, I was only offering...  I'd also like a donut right about now." next
+	"@Well, I was only offering..." linebreak
+	"  I'd also like a donut right about now." next
 
 l_0xc6b2ca:
 	"@Have you already checked out Stonehenge?" next
@@ -347,7 +348,8 @@ l_0xc6b329:
 	"@When you board, always listen for the message that comes from your destination." next
 	"@You'll get there for sure if you listen to the message." next
 	"@The round machine over there is the Sky Walker." next
-	"@What do you think?  Isn't it neat?" pause(20)
+	"@What do you think?"  linebreak
+	"  Isn't it neat?" pause(20)
 	"  Get in!" next
 
 l_0xc6b492:
