@@ -302,10 +302,10 @@ l_0xc6b161:
 	"@Do you think Sebastian's kidnapping will be in tomorrow's paper?" end
 
 l_0xc6b18d:
-	cc_open_letterbox
 	title(1, Andonuts)
 	goto_if_flag(FLG_JEFF, l_0xc6b4bb)	// 0x0E, 14
 	goto_if_flag(FLG_WINS_ANDONUT, l_0xc6b492)	// 0x7F, 127
+	cc_open_letterbox
 	"@Mr. Brickroad, the dungeon maker referred you, right?" next
 	"@And not only that...  What?|  Who?|  My son?" pause(20)
 	"  Oh... I... can't... I can't believe it..." next
@@ -351,19 +351,25 @@ l_0xc6b329:
 	"@What do you think?"  linebreak
 	"  Isn't it neat?" pause(20)
 	"  Get in!" next
-
-l_0xc6b492:
 	"@Let's get together again in 10 years or so." wait
 	npc_do_mc(623,137)	// 0x026F, 0x0089
 	set(FLG_WINS_ANDONUT)	// 127
 	cc_close_letterbox
 	eob
 
+l_0xc6b492:
+	"@Let's get together again in 10 years or so." wait
+	npc_do_mc(623,137)	// 0x026F, 0x0089
+	set(FLG_WINS_ANDONUT)	// 127
+	eob
+
 l_0xc6b4bb:
 	title(1, Andonuts)
+
 	get_char_at_pos(1) rtoarg
 	result_is(3)
 	goto_if_true(l_0xc6b4fe)
+
 	goto_if_flag(FLG_DOSEI_ANDONUT, l_0xc6b516)	// 0x82, 130
 	"@Oh!  You surprised me!" next
 	get_char_at_pos(1) rtoarg
@@ -379,7 +385,6 @@ l_0xc6b4fe:
 l_0xc6b516:
 	get_char_at_pos(1) rtoarg
 	"@Oh, {name(0)}!" next
-	goto(l_0xc6b523)
 
 l_0xc6b523:
 	newline
@@ -387,7 +392,6 @@ l_0xc6b523:
 	"  But other than that, he's a good boy." next
 	"@Take care of yourself" linebreak
 	"  and {name(3)}!..." next
-	goto(l_0xc6b56e)
 
 l_0xc6b56e:
 	isset(FLG_TLPT_SUMS)	// 215
