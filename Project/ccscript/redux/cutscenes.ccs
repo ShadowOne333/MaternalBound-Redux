@@ -25,45 +25,35 @@ ROM[Script_78] = {
 /* C3B8A2 */	m_jmp(Script_35)
 }
 //------------------------------------
-// Camera Pan for when Bubble Monkey lowers the rope
-Rope_Camera_Pan: {
-	m_warp_to_leader
-	m_disable_collision
-	m_priority(0)
-	m_refresh_graphics_frame0
-	m_onmove(0xA37A) //84
-	m_set_anim(0)
-	m_set_speed(80)
-	m_set_var5(2)
-	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
-	m_task_long(MovTask_Anim8)
-	m_move_until_at(5032, 320)
-	m_endlasttask()
-	m_pause(1)
-	/*m_pause(240)
-	m_pause(240)
-	m_pause(180)
-	m_onmove(0xA37A) //84
-	m_set_anim(0)
-	m_set_speed(80)
-	m_set_var5(2)
-	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
-	m_task_long(MovTask_Anim8)
-	m_set_dest_leader	//m_set_dest_pc(3)
-	m_walk_to_dest
-	m_endlasttask()
-	m_pause(1)*/
-	m_unlock_text()
-	m_destroy_self()
-}
-
-Jeff_Dup: {
+Jeff_Dup: {	// 898
 	m_warp_to_leader
 	m_priority(0)
 	//m_mov_var(0, 1)
 	m_set_facing_anim(0,0)
 	m_refresh_graphics
 	m_unlock_text
+	m_halt
+}
+
+// Camera Pan for when Bubble Monkey lowers the rope
+Rope_Camera_Pan: {	// 897
+	m_warp_to_leader
+	m_disable_collision
+	m_priority(0)
+	m_refresh_graphics_frame0
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_set_speed(100)
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_move_until_at(5032, 320)
+	m_pause(250)
+	m_set_speed(100)
+	m_set_dest_sprite(3)	// m_set_dest_leader, m_set_dest_pc(3)
+	m_walk_to_dest	// m_walk_to_dest, m_walk_to_leader
+	m_endlasttask()
+	m_pause(30)
+	m_unlock_text()
 	m_halt
 }
 

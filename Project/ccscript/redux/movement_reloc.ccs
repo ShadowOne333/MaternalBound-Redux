@@ -17,9 +17,8 @@ import "../redux/m2_title_screen_movements.ccs"
 command DEFINE_CUSTOM_POINTERS {
 	adr24(cutscenes.StarmanJr_Smoke)	// 895
 	adr24(cutscenes.PostWarp_Letterbox)	// 896
-	adr24(cutscenes.Rope_Camera_Pan)	// 897
-	adr24(cutscenes.Jeff_Dup)		// 898
-	adr24(cutscenes.Move_Back_To_Jeff)		// 899
+	adr24(cutscenes.Jeff_Dup)		// 897
+	adr24(cutscenes.Rope_Camera_Pan)	// 898
 }
 
 // This part intentionally has lots of newlines to separate the

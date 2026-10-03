@@ -603,17 +603,17 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	sprite2_spawn(49,253,1)	// 0x0031, 0x00FD, 0x01
 	wait_movement
 
-	sprite2_delete(49,6)	// 0x0031, 0x06
-	sprite2_spawn(50,261,1)	// 0x0032, 0x0105, 0x01
-	sprite2_spawn(344,255,1)	// 0x0158, 0x00FF, 0x01
 	// Spawn a duplicate Jeff sprite, hide_party and spawn camera entity
-	sprite2_spawn(3,898,1)	// Spawn a Jeff duplicate
-	sprite2_spawn(106,897,1)	// Spawn camera panning entity
+	sprite2_spawn(3,897,1)	// Spawn a Jeff duplicate
+	sprite2_spawn(106,898,1)	// Spawn camera panning entity
 	pause(1)
 	focus_camera_on_sprite2(106)
 	party_unfreeze
 	hide_party
 	// Continue with the vanilla code
+	sprite2_delete(49,6)	// 0x0031, 0x06
+	sprite2_spawn(50,261,1)	// 0x0032, 0x0105, 0x01
+	sprite2_spawn(344,255,1)	// 0x0158, 0x00FF, 0x01
 	wait_movement
 
 	sprite2_do_mc(344,262)	// 0x0158, 0x0106
@@ -651,6 +651,10 @@ l_0xc882bd:	// Bubble monkey leaves
 	npc_freeze(632)
 	char_direction(9,5)
 	show_char_float(9,3)
+	pause(60)
+	hide_char_float(9)
+	pause(60)
+	show_char_float(9,9)
 	pause(60)
 	hide_char_float(9)
 
