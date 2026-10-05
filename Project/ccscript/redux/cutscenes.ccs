@@ -4,6 +4,7 @@
 import "../definitions/flags.ccs"
 import "../essential/cc_effects.ccs"
 import "../redux/movscr_codes.ccs"
+import "../redux/m_jsl_rts.ccs"
 //------------------------------------
 // This file does action script modifications to certain cutscenes in the original EB game
 //------------------------------------
@@ -25,10 +26,59 @@ ROM[Script_78] = {
 /* C3B8A2 */	m_jmp(Script_35)
 }
 //------------------------------------
-Jeff_Dup: {	// 898
+// Script 146 modification, Make the full Sky Walker visible with the new cutscene letterboxes
+ROM[0xC3C6F6] = m_set_yvel(-64)	// Make the vel axis Y so the camera moves alongside the Sky Walker
+ROM[0xC3C730] = m_pause(0)	// Reduce timeout before fade out when the Sky Walker moves outside the visible map
+
+// Script 153 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Fourside
+ROM[0xC3C9A0] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Fourside (192)
+ROM[0xC3C9ED] = m_jml(Script_155_Hijack1)
+Script_155_Hijack1: {
+/* C3C9ED */	m_onmove(0xA00C)
+		m_set_zpos(-48)
+/* C3C9F0 */	m_set_anim(0)
+/* C3C9F2 */	m_jml(0xC3C9F2)
+}
+
+// Script 157 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Desert
+ROM[0xC3CAFA] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Desert (192)
+// Script 159 modification, Move the Sky Walker shadow lower on Desert
+ROM[0xC3CB40] = m_set_zpos(-48)
+//------------------------------------
+StarmanJr_Smoke: {	// 895
+	m_disable_collision()
+	m_refresh_graphics_frame0()
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_task_long(MovTask_DestroyIfFar)
+	m_task_long(MovTask_Anim8)
+
+	m_priority(1)	// Put above Starman's sprite, but behind Ness
+	m_set_facing_anim(0, 0)
+	m_pause(8)
+	m_set_facing_anim(2, 0)
+	m_pause(8)
+	m_set_facing_anim(4, 0)
+	m_pause(8)
+	m_set_facing_anim(6, 0)
+	m_pause(8)
+	m_destroy_self
+}
+//------------------------------------
+define UPDATE_LETTERBOX_HDMA_TABLE	= 0xC2D0AC
+
+PostWarp_Letterbox: {	// 896
+	m_ondraw(0x9FF0)
+	m_asmcall(cc_effects.instantLetterbox)
+	m_asmcall(UPDATE_LETTERBOX_HDMA_TABLE)	// Build letterbox HDMA table
+	m_destroy_self
+	m_end
+}
+//------------------------------------
+// Jeff decoy sprite for the Bubble monkey rope scene
+Jeff_Dup: {	// 897
 	m_warp_to_leader
 	m_priority(0)
-	//m_mov_var(0, 1)
 	m_set_facing_anim(0,0)
 	m_refresh_graphics
 	m_unlock_text
@@ -36,7 +86,7 @@ Jeff_Dup: {	// 898
 }
 
 // Camera Pan for when Bubble Monkey lowers the rope
-Rope_Camera_Pan: {	// 897
+Rope_Camera_Pan: {	// 898
 	m_warp_to_leader
 	m_disable_collision
 	m_priority(0)
@@ -56,51 +106,96 @@ Rope_Camera_Pan: {	// 897
 	m_unlock_text()
 	m_halt
 }
+//------------------------------------
+// Hijack the original Script 161 to remove the m_add_ypos(-128) for the Sky Walker sprite
+ROM[0xC3CCBA] = { m_ontick_nop m_ontick_nop m_ontick_nop }
 
-Move_Back_To_Jeff: {
-/* C3097C */	m_set_speed(256)
-/* C30982 */	m_set_var5(1)
-/* C30986 */	m_set_dest_leader	//m_set_dest_pc(3)
-/* C3098B */	m_walk_to_dest
-/* C3098E */	m_unlock_text
-/* C30992 */	m_halt
+// Make the Sky_Walker shadow sprite appear as the offset sprite (m_add_ypos(128)) instead of the Sky Walker's sprite being the offset one
+// Do this so the camera doesn't snap abruptly and the sprite appears on warp instead of a sec later
+Skywalker_Camera_Fix: {	// 899
+	m_warp_to_pc(-1)
+	m_add_ypos(128)
+	m_jml(0xC3CDF5)	// Continue with the original Script 164
 }
 //------------------------------------
-// Script 146 modification, Make the full Sky Walker visible with the new cutscene letterboxes
-ROM[0xC3C6F9] = m_pause(110)	// Stop the Sky Walker sooner when its exiting the lab roof (200)
-// Script 153 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Fourside
-ROM[0xC3C9A0] = m_set_zpos(168)	// Make the Sky Walker appear lower when its visible out of the letterbox on Fourside (192)
-// Script 157 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Desert
-ROM[0xC3CAFA] = m_set_zpos(168)	// Make the Sky Walker appear lower when its visible out of the letterbox on Desert (192)
-// Script 161 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Threek
-//ROM[0xC3CCBA] = m_add_ypos(-112)	// Stop the Sky Walker later when going down into Threek (128)
-//------------------------------------
-StarmanJr_Smoke:	// 895
-	m_disable_collision()
-	m_refresh_graphics_frame0()
-	m_onmove(0xA37A) //84
-	m_set_anim(0)
-	m_task_long(MovTask_DestroyIfFar)
-	m_task_long(MovTask_Anim8)
+// Screen tinting codes
+MOV_Make_Screen_Normal: {	// 900
+	m_set_var0(0)
+	m_asmcall(0xC47499)
+	m_pause(1)
+	m_unlock_text
+	m_end
+}
 
-	m_priority(1)	// Put above Starman's sprite, but behind Ness
-	m_set_facing_anim(0, 0)
-	m_pause(8)
-	m_set_facing_anim(2, 0)
-	m_pause(8)
-	m_set_facing_anim(4, 0)
-	m_pause(8)
-	m_set_facing_anim(6, 0)
-	m_pause(8)
-	m_destroy_self
-//------------------------------------
-define UPDATE_LETTERBOX_HDMA_TABLE	= 0xC2D0AC
+MOV_Tint_Screen_Black2Normal: {	// 901
+	m_set_anim(0xFF)
+	m_set_var0(-40)
+    
+	m_loop(39)
+		m_add_var0(1)
+		m_asmcall(0xC47499)
+		m_pause(1)
+	m_endloop
 
-PostWarp_Letterbox: {	// 896
-	m_ondraw(0x9FF0)
-	m_asmcall(cc_effects.instantLetterbox)
-	m_asmcall(UPDATE_LETTERBOX_HDMA_TABLE)	// Build letterbox HDMA table
-	m_destroy_self
+	m_unlock_text
+	m_end
+}
+
+MOV_Tint_Screen_White2Normal: {	// 902
+	m_set_anim(0xFF)
+	m_set_var0(-40)
+    
+	m_loop(39)
+		m_add_var0(1)
+		m_asmcall(0xC47499)
+		m_pause(1)
+	m_endloop
+
+	m_unlock_text
+	m_end
+}
+
+MOV_Make_Screen_White: {	// 903
+	m_set_var0(40)
+	m_asmcall(0xC47499)
+	m_pause(1)
+	m_unlock_text
+	m_end
+}
+
+MOV_Tint_Screen_White: {	// 904
+	m_set_anim(0xFF)
+	m_set_var0(30)
+    
+	m_loop(9)
+		m_add_var0(1)
+		m_asmcall(0xC47499)
+		m_pause(12)
+	m_endloop
+
+	m_unlock_text
+	m_end
+}
+
+MOV_Make_Screen_Black: {	// 905
+	m_set_var0(-40)
+	m_asmcall(0xC47499)
+	m_pause(1)
+	m_unlock_text
+	m_end
+}
+
+MOV_Tint_Screen_Black: {	// 906
+	m_set_anim(0xFF)
+	m_set_var0(0)
+
+	m_loop(39)
+		m_add_var0(-1)
+		m_asmcall(0xC47499)
+		m_pause(10)
+	m_endloop
+
+	m_unlock_text
 	m_end
 }
 //------------------------------------

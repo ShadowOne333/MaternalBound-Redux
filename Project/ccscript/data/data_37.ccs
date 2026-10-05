@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -490,6 +491,7 @@ l_0xc7ece9:
 	font_saturn
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc7edd9)	// 0x0049, 73
 	goto_if_flag(FLG_WIN_GEPPU, l_0xc7ed90)	// 0x0047, 71
+	cc_open_letterbox
 	"@Base..." linebreak
 	"  secret." next
 	"@Base behind" linebreak
@@ -511,9 +513,11 @@ l_0xc7ece9:
 	wait
 	set(FLG_DOSEI_SECRETCODE)	// 131
 	font_normal
+	cc_close_letterbox
 	eob
 
 l_0xc7ed90:
+	cc_open_letterbox
 	"@You wait three" linebreak
 	"  minutes!" next
 	"@Zoom!" next
@@ -524,6 +528,7 @@ l_0xc7ed90:
 	"  minutes?" linebreak
 	"  No?" wait
 	font_normal
+	cc_close_letterbox
 	eob
 
 l_0xc7edd9:

@@ -1,0 +1,478 @@
+// customwin_borderstyles.ccs v1
+// Allows custom window border styles
+// public domain, but credits are appreciated :)
+// cooprocks123e 2022-03-01
+import asm65816
+import ccexpand
+import cc_asmcall
+
+/**********************************************************************
+***** Custom Styles ***************************************************
+**********************************************************************/
+
+// Not really usable yet, you have to put all the tilemap data in the
+// right order. Might make a tool to build this.
+
+command _CustomWindowStyles {
+// Style 00 - No border at all
+// Style 01 - Vanilla border style (hardcoded below)
+// Style 02 - Empty
+"[00 00 00 00 00 00 00 00 00 00 00 00]"
+"[00 00 00 00 00 00 00 00 00 00 00 00]"
+"[00 00 00 00 00 00 00 00 00 00 00 00]"
+"[00 00 00 00 00 00 00 00 00 00 00 00]"
+"[00 00 00 00 00 00 00 00 00 00 00 00]"
+// Style 03 - Checkered
+"[07 3C 07 3C 07 3C 07 3C 07 3C 07 3C]"
+"[07 3C 07 3C 07 3C 07 3C 07 3C 07 3C]"
+"[07 3C 07 3C 07 3C 07 3C 07 3C 07 3C]"
+"[07 3C 07 3C 07 3C 07 3C 07 3C 07 3C]"
+"[07 3C 07 3C 07 3C 07 3C 07 3C 07 3C]"
+}
+
+/**********************************************************************
+***** CC for changing border ******************************************
+**********************************************************************/
+// There is one control code added in this file:
+// SetCurrentWindowBorder(style)
+// `style` is one byte, specifying the window border style that should
+// be used for the current window.
+// This command will use the argument register if style is -1 (not 0!).
+// This command will not modify any window registers.
+
+command SetCurrentWindowBorder(style) {
+    cc_asmcall(asm_SetCurrentWindowBorder, RET_NONE)
+    byte style
+}
+asm_SetCurrentWindowBorder: M_EB_Function_Wrapper({
+    LDY_i(1)
+    JSL(R_Read_Parameter_Bytes)
+    LDA_a(D_cc_argv_0)
+    STA_d(0x06)
+    CMP_i(0x00FF)
+    BNE(4) JSL(R_Get_Argument_Memory)
+    M_JSL_RTS_C1(0xC10301) // GET_ACTIVE_WINDOW_ADDRESS
+    TAX
+    LDA_d(0x06)
+    // In the code below, we look up borders in the table based on
+    // a 0-based index where 0 corresponds to the default style.
+    // If the style is 0xFF (given as 0 here) then we have a special
+    // case.
+    DEC
+    SEP(0x20)
+    STA_x(5) // Offset of window border style
+    REP(0x20)
+    JSL(0xC2087C) // Redraw all windows?
+})
+
+// Currently, the window ID is stored as a 16-bit integer in the window stat struct.
+// Let's change it to be 8-bit and use the upper 8-bits as a "style" byte.
+// It will be 0x00 for the default style, and custom styles after that.
+
+/**********************************************************************
+***** Patches *********************************************************
+**********************************************************************/
+// UNKNOWN_C1008E
+    ROM[0xC100A7] = { JSL(CloseWindowMask) }
+    CloseWindowMask: {
+        AND_i(0x00FF)
+        JML(0xC3E521) // CLOSE_WINDOW // Tail call optimization
+    }
+
+// CREATE_WINDOW - no patch needed, upper 8 bits will always be set to zero here, which should be the default
+
+// UNKNOWN_C200D9 - no patch needed, set upper 8 bits to 0xFF when window is closed
+
+// UNKNOWN_C3E4EF - no patch needed, upper 8 bits are set to 0xFF when window is closed
+
+// CLOSE_WINDOW - no patch needed, set upper 8 bits to 0xFF when window is closed
+
+// UNKNOWN_C107AF - go to our custom routine :)
+    ROM[0xC107AF] = JML(DrawWindowCustomBorder)
+
+define _L_TileCounter = 0x00
+define _L_XWrapAmount = 0x00 // We will never use this at the same time as _L_TileCounter
+define _L_XCounter = 0x02
+define _L_YCounter = 0x04
+define _L_ArrowsAnim = 0x04 // We will never use this at the same time as _L_YCounter
+define _L_MathTmp = 0x04 // We will never use this at the same time as _L_YCounter
+define _L_CurBg2Ptr = 0x18
+define _L_WindowHeight = 0x1A
+define _L_WindowWidth = 0x1C
+define _L_WindowTextTiles = 0x1E
+define _L_WindowStatsIndex = 0x20
+define _L_WindowStatsOffset = 0x22
+define _L_StyleOffset = 0x24
+define _Neg_Stack_Amt = -0x26
+command _DWCB_StoreIncrementPtr      { STA_y(0) INY INY }
+command _DWCB_StoreIncrementPtrStore { STA_y(0) INY INY STY_d(_L_CurBg2Ptr) }
+command _DWCB_Corner(transparent_offset, opaque_offset) {
+    LDX_d(_L_StyleOffset)
+    LDA_y(0)
+    BEQ(6) // UseTransparent
+    /* 4 */ CMP_xl(transparent_offset)
+    /* 2 */ BNE(6) // UseOpaque
+// UseTransparent:
+    /* 4 */ LDA_xl(transparent_offset)
+    /* 2 */ BRA(4) // Store
+// UseOpaque:
+    /* 4 */ LDA_xl(opaque_offset)
+// Store:
+    _DWCB_StoreIncrementPtr
+}
+command _DWCB_MiddleLoop {
+    /* 5 */ _DWCB_StoreIncrementPtr
+    /* 1 */ DEX
+    /* 2 */ BNE(-8)
+}
+
+
+"[43 41 42 42 59]"
+"[41 42 43 44]"
+DrawWindowCustomBorder: {
+///////////////////////////////////////////////////////////////////////
+/// Preamble + setup
+///////////////////////////////////////////////////////////////////////
+    REP(0x31)
+    PHD
+    TAY
+    TDC
+    ADC_i(_Neg_Stack_Amt)
+    TCD
+    TYA
+    STA_d(_L_WindowStatsIndex) // Window stats index
+    LDY_i(0x0052)
+    JSL(0xC08FF7) // MULT168
+    STA_d(_L_WindowStatsOffset) // Put window stats addr in $22
+    // Load a bunch of values from the window stats table
+    TAX
+    LDA_x(0x8685)
+    STA_d(_L_WindowTextTiles)
+    LDA_x(0x865A)
+    STA_d(_L_WindowWidth)
+    // Initialize the X counter for the top middle loop
+    // in case we don't draw a title
+    STA_d(_L_XCounter)
+    LDA_x(0x865C)
+    STA_d(_L_WindowHeight)
+    LDA_x(0x8655) // Window border style
+    AND_i(0x00FF)
+    CMP_i(0x00FF)
+    BEQ_a(DrawNoBorder)
+    ASL
+    ASL
+    STA_d(_L_MathTmp) // MathTmp = style * 4
+    ASL
+    ASL
+    ASL
+    ASL
+    SEC
+    SBC_d(_L_MathTmp) // A = style * 64 - MathTmp = style * 60
+    STA_d(_L_StyleOffset)
+    LDA_x(0x8658) // Y position of window
+    ASL
+    ASL
+    ASL
+    ASL
+    ASL
+    CLC
+    ADC_x(0x8656) // X position of window
+    ASL
+    CLC
+    ADC_i(0x7DFE) // BG2 buffer location
+    TAY
+
+///////////////////////////////////////////////////////////////////////
+/// Top left corner
+///////////////////////////////////////////////////////////////////////
+    _DWCB_Corner(StyleTable_TopLeftTransparent, StyleTable_TopLeftOpaque)
+
+///////////////////////////////////////////////////////////////////////
+/// Window title
+///////////////////////////////////////////////////////////////////////
+    // Check for window title ID
+    LDA_x(0x868B)
+    AND_i(0x00FF)
+    BEQ_a(AfterDrawWindowTitle) // skip if ID is 0
+
+    // Convert ID 1-5 into starting tile:
+    // FirstTile = (ID-1)*16 + 0x2E0
+    DEC
+    ASL
+    ASL
+    ASL
+    ASL
+    CLC
+    ADC_i(0x22E0) // Extra 0x2000 is priority bit
+    STA_d(_L_TileCounter)
+    
+    LDX_d(_L_StyleOffset)
+    LDA_xl(StyleTable_PreTitle)
+    _DWCB_StoreIncrementPtrStore // Draw pre-title tile
+
+    // Determine number of tiles 
+    LDA_d(_L_WindowStatsOffset)
+    CLC
+    ADC_i(0x868C) // Compute pointer to title text
+    STA_d(0x0E)
+    LDA_i(0x007E)
+    STA_d(0x10)
+    JSL(0xC08F22) // STRLEN
+    STA_d(0x04)
+    ASL
+    ADC_d(0x04)
+    ASL
+    CLC
+    ADC_i(0x0007) // to round up when /8
+    LSR
+    LSR
+    LSR
+    // Title text length in tiles = (Strlen*6 + 7) / 8
+    STA_d(_L_XCounter)
+
+    // Restore our output pointer into Y after calling STRLEN
+    LDY_d(_L_CurBg2Ptr)
+    // 
+    TAX
+    BEQ_a(AfterDrawWindowTitle)
+
+    LDA_d(_L_TileCounter)
+DrawWindowTitleLoop:
+    _DWCB_StoreIncrementPtr
+    INC
+    DEX
+    BNE_a(DrawWindowTitleLoop)
+AfterDrawWindowTitleLoop:
+
+    LDX_d(_L_StyleOffset)
+    LDA_xl(StyleTable_PostTitle)
+    _DWCB_StoreIncrementPtr // Draw post-title tile
+
+    // Figure out number of tiles left in the row
+    LDA_d(_L_WindowWidth)
+    CLC               // -1 for pre-title tile when doing SBC
+    SBC_d(_L_XCounter) // Holding number of tiles in title text
+    DEC               // -1 for post-title tile
+    STA_d(_L_XCounter)
+AfterDrawWindowTitle:
+
+///////////////////////////////////////////////////////////////////////
+/// Top middle
+///////////////////////////////////////////////////////////////////////
+    // Check if we need to leave space for the arrows in top-right
+LeaveSpaceForArrows:
+    // Preset _L_ArrowsAnim to 0xFFFF=No
+    LDA_i(0xFFFF)
+    STA_d(_L_ArrowsAnim)
+    LDX_d(_L_WindowStatsOffset)
+    LDA_x(0x8654) // Window ID (now 8 bits)
+    AND_i(0x00FF)
+    CMP_a(0x5E7A) // Check if this window ID has arrows in top-right
+    BNE_a(AfterLeaveSpaceForArrows)
+    LDA_a(0x5E7C) // Check arrow animation index
+    CMP_i(0xFFFF)
+    BEQ_a(AfterLeaveSpaceForArrows)
+    // We're going to draw the < > arrows in the top-right,
+    // so leave 4 tiles of space for them
+    STA_d(_L_ArrowsAnim) // Store which animation frame we'll use
+    LDA_d(_L_XCounter)
+    SEC
+    SBC_i(0x0004)
+    STA_d(_L_XCounter)
+AfterLeaveSpaceForArrows:
+
+    // Draw top middle bar
+    LDX_d(_L_StyleOffset)
+    LDA_xl(StyleTable_TopMid)
+    LDX_d(_L_XCounter)
+    BEQ_a(AfterDrawTopMiddle)
+    _DWCB_MiddleLoop
+AfterDrawTopMiddle:
+
+///////////////////////////////////////////////////////////////////////
+/// Top right arrows
+///////////////////////////////////////////////////////////////////////
+    LDA_d(_L_ArrowsAnim) // Check arrow animation index
+    CMP_i(0xFFFF)
+    BEQ_a(AfterDrawArrows)
+DrawArrows:
+    // Multiply _L_ArrowsAnim by 8 to get offset into StyleTable_Arrows table
+    ASL ASL ASL
+    CLC
+    ADC_d(_L_StyleOffset)
+    TAX
+    LDA_i(0x0004)
+    STA_d(_L_YCounter) // We need XCounter and aren't using YCounter atm
+DrawArrowsLoop:
+    LDA_xl(StyleTable_Arrows_Anim0_Tile0)
+    _DWCB_StoreIncrementPtr
+    INX INX
+    DEC_d(_L_YCounter)
+    BNE_a(DrawArrowsLoop)
+AfterDrawArrows:
+
+///////////////////////////////////////////////////////////////////////
+/// Top right corner
+///////////////////////////////////////////////////////////////////////
+    _DWCB_Corner(StyleTable_TopRightTransparent, StyleTable_TopRightOpaque)
+    JSR(AdvancePtrToNextLine)
+
+///////////////////////////////////////////////////////////////////////
+/// Middle rows
+///////////////////////////////////////////////////////////////////////
+    LDA_d(_L_WindowHeight)
+    STA_d(_L_YCounter)
+    BEQ_a(AfterDrawMiddleRows)
+
+DrawMiddleRowsLoop:
+    // Draw left side border
+    LDX_d(_L_StyleOffset)
+    LDA_xl(StyleTable_MiddleLeft)
+    _DWCB_StoreIncrementPtr
+
+    // Prepare for width loop
+    LDX_d(_L_WindowTextTiles)
+    LDA_d(_L_WindowWidth)
+    STA_d(_L_XCounter)
+    BEQ_a(AfterDrawMiddleTextTiles)
+DrawMiddleTextTilesLoop:
+    LDA_x(0)
+    ORA_i(0x2000)
+    _DWCB_StoreIncrementPtr
+    INX INX
+    DEC_d(_L_XCounter)
+    BNE_a(DrawMiddleTextTilesLoop)
+AfterDrawMiddleTextTiles:
+    STX_d(_L_WindowTextTiles)
+
+    // Draw right side border
+    LDX_d(_L_StyleOffset)
+    LDA_xl(StyleTable_MiddleRight)
+    _DWCB_StoreIncrementPtr
+
+    // Advance to next line
+    JSR(AdvancePtrToNextLine)
+    DEC_d(_L_YCounter)
+    BNE_a(DrawMiddleRowsLoop)
+AfterDrawMiddleRows:
+
+///////////////////////////////////////////////////////////////////////
+/// Bottom left corner
+///////////////////////////////////////////////////////////////////////
+    _DWCB_Corner(StyleTable_BottomLeftTransparent, StyleTable_BottomLeftOpaque)
+
+///////////////////////////////////////////////////////////////////////
+/// Bottom middle
+///////////////////////////////////////////////////////////////////////
+    // LDX_d(_L_StyleOffset) // Already in X from _DWCB_Corner macro
+    LDA_xl(StyleTable_BottomMid)
+    LDX_d(_L_WindowWidth)
+    BEQ_a(AfterDrawBottomMiddle)
+    _DWCB_MiddleLoop
+AfterDrawBottomMiddle:
+
+///////////////////////////////////////////////////////////////////////
+/// Bottom right corner
+///////////////////////////////////////////////////////////////////////
+    _DWCB_Corner(StyleTable_BottomRightTransparent, StyleTable_BottomRightOpaque)
+
+    // Return
+    PLD
+    RTL
+
+///////////////////////////////////////////////////////////////////////
+/// No border? :O
+///////////////////////////////////////////////////////////////////////
+DrawNoBorder:
+    // Compute offsetted position - the width and height measure the
+    // active text area, but the X and Y point to the top left tile
+    // of the window border.
+    LDA_x(0x8658) // Y position of window
+    INC           // Y + 1
+    ASL
+    ASL
+    ASL
+    ASL
+    ASL
+    SEC           // X + 1
+    ADC_x(0x8656) // X position of window
+    ASL
+    CLC
+    ADC_i(0x7DFE) // BG2 buffer location
+    TAY
+    // Compute how many bytes we need to add to our pointer to advance
+    // to the next line. (amt = (32 - width) * 2)
+    LDA_i(32) // width of tilemap in tiles
+    SEC
+    SBC_d(_L_WindowWidth)
+    ASL
+    STA_d(_L_XWrapAmount)
+
+    // Set up for Y loop
+    LDX_d(_L_WindowTextTiles)
+    LDA_d(_L_WindowHeight)
+    STA_d(_L_YCounter)
+    BEQ_a(AfterDrawNoBorderYLoop)
+DrawNoBorderYLoop:
+    LDA_d(_L_WindowWidth)
+    STA_d(_L_XCounter)
+    BEQ_a(AfterDrawNoBorderXLoop)
+DrawNoBorderXLoop:
+    LDA_x(0)
+    ORA_i(0x2000)
+    _DWCB_StoreIncrementPtr
+    INX INX
+    DEC_d(_L_XCounter)
+    BNE_a(DrawNoBorderXLoop)
+AfterDrawNoBorderXLoop:
+    // Advance to next line
+    TYA
+    CLC
+    ADC_d(_L_XWrapAmount)
+    TAY
+    DEC_d(_L_YCounter)
+    BNE_a(DrawNoBorderYLoop)
+AfterDrawNoBorderYLoop:
+    // We're done! Return
+    PLD
+    RTL
+
+
+"[41 42 43 44]"
+
+AdvancePtrToNextLine:
+    STY_d(_L_CurBg2Ptr)
+    LDA_i(0x0020)
+    CLC // This makes the SBC do `A = A - width - 1`
+    SBC_d(_L_WindowWidth)
+    DEC
+    ASL
+    CLC
+    ADC_d(_L_CurBg2Ptr)
+    TAY
+    RTS
+}
+
+"[41 42 43 44]"
+
+StyleTable_TopLeftTransparent:     short 0x3C10
+StyleTable_TopLeftOpaque:          short 0x3C13
+StyleTable_PreTitle:               short 0x3C16
+StyleTable_PostTitle:              short 0x7C16
+StyleTable_TopMid:                 short 0x3C11
+StyleTable_TopRightTransparent:    short 0x7C10
+StyleTable_TopRightOpaque:         short 0x7C13
+StyleTable_MiddleLeft:             short 0x3C12
+StyleTable_MiddleRight:            short 0x7C12
+StyleTable_BottomLeftTransparent:  short 0xBC10
+StyleTable_BottomLeftOpaque:       short 0xBC13
+StyleTable_BottomMid:              short 0xBC11
+StyleTable_BottomRightTransparent: short 0xFC10
+StyleTable_BottomRightOpaque:      short 0xFC13
+StyleTable_Arrows_Anim0_Tile0:
+    short 0x3C16 short 0x2E6D short 0x2E6E short 0x7C16
+    short 0x3C16 short 0x2E7D short 0x2E7E short 0x7C16
+    short 0x3C16 short 0x2E6D short 0x2C40 short 0x7C16
+    short 0x3C16 short 0x2C40 short 0x2E6E short 0x7C16
+StyleTable_CustomEntries:
+    _CustomWindowStyles

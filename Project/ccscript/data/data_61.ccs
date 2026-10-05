@@ -488,28 +488,35 @@ l_0xef679a:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
 
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the third <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
+
 	call(data_23.l_0xc6841e)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	npc_delete(705,8)	// 0x02C1, 8
 	pause(120)
 	set(FLG_WIN_MLKY_BOSS)	// 193
+	cc_close_letterbox
 	eob
 
 l_0xef6814:
 	call(ShopMain.l_0xc5d36b) eob	//call(data_13.l_0xc5d36b) eob
 
 l_0xef681a:
+	cc_open_letterbox
 	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6874)
 	"@Gyork Gyork!" next
 	"@Hey you, commoner!" pause(20)
 	"  You there wandering around without any <Fly Honey>..." next
 	"@I am the mortal enemy of your kind." promptw
+	//cc_close_letterbox	// Not needed since a battle starts after this
 	eob
 
 l_0xef6874:
@@ -517,9 +524,11 @@ l_0xef6874:
 	"@Since you had <Fly Honey,> I considered you a friend." next
 	"@But actually, you're just a commoner!" pause(20)
 	"  I am the mortal enemy of your kind." promptw
+	//cc_close_letterbox	// Not needed since a battle starts after this
 	eob
 
 l_0xef68d7:
+	cc_instant_letterbox
 	window_open(1)
 	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6954)
@@ -529,6 +538,7 @@ l_0xef68d7:
 	"@Master Belch hates people like you." next
 	"@...You see, those who don't have <Fly Honey> are our mortal enemies..." promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xef6954:
@@ -536,6 +546,7 @@ l_0xef6954:
 	"@Master Belch and I love Fly Honey." pause(20) linebreak
 	"  Gyorg Gyorg!..." promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
 

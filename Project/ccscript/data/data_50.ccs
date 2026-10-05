@@ -854,7 +854,7 @@ l_0xc92c70:	// Summers boat trip up to Kraken
 
 	restore_camera
 	party_freeze	// 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(89)	// 0x59
 	sprite2_spawn(261,294,1)	// 0x0105, 0x0126, 1
 	pause(1)
@@ -902,7 +902,7 @@ l_0xc92d92:
 
 	restore_camera
 	party_freeze	// 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(90)	// 0x5A
 	sprite2_spawn(212,296,1)	// 0xD4, 0x0128, 1
 	pause(1)
@@ -1298,7 +1298,7 @@ l_0xc934ed:
 	
 	hide_party	// 0xFF
 	sprite2_spawn(245,298,-1)	// F5, 12A, FF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(91)	// 5B
 	sprite2_freeze(245)	// F5
 	call(data_36.l_0xc7dd6b)
@@ -1312,7 +1312,7 @@ l_0xc934ed:
 	
 	party_freeze	// 0xFF
 	sprite2_spawn(245,299,-1)	// F5, 12B, FF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(92)	// 5C
 	focus_camera_on_sprite2(245)	// F5
 	party_unfreeze

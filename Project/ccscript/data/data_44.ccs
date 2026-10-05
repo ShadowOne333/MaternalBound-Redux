@@ -109,7 +109,7 @@ l_0xc88772:
 	hide_party	// 0xFF, 0x06
 	sprite2_spawn(308,322,-1)	// 0x0134, 0x0142, 0xFF
 	sprite2_spawn(308,323,-1)	// 0x0134, 0x0143, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(95)	// 0x5F
 	party_freeze	// 0xFF
 	pause(120) pause(120)
@@ -117,13 +117,13 @@ l_0xc88772:
 	sprite2_spawn(308,324,-1)	// 0x0134, 0x0144, 0xFF
 	sprite2_spawn(308,325,-1)	// 0x0134, 0x0145, 0xFF
 	sprite2_spawn(308,326,-1)	// 0x0134, 0x0146, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(96)	// 0x60
 	party_freeze	// 0xFF
 	npc_delete(536,6)	// 0x0218, 0x06
 	pause(30) pause(30)
 	pause(120)
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(97)	// 0x61
 	party_freeze	// 0xFF
 	pause(1)
@@ -140,7 +140,7 @@ l_0xc88772:
 	sprite2_spawn(308,332,-1)	// 0x0134, 0x014C, 0xFF
 	sprite2_spawn(364,333,-1)	// 0x016C, 0x014D, 0xFF
 	sprite2_spawn(308,334,-1)	// 0x0134, 0x014E, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(98)	// 0x62
 	party_freeze	// 0xFF
 	pause(120) pause(120)

@@ -16,7 +16,7 @@ TIME = `date +'%T, %a %d/%b/%Y'`
 SHA1SUM = `sha1sum $(CLEAN_ROM) | awk '{ print $$1 }'`
 #----------------------------------------------------------------
 # Targets
-all: check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
+all: check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols atmdebug_address create_both_patches finish
 #----------------------------------------------------------------
 # Check if the base ROM exists and has the correct name
 check_rom:
@@ -86,6 +86,13 @@ create_patch:
 #	@echo
 #	@coilsnake-cli createpatch $(CLEAN_ROM) "$(PATCHED_ROM_NAME)" "$(PATCH_DIR)/$(PATCH_NAME).ebp" "ShadowOne333" "A new MaternalBound with New Controls, MSU-1 integration and much more!" "MaternalBound Redux"
 #----------------------------------------------------------------
+atmdebug_address: Mother\ 2.sfc
+	@python3 -c 'from pathlib import Path; \
+	rom = Path("$<").read_bytes(); \
+	pattern = bytes.fromhex("F2 FB C9 00"); \
+	matches = [i for i in range(len(rom)) if rom.startswith(pattern, i)]; \
+	[print(f"ATM Debug Menu pattern F2FBC900: Physical address: 0x{i:06X}  SNES: 0x{i + 0xC00000:06X}") for i in matches] if matches else print("Found $(PATTERN): not found")'
+#----------------------------------------------------------------
 # Create both additional BPS and IPS patches files
 create_both_patches:
 	@echo
@@ -102,4 +109,4 @@ finish:
 	@echo "Final compilation time: $$(( `date +%s` - $(START) )) seconds"
 	@echo "Redux compilation finished at $(TIME)!"
 #----------------------------------------------------------------
-.PHONY: all check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols create_both_patches finish
+.PHONY: all check_rom check_checksum create_base_rom compile_sound_driver expand_base_rom compile_project create_patch create_debug_symbols atmdebug_address create_both_patches finish

@@ -179,7 +179,7 @@ l_0xc9c293:	// Giygas fight
 	sprite2_spawn(106,555,1)	// 0x006A, 0x022B, 0x01
 	wait_movement
 
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(215)	// 0xD7
 	party_freeze	// 0xFF
@@ -238,7 +238,7 @@ l_0xc9c293:	// Giygas fight
 	sprite2_spawn(394,579,255)	// 0x018A, 0x0243, 0xFF
 	sprite2_spawn(395,580,255)	// 0x018B, 0x0244, 0xFF
 
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(216)	// 0xD8
 	music(181)

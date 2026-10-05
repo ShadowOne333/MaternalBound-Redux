@@ -33,7 +33,7 @@ l_0xc79997:
 	sprite2_spawn(120,110,-1)	// 0x0078, 0x006E, 0xFF
 	sprite2_spawn(106,112,-1)	// 0x006A, 0x0070, 0xFF
 
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(65)	// 0x41
 	call(data_57.l_0xc9b4b8)
 	sprite2_delete(106,6)	// 0x006A, 0x06
@@ -205,7 +205,7 @@ l_0xc79c1e:
 	restore_camera
 	set(FLG_TUNNEL_TWSN_THRK_TR)	// 314
 	sprite2_spawn(243,185,-1)	// 0x00F3, 0x00B9, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(60)	// 0x3C
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -214,7 +214,7 @@ l_0xc79c32:
 	restore_camera
 	unset(FLG_TUNNEL_TWSN_THRK_TR)	// 314
 	sprite2_spawn(243,186,-1)	// 0x00F3, 0x00BA, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(63)	// 0x3F
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -334,7 +334,7 @@ l_0xc79d81:
 	hide_party	// 0xFF, 0x06
 	sprite2_spawn(16,662,-1)	// 0x0010, 0x0296, 0xFF
 	sprite2_spawn(393,663,-1)	// 0x0189, 0x0297, 0xFF
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(77)	// 0x4D
 	party_freeze	// 0xFF
 	pause(240)
@@ -385,11 +385,11 @@ l_0xc79e55:
 	pause(1)
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	hide_party	// 0xFF, 0x06
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(200)	// 0xC8
 	sprite2_spawn(106,643,1)	// 0x006A, 0x0283, 0x01
 	call(data_57.l_0xc9b4b8)
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(201)	// 0xC9
 	sprite2_spawn(106,644,1)	// 0x006A, 0x0284, 0x01
 	call(data_57.l_0xc9b4b8)
@@ -401,7 +401,7 @@ l_0xc79f32:
 	eob
 
 l_0xc79f33:
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(66)
 	party_freeze	// 0xFF
 	backup_npc_members_and_money
@@ -1901,7 +1901,8 @@ l_0xc7c17b:
 	music_resume
 	goto_if_flag(FLG_POWR_MLKY, data_35.l_0xc7c1f7)	// 0x00B9, 185
 	window_open(1)
-	"@{name(1)} thought he heard his mother from far away... she said" next
+	"@{name(1)} thought he heard his mother from far away..." linebreak
+	"  she said" next
 	"@<Be a thoughtful, strong boy...>" promptw
 	pause(60) linebreak
 	"@{name(1)}'s Sound Stone recorded the melody of the Milky Well." wait

@@ -567,7 +567,7 @@ l_0xc6bd9d:
 
 l_0xc6bdab:
 	call(data_49.l_0xc91693)
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(47)	// 0x2F
 	party_freeze	// 0xFF
 	unset(FLG_HOTEL_PAPERBOY_APPEAR)	// 383

@@ -373,7 +373,10 @@ l_0xc76112:
 	"  Good luck on your adventure." next
 	// Item 0x58 / 88 = Cookie
 	"@You might get hungry along the way,| so here is a {itemname(COOKIE)}." next
-	get_item_receiver(-1) goto_if_false(l_0xc761dd)
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xc761dd)
+
 	give_and_return_location(0, COOKIE)
 	set(FLG_ITEM_TRACY)	// 76
 	call(data_36.l_0xc7dccf) next
@@ -602,8 +605,7 @@ l_0xc76ad6:
 	unset(FLG_ONET_COPD_DISAPPEAR)	// 292
 	unset(FLG_ONET_COPE_DISAPPEAR)	// 293
 	window_closeall
-	// Prepare letterbox for after the warp
-	sprite2_spawn(376, 896, 0xFF)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	goto(data_16.l_0xc5f859)
 
 l_0xc76b0a:

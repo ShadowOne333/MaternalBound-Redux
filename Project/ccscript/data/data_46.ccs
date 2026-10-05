@@ -372,7 +372,7 @@ l_0xc8eb75:
 	unset(FLG_THRK_MATENT_FACE_APPEAR)	// 373
 	pause(1)
 
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox for after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(160)	// 0xA0
 	pause(1)

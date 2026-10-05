@@ -112,16 +112,14 @@ l_0xc5e70b:	// Game startup at Ness' bed in Onett
 	sprite2_spawn(106,476,1)	// 0x6A, 0x01DC, 1
 	call(data_57.l_0xc9b4b8)
 
-	// Prepare letterbox for after the warp
-	sprite2_spawn(376, 896, 0xFF)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(150)	// 0x96
 	npc_freeze(186)	// 0xBA
 	sprite2_spawn(106,477,1)	// 0x6A, 0x01DD, 1
 	call(data_57.l_0xc9b4b8)
 
-	// Prepare letterbox for after the warp
-	sprite2_spawn(376, 896, 0xFF)	// Prepare letterbox after the warp
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(151)	// 97
 	sprite2_spawn(106,478,1)	// 0x6A, 0x01DE, 1
@@ -746,16 +744,14 @@ l_0xc5f859:
 	call(data_57.l_0xc9b4b8)
 	sprite2_spawn(75,223,-1)	// 0x004B, 0x00DF, 0xFF
 
-	// Prepare letterbox for after the warp
-	sprite2_spawn(376, 896, 0xFF)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(67)	// 0x43
 	sprite2_spawn(106,226,1)	// 0x006A, 0x00E2, 0x01
 	call(data_57.l_0xc9b4b8)
 	sprite2_spawn(75,224,-1)	// 0x004B, 0x00E0, 0xFF
 
-	// Prepare letterbox for after the warp
-	sprite2_spawn(376, 896, 0xFF)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 
 	warp(68)	// 0x44
 	sprite2_spawn(106,227,1)	// 0x006A, 0x00E3, 0x01

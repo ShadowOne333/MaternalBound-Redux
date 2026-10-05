@@ -474,7 +474,7 @@ command m_pause_var7           "[21 07]"
 command m_pause_result         "[44]"
 
 // DATA MOVEMENT INSTRUCTIONS
-command m_var(var, value)    "[0E {byte var} {short value}]"    // Set a specific object VAR to immediate value ('var' must be in range 0..7)
+command m_var(var, value)	"[0E {byte var} {short value}]"    // Set a specific object VAR to immediate value ('var' must be in range 0..7)
 command m_set_var0(val)        "[0E 00 {short val}]"
 command m_set_var1(val)        "[0E 01 {short val}]"
 command m_set_var2(val)        "[0E 02 {short val}]"
@@ -1151,7 +1151,7 @@ command m_make_invisible           m_set_anim  (-1)
 // Unlocks the text (CCScript) script after a "[1F 61]" control code
 command m_unlock_text              m_set_mem16 (0x9641, 1)
 
-command m_yield_text               m_asmcall(0xC46E46)
+command m_yield_text               m_asmcall   (0xC46E46)
 
 // Copies the entity's (X, Y) position to (VAR0, VAR1)
 command m_copy_xy_to_var01         m_asmcall   (0xC46C45)

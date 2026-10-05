@@ -1,0 +1,63 @@
+// Enable action scripts to call RTS routines through JSL
+//	Similar to jsl_rts.ccs but fot action scripts
+//		by cooprocks123e
+//------------------------------------
+import "../essential/asm65816.ccs"
+import "../redux/movscr_codes.ccs"
+//------------------------------------
+// Command for usage within action scripts
+command m_jsl_rts(target) {
+	m_asmcall	(Actionscript_JSL_RTS)
+	adr24	(target)
+}
+//------------------------------------
+// Actual ASM code by cooprocks123e
+Actionscript_JSL_RTS: {
+	// Get jump target in $8C
+	LDA_dly	(0x80)
+	STA_d	(0x8C)
+	INY
+	INY
+	LDA_dly	(0x80)
+	STA_d	(0x8E)
+	INY
+	// Save long	return address to "stack"
+	TYA
+	LDX_d	(0x8A)
+	LDY_x	(0x12E6)
+	STA_diy	(0x84)
+	INY
+	INY
+	LDA_d	(0x82)
+	STA_diy	(0x84)
+	INY
+	// Add location of RTL in the target bank onto stack
+	LDA_d	(0x8E)
+	AND_i	(0x00FF)
+	SEC
+	SBC_i	(0x00C0)
+	ASL
+	TAX
+	LDA_xl	(Actionscript_RtlInBank)
+	STA_diy	(0x84)
+	INY
+	INY
+	// Save stack pointer into array
+	LDX_d	(0x8A)
+	TYA
+	STA_x (0x12E6)
+	// Change Actionscript execution pointer to jump target
+	LDA_d	(0x8E)
+	STA_d	(0x82)
+	LDY_d	(0x8C)
+	RTL
+}
+//------------------------------------
+Actionscript_RtlInBank:
+	long	0xC00237
+	long	0xC10132
+	long	0xC2005E
+	long	0xC301F6
+	long	0xC41F34
+	// ... keep going ...
+//------------------------------------
