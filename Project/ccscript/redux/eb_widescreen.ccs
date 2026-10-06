@@ -6,30 +6,31 @@ import "../essential/asm65816.ccs"
 import "../essential/cc_asmcall.ccs"
 import "../essential/jsl_rts.ccs"
 //------------------------------------
-// 1. Viewport & Camera Hooks (Bank $C0)
+// Viewport & Camera Hooks (Bank $C0)
 //------------------------------------
 // Expands viewport from 34 to 49 tiles)
-ROM[0xC00F06] = CMP_i	(49)	// 0x31, Originally MAX_RESOLUTION__WIDTH = 0x22 / 34
+ROM[0xC00F06] = CMP_i	(49)	// 0x0031, Originally MAX_RESOLUTION__WIDTH = 0x22 / 34
 // Right scroll trigger
-ROM[0xC015E4] = ADC_i	(40)	// 0x28, Originally 0x20 / 32
+ROM[0xC015E4] = ADC_i	(40)	// 0x0028, Originally 0x20 / 32
 // Jumps to left origin routine at $C0FF58
 ROM[0xC00E43] = JMP	(Left_Camera_Origin)	// Originally DEC : STA_d (0x20)
 // Jumps to left scroll routine at $C0FF70
 ROM[0xC0163A] = JMP	(Left_Scroll_Trigger) NOP	// Originally DEC : JSR (0x0FCB)
 //------------------------------------
-// 2. Sprite Culling Hook (Bank $C0)
+// Sprite Culling Hook (Bank $C0)
 //------------------------------------
 // Jumps to sprite check at $C0FF80; leaves $C08D45 untouched so native on-screen sprites render normally
-//ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
-ROM[0xC08D47] = LDA_8	(0xFF) NOP NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
+ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
+//ROM[0xC08D47] = LDA_8	(0xFF) NOP NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
 //------------------------------------
-// 3. Custom Subroutines (Bank $C0 padding)
+// Custom Subroutines (Bank $C0 padding)
 //------------------------------------
-define Left_Camera_Origin	= 0xC07D20	//0xC0FF58
-define Left_Scroll_Trigger	= 0xC07D30	//0xC0FF70
-define Sprite_Bounds_Handler	= 0xC07D40	//0xC0FF80
+define Left_Camera_Origin	= 0xC0FF58	//0xC0FF58, in original WS hack = 0xC07D20
+define Data_Table		= 0xC0FF6D
+define Left_Scroll_Trigger	= 0xC0FF70	//0xC0FF70, in original WS hack = 0xC07D30
+define Sprite_Bounds_Handler	= 0xC0FF80	//0xC0FF80, in original WS hack = 0xC07D40
 
-// Relocate these to wherever fits your setup best, was just used because of empty memory)
+// Left camera origin (8x DEC A, STA $20, JMP $0E46)
 ROM[Left_Camera_Origin] = {	// 0xC0FF58, 13 bytes
 	DEC DEC DEC DEC
 	DEC DEC DEC DEC
@@ -37,6 +38,10 @@ ROM[Left_Camera_Origin] = {	// 0xC0FF58, 13 bytes
 	JMP	(0x0E46)
 }
 
+// Data table values
+ROM[0xC0FF6D] = "[83 98 9F]"
+
+// Left scroll trigger (8x DEC A, JSR $0FCB, JMP $163E)
 ROM[Left_Scroll_Trigger] = {	// 0xC0FF70, 13 bytes
 	DEC DEC DEC DEC
 	DEC DEC DEC DEC

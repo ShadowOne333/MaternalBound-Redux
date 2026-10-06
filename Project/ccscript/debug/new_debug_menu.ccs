@@ -54,14 +54,14 @@ debug_main:
 		"Flags":		{main_menu goto(Flag_Test)}
 		"Events":		{main_menu goto(Events)}
 		"Enemy Spawn":		{main_menu goto(Enemy_Spawn)}
+		"Save Game":		{main_menu goto(Save_Game)}
 		"Enemy Test":		{main_menu goto(Battler)}
-		"PSI Animations":	{main_menu goto(PSI_Anims)}
 		"Teleport":		{main_menu goto(Teleport_Test)}
+		"PSI Animations":	{main_menu goto(PSI_Anims)}
+		"Item Descriptions":	{main_menu goto(Item_Desc)}
 		"Hint Map":		{main_menu goto(Hint_Map)}
 		"Hint Shop":		{main_menu goto(Hint_Shop)}
-		"Item Descriptions":	{main_menu goto(Item_Desc)}
 		"Unused Script":	{main_menu goto(Unused_Scripts)}
-		"Save Game":		{main_menu goto(Save_Game)}
 		"Phone Calls":		{main_menu goto(Phone_Calls)}
 	}
 	window_closetop

@@ -280,6 +280,14 @@ handle_windows: {
 ROM[0xC2026E] = LDY_i (0x80B2)
 ROM[0xC20295] = LDY_i (0x80B2)
 
+// Before a scripted battle begins, reset free_ram too.
+ROM[0xC22FAF] = JSL(m3sbs_scripted_prepare)
+
+m3sbs_scripted_prepare: {
+    JSL(0xC08756)
+    JML(m3sbs_reset)
+}
+
 // We remove the blinking effect when a member is hit.
 ROM[0xC2DD9A] = {	// Faster that 4 NOP's.
     BRA(0)

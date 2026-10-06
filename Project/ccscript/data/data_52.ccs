@@ -82,6 +82,7 @@ l_0xc94e44:
 	result_is(INSIGNIFICANT_ITEM)	// 206
 	goto_if_false(data_35.l_0xc7c6b6)
 
+	sound(SND_CHICKEN2)	// 118
 	"@Thank you!" pause(15)
 	"  You've made me so happy!" next
 	"@After my life,| this is the second most important thing to me!" next

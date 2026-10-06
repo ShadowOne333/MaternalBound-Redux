@@ -23,7 +23,8 @@ l_0xc91c2e:
 	eob
 
 l_0xc91c3a:
-	counter(3) call(data_36.l_0xc7dc7f)
+	counter(3)
+	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc91f9c)
 
 	window_closeall
@@ -47,15 +48,18 @@ l_0xc91c3a:
 	pause(60)
 	hide_char_float(3)	// 3
 
+	cc_open_letterbox
 	window_open(1)
 	title_jeff(1)
 	"@I can't see where the problem is from this vantage point." next
 	"@I need to be in the front." wait linebreak
 	window_closeall
 	pause(30)
+	cc_close_letterbox
 	eob
 
-l_0xc91cc1:
+l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
+	cc_open_letterbox
 	call(data_24.l_0xc69082)
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// event(5)
@@ -120,6 +124,7 @@ l_0xc91cc1:
 	pause(90)
 	sprite2_spawn(210,162,-1)	// 0xD2, 0xA2, 0xFF
 	sprite2_spawn(230,165,-1)	// 0xE6, 0xA5, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(194)	// 0xC2
 	focus_camera_on_sprite2(230)	// 0xE6
 	party_unfreeze	// 0xFF
@@ -128,6 +133,7 @@ l_0xc91cc1:
 
 	restore_camera
 	sprite2_spawn(209,150,-1)	// 0xD1, 0x96, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -135,12 +141,14 @@ l_0xc91cc1:
 	restore_camera
 	sprite2_spawn(209,158,-1)	// 0xD1, 0x9E, 0xFF
 	sprite2_spawn(230,160,-1)	// 0xE6, 0xA0, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(192)	// 0xC0
 	focus_camera_on_sprite2(230) 	// 0xE6
 	wait_movement
 
 	restore_camera
 	sprite2_spawn(209,151,-1)	// 0xD1, 0x97, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -148,24 +156,28 @@ l_0xc91cc1:
 	restore_camera
 	sprite2_spawn(209,154,-1)	// 0xD1, 0x9A, 0xFF
 	sprite2_spawn(230,156,-1)	// 0xE6, 0x9C, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(190)	// 0xBE
 	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
 
 	restore_camera
 	sprite2_spawn(209,152,-1)	// 0xD1, 0x98, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 
 	restore_camera
 	sprite2_spawn(209,166,-1)	// 0xD1, 0xA6, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(186)	// 0xBA
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
 
 	restore_camera
 	set(FLG_WINS_LABO_MONKEY_APPEAR)	// 621
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(218)	// 0xDA
 	npc_spawn(623,167,1)	// 0x026F, 0xA7, 1
 	pause(100)
@@ -209,6 +221,7 @@ l_0xc91cc1:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc91f9c:
@@ -242,7 +255,8 @@ l_0xc91fdb:
 l_0xc91ffa:
 	"me" eob
 
-l_0xc91ffd:
+l_0xc91ffd:	// Sky Walker flight to Summers
+	cc_open_letterbox
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// event(5)
 	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 1
@@ -255,11 +269,13 @@ l_0xc91ffd:
 	wait_movement
 
 	sprite2_spawn(209,146,-1)	// 0xD1, 0x92, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(186)	// 0xBA
 	wait_movement
 
 	restore_camera
 	sprite2_spawn(209,147,-1)	// 0xD1, 0x93, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(188)	// 0xBC
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -267,6 +283,7 @@ l_0xc91ffd:
 	restore_camera
 	sprite2_spawn(209,170,-1)	// 0xD1, 0xAA, 0xFF
 	sprite2_spawn(230,171,-1)	// 0xE6, 0xAB, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(195)	// 0xC3
 	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
@@ -285,6 +302,7 @@ l_0xc91ffd:
 	sprite2_spawn(241,173,-1)	// 0xF1, 0xAD, 0xFF
 	sprite2_spawn(241,174,-1)	// 0xF1, 0xAE, 0xFF
 	unset(FLG_BGM_TBUS)	// 535
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(78)	// 0x4E
 	party_unfreeze	// 0xFF
 	pause(1)
@@ -294,15 +312,18 @@ l_0xc91ffd:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 1
+	cc_close_letterbox
 	eob
 
-l_0xc920a2:
+l_0xc920a2:	// Dalaam flyover sequence, start of Poo's quest
+	cc_open_letterbox
 	call(data_24.l_0xc69082)
 	music(111)
 	sprite2_spawn(106,763,1)	// 0x6A, 0x02FB, 1
 	wait_movement
 
 	hide_party	// 0xFF, 6
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(81)	// 0x51
 	pause(120)
 
@@ -322,13 +343,16 @@ l_0xc920a2:
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	music_effect(3)	// Fade out
 	pause(60)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(202)	// 0xCA
 	sprite2_spawn(106,645,1)	// 0x6A, 0x0285, 1
 	call(data_57.l_0xc9b4b8)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(203)	// 0xCB
 	sprite2_spawn(106,646,1)	// 0x6A, 0x0286, 1
 	call(data_57.l_0xc9b4b8)
 	show_party(1)	// 0xFF, 1
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(79)	// 0x4F
 	party_freeze	// 0xFF
 	npc_freeze(1089)	// 0x0441
@@ -359,9 +383,11 @@ l_0xc920a2:
 	pause(60)
 	music_resume
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc92203:	// Mu training scene
+	cc_open_letterbox
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	sprite2_spawn(106,339,1)	// 0x6A, 0x0153, 1
 	call(data_57.l_0xc9b4b8)
@@ -433,9 +459,10 @@ l_0xc92203:	// Mu training scene
 	call(l_0xc92958)
 	sprite2_unfreeze(88)	// 0x58
 	wait_movement
+	cc_close_letterbox
 	eob
 
-l_0xc9237e:
+l_0xc9237e:	// Poo joins the party
 	set(FLG_BGM_TELEPORT)	// 593
 	music_effect(3)	// Fade out
 	pause(120)
@@ -448,12 +475,13 @@ l_0xc9237e:
 	party_add(2)	// Add Paula
 	party_add(3)	// Add Jeff
 	party_remove(4)	// Remove Poo
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(101)	// 0x65
 	party_freeze	// 0xFF
 	set_respawn_point(7)
 	show_party(1)	// 0xFF, 1
 
-l_0xc923b4:
+l_0xc923b4:	// Continuation of Poo joins the party
 	sprite2_spawn(4,345,1)	// 0x0004, 0x0159, 1
 	wait_movement
 
@@ -484,6 +512,7 @@ l_0xc923b4:
 	set(FLG_PHOTO_RAMMA)	// 498
 	restore_npc_members_and_money
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc92417:

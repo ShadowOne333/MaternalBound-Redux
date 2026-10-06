@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -278,7 +279,6 @@ l_0xc60b13:
 l_0xc60b69:
 	npc_do_mc(767,690)	// 0x02FF, 0x02B2
 	wait_movement
-	goto(l_0xc60b71)
 
 l_0xc60b71:
 	pause(2)
@@ -378,7 +378,9 @@ l_0xc60e2a:
 l_0xc60e30:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc611e2)	// 0x49, 73
 	goto_if_flag(FLG_DSRT_INFO_TLPT, l_0xc61139)	// 0x02FC, 764
+	cc_close_letterbox
 	goto_if_flag(FLG_ITEM_TOFU, l_0xc60ff3)	// 0x022A, 554
+
 	music(119)
 	title(1, Talah)
 	"@The truth of the universe travels through the cosmos like particles and waves..." next
@@ -423,7 +425,6 @@ l_0xc60e30:
 	}
 	next
 	set(FLG_ITEM_TOFU)	// 554
-	goto(l_0xc60ff3)
 
 l_0xc60ff3:
 	window_open(1)
@@ -444,6 +445,7 @@ l_0xc61082:
 	music_effect(3)	// Fade out
 	pause(20)
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc610c1:
@@ -456,6 +458,7 @@ l_0xc610c1:
 	music_effect(3)	// Fade out
 	pause(20)
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc610f1:
@@ -466,6 +469,7 @@ l_0xc610f1:
 	music_effect(3)	// Fade out
 	pause(20)
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc61139:
@@ -482,72 +486,105 @@ l_0xc611e2:
 	"@I praise all of you for your courage." end
 
 l_0xc61228:
+	cc_open_letterbox
 	title(1, Gerardo)
 	"@I didn't have a problem digging until this.../| I found a maze." next
 	"@Lots of monsters appeared, so I couldn't proceed." next
 	"@There's 5 big moles...!" next
 	"@If I beat the monsters, I can continue on." next
 	"@I think I have a bleeding ulcer from worrying too much." next
-	"@I'm helpless to really do anything." end
+	"@I'm helpless to really do anything." wait
+	cc_close_letterbox
+	eob
 
 l_0xc612d2:
 	goto_if_flag(FLG_WIN_DSRT_BOSS_A, data_35.l_0xc7c588)	// 0x0115, 277
+
+	cc_open_letterbox
 	call(l_0xc613b3)
+
 	call(data_23.l_0xc6858a)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	call(l_0xc615e9)
 	pause(1)
 	npc_do_mc(831,635)	// 0x033F, 0x027B
 	set(FLG_WIN_DSRT_BOSS_A)	// 277
 	call(l_0xc615a7)
+	cc_close_letterbox
 	eob
 
 l_0xc612ff:
 	goto_if_flag(FLG_WIN_DSRT_BOSS_B, data_35.l_0xc7c588)	// 0x0116, 278
+
+	cc_open_letterbox
 	call(l_0xc613b3)
+
 	call(data_23.l_0xc68591)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	call(l_0xc615e9)
 	pause(1)
 	npc_do_mc(832,635)	// 0x0340, 0x027B
 	set(FLG_WIN_DSRT_BOSS_B)	// 278
 	call(l_0xc615a7)
+	cc_close_letterbox
 	eob
 
 l_0xc6132c:
 	goto_if_flag(FLG_WIN_DSRT_BOSS_C, data_35.l_0xc7c588)	// 0x0117, 279
+
+	cc_open_letterbox
 	call(l_0xc613b3)
+
 	call(data_23.l_0xc68598)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	call(l_0xc615e9)
 	pause(1)
 	npc_do_mc(833,635)	// 0x0341, 0x027B
 	set(FLG_WIN_DSRT_BOSS_C)	// 279
 	call(l_0xc615a7)
+	cc_close_letterbox
 	eob
 
 l_0xc61359:
 	goto_if_flag(FLG_WIN_DSRT_BOSS_D, data_35.l_0xc7c588)	// 0x0118, 280
+
+	cc_open_letterbox
 	call(l_0xc613b3)
+
 	call(data_23.l_0xc6859f)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	call(l_0xc615e9)
 	pause(1)
 	npc_do_mc(837,635)	// 0x0345, 0x027B
 	set(FLG_WIN_DSRT_BOSS_D)	// 280
 	call(l_0xc615a7)
+	cc_close_letterbox
 	eob
 
 l_0xc61386:
 	goto_if_flag(FLG_WIN_DSRT_BOSS_E, data_35.l_0xc7c588)	// 0x0119, 281
+
+	cc_open_letterbox
 	call(l_0xc613b3)
+
 	call(data_23.l_0xc685a6)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	call(l_0xc615e9)
 	pause(1)
 	npc_do_mc(838,635)	// 0x0346, 0x027B
 	set(FLG_WIN_DSRT_BOSS_E)	// 281
 	call(l_0xc615a7)
+	cc_close_letterbox
 	eob
 
 l_0xc613b3:
@@ -616,7 +653,6 @@ l_0xc615a7:
 	unset(FLG_DSRT_SYOZI_DUNGEON_APPEAR)	// 54
 	unset(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
 	set(FLG_PHOTO_EXCAVATION)	// 492
-	goto(l_0xc615e8)
 
 l_0xc615e8:
 	eob

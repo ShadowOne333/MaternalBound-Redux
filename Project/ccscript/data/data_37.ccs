@@ -539,6 +539,7 @@ l_0xc7edd9:
 	eob
 
 l_0xc7edf1:
+	cc_open_letterbox
 	font_saturn
 	"@Drink coffee" linebreak
 	"  before go?" next
@@ -555,6 +556,7 @@ l_0xc7ee3e:
 	"@Why you" linebreak
 	"  say no?" wait
 	font_normal
+	cc_close_letterbox
 	eob
 
 l_0xc7ee4f:
@@ -613,6 +615,7 @@ l_0xc7ef3b:
 	goto_if_flag(FLG_INFO_XYZ, l_0xc7ef67)	// 0x0084, 132
 	goto_if_flag(FLG_WIN_OSCAR, l_0xc7efa2)	// 0x004A, 74
 
+	cc_open_letterbox
 	title(1, Apple)
 	get_char_at_pos(1) rtoarg
 	"@Ah, {name(0)}." next
@@ -620,9 +623,12 @@ l_0xc7ef3b:
 l_0xc7ef67:
 	title(1, Apple)
 	"@The Phase Distorter will certainly be completed someday," next
-	"@in my humble opinion." end
+	"@in my humble opinion." wait
+	cc_close_letterbox
+	eob
 
 l_0xc7efa2:
+	cc_open_letterbox
 	title(1, Apple)
 	"@Excellent, excellent!" linebreak
 	"  Everything proceeded as planned." next
@@ -633,7 +639,9 @@ l_0xc7efa2:
 	"@In this prototype, you can only travel to different points" next
 	"@within the same time period." next
 	"@It is able, however, to search out the locations of enemies." next
-	"@Right now, it is indicating the presence of enemies in the Lost Underworld!" end
+	"@Right now, it is indicating the presence of enemies in the Lost Underworld!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc7f0d6:
 	goto_if_flag(FLG_DAY_AFTER, l_0xc7ef67)	// 0x00A9, 169
@@ -653,6 +661,7 @@ l_0xc7f165:
 	goto_if_flag(FLG_XYZ_OK, l_0xc7f34c)	// 0x0086, 134
 	goto_if_flag(FLG_INFO_XYZ, l_0xc7f25b)	// 0x0084, 132
 
+	cc_open_letterbox
 	"@Yahah!  The Mr. Saturns are incredible folk." next
 	"@And the Apple Kid...  He is a most exceptional young man," next
 	"@very different from other kids." next
@@ -664,12 +673,16 @@ l_0xc7f165:
 
 	pause(1)
 	npc_do_mc(741,287)	// 0x02E5, 0x011F
+	cc_close_letterbox
 	eob
 
 l_0xc7f25b:
+	cc_open_letterbox
 	"@Hmmmm..." next
 	"@If I only had a piece of a meteorite," next
-	"@I might be able to make some Zexonyte." end
+	"@I might be able to make some Zexonyte." wait
+	cc_close_letterbox
+	eob
 
 l_0xc7f29e:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
@@ -680,6 +693,7 @@ l_0xc7f29e:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc7f2b1:
+	cc_open_letterbox
 	title(1, Andonuts)
 	if not flag FLG_KEY_ITEMS { take(-1, METEORITE_PIECE) }	// 0xFF, 0xC1 / 193
 	sound(SND_CHICKEN2)	// 118
@@ -692,9 +706,11 @@ l_0xc7f2b1:
 	"@This is getting most fascinating!" wait
 	set(FLG_XYZ_OK)	// 134
 	set(FLG_DAY_AFTER)	// 169
+	cc_close_letterbox
 	eob
 
 l_0xc7f34c:
+	cc_open_letterbox
 	title(1, Andonuts)
 	goto_if_flag(FLG_DAY_AFTER, l_0xc7f5ec)	// 0x00A9, 169
 	"@Finally, it's complete! " next
@@ -717,9 +733,11 @@ l_0xc7f459:
 	"@I just want to make sure you're ready." next
 	"@Let me know when your preparations are complete." wait
 	set(FLG_DOSEI_INFO_EQUIP)	// 765
+	cc_close_letterbox
 	eob
 
 l_0xc7f50b:
+	cc_open_letterbox
 	"@Good." pause(20)
 	"  At last,| the time has come." next
 	"@Are you ready?" linebreak
@@ -735,13 +753,17 @@ l_0xc7f54c:
 	"  Get right in!" wait
 	set(FLG_SPACETUNNEL2_START)	// 133
 	npc_do_mc(741,287)	// 0x02E5, 0x011F
+	cc_close_letterbox
 	eob
 
 l_0xc7f5ec:
-	"@Yes..." pause(20)
+	cc_open_letterbox
+	"@Yes..." pause(20) linebreak
 	"  Most intriguing..." next
 	"@Leave everything to us, and you get some rest." next
-	"@This is getting most fascinating!" end
+	"@This is getting most fascinating!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc7f634:
 	"@It's a miracle!" next

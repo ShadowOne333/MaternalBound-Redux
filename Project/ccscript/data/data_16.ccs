@@ -949,49 +949,66 @@ l_0xc5fa72:
 l_0xc5fd72:
 	call(l_0xc5ff12)
 	goto_if_true(l_0xc5ff4e)
-	get_char_at_pos(1)
-	rtoarg
-	"@({name(0)} checked the bus schedule.)" next
-	goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// 0x0A, 10
-	"@(It looks like the next bus will come pretty soon.)" promptw
-	window_closeall
-	sprite2_spawn(205,64,1)	// 0xCD, 0x40, 1
-	wait_movement
-	set(FLG_TEMP_9)	// 10
-	eob
 
-l_0xc5fdca:
-	"@(It looks like it's going to be a while before the next bus comes.)" end
-
-l_0xc5fdea:
-	isset(FLG_WIN_GEPPU)	// 71
-	goto_if_false(l_0xc5feac)
-	call(l_0xc5fef4)
-	goto_if_true(l_0xc5ff4e)
-	get_char_at_pos(1)
-	rtoarg
-	"@({name(0)} checked the bus schedule.)" next
-	goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// 0x0A, 10
-	"@(It looks like the next bus will come pretty soon.)" promptw
-	window_closeall
-	sprite2_spawn(205,202,1)	// 0xCD, 0xCA, 1
-	wait_movement
-	set(FLG_TEMP_9)	// 10
-	eob
-
-l_0xc5fe4b:
-	isset(FLG_WIN_GEPPU)	// 71
-	goto_if_false(l_0xc5feac)
-	call(l_0xc5ff03)
-	goto_if_true(l_0xc5ff4e)
+	cc_open_letterbox
 	get_char_at_pos(1) rtoarg
 	"@({name(0)} checked the bus schedule.)" next
 	goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// 0x0A, 10
 	"@(It looks like the next bus will come pretty soon.)" promptw
 	window_closeall
+
+	sprite2_spawn(205,64,1)	// 0xCD, 0x40, 1
+	wait_movement
+
+	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
+	eob
+
+l_0xc5fdca:
+	"@(It looks like it's going to be a while before the next bus comes.)" wait
+	cc_close_letterbox
+	eob
+
+l_0xc5fdea:
+	isset(FLG_WIN_GEPPU)	// 71
+	goto_if_false(l_0xc5feac)
+
+	call(l_0xc5fef4)
+	goto_if_true(l_0xc5ff4e)
+
+	cc_open_letterbox
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} checked the bus schedule.)" next
+	goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// 0x0A, 10
+	"@(It looks like the next bus will come pretty soon.)" promptw
+	window_closeall
+
+	sprite2_spawn(205,202,1)	// 0xCD, 0xCA, 1
+	wait_movement
+
+	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
+	eob
+
+l_0xc5fe4b:
+	isset(FLG_WIN_GEPPU)	// 71
+	goto_if_false(l_0xc5feac)
+
+	call(l_0xc5ff03)
+	goto_if_true(l_0xc5ff4e)
+
+	cc_open_letterbox
+	get_char_at_pos(1) rtoarg
+	"@({name(0)} checked the bus schedule.)" next
+	goto_if_flag(FLG_TEMP_9, l_0xc5fdca)	// 0x0A, 10
+	"@(It looks like the next bus will come pretty soon.)" promptw
+	window_closeall
+
 	sprite2_spawn(205,206,1)	// 0x00CD, 0x00CE, 0x01
 	wait_movement
+
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc5feac:
@@ -1179,6 +1196,7 @@ l_0xc60349:
 	goto_if_flag(FLG_WIN_DSRT_BOSS, l_0xc6050b)	// 0x0048, 72
 	goto_if_flag(FLG_DSRT_SYOZI_1, l_0xc604db)	// 0x0089, 137
 
+	cc_open_letterbox
 	title(1, Gerardo)
 	"@This hole's great!" pause(20)
 	"  Good hole, good hole, good hole..." next
@@ -1190,28 +1208,34 @@ l_0xc60349:
 
 l_0xc60400:
 	"@The humanitarian thing is to help people out when they're hungry." next
-	"@Although I hate it, {itemname(PIZZA)} would work for me..."
-	goto(l_0xc605d9)
+	"@Although I hate it, {itemname(PIZZA)} would work for me..." wait
+	cc_close_letterbox
+	eob	// end
 
 l_0xc6044c:
 	"@Seems like you have a lot of stuff." next
 	"@What are you gonna give me?" promptw
 	open_hp
+
 	call(data_15.l_0xc5e456)
 	newline
 	goto_if_false(l_0xc60400)
+
 	store_registers
 	get_inventory_item(0,0)	// 0x00, 0x00
 	arg_item_type_is_not(3)	// 0x03
 	goto_if_false(l_0xc604c9)
+
 	load_registers
 	take_from_location(0,0)	// 0x00, 0x00
+
 	sound(SND_CHICKEN2)	// 118
-	"@Thank you." pause(20)
+	"@Thank you." pause(20) linebreak
 	"  If I find the gold, I'll give it to you." wait
 	set(FLG_DSRT_SYOZI_1)	// 137
 	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
 	set(FLG_DSRT_SYOZI_DUNGEON_APPEAR)	// 54
+	cc_close_letterbox
 	goto_if_flag(FLG_FOUR_MISSFAKE, l_0xc604c5)	// 0x025F, 607
 	eob
 
@@ -1222,15 +1246,16 @@ l_0xc604c5:
 l_0xc604c9:
 	"@Come on!" pause(20)
 	"  I can't eat this!" next
+	cc_close_letterbox
 	eob
 
 l_0xc604db:
 	title(1, Gerardo)
-	"@I'm still hard at work digging and digging." pause(20)
-	"  Hey, wait a second."
-	goto(l_0xc605d9)
+	"@I'm still hard at work digging and digging." pause(20) linebreak
+	"  Hey, wait a second." end
 
 l_0xc6050b:
+	cc_open_letterbox
 	title(1, Gerardo)
 	"@You've gotten rid of the monsters?!" next
 	"@Good job." next
@@ -1239,14 +1264,14 @@ l_0xc6050b:
 	"@Before I start digging I'm going to set a careful plan of action..." wait
 	set(FLG_DSRT_YUMBO_SHIGE_APPEAR)	// 272
 	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	cc_close_letterbox
 	eob
 
 l_0xc6058f:
 	title(1, Gerardo)
 	"@If we could just find a diamond even..." next
 	"@It's a shame that a digger like me can't find buried gold." next
-	"@I'll try even harder."
-	goto(l_0xc605d9)
+	"@I'll try even harder." end
 
 l_0xc605d9:
 	end

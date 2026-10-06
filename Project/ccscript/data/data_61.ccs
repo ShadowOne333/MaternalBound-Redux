@@ -24,6 +24,7 @@ l_0xef57eb:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
 
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the eighth <Your Sanctuary> location." pause(20) linebreak
@@ -33,9 +34,11 @@ l_0xef57eb:
 	call(data_23.l_0xc6843a)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	npc_delete(1276,8)	// 0x04FC, 8
 	pause(120)
 	set(FLG_WIN_FIRE_BOSS)	// 197
+	cc_close_letterbox
 	eob
 
 l_0xef5864:
@@ -63,8 +66,10 @@ l_0xef58c7:
 
 	get_item_receiver(-1)
 	goto_if_false(data_23.l_0xc685bb)
+
 	give_and_return_location(0, HORN_OF_LIFE)	// 130
 	call(data_36.l_0xc7dccf)
+
 	set(FLG_BOX_DKFD_1)	// 223
 	end
 
@@ -151,15 +156,19 @@ l_0xef5ab5:
 l_0xef5aed:
 	goto_if_flag(FLG_INFO_POWR, l_0xef5bc8)	// 0x01A7, 423
 	goto_if_flag(FLG_DKFD_GUMI_BOSS, l_0xef5b97)	// 0x0268, 616
+
+	cc_open_letterbox
 	"@What are you doing in the dinosaur's cage?" next
 	"@I'll open the door for you, and you get out of the cage quick." next
 	"@That's an order from the boss." pause(15)
 	// Item 0xD3 / 211 = Tendakraut
 	"  ...By the way,| thanks for the {itemname(TENDAKRAUT)}." next
+
 	get_char_at_pos(1) rtoarg
 	"@({name(0)}'s {itemname(TENDAKRAUT)} was taken.)" next
 	"@(That nasty smell left you at the same time!)" wait
 	set(FLG_DKFD_GUMI_BOSS)	// 616
+	cc_close_letterbox
 	eob
 
 l_0xef5b97:
@@ -268,6 +277,7 @@ l_0xef6157:
 
 l_0xef617b:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x016E, 366
+	cc_open_letterbox
 	window_open(1)
 	"@Did you bring some <Fly Honey>?" next
 	"@It's Master Belch's favorite." linebreak
@@ -278,6 +288,8 @@ l_0xef61cb:
 	window_closeall
 	call(data_23.l_0xc6853f)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	pause(1)
 	npc_do_mc(688,635)	// 0x02B0, 0x027B
 	set(FLG_GPFT_MINIGEPPU_A_DISAPPEAR)	// 366
@@ -295,9 +307,11 @@ l_0xef61f3:
 	call(data_23.l_0xc6853f)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	pause(1)
 	npc_do_mc(688,635)	// 0x02B0, 0x027B
 	set(FLG_GPFT_MINIGEPPU_A_DISAPPEAR)	// 366
+	cc_close_letterbox
 	eob
 
 l_0xef6247:
@@ -305,6 +319,7 @@ l_0xef6247:
 	"@Hey, be careful!" pause(20)
 	"  Be sure you don't drop it!" promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xef6276:
@@ -320,8 +335,9 @@ l_0xef62b1:
 l_0xef62f5:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_D_DISAPPEAR, data_35.l_0xc7c588)	// 0x016F, 367
 
+	cc_open_letterbox
 	window_open(1)
-	"@Aren't you the Fly Honey delivery boy?" pause(15)
+	"@Aren't you the Fly Honey delivery boy?" pause(15) linebreak
 	"  What's the password!" next
 	"@It doesn't mean I don't trust you." pause(15)
 	"  Just say it!" next
@@ -333,14 +349,17 @@ l_0xef62f5:
 	call(data_23.l_0xc68546)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	pause(1)
 	npc_do_mc(691,635)	// 0x02B3, 0x027B
 	set(FLG_GPFT_MINIGEPPU_D_DISAPPEAR)	// 367
+	cc_close_letterbox
 	eob
 
 l_0xef63b5:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_E_DISAPPEAR, data_35.l_0xc7c588)	// 0x0170, 368
 
+	cc_open_letterbox
 	window_open(1)
 	"@So, you're the ones who destroyed the zombies that I assigned to Threek!!" promptw
 	window_closeall
@@ -348,9 +367,11 @@ l_0xef63b5:
 	call(data_23.l_0xc6854d)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	pause(1)
 	npc_do_mc(692,635)	// 0x02B4, 0x027B
 	set(FLG_GPFT_MINIGEPPU_E_DISAPPEAR)	// 368
+	cc_close_letterbox
 	eob
 
 l_0xef6400:
@@ -369,6 +390,8 @@ l_0xef6419:
 
 l_0xef6446:
 	goto_if_flag(FLG_WIN_GEPPU, data_35.l_0xc7c588)	// 0x47, 71
+
+	cc_open_letterbox
 	music(134)
 	sound(SND_WHIRR)	// 78
 
@@ -389,7 +412,7 @@ l_0xef6446:
 	"@If Master Giygas is scared of someone..." next
 	sound(SND_WHIRR)	// 78
 	"@he would have to be worse than the greatest evil..." next
-	"@Garg!  Ga!  Garg!  Ga!  Ga!  Ga!" next
+	"@Garg!  Ga!  Garg!  Ga!  Ga!  Ga!  Garg!" next
 	"@I'll take you down big time, so get ready for the worst fight of your life!" next
 	sound(SND_WHIRR)	// 78
 	pause(40)
@@ -408,6 +431,7 @@ l_0xef6569:
 	call(data_23.l_0xc68554)
 	goto_if_true(player_died_to_belch)	// data_23.l_0xc683de
 
+	cc_instant_letterbox
 	window_open(1)
 	music(134)
 	title(1, Belch)
@@ -446,6 +470,7 @@ l_0xef6569:
 	unset(FLG_THRK_TUNNEL_CLOSE)	// 761
 	set_respawn_point(4)
 	music_resume
+	cc_close_letterbox
 	eob
 
 player_died_to_belch: {
@@ -530,6 +555,7 @@ l_0xef6874:
 l_0xef68d7:
 	cc_instant_letterbox
 	window_open(1)
+
 	hasitem(-1, FLY_HONEY)	// 105
 	goto_if_true(l_0xef6954)
 

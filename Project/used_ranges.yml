@@ -1,6 +1,6 @@
 # List all ranges which CoilSnake should not touch
 # Example:
-- (0x007D20, 0x007D4F)	# Reserved for Widescreen hack
+- (0x00FF50, 0x00FF8F)	# Reserved for Widescreen hack
 - (0x03FE00, 0x040000)	# Reserved for the Extended PSI animations
 - (0x04FD4B, 0x04FFFF)	# Decompress speed hack
 - (0x02FFCC, 0x02FFD5)	# M3 Sprites (0xC2FFCC-0xC2FFD0) & HP/PP meter guard (0xC2FFD1-0xC2FFD5)

@@ -465,6 +465,8 @@ l_0xc9b268:
 	eob
 
 l_0xc9b270:	// Flashback scene prep
+	cc_open_letterbox
+
 	unset(FLG_PAULA_KI)
 	unset(FLG_JEFF_KI)
 	unset(FLG_POO_KI)
@@ -482,11 +484,13 @@ l_0xc9b270:	// Flashback scene prep
 	wait_movement
 	// hide_party command does 1F EB FF 06 instead of 1F EB FF 01
 	hide_party_with_style(1)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(81)	// 0x51
 	pause(30)
 	event(16)	// 0x10, Final unskippable Sound stone screen
 	pause(30)
 	sprite2_spawn(435,695,-1)	// 0x01B3, 0x02B7, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(35)	// 0x23
 	focus_camera_on_sprite2(435)	// 0x01B3
 	party_unfreeze	// 0xFF
@@ -495,12 +499,15 @@ l_0xc9b270:	// Flashback scene prep
 	party_freeze	// 0xFF
 	sprite2_delete(435,10)	// 0x01B3, 0x0A
 	pause(180)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(36)	// 0x24
 	sprite2_spawn(106, 696, 1)	// 0x006A, 0x02B8, 01
 	call(l_0xc9b4b8)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(37)	// 0x25
 	sprite2_spawn(106, 697, 1)	// 0x006A, 0x02B9, 01
 	call(l_0xc9b4b8)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(38)	// 0x26
 	sprite2_spawn(106, 698, 1)	// 0x006A, 0x02BA, 01
 	call(l_0xc9b4b8)
@@ -562,6 +569,7 @@ l_0xc9b270:	// Flashback scene prep
 	pause(120) pause(120) pause(120)
 	party_unfreeze	// 0xFF
 	sprite2_spawn(6,780,-1)	// 0x0006, 0x030C, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(161)	// 0xA1
 	sprite2_delete(6,6)
 	show_party(1)	// 0xFF, 1
@@ -571,6 +579,7 @@ l_0xc9b270:	// Flashback scene prep
 	music_resume
 	OSS_off	// event(6)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	eob
 
 l_0xc9b4b8:
@@ -619,6 +628,7 @@ l_0xc9b4c9:
 	goto_if_flag(FLG_MGKT_BACK_FIRE, l_0xc9b799)	// 0x0224, 548
 	goto_if_flag(FLG_MGKT_BACK_MGNT, l_0xc9b6e3)	// 0x0223, 547
 	goto_if_flag(FLG_MGKT_BACK_MLKY, l_0xc9b62d)	// 0x0222, 546
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(197)	// 0xC5
 	party_freeze	// 0xFF
 	pause(60)
@@ -680,6 +690,7 @@ l_0xc9b60f:
 	party_unfreeze	// 0xFF
 	OSS_off	// event(6)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	eob
 
 l_0xc9b62d:
@@ -880,7 +891,8 @@ l_0xc9b8dd:
 l_0xc9b8ff:
 	eob
 
-l_0xc9b900:
+l_0xc9b900:	// Phase Distorter 2 attempt
+	cc_open_letterbox
 	sprite2_spawn(106,288,1)	// 0x006A, 0x0120, 0x01
 	call(l_0xc9b4b8)
 	hide_party	// 0xFF, 0x06
@@ -901,6 +913,7 @@ l_0xc9b900:
 	music_resume
 	npc_freeze(728)	// 0x02D8
 	inflict_status(1, SCR_STATUS_GROUP_7, 0)	// 0x01, 0x08, 0x00
+
 	window_open(1)
 	title(1, Andonuts)
 	"@Hmmm... it doesn't work." pause(20)
@@ -943,6 +956,7 @@ l_0xc9ba78:
 	isset(FLG_GOT_CAPEESTATE)	// 99
 	goto_if_false(data_55.l_0xc9992f)
 	unset(FLG_ONET_ESTATE_DOOR_OPEN)	// 746
+	cc_close_letterbox
 	eob
 
 l_0xc9bbd3:
@@ -977,6 +991,8 @@ l_0xc9bc3c:
 	eob
 
 l_0xc9bc48:
+	cc_open_letterbox
+
 	music(127)
 	npc_spawn(1275,310,4)	// 0x04FB, 0x0136, 0x04
 	pause(180)
@@ -984,21 +1000,26 @@ l_0xc9bc48:
 	npc_spawn(1269,312,1)	// 0x04F5, 0x0138, 0x01
 	npc_spawn(1271,314,1)	// 0x04F7, 0x013A, 0x01
 	wait_movement
+
 	music_resume
 	get_dir_from_npc(1269,TO_CHAR,255)	// 0x04F5, 0x01, 0x00FF
 	npc_direction(1269,0)	// 0x04F5, 0x00
 	npc_freeze(1272)	// 0x04F8
 	npc_freeze(1269)	// 0x04F5
 	npc_freeze(1271)	// 0x04F7
+
 	call(l_0xc9bca1)
+
 	set(FLG_DKFD_ST3_APPEAR)	// 327
 	set(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
 	set(FLG_DKFD_APPLE_A_APPEAR)	// 329
 	set(FLG_DKFD_DOSEI_A_APPEAR)	// 330
+	cc_close_letterbox
 	eob
 
 l_0xc9bca1:
 	goto_if_flag(FLG_DKFD_END_GET_READY, l_0xc9bd69)	// 0x011D, 285
+
 	window_open(1)
 	title(1, Andonuts)
 	"@The <Phase Distorter 3> has been completed." next
@@ -1006,12 +1027,15 @@ l_0xc9bca1:
 	"@Giygas is attacking from our exact location," next
 	"@but he is attacking from this very location in the past." promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc9bd35:
+	cc_open_letterbox
 	title(1, Andonuts)
 	"@This is very hard for me to tell you, but..." promptw
 	goto_if_flag(FLG_DKFD_END_GET_READY, l_0xc9bd52)	// 0x011D, 285
+	cc_close_letterbox
 	eob
 
 l_0xc9bd52:
@@ -1021,6 +1045,7 @@ l_0xc9bd52:
 	pause(150)
 	set(FLG_DKFD_ANDONUT_B_APPEAR)	// 331
 	unset(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
+	cc_close_letterbox
 	eob
 
 l_0xc9bd69:
@@ -1042,7 +1067,9 @@ l_0xc9bd69:
 
 l_0xc9bf2c:
 	"@Yes, it's natural to feel as you do." next
-	"@The only thing left is the destruction of our planet..." end
+	"@The only thing left is the destruction of our planet..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc9bf68:
 	"@...Hmmm" pause(20)

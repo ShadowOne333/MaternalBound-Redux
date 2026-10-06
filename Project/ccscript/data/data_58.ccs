@@ -34,18 +34,21 @@ l_0xc9bfcd:
 	wait_movement
 
 	hide_party	// 0xFF, 0x06
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(81)	// 0x51
 	party_freeze	// 0xFF
 	sprite2_spawn(106,782,1)	// 0x006A, 0x030E, 0x01
 	wait_movement
 
 	npc_freeze(106)	// 0x006A
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	music(179)
 	npc_unfreeze(106)	// 0x006A
 	wait_movement
 
 	stop_music
 	sprite2_spawn(162,315,255)	// 0x00A2, 0x013B, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(104)	// 0x68
 	party_freeze	// 0xFF
 	hide_party	// 0xFF, 0x06
@@ -83,8 +86,10 @@ l_0xc9c19b:
 	"@to be present at the beginning of this monumental undertaking..." promptw
 	music(91)
 	window_closeall
+
 	set(FLG_STEP_PAST)	// 372
 	pause(1)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(93)	// 0x5D
 	party_freeze	// 0xFF
 	pause(60)
@@ -102,6 +107,7 @@ l_0xc9c19b:
 	unset(FLG_SUMS_STOIC_RESERVED)	// 337
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	party_unfreeze	// 0xFF	// FF
+	cc_close_letterbox
 	eob
 
 l_0xc9c262:
@@ -463,6 +469,7 @@ l_0xc9c65b:
 	eob
 
 l_0xc9c6b8:
+	cc_open_letterbox
 	show_npc_float(1283,3)	// 0x0503, 0x03
 	pause(60)
 	hide_npc_float(1283)	// 0x0503
@@ -505,6 +512,7 @@ l_0xc9c6b8:
 	"@({name(0)}'s Tendakraut was stolen.)" next
 	"@(The awful smell surrounding the group is now gone.)" promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc9c7fa:	// At Home ending Door knock setup
@@ -543,6 +551,7 @@ l_0xc9c7fa:	// At Home ending Door knock setup
 	eob
 
 l_0xc9c85d:	// Ending Porky's letter
+	cc_open_letterbox
 	stop_music	// music_stop(0)
 	sound(SND_DOOROPEN)	// 8
 	sprite2_spawn(106,39,1)	// 0x006A, 0x0027, 0x01
@@ -596,15 +605,18 @@ l_0xc9c991:
 	goto_if_flag(FLG_PU, l_0xc9cb79)	// 0x0010, 16
 	goto_if_flag(FLG_RAMA_OK, l_0xc9c9e8)	// 0x0111, 273
 	goto_if_flag(FLG_TEMP_9, l_0xc9c9db)	// 0x000A, 10
+	cc_open_letterbox
 	"@I won't say anything." next
 	"@Go to <Mu,> the Place of Emptiness again." wait
 	call(data_50.l_0xc92458)
+	cc_close_letterbox
 	eob
 
 l_0xc9c9db:
 	"@Go quickly!" end
 
 l_0xc9c9e8:
+	cc_open_letterbox
 	"@I am proud." next
 	"@You have completed your Mu training." next
 	"@I, Yi-Su-Chi, have nothing left to teach you." wait
@@ -838,10 +850,12 @@ l_0xc9d2a5:
 
 l_0xc9d2ba:
 	goto_if_flag(FLG_WIN_PINK_BOSS, data_35.l_0xc7c588)	// 0x00C3, 195
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
 
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the sixth <Your Sanctuary> location." pause(20) linebreak
@@ -851,9 +865,11 @@ l_0xc9d2ba:
 	call(data_23.l_0xc6842c)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	npc_delete(1118,8)	// 0x045E, 0x08
 	pause(120)
 	set(FLG_WIN_PINK_BOSS)	// 195
+	cc_close_letterbox
 	eob
 
 l_0xc9d334:
@@ -901,6 +917,7 @@ l_0xc9d4fd:
 	"@I'm waiting for Prince {name(4)} to see me and say <I love you.>" end
 
 l_0xc9d523:
+	cc_open_letterbox
 	title(1, Star)
 	"@You have sharp eyes." next
 	"@...You must be Prince {name(4)}." next
@@ -910,6 +927,7 @@ l_0xc9d523:
 	"@I'll see you again.  So long!" wait
 	sound(SND_STATSUP)	// 40
 	set(FLG_RAMA_258_DISAPPEAR)	// 595
+	cc_close_letterbox
 	eob
 
 l_0xc9d5c4:
@@ -926,8 +944,11 @@ l_0xc9d5c4:
 	"  You did so well for one who hasn't had much training." end
 
 l_0xc9d621:
+	cc_open_letterbox
 	"@(As strange as this may sound," pause(15)
-	" there are statues of rabbits blocking your way.)" end
+	" there are statues of rabbits blocking your way.)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc9d656:
 	if flag FLG_KEY_ITEMS {
@@ -939,6 +960,7 @@ l_0xc9d656:
 	result_is(CARROT_KEY)	// 253, Rabbit's carrot
 	goto_if_false(l_0xc9d6b7)
 
+	cc_open_letterbox
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		swap
@@ -961,6 +983,7 @@ l_0xc9d656:
 	hide_sprite(1108,8)	// 0454, 8
 	hide_sprite(1109,8)	// 0455, 8
 	set(FLG_RAMA_RABBIT_DISAPPEAR)	// 652
+	cc_close_letterbox
 	eob
 
 l_0xc9d6b7:
@@ -979,7 +1002,7 @@ l_0xc9d6f8:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc9d70b:
-	"@The Tenda turned it down, but really seemed tempted..." end
+	"@(The Tenda turned it down, but really seemed tempted...)" end
 
 l_0xc9d72e:
 	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9d743)	// 0x009B
@@ -1005,12 +1028,14 @@ l_0xc9d77f:
 	goto_if_flag(FLG_GUMI_OLDMAN_ITEM, l_0xc9d854)	// 0x005C, 92
 	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9d7e2)	// 0x009B
 
+	cc_open_letterbox
 	"@...We're all shy." next
 	"@Rumor, I heard a book to fix shyness, there is." next
 	"@Where?" next
 	"@Don't know." next
 	"@Just a rumor." wait
 	set(FLG_GUMI_INFO_MUKUCHI)	// 154
+	cc_close_letterbox
 	eob
 
 l_0xc9d7e2:
@@ -1032,14 +1057,17 @@ l_0xc9d81f:
 	"@Go and do whatever you have to and come back." end
 
 l_0xc9d854:
+	cc_open_letterbox
 	"@So long." pause(20) linebreak
 	"  I say good-bye." wait
 	window_closeall
 	pause(1)
 	npc_do_mc(1252,12)	// 04E4, 000C
+	cc_close_letterbox
 	eob
 
 l_0xc9d875:
+	cc_open_letterbox
 	goto_if_flag(FLG_GUMI_OLDMAN_END, l_0xc9d8de)	// 0x0309, 777
 	"@The book <Overcoming Shyness> was very helpful to us!" next
 	"@We've kept it for a long time, but I'll return it now." next
@@ -1058,11 +1086,14 @@ l_0xc9d8de:
 	"@We're living in peace now, in a wide variety of lifestyles." next
 	"@Thank you very much." wait
 	npc_do_mc(1252,12)	// 04E4, 000C
+	cc_close_letterbox
 	eob
 
 l_0xc9d91b:
 	"@You have too much stuff to receive the book." next
-	"@Get rid of something." end
+	"@Get rid of something." wait
+	cc_close_letterbox
+	eob
 
 l_0xc9d940:
 	store_registers
@@ -1083,6 +1114,7 @@ l_0xc9d95e:
 
 // Original script with the OSS flags removed (not necessary)
 _overcome_tenda_shyness:
+	cc_open_letterbox
 	window_open(1)
 	//OSS_on	// event(5)
 	"@.....!" next
@@ -1107,6 +1139,7 @@ _overcome_tenda_shyness:
 	window_closeall
 
 	call(data_49.l_0xc91582)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(231)	// E7
 	party_freeze	// 0xFF
 	pause(1)
@@ -1144,6 +1177,7 @@ _overcome_tenda_shyness:
 	call(data_50.l_0xc935b7)
 	party_unfreeze	// 0xFF
 	//OSS_off	// event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc9db12:
@@ -1189,11 +1223,14 @@ l_0xc9dbd6:
 	goto(l_0xc9d735)
 
 l_0xc9dbe2:
+	cc_open_letterbox
 	"@Would you like some tea?" linebreak
 	two_choice_menu("Yes", l_0xc9dc0e, "No", l_0xc9dc08)
 
 l_0xc9dc08:
-	"@OK." end
+	"@OK." wait
+	cc_close_letterbox
+	eob
 
 l_0xc9dc0e:
 	"@Drink." wait

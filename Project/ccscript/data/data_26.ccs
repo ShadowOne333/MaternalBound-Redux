@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -321,6 +322,7 @@ l_0xc6d19c:
 	title(1, Fake)
 	goto_if_flag(FLG_TLPT_SUMS, l_0xc6d325)	// 0xD7, 215
 	goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6d2e8)	// 0x92, 146
+	cc_open_letterbox
 	"@So, you're a Runaway Brothers fan, huh?" next
 	"@What?" next
 	"@Excuse me?" next
@@ -334,6 +336,7 @@ l_0xc6d19c:
 	"@Ho ho ho..." next
 	"@Ho ho ho ho ho ho ho!" wait
 	set(FLG_FOUR_MISSFAKE)	// 607
+	cc_close_letterbox
 	goto_if_flag(FLG_DSRT_SYOZI_1, l_0xc6d2e4)	// 0x89, 137
 	eob
 
@@ -362,7 +365,6 @@ l_0xc6d37e:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc6d391:
-	title(1, Fake)
 	get_char_at_pos(1)
 	get_dir_from_char(0,TO_NPC,839)	// 0, 2, 0x0347
 
@@ -381,6 +383,12 @@ l_0xc6d391:
 	sound(SND_CHICKEN2)	// 118
 	get_dir_from_npc(839,TO_CHAR,1)	// 0x0347, 1, 0x0001
 	npc_direction(839,0)	// 0x0347, 0
+
+	window_closeall	// Close menus
+	
+	cc_open_letterbox
+	window_open(1)
+	title(1, Fake)
 	"@Yaaaieeee!!" next
 	// Item 0xB6 / 182 = Diamond
 	"@That that that {itemname(DIAMOND)}... you're going to pay with that {itemname(DIAMOND)}?!" next
@@ -403,9 +411,15 @@ l_0xc6d4d5:
 	eob
 
 l_0xc6d4d6:
+	window_closeall	// Close menus
+	cc_open_letterbox
+	window_open(1)
+	title(1, Fake)
 	"@What, what, what?" next
 	"@I can't tell what it is from this distance." next
-	"@Bring it closer!" end
+	"@Bring it closer!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc6d50a:
 	goto_if_flag(FLG_TEMP_8, l_0xc6d642)	// 0x09
@@ -420,6 +434,7 @@ l_0xc6d50a:
 	"@Back stage is right behind this door." end
 
 l_0xc6d561:
+	cc_open_letterbox
 	"@When {name(1)} arrives,| the Runaway Brothers told me to let him in." next
 	"@So please come in." promptw
 	window_closeall
@@ -432,9 +447,11 @@ l_0xc6d561:
 
 	set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc6d5ae:
+	cc_open_letterbox
 	"@Ah, you're a friend of the Runaway Brothers.." next
 	"@Did you come to see Miss Venus?" pause(20)
 	"  Come inside quickly." next
@@ -449,6 +466,7 @@ l_0xc6d5ae:
 
 	set(FLG_FOUR_TOPOLO_BOY_B_APPEAR)	// 374
 	set(FLG_TEMP_8)	// 9
+	cc_close_letterbox
 	eob
 
 l_0xc6d61e:
@@ -471,21 +489,26 @@ l_0xc6d6a1:
 	goto_if_flag(FLG_TEMP_9, l_0xc6d822)	// 0x0A, 10
 	goto_if_flag(FLG_ITEM_BANANA, l_0xc6d7b3)	// 0x5B, 91
 	goto_if_flag(FLG_FOUR_KOMORITA, l_0xc6d707)	// 0x8C, 140
+	cc_open_letterbox
 	"@Oh, you're just a little kid." next
 	"@I'm kinda busy right now to give you my autograph." next
-	"@Maybe next time, little " get_char_at_pos(1) result_is(2) goto_if_true(l_0xc6d702) "man." end
+	"@Maybe next time, little " get_char_at_pos(1) result_is(2) goto_if_true(l_0xc6d702) "man." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6d702:
 	"girl." end
 
 l_0xc6d707:
+	cc_open_letterbox
 	"@Oh, you want an autograph?" next
 	"@Okay,| I'll give you my autograph on this banana peel..." next
 	pause(20)
 	"@Here you go." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(SIGNED_BANANA) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc6d786)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6d786)
 		give_and_return_location(0, SIGNED_BANANA)	// Item 0xB7, 183, Signed Banana
 		call(data_36.l_0xc7dcb6)
 	}
@@ -495,13 +518,17 @@ l_0xc6d707:
 	window_closeall
 	set(FLG_ITEM_BANANA)	// 91
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc6d786:
 	"@Oh, uh huh..." next
-	"@I can't give you the banana 'cause you have too much stuff." end
+	"@I can't give you the banana 'cause you have too much stuff." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6d7b3:
+	cc_open_letterbox
 	goto_if_flag(FLG_FOUR_VENUS_ENCORE, l_0xc6d852)	// 0x02A8, 680
 	"@Oh, you again..." next
 	"@Look, I'm a little busy right now." next
@@ -514,7 +541,9 @@ l_0xc6d817:
 
 l_0xc6d822:
 	"@Looks like you aren't too busy." pause(20)
-	"  Make yourself at home for a while." end
+	"  Make yourself at home for a while." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6d84b:
 	"@Okay." next
@@ -522,6 +551,7 @@ l_0xc6d84b:
 l_0xc6d852:
 	"@...Then, you should give me a big hand." wait
 	set(FLG_FOUR_VENUS_ENCORE)	// 680
+	cc_close_letterbox
 	eob
 
 l_0xc6d86d:
@@ -564,11 +594,15 @@ l_0xc6d9ca:
 
 l_0xc6da0b:
 	goto_if_flag(FLG_ITEM_SHOW_TICKET, DeptStore_Sold_Out)
+
+	cc_open_letterbox
 	"@Do you wanna buy a ticket?" linebreak
 	two_choice_menu("Yes", l_0xc6da3f, "No", l_0xc6da37)
 
 l_0xc6da37:
-	"@Please come again." end
+	"@Please come again." wait
+	cc_close_letterbox
+	eob
 
 DeptStore_Sold_Out:
 	"@I'm sorry " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "..." next
@@ -599,40 +633,44 @@ l_0xc6da6d:
 	"@That ticket should give you access for as long as you have it handy." wait
 	sound(SND_BOXTAKE)	// 116
 	load_registers
-	if flag FLG_KEY_ITEMS { give_menu_key_item(SHOW_TICKET) }
+	if flag FLG_KEY_ITEMS { give_menu_key_item(SHOW_TICKET) wait }
 	else { give_and_return_location(0, SHOW_TICKET) }	// 178, 0xB2
+	cc_close_letterbox
 	eob
 
 l_0xc6daa0:
-	"@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." end
+	"@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6dac0:
 	"@I'm sorry " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "..." next
 	sprite_direction(921,7)	// 0399, 7
-	"@We don't just give away the tickets... you must pay 30 dollars." end
+	"@We don't just give away the tickets... you must pay 30 dollars." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6daf5:
 	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
 	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6db0a)	// 0x93, 147
 	goto_if_flag(FLG_FOUR_TONZURA_FREE, l_0xc6db2e)	// 0x92, 146
-	goto(l_0xc6db0a)
 
 l_0xc6db0a:
-	if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET { goto(l_0xc6dc0c) }
-	else {
-		get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
-		call(data_36.l_0xc7dc9b)
-		goto_if_false(l_0xc6dbae)
-		"@Please have your tickets ready..." end
-		goto(l_0xc6db2e)
-	}
-	eob
+	//if flag FLG_KEY_ITEMS and flag FLG_ITEM_SHOW_TICKET { goto(l_0xc6dc0c) }
+	//else {
+	get_dir_from_char(-1,TO_NPC,849)	// FF, 2, 0351
+	call(data_36.l_0xc7dc9b)	// Direction checks
+	goto_if_false(l_0xc6dbae)
+	"@Please have your tickets ready..." end
 
 l_0xc6db2e:
 	goto_if_flag(FLG_FOUR_TONZURA_THANKS, l_0xc6dbd5)	// 0x93, 147
+	cc_open_letterbox
 	"@Boys and girls, ladies and gents... this is a very special show," next
 	"@the final Runaway Brothers show here at the Topollo!" next
-	"@Please, please, please don't miss this once in a lifetime chance to see their show." end
+	"@Please, please, please don't miss this once in a lifetime chance to see their show." wait
+	//cc_close_letterbox
+	eob
 
 l_0xc6dbae:
 	"@Oh, hi." wait
@@ -668,9 +706,12 @@ l_0xc6dc0c:
 
 	goto_if_flag(FLG_TEMP_1, l_0xc6dbbf)	// Flag 2
 	if not flag FLG_KEY_ITEMS { take(-1, SHOW_TICKET) }	// 178
-	goto(useshowticket)
 
 useshowticket:
+	window_closeall	// Close menus
+	cc_open_letterbox
+	window_open(1)
+
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	"@Thanks a lot." next
@@ -680,6 +721,7 @@ useshowticket:
 	call(data_44.l_0xc8897f)
 	set(FLG_TEMP_1)	// 2
 	set(FLG_SHOW_TICKET_TAKEN)	// Flag set for Key items
+	cc_close_letterbox
 	eob
 
 l_0xc6dc62:

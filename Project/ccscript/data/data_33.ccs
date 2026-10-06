@@ -50,6 +50,7 @@ l_0xc78442:
 	eob
 
 l_0xc7847e:
+	cc_open_letterbox
 	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
 	window_open(1)
 	goto_if_flag(FLG_TLPT_SUMS, l_0xc784ac)	// 0x00D7, 215
@@ -66,6 +67,7 @@ l_0xc784ac:
 l_0xc784ee:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc7854a)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_CHICKEN2)	// 118
@@ -88,12 +90,14 @@ l_0xc78536:
 	set(FLG_BGM_BUS)	// 534
 	music_resume
 	focus_camera_on_sprite2(205)	// 0x00CD
+	cc_close_letterbox
 	eob
 
 l_0xc7854a:
 	"@I can't do much for you if you don't have any money..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 0x06
+	cc_close_letterbox
 	eob
 
 l_0xc78569:
@@ -112,17 +116,19 @@ l_0xc78592:
 	load_registers
 	eob
 
-l_0xc78595:
+l_0xc78595:	// Threek to Twoson tunnel warp
 	set(FLG_TUNNEL_THRK_TWSN_BL)	// 316
 	restore_camera
 	sprite2_spawn(205,204,-1)	// 0x00CD, 0x00CC, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(62)	// 0x3E
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc785a9:
+l_0xc785a9:	// Threek to Twoson tunnel (Twoson outside) warp
 	restore_camera
 	sprite2_spawn(205,205,-1)	// 0x00CD, 0x00CD, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(61)	// 0x3D
 	focus_camera_on_sprite2(205)	// 0x00CD
 	unset(FLG_TUNNEL_THRK_TWSN_BL)	// 316
@@ -155,7 +161,11 @@ l_0xc785f1:
 l_0xc78628:
 	isset(FLG_DSRT_CLEAR)	// 136
 	goto_if_false(l_0xc785f1)
-	call(data_16.l_0xc5ff21) goto_if_true(data_16.l_0xc5ff4e)
+
+	call(data_16.l_0xc5ff21)
+	goto_if_true(data_16.l_0xc5ff4e)
+
+	cc_open_letterbox
 	get_char_at_pos(1) rtoarg
 	"@({name(0)} checked the bus schedule." next
 	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
@@ -166,10 +176,13 @@ l_0xc78628:
 	wait_movement
 
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc78689:
+	cc_open_letterbox
 	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+
 	window_open(1)
 	get_party_size_times(2)	swap
 	"@To Threek, it's going to cost ${number(0)}" call(l_0xc78569) "." next
@@ -203,13 +216,17 @@ l_0xc78734:
 	set(FLG_BGM_BUS)	// 534
 	music_resume
 	focus_camera_on_sprite2(205)	// 0x00CD
+	cc_close_letterbox
 	eob
 
 l_0xc78748:
 	isset(FLG_DSRT_CLEAR)	// 136
 	goto_if_false(l_0xc785f1)
+
 	call(data_16.l_0xc5ff30)
 	goto_if_true(data_16.l_0xc5ff4e)
+
+	cc_open_letterbox
 	get_char_at_pos(1) rtoarg
 	"@({name(0)} checked the bus schedule." next
 	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
@@ -220,10 +237,13 @@ l_0xc78748:
 	wait_movement
 
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc787a9:
+	cc_open_letterbox
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
+
 	window_open(1)
 	get_party_size_times(2)	swap
 	"@This bus goes to Fourside." next
@@ -236,6 +256,7 @@ l_0xc787a9:
 l_0xc78806:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(data_32.l_0xc78240)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_CHICKEN2)	// 118
@@ -258,10 +279,13 @@ l_0xc78852:
 	set(FLG_BGM_BUS)	// 534
 	music_resume
 	focus_camera_on_sprite2(205)	// 0x00CD
+	//cc_close_letterbox	// Don't close the letterbox the it stays open during the whole trip until a warp
 	eob
 
 l_0xc78866:
+	cc_open_letterbox
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
+
 	window_open(1)
 	get_party_size_times(2)	swap
 	"@This bus goes to Fourside." next
@@ -274,6 +298,7 @@ l_0xc78866:
 l_0xc788c3:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(data_32.l_0xc78240)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_CHICKEN2)	// 118
@@ -296,39 +321,45 @@ l_0xc788c3:
 	set(FLG_BGM_BUS)	// 534
 	music_resume
 	focus_camera_on_sprite2(205)	// 0x00CD
+	//cc_close_letterbox	// Don't close the letterbox the it stays open during the whole trip until a warp
 	eob
 
 l_0xc78926:
 	"@Oh.../ okay...| see you!" wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 0x06
+	cc_close_letterbox
 	eob
 
-l_0xc78943:
+l_0xc78943:	// Threek to Desert's resting area tunnel warp
 	set(FLG_WIN_GEPPU)	// 71
 	restore_camera
 	sprite2_spawn(205,208,-1)	// 0x00CD, 0x00D0, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(70)	// 0x46
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78957:
+l_0xc78957:	// Threek to Desert's resting area (outside) tunnel wap 
 	restore_camera
 	sprite2_spawn(205,209,-1)	// 0x00CD, 0x00D1, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(206)	// 0xCE
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78968:
+l_0xc78968:	// Desert resting area to Desert tunnel warp
 	restore_camera
 	sprite2_spawn(205,210,-1)	// 0x00CD, 0x00D2, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(207)	// 0xCF
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78979:
+l_0xc78979:	// Resting area to Desert tunnel (Desert outside) warp
 	restore_camera
 	sprite2_spawn(205,211,-1)	// 0x00CD, 0x00D3, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(72)	// 0x48
 	focus_camera_on_sprite2(205)	// 0x00CD
 	wait_movement
@@ -366,37 +397,43 @@ l_0xc789de:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	//cc_close_letterbox	// Don't close the letterbox the it stays open during the whole trip until a warp
 	eob
 
-l_0xc78a1b:
+l_0xc78a1b:	// Desert to Bridge tunnel warp
 	restore_camera
 	sprite2_spawn(205,212,-1)	// 0x00CD, 0x00D4, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(74)	// 0x4A
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78a2c:
+l_0xc78a2c:	// Outside of Bridge tunnel on the way to Fourside warp
 	restore_camera
 	sprite2_spawn(205,213,-1)	// 0x00CD, 0x00D5, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(208)	// 0xD0
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78a3d:
+l_0xc78a3d:	// Bridge to Fourside tunnel warp
 	restore_camera
 	sprite2_spawn(205,214,-1)	// 0x00CD, 0x00D6, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(209)	// 0xD1
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
-l_0xc78a4e:
+l_0xc78a4e:	// Outside the Fourside tunnel warp
 	restore_camera
 	sprite2_spawn(205,215,-1)	// 0x00CD, 0x00D7, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(76)	// 0x4C
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc78a5f:
+	cc_open_letterbox
 	sprite2_spawn(106,71,1)	// 0x006A, 0x0047, 0x01
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x006A
@@ -417,11 +454,14 @@ l_0xc78a5f:
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
 	set(FLG_TLPT_FOUR)	// 214
 	unset(FLG_THRK_PEOPLE_APPEAR)	// 590
+	cc_close_letterbox
 	eob
 
 l_0xc78a9e:
 	call(data_16.l_0xc5ff3f)
 	goto_if_true(data_16.l_0xc5ff4e)
+
+	cc_open_letterbox
 	get_char_at_pos(1) rtoarg
 	"@({name(0)} checked the bus schedule." next
 	goto_if_flag(FLG_TEMP_9, data_16.l_0xc5fdca)	// 0x000A, 10
@@ -432,10 +472,13 @@ l_0xc78a9e:
 	wait_movement
 
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc78af3:
+	cc_open_letterbox
 	sprite2_spawn(351,453,1)	// 0x015F, 0x01C5, 0x01
+
 	window_open(1)
 	"@This bus goes to Twoson via Threek." next
 	get_party_size_times(2)	swap
@@ -448,6 +491,7 @@ l_0xc78af3:
 l_0xc78b4e:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc7854a)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_CHICKEN2)	// 118
@@ -475,6 +519,7 @@ l_0xc78b4e:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,457,-1)	// 0x00CD, 0x01C9, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(75)	// 0x4B
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -483,6 +528,7 @@ l_0xc78b4e:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,458,-1)	// 0x00CD, 0x01CA, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(210)	// 0xD2
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -491,6 +537,7 @@ l_0xc78b4e:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,459,-1)	// 0x00CD, 0x01CB, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(211)	// 0xD3
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -499,6 +546,7 @@ l_0xc78b4e:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,460,-1)	// 0x00CD, 0x01CC, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(73)	// 0x49
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -537,11 +585,14 @@ l_0xc78c7f:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x0309, 1
+	cc_close_letterbox
 	eob
 
 l_0xc78cc0:
+	cc_open_letterbox
 	restore_camera
 	sprite2_spawn(205,461,-1)	// 0x00CD, 0x01CD, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(71)	// 0x47
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -550,6 +601,7 @@ l_0xc78cc0:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,462,-1)	// 0x00CD, 0x01CE, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(212)	// 0xD4
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -558,6 +610,7 @@ l_0xc78cc0:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,463,-1)	// 0x00CD, 0x01CF, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(213)	// 0xD5
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -566,6 +619,7 @@ l_0xc78cc0:
 	restore_camera
 	party_freeze	// 0xFF
 	sprite2_spawn(205,464,-1)	// 0x00CD, 0x01D0, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(69)	// 0x45
 	focus_camera_on_sprite2(205)	// 0x00CD
 	party_unfreeze	// 0xFF
@@ -606,6 +660,7 @@ l_0xc78d8f:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 1
+	cc_close_letterbox
 	eob
 
 l_0xc78dd0:
@@ -629,6 +684,7 @@ l_0xc78e11:
 l_0xc78e20:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc78e49)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	"@Ok,| we're off!" wait
@@ -685,6 +741,7 @@ l_0xc78f12:
 	eob
 
 l_0xc78f4a:
+	cc_open_letterbox
 	window_open(1)
 	sound(SND_POSSESSED)	// 96
 	"@Woooo!" pause(20)
@@ -699,6 +756,7 @@ l_0xc78f4a:
 	wait_movement
 
 	goto_if_flag(FLG_TUNNEL_TWSN_THRK_WR, l_0xc78fb1)	// 0x0138, 312
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(15)	// 0x0F
 	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
 	focus_camera_on_sprite2(106)	// 0x006A
@@ -707,9 +765,11 @@ l_0xc78f4a:
 
 	restore_camera
 	unset(FLG_TUNNEL_THRK_TWSN_WL)	// 315
+	cc_close_letterbox
 	eob
 
 l_0xc78fb1:
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(18)	// 0x12
 	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
 	focus_camera_on_sprite2(106)	// 0x006A
@@ -718,9 +778,11 @@ l_0xc78fb1:
 
 	restore_camera
 	unset(FLG_TUNNEL_TWSN_THRK_WR)	// 312
+	cc_close_letterbox
 	eob
 
 l_0xc78fca:
+	cc_open_letterbox
 	window_open(1)
 	sound(SND_POSSESSED)	// 96
 	"@Woooo!" pause(20)
@@ -734,6 +796,7 @@ l_0xc78fca:
 	sprite2_spawn(305,100,1)	// 0x0131, 0x0064, 0x01
 	wait_movement
 
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(16)	// 0x10
 	sprite2_spawn(106,93,1)	// 0x006A, 0x005D, 0x01
 	focus_camera_on_sprite2(106)	// 0x006A
@@ -741,6 +804,7 @@ l_0xc78fca:
 	wait_movement
 
 	restore_camera
+	cc_close_letterbox
 	eob
 
 l_0xc79028:
@@ -790,8 +854,11 @@ l_0xc79081:
 	eob
 
 l_0xc79088:
+	cc_open_letterbox
 	"@(For some weird reason," pause(20) linebreak
-	"  a pencil-shaped iron statue is blocking the path.)" end
+	"  a pencil-shaped iron statue is blocking the path.)" wait
+	cc_close_letterbox
+	eob
 
 _pencil_check:
 	if flag FLG_KEY_ITEMS {
@@ -957,7 +1024,7 @@ l_0xc79287:
 	//cc_close_letterbox
 	eob
 
-l_0xc792dc:
+l_0xc792dc:	// Chaos Theater (Twoson) stage warp
 	restore_camera
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	sprite2_delete(346,6)	// 0x015A, 0x06
@@ -968,8 +1035,10 @@ l_0xc792dc:
 	pause(1)
 	sprite2_delete(273,6)	// 0x0111, 0x06
 	unset(FLG_TWSN_CHAOS_ONSTAGE)	// 751
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(230)	// 0xE6
 	pause(1)
+	//cc_close_letterbox
 	eob
 
 l_0xc7930c:

@@ -122,6 +122,7 @@ l_0xc6e2a4:
 	goto_if_flag(FLG_WIN_MANIMANI, l_0xc6e45a)	// 0x4B, 75
 
 l_0xc6e2ab:
+	cc_open_letterbox
 	title(1, Porky)
 	"@Oooo la la." next
 	"@This... this is my poor old friend..." next
@@ -160,8 +161,9 @@ l_0xc6e426:
 	goto(data_44.l_0xc894ac)
 
 l_0xc6e45a:
-	title(1, Porky)
 	goto_if_flag(FLG_FOUR_POKEY, l_0xc6e2ab)	// 0x0271, 625
+	cc_open_letterbox
+	title(1, Porky)
 	"@Oooo la la." next
 	// Stat 4 = Fav food
 	"@You shouldn't be satisfied with eating just some more {stat(4)}." next
@@ -172,7 +174,9 @@ l_0xc6e45a:
 	"@Ha ha ha!" next
 	"@<{itemname(STRAWBERRY_TOFU)}>..." pause(20)
 	"  Oooo, I can't wait!" next
-	"@I'm starting to drool all over myself just thinking about it." end
+	"@I'm starting to drool all over myself just thinking about it." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6e557:
 	title(1, Aloysius)

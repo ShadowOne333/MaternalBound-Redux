@@ -1706,7 +1706,7 @@ Script_317:
 /* C31459 */   m_set_anim(-1)
 /* C3145B */   m_zerovel
 
-/* C3145C */   m_loop(180)
+/* C3145C */   m_loop(180)	// 3 minutes waiting time (180)
 
 /* C3145E */   m_loop(60)
 /* C31460 */   m_asmcall(0xC468A9)

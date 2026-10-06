@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/window_titles.ccs"
@@ -22,46 +23,61 @@ l_0xc76f20:
 l_0xc76f26:
 	call(l_0xc7716d)
 	goto_if_true(l_0xc77148)
+
+	cc_open_letterbox
 	call(l_0xc76fb2)
 	call(data_23.l_0xc6829f)
 	set(FLG_BGM_FLYINGMAN)	// 587
 	set(FLG_FLYINGMAN_1)		// 25
+	cc_close_letterbox
 	eob
 
 l_0xc76f42:
 	call(l_0xc7716d)
 	goto_if_true(l_0xc77148)
+
+	cc_open_letterbox
 	call(l_0xc76fb2)
 	call(data_23.l_0xc682dd)
 	set(FLG_BGM_FLYINGMAN)	// 587
 	set(FLG_FLYINGMAN_2)	// 26
+	cc_close_letterbox
 	eob
 
 l_0xc76f5e:
 	call(l_0xc7716d)
 	goto_if_true(l_0xc77148)
+
+	cc_open_letterbox
 	call(l_0xc76fb2)
 	call(data_23.l_0xc6831b)
 	set(FLG_BGM_FLYINGMAN)	// 587
 	set(FLG_FLYINGMAN_3)	// 27
+	cc_close_letterbox
 	eob
 
 l_0xc76f7a:
 	call(l_0xc7716d)
 	goto_if_true(l_0xc77148)
+
+	cc_open_letterbox
 	call(l_0xc76fb2)
 	call(data_23.l_0xc68359)
 	set(FLG_BGM_FLYINGMAN)	// 587
 	set(FLG_FLYINGMAN_4)	// 28
+	cc_close_letterbox
 	eob
 
 l_0xc76f96:
 	call(l_0xc7716d)
 	goto_if_true(l_0xc77148)
+
+	cc_open_letterbox
 	call(l_0xc76fb2)
 	call(data_23.l_0xc68397)
 	set(FLG_BGM_FLYINGMAN)	// 587
 	set(FLG_FLYINGMAN_5)	// 29
+	cc_close_letterbox
 	eob
 
 l_0xc76fb2:
@@ -70,6 +86,7 @@ l_0xc76fb2:
 	goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_C, l_0xc7706a)	// 0xCE, 206
 	goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_B, l_0xc7703f)	// 0xCD, 205
 	goto_if_flag(FLG_SYS_FLYINGMAN_DEAD_A, l_0xc77007)	// 0xCC, 204
+
 	"@I am your courage." next
 	"@I follow you here in Magicant." next
 	"@...My name?" next
@@ -149,7 +166,7 @@ l_0xc77208:
 	"@Okay." pause(20)
 	"  If you walk outside,| beware of the monsters." end
 
-l_0xc7722d:
+l_0xc7722d:	// Magicant hotel warp
 	call(data_49.l_0xc91693)
 	warp(53)	// 0x35
 	eob
@@ -280,8 +297,10 @@ l_0xc775fd:
 	title_ness(1)
 	"@Hey me!" pause(20)
 	"  I found my cap that you lost." next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc77639)
+
 	give_and_return_location(0, BASEBALL_CAP)	// Item 0x4A / 74 = Baseball cap
 	call(data_36.l_0xc7dccf)
 	wait
@@ -363,12 +382,16 @@ l_0xc7786e:
 
 l_0xc7794c:
 	goto_if_flag(FLG_WIN_OSCAR, data_35.l_0xc7c588)	// 0x4A, 74
+
+	cc_open_letterbox
 	"@(I am the evil in your heart." next
 	"@You can't beat me." next
 	"@Because you are the one who forced me into being...)" promptw
+
 	call(data_23.l_0xc6857c)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	set(FLG_WIN_OSCAR)	// 74
 	pause(1)
 	npc_do_mc(1358, 635)	// 054E, 027B
@@ -464,12 +487,12 @@ l_0xc77d3a:
 	set(FLG_MGKT_TONCHIKI_DISAPPEAR)	// 639
 	eob
 
-l_0xc77d9f:
+l_0xc77d9f:	// Warp to Sea of Eden
 	window_closeall
 	warp(214)	// 0xD6
 	eob
 
-l_0xc77da5:
+l_0xc77da5:	// Warp in front of the Magicant twisted tree (Transporter to Sea of Eden)
 	window_closeall
 	warp(40)	// 0x28
 	eob
@@ -536,6 +559,7 @@ l_0xc7814b:
 	eob
 
 l_0xc78166:
+	cc_open_letterbox
 	get_party_size_times(2) swap
 	"@...This bus goes to Fourside via Threek." next
 	"@If you don't pay ${number(0)} for the fare, I can't take you there." next
@@ -547,6 +571,7 @@ l_0xc781ce:
 	"@Besides, walking is good for you..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
+	cc_close_letterbox
 	eob
 
 l_0xc78208:
@@ -568,29 +593,33 @@ l_0xc78240:
 	"@Besides,| walking is good for you..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
+	cc_close_letterbox
 	eob
 
-l_0xc7827c:
+l_0xc7827c:	// Twoson to Threek tunnel warp
 	set(FLG_TUNNEL_TWSN_THRK_BR)	// 313
 	restore_camera
 	sprite2_spawn(205,67,-1)	// 0xCD, 0x43, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(60)	// 0x3C
 	focus_camera_on_sprite2(205)	// 0xCD
 	eob
 
-l_0xc78290:
+l_0xc78290:	// Threek to Twoson outside of tunnel (Twoson) warp
 	restore_camera
 	music_effect(5)
 	pause(30)
 	sprite2_spawn(205,68,-1)	// 0xCD, 0x44, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(61)	// 0x3D
 	focus_camera_on_sprite2(205)	// 0xCD
 	unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
 	eob
 
-l_0xc782a9:
+l_0xc782a9:	// Twoson to Threek outside of tunnel (Threek) warp
 	restore_camera
 	sprite2_spawn(205,70,-1)	// 0xCD, 0x46, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(63)	// 0x3F
 	focus_camera_on_sprite2(205)	// 0xCD
 	unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
@@ -598,7 +627,8 @@ l_0xc782a9:
 
 l_0xc782bd:
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 01
-	" "
+
+	cc_open_letterbox
 	window_open(1)
 	"@...This bus continues on to Fourside." next
 	"@Do you want to get off here?" linebreak

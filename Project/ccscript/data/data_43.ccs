@@ -723,12 +723,10 @@ l_0xc88387:	// Sky Walker cutscene (Jeff rescues Ness and Paula)
 	wait_movement
 
 	// Sky Walker flies out of the Winters Lab
-	//sprite2_spawn(106,907,-1)	// Sky Walker Ypos camera pan
 	sprite2_spawn(209,146,-1)	// 0x00D1, 0x0092, 0xFF
 	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(186)	// 0xBA
 	focus_camera_on_sprite2(209)
-	//focus_camera_on_sprite2(106)
 	party_unfreeze	// 0xFF
 	pause(1)
 	wait_movement

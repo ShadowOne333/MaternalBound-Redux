@@ -166,12 +166,15 @@ l_0xc8886a:
 	"@....." end
 
 l_0xc88875:
+	cc_open_letterbox
 	"@Say the password!"
 	pause(120) pause(60)
 	sprite2_spawn(106,317,1)	// 0x006A, 0x013D, 0x01
+	cc_close_letterbox
 	eob
 
 l_0xc8888d:
+	cc_open_letterbox
 	window_open(1)
 	"@Okay... you may enter." promptw
 	window_closeall
@@ -182,15 +185,16 @@ l_0xc8888d:
 	call(data_57.l_0xc9b112)
 	eob
 
-l_0xc888af:
+l_0xc888af:	// Resting area to Desert tunnel (Desert outside) warp
 	restore_camera
 	sprite2_spawn(205,216,-1)	// 0x00CD, 0x00D8, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(72)	// 0x48
 	focus_camera_on_sprite2(205)	// 0x00CD
 	eob
 
 l_0xc888c0:
-	cc_open_letterbox
+	//cc_open_letterbox	// Not needed since the warp carries the opened letterbox
 	unset(FLG_BGM_BUS)	// 534
 	music_resume
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 0x01
@@ -233,7 +237,8 @@ l_0xc88988:
 	wait_movement
 	eob
 
-l_0xc88991:
+l_0xc88991:	// Venus performance at Topollo theater
+	cc_open_letterbox
 	party_freeze	// 0xFF
 	window_closeall
 
@@ -247,6 +252,7 @@ l_0xc88991:
 	sprite2_spawn(106,355,1)	// 0x006A, 0x0163, 0x01
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x006A
+	cc_close_letterbox
 	eob
 
 l_0xc889c7:
@@ -293,8 +299,8 @@ l_0xc88a47:
 	"  ba/a/a/by/y/y!" next
 	"@Don't make me hurt so bad!" next
 	"@These guys are all stone cold gone for you..." next
-	"@Ow!!" pause(20) linebreak
-	"  ...You cute,| sexy thing,| you!..." next
+	"@Ow!!" pause(20) "  ...You cute,|" linebreak
+	"  sexy thing,| you!..." next
 	"@Baby,// sing to me!..." pause(20)
 	"  Sing to me only!...  Baby!!" pause(15)
 	"  Venus!" next
@@ -306,7 +312,8 @@ l_0xc88a47:
 	window_closeall
 	eob
 
-l_0xc88b6d:
+l_0xc88b6d:	// Runaway bros leaving Topollo theater
+	//cc_open_letterbox	// Handled in data_26
 	window_closeall
 	set(FLG_BGM_TONZURA_FREE)	// 536
 	music_resume
@@ -394,7 +401,7 @@ l_0xc88b6d:
 	title(1, Gorgeous)	// Sax guy
 	"@[AC] Money, that's what I want." linebreak
 	"  Money, that's what is hot." linebreak
-	"  Money, that's what I want... [AC]" promptw
+	"  Money, that's what I want. [AC]" promptw
 	window_closeall
 
 	sprite2_spawn(149,475,1)	// 0x0095, 0x01DB, 0x01
@@ -402,6 +409,7 @@ l_0xc88b6d:
 
 	sprite2_unfreeze(187)	// 0x00BB
 	wait_movement
+	cc_close_letterbox
 	eob
 
 l_0xc88d91:
@@ -430,7 +438,7 @@ l_0xc88d91:
 	cc_close_letterbox	// Closing it here so the full Runaway bros stage is visible
 	eob
 
-l_0xc88e0a:
+l_0xc88e0a:	// Runaway Bros. first show at Topollo theater
 	sprite2_do_mc(346,380)	// 0x015A, 0x017C
 	sprite2_do_mc(186,381)	// 0x00BA, 0x017D
 	sprite2_do_mc(185,381)	// 0x00B9, 0x017D
@@ -536,7 +544,8 @@ l_0xc89032:
 	set(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
 	eob
 
-l_0xc89036:
+l_0xc89036:	// George Montague's appearance at the bridge
+	cc_open_letterbox
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	music(85)
 	pause(120)
@@ -558,6 +567,7 @@ l_0xc8905c:
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc89180)
+
 	"@{name(1)}! Greetings!" next
 
 l_0xc89078:
@@ -595,6 +605,7 @@ l_0xc89160:
 	music_resume
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	unset(FLG_DSRT_SYOZI_DISAPPEAR)	// 55
+	cc_close_letterbox
 	eob
 
 l_0xc89180:
@@ -615,7 +626,8 @@ l_0xc891b7:
 	set(FLG_DSRT_DIA_RESERVE)	// 757
 	goto(l_0xc89160)
 
-l_0xc89238:
+l_0xc89238:	// Runaway Bros. final show at Topollo theater
+	cc_open_letterbox
 	OSS_off	// event(6)
 	party_freeze	// 0xFF
 	window_closeall
@@ -639,9 +651,10 @@ l_0xc89238:
 	sprite2_spawn(106,355,1)	// 0x006A, 0x0163, 0x01
 	pause(1)
 	focus_camera_on_sprite2(106)	// 0x006A
+	//cc_close_letterbox	// Closing it here so the full Runaway bros stage is visible
 	eob
 
-l_0xc892c3:
+l_0xc892c3:	// Runaway bros. final show scripts
 	party_unfreeze	// 0xFF
 	pause(60)
 
@@ -651,6 +664,8 @@ l_0xc892c3:
 	"@think that those kids by the exit will wet their pants!" next
 	"@Those kids are hip,| baby!" wait
 	window_closeall
+
+	cc_close_letterbox	// Closing it here so the full Runaway bros stage is visible
 
 	pause(30)
 	music(76)
@@ -741,7 +756,8 @@ l_0xc89498:
 	sprite2_delete(273,6)	// 0x0111, 0x06
 	eob
 
-l_0xc894ac:
+l_0xc894ac:	// Escort party outside Porky's room in Monotoly's building
+	//cc_open_letterbox	// Handled in data_27
 	unset(FLG_TEMP_1)	// 2
 	unset(FLG_TEMP_2)	// 3
 	npc_do_mc(866,301)	// 0x0362, 0x012D
@@ -751,6 +767,7 @@ l_0xc894ac:
 	set(FLG_TEMP_2)	// 3
 	sprite2_spawn(106,306,1)	// 0x006A, 0x0132, 0x01
 	call(data_57.l_0xc9b4b8)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(87)	// 0x57
 	npc_spawn(866,302,1)	// 0x0362, 0x012E, 0x01
 	npc_spawn(867,304,1)	// 0x0363, 0x0130, 0x01
@@ -767,6 +784,7 @@ l_0xc894ac:
 	wait_movement
 
 	set(FLG_FOUR_POKEY)	// 625
+	cc_close_letterbox
 	eob
 
 l_0xc89530:
@@ -792,6 +810,7 @@ l_0xc89566:
 
 // Paula kidnap at Fourside Dept. Store
 l_0xc89580:
+	cc_open_letterbox
 	unset(FLG_PAULA_KI)	// Key items party flag
 	counter(2)
 	call(data_36.l_0xc7dc7f)
@@ -853,9 +872,11 @@ l_0xc89580:
 	}
 	set(FLG_FOUR_PAULA_TAKOKESHI)	// 690
 	if not flag FLG_KEY_ITEMS { take(2, PENCIL_ERASER) }	// 0x02, 0xB8, 184
+	cc_close_letterbox
 	eob
 
 l_0xc896a7:
+	cc_open_letterbox
 	sound(SND_CREEPY)	// 114
 	pause(180)
 
@@ -866,9 +887,11 @@ l_0xc896a7:
 
 	hotspot_off(1)	// 0x01
 	hotspot_on(1,13, l_0xc896f0)	// 0x01, 0x0D, 0x00C896F0
+	cc_close_letterbox
 	eob
 
 l_0xc896f0:
+	cc_open_letterbox
 	sound(SND_CREEPY)	// 114
 	pause(180)
 
@@ -879,6 +902,7 @@ l_0xc896f0:
 	window_closeall
 
 	hotspot_off(1)	// 0x01
+	cc_close_letterbox
 	eob
 
 l_0xc8972a:
@@ -966,6 +990,7 @@ l_0xc89922:
 	"@'Cept I need to go to the bathroom first..." end
 
 l_0xc8995a:
+	cc_open_letterbox
 	OSS_on	// event(5)
 	npc_freeze(872)	// 0x0368
 
@@ -984,9 +1009,11 @@ l_0xc8995a:
 	music_resume
 	npc_unfreeze(872)	// 0x0368
 	pause(30)
+	cc_close_letterbox
 	eob
 
 l_0xc899a6:
+	cc_open_letterbox
 	show_char_float(2,3)	// 0x02, 0x03
 	pause(15)
 	get_dir_from_char(1,TO_CHAR,2)	// 0x01, 0x01, 0x0002
@@ -1031,9 +1058,11 @@ l_0xc899a6:
 	set(FLG_FOUR_OK)	// 143
 	call(data_36.l_0xc7de60)
 	set(FLG_BGM_TONZURA_FREE)	// 536
+	cc_close_letterbox
 	eob
 
 l_0xc89a71:
+	cc_open_letterbox
 	unset(FLG_TEMP_1)	// 2
 	sprite2_do_mc(149,122)	// 0x0095, 0x007A
 	sprite2_do_mc(150,123)	// 0x0096, 0x007B
@@ -1058,17 +1087,21 @@ l_0xc89a71:
 	wait_movement
 
 	hotspot_on(1,51, data_34.l_0xc7af57)	// 0x01, 0x33, 0x00C7AF57
+	cc_close_letterbox
 	eob
 
 l_0xc89b32:
+	cc_open_letterbox
 	window_open(1)
 	title(1, Nice)	// Fatty guy
 	"@Okay!" pause(15)
 	"  You can get on the bus now..." promptw
 	window_closeall
+	cc_close_letterbox
 	eob
 
-l_0xc89b4f:
+l_0xc89b4f:	// Riding the Runaway bus back to Threek
+	cc_open_letterbox
 	OSS_on	// event(5)
 	show_npc_float(960,1)	// 0x03C0, 0x01
 	pause(60)
@@ -1127,11 +1160,14 @@ l_0xc89bf6:
 	focus_camera_on_npc(994)	// 0x03E2
 	party_unfreeze	// 0xFF
 	hotspot_off(1)	// 0x01
+	//cc_close_letterbox	// Not needed since it will close when warping to the tunnels
 	eob
 
+// Warps from Fourside back to Threek
 l_0xc89c1d:
 	restore_camera
 	sprite2_spawn(243,194,-1)	// 0x00F3, 0x00C2, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(75)	// 0x4B
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1139,6 +1175,7 @@ l_0xc89c1d:
 l_0xc89c2e:
 	restore_camera
 	sprite2_spawn(243,195,-1)	// 0x00F3, 0x00C3, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(210)	// 0xD2
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1146,6 +1183,7 @@ l_0xc89c2e:
 l_0xc89c3f:
 	restore_camera
 	sprite2_spawn(243,196,-1)	// 0x00F3, 0x00C4, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(211)	// 0xD3
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1153,6 +1191,7 @@ l_0xc89c3f:
 l_0xc89c50:
 	restore_camera
 	sprite2_spawn(243,197,-1)	// 0x00F3, 0x00C5, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(73)	// 0x49
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1160,6 +1199,7 @@ l_0xc89c50:
 l_0xc89c61:
 	restore_camera
 	sprite2_spawn(243,198,-1)	// 0x00F3, 0x00C6, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(71)	// 0x47
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1167,6 +1207,7 @@ l_0xc89c61:
 l_0xc89c72:
 	restore_camera
 	sprite2_spawn(243,199,-1)	// 0x00F3, 0x00C7, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(212)	// 0xD4
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1174,6 +1215,7 @@ l_0xc89c72:
 l_0xc89c83:
 	restore_camera
 	sprite2_spawn(243,200,-1)	// 0x00F3, 0x00C8, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(213)	// 0xD5
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
@@ -1181,11 +1223,13 @@ l_0xc89c83:
 l_0xc89c94:
 	restore_camera
 	sprite2_spawn(243,201,-1)	// 0x00F3, 0x00C9, 0xFF
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(69)	// 0x45
 	focus_camera_on_sprite2(243)	// 0x00F3
 	eob
 
-l_0xc89ca5:
+l_0xc89ca5:	// Arriving at Threek on Runaway bus from Fourside
+	cc_instant_letterbox
 	music_effect(3)	// Fade out
 	pause(60)
 	unset(FLG_BGM_TBUS)	// 535
@@ -1219,6 +1263,7 @@ l_0xc89ca5:
 	unset(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_off	// event(6)
 	sprite2_spawn(441,778,1)	// 0x01B9, 0x030A, 0x01
+	cc_close_letterbox
 	eob
 
 l_0xc89d0a:
@@ -1311,6 +1356,7 @@ l_0xc8a1e1:
 
 l_0xc8a24c:
 	goto_if_flag(FLG_SUMS_STOIC_WIFE_DISAPPEAR, l_0xc8a2d5)	// 0x0269, 617
+	cc_open_letterbox
 	"@Do you know the Stoic Club, in Summers?" next
 	"@You need to call a secret number for a reservation if you want to get in." next
 	"@What?" next
@@ -1319,6 +1365,7 @@ l_0xc8a24c:
 	sound(SND_BOXTAKE)	// 116
 	set(FLG_SYS_PHONE_STOIC)	// 203
 	OSS_on	// event(5)
+	cc_close_letterbox
 	eob
 
 l_0xc8a2d5:
@@ -1398,8 +1445,7 @@ l_0xc8a58f:
 	eob
 
 l_0xc8a595:
-	get_char_at_pos(1)	// 0x01
-	rtoarg
+	get_char_at_pos(1) rtoarg	// 0x01
 	"@Thank you again, Pork-" next
 	"@Uhhh, " call(l_0xc8a5bc) "{name(0)}."	// 0x00 end
 
