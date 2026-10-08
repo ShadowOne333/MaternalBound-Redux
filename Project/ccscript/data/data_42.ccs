@@ -562,6 +562,7 @@ l_0xc86e14:
 	call(data_24.l_0xc69082)
 	get_char_at_pos(1) swap
 	"@?||?||?" wait
+	window_closeall
 	warp(153)	// 0x99
 	set_respawn_point(0)	// 0x00
 	eob

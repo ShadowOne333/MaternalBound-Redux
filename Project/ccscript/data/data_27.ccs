@@ -161,18 +161,20 @@ l_0xc6e426:
 	goto(data_44.l_0xc894ac)
 
 l_0xc6e45a:
-	goto_if_flag(FLG_FOUR_POKEY, l_0xc6e2ab)	// 0x0271, 625
+	// This goto flag reverts back to the original text, there's no point
+	//goto_if_flag(FLG_FOUR_POKEY, l_0xc6e2ab)	// 0x0271, 625
 	cc_open_letterbox
 	title(1, Porky)
 	"@Oooo la la." next
 	// Stat 4 = Fav food
 	"@You shouldn't be satisfied with eating just some more {stat(4)}." next
 	"@You're so out of it." next
-	"@I've ordered <{itemname(STRAWBERRY_TOFU)}.>" next
+	"@I've ordered" linebreak
+	"  <{itemname(STRAWBERRY_TOFU)}.>" next
 	"@It's very popular among gourmets." next
 	"@Aren't you jealous that I get to eat such a tongue-tickling treat?" next
 	"@Ha ha ha!" next
-	"@<{itemname(STRAWBERRY_TOFU)}>..." pause(20)
+	"@<{itemname(STRAWBERRY_TOFU)}>..." pause(20) linebreak
 	"  Oooo, I can't wait!" next
 	"@I'm starting to drool all over myself just thinking about it." wait
 	cc_close_letterbox
@@ -314,21 +316,25 @@ l_0xc6e982:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc6ea0f)	// 0x49, 73
 	goto_if_flag(FLG_TEMP_1, l_0xc6e9d6)	// 0x02, 2
 	goto_if_flag(FLG_FOUR_MAID_48, l_0xc6ea0f)	// 0x8D, 141
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc6e9d6)
 	give_and_return_location(0, STRAWBERRY_TOFU)	// 0xBD, 189, Strawberry tofu
+
 	title(1, Electra)
 	"@Your {itemname(STRAWBERRY_TOFU)}, "
+
+	// Sir / Ma'am
 	store_registers
 	get_char_at_pos(1)
 	call(data_37.l_0xc7e6b3)
+
 	"." promptw
 	load_registers
 	set(FLG_FOUR_MAID_48)	// 141
 	set(FLG_TEMP_1)	// 2
 	call(data_36.l_0xc7dccf)
 	next
-	goto(l_0xc6e9d6)
 
 l_0xc6e9d6:
 	title(1, Electra)
@@ -342,6 +348,7 @@ l_0xc6ea0f:
 l_0xc6ea34:
 	title(1, Monotoly)
 	goto_if_flag(FLG_FOUR_HELI_DISAPPEAR, l_0xc6ee6f)	// 0x02A0, 672
+	cc_open_letterbox
 	goto_if_flag(FLG_POLA_1, l_0xc6ee2e)	// 0x000F, 15
 	"@Look at my skinny arms,/| thin body,/| and gray hair..." next
 	"@I've become so weak since I lost the Mani Mani statue." next
@@ -408,8 +415,10 @@ l_0xc6ed74:
 	pause(1)
 	npc_do_mc(872,701)	// 0x0368, 0x02BD
 	wait_movement
+
 	npc_do_mc(876,702)	// 0x036C, 0x02BE
 	wait_movement
+
 	npc_do_mc(876,44)	// 0x036C, 0x002C
 	npc_freeze(872)	// 0x0368
 	music_effect(3)	// 0x03
@@ -417,6 +426,7 @@ l_0xc6ed74:
 	music(85)
 	npc_do_mc(877,703)	// 0x036D, 0x02BF
 	wait_movement
+
 	npc_do_mc(877,8)	// 0x036D, 0x0008
 	music_effect(2)	// 0x02
 	pause(30)
@@ -425,6 +435,7 @@ l_0xc6ed74:
 	music_resume
 	npc_unfreeze(872)	// 0x0368
 	wait_movement
+
 	npc_do_mc(872,8)	// 0x0368, 0x0008
 
 	window_open(1)
@@ -452,6 +463,7 @@ l_0xc6ee2e:
 	set(FLG_SYS_DISTLPT)	// 754
 	set(FLG_SYS_DISTLPT_EVENT)	// 779
 	unset(FLG_FOUR_TOPOLO_AB_APPEAR)	// 759
+	cc_close_letterbox
 	eob
 
 l_0xc6ee6f:
@@ -464,9 +476,10 @@ l_0xc6ee94:
 	"  He's stuffed!)" end
 
 l_0xc6eeb4:
-	get_char_at_pos(1) rtoarg
+	cc_open_letterbox
 	title_paula(1)
-	"@...{name(1)}!" next
+	get_char_at_pos(1) rtoarg
+	"@...{name(0)}!" next
 	"@You finally made it here!" next
 	"@...I'm fine." next
 	"@I had faith that you'd come and save me." next
@@ -474,6 +487,7 @@ l_0xc6eeb4:
 	"@Mr. Monotoly isn't really a bad person." next
 	"@Take some time to listen to him." wait
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc6ef24:
@@ -538,6 +552,7 @@ l_0xc6efd3:
 	eob
 
 l_0xc6eff9:
+	cc_open_letterbox
 	window_open(1)
 	"@Ping!" pause(20)
 	"  Clankety clankety..." next
@@ -545,6 +560,7 @@ l_0xc6eff9:
 	"@Squeeeek, tweet tweet..." pause(20)
 	"  CLANK!!" wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc6f054:
@@ -576,7 +592,8 @@ l_0xc6f175:
 	"@Does Mr. Geldegarde Monotoly come here often?" next
 	"@Hello!" pause(20)
 	"  Time to get up!!" next
-	"@It could never happen!...  Well, actually that's not true." end
+	"@It could never happen!..." linebreak
+	"  Well, actually that's not true." end
 
 l_0xc6f1d6:
 	title(1, Borges)
@@ -595,10 +612,12 @@ l_0xc6f225:
 l_0xc6f27c:
 	goto_if_flag(FLG_FOUR_OK, l_0xc6f354)	// 0x8F, 143
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc6f2e7)	// 0x91, 145
+	cc_open_letterbox
 	"@There's a loud noise outside." next
 	"@Must be the seventh inning stretch," next
 	"@and the fans are singing <Take me out to the ballgame> at the stadium." wait
 	set(FLG_FOUR_TONCHIKI_APPEAR)	// 60
+	cc_close_letterbox
 	eob
 
 l_0xc6f2e7:

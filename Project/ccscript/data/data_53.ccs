@@ -5,6 +5,9 @@
  */
 
 import "../definitions/flags.ccs"
+import "../essential/asm65816.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 
@@ -424,9 +427,92 @@ l_0xc973b1:
 	warp(8)	// 0x08
 	eob
 
-l_0xc973e4:
-	"@{stat(8)}'s HP drops to 0!" next
-	"@{stat(52)}'s HP drops to 0!" end
+l_0xc973e4:	// Moonside "drop to 0 HP" NPC
+	cc_asmcall(Store_HP, RET_NONE)	// Store Ness & Jeff's current HP values to restore them later
+	open_hp
+	goto_if_unconscious(1, _jeff_only)	// Ness is unconscious
+	goto_if_diamondized(1, _jeff_only)	// Ness is diamondized
+	"@{stat(8)}'s HP drops to 0!"
+	sound(SND_CRITICAL)	// 47
+	hurt_percent(1, 100)
+	pause(30) linebreak
+	"@{name(1)} got hurt and collapsed..."
+	sound(SND_HERODEATH)	// 32
+	cc_asmcall(HP_Red_Box, RET_NONE)
+	next
+
+_jeff_only:
+	goto_if_unconscious(1, _no_jeff)	// Jeff is unconscious
+	goto_if_diamondized(1, _no_jeff)	// Jeff is diamondized
+	"@{stat(52)}'s HP drops to 0!"
+	sound(SND_CRITICAL)	// 47
+	hurt_percent(3, 100)
+	pause(30) linebreak
+	"@{name(3)} got hurt and collapsed..."
+	sound(SND_HERODEATH)	// 32
+	next
+
+_no_jeff:
+	music(7)
+	"@{name(1)} lost the battle..." //wait
+	pause(180)
+	pause(180)
+	pause(180)
+	window_closeall
+	close_hp
+	music_effect(3)	
+	cc_asmcall(Restore_HP, RET_NONE)
+	cc_asmcall(Restore_HP_Box_Palette, RET_NONE)	// Restore HP/PP Box palette
+	music_resume
+	eob
+
+define PALETTE_UPLOAD_MODE	= 0x0030
+define TEXT_FLAVOUR		= 0x99CD
+define Moonside_HP_Storage_Ness	= 0x962B
+define Moonside_HP_Storage_Jeff		= 0x962D
+define Moonside_HP_Box_Palette_Storage	= 0x962F
+define MEMCPY16			= 0xC08ED2
+define PREPARE_PALETTE_UPLOAD	= 0xC0856B
+define TEXT_WINDOW_RED_PALETTE	= 0xE02108
+Store_HP: {	// Load each party member's HP value and store it in free RAM
+	LDA_a	(0x9A15)	// Ness HP
+	STA_a	(Moonside_HP_Storage_Ness)
+	LDA_a	(0x9AD3)	// Jeff HP
+	STA_a	(Moonside_HP_Storage_Jeff)
+	RTL
+}
+Restore_HP: {	// Restore the backed up HP values for each party member
+	LDA_a	(Moonside_HP_Storage_Ness)	// Ness HP
+	STA_a	(0x9A15)
+	STZ_a	(Moonside_HP_Storage_Ness)	// In case we need it for something else later
+	LDA_a	(Moonside_HP_Storage_Jeff)	// Jeff HP
+	STA_a	(0x9AD3)
+	STZ_a	(Moonside_HP_Storage_Jeff)	// In case we need it for something else later
+	RTL
+}
+
+HP_Red_Box: {	// Load the current text flavour and store it in free RAM
+	LDA_a	(TEXT_FLAVOUR)
+	AND_i	(0x00FF)
+	STA_a	(Moonside_HP_Box_Palette_Storage)
+
+	// Taken from C47F87 (C47FC3 precisely) and its tail end
+	ASMLoadAddress0E	(TEXT_WINDOW_RED_PALETTE)
+	LDX_i	(0x0040)
+	LDA_i	(0x0200)
+	JSL	(MEMCPY16)
+	LDA_i	(0x0008)
+	JSL	(PREPARE_PALETTE_UPLOAD)
+	RTL
+}
+Restore_HP_Box_Palette: {	// Restore the backed up text flavour
+	SEP	(0x20)
+	LDA_a	(Moonside_HP_Box_Palette_Storage)
+	STA_a	(TEXT_FLAVOUR)
+	JSL	(0xC1EC8F)	// Render text flavour
+	STZ_a	(Moonside_HP_Box_Palette_Storage)	// In case we need it for something else later
+	RTL
+}
 
 l_0xc9740a:
 	"@Welcome to Moonside." next
@@ -465,17 +551,20 @@ l_0xc97554:
 	eob
 
 l_0xc975cc:
+	cc_open_letterbox
 	"@Can ya'll see me?" linebreak
 	two_choice_menu("Yes", l_0xc9763a, "No", l_0xc975f1)
 
 l_0xc975f1:
 	"@Ha ha." linebreak
 	"  Ya'll can, huh?" next
-	"@He he.  Ya'll've become ay real Moonsidian, haven't y'all?" wait
+	"@He he." linebreak
+	"  Ya'll've become ay real Moonsidian, haven't y'all?" wait
 	set(FLG_MOON_INVISIBLEMAN)	// 165
 	hotspot_on(1,32, l_0xc97689)	// 0x01, 0x20, 0x00C97689
 	OSS_on	// event(5)
 	set(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	eob
 
 l_0xc9763a:
@@ -483,9 +572,12 @@ l_0xc9763a:
 	"  Ya'll can't?" next
 	"@Ya'll're definitely nahwt frawum 'round 'ere." next
 	"@Hee hee.  Get goin' now." pause(20)
-	"  'ere's ya'll's hat, what's ya'll's hurry..." end
+	"  'ere's ya'll's hat, what's ya'll's hurry..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc97689:
+	cc_open_letterbox
 	window_open(1)
 	"@He he ha!  It's me!" pause(20)
 	"  Ya'll can see me, right?" next
@@ -494,17 +586,21 @@ l_0xc97689:
 	"@If ya'll get into ay fight,/| ay'll stay out av it..." wait
 	hotspot_on(1,33, l_0xc97705)	// 0x01, 0x21, 0x00C97705
 	window_closetop
+	cc_close_letterbox
 	eob
 
 l_0xc97705:
+	cc_open_letterbox
 	window_open(1)
 	"@Heh heh." linebreak
 	"  Ya'll can't see me... right?" wait
 	hotspot_on(1,34, l_0xc97728)	// 0x01, 0x22, 0x00C97728
 	window_closetop
+	cc_close_letterbox
 	eob
 
 l_0xc97728:
+	cc_open_letterbox
 	window_open(1)
 	"@Hyuk huyk." linebreak
 	"  Hey!" next
@@ -513,27 +609,33 @@ l_0xc97728:
 	hotspot_on(1,35, l_0xc97780)	// 0x01, 0x23, 0x00C97780
 	hotspot_on(2,36, l_0xc977a8)	// 0x02, 0x24, 0x00C977A8
 	window_closetop
+	cc_close_letterbox
 	eob
 
 l_0xc97780:
+	cc_open_letterbox
 	window_open(1)
 	"@*Grin* *Grin*." next
 	"@Heh heh." wait
 	hotspot_off(2)	// 0x02
 	hotspot_on(1,37, l_0xc977d1)	// 0x01, 0x25, 0x00C977D1
 	window_closetop
+	cc_close_letterbox
 	eob
 
 l_0xc977a8:
+	cc_open_letterbox
 	window_open(1)
 	"@*Smile* *Smile*" next
 	"@Heh heh." wait
 	hotspot_off(1)	// 0x01
 	hotspot_on(1,38, l_0xc977d1)	// 0x01, 0x26, 0x00C977D1
 	window_closetop
+	cc_close_letterbox
 	eob
 
 l_0xc977d1:
+	cc_open_letterbox
 	window_open(1)
 	"@Uh... Heh heh..." pause(20) linebreak
 	"  Yo!" next
@@ -542,4 +644,5 @@ l_0xc977d1:
 	window_closetop
 	OSS_off	// event(6)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
+	cc_close_letterbox
 	eob

@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -117,8 +118,9 @@ l_0xc82c48:
 
 l_0xc82c6b:
 	goto_if_flag(FLG_FOUR_DEPT_OK, data_35.l_0xc7c588)	// 0x8B, 139
-	music(155)
 
+	cc_open_letterbox
+	music(155)
 	title(1, Spook)
 	"@Gwaaagh, gwarrrgh!" next
 	"@You finally made it." next
@@ -129,14 +131,15 @@ l_0xc82c6b:
 
 	call(data_23.l_0xc6855b)
 	goto_if_true(data_23.l_0xc683de)
-	stop_music
 
+	cc_instant_letterbox
+	stop_music
 	window_open(1)
 	title(1, Spook)
 	"@...Even though you could beat me..." next
 	"@Master Giygas will avenge me..." next
 	pause(60) linebreak
-	"@At this moment, {name(2)} should be...Monotoly..." next
+	"@At this moment, {name(2)} should be... Monotoly..." next
 	"@Gwaaaaarrrrgh!!" promptw
 	window_closeall
 
@@ -148,6 +151,7 @@ l_0xc82c6b:
 	npc_do_mc(941,635)	// 0x03AD, 0x027B
 	set(FLG_PHOTO_DEPT)	// 497
 	OSS_on	// event(5)
+	cc_close_letterbox
 	eob
 
 l_0xc82d6c:
@@ -286,11 +290,13 @@ l_0xc834a8:
 	"@...I know better now." end
 
 l_0xc834e1:
+	cc_open_letterbox
 	title(1, Electra)
-	"@I kept asking around for Strawberry tofu, but..." wait
+	"@I kept asking around for {itemname(STRAWBERRY_TOFU)}, but..." wait
 	if flag FLG_KEY_ITEMS { isset(FLG_ITEM_TOFU) }
 	else { hasitem(-1, TOFU_MACHINE) }
 	goto_if_true(l_0xc83515)
+	cc_close_letterbox
 	eob
 
 l_0xc83515:
@@ -301,8 +307,10 @@ l_0xc83515:
 	"@May I have it?" next
 	sound(SND_CHICKEN2)	// 118
 	pause(10)
+	window_open(1)
 	"@(Before you could answer, she took the" linebreak
 	"  <{itemname(TOFU_MACHINE)}.>)" next
+	title(1, Electra)
 	"@Now I can make Strawberry tofu for my guests." next
 	"@...You are so kind, I'll make some for you." next
 	"@My room's on the 48th floor." pause(20)
@@ -326,13 +334,16 @@ l_0xc83515:
 
 	npc_unfreeze(951)
 	unset(FLG_FOUR_MAID_APPEAR)	// 59
+	cc_close_letterbox
 	eob
 
 l_0xc8361b:
 	eob
 
 l_0xc8361c:
+	cc_open_letterbox
 	title(1, Everdred)
+_again:
 	"@....." next
 	"@*Wheeze, wheeze*..." next
 	"@....." next
@@ -369,7 +380,7 @@ l_0xc8361c:
 	"@But if you insist, I'll tell you once more..." next
 	"@...*gasp, gasp*" next
 	"@D-/ d-/ do you wanna hear it again?" linebreak
-	two_choice_menu("Yes", l_0xc8361c, "No", l_0xc83957)
+	two_choice_menu("Yes", _again, "No", l_0xc83957)
 	goto(l_0xc83957)
 
 l_0xc838b9:
@@ -389,7 +400,7 @@ l_0xc83957:
 	"@<When on your way out" next
 	"@Be sure that you say goodbye" next
 	"@then lock the door tight.>" next
-	"@                             -Everdred" next
+	"@" text_pos(11,2) "-Everdred" next
 	"@This is my final request..." pause(20) linebreak
 	"  Don't follow me." next
 	"@I must be on my way..." next
@@ -399,6 +410,7 @@ l_0xc83957:
 	set(FLG_FOUR_TONCHIKI)	// 145
 	unset(FLG_FOUR_TONCHIKI_APPEAR)	// 60
 	call(data_44.l_0xc8983b)
+	cc_close_letterbox
 	eob
 
 l_0xc839f7:
@@ -432,6 +444,7 @@ l_0xc83ab3:
 l_0xc83aee:
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc83c5d)	// 0x91, 145
 	goto_if_flag(FLG_TEMP_1, l_0xc83c1e)	// 0x02
+	cc_open_letterbox
 	"@Don't cut in front of me!" next
 	"@If you give me somethin', I'll let you have my spot." next
 	"@Will you give me somethin'?" linebreak
@@ -439,7 +452,9 @@ l_0xc83aee:
 
 l_0xc83b5a:
 	newline
-	"@Then stay right there where you're too short to see a thing!" end
+	"@Then stay right there where you're too short to see a thing!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc83b7b:
 	"@So, what do I get?"
@@ -447,7 +462,7 @@ l_0xc83b7b:
 	wait_input_timeout(30)
 	call(data_15.l_0xc5e456)
 
-	pause(60)
+	pause(30)
 	newline
 	goto_if_false(l_0xc83b5a)
 
@@ -471,7 +486,8 @@ l_0xc83bfc:
 	pause(1)
 	"@All right, take my place." wait
 	set(FLG_TEMP_1)	// 2
-	call(data_44.l_0xc8982a)
+	call(data_44.l_0xc8982a)	// NPC movement out of the way to Frank
+	cc_close_letterbox
 	eob
 
 l_0xc83c1e:
@@ -487,7 +503,7 @@ l_0xc83c5d:
 
 l_0xc83c94:
 	goto_if_flag(FLG_FOUR_TONCHIKI, l_0xc83cc8)	// 0x91, 145
-	"@Oh, no no no." pause(20)
+	"@Oh, no no no." pause(20) linebreak
 	"  I don't want to go like that." next
 	"@I'm glad it wasn't me." end
 

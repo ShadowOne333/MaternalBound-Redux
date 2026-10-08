@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -74,6 +75,7 @@ l_0xc8a88c:
 	"@Since the Hieroglyph display is closed,| people haven't wanted to visit." end
 
 l_0xc8a8bf:
+	cc_open_letterbox
 	"@This room is being remodeled, so I can't show it to you..." next
 	goto_if_flag(FLG_PU, l_0xc8a997)	// 0x10, 16
 
@@ -81,7 +83,9 @@ l_0xc8a8e7:
 	"@I can't... well, I usually don't.../| show this room..." next
 	"@If you were an adult you'd probably understand." next
 	"@I do,| however,| like jewelry." next
-	"@Perhaps a little, shall we say, <under the table deal> would be in order..." end
+	"@Perhaps a little, shall we say, <under the table deal> would be in order..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc8a976:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
@@ -102,6 +106,7 @@ l_0xc8a997:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc8a8e7)
 
+	cc_open_letterbox
 	"@Oh, the samurai kid is here." next
 	"@Will " call(l_0xc8aabe) " be giving me that gem?" next
 	two_choice_menu("Yes", l_0xc8aa7f, "No", l_0xc8a9ec)
@@ -145,10 +150,12 @@ l_0xc8aacf:
 	npc_delete(1037,6)	// 0x040D, 6
 	if not flag FLG_KEY_ITEMS { take(-1, TINY_RUBY) }	// 0xD0, 208
 	set(FLG_SUMS_OMAR_B_APPEAR)	// 346
+	cc_close_letterbox
 	eob
 
 l_0xc8aae6:
 	goto_if_flag(FLG_TEMP_9, l_0xc8abb0)	// 0x0A, 10
+	cc_open_letterbox
 	"@Excellent!" next
 	"@Do you feel like you're really experiencing this great historical period?" next
 	"@The experience is more valuable than a small gem...  Ha ha ha!" next
@@ -157,6 +164,7 @@ l_0xc8aae6:
 	"@I got lots of money from him.  Heh heh heh." end
 
 l_0xc8abb0:
+	cc_open_letterbox
 	"@Here's a picture of the hieroglyphs, just for you." next
 	"@It's a reward for studying so hard." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(HIEROGLYPH) }
@@ -171,6 +179,7 @@ l_0xc8abb0:
 	unset(FLG_TEMP_9)	// 10
 	goto_if_flag(FLG_FOUR_KOMORITA, data_55.l_0xc9992f)	// 0x8C, 140
 	set(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	cc_close_letterbox
 	eob
 
 l_0xc8ac30:
@@ -181,9 +190,11 @@ l_0xc8ac30:
 	"  You're such a hard worker." next
 	"@Ha ha ha!" wait
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc8ac6f:
+	cc_open_letterbox
 	npc_direction(1038,7)	// 0x040E, 7
 	show_npc_float(1038,3)	// 0x040E, 3
 	pause(60)
@@ -215,6 +226,7 @@ l_0xc8ac6f:
 	set(FLG_ITEM_HIEROGLYPH)	// 343
 	goto_if_flag(FLG_FOUR_KOMORITA, data_55.l_0xc9992f)	// 0x8C, 140
 	set(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	cc_close_letterbox
 	eob
 
 l_0xc8ad22:
@@ -230,12 +242,15 @@ l_0xc8ad22:
 	wait_movement
 
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc8ad69:
 	title(1, Fork)
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc8ae72)	// 0x49, 73
 	goto_if_flag(FLG_FOUR_KOMORITA_APPEAR, l_0xc8ae3b)	// 0x3A, 58
+
+	cc_open_letterbox
 	"@...mumble, mumble..." next
 	"@Why would Mr. Spoon from the Fourside museum try to call me?" next
 	"@I bet he just wants to brag about something..." next
@@ -247,11 +262,14 @@ l_0xc8ad69:
 	"  Pardon me..." pause(20)
 	"  I was just talking to myself... *cough*" wait
 	sound(SND_CREEPY)	// 114
-	end
+	cc_close_letterbox
+	eob
 
 l_0xc8ae3b:
 	"@It must be something teeny weeny that Mr. Spoon has found." next
-	"@I don't really care to know what it was." end
+	"@I don't really care to know what it was." wait
+	cc_close_letterbox
+	eob
 
 l_0xc8ae72:
 	"@You have a good reputation." next
@@ -325,6 +343,8 @@ l_0xc8b158:
 l_0xc8b191:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc8b22f)	// 0x49, 73
 	goto_if_flag(FLG_PU, data_20.l_0xc65015)	// 0x10, 16
+
+	cc_open_letterbox
 	OSS_on	// event(5)
 
 	title(1, Jill)
@@ -342,6 +362,7 @@ l_0xc8b191:
 	"@I used up the last of my ingredients to make this special Magic cake!" promptw
 	window_closeall
 
+	cc_close_letterbox
 	unset(FLG_SUMS_MASSAGE_APPEAR)	// 61
 	goto(data_50.l_0xc920a2)
 
@@ -520,6 +541,7 @@ l_0xc8b8cd:
 	"@Meow." end
 
 l_0xc8b8d5:
+	cc_open_letterbox
 	"@I've finally awakened the inner me, the true self." next
 	"@The patrons of this club are able to stare into their own soul hard" next
 	"@enough to burn a hole in their psyche." next
@@ -539,7 +561,9 @@ l_0xc8b9c4:
 	two_choice_menu("Yes", l_0xc8ba45, "No", l_0xc8ba12)
 
 l_0xc8ba12:
-	"@Okay then,/| don't get in my way while I search for the little girl within me..." end
+	"@Okay then,/| don't get in my way while I search for the little girl within me..." wait
+	cc_close_letterbox
+	eob
 
 l_0xc8ba45:
 	"@I| see...|| okay..." next
@@ -551,6 +575,7 @@ l_0xc8ba45:
 	wait_movement
 
 	set(FLG_SUMS_STOIC_WIFE_DISAPPEAR)	// 617
+	cc_close_letterbox
 	eob
 
 l_0xc8ba82:

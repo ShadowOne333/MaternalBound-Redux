@@ -378,14 +378,15 @@ l_0xc60e2a:
 l_0xc60e30:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc611e2)	// 0x49, 73
 	goto_if_flag(FLG_DSRT_INFO_TLPT, l_0xc61139)	// 0x02FC, 764
-	cc_close_letterbox
+	cc_open_letterbox
 	goto_if_flag(FLG_ITEM_TOFU, l_0xc60ff3)	// 0x022A, 554
 
 	music(119)
 	title(1, Talah)
 	"@The truth of the universe travels through the cosmos like particles and waves..." next
 	"@It speaks through space and time and makes itself known to human beings." next
-	"@Your coming here,| my waiting here..." pause(30) next
+	"@Your coming here,|" linebreak
+	"  my waiting here..." pause(30) next
 	"@It was all predestined truth..." next
 	// Stat 8 = Ness' name
 	"@{stat(8)},"

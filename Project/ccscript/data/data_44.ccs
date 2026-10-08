@@ -856,12 +856,14 @@ l_0xc89580:
 	"@Your attention please," next
 	"@would the customer from Onett,| Mr. {name(1)}," next
 	"@please proceed to the office on the fourth floor." next
-	"@That was customer {name(1)},| 4th floor office..." next
+	"@That was customer {name(1)},|" linebreak
+	"  4th floor office..." next
 	"@Gwaaaaaaaaagh!" wait
 	window_closeall
 
 	hotspot_off(1)	// 0x01
 	hotspot_on(1,12, l_0xc896a7)	// 0x01, 0x0C, 0x00C896A7
+	cc_close_letterbox
 	if flag FLG_KEY_ITEMS {
 		isset(FLG_ITEM_TACO_ERASER)
 		goto_if_true(data_55.l_0xc9992f)
@@ -872,7 +874,6 @@ l_0xc89580:
 	}
 	set(FLG_FOUR_PAULA_TAKOKESHI)	// 690
 	if not flag FLG_KEY_ITEMS { take(2, PENCIL_ERASER) }	// 0x02, 0xB8, 184
-	cc_close_letterbox
 	eob
 
 l_0xc896a7:
@@ -1094,7 +1095,7 @@ l_0xc89b32:
 	cc_open_letterbox
 	window_open(1)
 	title(1, Nice)	// Fatty guy
-	"@Okay!" pause(15)
+	"@Okay!" pause(15) linebreak
 	"  You can get on the bus now..." promptw
 	window_closeall
 	cc_close_letterbox
@@ -1132,8 +1133,11 @@ l_0xc89b4f:	// Riding the Runaway bus back to Threek
 	pause(60)
 	sprite2_delete(106,6)	// 0x006A, 0x06
 	restore_camera
+	goto(_skip_open_letterbox)
 
 l_0xc89bc5:
+	cc_open_letterbox
+_skip_open_letterbox:
 	sprite2_spawn(441,777,1)	// 0x01B9, 0x0309, 0x01
 	sprite2_spawn(106,191,1)	// 0x006A, 0x00BF, 0x01
 	focus_camera_on_sprite2(106)	// 0x006A
@@ -1273,11 +1277,11 @@ l_0xc89d0a:
 	"@All right!" pause(20)
 	"  We made it!" next
 	"@I'm sorry we couldn't do more for you." next
-	"@Remember,| though... we're on your side." next
+	"@Remember,| though..." linebreak
+	"  we're on your side." next
 	"@When you're having a tough time," next
 	"@just think of our songs and imagine" next
-	"  the Runaway Brothers singing somewhere far," next
-	"@far away..." next
+	"@the Runaway Brothers singing somewhere far,| far away..." next
 	"@By the way,| why did you need to come back here?" next
 	"@You must have forgotten some very important item or gadget here..." next
 	"@How's that for a guess?" pause(20) linebreak
@@ -1305,6 +1309,7 @@ l_0xc89ef8:
 
 l_0xc89f2d:
 	goto_if_flag(FLG_SUMS_STOIC_WIFE_DISAPPEAR, l_0xc8a023)	// 0x0269, 617
+	cc_open_letterbox
 	"@You know, I really want to eat some Magic cake." next
 	"@It's a mysterious work of art..." pause(15)
 	"  I can't get that cake off my mind." next
@@ -1314,6 +1319,7 @@ l_0xc89f2d:
 	"@Oh,/| the absolute conflict of self-identity this plagues me with." next
 	"@Grumble, grumble..." next
 	"@What a pickle this puts me in, you know?" wait
+	cc_close_letterbox
 	goto_if_flag(FLG_PU, data_55.l_0xc9992f)	// 0x0010, 16
 	set(FLG_SUMS_MASSAGE_APPEAR)	// 61
 	eob
@@ -1321,8 +1327,8 @@ l_0xc89f2d:
 l_0xc8a023:
 	"@The woman who sells Magic cake seems to have quitted the club." end
 
-l_0xc8a056:
-	"@You don't understand what the hey everyone is talking about, do you?" next
+l_0xc8a056:	// Uncensored line
+	"@You don't understand what the hell everyone is talking about, do you?" next
 	"@I don't either, but I try to be patient with the customers." next
 	"@They pay high prices just for a glass of water" next
 	"@and the chance to have serious, intellectual discussions." next
@@ -1356,6 +1362,7 @@ l_0xc8a1e1:
 
 l_0xc8a24c:
 	goto_if_flag(FLG_SUMS_STOIC_WIFE_DISAPPEAR, l_0xc8a2d5)	// 0x0269, 617
+	goto_if_flag(FLG_SYS_PHONE_STOIC, _stoic_number_gotten)	// 0x00CB, 203
 	cc_open_letterbox
 	"@Do you know the Stoic Club, in Summers?" next
 	"@You need to call a secret number for a reservation if you want to get in." next
@@ -1367,6 +1374,9 @@ l_0xc8a24c:
 	OSS_on	// event(5)
 	cc_close_letterbox
 	eob
+
+_stoic_number_gotten:
+	"@Did you call that secret number I gave you to make a reservation?" end
 
 l_0xc8a2d5:
 	"@I think this is a nice town." pause(20)

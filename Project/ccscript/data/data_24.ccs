@@ -9,6 +9,7 @@ import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/cc_asmcall.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
@@ -108,11 +109,14 @@ l_0xc6893b:
 	eob
 
 l_0xc68945:
+	cc_open_letterbox
 	music(115)
 	pause(60)
 	wait
 	stop_music
 	sound(SND_PHONEPICKUP)	// 11
+	show_phone_sprite_float
+
 	window_open(1)
 	"@Hello, {name(3)}?" next
 	"@Oh, happy day!" next
@@ -131,7 +135,6 @@ l_0xc6899a:
 	"@I've got to contact {name(3)}!" next
 	"@I know... just put the receiver close to his ear, and he'll hear me..." next
 	"@I know he will." next
-	goto(l_0xc689fb)
 
 l_0xc689fb:
 	"@Hi, it's me--Tony." next
@@ -175,7 +178,6 @@ l_0xc689fb:
 	title(1, Tony)
 	"@It seems like you're not feeling well..." next
 	"@Get better soon..." next
-	goto(l_0xc68b7d)
 
 l_0xc68b7d:
 	"@I pray from the bottom of my heart that I'll get to see you again!" next
@@ -191,9 +193,12 @@ l_0xc68b7d:
 	sound(SND_PHONEPICKUP)	// 11
 	"@*Beeeeep*" wait
 	window_closeall
+	hide_phone_sprite_float
+
 	set(FLG_SYS_INPUT_PLAYER_NAME)	// 539
 	music_resume
 	OSS_off	// event(6)
+	cc_close_letterbox
 	eob
 
 l_0xc68c3f:

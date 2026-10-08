@@ -26,24 +26,71 @@ ROM[Script_78] = {
 /* C3B8A2 */	m_jmp(Script_35)
 }
 //------------------------------------
+//	Sky Walker scenes changes
+//------------------------------------
+// First Sky Walker scene (Winters)
+
 // Script 146 modification, Make the full Sky Walker visible with the new cutscene letterboxes
 ROM[0xC3C6F6] = m_set_yvel(-64)	// Make the vel axis Y so the camera moves alongside the Sky Walker
 ROM[0xC3C730] = m_pause(0)	// Reduce timeout before fade out when the Sky Walker moves outside the visible map
 
 // Script 153 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Fourside
 ROM[0xC3C9A0] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Fourside (192)
-ROM[0xC3C9ED] = m_jml(Script_155_Hijack1)
-Script_155_Hijack1: {
+ROM[0xC3C9ED] = m_jml(Script_155_Hijack)
+Script_155_Hijack: {
 /* C3C9ED */	m_onmove(0xA00C)
 		m_set_zpos(-48)
 /* C3C9F0 */	m_set_anim(0)
 /* C3C9F2 */	m_jml(0xC3C9F2)
 }
-
 // Script 157 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Desert
 ROM[0xC3CAFA] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Desert (192)
 // Script 159 modification, Move the Sky Walker shadow lower on Desert
 ROM[0xC3CB40] = m_set_zpos(-48)
+//------------------------------------
+// Second Sky Walker scene (Threek)
+
+// Script 158 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Desert
+ROM[0xC3CB97] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Desert (192)
+// Script 160 modification, Move the Sky Walker shadow lower on Desert
+ROM[0xC3CBDD] = m_set_zpos(-48)
+// Script 154 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Fourside
+ROM[0xC3CA4E] = m_set_zpos(128)	// Make the Sky Walker appear lower so its visible with the letterbox on Fourside (192)
+ROM[0xC3CA9B] = m_jml(Script_156_Hijack)
+Script_156_Hijack: {
+/* C3CA9B */	m_onmove(0xA00C)
+		m_set_zpos(-48)
+/* C3CA9E */	m_set_anim(0)
+/* C3CAA0 */	m_jml(0xC3CAA0)
+}
+//------------------------------------
+// Third Sky Walker scene (Post-Rainy Circle)
+
+// Script 170 modification, Make the full Sky Walker visible with the new cutscene letterboxes on Summers
+// Adjusted the destination Y-pos coordinates
+ROM[0xC3CF86] = /* C3CF86 */	m_set_ypos(2896)	// m_set_zpos(192) -> (128)
+ROM[0xC3CFAF] = /* C3CFAF */	m_set_var7(3024)	// 3088
+ROM[0xC3CFC3] = /* C3CFC3 */	m_set_var7(3024)	// 3088
+ROM[0xC3CFDB] = /* C3CFDB */	m_set_var7(3152)	// 3144
+// Changed zpos/zvel for ypos/yvel so the camera can now be focus on sprite 209 (Sky Walker)
+ROM[0xC3CFA3] = /* C3CFA3 */	m_set_yvel(256)		// m_set_zvel(-256)
+ROM[0xC3CFA8] = /* C3CFA8 */	m_set_yvel(0)		// m_set_zvel(0)
+ROM[0xC3CFCE] = /* C3CFCE */	m_set_yvel(48)		// m_set_zvel(-48)
+ROM[0xC3CFE3] = /* C3CFE3 */	m_set_yvel(0)		// m_set_zvel(0)
+
+// Script 171 modification, Move the Sky Walker shadow lower on Summers
+ROM[0xC3D055] = /* C3D055 */	m_set_ypos(3072)	// m_set_zpos(-48)
+ROM[0xC3D078] = /* C3D078 */	m_set_var7(3072)	// 3088
+ROM[0xC3D089] = /* C3D089 */	m_set_var7(3072)	// 3088
+ROM[0xC3D09A] = /* C3D09A */	m_set_var7(3152)	// 3144
+// The Sky walker's shadow tends to move a bit too fast with the changes above, slow it down.
+ROM[0xC3D090] = /* C3D090 */	m_set_speed(244)	// Slow down the shadow when moving towards the ending point
+//------------------------------------
+// Script 670 modifications
+ROM[0xC37CB2] = {
+	m_set_var6(1256)	// Change the Teleport Monkey's X-axis standing position after his teleport (1264)
+	m_set_var7(9960)	// Change the Teleport Monkey's Y-axis standing position after his teleport (9928)
+}
 //------------------------------------
 StarmanJr_Smoke: {	// 895
 	m_disable_collision()
@@ -112,7 +159,7 @@ ROM[0xC3CCBA] = { m_ontick_nop m_ontick_nop m_ontick_nop }
 
 // Make the Sky_Walker shadow sprite appear as the offset sprite (m_add_ypos(128)) instead of the Sky Walker's sprite being the offset one
 // Do this so the camera doesn't snap abruptly and the sprite appears on warp instead of a sec later
-Skywalker_Camera_Fix: {	// 899
+Skywalker_Camera_Fix: {	// 899 (Modification of Script 164)
 	m_warp_to_pc(-1)
 	m_add_ypos(128)
 	m_jml(0xC3CDF5)	// Continue with the original Script 164

@@ -37,10 +37,9 @@ define VANILLA_1902_CALLONHOVER	= 0xC178A0	// @UNKNOWN0 (differentiator=1, singl
 define VANILLA_1902_NORMAL	= 0xC178B2	// @UNKNOWN1 (differentiator=2, single string)
 define VANILLA_1902_APPEND	= 0xC178E5	// @UNKNOWN2 (default: append char to buffer)
 
-// str2 is queued per row here, drawn later by DrawAllQueuedStr2. A row's
-// text_y is simply its row index (C114B1 sets it unconditionally).
-// 14 rows, at 0x012A (proven stable here after 0x7E3B2A caused str2 to
-// stop printing entirely -- reverted per live testing).
+// str2 queued per row here, drawn later by DrawAllQueuedStr2 (text_y =
+// row index). 14 rows at 0x012A -- 0x7E3B2A broke printing entirely in
+// testing, reverted.
 define QUEUE_ENTRY_SIZE		= 0x0010	// 16 bytes/row, generous for a number
 define MAX_QUEUE_ROWS		= 14
 define D_LoadTwoStr_Queue	= 0x012A	// spans 0x012A..0x0209

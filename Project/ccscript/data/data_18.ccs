@@ -354,6 +354,7 @@ l_0xc6279f:
 	"@(I've been waiting for you.)" end
 
 l_0xc627ca:
+	cc_open_letterbox
 	"@Kyakyekyai kya" next
 	"@(I'll teach you how to teleport.)" next
 	"@Kyakyakya" next
@@ -365,6 +366,7 @@ l_0xc627ca:
 	set(FLG_DSRT_INFO_TLPT)	// 764
 	set(FLG_DSRT_TSARU_DISAPPEAR)	// 613
 	set(FLG_DSRT_TSARU_A_APPEAR)	// 614
+	cc_close_letterbox
 	eob
 
 l_0xc62819:
@@ -372,10 +374,12 @@ l_0xc62819:
 	"@(So... how've you been?)" end
 
 l_0xc6283d:
+	cc_open_letterbox
 	"@Hik, ikki." next
 	"@(Follow me,| like this way.)" wait
 	window_closeall
 	npc_do_mc(772,669)	// 0x0304, 0x029D
+	cc_close_letterbox
 	eob
 
 l_0xc62865:
@@ -390,11 +394,13 @@ l_0xc62865:
 
 l_0xc62886:
 	goto_if_flag(FLG_MASTER_TLPT, l_0xc62b6f)	// 0x0113, 275
+
+	cc_open_letterbox
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc62a9b)
 	goto_if_flag(FLG_TEMP_1, l_0xc62a30)	// 0x02
-	goto(l_0xc628a1)
 
 l_0xc628a1:
 	"@Kyakya, Kyokyo" next
@@ -409,14 +415,17 @@ l_0xc628a1:
 
 	npc_do_mc(773,670)	// 0x0305, 0x029E
 	wait_movement
+
 	npc_freeze(773)	// 0x0305
 	music(13)
 	npc_unfreeze(773)	// 0x0305
 	wait_movement
+
 	npc_freeze(773)	// 0x0305
 	music_resume
 	npc_unfreeze(773)	// 0x0305
 	wait_movement
+
 	npc_do_mc(773,8)	// 0x0305, 0x08 (To party)
 	get_dir_from_npc(773,TO_CHAR,255)	// 0x0305, 01, 0x00FF
 	npc_direction(773,0)	// 0x0305, 0
@@ -429,10 +438,11 @@ l_0xc628a1:
 	"@(Just now I used a basic, straight course," next
 	"@but you can also change direction during a teleport if there's room for it.)" next
 	"@Ukki! Ukkiekie!" next
-	"@(Ok!" pause(15)
+	"@(Ok!" pause(15) linebreak
 	"  Why don't you try it, young man!)" wait
 	window_closeall
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc62a30:
@@ -445,6 +455,7 @@ l_0xc62a75:
 	"@Kyakyakya?..." next
 	"@(You don't like the monkey teacher?...)" wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc62a9b:
@@ -452,9 +463,12 @@ l_0xc62a9b:
 	"@(What happened to the boy with the red cap?" next
 	"@I was only going to teach him something.)" next
 	"@Kyakyo..." next
-	"@(He's not here...)" end
+	"@(He's not here...)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc62ae7:
+	cc_open_letterbox
 	window_open(1)
 	"@{name(1)} learned how to use PSI Teleport." wait
 	window_closeall
@@ -479,6 +493,7 @@ l_0xc62ae7:
 	unset(FLG_TEMP_1)	// 2
 	unset(FLG_DSRT_TSARU_B_APPEAR)	// 615
 	unset(FLG_DSRT_TSARU_DISAPPEAR)	// 613
+	cc_close_letterbox
 	eob
 
 l_0xc62b6f:

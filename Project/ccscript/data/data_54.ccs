@@ -19,14 +19,17 @@ command e(label) "{long label}"
 // Text Data
 l_0xc97823:
 	goto_if_flag(FLG_MOON_INVISIBLEMAN, l_0xc978aa)	// 0xA5, 165
+	cc_open_letterbox
 	"@The Mani Mani Statue is up ahead,| but I'm going to stop you right here." next
 	"@Don't even think about getting past me," next
 	"@'cause you aren't with a guy" next
 	"@whose eyebrows are connected and who also has a gold tooth." wait
 	set(FLG_MOON_WARP_X)	// 774
+	cc_close_letterbox
 	eob
 
 l_0xc978aa:
+	cc_open_letterbox
 	"@The Mani Mani Statue is up ahead, but I'm going to stop you right here." next
 	"@Huzzah!" pause(20) linebreak
 	"  You really surprised me!" next
@@ -37,6 +40,7 @@ l_0xc978aa:
 	wait_movement
 
 	set(FLG_MOON_R_DISAPPEAR)	// 63
+	cc_close_letterbox
 	eob
 
 l_0xc9794b:
@@ -53,12 +57,24 @@ l_0xc9794b:
 	npc_do_mc(1406,635)	// 0x057E, 0x027B
 	set(FLG_FOUR_MAID_APPEAR)	// 59
 	set(FLG_WIN_MANIMANI)	// 75
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(154)	// 0x9A
 	OSS_on	// event(5)
 	party_freeze	// 0xFF
 	pause(20)
 
+	// Copy of l_0xc97990 to avoid letterbox closing without an cc_open_letterbox
+	window_open(1)
+	"@(The Mani Mani statue was actually a device that created illusions." next
+	"@The illusion device was destroyed.)" wait
+	window_closeall
+	set_respawn_point(5)	// 0x05
+	party_unfreeze	// 0xFF
+	cc_close_letterbox
+	eob
+
 l_0xc97990:
+	cc_open_letterbox
 	window_open(1)
 	"@(The Mani Mani statue was actually a device that created illusions." next
 	"@The illusion device was destroyed.)" wait
@@ -106,12 +122,14 @@ l_0xc97b0c:
 	eob
 
 l_0xc97b12:
+	cc_open_letterbox
 	title(1, Monotoly)
 	"@Don't do anything to me!" linebreak
 	"  I am... I am not Monotoly!" promptw
 	npc_delete(1395,9)	// 0x0573, 0x09
 	pause(120)
 	set(FLG_MOON_MONOTOLY_DISAPPEAR)	// 631
+	cc_close_letterbox
 	eob
 
 l_0xc97b35:
@@ -120,8 +138,10 @@ l_0xc97b35:
 	"@How long are you staying in Moonside?" end
 
 l_0xc98000:
+	cc_open_letterbox
 	"@(The Mani Mani Statue is glowing strangely...)" wait
 	sound(SND_MANIMANI)	// 113
+	cc_close_letterbox
 	eob
 
 l_0xc98024:

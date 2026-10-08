@@ -733,9 +733,11 @@ l_0xc7a7dd:
 	"@The only problem is,| right now," next
 	"@it can only make Strawberry tofu..." next
 	"@I wasn't too happy with my last Escargo Express experience..." next
-	"@So,| I'm having the machine delivered to you via <Careless Express>." next
+	"@So,| I'm having the machine delivered to you via" linebreak
+	"  <Careless Express>." next
 	"@Hopefully, you'll get it soon." pause(20)
 	"  Yeah,| everything is..." next
+	sound(SND_FIRE4)	// 91, added for dramatic effect
 	"@(Kaboooom!)" next
 	"@Uh, I'vegotsomeproblems" linebreak
 	"  heregottago, bye!" next
@@ -762,10 +764,13 @@ l_0xc7a959:
 	"@Whew!" pause(15)
 	"  I just got here from the Dusty Dunes Desert." next
 	"@There was this sunbathing guy," next
-	"@and he told me about a cave with lots of monkeys... or was it orangutans?" next
-	"@Anyway,| he said...| well... uh.../| I forgot." next
+	"@and he told me about a cave with lots of monkeys..." linebreak
+	"  or was it orangutans?" next
+	"@Anyway,| he said...|" linebreak
+	"  Well... uh.../| I forgot." next
 	"@Yep, I forgot... actually I forgot the stuff I was supposed to deliver, too." next
-	"@I think it was some weird machine to make Strawberry tofu." next
+	"@I think it was some weird machine to make"
+	"  {itemname(STRAWBERRY_TOFU)}." next
 	"@Yeah, I forgot it at the desert..." next
 	"@I'm not going back that way, so don't ask me to get the package..." next
 	"@I mean,| it's your package, right?" next
@@ -1166,7 +1171,8 @@ l_0xc7b4fb:
 	set(FLG_TWSN_TONCHIKI_APPEAR)	// 624
 	eob
 
-l_0xc7b550:
+l_0xc7b550:	// Rama's Monkey appears after Moonside
+	cc_open_letterbox
 	show_npc_float(967,3)	// 0x03C7, 0x03
 	pause(60)
 	hide_npc_float(967)	// 0x03C7
@@ -1177,9 +1183,10 @@ l_0xc7b550:
 	npc_spawn(968,8,1)	// 0x03C8, 0x0008, 0x01
 	set(FLG_FOUR_SARU_K_APPEAR)	// 592
 	unset(FLG_FOUR_SARU_B_APPEAR)	// 591
+	cc_close_letterbox
 	eob
 
-l_0xc7b576:
+l_0xc7b576:	// Rama's Monkey speech
 	cc_open_letterbox
 	npc_delete(968,6)	// 0x03C8, 6
 	npc_spawn(967,8,1)	// 0x03C7, 0x0008, 1
@@ -1218,18 +1225,24 @@ l_0xc7b576:
 	music(13)
 	pause(60)
 	music_effect(3)	// Music fadeout
+
+	cc_close_letterbox
+
 	pause(60)
 	unset(FLG_FOUR_SARU_K_APPEAR)	// 592
+
+	// Careless Express NPC moves in
 	sprite2_spawn(64,638,1)	// 0040, 027E, 1
 	wait_movement
 
 	music_resume
 	get_char_at_pos(1)
 	get_dir_from_char(0,TO_SPRITE2,64)	// 00, 03, 0040
-	char_direction(0, 0)	// 00, 00
+	char_direction(0,0)	// 00, 00
 	show_sprite2_float(64,3)	// 0040, 3
 	pause(60)
 	hide_sprite2_float(64)	// 0040
+	cc_open_letterbox
 	sprite2_do_mc(64,640)	// 0040, 0280
 	wait_movement
 
@@ -1238,6 +1251,7 @@ l_0xc7b576:
 	sprite2_do_mc(64,639)	// 0040, 027F
 	wait_movement
 
+	// Electra moves in
 	set(FLG_DSRT_TJAB_MOVE)	// 745
 	sprite2_spawn(396,641,1)	// 018C, 0281, 1
 	wait_movement
@@ -1247,12 +1261,18 @@ l_0xc7b576:
 	window_open(1)
 	title(1, Electra)
 	"@Hello!" next
-	"@I heard you talking about Strawberry tofu." next
-	"@I'm a maid who serves Mr. Monotoly," next
-	"@and I'm looking for Strawberry tofu to give to our special guest." next
+	"@I heard you talking about {itemname(STRAWBERRY_TOFU)}." next
+	"@I'm a maid who serves" linebreak
+	"  Mr. Monotoly," next
+	"@and I'm looking for {itemname(STRAWBERRY_TOFU)} to give to our special guest." next
 	"@If you know anything about it,| please tell me!" next
 	"@I've been searching and searching..." next
+	window_closeall
+
 	sprite2_unfreeze(396)	// 018C
+	get_char_at_pos(1)
+	get_dir_from_char(0,TO_SPRITE2,396)	// 00, 03, 0040
+	char_direction(0,0)	// 00, 00
 	wait_movement
 	pause(30)
 	cc_close_letterbox

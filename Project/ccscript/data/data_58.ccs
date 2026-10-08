@@ -613,7 +613,10 @@ l_0xc9c991:
 	eob
 
 l_0xc9c9db:
-	"@Go quickly!" end
+	cc_open_letterbox
+	"@Go quickly!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc9c9e8:
 	cc_open_letterbox
