@@ -645,11 +645,19 @@ l_0xc9c9e8:
 	window_closeall
 
 	pause(1)
+
+	// This gives an empty window if the player is Lvl 99, add a check just in case
+	get_stat(75) swap
+	compare_argument(99)
+	goto_if_true(_poo_not_level_99)
+
 	window_open(14)
 	boost_experience(4,6000)	// Boost Poo exp by 6000, 0x001770
 	linebreak
 	prompt
 	window_closeall
+
+_poo_not_level_99:
 	goto(data_50.l_0xc9237e)
 
 l_0xc9cb77:
@@ -838,7 +846,7 @@ l_0xc9d1b7:
 	"@(This is Mu, the Place of Emptiness." next
 	"@People who train here must first clear everything from their mind." next
 	"@If you can make your mind blank and learn the true meaning of <Mu,>" next
-	"@you'll pass through." pause(20)
+	"@you'll pass through." pause(20) linebreak
 	"  Mu is Mu...)" end
 
 l_0xc9d23f:
@@ -920,7 +928,7 @@ l_0xc9d4fd:
 	"@I'm waiting for Prince {name(4)} to see me and say <I love you.>" end
 
 l_0xc9d523:
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled in data_50.l_0xc929ae
 	title(1, Star)
 	"@You have sharp eyes." next
 	"@...You must be Prince {name(4)}." next
@@ -930,7 +938,7 @@ l_0xc9d523:
 	"@I'll see you again.  So long!" wait
 	sound(SND_STATSUP)	// 40
 	set(FLG_RAMA_258_DISAPPEAR)	// 595
-	cc_close_letterbox
+	//cc_close_letterbox	// Handled in data_50.l_0xc929ae
 	eob
 
 l_0xc9d5c4:

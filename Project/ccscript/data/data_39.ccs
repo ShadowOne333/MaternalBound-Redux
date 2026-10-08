@@ -507,11 +507,11 @@ l_0xc81f56:
 	title(1, Apple)
 	"@If I invent some other brilliant item,| I'll call you." wait
 	window_closeall
-	cc_close_letterbox
 
 	unset(FLG_TWSN_CHAOSAPPLE_APPEAR)	// 42
 	set(FLG_HAPPY_SWITCH)	// 175
 	set(FLG_ITEM_TACO_ERASER)	// 83
+	cc_close_letterbox
 	eob
 
 l_0xc82049:
@@ -526,7 +526,8 @@ l_0xc8207c:
 
 l_0xc82105:
 	goto_if_flag(FLG_GLOBAL_MUSEUM_PAID, l_0xc82285)	// 0x0300, 768
-	"@The Dinosaur Museum doesn't have any real dinosaurs..." pause(20)
+	cc_open_letterbox
+	"@The Dinosaur Museum doesn't have any real dinosaurs..." pause(20) linebreak
 	"  They're all replicas." next
 	"@I'm sure everyone knows that." next
 	"@If you still want to go see the dinosaurs," next
@@ -538,8 +539,10 @@ l_0xc82105:
 l_0xc821b2:
 	get_party_size_times(5) swap
 	"@Maybe you think {number(0)} dollars is too much." next
-	"@Or are you just not interested in dinosaurs." pause(20)
-	"  You're strange, kid!" end
+	"@Or are you just not interested in dinosaurs." pause(20) linebreak
+	"  You're strange, kid!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc821fe:
 	get_party_size_times(5) swap
@@ -556,12 +559,15 @@ l_0xc821fe:
 	set(FLG_GLOBAL_MUSEUM_PAID)	// 768
 	goto_if_flag(FLG_WIN_GIEGU, data_55.l_0xc9992f)	// 0x49, 73
 	hotspot_off(1)
+	cc_close_letterbox
 	eob
 
 l_0xc82250:
 	get_party_size_times(5) swap
 	"@You don't even have {number(0)} dollars!" next
-	"@You don't deserve to go in the museum." end
+	"@You don't deserve to go in the museum." wait
+	cc_close_letterbox
+	eob
 
 l_0xc82285:
 	"@The Dinosaur Museum doesn't have real dinosaurs..." pause(20)
@@ -595,6 +601,7 @@ l_0xc82467:
 	eob
 
 l_0xc82468:
+	cc_open_letterbox
 	title(1, Spoon)
 	"@You want to know about something <extraordinary>?" next
 	"@....." next
@@ -608,11 +615,8 @@ l_0xc82468:
 	set(FLG_FOUR_KOMORITA)	// 140
 	unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
 
-	if flag FLG_KEY_ITEMS and flag FLG_ITEM_BANANA
-	{
-	    next
-	    call(l_0xc8259f)
-	}
+	/*if flag FLG_KEY_ITEMS and flag FLG_ITEM_BANANA { goto(l_0xc8259f) }*/
+	cc_close_letterbox
 	eob
 
 l_0xc82565:
@@ -629,6 +633,10 @@ l_0xc8258c:
 
 l_0xc8259f:
 	sound(SND_CHICKEN2)	// 118
+	window_closeall	// Close menus
+
+	cc_open_letterbox
+	window_open(1)
 	title(1, Spoon)
 	"@You got it!" next
 	"@That banana peel has an authentic <Venus> autograph?" next
@@ -650,6 +658,7 @@ l_0xc8259f:
 
 	set(FLG_FOUR_KOMORITA_APPEAR)	// 58
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc826bc:

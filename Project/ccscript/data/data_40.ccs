@@ -531,6 +531,7 @@ l_0xc83d24:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
 
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the fifth <Your Sanctuary> location." pause(20) linebreak
@@ -540,9 +541,11 @@ l_0xc83d24:
 	call(data_23.l_0xc68425)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	hide_sprite(995,8)	// 0x03E3, 08
 	pause(120)
 	set(FLG_WIN_MGNT_BOSS)	// 194
+	cc_close_letterbox
 	eob
 
 l_0xc83d9e:

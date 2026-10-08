@@ -427,6 +427,10 @@ l_0xc92203:	// Mu training scene
 	call(l_0xc92461)
 	sprite2_unfreeze(163)
 	wait_movement
+
+	// Trick the player into thinking the cutscene is over
+	cc_close_letterbox
+
 	sprite2_unfreeze(362)	// 0x016A
 	wait_movement
 
@@ -435,6 +439,7 @@ l_0xc92203:	// Mu training scene
 	unset(FLG_TEMP_2)	// 3
 	set(FLG_TEMP_3)	// 4
 	wait_movement
+
 	goto_if_flag(FLG_TEMP_1, l_0xc9242e)	// 2
 	set(FLG_TEMP_2)	// 3
 	wait_movement
@@ -460,12 +465,14 @@ l_0xc92203:	// Mu training scene
 	set(FLG_TEMP_2)	// 3
 	wait_movement
 
+	cc_instant_letterbox
 	sprite2_delete(365,6)	// 0x016D, 6
 	show_party(1)	// 0xFF, 1
 	pause(1)
 	music_resume
 	sprite2_spawn(88,341,1)	// 0xA3, 0x0155, 1
 	wait_movement
+
 	sprite2_freeze(88)	// 0x58
 	char_direction(4,7)	// 0x04, 7
 	call(l_0xc92958)
@@ -559,7 +566,8 @@ l_0xc92461:
 	"@Prince {name(4)}!" next
 	"@You must come back with me instead of staying in a place such as this." next
 	"@Your Master wishes it...| please rise, Prince..." next
-	"@Your highness, you must give up this trial for now... believe what I say," next
+	"@Your highness, you must give up this trial for now..." linebreak
+	"  believe what I say," next
 	"@it is the truth..." wait
 	window_closeall
 	eob
@@ -647,7 +655,8 @@ l_0xc927ea:
 	"@If you lose your mind,{pause(15)}" linebreak
 	"  you also lose any feelings of sadness..." next
 	"@Do you accept this?" next
-	"@I will take your mind, Prince {name(4)},/| know that I will possess it...)" promptw
+	"@I will take your mind," linebreak
+	"  Prince {name(4)},/| know that I will possess it...)" promptw
 	pause(20)
 	window_closeall
 
@@ -721,7 +730,7 @@ l_0xc929ae:
 	eob
 
 l_0xc929ca:
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled in data_58.l_0xc9c9e8
 	set(FLG_NESS_KI)
 	set(FLG_JEFF_KI)
 	set(FLG_PAULA_KI)
@@ -745,7 +754,7 @@ l_0xc929ca:
 	//set(FLG_ITEM_TINY_RUBY)
 	set(FLG_PHOTO_TOTO)	// 504
 	set(FLG_PHOTO_RAMMA_FIELD)	// 499
-	cc_close_letterbox
+	//cc_close_letterbox	// Handled in l_0xc923b4
 	eob
 
 l_0xc92a48:
@@ -878,7 +887,7 @@ l_0xc92be3:
 	eob
 
 l_0xc92c70:	// Summers boat trip up to Kraken
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled in data_45
 	OSS_on	// event(5)
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	npc_do_mc(1065,291)	// 0x0429, 0x0123

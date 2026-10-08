@@ -771,6 +771,7 @@ l_0xc7d87f:
 		result_is(CARROT_KEY)
 		goto_if_false(_not_carrot_key)
 
+	_carrot_key:
 		newline
 		swap
 		"@{name(0)} adds it" linebreak

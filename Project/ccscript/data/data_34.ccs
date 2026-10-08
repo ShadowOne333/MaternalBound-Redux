@@ -982,7 +982,7 @@ l_0xc7b146:
 
 	window_open(1)
 	"@Hey, you!" pause(15)
-	"  Over there!" pause(20)
+	"  Over there!" pause(20) linebreak
 	"  Get over here!" promptw
 	window_closeall
 
@@ -1004,7 +1004,7 @@ l_0xc7b1d8:
 	get_party_size_times(5)	swap
 	"@You can't afford to spend" linebreak
 	"  ${number(0)}?," next
-	"@or are you just not into dinosaurs?" pause(20)
+	"@or are you just not into dinosaurs?" pause(20) linebreak
 	"  You must be nuts..." wait
 	window_closeall
 

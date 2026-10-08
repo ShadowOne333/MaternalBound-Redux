@@ -31,9 +31,9 @@ l_0xc86e58:
 	"@Only one with the {itemname(HAWK_EYE)} can pierce the dark." next
 	"@The Sphinx now watches over everything," next
 	"@waiting for the coming of a truly brave hero." next
-	"@   #" linebreak
-	"  4   3" linebreak
-	"   2 5" next
+	"@" text_pos(8,2) "`#" pause(3) linebreak
+	text_pos(6,2) "4" text_pos(10,2) "3" pause(3) linebreak
+	text_pos(7,2) "2" text_pos(9,2) "5" next
 	"@Dance in front of the Sphinx!>"
 
 	goto_if_flag(FLG_SUMS_HIEROGLYPH, l_0xc87099)	// 0x0094, 148
@@ -55,8 +55,16 @@ l_0xc86e58:
 
 	window_open(1)
 	title_poo(1)
+
 	get_char_at_pos(1) rtoarg
-	"@{name(0)}!  Let's go to Scarabia." pause(15)
+	result_is(4)	// Added check in case Poo is alone in the party
+	goto_if_true(_poo_only)
+	"@{name(0)}!  Let's go to Scarabia."
+	goto(_poo_not_alone)
+_poo_only:
+	"@I shall go to Scarabia." linebreak
+_poo_not_alone:
+	pause(15)
 	"  The pyramid is the key!" wait
 	set(FLG_SUMS_HIEROGLYPH)	// 148
 	hotspot_on(1,49, data_45.l_0xc8ac6f)	// 0x01, 0x31, 0x00C8AC6F
@@ -64,7 +72,9 @@ l_0xc86e58:
 	eob
 
 l_0xc87099:
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc8709b:
 	end

@@ -294,6 +294,7 @@ l_0xc68e0c:
 	"@(It looks like a doorway...)" end
 
 l_0xc68e1c:
+	cc_open_letterbox
 	sound(SND_PHONEPICKUP)	// 11
 	pause(20)
 	call(data_57.l_0xc9b176)
@@ -314,6 +315,7 @@ l_0xc68e1c:
 	sound(SND_PHONEPICKUP)	// 11
 	"@*Click*  Beeeeep" wait
 	unset(FLG_SUMS_MUSEUM_PHONE_RING)	// 687
+	cc_close_letterbox
 	eob
 
 l_0xc68f74:
@@ -338,14 +340,16 @@ l_0xc69007:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
 	else { get_inventory_item(0,0) swap }
 	// Check for Rabbits' carrot, item 0xFD, 253
-	result_is(CARROT_KEY) goto_if_false(data_35.l_0xc7c6b6)
+	result_is(CARROT_KEY)
+	goto_if_false(data_35.l_0xc7c6b6)
 	"@Cows and carrots?..." next
 	"@That's a nutty combination!" end
 
 l_0xc69038:
 	get_inventory_item(0,0) swap
 	// Check for Letter from Tony, item 0xA7, 167
-	result_is(167) goto_if_false(data_35.l_0xc7c6b6)
+	result_is(LETTER_FROM_TONY)
+	goto_if_false(data_35.l_0xc7c6b6)
 	get_dir_from_npc(734,TO_CHAR,1)	// 0x02DE, 0x01, 0x0001
 	sprite_direction(734,0)	// 0x02DE, 0x00
 	"@Ah, {name(1)}... you've read it already." next
@@ -605,7 +609,8 @@ l_0xc695b3:
 l_0xc695ba:
 	get_char_at_pos(1) rtoarg
 	// Check if Ness is the party leader, if not, go to label
-	result_is(1) goto_if_false(data_55.l_0xc9992f)
+	result_is(1)
+	goto_if_false(data_55.l_0xc9992f)
 	// Check if Ness has homesickness, if not, go to label
 	character_has_status(1, SCR_STATUS_GROUP_5, SCR_STATUS_5_HOMESICK)	// 1, 6, 2
 	goto_if_false(data_55.l_0xc9992f)
