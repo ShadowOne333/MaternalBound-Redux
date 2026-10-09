@@ -94,6 +94,7 @@ l_0xc78536:
 	eob
 
 l_0xc7854a:
+	sound(SND_ERRORBEEP)	// 5
 	"@I can't do much for you if you don't have any money..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 0x06
@@ -194,6 +195,7 @@ l_0xc78689:
 l_0xc786e7:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc7854a)
+
 	takemoney(0)	// 0x0000
 	sound(SND_CHICKEN2)	// 118
 	show_wallet
@@ -694,6 +696,7 @@ l_0xc78e20:
 	eob
 
 l_0xc78e49:
+	sound(SND_ERRORBEEP)	// 5
 	"@I can't let you on if you don't pay."
 	goto(l_0xc78e11)
 
@@ -704,6 +707,7 @@ l_0xc78e60:
 	two_choice_menu("Yes", l_0xc78ed8, "No", l_0xc78e98)
 
 l_0xc78e98:
+	sound(SND_ERRORBEEP)	// 5
 	"@If you don't have any money, you should just stroll around." next
 	"@Besides,| walking is good for you."
 	counter(1)
@@ -717,6 +721,7 @@ l_0xc78e98:
 l_0xc78ed8:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc78e98)
+
 	takemoney(0)	// 0x0000
 	show_wallet
 	sound(SND_CHICKEN2)	// 118

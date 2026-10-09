@@ -126,6 +126,7 @@ l_0xc648e3:
 	goto(l_0xc6491e)
 
 l_0xc648fc:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@I think you are already carrying too many things." next
 	goto(l_0xc6491e)
@@ -313,11 +314,13 @@ l_0xc64c6a:
 
 l_0xc64c9e:
 	unset(FLG_PIZZA_SIZE)	// 179
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, it looks like you can not carry any more." linebreak
 	"  Call us again some other time."
 	goto(l_0xc64c52)
 
 l_0xc64cc9:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh? You are a little short of cash.  Well, call us again some other time."
 	goto(l_0xc64c52)
 
@@ -460,9 +463,11 @@ l_0xc64fc8:
 	goto(l_0xc64f9f)
 
 l_0xc64fde:
+	sound(SND_ERRORBEEP)	// 5
 	"@{name(1)} could not carry any more stuff." end
 
 l_0xc64ff3:
+	sound(SND_ERRORBEEP)	// 5
 	"@{name(1)} did not have that much money." end
 
 l_0xc65009:

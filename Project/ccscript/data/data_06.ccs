@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -42,24 +43,27 @@ l_0xc5749a:
 
 l_0xc574f6:
 	goto_if_flag(FLG_ITEM_KEY_PUPUKA, l_0xc575f8)	// 0x0150, 336
-	"@I'm doing this as a hobby."
-	pause(20)
+	cc_open_letterbox
+	"@I'm doing this as a hobby." pause(20) linebreak
 	"  Isn't it cool?" next
-	"@I recently made a friend."
-	pause(20)
+	"@I recently made a friend." pause(20) linebreak
 	"  He used to be a Dungeon Maker." next
 	"@And now he's a <Dungeon Man.>" next
 	"@Would you like to meet him?" linebreak
 	two_choice_menu("Yes", l_0xc5759d, "No", l_0xc57584)
 
 l_0xc57584:
-	"@I understand,| he is a very strange fellow." end
+	"@I understand,| he is a very strange fellow." wait
+	cc_close_letterbox
+	eob
 
 l_0xc5759d:
 	"@All righty then, I'll give you the key so that you can enter him." next
 	"@Oh no... I don't have it!" next
 	"@I must have lost it somewhere." next
-	"@I'm sorry, I don't worry about small things." end
+	"@I'm sorry, I don't worry about small things." wait
+	cc_close_letterbox
+	eob
 
 l_0xc575f8:
 	"@I stayed here the whole time you were gone." next
@@ -67,6 +71,7 @@ l_0xc575f8:
 
 l_0xc5762c:
 	goto_if_flag(FLG_ITEM_KEY_PUPUKA, l_0xc576e0)	// 0x0150, 336
+	cc_open_letterbox
 	title(1, Warrior)
 	"@I am not sure if it was the <Dungeon Man,> but..." next
 	"@there is a strange looking tower to the northwest." next
@@ -90,10 +95,13 @@ l_0xc5762c:
 	window_closeall
 
 	isset(FLG_SKRB_PU_TAKANOME)	// 691
+	cc_close_letterbox
 	goto_if_false(data_55.l_0xc9992f)
 
 	pause(60)
-	call(data_24.l_0xc692f7)
+	cc_open_letterbox
+	call(data_24.l_0xc692f7)	// Escargo script if Poo had the Hawk eye when he left
+	cc_close_letterbox
 	eob
 
 l_0xc576e0:
@@ -102,14 +110,18 @@ l_0xc576e0:
 	"@There's a strange looking tower to the northwest." end
 
 l_0xc57718:
+	sound(SND_ERRORBEEP)	// 5
 	next
 	"@...But it seems that you have too many things." end
 
 l_0xc57730:
 	goto_if_flag(FLG_SKRB_DUNGEONMAN_OPEN, l_0xc57753)	// 0x025E, 606
-	"@(Looks like you could enter, but it's locked.)" end
+	cc_open_letterbox
+	"@(Looks like you could enter, but it's locked.)" wait
+	cc_close_letterbox
+	eob
 
-l_0xc57753:
+l_0xc57753:	// Warp into the Dungeon man
 	window_closeall
 	pause(1)
 	warp(159)	// 0x9F
@@ -130,6 +142,13 @@ l_0xc57760:
 	result_is(TOWER_KEY)	// 192
 	goto_if_false(l_0xc577b2)
 
+	// Close menus, using window_closeall screws with the item name
+	window_close(0)
+	window_close(10)
+	close_hp
+	cc_open_letterbox
+	window_switch(1)
+
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		swap
@@ -145,6 +164,7 @@ l_0xc57760:
 	set(FLG_SKRB_DUNGEONMAN_OPEN)	// 606
 	sound(SND_PSI3)	// 119
 	window_closeall
+	cc_close_letterbox
 	pause(15)	// Added pause so the SFX has time to finish properly
 	warp(159)	// 0x9F
 	call(data_57.l_0xc9b112)
@@ -158,6 +178,7 @@ l_0xc577c5:
 
 l_0xc577d8:
 	goto_if_flag(FLG_TLPT_MAKY, l_0xc57911)	// 0x00DA, 218
+	cc_open_letterbox
 	title(1, Warrior)
 	"@A scary place called Deep Darkness is on the other side of the river." next
 	"@The monsters are very strong..." next
@@ -167,7 +188,9 @@ l_0xc577d8:
 
 l_0xc57878:
 	"@It was stupid of me to ask." next
-	"@Let's watch the sunset over Deep Darkness together from here." end
+	"@Let's watch the sunset over Deep Darkness together from here." wait
+	cc_close_letterbox
+	eob
 
 l_0xc578b3:
 	"@The swamp is bottomless." next
@@ -175,6 +198,7 @@ l_0xc578b3:
 	"@It is a different story if you have a submarine." wait
 	set(FLG_SKRB_YARIMAN)	// 151
 	set(FLG_DSRT_KANBAN_44_MOVE)	// 762
+	cc_close_letterbox
 	eob
 
 l_0xc57911:
@@ -187,6 +211,7 @@ l_0xc57947:
 	goto_if_flag(FLG_SKRB_YARIMAN, l_0xc57a26)	// 0x0097, 151
 
 l_0xc57955:
+	cc_open_letterbox
 	title(1, Brickroad)
 	"@Welcome!" promptw
 	window_closeall
@@ -210,9 +235,11 @@ l_0xc57955:
 	set(FLG_SKRB_YARIMAN_B_APPEAR)	// 445
 	hotspot_on(1,9, data_50.l_0xc93381)	// 0x01, 0x09, 0x00C93381
 	set(FLG_PHOTO_DUNGEONMAN)	// 507
+	cc_close_letterbox
 	eob
 
 l_0xc57a26:
+	cc_open_letterbox
 	title(1, Dungeon)
 	"@There's an old submarine at the back of the dungeon." next
 	"@It can be used to cross the river." next
@@ -220,7 +247,9 @@ l_0xc57a26:
 	"@It will take you to the submarine." next
 	"@Don't make a mistake on which exit you take." next
 	"@You need to take the <Goodbye Exit!>" next
-	"@Hope to see you again!" end
+	"@Hope to see you again!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc57ad9:
 	title(1, Dungeon)
@@ -292,9 +321,11 @@ l_0xc57c10:
 	eob
 
 l_0xc57c2c:
+	cc_open_letterbox
 	counter(3)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc57c6f)
+
 	"@({name(3)} checked the broken submarine.)" next
 	"@Yes!" pause(20)
 	"  It can still work." wait
@@ -302,7 +333,9 @@ l_0xc57c2c:
 	goto(data_50.l_0xc934ed)
 
 l_0xc57c6f:
-	"@(No one can repair the submarine except {name(3)}.)" end
+	"@(No one can repair the submarine except {name(3)}.)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc57c96:
 	"@Oh,/| if you walk around out here you'll find something gross." next
@@ -355,6 +388,9 @@ l_0xc57e1c:
 	"@He is evil itself." promptw
 	eob
 
+//------------------------------------
+// Original ATM Debug menu starts here
+//------------------------------------
 l_0xc58000:
 	window_open(1)
 	newline
@@ -636,6 +672,7 @@ l_0xc582f8:
 	goto(l_0xc582f8)
 
 l_0xc58358:
+	sound(SND_ERRORBEEP)	// 5
 	diam "Inventory full." linebreak
 	diam "Can't add more items.{wait}"
 	goto(l_0xc58364)

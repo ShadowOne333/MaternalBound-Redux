@@ -371,8 +371,8 @@ l_0xc80276:
 	eob
 
 l_0xc80277:
-	newline
 	sound(SND_ERRORBEEP)	// 5
+	newline
 	pause(30)
 	"@You have too many items." pause(20)
 	"  Why don't you get rid of something and come back." next
@@ -570,6 +570,7 @@ l_0xc807bc:
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc8082a)
 	give_and_return_location(0, HAND_AID)	// 0x00, 0xBC, 188
+
 	call(data_36.l_0xc7dccf)
 	wait
 	set(FLG_TWSN_ITEM_ISABELLA)	// 84
@@ -577,6 +578,7 @@ l_0xc807bc:
 	eob
 
 l_0xc8082a:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	title(1, MsJones)
 	"@What's that?" pause(15)

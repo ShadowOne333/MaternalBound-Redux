@@ -2151,11 +2151,14 @@ l_0xef7bdf:
 	"@Inside the present," linebreak
 	get_action_arg swap
 	"  there was a {itemname(0)}!" next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xef7c73)
+
 	store_registers
 	call(data_36.l_0xc7dc85)
 	goto_if_true(l_0xef7c42)
+
 	load_registers swap
 	"@{name(0)}{swap} took it."
 	give_and_return_location(0,0)
@@ -2176,6 +2179,7 @@ l_0xef7c42:
 	eob
 
 l_0xef7c73:
+	sound(SND_ERRORBEEP)	// 5
 	"@But, " call(data_37.l_0xc7e6d7) " cannot carry anymore stuff." prompt
 	linebreak
 

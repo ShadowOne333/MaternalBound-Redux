@@ -110,7 +110,8 @@ l_0xc6abd5:
 	"@Sorry for the inconvenience." promptw
 	if flag FLG_KEY_ITEMS { give_menu_key_item(BAD_KEY_MACHINE) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc6acda)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6acda)
 		give_and_return_location(0, BAD_KEY_MACHINE)	// 0xAC, 172
 		call(data_36.l_0xc7dcb6) }
 	next
@@ -124,6 +125,7 @@ l_0xc6abd5:
 	eob
 
 l_0xc6acda:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@Seems like you're trying to carry too much.  You aren't able to carry the key." next
 	"@Hah, ha, ha.  What a greedy guy!  Hah, ha, ha." end
@@ -157,12 +159,17 @@ l_0xc6ae36:
 	hasmoney(1)
 	goto_if_false(l_0xc6ae77)
 
-	if not flag FLG_KEY_ITEMS { get_item_receiver(-1) goto_if_false(l_0xc6aee1) }
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6aee1)
+	}
 
 	pause(1)
 	takemoney(1)
 
-	if not flag FLG_KEY_ITEMS { give_and_return_location(3, BUBBLE_GUM) }	// 0x68, 104
+	if not flag FLG_KEY_ITEMS {
+		give_and_return_location(3, BUBBLE_GUM)	// 0x68, 104
+	}
 
 	store_registers
 	sound(SND_CHICKEN2)	// 118
@@ -527,6 +534,7 @@ l_0xc6bbe3:
 
 l_0xc6bbf9:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc6bc43)	// 0x49, 73
+	cc_open_letterbox
 	title(1, Bubble)
 	"@Ki-kye-kye-kye-kiii." next
 	"@(Yep,| I have some" linebreak
@@ -537,10 +545,18 @@ l_0xc6bbf9:
 l_0xc6bc42:
 	eob
 
-l_0xc6bc43:
+l_0xc6bc43: {
+	title(1, Bubble)
 	"@Kya ke ke kiya." linebreak
 	"  (In the monkey community,| {name(1)} is famous." next
+
+	get_char_at_pos(1)
+	result_is(1)
+	goto_if_false(_ness_not_leader)
 	"@You're such a great man.)" end
+_ness_not_leader:
+	"@He's such a great man.)" end
+}
 
 l_0xc6bc80:
 	cc_open_letterbox
@@ -598,7 +614,8 @@ kid:
 
 kid1:
 	inc ctoarg
-	party_size_smaller_than(0) goto_if_true(kid2)
+	party_size_smaller_than(0)
+	goto_if_true(kid2)
 	get_char_at_pos(0)
 	character_has_status(0, SCR_STATUS_GROUP_0, SCR_STATUS_0_UNCONSCIOUS)	// 0, 1, 2
 	goto_if_true(kid2)
@@ -619,7 +636,8 @@ kid2:
 
 kid3:
 	get_char_at_pos(1)
-	result_is(2) goto_if_true(kid_paula)
+	result_is(2)
+	goto_if_true(kid_paula)
 	eob //kid
 
 kid_paula:
@@ -663,6 +681,7 @@ l_0xc6bef9:
 	"@(There's no response.)" end
 
 l_0xc6bf0c:
+	cc_open_letterbox
 	title(1, Apple)
 	"@I expected there to be about a seven percent chance that you would rescue me." next
 	"@But meeting Mr. Saturn here has actually turned out to be very beneficial." next
@@ -677,6 +696,7 @@ l_0xc6bf0c:
 	"@...Anyway,| because I knew you, I had an incredible experience... wow!" next
 	"@I was kidnapped by some of Giygas' toadies!" wait
 	unset(FLG_WINS_ESCAPE_MOUSE_NG)	// 766
+	cc_close_letterbox
 	eob
 
 l_0xc6c035:
@@ -693,7 +713,10 @@ l_0xc6c059:
 	"@I give you" linebreak 
 	"  ribbon." next
 	font_normal
-	get_item_receiver(-1) goto_if_false(l_0xc6c081)
+
+	get_item_receiver(-1)
+	goto_if_false(l_0xc6c081)
+
 	give_and_return_location(0, SATURN_RIBBON)	// Item 0xDC, 220, Saturn ribbon
 	call(data_36.l_0xc7dccf)
 	wait
@@ -701,6 +724,7 @@ l_0xc6c059:
 	eob
 
 l_0xc6c081:
+	sound(SND_ERRORBEEP)	// 5
 	font_saturn
 	"@Too much." next
 	"@...can't carry all." wait
@@ -709,14 +733,27 @@ l_0xc6c081:
 
 l_0xc6c099:
 	title(1, Tony)
-	counter(3) call(data_36.l_0xc7dc7f) goto_if_true(l_0xc6c168)
+
+	counter(3)
+	call(data_36.l_0xc7dc7f)
+	goto_if_true(l_0xc6c168)
+
 	"@{name(3)}, {name(3)} buddy!" next
 	"@Oh me, oh my..." next
 	"@You... came to rescue me!" pause(15)
 	"  Pal!" linebreak
-	counter(1) call(data_36.l_0xc7dc7f) goto_if_false(l_0xc6c107)
-	counter(4) call(data_36.l_0xc7dc7f) goto_if_false(l_0xc6c129)
-	counter(2) call(data_36.l_0xc7dc7f) goto_if_false(l_0xc6c118)
+
+	counter(1)
+	call(data_36.l_0xc7dc7f)
+	goto_if_false(l_0xc6c107)
+
+	counter(4)
+	call(data_36.l_0xc7dc7f)
+	goto_if_false(l_0xc6c129)
+
+	counter(2)
+	call(data_36.l_0xc7dc7f)
+	goto_if_false(l_0xc6c118)
 	 end
 
 l_0xc6c107:
@@ -737,7 +774,7 @@ l_0xc6c13a:
 	next
 	title(1, Tony)
 	"@I'm Tony." next
-	"@I'm {name(3)}'s best friend." pause(20)
+	"@I'm {name(3)}'s best friend." pause(20) linebreak
 	"  I've known him for the longest time." end
 
 l_0xc6c168:

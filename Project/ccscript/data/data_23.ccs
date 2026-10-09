@@ -429,6 +429,7 @@ l_0xc685b4:	// Starman Junior
 	eob
 
 l_0xc685bb:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@But, you can't carry anything else." end
 

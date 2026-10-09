@@ -391,8 +391,8 @@ l_0xc761d7:
 	call(data_20.l_0xc6474f) eob
 
 l_0xc761dd:
-	newline
 	sound(SND_ERRORBEEP)	// 5
+	newline
 	pause(30)
 	"@You have too much stuff." end
 
@@ -403,7 +403,8 @@ l_0xc761eb:
 	"  Let me give it back to you..." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(SOUND_STONE) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc7623e)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc7623e)
 		give_and_return_location(0, SOUND_STONE)	// 0xC4, 196
 		call(data_36.l_0xc7dcb6)
 	}
@@ -413,6 +414,7 @@ l_0xc761eb:
 	eob
 
 l_0xc7623e:
+	sound(SND_ERRORBEEP)	// 5
 	"@Ooops!" pause(20)
 	"  You seem to be carrying too much stuff already!" end
 

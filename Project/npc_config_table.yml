@@ -12623,11 +12623,11 @@
   Event Flag: 0
   Movement: 8
   Show Sprite: always
-  Sprite: 215
-  Text Pointer 1: data_22.l_0xc68017
+  Sprite: 213
+  Text Pointer 1: data_61.l_0xef610d
   Text Pointer 2: $0
-  Type: person
-  EBME_Comment: null
+  Type: object
+  EBME_Comment: Added sign in Lost Underworld (Original phone made to duplicate 1128)
 1263:
   Direction: down
   Event Flag: 153
@@ -13004,7 +13004,7 @@
   Movement: 8
   Show Sprite: always
   Sprite: 213
-  Text Pointer 1: data_61.l_0xef610d
+  Text Pointer 1: data_61.l_0xef6132
   Text Pointer 2: $0
   Type: object
   EBME_Comment: null
@@ -15114,10 +15114,10 @@
   Movement: 9
   Show Sprite: always
   Sprite: 233
-  Text Pointer 1: data_35.l_0xc7d867
+  Text Pointer 1: original_lines.Carrot_Key_Box	# data_35.l_0xc7d867
   Text Pointer 2: $fd
   Type: item
-  EBME_Comment: null
+  EBME_Comment: Rabbit's carrot / Carrot key box
 1512:
   Direction: down
   Event Flag: 905

@@ -615,6 +615,7 @@ l_0xc89180:
 	goto(l_0xc89078)
 
 l_0xc891b7:
+	sound(SND_ERRORBEEP)	// 5
 	title(1, George)
 	"@Hey!" pause(20)
 	"  You've got too many things with you..." next

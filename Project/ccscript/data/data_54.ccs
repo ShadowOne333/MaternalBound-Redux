@@ -227,7 +227,8 @@ l_0xc981c6:
 	eob
 
 l_0xc9827c:
-	set(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 
+	set(FLG_HAPPY_CARPAINTER_ITEMFULL)	// 122
+	sound(SND_ERRORBEEP)	// 5
 	"@Your backpack is full..." next
 	"@You should take this even if you need to throw away one of your items." wait
 	cc_close_letterbox
@@ -448,6 +449,7 @@ l_0xc9894e:
 l_0xc989c5:
 	hasmoney(1)
 	goto_if_false(l_0xc989ea)
+
 	"@I'll be your shadow, then." wait
 	window_closeall
 	goto(data_33.l_0xc79081)
@@ -456,6 +458,7 @@ l_0xc989e9:
 	eob
 
 l_0xc989ea:
+	sound(SND_ERRORBEEP)	// 5
 	"@Incredible!" next
 	"@I can't believe people exist who have no money at all..." next
 	"@Blue, blue!" wait
@@ -469,6 +472,7 @@ l_0xc98a27:
 	swap
 	compare_register(1,0)
 	goto_if_false(l_0xc989c5)
+
 	hasmoney(0)
 	goto_if_false(l_0xc98ae8)
 
@@ -477,8 +481,10 @@ l_0xc98a27:
 	show_wallet
 	"@Your good deed will be rewarded." pause(20)
 	"  Here's a postcard for you." next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc98ab2)
+
 	// 0xA5, 165, Picture postcard
 	give_and_return_location(0, PICTURE_POSTCARD)	// 0xA5 / 165
 	call(data_36.l_0xc7dccf) promptw
@@ -488,6 +494,7 @@ l_0xc98a27:
 	goto(data_33.l_0xc7907a)
 
 l_0xc98ab2:
+	sound(SND_ERRORBEEP)	// 5
 	"@I wanted to give you a postcard." pause(20)
 	"  But... you can't accept it." next
 	"@You have too many items." wait
@@ -497,6 +504,8 @@ l_0xc98ab2:
 l_0xc98ae8:
 	hasmoney(1)
 	goto_if_false(l_0xc989ea)
+
+	sound(SND_ERRORBEEP)	// 5
 	"@...No jokes allowed." wait
 	window_closeall
 	eob

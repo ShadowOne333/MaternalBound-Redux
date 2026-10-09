@@ -76,6 +76,7 @@ l_0xc607a5:
 l_0xc6078b:
 	hasmoney(1)
 	goto_if_false(l_0xc607ae)
+
 	pause(1)
 	takemoney(1)
 	show_wallet
@@ -83,6 +84,7 @@ l_0xc6078b:
 	eob
 
 l_0xc607ae:
+	sound(SND_ERRORBEEP)	// 5
 	"@(You have no money.)" end
 
 l_0xc607b9:
@@ -266,6 +268,7 @@ l_0xc60a97:
 	goto(l_0xc60b71)
 
 l_0xc60b13:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@That's what I thought, but amigo, you have no more room." next
 	"@I'm sorry, but the deal's off." next
@@ -354,8 +357,10 @@ l_0xc60d6c:
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} spotted something shiny." next
 	"@It was a set of contact lenses!" next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc60db8)
+
 	// Item 0xBB, 187, Contact lens
 	give_and_return_location(-1, CONTACT_LENS)
 	npc_delete(794,6)	// 0x031A, 6
@@ -364,6 +369,7 @@ l_0xc60d6c:
 	end
 
 l_0xc60db8:
+	sound(SND_ERRORBEEP)	// 5
 	"@You have no more room." end
 
 l_0xc60dc4:
@@ -463,6 +469,7 @@ l_0xc610c1:
 	eob
 
 l_0xc610f1:
+	sound(SND_ERRORBEEP)	// 5
 	"@You cannot carry anything else." next
 	"@Why don't you get rid of something you don't need." next
 	"@You will need this, the Gourmet Tofu Machine." wait

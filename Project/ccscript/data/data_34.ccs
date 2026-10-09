@@ -328,7 +328,7 @@ l_0xc79d81:
 	"@What could be the fate of {name(1)} and his friend?)" wait
 	window_closeall
 
-	call(data_49.l_0xc915f4)
+	call(data_49.l_0xc915f4)	// Check and heal
 	call(data_24.l_0xc69082)
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	hide_party	// 0xFF, 0x06
@@ -667,6 +667,7 @@ l_0xc7a63e:
 	eob
 
 l_0xc7a6a9:
+	sound(SND_ERRORBEEP)	// 5
 	"@You have too much stuff, so I can't give this to you..." next
 	"@Why don't you get rid of something?" linebreak
 	two_choice_menu("Yes", l_0xc7a72f, "No", l_0xc7a6ea)
@@ -845,7 +846,7 @@ l_0xc7ac42:
 
 // Orange & Apple Kids phone calls
 l_0xc7acb8:
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled in data_55.l_0xc99ca9
 	music(115)
 	pause(60)
 	wait
@@ -874,11 +875,11 @@ l_0xc7acb8:
 	hide_phone_sprite_float
 
 	music_resume
-	cc_close_letterbox
+	//cc_close_letterbox	// Handled in data_55.l_0xc99ca9
 	eob
 
 l_0xc7ae41:
-	cc_open_letterbox
+	//cc_open_letterbox	// Handled in data_55.l_0xc99ca9
 	music(115)
 	pause(60)
 	wait
@@ -904,14 +905,14 @@ l_0xc7ae41:
 	"@Hey!" pause(20)
 	"  Oh no!  What are you doing to me?" next
 	pause(60) linebreak
-	"@Who are you ?|!!!... "
+	"@Who are you ?|!!!... " linebreak
 	sound(SND_PHONEPICKUP)	// 11
-	"*Click*" wait
+	"  *Click*" wait
 	window_closeall
 	hide_phone_sprite_float
 
 	set(FLG_WINS_LABO_MOUSE_APPEAR)	// 620
-	cc_close_letterbox
+	//cc_close_letterbox	// Handled in data_55.l_0xc99ca9
 	eob
 
 l_0xc7af57:
@@ -1039,10 +1040,14 @@ l_0xc7b1d8:
 	cc_close_letterbox
 	eob
 
+_no_dinomuseum_money:
+	sound(SND_ERRORBEEP)	// 5
+	goto(l_0xc7b1d8)
+	
 l_0xc7b2bd:
 	get_party_size_times(5) swap
 	hasmoney(0)	// 0x00000000
-	goto_if_false(l_0xc7b1d8)
+	goto_if_false(_no_dinomuseum_money)
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)	// 0x0000
 
@@ -1122,10 +1127,14 @@ l_0xc7b3c0:
 	cc_close_letterbox
 	eob
 
+_no_summers_museum_money:
+	sound(SND_ERRORBEEP)	// 5
+	goto(l_0xc7b3c0)
+
 l_0xc7b4a2:
 	get_party_size_times(3) swap
 	hasmoney(0)
-	goto_if_false(l_0xc7b3c0)
+	goto_if_false(_no_summers_museum_money)
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)
 
@@ -1786,22 +1795,22 @@ l_0xc7becf:	// Added
 	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(32)
-	call(data_35.l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(data_35.l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7bf1e)
 
 	window_open(1)
-	"@The power of Giant Step" call(data_35.l_0xc7c55d)
+	"@The power of Giant Step" call(data_35.l_0xc7c55d)	// flowed into.
 
 l_0xc7bf1e:	// Giant Step recording
-	call(data_35.l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(data_35.l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_GIAN, l_0xc7bf94)	// 0xB6, 182
 
@@ -1816,31 +1825,31 @@ l_0xc7bf1e:	// Giant Step recording
 	set(FLG_POLICE_STRONG_DISAPPEAR)	// 450
 	set(FLG_ONET_POLA_TELEPATHY)	// 634
 	window_closetop
-	cc_close_letterbox
 
 l_0xc7bf94:
+	cc_close_letterbox
 	eob
 
 l_0xc7bf95:
 	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(33)
-	call(data_35.l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(data_35.l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7bfe8)
 
 	window_open(1)
-	"@The power of Lilliput Steps" call(data_35.l_0xc7c55d)
+	"@The power of Lilliput Steps" call(data_35.l_0xc7c55d)	// flowed into.
 
 l_0xc7bfe8:
-	call(data_35.l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(data_35.l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_LLPT, l_0xc7c058)	// 0x00B7, 183
 
@@ -1853,36 +1862,37 @@ l_0xc7bfe8:
 	window_closetop
 
 l_0xc7c058:
-	call(data_49.l_0xc915f4)
-	call(data_57.l_0xc9b226)
-	cc_close_letterbox
+	call(data_49.l_0xc915f4)	// Check and heal
+	call(data_57.l_0xc9b226)	// All melodies check
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c06a)	// 0x0180, 384
+	cc_close_letterbox
 	eob
 
 l_0xc7c06a:
 	set(FLG_MGKT_BACK_LLPT)	// 545
+	cc_close_letterbox
 	eob
 
 l_0xc7c06e:
 	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(35)
-	call(data_35.l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(data_35.l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c0c0)
 
 	window_open(1)
-	"@The power of Rainy Circle" call(data_35.l_0xc7c55d)
+	"@The power of Rainy Circle" call(data_35.l_0xc7c55d)	// flowed into.
 
 l_0xc7c0c0:
-	call(data_35.l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(data_35.l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_RAIN, l_0xc7c129)	// 0x00B8, 184
 
@@ -1893,33 +1903,34 @@ l_0xc7c0c0:
 
 	set(FLG_POWR_RAIN)	// 184
 	window_closetop
-	cc_close_letterbox
 
 l_0xc7c129:
+	cc_close_letterbox
 	eob
 
 l_0xc7c12a:
 	cc_open_letterbox
 	sprite2_spawn(106, 352, 1)	// 006A, 0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(34)
-	call(data_35.l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(data_35.l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c17b)
 
 	window_open(1)
-	"@The power of Milky Well" call(data_35.l_0xc7c55d)
+	"@The power of Milky Well" call(data_35.l_0xc7c55d)	// flowed into.
 
 l_0xc7c17b:
-	call(data_35.l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(data_35.l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_MLKY, data_35.l_0xc7c1f7)	// 0x00B9, 185
+
 	window_open(1)
 	"@{name(1)} thought he heard his mother from far away..." linebreak
 	"  she said" next

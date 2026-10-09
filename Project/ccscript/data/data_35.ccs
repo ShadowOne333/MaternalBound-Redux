@@ -18,35 +18,36 @@ command e(label) "{long label}"
 
 // Text Data
 l_0xc7c1f7:
-	call(data_57.l_0xc9b226)
-	cc_close_letterbox
+	call(data_57.l_0xc9b226)	// All melodies check
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c204)	// 0x0180, 384
+	cc_close_letterbox
 	eob
 
 l_0xc7c204:
 	set(FLG_MGKT_BACK_MLKY)	// 546
+	cc_close_letterbox
 	eob
 
 l_0xc7c208:
 	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(36)
-	call(l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c258)
 
 	window_open(1)
-	"@The power of Magnet Hill" call(l_0xc7c55d)
+	"@The power of Magnet Hill" call(l_0xc7c55d)	// flowed into.
 
 l_0xc7c258:
-	call(l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_MGNT, l_0xc7c2c5)	// 0xBA, 186
 
@@ -57,31 +58,31 @@ l_0xc7c258:
 	set(FLG_POWR_MGNT)	// 186
 	set(FLG_PHOTO_DINO_MUSEUM)	// 494
 	window_closetop
-	cc_close_letterbox
 
 l_0xc7c2c5:
+	cc_close_letterbox
 	eob
 
 l_0xc7c2c6:
 	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(37)
-	call(l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c317)
 
 	window_open(1)
-	"@The power of Pink Cloud" call(l_0xc7c55d)
+	"@The power of Pink Cloud" call(l_0xc7c55d)	// flowed into.
 
 l_0xc7c317:
-	call(l_0xc7c57d)
-	set(FLG_TEMP_3)	// 4
+	call(l_0xc7c57d)	// Recover party
+	set(FLG_TEMP_3)		// 4
 	music_resume
 	goto_if_flag(FLG_POWR_PINK, l_0xc7c38a)	// 0xBB, 187
 
@@ -93,44 +94,61 @@ l_0xc7c317:
 	window_closetop
 
 l_0xc7c38a:
-	call(data_57.l_0xc9b226)
-	cc_close_letterbox
+	call(data_57.l_0xc9b226)	// All melodies check
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c397)	// 0x0180, 384
+	cc_close_letterbox
 	eob
 
 l_0xc7c397:
 	set(FLG_MGKT_BACK_MGNT)	// 547
+	cc_close_letterbox
 	eob
 
 l_0xc7c39b:
 	// If we set the letterbox on the Lumine cutscene, the letters on the wall are cut-off
-	//cc_open_letterbox
+	cc_open_letterbox
 	goto_if_flag(FLG_POWR_LUMI, l_0xc7c3c2)	// 0xBC, 188
-	call(l_0xc7c57d)
+	call(l_0xc7c57d)	// Recover party
 	pause(1)
 	fade_map_palette(26,2,60)	// Tileset 0x1A, palette 02, speed 0x3C
+
+	// Spawn a duplicate Ness sprite, change its facing and spawn camera entity
+	hide_char(1)
+	sprite2_spawn(1,897,1)	// Spawn a Ness duplicate
+	sprite2_spawn(440,900,1)	// Spawn camera panning entity
+	pause(1)
+	focus_camera_on_sprite2(440)
+	party_unfreeze
+	pause(10)
+
+	sprite2_direction(1,1)	// Make the Ness duplicate face up
 	party_direction(1)
+	// Start Lumine Hall wall text
 	sprite2_spawn(106,353,1)	// 0x006A, 0x0161, 1
 	wait_movement
+	
+	sprite2_delete(440,6)
+	sprite2_delete(1,6)
+	show_char(1,6)	// 
 
 l_0xc7c3c2:
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(38)
-	call(l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c412)
 
 	window_open(1)
-	"@The power of Lumine Hall" call(l_0xc7c55d)
+	"@The power of Lumine Hall" call(l_0xc7c55d)	// flowed into.
 
 l_0xc7c412:
-	set(FLG_TEMP_3)	// 4
+	set(FLG_TEMP_3)		// 4
 	call(l_0xc7c57d)
 	music_resume
 	goto_if_flag(FLG_POWR_LUMI, l_0xc7c478)	// 0xBC, 188
@@ -141,30 +159,30 @@ l_0xc7c412:
 	"@{name(1)}'s Sound Stone recorded the melody of Lumine Hall." wait
 	set(FLG_POWR_LUMI)	// 188
 	window_closetop
-	//cc_close_letterbox
 
 l_0xc7c478:
+	cc_close_letterbox	// If we use the letterbox, the letters on the wall are cut-off
 	eob
 
 l_0xc7c479:
 	cc_open_letterbox
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1
 	unset(FLG_TEMP_1)	// 2
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade music and stop
 	music(39)
-	call(l_0xc7c54b)
-	set(FLG_TEMP_1)	// 2
+	call(l_0xc7c54b)	// 10 seconds pause
+	set(FLG_TEMP_1)		// 2
 	wait_movement
 
 	counter(1)
-	call(data_36.l_0xc7dc7f)
+	call(data_36.l_0xc7dc7f)	// Check party for unconscious/diamondized
 	goto_if_false(l_0xc7c4c9)
 
 	window_open(1)
-	"@The power of Fire Spring" call(l_0xc7c55d)
+	"@The power of Fire Spring" call(l_0xc7c55d)	// flowed into.
 
 l_0xc7c4c9:
-	set(FLG_TEMP_3)	// 4
+	set(FLG_TEMP_3)		// 4
 	call(l_0xc7c57d)
 	music_resume
 	goto_if_flag(FLG_POWR_FIRE, l_0xc7c53a)	// 0xBD, 189
@@ -177,13 +195,14 @@ l_0xc7c4c9:
 	window_closetop
 
 l_0xc7c53a:
-	call(data_57.l_0xc9b226)
-	cc_close_letterbox
+	call(data_57.l_0xc9b226)	// All melodies check
 	goto_if_flag(FLG_POWR_ALL, l_0xc7c547)	// 0x0180, 384
+	cc_close_letterbox
 	eob
 
 l_0xc7c547:
 	set(FLG_MGKT_BACK_FIRE)	// 548
+	cc_close_letterbox
 	eob
 
 l_0xc7c54b:
@@ -204,7 +223,7 @@ l_0xc7c55d:
 	eob
 
 l_0xc7c57d:
-	call(data_49.l_0xc915f4)
+	call(data_49.l_0xc915f4)	// Check and heal
 	sound(SND_STATUSRECOVER)	// 37
 	pause(90)
 	eob
@@ -869,6 +888,7 @@ l_0xc7d967:
 	" to {swap}{name(0)}'s stuff." swap end
 
 l_0xc7d991:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	get_char_at_pos(1)
 	"@But, " call(data_36.l_0xc7e5f3) " has got too much stuff already." end

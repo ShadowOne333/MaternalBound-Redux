@@ -20,13 +20,14 @@ command DEFINE_CUSTOM_POINTERS {
 	adr24(cutscenes.Jeff_Dup)		// 897
 	adr24(cutscenes.Rope_Camera_Pan)	// 898
 	adr24(cutscenes.Skywalker_Camera_Fix)	// 899
-	adr24(cutscenes.MOV_Make_Screen_Normal)	// 900
-	adr24(cutscenes.MOV_Tint_Screen_Black2Normal)	// 901
-	adr24(cutscenes.MOV_Tint_Screen_White2Normal)	// 902
-	adr24(cutscenes.MOV_Make_Screen_White)	// 903
-	adr24(cutscenes.MOV_Tint_Screen_White)	// 904
-	adr24(cutscenes.MOV_Make_Screen_Black)	// 905
-	adr24(cutscenes.MOV_Tint_Screen_Black)	// 906
+	adr24(cutscenes.Lumine_Camera_Pan)	// 900
+	adr24(cutscenes.MOV_Make_Screen_Normal)	// 901
+	adr24(cutscenes.MOV_Tint_Screen_Black2Normal)	// 902
+	adr24(cutscenes.MOV_Tint_Screen_White2Normal)	// 903
+	adr24(cutscenes.MOV_Make_Screen_White)	// 904
+	adr24(cutscenes.MOV_Tint_Screen_White)	// 905
+	adr24(cutscenes.MOV_Make_Screen_Black)	// 906
+	adr24(cutscenes.MOV_Tint_Screen_Black)	// 907
 }
 
 // This part intentionally has lots of newlines to separate the

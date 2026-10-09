@@ -318,23 +318,31 @@ l_0xc68e1c:
 	cc_close_letterbox
 	eob
 
-l_0xc68f74:
+l_0xc68f74:	// Trying to use the Eraser and Pencil erasers on the Mani mani statues (Moonside and Sea of Eden)
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
 	else { get_inventory_item(0,0) swap }
 	store_registers
 	// Check for Eraser eraser, item 0xD2, 210
 	result_is(ERASER_ERASER)
 	goto_if_true(l_0xc68fa6)
+
 	load_registers
 	// Check for Pencil eraser, item 0xB8, 184
 	result_is(PENCIL_ERASER)
 	goto_if_false(data_35.l_0xc7c6b6)
-	"@Do you really think this looks like a pencil?" end
+
+	cc_open_letterbox
+	"@Do you really think this looks like a pencil?" wait
+	cc_close_letterbox
+	eob
 
 l_0xc68fa6:
+	cc_open_letterbox
 	"@It looks sort of like some primitive human statue" next
 	"@if you look at it from the right angle..." next
-	"@But it definitely doesn't look like an eraser... does it?" end
+	"@But it definitely doesn't look like an eraser... does it?" wait
+	cc_close_letterbox
+	eob
 
 l_0xc69007:
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
@@ -342,6 +350,7 @@ l_0xc69007:
 	// Check for Rabbits' carrot, item 0xFD, 253
 	result_is(CARROT_KEY)
 	goto_if_false(data_35.l_0xc7c6b6)
+
 	"@Cows and carrots?..." next
 	"@That's a nutty combination!" end
 
@@ -545,9 +554,11 @@ l_0xc6943a:
 	"@Escargo Express!" next
 	"@<We treat your package like it was our only child>..." next
 	"@I'm here with your Pencil eraser." next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc694b9)
 	give_and_return_location(0, PENCIL_ERASER)	// 0xB8, 184
+
 	sound(SND_CHICKEN2)	// 118
 	"@Here you are." next
 	"@Thank you very much!" wait
@@ -559,6 +570,7 @@ l_0xc6943a:
 	eob
 
 l_0xc694b9:
+	sound(SND_ERRORBEEP)	// 5
 	"@You've really got too much stuff already." next
 	"@I hope I can deliver this to you soon!" promptw
 	window_closeall
@@ -575,7 +587,8 @@ l_0xc694f4:
 	"@I'm here to deliver" linebreak
 	"  the {itemname(HAWK_EYE)}." next
 	// Item 0xAF / 175 = Hawk eye
-	get_item_receiver(-1) goto_if_false(l_0xc69571)
+	get_item_receiver(-1)
+	goto_if_false(l_0xc69571)
 	give_and_return_location(0, HAWK_EYE)	// 0xAF, 175
 	sound(SND_CHICKEN2)	// 118
 	"@Here you are." next
@@ -588,6 +601,7 @@ l_0xc694f4:
 	eob
 
 l_0xc69571:
+	sound(SND_ERRORBEEP)	// 5
 	"@You've really got too much stuff already." next
 	"@I hope I can deliver this to you soon!" promptw
 	window_closeall

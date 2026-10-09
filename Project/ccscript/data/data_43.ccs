@@ -106,7 +106,7 @@ l_0xc871cd:
 l_0xc871e9:
 	"@(Toten Karmen's casket.)" end
 
-l_0xc87202:
+l_0xc87202:	// Scarabia Sphynx
 	goto_if_flag(FLG_ITEM_TAKANOME, data_55.l_0xc9992f)	// 0x015C, 348
 	goto_if_flag(FLG_SPHINX_OK, l_0xc87280)	// 0x0156, 342
 	goto_if_flag(FLG_SUMS_HIEROGLYPH, l_0xc87220)	// 0x0094, 148
@@ -117,19 +117,23 @@ l_0xc87202:
 	eob
 
 l_0xc87220:
+	cc_open_letterbox
 	window_open(1)
 	"@Are you a thief, a warrior, or one who has come to see my majesty?" next
 	"@You must decide what you really are.  Therefore, what will you do?" wait
 	window_closeall
 	set(FLG_TEMP_6)	// 7
 	set(FLG_SPHINX)	// 152
+	cc_close_letterbox
 	eob
 
 l_0xc87280:
+	//cc_open_letterbox	// Handled in data_50.l_0xc93005
 	window_open(1)
 	"@Warriors, enter now." pause(20) linebreak
 	"  Search for the {itemname(HAWK_EYE)}." promptw
 	window_closeall
+	//cc_close_letterbox	// Handled in data_50.l_0xc93005
 	eob
 
 l_0xc872a6:
@@ -449,6 +453,7 @@ l_0xc87e4c:
 	eob
 
 l_0xc87e8e:
+	sound(SND_ERRORBEEP)	// 5
 	"@(But look, at this glorious moment you have no more room.)" next
 	eob
 

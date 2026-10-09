@@ -148,7 +148,6 @@ l_0xc63790:
 	get_next_storage_item
 	goto_if_false(l_0xc6390c)
 	call(l_0xc63ca8)
-	goto(l_0xc6379f)
 
 l_0xc6379f:
 	back_up_text_rendering_state
@@ -282,7 +281,6 @@ l_0xc63963:
 	"@It's me, Tracy." next
 	title(1, Tracy)
 	"@I'm working part-time for Escargo Express." next
-	goto(l_0xc639c9)
 
 l_0xc639c9:
 	eob
@@ -537,7 +535,6 @@ l_0xc640a1:
 
 add_dot:
 	"."
-	goto(l_0xc640f1)
 
 l_0xc640f1:
 	next
@@ -607,6 +604,7 @@ l_0xc64240:
 	goto(l_0xc640a1)
 
 l_0xc6427c:
+	sound(SND_ERRORBEEP)	// 5
 	title(1, Escargo)
 	"@You don't have enough money." next
 	"@Call us at another time." wait
@@ -633,7 +631,6 @@ l_0xc642a3:
 	goto_if_false(l_0xc642fc)
 	"," linebreak
 	"  and {itemname(0)}"
-	goto(l_0xc642fc)
 
 l_0xc642fc:
 	"." next
@@ -668,7 +665,6 @@ l_0xc643ce:
 	hasmoney(18)	// 0x00000012
 	goto_if_false(l_0xc644e3)
 	get_queued_item(1)	// 0x01
-	goto(l_0xc643de)
 
 l_0xc643de:
 	get_item_receiver(-1)	// 0xFF
@@ -698,6 +694,7 @@ l_0xc6441d:
 	eob
 
 l_0xc6442f:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, you have too many things." linebreak
 	"  Please call us again later." wait
 	call(l_0xc64650)
@@ -708,6 +705,7 @@ l_0xc6442f:
 	eob
 
 l_0xc6445f:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can carry everything." next
 	remove_queued_item(1)
 	"@Well, I'll leave just" linebreak
@@ -723,6 +721,7 @@ l_0xc6449f:
 	eob
 
 l_0xc644a0:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can carry everything." next
 	remove_queued_item(1)
 	"@Well, I'll leave just" linebreak
@@ -734,6 +733,7 @@ l_0xc644a0:
 	eob
 
 l_0xc644e3:
+	sound(SND_ERRORBEEP)	// 5
 	"@Ah, I see...  You don't have enough money.  Call us again later." wait
 	call(l_0xc64650)
 	window_closeall
@@ -804,7 +804,6 @@ l_0xc64650:
 	remove_queued_item(3)
 	goto_if_false(l_0xc64671)
 	store_item(0)
-	goto(l_0xc64671)
 
 l_0xc64671:
 	eob

@@ -39,7 +39,8 @@ l_0xc7259f:
 	call(l_0xc726cb) eob
 
 l_0xc72620:
-	call(l_0xc726b2) "@I'd love to give you a hint, but I can't think of even one." next
+	call(l_0xc726b2)
+	"@I'd love to give you a hint, but I can't think of even one." next
 	"@I'm sorry." linebreak
 	"  I'll return your money."
 	givemoney(0)
@@ -50,6 +51,7 @@ l_0xc72620:
 	eob
 
 l_0xc72664:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, you don't have any money." linebreak
 	"  Don't you understand?" next
 	"@This is how I make my living... I can't just give you a hint for free,"  get_char_at_pos(1) result_is(2) goto_if_true(l_0xc726aa) " kid." end
@@ -324,6 +326,7 @@ l_0xc732e1:
 	end
 
 l_0xc733a7:
+	sound(SND_ERRORBEEP)	// 5
 	"@I suggest you bring a map along, even if you have to give up something else." next
 	"@You seem to be carrying many worthless items." end
 
@@ -362,28 +365,36 @@ l_0xc734de:
 
 l_0xc73550:
 	goto_if_flag(FLG_CAPSULE_OK, l_0xc73590)	// 0x7E, 126
+	cc_open_letterbox
 	"@....." linebreak
 	"       ....." linebreak
 	"            ....." next
 	"@(A man of few words." pause(15)
-	"  It's useless talking to him now.)" end
+	"  It's useless talking to him now.)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc73590:
 	goto_if_flag(FLG_ITEM_MUKUCHI, l_0xc7363a)	// 0x59, 89
+
+	cc_open_letterbox
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc73628)
+
 	// Stat 8 = Ness' name
 	"@Oh,// hi {stat(8)}." next
 
 l_0xc735b3:
-	"@It's another nice day.  What?" pause(15)
+	"@It's another nice day." next
+	"@What?" pause(15)
 	"  You'd like the book <Overcoming Shyness>?" next
 	"@I've read it." pause(10)
 	"  It's a great book." pause(10)
 	"  So you want to overcome shyness also?" next
 	"@You should be able to find the book if you carefully check the bookcases." wait
 	set(FLG_LIBRARY_INFO_MUKUCHI)
+	cc_close_letterbox
 	eob
 
 l_0xc73628:

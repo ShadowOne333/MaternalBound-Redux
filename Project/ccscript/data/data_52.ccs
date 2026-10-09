@@ -592,11 +592,10 @@ l_0xc95f0a:
 	eob
 
 l_0xc9605d:
+	sound(SND_ERRORBEEP)	// 5
 	pause(60) linebreak
 	title(1, Everdred)
-	sound(SND_ERRORBEEP)	// 5
 	pause(30)
-
 	"@Your backpack is filled with junk." pause(20)
 	"  Get rid of something!" next
 	"@I'll put the money in a safe place until you get back." wait

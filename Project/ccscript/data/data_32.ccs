@@ -300,8 +300,8 @@ l_0xc775fd:
 
 	get_item_receiver(-1)
 	goto_if_false(l_0xc77639)
-
 	give_and_return_location(0, BASEBALL_CAP)	// Item 0x4A / 74 = Baseball cap
+
 	call(data_36.l_0xc7dccf)
 	wait
 	set(FLG_MGKT_GETITEM_CAP)	// 93
@@ -309,6 +309,7 @@ l_0xc775fd:
 	eob
 
 l_0xc77639:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@I'm so stupid!" next
 	"@There's lots of junk in my backpack at a time like this." next
@@ -541,6 +542,7 @@ l_0xc780b2:
 l_0xc780f7:
 	hasmoney(0)
 	goto_if_false(l_0xc7814b)
+
 	sound(SND_CHICKEN2)	// 118
 	pause(1)
 	takemoney(0)
@@ -553,6 +555,7 @@ l_0xc780f7:
 	goto(l_0xc78000)
 
 l_0xc7814b:
+	sound(SND_ERRORBEEP)	// 5
 	"@...I can't let you on if you don't pay." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
@@ -577,6 +580,7 @@ l_0xc781ce:
 l_0xc78208:
 	hasmoney(0)
 	goto_if_false(l_0xc78240)
+
 	sound(SND_CHICKEN2)	// 118
 	takemoney(0)
 	show_wallet
@@ -589,6 +593,7 @@ l_0xc7823f:
 	eob
 
 l_0xc78240:
+	sound(SND_ERRORBEEP)	// 5
 	"@...If you don't have any money,| you should stroll around." next
 	"@Besides,| walking is good for you..." wait
 	window_closeall

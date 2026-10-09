@@ -424,6 +424,7 @@ l_0xc918be:
 l_0xc918da:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc91a11)
+
 	party_size_smaller_than(2)	// 0x02
 	goto_if_false(l_0xc918f7)
 
@@ -506,6 +507,7 @@ l_0xc919f6:
 	eob
 
 l_0xc91a11:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@If you don't have any money, you'll just have to keep on going in your current state." wait
 	call(l_0xc91bae)

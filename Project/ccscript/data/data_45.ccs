@@ -70,6 +70,7 @@ l_0xc8a805:
 	eob
 
 l_0xc8a82e:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have any money, right?" next
 	"@Okay, since you kids look like you would study hard, you may enter," next
 	"@free of charge!" next
@@ -174,7 +175,8 @@ l_0xc8abb0:
 	"@It's a reward for studying so hard." next
 	if flag FLG_KEY_ITEMS { give_menu_key_item(HIEROGLYPH) }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc8ac30)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc8ac30)
 		give_and_return_location(0, HIEROGLYPH)	// 0xB9, 185, Hieroglyph copy
 		call(data_36.l_0xc7dcb6)
 	}
@@ -389,6 +391,7 @@ l_0xc8b22f:
 	"@...I've made another tasty treat today!" end
 
 l_0xc8b292:
+	sound(SND_ERRORBEEP)	// 5
 	title(1, Jill)
 	"@You seem to have too much stuff to carry." next
 	"@Come back after you get rid of something." end

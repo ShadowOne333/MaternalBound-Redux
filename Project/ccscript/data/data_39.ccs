@@ -72,6 +72,7 @@ l_0xc81392:
 	eob
 
 l_0xc813d4:
+	sound(SND_ERRORBEEP)	// 5
 	"@What?!" pause(15)
 	"  You don't have that much money?" next
 	"@Well, perhaps you shouldn't be yappin' about having cash then,| buddy." wait
@@ -166,6 +167,7 @@ l_0xc81789:
 	arg_item_type_is_not(3)	// Edible
 	goto_if_true(l_0xc817dc)
 
+	sound(SND_ERRORBEEP)	// 5
 	"@Please choose something edible... I'm not a garbage can, you know."
 	goto(l_0xc81913)
 
@@ -198,6 +200,7 @@ l_0xc81848:
 l_0xc818a2:
 	hasmoney(200)	// 0xC8
 	goto_if_false(l_0xc818dd)
+
 	takemoney(200)	// 0xC8
 	show_wallet
 	sound(SND_CHICKEN2)	// 118
@@ -218,6 +221,7 @@ l_0xc818dc:
 	eob
 
 l_0xc818dd:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, you don't have any money, do you?" next
 	goto(l_0xc81751)
 
@@ -282,6 +286,7 @@ l_0xc819f1:
 	eob
 
 l_0xc81a26:
+	sound(SND_ERRORBEEP)	// 5
 	pause(60) linebreak
 	"@Unfortunately,| you have too many items." pause(20)
 	"  Therefore, I can't give this to you."
@@ -515,6 +520,7 @@ l_0xc81f56:
 	eob
 
 l_0xc82049:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, it won't fit in your backpack." next
 	"@Come back after you have gotten rid of some stuff." end
 
@@ -563,6 +569,7 @@ l_0xc821fe:
 	eob
 
 l_0xc82250:
+	sound(SND_ERRORBEEP)	// 5
 	get_party_size_times(5) swap
 	"@You don't even have {number(0)} dollars!" next
 	"@You don't deserve to go in the museum." wait

@@ -221,6 +221,7 @@ l_0xc70288:
 l_0xc7030f:
 	hasmoney(0)	// 0x00000000
 	goto_if_false(data_29.l_0xc72664)
+
 	set(FLG_TEMP_7)	// 8
 	takemoney(0)	// 0x0000
 	show_wallet

@@ -92,6 +92,7 @@ l_0xc904e3:
 	eob
 
 l_0xc9052e:
+	sound(SND_ERRORBEEP)	// 5
 	"@No faith..." linebreak
 	"  No money..." linebreak
 	"  You are a hopeless case." end
@@ -187,6 +188,7 @@ l_0xc90774:
 	eob
 
 l_0xc907b0:
+	sound(SND_ERRORBEEP)	// 5
 	"@You... don't have enough money." end
 
 l_0xc907be:
@@ -265,6 +267,7 @@ l_0xc909d3:
 	eob
 
 l_0xc90a31:
+	sound(SND_ERRORBEEP)	// 5
 	"@If you do not have enough cash with you," next
 	"@please feel free to use the ATM just over there." end
 
@@ -337,6 +340,7 @@ l_0xc90c90:
 	"@You're actually going to try to stay up...?  Hah hah hah!" end
 
 l_0xc90ce8:
+	sound(SND_ERRORBEEP)	// 5
 	"@Money rules here in Moonside, too." next
 	"@And you do not seem to have any at this moment." end
 
@@ -392,8 +396,7 @@ l_0xc90e4a:
 	get_party_size_times(100) swap	// 0x0064
 	"@Thank you for coming all the way into this primitive country." next
 	"@You must be tired." linebreak
-	"  To stay," linebreak
-	"  it'll run you ${number(0)}." next
+	"  To stay, it'll run you ${number(0)}." next
 	"@You are going to stay, aren't you?" linebreak
 	show_wallet
 	two_choice_menu("Yes", l_0xc90ed4, "No", l_0xc90ebf)
@@ -416,6 +419,7 @@ l_0xc90ed4:
 	eob
 
 l_0xc90f0b:
+	sound(SND_ERRORBEEP)	// 5
 	"@Money rules even at the end of the world." next
 	"@We cannot accept a guest who has no money." end
 
@@ -455,6 +459,7 @@ l_0xc90fb2:
 	"@See you next time." end
 
 l_0xc90fbe:
+	sound(SND_ERRORBEEP)	// 5
 	"@It looks like you don't have" linebreak
 	"  ${number(0)}..." end
 
@@ -519,6 +524,7 @@ l_0xc910c1:
 	goto(l_0xc91099)
 
 l_0xc910c9:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have enough money." linebreak
 	"  Go home, and then come again."
 	goto(l_0xc91058)
@@ -648,5 +654,6 @@ l_0xc913a4:
 	"@We don't have a person like that in our hospital." end
 
 l_0xc913c4:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have enough money...?" linebreak
 	"  That's too bad." end

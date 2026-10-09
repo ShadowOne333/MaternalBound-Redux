@@ -771,16 +771,20 @@ l_0xc92a48:
 	set(FLG_PHOTO_RAMMA_FIELD)	// 499
 	eob
 
-l_0xc92a82:
+l_0xc92a82:	// Second Winters visit Tessie ride
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	goto_if_flag(FLG_WINS_TASSI_ENTER, l_0xc92ab9)	// 0x0158, 344
 	set(FLG_WINS_TASSI_ENTER)	// 344
+
+	// Hide two instances of sprite 371 to avoid HDMA corruption with the cutscenes letterbox
+	// It is used to obscure Tessie when she's coming out of the water.
+	// It is also used for the Water ripples on her body
 	npc_spawn(655,485,1)	// 0x028F, 0x01E5, 1
 	npc_spawn(656,486,1)	// 0x0290, 0x01E6, 1
 	npc_spawn(642,487,1)	// 0x0282, 0x01E7, 1
 	npc_spawn(643,488,1)	// 0x0283, 0x01E8, 1
-	npc_spawn(644,489,1)	// 0x0284, 0x01E9, 1
-	npc_spawn(654,490,1)	// 0x028E, 0x01EA, 1
+	//npc_spawn(644,489,1)	// 0x0284, 0x01E9, 1
+	//npc_spawn(654,490,1)	// 0x028E, 0x01EA, 1
 
 l_0xc92ab9:
 	sprite2_spawn(367,495,1)	// 0x016F, 0x01EF, 1
@@ -851,9 +855,11 @@ l_0xc92ab9:
 	unset(FLG_BGM_TASSY)	// 537
 	music_resume
 	set_respawn_point(6)
+	cc_close_letterbox
 	eob
 
-l_0xc92be3:
+l_0xc92be3:	// After defeating Starman DX at the Stonehenge base
+	cc_instant_letterbox
 	window_closeall
 	pause(60)
 	music(145)
@@ -884,6 +890,7 @@ l_0xc92be3:
 	goto_if_false(data_55.l_0xc9992f)
 	set(FLG_DOSEI_APPLE_APPEAR)	// 538
 	music_resume
+	cc_close_letterbox
 	eob
 
 l_0xc92c70:	// Summers boat trip up to Kraken
@@ -1049,6 +1056,7 @@ l_0xc92fdb:
 	eob
 
 l_0xc93005:
+	cc_open_letterbox
 	sound(SND_PYRAMIDOPEN)	// 110
 	pause(180)
 	
@@ -1061,6 +1069,7 @@ l_0xc93005:
 	sound(SND_BEEP2)	// 121
 	npc_do_mc(1143,635)	// 0x0477, 0x027B
 	npc_do_mc(1154,635)	// 0x0482, 0x027B
+	cc_close_letterbox
 	eob
 
 l_0xc93029:
@@ -1204,9 +1213,13 @@ l_0xc93239:
 	end
 
 l_0xc9323b:
-	"@(This casket seems a little suspicious...)" end
+	cc_open_letterbox
+	"@(This casket seems a little suspicious...)" wait
+	cc_close_letterbox
+	eob
 
-l_0xc93258:
+l_0xc93258:	// Starmaster after the Pyramid action scripts
+	cc_open_letterbox
 	sound(SND_STARMASTER)	// 99
 	sprite2_spawn(169,318,1)	// 0xA9, 0x013E, 1
 	wait_movement
@@ -1224,7 +1237,7 @@ l_0xc93258:
 	goto(data_06.l_0xc573dc)
 
 l_0xc9329b:
-	cc_open_letterbox
+	//cc_open_letterbox	// Continuation after goto(data_06.l_0xc573dc) from above
 	call(l_0xc932f6)
 	sprite2_unfreeze(4)	// 0x0004
 	wait_movement
@@ -1244,10 +1257,12 @@ l_0xc9329b:
 	call(data_36.l_0xc7de60)
 	if flag FLG_KEY_ITEMS {
 		isset(FLG_ITEM_TAKANOME)
+		cc_close_letterbox
 		goto_if_true(data_55.l_0xc9992f)
 	}
 	else {
 		hasitem(4, HAWK_EYE)	// 0xAF / 175 = Hawk eye
+		cc_close_letterbox
 		goto_if_false(data_55.l_0xc9992f)
 	}
 	set(FLG_SKRB_PU_TAKANOME)	// 691
@@ -1262,7 +1277,7 @@ l_0xc932f6:
 	"@This <technique for causing stars to rain down>" next
 	"@will most likely prove vital to us." next
 	"@...Once I learn it,| I'll meet up with you, {name(1)}." next
-	"@Trust me..." pause(20)
+	"@Trust me..." pause(20) linebreak
 	"  I will see you again." promptw
 	window_closeall
 	set(FLG_PU_0)	// 17
@@ -1280,9 +1295,9 @@ l_0xc93381:
 	window_open(1)
 	title(1, Dungeon)
 	"@Guargh!" pause(20)
-	"  Oh no!  I... am..." next
-	"@getting caught in the palm trees!" pause(20)
-	"  Mmm... I cannot move." next
+	"  Oh no!  I...| am..." pause(20) linebreak
+	"  getting caught in the palm trees!" next
+	"@Mmm... I cannot move." next
 	"@Well,/| if I cannot move, it is okay." next
 	get_char_at_pos(1) rtoarg
 	"@{name(0)}!" next
@@ -1324,6 +1339,7 @@ l_0xc934a4:
 	"@I believe...| that I have one in my old vehicle collection." next
 	"@Please enter..." wait
 	window_closeall
+	cc_close_letterbox
 	pause(1)
 
 l_0xc934e4:
@@ -1331,8 +1347,8 @@ l_0xc934e4:
 	call(data_57.l_0xc9b112)
 	eob
 
-l_0xc934ed:
-	cc_open_letterbox
+l_0xc934ed:	// Submarine trip to Deep Darkness swamp
+	//cc_open_letterbox	// Handled in data_06.l_0xc57c2c
 	set(FLG_SYS_MONSTER_OFF)	// 11
 	OSS_on	// special_event(5)
 	party_freeze	// 0xFF

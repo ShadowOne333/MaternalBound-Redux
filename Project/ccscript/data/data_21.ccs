@@ -133,30 +133,36 @@ l_0xc654c4:
 	goto(l_0xc652f1)
 
 l_0xc654de:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@I don't think you have that much money." next
 	goto(l_0xc6534a)
 
 l_0xc654f3:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you have any savings in the bank." promptw
 	goto(l_0xc652f1)
 
 _maxed_out_cash:
 	deposit(0)
 	deposit(0)
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can withdraw any more money." next
 	goto(l_0xc653a5)
 
 l_0xc6550e:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can withdraw any more money." next
 	goto(l_0xc652f1)
 
 l_0xc65527:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you have that much money in your account." next
 	goto(l_0xc653a5)
 
 l_0xc65544:
 	deposit(0)
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you have enough money for my handling fee." next
 	goto(l_0xc653a5)
 
@@ -286,33 +292,40 @@ l_0xc65892:
 	"@Please come again." end
 
 l_0xc658bb:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can deposit any more money." next
 	goto(l_0xc65671)
 
 l_0xc658d4:
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you have that much money." next
 	goto(l_0xc65751)
 
 l_0xc658e8:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have any money in your account." next
 	goto(l_0xc65671)
 
 _maxed_out_cash2:
 	deposit(0)
 	deposit(0)
+	sound(SND_ERRORBEEP)	// 5
 	"@I think it's impossible for you to carry any more money." next
 	goto(l_0xc657ac)
 
 l_0xc65900:
+	sound(SND_ERRORBEEP)	// 5
 	"@I think it's impossible for you to carry any more money." next
 	goto(l_0xc65671)
 
 l_0xc65923:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have that much money in your account." next
 	goto(l_0xc657ac)
 
 l_0xc6593e:
 	deposit(0)
+	sound(SND_ERRORBEEP)	// 5
 	"@I don't think you can cover my handling charge." next
 	goto(l_0xc657ac)
 
@@ -413,6 +426,7 @@ l_0xc65cec:
 	two_choice_menu("Yes", l_0xc65da6, "No", l_0xc65d81)
 
 l_0xc65d81:
+	sound(SND_ERRORBEEP)	// 5
 	"@You can't afford $7500?" pause(20)
 	"  It was a waste of time talking to you." end
 

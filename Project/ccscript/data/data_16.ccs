@@ -597,9 +597,10 @@ l_0xc5f3d2:
 
 l_0xc5f4f4:
 	"@Good!" next
-	if not flag FLG_KEY_ITEMS {
+	if not flag FLG_KEY_ITEMS { // Check if item has space to be carried
 		get_item_receiver(-1)
-		goto_if_false(l_0xc5f575) } // Check if item has space to be carried
+		goto_if_false(l_0xc5f575)
+	}
 	"@It's already dawn outside..." next
 	"@But it doesn't matter to me." pause(20)
 	"  I'm fading fast..." next
@@ -626,6 +627,7 @@ l_0xc5f564:
 	goto(l_0xc5f2ad)
 
 l_0xc5f575:
+	sound(SND_ERRORBEEP)	// 5
 	"@What the...?" next
 	"@It seems that you have too many things to carry already..." next
 	"@Since you can't take it,| I'll give it to your sister." next
@@ -1140,6 +1142,7 @@ l_0xc6005f:
 	eob
 
 l_0xc600a4:
+	sound(SND_ERRORBEEP)	// 5
 	window_open(1)
 	"@Come on!" pause(20)
 	"  You haven't got room again!" next

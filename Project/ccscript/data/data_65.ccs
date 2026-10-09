@@ -717,15 +717,19 @@ l_0xef941f:
 	call(data_50.l_0xc92be3)
 	eob
 
-// Pyramid Boss NPC
+// Pyramid Boss NPC - Guardian General
 l_0xef9448:
 	goto_if_flag(FLG_FMON_PYRA_BOSS_DISAPPEAR, data_35.l_0xc7c588)	// 0x01B3, 435
 	window_closeall
+	cc_open_letterbox
+
 	start_battle(468)	// 0x01D4
 	goto_if_true(battle_text.l_0xc77eff)
+
 	set(FLG_FMON_PYRA_BOSS_DISAPPEAR)	// 435
 	pause(1)
 	npc_do_mc(1180,635)	// 0x049C, 0x027B
+	cc_close_letterbox
 	eob
 
 // Kraken Boss NPCs

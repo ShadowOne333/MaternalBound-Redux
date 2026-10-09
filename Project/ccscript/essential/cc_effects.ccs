@@ -307,9 +307,9 @@ command cc_reset_brightness cc_set_brightness(32, 63)
 // Letterbox.
 
 doLetterbox: {
-	LDA_i(23)
+	LDA_i(23)	// Enable sprites, layer 1, layer 2, layer 3 outside letterboxed region
 	STA_a(0xADAE)
-	LDA_i(4)
+	LDA_i(4)	// Enable layer 3 inside letterboxed region
 	STA_a(0xADB0)
 	
 	LDA_i(0)
@@ -322,10 +322,10 @@ _loop:
 	STA_a(0xADB2)
 	STY_a(0xADB4)
 	
-	JSL(0xC2D0AC)
+	JSL(0xC2D0AC)	// Build letterbox HDMA table
 	
 	LDA_i(2)
-	JSL(0xC429E8)
+	JSL(0xC429E8)	// Start latterbox HDMA on channel 2
 	
 	JSL(0xC08756)
 	
@@ -396,7 +396,7 @@ _loop:
 	BNE_a(_loop)
 	
 	LDA_i(2)
-	JSL(0xC0AE34)
+	JSL(0xC0AE34)	// Disable HDMA channel 2
 	
 	RTL
 }

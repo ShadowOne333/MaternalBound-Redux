@@ -223,6 +223,7 @@ l_0xc93eba:
 l_0xc93ed2:
 	hasmoney(98)	// 0x00000062
 	goto_if_false(l_0xc93f2e)
+
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc93f51)
 
@@ -238,10 +239,12 @@ l_0xc93ed2:
 	eob
 
 l_0xc93f2e:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, you can't buy it 'cause you're poor." pause(20)
 	"  That's too bad." end
 
 l_0xc93f51:
+	sound(SND_ERRORBEEP)	// 5
 	"@I can't help you if you're carrying too many things..." end
 
 l_0xc93f69:
@@ -270,6 +273,7 @@ l_0xc9403e:
 	load_registers
 	hasmoney(0)	// 0x00000000
 	goto_if_false(l_0xc94077)
+
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc94096)
 
@@ -281,10 +285,12 @@ l_0xc9403e:
 	"@Here you go,| one Ruler!" end
 
 l_0xc94077:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@You said yes,| even though you need a lot more money." end
 
 l_0xc94096:
+	sound(SND_ERRORBEEP)	// 5
 	"@You said <yes> - that's short and to the point." pause(20)
 	"  But you don't have any more room..." next
 	"@Get rid of something and come back." pause(20)
@@ -332,12 +338,13 @@ l_0xc94231:
 	eob
 
 l_0xc94270:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@Hey,| I'm not just giving it away..." end
 
 l_0xc94288:
-	newline
 	sound(SND_ERRORBEEP)	// 5
+	newline
 	pause(30)
 	"@Eggs are easily broken." next
 	"@There's no way to stuff it in with your other things if you have no more room..." end
@@ -530,8 +537,8 @@ l_0xc948dc:
 	eob
 
 l_0xc94966:
-	title(1, Lucky)	// Skinny guy
 	sound(SND_ERRORBEEP)	// 5
+	title(1, Lucky)	// Skinny guy
 	"@It seems like you've got an awful lot of junk." next
 	"@Get rid of somethin' and come back for the pass." wait
 	cc_close_letterbox

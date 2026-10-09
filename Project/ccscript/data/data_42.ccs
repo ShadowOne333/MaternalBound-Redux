@@ -326,6 +326,7 @@ l_0xc862f8:
 	end
 
 l_0xc86311:
+	sound(SND_ERRORBEEP)	// 5
 	"@You don't have any more space." end
 
 l_0xc86320:
@@ -450,9 +451,11 @@ l_0xc8683d:
 	goto_if_flag(FLG_ITEM_TAISHITA, l_0xc8688e)	// 0x02F3, 755
 	get_char_at_pos(1) swap
 	"@There was a {itemname(INSIGNIFICANT_ITEM)} in the drawer." next
+
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc8689c)
 	give_and_return_location(0, INSIGNIFICANT_ITEM)	// 0x00, 0xCE / 206
+
 	call(data_36.l_0xc7dccf)
 	set(FLG_ITEM_TAISHITA)	// 755
 	end
@@ -461,6 +464,7 @@ l_0xc8688e:
 	"@But there was nothing." end
 
 l_0xc8689c:
+	sound(SND_ERRORBEEP)	// 5
 	"@But you don't have any more space." end
 
 l_0xc868ad:

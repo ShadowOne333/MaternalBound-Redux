@@ -265,15 +265,15 @@ l_0xef610c:
 
 l_0xef610d:
 	"@(Don't feed the dinosaurs in the cage!" pause(20) linebreak
-	"                            -The Boss)" end
+	text_pos(11,2) "-The Boss)" end
 
 l_0xef6132:
 	"@(Don't talk to the rock if you have nothing to say." pause(20) linebreak
-	"                            -The Boss)" end
+	text_pos(11,2) "-The Boss)" end
 
 l_0xef6157:
 	"@(In case of danger, evacuate here!" pause(20) linebreak
-	"                            -The Boss)" end
+	text_pos(11,2) "-The Boss)" end
 
 l_0xef617b:
 	goto_if_flag(FLG_GPFT_MINIGEPPU_A_DISAPPEAR, data_35.l_0xc7c588)	// 0x016E, 366

@@ -276,6 +276,7 @@ l_0xc623bf:
 	end
 
 l_0xc624d6:
+	sound(SND_ERRORBEEP)	// 5
 	next
 	"@Kyokyukyo kyakie!" next
 	"@(You have too much stuff!)" end
@@ -323,6 +324,7 @@ l_0xc62578:
 	end
 
 l_0xc62641:
+	sound(SND_ERRORBEEP)	// 5
 	"@Kiee. Kiee" next
 	"@(You can't carry any more items." pause(20)
 	"  You've got too much stuff.)" end
@@ -542,6 +544,7 @@ _cancel:
 _deposit:
 	cannot_withdraw(9999999)
 	goto_if_false(_deposit_above_max)
+
 	call(_enter_deposit_amount)
 	goto_if_false(_cancel)
 
@@ -569,10 +572,12 @@ _invalid_input:
 	goto(_deposit)
 
 _not_enough_to_deposit:
+	sound(SND_ERRORBEEP)	// 5
 	"@You do not have that much money for a deposit." next
 	goto(_deposit)
 
 _deposit_above_max:
+	sound(SND_ERRORBEEP)	// 5
 	"@This machine cannot accept a deposit greater than" linebreak
 	"  $9,999,999." next
 	goto(_cancel)
@@ -612,20 +617,24 @@ _withdraw:
 	end
 
 _amount_excess:
+	sound(SND_ERRORBEEP)	// 5
 	"@The requested amount is in excess of your account balance." next
 	goto(_withdraw)
 
 _maxed_out_cash:
+	sound(SND_ERRORBEEP)	// 5
 	deposit(0)
 	"@You are not allowed to carry more than" linebreak
 	"  $99,999." next
 	goto(_withdraw)
 
 _zero_balance:
+	sound(SND_ERRORBEEP)	// 5
 	"@Your account is currently showing a zero balance." next
 	goto(_cancel)
 
 _max_cash:
+	sound(SND_ERRORBEEP)	// 5
 	"@You are not allowed to carry more than" linebreak
 	"  $99,999." next
 	goto(_cancel)

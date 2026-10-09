@@ -8,6 +8,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
+import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../redux/keyitems.ccs"
@@ -20,6 +21,7 @@ command e(label) "{long label}"
 l_0xc9dc2c:
 	goto_if_flag(FLG_GUMI_USEBOOK, l_0xc9dd87)	// 0x9B, 155
 	goto_if_flag(FLG_TEMP_1, l_0xc9dd78)
+	cc_open_letterbox
 	"@There's only one Tenda who's not shy." next
 	"@It's me, bubby!" next
 	"@You know what?" next
@@ -35,6 +37,7 @@ l_0xc9dc2c:
 	"@The guy next to me is strong, but he lacks conversation skills." next
 	"@He needs to overcome his shyness first." wait
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc9dd78:
@@ -64,6 +67,8 @@ l_0xc9de0e:
 	title(1, Rock)
 	goto_if_flag(FLG_INFO_POWR, data_35.l_0xc7c588)	// 0x01A7, 423
 	goto_if_flag(FLG_POWR_ALL, l_0xc9e252)	// 0x0180, 384
+
+	cc_open_letterbox
 	music(119)
 	goto_if_flag(FLG_TEMP_1, l_0xc9e041)	// 0x0002, 2
 	"@You finally came, {stat(8)}." next
@@ -124,6 +129,7 @@ l_0xc9e041:
 	"@Is close at hand." wait
 	music_resume
 	set(FLG_TEMP_1)	// 2
+	cc_close_letterbox
 	eob
 
 l_0xc9e252:
@@ -134,22 +140,30 @@ l_0xc9e252:
 
 l_0xc9e27b:
 	goto_if_flag(FLG_WIN_LUMI_BOSS, data_35.l_0xc7c588)	// 0xC4, 196
+
 	counter(1)
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(data_24.l_0xc690a6)
+
+	cc_open_letterbox
 	music(155)
 	"@You finally got here." next
 	"@This is the seventh <Your Sanctuary> location." pause(20) linebreak
 	"  But it's mine now." next
 	"@Take it from me,|| if you dare..." promptw
+
 	call(data_23.l_0xc68433)
 	goto_if_true(data_23.l_0xc683de)
+
+	cc_instant_letterbox
 	hide_sprite(1246, 8)	// 04DE, 8
 	pause(120)
 	set(FLG_WIN_LUMI_BOSS)	// 196
+	cc_close_letterbox
 	eob
 
 l_0xc9e2f5:
+	cc_open_letterbox
 	"@Good evening." next
 	"@I'm a talking rock." next
 	"@But the rocks around here don't talk too much." next
@@ -158,6 +172,7 @@ l_0xc9e2f5:
 	"@Don't forget to talk to the rock!" pause(20)
 	"  It's important!" wait
 	set(FLG_GUMI_TALKERSTONE)	// 649
+	cc_close_letterbox
 	eob
 
 l_0xc9e37e:
@@ -175,6 +190,7 @@ l_0xc9e406:
 
 l_0xc9e421:
 	window_closeall
+	cc_open_letterbox
 	pause(30)
 
 	window_open(1)
@@ -223,8 +239,11 @@ l_0xc9e421:
 	"@I did it!" next
 	"@Did you see me?" pause(20) linebreak
 	"  That's awesome!" next
+	goto(_skip_open_letterbox)	// Do this so the sequential event doesn't re-open the letterbox
 
 l_0xc9e4eb:
+	cc_open_letterbox
+_skip_open_letterbox:
 	"@Here's a small gift to thank you." next
 	get_item_receiver(-1)	// 0xFF
 	goto_if_false(l_0xc9e51f)
@@ -235,14 +254,18 @@ l_0xc9e4eb:
 
 	set(FLG_ITEM_MONKY_MIND)	// 650
 	unset(FLG_TEMP_9)	// 10
-	end
+	wait
+	cc_close_letterbox
+	eob
 
 l_0xc9e51f:
+	sound(SND_ERRORBEEP)	// 5
 	"@Are you sure you can't accept this?" next
 	"@...I know you have no room, so you can't carry it,| but..." next
 	"@...I wanted to give you" linebreak
 	"  the <{itemname(MONKEYS_LOVE)}.>" wait
 	set(FLG_TEMP_9)	// 10
+	cc_close_letterbox
 	eob
 
 l_0xc9e567:
@@ -265,10 +288,11 @@ l_0xc9e613:
 	eob
 
 l_0xc9e619:
-	title(1, Belch)
 	goto_if_flag(FLG_WIN_GEROPP, data_35.l_0xc7c588)	// 0x0114, 276
+	cc_open_letterbox
 	music(134)
 
+	title(1, Belch)
 	"@You may have forgotten, but *Buuuuurp!*..." next
 	"@I'm the return of Belch!"
 	sound(SND_WHIRR)	// 78
@@ -295,11 +319,14 @@ l_0xc9e619:
 	call(data_23.l_0xc68570)
 	goto_if_true(data_23.l_0xc683de)
 
+	cc_instant_letterbox
 	party_add(4)	// Add Poo
 	learn_starstorm_alpha	// Make Poo learn Starstorm, 0x04, 0x02
 	set(FLG_WIN_GEROPP)	// 276
 	pause(1)
 	npc_do_mc(1229,635)	// 04CD, 027B
+	pause(10)
+	cc_close_letterbox
 	eob
 
 l_0xc9e763:
@@ -360,6 +387,7 @@ l_0xc9e838:
 	end
 
 l_0xc9e843:
+	sound(SND_ERRORBEEP)	// 5
 	"@But you have no room." next
 	// Magic truffle, 0x63, 99
 	"@" call(data_37.l_0xc7e6d7) " gives up the {itemname(MAGIC_TRUFFLE)}." end
@@ -395,7 +423,7 @@ l_0xc9e9c6:
 l_0xc9ea20:
 	"@Okay." next
 	"@If you attempt to talk with the doctor without first going through me," next
-	"@it violates the law." pause(20)
+	"@it violates the law." pause(20) linebreak
 	"  Please be careful." end
 
 l_0xc9ea6f:
@@ -417,12 +445,14 @@ l_0xc9eadb:
 l_0xc9eb28:
 	hasmoney(500)	// 0x000001F4
 	goto_if_false(l_0xc9eb41)
+
 	takemoney(500)	// 0x01F4
 	sound(SND_CHICKEN2)	// 118
 	call(l_0xc9eb76)
 	eob
 
 l_0xc9eb41:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh,// Oh..." pause(20)
 	"  You don't seem to have enough money." next
 
@@ -491,6 +521,8 @@ l_0xc9ec7a:
 	call(data_36.l_0xc7dc7f)
 	goto_if_true(l_0xc9ecfe)
 
+	cc_open_letterbox
+
 	get_dir_from_char(1,TO_CHAR,3)	// 0x01, 0x01, 0x0003
 	char_direction(1,0)	// 0x01, 0x00
 	get_dir_from_char(2,TO_CHAR,3)	// 0x02, 0x01, 0x0003
@@ -504,6 +536,7 @@ l_0xc9ec7a:
 	"@...I noticed that there's no engine." pause(20)
 	"  Mmmm." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc9ecfe:
@@ -527,6 +560,7 @@ l_0xc9ed95:
 	"@They're located in the swamp and can be found by scent." next
 	"@You know, a Pig's nose would be enough to find those great truffles by scent alone." end
 
+// Giygas' battle texts
 l_0xc9ee2f:
 	random(13)	// 0x0D
 	switch_goto(13)	// 0x0D
@@ -843,6 +877,7 @@ l_0xc9f3ec:
 	pause(150)
 	eob
 
+// Giygas prayers' texts
 l_0xc9f442:
 	window_open(1)
 	"@(Suddenly," linebreak

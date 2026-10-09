@@ -80,6 +80,7 @@ l_0xc56ffb:
 l_0xc5701f:
 	get_item_receiver(-1)
 	goto_if_false(l_0xc570f2)
+
 	"@That is 290 dollars, kind " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "." linebreak
 	show_wallet
 	two_choice_menu("Yes", l_0xc57067, "No", l_0xc56ffb)
@@ -88,8 +89,10 @@ l_0xc5701f:
 l_0xc57067:
 	hasmoney(290)	// 0x0122
 	goto_if_false(l_0xc570db)
+
 	get_item_receiver(-1)
 	give_and_return_location(0, SNAKE_BAG)	// Item 0x8D / 141 = Snake bag
+
 	sound(SND_CHICKEN2)	// 118
 	takemoney(98)
 	show_wallet
@@ -99,9 +102,11 @@ l_0xc57067:
 	end
 
 l_0xc570db:
+	sound(SND_ERRORBEEP)	// 5
 	"@Without any money, I cannot sell to you.." end
 
 l_0xc570f2:
+	sound(SND_ERRORBEEP)	// 5
 	"@Since you have too many items,| I humbly keep this important {itemname(SNAKE_BAG)}." end
 
 l_0xc5711a:
@@ -150,7 +155,7 @@ l_0xc57361:
 l_0xc57399:
 	call(data_20.l_0xc6500f) eob
 
-l_0xc5739f:
+l_0xc5739f:	// Starmaster after exiting the Pyramid (called by data_50)
 	window_open(1)
 	title(1, Star)
 	"@Well done." next

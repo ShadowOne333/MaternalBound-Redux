@@ -47,6 +47,7 @@ l_0xc82945:
 	eob
 
 l_0xc82986:
+	sound(SND_ERRORBEEP)	// 5
 	"@I've never heard of anyone who doesn't even have $30!" next
 	"@Ho| ho| ho ho ho ho ho ho ho." next
 	"@Oh, excuse me for my laughing in your face." end

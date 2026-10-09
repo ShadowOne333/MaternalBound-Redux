@@ -32,7 +32,10 @@ l_0xc66bf6:
 	"  ...I was ready to give it to you..." end
 
 l_0xc66c15:
-	if not flag FLG_KEY_ITEMS { get_item_receiver(-1) goto_if_false(l_0xc66d2b) }
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc66d2b)
+	}
 	"@Here's the {itemname(PENCIL_ERASER)}." pause(20)
 	"  What are you going to use it for?" next
 	"@Sorry..." pause(15)
@@ -52,7 +55,10 @@ l_0xc66c7d:
 	goto(l_0xc66bf6)
 
 l_0xc66cc1:
-	if not flag FLG_KEY_ITEMS { get_item_receiver(-1) goto_if_false(l_0xc66d2b) }
+	if not flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc66d2b)
+	}
 	// Item 0xAF / 175 = Hawk eye
 	"@Here's the <{itemname(HAWK_EYE)}.>" pause(20)
 	"  What are you going to use it for?" next
@@ -66,6 +72,7 @@ l_0xc66cc1:
 	eob
 
 l_0xc66d2b:
+	sound(SND_ERRORBEEP)	// 5
 	"@It seems you have too many items to carry!" end
 
 l_0xc66d3e:
@@ -339,6 +346,7 @@ l_0xc677eb:
 	"@(Didn't you leave my son with someone?)" end
 
 l_0xc67804:
+	sound(SND_ERRORBEEP)	// 5
 	"@(You have too many items." pause(20)
 	"  You can't take my son.)" end
 
@@ -521,6 +529,7 @@ l_0xc6803d:
 	eob
 
 l_0xc68077:
+	sound(SND_ERRORBEEP)	// 5
 	"@(The pay phone costs one dollar.)" end
 
 l_0xc68091:

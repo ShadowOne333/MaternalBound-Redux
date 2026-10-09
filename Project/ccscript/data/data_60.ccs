@@ -18,7 +18,7 @@ import "../redux/window_titles.ccs"
 command e(label) "{long label}"
 
 // Text Data
-l_0xc9f897:
+l_0xc9f897:	// Using the Pig's nose to find Truffles
 	newline
 	"@{user}{get_action_arg}{swap} put" linebreak
 	"  the {itemname(0)} on " call(data_37.l_0xc7e66e) " nose!"
@@ -99,7 +99,7 @@ l_0xc9f9cf:
 	window_closeall
 	eob
 
-l_0xc9f9f3:
+l_0xc9f9f3:	// Using the For Sale Sign
 	goto_if_flag(FLG_MYHOME_TO_BE, l_0xc9fab9)	// 0x02FB, 763
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc9fab9)	// 0x0049, 73
 	goto_if_flag(FLG_STEP_PAST, data_35.l_0xc7c6f1)	// 0x0174, 372
@@ -125,7 +125,7 @@ l_0xc9f9f3:
 	set(FLG_SYS_DISTLPT)	// 754
 	eob
 
-l_0xc9fa74:
+l_0xc9fa74:	// Using the For Sale Sign again
 	newline
 	"@{user}{get_action_arg}{swap} used" linebreak
 	"  the {itemname(0)}!" next
@@ -156,7 +156,7 @@ l_0xc9fb57:
 	set(FLG_SYS_DISTLPT)	// 754
 	eob
 
-l_0xc9fb61:
+l_0xc9fb61:	// Using the Shyness book
 	newline
 	"@This book should be required reading for any quiet, shy person." promptw
 	eob
@@ -178,7 +178,7 @@ l_0xc9fbc4:
 	"@The enemy may not notice that you are present." promptw
 	eob
 
-l_0xc9fbf2:
+l_0xc9fbf2:	// Using ATM card
 	newline
 	"@To use this, go to a cash machine and insert the card." promptw
 	eob
@@ -193,7 +193,7 @@ l_0xc9fc32:
 	"@It might be useful in a dark place." promptw
 	eob
 
-l_0xc9fc48:
+l_0xc9fc48:	// Using the Zombie paper at Threek's circus
 	newline
 	"@{user}{get_action_arg}{swap} placed the {itemname(0)} on the floor."
 	sound(SND_BOXOPEN1)	// 115
@@ -203,28 +203,35 @@ l_0xc9fc48:
 	if not flag FLG_KEY_ITEMS { take(-1, ZOMBIE_PAPER) }	// 0xFF,0xAE / 174
 	eob
 
-l_0xc9fc6f:
+l_0xc9fc6f:	// Using the Hawk eye at Deep Darkness
+	window_closeall	// Close menus
 	cc_open_letterbox
+	window_open(1)
+
 	newline
-	"@{user}{get_action_arg}{swap} used the {itemname(0)}!"
+	"@{user}{get_action_arg}{swap} used the {itemname(0)}!" wait
+	window_closeall
 	sound(SND_BUTTERFLY)	// 95
 	pause(1)
-	wait
-	window_closeall
 
 	if not flag FLG_KEY_ITEMS { take(-1, HAWK_EYE) }	// 0xFF,0xAF / 175
 	set(FLG_MAKYO_USE_TAKANOME)	// 288
 	npc_delete(1231,6)	// 0x04CF,0x06
-	call(data_50.l_0xc935b1) ")"
-	set(FLG_PHOTO_MAKYOU)	// 508}"
+	call(data_50.l_0xc935b1)
+	// ")" - Leftover?
+	pause(30)	// Give SFX time to end properly
+	set(FLG_PHOTO_MAKYOU)	// 508
 	cc_close_letterbox
 	eob
 
 l_0xc9fc9e:
+	cc_open_letterbox
 	"@(For some reason," next
-	"@something that looks like a very large iron eraser is in the way.)" end
+	"@something that looks like a very large iron eraser is in the way.)" wait
+	cc_close_letterbox
+	eob
 
-l_0xc9fcd5:
+l_0xc9fcd5:	// Using the Eraser eraser
 	if flag FLG_KEY_ITEMS {
 		store_registers_shared
 		swap get_action_arg
@@ -234,10 +241,13 @@ l_0xc9fcd5:
 	result_is(ERASER_ERASER)
 	goto_if_false(data_35.l_0xc7c6f1)
 
-	window_closeall	// Close all menus
-
+	// Close menus, using window_closeall screws with the item name
+	window_close(0)
+	window_close(10)
+	close_hp
 	cc_open_letterbox
-	window_open(1)
+	window_switch(1)
+
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		swap
@@ -258,7 +268,7 @@ l_0xc9fcd5:
 	cc_close_letterbox
 	eob
 
-l_0xc9fd2e:
+l_0xc9fd2e:	// Using the Bicycle
 	newline
 	// Removed so that anyone in the party can initiate the bike
 	//get_char_at_pos(2)	// 0x02
@@ -279,19 +289,19 @@ l_0xc9fd5a:
 l_0xc9fd60:	// Party leader is mushroomized
 	"@If you are not feeling well, you should not ride a bicycle." end
 
-l_0xc9fd82:
+l_0xc9fd82:	// Using the Ruler
 	newline
 	"@{user}{get_action_arg}{swap} used the {itemname(0)}!" next
 	"@Now, " call(data_36.l_0xc7e602) " can figure out the length of things easily." promptw
 	eob
 
-l_0xc9fdbb:
+l_0xc9fdbb:	// Using the Protractor
 	newline
 	"@{user}{get_action_arg}{swap} used the {itemname(0)}!" next
 	"@Now, " call(data_36.l_0xc7e602) " can fairly easily figure out the angle of various things." promptw
 	eob
 
-l_0xc9fdfb:
+l_0xc9fdfb:	// Using the Chick
 	newline
 	sound(SND_BIRDS)	// 101
 	"@Seeing chicks makes you happy."
@@ -299,7 +309,7 @@ l_0xc9fdfb:
 	promptw
 	eob
 
-l_0xc9fe1b:
+l_0xc9fe1b:	// Using the Chicken
 	newline
 	sound(SND_CHICKEN)	// 104
 	pause(10)
@@ -307,7 +317,7 @@ l_0xc9fe1b:
 	"@A chicken ran away as fast as it could." promptw
 	eob
 
-l_0xc9fe41:
+l_0xc9fe41:	// Using the Teleport box
 	newline
 	" The Teleport Box started to groan."
 	sound(SND_STARMASTER) next	// 99
@@ -317,7 +327,7 @@ l_0xc9fe41:
 	battle_animation(35,0)	// 0x23, 0x00
 	end
 
-l_0xc9fe9d:
+l_0xc9fe9d:	// Using the Teleport box
 	newline
 	"@The Teleport Box began to groan."
 	sound(SND_STARMASTER) next	// 99
@@ -327,11 +337,11 @@ l_0xc9fe9d:
 	pause(30)
 	end
 
-l_0xc9fee3:
+l_0xc9fee3:	// Using the Teleport box outside of battle
 	newline
 	"@The Teleport Box can't be used here." end
 
-l_0xc9fefd:
+l_0xc9fefd:	// Using the Sound Stone
 	newline
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
 	else { get_inventory_item(0,0) swap }

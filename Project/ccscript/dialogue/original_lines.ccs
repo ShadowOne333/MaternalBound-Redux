@@ -1,0 +1,46 @@
+//------------------------------------
+//	Original lines for Redux
+//------------------------------------
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
+import "../essential/cc_effects.ccs"
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/keyitems.ccs"
+//------------------------------------
+Carrot_Key_Box: {
+	// If we're not using Key Items, fallback to the original script
+	if not FLG_KEY_ITEMS { goto(data_35.l_0xc7d867) }
+	goto_if_flag(FLG_ITEM_CARROT_KEY, _carrot_key_obtained)	// 0x0388, 904
+
+	cc_open_letterbox
+	get_char_at_pos(1) swap
+	"@{name(0)} opened the chest."
+	sound(SND_GIFTOPEN)	// 16
+	face_up_and_set_npc_flag
+	next
+
+	pause(20)
+	"@WHOAAAAAAAAAAH!" promptw
+
+	newline
+	"@There is a {itemname(CARROT_KEY)} inside!" promptw
+
+	give_menu_key_item(CARROT_KEY) next
+	/*newline
+	get_char_at_pos(1) swap
+	"@({name(0)} adds it" linebreak
+	"  to the Key items.)" swap wait
+	sound(SND_BOXTAKE)	// 116*/
+
+	cc_close_letterbox
+	eob
+
+_carrot_key_obtained:
+	get_char_at_pos(1) swap
+	"@{name(0)} opened the chest." next
+	sound(SND_GIFTOPEN)	// 16
+	newline
+	"@But the chest was empty." end
+}
+//------------------------------------

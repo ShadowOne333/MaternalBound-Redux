@@ -531,11 +531,13 @@ l_0xc99c98:
 	eob
 
 l_0xc99ca9:
+	cc_open_letterbox
 	call(data_34.l_0xc7ae41)
 	pause(15)
 	call(data_34.l_0xc7acb8)
 	set(FLG_PHONE_GUMI_APPLE)	// 379
 	set(FLG_SEBASTIAN_DISAPPEAR)	// 52
+	cc_close_letterbox
 	eob
 
 l_0xc99cbc:

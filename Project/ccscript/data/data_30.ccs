@@ -58,8 +58,8 @@ l_0xc73f6c:
 	end
 
 l_0xc73f83:
-	newline
 	sound(SND_ERRORBEEP)	// 5
+	newline
 	pause(30)
 	"@Ah!" pause(20)
 	"  You can't carry anything else." next
@@ -241,16 +241,18 @@ l_0xc7472f:
 	"  All right!" next
 	"@Here's a trinket for good luck." pause(15)
 	"  It's the {itemname(TRAVEL_CHARM)}!" next
+
 	get_item_receiver(-1)	// FF
 	goto_if_false(l_0xc74787)
 	give_and_return_location(0, TRAVEL_CHARM)	// 0x36 / 54
+
 	call(data_36.l_0xc7dccf)
 	set(FLG_ITEM_PRETZ)	// 78
 	end
 
 l_0xc74787:
-	newline
 	sound(SND_ERRORBEEP)	// 5
+	newline
 	pause(30)
 	"@I decided that..." next
 	"@you have too many items to carry, and are unable to carry more." next

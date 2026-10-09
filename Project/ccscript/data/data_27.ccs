@@ -318,7 +318,7 @@ l_0xc6e982:
 	goto_if_flag(FLG_FOUR_MAID_48, l_0xc6ea0f)	// 0x8D, 141
 
 	get_item_receiver(-1)
-	goto_if_false(l_0xc6e9d6)
+	goto_if_false(_no_tofu_room)
 	give_and_return_location(0, STRAWBERRY_TOFU)	// 0xBD, 189, Strawberry tofu
 
 	title(1, Electra)
@@ -336,6 +336,8 @@ l_0xc6e982:
 	call(data_36.l_0xc7dccf)
 	next
 
+_no_tofu_room:
+	sound(SND_ERRORBEEP)	// 5
 l_0xc6e9d6:
 	title(1, Electra)
 	"@Master Porky's cool!" next
@@ -843,8 +845,10 @@ l_0xc6fa0c:
 l_0xc6fa2e:
 	ctoarg
 	"@There was a {itemname(0)} in the locker." next
+
 	get_item_receiver(-1)
 	goto_if_false(l_0xc6fab4)
+
 	store_registers
 	give_and_return_location(0,0)
 	load_registers swap
@@ -864,6 +868,7 @@ l_0xc6fa93:
 	"@(Unfortunately, there is nothing in this locker.)" end
 
 l_0xc6fab4:
+	sound(SND_ERRORBEEP)	// 5
 	"@However, you already have too many things to carry." next
 	get_char_at_pos(1) swap
 	"@{name(0)}{swap} left it in the locker." end

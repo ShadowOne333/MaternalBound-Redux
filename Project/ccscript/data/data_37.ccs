@@ -383,6 +383,7 @@ l_0xc7eb16:
 	end
 
 l_0xc7eb25:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@You no room." linebreak
 	"  Bye later!"
@@ -483,7 +484,7 @@ l_0xc7eccd:
 	eob
 
 l_0xc7ecdb:
-	"@Healthfull!" wait
+	"@Health full!" wait
 	font_normal
 	eob
 

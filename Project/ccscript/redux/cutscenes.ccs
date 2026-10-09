@@ -165,8 +165,35 @@ Skywalker_Camera_Fix: {	// 899 (Modification of Script 164)
 	m_jml(0xC3CDF5)	// Continue with the original Script 164
 }
 //------------------------------------
+// Camera Pan for when Bubble Monkey lowers the rope
+Lumine_Camera_Pan: {	// 900
+	m_warp_to_leader
+	m_disable_collision
+	m_priority(0)
+	m_refresh_graphics_frame0
+	m_onmove(0xA37A) //84
+	m_set_anim(0)
+	m_set_speed(100)
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_move_until_at(6598, 4740)
+	//m_add_ypos(-64)
+
+	m_loop(50)	// Pause for 63 seconds
+		m_pause(60)
+	m_endloop
+
+	m_set_speed(100)
+	m_set_dest_sprite(1)	// m_set_dest_leader, m_set_dest_pc(3)
+	m_walk_to_dest	// m_walk_to_dest, m_walk_to_leader
+	m_endlasttask()
+	m_pause(30)
+	m_unlock_text()
+	m_halt
+}
+//------------------------------------
 // Screen tinting codes
-MOV_Make_Screen_Normal: {	// 900
+MOV_Make_Screen_Normal: {	// 901
 	m_set_var0(0)
 	m_asmcall(0xC47499)
 	m_pause(1)
@@ -174,7 +201,7 @@ MOV_Make_Screen_Normal: {	// 900
 	m_end
 }
 
-MOV_Tint_Screen_Black2Normal: {	// 901
+MOV_Tint_Screen_Black2Normal: {	// 902
 	m_set_anim(0xFF)
 	m_set_var0(-40)
     
@@ -188,7 +215,7 @@ MOV_Tint_Screen_Black2Normal: {	// 901
 	m_end
 }
 
-MOV_Tint_Screen_White2Normal: {	// 902
+MOV_Tint_Screen_White2Normal: {	// 903
 	m_set_anim(0xFF)
 	m_set_var0(-40)
     
@@ -202,7 +229,7 @@ MOV_Tint_Screen_White2Normal: {	// 902
 	m_end
 }
 
-MOV_Make_Screen_White: {	// 903
+MOV_Make_Screen_White: {	// 904
 	m_set_var0(40)
 	m_asmcall(0xC47499)
 	m_pause(1)
@@ -210,7 +237,7 @@ MOV_Make_Screen_White: {	// 903
 	m_end
 }
 
-MOV_Tint_Screen_White: {	// 904
+MOV_Tint_Screen_White: {	// 905
 	m_set_anim(0xFF)
 	m_set_var0(30)
     
@@ -224,7 +251,7 @@ MOV_Tint_Screen_White: {	// 904
 	m_end
 }
 
-MOV_Make_Screen_Black: {	// 905
+MOV_Make_Screen_Black: {	// 906
 	m_set_var0(-40)
 	m_asmcall(0xC47499)
 	m_pause(1)
@@ -232,7 +259,7 @@ MOV_Make_Screen_Black: {	// 905
 	m_end
 }
 
-MOV_Tint_Screen_Black: {	// 906
+MOV_Tint_Screen_Black: {	// 907
 	m_set_anim(0xFF)
 	m_set_var0(0)
 

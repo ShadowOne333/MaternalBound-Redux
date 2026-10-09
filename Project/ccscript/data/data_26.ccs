@@ -115,25 +115,32 @@ l_0xc6c77b:
 l_0xc6c7d9:
 	goto_if_flag(FLG_WIN_GANSEKIMAN, l_0xc6c8dd)	// 0x46, 70
 	goto_if_flag(FLG_ITEM_KOKESHI, l_0xc6c8d3)	// 0x026A, 618
+	cc_open_letterbox
 	"@I've been waiting for you." next
-	"@My master, Apple Kid completed this <Eraser eraser machine.>" next
-	"@While he was calling you, he was kidnapped." pause(20)
+	"@My master, Apple Kid completed this" linebreak
+	"  <Eraser eraser machine.>" next
+	"@While he was calling you, he was kidnapped." pause(20) linebreak
 	"  He felt like this...!/!/!/!/!" next
 	"@I was there, but was helpless." pause(15)
 	"  Sorry about that." next
 	"@Anyway, take this machine." next
-	if flag FLG_KEY_ITEMS { give_menu_key_item(ERASER_ERASER) }
+	if flag FLG_KEY_ITEMS { give_menu_key_item(ERASER_ERASER) wait }
 	else {
-		get_item_receiver(-1) goto_if_false(l_0xc6c8a3)
+		get_item_receiver(-1)
+		goto_if_false(l_0xc6c8a3)
 		give_and_return_location(0, ERASER_ERASER)	// Item 0xD2, 210, Eraser eraser
 		call(data_36.l_0xc7dcb6)
 	}
 	set(FLG_ITEM_KOKESHI)	// 618
+	cc_close_letterbox
 	eob
 
 l_0xc6c8a3:
+	sound(SND_ERRORBEEP)	// 5
 	"@I think this is an important item." next
-	"@Get rid of something you don't need, and come back for it." end
+	"@Get rid of something you don't need, and come back for it." wait
+	cc_close_letterbox
+	eob
 
 l_0xc6c8d3:
 	"@Way to go." end
@@ -152,6 +159,7 @@ l_0xc6c942:
 l_0xc6c970:
 	goto_if_flag(FLG_WIN_GIEGU, l_0xc6cb14)	// 0x49, 73
 	goto_if_flag(FLG_WINS_TASS_BMONKEY_APPEAR, l_0xc6ca9a)	// 0x0276, 630
+	cc_open_letterbox
 	"@Kyi kya kiko kree." next
 	"@(I saw you once before just for a second..." next
 	"@I'm Monyeki.// You know my fianc[C1].)" next
@@ -163,15 +171,20 @@ l_0xc6c970:
 	"  (I want to go there so I can get him home," next
 	"@but without him, I can't cross Lake Tess.)" next
 	"@Kri kekko kya ko" next
-	"@(I'm really worried that the mad doctor will use him in a crash test.)" end
+	"@(I'm really worried that the mad doctor will use him in a crash test.)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc6ca9a:
+	cc_open_letterbox
 	title(1, Monyeki)
 	"@Ku kyo kika." next
 	"@(It's me again, that chewing gum monkey's wife.)" next
 	"@Kako kyuka kre." next
 	"@(My husband ditched me here to go play with Tessie along the shores of Lake Tess." next
-	"@Sheesh, what nerve!)" end
+	"@Sheesh, what nerve!)" wait
+	cc_close_letterbox
+	eob
 
 l_0xc6cb14:
 	title(1, Monyeki)
@@ -251,6 +264,7 @@ l_0xc6cdcd:
 	eob
 
 l_0xc6ce34:
+	cc_open_letterbox
 	title(1, Andonuts)
 	"@Since our imprisonment is now over," next
 	"@I want to start on the Phase Distorter as soon as possible." next
@@ -258,6 +272,7 @@ l_0xc6ce34:
 	"@Thank you." next
 	"@Now, then. Leave everything here to us and hurry forth." wait
 	unset(FLG_WINS_ESCAPE_MOUSE_NG)	// 766
+	cc_close_letterbox
 	eob
 
 l_0xc6cebc:
@@ -277,12 +292,15 @@ l_0xc6cf2d:
 	"@If you see {name(3)},| please,| please ask him to call Tony.  Thanks!" end
 
 l_0xc6cfc5:
+	cc_open_letterbox
 	window_open(1)
 	title(1, StarmanDX)
 	"@YOU'RE MUCH STRONGER THAN OUR REPORTS INDICATED..." next
 	"@WE WERE NOT PREPARED FOR THAT EVENTUALITY..." next
 	"@THE PROPHECY FROM THE APPLE OF ENLIGHTMENT MAY BE CORRECT..." next
-	"@BUT YOU MUST NOT UNDERESTIMATE US.[03]{window_closeall}" eob
+	"@BUT YOU MUST NOT UNDERESTIMATE US." promptw
+	window_closeall
+	eob
 
 l_0xc6d067:
 	"@(Drug Store <Best Friend>)" end
@@ -294,7 +312,7 @@ l_0xc6d082:
 l_0xc6d0b1:
 	title(1, Apple)
 	"@Next *Bloop*" pause(20) linebreak
-	"  Next *Bloop*|  Room..." end
+	"  Next *Bloop*| Room..." end
 
 l_0xc6d0db:
 	"@*Glub*" linebreak
@@ -302,12 +320,13 @@ l_0xc6d0db:
 
 l_0xc6d0f0:
 	font_saturn
-	"@Kay-o.| Can" linebreak  
+	"@Kay-o.|" linebreak
+	"  Can" linebreak
 	"  breathe..." next
 	"@*Bloop*|" linebreak 
 	"  *Bloop*|" linebreak 
-	"  *Bloop*||" linebreak
-	"  Oh, no!" font_normal
+	"  *Bloop*||" next
+	"@Oh, no!" font_normal
 	end
 
 l_0xc6d133:
@@ -316,7 +335,8 @@ l_0xc6d133:
 	"  Can't see anything..." next
 	"@*Bloop* *Glub*" linebreak
 	"  {name(3)}!...| *Bloop*..." next
-	"@Where...| is...| {name(3)}... | *Bloop*" end
+	"@Where...| is...| {name(3)}... |" linebreak
+	"  *Bloop*" end
 
 l_0xc6d19c:
 	title(1, Fake)
@@ -523,6 +543,7 @@ l_0xc6d707:
 	eob
 
 l_0xc6d786:
+	sound(SND_ERRORBEEP)	// 5
 	"@Oh, uh huh..." next
 	"@I can't give you the banana 'cause you have too much stuff." wait
 	cc_close_letterbox
@@ -640,11 +661,13 @@ l_0xc6da6d:
 	eob
 
 l_0xc6daa0:
+	sound(SND_ERRORBEEP)	// 5
 	"@Excuse me " get_char_at_pos(1) call(data_37.l_0xc7e6b3) ", but your hands are full..." wait
 	cc_close_letterbox
 	eob
 
 l_0xc6dac0:
+	sound(SND_ERRORBEEP)	// 5
 	"@I'm sorry " get_char_at_pos(1) call(data_37.l_0xc7e6b3) "..." next
 	sprite_direction(921,7)	// 0399, 7
 	"@We don't just give away the tickets... you must pay 30 dollars." wait

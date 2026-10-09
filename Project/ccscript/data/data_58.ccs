@@ -971,7 +971,13 @@ l_0xc9d656:
 	result_is(CARROT_KEY)	// 253, Rabbit's carrot
 	goto_if_false(l_0xc9d6b7)
 
+	// Close menus, using window_closeall screws with the item name
+	window_close(0)
+	window_close(10)
+	close_hp
 	cc_open_letterbox
+	window_switch(1)
+
 	load_registers
 	if flag FLG_KEY_ITEMS {
 		swap
@@ -1062,6 +1068,7 @@ l_0xc9d7e2:
 	end
 
 l_0xc9d81f:
+	sound(SND_ERRORBEEP)	// 5
 	newline
 	"@But, you can't take it." next
 	"@You have no space for it." next
@@ -1101,6 +1108,7 @@ l_0xc9d8de:
 	eob
 
 l_0xc9d91b:
+	sound(SND_ERRORBEEP)	// 5
 	"@You have too much stuff to receive the book." next
 	"@Get rid of something." wait
 	cc_close_letterbox
@@ -1182,9 +1190,14 @@ _overcome_tenda_shyness:
 	window_closeall
 
 	set(FLG_GUMI_USEBOOK)	// 155
+	cc_close_letterbox
 	pause(60)
+
 	set(FLG_PHOTO_GUMI)	// 509
-	call(data_24.l_0xc68931)
+	call(data_24.l_0xc68931)	// Photo guy call
+	
+	// Post-photo Tenda Elder speech
+	cc_open_letterbox
 	call(data_50.l_0xc935b7)
 	party_unfreeze	// 0xFF
 	//OSS_off	// event(6)
@@ -1250,4 +1263,9 @@ l_0xc9dc0e:
 	call(data_36.l_0xc7dd74)
 	music(92)
 	event(2)	// Start Tenda Village Tea scene
+
+	// After the tea scene is done
+	cc_instant_letterbox
+	pause(10)
+	cc_close_letterbox
 	eob
