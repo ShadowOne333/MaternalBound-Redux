@@ -113,23 +113,29 @@ l_0xc7c39b:
 	fade_map_palette(26,2,60)	// Tileset 0x1A, palette 02, speed 0x3C
 
 	// Spawn a duplicate Ness sprite, change its facing and spawn camera entity
-	hide_char(1)
+	hide_party
 	sprite2_spawn(1,897,1)	// Spawn a Ness duplicate
+	sprite2_spawn(2,902,1)	// Spawn a Paula duplicate
+	sprite2_spawn(3,903,1)	// Spawn a Jeff duplicate
+	sprite2_spawn(4,904,1)	// Spawn a Poo duplicate
+	sprite2_direction(1,1) sprite2_direction(2,1)
+	sprite2_direction(3,1) sprite2_direction(4,1)
+	//party_direction(1)
 	sprite2_spawn(440,900,1)	// Spawn camera panning entity
 	pause(1)
 	focus_camera_on_sprite2(440)
 	party_unfreeze
-	pause(10)
 
-	sprite2_direction(1,1)	// Make the Ness duplicate face up
-	party_direction(1)
 	// Start Lumine Hall wall text
+	pause(120)
 	sprite2_spawn(106,353,1)	// 0x006A, 0x0161, 1
 	wait_movement
-	
-	sprite2_delete(440,6)
-	sprite2_delete(1,6)
-	show_char(1,6)	// 
+	wait_movement
+
+	sprite2_delete(1,6) sprite2_delete(2,6)
+	sprite2_delete(3,6) sprite2_delete(4,6)
+	show_party(1)
+	restore_camera
 
 l_0xc7c3c2:
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1

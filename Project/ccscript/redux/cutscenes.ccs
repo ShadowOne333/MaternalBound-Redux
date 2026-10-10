@@ -122,9 +122,37 @@ PostWarp_Letterbox: {	// 896
 	m_end
 }
 //------------------------------------
-// Jeff decoy sprite for the Bubble monkey rope scene
-Jeff_Dup: {	// 897
+// Leader decoy sprite for the Bubble monkey rope scene
+Leader_Decoy: {	// 897
 	m_warp_to_leader
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_priority(0)
+	m_set_facing_anim(0,0)
+	m_refresh_graphics
+	m_endlasttask
+	m_pause(1)
+	m_unlock_text
+	m_halt
+}
+Paula_Decoy: {	// 902
+	m_warp_to_pc(2)
+	m_priority(0)
+	m_set_facing_anim(0,0)
+	m_refresh_graphics
+	m_unlock_text
+	m_halt
+}
+Jeff_Decoy: {	// 903
+	m_warp_to_pc(3)
+	m_priority(0)
+	m_set_facing_anim(0,0)
+	m_refresh_graphics
+	m_unlock_text
+	m_halt
+}
+Poo_Decoy: {	// 904
+	m_warp_to_pc(4)
 	m_priority(0)
 	m_set_facing_anim(0,0)
 	m_refresh_graphics
@@ -165,32 +193,49 @@ Skywalker_Camera_Fix: {	// 899 (Modification of Script 164)
 	m_jml(0xC3CDF5)	// Continue with the original Script 164
 }
 //------------------------------------
-// Camera Pan for when Bubble Monkey lowers the rope
-Lumine_Camera_Pan: {	// 900
+// Camera Pans for the Lumine Hall scene where the text prints on the wall
+Camera_Pan_Up_64px: {	// 900
 	m_warp_to_leader
 	m_disable_collision
 	m_priority(0)
 	m_refresh_graphics_frame0
 	m_onmove(0xA37A) //84
 	m_set_anim(0)
-	m_set_speed(100)
+	m_set_speed(150)
 	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
 	m_task_long(MovTask_Anim8)
 	m_move_until_at(6598, 4740)
-	//m_add_ypos(-64)
 
-	m_loop(50)	// Pause for 63 seconds
+	m_loop(48)	// Pause for 63 seconds
 		m_pause(60)
 	m_endloop
 
-	m_set_speed(100)
+	m_set_speed(150)
 	m_set_dest_sprite(1)	// m_set_dest_leader, m_set_dest_pc(3)
 	m_walk_to_dest	// m_walk_to_dest, m_walk_to_leader
 	m_endlasttask()
 	m_pause(30)
 	m_unlock_text()
-	m_halt
+	m_destroy_self
 }
+Camera_Pan_Return: {	// 901
+	m_warp_to_leader
+	m_disable_collision
+	m_priority(0)
+	m_refresh_graphics_frame0
+	m_set_anim(0)
+	m_set_speed(100)
+	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
+	m_task_long(MovTask_Anim8)
+	m_start_walk(4)
+	m_walk_pixels(64)
+	m_endlasttask
+	m_pause(1)
+	m_unlock_text
+	m_destroy_self
+}
+//------------------------------------
+
 //------------------------------------
 // Screen tinting codes
 MOV_Make_Screen_Normal: {	// 901
