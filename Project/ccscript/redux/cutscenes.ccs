@@ -135,7 +135,7 @@ Leader_Decoy: {	// 897
 	m_unlock_text
 	m_halt
 }
-Paula_Decoy: {	// 902
+Paula_Decoy: {	// 903
 	m_warp_to_pc(2)
 	m_priority(0)
 	m_set_facing_anim(0,0)
@@ -143,7 +143,7 @@ Paula_Decoy: {	// 902
 	m_unlock_text
 	m_halt
 }
-Jeff_Decoy: {	// 903
+Jeff_Decoy: {	// 904
 	m_warp_to_pc(3)
 	m_priority(0)
 	m_set_facing_anim(0,0)
@@ -151,7 +151,7 @@ Jeff_Decoy: {	// 903
 	m_unlock_text
 	m_halt
 }
-Poo_Decoy: {	// 904
+Poo_Decoy: {	// 905
 	m_warp_to_pc(4)
 	m_priority(0)
 	m_set_facing_anim(0,0)
@@ -162,24 +162,15 @@ Poo_Decoy: {	// 904
 
 // Camera Pan for when Bubble Monkey lowers the rope
 Rope_Camera_Pan: {	// 898
-	m_warp_to_leader
-	m_disable_collision
-	m_priority(0)
-	m_refresh_graphics_frame0
-	m_onmove(0xA37A) //84
-	m_set_anim(0)
-	m_set_speed(100)
-	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
-	m_task_long(MovTask_Anim8)
-	m_move_until_at(5032, 320)
-	m_pause(250)
-	m_set_speed(100)
-	m_set_dest_sprite(3)	// m_set_dest_leader, m_set_dest_pc(3)
-	m_walk_to_dest	// m_walk_to_dest, m_walk_to_leader
-	m_endlasttask()
-	m_pause(30)
-	m_unlock_text()
-	m_halt
+/* C334FF */	m_warp_to_pc(-1)
+/* C33504 */	m_onmove(0x9FC8)
+/* C33507 */	m_set_anim(-1)
+/* C33509 */	m_ontick(0xC48C2B)
+/* C33515 */	m_set_speed(150)
+/* C3351F */	m_set_var6(5032)
+/* C33523 */	m_set_var7(320)
+/* C33527 */	m_walk_to_dest
+/* C33532 */	m_destroy_self
 }
 //------------------------------------
 // Hijack the original Script 161 to remove the m_add_ypos(-128) for the Sky Walker sprite
@@ -194,45 +185,42 @@ Skywalker_Camera_Fix: {	// 899 (Modification of Script 164)
 }
 //------------------------------------
 // Camera Pans for the Lumine Hall scene where the text prints on the wall
-Camera_Pan_Up_64px: {	// 900
-	m_warp_to_leader
-	m_disable_collision
-	m_priority(0)
-	m_refresh_graphics_frame0
-	m_onmove(0xA37A) //84
-	m_set_anim(0)
-	m_set_speed(150)
-	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
-	m_task_long(MovTask_Anim8)
-	m_move_until_at(6598, 4740)
-
-	m_loop(48)	// Pause for 63 seconds
-		m_pause(60)
-	m_endloop
-
-	m_set_speed(150)
-	m_set_dest_sprite(1)	// m_set_dest_leader, m_set_dest_pc(3)
-	m_walk_to_dest	// m_walk_to_dest, m_walk_to_leader
-	m_endlasttask()
-	m_pause(30)
-	m_unlock_text()
-	m_destroy_self
+Camera_Pan_Up_64px: {	// 900 (Rewrite of 438)
+/* C334FF */	m_warp_to_pc(-1)
+/* C33504 */	m_onmove(0x9FC8)
+/* C33507 */	m_set_anim(-1)
+/* C33509 */	m_ontick(0xC48C2B)
+/* C33515 */	m_set_speed(150)
+/* C3351B */	m_set_var5(1)
+		m_start_walk(0)
+		m_walk_pixels(64)
+		m_destroy_self	// Script_35
 }
 Camera_Pan_Return: {	// 901
-	m_warp_to_leader
-	m_disable_collision
-	m_priority(0)
-	m_refresh_graphics_frame0
-	m_set_anim(0)
-	m_set_speed(100)
-	m_task_long(MovTask_DestroyIfFar) // This label actually exists!
-	m_task_long(MovTask_Anim8)
-	m_start_walk(4)
-	m_walk_pixels(64)
-	m_endlasttask
-	m_pause(1)
-	m_unlock_text
-	m_destroy_self
+/* C33AED */	m_set_xpos(6598)
+/* C33AF0 */	m_set_ypos(4740)
+/* C33AF3 */	m_set_speed(150)
+/* C33AF9 */	m_set_var5(1)
+/* C33AFD */	m_set_var1(20)
+/* C31E2D */	m_onmove(0x9FC8)
+/* C31E30 */	m_set_anim(-1)
+/* C31E32 */	m_ontick(0xC48C2B)
+/* C31E3D */	m_set_dest_pc(-1)
+/* C31E42 */	m_walk_to_dest
+		m_destroy_self
+}
+Camera_Return_Jeff: {	// 902
+/* C33AED */	m_set_xpos(5032)
+/* C33AF0 */	m_set_ypos(320)
+/* C33AF3 */	m_set_speed(150)
+/* C33AF9 */	m_set_var5(1)
+/* C33AFD */	m_set_var1(20)
+/* C31E2D */	m_onmove(0x9FC8)
+/* C31E30 */	m_set_anim(-1)
+/* C31E32 */	m_ontick(0xC48C2B)
+/* C31E3D */	m_set_dest_pc(-1)
+/* C31E42 */	m_walk_to_dest
+		m_destroy_self
 }
 //------------------------------------
 

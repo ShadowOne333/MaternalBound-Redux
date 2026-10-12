@@ -563,7 +563,7 @@ l_0xc9b270:	// Flashback scene prep
 	window_closeall
 
 	pause(60)
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade and stop music
 	set(FLG_BGM_MGKT_IN)	// 758
 	music_resume
 	pause(120) pause(120) pause(120)
@@ -574,12 +574,12 @@ l_0xc9b270:	// Flashback scene prep
 	sprite2_delete(6,6)
 	show_party(1)	// 0xFF, 1
 	set_respawn_point(1)
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade and stop music
 	unset(FLG_BGM_MGKT_IN)	// 758
 	music_resume
 	OSS_off	// event(6)
 	unset(FLG_SYS_MONSTER_OFF)	// 11
-	cc_close_letterbox
+	//cc_close_letterbox	// Not needed?
 	eob
 
 l_0xc9b4b8:
@@ -625,10 +625,11 @@ l_0xc9b4c9:
 	set(FLG_JEFF_KI)
 	set(FLG_POO_KI)
 	call(data_36.l_0xc7dd6b)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	// Flag checks to know which Sanctuary we should teleport back to
 	goto_if_flag(FLG_MGKT_BACK_FIRE, l_0xc9b799)	// 0x0224, 548
 	goto_if_flag(FLG_MGKT_BACK_MGNT, l_0xc9b6e3)	// 0x0223, 547
 	goto_if_flag(FLG_MGKT_BACK_MLKY, l_0xc9b62d)	// 0x0222, 546
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(197)	// 0xC5
 	party_freeze	// 0xFF
 	pause(60)
@@ -929,7 +930,8 @@ l_0xc9b9d0:
 l_0xc9ba0a:
 	"@Hmmm.../| so are we just going to wait for a meteorite" next
 	"@to suddenly fall from the sky?" next
-	"@Mmm...|| you haven't seen a meteorite.../| Hm... think for a minute..." next
+	"@Mmm...|| you haven't seen a meteorite..." pause(20) linebreak
+	"  Hm... think for a minute..." next
 	goto(l_0xc9b9d0)
 
 l_0xc9ba78:
@@ -954,12 +956,13 @@ l_0xc9ba78:
 	unset(FLG_ONET_DAYBREAK)	// 422
 	unset(FLG_MYHOME_LIGHT_ON)	// 517
 	isset(FLG_GOT_CAPEESTATE)	// 99
+	cc_close_letterbox
 	goto_if_false(data_55.l_0xc9992f)
 	unset(FLG_ONET_ESTATE_DOOR_OPEN)	// 746
-	cc_close_letterbox
 	eob
 
-l_0xc9bbd3:
+l_0xc9bbd3:	// Enter the Phase Distorter 2 to the Cave of the Past
+	cc_open_letterbox
 	set(FLG_SYS_DIS_2H_PAPA)	// 775
 	call(data_24.l_0xc69082)
 	sprite2_spawn(106,336,1)	// 0x006A, 0x0150, 0x01
@@ -969,6 +972,7 @@ l_0xc9bbd3:
 	music_resume
 	npc_delete(741,9)	// 0x02E5, 0x09
 	pause(180)
+	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(94)	// 0x5E
 	pause(100)
 	npc_spawn(1274,337,4)	// 0x04FA, 0x0151, 0x04
@@ -983,6 +987,7 @@ l_0xc9bbd3:
 	hotspot_on(1,7, l_0xc9bc3c)	// 0x01, 0x07, 0x00C9BC3C
 	hotspot_on(2,41, data_61.l_0xef5917)	// 0x02, 0x29, 0x00EF5917
 	set(FLG_DKFD_ST2_APPEAR)	// 332
+	cc_close_letterbox
 	eob
 
 l_0xc9bc3c:
@@ -1027,7 +1032,6 @@ l_0xc9bca1:
 	"@Giygas is attacking from our exact location," next
 	"@but he is attacking from this very location in the past." promptw
 	window_closeall
-	cc_close_letterbox
 	eob
 
 l_0xc9bd35:
@@ -1042,13 +1046,14 @@ l_0xc9bd52:
 	window_closeall
 	npc_delete(1269,6)	// 0x04F5, 0x06
 	npc_spawn(1270,313,1)	// 0x04F6, 0x0139, 0x01
-	pause(150)
+	pause(180)
 	set(FLG_DKFD_ANDONUT_B_APPEAR)	// 331
 	unset(FLG_DKFD_ANDONUT_A_APPEAR)	// 328
 	cc_close_letterbox
 	eob
 
 l_0xc9bd69:
+	cc_open_letterbox
 	title(1, Andonuts)
 	"@In order to defeat Giygas,| who is attacking from the past," next
 	"@you must warp to the past." next
@@ -1072,7 +1077,7 @@ l_0xc9bf2c:
 	eob
 
 l_0xc9bf68:
-	"@...Hmmm" pause(20)
+	"@...Hmmm" pause(20) linebreak
 	" ...you accept this while knowing" next
 	"@that you may not be able to return to your current form," next
 	"@right?" linebreak

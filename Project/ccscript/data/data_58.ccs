@@ -155,10 +155,11 @@ l_0xc9c293:	// Giygas fight
 
 	pause(100)
 	window_open(1)
-	call(data_06.l_0xc57e1c)
+	call(data_06.l_0xc57e1c)	// Porky speech
 	window_closeall
 
 	pause(120)
+	// Start Giygas fight
 	call(data_23.l_0xc68577)
 	goto_if_true(data_23.l_0xc683de)
 

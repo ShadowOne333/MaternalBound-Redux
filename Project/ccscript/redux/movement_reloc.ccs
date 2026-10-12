@@ -22,9 +22,10 @@ command DEFINE_CUSTOM_POINTERS {
 	adr24(cutscenes.Skywalker_Camera_Fix)	// 899
 	adr24(cutscenes.Camera_Pan_Up_64px)	// 900
 	adr24(cutscenes.Camera_Pan_Return)	// 901
-	adr24(cutscenes.Paula_Decoy)		// 902
-	adr24(cutscenes.Jeff_Decoy)		// 903
-	adr24(cutscenes.Poo_Decoy)		// 904
+	adr24(cutscenes.Camera_Return_Jeff)	// 902
+	adr24(cutscenes.Paula_Decoy)	// 903
+	adr24(cutscenes.Jeff_Decoy)	// 904
+	adr24(cutscenes.Poo_Decoy)	// 905
 }
 
 // This part intentionally has lots of newlines to separate the

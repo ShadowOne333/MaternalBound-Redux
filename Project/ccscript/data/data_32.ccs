@@ -413,6 +413,7 @@ l_0xc7794c:
 	call(l_0xc77c50) "@that Giygas' attempt will fail." next
 	call(l_0xc77c50) "@It is because of the existence of a boy named {name(1)}." next
 	call(l_0xc77c50) title_ness(1) "@...That's me!" next
+	window_open(1)	// Reset window title
 	call(l_0xc77c50) "@Listen." next
 	call(l_0xc77c50) "@Free your mind and KNOW what you must do!" next
 	call(l_0xc77c50) "@Your destiny has already been decided." next
@@ -428,16 +429,19 @@ l_0xc7794c:
 	call(l_0xc77c50) "@Soon, Magicant will be no more." pause(20) "  We must be quick!" promptw
 	call(l_0xc77c50)
 	window_closetop
+
 	pause(120)
 
 	window_open(1)
 	"@({name(1)} really heard his own voice." next
+	title_ness(1)
 	"@Go to Saturn Valley!" next
 	"@Go to Saturn Valley now!)" wait
 	window_closetop
 	music_effect(3)	// Music fadeout
 	call(l_0xc77c50)
 	pause(60)
+	cc_close_letterbox
 	goto(data_36.l_0xc7dfbe)
 
 l_0xc77c4f:

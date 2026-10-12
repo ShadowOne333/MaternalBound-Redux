@@ -85,8 +85,8 @@ l_0xc7f949:
 	"@{stat(8)}," pause(15) linebreak
 	"  {stat(30)},"	pause(20) linebreak	// 0x1E
 	"  {stat(52)}..." next	// 0x34
-	"@Let me demonstrate a strange power before I go." pause(20)
-	"  I realized this power as a child." next
+	"@Let me demonstrate a strange power before I go." next
+	"@I realized this power as a child." next
 	"@PSI Farewell!  Now!" promptw
 	window_closeall
 	set(FLG_RAMA_PU_APPEAR)	// 637

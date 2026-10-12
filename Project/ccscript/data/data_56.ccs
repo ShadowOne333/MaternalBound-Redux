@@ -45,7 +45,7 @@ l_0xc99d45:
 	set(FLG_FOUR_TOPOLO_AB_APPEAR)	// 759
 	eob
 
-l_0xc99d59:
+l_0xc99d59:	// Venus concert
 	goto_if_flag(679, data_55.l_0xc9992f)	// 0x02A7
 	queue_text(data_44.l_0xc88991)
 	set(flag 679)

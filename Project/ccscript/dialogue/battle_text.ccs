@@ -360,14 +360,15 @@ l_0xc8ff31:
 	window_open(1)
 	set_text_mode(0)	// 0x00
 	title(1, Porky)
-	"@{stat(8)}!|| Now, I..." linebreak
-	"  Well.../| It's going to seem like" linebreak
+	"@{stat(8)}!||  Now, I..." linebreak
+	"  Well.../|  It's going to seem like" linebreak
 	"  I'm running away." prompt linebreak
 	"@But perhaps I'll just sneak away to another era to think about my next plan." prompt linebreak
 	"@It's a good bet that we will see each other again..." prompt
 	pause(30) linebreak
 	"@All right!  I'll be seeing you!" prompt linebreak
-	"@So now which one of us do you think is the cool guy?!" pause(150)
+	"@So now which one of us do you think is the cool guy?!"
+	pause(150)
 	sound(SND_FLASH1)	// 65
 	window_closetop
 	eob

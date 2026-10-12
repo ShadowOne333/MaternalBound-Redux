@@ -109,33 +109,35 @@ l_0xc7c39b:
 	cc_open_letterbox
 	goto_if_flag(FLG_POWR_LUMI, l_0xc7c3c2)	// 0xBC, 188
 	call(l_0xc7c57d)	// Recover party
+	party_freeze
 	pause(1)
 	fade_map_palette(26,2,60)	// Tileset 0x1A, palette 02, speed 0x3C
 
+	party_direction(1)
 	// Spawn a duplicate Ness sprite, change its facing and spawn camera entity
-	hide_party
-	sprite2_spawn(1,897,1)	// Spawn a Ness duplicate
-	sprite2_spawn(2,902,1)	// Spawn a Paula duplicate
-	sprite2_spawn(3,903,1)	// Spawn a Jeff duplicate
-	sprite2_spawn(4,904,1)	// Spawn a Poo duplicate
-	sprite2_direction(1,1) sprite2_direction(2,1)
-	sprite2_direction(3,1) sprite2_direction(4,1)
-	//party_direction(1)
-	sprite2_spawn(440,900,1)	// Spawn camera panning entity
+	sprite2_spawn(316,900,1)	// Spawn camera panning entity
+	sprite2_spawn(440,355,1)	// 0x006A, 0x0163, 0x01
 	pause(1)
-	focus_camera_on_sprite2(440)
+	focus_camera_on_sprite2(440)	// 0x006A
 	party_unfreeze
+
+	// Hide all party members except Ness
+	hide_char(2) hide_char(3) hide_char(4)
+	sprite2_spawn(2,903,1) sprite2_spawn(3,904,1) sprite2_spawn(4,905,1)
 
 	// Start Lumine Hall wall text
 	pause(120)
 	sprite2_spawn(106,353,1)	// 0x006A, 0x0161, 1
 	wait_movement
-	wait_movement
 
-	sprite2_delete(1,6) sprite2_delete(2,6)
-	sprite2_delete(3,6) sprite2_delete(4,6)
-	show_party(1)
+	// Move back camera ot the party
+	sprite2_spawn(440,901,1)	// 0x006A, 0x01BF, 0x01
+	pause(120)
+
 	restore_camera
+	sprite2_delete(2,6) sprite2_delete(3,6) sprite2_delete(4,6)
+	show_party(1)
+	sprite2_delete(440,6)	// Destroy our camera entity
 
 l_0xc7c3c2:
 	sprite2_spawn(106,352,1)	// 0x006A, 0x0160, 1

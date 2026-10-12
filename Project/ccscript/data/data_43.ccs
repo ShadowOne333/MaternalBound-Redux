@@ -618,13 +618,13 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	sprite2_spawn(49,253,1)	// 0x0031, 0x00FD, 0x01
 	wait_movement
 
-	// Spawn a duplicate Jeff sprite, hide_party and spawn camera entity
-	sprite2_spawn(3,897,1)	// Spawn a Jeff duplicate
-	sprite2_spawn(106,898,1)	// Spawn camera panning entity
+	// Spawn a duplicate Jeff sprite and spawn camera entity
+	sprite2_spawn(440,898,1)	// Spawn a Jeff duplicate
+	sprite2_spawn(106,355,1)	// Spawn camera panning entity
 	pause(1)
 	focus_camera_on_sprite2(106)
 	party_unfreeze
-	hide_party
+
 	// Continue with the vanilla code
 	sprite2_delete(49,6)	// 0x0031, 0x06
 	sprite2_spawn(50,261,1)	// 0x0032, 0x0105, 0x01
@@ -634,6 +634,7 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	sprite2_do_mc(344,262)	// 0x0158, 0x0106
 	wait_movement
 
+	sprite2_delete(106,6) sprite2_delete(440,6)
 	sprite2_delete(50,6)	// 0x0032, 0x06
 	sprite2_delete(344,6)	// 0x0158, 0x06
 	sprite2_spawn(46,263,1)	// 0x002E, 0x0107, 0x01
@@ -642,16 +643,19 @@ l_0xc8824a:	// Bubble monkey lowers the rope
 	npc_delete(677,6)	// 0x02A5, 0x06
 	wait_movement
 
+	// Restore camera back to Jeff
+	sprite2_spawn(106,902,1)	// 0x006A, 0x01BF, 0x01
+	pause(60)
+
 	sprite2_delete(46,6)	// 0x002E, 0x06
 	sprite2_spawn(47,264,1)	// 0x002F, 0x0108, 0x01
 	wait_movement
 
+	sprite2_delete(440,6) sprite2_delete(106,6)	// Delete camera entities
 	sprite2_delete(47,6)	// 0x002F, 0x06
 	sprite2_spawn(46,265,1)	// 0x002E, 0x0109, 0x01
 	wait_movement
 
-	sprite2_delete(106,6)	// Delete camera entity
-	sprite2_delete(3,6)	// Delete Jeff decoy
 	sprite2_delete(46,6)	// 0x002E, 0x06
 	show_char(9,1)	// 0x09, 0x01
 	restore_camera

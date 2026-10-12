@@ -616,7 +616,6 @@ l_0xc7ef3b:
 	goto_if_flag(FLG_INFO_XYZ, l_0xc7ef67)	// 0x0084, 132
 	goto_if_flag(FLG_WIN_OSCAR, l_0xc7efa2)	// 0x004A, 74
 
-	cc_open_letterbox
 	title(1, Apple)
 	get_char_at_pos(1) rtoarg
 	"@Ah, {name(0)}." next
@@ -624,12 +623,9 @@ l_0xc7ef3b:
 l_0xc7ef67:
 	title(1, Apple)
 	"@The Phase Distorter will certainly be completed someday," next
-	"@in my humble opinion." wait
-	cc_close_letterbox
-	eob
+	"@in my humble opinion." end
 
 l_0xc7efa2:
-	cc_open_letterbox
 	title(1, Apple)
 	"@Excellent, excellent!" linebreak
 	"  Everything proceeded as planned." next
@@ -640,9 +636,7 @@ l_0xc7efa2:
 	"@In this prototype, you can only travel to different points" next
 	"@within the same time period." next
 	"@It is able, however, to search out the locations of enemies." next
-	"@Right now, it is indicating the presence of enemies in the Lost Underworld!" wait
-	cc_close_letterbox
-	eob
+	"@Right now, it is indicating the presence of enemies in the Lost Underworld!" end
 
 l_0xc7f0d6:
 	goto_if_flag(FLG_DAY_AFTER, l_0xc7ef67)	// 0x00A9, 169
@@ -694,7 +688,10 @@ l_0xc7f29e:
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc7f2b1:
+	window_closeall	// Close menus
 	cc_open_letterbox
+	window_open(1)
+
 	title(1, Andonuts)
 	if not flag FLG_KEY_ITEMS { take(-1, METEORITE_PIECE) }	// 0xFF, 0xC1 / 193
 	sound(SND_CHICKEN2)	// 118
