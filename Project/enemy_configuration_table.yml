@@ -102,7 +102,7 @@
   Action 3 Argument: 23
   Action 4: 245
   Action 4 Argument: 171
-  Action Order: 5
+  Action Order: 3
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d71
@@ -995,7 +995,7 @@
   Action 3 Argument: 0
   Action 4: 41
   Action 4 Argument: 33
-  Action Order: 5 # 0
+  Action Order: 0
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d83
@@ -2311,7 +2311,7 @@
   Action 3 Argument: 0
   Action 4: 245
   Action 4 Argument: 182
-  Action Order: 5	# 5 = Use EnemyAI script
+  Action Order: 0	# 5 = Use EnemyAI script
   Boss Flag: 'true'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d71
@@ -5460,7 +5460,7 @@
   Action 3 Argument: 0
   Action 4: 176
   Action 4 Argument: 136
-  Action Order: 5 # 1
+  Action Order: 1
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d96
@@ -6024,7 +6024,7 @@
   Action 3 Argument: 0
   Action 4: 245
   Action 4 Argument: 201
-  Action Order: 5 # 2
+  Action Order: 2
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d96
@@ -6447,7 +6447,7 @@
   Action 3 Argument: 0
   Action 4: 245
   Action 4 Argument: 203
-  Action Order: 5
+  Action Order: 3
   Boss Flag: 'true'
   Death Sound: boss
   Death Text Pointer: battle_text.l_0xef6d83
@@ -7988,53 +7988,53 @@
   Speed: 16
   Type: normal
   Unknown: 2
-170:
-  '"The" Flag': 'true'
-  Action 1: 0
+170:	# Sea of Eden Kraken
+  '"The" Flag': 'false'
+  Action 1: 94
   Action 1 Argument: 0
-  Action 2: 0
+  Action 2: 248
   Action 2 Argument: 0
-  Action 3: 0
+  Action 3: 92
   Action 3 Argument: 0
-  Action 4: 0
-  Action 4 Argument: 0
+  Action 4: 245
+  Action 4 Argument: 183
   Action Order: 0
-  Boss Flag: 'true'
+  Boss Flag: 'false'
   Death Sound: normal
-  Death Text Pointer: battle_text.l_0xef6e19
-  Defense: 25
-  Encounter Text Pointer: battle_text.l_0xef788b
-  Experience points: 353
+  Death Text Pointer: battle_text.l_0xef6d71
+  Defense: 180
+  Encounter Text Pointer: battle_text.l_0xef7866
+  Experience points: 79267
   Final Action: 0
   Final Action Argument: 0
-  Fire vulnerability: 70%
+  Fire vulnerability: 40%
   Flash vulnerability: 70%
-  Freeze vulnerability: 70%
-  Gender: male
-  Guts: 20
-  HP: 94
-  Hypnosis/Brainshock vulnerability: 50%
+  Freeze vulnerability: 40%
+  Gender: neutral
+  Guts: 1
+  HP: 1097
+  Hypnosis/Brainshock vulnerability: 10%
   Initial Status: normal
-  Item Dropped: 98
+  Item Dropped: 26
   Item Rarity: 2/128
-  Level: 13
-  Luck: 64
-  Max Call: 3
+  Level: 62
+  Luck: 32
+  Max Call: 0
   Mirror Success Rate: 50
   Miss Rate: 1
-  Money: 33
-  Movement pattern: 21
-  Music: 102
-  Name: Insane Cultist
-  Offense: 19
-  Overworld Sprite: 101
-  PP: 0
+  Money: 3049
+  Movement pattern: 29
+  Music: 104
+  Name: Magikraken
+  Offense: 130
+  Overworld Sprite: 482
+  PP: 176
   Paralysis vulnerability: 50%
-  Row: 1
+  Row: 0
   Run Flag: 'true'
-  Speed: 8
+  Speed: 32
   Type: normal
-  Unknown: 0
+  Unknown: 3
 171:
   '"The" Flag': 'false'
   Action 1: 55
@@ -8552,7 +8552,7 @@
   Speed: 17
   Type: normal
   Unknown: 3
-182:	# Sea of Eden Krakens
+182:
   '"The" Flag': 'false'
   Action 1: 27
   Action 1 Argument: 18
@@ -8562,11 +8562,58 @@
   Action 3 Argument: 0
   Action 4: 245
   Action 4 Argument: 49
-  Action Order: 5	# 5 = Use EnemyAI script
+  Action Order: 3
   Boss Flag: 'true'
   Death Sound: normal
   Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 180	#166
+  Defense: 166
+  Encounter Text Pointer: battle_text.l_0xef7866
+  Experience points: 79267
+  Final Action: 0
+  Final Action Argument: 0
+  Fire vulnerability: 40%
+  Flash vulnerability: 70%
+  Freeze vulnerability: 40%
+  Gender: neutral
+  Guts: 1
+  HP: 1097
+  Hypnosis/Brainshock vulnerability: 10%
+  Initial Status: normal
+  Item Dropped: 0
+  Item Rarity: 1/128
+  Level: 54
+  Luck: 32
+  Max Call: 0
+  Mirror Success Rate: 50
+  Miss Rate: 0
+  Money: 3049
+  Movement pattern: 29
+  Music: 104
+  Name: Kraken
+  Offense: 105
+  Overworld Sprite: 295
+  PP: 176
+  Paralysis vulnerability: 50%
+  Row: 0
+  Run Flag: 'true'
+  Speed: 21
+  Type: normal
+  Unknown: 3
+183:	# Sea of Eden Kraken
+  '"The" Flag': 'false'
+  Action 1: 27
+  Action 1 Argument: 18
+  Action 2: 58
+  Action 2 Argument: 49
+  Action 3: 117
+  Action 3 Argument: 0
+  Action 4: 245
+  Action 4 Argument: 170
+  Action Order: 3
+  Boss Flag: 'false'
+  Death Sound: normal
+  Death Text Pointer: battle_text.l_0xef6d71
+  Defense: 180
   Encounter Text Pointer: battle_text.l_0xef7866
   Experience points: 79267
   Final Action: 0
@@ -8581,69 +8628,22 @@
   Initial Status: normal
   Item Dropped: 26
   Item Rarity: 2/128
-  Level: 54
+  Level: 62
   Luck: 32
   Max Call: 0
   Mirror Success Rate: 50
-  Miss Rate: 0
+  Miss Rate: 1
   Money: 3049
   Movement pattern: 29
   Music: 104
   Name: Magikraken
-  Offense: 130	#105
+  Offense: 130
   Overworld Sprite: 482
   PP: 176
   Paralysis vulnerability: 50%
   Row: 0
   Run Flag: 'true'
-  Speed: 32	#21
-  Type: normal
-  Unknown: 3
-183:
-  '"The" Flag': 'true'
-  Action 1: 0
-  Action 1 Argument: 0
-  Action 2: 0
-  Action 2 Argument: 0
-  Action 3: 0
-  Action 3 Argument: 0
-  Action 4: 0
-  Action 4 Argument: 0
-  Action Order: 0
-  Boss Flag: 'false'
-  Death Sound: normal
-  Death Text Pointer: battle_text.l_0xef6d71
-  Defense: 195
-  Encounter Text Pointer: battle_text.l_0xef78c7
-  Experience points: 50308
-  Final Action: 0
-  Final Action Argument: 0
-  Fire vulnerability: 40%
-  Flash vulnerability: 70%
-  Freeze vulnerability: 70%
-  Gender: neutral
-  Guts: 1
-  HP: 900
-  Hypnosis/Brainshock vulnerability: 10%
-  Initial Status: normal
-  Item Dropped: 26
-  Item Rarity: 2/128
-  Level: 70
-  Luck: 32
-  Max Call: 0
-  Mirror Success Rate: 50
-  Miss Rate: 1
-  Money: 960
-  Movement pattern: 29
-  Music: 104
-  Name: Bionic Kraken
-  Offense: 155
-  Overworld Sprite: 338
-  PP: 60
-  Paralysis vulnerability: 50%
-  Row: 1
-  Run Flag: 'true'
-  Speed: 42
+  Speed: 32
   Type: normal
   Unknown: 3
 184:
@@ -9312,7 +9312,7 @@
   Action 2 Argument: 0
   Action 3: 0
   Action 3 Argument: 0
-  Action 4: 0 
+  Action 4: 0
   Action 4 Argument: 0
   Action Order: 1
   Boss Flag: 'false'

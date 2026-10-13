@@ -86,6 +86,11 @@ ROM[0xC3D09A] = /* C3D09A */	m_set_var7(3152)	// 3144
 // The Sky walker's shadow tends to move a bit too fast with the changes above, slow it down.
 ROM[0xC3D090] = /* C3D090 */	m_set_speed(244)	// Slow down the shadow when moving towards the ending point
 //------------------------------------
+// Originally planned to have Cutscene Letterbox during the Runaway shows.
+// However, this causes a slight graphical glitch with the spotlights, so we're ditching it.
+//ROM[0xC31DA5] = /* C31DA5 */	m_set_var7(8528)	//  Modify where the camera moves to in the first Runaway show
+//ROM[0xC31DB8] = /* C31DB8 */	m_set_ypos(8528)	//  Modify where the camera returns from in the first Runaway show
+//------------------------------------
 // Script 670 modifications
 ROM[0xC37CB2] = {
 	m_set_var6(1256)	// Change the Teleport Monkey's X-axis standing position after his teleport (1264)
@@ -233,8 +238,6 @@ Camera_Pan_Up_32px: {	// 906
 		m_walk_pixels(32)
 		m_destroy_self	// Script_35
 }
-ROM[0xC34575] = /* C34575 */	m_set_ypos(872)
-ROM[0xC345A1] = /* C345A1 */	m_set_ypos(856)
 //------------------------------------
 
 //------------------------------------

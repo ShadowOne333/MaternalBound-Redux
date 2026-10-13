@@ -387,7 +387,7 @@ chaostheaterticket:
 	window_open(1)
 	sound(SND_CHICKEN2)	// 118
 	"@Here you go." pause(15)
-	"  Hurry!" pause(20)
+	"  Hurry!" pause(20) linebreak
 	"  You're just in time to see the Runaway Five show!" promptw
 	call(data_33.l_0xc79211)
 	set(FLG_TWSN_FIELD_TONZ_DISAPPEAR)	// 549
@@ -402,8 +402,8 @@ l_0xc81baf:
 	"@How do you do?" end
 
 l_0xc81bb8:
-	"@Oh, here you are!" pause(20)
-	"  Hurry up, you're just in time to see the Runaway Brothers show." promptw
+	"@Oh, here you are!" next
+	"@Hurry up, you're just in time to see the Runaway Brothers show." promptw
 	eob
 
 l_0xc81be2:
@@ -412,7 +412,8 @@ l_0xc81be2:
 	"@The ticket counter at the department store was even sold out." end
 
 l_0xc81c2f:
-	"@*Sniff*| I suppose I'll never see the Runaway Brothers' show again." end
+	"@*Sniff*" next
+	"@I suppose I'll never see the Runaway Brothers' show again." end
 
 l_0xc81c56:
 	"@Didn't I see you at the Topollo Theater in Fourside?" next

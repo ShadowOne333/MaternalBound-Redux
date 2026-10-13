@@ -1,62 +1,219 @@
 // EarthBound widescreen hack by Raid
-// Credit to GiovannyGB for the original Widescreen Backgrounds hack
-//------------------------------------
-// This was made by replacing bytes directly in Mesen's Memory editor (CPU Memory).
+// Credit to GiovannyGB for the original Widescreen Backgrounds hack.
+// October 13, 2026: bounded sprite / NPC / enemy fixes by Crono's Companion project.
+// For EarthBound USA / MaternalBound Redux, bsnes-hd, 64 added pixels per side.
+// Replace Project/ccscript/redux/eb_widescreen.ccs; do not include both versions.
+// This is ROM-side widescreen support, not Companion's native C renderer.
 import "../essential/asm65816.ccs"
-import "../essential/cc_asmcall.ccs"
 import "../essential/jsl_rts.ccs"
-//------------------------------------
-// Viewport & Camera Hooks (Bank $C0)
-//------------------------------------
-// Expands viewport from 34 to 49 tiles)
-ROM[0xC00F06] = CMP_i	(49)	// 0x0031, Originally MAX_RESOLUTION__WIDTH = 0x22 / 34
-// Right scroll trigger
-ROM[0xC015E4] = ADC_i	(40)	// 0x0028, Originally 0x20 / 32
-// Jumps to left origin routine at $C0FF58
-ROM[0xC00E43] = JMP	(Left_Camera_Origin)	// Originally DEC : STA_d (0x20)
-// Jumps to left scroll routine at $C0FF70
-ROM[0xC0163A] = JMP	(Left_Scroll_Trigger) NOP	// Originally DEC : JSR (0x0FCB)
-//------------------------------------
-// Sprite Culling Hook (Bank $C0)
-//------------------------------------
-// Jumps to sprite check at $C0FF80; leaves $C08D45 untouched so native on-screen sprites render normally
-ROM[0xC08D47] = JMP	(Sprite_Bounds_Handler) NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
-//ROM[0xC08D47] = LDA_8	(0xFF) NOP NOP	// Originally CMP_8 (0xFF) : BNE @UNKNOWN5
-//------------------------------------
-// Custom Subroutines (Bank $C0 padding)
-//------------------------------------
-define Left_Camera_Origin	= 0xC0FF58	//0xC0FF58, in original WS hack = 0xC07D20
-define Data_Table		= 0xC0FF6D
-define Left_Scroll_Trigger	= 0xC0FF70	//0xC0FF70, in original WS hack = 0xC07D30
-define Sprite_Bounds_Handler	= 0xC0FF80	//0xC0FF80, in original WS hack = 0xC07D40
 
-// Left camera origin (8x DEC A, STA $20, JMP $0E46)
-ROM[Left_Camera_Origin] = {	// 0xC0FF58, 13 bytes
-	DEC DEC DEC DEC
-	DEC DEC DEC DEC
-	STA_d	(0x20)
-	JMP	(0x0E46)
+//------------------------------------
+// Map tile upload and scrolling (same geometry as Raid's supplied file)
+//------------------------------------
+ROM[0xC00F06] = CMP_i (49)
+ROM[0xC015E4] = ADC_i (40)
+ROM[0xC00E43] = JMP (Left_Camera_Origin)
+ROM[0xC0163A] = { JMP (Left_Scroll_Trigger) NOP }
+ROM[0xC08D47] = { JMP (Sprite_Bounds_Handler) NOP }
+
+// Current upstream Redux reserves these slots in used_ranges.yml.
+// Keep (0x00FF50, 0x00FF8F) reserved when compiling; older projects instead
+// reserved C07D20..C07D4F and need their used_ranges.yml updated for this file.
+define Left_Camera_Origin = 0xC0FF58
+define Left_Scroll_Trigger = 0xC0FF70
+define Sprite_Bounds_Handler = 0xC0FF80
+
+ROM[Left_Camera_Origin] = {
+    DEC DEC DEC DEC DEC DEC DEC DEC
+    STA_d (0x20)
+    JMP (0x0E46)
+}
+ROM[Left_Scroll_Trigger] = {
+    DEC DEC DEC DEC DEC DEC DEC DEC
+    JSR (0x0FCB)
+    JMP (0x163E)
 }
 
-// Data table values
-ROM[0xC0FF6D] = "[83 98 9F]"
-
-// Left scroll trigger (8x DEC A, JSR $0FCB, JMP $163E)
-ROM[Left_Scroll_Trigger] = {	// 0xC0FF70, 13 bytes
-	DEC DEC DEC DEC
-	DEC DEC DEC DEC
-	JSR	(0x0FCB)
-	JMP	(0x163E)
+// At entry M=8, A contains the high byte of X, B the low byte.
+// The original BEQ at C08D45 still accepts ordinary X=0..255.
+// Accept only -96..-1 or 256..351 here, retaining a 32px edge margin.
+// Accepting every $01/$FF high byte can wrap distant objects across the screen.
+// Restore M=8 and a set carry for the original ROL / OAM ninth-X-bit path.
+// No extra RAM; X/Y/DBR/D and the spritemap's low X byte are preserved.
+// Keep the fixed stub four bytes long; Redux has data beyond its old 16-byte slot.
+ROM[Sprite_Bounds_Handler] = JML (WS_Sprite_Bounds)
+WS_Sprite_Bounds: {
+    REP (0x20)
+    XBA
+    CMP_i (352)
+    BCC (11)
+    CMP_i (0xFFA0)
+    BCS (6)
+    SEP (0x20)
+    JML (0xC08D21)
+    XBA
+    SEP (0x20)
+    LDA_8 (0xFF)
+    JML (0xC08D4B)
 }
 
-// Checks if high byte is $01 or $FF so actors aren't culled past the 8:7 frame, then returns to $8D4B
-ROM[Sprite_Bounds_Handler] = {	// 0xC0FF80, 16 bytes
-	CMP_8	(1)
-	BEQ	(7)
-	CMP_8	(0xFF)
-	BEQ	(5)
-	JMP	(0x8D21)
-	LDA_8	(0xFF)
-	JMP	(0x8D4B)
-}
 //------------------------------------
+// Entity draw / despawn bounds: original screen plus 64px on each side
+//------------------------------------
+// BUILD_ENTITY_DRAW_LIST: retain its original sorting and Y checks.
+ROM[0xC0DB49] = CMP_i (384)
+ROM[0xC0DB4E] = CMP_i (0xFF80)
+// IS_ENTITY_NEAR_LEADER: original leader-relative X origin remains unchanged.
+// Do not move the party/camera or change either Y bound or teleport behavior.
+ROM[0xC0C6F3] = CMP_i (0xFF80)
+ROM[0xC0C6F8] = CMP_i (384)
+
+//------------------------------------
+// NPC spawning: wider scans AND wider placement filters
+//------------------------------------
+// SPAWN_NPCS_IN_ROW: scan from original left-10 through left+43 tiles.
+// The helper shifts its input by 8 tiles; 52 retains the original row margin.
+// Original five bytes at C02566: STA $04 : LDA #$8000.
+ROM[0xC02566] = { JSL (WS_Npc_Row_Origin) NOP }
+ROM[0xC025C0] = ADC_i (52)
+
+// REFRESH_MAP_AT_POSITION: NPC column loads need to reach the new edges too.
+ROM[0xC015F1] = ADC_i (42)
+// Original six bytes: LDA $4374 : DEC : DEC : DEC.
+ROM[0xC01641] = { JSL (WS_Npc_Left_Column) NOP NOP }
+
+// SPAWN_NPCS_AT_SECTOR: preserve flags/tileset/duplicate/appearance checks.
+// Both normal and debug pop-in checks recognize the entire -64..319 view.
+ROM[0xC02367] = { JSL (WS_Npc_Visible_X) NOP }
+ROM[0xC02380] = { JSL (WS_Npc_Visible_X) NOP }
+// Preserve its signed CLC/SBC branch convention: accepted X is -128..383
+// (was -64..319). Both Y comparisons are unchanged.
+ROM[0xC02395] = LDA_i (0xFF80)
+ROM[0xC023AB] = LDA_i (384)
+
+//------------------------------------
+// Enemy spawning: cover both sides on initial load and vertical movement
+//------------------------------------
+// SPAWN_HORIZONTAL: shift the scan's X input left by one 64px spawn cell.
+// Keep Y, enabled flags, encounter rules, spawn rates and group merging intact.
+// Original five bytes: STX $18 : TAY : STY $16.
+ROM[0xC02A75] = { JSL (WS_Enemy_Row_Origin) NOP }
+ROM[0xC02B45] = ADC_i (7)
+// REFRESH_MAP_AT_POSITION: original enemy margins, moved to the wide edges.
+ROM[0xC01603] = ADC_i (48)
+ROM[0xC01656] = SBC_i (16)
+
+//------------------------------------
+// Blank-column scrolling used by scripted transitions
+//------------------------------------
+// SCROLL_MAP_TO_POSITION must clear the same columns the wide upload fills.
+ROM[0xC01792] = ADC_i (40)
+ROM[0xC017A3] = JSL (WS_Clear_Left_Column)
+
+//------------------------------------
+// New helpers: CCScript allocates these with the rest of Redux's code.
+// All hooks are JSL, so these do not need to fit inside bank C0 padding.
+//------------------------------------
+WS_Npc_Row_Origin: {
+    SEC
+    SBC_i (8)
+    STA_d (0x04)
+    LDA_i (0x8000)
+    RTL
+}
+WS_Npc_Left_Column: {
+    LDA_a (0x4374)
+    SEC
+    SBC_i (11)
+    RTL
+}
+WS_Npc_Visible_X: {
+    LDA_d (0x1A)
+    CLC
+    ADC_i (64)
+    CMP_i (384)
+    RTL
+}
+WS_Enemy_Row_Origin: {
+    STX_d (0x18)
+    SEC
+    SBC_i (8)
+    TAY
+    STY_d (0x16)
+    RTL
+}
+WS_Clear_Left_Column: {
+    SEC
+    SBC_i (8)
+    JSL_RTS_C0 (0xC0122A)
+    RTL
+}
+
+//------------------------------------
+// Battles: stable extended backgrounds, clipped UI/PSI.
+//------------------------------------
+// bsnes-hd's Auto policy toggles a stationary background narrow/wide when
+// scroll passes through zero. OR $100 keeps a 256px periodic background
+// wide without changing its original phase, including horizontal HDMA.
+ROM[0xC2CD15] = { JSL (WS_Background_BG1) NOP NOP }
+ROM[0xC2CD35] = { JSL (WS_Background_BG2) NOP NOP }
+ROM[0xC2CD55] = { JSL (WS_Background_BG3) NOP NOP }
+ROM[0xC2CD75] = { JSL (WS_Background_BG4) NOP NOP }
+ROM[0xC0AED0] = { JSL (WS_Hdma_Horizontal) NOP }
+ROM[0xC0AEF5] = { JSL (WS_Hdma_Horizontal) NOP }
+ROM[0xC0AF10] = { JSL (WS_Hdma_Horizontal_Pair) NOP }
+
+// Battle HUD and PSI reuse different layers in 2bpp/4bpp modes. Window 1
+// clips just those two layers; background and sprites remain extended.
+// The original target offsets, 256px PSI artwork and shake are preserved.
+// No new VRAM buffers: Giygas and the enemy OBJ bank keep all their space.
+// WH0=1, WH1=254 also clip the two outermost classic PSI columns. bsnes-hd
+// explicitly stretches 0/255 bounds into its side areas, so those values
+// cannot clip repeated artwork. HUD content lies inside these margins.
+// Requires the accompanying .bso's i0 (honor window effects).
+ROM[0xC2DCF9] = JSL (WS_Update_Psi_And_Clip)
+
+// Remove our window before ordinary cleanup and the special prayer scenes.
+// Reproduce every overwritten instruction; source signatures are checked.
+// Reserve (0x02FFDC, 0x02FFE3) in used_ranges.yml. The three-byte JSR
+// replaces only the three-byte STZ; following upstream/allocated calls
+// remain untouched, including m3sprites.giygas_fix_3.
+ROM[0xC26150] = JSR (0xFFDC)
+ROM[0xC2C39E] = JSR (0xFFDC)
+ROM[0xC2C446] = JSR (0xFFDC)
+ROM[0xC2C758] = JSR (0xFFDC)
+ROM[0xC2FFDC] = { STZ_a (0x9643) JSL (WS_Clear_Battle_Clip) RTS }
+
+WS_Background_BG1: { ORA_i (0x0100) STA_a (0x0031) LDA_y (0) RTL }
+WS_Background_BG2: { ORA_i (0x0100) STA_a (0x0035) LDA_y (0) RTL }
+WS_Background_BG3: { ORA_i (0x0100) STA_a (0x0039) LDA_y (0) RTL }
+WS_Background_BG4: { ORA_i (0x0100) STA_a (0x003D) LDA_y (0) RTL }
+WS_Hdma_Horizontal: { ORA_i (0x0100) STA_y (0x3C46) LDA_d (2) RTL }
+WS_Hdma_Horizontal_Pair: { ORA_i (0x0100) STA_y (0x3C48) LDA_d (2) RTL }
+WS_Update_Psi_And_Clip: {
+    JSL (0xC2E6B6)
+    JSL (WS_Battle_Clip)
+    RTL
+}
+WS_Battle_Clip: {
+    PHP REP (0x30) PHA PHX PHY
+    LDA_a (0x9643) BNE (4) JML (WS_Clip_Done)
+    LDA_a (0xADD5) AND_i (0x00FF) CMP_i (2) BNE (11)
+    LDA_i (0x33) LDX_i (3) LDY_i (0) BRA (9)
+    LDA_i (3) LDX_i (5) LDY_i (3)
+    SEP (0x20)
+    STA_al (0x002123)
+    TYA STA_al (0x002124)
+    TXA STA_al (0x00212E) STA_al (0x00212F)
+    LDA_8 (1) STA_al (0x002126)
+    LDA_8 (254) STA_al (0x002127)
+    LDA_8 (0) STA_al (0x00212A)
+    REP (0x20)
+    JML (WS_Clip_Done)
+}
+WS_Clip_Done: { PLY PLX PLA PLP RTL }
+WS_Clear_Battle_Clip: {
+    PHP REP (0x30) PHA PHX PHY
+    LDX_i (0) TXA JSL (0xC0B047)
+    PLY PLX PLA PLP RTL
+}

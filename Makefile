@@ -60,19 +60,19 @@ compile_sound_driver:
 #----------------------------------------------------------------
 # We'll now copy and expand our Base ROM to 6MB
 expand_base_rom:
-	@echo "Expanding Base ROM to 6MB..."
-	@cp $(BASE) $(BASE6MB)
-	@coilsnake-cli expand $(BASE6MB) true
-	@echo
+#	@echo "Expanding Base ROM to 6MB..."
+#	@cp $(BASE) $(BASE6MB)
+#	@coilsnake-cli expand $(BASE6MB) true
+#	@echo
 #----------------------------------------------------------------
 # Compile the full CoilSnake Project
 compile_project:
 	@echo "Starting compilation process..."; echo
-#@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"	
+#	@coilsnake-cli compile Project/ $(BASE) "$(PATCHED_ROM_NAME)"	
 # Changed the CCScript offset so we can compile the Expanded PSI animation base ROM
 # Also, changed the compilation so it now uses the 6MB expanded ROM instead of the 4MB one
-#@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE) "$(PATCHED_ROM_NAME)"
-	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE6MB) "$(PATCHED_ROM_NAME)"
+	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE) "$(PATCHED_ROM_NAME)"
+#	@coilsnake-cli compile --ccscript-offset=F31000 Project/ $(BASE6MB) "$(PATCHED_ROM_NAME)"
 	@echo
 #----------------------------------------------------------------
 # Generate the Debug symbols for the project (Requires Python 3)

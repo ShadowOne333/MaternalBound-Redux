@@ -84,8 +84,10 @@ l_0xc9c19b:
 	"@but the number of people you save through that bravery is immense." next
 	"@I feel very fortunate..." next
 	"@to be present at the beginning of this monumental undertaking..." promptw
-	music(91)
 	window_closeall
+
+	cc_close_letterbox	// Close letterbox here so the warp effect is fully visible
+	music(91)
 
 	set(FLG_STEP_PAST)	// 372
 	pause(1)
@@ -594,8 +596,12 @@ l_0xc9c85d:	// Ending Porky's letter
 
 	pause(1)
 	set(FLG_TLPT_ONET)	// 209
+
 	sprite2_spawn(106,775,1)	// 0x006A, 0x0307, 0x01
 	wait_movement
+
+	cc_close_letterbox
+
 	hide_party	// 0xFF, 0x06
 	warp(81)	// 0x51
 	sprite2_spawn(106,776,1)	// 0x006A, 0x0308, 0x01
