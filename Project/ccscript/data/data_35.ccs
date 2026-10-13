@@ -114,7 +114,7 @@ l_0xc7c39b:
 	fade_map_palette(26,2,60)	// Tileset 0x1A, palette 02, speed 0x3C
 
 	party_direction(1)
-	// Spawn a duplicate Ness sprite, change its facing and spawn camera entity
+	// Move the camera upwards 64px, change leader facing and spawn camera entity
 	sprite2_spawn(316,900,1)	// Spawn camera panning entity
 	sprite2_spawn(440,355,1)	// 0x006A, 0x0163, 0x01
 	pause(1)

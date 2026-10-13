@@ -27,6 +27,7 @@ l_0xc7547d:
 	title(1, Mom)
 	goto_if_flag(FLG_MYHOME_PHONE_RING, l_0xc755ad)	// 0x02F1, 753
 	goto_if_flag(FLG_ONET_MYHOME_END_MAMA, l_0xc755c4)	// 0x0283, 643
+	cc_open_letterbox
 	"@Wow,// you've become such a strong,// young man." next
 	"@I'd like to hear all of your stories," next
 	"@but I don't want to annoy you as soon as you walk through the door." next
@@ -43,10 +44,13 @@ l_0xc7552d:
 	window_closeall
 	set(FLG_ONET_MYHOME_END_MAMA)	// 643
 	isset(FLG_MAKYO_TRADER_DEBT)	// 654
-	goto_if_false(data_55.l_0xc9992f)
+	goto_if_false(_end_interaction)
 	pause(60)
 	npc_do_mc(21,41)	// 0x15, 0x29
 	set(FLG_MYHOME_PHONE_RING)	// 753
+
+_end_interaction:
+	cc_close_letterbox
 	eob
 
 l_0xc755ad:
@@ -54,13 +58,16 @@ l_0xc755ad:
 	"@{name(1)},| could you get the phone?" end
 
 l_0xc755c4:
+	cc_open_letterbox
 	title(1, Mom)
 	"@Did you finish doing everything that you wanted to?" next
 	two_choice_menu("Yes", l_0xc7562f, "No", l_0xc755fb)
 
 l_0xc755fb:
 	"@You'd better do everything,| because once you start looking at the album," next
-	"@you can't stop!" end
+	"@you can't stop!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc7562f:
 	"@Okay!" pause(20)
@@ -68,7 +75,7 @@ l_0xc7562f:
 	"@You did so well!" promptw
 	window_closeall
 	call(data_24.l_0xc69082)
-	call(data_36.l_0xc7dd6b)
+	call(data_36.l_0xc7dd6b)	// Fade and stop music
 	music(94)
 	party_direction(5)
 	goto_if_flag(FLG_TWSN_POLA_APPEAR, l_0xc75695)	// 638, 0x027E
@@ -76,6 +83,7 @@ l_0xc7562f:
 	sprite2_spawn(2,781,1)	// 0002, 030D, 1
 	pause(1)
 	sprite2_do_mc(2,10)	// 0002, 000A
+	cc_close_letterbox
 
 l_0xc75695:	// Ending trigger
 	hide_char(1)	// 1, 6

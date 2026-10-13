@@ -137,6 +137,8 @@ l_0xc7fba1:
 	eob
 
 l_0xc7fbec:
+	cc_open_letterbox
+
 	hotspot_off(2)	// 0x02
 	call(l_0xc7fc3e)
 
@@ -188,6 +190,7 @@ l_0xc7fc3e:
 	"@...Bye." wait
 	window_closeall
 	hide_char_with_style(2,6)	// 0x02, 0x06
+	cc_close_letterbox
 	eob
 
 l_0xc7fd06:
@@ -201,9 +204,12 @@ l_0xc7fd06:
 	party_remove(2)	// Remove Paula
 	set(FLG_TWSN_POLA_APPEAR)	// 638
 	party_unfreeze	// 0xFF
+	cc_close_letterbox
 	eob
 
 l_0xc7fd22:
+	cc_open_letterbox
+
 	get_dir_from_char(1,TO_CHAR,2)	// 0x01, 0x01, 0x0002
 	char_direction(1,0)	// 0x01, 0x00
 	get_dir_from_char(2,TO_CHAR,1)	// 0x02, 0x01, 0x0001
@@ -221,6 +227,7 @@ l_0xc7fdd6:
 	"@Well...  Okay." pause(20) linebreak
 	"  I guess I would like to be with you a little longer." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc7fd8e:
@@ -229,6 +236,7 @@ l_0xc7fd8e:
 	"@You remember where it is, right?" next
 	"@Let's go..." wait
 	window_closeall
+	cc_close_letterbox
 	eob
 
 l_0xc7fe02:

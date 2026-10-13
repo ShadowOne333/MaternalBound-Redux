@@ -222,6 +222,19 @@ Camera_Return_Jeff: {	// 902
 /* C31E42 */	m_walk_to_dest
 		m_destroy_self
 }
+Camera_Pan_Up_32px: {	// 906
+/* C334FF */	m_warp_to_pc(-1)
+/* C33504 */	m_onmove(0x9FC8)
+/* C33507 */	m_set_anim(-1)
+/* C33509 */	m_ontick(0xC48C2B)
+/* C33515 */	m_set_speed(150)
+/* C3351B */	m_set_var5(1)
+		m_start_walk(0)
+		m_walk_pixels(32)
+		m_destroy_self	// Script_35
+}
+ROM[0xC34575] = /* C34575 */	m_set_ypos(872)
+ROM[0xC345A1] = /* C345A1 */	m_set_ypos(856)
 //------------------------------------
 
 //------------------------------------

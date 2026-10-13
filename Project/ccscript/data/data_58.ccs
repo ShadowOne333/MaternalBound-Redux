@@ -111,9 +111,11 @@ l_0xc9c19b:
 	eob
 
 l_0xc9c262:
+	cc_open_letterbox
 	title(1, Apple)
 	"@You must warp to the past and fight, but..." wait
 	set(FLG_DKFD_END_GET_READY)	// 285
+	cc_close_letterbox
 	eob
 
 l_0xc9c27e:
@@ -124,7 +126,6 @@ l_0xc9c27e:
 	eob
 
 l_0xc9c293:	// Giygas fight
-	cc_open_letterbox
 	music_effect(3)	// 0x03
 	pause(180)
 	music(72)
@@ -153,6 +154,7 @@ l_0xc9c293:	// Giygas fight
 	sprite2_spawn(458,549,5)	// 0x01CA, 0x0225, 0x05
 	wait_movement
 
+	cc_open_letterbox
 	pause(100)
 	window_open(1)
 	call(data_06.l_0xc57e1c)	// Porky speech
@@ -161,8 +163,9 @@ l_0xc9c293:	// Giygas fight
 	pause(120)
 	// Start Giygas fight
 	call(data_23.l_0xc68577)
-	goto_if_true(data_23.l_0xc683de)
+	goto_if_true(data_23.l_0xc683de)	// If we lose
 
+	// Winning against Giygas
 	cc_instant_letterbox
 	set(FLG_WIN_GIEGU)	// 73
 	unset(FLG_ONET_DOOR_CLOSE)	// 632
@@ -443,10 +446,12 @@ l_0xc9c293:	// Giygas fight
 	party_unfreeze	// 0xFF
 	OSS_on	// event(5)
 	unset(FLG_PHOTO_RAMMA)	// 498
-	cc_close_letterbox
 	isset(FLG_GOT_CAPEESTATE)	// 99
-	goto_if_false(data_55.l_0xc9992f)
+	goto_if_false(_skip_onett_flag)	// eob
 	set(FLG_ONET_ESTATE_DOOR_OPEN)	// 746
+
+_skip_onett_flag:
+	cc_close_letterbox
 	eob
 
 l_0xc9c65b:
