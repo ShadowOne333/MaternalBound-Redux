@@ -3554,7 +3554,8 @@
   Background 1: 16
   Background 2: 0
   Enemies:
-  - {Amount: 1, Enemy: 1}	#Insane Cultist
+#  - {Amount: 1, Enemy: 1}	#Insane Cultist
+  - {Amount: 1, Enemy: 79}	#Crooked Cop
   Fear event flag: 0
   Fear mode: run away if flag is unset
   Letterbox Size: 2
