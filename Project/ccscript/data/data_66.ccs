@@ -102,7 +102,6 @@ l_0xefa2b5:
 l_0xefa2c9:
 	goto_if_flag(FLG_OPEN_TABIGOYA, l_0xefa2d5)	// 0x6C, 108
 	call(data_27.l_0xc6fb20)
-	goto(l_0xefa2d5)
 
 l_0xefa2d5:
 	eob
