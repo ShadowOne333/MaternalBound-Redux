@@ -279,6 +279,7 @@ l_0xc9fd2e:	// Using the Bicycle
 	goto_if_true(l_0xc9fd60)
 
 	"@{user} rode a bicycle." wait
+	//cc_asmcall(MakeTrailMembersIntangible, RET_NONE)
 	bicycle
 	eob
 

@@ -66,6 +66,7 @@ define PENDING_INTERACTIONS	= 0x5D9A
 define MUSHROOMIZED_WALKING_FLAG	= 0x5DA0	// LDA_a : BEQ (NOT_MUSHROOMIZED)
 define GAME_STATE_WALKING_STYLE	= 0x9883
 define PARTY_MEMBER_INDEX	= 0x988B	// Leader/order array, same table as game_state::unknown96
+define ENTITY_HITBOXES_ENABLED	= 0x332A
 
 // Sprite definitions
 define NESS_SPRITE		= 1
@@ -162,7 +163,48 @@ Post_Status_Change_Bike_Refresh: {
 _Skip:
 	JML	(0xC3EE53)
 }
+//------------------------------------------------------------------
+//		Change trailing members tangibility
+//------------------------------------------------------------------
+// When enabling the bike, removing tangibility for all trailing members
+MakeTrailMembersIntangible: {
+	/*
+	for (i=25, i!=31, i++) {
+		entityHitboxesEnabled[i] = 0;
+	}
+	*/
+	LDY_i (25)
+_loop:
+	TYA
+	ASL
+	TAX
+	STZ_x (ENTITY_HITBOXES_ENABLED)
+	INY
+	CPY_i (31)	// With this being the last entity slot +1
+	BNE_a (_loop)
 
+	RTL
+}
+// When dismounting the bike, re-enable tangibility for all trailing memmbers
+MakeTrailMembersTangible: {
+	/*
+	for (i=25, i!=31, i++) {
+		entityHitboxesEnabled[i] = 1;
+	}
+	*/
+	LDY_i (25)
+_loop:
+	TYA
+	ASL
+	TAX
+	LDA_i (1)
+	STA_x (ENTITY_HITBOXES_ENABLED)
+	INY
+	CPY_i (31)	// With this being the last entity slot +1
+	BNE_a (_loop)
+
+	RTL
+}
 //------------------------------------
 // ENTITY_SCRIPT_VAR1 for newly created entity
 // Stored into ENTITY_SCRIPT_VAR1_TABLE[slot*2]
@@ -173,7 +215,6 @@ _Skip:
 
 // unknown96[0] at 0x988B = 1-based leader char ID: Ness=1, Paula=2, Jeff=3, Poo=4.
 // Entity slots (CHARACTER_INITIAL_ENTITY_DATA): Ness=24, Paula=25, Jeff=26, Poo=27.
-
 //------------------------------------------------------------------
 //	GET_ON_BIKE routine modifications
 //------------------------------------------------------------------
@@ -271,8 +312,9 @@ _Return:
 
 	// Disable collision for trailing party members
 	LDA_i	(0x8000)
-	STA_x	(ENTITY_COLLIDED_OBJECTS)		// Disables collision for whichever entity X points at
+	STA_x	(ENTITY_COLLIDED_OBJECTS)	// Disables collision for whichever entity X points at
 
+	JSL	(MakeTrailMembersIntangible)	// Make all trailing members intangible
 	JML	(0xC03C95)
 }
 
@@ -422,6 +464,7 @@ _Poo_Entity:
 
 _Return:
 	JSL	(DESTROY_ENTITY)
+	JSL	(MakeTrailMembersTangible)	// Make all trailing members tangible
 	JML	(0xC03D2C)	// Continue to the rest of the original code
 }
 
