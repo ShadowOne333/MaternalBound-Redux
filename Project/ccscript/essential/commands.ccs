@@ -4,34 +4,31 @@ import "../essential/cc_asmcall.ccs"
 import "../essential/stdext.ccs"
 import "../redux/run_stamina_mechanic.ccs"
 
-command false_goto(target) "[1B 02 {long target}]"
-
-command true_goto(target) "[1B 03 {long target}]"
-
-command fullsave { load_registers_shared set_respawn_point(0) save }
-
-command input_num (n) "[1F 52 {byte n}]"
-
-//n is the number of digits
-
-command boolean_pointer(addr) "[1B 03 {mem24(addr)}]" // Boolean-True Pointer
-
-command delete_tpt(entry, effect) "[1F 1E {short entry} {byte effect}]" // delete sprite loaded on-screen
+command fullsave {
+	copy_active
+	set_respawn_point(0)
+	save
+}
 
 command inst_pack_loc (target) "[{byte[2] target} {byte[0] target} {byte[1] target}]"
 
-command fade_1 "[1F 15 6A 00 FE 02 01]" // Simple fade out. (106, 766)
+command fade_1	sprite2_spawn(106,766,1)	// Simple fade out. (106, 766)
 
-command fade_2 "[1F 15 6A 00 79 02 01][1F 61][10 78][1F 1F 6A 00 06]" // Fade out, but stays black until a warp is used. (106, 633)
+command fade_2 {	// Fade out, but stays black until a warp is used. (106, 633)
+	sprite2_spawn(106,633,1)
+	wait_movement
+	pause(120)
+	sprite2_delete(106,6)
+}
 
-command fade_in "[1F EA 6A 00][1F 61]" // To be used at some point after fade_1 if you want the screen to fade back in.
+command fade_in	sprite2_unfreeze(106) wait_movement	// To be used at some point after fade_1 if you want the screen to fade back in.
 
-command text_pos_1s(y)	text_pos(115,y)
-command text_pos_10s(y)	text_pos(109,y)
-command text_pos_100s(y)	text_pos(103,y)
-command text_pos_1000s(y)	text_pos(97,y)
-command text_pos_10000s(y)	text_pos(91,y)
-command text_pos_100000s(y)	text_pos(85,y)
+command	text_pos_1s(y)		text_pos(115,y)
+command	text_pos_10s(y)		text_pos(109,y)
+command	text_pos_100s(y)	text_pos(103,y)
+command	text_pos_1000s(y)	text_pos(97,y)
+command	text_pos_10000s(y)	text_pos(91,y)
+command	text_pos_100000s(y)	text_pos(85,y)
 
 command two_choice_menu(opt1, label1, opt2, label2) {
 	load_str(opt1)

@@ -375,7 +375,7 @@ Subtract_Money_String:
 	get_item_receiver(0)
 	goto_if_false(Chosen_Character_Inventory_Full_String)
 	load_registers
-	arg_item_type_is_not(EQUIPPABLE)
+	arg_item_type_is_not(EQUIP_ITEM)
 	goto_if_false(Character_Cant_Equip_Bought_String)
 	call(0xc5e25b)		// Get equippable item type
 	call(0xc5e26a)		// Give and check if item can be equipped
