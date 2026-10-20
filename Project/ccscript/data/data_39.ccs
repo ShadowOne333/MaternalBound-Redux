@@ -290,7 +290,9 @@ l_0xc81a26:
 	pause(60) linebreak
 	"@Unfortunately,| you have too many items." pause(20)
 	"  Therefore, I can't give this to you."
-	goto_if_flag(FLG_TEMP_3, l_0xc819f1) end	// 0x04
+	goto_if_flag(FLG_TEMP_3, l_0xc819f1) wait	// 0x04
+	cc_close_letterbox
+	eob
 
 l_0xc81a5d:
 	get_dir_from_char(-1,TO_NPC,222) swap	// 0xFF, 2, 0xDE

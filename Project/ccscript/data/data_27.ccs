@@ -706,7 +706,8 @@ l_0xc6f881:
 	"@I appreciate it from the bottom of my heart." next
 	"@Thank you." end
 
-l_0xc6f8bf:
+l_0xc6f8bf: {
+	//"@Seems like it's just for decoration." end
 	"@Seems like you can select a nice song." next
 	"@Would you like to listen to something?" linebreak
 	two_choice_menu("Yes", song_yes, "No", song_no)
@@ -719,8 +720,7 @@ song_yes:
 	goto(song_select)
 
 song_select:
-	"    "
-	number_input(3)
+	"    " number_input(3)
 	clearline
 	store_registers
 	if ( compare_result(192) ) {
@@ -736,7 +736,7 @@ song_select:
 
 song_set:
 	"@Enjoy your song!" end
-
+}
 
 l_0xc6f8d9:
 	"@This one is locked." end
