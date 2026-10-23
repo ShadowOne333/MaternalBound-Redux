@@ -566,7 +566,6 @@ l_0xc7814b:
 	eob
 
 l_0xc78166:
-	cc_open_letterbox
 	get_party_size_times(2) swap
 	"@...This bus goes to Fourside via Threek." next
 	"@If you don't pay ${number(0)} for the fare, I can't take you there." next
@@ -578,7 +577,6 @@ l_0xc781ce:
 	"@Besides, walking is good for you..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
-	cc_close_letterbox
 	eob
 
 l_0xc78208:
@@ -602,14 +600,12 @@ l_0xc78240:
 	"@Besides,| walking is good for you..." wait
 	window_closeall
 	sprite2_delete(351,6)	// 0x015F, 06
-	cc_close_letterbox
 	eob
 
 l_0xc7827c:	// Twoson to Threek tunnel warp
 	set(FLG_TUNNEL_TWSN_THRK_BR)	// 313
 	restore_camera
 	sprite2_spawn(205,67,-1)	// 0xCD, 0x43, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(60)	// 0x3C
 	focus_camera_on_sprite2(205)	// 0xCD
 	eob
@@ -619,7 +615,6 @@ l_0xc78290:	// Threek to Twoson outside of tunnel (Twoson) warp
 	music_effect(5)
 	pause(30)
 	sprite2_spawn(205,68,-1)	// 0xCD, 0x44, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(61)	// 0x3D
 	focus_camera_on_sprite2(205)	// 0xCD
 	unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
@@ -628,7 +623,6 @@ l_0xc78290:	// Threek to Twoson outside of tunnel (Twoson) warp
 l_0xc782a9:	// Twoson to Threek outside of tunnel (Threek) warp
 	restore_camera
 	sprite2_spawn(205,70,-1)	// 0xCD, 0x46, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(63)	// 0x3F
 	focus_camera_on_sprite2(205)	// 0xCD
 	unset(FLG_TUNNEL_TWSN_THRK_BR)	// 313
@@ -637,7 +631,6 @@ l_0xc782a9:	// Twoson to Threek outside of tunnel (Threek) warp
 l_0xc782bd:
 	sprite2_spawn(351,454,1)	// 0x015F, 0x01C6, 01
 
-	cc_open_letterbox
 	window_open(1)
 	"@...This bus continues on to Fourside." next
 	"@Do you want to get off here?" linebreak

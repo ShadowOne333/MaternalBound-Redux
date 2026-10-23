@@ -124,7 +124,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	pause(90)
 	sprite2_spawn(209,162,-1)	// 0xD1, 0xA2, 0xFF
 	sprite2_spawn(230,165,-1)	// 0xE6, 0xA5, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(194)	// 0xC2
 	focus_camera_on_sprite2(230)	// 0xE6
 	party_unfreeze	// 0xFF
@@ -134,7 +134,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	// First clouds transition
 	restore_camera
 	sprite2_spawn(209,150,-1)	// 0xD1, 0x96, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -143,7 +143,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	restore_camera
 	sprite2_spawn(209,158,-1)	// 0xD1, 0x9E, 0xFF
 	sprite2_spawn(230,160,-1)	// 0xE6, 0xA0, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(192)	// 0xC0
 	focus_camera_on_sprite2(230) 	// 0xE6
 	wait_movement
@@ -151,7 +151,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	// Second clouds transition
 	restore_camera
 	sprite2_spawn(209,151,-1)	// 0xD1, 0x97, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -160,7 +160,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	restore_camera
 	sprite2_spawn(209,154,-1)	// 0xD1, 0x9A, 0xFF
 	sprite2_spawn(230,156,-1)	// 0xE6, 0x9C, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(190)	// 0xBE
 	focus_camera_on_sprite2(230)	// 0xE6
 	wait_movement
@@ -168,7 +168,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	// Third clouds transition
 	restore_camera
 	sprite2_spawn(209,152,-1)	// 0xD1, 0x98, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(187)	// 0xBB
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -176,7 +176,7 @@ l_0xc91cc1:	//  Jeff repairs the Sky Walker at Threek
 	// Arriving in Winters
 	restore_camera
 	sprite2_spawn(209,166,-1)	// 0xD1, 0xA6, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(186)	// 0xBA
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -277,15 +277,15 @@ l_0xc91ffd:	// Sky Walker flight to Summers
 
 	// Sky Walker flies out of the Winters Lab
 	sprite2_spawn(209,146,-1)	// 0xD1, 0x92, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(186)	// 0xBA
-	focus_camera_on_sprite2(209)
+	//focus_camera_on_sprite2(209)
 	wait_movement
 
 	// Clouds transition
 	restore_camera
 	sprite2_spawn(209,147,-1)	// 0xD1, 0x93, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(188)	// 0xBC
 	focus_camera_on_sprite2(209)	// 0xD1
 	wait_movement
@@ -294,9 +294,9 @@ l_0xc91ffd:	// Sky Walker flight to Summers
 	restore_camera
 	sprite2_spawn(209,170,-1)	// 0xD1, 0xAA, 0xFF
 	sprite2_spawn(230,171,-1)	// 0xE6, 0xAB, 0xFF
-	sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
+	//sprite2_spawn(381,896,0xFF)	// Prepare letterbox for after the warp
 	warp(195)	// 0xC3
-	focus_camera_on_sprite2(209)	// 0xE6 (230)
+	focus_camera_on_sprite2(230)	// 0x00E6 (209 if we want it to follow the Sky Walker sprite instead of the shadow)
 	wait_movement
 
 	unset(FLG_BGM_SW)	// 655

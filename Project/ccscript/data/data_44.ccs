@@ -1168,7 +1168,7 @@ l_0xc89bf6:
 	//cc_close_letterbox	// Not needed since it will close when warping to the tunnels
 	eob
 
-// Warps from Fourside back to Threek
+// Runaway bus ride from Fourside to Threek
 l_0xc89c1d:
 	restore_camera
 	sprite2_spawn(243,194,-1)	// 0x00F3, 0x00C2, 0xFF
