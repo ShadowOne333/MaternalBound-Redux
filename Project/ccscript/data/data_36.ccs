@@ -10,6 +10,7 @@ import "../essential/asm65816.ccs"
 import "../essential/ASMRef.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -306,11 +307,11 @@ l_0xc7dcda:
 	load_registers swap
 	newline
 	"@({name(0)} got" linebreak
-	"  the " swap get_inventory_item(0,0) "{itemname(0)}.)" eob
+	"  " swap get_inventory_item(0,0) "{call(CCSub_determiner)}{itemname(0)}.)" eob
 
 l_0xc7dd03:
 	get_char_at_pos(1) swap
-	"@({name(0)} added the " load_registers get_inventory_item(0,0) "{itemname(0)}" linebreak
+	"@({name(0)} added " load_registers get_inventory_item(0,0) "{call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  to {swap}{name(0)}'s stuff.)" eob
 
 l_0xc7dd2c:
@@ -322,7 +323,7 @@ l_0xc7dd2c:
 l_0xc7dd37:
 	swap
 	"@{name(0)} used" linebreak
-	"  the {swap}{itemname(0)}." promptw
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}." promptw
 	eob
 
 l_0xc7dd4b:
@@ -639,12 +640,12 @@ l_0xc7e3f9:
 
 l_0xc7e3fa:
 	get_inventory_item(0,0) swap
-	"@{name(0)} rearranged {swap}" call(data_37.l_0xc7e660) "{swap} own items and the {swap}{itemname(0)} moved." end
+	"@{name(0)} rearranged {swap}" call(data_37.l_0xc7e660) "{swap} own items and {swap}{call(CCSub_determiner)}{itemname(0)} moved." end
 
 l_0xc7e42c:
 	get_inventory_item(0,0) swap
 	"@{name(0)} tried to give" linebreak
-	"  the {swap}{itemname(0)}" linebreak
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  to {name(-1)}," next
 	load_registers
 	"@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
@@ -652,31 +653,31 @@ l_0xc7e42c:
 l_0xc7e468:
 	get_inventory_item(0,0) swap
 	"@{name(0)} tried to add" linebreak
-	"  the {swap}{itemname(0)}" linebreak
+	"  {call(CCSub_determiner)}{swap}{itemname(0)}" linebreak
 	"  to {name(-1)}'s stuff," next
 	"@but there was no room for it." end
 
 l_0xc7e4a4:
 	get_inventory_item(0,0) swap
-	"@{name(0)} gave the {swap}{itemname(0)}" linebreak
+	"@{name(0)} gave {swap}{call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  to {name(-1)}." end
 
 l_0xc7e4c3:
 	get_inventory_item(0,0) swap
 	"@{name(0)} added" linebreak
-	"  the {swap}{itemname(0)}" linebreak
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  to {name(-1)}'s stuff." end
 
 l_0xc7e4e9:
 	get_inventory_item(0,0) swap
 	store_registers
 	get_char_at_pos(1) swap
-	"@{name(0)}{load_registers} rearranged {name(0)}'s items and the {swap}{itemname(0)} moved." end
+	"@{name(0)}{load_registers} rearranged {name(0)}'s items and {swap}{call(CCSub_determiner)}{itemname(0)} moved." end
 
 l_0xc7e51c:
 	get_inventory_item(0,0)
 	"@{name(-1)} tried to take" linebreak
-	"  the {itemname(0)}" linebreak
+	"  {call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  from {swap}{name(0)}'s stuff," next
 	load_registers
 	"@but " call(l_0xc7e5f3) " was already carrying too much stuff." end
@@ -692,7 +693,7 @@ l_0xc7e559:
 l_0xc7e5a1:
 	get_inventory_item(0,0)
 	"@{name(-1)} took" linebreak
-	"  the {itemname(0)}" linebreak
+	"  {call(CCSub_determiner)}{itemname(0)}" linebreak
 	"  from {swap}{name(0)}'s stuff." end
 
 l_0xc7e5c2:

@@ -78,22 +78,41 @@ l_0xc94df6:
 	"@*cough* *hack, hack* *cough*" end
 
 l_0xc94e44:
+	//if flag FLG_KEY_ITEMS { swap get_action_arg }
+	//else { get_inventory_item(0,0) swap }
 	get_inventory_item(0,0) swap
 	result_is(INSIGNIFICANT_ITEM)	// 206
 	goto_if_false(data_35.l_0xc7c6b6)
 
+	cc_open_letterbox
 	sound(SND_CHICKEN2)	// 118
-	"@Thank you!" pause(15)
+	"@Thank you!" pause(15) linebreak
 	"  You've made me so happy!" next
 	"@After my life,| this is the second most important thing to me!" next
 	// Magic truffle = 99, 0x63
-	"@Because you're so kind,| I want to give you this {itemname(MAGIC_TRUFFLE)}." next
+	"@Because you're so kind,|" linebreak
+	"  I want to give you this {itemname(MAGIC_TRUFFLE)}." next
 	"@It's a souvenir from Scarabia." next
 
-	take(-1, INSIGNIFICANT_ITEM)	// 0xFF, 206
+	/*if flag FLG_KEY_ITEMS {
+		get_item_receiver(-1)	// 0xFF
+		goto_if_false(_no_room_insignificant_item)
+	}*/
+	//else { take(-1, INSIGNIFICANT_ITEM) }	// 0xFF, 206
+	take(-1, INSIGNIFICANT_ITEM)
 	give_and_return_location(0, MAGIC_TRUFFLE)	// 99
-	call(data_36.l_0xc7dccf)
-	end
+	set(FLG_ITEM_INSIGNIFICANT_GIVEN)
+	call(data_36.l_0xc7dccf) wait
+	cc_close_letterbox
+	eob
+
+_no_room_insignificant_item:
+	sound(SND_ERRORBEEP)
+	newline
+	"@Oh,/ but you don't have any space for this {itemname(MAGIC_TRUFFLE)}." next
+	"@Make some room for it so I can give it to you!" wait
+	cc_close_letterbox
+	eob
 
 l_0xc94ed9:
 	goto_if_flag(FLG_WIN_CARPAINTER, l_0xc94f01)	// 0x44, 68

@@ -15,6 +15,7 @@ import "../essential/commands.ccs"
 import "../essential/jsl_rts.ccs"
 import "../essential/stdext.ccs"
 import "../expansion/ccexpand.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/menu_macros.ccs"
 import "../redux/window_titles.ccs"
 
@@ -306,13 +307,13 @@ command give_menu_tools_item(itemID) {
 	goto_if_true(_jeff_leader)
 
 	get_char_at_pos(1) swap
-	"@({name(0)} added the" linebreak
+	"@({name(0)} added {call(CCSub_determiner)}" linebreak
 	"  {itemname(itemID)}" linebreak
 	"  to Jeff's Tools.)" end
 
 _jeff_leader:
 	get_char_at_pos(1) swap
-	"@({name(0)} added the" linebreak
+	"@({name(0)} added {call(CCSub_determiner)}" linebreak
 	"  {itemname(itemID)}" linebreak
 	"  to his Tools.)" end
 }

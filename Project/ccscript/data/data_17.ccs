@@ -354,23 +354,28 @@ l_0xc60d31:
 	eob
 
 l_0xc60d6c:
+	cc_open_letterbox
 	get_char_at_pos(1) rtoarg
 	"@{name(0)} spotted something shiny." next
-	"@It was a set of contact lenses!" next
+	"@It was a set of {itemname(CONTACT_LENS)}!" next
 
-	get_item_receiver(-1)
-	goto_if_false(l_0xc60db8)
-
-	// Item 0xBB, 187, Contact lens
-	give_and_return_location(-1, CONTACT_LENS)
+	if flag FLG_KEY_ITEMS { give_menu_key_item(CONTACT_LENS) wait }
+	else {
+		get_item_receiver(-1)
+		goto_if_false(l_0xc60db8)
+		give_and_return_location(-1, CONTACT_LENS)	// // 0xBB, 187, Contact lens
+	}
 	npc_delete(794,6)	// 0x031A, 6
-	call(data_36.l_0xc7dccf)
+	if not FLG_KEY_ITEMS { call(data_36.l_0xc7dccf) wait }
 	set(FLG_ITEM_CONTACTLENS)	// 385
-	end
+	cc_close_letterbox
+	eob
 
 l_0xc60db8:
 	sound(SND_ERRORBEEP)	// 5
-	"@You have no more room." end
+	"@You have no more room." wait
+	cc_close_letterbox
+	eob
 
 l_0xc60dc4:
 	"@As sea monkeys live in the sea.../| desert monkeys live in the dessert." next

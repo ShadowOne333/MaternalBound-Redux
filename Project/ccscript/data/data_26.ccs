@@ -11,6 +11,7 @@ import "../essential/ASMRef.ccs"
 import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -762,19 +763,27 @@ l_0xc6dc93:
 
 l_0xc6dce7:
 	title(1, Petenella)
-	"@I was thinking <There's a tight wad born every minute...>" end
+	"@I was thinking:|" linebreak
+	"  <There's a tight wad born every minute...>" end
 
 l_0xc6dd0a:
-	get_inventory_item(0,0) swap
+	if flag FLG_KEY_ITEMS { swap get_action_arg }
+	else { get_inventory_item(0,0) swap }
 	result_is(CONTACT_LENS)	// Contact lens
 	goto_if_true(l_0xc6dd1d)
 	goto(data_35.l_0xc7c6b6)
 
 l_0xc6dd1d:
+	window_closeall	// Close menus
+	cc_open_letterbox
+	sound(SND_CHICKEN2)	// 118
+	window_open(1)
+
 	title(1, Petenella)
 	"@What?" next
 	// Item 0xBB / 187, Contact lens
-	"@You came to deliver my grandma's memento, the {itemname(CONTACT_LENS)}?!" next
+	"@You came to deliver my grandma's memento" linebreak
+	"  {itemname(CONTACT_LENS)}?!" next
 	"@Thank you." next
 	"@Thank you so/o/o{pause(1)}o{pause(1)}o much!" next
 	"@It's our family tradition to keep things forever." next
@@ -782,16 +791,27 @@ l_0xc6dd1d:
 	"@Here's my socks that I use only for special occasions." next
 	"@I've worn these socks for just five years." next
 	"@There are no holes, and they've only been worn once since the last washing." next
-	"@They stink a little... but they're still good." next
-	"@Hey, don't refuse me here... I'm being generous!" next
+	"@They stink a little..." linebreak
+	"  but they're still good." next
+	"@Hey, don't refuse me here..." linebreak
+	"  I'm being generous!" next
 	sound(SND_BOXTAKE)	// 116
-	take(-1,CONTACT_LENS)	// FF, Item 0xBB / 187, Contact lens
+	if not flag FLG_KEY_ITEMS { take(-1,CONTACT_LENS) }	// FF, Item 0xBB / 187, Contact lens
 	get_item_receiver(-1)
+	if flag FLG_KEY_ITEMS { goto_if_false(_no_room_contacts) }	// Added for Key items
 	give_and_return_location(-1, PETENELLAS_SOCKS)	// item 0x98, 152, Petenella's socks
 	call(data_36.l_0xc7dccf) next
 	"@Please take good care of my socks... *sniff!*" wait
 	set(FLG_FOUR_PETENERA)	// 736
+	cc_close_letterbox
 	eob
+
+_no_room_contacts:
+	sound(SND_ERRORBEEP)
+	newline
+	"@Hey,/ c'mon,/ make some room,/ they don't smell that bad!" wait
+	cc_close_letterbox
+	eob 
 
 l_0xc6de7b:
 	goto_if_flag(FLG_TEMP_9, data_27.l_0xc6df35)	// Flag 10, 0x0A

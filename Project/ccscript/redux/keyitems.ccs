@@ -14,6 +14,7 @@ import "../essential/cc_asmcall.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
 import "../expansion/ccexpand.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/window_titles.ccs"
 
 //------------------------------------
@@ -134,6 +135,7 @@ SetCount26: { counter(26) ctoarg eob }
 SetCount27: { counter(27) ctoarg eob }
 SetCount28: { counter(28) ctoarg eob }
 SetCount29: { counter(29) ctoarg eob }
+SetCount30: { counter(30) ctoarg eob }
 
 //------------------------------------
 //   Main Key items ccscript code
@@ -180,47 +182,51 @@ KeyItems:
 			load_str_callonhover("Suitcase of bills", SetCount10) }
 		if flag FLG_ITEM_TICKET { //and not flag FLG_TWSN_FIELD_TONZ_DISAPPEAR {	// Shouldn't be taken
 			load_str_callonhover("Backstage pass", SetCount11) }
+		//if flag FLG_ITEM_TAISHITA and not flag FLG_ITEM_INSIGNIFICANT_GIVEN {
+			//load_str_callonhover("Insignificant item", SetCount12) }
 		if flag FLG_ITEM_GAUS and not flag FLG_THRK_PRISON_OPEN {
 			load_str_callonhover("Bad key machine", SetCount12) }
 		if flag FLG_ITEM_HOIHOI and not flag FLG_PUT_ZOMBI_HOIHOI and not flag FLG_THRK_ZOMBI_CAPTURED and not flag FLG_WIN_GEPPU {
 			load_str_callonhover("Zombie paper", SetCount13) }
+		if flag FLG_ITEM_CONTACTLENS and not flag FLG_FOUR_PETENERA {
+			load_str_callonhover("Contact lens", SetCount14) }
 		if flag FLG_ITEM_SHOW_TICKET { //and not flag FLG_SHOW_TICKET_TAKEN {	// We don't need it removed though, so keep it
-			load_str_callonhover("Show ticket", SetCount14) }
+			load_str_callonhover("Show ticket", SetCount15) }
 		if flag FLG_DSRT_ITEM_DIA and not flag FLG_FOUR_TONZURA_FREE {
-			load_str_callonhover("Diamond", SetCount15) }
+			load_str_callonhover("Diamond", SetCount16) }
 		if flag FLG_ITEM_TOFU and not flag FLG_FOUR_MAID_THANKS {	// Tofu machine
-			load_str_callonhover("Tofu machine", SetCount16) }
+			load_str_callonhover("Tofu machine", SetCount17) }
 		if flag FLG_PU and not flag FLG_SUMS_OMAR_B_APPEAR {
-			load_str_callonhover("Tiny ruby", SetCount17) }
+			load_str_callonhover("Tiny ruby", SetCount18) }
 		if flag FLG_ITEM_BANANA and not flag FLG_FOUR_KOMORITA_APPEAR {	// Open Sewer
-			load_str_callonhover("Signed banana", SetCount18) }
+			load_str_callonhover("Signed banana", SetCount19) }
 		if flag FLG_SUMS_HIEROGLYPH and not flag FLG_SPHINX_OK {	// Pyramid open
-			load_str_callonhover("Hieroglyph copy", SetCount19) }
+			load_str_callonhover("Hieroglyph copy", SetCount20) }
 		if flag FLG_ITEM_CARROT_KEY and not flag FLG_RAMA_RABBIT_DISAPPEAR {
-			load_str_callonhover("Rabbits' carrot", SetCount20) }
+			load_str_callonhover("Rabbits' carrot", SetCount21) }
 		if flag FLG_ITEM_KEY_PUPUKA and not flag FLG_SKRB_DUNGEONMAN_OPEN {
-			load_str_callonhover("Key to the tower", SetCount21) }
+			load_str_callonhover("Key to the tower", SetCount22) }
 		if flag FLG_ITEM_TAKANOME and not flag FLG_MAKYO_USE_TAKANOME {
-			load_str_callonhover("Hawk eye", SetCount22) }
+			load_str_callonhover("Hawk eye", SetCount23) }
 		if flag FLG_ITEM_MUKUCHI and not flag FLG_GUMI_USEBOOK or flag FLG_GUMI_OLDMAN_END and not flag FLG_ONET_LUCY_CHU {
-			load_str_callonhover("Shyness book", SetCount23) }
+			load_str_callonhover("Shyness book", SetCount24) }
 		if flag FLG_GUMI_OLDMAN_ITEM and not flag FLG_DKFD_DOOR_DISAPPEAR or not flag FLG_DKFD_GUMI_BOSS {
 		// Open Underworld rock or Tenda boss takes the Tendakraut
-			load_str_callonhover("Tendakraut", SetCount24) }
+			load_str_callonhover("Tendakraut", SetCount25) }
 		if flag FLG_ITEM_XYZ and not flag FLG_XYZ_OK {
-			load_str_callonhover("Meteorite piece", SetCount25) }
+			load_str_callonhover("Meteorite piece", SetCount26) }
 	}
 
 	if flag FLG_JEFF_SOLO {
 		if flag FLG_ITEM_KEY_LOCKER and not flag FLG_ITEM_GAUS {
-			load_str_callonhover("Key to the locker", SetCount26) }
+			load_str_callonhover("Key to the locker", SetCount27) }
 		if flag FLG_ITEM_GAUS and not flag FLG_THRK_PRISON_OPEN {
-			load_str_callonhover("Bad key machine", SetCount27) }
+			load_str_callonhover("Bad key machine", SetCount28) }
 		if flag FLG_ITEM_BUBBLE_GUM and not flag FLG_WINS_ROPE_SWITCH {	// and flag FLG_BALLOONMONKEY
-			load_str_callonhover("Pak of bubble gum", SetCount28) }
+			load_str_callonhover("Pak of bubble gum", SetCount29) }
 	}
 
-	if flag FLG_POO_SOLO { load_str_callonhover("Tiny ruby", SetCount29) }
+	if flag FLG_POO_SOLO { load_str_callonhover("Tiny ruby", SetCount30) }
 
 _Help_Backout:
 	print_strings_vertical(2)
@@ -235,7 +241,7 @@ _UseHelp_Window_Backout:
 	ctoarg
 	swap
 
-	switch_goto(29)
+	switch_goto(30)
 		switch_entry(atm)
 		switch_entry(soundstone)
 		switch_entry(townmap)
@@ -249,6 +255,7 @@ _UseHelp_Window_Backout:
 		switch_entry(backstagepass)
 		switch_entry(badkeymachine)
 		switch_entry(zombiepaper)
+		switch_entry(contactlens)
 		switch_entry(showticket)
 		switch_entry(diamond)
 		switch_entry(tofumachine)
@@ -284,6 +291,7 @@ _Exit_KeyItems_Menu:
 	backstagepass:	use_help_submenu(BACKSTAGE_PASS, item_descriptions.l_0xc548b2) eob
 	badkeymachine:	use_help_submenu(BAD_KEY_MACHINE, item_descriptions.l_0xc55546) eob
 	zombiepaper:	use_help_submenu(ZOMBIE_PAPER, item_descriptions.l_0xc555b8) eob
+	contactlens:	use_help_submenu(CONTACT_LENS, item_descriptions.l_0xc5587e) eob
 	showticket:	use_help_submenu(SHOW_TICKET, item_descriptions.l_0xc5569c) eob
 	diamond:	use_help_submenu(DIAMOND, item_descriptions.l_0xc55740) eob
 	tofumachine:	use_help_submenu(TOFU_MACHINE, item_descriptions.l_0xc54c6d) eob
@@ -368,7 +376,7 @@ command give_menu_key_item(itemID) {
 	window_open(1)
 
 	get_char_at_pos(1) swap
-	"@({name(0)} added the" linebreak
+	"@({name(0)} added {call(CCSub_determiner)}" linebreak
 	"  {itemname(itemID)}" linebreak
 	"  to the Key items.)" //eob
 }
@@ -386,6 +394,7 @@ keyitemcounter:
 	if counter_is(WAD_BILLS) { toggle_with_sound(FLG_TWSN_ITEM_TONCHIKI) }	// Suitcase bills
 	if counter_is(BACKSTAGE_PASS) { toggle_with_sound(FLG_ITEM_BACKSTAGE_PASS) }	// Backstage pass
 	if counter_is(ZOMBIE_PAPER) { toggle_with_sound(FLG_ITEM_HOIHOI) }	// Zombie paper
+	if counter_is(CONTACT_LENS) { toggle_with_sound(FLG_ITEM_CONTACTLENS) }	// Contact lens
 	*/
 	if counter_is(SHOW_TICKET) { toggle_with_sound(FLG_ITEM_SHOW_TICKET) }	// Show ticket
 	/*

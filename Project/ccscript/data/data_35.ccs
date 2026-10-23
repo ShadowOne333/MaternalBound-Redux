@@ -11,6 +11,7 @@ import "../essential/cc_asmcall.ccs"
 import "../essential/cc_effects.ccs"
 import "../essential/commands.ccs"
 import "../essential/stdext.ccs"
+import "../redux/item_determiners.ccs"
 import "../redux/keyitems.ccs"
 import "../redux/window_titles.ccs"
 
@@ -299,10 +300,10 @@ l_0xc7c609:
 	load_registers
 	swap
 	"@{name(0)} got rid of" linebreak
-	"  the {swap}{itemname(0)}." end
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}." end
 
 l_0xc7c655:
-	"@You shouldn't throw the {itemname(0)} away." end
+	"@You shouldn't throw {call(CCSub_determiner)}{itemname(0)} away." end
 
 l_0xc7c669:
 	"@Don't spit your gum out. " next
@@ -317,16 +318,16 @@ l_0xc7c693:
 l_0xc7c6b6:
 	get_action_arg swap
 	"@You can't use" linebreak
-	"  the {itemname(0)}." end
+	"  {call(CCSub_determiner)}{itemname(0)}." end
 
 l_0xc7c6c9:
 	get_inventory_item(0, 0) swap
 	"@{name(0)} is the only one who should carry" linebreak
-	"  the {swap}{itemname(0)}." end
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}." end
 
 l_0xc7c6f1:
 	get_action_arg swap
-	"@The {itemname(0)} can't be used here." wait
+	"@{call(CCSub_determiner_caps)}{itemname(0)} can't be used here." wait
 	eob
 
 l_0xc7c705:
@@ -339,7 +340,7 @@ l_0xc7c705:
 	load_registers
 	get_inventory_item(0,0)
 	"@Why would you do that?" linebreak
-	"  The {itemname(0)} would probably make you barf." end
+	"  {call(CCSub_determiner_caps)}{itemname(0)} would probably make you barf." end
 
 l_0xc7c742:
 	store_registers
@@ -360,14 +361,14 @@ loadZero:
 	eob
 
 failLines:
-	"@{user} can't equip the " get_action_arg swap "{itemname(0)}." end 
+	"@{user} can't equip " get_action_arg swap "{call(CCSub_determiner)}{itemname(0)}." end
 
 l_0xc7c761:
 	load_registers
 	if flag FLG_KEY_ITEMS { swap get_action_arg }
 	else { get_inventory_item(0,0) swap }
 	"@{name(0)} chewed" linebreak
-	"  the {swap}{itemname(0)}." end
+	"  {swap}{call(CCSub_determiner)}{itemname(0)}." end
 
 l_0xc7c77e:
 	"@{name(0)} got sunstroke." end
@@ -884,7 +885,7 @@ l_0xc7d92a:	// Check for shop flags 2
 
 l_0xc7d947:
 	newline
-	"@There is {call(item_determiners.CCSub_determiner)}{itemname(0)} inside!" promptw
+	"@There is {call(CCSub_determiner)}{itemname(0)} inside!" promptw
 	eob
 
 l_0xc7d958:
@@ -894,7 +895,7 @@ l_0xc7d958:
 l_0xc7d967:
 	get_char_at_pos(1) swap
 	newline
-	"@{name(0)} added the {load_registers}{itemname(0)} " linebreak
+	"@{name(0)} added {load_registers}{call(CCSub_determiner)}{itemname(0)} " linebreak
 	" to {swap}{name(0)}'s stuff." swap end
 
 l_0xc7d991:
