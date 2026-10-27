@@ -3,6 +3,7 @@ import "../definitions/flags.ccs"
 import "../definitions/items.ccs"
 import "../expansion/ccexpand.ccs"
 import "../essential/asm65816.ccs"
+import "../essential/cc_asmcall.ccs"
 import "../essential/stdext.ccs"
 // Shop system internals
 
@@ -346,13 +347,33 @@ _continue_buying:
 	store_registers_shared
 	// NEW CODE
 	newline
+	
+	cc_asmcall(Saturn_Font_Check, RET_RESULT)	// Check if the current font is the Saturn font
+	goto_if_false(_normal_font)	// If not Saturn font, run the normal font options
+
+_saturn_font:
+	"@kookie  much?" linebreak
+	menu {
+		"one" : { goto(Selected_Item_String_Pt2) }
+		"many" : { goto(BulkBuy) }
+	}
+	goto(Cancel_Cant_Equip_String)
+
+_normal_font:
 	"@How many?" linebreak
 	menu {
 		"Just one" : { goto(Selected_Item_String_Pt2) }
 		"Multiple" : { goto(BulkBuy) }
 	}
+
 	goto(Cancel_Cant_Equip_String) // this text isn't specific to not equipping; each vendor just says "oh so you dont want to buy anything"
 
+//------------------------------------
+Saturn_Font_Check: {
+	LDA_a	(0x8665)	// WINDOW_STATS+window_stats::font
+	RTL
+}
+//------------------------------------
 Selected_Item_String_Pt2:
 	load_registers_shared
 	// END NEW CODE

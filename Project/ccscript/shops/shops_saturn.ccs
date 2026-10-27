@@ -18,7 +18,7 @@ SaturnValley_Greeting:		//l_0xc530a2
 	"@can do all  for you." next
 	"@What do you" linebreak
 	"  want zoom?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Exit_Store_Buy:	//l_0xc530fc
@@ -39,14 +39,14 @@ SaturnValley_Open_Shop_Window:	//l_0xc5311f
 	font_saturn
 	"@What you" linebreak
 	"  buying zoom?" promptw
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Selected_Item:		//l_0xc53134
 	font_saturn
 	"@The" linebreak
-	"  {itemname(0)}?" next
-	font_normal
+	"  {itemname(0)}?" promptw
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Who_Will_Take_Item:	//l_0xc53144
@@ -54,14 +54,14 @@ SaturnValley_Who_Will_Take_Item:	//l_0xc53144
 	"@Which" linebreak
 	"  you carry" linebreak
 	"  this burden?" promptw
-	font_normal
+	font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Equip_Now:		//l_0xc53161
 	font_saturn
 	"@Equip" linebreak
 	"  here?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Buy_Previous_Equipment:	//l_0xc53172
@@ -74,7 +74,7 @@ SaturnValley_Buy_Previous_Equipment:	//l_0xc53172
 	"@What think you about" next
 	"@that price..." linebreak
 	"  zoom?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Cant_Equip_Item:	//l_0xc531ba
@@ -84,7 +84,7 @@ SaturnValley_Cant_Equip_Item:	//l_0xc531ba
 	"@Boing!" next
 	"@Still wanna" linebreak
 	"  buy?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Cancel_Cant_Equip:	//l_0xc531ea
@@ -141,7 +141,7 @@ SaturnValley_Confirm_Selling:	//l_0xc532b3
 	"@That kay-o" linebreak
 	"  on you?" next
 	"@Ding! Ding!" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Cancel_Selling:	//l_0xc532fa
@@ -188,13 +188,13 @@ SaturnValley_Request_Another_Transaction:	//l_0xc533b6
 	font_saturn
 	"@Is there  anything  Zoom" next
 	"@else need?" next
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Do_Another_Transaction:	//l_0xc533d5
 	font_saturn
 	"@What next, Boing?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Chosen_Character_Inventory_Full:	//l_0xc533e5
@@ -205,14 +205,14 @@ SaturnValley_Chosen_Character_Inventory_Full:	//l_0xc533e5
 	"@Does anyone" linebreak
 	"  want help" linebreak
 	"  Zoom?" next
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Bulk_Buy_Lots:
 	font_saturn
 	"@This all," linebreak
 	"  Zoom?" next
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	eob
 
 SaturnValley_Bulk_Buy_Not_Enough_Cash:

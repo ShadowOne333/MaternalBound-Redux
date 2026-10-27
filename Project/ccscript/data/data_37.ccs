@@ -177,7 +177,7 @@ l_0xc7e797:
 	goto_if_flag(FLG_TEMP_9, l_0xc7e7f8)	// 0x000A, 10
 	"@Do you want" linebreak
 	"  slumber?" linebreak
-	font_normal
+	//font_normal	// Keep the Yes/No options in Saturn font
 	two_choice_menu("Yes", l_0xc7e7d9, "No", l_0xc7e7cc)
 
 l_0xc7e7cc:
