@@ -93,6 +93,13 @@ atmdebug_address: Mother\ 2.sfc
 	matches = [i for i in range(len(rom)) if rom.startswith(pattern, i)]; \
 	[print(f"ATM Debug Menu pattern F2FBC900: Physical address: 0x{i:06X}  SNES: 0x{i + 0xC00000:06X}") for i in matches] if matches else print("Found $(PATTERN): not found")'
 #----------------------------------------------------------------
+# Add an option to clear the original header in case the game needs to be expanded to 6MB
+# (For compatibility with certain emulators that still read the old header)
+#6mb_headerclear:
+#	@echo
+#	@echo "Patching 6MB header clear..."
+#	@$(FLIPS) -a "PSIROM/6MB_headerclear.ips" "$(PATCH_NAME).sfc" "$(PATCH_NAME).sfc"
+#----------------------------------------------------------------
 # Create both additional BPS and IPS patches files
 create_both_patches:
 	@echo

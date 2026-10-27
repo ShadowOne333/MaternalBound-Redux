@@ -1,0 +1,19 @@
+//------------------------------------
+// Header Clear patch for 6MB EarthBound ROMs
+//------------------------------------
+// This patch removes any leftover data from the old header of an EB ROM, so that certain emulators don't try to read from the old header data.
+//------------------------------------
+// Force the ROM to use mapping configuration $31 (3.58MHz HiROM) instead of $25 (2.68MHz ExHiROM)
+ROM[0x40FFD5] = "[31]"	// Alternatively,  use "[35]"
+// If needed, use $35 to make the game use 3.58MHz ExHiROM
+//------------------------------------
+ROM[0xC0FFB0] = {
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"	// FFB0-FFBF
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]"	// FFC0-FFCF
+	"[00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF]"	// FFD0-FFDF
+}
+
+ROM[0xC0FFE4] = {
+		    "[00 00 00 00 00 00 00 00 00 00 00 00]"	// FFE4-FFEF
+	"[00 00 00 00 00 00 00 00 00 00 00 00 FF FF 00 00]"	// FFF0-FFFF
+}
